@@ -1,5 +1,5 @@
 ---
-name: 
+name: Nupur Thakur
 position: Contributor
 image_path: /
 twitter: 
