@@ -1,5 +1,5 @@
 ---
-name: 
+name: Sako Mammadov
 position: Contributor
 image_path: /
 twitter: 

@@ -1,7 +1,7 @@
 ---
-name: 
+name: Will Tamagi
 position: Contributor
 image_path: /
-twitter: 
+github: wdtamagi
 blurb: Mesh Head
 ---
