@@ -5,10 +5,26 @@ description: A warm and welcoming collection of open sourcers.
 <p class="editor-link" style="text-align: center;"><a href="cloudcannon:collections/_staff_members/" class="btn"><strong>&#9998;</strong> Manage commumnity members</a></p>
 <ul class="staff">
 	{% for person in site.staff_members %}
-		<li>
-			<div class="square-image"><img src="{% include relative-src.html src=person.image_path %}" alt="{{ person.name }}"/></div>
-			<div class="name"><a target="_blank" href="https://twitter.com/{{ person.twitter }}">{{ person.name }}</a></div>
-			<div class="position">{{ person.position }}</div>
-		</li>
+		{% if person.twitter %}
+			<li>
+				<div class="square-image"><img src="{% include relative-src.html src=person.image_path %}" alt="{{ person.name }}"/></div>
+				<div class="name"><a target="_blank" href="https://twitter.com/{{ person.twitter }}">{{ person.name }}</a></div>
+				<div class="position">{{ person.position }}</div>
+			</li>
+		{% else %}
+			{% if person.github %}
+				<li>
+					<div class="square-image"><img src="{% include relative-src.html src=person.image_path %}" alt="{{ person.name }}"/></div>
+					<div class="name"><a target="_blank" href="https://github.com/{{ person.github }}">{{ person.name }}</a></div>
+					<div class="position">{{ person.position }}</div>
+				</li>
+			{% else %}
+				<li>
+					<div class="square-image"><img src="{% include relative-src.html src=person.image_path %}" alt="{{ person.name }}"/></div>
+					<div class="name">{{ person.name }}</div>
+					<div class="position">{{ person.position }}</div>
+				</li>
+			{% endif %}
+		{% endif %}
 	{% endfor %}
 </ul>
