@@ -1,7 +1,7 @@
 ---
 name: Madhab Paul
 position: Contributor
-image_path: /images/photos/Madhab Paul.jpg
+image_path: /images/photos/madhab-paul.jpg
 twitter: MadhabPaul
 blurb: Mesh Head
 ---
