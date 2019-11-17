@@ -1,6 +1,6 @@
 ---
 name: Martín Castre
-position: Contributor
+position: Contributor - Designer
 image_path: /images/photos/martin-castre.jpg
 github: mcastre
 blurb: Mesh Head
