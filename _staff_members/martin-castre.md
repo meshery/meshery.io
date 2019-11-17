@@ -1,7 +1,7 @@
 ---
-name: 
+name: Martín Castre
 position: Contributor
 image_path: /
-twitter: 
+github: mcastre
 blurb: Mesh Head
 ---

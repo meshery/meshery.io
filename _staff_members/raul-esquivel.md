@@ -1,7 +1,7 @@
 ---
-name: 
+name: Raul Esquivel
 position: Contributor
-image_path: /
+# image_path: 
 twitter: 
 blurb: Mesh Head
 ---
