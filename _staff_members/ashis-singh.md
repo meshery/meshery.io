@@ -2,6 +2,6 @@
 name: Ashis Singh
 position: Contributor
 image_path: /images/photos/ashis-singh.jpg
-# twitter: 
+github: 
 blurb: Mesh Head
 ---
