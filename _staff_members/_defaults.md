@@ -1,7 +1,7 @@
 ---
-name:
-position:
-image_path:
-twitter:
-blurb:
+name: 
+position: Contributor
+image_path: /
+twitter: 
+blurb: Mesh Head
 ---
