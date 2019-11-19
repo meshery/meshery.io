@@ -20,8 +20,33 @@
 header {
 	color: $coolgray;
 	padding: 20px 0;
-	background: $brand-color; /* Old browsers */
-	background: linear-gradient(to bottom, $brand-color 0%, $middle-gradient-color 100%) no-repeat $brand-color;
+	// background: $brand-color; /* Old browsers */
+	// background: linear-gradient(to bottom, $brand-color 0%, $middle-gradient-color 100%) no-repeat $brand-color;
+	position: fixed;
+	width: 100%;
+	z-index: 9999;
+	margin-bottom: 5px;
+
+	&.header-background {
+		background: $brand-color; /* Old browsers */
+		background-color: linear-gradient(to bottom, $brand-color 0%, $middle-gradient-color 100%) no-repeat $brand-color;
+		// color: $coolgray;
+		color: rgba(255,255,255,.8);
+		// box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+		transition: background-color 0.2s ease;
+		text-shadow: none;
+
+		a {
+			// color: $coolgray;
+			color: rgba(255,255,255,.8);
+			@media #{$mid-point} {
+				&:hover {
+					border-bottom-color: rgba(80, 80, 80,.3);
+					border-bottom-width: 5px;
+				}
+			}
+		}
+	}
 
 	a {
 		color: #fff;
@@ -50,6 +75,8 @@ header {
 		}
 	}
 }
+
+
 
 .content {
 	background: #fff;
