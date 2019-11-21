@@ -3,7 +3,11 @@
 
 	function changeHeader() {
 		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-		header.classList.toggle("header-background", scrollTop >= 50 || document.body.classList.contains("nav-open"));
+		var scrollBuffer = 50;
+		if (window.location.pathname !== "/"){
+			scrollBuffer = 0;
+		}
+		header.classList.toggle("header-background", scrollTop >= scrollBuffer || document.body.classList.contains("nav-open"));
 	}
 
 	var didScroll = false;
@@ -22,7 +26,8 @@
     changeHeader();
     
     document.getElementById("open-nav").onclick = function () {
-        document.body.classList.toggle("nav-open");
+		document.body.classList.toggle("nav-open");
+		changeHeader();
         return false;
     };
 })();

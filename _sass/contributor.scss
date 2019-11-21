@@ -1,0 +1,91 @@
+.contributor {
+	padding: 0;
+	list-style: none;
+	@extend %flexbox;
+	@include flex-flow(wrap);
+	text-align: center;
+	justify-content: center;
+			
+	li {
+		padding: 20px 20px;
+		box-sizing: border-box;
+		width: 100%;
+
+		@media #{$tablet} {
+			@include flex(1, 1, 2%);
+		}
+
+		@media #{$desktop} {
+			@include flex(1, 1, 1%);
+		}
+
+	}
+	.solo-image {		
+			img {
+				border-radius: 150px;
+			}
+		}
+	.square-image {
+		width: 150px;
+		
+			img {
+				border-radius: 150px;
+			}
+		}
+	.name {
+		font-size: calc(.8em + 1.4vw);
+		margin-top: 0px;
+	}
+	.names {
+		font-size: calc(.6em + 1vw);
+		margin-top: 0px;
+	}
+	.twitter, .github {
+		font-size: calc(.35em + 1.1vw);
+		margin-top: .5vw;
+		white-space: nowrap;
+		img {
+			border-radius: 4px;  /* Rounded border */
+			width: 20px; /* Set a small width */
+			vertical-align: middle;
+		  }
+	}
+	.position {
+		color: #666;
+	}
+}
+.community {
+	@extend %flexbox;
+	@include flex-flow( row);
+	margin-left: 5%;
+	margin-right: 5%;
+	justify-content: center;
+	//background: linear-gradient(to bottom, $middle-gradient-color 0%, $secondary-brand-color 100%) no-repeat #a05fb7;
+	
+	.community-block {
+		ul li { text-align: left; color:inherit;}
+		
+		text-align: center;
+	}
+	.project-block {
+		ul li { text-align: left; color:inherit;
+			font-size: 1.38em;
+	color: #666;
+	margin-bottom: 20px;
+	font-weight: 300;
+	line-height: 1.4em;}
+	}
+}
+ 
+  .flex-item {
+	padding: 5px;
+	width: 100%;
+	margin-top: 10px;	
+
+  }
+  @media all and (max-width: 700px) {
+	.community {
+	  /* On small screens, we are no longer using row direction but column */
+	  flex-direction: column;
+	}
+  }
