@@ -1,0 +1,62 @@
+<a name="getting-started"></a><h2>Run Meshery</h2>
+<div class="container flex">
+<div class="text editable code">
+    <div class="post-content row" itemprop="articleBody">
+        <h3>Step 1: Install and start</h3>
+        <p>Install on <a href="https://meshery.layer5.io/docs/installation#quick-start">Mac or Linux</a> using Docker, install Meshery on your local machine by running the following:</p>        
+  
+        <div id="start" class="highlight-code highlight-source-shell">
+            <div style="width:auto; height:65px; padding:0px; position:relative;">
+              <pre><code>
+   curl -L https://git.io/meshery | sh -
+              </code></pre>
+              <!-- copy to clipboard -->
+              <a class="btn waves-effect waves-dark white-text darken-2 l5-light-blue z-depth-4"
+                style="position: absolute; top: 0px; right: 0px; border: 0; cursor: pointer;"
+                data-clipboard-target="#start"
+                data-clipboard-text="curl -L https://git.io/meshery | bash -">
+                <img src="/images/buttons/clippy.svg" width="18px" height="18px" style="vertical-align: middle; width: 18px;" />
+              </a>
+          </div>
+        </div>
+        
+        <div class="toggle">
+          
+          <label for="k8s-instructions">To install on Kubernetes, <a>click here</a></label> 
+          or see Meshery documentation to <a href="https://meshery.layer5.io/docs/installation#using-docker-on-windows">install on Windows</a>.
+          <input type="checkbox" class="k8s-instructions" checked name="one" id="k8s-instructions">
+          <div class="hidediv">
+            <div class="innerdiv">
+              
+        <p>Using Kubernetes, install Meshery on your cluster by cloning the Meshery repo:</p>
+        <div class="highlight-code highlight-source-shell">
+          <pre><code>
+   $ git clone https://github.com/layer5io/meshery.git; cd meshery        
+          </code></pre>
+        </div>
+      <p>Install Meshery on your cluster by running the following:</p>
+      <div class="highlight-code highlight-source-shell">
+  <pre><code>
+    $ kubectl create ns meshery
+    $ kubectl -n meshery apply -f deployment_yamls/k8s
+  
+  </code></pre>
+  <!-- PROVIDE THE "ON THE MESH" VERSION IN FUTURE DOCUMENTATION
+  # additional step for running on Istio
+  $ kubectl -n meshery apply -f deployment_yamls/istio.yaml -->
+      </div>
+      <p>If you want to use a different namespace, please change the name of the namespace in the <code>ClusterRoleBinding</code> section appropriately. </p>
+              </div>
+            </div>
+      <h3>Step 2: Login</h3>
+      <p>Access Meshery in your browser at <a href="http://127.0.0.1:9081">http://127.0.0.1:9081</a>.</p>
+    
+    <!-- <h3 style="color:#111111;">Step 3: Configure and Enjoy Meshery</h3>
+    <p>- Configure Meshery with references to your deployed adapters, using "meshery-&lt;service-mesh-name&gt;:&lt;port&gt;" (e.g. <code>meshery-istio:10000</code> or <code>meshery-linkerd:10001</code>)
+      in the <i>Mesh Adapter Location</i> field.</p> -->
+    </div>
+</div>
+
+</div>
+
+</div>
