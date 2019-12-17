@@ -1,78 +1,50 @@
-# Hydra
+# Meshery.io
 
-Marketing site template for Jekyll. Browse through a [live demo](https://proud-alligator.cloudvent.net/).
-Increase the web presence of your brand with this configurable theme.
+![Meshery.io website screenshot](images/mesheryio_screenshot.png)
+*Visit [Meshery.io](https://meshery.io/) to learn more!*
 
-![Hydra template screenshot](images/_screenshot.png)
+## What is Meshery?
+Meshery is a multi-service mesh management plane adopting, operating, and developing on different service meshes. Meshery facilitates learning about functionality and performance of service meshes. It incorporates the collection and display of metrics from applications running on or across service meshes. At a high level, Meshery provides performance benchmarking, service mesh lifecycle management, and service mesh interoperability and federation.
 
-Hydra was made by [CloudCannon](http://cloudcannon.com/), the Cloud CMS for Jekyll.
+For further information, refer to the [Meshery Docs](https://meshery.layer5.io/docs/).
 
-Find more templates, themes and step-by-step Jekyll tutorials at [CloudCannon Academy](https://learn.cloudcannon.com/).
+## Contributing to Meshery
 
-## Features
+Before contributing, please review the [Contribution Flow](https://github.com/layer5io/meshery/blob/master/CONTRIBUTING.md). In the following steps you will set up your development environment, fork and clone the repository, run the site locally, and finally commit, sign-off, and push any changes made for review.
 
-* Contact form
-* Pre-built pages
-* Pre-styled components
-* Blog with pagination
-* Post category pages
-* Disqus comments for posts
-* Staff and author system
-* Configurable footer
-* Optimised for editing in [CloudCannon](http://cloudcannon.com/)
-* RSS/Atom feed
-* SEO tags
-* Google Analytics
+### 1. Set up your development environment
 
-## Setup
+* *The Meshery site is built using Jekyll - a simple static site generator! You can learn more about Jekyll and setting up your development environment in the [Jekyll Docs](https://jekyllrb.com/docs/).*
 
-1. Add your site and author details in `_config.yml`.
-2. Add your Google Analytics and Disqus keys to `_config.yml`.
-3. Get a workflow going to see your site's output (with [CloudCannon](https://app.cloudcannon.com/) or Jekyll locally).
+* First [install Ruby](https://jekyllrb.com/docs/installation/), then install Jekyll and Bundler.
 
-## Develop
+### 2. Get the code
 
-Hydra was built with [Jekyll](http://jekyllrb.com/) version 3.3.1, but should support newer versions as well.
+* Fork and then clone the [Meshery.io repository](https://github.com/layer5io/meshery.io)
+  ```bash
+  $ git clone https://github.com/YOUR-USERNAME/meshery.io
+  ```
+* Install any Ruby dependencies
+  ```bash
+  $ bundle install
+  ```
 
-Install the dependencies with [Bundler](http://bundler.io/):
+### 3. Serve the site
 
-~~~bash
-$ bundle install
-~~~
+* Serve the code locally
+  ```bash
+  $ make site
+  ```
+  *Note: From the Makefile, this command is actually running `$ bundle exec jekyll serve --drafts --livereload`*
 
-Run `jekyll` commands through Bundler to ensure you're using the right versions:
+### 4. Create a Pull Request
 
-~~~bash
-$ bundle exec jekyll serve
-~~~
-
-## Editing
-
-Hydra is already optimised for adding, updating and removing pages, staff, advice, company details and footer elements in CloudCannon.
-
-### Posts
-
-* Add, update or remove a post in the *Posts* collection.
-* The **Staff Author** field links to members in the **Staff** collection.
-* Documentation pages are organised in the navigation by category, with URLs based on the path inside the `_docs` folder.
-* Change the defaults when new posts are created in `_posts/_defaults.md`.
-
-### Contact Form
-
-* Preconfigured to work with CloudCannon, but easily changed to another provider (e.g. [FormSpree](https://formspree.io/)).
-* Sends email to the address listed in company details.
-
-### Staff
-
-* Reused around the site to save multiple editing locations.
-* Add `excluded_in_search: true` to any documentation page's front matter to exclude that page in the search results.
-
-### Navigation
-
-* Exposed as a data file to give clients better access.
-* Set in the *Data* / *Navigation* section.
-
-### Footer
-
-* Exposed as a data file to give clients better access.
-* Set in the *Data* / *Footer* section.
+* After making changes, don't forget to commit with the sign-off flag (-s)!
+  ```bash
+  $ commit -s -m “my commit message w/signoff”
+  ```
+* Once all changes have been committed, push the changes.
+  ```bash
+  $ git push origin <branch-name>
+  ```
+* Then on Github, navigate to the [Meshery.io repository](https://github.com/layer5io/meshery.io) and create a pull request from your recently pushed changes!
