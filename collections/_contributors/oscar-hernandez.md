@@ -1,4 +1,5 @@
 ---
+layout: person
 name: Oscar Hernandez
 position: Contributor
 image_path: /images/photos/oscar-hernandez.jpg

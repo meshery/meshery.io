@@ -1,4 +1,5 @@
 ---
+layout: person
 name: Jerrid Schilling
 position: Contributor - Documentation
 image_path: /images/photos/jerrid-schilling.jpg

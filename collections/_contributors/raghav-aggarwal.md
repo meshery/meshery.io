@@ -1,4 +1,5 @@
 ---
+layout: person
 name: Raghav Aggarwal
 position: Contributor
 image_path: /images/photos/raghav-aggarwal.png
