@@ -17,11 +17,46 @@
 	}
 }
 
+.anchor {
+	position: relative;
+  }
+  
+.anchor a {
+	position: absolute;
+	left: 0px;
+	top: -110px;
+  }
+
 header {
 	color: $coolgray;
 	padding: 20px 0;
-	background: $brand-color; /* Old browsers */
-	background: linear-gradient(to bottom, $brand-color 0%, $middle-gradient-color 100%) no-repeat $brand-color;
+	// background: $brand-color; /* Old browsers */
+	// background: linear-gradient(to bottom, $brand-color 0%, $middle-gradient-color 100%) no-repeat $brand-color;
+	position: fixed;
+	width: 100%;
+	z-index: 9999;
+	margin-bottom: 5px;
+
+	&.header-background {
+		background: $brand-color; /* Old browsers */
+		background-color: linear-gradient(to bottom, $brand-color 0%, $middle-gradient-color 100%) no-repeat $brand-color;
+		// color: $coolgray;
+		color: rgba(255,255,255,.8);
+		// box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+		transition: background-color 0.2s ease;
+		text-shadow: none;
+
+		a {
+			// color: $coolgray;
+			color: rgba(255,255,255,.8);
+			@media #{$mid-point} {
+				&:hover {
+					border-bottom-color: rgba(80, 80, 80,.3);
+					border-bottom-width: 5px;
+				}
+			}
+		}
+	}
 
 	a {
 		color: #fff;
@@ -50,6 +85,8 @@ header {
 		}
 	}
 }
+
+
 
 .content {
 	background: #fff;
@@ -135,7 +172,8 @@ blockquote:before {
 		top: -1000%;
 		bottom: -1000%;
 		margin: auto;
-		width: 300px;
+		width: 100px;
+		height: 100px;
 	}
 }
 
@@ -173,4 +211,62 @@ blockquote:before {
 		}
 	}
 
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table, th, td {
+	border: 1px solid black;
+	padding: 8px;
+}
+
+.code {
+	color: white;
+	// & p ul {
+	 text-align: left;
+	// }
+	a {
+		color: white;
+	}
+}
+
+.highlight-code {
+    background: black;
+	margin-bottom: 15px;
+	padding: 2px;
+}
+
+.toggle .hidediv {
+	width: 80%;
+	display: table;
+	height: 150px; /* any arbitrary height but best at the minimum initial height you would want. */
+	overflow: hidden;
+	// background: #EEE;
+	margin: 0px auto;
+	transition-timing-function: linear;
+	transition: cubic-bezier(0, 1, 0, 1);
+  
+  }
+  
+  .innerdiv {
+	padding: 10px;
+  }
+
+.toggle input[type="checkbox"]:checked + .hidediv {
+	height: 0;
+	opacity: 0;
+	display: block;
+  }
+
+  .k8s-instructions {
+	position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+
+nav a:hover {
+	border-bottom-width: 0px !important;
 }
