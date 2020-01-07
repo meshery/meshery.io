@@ -48,3 +48,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/la
   $ git push origin <branch-name>
   ```
 * Then on Github, navigate to the [Meshery.io repository](https://github.com/layer5io/meshery.io) and create a pull request from your recently pushed changes!
+
+### About
+
+[Layer5.io](https://layer5.io) is a community-maintained repository of information pertaining to the technology ecosystem surrounding service meshes, API gateways, edge proxies, ingress and egress controllers - - microservice management in cloud native environments. 
