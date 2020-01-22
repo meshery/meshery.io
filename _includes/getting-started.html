@@ -2,18 +2,19 @@
 <div class="container flex">
 <div class="text editable code">
     <div class="post-content row" itemprop="articleBody">
-        <h3>Step 1: Install and start</h3>
-        <p>Install on <a href="https://meshery.layer5.io/docs/installation#quick-start">Mac or Linux</a> using Docker, install Meshery on your local machine by running the following:</p>        
+        <h2>Step 1: Install and Start</h2>
+        <!-- Docker -->
+        <h3 style="margin-left:1em;">Bash user</h3>
+        <p style="margin-left:1.5em;">Install on <a href="https://meshery.layer5.io/docs/installation#quick-start">Mac or Linux</a> using Docker:</p style="margin-left:1em;">        
   
-        <div id="start" class="highlight-code highlight-source-shell">
-            <div style="width:auto; height:65px; padding:0px; position:relative;">
-              <pre><code>
-   curl -L https://git.io/meshery | sh -
+        <div id="start" class="highlight-code highlight-source-shell" style="margin-left:1.8em;">
+            <div style="width:auto; height:30px; padding:0px; position:relative;">
+              <pre><code>   $ curl -L https://git.io/meshery | sh -
               </code></pre>
               <!-- copy to clipboard -->
               <a class="btn waves-effect waves-dark white-text darken-2 l5-light-blue z-depth-4"
-                style="position: absolute;top:-13px;  right: 0px; border: 0; 
-                    cursor: pointer; background:#00a4ca; width:60px; height:40px; margin-bottom:35px; 
+                style="position: absolute;top:-14px; right: -1px; border: 0; 
+                    cursor: pointer; background:#00a4ca; width:60px; height:44px; margin-bottom:35px; 
                     border-radius: 2px; margin:0px 0px 880px 0px;"
                 data-clipboard-target="#start"
                 data-clipboard-text="curl -L https://git.io/meshery | bash -">
@@ -21,15 +22,44 @@
               </a>
           </div>
         </div>
-        
+
+        <!-- Brew -->
+        <h3 style="margin-left:1em;">Brew user</h3 style="margin-left:1.5em;">
+        <p style="margin-left:1.5em;">Install on <a href="https://meshery.layer5.io/docs/installation#quick-start">Mac or Linux</a> using Homebrew:</p style="margin-left:1.5em;">        
+  
+        <div id="start-brew" class="highlight-code highlight-source-shell" style="margin-left:1.8em;">
+            <div style="width:auto; height:60px; padding:0px; position:relative;">
+              <pre><code> $ brew tap layer5io/tap<br /> $ brew install mesheryctl<br /> $ mesheryctl start<br /> 
+              </code></pre>
+              <!-- copy to clipboard -->
+              <a class="btn waves-effect waves-dark white-text darken-2 l5-light-blue z-depth-4"
+              style="position: absolute;top:-14px; right: -1px; border: 0; 
+                  cursor: pointer; background:#00a4ca; width:60px; height:44px; margin-bottom:35px; 
+                  border-radius: 2px; margin:0px 0px 880px 0px;"
+                data-clipboard-target="#start-brew"
+                data-clipboard-text="brew tap layer5io/tap
+                brew install mesheryctl
+                mesheryctl start">
+                <img src="/images/buttons/clippy.svg" style="width:20px; margin: 0; position: absolute; top: 50%; left: 54%; transform: translate(-50%, -50%);" />
+              </a>
+          </div>
+        </div>
+
+        <!-- Kubernetes -->
         <div class="toggle">
-          
-          <label for="k8s-instructions">To install on Kubernetes, <a>click here</a></label> 
-          or see Meshery documentation to <a href="https://meshery.layer5.io/docs/installation#using-docker-on-windows">install on Windows</a>.
+          <h3 style="margin-left:1em;">Kubernetes user</h3 style="margin-left:1.5em;">
+
+          <label for="k8s-instructions" style="margin-left:1.8em;display: inline;	font-size: 1.38em;
+          color: #666;
+          margin-bottom: 20px;
+          font-weight: 300;
+          line-height: 1.4em;">
+            <a>Follow these instructions to install on Kubernetes</a>.</label>
+           
           <input type="checkbox" class="k8s-instructions" checked name="one" id="k8s-instructions">
           <div class="hidediv">
             <div class="innerdiv">
-              
+        
         <p>Using Kubernetes, install Meshery on your cluster by cloning the Meshery repo:</p>
         <div class="highlight-code highlight-source-shell">
           <pre><code>
@@ -48,10 +78,14 @@
   $ kubectl -n meshery apply -f deployment_yamls/istio.yaml -->
       </div>
       <p>If you want to use a different namespace, please change the name of the namespace in the <code>ClusterRoleBinding</code> section appropriately. </p>
-              </div>
-            </div>
-      <h3>Step 2: Login</h3>
-      <p>Access Meshery in your browser at <a href="http://127.0.0.1:9081">http://127.0.0.1:9081</a>.</p>
+      </div>
+    </div>
+    <h3 style="margin-left:1em;">Windows user</h3> 
+    <p style="margin-left:1.8em;display: inline;">
+      <a href="https://meshery.layer5.io/docs/installation#using-docker-on-windows">See Meshery documentation to install on Windows</a>.
+      </p>
+    <h2 style="margin-top: 1em;">Step 2: Login</h2>
+    <p style="margin-left:1em;">Access Meshery in your browser at <a href="http://127.0.0.1:9081">http://127.0.0.1:9081</a>.</p>
     
     <!-- <h3 style="color:#111111;">Step 3: Configure and Enjoy Meshery</h3>
     <p>- Configure Meshery with references to your deployed adapters, using "meshery-&lt;service-mesh-name&gt;:&lt;port&gt;" (e.g. <code>meshery-istio:10000</code> or <code>meshery-linkerd:10001</code>)
