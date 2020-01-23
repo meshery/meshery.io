@@ -7,7 +7,7 @@
 		if (window.location.pathname !== "/"){
 			scrollBuffer = 0;
 		}
-		header.classList.toggle("header-background", scrollTop >= scrollBuffer || document.body.classList.contains("nav-open"));
+		header.classList.toggle("header-background", scrollTop >= scrollBuffer);
 	}
 
 	var didScroll = false;
@@ -24,10 +24,4 @@
 	}, 100);
 
     changeHeader();
-    
-    document.getElementById("open-nav").onclick = function () {
-		document.body.classList.toggle("nav-open");
-		changeHeader();
-        return false;
-    };
 })();
