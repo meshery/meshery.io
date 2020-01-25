@@ -7,8 +7,11 @@
 
 		{% seo %}
 		{% feed_meta %}
-
-		<link rel="stylesheet" href="{{ site.baseurl }}/css/stellarnav.min.css">
+		{% if jekyll.environment == 'production' %}
+			<link rel="stylesheet" href="{{ site.baseurl }}/css/stellarnav.min.css">
+		{% else %}
+			<link rel="stylesheet" href="{{ site.baseurl }}/css/stellarnav.css">
+		{% endif %}
 		<link rel="stylesheet" href="{{ site.baseurl }}/css/screen.css">
 		<link rel="icon" type="image/png" href="{{ site.baseurl }}/favicon.png">
 
@@ -61,8 +64,14 @@
 			</div>
 		</footer>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script src="{{ site.baseurl }}/js/stellarnav.min.js"></script>
+		{% if jekyll.environment == 'production' %}
+       		<script src="{{ site.baseurl }}/js/stellarnav.min.js"></script>
+        {% else %}
+		<script src="{{ site.baseurl }}/js/stellarnav.js"></script>
+	    {% endif %}
+		
 		<script src="{{ site.baseurl }}/js/main.js"></script>
+		<!-- Site Navigation Menu -->
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				jQuery('.stellarnav').stellarNav();
