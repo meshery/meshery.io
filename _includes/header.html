@@ -1,0 +1,45 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		{% seo %}
+		{% feed_meta %}
+		{% if jekyll.environment == 'production' %}
+			<link rel="stylesheet" href="{{ site.baseurl }}/css/stellarnav.min.css">
+		{% else %}
+			<link rel="stylesheet" href="{{ site.baseurl }}/css/stellarnav.css">
+		{% endif %}
+		<link rel="stylesheet" href="{{ site.baseurl }}/css/screen.css">
+		<link rel="icon" type="image/png" href="{{ site.baseurl }}/favicon.png">
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+		
+		{% if jekyll.environment == 'production' and site.google_analytics_key != '' %}
+			<script>
+				window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+				ga('create', '{{ site.google_analytics_key }}', 'auto');
+				ga('send', 'pageview');
+			</script>
+			<script async src='https://www.google-analytics.com/analytics.js'></script>
+		{% endif %}
+		<meta name="twitter:card" content="summary" />
+		<meta property="twitter:title" content="Meshery"/>
+		<meta name="twitter:site" content="@mesheryio" />
+		<meta name="twitter:creator" content="@Lee Calcote" />
+		<meta name="twitter:image" content="https://raw.githubusercontent.com/layer5io/meshery.io/master/images/logos/meshery-logo.png" />
+	</head>
+	<body>
+	<header id="mainHeader">
+		<div class="container nav-container">
+			<div class="project-name">
+				<a href="{{ site.baseurl }}/">
+				<img src="{{ site.baseurl }}/images/logos/meshery-logo.png" alt="Meshery Logo" height="45" />&nbsp;
+				<img src="{{ site.baseurl }}/images/logos/meshery-logo-text.png" alt="Meshery Logo" height="20" />
+				</a>
+			</div>
+			{% include navigation.html %}
+		</div>
+	</header>
