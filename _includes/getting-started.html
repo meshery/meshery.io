@@ -59,27 +59,49 @@
           <input type="checkbox" class="k8s-instructions" checked name="one" id="k8s-instructions">
           <div class="hidediv">
             <div class="innerdiv">
-        
-        <p>Using Kubernetes, install Meshery on your cluster by cloning the Meshery repo:</p>
+  
+            <!-- Kubernetes - Helm -->
+            <h4 style="font-size: 1.5em;">Using Helm</h4>
+            <p>Helm v3 - run the following:</p>
+            <div class="highlight-code highlight-source-shell">
+              <pre><code>
+  $ git clone https://github.com/layer5io/meshery.git; cd meshery
+  $ kubectl create namespace meshery
+  $ helm install meshery --namespace meshery install/kubernetes/helm/meshery
+              </code></pre>
+            </div>
+
+            <p>Helm v2 - run the following:</p>
+              <div class="highlight-code highlight-source-shell">
+              <pre><code>
+  $ git clone https://github.com/layer5io/meshery.git; cd meshery
+  $ kubectl create namespace meshery
+  $ helm template meshery --namespace meshery install/kubernetes/helm/meshery
+              </code></pre>
+            </div>
+              
+            </div>
+
+          <!-- Kubernetes - Manifests -->
+          <h4 style="font-size: 1.5em;">Using Manifests directly</h4>
+          <p>Using Kubernetes, install Meshery on your cluster by cloning the Meshery repo:</p>
+          <div class="highlight-code highlight-source-shell">
+            <pre><code>
+  $ git clone https://github.com/layer5io/meshery.git; cd meshery        
+            </code></pre>
+          </div>
+        <p>Install Meshery on your cluster by running the following:</p>
         <div class="highlight-code highlight-source-shell">
           <pre><code>
-   $ git clone https://github.com/layer5io/meshery.git; cd meshery        
+  $ kubectl create ns meshery
+  $ kubectl -n meshery apply -f deployment_yamls/k8s
           </code></pre>
+          <!-- PROVIDE THE "ON THE MESH" VERSION IN FUTURE DOCUMENTATION
+          # additional step for running on Istio
+          $ kubectl -n meshery apply -f deployment_yamls/istio.yaml -->
         </div>
-      <p>Install Meshery on your cluster by running the following:</p>
-      <div class="highlight-code highlight-source-shell">
-  <pre><code>
-    $ kubectl create ns meshery
-    $ kubectl -n meshery apply -f deployment_yamls/k8s
-  
-  </code></pre>
-  <!-- PROVIDE THE "ON THE MESH" VERSION IN FUTURE DOCUMENTATION
-  # additional step for running on Istio
-  $ kubectl -n meshery apply -f deployment_yamls/istio.yaml -->
       </div>
-      <p>If you want to use a different namespace, please change the name of the namespace in the <code>ClusterRoleBinding</code> section appropriately. </p>
-      </div>
-    </div>
+    
     <h3 style="margin-left:1em;">Windows user</h3> 
     <p style="margin-left:1.8em;display: inline;">
       <a href="https://meshery.layer5.io/docs/installation#using-docker-on-windows">See Meshery documentation to install on Windows</a>.
