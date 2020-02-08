@@ -77,6 +77,19 @@
   # additional step for running on Istio
   $ kubectl -n meshery apply -f deployment_yamls/istio.yaml -->
       </div>
+      
+      <p>Deploying Meshery by Helm chart(If you in Helm2 please kindly use helm template, the chart only was passed tested under Helm3):</p>
+      <div class="highlight-code highlight-source-shell">
+  <pre><code>
+    $ git clone https://github.com/layer5io/meshery.git; cd meshery
+    $ kubectl create namespace meshery
+    $ helm install meshery --namespace meshery install/kubernetes/helm/meshery
+  </code></pre>
+  <!-- PROVIDE THE "ON THE MESH" VERSION IN FUTURE DOCUMENTATION
+  # additional step for running on Istio
+  $ kubectl -n meshery apply -f deployment_yamls/istio.yaml -->
+      </div>
+
       <p>If you want to use a different namespace, please change the name of the namespace in the <code>ClusterRoleBinding</code> section appropriately. </p>
       </div>
     </div>
