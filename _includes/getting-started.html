@@ -1,22 +1,111 @@
-<div class="anchor"><a name="getting-started"></a><h2>Run Meshery</h2></div>
-<div class="container flex">
+<html>
+  <head>
+    
+    <style>
+      
+      #bounce:hover{
+        -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.5); 
+
+      }
+      @media screen and (max-width: 1900px){
+        #box{
+          width: 40%;
+          overflow: hidden;
+          margin-left: -60px;
+        }
+        #containers{
+          width: 80%;
+          position: relative;
+          
+          left: -100px;
+        }
+
+      }
+    
+      @media screen and (max-width: 1440px){
+        #box{
+          width: 40%;
+          overflow: hidden;
+          margin-left: -60px;
+        }
+        #containers{
+          width: 80%;
+          position: relative;
+          top: -100px;
+          left: -200px;
+        }
+
+      }
+      @media screen and (max-width: 1000px){
+        #box{
+          width: 100%;
+        }
+        #containers{
+          width: 100%;
+          height: 50%;
+          position: relative;
+          top: 300px;
+          left: -600px;
+        }
+
+      }
+
+      @media screen and (max-width: 500px){
+        #box{
+          width: 100%;
+        }
+        #containers{
+          width: 100%;
+          position: relative;
+          top: 300px;
+          left: -630px;
+        }
+
+      }
+
+     
+    </style>
+
+  </head>
+  <body style="overflow-x: hidden;">
+    
+    <div style="margin-top: auto;" id="box"> 
+      <h1 style="text-align: left;margin-left: 80px;"><strong style="font-size: 90px;">Get Started</strong><br>
+        with <span style="color: rgb(0, 162, 226);">Meshery</span> in<br>
+        Easy Steps<br>
+      <p style="font-size: 20px;">See how easy it is to get up<br>and running with <span style="color: rgb(0, 162, 226);">Meshery</span>, right away.</p></h1>
+    </div>
+
+<div class="container flex" id="containers" style="margin-left: 680px;margin-top: -250px;">
 <div class="text editable code">
     <div class="post-content row" itemprop="articleBody">
-        <h2>Step 1: Install and Start</h2>
+        <h2><strong>Install and Start</strong></h2>
+        <h1 style="font-size: 80px;opacity: 0.2;margin-top: -95px;margin-left: -55px;"><strong>01</strong></h1>
+        <!-----------try---------->
+        <label for="start-helm-v2"><img id="bounce" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Bash_Logo_Colored.svg/1024px-Bash_Logo_Colored.svg.png" alt="" style="height: 50px;width: 50px;cursor:pointer;"></label>
+        <label for="start-brew"><img id="bounce" src="https://brew.sh/assets/img/homebrew-256x256.png" alt="" style="height: 50px;width: 50px;margin-left: 60px;top: -81px;position: relative;cursor:pointer"></label>
+        <div style="position: relative;left: 115px;top: -150px;">
+          <label for="k8s-instructions"><img id="bounce" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/1200px-Kubernetes_logo_without_workmark.svg.png" alt="" style="height: 50px;width: 50px;cursor:pointer"></label>
+        <label for="windows"><img id="bounce" src="https://pngimg.com/uploads/windows_logos/windows_logos_PNG31.png" alt="" style="height: 50px;width: 50px;margin-left: 60px;top: -81px;position: relative;cursor:pointer"></label>
+        </div>
+        
+        <!-----------try---------->
         <!-- Docker -->
-        <div class="toggle">
-          <h3 style="margin-left:1em;">Bash user</h3 style="margin-left:1.5em;">
+        <div class="toggle" style="margin-top: -200px;">
           <label for="start-helm-v2" style="margin-left:1.8em;display: inline;	font-size: 1.38em;
           color: #666;
           font-weight: 300;
           line-height: 1.4em;">
-            <a>Install on Mac or Linux using Docker:</a>.</label>
+            <a></a>.</label>
           <input type="checkbox" class="k8s-instructions" checked name="one" id="start-helm-v2">
-          <div class="hidediv">
-            <div class="innerdiv">
+          <div class="hidediv" >
+            <div class="innerdiv" >
+              <p>Install on Mac or Linux using Docker:</p>
   
               <div id="start" class="highlight-code highlight-source-shell" style="margin-left:1.8em;">
-                <div style="width:auto; height:30px; padding:0px; position:relative;">
+                <div style="width:auto; height:30px; padding:0px; position:relative;border-radius: 5px;">
                   <pre><code>   $ curl -L https://git.io/meshery | bash -
                   </code></pre>
                   <!-- copy to clipboard -->
@@ -35,32 +124,30 @@
       </div>
     </div>
         <!-- Brew -->
-        <div class="toggle">
-          <h3 style="margin-left:1em;">Bash user</h3 style="margin-left:1.5em;">
+        <div class="toggle" >
 
           <label for="start-brew" style="margin-left:1.8em;display: inline;	font-size: 1.38em;
           color: #666;
-          margin-bottom:20px;
           font-weight: 300;
           line-height: 1.4em;">
-            <a>Install on Mac or Linux using Homebrew:</a>.</label>
+            <a></a>.</label>
            
           <input type="checkbox" class="k8s-instructions" checked name="one" id="start-brew">
           <div class="hidediv">
             <div class="innerdiv">
+              <p>Install on Mac or Linux using Homebrew:</p>
   
               <div id="start-brew" class="highlight-code highlight-source-shell" style="margin-left:1.8em;">
-                <div style="width:auto; height:60px; padding:0px; position:relative;">
-                  <pre><code> $ brew tap layer5io/tap<br /> $ brew install mesheryctl<br /> $ mesheryctl start<br /> 
+                <div style="width:auto; height:40px; padding:0px; position:relative;">
+                  <pre><code> $ kubectl create namespace meshery<br /> $ mesheryctl start<br /> 
                   </code></pre>
                   <!-- copy to clipboard -->
                   <a class="btn waves-effect waves-dark white-text darken-2 l5-light-blue z-depth-4"
                   style="position: absolute;top:-14px; right: -1px; border: 0; 
-                      cursor: pointer; background:#00a4ca; width:60px; height:75px; margin-bottom:35px; 
+                      cursor: pointer; background:#00a4ca; width:60px; height:55px; margin-bottom:35px; 
                       border-radius: 2px; margin:0px 0px 880px 0px;"
-                    data-clipboard-target="#start-brew"
-                    data-clipboard-text="brew tap layer5io/tap
-                    brew install mesheryctl
+                    data-clipboard-target="#start-k8s"
+                    data-clipboard-text="kubectl create namespace meshery
                     mesheryctl start">
                     <img src="/images/buttons/clippy.svg" style="width:20px; margin: 0; position: absolute; top: 50%; left: 54%; transform: translate(-50%, -50%);" />
                   </a>
@@ -73,14 +160,12 @@
     </div>
         <!-- Kubernetes -->
         <div class="toggle">
-          <h3 style="margin-left:1em;">Kubernetes user</h3 style="margin-left:1.5em;">
 
           <label for="k8s-instructions" style="margin-left:1.8em;display: inline;	font-size: 1.38em;
           color: #666;
-          margin-bottom: 20px;
           font-weight: 300;
           line-height: 1.4em;">
-            <a>Follow these instructions to install on Kubernetes</a>.</label>
+            <a></a>.</label>
            
           <input type="checkbox" class="k8s-instructions" checked name="one" id="k8s-instructions">
           <div class="hidediv">
@@ -89,51 +174,123 @@
             <!-- Kubernetes - Helm -->
             <h4 style="font-size: 1.5em;">Using Helm</h4>
             <p>Helm v3 - run the following:</p>
-            <div class="highlight-code highlight-source-shell">
-              <pre><code>
-  $ git clone https://github.com/layer5io/meshery.git; cd meshery
-  $ kubectl create namespace meshery
-  $ helm install meshery --namespace meshery install/kubernetes/helm/meshery
-              </code></pre>
+            <div id="start-helm-v3" class="highlight-code highlight-source-shell" style="margin-left:1.8em;">
+              <div style="width:auto; height:60px; padding:0px; position:relative;">
+                <pre><code> $ git clone https://github.com/layer5io/meshery.git; cd meshery<br /> $ kubectl create namespace meshery<br /> $ helm install meshery --namespace meshery install/kubernetes/helm/meshery<br /> 
+                </code></pre>
+                <!-- copy to clipboard -->
+                <a class="btn waves-effect waves-dark white-text darken-2 l5-light-blue z-depth-4"
+                style="position: absolute;top:-14px; right: -1px; border: 0; 
+                    cursor: pointer; background:#00a4ca; width:60px; height:75px; margin-bottom:35px; 
+                    border-radius: 2px; margin:0px 0px 880px 0px;"
+                  data-clipboard-target="#start-brew"
+                  data-clipboard-text="git clone https://github.com/layer5io/meshery.git; cd meshery
+                  kubectl create namespace meshery
+                  helm install meshery --namespace meshery install/kubernetes/helm/meshery">
+                  <img src="/images/buttons/clippy.svg" style="width:20px; margin: 0; position: absolute; top: 50%; left: 54%; transform: translate(-50%, -50%);" />
+                </a>
             </div>
+          </div>
 
             <p>Helm v2 - run the following:</p>
-              <div class="highlight-code highlight-source-shell">
-              <pre><code>
-  $ git clone https://github.com/layer5io/meshery.git; cd meshery
-  $ kubectl create namespace meshery
-  $ helm template meshery --namespace meshery install/kubernetes/helm/meshery
-              </code></pre>
+              
+            <div id="start-helm-v2" class="highlight-code highlight-source-shell" style="margin-left:1.8em;">
+              <div style="width:auto; height:60px; padding:0px; position:relative;">
+                <pre><code> $ git clone https://github.com/layer5io/meshery.git; cd meshery<br /> $ kubectl create namespace meshery<br /> $ helm template meshery --namespace meshery install/kubernetes/helm/meshery<br /> 
+                </code></pre>
+                <!-- copy to clipboard -->
+                <a class="btn waves-effect waves-dark white-text darken-2 l5-light-blue z-depth-4"
+                style="position: absolute;top:-14px; right: -1px; border: 0; 
+                    cursor: pointer; background:#00a4ca; width:60px; height:75px; margin-bottom:35px; 
+                    border-radius: 2px; margin:0px 0px 880px 0px;"
+                  data-clipboard-target="#start-brew"
+                  data-clipboard-text="git clone https://github.com/layer5io/meshery.git; cd meshery
+                  kubectl create namespace meshery
+                  helm template meshery --namespace meshery install/kubernetes/helm/meshery">
+                  <img src="/images/buttons/clippy.svg" style="width:20px; margin: 0; position: absolute; top: 50%; left: 54%; transform: translate(-50%, -50%);" />
+                </a>
             </div>
+          </div>
               
             </div>
 
           <!-- Kubernetes - Manifests -->
           <h4 style="font-size: 1.5em;">Using Manifests directly</h4>
           <p>Using Kubernetes, install Meshery on your cluster by cloning the Meshery repo:</p>
-          <div class="highlight-code highlight-source-shell">
-            <pre><code>
-  $ git clone https://github.com/layer5io/meshery.git; cd meshery        
-            </code></pre>
+          
+          <div id="start-k8s-manifests" class="highlight-code highlight-source-shell" style="margin-left:1.8em;">
+            <div style="width:auto; height:30px; padding:0px; position:relative;">
+              <pre><code>   $ git clone https://github.com/layer5io/meshery.git; cd meshery    
+              </code></pre>
+              <!-- copy to clipboard -->
+              <a class="btn waves-effect waves-dark white-text darken-2 l5-light-blue z-depth-4"
+                style="position: absolute;top:-14px; right: -1px; border: 0; 
+                    cursor: pointer; background:#00a4ca; width:60px; height:44px; margin-bottom:35px; 
+                    border-radius: 2px; margin:0px 0px 880px 0px;"
+                data-clipboard-target="#start-k8s-manifests"
+                data-clipboard-text="git clone https://github.com/layer5io/meshery.git; cd meshery    ">
+                <img src="/images/buttons/clippy.svg" style="width:20px; margin: 0; position: absolute; top: 50%; left: 54%; transform: translate(-50%, -50%);" />
+              </a>
           </div>
+        </div>
         <p>Install Meshery on your cluster by running the following:</p>
-        <div class="highlight-code highlight-source-shell">
-          <pre><code>
-  $ kubectl create ns meshery
-  $ kubectl -n meshery apply -f deployment_yamls/k8s
-          </code></pre>
-          <!-- PROVIDE THE "ON THE MESH" VERSION IN FUTURE DOCUMENTATION
-          # additional step for running on Istio
-          $ kubectl -n meshery apply -f deployment_yamls/istio.yaml -->
+        
+        <div id="start-k8s-in-cluster" class="highlight-code highlight-source-shell" style="margin-left:1.8em;">
+          <div style="width:auto; height:60px; padding:0px; position:relative;">
+            <pre><code> $ git clone https://github.com/layer5io/meshery.git; cd meshery<br /> $ kubectl create namespace meshery<br /> $ helm template meshery --namespace meshery install/kubernetes/helm/meshery<br /> 
+            </code></pre>
+            <!-- copy to clipboard -->
+            <a class="btn waves-effect waves-dark white-text darken-2 l5-light-blue z-depth-4"
+              style="position: absolute;top:-14px; right: -1px; border: 0; 
+                  cursor: pointer; background:#00a4ca; width:60px; height:74px; margin-bottom:35px; 
+                  border-radius: 2px; margin:0px 0px 880px 0px;"
+              data-clipboard-target="#start-k8s-in-cluster"
+              data-clipboard-text="kubectl create ns meshery
+              kubectl -n meshery apply -f deployment_yamls/k8s ">
+              <img src="/images/buttons/clippy.svg" style="width:20px; margin: 0; position: absolute; top: 50%; left: 54%; transform: translate(-50%, -50%);" />
+            </a>
         </div>
       </div>
+      </div>
     
-    <h3 style="margin-left:1em;">Windows user</h3> 
-    <p style="margin-left:1.8em;display: inline;">
-      <a href="https://meshery.layer5.io/docs/installation#using-docker-on-windows">See Meshery documentation to install on Windows</a>.
-      </p>
-    <h2 style="margin-top: 1em;">Step 2: Login</h2>
-    <p style="margin-left:1em;">Access Meshery in your browser at <a href="http://127.0.0.1:9081">http://127.0.0.1:9081</a>.</p>
+    
+    <!-- Docker -->
+    <div class="toggle">
+      <!-- <h3 style="margin-left:1em;">Windows user</h3 style="margin-left:1.5em;"> -->
+      <label for="windows" style="margin-left:1.8em;display: inline;	font-size: 1.38em;
+      color: #666;
+      font-weight: 300;
+      line-height: 1.4em;">
+        <a></a>.</label>
+      <input type="checkbox" class="k8s-instructions" checked name="one" id="windows">
+      <div class="hidediv">
+        <div class="innerdiv">
+          <p>Download and unzip <span style="color: rgb(117, 250, 255);">mesheryctl</span> from the <a href="https://github.com/layer5io/meshery/releases/tag/v0.3.9">Meshery releases</a> page. Add <span style="color: rgb(117, 250, 255);">mesheryctl</span> to your PATH for ease of use. Then, execute:</p>
+          <div id="start" class="highlight-code highlight-source-shell" style="margin-left:1.8em;">
+            <div style="width:auto; height:30px; padding:0px; position:relative;">
+              <pre><code>   $ ./mesheryctl start
+              </code></pre>
+              <!-- copy to clipboard -->
+              <a class="btn waves-effect waves-dark white-text darken-2 l5-light-blue z-depth-4"
+                style="position: absolute;top:-14px; right: -1px; border: 0; 
+                    cursor: pointer; background:#00a4ca; width:60px; height:44px; margin-bottom:35px; 
+                    border-radius: 2px; margin:0px 0px 880px 0px;"
+                data-clipboard-target="#start"
+                data-clipboard-text="./mesheryctl start">
+                <img src="/images/buttons/clippy.svg" style="width:20px; margin: 0; position: absolute; top: 50%; left: 54%; transform: translate(-50%, -50%);" />
+              </a>
+          </div>
+        </div>
+          
+        </div>  
+  </div>
+</div>
+<hr style="opacity: .4;width: 900px;">
+    <div>
+      <h2 style="margin-top: 1em;"><strong>Login</strong></h2>
+    <h1 style="font-size: 80px;opacity: 0.2;margin-top: -95px;margin-left: -55px;"><strong>02</strong></h1>
+    <p style="margin-left:1em;">Access Meshery in your browser if you are using Kubernetes at <a href="http://127.0.0.1:9081" style="color: rgb(85, 217, 240);">http://127.0.0.1:9081</a>.</p>
+    </div>
     
     <!-- <h3 style="color:#111111;">Step 3: Configure and Enjoy Meshery</h3>
     <p>- Configure Meshery with references to your deployed adapters, using "meshery-&lt;service-mesh-name&gt;:&lt;port&gt;" (e.g. <code>meshery-istio:10000</code> or <code>meshery-linkerd:10001</code>)
@@ -144,3 +301,6 @@
 </div>
 
 </div>
+
+  </body>
+</html>
