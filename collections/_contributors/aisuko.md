@@ -1,7 +1,7 @@
 ---
 layout: person
 name: Aisuko
-position: Contributor
+position: Maintainer - Helm Charts
 image_path: /images/photos/aisuko.png
 twitter: AisukoLi
 github: aisuko

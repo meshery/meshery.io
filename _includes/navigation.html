@@ -16,7 +16,13 @@
 				{% if link.subitems[0] %}
 				<ul>
 					{% for sublink in link.subitems %}
-                    <li><a href="{{sublink.link}}" {% if sublink.new_window %}target="_blank"{% endif %} class="subnav-item">{{sublink.name}}</a></li>
+					<li><a href="{{sublink.link}}" {% if sublink.new_window %}target="_blank"{% endif %} 
+						class="subnav-item">{{sublink.name}}
+						{% if sublink.external %}
+						<img src="/images/buttons/external-link_gray.svg" 
+							style="max-width:  10px; vertical-align:top;" />
+						{% endif %}
+					</a></li>
                 	{% endfor %}
 				</ul>
 				{% endif %}
