@@ -20,6 +20,21 @@ description: Quickly compare and learn service meshes like Istio, Linkerd, Envoy
 				<img src="{{ site.baseurl }}/images/meshery_multi_mesh.png" alt="Multi-service mesh management plane" class="screenshot editable" />
 			</a>	
 		</div>
+		<!-- show number of total performance tests run by Meshery users -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$.get("https://meshery.layer5.io/result/total", function(data, status) {
+					var testresults = JSON.parse(data);
+					document.getElementById("testresults").innerHTML = "&nbsp;"+testresults.total_runs+"&nbsp;&nbsp;";
+				});
+			});
+		</script>
+		<div class="card" style="z-index: 1;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);background-color: white;margin-top: 20px;height: 40px;border-radius: 10px; ">
+			<div class="performance" style="color: black;margin-top: 10px;position: relative;top: 10px;font-weight: bolder;font-size: larger;">
+			  <span class="testresults" id="testresults"></span>performance tests run!
+		  </div>
+		</div>
 		<div style="margin-top: 2.5em;">
 			<iframe src="https://ghbtns.com/github-btn.html?user=layer5io&repo=meshery&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="50px"></iframe>
 			<iframe src="https://ghbtns.com/github-btn.html?user=layer5io&repo=meshery&type=watch&count=true&size=large&v=2" frameborder="0" scrolling="0" width="160px" height="50px"></iframe>
