@@ -1,7 +1,7 @@
 ---
 layout: person
 name: Ashis Kumar Singh
-position: Contributor
+position: Meshery Contributor, Landscape Maintainer
 image_path: /images/photos/ashis-singh.jpg
 github: ashiscs
 twitter: AshisKumarSin20
