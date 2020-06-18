@@ -21,4 +21,6 @@ Meshery and SMI are aligned on common goals of getting users started quickly, un
 
 As a multi-mesh manager, Meshery, understands that each service mesh has it own strengths. SMI intends to allow for differentiation by service mesh providers, at the same time providing interoperability between service meshes and their surrounding tooling. As a management plane, Meshery enhances networking intelligence in a multi-mesh way, encouraging users to expect more from their infrastructure. Meshery exposes each service mesh’s differentiated capabilities. 
 
-SMI’s aim for consistent APIs facilitates Meshery’s same goals, allowing for users and tools to flourish. As SMI unveils today, so does Meshery’s compatibility. Try out [Meshery and SMI](https://layer5.io/meshery) today!
+SMI’s aim for consistent APIs facilitates Meshery’s same goals, allowing for users and tools to flourish. As SMI unveils today, so does Meshery’s compatibility. Try out [Meshery and SMI](https://layer5.io/meshery) today!  
+  
+<i><a href="https://github.com/leecalcote">- Lee Calcote</a></i>
