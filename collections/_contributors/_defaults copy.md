@@ -1,9 +1,9 @@
 ---
 layout: person
-name: Adheip Singh
+name: Dhruv Patel
 position: Contributor
 image_path: /
-twitter: 
-github: 
+twitter: DhruvPatel0008
+github: dhruv0000
 blurb: Mesh Head
 ---
