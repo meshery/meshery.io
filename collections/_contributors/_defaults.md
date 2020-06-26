@@ -1,6 +1,6 @@
 ---
 layout: person
-name: Adheip Singh
+name: 
 position: Contributor
 image_path: /
 twitter: 
