@@ -2,7 +2,6 @@
 .text-container {
 	margin: 0 auto;
 	position: relative;
-	padding: 0 20px;
 }
 
 .text-container {
@@ -74,6 +73,7 @@ header {
 	.project-name {
 		font-size: 1.7em;
 		line-height: 0;
+		padding: 0 20px;
 
 		a {
 			display: inline-flex;
@@ -110,7 +110,7 @@ header {
 }
 
 section {
-	padding: 100px 0;
+	padding: 100px 25px;
 }
 
 section + section {
@@ -235,37 +235,31 @@ td {
 }
 
 .highlight-code {
+	position: relative;
+	border-radius: 5px;
 	background: black;
 	margin-bottom: 15px;
-	padding: 2px;
-	width: 700px;
 }
 
 .toggle .hidediv {
 	width: 80%;
 	display: table;
 	height: 80px; /* any arbitrary height but best at the minimum initial height you would want. */
-	overflow: hidden;
 	// background: #EEE;
 	margin: 0px auto;
 	transition-timing-function: linear;
 	transition: cubic-bezier(0, 1, 0, 1);
 }
 
-.innerdiv {
-	padding: 10px;
-}
-
 .toggle input[type="checkbox"]:checked + .hidediv {
-	height: 0;
-	opacity: 0;
-	display: block;
+	display: none;
 }
 
 .k8s-instructions {
 	position: absolute;
 	opacity: 0;
 	pointer-events: none;
+	display: none;
 }
 
 nav a:hover {
@@ -283,27 +277,45 @@ nav a:hover {
 }
 hr {
 	opacity: 0.4;
-	width: 900px;
+	width: auto;
 }
 #breakWords {
 	word-break: break-all;
 }
-#containers {
+
+.code-box {
 	position: relative;
-	right: -100px;
+	overflow-x: auto;
+	height: 50px;
+	line-height: 50px;
+	margin-right: 2rem;
+	font-size: 15px;
+	white-space: pre-line;
+	padding-left: 10px;
 }
+
+.getting-started-heading {
+	font-weight: bold;
+	font-size: 75px;
+}
+
+.step-number {
+	font-size: 60px;
+	opacity: 0.2;
+	font-weight: bold; 
+}
+
+.step-heading {
+	margin: 0;
+	font-weight: bold;
+}
+
 // responsive getting started
 @media screen and (max-width: 1900px) {
 	#box {
 		width: 40%;
 		overflow: hidden;
 		margin-left: -60px;
-	}
-	#containers {
-		width: 80%;
-		position: relative;
-
-		left: -100px;
 	}
 }
 
@@ -313,49 +325,33 @@ hr {
 		overflow: hidden;
 		margin-left: -60px;
 	}
-	#containers {
-		width: 80%;
-		position: relative;
-		top: -100px;
-		left: -200px;
-	}
 }
-
-
 
 @media screen and (max-width: 1000px) {
 	#box {
 		width: 100%;
 		font-size: small;
 	}
-	.innerdiv{
-		width: 40%;
-	}
-	#containers {
-		width: 100%;
-		position: relative;
-		top: 250px;
-		left: -630px;
-		height: auto;
-	}
-	.login {
-		margin-top: 50px;
-		width: 80%;
-		position: relative;
-		left: -2px;
-		top: -160px;
-		font-size: smaller;
-		padding-top: 80px;
-	}
-	hr {
-		opacity: 0;
-	}
 }
 .platformIcon {
 	padding: 0.5rem;
 	display: flex;
 	flex-direction: row;
-	padding-bottom: 200px;
+}
+
+@media screen and (max-width: 650px) {
+	.getting-started-heading {
+		font-size: 55px;
+	}
+
+	.step-number {
+		font-size: 50px;
+	}
+
+	.step-heading {
+		font-size: 30px;
+	}
+
 }
 
 //   tooltip
@@ -386,3 +382,32 @@ hr {
 		opacity: 1;
 	}
 }
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+  }
+  
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+	visibility: hidden;
+	width: 100px;
+	background-color: #505050;
+	text-align: center;
+	padding: 0.5em;
+	font-size: 1.2em;
+	border-radius: 10px;
+   
+	/* Position the tooltip text */
+	position: absolute;
+	z-index: 1;
+	top: 5rem;
+	left: 50%;
+	margin-left: -45px;
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .tooltip:hover .tooltiptext {
+	visibility: visible;
+  }
