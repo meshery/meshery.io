@@ -1,7 +1,7 @@
 ---
 layout: person
 name: Shivay Lamba
-position: Contributor
+position: Contributor, MeshMate
 image_path: /images/photos/shivay-lamba.png
 twitter: howdevelop
 github: shivaylamba
