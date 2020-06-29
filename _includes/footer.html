@@ -34,17 +34,26 @@
 		<!-- Site Navigation Menu -->
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
-				jQuery('.stellarnav').stellarNav();
+				jQuery('.stellarnav').stellarNav({breakpoint: 840});
+				jQuery('.stellarnav.mobile').css('text-align','end');
 			});
 		</script>
 		<!--Script for Copy to Clipboard-->
 		<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 		<script>
+		
+		function resetCopyText(element) {
+			let childElements = element.childNodes
+			childElements[3].innerHTML="Copy to clipboard";
+		}
+		
 		var clipboard = new ClipboardJS('.btn');
 		clipboard.on('success', function(e) {
 			console.info('Action:', e.action);
 			console.info('Text:', e.text);
 			console.info('Trigger:', e.trigger);
+			let childElements = e.trigger.childNodes;
+			childElements[3].innerHTML = "Copied!";
 			e.clearSelection();
 		});
 		clipboard.on('error', function(e) {
