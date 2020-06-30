@@ -4,8 +4,9 @@
 				<div class="footer-columns">
 					{% for column in site.data.footer %}
 					<ul class="footer-links">
+						<li><h2>{{ column.title }}</h2></li>
 						{% for link in column.links %}
-							<li><a {% if link.new_window %}target="_blank"{% endif %} href="{% include relative-src.html src=link.link %}" {% if link.social_icon %}class="{{ link.social_icon }}-icon"{% endif %}>
+							<li><a {% if link.new_window %}target="_blank"{% endif %} href="{% include relative-src.html src=link.link %}" {% if link.social_icon %}class="{{ link.social_icon || downcase }}-icon"{% endif %}>
 								{% if link.social_icon %}
 									{% include social-icon.html icon=link.social_icon %}
 								{% endif %}
@@ -13,7 +14,16 @@
 						{% endfor %}
 					</ul>
 					{% endfor %}
+					<ul class="feed">
+						<div class="col l4">
+							<a class="twitter-timeline" data-height="230px"
+							data-theme="light" data-link-color="#62ACCD" href="https://twitter.com/mesheryio"
+							data-chrome="nofooter noborders noscrollbar">Tweets by Meshery</a> 
+							<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+						</div>
+					</ul>
 				</div>
+				
 				<p class="copyright">&copy; {{ site.time | date: '%Y' }} Layer5, Inc. • <a href="https://meshery.layer5.io/terms-of-service.html">Terms</a> &amp; <a href="https://meshery.layer5.io/privacy-policy.html">Privacy</a> • <a href="https://layer5.io/">Layer5</a></p>
 				<p style="text-align: center;">
 					<a href="https://www.netlify.com">
