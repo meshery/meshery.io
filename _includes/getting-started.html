@@ -16,34 +16,34 @@
         <h2 class="step-heading">Choose your Platform</h2>
       </div>
       <div class="platformIcon">
-        <label class="tooltip" for="start-helm-v2" style="margin: 0 20px 0px 0px; padding: 0;">
+        <span class="tooltip" id="bash" style="margin: 0 20px 0px 0px; padding: 0;" onclick="displayCode(this.id)">
           <img id="bounce"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Bash_Logo_Colored.svg/1024px-Bash_Logo_Colored.svg.png"
             alt="Bash User">
           <span class="tooltiptext">Bash User</span>
-        </label>
-        <label class="tooltip" for="start-brew" style="margin: 0px 20px 0px 0px; padding: 0;">
+        </span>
+        <span class="tooltip" id="brew" style="margin: 0px 20px 0px 0px; padding: 0;" onclick="displayCode(this.id)">
           <img id="bounce"
             src="https://brew.sh/assets/img/homebrew-256x256.png" alt="Brew User">
           <span class="tooltiptext">Brew User</span>
-        </label>
-        <label class="tooltip" for="k8s-instructions" style="margin: 0 20px 0px 0px; padding: 0;">
+        </span>
+        <span class="tooltip" id="k8s-instructions" style="margin: 0 20px 0px 0px; padding: 0;" onclick="displayCode(this.id)">
           <img id="bounce"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/1200px-Kubernetes_logo_without_workmark.svg.png"
             alt="Kubernetes User">
           <span class="tooltiptext">Kubernetes User</span>
-        </label>
-        <label class="tooltip" for="windows" style="margin: 0px 20px 0px 0px; padding: 0;">
+        </span>
+        <span class="tooltip" id="windows" style="margin: 0px 20px 0px 0px; padding: 0;" onclick="displayCode(this.id)">
           <img id="bounce"
             src="https://pngimg.com/uploads/windows_logos/windows_logos_PNG31.png" alt="Windows User">
           <span class="tooltiptext">Windows User</span>
-        </label>
+        </span>
       </div>
 
       <!-- Docker -->
-      <div class="toggle">
-        <input type="checkbox" class="k8s-instructions" checked name="one" id="start-helm-v2">
-        <div class="hidediv">
+      <div id="bash_code" class="toggle hideDiv">
+        <div class="innerDiv">
+          <h3>Bash User:</h3>
             <p>Install on Mac or Linux using Docker:</p>
 
             <div id="start-docker" class="highlight-code">
@@ -60,9 +60,9 @@
       </div>
       
       <!-- Brew -->
-      <div class="toggle">
-        <input type="checkbox" class="k8s-instructions" checked name="one" id="start-brew">
-        <div class="hidediv">
+      <div id="brew_code" class="toggle hideDiv">
+        <div class="innerDiv">
+          <h3>Brew User:</h3>
             <p>Install on Mac or Linux using Homebrew:</p>
 
             <div id="start-brew" class="highlight-code">
@@ -79,9 +79,9 @@ mesheryctl system start" onmouseout="resetCopyText(this)">
         </div>
       </div>
       <!-- Kubernetes -->
-      <div class="toggle">
-        <input type="checkbox" class="k8s-instructions" checked name="one" id="k8s-instructions">
-        <div class="hidediv">
+      <div id="k8s-instructions_code" class="toggle hideDiv">
+        <div class="innerDiv">
+          <h3>Kubernetes User:</h3>
 
             <!-- Kubernetes - Helm -->
             <h4 style="font-size: 1.5em;">Using Helm</h4>
@@ -149,9 +149,9 @@ kubectl -n meshery apply -f install/deployment_yamls/k8s" onmouseout="resetCopyT
       </div>
 
       <!-- Windows-->
-      <div class="toggle" id="windowsBlock">
-        <input type="checkbox" class="k8s-instructions" checked name="one" id="windows">
-        <div class="hidediv">
+      <div id="windows_code" class="toggle hideDiv">
+        <div class="innerDiv">
+          <h3>Windows User:</h3>
             <p>Download and unzip <span style="color: rgb(117, 250, 255);">mesheryctl</span> from the <a
                 href="https://github.com/layer5io/meshery/releases/tag/v0.3.9">Meshery releases</a> page. Add <span
                 style="color: rgb(117, 250, 255);">mesheryctl</span> to your PATH for ease of use. Then, execute:
