@@ -9,20 +9,22 @@ layout: page
 		{{ content }}
 
 		<div class="author">
-        {% for contributors in site.contributors %}
+        {% for author in site.posts %}
         <h2>
-        <a href="{{ contributors.url }}">
-        {{ contributors.name }} - {{ contributors.position }}
+        <a href="{{ author.url }}">
+            <p><h1>Author       </h1>{{ author.author_contributor }} 
+        </p>
+        {{ author.categories }}
         
-        <h5>Github</h5>
-        {{ contributors.github }} 
-        <h5>Twitter</h5>
-        {{ contributors.twitter }}
-
+        
        </a>
-       <div class="square-image"><img src="{% include relative-src.html src=contributors.image_path %}" alt="{{ contributors.name }}"/></div>
-       </h2>
-       <p class="blurb">{{ contributors.blurb }}</p>
+       <div class="square-image"><img src="{% include relative-src.html 
+       src=author.image
+%}" alt="{{ author.author_contributor }}"/></div>
+        </h2>
+        <center>
+       <p class="date">{{ author.date }}</p>
+        </center>
        {% endfor %}
         
         
