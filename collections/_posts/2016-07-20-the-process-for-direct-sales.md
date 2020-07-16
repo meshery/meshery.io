@@ -1,7 +1,7 @@
 ---
 date:   2019-05-21 12:15:05 +0000
 title: A Standard Interface for Service Meshes
-author_contributor: Lee calcote
+author_contributor: Lee Calcote
 categories:
   - specification
   - multi-mesh
