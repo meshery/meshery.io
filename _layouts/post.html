@@ -8,13 +8,15 @@ layout: page
 	<div class="post-content">
 		{{ content }}
 
-		<div class="author">
-			{% assign author_id = page.author_staff_member | prepend: "/contributors/" | append: "/" %}
-			{% assign author = site.contributors | where: "url", author_id | first %}
-			<div class="square-image"><img src="{% include relative-src.html src=author.image_path %}" alt="{{ author.name }}"/></div>
-			<p class="blurb">{{ author.blurb }}</p>
-		</div>
-
+		
+        {% for author in site.posts %}
+        <p  style= "font-size:20px;"> 
+          {{ author.author_contributor }} 
+        </p>
+       {% endfor %}
+        
+        
+        
 		<div class="blog-navigation">
 			{% if page.previous.url %}
 				<a class="prev" href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.title }}</a>
