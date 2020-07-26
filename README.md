@@ -1,4 +1,4 @@
-# Meshery.io
+# Meshery
 
 ![Meshery.io website screenshot](images/mesheryio_screenshot.png)
 *Visit [Meshery.io](https://meshery.io/) to learn more!*
@@ -41,8 +41,9 @@ Find out more on the <a href="https://layer5.io/community#meshmate">Layer5 commu
 </p>
 
 <div>&nbsp;</div>
+<a name="contributing"></a>
 
-## Contributing to Meshery
+## Contributing to the Meshery.io Website
 
 Before contributing, please review the [Contribution Flow](https://github.com/layer5io/meshery/blob/master/CONTRIBUTING.md). In the following steps you will set up your development environment, fork and clone the repository, run the site locally, and finally commit, sign-off, and push any changes made for review.
 
