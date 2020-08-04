@@ -12,7 +12,7 @@
 			{% if link.link == page.url %}
 				{% assign class = class | append: " active" %}
 			{% endif %}
-				<a href="{% include relative-src.html src=link.link %}" class="{{class}}" {% if link.new_window %}target="_blank"{% endif %}>{{ link.name }}</a>
+				<a {% if link.link %}href="{% include relative-src.html src=link.link %}"{% endif %} {% if link.submenu %}style="width:125px"{% endif %} class="{{class}}" {% if link.new_window %}target="_blank"{% endif %}>{{ link.name }}</a>
 				{% if link.subitems[0] %}
 				<ul>
 					{% for sublink in link.subitems %}
