@@ -13,11 +13,7 @@
                 <li>
                     <div class="square-image">
                         <a href="{{page.url}}">
-                        {% if page.status == "Active" %}
-                        <img class="b-active" src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/>
-                        {% else %}
-                        <img class="b-inactive" src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/>
-                        {% endif %}
+                        <img {% if status == "Active" %} class="b-active" {% else %} class="b-inactive" {% endif %} src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/>    
                         </a>
                     </div>
                     <div class="names">{{ page.name }}</a></div>
