@@ -6,4 +6,5 @@ image_path: /images/photos/oscar-hernandez.jpg
 # twitter:
 github: ozrlz
 blurb: Mesh Head
+status: Active
 ---

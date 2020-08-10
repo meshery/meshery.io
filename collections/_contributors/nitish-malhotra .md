@@ -6,4 +6,5 @@ image_path: /images/photos/nitish-malhotra.jpeg
 twitter: nitishmalhotra9
 github: nitishm
 blurb: meshygopher
+status: Active
 ---

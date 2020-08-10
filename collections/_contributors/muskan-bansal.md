@@ -5,4 +5,5 @@ position: Contributor
 image_path: /images/photos/muskan-bansal.jpg
 github: crustyy
 blurb: Mesh Head
+status: Active
 ---

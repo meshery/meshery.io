@@ -6,4 +6,5 @@ image_path: /images/photos/ruth-ikegah.jpeg
 github: Ruth-ikegah
 twitter: ikegahruth
 blurb: Mesh Head
+status: Active
 ---

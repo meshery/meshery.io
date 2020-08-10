@@ -6,4 +6,5 @@ image_path: /images/photos/naveen-jain.png
 twitter: nveenjain
 github: nveenjain
 blurb: Mesh Head
+status: Active
 ---

@@ -6,4 +6,5 @@ image_path: /images/photos/lidor-ettinger.jpeg
 twitter: EttingerLidor
 github: naturalett
 blurb: Mesh Head
+status: Active
 ---
