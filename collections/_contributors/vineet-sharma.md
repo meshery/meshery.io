@@ -6,4 +6,5 @@ image_path: /images/photos/vineet-sharma.jpg
 twitter: vineet_s29
 github: Vineet-Sharma29
 blurb: Mesh Head
+status: Active
 ---
