@@ -1,19 +1,16 @@
 ---
-name: Feature request
-about: Suggest an enhancement to this project
+name: Site Update
+about: Suggest an update to the Meshery.io website
 title: ''
-labels: 'enhancement'
+labels: 'kind/enhancement'
 assignees: ''
 ---
-**Current Behavior**
-A brief description of what the problem is. (e.g. I need to be able to...)
+**Current State of the Meshery.io site**
+A brief description of what the problem is.
 
-**Desired Behavior**
-A brief description of the enhancement.
+**Desired State of the Meshery.io site**
+A brief description of the change you are requesting.
 
 ---
-[Optional] **Alternatives**
-A brief description of any alternative solutions or features you've considered.
-
-[Optional] **Additional context**
-Add any other context or screenshots about the feature request here.
+**Contributor Resources**
+- See the [Contributing to Meshery.io Website](https://github.com/layer5io/meshery.io#contributing-to-the-mesheryio-website) section of the readme.md.
