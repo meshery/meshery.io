@@ -6,5 +6,5 @@ image_path: /images/photos/gunjan-paul.jpg
 twitter: GunjanPaul2
 github: gunjanmimo
 blurb: Mesh Head
-status: Active
+status: Inactive
 ---

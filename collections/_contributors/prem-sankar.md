@@ -6,5 +6,5 @@ image_path: /images/photos/prem-sankar.jpg
 twitter: premsankar
 github: gpremsankar
 blurb: Mesh Head
-status: Active
+status: Inactive
 ---

@@ -5,5 +5,5 @@ position: Contributor - Designer
 image_path: /images/photos/martin-castre.jpg
 github: mcastre
 blurb: Mesh Head
-status: Active
+status: Inactive
 ---

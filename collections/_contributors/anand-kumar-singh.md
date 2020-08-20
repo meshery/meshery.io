@@ -6,5 +6,5 @@ image_path: https://pbs.twimg.com/profile_images/1102512808363679744/Rp8-3wn9_40
 github: anandrkskd
 twitter: anandrkskd
 blurb: engineer, enthusiastic with technology
-status: Active
+status: Inactive
 ---
