@@ -5,5 +5,5 @@ position: Contributor
 image_path: /images/photos/will-tamagi.jpg
 github: wdtamagi
 blurb: Mesh Head
-status: Active
+status: Inactive
 ---
