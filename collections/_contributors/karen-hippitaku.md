@@ -6,5 +6,5 @@ image_path: /images/photos/karen-hippitaku.jpg
 twitter: KarenHippitaku
 github: KarenHippitaku
 blurb: Mesh Head
-status: Active
+status: Inactive
 ---

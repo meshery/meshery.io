@@ -5,5 +5,5 @@ position: Contributor
 image_path: /images/photos/rohit argarwal.jpg
 twitter: rohitag2503
 blurb: Mesh Head
-status: Active
+status: Inactive
 ---
