@@ -2,7 +2,7 @@
 layout: person
 name: Michael Gfeller
 position: Contributor
-image_path: /images/photos/michael-gfeller.jpg
+image_path: images/photos/michael-gfeller.jpeg
 twitter: mgfeller
 github: mgfeller
 blurb: Mesh Head
