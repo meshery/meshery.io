@@ -6,5 +6,5 @@ image_path: /images/photos/tajinder-singh.jpeg
 twitter: Tajinde65733396 
 github: tsingh2k15
 blurb: Mesh Head
-status: Active
+status: Inactive
 ---
