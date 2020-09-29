@@ -1,5 +1,9 @@
 .bottom-cta {
-	background: linear-gradient(to bottom, $brand-color 0%, $middle-gradient-color 100%);
+	background: linear-gradient(
+		to bottom,
+		$brand-color 0%,
+		$middle-gradient-color 100%
+	);
 	color: #fff;
 	text-align: center;
 	margin: 0 auto;
@@ -29,14 +33,86 @@
 				flex: 1;
 			}
 		}
-		
+	}
+}
+
+.created-by-section {
+	max-width: 1140px;
+	margin: auto;
+	padding: 0 0 30px 0;
+
+	.created-by {
+		color: dimgray;
+		font-weight: 600;
+		text-decoration: none;
+		text-transform: uppercase;
+		margin-bottom: 30px;
+		text-align: center;
+	}
+
+	.company-image {
+		filter: grayscale(70%);
+		max-width: 350px;
+		margin: auto;
+		padding: 30px;
+		transition: 0.5s ease-in-out all;
+
+		&:hover {
+			filter: none;
+		}
+	}
+
+	img {
+		padding-bottom: 30px;
+	}
+}
+
+.used-by-section {
+	max-width: 1140px;
+	margin: auto;
+	padding: 0 0 50px 0;
+
+	.used-by {
+		text-align: center;
+		margin-bottom: 40px;
+		font-weight: 600;
+		color: dimgray;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+
+	.companies-image {
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		justify-content: space-evenly;
+		align-items: center;
+		margin: auto;
+	}
+
+	.company-image {
+		filter: grayscale(70%);
+		transition: 0.5s ease-in-out all;
+
+		&:hover {
+			filter: none;
+		}
+	}
+
+	img {
+		padding-bottom: 30px;
 	}
 }
 
 .hero {
 	color: #ffffff;
 	text-align: center;
-	background: linear-gradient(to bottom, $middle-gradient-color 0%, $secondary-brand-color 100%) no-repeat #a05fb7;
+	background: linear-gradient(
+			to bottom,
+			$middle-gradient-color 0%,
+			$secondary-brand-color 100%
+		)
+		no-repeat #a05fb7;
 	padding-top: 75px;
 
 	p {
@@ -47,7 +123,12 @@
 .reversehero {
 	color: #ffffff;
 	text-align: center;
-	background: linear-gradient(to top, $middle-gradient-color 0%, $secondary-brand-color 100%) no-repeat #a05fb7;
+	background: linear-gradient(
+			to top,
+			$middle-gradient-color 0%,
+			$secondary-brand-color 100%
+		)
+		no-repeat #a05fb7;
 	padding-top: 50px;
 
 	p {
@@ -56,12 +137,12 @@
 }
 .google-slides {
 	position: relative;
-	padding-bottom: 59%; 
+	padding-bottom: 59%;
 	overflow: hidden;
 	align-items: center;
 	text-align: center;
-  }
-  
+}
+
 .google-slides iframe {
 	border: 0;
 	position: absolute;
@@ -69,18 +150,18 @@
 	left: 0;
 	margin-left: auto;
 	margin-right: auto;
-	width: 100% ;
-	height: 100% ;
-  }
+	width: 100%;
+	height: 100%;
+}
 
 .overview-section {
 	padding-top: 10px;
 	padding-bottom: 85px;
-	color:#fff;
+	color: #fff;
 	align-items: center;
 	background-color: #222;
-  }
-  
+}
+
 .getting-started {
 	color: #ffffff;
 	text-align: center;
@@ -99,7 +180,8 @@
 		align-items: center;
 		flex-direction: row;
 
-		.text, .image {
+		.text,
+		.image {
 			-webkit-flex: 1;
 			flex: 1;
 			padding: 0 20px;
@@ -108,5 +190,30 @@
 
 	.content section:nth-child(even) .flex {
 		flex-direction: row-reverse;
+	}
+}
+
+@media #{$mobile} {
+	.created-by-section .company-image {
+		width: auto;
+		padding: 0px;
+	}
+
+	.used-by-section .companies-image {
+		flex-direction: column;
+
+		.company-image {
+			height: 140px;
+		}
+	}
+
+	.used-by-section .companies-image {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-column-gap: 10px;
+
+		img {
+			padding-bottom: 30px;
+		}
 	}
 }
