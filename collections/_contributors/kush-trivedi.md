@@ -7,4 +7,5 @@ twitter: kush_1814
 github: kushthedude
 blurb: Mesh Head
 status: Active
+MeshMate: true
 ---

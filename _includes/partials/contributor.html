@@ -2,63 +2,81 @@
     <div class="container {% if page.full_width %}max-container{% endif %}">
         <h2>Community Members</h2>
         <p>A warm and welcoming collection of open sourcers.</p>
-        <a href="http://slack.layer5.io/" style="text-decoration: none !important;"><h4 style="text-align:center;color:aliceblue;">
-            <input style="padding-bottom:10px;padding-top:10px;width:300px; margin-left: auto; margin-right: auto;" type="submit" value="Join the Community"></h4></a>
+          <a href="http://slack.layer5.io/" style="text-decoration: none !important;">
+            <h4 style="text-align:center;color:aliceblue;">
+              <input style="padding-bottom:10px;padding-top:10px;width:300px; margin-left: auto; margin-right: auto;" type="submit" value="Join the Community">
+            </h4>
+          </a>
+
+        {% include partials/filter-members.html %}
 
         <ul class="contributor">  
         <!-- List all Contributors -->
         {% if "community.html" == page.name %}
-            {% for page in site.contributors %}
-                {% if page.layout != 'archive' %}
-                <li>
-                    <div class="square-image">
-                        <a href="{{page.url}}">
-                        <img {% if page.status == "Active" %} class="b-active" {% else %} class="b-inactive" {% endif %} src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/>    
-                        </a>
-                    </div>
-                    <div class="names">{{ page.name }}</a></div>
+        {% for page in site.contributors %}
+        {% if page.layout != 'archive' %}
+        <li>
+          <div class="square-image">
+            <a href="{{page.url}}">
+              <img {% if page.status == "Active" %} class="b-active" {% else %} class="b-inactive" {% endif %} src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/>    
+            </a>
+          </div>
+          <div class="names">{{ page.name }}</a></div>
 
-                    {% if page.twitter %}
+          {% if page.twitter %}
+              <div class="twitter">
+                <img src="{% include relative-src.html src='../images/social/twitter.png'%}"> 
+                  <a target="_blank" href="https://twitter.com/{{ page.twitter }}">{{ page.twitter }}</a>
+              </div>
+          {% endif %}
 
-                        <div class="twitter"><img src="{% include relative-src.html src='../images/social/twitter.png'%}"> 
-                            <a target="_blank" href="https://twitter.com/{{ page.twitter }}">{{ page.twitter }}</a></div>
+          {% if page.github %}
+              
+              <div class="github">
+                <img src="{% include relative-src.html src='../images/social/github.png'%}"> 
+                  <a target="_blank" href="https://github.com/{{ page.github }}">{{ page.github }}</a>
+              </div>
+          {% endif %}
 
-                    {% endif %}
-                    {% if page.github %}
-                        
-                        <div class="github"><img src="{% include relative-src.html src='../images/social/github.png'%}"> 
-                            <a target="_blank" href="https://github.com/{{ page.github }}">{{ page.github }}</a></div>
-
-                    {% endif %}
-                </li>
-                {% endif %}
-            {% endfor %}
-
-            <!-- List a specific contributor -->
-
-            {% else %}
-                {% if page.twitter %}
-                <li>
-                    <div class="solo-image"><img src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/></div>
-                    <div class="name"><a target="_blank" href="https://twitter.com/{{ page.twitter }}">{{ page.name }}</a></div>
-                    <div class="position">{{ page.position }}</div>
-                </li>
-            {% else %}
-                {% if page.github %}
-                <li>
-                    <div class="solo-image"><img style="max-width: 300px;" src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/></div>
-                    <div class="name"><a target="_blank" href="https://github.com/{{ page.github }}">{{ page.name }}</a></div>
-                    <div class="position">{{ page.position }}</div>
-                </li>
-                {% else %}
-                <li>
-                    <div class="solo-image"><img style="max-width: 300px;" {% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/></div>
-                    <div class="name">{{ page.name }}</div>
-                    <div class="position">{{ page.position }}</div>
-                </li>
-                {% endif %}
-            {% endif %}
+        </li>
         {% endif %}
+        {% endfor %}
+
+        <!-- List a specific contributor -->
+        {% else %}
+        {% if page.twitter %}
+        <li>
+            <div class="solo-image">
+              <img src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/>
+            </div>
+            <div class="name">
+              <a target="_blank" href="https://twitter.com/{{ page.twitter }}">{{ page.name }}</a>
+            </div>
+            <div class="position">{{ page.position }}</div>
+        </li>
+        {% else %}
+        {% if page.github %}
+        <li>
+            <div class="solo-image">
+              <img style="max-width: 300px;" src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/>
+            </div>
+            <div class="name">
+              <a target="_blank" href="https://github.com/{{ page.github }}">{{ page.name }}</a>
+            </div>
+            <div class="position">{{ page.position }}</div>
+        </li>
+        {% else %}
+        <li>
+            <div class="solo-image">
+              <img style="max-width: 300px;" src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/>
+            </div>
+            <div class="name">{{ page.name }}</div>
+            <div class="position">{{ page.position }}</div>
+        </li>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+
         </ul>
     </div>	
 </div>

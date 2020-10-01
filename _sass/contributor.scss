@@ -5,7 +5,7 @@
 	@include flex-flow(wrap);
 	text-align: center;
 	justify-content: center;
-			
+
 	li {
 		padding: 20px 20px;
 		box-sizing: border-box;
@@ -18,41 +18,41 @@
 		@media #{$desktop} {
 			@include flex(1, 1, 1%);
 		}
-
 	}
-	.solo-image {		
-			img {
-				border-radius: 150px;
-				height: 300px;
-				width: 300px;
-				object-fit: cover;
-			}
+	.solo-image {
+		img {
+			border-radius: 150px;
+			height: 300px;
+			width: 300px;
+			object-fit: cover;
 		}
+	}
 	.square-image {
 		width: 150px;
-		
-			img {
-				border-radius: 150px;
-				object-fit: cover;
-			}
+
+		img {
+			border-radius: 150px;
+			object-fit: cover;
 		}
+	}
 	.name {
-		font-size: calc(.8em + 1.4vw);
+		font-size: calc(0.8em + 1.4vw);
 		margin-top: 0px;
 	}
 	.names {
-		font-size: calc(.6em + 1vw);
+		font-size: calc(0.6em + 1vw);
 		margin-top: 0px;
 	}
-	.twitter, .github {
-		font-size: calc(.35em + 1.1vw);
-		margin-top: .5vw;
+	.twitter,
+	.github {
+		font-size: calc(0.35em + 1.1vw);
+		margin-top: 0.5vw;
 		white-space: nowrap;
 		img {
-			border-radius: 4px;  /* Rounded border */
+			border-radius: 4px; /* Rounded border */
 			width: 20px; /* Set a small width */
 			vertical-align: middle;
-		  }
+		}
 	}
 	.position {
 		color: #666;
@@ -64,45 +64,196 @@
 	margin-left: 5%;
 	margin-right: 5%;
 	justify-content: center;
-		
+
 	.community-block {
-		ul li { 
-			text-align: left; color:inherit;}
-			text-align: center;
+		ul li {
+			text-align: left;
+			color: inherit;
+		}
+		text-align: center;
 	}
 	.project-block {
-		ul li { 
-			text-align: left; color:inherit;
+		ul li {
+			text-align: left;
+			color: inherit;
 			font-size: 1.38em;
 			color: #666;
 			margin-bottom: 20px;
 			font-weight: 300;
-			line-height: 1.4em;}
+			line-height: 1.4em;
 		}
 	}
- 
-  .flex-item {
+}
+
+.flex-item {
 	padding: 5px;
 	width: 100%;
-	margin-top: 10px;	
-
-  }
-  @media all and (max-width: 700px) {
+	margin-top: 10px;
+}
+@media all and (max-width: 700px) {
 	.community {
-	  /* On small screens, we are no longer using row direction but column */
-	  flex-direction: column;
+		/* On small screens, we are no longer using row direction but column */
+		flex-direction: column;
 	}
-  }
-
+}
 
 /* This activates the circular border around community member images - Default*/
 .b-active {
-    border:5px solid #00b39f;
-    border-radius: 65%; 
+	border: 5px solid #00b39f;
+	border-radius: 65%;
 }
 
 /* This inactivates the circular border around community member images */
 .b-inactive {
-    border:5px solid #828c8c;
-    border-radius: 65%;  
+	border: 5px solid #828c8c;
+	border-radius: 65%;
+}
+
+// filter buttons
+.title-and-filter-btns {
+	display: block;
+	width: 90%;
+	margin: 0 auto;
+	text-align: end;
+}
+
+.filter-color {
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+}
+
+.active-filter-color {
+	display: inline-block;
+	background-color: #00b39f;
+}
+
+.inactive-filter-color {
+	display: inline-block;
+	background-color: #828c8c;
+	margin-left: 10px;
+}
+
+.active-btn,
+.inactive-btn {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	cursor: pointer;
+}
+
+.active-btn {
+	margin: 0;
+}
+
+.filter-btn-group {
+	display: flex;
+	flex-direction: column;
+}
+
+.filter-btns {
+	width: 130px;
+	position: relative;
+	display: inline-block;
+}
+
+.all {
+	width: inherit;
+	background-color: #3c494f;
+	color: white;
+	padding: 16px;
+	font-size: 20px;
+	border: none;
+	border-radius: 10px;
+}
+
+.filter-drop-down {
+	display: none;
+	position: absolute;
+	background-color: #f1f1f1;
+	text-align: center;
+	width: inherit;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+}
+
+.filter-drop-down a {
+	color: black;
+	padding: 10px 8px;
+	text-decoration: none;
+	display: block;
+
+	&:nth-child(2),
+	&:nth-child(3) {
+		padding: 10px 8px;
+	}
+}
+
+.filter-drop-down .active-btn,
+.filter-drop-down .inactive-btn {
+	padding: 10px 0;
+}
+
+.filter-drop-down .active-btn:hover,
+.filter-drop-down .inactive-btn:hover,
+.filter-drop-down a:hover {
+	background-color: #e2e2e2;
+}
+
+.filter-btns:hover .filter-drop-down {
+	display: block;
+}
+
+.filter-btns:hover .all {
+	background-color: #3c494f;
+}
+
+.filter-icon {
+	width: 25px;
+	padding-left: 20px;
+	vertical-align: middle;
+}
+
+.meshmate-icon {
+	width: 25px;
+	padding-right: 5px;
+	vertical-align: middle;
+}
+
+@media #{$tablet} {
+	.all {
+		padding: 10px;
+	}
+
+	.filter-icon {
+		padding-left: 15px;
+	}
+}
+
+@media #{$mobile} {
+	.title-and-filter-btns {
+		width: 100%;
+	}
+
+	.all {
+		font-size: 16px;
+		padding: 10px 0px;
+	}
+
+	.filter-icon {
+		width: 15px;
+	}
+
+	.filter-btns {
+		width: 115px;
+	}
+
+	.meshmate-icon {
+		width: 20px;
+		padding-right: 0;
+	}
+
+	a {
+		font-size: 15px;
+	}
 }
