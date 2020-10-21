@@ -2,7 +2,7 @@
 name: Documentation issue
 about: Issues related to documenation.
 title: '[Docs]'
-labels: 'docs'
+labels: 'kind/docs'
 assignees: ''
 ---
 **Current State:**
