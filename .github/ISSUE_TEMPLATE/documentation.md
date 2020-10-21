@@ -1,7 +1,7 @@
 ---
 name: Documentation issue
 about: Issues related to documenation.
-title: ''
+title: '[Docs]'
 labels: 'docs'
 assignees: ''
 ---
