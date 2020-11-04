@@ -1,0 +1,64 @@
+---
+layout: plain
+title: An Open Source Community
+description: Meshery is community-built and welcomes collaboration!
+---
+
+<style>
+.button {
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #232423;
+}
+.button:hover {
+    background-color: teal;
+}
+</style>
+
+<div style="text-align:center">
+<a href= "https://bit.ly/2SbrRhe"><button class="button"> Add To Your Calendar</button></a>
+
+</div>
+
+<div id='calendar'></div><br />
+
+
+
+<!-- Fullcalender CDN's -->
+<link rel="stylesheet" href="/css/fullcalender.css">
+<link rel="stylesheet" href="https://unpkg.com/@fullcalendar/core@4.4.0/main.min.css">
+<link rel="stylesheet" href="https://unpkg.com/@fullcalendar/daygrid@4.4.0/main.min.css">
+<link rel="stylesheet" href="https://unpkg.com/@fullcalendar/list@4.4.0/main.min.css">
+<script src="https://unpkg.com/@fullcalendar/core@4.4.0/main.min.js"></script>
+<script src="https://unpkg.com/@fullcalendar/daygrid@4.4.0/main.min.js"></script>
+<script src="https://unpkg.com/@fullcalendar/list@4.4.0/main.min.js"></script>
+<script src="https://unpkg.com/@fullcalendar/google-calendar@4.4.0/main.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    plugins: [ 'dayGrid', 'list', 'googleCalendar' ],
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,listYear'
+    },
+    displayEventTime: false, // don't show the time column in list view
+    googleCalendarApiKey: 'AIzaSyDcmx-nLYfqvrfpEmVJuclwt9akayYfUgg',
+    events: {
+        googleCalendarId: 'layer5.io_eh2aa9dpf1g40elvoc762jnphs@group.calendar.google.com'
+    },
+    eventClick: function(arg) {
+      // opens events in a popup window
+      window.open(arg.event.url, '_blank', 'width=700,height=600');
+      // prevents current tab from navigating
+      arg.jsEvent.preventDefault();
+    }
+  });
+  calendar.render();
+});
+</script>
