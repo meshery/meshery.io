@@ -4,13 +4,11 @@ title: Community Calendar
 description: Meshery is community-built and welcomes collaboration!
 ---
 
-
-
-<div style="text-align:center">
-<a href= "https://bit.ly/2SbrRhe"><button class="button"> Add To Your Calendar</button></a>
+<div class="calendar-meetings">
+  <h1>Community Calendar</h3>
+  <p>Join any or all of the weekly meetings</p>
+  <div id='calendar'></div><br />
 </div>
-
-<div id='calendar'></div><br />
 
 <!-- Fullcalender CDN's -->
 <link rel="stylesheet" href="/css/fullcalender.css">
@@ -28,10 +26,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
     plugins: [ 'dayGrid', 'list', 'googleCalendar' ],
+    buttonText: {
+      today: 'Today'
+    },
+    customButtons: {
+      addToCalendar: {
+        text: 'Add To Your Calendar',
+        click: function() {
+          window.open('https://bit.ly/2SbrRhe', '_blank');
+        }
+      }
+    },
     header: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,listYear'
+      right: 'addToCalendar'
     },
     displayEventTime: false, // don't show the time column in list view
     googleCalendarApiKey: 'AIzaSyDcmx-nLYfqvrfpEmVJuclwt9akayYfUgg',
@@ -48,16 +57,3 @@ document.addEventListener('DOMContentLoaded', function() {
   calendar.render();
 });
 </script>
-
-<style>
-    .button {
-      text-align: center;
-      cursor: pointer;
-      outline: none;
-      color: #fff;
-      background-color: #232423;
-    }
-    .button:hover {
-        background-color: teal;
-    }
-</style>
