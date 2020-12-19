@@ -28,10 +28,14 @@ image: images/logos/meshery-logo-light-text-pad.png
 		<!-- show number of total performance tests run by Meshery users -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script>
+			function numberWithCommas(x) {
+    		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+
 			$(document).ready(function () {
 				$.get("https://meshery.layer5.io/result/total", function (data, status) {
 					var testresults = JSON.parse(data);
-					document.getElementById("testresults").innerHTML = "&nbsp;" + testresults.total_runs + "&nbsp;";
+					document.getElementById("testresults").innerHTML = "&nbsp;" + numberWithCommas(testresults.total_runs) + "&nbsp;";
 				});
 			});
 		</script>
