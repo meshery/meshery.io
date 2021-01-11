@@ -14,3 +14,7 @@ docker-stop:
 
 docker-logs:
 	docker logs -f meshery-io
+
+.PHONY: helm-repo-update
+helm-repo-update:
+	helm repo index charts
