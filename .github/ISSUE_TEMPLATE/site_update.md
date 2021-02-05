@@ -2,7 +2,7 @@
 name: Site Update
 about: Suggest an update to the Meshery.io website
 title: ''
-labels: 'kind/enhancement'
+labels: 'component/ui'
 assignees: ''
 ---
 **Current State of the Meshery.io site**
