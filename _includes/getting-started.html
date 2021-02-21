@@ -88,12 +88,15 @@ mesheryctl system start" onmouseout="resetCopyText(this)">
             <!-- Kubernetes - Helm -->
             <h4 style="font-size: 1.5em;">Using Helm</h4>
             <div id="start-helm-v3" class="highlight-code">
-              <p class="code-box" style="height: 60px; line-height: 30px;"><code style="position: absolute;">$ kubectl create namespace meshery
-                $ helm install meshery --namespace meshery install/kubernetes/helm/meshery</code></p>
+              <p class="code-box" style="height: 90px; line-height: 30px;"><code style="position: absolute;">kubectl create ns meshery
+                helm repo add meshery https://meshery.io/charts/
+                helm install meshery meshery/meshery -n meshery
+              </code></p>
                 <!-- copy to clipboard -->
                 <a class="btn tooltip" style="position: absolute; top:0.5rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-helm-v3"
-                  data-clipboard-text="kubectl create namespace meshery
-helm install meshery --namespace meshery install/kubernetes/helm/meshery" onmouseout="resetCopyText(this)">
+                  data-clipboard-text="kubectl create ns meshery
+                  helm repo add meshery https://meshery.io/charts/
+                  helm install meshery meshery/meshery -n meshery" onmouseout="resetCopyText(this)">
                   <i class="far fa-copy"></i>
                   <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 3rem; left: -20px;">Copy to clipboard</span>
                 </a>
@@ -118,14 +121,16 @@ helm template meshery --namespace meshery install/kubernetes/helm/meshery" onmou
 
           <!-- Kubernetes - Manifests -->
           <h4 style="font-size: 1.5em;">Using Manifests</h4>
-          <p style="font-size: 1.25em;">Not a Helm user?<br> Use the Meshery manifests directly.</p>
+          <p style="font-size: 1.25em;">Not a Helm user? Use the Meshery manifests directly.</p>
 
           <div id="start-k8s-in-cluster" class="highlight-code">
-              <p class="code-box" style="height: 60px; line-height: 30px;"><code style="position: absolute;"> $ kubectl create ns meshery
+              <p class="code-box" style="height: 90px; line-height: 30px;"><code style="position: absolute;">$ git clone https://github.com/layer5io/meshery.git; cd meshery
+                $ kubectl create ns meshery
                 $ kubectl -n meshery apply -f install/deployment_yamls/k8s</code></p>
               <!-- copy to clipboard -->
               <a class="btn tooltip" style="position: absolute; top:0.5rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-k8s-in-cluster"
-                data-clipboard-text="kubectl create ns meshery
+                data-clipboard-text="git clone https://github.com/layer5io/meshery.git; cd meshery
+kubectl create ns meshery
 kubectl -n meshery apply -f install/deployment_yamls/k8s" onmouseout="resetCopyText(this)">
                 <i class="far fa-copy"></i>
                 <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 3rem; left: -20px;">Copy to clipboard</span>
@@ -156,7 +161,7 @@ scoop install mesheryctl" onmouseout="resetCopyText(this)">
             </div>
 
             <h4 style="font-size: 1.5em;">Using Binary</h4>
-            <p style="font-size: 1.25em;">Not a Scoop user?<br> Download and unzip the <a href="https://github.com/layer5io/meshery/releases/tag/v0.3.9"><span style="color: rgb(117, 250, 255);">mesheryctl</span></a>
+            <p style="font-size: 1.25em;">Not a Scoop user? Download and unzip the <a href="https://github.com/layer5io/meshery/releases/tag/v0.3.9"><span style="color: rgb(117, 250, 255);">mesheryctl</span></a>
               binary directly from the Meshery releases page. </p>
             <p style="font-size:125%;">Add <a href="https://github.com/layer5io/meshery/releases/tag/v0.3.9"><span style="color: rgb(117, 250, 255);">mesheryctl</span></a>
               to your PATH for ease of use. Then, execute:
