@@ -6,4 +6,5 @@ image_path: /images/photos/jash-patel.jpeg
 github: Jashpatel1
 blurb: Mesh Head
 status: Active
+meshmate: true
 ---

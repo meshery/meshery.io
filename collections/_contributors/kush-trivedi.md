@@ -6,6 +6,6 @@ image_path: /images/photos/kush-trivedi.jpeg
 twitter: kush_1814
 github: kushthedude
 blurb: Mesh Head
-status: Active
-MeshMate: true
+status: Inactive
+MeshMate: false
 ---
