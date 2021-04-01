@@ -51,14 +51,16 @@ heading: Check your <i>SMI Conformance</i>
       </tr>
     </thead>
     <tbody>
-      {% assign smi = site.data.smi %} {% for result in smi %}
+      {% externalJSON data from url https://meshery.layer5.io/smi/results/public %}
+      {% assign smi = data.results %} {% for result in smi %}
+      {% if result.mesh_version != "none" %}
       <tr class="collapse-head" style="border: 1px dashed #a6b7be;" id="{{result.id}}" data-toggle="tooltip"
         data-target=".{{result.id}}">
         <td>
           {% if result.mesh_name == "Open Service Mesh" %}
           <img src="images/osm.svg" style="height:30px;
               width:30px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
-          {% elsif result.mesh_name == "Traefik" %}
+          {% elsif result.mesh_name == "Traefik Mesh" %}
           <img src="images/traefik-mesh.svg" style="height:30px;
               width:30px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
           {% elsif result.mesh_name == "Istio" %}
@@ -86,19 +88,19 @@ heading: Check your <i>SMI Conformance</i>
         {% for spec in result.more_details %}
 
         <td data-toggle="tooltip" title="{{spec.reason}}">
-          {% if spec.capability == "None" %}
+          {% if spec.capability == "NONE" %}
           <i class="fa fa-times-circle" style="font-size:18px;color:red"></i>
-          {% elsif spec.capability == "Full" %}
+          {% elsif spec.capability == "FULL" %}
           <i class="fa fa-check-circle" style="font-size:20px;color:green"></i>
-          {% elsif result.capability == "Half" %}
+          {% elsif spec.capability == "HALF" %}
           <i class="fa fa-check-circle" style="font-size:20px;color:yellow"></i>
           {% endif %}
         </td>
         {% endfor %}
 
-        <td>{{result.passing_percentage}}</td>
+        <td>{{result.passing_percentage}}%</td>
       </tr>
-
+      {% endif %}
       {% for prev_result in result.previous_versions %}
       <tr class="collapse-{{result.id}}" style="background-color: #f2f2f2;padding: 0;border: 1px dashed #a6b7be;">
         <td style="padding: 0">
