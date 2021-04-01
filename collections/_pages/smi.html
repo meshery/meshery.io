@@ -2,7 +2,7 @@
 layout: page
 permalink: /smi
 title: SMI Conformance
-heading: Check your <i>SMI Conformance</i>
+heading: Service Mesh Interface Conformance
 ---
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -22,9 +22,16 @@ heading: Check your <i>SMI Conformance</i>
     border: none !important;
     font-size: small;
   }
+  p {
+    text-align: center;
+    margin: 1rem 5rem;
+  }
   @media screen and (min-width: 900px){
     th, td {
       font-size: larger;
+    }
+    p {
+      margin: 1rem 2rem;
     }
   }
 </style>
@@ -58,26 +65,26 @@ heading: Check your <i>SMI Conformance</i>
         data-target=".{{result.id}}">
         <td>
           {% if result.mesh_name == "Open Service Mesh" %}
-          <img src="images/osm.svg" style="height:30px;
-              width:30px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
+          <img src="images/osm.svg" style="height:40px;
+              width:40px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
           {% elsif result.mesh_name == "Traefik Mesh" %}
-          <img src="images/traefik-mesh.svg" style="height:30px;
-              width:30px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
+          <img src="images/traefik-mesh.svg" style="height:40px;
+              width:40px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
           {% elsif result.mesh_name == "Istio" %}
-          <img src="images/istio.svg" style="height:30px;
-              width:30px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
+          <img src="images/istio.svg" style="height:40px;
+              width:40px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
           {% elsif result.mesh_name == "Linkerd" %}
-          <img src="images/linkerd.svg" style="height:30px;
-              width:30px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
+          <img src="images/linkerd.svg" style="height:40px;
+              width:40px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
           {% elsif result.mesh_name == "Kuma" %}
-          <img src="images/Kuma.svg" style="height:30px;
-              width:30px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
+          <img src="images/Kuma.svg" style="height:40px;
+              width:40px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
           {% elsif result.mesh_name == "Consul" %}
-          <img src="images/consul.svg" style="height:30px;
-              width:30px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
+          <img src="images/consul.svg" style="height:40px;
+              width:40px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
           {% elsif result.mesh_name == "App Mesh" %}
-          <img src="images/aws-app-mesh.svg" style="height:30px;
-              width:30px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
+          <img src="images/aws-app-mesh.svg" style="height:40px;
+              width:40px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
           {% endif %}
         </td>
 
@@ -89,11 +96,11 @@ heading: Check your <i>SMI Conformance</i>
 
         <td data-toggle="tooltip" title="{{spec.reason}}">
           {% if spec.capability == "NONE" %}
-          <i class="fa fa-times-circle" style="font-size:18px;color:red"></i>
+          <i class="fa fa-times-circle" style="font-size:32px;color:red;cursor:help;"></i>
           {% elsif spec.capability == "FULL" %}
-          <i class="fa fa-check-circle" style="font-size:20px;color:green"></i>
+          <i class="fa fa-check-circle" style="font-size:32px;color:green;"></i>
           {% elsif spec.capability == "HALF" %}
-          <i class="fa fa-check-circle" style="font-size:20px;color:yellow"></i>
+          <i class="fa fa-check-circle" style="font-size:32px;color:orange;clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);cursor:help;"></i>
           {% endif %}
         </td>
         {% endfor %}
@@ -114,11 +121,11 @@ heading: Check your <i>SMI Conformance</i>
         <td style="padding: 0" scope="row" data-toggle="tooltip" title="{{spec.reason}}">
           <div class="collapse-body" style="display: none;padding: 10px">
             {% if spec.capability == "None" %}
-            <i class="fa fa-times-circle" style="font-size:18px;color:red"></i>
+            <i class="fa fa-times-circle" style="font-size:32px;color:red;cursor:help;"></i>
             {% elsif spec.capability == "Full" %}
-            <i class="fa fa-check-circle" style="font-size:20px;color:green"></i>
+            <i class="fa fa-check-circle" style="font-size:32px;color:green;"></i>
             {% elsif result.capability == "Half" %}
-            <i class="fa fa-check-circle" style="font-size:20px;color:yellow"></i>
+            <i class="fa fa-check-circle" style="font-size:32px;color:orange;clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);cursor:help;"></i>
             {% endif %}
           </div>
         </td>
@@ -128,9 +135,14 @@ heading: Check your <i>SMI Conformance</i>
           <div class="collapse-body" style="display: none;padding: 10px">{{prev_result.passing_percentage}}</div>
         </td>
       </tr>
+      
       {% endfor %}
 
       {% endfor %}
+      <tr style="height: .5rem;"><td><span style="vertical-align: text-top; font-style: italic;font-size: .8rem;color:#666;">Hover for details of test failures.</i></td></tr>
     </tbody>
   </table>
+  
 </div>
+<p style="margin-top:1rem;">Interested in how the SMI Conformance program works or details of the specific tests that are run?</p>
+  <p style="font-size:1.25rem;"><a href="https://layer5.io/projects/service-mesh-interface-conformance">Learn more about Service Mesh Interface Conformance.</a></p>
