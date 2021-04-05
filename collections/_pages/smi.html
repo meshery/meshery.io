@@ -6,10 +6,121 @@ heading: Service Mesh Interface Conformance
 ---
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+  function createTable(data) {
+    if (Array.isArray(data)) {
+      const tbody = $("tbody");
+
+      data.forEach(result => {
+        // Render iff mesh version is not "none"
+        if (result.mesh_version === "none") return;
+
+        // Create a row for the incoming data
+        const tr = document.createElement('tr')
+        // set attributes to the row
+        tr.setAttribute('class', 'collapse-head')
+        tr.setAttribute('style', 'border: 1px dashed #a6b7be;')
+        tr.setAttribute('id', result.id)
+        tr.setAttribute('data-toggle', 'tooltip')
+        tr.setAttribute('id', `.${result.id}`)
+
+        // Create tds for the row
+        // 1. td for the mesh icon
+        const td1 = document.createElement('td')
+        const img = document.createElement('img')
+        img.setAttribute('style', 'height:40px;width:40px!important')
+        img.setAttribute('alt', result.mesh_name)
+        img.setAttribute('data-toggle', 'tooltip')
+        img.setAttribute('title', result.mesh_name)
+
+        switch (result.mesh_name) {
+          case "Open Service Mesh": img.setAttribute('src', 'images/osm.svg'); break;
+          case "Traefik Mesh": img.setAttribute('src', 'images/traefik-mesh.svg'); break;
+          case "Istio": img.setAttribute('src', 'images/istio.svg'); break;
+          case "Linkerd": img.setAttribute('src', 'images/linkerd.svg'); break;
+          case "Kuma": img.setAttribute('src', 'images/Kuma.svg'); break;
+          case "Consul": img.setAttribute('src', 'images/consul.svg'); break;
+          case "App Mesh": img.setAttribute('src', 'images/aws-app-mesh.svg'); break;
+        }
+        td1.appendChild(img)
+        tr.appendChild(td1);
+
+        // 2. td for mesh version
+        const td2 = document.createElement('td')
+        td2.innerText = result.mesh_version
+        tr.appendChild(td2);
+        
+        // 3. td for capability
+        const moreDetails = result.more_details
+        if (Array.isArray(moreDetails)) {
+          moreDetails.forEach(detail => {
+            // Create td for each detail
+            const td = document.createElement('td')
+            td.setAttribute('data-toggle', 'tooltip')
+            td.setAttribute('title', `${detail.reason} | ${detail.result}`)
+            
+            // Create icon element
+            const i = document.createElement('i')
+            switch (detail.capability) {
+              case "NONE": 
+                i.setAttribute('class', 'fa fa-times-circle')
+                i.setAttribute('style', 'font-size:32px;color:red;cursor:help;'); 
+                break;
+              case "FULL": 
+                i.setAttribute('class', 'fa fa-check-circle')
+                i.setAttribute('style', 'font-size:32px;color:green;'); 
+                break;
+              case "HALF": 
+                i.setAttribute('class', 'fa fa-check-circle')
+                i.setAttribute('style', 'font-size:32px;color:orange;clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);cursor:help;'); 
+                break;
+            }
+
+            td.appendChild(i);
+
+            // Add this td to the row
+            tr.appendChild(td);
+          })
+        }
+
+        // 4. td for passing percentage
+        const td4 = document.createElement('td')
+        td4.innerText = `${result.passing_percentage}%`
+        tr.appendChild(td4)
+
+        tbody.append(tr)
+      })
+
+      // Custom row for showing message
+      const tr = document.createElement('tr')
+      tr.setAttribute('style', 'height: .5rem')
+
+      const td = document.createElement('td')
+
+      const span = document.createElement('span')
+      span.setAttribute('style', 'vertical-align: text-top; font-style: italic;font-size: .8rem;color:#666;')
+      span.innerText = "Hover for details of test failures."
+      
+      td.appendChild(span)
+
+      tr.appendChild(td)
+
+      tbody.append(tr)
+    }
+  }
+
   $(document).ready(function () {
     $(".collapse-head").click(function () {
       $(".collapse-" + $(this).attr("id")).find(".collapse-body").slideToggle();
     });
+
+    $.getJSON('https://meshery.layer5.io/smi/results/public', (data, status) => {
+      // Disable spinner
+      $(".loader").addClass("hide")
+
+      if (status !== "success") return;
+
+      createTable(data.results)
+    })
   });
 </script>
 
@@ -26,6 +137,89 @@ heading: Service Mesh Interface Conformance
     text-align: center;
     margin: 1rem 5rem;
   }
+  .hide {
+    display: none;
+  }
+  .loader {
+  color: #00b39f;
+  font-size: 90px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  margin: 72px auto;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+}
+@-webkit-keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@keyframes load6 {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@-webkit-keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes round {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
   @media screen and (min-width: 900px){
     th, td {
       font-size: larger;
@@ -37,6 +231,7 @@ heading: Service Mesh Interface Conformance
 </style>
 
 <div style="justify-content: center;">
+  <div class="js-data"></div>
   <table class="table highlighted table-responsive table-hover" style="color: #3C494E;
       background-color: #ffffff;
       margin: auto;
@@ -58,90 +253,9 @@ heading: Service Mesh Interface Conformance
       </tr>
     </thead>
     <tbody>
-      {% externalJSON data from url https://meshery.layer5.io/smi/results/public %}
-      {% assign smi = data.results %} {% for result in smi %}
-      {% if result.mesh_version != "none" %}
-      <tr class="collapse-head" style="border: 1px dashed #a6b7be;" id="{{result.id}}" data-toggle="tooltip"
-        data-target=".{{result.id}}">
-        <td>
-          {% if result.mesh_name == "Open Service Mesh" %}
-          <img src="images/osm.svg" style="height:40px;
-              width:40px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
-          {% elsif result.mesh_name == "Traefik Mesh" %}
-          <img src="images/traefik-mesh.svg" style="height:40px;
-              width:40px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
-          {% elsif result.mesh_name == "Istio" %}
-          <img src="images/istio.svg" style="height:40px;
-              width:40px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
-          {% elsif result.mesh_name == "Linkerd" %}
-          <img src="images/linkerd.svg" style="height:40px;
-              width:40px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
-          {% elsif result.mesh_name == "Kuma" %}
-          <img src="images/Kuma.svg" style="height:40px;
-              width:40px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
-          {% elsif result.mesh_name == "Consul" %}
-          <img src="images/consul.svg" style="height:40px;
-              width:40px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
-          {% elsif result.mesh_name == "App Mesh" %}
-          <img src="images/aws-app-mesh.svg" style="height:40px;
-              width:40px!important" alt="{{result.mesh_name}}" data-toggle="tooltip" title="{{result.mesh_name}}" />
-          {% endif %}
-        </td>
-
-        <td>
-          {{result.mesh_version}}
-        </td>
-
-        {% for spec in result.more_details %}
-
-        <td data-toggle="tooltip" title='{{spec.reason}} | {{spec.result}}'>
-          {% if spec.capability == "NONE" %}
-          <i class="fa fa-times-circle" style="font-size:32px;color:red;cursor:help;"></i>
-          {% elsif spec.capability == "FULL" %}
-          <i class="fa fa-check-circle" style="font-size:32px;color:green;"></i>
-          {% elsif spec.capability == "HALF" %}
-          <i class="fa fa-check-circle" style="font-size:32px;color:orange;clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);cursor:help;"></i>
-          {% endif %}
-        </td>
-        {% endfor %}
-
-        <td>{{result.passing_percentage}}%</td>
-      </tr>
-      {% endif %}
-      {% for prev_result in result.previous_versions %}
-      <tr class="collapse-{{result.id}}" style="background-color: #f2f2f2;padding: 0;border: 1px dashed #a6b7be;">
-        <td style="padding: 0">
-          <div class="collapse-body" style="display: none;padding: 10px"></div>
-        </td>
-        <td style="padding: 0">
-          <div class="collapse-body" style="display: none;padding: 10px"> {{prev_result.mesh_version}} </div>
-        </td>
-
-        {% for spec in result.more_details %}
-        <td style="padding: 0" scope="row" data-toggle="tooltip" title="{{spec.reason}}">
-          <div class="collapse-body" style="display: none;padding: 10px">
-            {% if spec.capability == "None" %}
-            <i class="fa fa-times-circle" style="font-size:32px;color:red;cursor:help;"></i>
-            {% elsif spec.capability == "Full" %}
-            <i class="fa fa-check-circle" style="font-size:32px;color:green;"></i>
-            {% elsif result.capability == "Half" %}
-            <i class="fa fa-check-circle" style="font-size:32px;color:orange;clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);cursor:help;"></i>
-            {% endif %}
-          </div>
-        </td>
-        {% endfor %}
-
-        <td style="padding: 0;">
-          <div class="collapse-body" style="display: none;padding: 10px">{{prev_result.passing_percentage}}</div>
-        </td>
-      </tr>
-      
-      {% endfor %}
-
-      {% endfor %}
-      <tr style="height: .5rem;"><td><span style="vertical-align: text-top; font-style: italic;font-size: .8rem;color:#666;">Hover for details of test failures.</i></td></tr>
     </tbody>
   </table>
+  <div class="loader"></div>
   
 </div>
 <p style="margin-top:1rem;">Interested in how the SMI Conformance program works or details of the specific tests that are run?</p>
