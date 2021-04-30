@@ -9,6 +9,13 @@ redirect_from: smi
 <script>
   function createTable(data) {
     if (Array.isArray(data)) {
+
+      // Set Spec Version for Headers
+      data[0].more_details.forEach( spec => {
+        let th = $(`.${spec.smi_specification}`);
+        th.append(`<div style="font-size: small;font-weight: normal;">${spec.smi_version}</div>`);
+      })
+
       const tbody = $("tbody");
 
       data.forEach(result => {
@@ -247,9 +254,9 @@ redirect_from: smi
       <tr>
         <th>Service Mesh</th>
         <th>Mesh Version</th>
-        <th>Traffic Access</th>
-        <th>Traffic Split</th>
-        <th>Traffic Spec</th>
+        <th class="traffic-access">Traffic Access</th>
+        <th class="traffic-split">Traffic Split</th>
+        <th class="traffic-spec">Traffic Spec</th>
         <th>% Passed</th>
       </tr>
     </thead>
