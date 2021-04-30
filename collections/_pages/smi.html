@@ -35,6 +35,10 @@ redirect_from: smi
         // 1. td for the mesh icon
         const td1 = document.createElement('td')
         const img = document.createElement('img')
+        const istio = document.createElement('div')
+        istio.setAttribute('style', 'font-size:.85rem;')
+        istio.innerText ='SMI Adapter for Istio';
+        
         img.setAttribute('style', 'height:40px;width:40px!important')
         img.setAttribute('alt', result.mesh_name)
         img.setAttribute('data-toggle', 'tooltip')
@@ -49,7 +53,12 @@ redirect_from: smi
           case "Consul": img.setAttribute('src', 'images/consul.svg'); break;
           case "App Mesh": img.setAttribute('src', 'images/aws-app-mesh.svg'); break;
         }
-        td1.appendChild(img)
+        td1.appendChild(img);
+
+        // Istio specific label
+        switch (result.mesh_name) {
+          case "Istio": td1.appendChild(istio);
+        }
         tr.appendChild(td1);
 
         // 2. td for mesh version
@@ -82,7 +91,6 @@ redirect_from: smi
                 i.setAttribute('style', 'font-size:32px;color:orange;clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);cursor:help;'); 
                 break;
             }
-
             td.appendChild(i);
 
             // Add this td to the row
@@ -103,7 +111,8 @@ redirect_from: smi
       tr.setAttribute('style', 'height: .5rem')
 
       const td = document.createElement('td')
-
+      td.setAttribute('colspan', '6');
+      
       const span = document.createElement('span')
       span.setAttribute('style', 'vertical-align: text-top; font-style: italic;font-size: .8rem;color:#666;')
       span.innerText = "Hover for details of test failures."
