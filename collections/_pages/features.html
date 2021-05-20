@@ -16,10 +16,10 @@ features_table:
         highlight: false
       - text: Validate each service mesh's compliance with Service Mesh Interface (SMI) specifications
         highlight: false
-      - text: 
-        highlight: 
-      - text: 
-        highlight: 
+      - text:
+        highlight:
+      - text:
+        highlight:
     call_to_action:
       link: /#getting-started
       text: Get started
@@ -33,13 +33,15 @@ features_table:
       - text: Apply custom configuration to your service mesh
         highlight: false
       - text: Advanced reporting
+      - highlight: false
+      - text: Management of task/operation lifecycle for Operators Actors using CloudEvents specification
         highlight: false
-      - text: 
-        highlight: 
-      - text: 
-        highlight: 
-      - text: 
-        highlight: 
+      - text:
+        highlight:
+      - text:
+        highlight:
+      - text:
+        highlight:
     call_to_action:
       link: /#getting-started
       text: Get started
@@ -81,32 +83,38 @@ features_table:
   - question: Questions?
     answer: Contact us for any further questions at <a href="#">community@layer5.io</a>. -->
 ---
-<div class="features">
-    
-	{% for feature in page.features_table %}
-		<ul class="feature" style="display:flex;flex-direction:column;">
-			<li style="background: {{ feature.color }}">
-				<h3>{{ feature.name }}</h3>
-			</li>
-			{% for item in feature.features %}
-				<li {% if item.highlight %} class="highlighted"{% endif %}>{{ item.text }}</li>
-			{% endfor %}
 
-			{% if feature.call_to_action %}
-				<li class="features-cta" style="margin-top: auto;"><div class="features-cta start"><a href="{{ feature.call_to_action.link }}">{{ feature.call_to_action.text }} &rarr;</a></div></li>
-			{% endif %}
-		</ul>
+<div class="features">
+	{% for feature in page.features_table %}
+	<ul class="feature" style="display: flex; flex-direction: column">
+		<li style="background: {{ feature.color }}">
+			<h3>{{ feature.name }}</h3>
+		</li>
+		{% for item in feature.features %}
+		<li {% if item.highlight %} class="highlighted" {% endif %}>
+			{{ item.text }}
+		</li>
+		{% endfor %} {% if feature.call_to_action %}
+		<li class="features-cta" style="margin-top: auto">
+			<div class="features-cta start">
+				<a href="{{ feature.call_to_action.link }}"
+					>{{ feature.call_to_action.text }} &rarr;</a
+				>
+			</div>
+		</li>
+		{% endif %}
+	</ul>
 	{% endfor %}
 </div>
 
 {% if page.faq %}
-	<h2>features FAQ</h2>
-	<dl class="faq">
-		{% for item in page.faq %}
-			<div>
-				<dt>{{ item.question }}</dt>
-				<dd>{{ item.answer }}</dd>
-			</div>
-		{% endfor %}
-	</dl>
+<h2>features FAQ</h2>
+<dl class="faq">
+	{% for item in page.faq %}
+	<div>
+		<dt>{{ item.question }}</dt>
+		<dd>{{ item.answer }}</dd>
+	</div>
+	{% endfor %}
+</dl>
 {% endif %}
