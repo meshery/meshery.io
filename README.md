@@ -1,13 +1,13 @@
 # Meshery
 
 ![Meshery.io website screenshot](images/mesheryio_screenshot.png)
-*Visit [Meshery.io](https://meshery.io/) to learn more!*
+_Visit [Meshery.io](https://meshery.io/) to learn more!_
 
 ## What is Meshery?
+
 Meshery is a multi-service mesh management plane adopting, operating, and developing on different service meshes. Meshery facilitates learning about functionality and performance of service meshes. It incorporates the collection and display of metrics from applications running on or across service meshes. At a high level, Meshery provides performance benchmarking, service mesh lifecycle management, and service mesh interoperability and federation.
 
 For further information, refer to the [Meshery Docs](https://docs.meshery.io).
-
 
 <div>&nbsp;</div>
 
@@ -25,6 +25,7 @@ Become a <b>Meshtee</b> today!</p>
 
 Find out more on the <a href="https://layer5.io/community#meshmate">Layer5 community</a>. <br />
 <br /><br /><br /><br />
+
 </p>
 
 <a href="https://meshery.io/community"><img alt="Layer5 Service Mesh Community" src="images/social/slack-128.png" style="margin-left:10px;padding-top:5px;" width="110px" align="right" /></a>
@@ -34,7 +35,7 @@ Find out more on the <a href="https://layer5.io/community#meshmate">Layer5 commu
 <p>
 ✔️ <em><strong>Join</strong></em> any or all of the weekly meetings on the <a href="https://calendar.google.com/calendar/b/1?cid=bGF5ZXI1LmlvX2VoMmFhOWRwZjFnNDBlbHZvYzc2MmpucGhzQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20">community calendar</a>.<br />
 ✔️ <em><strong>Watch</strong></em> community <a href="https://www.youtube.com/playlist?list=PL3A-A6hPO2IMPPqVjuzgqNU5xwnFFn3n0">meeting recordings</a>.<br />
-✔️ <em><strong>To Access Community Drive</strong></em>, fill <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMLeZY6hZ46yYNkoKKV5OM-jCypjbYcqptbUNltEE73EqCjA/viewform">Community Member Form</a>.<br />
+✔️ <em><strong>Access</strong></em> the <a href="https://drive.google.com/drive/u/4/folders/0ABH8aabN4WAKUk9PVA">Community Drive</a> by completing a community <a href="https://layer5.io/newcomer">Member Form</a>.<br />
 </p>
 <p align="center">
 <i>Not sure where to start?</i> Grab an open issue with the <a href="https://github.com/issues?utf8=✓&q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Alayer5io+label%3A%22help+wanted%22+">help-wanted label</a>.
@@ -49,40 +50,40 @@ Before contributing, please review the [Contribution Flow](https://github.com/la
 
 ### 1. Set up your development environment
 
-* *The Meshery site is built using Jekyll - a simple static site generator! You can learn more about Jekyll and setting up your development environment in the [Jekyll Docs](https://jekyllrb.com/docs/).*
+- _The Meshery site is built using Jekyll - a simple static site generator! You can learn more about Jekyll and setting up your development environment in the [Jekyll Docs](https://jekyllrb.com/docs/)._
 
-* First [install Ruby](https://jekyllrb.com/docs/installation/), then install Jekyll and Bundler.
+- First [install Ruby](https://jekyllrb.com/docs/installation/), then install Jekyll and Bundler.
 
 ### 2. Get the code
 
-* Fork and then clone the [Meshery.io repository](https://github.com/layer5io/meshery.io)
+- Fork and then clone the [Meshery.io repository](https://github.com/layer5io/meshery.io)
   ```bash
   $ git clone https://github.com/YOUR-USERNAME/meshery.io
   ```
-* Install any Ruby dependencies
+- Install any Ruby dependencies
   ```bash
   $ bundle install
   ```
 
 ### 3. Serve the site
 
-* Serve the code locally
+- Serve the code locally
   ```bash
   $ make site
   ```
-  *Note: From the Makefile, this command is actually running `$ bundle exec jekyll serve --drafts --livereload`*
+  _Note: From the Makefile, this command is actually running `$ bundle exec jekyll serve --drafts --livereload`_
 
 ### 4. Create a Pull Request
 
-* After making changes, don't forget to commit with the sign-off flag (-s)!
+- After making changes, don't forget to commit with the sign-off flag (-s)!
   ```bash
   $ commit -s -m “my commit message w/signoff”
   ```
-* Once all changes have been committed, push the changes.
+- Once all changes have been committed, push the changes.
   ```bash
   $ git push origin <branch-name>
   ```
-* Then on Github, navigate to the [Meshery.io repository](https://github.com/layer5io/meshery.io) and create a pull request from your recently pushed changes!
+- Then on Github, navigate to the [Meshery.io repository](https://github.com/layer5io/meshery.io) and create a pull request from your recently pushed changes!
 
 #### License
 
