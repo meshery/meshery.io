@@ -6,7 +6,7 @@
 ## What is Meshery?
 Meshery is a multi-service mesh management plane adopting, operating, and developing on different service meshes. Meshery facilitates learning about functionality and performance of service meshes. It incorporates the collection and display of metrics from applications running on or across service meshes. At a high level, Meshery provides performance benchmarking, service mesh lifecycle management, and service mesh interoperability and federation.
 
-For further information, refer to the [Meshery Docs](https://meshery.layer5.io/docs/).
+For further information, refer to the [Meshery Docs](https://docs.meshery.io).
 
 
 <div>&nbsp;</div>
