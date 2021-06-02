@@ -27,7 +27,7 @@ The scope of the [SMI Conformance](https://layer5.io/projects/service-mesh-inter
 
 Delivering on these requirements required a tool specifically suited to SMI.
 
-![Meshery](/images/posts/2021-04-26-validating-smi-conformance-with-meshery/meshery-logo-light-text-side.svg#center)
+<img src="/images/posts/2021-04-26-validating-smi-conformance-with-meshery/meshery-logo-light-text-side.svg#center" height="75" alt="Meshery">
 
 ## SMI Conformance Tool: Meshery
 
@@ -59,7 +59,8 @@ The following list highlights the sequence of steps taken to perform conformance
   - Once all assertions are evaluated, test results are returned for visual presentation in Meshery.
   - Tests that are run by the service mesh project team are identified by a pre-approved service account and are publicly published the [SMI Conformance dashboard](https://meshery.io/service-mesh-interface).
 
-[![Results Mockup](/images/posts/2021-04-26-validating-smi-conformance-with-meshery/smi-conformance-results.svg#center)](https://meshery.io/service-mesh-interface)
+
+<img src="/images/posts/2021-04-26-validating-smi-conformance-with-meshery/smi-conformance-results.svg" height="400" alt="Results Mockup">
 
 ## Validate Your Service Mesh's Conformance
 
