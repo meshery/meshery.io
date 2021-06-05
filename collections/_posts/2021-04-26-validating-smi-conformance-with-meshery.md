@@ -1,7 +1,6 @@
 ---
 date: 2021-04-26T05:00:00-13:00
 title: Validating SMI Conformance with Meshery
-author_contributor: Lee Calcote
 categories:
   - SMI Conformance
 # layout: post
@@ -70,4 +69,4 @@ See current [conformance test results](https://meshery.io/service-mesh-interface
 
 The SMI Conformance program gives end users the confidence that when they use a validated SMI project or product that they can rely on common functionality and high level behavior. The program gives Independent Software Vendors (ISVs) confidence that if their customer is using a service mesh with validated SMI implementation that their software will behave as expected.
 
-> > Learn more about SMI Conformance. Join the [#smi](https://cloud-native.slack.com/messages/smi) channel in the CNCF Slack.
+> Learn more about SMI Conformance. Join the [#smi](https://cloud-native.slack.com/messages/smi) channel in the CNCF Slack.
