@@ -38,6 +38,36 @@
             src="{{site.baseurl}}/images/logos/windows_logo.png" alt="Windows User">
           <span class="tooltiptext">Windows User</span>
         </span>
+        <span class="tooltip" id="google_kubernetes" style="margin: 0px 20px 0px 0px; padding: 0;" onclick="displayCode(this.id)">
+          <img id="bounce"
+            src="{{site.baseurl}}/images/logos/google_kubernetes.png" alt="Google Kubernetes">
+          <span class="tooltiptext">Google Kubernetes</span>
+        </span>
+        <span class="tooltip" id="aws_elastic" style="margin: 0px 20px 0px 0px; padding: 0;" onclick="displayCode(this.id)">
+          <img id="bounce"
+            src="{{site.baseurl}}/images/logos/aws_elastic.jpeg" alt="AWS Elastic Kubernetes">
+          <span class="tooltiptext">AWS Elastic Kubernetes</span>
+        </span>
+        <span class="tooltip" id="aks" style="margin: 0px 20px 0px 0px; padding: 0;" onclick="displayCode(this.id)">
+          <img id="bounce"
+            src="{{site.baseurl}}/images/logos/aks.png" alt="AKS">
+          <span class="tooltiptext">AKS</span>
+        </span>
+        <span class="tooltip" id="minikube" style="margin: 0px 20px 0px 0px; padding: 0;" onclick="displayCode(this.id)">
+          <img id="bounce"
+            src="{{site.baseurl}}/images/logos/minikube.png" alt="Minikube">
+          <span class="tooltiptext">Minikube</span>
+        </span>
+        <span class="tooltip" id="kind" style="margin: 0px 20px 0px 0px; padding: 0;" onclick="displayCode(this.id)">
+          <img id="bounce"
+            src="{{site.baseurl}}/images/logos/kind.png" style="width: 90px;" alt="KinD">
+          <span class="tooltiptext">KinD</span>
+        </span>
+        <span class="tooltip" id="helm" style="margin: 0px 20px 0px 0px; padding: 0;" onclick="displayCode(this.id)">
+          <img id="bounce"
+            src="{{site.baseurl}}/images/logos/helm.png" alt="Helm">
+          <span class="tooltiptext">Helm</span>
+        </span>
       </div>
 
       <!-- Docker -->
@@ -204,6 +234,161 @@ scoop install mesheryctl" onmouseout="resetCopyText(this)">
               </div>
 
           </div>
+      </div>
+
+      <!-- AKS -->
+      <div id="aks_code" class="toggle hideDiv">
+        <div class="innerDiv">
+          <h3>Azure Kubernetes Service ( AKS ) User:</h3>
+
+            <h4 style="font-size: 1.5em;">Using mesheryctl</h4>
+            <div id="start-helm-v3" class="highlight-code">
+                <p class="code-box"><code style="position: absolute;">   mesheryctl system config aks </code></p>
+                <!-- copy to clipboard -->
+                <a class="btn tooltip" style="position: absolute; top:0.5rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-helm-v3"
+                  data-clipboard-text="mesheryctl system context create k8s -p kubernetes -s
+                  mesheryctl system start" onmouseout="resetCopyText(this)">
+                  <i class="far fa-copy"></i>
+                  <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 3rem; left: -20px;">Copy to clipboard</span>
+                </a>
+            </div>
+              <p style="font-size: 1em;">Don't have `mesheryctl`? Install with <a onclick="displayCode('bash');">Bash</a>, <a onclick="displayCode('brew');">Brew</a>, or <a onclick="displayCode('windows');">Scoop</a>.</p>
+        </div>
+      </div>
+
+      <!-- Minikube -->
+      <div id="minikube_code" class="toggle hideDiv">
+        <div class="innerDiv">
+          <h3>Minikube User:</h3>
+
+            <h4 style="font-size: 1.5em;">Using mesheryctl</h4>
+            <div id="start-helm-v3" class="highlight-code">
+                <p class="code-box"><code style="position: absolute;">   mesheryctl system config minikube </code></p>
+                <!-- copy to clipboard -->
+                <a class="btn tooltip" style="position: absolute; top:0.5rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-helm-v3"
+                  data-clipboard-text="mesheryctl system config minikube" onmouseout="resetCopyText(this)">
+                  <i class="far fa-copy"></i>
+                  <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 3rem; left: -20px;">Copy to clipboard</span>
+                </a>
+            </div>
+              <p style="font-size: 1em;">Don't have `mesheryctl`? Install with <a onclick="displayCode('bash');">Bash</a>, <a onclick="displayCode('brew');">Brew</a>, or <a onclick="displayCode('windows');">Scoop</a>.</p>
+        </div>
+      </div>
+
+      <!-- KinD -->
+      <div id="kind_code" class="toggle hideDiv">
+        <div class="innerDiv">
+          <h3>KinD User:</h3>
+      
+            <div id="start-helm-v3" class="highlight-code">
+              <p class="code-box" style="height: 90px; line-height: 30px;"><code style="position: absolute;"> export KUBECONFIG=$HOME/.kube/config
+                kubectl create namespace meshery
+                helm install meshery --namespace meshery install/kubernetes/helm/meshery</code></p>
+                <!-- copy to clipboard -->
+                <a class="btn tooltip" style="position: absolute; top:0.5rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-helm-v3"
+                  data-clipboard-text="export KUBECONFIG=$HOME/.kube/config
+                  kubectl create namespace meshery
+                  helm install meshery --namespace meshery install/kubernetes/helm/meshery" onmouseout="resetCopyText(this)">
+                  <i class="far fa-copy"></i>
+                  <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 3rem; left: -20px;">Copy to clipboard</span>
+                </a>
+            </div>
+            <p style="font-size: 1em;">Not a Helm user? Use the Meshery manifests directly.</p>
+            <h4 style="font-size: 1.5em;">Using Manifests</h4>
+          <div id="start-k8s-in-cluster" class="highlight-code">
+              <p class="code-box" style="height: 90px; line-height: 30px;"><code style="position: absolute;">$ git clone https://github.com/layer5io/meshery.git; cd meshery
+                $ kubectl create ns meshery
+                $ kubectl -n meshery apply -f install/deployment_yamls/k8s</code></p>
+              <!-- copy to clipboard -->
+              <a class="btn tooltip" style="position: absolute; top:0.5rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-k8s-in-cluster"
+                data-clipboard-text="git clone https://github.com/layer5io/meshery.git; cd meshery
+kubectl create ns meshery
+kubectl -n meshery apply -f install/deployment_yamls/k8s" onmouseout="resetCopyText(this)">
+                <i class="far fa-copy"></i>
+                <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 3rem; left: -20px;">Copy to clipboard</span>
+              </a>
+          </div>
+        </div>
+      </div>
+                 
+      <!-- Helm -->
+      <div id="helm_code" class="toggle hideDiv">
+        <div class="innerDiv">
+          <h3>Helm Chart:</h3>
+
+            <h4 style="font-size: 1.5em;">Install on Kubernetes using Helm:</h4>
+            <div id="start-helm-v3" class="highlight-code">
+              <p class="code-box" style="height: 60px; line-height: 30px;"><code style="position: absolute;"> kubectl create namespace meshery
+                helm install meshery --namespace meshery install/kubernetes/helm/meshery </code>
+              </p>
+                <!-- copy to clipboard -->
+                <a class="btn tooltip" style="position: absolute; top:0.5rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-helm-v3"
+                  data-clipboard-text="kubectl create namespace meshery
+                  helm install meshery --namespace meshery install/kubernetes/helm/meshery" onmouseout="resetCopyText(this)">
+                  <i class="far fa-copy"></i>
+                  <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 3rem; left: -20px;">Copy to clipboard</span>
+                </a>
+            </div>
+            <p style="font-size: 1em;">Not a Helm user? Use the Meshery manifests directly.</p>
+            <h4 style="font-size: 1.5em;">Using Manifests</h4>
+          <div id="start-k8s-in-cluster" class="highlight-code">
+              <p class="code-box" style="height: 90px; line-height: 30px;"><code style="position: absolute;">$ git clone https://github.com/layer5io/meshery.git; cd meshery
+                $ kubectl create ns meshery
+                $ kubectl -n meshery apply -f install/deployment_yamls/k8s</code></p>
+              <!-- copy to clipboard -->
+              <a class="btn tooltip" style="position: absolute; top:0.5rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-k8s-in-cluster"
+                data-clipboard-text="git clone https://github.com/layer5io/meshery.git; cd meshery
+kubectl create ns meshery
+kubectl -n meshery apply -f install/deployment_yamls/k8s" onmouseout="resetCopyText(this)">
+                <i class="far fa-copy"></i>
+                <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 3rem; left: -20px;">Copy to clipboard</span>
+              </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Kubernetes Engine -->
+      <div id="google_kubernetes_code" class="toggle hideDiv">
+        <div class="innerDiv">
+          <h3>Google Kubernetes Engine User:</h3>
+            
+            <h4 style="font-size: 1.5em;">Using mesheryctl</h4>
+            <div id="start-helm-v3" class="highlight-code">
+              <p class="code-box" style="height: 60px; line-height: 30px;"><code style="position: absolute;"> mesheryctl system config gke
+                mesheryctl system start </code>
+              </p>
+                <!-- copy to clipboard -->
+                <a class="btn tooltip" style="position: absolute; top:0.5rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-helm-v3"
+                  data-clipboard-text="mesheryctl system config gke
+                  mesheryctl system start" onmouseout="resetCopyText(this)">
+                  <i class="far fa-copy"></i>
+                  <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 3rem; left: -20px;">Copy to clipboard</span>
+                </a>
+            </div>
+              <p style="font-size: 1em;">Don't have `mesheryctl`? Install with <a onclick="displayCode('bash');">Bash</a>, <a onclick="displayCode('brew');">Brew</a>, or <a onclick="displayCode('windows');">Scoop</a>.</p>
+        </div>
+      </div>
+
+      <!-- AWS Elastic Kubernetes Service -->
+      <div id="aws_elastic_code" class="toggle hideDiv">
+        <div class="innerDiv">
+          <h3>AWS Elastic Kubernetes Service User:</h3>
+                              
+            <h4 style="font-size: 1.5em;">Using mesheryctl</h4>
+            <div id="start-helm-v3" class="highlight-code">
+              <p class="code-box" style="height: 60px; line-height: 30px;"><code style="position: absolute;"> mesheryctl system config eks
+                mesheryctl system start </code>
+              </p>
+                <!-- copy to clipboard -->
+                <a class="btn tooltip" style="position: absolute; top:0.5rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-helm-v3"
+                  data-clipboard-text="mesheryctl system config eks
+                  mesheryctl system start" onmouseout="resetCopyText(this)">
+                  <i class="far fa-copy"></i>
+                  <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 3rem; left: -20px;">Copy to clipboard</span>
+                </a>
+            </div>
+              <p style="font-size: 1em;">Don't have `mesheryctl`? Install with <a onclick="displayCode('bash');">Bash</a>, <a onclick="displayCode('brew');">Brew</a>, or <a onclick="displayCode('windows');">Scoop</a>.</p>
+        </div>
       </div>
 
       <hr>
