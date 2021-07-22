@@ -2,7 +2,7 @@
 layout: person
 name: Anand Kumar Singh
 position: Contributor - Mesheryctl , MeshMate
-image_path: https://pbs.twimg.com/profile_images/1102512808363679744/Rp8-3wn9_400x400.jpg
+image_path: https://avatars.githubusercontent.com/u/34443651?v=4
 github: anandrkskd
 twitter: anandrkskd
 blurb: engineer, enthusiastic with technology
