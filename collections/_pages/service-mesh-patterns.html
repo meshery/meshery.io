@@ -1,0 +1,159 @@
+---
+layout: page
+permalink: /service-mesh-patterns
+title: Service Mesh patterns
+heading: Service Mesh Patterns
+redirect_from: service-mesh-patterns
+---
+<link rel="stylesheet" href="/assets/js/extend.js">
+<style>
+      .smallcard-a {
+    padding-top: 0.6rem;
+    padding-bottom: 0.8rem;
+    background-color: whitesmoke;
+    border-color: black;
+    border-radius: 2px;
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: 0.5px;
+    margin-top: 2rem;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: middle;
+    z-index: 1;
+    -webkit-transition: 0.3s ease-out;
+    transition: 0.3s ease-out;
+    width: 100%;
+    user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    
+  }
+ h3{
+   font-weight: 300;
+ }
+ p{
+   font-size: 18px;
+ }
+  span .smallcard-a:hover {
+    text-decoration: none;
+    transition-timing-function: ease-in;
+    transition: 0.2s;
+    transition: 0.25s ease-out;
+    box-shadow: 0 7px 7px 1px rgba(0, 0, 0, 0.14),
+      0 3px 6px 2px rgba(0, 0, 0, 0.12), 0 4px 4px -3px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 7px 7px 1px rgba(0, 0, 0, 0.14),
+      0 3px 6px 2px rgba(0, 0, 0, 0.12), 0 4px 4px -3px rgba(0, 0, 0, 0.3);
+  }
+
+  .minicard-span {
+    text-align: center;
+    width: 100%;
+    font-size: 1.3rem;
+    line-height: 110%;
+
+  }
+
+  .minicard-img {
+    width: 10%;
+    height: inherit;
+    vertical-align: middle;
+    position: relative;
+    z-index: -1;
+  }
+
+  .inner-span {
+    font-size: 16px;
+    position: relative;
+    color: black;
+  }
+
+  .card-content {
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  .patterns {
+      height:800px;
+      width: 400px;
+  }
+  pre code {
+    width: 100%;
+    font-size: 14px;
+    text-align: left;
+    justify-content: center;
+    display: block;
+    margin-top:-10px;
+  }
+  .column {
+  float: left;
+  width: 30%;
+  padding: 0 10px;
+}
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  
+}
+.download-link{
+    font-size: 14px;
+    text-align: left;
+}
+
+</style>
+<div class="sub-heading">
+
+  <h3>What are Service Mesh Patterns?</h3>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pulvinar placerat tellus sed posuere. Nulla venenatis fringilla faucibus. Etiam et commodo dolor, sit amet fringilla leo. Nullam tristique tristique condimentum. Maecenas sollicitudin scelerisque egestas. Suspendisse aliquet elit quis dolor gravida, et auctor ligula ornare. Nullam et sodales ante, quis varius elit. Nullam cursus, orci eleifend tristique semper, neque nisl tincidunt purus, sed ultricies felis arcu vel metus. Nullam feugiat lacus lacus, sit amet rhoncus mauris imperdiet vitae. Aenean quis lectus a ante placerat vulputate ut id ante. Nunc pharetra a justo nec bibendum. Fusce et risus diam.</p>
+  <h3>Pattern Management</h3>
+  <p>You may bring your own patterns or find them available through your chosen provider. Each service mesh pattern carries a unique identifier for reference. The patterns in this repository serve in an educational capacity, facilitating learning, and also serve in an operational capacity, facilitating implementation and validation of your service mesh deployment’s adherence to a pattern.
+
+  </p>
+  
+</div>
+
+<h3>Some sample patterns:</h3>
+{% for pattern in site.data.patterns %}
+<div class="row">
+<div class="column">
+
+    <div class="card-content flex">
+            <span class="minicard-span">
+             
+          <a class= "smallcard-a waves-effect waves-light btn white-text darken-2 l5-dark-green z-depth-2" href="https://docs.meshery.io/functionality/pattern-management#basic-istio-install"  >
+    <img src="{% include relative-src.html src='../../images/patterns/service-mesh.svg'%}" style="transform: scale(-1, 1)">
+    <span class="inner-span">
+     
+      {% assign patterns = pattern[1] %}
+     <b> Pattern name:</b> {{patterns.name}}<br>
+     <b> Pattern-ID:</b> {{patterns.pattern-id}} <br>
+     <b> Pattern-Type:</b> {{patterns.pattern-type}}  
+    <a href="#" class="download-link"  >Download yaml </a>
+   </span></a>
+  
+    </span>
+  
+    </div></div>
+    
+    {% endfor %}
+
+        
+    </div>
+    
+</div></div>
+</div>
