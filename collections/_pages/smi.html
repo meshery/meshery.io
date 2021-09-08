@@ -5,147 +5,202 @@ title: SMI Conformance
 heading: Service Mesh Interface Conformance
 redirect_from: smi
 ---
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
   function createTable(data) {
     if (Array.isArray(data)) {
-
       // Set Spec Version for Headers
-      data[0].more_details.forEach( spec => {
+      data[0].more_details.forEach((spec) => {
         let th = $(`.${spec.smi_specification}`);
-        th.append(`<div style="font-size: small;font-weight: normal;">${spec.smi_version}</div>`);
-      })
+        th.append(
+          `<div style="font-size: small;font-weight: normal;">${spec.smi_version}</div>`
+        );
+      });
 
       const tbody = $("tbody");
 
-      data.forEach(result => {
-        // Render iff mesh version is not "none"
-        if (result.mesh_version === "none") return;
+      // Create a map set of all the SMI specifications
+      var n = new Map();
+      data.map((s, index) => {
+        n.set(s.mesh_name, index);
+      });
 
-        // Create a row for the incoming data
-        const tr = document.createElement('tr')
-        // set attributes to the row
-        tr.setAttribute('class', 'collapse-head')
-        tr.setAttribute('style', 'border: 1px dashed #a6b7be;')
-        tr.setAttribute('id', result.id)
-        tr.setAttribute('data-toggle', 'tooltip')
-        tr.setAttribute('id', `.${result.id}`)
+      // Filter the latest ones
+      for (let k of n.keys()) {
+        let t = "v0.0.0";
+        data.filter((result, id) => {
+          // Skipping service mesh having "none" mesh version
+          if (result.mesh_version === "none") return;
 
-        // Create tds for the row
-        // 1. td for the mesh icon
-        const td1 = document.createElement('td')
-        const img = document.createElement('img')
-        const istio = document.createElement('div')
-        istio.setAttribute('style', 'font-size:.85rem;')
-        istio.innerText ='SMI Adapter for Istio';
-        
-        img.setAttribute('style', 'height:40px;width:40px!important')
-        img.setAttribute('alt', result.mesh_name)
-        img.setAttribute('data-toggle', 'tooltip')
-        img.setAttribute('title', result.mesh_name)
+          if (
+            k === result.mesh_name &&
+            t.substr(1, 6) <= result.mesh_version.substr(1, 9)
+          ) {
+            result.mesh_version = result.mesh_version;
+            result.mesh_name = k;
+            t = result.mesh_version;
 
-        switch (result.mesh_name) {
-          case "Traefik Mesh": img.setAttribute('src', 'images/traefik-mesh.svg'); break;
-          case "Open Service Mesh": img.setAttribute('src', 'images/osm.svg'); break;
-          case "Nginx Service Mesh": img.setAttribute('src', 'images/nginx-sm.svg'); break;
-          case "Linkerd": img.setAttribute('src', 'images/linkerd.svg'); break;
-          case "Kuma": img.setAttribute('src', 'images/Kuma.svg'); break;
-          case "Consul": img.setAttribute('src', 'images/consul.svg'); break;
-          case "App Mesh": img.setAttribute('src', 'images/aws-app-mesh.svg'); break;
-          case "Istio": img.setAttribute('src', 'images/istio.svg'); break;
-        }
-        td1.appendChild(img);
+            // Create a row for the incoming data
+            const tr = document.createElement("tr");
+            // set attributes to the row
+            tr.setAttribute("class", "collapse-head");
+            tr.setAttribute("style", "border: 1px dashed #a6b7be;");
+            tr.setAttribute("id", result.id);
+            tr.setAttribute("data-toggle", "tooltip");
+            tr.setAttribute("id", `.${result.id}`);
 
-        // Istio specific label
-        switch (result.mesh_name) {
-          case "Istio": td1.appendChild(istio);
-        }
-        tr.appendChild(td1);
+            // Create tds for the row
+            // 1. td for the mesh icon
+            const td1 = document.createElement("td");
+            const img = document.createElement("img");
+            const istio = document.createElement("div");
+            istio.setAttribute("style", "font-size:.85rem;");
+            istio.innerText = "SMI Adapter for Istio";
 
-        // 2. td for mesh version
-        const td2 = document.createElement('td')
-        td2.innerText = result.mesh_version
-        tr.appendChild(td2);
-        
-        // 3. td for capability
-        const moreDetails = result.more_details
-        if (Array.isArray(moreDetails)) {
-          moreDetails.forEach(detail => {
-            // Create td for each detail
-            const td = document.createElement('td')
-            td.setAttribute('data-toggle', 'tooltip')
-            td.setAttribute('title', `${detail.reason} | ${detail.result}`)
-            
-            // Create icon element
-            const i = document.createElement('i')
-            switch (detail.capability) {
-              case "NONE": 
-                i.setAttribute('class', 'fa fa-times-circle')
-                i.setAttribute('style', 'font-size:32px;color:red;cursor:help;'); 
+            img.setAttribute("style", "height:40px;width:40px!important");
+            img.setAttribute("alt", result.mesh_name);
+            img.setAttribute("data-toggle", "tooltip");
+            img.setAttribute("title", result.mesh_name);
+            switch (result.mesh_name) {
+              case "Traefik Mesh":
+                img.setAttribute("src", "images/traefik-mesh.svg");
                 break;
-              case "FULL": 
-                i.setAttribute('class', 'fa fa-check-circle')
-                i.setAttribute('style', 'font-size:32px;color:green;'); 
+              case "Open Service Mesh":
+                img.setAttribute("src", "images/osm.svg");
                 break;
-              case "HALF": 
-                i.setAttribute('class', 'fa fa-check-circle')
-                i.setAttribute('style', 'font-size:32px;color:orange;clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);cursor:help;'); 
+              case "Nginx Service Mesh":
+                img.setAttribute("src", "images/nginx-sm.svg");
+                break;
+              case "Linkerd":
+                img.setAttribute("src", "images/linkerd.svg");
+                break;
+              case "Kuma":
+                img.setAttribute("src", "images/Kuma.svg");
+                break;
+              case "Consul":
+                img.setAttribute("src", "images/consul.svg");
+                break;
+              case "App Mesh":
+                img.setAttribute("src", "images/aws-app-mesh.svg");
+                break;
+              case "Istio":
+                img.setAttribute("src", "images/istio.svg");
                 break;
             }
-            td.appendChild(i);
+            td1.appendChild(img);
+            // console.log(x);
+            // console.log(result.mesh_name);
+            // console.log(result);
+            // console.log(result.mesh_version);
 
-            // Add this td to the row
-            tr.appendChild(td);
-          })
-        }
+            // Istio specific label
+            switch (result.mesh_name) {
+              case "Istio":
+                td1.appendChild(istio);
+            }
+            tr.appendChild(td1);
 
-        // 4. td for passing percentage
-        const td4 = document.createElement('td')
-        td4.innerText = `${result.passing_percentage}%`
-        tr.appendChild(td4)
+            // 2. td for mesh version
+            const td2 = document.createElement("td");
+            td2.innerText = result.mesh_version;
+            tr.appendChild(td2);
 
-        tbody.append(tr)
-      })
+            // 3. td for capability
+            const moreDetails = result.more_details;
+            if (Array.isArray(moreDetails)) {
+              moreDetails.forEach((detail) => {
+                // Create td for each detail
+                const td = document.createElement("td");
+                td.setAttribute("data-toggle", "tooltip");
+                td.setAttribute("title", `${detail.reason} | ${detail.result}`);
+
+                // Create icon element
+                const i = document.createElement("i");
+                switch (detail.capability) {
+                  case "NONE":
+                    i.setAttribute("class", "fa fa-times-circle");
+                    i.setAttribute(
+                      "style",
+                      "font-size:32px;color:red;cursor:help;"
+                    );
+                    break;
+                  case "FULL":
+                    i.setAttribute("class", "fa fa-check-circle");
+                    i.setAttribute("style", "font-size:32px;color:green;");
+                    break;
+                  case "HALF":
+                    i.setAttribute("class", "fa fa-check-circle");
+                    i.setAttribute(
+                      "style",
+                      "font-size:32px;color:orange;clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);cursor:help;"
+                    );
+                    break;
+                }
+                td.appendChild(i);
+
+                // Add this td to the row
+                tr.appendChild(td);
+              });
+            }
+
+            // 4. td for passing percentage
+            const td4 = document.createElement("td");
+            td4.innerText = `${result.passing_percentage}%`;
+            tr.appendChild(td4);
+
+            tbody.append(tr);
+          }
+        });
+      }
 
       // Custom row for showing message
-      const tr = document.createElement('tr')
-      tr.setAttribute('style', 'height: .5rem')
+      const tr = document.createElement("tr");
+      tr.setAttribute("style", "height: .5rem");
 
-      const td = document.createElement('td')
-      td.setAttribute('colspan', '6');
-      
-      const span = document.createElement('span')
-      span.setAttribute('style', 'vertical-align: text-top; font-style: italic;font-size: .8rem;color:#666;')
-      span.innerText = "Hover for details of test failures."
-      
-      td.appendChild(span)
+      const td = document.createElement("td");
+      td.setAttribute("colspan", "6");
 
-      tr.appendChild(td)
+      const span = document.createElement("span");
+      span.setAttribute(
+        "style",
+        "vertical-align: text-top; font-style: italic;font-size: .8rem;color:#666;"
+      );
+      span.innerText = "Hover for details of test failures.";
 
-      tbody.append(tr)
+      td.appendChild(span);
+
+      tr.appendChild(td);
+
+      tbody.append(tr);
     }
   }
 
   $(document).ready(function () {
     $(".collapse-head").click(function () {
-      $(".collapse-" + $(this).attr("id")).find(".collapse-body").slideToggle();
+      $(".collapse-" + $(this).attr("id"))
+        .find(".collapse-body")
+        .slideToggle();
     });
 
-    $.getJSON('https://meshery.layer5.io/smi/results/public', (data, status) => {
-      // Disable spinner
-      $(".loader").addClass("hide")
+    $.getJSON(
+      "https://meshery.layer5.io/smi/results/public",
+      (data, status) => {
+        // Disable spinner
+        $(".loader").addClass("hide");
 
-      if (status !== "success") return;
+        if (status !== "success") return;
 
-      createTable(data.results)
-    })
+        createTable(data.results);
+      }
+    );
   });
 </script>
 
 <style>
   th,
   td {
-    padding: .6em .6em;
+    padding: 0.6em 0.6em;
     display: table-cell;
     text-align: center;
     border: none !important;
@@ -159,87 +214,106 @@ redirect_from: smi
     display: none;
   }
   .loader {
-  color: #00b39f;
-  font-size: 90px;
-  text-indent: -9999em;
-  overflow: hidden;
-  width: 1em;
-  height: 1em;
-  border-radius: 50%;
-  margin: 72px auto;
-  position: relative;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
-  animation: load6 1.7s infinite ease, round 1.7s infinite ease;
-}
-@-webkit-keyframes load6 {
-  0% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    color: #00b39f;
+    font-size: 90px;
+    text-indent: -9999em;
+    overflow: hidden;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    margin: 72px auto;
+    position: relative;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+    animation: load6 1.7s infinite ease, round 1.7s infinite ease;
   }
-  5%,
-  95% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  @-webkit-keyframes load6 {
+    0% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+        0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    5%,
+    95% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+        0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    10%,
+    59% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+        -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+        -0.297em -0.775em 0 -0.477em;
+    }
+    20% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+        -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+        -0.749em -0.34em 0 -0.477em;
+    }
+    38% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+        -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+        -0.82em -0.09em 0 -0.477em;
+    }
+    100% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+        0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
   }
-  10%,
-  59% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  @keyframes load6 {
+    0% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+        0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    5%,
+    95% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+        0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    10%,
+    59% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
+        -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
+        -0.297em -0.775em 0 -0.477em;
+    }
+    20% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+        -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+        -0.749em -0.34em 0 -0.477em;
+    }
+    38% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+        -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+        -0.82em -0.09em 0 -0.477em;
+    }
+    100% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+        0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
   }
-  20% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  @-webkit-keyframes round {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
   }
-  38% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  @keyframes round {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
   }
-  100% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-  }
-}
-@keyframes load6 {
-  0% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-  }
-  5%,
-  95% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-  }
-  10%,
-  59% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
-  }
-  20% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
-  }
-  38% {
-    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
-  }
-  100% {
-    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-  }
-}
-@-webkit-keyframes round {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@keyframes round {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-  @media screen and (min-width: 900px){
-    th, td {
+  @media screen and (min-width: 900px) {
+    th,
+    td {
       font-size: larger;
     }
     p {
@@ -248,19 +322,25 @@ redirect_from: smi
   }
 </style>
 
-<div style="justify-content: center;">
+<div style="justify-content: center">
   <div class="js-data"></div>
-  <table class="table highlighted table-responsive table-hover" style="color: #3C494E;
+  <table
+    class="table highlighted table-responsive table-hover"
+    style="
+      color: #3c494e;
       background-color: #ffffff;
       margin: auto;
       border: none;
-      ">
-    <thead style="
-          background-color: #a6b7be;
-          color: #222;
-          word-wrap: none;
-          width: 100%;
-        ">
+    "
+  >
+    <thead
+      style="
+        background-color: #a6b7be;
+        color: #222;
+        word-wrap: none;
+        width: 100%;
+      "
+    >
       <tr>
         <th>Service Mesh</th>
         <th>Mesh Version</th>
@@ -270,11 +350,16 @@ redirect_from: smi
         <th>% Passed</th>
       </tr>
     </thead>
-    <tbody>
-    </tbody>
+    <tbody></tbody>
   </table>
   <div class="loader"></div>
-  
 </div>
-<p style="margin-top:1rem;">Interested in how the SMI Conformance program works or details of the specific tests that are run?</p>
-  <p style="font-size:1.25rem;"><a href="https://layer5.io/projects/service-mesh-interface-conformance">Learn more about Service Mesh Interface Conformance.</a></p>
+<p style="margin-top: 1rem">
+  Interested in how the SMI Conformance program works or details of the specific
+  tests that are run?
+</p>
+<p style="font-size: 1.25rem">
+  <a href="https://layer5.io/projects/service-mesh-interface-conformance"
+    >Learn more about Service Mesh Interface Conformance.</a
+  >
+</p>
