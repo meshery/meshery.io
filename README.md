@@ -37,7 +37,7 @@ Find out more on the <a href="https://layer5.io/community#meshmate">Layer5 commu
 ✔️ <em><strong>Watch</strong></em> community <a href="https://www.youtube.com/playlist?list=PL3A-A6hPO2IMPPqVjuzgqNU5xwnFFn3n0">meeting recordings</a>.<br />
 ✔️ <em><strong>Access</strong></em> the <b>Community Drive</b> by completing a community <a href="https://layer5.io/newcomer">Member Form</a>.<br />
 ✔️ <em><strong>Discuss</strong></em> in the <a href="https://discuss.layer5.io">Community Forum</a>.<br />
-✔️ <em><strong>Join Us</strong></em> on <a href="https://community.cncf.io/meshery-community/">  CNCF Meshery Community </a>.<br />
+✔️ <em><strong>RSVP</strong></em> to the <a href="https://community.cncf.io/meshery-community/">CNCF Meshery Community</a> meetings.<br />
 </p>
 <p align="center">
 <i>Not sure where to start?</i> Grab an open issue with the <a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Alayer5io+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+label%3A%22help+wanted%22+">help-wanted label</a>.
