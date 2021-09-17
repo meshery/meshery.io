@@ -4,15 +4,15 @@ Meshery is the multi-service mesh management plane. This repository include mesh
 
 The chart source code:
 
-* https://github.com/layer5io/meshery/tree/master/install/kubernetes/helm/meshery
+* https://github.com/meshery/meshery/tree/master/install/kubernetes/helm/meshery
 
 The Meshery source code:
 
-* https://github.com/layer5io/meshery
+* https://github.com/meshery/meshery
 
 The repo source code:
 
-* https://github.com/layer5io/meshery.io/blob/master/charts
+* https://github.com/meshery/meshery.io/blob/master/charts
 
 ## License
 

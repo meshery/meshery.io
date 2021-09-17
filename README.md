@@ -48,7 +48,7 @@ Find out more on the <a href="https://layer5.io/community#meshmate">Layer5 commu
 
 ## Contributing to the Meshery.io Website
 
-Before contributing, please review the [Contribution Flow](https://github.com/layer5io/meshery/blob/master/CONTRIBUTING.md). In the following steps you will set up your development environment, fork and clone the repository, run the site locally, and finally commit, sign-off, and push any changes made for review.
+Before contributing, please review the [Contribution Flow](https://github.com/meshery/meshery/blob/master/CONTRIBUTING.md). In the following steps you will set up your development environment, fork and clone the repository, run the site locally, and finally commit, sign-off, and push any changes made for review.
 
 ### 1. Set up your development environment
 
@@ -58,7 +58,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/la
 
 ### 2. Get the code
 
-- Fork and then clone the [Meshery.io repository](https://github.com/layer5io/meshery.io)
+- Fork and then clone the [Meshery.io repository](https://github.com/meshery/meshery.io)
   ```bash
   $ git clone https://github.com/YOUR-USERNAME/meshery.io
   ```
@@ -85,7 +85,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/la
   ```bash
   $ git push origin <branch-name>
   ```
-- Then on Github, navigate to the [Meshery.io repository](https://github.com/layer5io/meshery.io) and create a pull request from your recently pushed changes!
+- Then on Github, navigate to the [Meshery.io repository](https://github.com/meshery/meshery.io) and create a pull request from your recently pushed changes!
 
 #### License
 
