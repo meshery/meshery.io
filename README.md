@@ -37,7 +37,7 @@ Find out more on the <a href="https://layer5.io/community#meshmate">Layer5 commu
 ✔️ <em><strong>Watch</strong></em> community <a href="https://www.youtube.com/playlist?list=PL3A-A6hPO2IMPPqVjuzgqNU5xwnFFn3n0">meeting recordings</a>.<br />
 ✔️ <em><strong>Access</strong></em> the <b>Community Drive</b> by completing a community <a href="https://layer5.io/newcomer">Member Form</a>.<br />
 ✔️ <em><strong>Discuss</strong></em> in the <a href="https://discuss.layer5.io">Community Forum</a>.<br />
-<br />
+✔️ <em><strong>RSVP</strong></em> to the <a href="https://community.cncf.io/meshery-community/">CNCF Meshery Community</a> meetings.<br />
 </p>
 <p align="center">
 <i>Not sure where to start?</i> Grab an open issue with the <a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Alayer5io+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+label%3A%22help+wanted%22+">help-wanted label</a>.
@@ -48,17 +48,17 @@ Find out more on the <a href="https://layer5.io/community#meshmate">Layer5 commu
 
 ## Contributing to the Meshery.io Website
 
-Before contributing, please review the [Contribution Flow](https://github.com/layer5io/meshery/blob/master/CONTRIBUTING.md). In the following steps you will set up your development environment, fork and clone the repository, run the site locally, and finally commit, sign-off, and push any changes made for review.
+Before contributing, please review the [Contribution Flow](https://github.com/meshery/meshery/blob/master/CONTRIBUTING.md). In the following steps you will set up your development environment, fork and clone the repository, run the site locally, and finally commit, sign-off, and push any changes made for review.
 
 ### 1. Set up your development environment
 
 - _The Meshery site is built using Jekyll - a simple static site generator! You can learn more about Jekyll and setting up your development environment in the [Jekyll Docs](https://jekyllrb.com/docs/)._
 
-- First [install Ruby](https://jekyllrb.com/docs/installation/), then install Jekyll and Bundler.
+- First [install Ruby](https://jekyllrb.com/docs/installation/), then install Jekyll and Bundler. ( **Note** : Install the same version of Ruby as mentioned in the [Gemfile](https://github.com/meshery/meshery.io/blob/master/Gemfile) )
 
 ### 2. Get the code
 
-- Fork and then clone the [Meshery.io repository](https://github.com/layer5io/meshery.io)
+- Fork and then clone the [Meshery.io repository](https://github.com/meshery/meshery.io)
   ```bash
   $ git clone https://github.com/YOUR-USERNAME/meshery.io
   ```
@@ -85,7 +85,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/la
   ```bash
   $ git push origin <branch-name>
   ```
-- Then on Github, navigate to the [Meshery.io repository](https://github.com/layer5io/meshery.io) and create a pull request from your recently pushed changes!
+- Then on Github, navigate to the [Meshery.io repository](https://github.com/meshery/meshery.io) and create a pull request from your recently pushed changes!
 
 #### License
 
