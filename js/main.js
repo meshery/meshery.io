@@ -29,3 +29,19 @@
 
   changeHeader();
 })();
+
+var btnscroll = $('#button-scroll-to-up');
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 300) {
+    btnscroll.addClass('show');
+  } else {
+    btnscroll.removeClass('show');
+  }
+});
+
+btnscroll.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({scrollTop:0}, '300');
+});
+
