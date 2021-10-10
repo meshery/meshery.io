@@ -29,6 +29,11 @@
             loading="lazy">
           <span class="tooltiptext">Brew User</span>
         </span>
+        <span class="tooltip" id="docker" style="margin: 0px 20px 0px 0px; padding: 0.5rem;" onclick="displayCode(this.id)">
+          <img id="bounce"
+            src="{{site.baseurl}}/images/logos/docker.png" alt="Docker"
+            loading="lazy">
+            <span class="tooltiptext">Docker</span>
         <span class="tooltip" id="k8s-instructions" style="margin: 0 20px 0px 0px; padding: 0.5rem;" onclick="displayCode(this.id)">
           <img id="bounce"
             src="{{site.baseurl}}/images/logos/kubernetes.png"
@@ -134,7 +139,29 @@ mesheryctl system start" onmouseout="resetCopyText(this)">
         </div>
       </div>
 
+      <!-- Docker User -->
+      <div id="docker_code" class="toggle hideDiv">
+        <div class="innerDiv">
+          <h3>Docker User:</h3>
 
+          <h4 style="font-size: 1.5em;">Get mesheryctl</h4>
+            <p style="font-size: 1em;margin-left:1rem;">Install mesheryctl with <a onclick="displayCode('bash');">Bash</a>, <a onclick="displayCode('brew');">Brew</a>, <a onclick="displayCode('windows');">Scoop</a>, or <a href="https://github.com/meshery/meshery/releases/latest">download directly</a>.</p>
+
+            <!-- Docker - mesheryctl -->
+            <h4 style="font-size: 1.5em;">Use mesheryctl</h4>
+            <div id="start-helm-v3" class="highlight-code">
+              <p class="code-box" style="height: 68px; line-height: 30px;"><code style="position: absolute;">mesheryctl system context create k8s --platform Docker --set
+                mesheryctl system start</code></p>
+                <!-- copy to clipboard -->
+                <a class="btn tooltip" style="position: absolute; top:0.10rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-helm-v3"
+                  data-clipboard-text="mesheryctl system context create k8s --platform Docker --set
+                  mesheryctl system start" onmouseout="resetCopyText(this)">
+                  <i class="far fa-copy"></i>
+                  <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 3rem; left: -20px;">Copy to clipboard</span>
+                </a>
+              </div>
+        </div>
+      </div>
       <!-- Kubernetes -->
       <div id="k8s-instructions_code" class="toggle hideDiv">
         <div class="innerDiv">
