@@ -12,7 +12,7 @@ image: images/logos/meshery-logo-tag-dark-text-side.png
 
 <a id="button-scroll-to-up" style="text-decoration: none; color: white;"></a>
 
-<section class="hero">
+<section class="hero" style="padding-bottom: 2rem">
 	<div class="text-container">
 		<h1 style="margin: 3rem 0rem 3rem 0rem;">The service mesh <span style="font-weight: 100;">management plane</span></h1>
 		<div>
@@ -22,28 +22,7 @@ image: images/logos/meshery-logo-tag-dark-text-side.png
 						/>
 			</a>
 		</div>
-		<!-- show number of total performance tests run by Meshery users -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script>
-			function numberWithCommas(x) {
-    		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-			}
-
-			$(document).ready(function () {
-				$.get("https://meshery.layer5.io/result/total", function (data, status) {
-					var testresults = JSON.parse(data);
-					document.getElementById("testresults").innerHTML = "&nbsp;" + numberWithCommas(testresults.total_runs) + "&nbsp;";
-				});
-			});
-		</script>
-		<div class="card"
-			style="z-index: 1;box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);background-color: white;margin-top: 20px;height: 40px;border-radius: 10px; margin:auto; width:93%;">
-			<div class="performance"
-				style="color: black;margin-top: 10px;position: relative;top: 10px;font-weight: bolder;font-size: larger;">
-				<span class="testresults" id="testresults"></span>performance tests run!
-			</div>
-		</div>
-		<div style="margin-top: 2.5em;">
+		<div style="margin-top: 2.5em;margin-bottom: 0em;padding-bottom: 0rem;">
 			<iframe src="https://ghbtns.com/github-btn.html?user=meshery&repo=meshery&type=star&count=true&size=large"
 				frameborder="0" scrolling="0" width="160px" height="50px"></iframe>
 			<iframe src="https://ghbtns.com/github-btn.html?user=meshery&repo=meshery&type=fork&count=true&size=large"
@@ -72,7 +51,7 @@ image: images/logos/meshery-logo-tag-dark-text-side.png
 			</span>
 			</div>
 			<!--removed style="flex-basis:30%; so that image and text can occupy same width-->
-			<div class="image flex">
+			<div class="image">
 				<a href="images/screens/service mesh performance example.gif" data-fancybox="images"
 					data-caption="Service Mesh Performance Specification">
 					<img src="{{ site.baseurl }}/images/screens/service mesh performance example.gif"
@@ -82,7 +61,30 @@ image: images/logos/meshery-logo-tag-dark-text-side.png
 						border: 1px;" 
 						loading="lazy" />
 				</a>
+				<br />
+									<!-- show number of total performance tests run by Meshery users -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+			function numberWithCommas(x) {
+    		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			}
+
+			$(document).ready(function () {
+				$.get("https://meshery.layer5.io/result/total", function (data, status) {
+					var testresults = JSON.parse(data);
+					document.getElementById("testresults").innerHTML = "&nbsp;" + numberWithCommas(testresults.total_runs) + "&nbsp;";
+				});
+			});
+		</script>
+		<div class="flex"
+			style="box-shadow:  0px 0px 20px 3px rgba(71,126,150,.5);margin-top: 20px; display: block; clear:both; height: 40px;border-radius: 10px; margin:auto; width:90%;">
+			<p class="performance"
+				style="color: b;margin-top: 10px;position: relative;top: 10px;font-weight: bolder;font-size: larger; text-align: center;">
+				<span class="testresults" id="testresults"></span>performance tests run!
+	</p>
 			</div>
+
+		</div>
 		</div>
 	</section>
 
