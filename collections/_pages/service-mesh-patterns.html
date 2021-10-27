@@ -114,6 +114,10 @@ redirect_from: service-mesh-patterns
     text-align: left;
 }
 
+.modal-content{
+  text-align: center;
+}
+
 .modal-window {
   position: fixed;
   background-color: rgba(255, 255, 255, 0.25);
@@ -217,28 +221,31 @@ small {
     <div class="card-content flex">
         <span class="minicard-span">
             <a class= "smallcard-a waves-effect waves-light btn white-text darken-2 l5-dark-green z-depth-2 link" href="#open-modal" >
-              <img src="{% include relative-src.html src='../../images/patterns/service-mesh.svg'%}" style="transform: scale(-1, 1)">
+            <img src="{% include relative-src.html src='../../images/patterns/service-mesh.svg'%}" style="transform: scale(-1, 1)">
               {% assign patterns = pattern[1] %}
-              <span class="inner-span">
-             <div id="open-modal" class="modal-window">
-                <div>
-                  <a href="#" title="Close" class="modal-close close">&times;</a>
-                  <h1>{{patterns.name}}</h1>
-                  <div>
-                    <img src="{% include relative-src.html src='../../images/patterns/service-mesh.svg'%}" style="transform: scale(-1, 1)">
-                  </div>
-                  <div><small>{{patterns.pattern-id}}</small></div>
-                </div></div>
-             
-             Pattern name: <small>{{patterns.name}}</small><br>
-             Pattern-ID: <small>{{patterns.pattern-id}}</small> <br>
-             Pattern-Type:<small> {{patterns.pattern-type}}</small><br>
+            <span class="inner-span">
+              Pattern name: <small>{{patterns.name}}</small><br>
+              Pattern-ID: <small>{{patterns.pattern-id}}</small> <br>
+              Pattern-Type:<small> {{patterns.pattern-type}}</small><br>
             <a href="#" class="download-link">Download yaml </a>
-           
-            </span></a>
+           </span></a>
          </span>
       </div>
   </div>
   {% endfor %}
+  {% for pattern in site.data.patterns %}
+  <div id="open-modal" class="modal-window">
+    <div>
+      <a href="#" title="Close" class="modal-close close">&times;</a>
+      {% assign patterns = pattern[1] %}
+      <h1 class="modal-content">{{patterns.name}}</h1>
+      <div>
+        <img src="{% include relative-src.html src='../../images/patterns/service-mesh.svg'%}" style="transform: scale(-1, 1)">
+      </div>
+      <div class="modal-content" ><small>{{patterns.pattern-id}}</small><br/>
+          <small>{{patterns.pattern-type}}</small></div>
+    </div></div>
+    {% endfor %}
 </div>
+
 
