@@ -114,6 +114,92 @@ redirect_from: service-mesh-patterns
     text-align: left;
 }
 
+.modal-window {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.25);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+}
+.modal-window:target {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-window > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2em;
+  background: rgba(255, 255, 255);
+  border: 3px solid #00d3a9;
+}
+.modal-window header {
+  font-weight: bold;
+}
+.modal-window h1 {
+  font-size: 150%;
+  margin: 0 0 15px;
+}
+
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+}
+.modal-close:hover {
+  color: black;
+}
+
+.modal-window > div {
+  border-radius: 1rem;
+}
+
+.modal-window div:not(:last-of-type) {
+  margin-bottom: 15px;
+}
+
+small {
+  color: rgb(134, 132, 132);
+}
+.event{
+  padding-top: 0;
+}
+.close {
+  position: absolute;
+  transition: all 200ms;
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.close:hover {
+  color: #00d3a9 !important;
+  opacity: 0.8 !important;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 700px){
+  .modal-window{
+    width: 100%;
+    height: 100%;
+    margin-top: 2rem;
+  }
+}
+
 </style>
 <div class="sub-heading">
   <h3>What are Service Mesh Patterns?</h3>
@@ -130,14 +216,25 @@ redirect_from: service-mesh-patterns
   <div class="column">
     <div class="card-content flex">
         <span class="minicard-span">
-            <a class= "smallcard-a waves-effect waves-light btn white-text darken-2 l5-dark-green z-depth-2" href="https://docs.meshery.io/functionality/pattern-management#basic-istio-install"  >
+            <a class= "smallcard-a waves-effect waves-light btn white-text darken-2 l5-dark-green z-depth-2 link" href="#open-modal" >
               <img src="{% include relative-src.html src='../../images/patterns/service-mesh.svg'%}" style="transform: scale(-1, 1)">
-            <span class="inner-span">
               {% assign patterns = pattern[1] %}
-            <b> Pattern name:</b> {{patterns.name}}<br>
-            <b> Pattern-ID:</b> {{patterns.pattern-id}} <br>
-            <b> Pattern-Type:</b> {{patterns.pattern-type}}  
+              <span class="inner-span">
+             <div id="open-modal" class="modal-window">
+                <div>
+                  <a href="#" title="Close" class="modal-close close">&times;</a>
+                  <h1>{{patterns.name}}</h1>
+                  <div>
+                    <img src="{% include relative-src.html src='../../images/patterns/service-mesh.svg'%}" style="transform: scale(-1, 1)">
+                  </div>
+                  <div><small>{{patterns.pattern-id}}</small></div>
+                </div></div>
+             
+             Pattern name: <small>{{patterns.name}}</small><br>
+             Pattern-ID: <small>{{patterns.pattern-id}}</small> <br>
+             Pattern-Type:<small> {{patterns.pattern-type}}</small><br>
             <a href="#" class="download-link">Download yaml </a>
+           
             </span></a>
          </span>
       </div>
