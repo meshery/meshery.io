@@ -221,12 +221,11 @@ small {
     <div class="card-content flex">
         <span class="minicard-span">
             <a class= "smallcard-a waves-effect waves-light btn white-text darken-2 l5-dark-green z-depth-2 link" href="#open-modal" >
-            <img src="{% include relative-src.html src='../../images/patterns/service-mesh.svg'%}" style="transform: scale(-1, 1)">
-              {% assign patterns = pattern[1] %}
+            <img src="{{pattern.image}}">
             <span class="inner-span">
-              Pattern name: <small>{{patterns.name}}</small><br>
-              Pattern-ID: <small>{{patterns.pattern-id}}</small> <br>
-              Pattern-Type:<small> {{patterns.pattern-type}}</small><br>
+              Pattern name: <small>{{pattern.name}}</small><br>
+              Pattern-ID: <small>{{pattern.patternId}}</small> <br>
+              Pattern-Type:<small> {{pattern.patternType}}</small><br>
             <a href="#" class="download-link">Download yaml </a>
            </span></a>
          </span>
@@ -235,15 +234,14 @@ small {
   {% endfor %}
   {% for pattern in site.data.patterns %}
   <div id="open-modal" class="modal-window">
-    <div>
       <a href="#" title="Close" class="modal-close close">&times;</a>
-      {% assign patterns = pattern[1] %}
-      <h1 class="modal-content">{{patterns.name}}</h1>
+
+      <h1 class="modal-content">{{pattern.name}}</h1>
       <div>
-        <img src="{% include relative-src.html src='../../images/patterns/service-mesh.svg'%}" style="transform: scale(-1, 1)">
+        <img src="{{pattern.image}}">
       </div>
-      <div class="modal-content" ><small>{{patterns.pattern-id}}</small><br/>
-          <small>{{patterns.pattern-type}}</small></div>
+      <div class="modal-content" ><small>{{pattern.patternId}}</small><br/>
+          <small>{{pattern.patternType}}</small></div>
     </div></div>
     {% endfor %}
 </div>
