@@ -1,6 +1,8 @@
 
 <style>
 .card {
+  width: 280px;
+  height: 280px;
   border-radius: 15px;
   padding: 1.5rem;
   background: #3c494f;
@@ -35,23 +37,18 @@
   opacity: 0;
 }
 .card img {
-  width: 9rem;
-  height: 9rem;
+  width: 80%;
+  height: 80%;
   -o-object-fit: cover;
      object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
-  margin-left: 22%;
-  margin-top: 5%; 
+  margin-left: 10%;
+  margin-top: 10%; 
   border-radius: 15px;
 }
-.card .big-image{
-  width: 20rem;
-  height: 20rem;
-  margin-left: 8%;
-  margin-top: 12%; 
-}
+
 .card-img {
   object-fit: contain;
   user-select: none;
@@ -92,91 +89,20 @@
   color: white;
 }
 
-.container-grid {
-  display: grid;
-  grid-gap: 1rem;
-  grid-template-rows: 1fr 1fr;
-}
-
-.a {
-  grid-row-start: 1;
-  grid-row-end: 3;
-  width: 20rem;
-}
-
-.c {
-  grid-row-start: 2;
-  grid-row-end: 2;
-  width: 15rem;
-}
-
-.e {
-  grid-row-start: 3;
-  grid-row-end: 2;
-  width: 15rem;
-}
-.b{
-  width: 15rem;
-}
-.d{
-  width: 15rem;
-}
-
-
-@media only screen and (max-width: 1000px) {
-  .container-grid {
-  display: block;
-}
- .card{
-   width: 18rem;
-   height: 18rem;
- }
- .card img{
-   height: 70%;
-   width: 70%;
-   margin-top: 3rem;
-   margin-left: 3rem;
- }
- .card .big-image{
-  height: 70%;
-   width: 70%;
-   margin-top: 3rem;
-   margin-left: 3rem;
- }
-  }
-
 </style>
 
-<div class="container-grid">
-  <div class="card a"> 
-    <img src="/images/programs/gsoc.svg" alt="Gsoc" class="big-image">
-    <div class="info">
-      <h3>Google Summer of Code</h3>
-    </div>
-  </div>
-  <div class="card b">
-    <img src="/images/programs/gsod.svg" alt="Gsod">
-    <div class="info">
-      <h3>Google Summer of Docs</h3>
-    </div>
-  </div>
-  <div class="card c"> 
-    <img src="/images/programs/fellowship_gray.png" alt="Sample photo">
-    <div class="info">
-      <h3>MLH</h3>
-    </div></div>
-  <div class="card d">    
-    <img src=" /images/programs/cncf-icon-white.svg" alt="Sample photo">
-    <div class="info">
-      <h3>Cloud Native Computing Foundation</h3>
-    </div></div>
-  <div class="card e">   
-    <img src="/images/programs/CommunityBridge-circular-white.svg" alt="Sample photo">
-    <div class="info">
-      <h3>Community Bridge</h3>
-    </div></div>
-</div>
-
-
+  {% for program in site.data.programs  %}
+  <a href="{{program.link}}">
+  <wrapper>
+    <div class="card">
+      <img src="{{program.imagePath}}">
+      <div class="info">
+        <h1>{{program.name}}</h1>
+      </div>
+      </div>
+      </wrapper>
+    </a>
+  {% endfor %}
+  
 
 
