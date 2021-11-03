@@ -1,22 +1,25 @@
-var modal = document.querySelector('.modal-window');
-var btn = document.querySelector('.link');
-var btnClose = document.querySelector('.close');
-modal.addEventListener('click',function(){
-    modal.style.visiblity = "hidden";
-    modal.style.opacity = "0";
-    modal.style.pointerEvents= "none";
-    console.log('click');
+document.addEventListener('DOMContentLoaded', function(event){
+    var modal = document.querySelector('.modal-window');
+    var btnOpen = document.querySelector('.link');
+    var btnClose = document.querySelector('.close');
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.visiblity = "hidden";
+            modal.style.opacity = "0";
+            modal.style.pointerEvents= "none";
+            console.log('clicked');
+        }
+        if(event.target == btnClose){
+            modal.style.visiblity = "hidden";
+            modal.style.opacity = "0";
+            modal.style.pointerEvents= "none";
+            console.log('click');
+        }
+        if(event.target == btnOpen){
+            modal.style.visibility = "visible";
+            modal.style.opacity = "1";
+            modal.style.pointerEvents="auto";
+            console.log('click');
+        }
+    }
 });
-btnClose.addEventListener('click',function(){
-    modal.style.visiblity = "hidden";
-    modal.style.opacity = "0";
-    modal.style.pointerEvents= "none";
-    console.log('click');
-});
-btn.addEventListener('click',function(){
-    modal.style.visibility = "visible";
-    modal.style.opacity = "1";
-    modal.style.pointerEvents="auto";
-    console.log('click');
-    });
-    
