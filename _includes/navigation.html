@@ -7,18 +7,35 @@
 			<li class="nav-item">
 				{% assign class = "nav-text" %}
 				{% if link.highlight %}
-				{% assign class = class | append: " highlight" %}
+					{% assign class = class | append: " highlight" %}
 				{% endif %}
 
 				{% if link.link == page.url %}
-				{% assign class = class | append: " active" %}
+					{% assign class = class | append: " active" %}
+				{% elsif link.submenu %}
+					{% for sublink in link.subitems %}
+							{% if page.url == sublink.link %}
+								{%  assign class = class | append: " active" %}
+								{% break %}
+							{% endif %}
+					{% endfor %}
 				{% endif %}
-				<a {% if link.link %}href="{% include relative-src.html src=link.link %}" {% endif %}
-					{% if link.submenu %}style="width:130px" {% endif %} class="{{class}}"
-					{% if link.new_window %}target="_blank" {% endif %}>{{ link.name }}</a>
+				
+				<a {% if link.link %}href="{% include relative-src.html src=link.link %}" {% endif %} {% if link.submenu %}style="width:130px" {% endif %} class="{{class}}"
+					{% if link.new_window %} target="_blank" {% endif %}>
+					{{ link.name }}
+					{% if link.external %}
+						<img src="/images/buttons/external-link_white.svg"
+							style="max-width:  10px; vertical-align:top;margin-left: 1px; " />
+					{% endif %}
+				</a>
+
 				{% if link.subitems[0] %}
 				<ul>
 					{% for sublink in link.subitems %}
+					{% if page.url == sublink.link %}
+						{% continue %}
+					{% endif %}
 					<li><a href="{{sublink.link}}" {% if sublink.new_window %}target="_blank" {% endif %}
 							class="subnav-item">{{sublink.name}}
 							{% if sublink.external %}
