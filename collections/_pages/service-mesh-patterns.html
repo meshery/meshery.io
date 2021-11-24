@@ -6,63 +6,56 @@ heading: Service Mesh Patterns
 redirect_from: service-mesh-patterns
 ---
 <style>
-      .smallcard-a {
-    padding-top: 0.6rem;
-    padding-bottom: 0.8rem;
-    background-color: whitesmoke;
-    border-color: black;
-    border-radius: 2px;
-    text-decoration: none;
-    text-align: center;
-    letter-spacing: 0.5px;
-    margin-top: 2rem;
-    cursor: pointer;
-    display: inline-block;
-    overflow: hidden;
-    vertical-align: middle;
-    z-index: 1;
-    -webkit-transition: 0.3s ease-out;
-    transition: 0.3s ease-out;
-    width: 100%;
-    user-select: none;
-    -webkit-user-drag: none;
-    -khtml-user-drag: none;
-    -moz-user-drag: none;
-    -o-user-drag: none;
-    
-  }
+.card {
+  width: 280px;
+  height: 280px;
+  border-radius: 15px;
+  padding: 1.5rem;
+  background: #e9e9e9;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  transition: 0.4s ease-out;
+  box-shadow: 2px 2px 6px 0px  #00d3a9;
+}
+
+.card:before {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  transition: 0.5s;
+  opacity: 0;
+}
+
+.card:hover {
+  background: rgba(0, 0, 0, 0.6);
+  transition: 0.5s;
+}
+.card img {
+  width: 60%;
+  height: 60%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 10%;
+  margin-top: 10%; 
+  border-radius: 15px;
+}
+
+
  h3{
    font-weight: 300;
  }
  p{
    font-size: 18px;
  }
-  span .smallcard-a:hover {
-    text-decoration: none;
-    transition-timing-function: ease-in;
-    transition: 0.2s;
-    transition: 0.25s ease-out;
-    box-shadow: 0 7px 7px 1px rgba(0, 0, 0, 0.14),
-      0 3px 6px 2px rgba(0, 0, 0, 0.12), 0 4px 4px -3px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0 7px 7px 1px rgba(0, 0, 0, 0.14),
-      0 3px 6px 2px rgba(0, 0, 0, 0.12), 0 4px 4px -3px rgba(0, 0, 0, 0.3);
-  }
-
-  .minicard-span {
-    text-align: center;
-    width: 100%;
-    font-size: 1.3rem;
-    line-height: 110%;
-
-  }
-
-  .minicard-img {
-    width: 10%;
-    height: inherit;
-    vertical-align: middle;
-    position: relative;
-    z-index: -1;
-  }
+ 
 
   .inner-span {
     font-size: 16px;
@@ -70,23 +63,6 @@ redirect_from: service-mesh-patterns
     color: black;
   }
 
-  .card-content {
-    flex-direction: row;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-  }
-  .patterns {
-      height:800px;
-      width: 400px;
-  }
-  pre code {
-    width: 100%;
-    font-size: 14px;
-    text-align: left;
-    justify-content: center;
-    display: block;
-    margin-top:-10px;
-  }
   .column {
   float: left;
   width: 30%;
@@ -100,6 +76,56 @@ redirect_from: service-mesh-patterns
   display: table;
   clear: both;
 }
+
+
+/* pattern card styles */
+.pattern-type {
+  cursor: inherit;
+    display: flex-start;
+    align-items: center;
+    user-select: none;
+    white-space: nowrap;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 12px;
+}
+ .chip {
+  display: inline-flex;
+    flex-direction: row;
+    background-color: #b6d7a8ff;
+    border: none;
+    cursor: default;
+    height: 24px;
+    outline: none;
+    padding: 0;
+    font-size: 14px;
+    font-family:"Open Sans", sans-serif;
+    white-space: nowrap;
+    align-items: center;
+    border-radius: 16px;
+    vertical-align: middle;
+    text-decoration: none;
+    justify-content: center;
+ }
+
+ .pattern-name {
+   color:#333;
+   font-weight: 700;
+   font-style: bold;
+   white-space: nowrap;
+   text-align: center;
+  padding: 3px 0;
+ }
+
+ .pattern-id {
+   position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 10px;
+ }
+
+
+
 @media screen and (max-width: 600px) {
   .column {
     width: 100%;
@@ -114,13 +140,9 @@ redirect_from: service-mesh-patterns
     text-align: left;
 }
 
-.modal-content{
-  text-align: center;
-}
-
 .modal-window {
   position: fixed;
-  background-color: rgba(255, 255, 255, 0.25);
+  background-color: rgba(0, 0, 0, 0.75);
   top: 0;
   right: 0;
   bottom: 0;
@@ -131,19 +153,27 @@ redirect_from: service-mesh-patterns
   pointer-events: none;
   transition: all 0.3s;
 }
-.modal-window:target {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
+
+.modal-image {
+  width: 250px;
+    margin: 30px 30px 30px 0;
+    float: left;
+
 }
+.align {
+  display: flex;
+            align-items: center;
+}
+
+
 .modal-window > div {
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 2em;
-  background: rgba(255, 255, 255);
-  border: 3px solid #00d3a9;
+  padding: 1.5em 1.5em 1.5em 1.5em;
+  background: #fff;
+  border-radius: 1rem;
 }
 .modal-window header {
   font-weight: bold;
@@ -164,24 +194,34 @@ redirect_from: service-mesh-patterns
   width: 70px;
   text-decoration: none;
 }
-.modal-close:hover {
-  color: black;
+.modal-small-header {
+  font-size: 15px;
+  display: block;
+ 
 }
-
-.modal-window > div {
-  border-radius: 1rem;
+.modal-content {
+  font-size: 10px;
+  display: block;
+  padding: 10px;
 }
-
-.modal-window div:not(:last-of-type) {
+.modal-window div div:not(:last-of-type) {
   margin-bottom: 15px;
 }
 
-small {
-  color: rgb(134, 132, 132);
-}
-.event{
-  padding-top: 0;
-}
+.modal-container {
+        /* display: flex;
+        align-items: center;
+        justify-content: center; */
+        padding: 20px 40px 40px;
+  max-width: 600px;
+      }
+  .modal-text {
+    display: inline;
+  }
+      .image-container {
+        flex-basis: 70%;
+      }
+
 .close {
   position: absolute;
   transition: all 200ms;
@@ -189,12 +229,21 @@ small {
   font-weight: bold;
   text-decoration: none;
   color: #333;
+  background: transparent;
+  border : 0px;
+  cursor: pointer;
 }
 .close:hover {
   color: #00d3a9 !important;
   opacity: 0.8 !important;
   text-decoration: none;
 }
+
+.open-modal-btn{
+  display: block;
+  margin: 0 auto; 
+}
+
 
 @media screen and (max-width: 700px){
   .modal-window{
@@ -218,32 +267,52 @@ small {
 
 <div class="row">
   <div class="column">
-    <div class="card-content flex">
-        <span class="minicard-span">
-            <a class= "smallcard-a waves-effect waves-light btn white-text darken-2 l5-dark-green z-depth-2 link" href="#open-modal" >
-            <img src="{{pattern.image}}">
-            <span class="inner-span">
-              Pattern name: <small>{{pattern.name}}</small><br>
-              Pattern-ID: <small>{{pattern.patternId}}</small> <br>
-              Pattern-Type:<small> {{pattern.patternType}}</small><br>
-            <a href="#" class="download-link">Download yaml </a>
-           </span></a>
-         </span>
-      </div>
+          <div class="link open-modal-btn">
+            <div class= "card">
+              <div class="chip">
+                  <small class="pattern-type"> {{pattern.patternType}}</small>
+                  <img class= "pattern-image" src="{{pattern.image}}"/>
+              </div>
+             
+              <h4 class="pattern-name">{{pattern.name}}</h4>
+           <h6 class="pattern-id">{{pattern.patternId}}</h6> 
+        
+            </div>
+          </div>
+         
   </div>
-  {% endfor %}
-  {% for pattern in site.data.patterns %}
   <div id="open-modal" class="modal-window">
     <div>
-      <a href="#" title="Close" class="modal-close close">&times;</a>
-        <h1 class="modal-content">{{pattern.name}}</h1>
-      <div>
-        <img src="{{pattern.image}}">
+      <button class = "modal-close close">&times;</button>
+      <div class="chip">
+        <small class="pattern-type"> {{pattern.patternType}}</small>
+    </div>
+
+    <p><img class="modal-image" src="{{pattern.image}}" />{{pattern.name}}
+    <h4>What this pattern does:</h4><br/>{{pattern.patternInfo}}<br/>
+    <h4>Caveats and Consideration: </h4>{{pattern.patternCaveats}}</p>
+
+
+     <!-- <div class="modal-container">
+       
+        <div class="image-container">
+          <img class="modal-image" src="{{pattern.image}}" />
+          </div>
+          <div class="modal-text">
+            <h1 style="text-align: center;">{{pattern.name}}</h1>
+        
+            <small>{{pattern.patternId}}</small>
+        <span class="modal-small-header">What this pattern does:</span>
+        <span class="modal-content">{{pattern.patternInfo}}</span>
+        <span class="modal-small-header">Caveats and Consideration: </span>
+        <span class="modal-content">{{pattern.patternCaveats}}</span>
+
       </div>
-      <div class="modal-content" ><small>{{pattern.patternId}}</small><br/>
-          <small>{{pattern.patternType}}</small></div>
+ 
+    </div> -->
+
     </div></div>
     {% endfor %}
 </div>
-
+<script src="{{  site.baseurl }}/assets/js/talks-presentations.js"></script>
 
