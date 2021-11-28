@@ -5,314 +5,54 @@ title: Service Mesh patterns
 heading: Service Mesh Patterns
 redirect_from: service-mesh-patterns
 ---
-<style>
-.card {
-  width: 280px;
-  height: 280px;
-  border-radius: 15px;
-  padding: 1.5rem;
-  background: #e9e9e9;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  transition: 0.4s ease-out;
-  box-shadow: 2px 2px 6px 0px  #00d3a9;
-}
-
-.card:before {
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 2;
-  transition: 0.5s;
-  opacity: 0;
-}
-
-.card:hover {
-  background: rgba(0, 0, 0, 0.6);
-  transition: 0.5s;
-}
-.card img {
-  width: 60%;
-  height: 60%;
-  -o-object-fit: contain;
-     object-fit: contain;
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin-left: 10%;
-  margin-top: 10%; 
-  border-radius: 15px;
-}
-
-
- h3{
-   font-weight: 300;
- }
- p{
-   font-size: 18px;
- }
- 
-
-  .inner-span {
-    font-size: 16px;
-    position: relative;
-    color: black;
-  }
-
-  .column {
-  float: left;
-  width: 30%;
-  padding: 0 10px;
-}
-.row {margin: 0 -5px;}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-
-/* pattern card styles */
-.pattern-type {
-  cursor: inherit;
-    display: flex-start;
-    align-items: center;
-    user-select: none;
-    white-space: nowrap;
-    padding-left: 12px;
-    padding-right: 12px;
-    font-size: 12px;
-}
- .chip {
-  display: inline-flex;
-    flex-direction: row;
-    background-color: #b6d7a8ff;
-    border: none;
-    cursor: default;
-    height: 24px;
-    outline: none;
-    padding: 0;
-    font-size: 14px;
-    font-family:"Open Sans", sans-serif;
-    white-space: nowrap;
-    align-items: center;
-    border-radius: 16px;
-    vertical-align: middle;
-    text-decoration: none;
-    justify-content: center;
- }
-
- .pattern-name {
-   color:#333;
-   font-weight: 700;
-   font-style: bold;
-   white-space: nowrap;
-   text-align: center;
-  padding: 3px 0;
- }
-
- .pattern-id {
-   position: absolute;
-  bottom: 0;
-  right: 0;
-  margin-right: 10px;
- }
-
-
-
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
-  }
-
-  
-}
-.download-link{
-    font-size: 14px;
-    text-align: left;
-}
-
-.modal-window {
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.75);
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 999;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s;
-}
-
-.modal-image {
-  width: 250px;
-    margin: 30px 30px 30px 0;
-    float: left;
-
-}
-.align {
-  display: flex;
-            align-items: center;
-}
-
-
-.modal-window > div {
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 1.5em 1.5em 1.5em 1.5em;
-  background: #fff;
-  border-radius: 1rem;
-}
-.modal-window header {
-  font-weight: bold;
-}
-.modal-window h1 {
-  font-size: 150%;
-  margin: 0 0 15px;
-}
-
-.modal-close {
-  color: #aaa;
-  line-height: 50px;
-  font-size: 80%;
-  position: absolute;
-  right: 0;
-  text-align: center;
-  top: 0;
-  width: 70px;
-  text-decoration: none;
-}
-.modal-small-header {
-  font-size: 15px;
-  display: block;
- 
-}
-.modal-content {
-  font-size: 10px;
-  display: block;
-  padding: 10px;
-}
-.modal-window div div:not(:last-of-type) {
-  margin-bottom: 15px;
-}
-
-.modal-container {
-        /* display: flex;
-        align-items: center;
-        justify-content: center; */
-        padding: 20px 40px 40px;
-  max-width: 600px;
-      }
-  .modal-text {
-    display: inline;
-  }
-      .image-container {
-        flex-basis: 70%;
-      }
-
-.close {
-  position: absolute;
-  transition: all 200ms;
-  font-size: 25px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-  background: transparent;
-  border : 0px;
-  cursor: pointer;
-}
-.close:hover {
-  color: #00d3a9 !important;
-  opacity: 0.8 !important;
-  text-decoration: none;
-}
-
-.open-modal-btn{
-  display: block;
-  margin: 0 auto; 
-}
-
-
-@media screen and (max-width: 700px){
-  .modal-window{
-    width: 100%;
-    height: 100%;
-    margin-top: 2rem;
-  }
-}
-
-</style>
+<link rel="stylesheet" href="{{  site.baseurl }}/assets/css/patterns.css" />
 <div class="sub-heading">
   <h3>What are Service Mesh Patterns?</h3>
   <p>Service Mesh Patterns help you confidently wield a service mesh by extracting best practices of service mesh use and harnessing the core value service meshes offer, irrespective of which service mesh you’re using.</p>
   <h3>Pattern Management</h3>
   <p>You may bring your own patterns or find them available through your chosen provider. Each service mesh pattern carries a unique identifier for reference. The patterns in this repository serve in an educational capacity, facilitating learning, and also serve in an operational capacity, facilitating implementation and validation of your service mesh deployment’s adherence to a pattern.</p>
 </div>
-
 <h3>Some sample patterns:</h3>
-
 {% for pattern in site.data.patterns %}
-
 <div class="row">
   <div class="column">
           <div class="link open-modal-btn">
             <div class= "card">
+            {% if pattern.ComingSoon == "yes" %}
+            <h2>Coming Soon</h2>
+            {% endif %}
               <div class="chip">
                   <small class="pattern-type"> {{pattern.patternType}}</small>
-                  <img class= "pattern-image" src="{{pattern.image}}"/>
               </div>
-             
               <h4 class="pattern-name">{{pattern.name}}</h4>
-           <h6 class="pattern-id">{{pattern.patternId}}</h6> 
-        
+              <img class= "pattern-image" src="{{pattern.image}}"/>
+           <h6 class="pattern-id">{{pattern.patternId}}</h6>
             </div>
           </div>
-         
   </div>
   <div id="open-modal" class="modal-window">
     <div>
       <button class = "modal-close close">&times;</button>
-      <div class="chip">
+      <div class="chip chip-modal">
         <small class="pattern-type"> {{pattern.patternType}}</small>
     </div>
-
     <p><img class="modal-image" src="{{pattern.image}}" />{{pattern.name}}
     <h4>What this pattern does:</h4><br/>{{pattern.patternInfo}}<br/>
     <h4>Caveats and Consideration: </h4>{{pattern.patternCaveats}}</p>
-
-
      <!-- <div class="modal-container">
-       
         <div class="image-container">
           <img class="modal-image" src="{{pattern.image}}" />
           </div>
           <div class="modal-text">
             <h1 style="text-align: center;">{{pattern.name}}</h1>
-        
             <small>{{pattern.patternId}}</small>
         <span class="modal-small-header">What this pattern does:</span>
         <span class="modal-content">{{pattern.patternInfo}}</span>
         <span class="modal-small-header">Caveats and Consideration: </span>
         <span class="modal-content">{{pattern.patternCaveats}}</span>
-
       </div>
- 
     </div> -->
-
     </div></div>
     {% endfor %}
 </div>
-<script src="{{  site.baseurl }}/assets/js/talks-presentations.js"></script>
-
+<script src="{{  site.baseurl }}/assets/js/modal.js"></script>
