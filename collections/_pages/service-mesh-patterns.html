@@ -6,6 +6,361 @@ heading: Service Mesh Patterns
 redirect_from: service-mesh-patterns
 ---
 <link rel="stylesheet" href="{{  site.baseurl }}/assets/css/patterns.css" /> 
+<style>
+.card {
+  position: relative;
+  margin: 10px auto;
+  width: 220px;
+  height: 250px;
+  padding: 20px;
+  border-radius: 15px;
+  border: 0;
+  transition: 0.4s ease-out;
+  box-shadow: 2px 2px 6px 0px  #00D3A9;
+}
+.card:hover {
+  background: rgba(0, 0, 0, 0.3);
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.modal-card {
+  position: relative;
+  margin: 10px auto;
+  width: 160px;
+  height: 195px;
+  padding: 20px;
+  border-radius: 15px;
+  border: 0;
+  transition: 0.4s ease-out;
+  box-shadow: 2px 2px 6px 0px  #00D3A9;
+}
+/* .overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 50px;
+  color: white;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+} */
+
+ h3{
+   font-weight: 300;
+ }
+ p{
+   font-size: 18px;
+ }
+  .inner-span {
+    font-size: 16px;
+    position: relative;
+    color: black;
+  }
+  .column {
+  float: left;
+  padding: 0 10px;
+}
+
+.smp {
+  width: 25px;
+  bottom: 0;
+  right: 0;
+  vertical-align: middle;
+  padding-right: 2px;
+ 
+}
+.overlay {
+    height: 160px;
+    width: 100%;
+    text-align: center;
+    padding-top: 100px;
+    color: white;
+    overflow: hidden;
+    background: #C04848;  /* fallback for old browsers */
+    background: linear-gradient(rgb(72,0,72,0.8), rgb(192,72,72,0.8));
+    background: linear-gradient(rgb(72,0,72,0.8), rgb(192,72,72,0.8));
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.service-mesh-image {
+  height: 50px;
+  width: 50px;
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 100px;
+    background-color: #1a2421;
+    text-align: center;
+    padding: 7px;
+    font-size: 1em;
+    border-radius: 10px;
+    position: absolute;
+    z-index: 1;
+    top: 5rem;
+    left: 50%;
+    margin-left: -45px;
+  }
+.import{
+  background-color: #00b39fff;
+  color: white;
+  border-radius: 4px;
+  border: none;
+  padding: 10px;
+
+}
+.vertical-center {
+
+  -ms-transform: translateY(-50%);
+  transform: translateY(-20%) translateX(20%);
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* pattern card styles */
+.pattern-type {
+  cursor: inherit;
+    display: flex-start;
+    align-items: center;
+    user-select: none;
+    white-space: nowrap;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+ .chip {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  float: right;
+    background-color: #b6d7a8ff;
+    border: none;
+    cursor: default;
+    height: 23px;
+    outline: none;
+    padding: 0;
+    font-size: 14px;
+    font-family:"Open Sans", sans-serif;
+    white-space: nowrap;
+    align-items: center;
+    border-radius: 16px;
+    vertical-align: middle;
+    text-decoration: none;
+    justify-content: center;
+ }
+ .chip-modal{
+  float: left;
+ }
+ .modal-chip{
+  display: inline-flex;
+  flex-direction: row-reverse;
+  float: right;
+    background-color: #b6d7a8ff;
+    border: none;
+    cursor: default;
+    height: 20px;
+    outline: none;
+    padding: 1px;
+    font-size: 12px;
+    font-family:"Open Sans", sans-serif;
+    white-space: nowrap;
+    align-items: center;
+    border-radius: 16px;
+    vertical-align: middle;
+    text-decoration: none;
+    justify-content: center;
+ }
+ .modal-smp{
+  width: 20px;
+  bottom: 0;
+  right: 0;
+  vertical-align: middle;
+  padding-right: 2px;
+ 
+ }
+ .modal-pattern-name {
+  color:#333;
+   font-weight: 600;
+   font-style: bold;
+   white-space: nowrap;
+   text-align: center;
+  padding-top: 7px;
+  
+
+ }
+ .modal-pattern-image{
+  width: 60%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: absolute;
+  margin-left: 5%;
+  border-radius: 15px;
+  padding-bottom: 2px;
+ }
+ .pattern-name {
+   color:#333;
+   font-weight: 1400;
+   font-style: bold;
+   white-space: nowrap;
+   text-align: center;
+  padding: 15px 0 3px 0;
+  
+ }
+ .pattern-id {
+   position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-top: 10px;
+  margin-right: 14px;
+ }
+
+ .modal-pattern-id {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-top: 10px;
+  margin-right: 14px;
+ }
+
+ .pattern-image {
+  width: 60%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: absolute;
+  margin-left: 5%;
+  border-radius: 15px;
+ }
+@media screen and (max-width: 700px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+.download-link{
+    font-size: 14px;
+    text-align: left;
+}
+.modal-window {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.75);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+}
+.modal-image {
+  width: 250px;
+    margin: 30px 30px 30px -90px;
+    float: left;
+}
+.align {
+  display: flex;
+            align-items: center;
+}
+.modal-window > div {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1.5em 0.5em 1.5em 2em;
+  background: #fff;
+  border-radius: 1rem;
+}
+.modal-window header {
+  font-weight: bold;
+}
+.modal-window h1 {
+  font-size: 150%;
+  margin: 0 0 15px;
+}
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+}
+.modal-small-header {
+  font-size: 15px;
+  display: block;
+}
+.modal-content {
+  font-size: 10px;
+  display: block;
+  padding: 10px;
+}
+.modal-window div div:not(:last-of-type) {
+  margin-bottom: 15px;
+}
+.modal-container {
+        /* display: flex;
+        align-items: center;
+        justify-content: center; */
+        padding: 20px 40px 40px;
+  max-width: 600px;
+      }
+  .modal-text {
+    display: inline;
+  }
+      .image-container {
+        flex-basis: 70%;
+      }
+.close {
+  position: absolute;
+  transition: all 200ms;
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+  background: transparent;
+  border : 0px;
+  cursor: pointer;
+}
+.close:hover {
+  color: #00D3A9 !important;
+  opacity: 0.8 !important;
+  text-decoration: none;
+}
+.open-modal-btn{
+  display: block;
+  margin: 0 auto;
+}
+@media screen and (max-width: 700px){
+  .modal-window{
+    width: 100%;
+    height: 100%;
+    margin-top: 2rem;
+  }
+}</style>
 <div class="sub-heading">
   <h3>What are Service Mesh Patterns?</h3>
   <p>Service Mesh Patterns help you confidently wield a service mesh by extracting best practices of service mesh use and harnessing the core value service meshes offer, irrespective of which service mesh you’re using.</p>
@@ -14,13 +369,25 @@ redirect_from: service-mesh-patterns
 </div>
 <h3>Some sample patterns:</h3>
 {% for pattern in site.data.patterns %}
+
 <div class="row">
   <div class="column">
           <div class="link open-modal-btn">
+            {% if pattern.ComingSoon == "ye" %}
+            <div class="link open-modal-btn">
             <div class= "card">
-            {% if pattern.ComingSoon == "yes" %}
-            <h2>Coming Soon</h2>
-            {% endif %}
+           
+            <div class="overlay">
+            
+              <h4>Coming Soon</h4>
+            
+            </div>
+          </div>
+        </div>
+           {% else %}
+           <div class= "card">
+           
+           
               <div class="chip">
                   <small class="pattern-type"> {{pattern.patternType}}</small>
               </div>
@@ -34,30 +401,63 @@ redirect_from: service-mesh-patterns
           </div>
             </div>
           </div>
+          {% endif %}
   </div>
   <div id="open-modal" class="modal-window">
     <div>
       <button class = "modal-close close">&times;</button>
       <div class="chip chip-modal">
-        <small class="pattern-type"> {{pattern.patternType}}</small>
+        <h6 class="pattern-type"> {{pattern.patternType}}</h6>
     </div>
-    <p><img class="modal-image" src="{{pattern.image}}" />{{pattern.name}}
-    <h4>What this pattern does:</h4><br/>{{pattern.patternInfo}}<br/>
-    <h4>Caveats and Consideration: </h4>{{pattern.patternCaveats}}</p>
-     <!-- <div class="modal-container">
-        <div class="image-container">
-          <img class="modal-image" src="{{pattern.image}}" />
-          </div>
-          <div class="modal-text">
-            <h1 style="text-align: center;">{{pattern.name}}</h1>
-            <small>{{pattern.patternId}}</small>
-        <span class="modal-small-header">What this pattern does:</span>
-        <span class="modal-content">{{pattern.patternInfo}}</span>
-        <span class="modal-small-header">Caveats and Consideration: </span>
-        <span class="modal-content">{{pattern.patternCaveats}}</span>
+    <p><div class="modal-image" ><img src="{{pattern.image}}" /> <h4>Related Patterns</h4>
+    
+    
+    
+    {% if pattern.patternType == "Deployment" %}
+    <div class= "modal-card">
+      <div class="modal-chip">
+          <small class="modal-pattern-type"> {{pattern.patternType}}</small>
       </div>
-    </div> -->
+      <h5 class="modal-pattern-name">{{pattern.name}}</h5>
+      <img class= "modal-pattern-image" src="{{pattern.image}}"/>
+      <div>
+      <h6 class="modal-pattern-id">
+      <img class="modal-smp"
+      src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
+      loading="lazy" />{{pattern.patternId}}</h6>
+      </div>
+    </div>
+    {% elsif pattern.patternType == "Traffic Management" %}
+    <div class= "modal-card">
+      <div class="modal-chip">
+          <small class="modal-pattern-type"> {{pattern.patternType}}</small>
+      </div>
+      <h5 class="modal-pattern-name">{{pattern.name}}</h5>
+      <img class= "modal-pattern-image" src="{{pattern.image}}"/>
+      <div>
+      <h6 class="modal-pattern-id">
+      <img class="modal-smp"
+      src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
+      loading="lazy" />{{pattern.patternId}}</h6>
+      </div>
+    </div>
+    {% endif %}
+
+
+
+    </div><h3 style="text-align: center;">{{pattern.name}}</h3>
+    <h4>What this pattern does:</h4><h5>{{pattern.patternInfo}}</h5>
+    <h4>Caveats and Consideration: </h4><h5>{{pattern.patternCaveats}}</h5></p>
+    <h4>Compatibilty:</h4>
+   
+    {% if pattern.Compatibility == "Istio" %}
+    <img class="service-mesh-image" src="{{site.baseurl}}/images/istio.svg" /><br />
+    {% elsif pattern.Compatibility == "Linkerd" %}
+    <img class="service-mesh-image" src="{{site.baseurl}}/images/linkerd.svg" /><br />
+    {% endif %}
+    <div class="vertical-center">
+    <button class="import">Import Url</button></div>
     </div></div>
-    {% endfor %}
+    {% endfor %} 
 </div>
 <script src="{{  site.baseurl }}/assets/js/modal.js"></script>
