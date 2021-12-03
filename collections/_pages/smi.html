@@ -45,7 +45,7 @@ redirect_from: smi
             const tr = document.createElement("tr");
             // set attributes to the row
             tr.setAttribute("class", "collapse-head");
-            tr.setAttribute("style", "border: 1px dashed #a6b7be;");
+            tr.setAttribute("style", "border-bottom: 1px solid rgb(239, 239, 239);");
             tr.setAttribute("id", result.id);
             tr.setAttribute("data-toggle", "tooltip");
             tr.setAttribute("id", `.${result.id}`);
@@ -56,7 +56,6 @@ redirect_from: smi
             const img = document.createElement("img");
             const istio = document.createElement("div");
             istio.setAttribute("style", "font-size:.85rem;");
-            istio.innerText = "SMI Adapter for Istio";
 
             img.setAttribute("style", "height:40px;width:40px!important");
             img.setAttribute("alt", result.mesh_name);
@@ -198,24 +197,11 @@ redirect_from: smi
 </script>
 
 <style>
-  @media screen and (max-width:700px) {
-    .legend {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      margin-right: -25%;
-      align-content: left;
-    }
-    .tableDiv {
-      overflow-x: scroll;
-      padding-bottom: 15px;
-    }
-  }
-
   .mainLegendDiv {
     display: flex;
     margin-left: 30%;
-    margin-right: 14.5%;
+    margin-right: 17%;
+    padding-top: 1.5rem;
   }
 
   .legend {
@@ -273,6 +259,7 @@ redirect_from: smi
     background-color: #ffffff;
     margin: auto;
     border: none;
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 16px;
   }
 
   .tableHead {
@@ -282,12 +269,54 @@ redirect_from: smi
     width: 100%;
   }
 
-  th, td {
+  td {
     padding: 0.6em 0.6em;
     display: table-cell;
     text-align: center;
     border: none !important;
     font-size: small;
+  }
+
+  th {
+    border: solid lightslategrey;
+    border-width: 0.5px;
+  }
+  
+  td {
+    border: solid lightslategrey;
+    border-width: 1px;
+    
+  }
+
+  .top-row-table #version {
+    background-color: rgb(30, 33, 23);
+    color: rgb(255, 255, 255);
+    height: 3.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px 0px 0px 0px;
+    border: none !important
+  }
+
+  .top-row-table #blank {
+    background-color: rgb(0, 179, 159);
+    height: 3.5rem;
+    border: none !important
+  }
+
+  .top-row-table #lastBlank {
+    background-color: rgb(0, 179, 159);
+    height: 3.5rem;
+    border-radius: 0px 10px 0px 0px;
+    border: none !important
+  }
+
+  .bottom-row-table {
+    background-color: rgb(30, 33, 23);
+    color: rgb(255, 255, 255);
+    height: 4rem;
+    font-size: 1rem;
+    font-weight: 600;
   }
 
   p {
@@ -414,6 +443,19 @@ redirect_from: smi
     }
   }
 
+  /*Ipad Pro Sizing*/
+  @media screen and (max-width:1024px) {
+    .mainLegendDiv {
+      display: flex;
+      margin-right: 11.5%;
+    }
+    .legend {
+      display: flex;
+      align-content: left;
+    }
+  }
+
+  /*Tablet Sizing*/
   @media screen and (min-width: 900px) {
     th,
     td {
@@ -423,6 +465,41 @@ redirect_from: smi
     p {
       margin: 1rem 2rem;
     }
+    .legend {
+      font-weight: 900;
+      align-content: left;
+    }
+  }
+
+  /*Ipad Sizing*/
+  @media screen and (max-width:768px) {
+    .mainLegendDiv {
+      display: flex;
+      margin-right: 13.5%;
+      margin-left: 20%;
+    }
+    .legend {
+      display: flex;
+      font-weight: 900;
+      margin-right: -14.5%;
+      align-content: left;
+    }
+  }
+
+  /*Mobile Device Sizing*/
+  @media screen and (max-width:375px) {
+    .legend {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      margin-right: 8%;
+      font-weight: 900;
+      align-content: left;
+    }
+    .tableDiv {
+      overflow-x: scroll;
+      padding-bottom: 15px;
+    }
   }
 </style>
 
@@ -431,7 +508,15 @@ redirect_from: smi
   <div class="tableDiv">
     <table class="table highlighted table-responsive table-hover">
       <thead class="tableHead">
-        <tr>
+        <tr class="top-row-table">
+          <th id="version">v0.6.0</th>
+          <th id="blank"></th>
+          <th id="blank"></th>
+          <th id="blank"></th>
+          <th id="blank"></th>
+          <th id="lastBlank"></th>
+        </tr>
+        <tr class="bottom-row-table">
           <th>Service Mesh</th>
           <th>Mesh Version</th>
           <th class="traffic-access">Traffic Access</th>
