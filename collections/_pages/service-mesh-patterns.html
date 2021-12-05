@@ -5,11 +5,10 @@ title: Service Mesh patterns
 heading: Service Mesh Patterns
 redirect_from: service-mesh-patterns
 ---
-<link rel="stylesheet" href="{{  site.baseurl }}/assets/css/patterns.css" /> 
+
 <style>
 .card {
   position: relative;
-  margin: 10px auto;
   width: 220px;
   height: 250px;
   padding: 20px;
@@ -17,6 +16,7 @@ redirect_from: service-mesh-patterns
   border: 0;
   transition: 0.4s ease-out;
   box-shadow: 2px 2px 6px 0px  #00D3A9;
+  margin-bottom: 20px;
 }
 .card:hover {
   background: rgba(0, 0, 0, 0.3);
@@ -249,6 +249,42 @@ redirect_from: service-mesh-patterns
   margin-left: 5%;
   border-radius: 15px;
  }
+
+.filter-wrap {
+  float: left;
+  flex-grow: 1;
+  width: 22%;
+  height: 800px; /* height needs to be increased with regarding to the total no. of patterns */
+}
+label {
+        display: block;
+        padding-left: 15px;
+        text-indent: -15px;
+        
+      }
+      input {
+        width: 15px;
+        height: 15px;
+        padding: 0;
+        margin: 0;
+        vertical-align: bottom;
+        position: relative;
+        top: -1px;
+      }
+
+  /* .form-check {
+          width: 20px;
+          height: 20px;
+          border-radius: 15px;
+          margin: 2px 10px !important;
+        /* } */
+        /* label {
+            display: flex-end;
+            align-items: center;
+        }
+        input[type=checkbox]{
+            flex: none;
+        } */ 
 @media screen and (max-width: 700px) {
   .column {
     width: 100%;
@@ -353,14 +389,26 @@ redirect_from: service-mesh-patterns
 .open-modal-btn{
   display: block;
   margin: 0 auto;
+
 }
+
+	
 @media screen and (max-width: 700px){
   .modal-window{
     width: 100%;
     height: 100%;
     margin-top: 2rem;
   }
-}</style>
+}
+@media screen and (max-width: 770px){
+.filter-wrap{
+display: none;
+}
+  
+}
+
+</style>
+<script src="{{ site.baseurl }}/assets/js/filter.js"></script>
 <div class="sub-heading">
   <h3>What are Service Mesh Patterns?</h3>
   <p>Service Mesh Patterns help you confidently wield a service mesh by extracting best practices of service mesh use and harnessing the core value service meshes offer, irrespective of which service mesh you’re using.</p>
@@ -368,10 +416,39 @@ redirect_from: service-mesh-patterns
   <p>You may bring your own patterns or find them available through your chosen provider. Each service mesh pattern carries a unique identifier for reference. The patterns in this repository serve in an educational capacity, facilitating learning, and also serve in an operational capacity, facilitating implementation and validation of your service mesh deployment’s adherence to a pattern.</p>
 </div>
 <h3>Some sample patterns:</h3>
-{% for pattern in site.data.patterns %}
 
-<div class="row">
-  <div class="column">
+<div class="filter-wrap">
+  <p><strong>Categories:</strong></p>
+  <form>
+    <div class="checkboxes">
+    <label><input type="checkbox" name="s-type" value="Deployment" id="Deployment" class="form-check"/><span>Deployment</span></label>
+    <label><input type="checkbox" name="s-type" value="TrafficManagement" id="TrafficManagement" /><span> Traffic Management</span></label>
+    <label><input type="checkbox" name="s-type" value="Security" id="Security" /><span> Security</span> </label> 
+      </div>
+  </form>
+  <hr>
+  <p><strong>Compatibilty:</strong></p>
+  <form>
+    <label><input type="checkbox" name="s-category" value="Istio" id="Istio" />Istio</label>
+    <label><input type="checkbox" name="s-category" value="Linkerd" id="Linkerd" /> Linkerd</label>
+  </form>
+  <hr>
+  <p><strong>Technology</strong></p>
+  <form>
+    <label><input type="checkbox" name="s-technology" value="WebAssembly" id="WebAssembly" />WebAssembly</label>
+    <label><input type="checkbox" name="s-technology" value="JWT" id="JWT"/>JWT</label>
+  </form>
+</div>
+
+
+
+
+
+
+
+    {% for pattern in site.data.patterns %}
+    <div class="row">
+      <div class="column">
           <div class="link open-modal-btn">
             {% if pattern.ComingSoon == "ye" %}
             <div class="link open-modal-btn">
@@ -385,9 +462,8 @@ redirect_from: service-mesh-patterns
           </div>
         </div>
            {% else %}
-           <div class= "card">
-           
-           
+        
+           <div class= "card" data-id="{{pattern.DataId}}" data-category="{{pattern.DataCategory}}" >
               <div class="chip">
                   <small class="pattern-type"> {{pattern.patternType}}</small>
               </div>
@@ -401,8 +477,12 @@ redirect_from: service-mesh-patterns
           </div>
             </div>
           </div>
+       
           {% endif %}
   </div>
+
+
+
   <div id="open-modal" class="modal-window">
     <div>
       <button class = "modal-close close">&times;</button>
