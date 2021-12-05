@@ -45,7 +45,7 @@ redirect_from: smi
             const tr = document.createElement("tr");
             // set attributes to the row
             tr.setAttribute("class", "collapse-head");
-            tr.setAttribute("style", "border: 1px dashed #a6b7be;");
+            tr.setAttribute("style", "border-bottom: 1px solid rgb(239, 239, 239);");
             tr.setAttribute("id", result.id);
             tr.setAttribute("data-toggle", "tooltip");
             tr.setAttribute("id", `.${result.id}`);
@@ -56,7 +56,6 @@ redirect_from: smi
             const img = document.createElement("img");
             const istio = document.createElement("div");
             istio.setAttribute("style", "font-size:.85rem;");
-            istio.innerText = "SMI Adapter for Istio";
 
             img.setAttribute("style", "height:40px;width:40px!important");
             img.setAttribute("alt", result.mesh_name);
@@ -127,7 +126,7 @@ redirect_from: smi
                     break;
                   case "FULL":
                     i.setAttribute("class", "fa fa-check-circle");
-                    i.setAttribute("style", "font-size:32px;color:green;");
+                    i.setAttribute("style", "font-size:32px;color:green;cursor:help;");
                     break;
                   case "HALF":
                     i.setAttribute("class", "fa fa-check-circle");
@@ -198,7 +197,78 @@ redirect_from: smi
 </script>
 
 <style>
-  th,
+  .mainLegendDiv {
+    display: flex;
+    margin-left: 30%;
+    margin-right: 17%;
+    padding-top: 1.5rem;
+  }
+
+  .legend {
+    display: flex;
+    width: auto;
+    margin-left: auto;
+    padding: 0.3rem;
+    margin-top: -1.5%;
+    vertical-align: middle;
+    border: 1px inset rgb(60, 73, 79);
+    background-color: rgb(30, 33, 23);
+    opacity: 0.85;
+    color: rgb(239, 239, 239);
+    font-size: 0.9rem;
+  }
+
+  .legendBoxes {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 13px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(30, 33, 23);
+    border: 1px dashed rgb(179, 179, 179);
+    margin: 0rem 0.3rem;
+    text-align: center;
+    vertical-align: center;
+    display: flex;
+  }
+
+  .legendBoxes img {
+    vertical-align: center;
+    align-self: middle;
+    margin-right: 0.25rem;
+    padding-top: 0.15rem;
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+
+  .legendBoxes p {
+    all: revert;
+    text-align: center;
+    vertical-align: center;
+    font-size: 0.7rem;
+    align-self: middle;
+  }
+
+  .legend span {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: auto 0.5rem auto auto;
+  }
+
+  .table {
+    color: #3c494e;
+    background-color: #ffffff;
+    margin: auto;
+    border: none;
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 16px;
+  }
+
+  .tableHead {
+    background-color: #a6b7be;
+    color: #222;
+    word-wrap: none;
+    width: 100%;
+  }
+
   td {
     padding: 0.6em 0.6em;
     display: table-cell;
@@ -206,13 +276,58 @@ redirect_from: smi
     border: none !important;
     font-size: small;
   }
+
+  th {
+    border: solid lightslategrey;
+    border-width: 0.5px;
+  }
+  
+  td {
+    border: solid lightslategrey;
+    border-width: 1px;
+    
+  }
+
+  .top-row-table #version {
+    background-color: rgb(30, 33, 23);
+    color: rgb(255, 255, 255);
+    height: 3.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px 0px 0px 0px;
+    border: none !important
+  }
+
+  .top-row-table #blank {
+    background-color: rgb(0, 179, 159);
+    height: 3.5rem;
+    border: none !important
+  }
+
+  .top-row-table #lastBlank {
+    background-color: rgb(0, 179, 159);
+    height: 3.5rem;
+    border-radius: 0px 10px 0px 0px;
+    border: none !important
+  }
+
+  .bottom-row-table {
+    background-color: rgb(30, 33, 23);
+    color: rgb(255, 255, 255);
+    height: 4rem;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
   p {
     text-align: center;
     margin: 1rem 5rem;
   }
+
   .hide {
     display: none;
   }
+
   .loader {
     color: #00b39f;
     font-size: 90px;
@@ -229,137 +344,236 @@ redirect_from: smi
     -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
     animation: load6 1.7s infinite ease, round 1.7s infinite ease;
   }
+
   @-webkit-keyframes load6 {
     0% {
       box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
         0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
     }
+
     5%,
     95% {
       box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
         0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
     }
+
     10%,
     59% {
       box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
         -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
         -0.297em -0.775em 0 -0.477em;
     }
+
     20% {
       box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
         -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
         -0.749em -0.34em 0 -0.477em;
     }
+
     38% {
       box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
         -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
         -0.82em -0.09em 0 -0.477em;
     }
+
     100% {
       box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
         0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
     }
   }
+
   @keyframes load6 {
     0% {
       box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
         0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
     }
+
     5%,
     95% {
       box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
         0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
     }
+
     10%,
     59% {
       box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em,
         -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em,
         -0.297em -0.775em 0 -0.477em;
     }
+
     20% {
       box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
         -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
         -0.749em -0.34em 0 -0.477em;
     }
+
     38% {
       box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
         -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
         -0.82em -0.09em 0 -0.477em;
     }
+
     100% {
       box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
         0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
     }
   }
+
   @-webkit-keyframes round {
     0% {
       -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
     }
+
     100% {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
     }
   }
+
   @keyframes round {
     0% {
       -webkit-transform: rotate(0deg);
       transform: rotate(0deg);
     }
+
     100% {
       -webkit-transform: rotate(360deg);
       transform: rotate(360deg);
     }
   }
+
+  /*Ipad Pro Sizing*/
+  @media screen and (max-width:1024px) {
+    .mainLegendDiv {
+      display: flex;
+      margin-right: 11.5%;
+    }
+    .legend {
+      display: flex;
+      align-content: left;
+    }
+  }
+
+  /*Tablet Sizing*/
   @media screen and (min-width: 900px) {
     th,
     td {
       font-size: larger;
     }
+
     p {
       margin: 1rem 2rem;
+    }
+    .legend {
+      font-weight: 900;
+      align-content: left;
+    }
+  }
+
+  /*Ipad Sizing*/
+  @media screen and (max-width:768px) {
+    .mainLegendDiv {
+      display: flex;
+      margin-right: 13.5%;
+      margin-left: 20%;
+    }
+    .legend {
+      display: flex;
+      font-weight: 900;
+      margin-right: -14.5%;
+      align-content: left;
+    }
+    .tableDiv {
+      overflow-x: scroll;
+      padding-bottom: 15px;
+    }
+  }
+  @media screen and (max-width: 650px) {
+    .legend {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      margin-right: 8%;
+      font-weight: 900;
+      align-content: left;
+    }
+    .tableDiv {
+      overflow-x: scroll;
+      padding-bottom: 15px;
+    }
+    .tableDiv {
+      overflow-x: scroll;
+      padding-bottom: 15px;
+    }
+  }
+
+  /*Mobile Device Sizing*/
+  @media screen and (max-width:375px) {
+    .legend {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      margin-right: 8%;
+      font-weight: 900;
+      align-content: left;
+    }
+    .tableDiv {
+      overflow-x: scroll;
+      padding-bottom: 15px;
     }
   }
 </style>
 
 <div style="justify-content: center">
   <div class="js-data"></div>
-  <table
-    class="table highlighted table-responsive table-hover"
-    style="
-      color: #3c494e;
-      background-color: #ffffff;
-      margin: auto;
-      border: none;
-    "
-  >
-    <thead
-      style="
-        background-color: #a6b7be;
-        color: #222;
-        word-wrap: none;
-        width: 100%;
-      "
-    >
-      <tr>
-        <th>Service Mesh</th>
-        <th>Mesh Version</th>
-        <th class="traffic-access">Traffic Access</th>
-        <th class="traffic-split">Traffic Split</th>
-        <th class="traffic-spec">Traffic Spec</th>
-        <th>% Passed</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-  <div class="loader"></div>
+  <div class="tableDiv">
+    <table class="table highlighted table-responsive table-hover">
+      <thead class="tableHead">
+        <tr class="top-row-table">
+          <th id="version">v0.6.0</th>
+          <th id="blank"></th>
+          <th id="blank"></th>
+          <th id="blank"></th>
+          <th id="blank"></th>
+          <th id="lastBlank"></th>
+        </tr>
+        <tr class="bottom-row-table">
+          <th>Service Mesh</th>
+          <th>Mesh Version</th>
+          <th class="traffic-access">Traffic Access</th>
+          <th class="traffic-split">Traffic Split</th>
+          <th class="traffic-spec">Traffic Spec</th>
+          <th>% Passed</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="mainLegendDiv">
+      <div class="legend">
+        <span>Legend:</span>
+        <div class="legendBoxes">
+          <img alt="Full" src="../../images/success-check-mark.png">
+          <p>Fully Compatible</p>
+        </div>
+        <div class="legendBoxes">
+          <img alt="Half" src="../../images/half-check-mark.png">
+          <p>Partially Compatible</p>
+        </div>
+        <div class="legendBoxes">
+          <img alt="None" src="../../images/failing.png">
+          <p>Incompatible</p>
+        </div>
+      </div>
+    </div>
+    <div class="loader"></div>
+  </div>
 </div>
 <p style="margin-top: 1rem">
   Interested in how the SMI Conformance program works or details of the specific
   tests that are run?
 </p>
 <p style="font-size: 1.25rem">
-  <a href="https://layer5.io/projects/service-mesh-interface-conformance"
-    >Learn more about Service Mesh Interface Conformance.</a
-  >
+  <a href="https://layer5.io/projects/service-mesh-interface-conformance">Learn more about Service Mesh Interface
+    Conformance.</a>
 </p>

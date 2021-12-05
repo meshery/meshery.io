@@ -7,15 +7,23 @@
 			<li class="nav-item">
 				{% assign class = "nav-text" %}
 				{% if link.highlight %}
-				{% assign class = class | append: " highlight" %}
+					{% assign class = class | append: " highlight" %}
 				{% endif %}
-
 				{% if link.link == page.url %}
-				{% assign class = class | append: " active" %}
-				{% endif %}
-				<a {% if link.link %}href="{% include relative-src.html src=link.link %}" {% endif %}
-					{% if link.submenu %}style="width:130px" {% endif %} class="{{class}}"
-					{% if link.new_window %}target="_blank" {% endif %}>{{ link.name }}</a>
+					{% assign class = class | append: " active" %}
+				{% elsif link.submenu %}
+					{% for sublink in link.subitems %}
+							{% if page.url == sublink.link %}
+								{%  assign class = class | append: " active" %}
+								{% break %}
+							{% endif %}
+					{% endfor %}
+				{% endif %}			
+				<a {% if link.link %}href="{% include relative-src.html src=link.link %}" {% endif %} {% if link.submenu %}style="width:130px" {% endif %} class="{{class}}"
+					{% if link.new_window %} target="_blank" {% endif %}>
+					{{ link.name }}
+				</a>
+
 				{% if link.subitems[0] %}
 				<ul>
 					{% for sublink in link.subitems %}
