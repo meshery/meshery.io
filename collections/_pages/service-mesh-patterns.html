@@ -7,6 +7,8 @@ redirect_from: service-mesh-patterns
 ---
 
 <style>
+
+/* CARD-STYLES */
 .card {
   position: relative;
   width: 220px;
@@ -23,41 +25,44 @@ redirect_from: service-mesh-patterns
   transition: 0.5s;
   cursor: pointer;
 }
-
-.modal-card {
+.pattern-image-overlay{
+  opacity: 0.5;
+  width: 60%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: absolute;
+  margin-left: 5%;
+  border-radius: 15px;
+}
+.card-overlay {
   position: relative;
-  margin: 10px auto;
-  width: 160px;
-  height: 195px;
+  width: 220px;
+  height: 250px;
   padding: 20px;
   border-radius: 15px;
   border: 0;
-  transition: 0.4s ease-out;
+  background: #204a3d;
+  opacity: 0.95;
   box-shadow: 2px 2px 6px 0px  #00D3A9;
+  margin-bottom: 20px;
 }
-/* .overlay {
-  position: fixed;
-  display: none;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.5);
-  z-index: 2;
+.card:hover {
+  background: rgba(0, 0, 0, 0.3);
+  transition: 0.5s;
   cursor: pointer;
 }
 
 .text{
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 50%;
-  font-size: 50px;
   color: white;
+  font-size: 19px;
   transform: translate(-50%,-50%);
   -ms-transform: translate(-50%,-50%);
-} */
+  z-index: 100;
+  white-space: nowrap;
+} 
 
  h3{
    font-weight: 300;
@@ -82,23 +87,6 @@ redirect_from: service-mesh-patterns
   vertical-align: middle;
   padding-right: 2px;
  
-}
-.overlay {
-    height: 160px;
-    width: 100%;
-    text-align: center;
-    padding-top: 100px;
-    color: white;
-    overflow: hidden;
-    background: #C04848;  /* fallback for old browsers */
-    background: linear-gradient(rgb(72,0,72,0.8), rgb(192,72,72,0.8));
-    background: linear-gradient(rgb(72,0,72,0.8), rgb(192,72,72,0.8));
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.service-mesh-image {
-  height: 50px;
-  width: 50px;
 }
 .tooltip:hover .tooltiptext {
     visibility: visible;
@@ -137,7 +125,7 @@ redirect_from: service-mesh-patterns
   display: table;
   clear: both;
 }
-/* pattern card styles */
+/* PATTERN-STYLES */
 .pattern-type {
   cursor: inherit;
     display: flex-start;
@@ -167,56 +155,12 @@ redirect_from: service-mesh-patterns
     text-decoration: none;
     justify-content: center;
  }
+
  .chip-modal{
   float: left;
  }
- .modal-chip{
-  display: inline-flex;
-  flex-direction: row-reverse;
-  float: right;
-    background-color: #b6d7a8ff;
-    border: none;
-    cursor: default;
-    height: 20px;
-    outline: none;
-    padding: 1px;
-    font-size: 12px;
-    font-family:"Open Sans", sans-serif;
-    white-space: nowrap;
-    align-items: center;
-    border-radius: 16px;
-    vertical-align: middle;
-    text-decoration: none;
-    justify-content: center;
- }
- .modal-smp{
-  width: 20px;
-  bottom: 0;
-  right: 0;
-  vertical-align: middle;
-  padding-right: 2px;
- 
- }
- .modal-pattern-name {
-  color:#333;
-   font-weight: 600;
-   font-style: bold;
-   white-space: nowrap;
-   text-align: center;
-  padding-top: 7px;
-  
 
- }
- .modal-pattern-image{
-  width: 60%;
-  -o-object-fit: contain;
-     object-fit: contain;
-  position: absolute;
-  margin-left: 5%;
-  border-radius: 15px;
-  padding-bottom: 2px;
- }
- .pattern-name {
+.pattern-name {
    color:#333;
    font-weight: 1400;
    font-style: bold;
@@ -233,13 +177,7 @@ redirect_from: service-mesh-patterns
   margin-right: 14px;
  }
 
- .modal-pattern-id {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  padding-top: 10px;
-  margin-right: 14px;
- }
+
 
  .pattern-image {
   width: 60%;
@@ -250,6 +188,8 @@ redirect_from: service-mesh-patterns
   border-radius: 15px;
  }
 
+
+/* CHECKBOX-STYLES */
 .filter-wrap {
   float: left;
   flex-grow: 1;
@@ -271,31 +211,12 @@ label {
         position: relative;
         top: -1px;
       }
+      input[type="checkbox"] {
+      margin: 0;
+      }
 
-  /* .form-check {
-          width: 20px;
-          height: 20px;
-          border-radius: 15px;
-          margin: 2px 10px !important;
-        /* } */
-        /* label {
-            display: flex-end;
-            align-items: center;
-        }
-        input[type=checkbox]{
-            flex: none;
-        } */ 
-@media screen and (max-width: 700px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
-  }
-}
-.download-link{
-    font-size: 14px;
-    text-align: left;
-}
+
+/* MODAL-STYLES */
 .modal-window {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.75);
@@ -316,7 +237,7 @@ label {
 }
 .align {
   display: flex;
-            align-items: center;
+  align-items: center;
 }
 .modal-window > div {
   position: absolute;
@@ -334,6 +255,10 @@ label {
   font-size: 150%;
   margin: 0 0 15px;
 }
+.service-mesh-image {
+  height: 50px;
+  width: 50px;
+}
 .modal-close {
   color: #aaa;
   line-height: 50px;
@@ -345,6 +270,62 @@ label {
   width: 70px;
   text-decoration: none;
 }
+.modal-pattern-name {
+  color:#333;
+   font-weight: 600;
+   font-style: bold;
+   white-space: nowrap;
+   text-align: center;
+  padding-top: 7px;
+  }
+.modal-chip{
+  display: inline-flex;
+  flex-direction: row-reverse;
+  float: right;
+  background-color: #b6d7a8ff;
+    border: none;
+    cursor: default;
+    height: 20px;
+    outline: none;
+    padding: 1px;
+    font-size: 12px;
+    font-family:"Open Sans", sans-serif;
+    white-space: nowrap;
+    align-items: center;
+    border-radius: 16px;
+    vertical-align: middle;
+    text-decoration: none;
+    justify-content: center;
+ }
+ .modal-card {
+  position: relative;
+  margin: 10px auto;
+  width: 160px;
+  height: 195px;
+  padding: 20px;
+  border-radius: 15px;
+  border: 0;
+  transition: 0.4s ease-out;
+  box-shadow: 2px 2px 6px 0px  #00D3A9;
+}
+
+ .modal-smp{
+  width: 20px;
+  bottom: 0;
+  right: 0;
+  vertical-align: middle;
+  padding-right: 2px;
+ 
+ }
+.modal-pattern-image{
+  width: 60%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: absolute;
+  margin-left: 5%;
+  border-radius: 15px;
+  padding-bottom: 2px;
+ }
 .modal-small-header {
   font-size: 15px;
   display: block;
@@ -354,14 +335,18 @@ label {
   display: block;
   padding: 10px;
 }
+.modal-pattern-id {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-top: 10px;
+  margin-right: 14px;
+ }
 .modal-window div div:not(:last-of-type) {
   margin-bottom: 15px;
 }
 .modal-container {
-        /* display: flex;
-        align-items: center;
-        justify-content: center; */
-        padding: 20px 40px 40px;
+  padding: 20px 40px 40px;
   max-width: 600px;
       }
   .modal-text {
@@ -392,7 +377,15 @@ label {
 
 }
 
-	
+
+@media screen and (max-width: 700px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
 @media screen and (max-width: 700px){
   .modal-window{
     width: 100%;
@@ -408,7 +401,6 @@ display: none;
 }
 
 </style>
-<script src="{{ site.baseurl }}/assets/js/filter.js"></script>
 <div class="sub-heading">
   <h3>What are Service Mesh Patterns?</h3>
   <p>Service Mesh Patterns help you confidently wield a service mesh by extracting best practices of service mesh use and harnessing the core value service meshes offer, irrespective of which service mesh you’re using.</p>
@@ -416,6 +408,8 @@ display: none;
   <p>You may bring your own patterns or find them available through your chosen provider. Each service mesh pattern carries a unique identifier for reference. The patterns in this repository serve in an educational capacity, facilitating learning, and also serve in an operational capacity, facilitating implementation and validation of your service mesh deployment’s adherence to a pattern.</p>
 </div>
 <h3>Some sample patterns:</h3>
+
+<!-- FILTER-START -->
 
 <div class="filter-wrap">
   <p><strong>Categories:</strong></p>
@@ -440,30 +434,37 @@ display: none;
   </form>
 </div>
 
+<!-- FILTER-END -->
 
 
 
-
-
+<!-- CARD-START -->
 
     {% for pattern in site.data.patterns %}
     <div class="row">
       <div class="column">
-          <div class="link open-modal-btn">
-            {% if pattern.ComingSoon == "ye" %}
-            <div class="link open-modal-btn">
-            <div class= "card">
-           
-            <div class="overlay">
-            
-              <h4>Coming Soon</h4>
-            
-            </div>
-          </div>
-        </div>
-           {% else %}
         
-           <div class= "card" data-id="{{pattern.DataId}}" data-category="{{pattern.DataCategory}}" >
+            {% if pattern.Status == "ComingSoon" %}
+          
+            <div class= "card-overlay">
+           
+            
+              <h4 class="text">Coming Soon...</h4>
+            <h4 class="pattern-name">{{pattern.name}}</h4>
+            <img class= "pattern-image-overlay" src="{{pattern.image}}"/>
+            <div>
+         
+         <h6 class="pattern-id">     <img class="smp"
+          src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
+          loading="lazy" />{{pattern.patternId}}</h6>
+ 
+        </div>
+            </div>
+       
+           {% else %}
+           <div class="link open-modal-btn">
+           <div class= "card" data-id="{{pattern.DataId}}" data-category="{{pattern.DataCategory}}">
+             
               <div class="chip">
                   <small class="pattern-type"> {{pattern.patternType}}</small>
               </div>
@@ -474,6 +475,7 @@ display: none;
            <h6 class="pattern-id">     <img class="smp"
             src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
             loading="lazy" />{{pattern.patternId}}</h6>
+   
           </div>
             </div>
           </div>
@@ -481,8 +483,10 @@ display: none;
           {% endif %}
   </div>
 
+<!-- CARD-END -->
 
 
+<!-- MODAL-START -->
   <div id="open-modal" class="modal-window">
     <div>
       <button class = "modal-close close">&times;</button>
@@ -492,7 +496,7 @@ display: none;
     <p><div class="modal-image" ><img src="{{pattern.image}}" /> <h4>Related Patterns</h4>
     
     
-    
+    <!-- MINICARD-START -->
     {% if pattern.patternType == "Deployment" %}
     <div class= "modal-card">
       <div class="modal-chip">
@@ -522,9 +526,7 @@ display: none;
       </div>
     </div>
     {% endif %}
-
-
-
+    <!-- MINICARD-END -->
     </div><h3 style="text-align: center;">{{pattern.name}}</h3>
     <h4>What this pattern does:</h4><h5>{{pattern.patternInfo}}</h5>
     <h4>Caveats and Consideration: </h4><h5>{{pattern.patternCaveats}}</h5></p>
@@ -539,5 +541,8 @@ display: none;
     <button class="import">Import Url</button></div>
     </div></div>
     {% endfor %} 
+    <!-- MODAL-END -->
 </div>
+<script src="{{ site.baseurl }}/assets/js/filter.js"></script>
 <script src="{{  site.baseurl }}/assets/js/modal.js"></script>
+
