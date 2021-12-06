@@ -67,6 +67,8 @@ small {
 }
 .event{
   padding-top: 0;
+  padding-bottom: 0;
+
 }
 .close {
   position: absolute;
@@ -93,7 +95,48 @@ small {
 .talks-description{
   text-align: justify; 
   text-justify: inter-word;
+  flex-basis: 100%;
 }
+
+
+/* box-shadow:0 2px 16px rgba(0,0,0,0.2); */
+  
+  table{
+    display: table;
+    width: 100%;
+    height: auto;
+    border-collapse: collapse;
+    margin: 2rem auto;
+    border: none;
+    box-shadow:0 2px 16px rgba(0,0,0,0.4);
+  }
+  th {
+    color: white;
+  }
+  th, tr {
+    height: 3.75rem;
+    vertical-align: middle;
+  }
+  tr:nth-child(odd) {
+    background-color: #F0F0F0;
+  }
+  th {
+    background-color: #3C494F;
+    /* background-color: #01B29F; */
+  }
+  th, td {
+    /* border: 1px solid #F0F0F0; */
+    text-align: center;
+    padding: 0 0.625rem; 
+    border: none;
+  }
+  .table-cell-style{
+    padding: 0.4rem 0;
+  }
+  span {
+    display: block;
+    margin: 0.2rem 0;
+  }
 
 @media screen and (max-width: 700px){
   .modal-window{
@@ -106,6 +149,33 @@ small {
     width: auto;
     margin: 0;
   }
+}
+
+th.topic{
+  width: 60%;
+}
+th{
+  font-size: 1rem;
+}
+td a{
+  text-decoration: none;
+  color: #00d3a9  ;
+}
+td a:hover{
+  text-decoration: none;
+  color: #3C484E;
+}
+td{
+  font-size: 1.1rem;
+}
+
+.tutorials-heading{
+  margin-top: 8rem;
+  text-align: center;
+}
+
+.tutorials-heading p{
+  margin: 0;
 }
 </style>
 
@@ -138,6 +208,78 @@ small {
       <img src="{{ site.baseurl }}/images/events/cncf-webinar-meshery.png"
         alt="Service Mesh configuration Comparison" loading="lazy"/>
     </div>
+    
   </div>
+  
 </section>
+<table>
+  <thead>
+      <tr>
+          <th class="topic">Topic</th>
+          <th>Resources</th>
+          <th>Presenter</th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for talk in site.data.talks %}
+      {% if talk.type != 'tutorial' %}
+        <tr >
+            <td>{{talk.title}}</td>
+            <td class = "table-cell-style">
+              {% if talk.video %}
+                <span><a href={{talk.video}} target="_blank">Recording</a></span>
+              {% endif %}
+              {% if talk.presentation %}
+                <span><a href={{talk.presentation}} target="_blank">Slides</a></span>
+              {% endif %}
+            </td>
+            <td>
+              <span><a href={{talk.presenter1_profile}} target="_blank">{{talk.presenter1}}</a></span>
+              {% if talk.presenter2 %}
+                <span><a href={{talk.presenter2_profile}} target="_blank">{{talk.presenter2}}</a></span>
+              {% endif %}
+            </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+      
+  </tbody>
+</table>
+<div class = "tutorials-heading">
+  <h1 class>Tutorials</h1>
+  <p>Checkout some of the resources to start contributing to Meshery</p>
+</div>
+  <table>
+    <thead>
+        <tr>
+            <th class="topic">Topic</th>
+            <th>Resources</th>
+            <th>Presenter</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for talk in site.data.talks %}
+        {% if talk.type == 'tutorial' %}
+          <tr >
+              <td>{{talk.title}}</td>
+              <td class = "table-cell-style">
+                {% if talk.video %}
+                  <span><a href={{talk.video}} target="_blank">Recording</a></span>
+                {% endif %}
+                {% if talk.presentation %}
+                  <span><a href={{talk.presentation}} target="_blank">Slides</a></span>
+                {% endif %}
+              </td>
+              <td>
+                <span><a href={{talk.presenter1_profile}} target="_blank">{{talk.presenter1}}</a></span>
+                {% if talk.presenter2 %}
+                  <span><a href={{talk.presenter2_profile}} target="_blank">{{talk.presenter2}}</a></span>
+                {% endif %}
+              </td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+        
+    </tbody>
+  </table>
 <script src="{{  site.baseurl }}/assets/js/talks-presentations.js"></script>
