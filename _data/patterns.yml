@@ -1,11 +1,11 @@
-- name: Basic Istio install
+- name: Basic Istio Install
   image: /images/patterns/service-mesh.svg
   patternId: MESHERY001
   patternType: Deployment
   patternInfo: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pulvinar placerat tellus sed posuere. Nulla venenatis fringilla faucibus. Etiam et commodo dolor, sit amet fringilla leo. Nullam tristique tristique condimentum. Maecenas sollicitudin scelerisque egestas. Suspendisse aliquet elit quis dolor gravida, et auctor ligula ornare. Nullam et sodales ante, quis varius elit. Nullam cursus, orci eleifend tristique semper, neque nisl tincidunt purus, sed ultricies felis arcu vel metus. 
   patternCaveats: llam tristique tristique condimentum. Maecenas sollicitudin scelerisque egestas. Suspendisse aliquet elit quis dolor gravida, et auctor ligula ornare. Nullam et sodales ante, quis varius elit. Nullam cursus, orci eleifend tristique semper, neque nisl tincidunt purus, sed ultricies felis arcu vel metus. 
 
-- name: Circuit Breaking
+- name: Circuit Breaker
   image: /images/patterns/circuit-breaker.svg
   patternId: MESHERY002
   patternType: Traffic Management 
@@ -13,7 +13,7 @@
   patternCaveats: llam tristique tristique condimentum. Maecenas sollicitudin scelerisque egestas. Suspendisse aliquet elit quis dolor gravida, et auctor ligula ornare. Nullam et sodales ante, quis varius elit. Nullam cursus, orci eleifend tristique semper, neque nisl tincidunt purus, sed ultricies felis arcu vel metus. 
 
 
-- name: Local and Global Rate Limiting
+- name: Local Rate Limiter
   image: /images/patterns/rate-limit.svg
   patternId: MESHERY003
   patternType: Traffic Management
@@ -23,10 +23,10 @@
 - name: Duration-based Canary
   image: /images/patterns/service-mesh.svg
   patternId: MESHERY004
-  patternType: Deployment 
-  patternInfo: 
-  patternCaveats: 
-  ComingSoon: yes
+  patternType: Traffic Management 
+  patternInfo: <p>Gradual and measured introduction of a new version of an application is commonly called a Canary deployment.  With a canary deployment, you deploy a new version of your application to the production environment; however, it initially receives no user requests. The previous version continues to handle 100% of the requests.</p><p>Traffic is gradually distributed to the new version of the service while monitoring it for errors or anomalies. Incremental increases to the new service’s traffic continue until the new service handles 100% of all traffic, and you remove the previous service version. If you detect unsatisfactory levels of errors at any point, traffic is reverted to the old version. Because the service meshes routing later handles traffic direction, it is incredibly quick to change the traffic flow. Also, there is a dramatic reduction to risk as you hopefully catch any errors before exposure to the problem affects all users.</p>
+  patternCaveats: "<em>Parallel Change</em> <p>When introducing a new version of an application into production, you are often required to: <li>Change or modify the application’s behavior.</li><li>Change the interface.</li><li>Change a model in an external data store.</li></p>"
+  ComingSoon: no
 
 - name: Debugging the Data Plane
   image: /images/patterns/service-mesh.svg
