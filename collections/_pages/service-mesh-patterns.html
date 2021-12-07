@@ -41,8 +41,7 @@ redirect_from: service-mesh-patterns
   padding: 20px;
   border-radius: 15px;
   border: 0;
-  background: #204a3d;
-  opacity: 0.95;
+  background: rgba(0,0,0,0.7) ;
   box-shadow: 2px 2px 6px 0px  #00D3A9;
   margin-bottom: 20px;
 }
@@ -63,6 +62,15 @@ redirect_from: service-mesh-patterns
   z-index: 100;
   white-space: nowrap;
 }  
+.pattern-id-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-top: 10px;
+  margin-right: 14px;
+  color: white;
+  opacity: 0.7;
+}
 
  h3{
    font-weight: 300;
@@ -79,7 +87,14 @@ redirect_from: service-mesh-patterns
   float: left;
   padding: 0 10px;
 }
-
+.smp-overlay{
+  width: 25px;
+  bottom: 0;
+  right: 0;
+  opacity: 0.7;
+  vertical-align: middle;
+  padding-right: 2px;
+}
 .smp {
   width: 25px;
   bottom: 0;
@@ -88,23 +103,29 @@ redirect_from: service-mesh-patterns
   padding-right: 2px;
  
 }
-.tooltip:hover .tooltiptext {
+.tooltip-modal:hover .tooltiptext-modal {
     visibility: visible;
   }
 
-  .tooltip .tooltiptext {
+  .tooltip-modal .tooltiptext-modal {
     visibility: hidden;
     width: 100px;
+    display: inline-block;
+    color: white;
     background-color: #1a2421;
     text-align: center;
     padding: 7px;
     font-size: 1em;
-    border-radius: 10px;
+    border-radius: 7px;
     position: absolute;
     z-index: 1;
-    top: 5rem;
-    left: 50%;
-    margin-left: -45px;
+    left:40%;
+    font-size: 15px; 
+    width: 140px;
+    height: 40px;
+    padding: 0;
+    line-height: 40px;
+    top: 3rem;
   }
 .import{
   background-color: #00b39fff;
@@ -115,8 +136,8 @@ redirect_from: service-mesh-patterns
 
 }
 .vertical-center {
-  -ms-transform: translateY(-50%);
-  transform: translateY(-20%) translateX(20%);
+  -ms-transform: translateY(-60%);
+  transform: translateY(20%) translateX(15%);
 }
 /* Clear floats after the columns */
 .row:after {
@@ -228,22 +249,30 @@ label {
 }
 .modal-image {
   width: 250px;
-    margin: 30px 30px 30px -90px;
+    margin: 30px 30px 30px 0px;
     float: left;
 }
 .align {
   display: flex;
   align-items: center;
 }
+::-webkit-scrollbar {
+      display: "none"
+    }
 .modal-window > div {
   position: absolute;
+  height: 75%;
+  overflow: auto;
+  overflow-x: hidden;
+  width: 60%;
   top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 1.5em 0.5em 1.5em 2em;
+  padding: 1.5em 1.5em 1.5em 0.5em;
   background: #fff;
   border-radius: 1rem;
 }
+::-webkit-scrollbar-corner {background-color: transparent;}
 .modal-window header {
   font-weight: bold;
 }
@@ -373,6 +402,37 @@ label {
 
 }
 
+.copy-code-button {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  grid-column-gap: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px 8px;
+}
+  .copy-code-button::before {
+    content: "Copy";
+  }
+
+  .copy-code-button::after {
+    content: "📋";
+    display: block;
+  }
+
+  
+ 
+    .copied::before {
+      content: "Copied!";
+    }
+
+    .copied::after {
+      content: "✔️";
+    }
+  
+
+
 
 @media screen and (max-width: 700px) {
   .column {
@@ -393,10 +453,23 @@ label {
 .filter-wrap{
 display: none;
 }
-  
+@media screen and (max-width: 544px){
+.modal-image{
+  width:200px;
+}
+.related-patterns {
+  display: none;
+}
+.modal-card{
+  display: none;
+}
+}
+
 }
 
 </style>
+
+
 <div class="sub-heading">
   <h3>What are Service Mesh Patterns?</h3>
   <p>Service Mesh Patterns help you confidently wield a service mesh by extracting best practices of service mesh use and harnessing the core value service meshes offer, irrespective of which service mesh you’re using.</p>
@@ -410,21 +483,21 @@ display: none;
 <div class="filter-wrap">
   <p><strong>Categories:</strong></p>
   <form>  
-    <label><input type="checkbox" name="s-type" value="Deployment" id="Deployment" class="form-check"/> Deployment </label>
-    <label><input type="checkbox" name="s-type" value="TrafficManagement" id="TrafficManagement" /> Traffic Management </label>
-    <label><input type="checkbox" name="s-type" value="Security" id="Security" /> Security </label> 
+    <label><input type="checkbox" name="sType" rel="Deployment" id="Deployment"/> Deployment </label>
+    <label><input type="checkbox" name="sType" rel="TrafficManagement" id="TrafficManagement" /> Traffic Management </label>
+    <label><input type="checkbox" name="sType" rel="Security" id="Security" /> Security </label> 
   </form>
   <hr>
   <p><strong>Compatibilty:</strong></p>
   <form>
-    <label><input type="checkbox" name="s-category" value="Istio" id="Istio" /> Istio </label>
-    <label><input type="checkbox" name="s-category" value="Linkerd" id="Linkerd" /> Linkerd </label>
+    <label><input type="checkbox" name="sCategory" rel="Istio" id="Istio" /> Istio </label>
+    <label><input type="checkbox" name="sCategory" rel="Linkerd" id="Linkerd" /> Linkerd </label>
   </form>
   <hr>
   <p><strong>Technology:</strong></p>
   <form>
-    <label><input type="checkbox" name="s-technology" value="WebAssembly" id="WebAssembly" /> WebAssembly </label>
-    <label><input type="checkbox" name="s-technology" value="JWT" id="JWT"/> JWT </label>
+    <label><input type="checkbox" name="sTechnology" rel="WebAssembly" id="WebAssembly" /> WebAssembly </label>
+    <label><input type="checkbox" name="sTechnology" rel="JWT" id="JWT"/> JWT </label>
   </form>
 </div>
 
@@ -448,7 +521,7 @@ display: none;
             <img class= "pattern-image-overlay" src="{{pattern.image}}"/>
             <div>
          
-         <h6 class="pattern-id">     <img class="smp"
+         <h6 class="pattern-id-overlay">     <img class="smp-overlay"
           src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
           loading="lazy" />{{pattern.patternId}}</h6>
  
@@ -456,8 +529,9 @@ display: none;
             </div>
        
            {% else %}
+           <div class="mesh Deployment Istio">
            <div class="link open-modal-btn">
-           <div class= "card" data-id="{{pattern.DataId}}" data-category="{{pattern.DataCategory}}">
+           <div class= "card" id="{{pattern.DataCategory}}">
              
               <div class="chip">
                   <small class="pattern-type"> {{pattern.patternType}}</small>
@@ -473,7 +547,7 @@ display: none;
           </div>
             </div>
           </div>
-       
+        </div>
           {% endif %}
   </div>
 
@@ -487,7 +561,7 @@ display: none;
       <div class="chip chip-modal">
         <h6 class="pattern-type"> {{pattern.patternType}}</h6>
     </div>
-    <p><div class="modal-image" ><img src="{{pattern.image}}" /> <h4>Related Patterns</h4>
+    <p><div class="modal-image" ><img src="{{pattern.image}}" /> <h4 class="related-patterns">Related Patterns</h4>
     
     
     <!-- MINICARD-START -->
@@ -531,12 +605,55 @@ display: none;
     {% elsif pattern.Compatibility == "Linkerd" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/images/linkerd.svg" /><br />
     {% endif %}
-    <div class="vertical-center">
-    <button class="import">Import Url</button></div>
+  
+    <div id="copy-url">
+    
+    <div class="vertical-center" id="{{pattern.name}}">
+      <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="{{pattern.patternURL}}"
+        onmouseout="resetCopyText(this)">
+       <button class="import">Import URL</button>
+        <span class="tooltiptext-modal">Copy to clipboard</span>
+      
+      </a></div></div>
     </div></div>
     {% endfor %} 
     <!-- MODAL-END -->
 </div>
-<script src="{{ site.baseurl }}/assets/js/filter.js"></script>
-<script src="{{  site.baseurl }}/assets/js/modal.js"></script>
+
+
+
+<!-- MODAL-JS -->
+
+<script>
+    var modal = document.querySelectorAll('.modal-window');
+    var btnOpen = document.querySelectorAll('.link');
+    var btnClose = document.querySelectorAll('.close');
+    var cont = document.querySelectorAll('.pattern')
+
+
+    console.log(cont);
+    for(i=0;i<cont.length;i++){
+        console.log(cont[i]);
+        if(i%2!=0){
+            cont[i].style.flexDirection = "row-reverse";
+        }
+    }
+    console.log(modal);
+    for(let i in modal){
+    btnClose[i].addEventListener('click',function(){
+        modal[i].style.visiblity = "hidden";
+        modal[i].style.opacity = "0";
+        modal[i].style.pointerEvents= "none";
+        console.log('clicked btn');
+    });
+    btnOpen[i].addEventListener('click',function(){
+        modal[i].style.visibility = "visible";
+        modal[i].style.opacity = "1";
+        modal[i].style.pointerEvents="auto";
+        console.log('click btn open');
+        console.log(modal);
+    });
+    }
+
+</script>
 
