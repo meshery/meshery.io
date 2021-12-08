@@ -1,36 +1,35 @@
-var $filterCheckboxes = $('input[type="checkbox"]');
-var filterFunc = function() {
-  
-  var selectedFilters = {};
+var allCheckboxes = document.querySelectorAll('input[type=checkbox]');
+var allFilters = Array.from(document.querySelectorAll('.mesh'));
+var checked = {};
 
-  $filterCheckboxes.filter(':checked').each(function() {
+getChecked('sType');
+getChecked('sCategory');
+getChecked('sTechnology');
 
-    if (!selectedFilters.hasOwnProperty(this.name)) {
-      selectedFilters[this.name] = [];
-    }
+Array.prototype.forEach.call(allCheckboxes, function (el) {
+  el.addEventListener('change', toggleCheckbox);
+});
 
-    selectedFilters[this.name].push(this.value);
-  });
-  var $filteredResults = $('.filter');
-  $.each(selectedFilters, function(name, filterValues) {
-    $filteredResults = $filteredResults.filter(function() {
-
-      var matched = false,
-        currentFilterValues = $(this).data('category').split(' ');
-      $.each(currentFilterValues, function(_, currentFilterValue) {
-
-
-        if ($.inArray(currentFilterValue, filterValues) != -1) {
-          matched = true;
-          return false;
-        }
-      });
-      return matched;
-
-    });
-  });
-
-  $('.filter').hide().filter($filteredResults).show();
+function toggleCheckbox(e) {
+  getChecked(e.target.name);
+  setVisibility();
 }
 
-$filterCheckboxes.on('change', filterFunc);  
+function getChecked(name) {
+  checked[name] = Array.from(document.querySelectorAll('input[name=' + name + ']:checked')).map(function (el) {
+    return el.value;
+  });
+}
+
+function setVisibility() {
+  allFilters.map(function (el) {
+    var sType = checked.sType.length ? _.intersection(Array.from(el.classList), checked.sType).length : true;
+    var sCategory = checked.sCategory.length ? _.intersection(Array.from(el.classList), checked.sCategory).length : true;
+    var sTechnology = checked.sTechnology.length ? _.intersection(Array.from(el.classList), checked.sTechnology).length : true;
+    if (sType && sCategory && sTechnology) {
+      el.style.display = 'block';
+    } else {
+      el.style.display = 'none';
+    }
+  });
+}

@@ -211,7 +211,7 @@ redirect_from: service-mesh-catalog
   flex-grow: 1;
   width: 22%;
   padding-right: 1rem;
-  height: 800px; /* height needs to be increased with regarding to the total no. of patterns */
+  height: 63rem; /* height needs to be increased with regarding to the total no. of patterns */
 }
 label {
         display: block;
@@ -249,8 +249,9 @@ label {
 }
 .modal-image {
   width: 250px;
-    margin: 30px 30px 30px 0px;
+    margin: 30px 30px 2rem 0px;
     float: left;
+    padding-bottom: 19rem;
 }
 .align {
   display: flex;
@@ -259,6 +260,7 @@ label {
 ::-webkit-scrollbar {
       display: "none"
     }
+
 .modal-window > div {
   position: absolute;
   height: 75%;
@@ -333,7 +335,10 @@ label {
   transition: 0.4s ease-out;
   box-shadow: 2px 2px 6px 0px  #00D3A9;
 }
-
+.modal-image-container {
+  width: 80%;
+  flex-grow: 1;
+}
  .modal-smp{
   width: 20px;
   bottom: 0;
@@ -424,10 +429,12 @@ label {
 .filter-wrap{
 display: none;
 }
-@media screen and (max-width: 544px){
+@media screen and (max-width: 644px){
 .modal-image{
-  width:200px;
+  width:230px;
+  padding-bottom: 2rem;
 }
+
 .related-patterns {
   display: none;
 }
@@ -440,7 +447,7 @@ display: none;
 
 </style>
 
-
+<script src="{{ site.baseurl }}/assets/js/filter.js"></script>
 <div class="sub-heading">
   <div><h3>What are Service Mesh Patterns?</h3>
   <p>Service Mesh Patterns help you confidently wield a service mesh by extracting best practices of service mesh use and harnessing the core value service meshes offer, irrespective of which service mesh you’re using.</p>
@@ -533,7 +540,7 @@ display: none;
       <div class="chip chip-modal">
         <h6 class="pattern-type"> {{pattern.patternType}}</h6>
     </div>
-    <p><div class="modal-image" ><img src="{{pattern.image}}" /> <h4 class="related-patterns">Related Patterns</h4>
+    <p><div class="modal-image-container"><div class="modal-image" ><img src="{{pattern.image}}" /> <h4 class="related-patterns">Related Patterns</h4>
     
     
     <!-- MINICARD-START -->
@@ -565,18 +572,24 @@ display: none;
       loading="lazy" />{{pattern.patternId}}</h6>
       </div>
     </div>
+  
     {% endif %}
+  </div>
+  </div>
     <!-- MINICARD-END -->
-    </div><h3 style="text-align: center;">{{pattern.name}}</h3>
+   <h3 style="text-align: center;">{{pattern.name}}</h3>
     <h4>What this pattern does:</h4><h5>{{pattern.patternInfo}}</h5>
     <h4>Caveats and Consideration: </h4><h5>{{pattern.patternCaveats}}</h5></p>
     <h4>Compatibilty:</h4>
+
    
-    {% if pattern.Compatibility == "Istio" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/images/istio.svg" /><br />
-    {% elsif pattern.Compatibility == "Linkerd" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/images/linkerd.svg" /><br />
+    {% if pattern.Istio == "support" %}
+    <img class="service-mesh-image" src="{{site.baseurl}}/images/istio.svg" />
     {% endif %}
+    {% if pattern.Linkerd == "support" %}
+    <img class="service-mesh-image" src="{{site.baseurl}}/images/linkerd.svg" />
+    {% endif %}
+    
   
     <div id="copy-url">
     
