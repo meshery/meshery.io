@@ -1,0 +1,169 @@
+<div class="sub-heading">
+    <div><h3>What are Service Mesh Patterns?</h3>
+    <p>Service Mesh Patterns help you confidently wield a service mesh by extracting best practices of service mesh use and harnessing the core value service meshes offer, irrespective of which service mesh you’re using.</p>
+    </div>
+    <h3>Pattern Management</h3>
+    <p>You may bring your own patterns or find them available through your chosen provider. Each service mesh pattern carries a unique identifier for reference. The patterns in this repository serve in an educational capacity, facilitating learning, and also serve in an operational capacity, facilitating implementation and validation of your service mesh deployment’s adherence to a pattern.</p>
+  </div>
+  <h3>Some sample patterns:</h3>
+  
+  
+  <!-- TEMP-FILTER -->
+  {% include partials/pattern-filter.html %}
+  
+  
+  <!-- FILTER-START -->
+  
+  <!-- <div class="filter-wrap">
+    <p><strong>Categories:</strong></p>
+    <form>  
+      </a><label><input type="checkbox" name="sType" rel="Deployment" id="Deployment" checked/> Deployment </label>
+      <label><input type="checkbox" name="sType" rel="TrafficManagement" id="TrafficManagement" /> Traffic Management </label>
+      <label><input type="checkbox" name="sType" rel="Security" id="Security" /> Security </label> 
+    </form>
+    <hr>
+    <p><strong>Compatibilty:</strong></p>
+    <form>
+      <label><input type="checkbox" name="sCategory" rel="Istio" id="Istio" /> Istio </label>
+      <label><input type="checkbox" name="sCategory" rel="Linkerd" id="Linkerd" /> Linkerd </label>
+    </form>
+    <hr>
+    <p><strong>Technology:</strong></p>
+    <form>
+      <label><input type="checkbox" name="sTechnology" rel="WebAssembly" id="WebAssembly" /> WebAssembly </label>
+      <label><input type="checkbox" name="sTechnology" rel="JWT" id="JWT"/> JWT </label>
+    </form>
+  </div> -->
+  
+  <!-- FILTER-END -->
+  
+  
+  
+  <!-- CARD-START -->
+      <div class="catalog">
+      {% for pattern in site.data.patterns %}
+      <div class="row">
+        <div class="column">
+          
+              {% if pattern.Linkerd == "support" and pattern.Status != "ComingSoon"  %}
+            
+      
+             <div class="link open-modal-btn">
+             <div class= "card" id="{{pattern.DataCategory}}">
+               
+                <div class="chip">
+                    <small class="pattern-type"> {{pattern.patternType}}</small>
+                </div>
+                <h4 class="pattern-name">{{pattern.name}}</h4>
+                <img class= "pattern-image" src="{{pattern.image}}"/>
+                <div>
+             
+             <h6 class="pattern-id">     <img class="smp"
+              src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
+              loading="lazy" />{{pattern.patternId}}</h6>
+     
+            </div>
+              </div>
+            </div>
+            {% endif %}
+    </div>
+  
+  <!-- CARD-END -->
+  
+  
+  <!-- MODAL-START -->
+    <div id="open-modal" class="modal-window">
+      <div>
+        <button class = "modal-close close">&times;</button>
+        <div class="chip chip-modal">
+          <h6 class="pattern-type"> {{pattern.patternType}}</h6>
+      </div>
+      <p><div class="modal-image-container"><div class="modal-image" ><img src="{{pattern.image}}" /> <h4 class="related-patterns">Related Patterns</h4>
+      
+      
+      <!-- MINICARD-START -->
+      {% if pattern.patternType == "Deployment" %}
+      <div class= "modal-card">
+        <div class="modal-chip">
+            <small class="modal-pattern-type"> {{pattern.patternType}}</small>
+        </div>
+        <h5 class="modal-pattern-name">{{pattern.name}}</h5>
+        <img class= "modal-pattern-image" src="{{pattern.image}}"/>
+        <div>
+        <h6 class="modal-pattern-id">
+        <img class="modal-smp"
+        src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
+        loading="lazy" />{{pattern.patternId}}</h6>
+        </div>
+      </div>
+    
+      {% endif %}
+    </div>
+    </div>
+      <!-- MINICARD-END -->
+     <h3 style="text-align: center;">{{pattern.name}}</h3>
+      <h4>What this pattern does:</h4><h5>{{pattern.patternInfo}}</h5>
+      <h4>Caveats and Consideration: </h4><h5>{{pattern.patternCaveats}}</h5></p>
+      <h4>Compatibilty:</h4>
+  
+     
+      {% if pattern.Istio == "support" %}
+      <img class="service-mesh-image" src="{{site.baseurl}}/images/istio.svg" />
+      {% endif %}
+      {% if pattern.Linkerd == "support" %}
+      <img class="service-mesh-image" src="{{site.baseurl}}/images/linkerd.svg" />
+      {% endif %}
+    
+    
+      <div id="copy-url">
+      <div class="vertical-center" id="{{pattern.name}}">
+        <a href="/downloads/{{pattern.downloadLink}}" download><button class="import">Download</button></a>
+        <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="{{pattern.patternURL}}"
+          onmouseout="resetCopyText(this)">
+         <button class="import">Copy URL</button>
+          <span class="tooltiptext-modal">Copy to clipboard</span>
+        
+        </a></div></div>
+      </div></div>
+      {% endfor %} 
+      <!-- MODAL-END -->
+  </div>
+  </div>
+  
+  
+  <!-- MODAL-JS -->
+  
+  <script>
+      var modal = document.querySelectorAll('.modal-window');
+      var btnOpen = document.querySelectorAll('.link');
+      var btnClose = document.querySelectorAll('.close');
+      var cont = document.querySelectorAll('.pattern')
+  
+  
+      console.log(cont);
+      for(i=0;i<cont.length;i++){
+          console.log(cont[i]);
+          if(i%2!=0){
+              cont[i].style.flexDirection = "row-reverse";
+          }
+      }
+      console.log(modal);
+      for(let i in modal){
+      btnClose[i].addEventListener('click',function(){
+          modal[i].style.visiblity = "hidden";
+          modal[i].style.opacity = "0";
+          modal[i].style.pointerEvents= "none";
+          console.log('clicked btn');
+      });
+      btnOpen[i].addEventListener('click',function(){
+          modal[i].style.visibility = "visible";
+          modal[i].style.opacity = "1";
+          modal[i].style.pointerEvents="auto";
+          console.log('click btn open');
+          console.log(modal);
+      });
+      }
+  
+  </script>
+  
+  
