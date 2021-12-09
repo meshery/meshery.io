@@ -72,6 +72,7 @@
   
   
   <!-- MODAL-START -->
+  {% if pattern.Istio == "support" and pattern.Status != "ComingSoon" %}
     <div id="open-modal" class="modal-window">
       <div>
         <button class = "modal-close close">&times;</button>
@@ -96,7 +97,20 @@
         loading="lazy" />{{pattern.patternId}}</h6>
         </div>
       </div>
-    
+      {% elsif pattern.patternType == "Traffic Management" %}
+    <div class= "modal-card">
+      <div class="modal-chip">
+          <small class="modal-pattern-type"> {{pattern.patternType}}</small>
+      </div>
+      <h5 class="modal-pattern-name">{{pattern.name}}</h5>
+      <img class= "modal-pattern-image" src="{{pattern.image}}"/>
+      <div>
+      <h6 class="modal-pattern-id">
+      <img class="modal-smp"
+      src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
+      loading="lazy" />{{pattern.patternId}}</h6>
+      </div>
+    </div>
       {% endif %}
     </div>
     </div>
@@ -125,6 +139,7 @@
         
         </a></div></div>
       </div></div>
+      {% endif %}
       {% endfor %} 
       <!-- MODAL-END -->
   </div>
