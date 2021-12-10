@@ -41,15 +41,13 @@
   
   <!-- CARD-START -->
       <div class="catalog">
-      {% for pattern in site.data.patterns %}
+        {% for pattern in site.data.patterns %}
+        {% for entry in pattern.Compatibility %}
+        {% if entry.serviceMesh == "Linkerd" and pattern.Status != "ComingSoon"  %}
       <div class="row">
         <div class="column">
-          
-              {% if pattern.Linkerd == "support" and pattern.Status != "ComingSoon"  %}
-            
-      
-             <div class="link open-modal-btn">
-             <div class= "card" id="{{pattern.DataCategory}}">
+            <div class="link open-modal-btn">
+            <div class= "card">
                
                 <div class="chip">
                     <small class="pattern-type"> {{pattern.patternType}}</small>
@@ -65,17 +63,18 @@
             </div>
               </div>
             </div>
-            {% endif %}
-    </div>
+        </div>
   
   <!-- CARD-END -->
   
   
   <!-- MODAL-START -->
-  {% if pattern.Linkerd == "support" and pattern.Status != "ComingSoon"  %}
+ 
     <div id="open-modal" class="modal-window">
+       
       <div>
         <button class = "modal-close close">&times;</button>
+        
         <div class="chip chip-modal">
           <h6 class="pattern-type"> {{pattern.patternType}}</h6>
       </div>
@@ -83,7 +82,7 @@
       
       
       <!-- MINICARD-START -->
-      {% if pattern.patternType == "Traffic Management" %}
+    {% if pattern.patternType == "Traffic Management" %}
       <div class= "modal-card">
         <div class="modal-chip">
             <small class="modal-pattern-type"> {{pattern.patternType}}</small>
@@ -97,8 +96,8 @@
         loading="lazy" />{{pattern.patternId}}</h6>
         </div>
       </div>
-      {% elsif pattern.patternType == "Traffic Management" %}
-    <div class= "modal-card">
+    {% elsif pattern.patternType == "Traffic Management" %}
+        <div class= "modal-card">
       <div class="modal-chip">
           <small class="modal-pattern-type"> {{pattern.patternType}}</small>
       </div>
@@ -111,7 +110,7 @@
       loading="lazy" />{{pattern.patternId}}</h6>
       </div>
     </div>
-      {% endif %}
+    {% endif %}
     </div>
     </div>
       <!-- MINICARD-END -->
@@ -121,29 +120,23 @@
       <h4>Compatibilty:</h4>
   
      
-      {% if pattern.Istio == "support" %}
-      <img class="service-mesh-image" src="{{site.baseurl}}/images/istio.svg" />
-      {% endif %}
-      {% if pattern.Linkerd == "support" %}
-      <img class="service-mesh-image" src="{{site.baseurl}}/images/linkerd.svg" />
-      {% endif %}
-    
-    
-      <div id="copy-url">
-      <div class="vertical-center" id="{{pattern.name}}">
-        <a href="/downloads/{{pattern.downloadLink}}" download><button class="import">Download</button></a>
-        <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="{{pattern.patternURL}}"
-          onmouseout="resetCopyText(this)">
-         <button class="import">Copy URL</button>
-          <span class="tooltiptext-modal">Copy to clipboard</span>
-        
-        </a></div></div>
+      {% include partials/compatibility.html %}
+
+        <div id="copy-url">
+            <div class="vertical-center" id="{{pattern.name}}">
+                <a href="/downloads/{{pattern.downloadLink}}" download><button class="import">Download</button></a>
+                <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="{{pattern.patternURL}}"
+                onmouseout="resetCopyText(this)">
+                <button class="import">Copy URL</button>
+                    <span class="tooltiptext-modal">Copy to clipboard</span>
+                </a></div></div>
       </div></div>
 
-      {% endif %}
-      {% endfor %} 
-      <!-- MODAL-END -->
+      {% endif %}{% endfor %}{% endfor %} 
+  
+    <!-- MODAL-END -->
   </div>
+
   </div>
   
   

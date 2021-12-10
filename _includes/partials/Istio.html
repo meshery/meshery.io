@@ -41,13 +41,11 @@
   
   <!-- CARD-START -->
       <div class="catalog">
-      {% for pattern in site.data.patterns %}
+      {% for pattern in site.data.patterns %} 
+      {% for entry in pattern.Compatibility %}
       <div class="row">
-        <div class="column">
-          
-              {% if pattern.Istio == "support" and pattern.Status != "ComingSoon" %}
-            
-      
+       <div class="column">
+             {% if entry.serviceMesh == "Istio" and pattern.Status != "ComingSoon" %}
              <div class="link open-modal-btn">
              <div class= "card" id="{{pattern.DataCategory}}">
                
@@ -65,14 +63,14 @@
             </div>
               </div>
             </div>
-            {% endif %}
+          
     </div>
   
   <!-- CARD-END -->
   
   
   <!-- MODAL-START -->
-  {% if pattern.Istio == "support" and pattern.Status != "ComingSoon" %}
+  
     <div id="open-modal" class="modal-window">
       <div>
         <button class = "modal-close close">&times;</button>
@@ -114,6 +112,7 @@
       {% endif %}
     </div>
     </div>
+
       <!-- MINICARD-END -->
      <h3 style="text-align: center;">{{pattern.name}}</h3>
       <h4>What this pattern does:</h4><h5>{{pattern.patternInfo}}</h5>
@@ -121,13 +120,7 @@
       <h4>Compatibilty:</h4>
   
      
-      {% if pattern.Istio == "support" %}
-      <img class="service-mesh-image" src="{{site.baseurl}}/images/istio.svg" />
-      {% endif %}
-      {% if pattern.Linkerd == "support" %}
-      <img class="service-mesh-image" src="{{site.baseurl}}/images/linkerd.svg" />
-      {% endif %}
-    
+       {% include partials/compatibility.html %}
     
       <div id="copy-url">
       <div class="vertical-center" id="{{pattern.name}}">
@@ -139,11 +132,10 @@
         
         </a></div></div>
       </div></div>
-      {% endif %}
-      {% endfor %} 
+     {% endif %}{% endfor %} {% endfor %} 
       <!-- MODAL-END -->
   </div>
-  </div>
+ </div>
   
   
   <!-- MODAL-JS -->
