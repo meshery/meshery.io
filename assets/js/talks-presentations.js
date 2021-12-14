@@ -5,13 +5,10 @@ var recordingLink = document.querySelectorAll('.recording-link')
 var n = recordingLink.length;
 
 for(let i=0;i<n;i++){
-    console.log(modal[i]);
-
     modal[i].addEventListener('click',function(){
         modal[i].style.visiblity = "hidden";
         modal[i].style.opacity = "0";
         modal[i].style.pointerEvents= "none";
-        console.log('clicked outside');
 
     });
 
@@ -19,15 +16,12 @@ for(let i=0;i<n;i++){
         modal[i].style.visiblity = "hidden";
         modal[i].style.opacity = "0";
         modal[i].style.pointerEvents= "none";
-        console.log('clicked btn');
     });
 
     recordingLink[i].addEventListener('click',function(){
         modal[i+1].style.visibility = "visible";
         modal[i+1].style.opacity = "1";
         modal[i+1].style.pointerEvents="auto";
-        console.log('click btn open');
-        console.log(modal);
     });
 }
 
@@ -40,20 +34,16 @@ modal[n].addEventListener('click',function(){
     modal[n].style.visiblity = "hidden";
     modal[n].style.opacity = "0";
     modal[n].style.pointerEvents= "none";
-    console.log('clicked outside');
 
 });
 btnClose[n].addEventListener('click',function(){
     modal[n].style.visiblity = "hidden";
     modal[n].style.opacity = "0";
     modal[n].style.pointerEvents= "none";
-    console.log('clicked btn');
 });
 
 btnOpen.addEventListener('click',function(){
     modal[0].style.visibility = "visible";
     modal[0].style.opacity = "1";
     modal[0].style.pointerEvents="auto";
-    console.log('click btn open');
-    console.log(modal);
 });
