@@ -9,10 +9,7 @@ const toggle = player.querySelector('.toggle');
 const fullscreen = player.querySelector('.player__fullscreen');
 const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player__slider');
-
-console.log(modal);
-console.log(btnOpen);
-console.log(btnClose);
+const image =  player.querySelector('.player__fullscreen img');
 
 btnClose.addEventListener('click',function(){
     modal.style.visiblity = "hidden";
@@ -22,7 +19,6 @@ btnClose.addEventListener('click',function(){
 });
 
 btnOpen.addEventListener('click',function(){
-    console.log("click");
     modal.style.visibility = "visible";
     modal.style.opacity = "1";
     modal.style.pointerEvents = "auto";
@@ -45,11 +41,7 @@ function togglePlay() {
     */
 }
 
-function spaceBarTogglePlay(e) {
-    if (e.keyCode == 32) {
-        togglePlay();
-    }
-}
+
 
 function updateButton() {
     const icon = this.paused ? '►' : '❚❚';
@@ -64,7 +56,6 @@ function handleRangeUpdate() {
     const sliderValue = this.value;
     this.setAttribute('title', sliderValue);
     video[this.name] = sliderValue;
-    console.log(this.event);
 }
 
 function handleProgress() {
@@ -78,16 +69,29 @@ function scrub(e) {
 }
 
 function toggleFullscreen() {
-    if (!document.fullscreenElement) {
-        player.requestFullscreen();
-        fullscreen.textContent = '↙';
-    } else {
+    if (!document.webkitFullscreenElement && !document.fullscreenElement &&!document.mozFullScreen) {
+        if (player.requestFullscreen) {
+            player.requestFullscreen();
+          } else if (player.webkitRequestFullscreen) { /* Safari */
+            player.webkitRequestFullscreen();
+          } else if (player.msRequestFullscreen) { /* IE11 */
+            player.msRequestFullscreen();
+          } 
+        image.src = "images/normal-screen.png";
+    } 
+    else{
+        image.src = "images/full-screen.png"
         if (document.exitFullscreen) {
             document.exitFullscreen();
-            fullscreen.textContent = '️️️️↔️';
+        } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE11 */
+            document.msExitFullscreen();
         }
-    }
+    }  
 }
+
+
 
 // event listeners
 video.addEventListener('click', togglePlay);
@@ -99,7 +103,6 @@ fullscreen.addEventListener('click', toggleFullscreen);
 video.addEventListener('dblclick', toggleFullscreen);
 
 toggle.addEventListener('click', togglePlay);
-document.addEventListener('keypress', spaceBarTogglePlay);
 skipButtons.forEach(button => button.addEventListener('click', skip));
 ranges.forEach(range => range.addEventListener('change', handleRangeUpdate));
 ranges.forEach(range => range.addEventListener('mousemove', handleRangeUpdate));
