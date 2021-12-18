@@ -17,13 +17,15 @@ document.addEventListener('DOMContentLoaded', function(event){
             modal.style.opacity = "0";
             modal.style.pointerEvents= "none";
             // Resets the src so that the video stops playing
-            var iframeSrc = iframe.src;
-		    iframe.src = iframeSrc;
+            console.log(btnClose);
+            // var iframeSrc = iframe.src;
+		    // iframe.src = iframeSrc;
         }
         if(event.target == btnOpen){
             modal.style.visibility = "visible";
             modal.style.opacity = "1";
             modal.style.pointerEvents="auto";
+            console.log("Hello");
         }
     }
 });
