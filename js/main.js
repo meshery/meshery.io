@@ -33,7 +33,7 @@
 var btnscroll = $('#button-scroll-to-up');
 
 $(window).scroll(function() {
-  if ($(window).scrollTop() > 300) {
+  if ($(window).scrollTop() > 0) {
     btnscroll.addClass('show');
   } else {
     btnscroll.removeClass('show');
@@ -42,6 +42,6 @@ $(window).scroll(function() {
 
 btnscroll.on('click', function(e) {
   e.preventDefault();
-  $('html, body').animate({scrollTop:0}, '300');
+  $('html, body').animate({scrollTop:0}, '0');
 });
 
