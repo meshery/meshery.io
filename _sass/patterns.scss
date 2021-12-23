@@ -342,14 +342,12 @@
   
   .modal-window > div {
     position: absolute;
-    height: 75%;
     overflow: auto;
     overflow-x: hidden;
-    width: 60%;
     top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 1.5em 1.5em 1.5em 0.5em;
+    padding: 1.5em 1.5em 1.5em 1.5em;
     background: #fff;
     border-radius: 1rem;
   }
@@ -367,7 +365,7 @@
   }
   .modal-close {
     color: #aaa;
-    line-height: 50px;
+    line-height: 40px;
     font-size: 80%;
     position: absolute;
     right: 0;
@@ -440,9 +438,15 @@
     display: block;
   }
   .modal-content {
-    font-size: 10px;
+    // font-size: 10px;
     display: block;
-    padding: 10px;
+    padding: 30px;
+    max-width: 1200px;
+    width: 60%;
+  }
+  .modal-content h1{
+    font-size: large;
+    text-align: center;
   }
   .modal-pattern-id {
     position: absolute;
@@ -521,6 +525,150 @@
     display: none;
   }
   }
+  }
   
+  .player {
+    position: relative;
+    font-size: 0;
+    overflow: hidden;
+  }
+  
+  /* This css is only applied when fullscreen is active. */
+  .player:fullscreen {
+    max-width: none;
+    width: 100%;
+  }
+  
+  .player:-webkit-full-screen {
+    max-width: none;
+    width: 100%;
+  }
+  
+  .player__video {
+    max-width: none;
+    width: 100%;
+  }
+  
+  .player__button {
+    font-size: 1rem;
+    background:transparent;
+    line-height:1;
+    color:white;
+    text-align: center;
+    outline:0;
+    padding: 0;
+    border: 0;
+    cursor:pointer;
+    max-width:50px;
+  }
+  
+  .player__button:focus {
+    border-color: #ffc600;
+  }
+  
+  .player__slider {
+    width:10px;
+    height:50px;
+  }
+  
+  .player__fullscreen {
+    border: 0;
+    outline:0;
+    max-width: 35px;
+    background: transparent;
+    cursor: pointer;
+  }
+  
+  .player__controls {
+    display:flex;
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    transform: translateY(100%) translateY(-10px);
+    transition:all .3s;
+    flex-wrap:wrap;
+    background:rgba(0,0,0,0.1);
+  }
+  
+  .player:hover .player__controls {
+    transform: translateY(0);
+  }
+  
+  .player:hover .progress {
+    height:15px;
+  }
+  
+  .player__controls > * {
+    flex:1;
+  }
+  
+  .progress {
+    flex:10;
+    position: relative;
+    display:flex;
+    flex-basis:100%;
+    height:10px;
+    transition:height 0.3s;
+    background:rgba(0,0,0,0.5);
+    cursor:pointer;
+  }
+  
+  .progress__filled {
+    width:50%;
+    background: #01D2A9;
+    flex:0;
+    flex-basis:0%;
+  }
+  
+  /* unholy css to style input type="range" */
+  
+  input[type=range] {
+    -webkit-appearance: none;
+    background:transparent;
+    width: 100%;
+    margin: 0 5px;
+    border: none;
+  }
+  input[type=range]:focus {
+    outline: none;
+  }
+  input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8.5px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0 0 1px rgba(13, 13, 13, 0);
+    background: rgba(255,255,255,0.8);
+    border-radius: 1.3px;
+    border: 0.2px solid rgba(1, 1, 1, 0);
+  }
+  input[type=range]::-webkit-slider-thumb {
+    height: 15px;
+    width: 15px;
+    border-radius: 50px;
+    background: #01D2A9;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -3.5px;
+    box-shadow:0 0 2px rgba(0,0,0,0.2);
+  }
+  input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #3C484E;
+  }
+  input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 8.5px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0 0 1px rgba(13, 13, 13, 0);
+    background: #ffffff;
+    border-radius: 1.3px;
+    border: 0.2px solid rgba(1, 1, 1, 0);
+  }
+  input[type=range]::-moz-range-thumb {
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0), 0 0 0 rgba(13, 13, 13, 0);
+    height: 15px;
+    width: 15px;
+    border-radius: 50px;
+    background: #fff;
+    cursor: pointer;
   }
   
