@@ -5,7 +5,7 @@ title: Service Mesh Catalog
 heading: Service Mesh Catalog
 redirect_from: service-mesh-patterns
 ---
-<script src="{{ site.baseurl }}/assets/js/filter.js"></script>
+
 <div class="sub-heading">
   <div><h3>What are Service Mesh Patterns?</h3>
   <p>Service Mesh Patterns help you confidently wield a service mesh by extracting best practices of service mesh use and harnessing the core value service meshes offer, irrespective of which service mesh you’re using.</p>
@@ -24,33 +24,33 @@ redirect_from: service-mesh-patterns
 <div class="filter-wrap">
   <p><strong>Categories:</strong></p>
   <form>  
-    </a><label><input type="checkbox" name="sType" rel="Deployment" id="Deployment" onclick='window.location.assign("/service-mesh-catalog/deployment")'/> Deployment </label>
-    <label><input type="checkbox" name="sType" rel="TrafficManagement" id="TrafficManagement" /> Traffic Management </label>
-    <label><input type="checkbox" name="sType" rel="Security" id="Security" /> Security </label> 
-    <label><input type="checkbox" name="sType" rel="Workloads" id="Workloads" /> Workloads </label> 
-    <label><input type="checkbox" name="sType" rel="Observability" id="Observability" /> Observability </label>
-    <label><input type="checkbox" name="sType" rel="Troubleshooting" id="Troubleshooting" /> Troubleshooting </label>
-    <label><input type="checkbox" name="sType" rel="Scaling" id="Scaling" /> Scaling </label>
-    <label><input type="checkbox" name="sType" rel="Resiliency" id="Resiliency" /> Resiliency </label>
+    </a><label><input type="checkbox" value="Deployment" onchange="handleChange()"/> Deployment </label>
+    <label><input type="checkbox" value="Traffic Management" onchange="handleChange()" /> Traffic Management </label>
+    <label><input type="checkbox" value="Security" onchange="handleChange()" /> Security </label> 
+    <label><input type="checkbox" value="Workloads" onchange="handleChange()"/> Workloads </label> 
+    <label><input type="checkbox" value="Observability" onchange="handleChange()"/> Observability </label>
+    <label><input type="checkbox" value="Troubleshooting" onchange="handleChange()" /> Troubleshooting </label>
+    <label><input type="checkbox" value="Scaling" onchange="handleChange()"/> Scaling </label>
+    <label><input type="checkbox" value="Resiliency" onchange="handleChange()"/> Resiliency </label>
   </form>
   <hr>
   <p><strong>Compatibilty:</strong></p>
   <form>
-    <label><input type="checkbox" name="sCategory" rel="Istio" id="Istio" /> Istio </label>
-    <label><input type="checkbox" name="sCategory" rel="Linkerd" id="Linkerd" /> Linkerd </label>
-    <label><input type="checkbox" name="sCategory" rel="Consul" id="Consul" /> Consul </label>
-    <label><input type="checkbox" name="sCategory" rel="Kuma" id="Kuma" /> Kuma </label>
-    <label><input type="checkbox" name="sCategory" rel="AppMesh" id="AppMesh" /> App Mesh </label>
-    <label><input type="checkbox" name="sCategory" rel="OSM" id="OSM" /> Open Service Mesh </label>
-    <label><input type="checkbox" name="sCategory" rel="Traefik" id="Traefik" /> Traefik Mesh </label>
-    <label><input type="checkbox" name="sCategory" rel="Nginx" id="Nginx" /> Nginx </label>
-    <label><input type="checkbox" name="sCategory" rel="NSM" id="NSM" /> NSM </label>
+    <label><input type="checkbox" value="Istio" onchange="handleChange()" /> Istio </label>
+    <label><input type="checkbox" value="Linkerd" onchange="handleChange()"/> Linkerd </label>
+    <label><input type="checkbox" value="Consul" onchange="handleChange()"/> Consul </label>
+    <label><input type="checkbox" value="Kuma" onchange="handleChange()"/> Kuma </label>
+    <label><input type="checkbox" value="AppMesh" onchange="handleChange()" /> App Mesh </label>
+    <label><input type="checkbox" value="OSM" onchange="handleChange()"/> Open Service Mesh </label>
+    <label><input type="checkbox" value="Traefik" onchange="handleChange()"/> Traefik Mesh </label>
+    <label><input type="checkbox" value="Nginx" onchange="handleChange()"/> Nginx </label>
+    <label><input type="checkbox" value="NSM" onchange="handleChange()"/> NSM </label>
   </form>
   <hr>
   <p><strong>Technology:</strong></p>
   <form>
-    <label><input type="checkbox" name="sTechnology" rel="WebAssembly" id="WebAssembly" /> WebAssembly </label>
-    <label><input type="checkbox" name="sTechnology" rel="JWT" id="JWT"/> JWT </label>
+    <label><input type="checkbox" value="WebAssembly" onchange="handleChange()" /> WebAssembly </label>
+    <label><input type="checkbox" value="JWT" onchange="handleChange()"/> JWT </label>
   </form>
 </div>
 
@@ -172,6 +172,51 @@ redirect_from: service-mesh-patterns
     <!-- MODAL-END -->
 </div>
 </div>
+
+<!-- FILTER -->
+<script>
+    const handleChange = () => {
+    var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+    var filters = [];
+    var Categories = ["Deployment", "Traffic Management", "Security", "Workloads", "Observability", "Troubleshooting", "Scaling", "Resiliency"];
+    var Compatibility = ["Istio", "Linkerd", "Consul", "Kuma", "App Mesh", "OSM", "Traefik", "Nginx", "NSM"];
+    var Technology = ["WebAssembly", "JWT"];
+    var categoryDATA =[];
+    var compDATA = [];
+    var techDATA = [];
+
+for (var i = 0; i < checkboxes.length; i++) {
+     
+      filters.push(checkboxes[i].value)
+      
+    }
+
+  filters.forEach((x) => { 
+    Categories.map((y) => { 
+      if( x === y ) {
+        categoryDATA.push(y);
+       }
+    }) 
+  })
+  console.log(categoryDATA);
+  filters.forEach((x) => { 
+    Compatibility.map((y) => { 
+      if( x === y ) {
+         compDATA.push(y);
+       }
+    }) 
+  })
+  console.log(compDATA);
+  filters.forEach((x) => { 
+    Technology.map((y) => { 
+      if( x === y ) {
+        techDATA.push(y);
+       }
+    }) 
+  })
+  console.log(techDATA);
+  }
+</script>
 
 
 <!-- MODAL-JS -->
