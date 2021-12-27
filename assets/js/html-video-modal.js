@@ -1,4 +1,6 @@
-var modal = document.querySelector('.modal-window');
+// get elements
+var modal = document.querySelector('.video-modal');
+var body = document.querySelector('body');
 var btnOpen = document.querySelector('.link.recording-link');
 var btnClose = document.querySelector('.close');
 const player = document.querySelector('.player');
@@ -15,33 +17,27 @@ btnClose.addEventListener('click',function(){
     modal.style.visiblity = "hidden";
     modal.style.opacity = "0";
     modal.style.pointerEvents= "none";
+    body.style.overflow = "scroll";
     video.pause();
 });
 
 btnOpen.addEventListener('click',function(){
     modal.style.visibility = "visible";
     modal.style.opacity = "1";
+    body.style.overflow = "hidden";
     modal.style.pointerEvents = "auto";
 });
-
-// get elements
-
 
 // build functions
 function togglePlay() {
     if (video.paused) {
         video.play();
+        toggle.focus();
     } else {
         video.pause();
+        toggle.focus();
     }
-    // alternatively this can be written with a ternary operator
-    /*
-    const method = video.paused ? 'play' : 'pause';
-    video[method]();
-    */
 }
-
-
 
 function updateButton() {
     const icon = this.paused ? '►' : '❚❚';
@@ -68,7 +64,15 @@ function scrub(e) {
     video.currentTime = scrubTime;
 }
 
+function ChangeFullscreenIcon(){
+    if (!document.webkitFullscreenElement && !document.fullscreenElement &&!document.mozFullScreen)
+        image.src = "images/full-screen.png";
+    else
+        image.src = "images/normal-screen.png";
+}
+
 function toggleFullscreen() {
+    ChangeFullscreenIcon()
     if (!document.webkitFullscreenElement && !document.fullscreenElement &&!document.mozFullScreen) {
         if (player.requestFullscreen) {
             player.requestFullscreen();
@@ -77,10 +81,9 @@ function toggleFullscreen() {
           } else if (player.msRequestFullscreen) { /* IE11 */
             player.msRequestFullscreen();
           } 
-        image.src = "images/normal-screen.png";
     } 
     else{
-        image.src = "images/full-screen.png"
+        ChangeFullscreenIcon()
         if (document.exitFullscreen) {
             document.exitFullscreen();
         } else if (document.webkitExitFullscreen) { /* Safari */
@@ -93,22 +96,21 @@ function toggleFullscreen() {
 
 
 
+
 // event listeners
 video.addEventListener('click', togglePlay);
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
 video.addEventListener('timeupdate', handleProgress);
-
-fullscreen.addEventListener('click', toggleFullscreen);
 video.addEventListener('dblclick', toggleFullscreen);
-
+fullscreen.addEventListener('click', toggleFullscreen);
 toggle.addEventListener('click', togglePlay);
 skipButtons.forEach(button => button.addEventListener('click', skip));
 ranges.forEach(range => range.addEventListener('change', handleRangeUpdate));
 ranges.forEach(range => range.addEventListener('mousemove', handleRangeUpdate));
-
 let mousedown = false;
 progress.addEventListener('click', scrub);
-progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
-progress.addEventListener('mousedown', () => mousedown = true);
-progress.addEventListener('mouseup', () => mousedown = false);
+document.addEventListener("webkitfullscreenchange",ChangeFullscreenIcon);
+document.addEventListener("fullscreenchange",ChangeFullscreenIcon);
+document.addEventListener("mozfullscreenchange",ChangeFullscreenIcon);
+document.addEventListener("msfullscreenchange",ChangeFullscreenIcon);
