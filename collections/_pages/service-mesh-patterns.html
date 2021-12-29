@@ -5,7 +5,7 @@ title: Service Mesh Catalog
 heading: Service Mesh Catalog
 redirect_from: service-mesh-patterns
 ---
-<script src="{{ site.baseurl }}/assets/js/filter.js"></script>
+
 <div class="sub-heading">
   <div><h3>What are Service Mesh Patterns?</h3>
   <p>Service Mesh Patterns help you confidently wield a service mesh by extracting best practices of service mesh use and harnessing the core value service meshes offer, irrespective of which service mesh you’re using.</p>
@@ -16,6 +16,7 @@ redirect_from: service-mesh-patterns
 <h3>Some sample patterns:</h3>
 
 <!-- TEMP-FILTER -->
+
 {% include partials/pattern-filter.html %}
 
 
@@ -24,33 +25,33 @@ redirect_from: service-mesh-patterns
 <div class="filter-wrap">
   <p><strong>Categories:</strong></p>
   <form>  
-    </a><label><input type="checkbox" name="sType" rel="Deployment" id="Deployment" onclick='window.location.assign("/service-mesh-catalog/deployment")'/> Deployment </label>
-    <label><input type="checkbox" name="sType" rel="TrafficManagement" id="TrafficManagement" /> Traffic Management </label>
-    <label><input type="checkbox" name="sType" rel="Security" id="Security" /> Security </label> 
-    <label><input type="checkbox" name="sType" rel="Workloads" id="Workloads" /> Workloads </label> 
-    <label><input type="checkbox" name="sType" rel="Observability" id="Observability" /> Observability </label>
-    <label><input type="checkbox" name="sType" rel="Troubleshooting" id="Troubleshooting" /> Troubleshooting </label>
-    <label><input type="checkbox" name="sType" rel="Scaling" id="Scaling" /> Scaling </label>
-    <label><input type="checkbox" name="sType" rel="Resiliency" id="Resiliency" /> Resiliency </label>
+    </a><label><input type="checkbox" value="Deployment" onchange="handleChange()"/> Deployment </label>
+    <label><input type="checkbox" value="Traffic Management" onchange="handleChange()" /> Traffic Management </label>
+    <label><input type="checkbox" value="Security" onchange="handleChange()" /> Security </label> 
+    <label><input type="checkbox" value="Workloads" onchange="handleChange()"/> Workloads </label> 
+    <label><input type="checkbox" value="Observability" onchange="handleChange()"/> Observability </label>
+    <label><input type="checkbox" value="Troubleshooting" onchange="handleChange()" /> Troubleshooting </label>
+    <label><input type="checkbox" value="Scaling" onchange="handleChange()"/> Scaling </label>
+    <label><input type="checkbox" value="Resiliency" onchange="handleChange()"/> Resiliency </label>
   </form>
   <hr>
   <p><strong>Compatibilty:</strong></p>
   <form>
-    <label><input type="checkbox" name="sCategory" rel="Istio" id="Istio" /> Istio </label>
-    <label><input type="checkbox" name="sCategory" rel="Linkerd" id="Linkerd" /> Linkerd </label>
-    <label><input type="checkbox" name="sCategory" rel="Consul" id="Consul" /> Consul </label>
-    <label><input type="checkbox" name="sCategory" rel="Kuma" id="Kuma" /> Kuma </label>
-    <label><input type="checkbox" name="sCategory" rel="AppMesh" id="AppMesh" /> App Mesh </label>
-    <label><input type="checkbox" name="sCategory" rel="OSM" id="OSM" /> Open Service Mesh </label>
-    <label><input type="checkbox" name="sCategory" rel="Traefik" id="Traefik" /> Traefik Mesh </label>
-    <label><input type="checkbox" name="sCategory" rel="Nginx" id="Nginx" /> Nginx </label>
-    <label><input type="checkbox" name="sCategory" rel="NSM" id="NSM" /> NSM </label>
+    <label><input type="checkbox" value="Istio" onchange="handleChange()" /> Istio </label>
+    <label><input type="checkbox" value="Linkerd" onchange="handleChange()"/> Linkerd </label>
+    <label><input type="checkbox" value="Consul" onchange="handleChange()"/> Consul </label>
+    <label><input type="checkbox" value="Kuma" onchange="handleChange()"/> Kuma </label>
+    <label><input type="checkbox" value="App Mesh" onchange="handleChange()" /> App Mesh </label>
+    <label><input type="checkbox" value="OSM" onchange="handleChange()"/> Open Service Mesh </label>
+    <label><input type="checkbox" value="Traefik" onchange="handleChange()"/> Traefik Mesh </label>
+    <label><input type="checkbox" value="Nginx" onchange="handleChange()"/> Nginx </label>
+    <label><input type="checkbox" value="NSM" onchange="handleChange()"/> NSM </label>
   </form>
   <hr>
   <p><strong>Technology:</strong></p>
   <form>
-    <label><input type="checkbox" name="sTechnology" rel="WebAssembly" id="WebAssembly" /> WebAssembly </label>
-    <label><input type="checkbox" name="sTechnology" rel="JWT" id="JWT"/> JWT </label>
+    <label><input type="checkbox" value="WebAssembly" onchange="handleChange()" /> WebAssembly </label>
+    <label><input type="checkbox" value="JWT" onchange="handleChange()"/> JWT </label>
   </form>
 </div>
 
@@ -82,24 +83,23 @@ redirect_from: service-mesh-patterns
             </div>
        
            {% else %}
+         
            <div class="link open-modal-btn">
-           <div class= "card" id="{{pattern.DataCategory}}">
-             
+           <div class= "card" id="{{pattern.name}}" >           
               <div class="chip">
-                  <small class="pattern-type"> {{pattern.patternType}}</small>
+                  <small class="pattern-type"> {{pattern.filters.type}}</small>
               </div>
               <h4 class="pattern-name">{{pattern.name}}</h4>
-              <img class= "pattern-image" src="{{pattern.image}}"/>
+              <img class= "pattern-image" src="{{pattern.image}}" loading="lazy"/>
               <div>
-           
-           <h6 class="pattern-id">     <img class="smp"
-            src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
-            loading="lazy" />{{pattern.patternId}}</h6>
+              <h6 class="pattern-id">     <img class="smp"
+              src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
+              loading="lazy" />{{pattern.patternId}}</h6>
    
           </div>
             </div>
           </div>
-  
+        
           {% endif %}
   </div>
 
@@ -111,16 +111,16 @@ redirect_from: service-mesh-patterns
     <div>
       <button class = "modal-close close">&times;</button>
       <div class="chip chip-modal">
-        <h6 class="pattern-type"> {{pattern.patternType}}</h6>
+        <h6 class="pattern-type"> {{pattern.filters.type}}</h6>
     </div>
     <p><div class="modal-image-container"><div class="modal-image" ><img src="{{pattern.image}}" /> <h4 class="related-patterns">Related Patterns</h4>
     
     
     <!-- MINICARD-START -->
-    {% if pattern.patternType == "Deployment" %}
+    {% if pattern.filters.type == "Deployment" %}
     <div class= "modal-card">
       <div class="modal-chip">
-          <small class="modal-pattern-type"> {{pattern.patternType}}</small>
+          <small class="modal-pattern-type"> {{pattern.filters.type}}</small>
       </div>
       <h5 class="modal-pattern-name">{{pattern.name}}</h5>
       <img class= "modal-pattern-image" src="{{pattern.image}}"/>
@@ -131,10 +131,10 @@ redirect_from: service-mesh-patterns
       loading="lazy" />{{pattern.patternId}}</h6>
       </div>
     </div>
-    {% elsif pattern.patternType == "Traffic Management" %}
+    {% elsif pattern.filters.type == "Traffic Management" %}
     <div class= "modal-card">
       <div class="modal-chip">
-          <small class="modal-pattern-type"> {{pattern.patternType}}</small>
+          <small class="modal-pattern-type"> {{pattern.filters.type}}</small>
       </div>
       <h5 class="modal-pattern-name">{{pattern.name}}</h5>
       <img class= "modal-pattern-image" src="{{pattern.image}}"/>
@@ -172,6 +172,102 @@ redirect_from: service-mesh-patterns
     <!-- MODAL-END -->
 </div>
 </div>
+
+<!-- FILTER -->
+<script>
+const handleChange = () => {
+    var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+    var filters = [];
+    var Categories = ["Deployment", "Traffic Management", "Security", "Workloads", "Observability", "Troubleshooting", "Scaling", "Resiliency"];
+    var Compatibility = ["Istio", "Linkerd", "Consul", "Kuma", "App Mesh", "OSM", "Traefik", "Nginx", "NSM"];
+    var Technology = ["WebAssembly", "JWT"];
+    var categoryDATA =[];
+    var compDATA = [];
+    var techDATA = [];
+    var allPatterns = {{ site.data.patterns | jsonify }};
+    var finalCategories = [];
+    var finalCompatibility = [];
+    var finalTechnology = [];
+    var Result = [];
+    var data = [];
+
+for (var i = 0; i < checkboxes.length; i++) {
+     
+      filters.push(checkboxes[i].value)
+      
+    }
+
+  filters.forEach((x) => { 
+    Categories.map((y) => { 
+      if( x === y ) {
+        categoryDATA.push(y);
+       }
+    }) 
+  })
+
+  filters.forEach((x) => { 
+    Compatibility.map((y) => { 
+      if( x === y ) {
+         compDATA.push(y);
+       }
+    }) 
+  })
+
+  filters.forEach((x) => { 
+    Technology.map((y) => { 
+      if( x === y ) {
+        techDATA.push(y);
+       }
+    }) 
+  })
+
+  allPatterns.forEach((x) => {
+    categoryDATA.map((category) => {
+        if(x.filters.type === category)
+        {
+         finalCategories.push(x);
+        }
+      })
+  })
+
+  allPatterns.forEach((x) => {
+  compDATA.map((compatibility) => {
+    for(i=0;i< x.filters.compatibility.length;i++)
+    {
+      if(x.filters.compatibility[i] === compatibility)
+      {
+        finalCompatibility.push(x);
+      }
+    }
+    })
+})
+
+  allPatterns.forEach((x) => {
+    techDATA.map((tech) => {
+        if(x.filters.technology === tech)
+        {
+         finalTechnology.push(x);
+        }
+      })
+  })
+
+  if(categoryDATA.length === 0) finalCategories = allPatterns;
+      if(compDATA.length === 0) finalCompatibility = allPatterns;
+      if(techDATA.length === 0) finalTechnology = allPatterns;
+
+  Result = [finalCategories, finalCompatibility, finalTechnology, allPatterns],
+      data = Result.reduce((a, b) => a.filter(c => b.includes(c)));
+      console.log(data);
+
+
+      data = document.getElementById("card");
+
+  // var JsonData = JSON.stringify(data);
+
+  // console.log(JsonData);
+     
+  }
+</script>
 
 
 <!-- MODAL-JS -->
