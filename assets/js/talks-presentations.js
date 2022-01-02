@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function(event){
             modal.style.opacity = "0";
             modal.style.pointerEvents= "none";
             // Resets the src so that the video stops playing
+            console.log(iframe);
             var iframeSrc = iframe.src;
 		    iframe.src = iframeSrc;
         }
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function(event){
             modal.style.opacity = "0";
             modal.style.pointerEvents= "none";
             // Resets the src so that the video stops playing
-            console.log(btnClose);
+            // console.log(iframe);
             // var iframeSrc = iframe.src;
 		    // iframe.src = iframeSrc;
         }
