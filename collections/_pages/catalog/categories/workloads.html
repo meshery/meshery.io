@@ -1,24 +1,9 @@
 ---
-layout: page
+layout: catalog
 permalink: /service-mesh-catalog/workloads
 title: Service Mesh Catalog
 redirect_from: /service-mesh-catalog
 ---
-
-<div class="sub-heading">
-    <div><h3>What are Service Mesh Patterns?</h3>
-    <p>Service Mesh Patterns help you confidently wield a service mesh by extracting best practices of service mesh use and harnessing the core value service meshes offer, irrespective of which service mesh you’re using.</p>
-    </div>
-    <h3>Pattern Management</h3>
-    <p>You may bring your own patterns or find them available through your chosen provider. Each service mesh pattern carries a unique identifier for reference. The patterns in this repository serve in an educational capacity, facilitating learning, and also serve in an operational capacity, facilitating implementation and validation of your service mesh deployment’s adherence to a pattern.</p>
-  </div>
-  <h3>Some sample patterns:</h3>
-  
-  
-  {% include patterns-filter.html %}
-   
-  <!-- CARD-START -->
-      <div class="catalog">
       {% for pattern in site.data.patterns %}
       <div class="row">
         <div class="column">
@@ -46,22 +31,7 @@ redirect_from: /service-mesh-catalog
       
       
       <!-- MINICARD-START -->
-      {% if pattern.filters.type == "Workloads" %}
-      <div class= "modal-card">
-        <div class="modal-chip">
-            <small class="modal-pattern-type"> {{pattern.filters.type}}</small>
-        </div>
-        <h5 class="modal-pattern-name">{{pattern.name}}</h5>
-        <img class= "modal-pattern-image" src="{{pattern.image}}"/>
-        <div>
-        <h6 class="modal-pattern-id">
-        <img class="modal-smp"
-        src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
-        loading="lazy" />{{pattern.patternId}}</h6>
-        </div>
-      </div>
-    
-      {% endif %}
+      {% include related-patterns.html %}
     </div>
     </div>
       <!-- MINICARD-END -->
@@ -76,8 +46,6 @@ redirect_from: /service-mesh-catalog
       {% endif %}{% endfor %} 
       <!-- MODAL-END -->
   </div>
-  </div>
-  {% include card-modal.html %}
   <script>
     document.getElementById("workloads").checked = true;
   </script>
