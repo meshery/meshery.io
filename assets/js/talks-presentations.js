@@ -40,12 +40,18 @@ modal[n].addEventListener('click',function(){
     modal[n].style.visiblity = "hidden";
     modal[n].style.opacity = "0";
     modal[n].style.pointerEvents= "none";
+    let iframeTEST = modal[n].childNodes[1].childNodes[5].childNodes[1];
+    let src = iframeTEST.src;
+    iframeTEST.src = src;
 
 });
 btnClose[n].addEventListener('click',function(){
     modal[n].style.visiblity = "hidden";
     modal[n].style.opacity = "0";
     modal[n].style.pointerEvents= "none";
+    let iframeTEST = modal[n].childNodes[1].childNodes[5].childNodes[1];
+    let src = iframeTEST.src;
+    iframeTEST.src = src;
 });
 
 btnOpen.addEventListener('click',function(){
