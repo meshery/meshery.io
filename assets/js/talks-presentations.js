@@ -9,7 +9,9 @@ for(let i=0;i<n;i++){
         modal[i].style.visiblity = "hidden";
         modal[i].style.opacity = "0";
         modal[i].style.pointerEvents= "none";
-
+        let iframeTEST = modal[i].childNodes[1].childNodes[5].childNodes[1];
+        let src = iframeTEST.src;
+        iframeTEST.src = src;
     });
 
     btnClose[i].addEventListener('click',function(){
