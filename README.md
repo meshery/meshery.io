@@ -26,7 +26,7 @@ _Visit [Meshery.io](https://meshery.io/) to learn more!_
 
 ## What is Meshery?
 
-Meshery is a multi-service mesh management plane adopting, operating, and developing on different service meshes. Meshery facilitates learning about functionality and performance of service meshes. It incorporates the collection and display of metrics from applications running on or across service meshes. At a high level, Meshery provides performance benchmarking, service mesh lifecycle management, and service mesh interoperability and federation.
+Meshery is a multi-service mesh management plane adopting, operating, and developing on different service meshes. Meshery facilitates learning about the functionality and performance of service meshes. It incorporates the collection and display of metrics from applications running on or across service meshes. At a high level, Meshery provides performance benchmarking, service mesh lifecycle management, and service mesh interoperability and federation.
 
 For further information, refer to the [Meshery Docs](https://docs.meshery.io).
 
@@ -35,7 +35,7 @@ For further information, refer to the [Meshery Docs](https://docs.meshery.io).
 ## Join the service mesh community!
 
 <a name="contributing"></a><a name="community"></a>
-Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://docs.google.com/document/d/17OPtDE_rdnPQxmk2Kauhm3GwXF1R5dZ3Cj8qZLKdo5E/edit">Layer5 Community Welcome Guide</a> for a tour of resources available to you and jump into our <a href="http://slack.layer5.io">Slack</a>!
+Our projects are a community-built and welcome collaboration. 👍 Be sure to see the <a href="https://docs.google.com/document/d/17OPtDE_rdnPQxmk2Kauhm3GwXF1R5dZ3Cj8qZLKdo5E/edit">Layer5 Community Welcome Guide</a> for a tour of resources available to you and jump into our <a href="http://slack.layer5.io">Slack</a>!
 
 <p style="clear:both;">
 <a href ="https://layer5.io/community"><img alt="MeshMates" src="images/logos/Layer5-MeshMentors.png" style="margin-right:10px; margin-bottom:7px;" width="28%" align="left" /></a>
@@ -44,7 +44,7 @@ Our projects are community-built and welcome collaboration. 👍 Be sure to see 
 <p>MeshMates are experienced Layer5 community members, who will help you learn your way around, discover live projects and expand your community network. 
 Become a <b>Meshtee</b> today!</p>
 
-Find out more on the <a href="https://layer5.io/community#meshmate">Layer5 community</a>. <br />
+Find out more about the <a href="https://layer5.io/community#meshmate">Layer5 community</a>. <br />
 <br /><br /><br /><br />
 
 </p>
@@ -56,7 +56,7 @@ Find out more on the <a href="https://layer5.io/community#meshmate">Layer5 commu
 <p>
 ✔️ <em><strong>Join</strong></em> any or all of the weekly meetings on the <a href="https://calendar.google.com/calendar/b/1?cid=bGF5ZXI1LmlvX2VoMmFhOWRwZjFnNDBlbHZvYzc2MmpucGhzQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20">community calendar</a>.<br />
 ✔️ <em><strong>Watch</strong></em> community <a href="https://www.youtube.com/playlist?list=PL3A-A6hPO2IMPPqVjuzgqNU5xwnFFn3n0">meeting recordings</a>.<br />
-✔️ <em><strong>Access</strong></em> the <b>Community Drive</b> by completing a community <a href="https://layer5.io/newcomer">Member Form</a>.<br />
+✔️ <em><strong>Access</strong></em> the <b>Community Drive</b>-by completing a community <a href="https://layer5.io/newcomer">Member Form</a>.<br />
 ✔️ <em><strong>Discuss</strong></em> in the <a href="https://discuss.layer5.io">Community Forum</a>.<br />
 ✔️ <em><strong>RSVP</strong></em> to the <a href="https://community.cncf.io/meshery-community/">CNCF Meshery Community</a> meetings.<br />
 </p>
@@ -69,11 +69,11 @@ Find out more on the <a href="https://layer5.io/community#meshmate">Layer5 commu
 
 ## Contributing to the Meshery.io Website
 
-Before contributing, please review the [Contribution Flow](https://github.com/meshery/meshery/blob/master/CONTRIBUTING.md). In the following steps you will set up your development environment, fork and clone the repository, run the site locally, and finally commit, sign-off, and push any changes made for review.
+Before contributing, please review the [Contribution Flow](https://github.com/meshery/meshery/blob/master/CONTRIBUTING.md). In the following steps, you will set up your development environment, fork and clone the repository, run the site locally, and finally commit, sign off, and push any changes made for review.
 
 ### 1. Set up your development environment
 
-- _The Meshery site is built using Jekyll - a simple static site generator! You can learn more about Jekyll and setting up your development environment in the [Jekyll Docs](https://jekyllrb.com/docs/)._
+- _The Meshery site is built using Jekyll - a simple static site generator! You can learn more about Jekyll and set up your development environment in the [Jekyll Docs](https://jekyllrb.com/docs/)._
 
 - First [install Ruby](https://jekyllrb.com/docs/installation/), then install Jekyll and Bundler. ( **Note** : Install the same version of Ruby as mentioned in the [Gemfile](https://github.com/meshery/meshery.io/blob/master/Gemfile) )
 
@@ -94,7 +94,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   ```bash
   $ make site
   ```
-  _Note: From the Makefile, this command is actually running `$ bundle exec jekyll serve --drafts --livereload`_
+  _Note: From the Makefile, this command is running `$ bundle exec jekyll serve --drafts --livereload`_
 
 ### 4. Create a Pull Request
 
@@ -110,4 +110,4 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
 
 #### License
 
-This repository and site are available as open source under the terms of the [Apache 2.0 License](https://opensource.org/licenses/Apache-2.0).
+This repository and site are available as open-source under the terms of the [Apache 2.0 License](https://opensource.org/licenses/Apache-2.0).
