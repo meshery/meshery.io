@@ -35,7 +35,7 @@ For further information, refer to the [Meshery Docs](https://docs.meshery.io).
 ## Join the service mesh community!
 
 <a name="contributing"></a><a name="community"></a>
-Our projects are a community-built and welcome collaboration. 👍 Be sure to see the <a href="https://docs.google.com/document/d/17OPtDE_rdnPQxmk2Kauhm3GwXF1R5dZ3Cj8qZLKdo5E/edit">Layer5 Community Welcome Guide</a> for a tour of resources available to you and jump into our <a href="http://slack.layer5.io">Slack</a>!
+Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://docs.google.com/document/d/17OPtDE_rdnPQxmk2Kauhm3GwXF1R5dZ3Cj8qZLKdo5E/edit">Layer5 Community Welcome Guide</a> for a tour of resources available to you and jump into our <a href="http://slack.layer5.io">Slack</a>!
 
 <p style="clear:both;">
 <a href ="https://layer5.io/community"><img alt="MeshMates" src="images/logos/Layer5-MeshMentors.png" style="margin-right:10px; margin-bottom:7px;" width="28%" align="left" /></a>
@@ -73,7 +73,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
 
 ### 1. Set up your development environment
 
-- _The Meshery site is built using Jekyll - a simple static site generator! You can learn more about Jekyll and set up your development environment in the [Jekyll Docs](https://jekyllrb.com/docs/)._
+- _The Meshery site is built using Jekyll - a simple static site generator! You can learn more about Jekyll and setting up your development environment in the [Jekyll Docs](https://jekyllrb.com/docs/)._
 
 - First [install Ruby](https://jekyllrb.com/docs/installation/), then install Jekyll and Bundler. ( **Note** : Install the same version of Ruby as mentioned in the [Gemfile](https://github.com/meshery/meshery.io/blob/master/Gemfile) )
 
@@ -94,7 +94,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   ```bash
   $ make site
   ```
-  _Note: From the Makefile, this command is running `$ bundle exec jekyll serve --drafts --livereload`_
+  _Note: From the Makefile, this command is actually running `$ bundle exec jekyll serve --drafts --livereload`_
 
 ### 4. Create a Pull Request
 
@@ -110,4 +110,4 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
 
 #### License
 
-This repository and site are available as open-source under the terms of the [Apache 2.0 License](https://opensource.org/licenses/Apache-2.0).
+This repository and site are available as open source under the terms of the [Apache 2.0 License](https://opensource.org/licenses/Apache-2.0).
