@@ -13,5 +13,6 @@ group :jekyll_plugins do
   gem 'jekyll-redirect-from'
   gem 'tzinfo-data'
   gem 'tzinfo'
+  gem "webrick"
   gem 'eventmachine', '1.2.7', git: 'https://github.com/eventmachine/eventmachine.git', tag: 'v1.2.7'
 end
