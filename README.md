@@ -26,7 +26,7 @@ _Visit [Meshery.io](https://meshery.io/) to learn more!_
 
 ## What is Meshery?
 
-Meshery is a multi-service mesh management plane adopting, operating, and developing on different service meshes. Meshery facilitates learning about the functionality and performance of service meshes. It incorporates the collection and display of metrics from applications running on or across service meshes. At a high level, Meshery provides performance benchmarking, service mesh lifecycle management, and service mesh interoperability and federation.
+Meshery is the management plane for developing, deploying, and operating cloud native infrastructure and applications. Among other features, Meshery facilitates learning about the functionality and performance of service meshes. It incorporates the collection and display of metrics from applications running on or across service meshes. At a high level, Meshery provides performance benchmarking, service mesh lifecycle management, and service mesh interoperability and federation.
 
 For further information, refer to the [Meshery Docs](https://docs.meshery.io).
 
@@ -69,7 +69,7 @@ Find out more about the <a href="https://layer5.io/community#meshmate">Layer5 co
 
 ## Contributing to the Meshery.io Website
 
-Before contributing, please review the [Contribution Flow](https://github.com/meshery/meshery/blob/master/CONTRIBUTING.md). In the following steps, you will set up your development environment, fork and clone the repository, run the site locally, and finally commit, sign off, and push any changes made for review.
+Before contributing, please review the [Contribution Flow](https://github.com/meshery/meshery/blob/master/CONTRIBUTING.md). In the following steps, you will setup your development environment, fork and clone the repository, run the site locally, and finally commit, sign off, and push any changes made for review.
 
 ### 1. Set up your development environment
 
