@@ -1,0 +1,33 @@
+{% for pattern in site.data.patterns %}
+<div class="row">
+  <div class="column">
+    {% if pattern.Status == "ComingSoon" %}
+    {% include coming-soon.html %}
+{% else %}
+{% include card.html %}
+  {% endif %}
+</div>
+  <div id="open-modal" class="modal-window">
+    <div>
+      <button class = "modal-close close">&times;</button>
+      <div class="chip chip-modal">
+        <h6 class="pattern-type"> {{pattern.filters.type}}</h6>
+    </div>
+    <p><div class="modal-image-container"><div class="modal-image" ><img src="{{pattern.image}}" /> <h4 class="related-patterns">Related Patterns</h4>
+<!-- MINICARD-START -->
+{% include related-patterns.html %}
+
+
+</div>
+</div>
+<!-- MINICARD-END -->
+<h3 style="text-align: center;">{{pattern.name}}</h3>
+<h4>What this pattern does:</h4><p>{{pattern.patternInfo}}</p>
+<h4>Caveats and Consideration: </h4><p>{{pattern.patternCaveats}}</p></p>
+<h4>Compatibilty:</h4>
+
+{% include partials/compatibility.html%}
+{% include copy-and-download.html %}
+</div></div>
+{% endfor %}     
+</div>
