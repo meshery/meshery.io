@@ -10,22 +10,20 @@ redirect_from: service-mesh-patterns
 <!-- CARD-START -->
 
 
-  {% for pattern in site.data.patterns %}
-  <div class="row">
-    <div class="column">
-      {% if pattern.Status == "ComingSoon" %}
-      {% include coming-soon.html %}
-  {% else %}
-  {% include card.html %}
-    {% endif %}
+{% for pattern in site.data.patterns %}
+<div class="row">
+  <div class="column">
+    {% if pattern.Status != "ComingSoon" %}
+    {% include card.html %}
+  {% endif %}
 </div>
-    <div id="open-modal" class="modal-window">
-      <div>
-        <button class = "modal-close close">&times;</button>
-        <div class="chip chip-modal">
-          <h6 class="pattern-type"> {{pattern.filters.type}}</h6>
-      </div>
-      <p><div class="modal-image-container"><div class="modal-image" ><img src="{{pattern.image}}" /> <h4 class="related-patterns">Related Patterns</h4>
+  <div id="open-modal" class="modal-window">
+    <div>
+      <button class = "modal-close close">&times;</button>
+      <div class="chip chip-modal">
+        <h6 class="pattern-type"> {{pattern.filters.type}}</h6>
+    </div>
+    <p><div class="modal-image-container"><div class="modal-image" ><img src="{{pattern.image}}" /> <h4 class="related-patterns">Related Patterns</h4>
 <!-- MINICARD-START -->
 {% include related-patterns.html %}
 
@@ -42,7 +40,22 @@ redirect_from: service-mesh-patterns
 {% include copy-and-download.html %}
 </div></div>
 {% endfor %}     
+
+{% include wasm-catalog.html %}
+
+{% for pattern in site.data.patterns %}
+<div class="row">
+  <div class="column">
+    {% if pattern.Status == "ComingSoon" %}
+    {% include coming-soon.html %} 
+    {% endif %}
+  </div>
+{% endfor %}     
+  
 </div>
+
+
+
 <script>
   document.getElementById("all").checked = true;
 </script>
