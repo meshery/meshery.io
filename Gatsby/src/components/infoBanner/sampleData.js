@@ -18,7 +18,8 @@ const Data = [
     headingimg: "none",
     content:
       "Assess your service mesh configuration against deployment and operational best practices with Meshery's configuration validator.",
-    button: "learn more",
+    button: "",
+    
   },
   {
     index: 2,
@@ -28,7 +29,8 @@ const Data = [
     headingimg: "none",
     content:
       "Weigh the value of your service mesh features in-context of it's overhead.",
-    button: "See the Meshery Documentation",
+    button: "See Service Mesh Performance(SMP)",
+    btnurl: "https://smp-spec.io/"
   },
   {
     index: 3,
@@ -39,6 +41,7 @@ const Data = [
     content:
       "Validate your service mesh's conformance to Service Mesh Interface (SMI) specifications.",
     button: "See the Service Mesh Interface Conformance Report",
+    btnurl: "/service-mesh-interface"
   },
   {
     index: 4,
@@ -59,6 +62,7 @@ const Data = [
     content:
       "Learn about the functionality of different service meshes and visually manipulate mesh configuration.",
     button: "See the Meshery documentation",
+    btnurl: "https://docs.meshery.io/"
   },
   {
     index: 6,

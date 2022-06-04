@@ -25,7 +25,7 @@ const AdapterTable = () => {
         </p>
       </div>
       <div className="text">
-        <table className="adapters">
+        <table className="adapters" CELLSPACING="0">
           <thead style={{ display: "none" }}>
             <tr>
               <th>Status</th>
@@ -39,7 +39,7 @@ const AdapterTable = () => {
               </td>
             </tr>
             <tr>
-              <td colSpan={2} className="stable-adapters" />
+              <td colSpan={12} className="stable-adapters empty" />
             </tr>
             {stable.map((stable) => {
               return stable.subdata.map((subdata) => {
@@ -61,15 +61,15 @@ const AdapterTable = () => {
               });
             })}
             <tr>
-              <td colSpan={2} className="stable-adapters" />
+              <td colSpan={2} className="stable-adapters empty" />
             </tr>
             <tr>
-              <td rowSpan={7} className="beta-adapters">
+              <td rowSpan={8} className="beta-adapters">
                 beta
               </td>
             </tr>
             <tr>
-              <td colSpan={2} className="beta-adapters" />
+              <td colSpan={2} className="beta-adapters empty" />
             </tr>
             {beta.map((beta) => {
               return beta.subdata.map((subdata) => {
@@ -92,7 +92,7 @@ const AdapterTable = () => {
             })}
 
             <tr>
-              <td colSpan={2} className="beta-adapters" />
+              <td colSpan={2} className="beta-adapters empty" />
             </tr>
             <tr>
               <td rowSpan={6} className="alpha-adapters">
@@ -100,7 +100,7 @@ const AdapterTable = () => {
               </td>
             </tr>
             <tr>
-              <td colSpan={2} className="alpha-adapters" />
+              <td colSpan={2} className="alpha-adapters empty" />
             </tr>
             {alpha.map((alpha) => {
               return alpha.subdata.map((subdata) => {
@@ -122,7 +122,7 @@ const AdapterTable = () => {
               });
             })}
             <tr>
-              <td colSpan={2} className="alpha-adapters" />
+              <td colSpan={2} className="alpha-adapters empty" />
             </tr>
           </tbody>
         </table>

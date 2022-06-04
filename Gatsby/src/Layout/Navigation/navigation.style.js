@@ -15,8 +15,8 @@ const NavigationWrap = styled.header`
     
   }
   .meshery-cta {
-    position: absolute;
-    right: -2rem;
+    position: relative;
+    right: 0rem;
     // left: 0;
     top: 1.75rem;
     // bottom: 1.5rem;
@@ -24,6 +24,8 @@ const NavigationWrap = styled.header`
 
     a {
       display: flex;
+      text-decoration: none;
+      cursor: pointer;
     }
 
     .runmesherybtn{
@@ -34,6 +36,8 @@ const NavigationWrap = styled.header`
       background-color: Transparent;
       width: 7rem;
       padding: 0.8rem 0;
+      cursor: pointer;
+
     }
 
     @media screen and (max-width: 1550px) {

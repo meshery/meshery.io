@@ -123,9 +123,11 @@ const Navigation = () => {
           </nav>
         </div>
         <div className="meshery-cta">
-          <button to="#getting-started" className="runmesherybtn">
+        <Link to="#runmeshery">
+          <button  className="runmesherybtn">
             Run Meshery
           </button>
+          </Link>
         </div>
       </Container>
     </NavigationWrap>

@@ -20,7 +20,7 @@ const Hero = () => {
               secondary
               className="banner-btn two"
               title="Get Started"
-              url="/service-mesh-management/meshery"
+              url="#runmeshery"
             />
           </div>
           <div style={{ paddingBottom: "2rem" }}>
