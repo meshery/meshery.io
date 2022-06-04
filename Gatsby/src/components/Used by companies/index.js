@@ -18,7 +18,7 @@ const Companies = () => {
       <div class="content">
         <section class="created-by-section">
           <div class="created-by-container">
-            <h1 class="created-by">Created By</h1>
+            <h1 class="created-by">Created By </h1>
             <div class="company-image">
               <a href="https://layer5.io/" target="_blank" rel="noreferrer">
                 <img src={layer5logo} alt="Layer5" loading="lazy" />
