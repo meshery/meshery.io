@@ -213,7 +213,7 @@ const MesheryPlatforms = () => {
     <MesheryPlatformsWrapper>
       <div className="content">
         <Row Hcenter className="step-1">
-          <p>1 step install to managing service meshes</p>
+        <a id="runmeshery" > <p>1 step install to managing service meshes</p> </a>
           <h2>
             <span>Step 1:</span> Choose your platform
           </h2>

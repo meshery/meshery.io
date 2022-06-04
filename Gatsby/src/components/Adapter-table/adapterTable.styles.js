@@ -8,6 +8,11 @@ const AdapterTableWrapper = styled.section`
   max-width: 1140px;
   margin: 0 auto;
 
+  .empty{
+    padding: 0.5rem 0;
+    margin-left: -0.5rem;
+  }
+
   .adapter-logo {
     margin: 10px 5px 10px 0;
     height: 30px;
@@ -25,6 +30,8 @@ const AdapterTableWrapper = styled.section`
       border: 1px dashed #cccccc;
       border-right-width: 0px;
       border-left-width: 0px;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
       a {
         text-decoration: none;
         color: #00a4ca;
