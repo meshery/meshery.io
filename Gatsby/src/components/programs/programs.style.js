@@ -18,6 +18,7 @@ const ProgramsWrapper = styled.section`
   }
 
   .smallcard-a {
+    padding: 0.8rem 1rem;
     font-size: 1.2rem;
     background-color: #3eb5a1;
     position: relative;
@@ -32,7 +33,7 @@ const ProgramsWrapper = styled.section`
     z-index: 1;
     -webkit-transition: 0.3s ease-out;
     transition: 0.3s ease-out;
-    width: 100%;
+    width: 18rem;
     user-select: none;
     -webkit-user-drag: none;
     -khtml-user-drag: none;
@@ -65,6 +66,7 @@ const ProgramsWrapper = styled.section`
       height: inherit;
       vertical-align: middle;
       position: relative;
+      marginBottom: "0"
       z-index: -1;
     }
 
@@ -86,7 +88,7 @@ const ProgramsWrapper = styled.section`
       width: 22%;
     }
     .card-content {
-      padding: 0 4vw;
+      // padding: 0 4vw;
     }
   }
 `;

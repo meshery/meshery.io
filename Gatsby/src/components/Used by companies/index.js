@@ -1,5 +1,6 @@
 import React from "react";
 import CompaniesWrapper from "./companies.styles";
+import { Link } from "gatsby";
 
 import layer5logo from "../../assets/images/company-logo/layer5-no-trim.svg";
 import HPElogo from "../../assets/images/company-logo/hpe-logo-color-no-trim.svg";
@@ -17,7 +18,7 @@ const Companies = () => {
       <div class="content">
         <section class="created-by-section">
           <div class="created-by-container">
-            <h1 class="created-by">Created By</h1>
+            <h1 class="created-by">Created By </h1>
             <div class="company-image">
               <a href="https://layer5.io/" target="_blank" rel="noreferrer">
                 <img src={layer5logo} alt="Layer5" loading="lazy" />
@@ -66,13 +67,15 @@ const Companies = () => {
             <p className="adopter-descption">
               and share your service mesh story with the community
             </p>
+            <Link to="https://github.com/layer5io/meshery/blob/master/ADOPTERS.md">
             <button
-              to="https://github.com/layer5io/meshery/blob/master/ADOPTERS.md"
+              
               target="_blank"
               class="link"
             >
               Become an Adopter
             </button>
+            </Link>
             <br />
           </div>
         </section>
