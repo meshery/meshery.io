@@ -1,7 +1,7 @@
 import React from "react";
 import ProjectItemWrapper from "./projectSection.style";
 
-import projectImage3 from "../../assets/images/meshery-logo-light.png";
+import projectImage from "../../assets/images/meshery-logo-light.svg";
 
 const data = [
   {
@@ -45,9 +45,9 @@ const Projects = () => {
               <p className="small">{data.description}</p>
               <img
                 className="go-corner"
-                src={projectImage3}
+                src={projectImage}
                 alt="projectImage"
-                href={data.link}
+                // href={data.link}
               />
             </a>
           );

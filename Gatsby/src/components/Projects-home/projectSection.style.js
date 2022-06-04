@@ -46,7 +46,6 @@ const ProjectItemWrapper = styled.section`
       right: 0;
       background-color: none;
       border-radius: 0 4px 0 3px;
-      content: url("../../assets/images/meshery-logo-light.png");
     }
 
     .card {
@@ -85,19 +84,6 @@ const ProjectItemWrapper = styled.section`
       }
     }
 
-    .card:hover {
-      //   p {
-      //     transition: all 0.3s ease-out;
-      //     color: rgba(255, 255, 255, 0.8);
-      //   }
-
-      //   h3 {
-      //     transition: all 0.3s ease-out;
-      //     color: #ffffff;
-      //   }
-      .go-corner {
-        content: url("../images/logos/meshery-logo-white.png");
-      }
     }
   }
 `;

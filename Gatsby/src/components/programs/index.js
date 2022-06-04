@@ -23,9 +23,13 @@ const Programs = () => {
               <img
                 src={CNCF}
                 style={{
-                  width: "35%",
-                  paddingTop: "1.4rem",
-                  paddingBottom: ".4rem",
+                  width: "40%",
+                  // paddingTop: "1.4rem",
+                  // paddingBottom: ".4rem",
+                verticalAlign: "middle",
+                marginBottom: "0"
+       
+
                 }}
                 alt="CNCF"
                 className="minicard-img"
@@ -40,9 +44,11 @@ const Programs = () => {
               <img
                 src={Gsod}
                 style={{
-                  width: "35%",
-                  paddingTop: "1.4rem",
-                  paddingBottom: ".4rem",
+                  width: "40%",
+                  // paddingTop: "1.4rem",
+                  // paddingBottom: ".4rem",
+                 marginBottom: "0"
+
                 }}
                 alt="GSOD2020"
                 className="minicard-img"
@@ -57,9 +63,11 @@ const Programs = () => {
               <img
                 src={Gsoc}
                 style={{
-                  width: "35%",
-                  paddingTop: "1.4rem",
-                  paddingBottom: ".4rem",
+                  width: "40%",
+                  // paddingTop: "1.4rem",
+                  // paddingBottom: ".4rem",
+                  marginBottom: "0"
+
                 }}
                 alt="GSOC"
                 className="minicard-img"
@@ -76,9 +84,10 @@ const Programs = () => {
                 alt="LFX"
                 className="minicard-img"
                 style={{
-                  width: "23%",
-                  paddingTop: "1.7rem",
-                  paddingBottom: ".7rem",
+                  width: "30%",
+                  // paddingTop: "1.7rem",
+                  // paddingBottom: ".7rem",
+                  marginBottom: "0",
                 }}
               />
             </a>
