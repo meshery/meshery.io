@@ -9,7 +9,7 @@ import Features from "../components/Catalog/Features/features"
 
 const MembersPage = () => {
   const [filter, setFilter] = useState([]);
-  const [categories] = useState(DataFile)
+  const [dataFile] = useState(DataFile)
 
   const handleChange = () => {
     var checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
@@ -26,7 +26,7 @@ const MembersPage = () => {
         <h1 style={{ marginTop: "2rem" }}>Service Mesh Catalog </h1>
         <Features />
         <div style={{display: "flex", gap:"2rem"}}>
-              <Filters handleChange={handleChange} resources={filter} data={categories} />
+              <Filters handleChange={handleChange} resources={filter} data={dataFile} />
               <CatalogList  resources={filter} />
               </div>
               </div>
