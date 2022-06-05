@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Components
 import CatalogGrid from "./index";
 import DataWrapper from "./DataWrapper";
 import { options } from "./filters/options";
+import DataFile from "./data";
 
 
 const CatalogList = (props) => {
+  const [allResources] = useState(DataFile)
   let data = [];
   let all = [];
   //arrays to store filtered list of resources based on individual filters
@@ -49,7 +51,7 @@ const CatalogList = (props) => {
   let totalTech = tech.length;
 
   if(props.resources.length>0) {
-    props.allResources.forEach((resources) => {
+    allResources.forEach((resources) => {
       all.push(resources);
       categories.map((category) => {
         if(resources.type === category) {
@@ -79,7 +81,7 @@ const CatalogList = (props) => {
       data = result.reduce((a, b) => a.filter(c => b.includes(c)));
     });
   } else{ 
-    props.allResources.forEach((resources) => {
+    allResources.forEach((resources) => {
       data.push(resources);
     });
   }
