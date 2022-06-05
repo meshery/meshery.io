@@ -14,11 +14,11 @@ import wasmimg from "../../assets/images/webassembly_text.svg";
  import NSM from "../../assets/images/adapters/nsm.svg";
  import Traefik from "../../assets/images/adapters/traefik-mesh.svg";
 
-const DataFile = [
+ const DataFile = [
     {
       name: "Basic Istio Install",
       compatibility: ["Istio"],
-        technology: "WebAssembly",
+        technology: "",
       type: "Deployment",
       compatibilityIcon: Istio ,
       Id: "MESHERY001",
@@ -43,7 +43,7 @@ const DataFile = [
         "NSM",
         "Traefik",
       ],
-      technology: "JWT",
+      technology: "",
       compatibilityIcon: 
       {  Istio,
         Linkerd,
@@ -578,9 +578,9 @@ const DataFile = [
     },
     {
       name: "TCP-Metrics",
-      type: "wasm filter",
-      compatibility: [""],
-      technology: "WebAssembly",
+        type: "wasm filter",
+        compatibility: [""],
+        technology: "WebAssembly",
       Id: "FILTER002",
       image: wasmimg,
       filterInfo:
