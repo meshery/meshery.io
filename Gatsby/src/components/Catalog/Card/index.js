@@ -56,8 +56,7 @@ const closeModal = () => setIsOpen(false);
       >
       <div id="open-modal" className="modal-window">
         <div>
-          <AiOutlineClose  style={{right:"1rem",top: "1rem", position: "fixed", cursor: "pointer"}}  />
-          <button onClick={closeModal}>Close</button>
+          <AiOutlineClose  style={{right:"1rem",top: "1rem", position: "fixed", cursor: "pointer"}} onClick={closeModal}  />
           <div className="chip ">
             <h6 className="pattern-type"> {data.type}</h6>
           </div>
