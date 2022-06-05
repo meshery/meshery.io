@@ -118,7 +118,7 @@ input[type="checkbox"] {
        .filter{
         display:contents;
        }
-           
+      }         
 `;
 
 export default FiltersWrapper;

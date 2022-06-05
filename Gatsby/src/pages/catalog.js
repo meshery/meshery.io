@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DataFile from "../components/Catalog/data";
 
 // Components
 import Layout from "../Layout/layout";
@@ -8,6 +9,7 @@ import Features from "../components/Catalog/Features/features"
 
 const MembersPage = () => {
   const [filter, setFilter] = useState([]);
+  const [dataFile] = useState(DataFile)
 
   const handleChange = () => {
     var checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
@@ -24,7 +26,7 @@ const MembersPage = () => {
         <h1 style={{ marginTop: "2rem" }}>Service Mesh Catalog </h1>
         <Features />
         <div style={{display: "flex", gap:"2rem"}}>
-              <Filters handleChange={handleChange} resources={filter} />
+              <Filters handleChange={handleChange} resources={filter} data={dataFile} />
               <CatalogList  resources={filter} />
               </div>
               </div>
