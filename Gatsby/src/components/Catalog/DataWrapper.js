@@ -26,7 +26,7 @@ const data = [
   {
     name: "Basic Istio Install",
     compatibility: ["Istio"],
-      technology: "WebAssembly",
+      technology: "",
     type: "Deployment",
     compatibilityIcon: Istio ,
     Id: "MESHERY001",
@@ -51,7 +51,7 @@ const data = [
       "NSM",
       "Traefik",
     ],
-    technology: "JWT",
+    technology: "",
     compatibilityIcon: 
     {  Istio,
       Linkerd,
