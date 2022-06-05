@@ -1,10 +1,10 @@
 import React from "react";
 import FeaturesWrapper from "./features.styles";
 
-import patternslogo from "../../assets/images/service-mesh-pattern.svg";
-import wasmlogo from "../../assets/images/webassembly_logo.svg";
-import opologo from "../../assets/images/opa-logo.png";
-import ebpflogo from "../../assets/images/eBPF_logo.png";
+import patternslogo from "../../../assets/images/service-mesh-pattern.svg";
+import wasmlogo from "../../../assets/images/webassembly_logo.svg";
+import opologo from "../../../assets/images/opa-logo.png";
+import ebpflogo from "../../../assets/images/eBPF_logo.png";
 // import coming_soon from "../../assets/images/patterns-coming-soon.png"
 
 const Features = () => {

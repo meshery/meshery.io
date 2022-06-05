@@ -3,22 +3,23 @@ import React from "react";
 import ComingSoonWrapper from "./comingsoon.styles";
 import patternslogo from "../../../assets/images/service-mesh-pattern.svg";
 
-const CommingSoonCard = ({ pattern }) => {
+const CommingSoonCard = ({ data }) => {
   return (
     <ComingSoonWrapper>
       <div className="card-overlay">
         <h4 className="overlay-text">Coming Soon...</h4>
-        <h4 className="pattern-name">{pattern.name}</h4>
-        <img className="pattern-image-overlay" src={pattern.image} />
+        <h4 className="pattern-name">{data.name}</h4>
+        <img className="pattern-image-overlay" src={data.image} />
         <div>
           <h6 className="pattern-id-overlay">
             <img
               className="smp-overlay"
+              imgStyle={{ objectFit: "contain" }}
               src={patternslogo}
-              alt="text"
+              alt={data.name}
               loading="lazy"
             />
-            {pattern.patternId}
+            {data.Id}
           </h6>
         </div>
       </div>
