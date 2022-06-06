@@ -85,8 +85,9 @@ const handleClick = () => {
           <img style={{width:"2rem"}} src={data.compatibilityIcon} />
           <div style={{marginTop: "0.5rem"}}>
           <Button secondary className="banner-btn two" title={copyText}  onClick={handleClick} />
-          <a style={{textDecoration: "none"}} href={'/assets/catalogdata/'+ data.downloadLink } download>  <Button secondary className="banner-btn two" title="Click to download" /></a>
+          <a style={{textDecoration: "none"}} href={`/files/${data.downloadLink}`} download>  <Button secondary className="banner-btn two" title="Click to download" /></a>
           </div>
+          <div>{data.downloadLink}</div>
           </div>
         </div></div></div>
               </ReactModal>
