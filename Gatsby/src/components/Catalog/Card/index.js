@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import  CardWrapper  from "./Card.style";
 import ReactModal from "react-modal";
 import {AiOutlineClose} from '@react-icons/all-files/ai/AiOutlineClose'
+import { copyToClipboard } from "../../CodeBlock/copy-to-clipboard"
+import Button from "../../../reusecore/Button"
 
 
 const Card = ({ data }) => {
@@ -11,6 +13,14 @@ const Card = ({ data }) => {
 const openModal = () => setIsOpen(true);
 
 const closeModal = () => setIsOpen(false);  
+
+const [copyText, setCopyText] = useState("Copy");
+
+const handleClick = () => {
+  copyToClipboard(data.URL)
+  setCopyText("Copied!");
+  setTimeout(() => setCopyText("Copy"), 5000);
+}
 
   const customStyles = {
     content: {
@@ -72,8 +82,11 @@ const closeModal = () => setIsOpen(false);
           <h4>What this pattern does:</h4><p>{data.patternInfo}</p>
           <h4>Caveats and Consideration: </h4><p>{data.patternCaveats}</p><p />
           <h4>Compatibilty:</h4>
-          <img style={{width:"2rem"}} src={data.compatibility} />
-          {/* {{'{'}% include copy-and-download.html %{'}'}  */}
+          <img style={{width:"2rem"}} src={data.compatibilityIcon} />
+          <div style={{marginTop: "0.5rem"}}>
+          <Button secondary className="banner-btn two" title={copyText}  onClick={handleClick} />
+          <a style={{textDecoration: "none"}} href={'/assets/catalogdata/'+ data.downloadLink } download>  <Button secondary className="banner-btn two" title="Click to download" /></a>
+          </div>
           </div>
         </div></div></div>
               </ReactModal>
