@@ -1,0 +1,28 @@
+---
+layout: catalog-page
+permalink: /catalog/individualItem
+title: Service Mesh Catalog
+redirect_from: /catalog
+---
+
+  {% for pattern in site.data.patterns %}
+<div>
+    <div>
+      <div class="chip chip-modal">
+        <h6 class="pattern-type"> {{pattern.filters.type}}</h6>
+    </div>
+    <p><div class="modal-image-container"><div class="modal-image" ><img src="{{pattern.image}}" /> <h4 class="related-patterns">Related Patterns</h4>
+{% include related-patterns.html %}
+</div>
+</div>
+
+<h3 style="text-align: center;">{{pattern.name}}</h3>
+<h4>What this pattern does:</h4><p>{{pattern.patternInfo}}</p>
+<h4>Caveats and Consideration: </h4><p>{{pattern.patternCaveats}}</p></p>
+<h4>Compatibilty:</h4>
+
+{% include partials/compatibility.html%}
+{% include copy-and-download.html %}
+</div> 
+</div>
+{% endfor %}     
