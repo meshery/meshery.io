@@ -1,7 +1,6 @@
 <picture>
   <p style="text-align:center;" align="center">
   <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/91916466/173246016-415ad5bd-2d56-42ea-934a-2110004ac089.png" width="70%" align="center" style="margin-bottom:20px;">
-  
   <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/91916466/173404137-ff5007ce-9587-4069-8623-cd6d5d351fe6.png" width="70%" align="center" style="margin-bottom:20px;">
   <img  alt="Shows an illustrated light mode official meshery logo in light color mode and a dark mode meshery logo dark color mode." src="https://user-images.githubusercontent.com/91916466/173404137-ff5007ce-9587-4069-8623-cd6d5d351fe6.png" width="70%" align="center" style="margin-bottom:20px;"/></a><br /><br /></p>
 </picture>
