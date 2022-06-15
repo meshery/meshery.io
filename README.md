@@ -2,7 +2,7 @@
   <p style="text-align:center;" align="center">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/meshery/meshery.io/master/images/logos/meshery-logo-light-text-side.png" width="70%" align="center" style="margin-bottom:20px;">
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/meshery/meshery.io/master/images/logos/meshery-logo-white-tag-side.svg" width="70%" align="center" style="margin-bottom:20px;">
-  <img  alt="Shows an illustrated light mode official meshery logo in light color mode and a dark mode meshery logo dark color mode." src="https://raw.githubusercontent.com/meshery/meshery.io/master/images/logos/meshery-logo-light-text-side.png" width="70%" align="center" style="margin-bottom:20px;"/></a><br /><br /></p>
+  <img  alt="Shows an illustrated light mode official meshery logo in light color mode and a dark mode meshery logo dark color mode." src="https://raw.githubusercontent.com/meshery/meshery.io/master/images/logos/meshery-logo-white-tag-side.svg" width="70%" align="center" style="margin-bottom:20px;"/></a><br /><br /></p>
 </picture>
  
 # Meshery.io
