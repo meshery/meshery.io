@@ -4,8 +4,8 @@ permalink: /catalog/consul
 title: Service Mesh Catalog
 redirect_from: /catalog
 ---
-{% for pattern in site.data.patterns %} 
-      {% for entry in pattern.filters.compatibility %}
+{% for pattern in site.catalog %} 
+      {% for entry in pattern.compatibility %}
      <div class="row">
        <div class="column">
         {% if entry == "Consul" and pattern.Status != "ComingSoon" %}
@@ -20,7 +20,7 @@ redirect_from: /catalog
       <div>
         <button class = "modal-close close">&times;</button>
         <div class="chip chip-modal">
-          <h6 class="pattern-type"> {{pattern.filters.type}}</h6>
+          <h6 class="pattern-type"> {{pattern.type}}</h6>
       </div>
       <p><div class="modal-image-container"><div class="modal-image" ><img src="{{pattern.image}}" /> <h4 class="related-patterns">Related Patterns</h4>
       {% include related-patterns.html %}
@@ -31,7 +31,7 @@ redirect_from: /catalog
       <h4>Caveats and Consideration: </h4><h5>{{pattern.patternCaveats}}</h5></p>
       <h4>Compatibilty:</h4>
        {% include partials/compatibility.html %}
-       {% include copy-and-download.html %}
+       {% include copy-and-download.html %} {% include read-more.html %}
       </div></div>
       {% endif %}{% endfor %}{% endfor %} 
       <!-- MODAL-END -->

@@ -6,13 +6,13 @@ redirect_from: /catalog
 --- 
   <!-- CARD-START -->
   
-      {% for pattern in site.data.patterns %}
+      {% for pattern in site.catalog %}
       <div class="row">
         <div class="column">
-            {% if pattern.filters.type == "Deployment" and pattern.Status != "ComingSoon" %}
+            {% if pattern.type == "Deployment" and pattern.Status != "ComingSoon" %}
               {% include card.html %}
             {% endif %}
-            {% if pattern.filters.type == "Deployment" and pattern.Status == "ComingSoon" %}
+            {% if pattern.type == "Deployment" and pattern.Status == "ComingSoon" %}
               {% include coming-soon.html %}
             {% endif %}
     </div>
@@ -21,12 +21,12 @@ redirect_from: /catalog
   
   
   <!-- MODAL-START -->
-  {% if pattern.filters.type == "Deployment" and pattern.Status != "ComingSoon" %}
+  {% if pattern.type == "Deployment" and pattern.Status != "ComingSoon" %}
     <div id="open-modal" class="modal-window">
       <div>
         <button class = "modal-close close">&times;</button>
         <div class="chip chip-modal">
-          <h6 class="pattern-type"> {{pattern.filters.type}}</h6>
+          <h6 class="pattern-type"> {{pattern.type}}</h6>
       </div>
       <p><div class="modal-image-container"><div class="modal-image" ><img src="{{pattern.image}}" /> <h4 class="related-patterns">Related Patterns</h4>
       
@@ -42,7 +42,7 @@ redirect_from: /catalog
       <h4>Compatibilty:</h4>
   
       {% include partials/compatibility.html %}
-      {% include copy-and-download.html %}
+      {% include copy-and-download.html %} {% include read-more.html %}
       </div></div>
       {% endif %}{% endfor %} 
       <!-- MODAL-END -->
