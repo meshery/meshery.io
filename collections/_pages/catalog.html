@@ -13,10 +13,9 @@ redirect_from: service-mesh-patterns
   {% for pattern in site.designs %}
   <div class="row">
     <div class="column">
-      {% if pattern.Status == "ComingSoon" %}
-      {% include coming-soon.html %}
-  {% else %}
+      {% if pattern.Status != "ComingSoon" %}
   {% include card.html %}
+  
     {% endif %}
 </div>
     <div id="open-modal" class="modal-window">
@@ -42,7 +41,22 @@ redirect_from: service-mesh-patterns
 {% include copy-and-download.html %}
 {% include read-more.html %}
 </div></div>
+{% endfor %}   
+{% include wasm.html %}
+
+{% for pattern in site.designs %}
+<div class="row">
+  <div class="column">
+    {% if pattern.Status == "ComingSoon" %}
+    {% include coming-soon.html %} 
+    {% endif %}
+  </div>
 {% endfor %}     
+
+</div>
+
+
+
 </div>
 <script>
   document.getElementById("all").checked = true;

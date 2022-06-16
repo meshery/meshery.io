@@ -3,8 +3,8 @@ layout: item
 name: Local Rate Limiter
 type: Traffic Management
 compatibility: 
-- serviceMesh: Istio
-- serviceMesh: Kuma
+    serviceMesh: "Istio"
+    serviceMesh: "Kuma"
 patternId: MESHERY003
 image: "/images/patterns/service-mesh.svg"
 patternInfo: "Local rate limiting is used to limit the rate of requests per service instance. Local rate limiting can be used in conjunction with global rate limiting to reduce load on the global rate limiting service."

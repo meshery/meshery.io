@@ -1,8 +1,9 @@
 {% for entry in site.designs %}
-{% if entry.compatibility== "Istio" %}
+{% for item in entry.compatibility %}
+{% if item.serviceMesh == "Istio" %}
 <img class="service-mesh-image" src="{{site.baseurl}}/images/istio.svg" />
 {% endif %}
-{% if entry.compatibility == "Linkerd" %}
+{% if item.serviceMesh == "Linkerd" %}
 <img class="service-mesh-image" src="{{site.baseurl}}/images/linkerd.svg" />
 {% endif %}
 {% if entry.compatibility.serviceMesh == "Consul" %}
@@ -26,4 +27,5 @@
 {% if entry.compatibility.serviceMesh == "NSM" %}
 <img class="service-mesh-image" src="{{site.baseurl}}/images/nsm.svg" />
 {% endif %}
+{% endfor %}
 {% endfor %}

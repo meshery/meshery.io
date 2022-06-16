@@ -2,7 +2,8 @@
 layout: item
 name: Basic Istio Install
 type: Deployment
-compatibility: Istio Linkerd
+compatibility: 
+    serviceMesh: "Istio"
 patternId: MESHERY001
 image: "/images/patterns/service-mesh.svg"
 patternInfo: "A demo configuration designed to showcase Istio functionality with modest resource requirements. It is suitable to run the Bookinfo application and associated tasks. This is the configuration that is installed with the quick start instructions."
