@@ -1,7 +1,7 @@
 ---
 layout: item
 name: Brownfield Environments
-type: Worloads
+type: Workloads
 compatibility:
     - Linkerd
 patternId: MESHERY010

@@ -10,10 +10,12 @@ redirect_from: service-mesh-patterns
 <!-- CARD-START -->
 
 
-  {% for pattern in site.designs %}
+  {% for pattern in site.catalog %}
   <div class="row">
     <div class="column">
-      {% if pattern.Status != "ComingSoon" %}
+      {% if pattern.Status == "ComingSoon" %}
+      {% include coming-soon.html %} 
+      {% else %}
   {% include card.html %}
   
     {% endif %}
@@ -42,16 +44,16 @@ redirect_from: service-mesh-patterns
 {% include read-more.html %}
 </div></div>
 {% endfor %}   
-{% include wasm.html %}
-
-{% for pattern in site.designs %}
+<!-- {% include wasm.html %} -->
+<!-- 
+{% for pattern in site.catalog %}
 <div class="row">
   <div class="column">
     {% if pattern.Status == "ComingSoon" %}
     {% include coming-soon.html %} 
     {% endif %}
   </div>
-{% endfor %}     
+{% endfor %}      -->
 
 </div>
 
