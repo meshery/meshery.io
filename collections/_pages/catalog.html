@@ -8,15 +8,17 @@ redirect_from:
  - /catalog
 ---
 
-
 <!-- CARD-START -->
 
-
+<div id = "page-div">
   {% for pattern in site.catalog %}
-  <div class="row">
+  <div id = "page1" class="row">
     <div class="column">
+      
       {% if pattern.Status == "ComingSoon" %}
-      {% include coming-soon.html %} 
+      {% include coming-soon.html %}
+      {% elsif pattern.type == "wasm filter"%} 
+      {% include wasm-card.html %}
       {% else %}
   {% include card.html %}
   
@@ -45,16 +47,21 @@ redirect_from:
 {% include copy-and-download.html %}
 {% include read-more.html %}
 </div></div>
-{% endfor %}   
+
+{% endfor %} 
+</div>  
+
 
 </div>
 
 
 
-</div>
+
 <script>
   document.getElementById("all").checked = true;
 </script>
+
+<script src="../../js/pagination.js"></script>
 
 <!-- <script>
 const handleChange = () => {
