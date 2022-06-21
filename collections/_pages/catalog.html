@@ -10,9 +10,9 @@ redirect_from:
 
 <!-- CARD-START -->
 
-<div id = "page-div">
-  {% for pattern in site.catalog %}
-  <div id = "page1" class="row">
+  {% assign catalog = site.catalog | sort: 'patternId' %}
+  {% for pattern in catalog %}
+  <div class="row">
     <div class="column">
       
       {% if pattern.Status == "ComingSoon" %}
