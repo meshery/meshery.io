@@ -8,12 +8,23 @@
        <img class= "pattern-image" src="{{pattern.image}}" />
        <div>
     
-    <h6 class="pattern-id">
-      <img class="smp"
-        src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
-        loading="lazy" />
-      {{pattern.patternId}}
-    </h6>
+    {% if pattern.patternId %}
+      <h6 class="pattern-id">
+        <img class="smp"
+          src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
+          loading="lazy" />
+        
+          <span>{{pattern.patternId}}</span>
+      </h6>    
+      {% else %}
+      <h6 class="pattern-id" style="bottom: -18px;">
+        <img class="smp"
+          src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
+          loading="lazy" />
+        <span style="margin-top: 10rem;">{{pattern.filterId}}</span>
+      </h6>
+      {% endif %}
+    
 
    </div>
      </div>

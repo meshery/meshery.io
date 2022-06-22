@@ -17,8 +17,6 @@ redirect_from:
       
       {% if pattern.Status == "ComingSoon" %}
       {% include coming-soon.html %}
-      {% elsif pattern.type == "wasm filter"%} 
-      {% include wasm-card.html %}
       {% else %}
   {% include card.html %}
   
@@ -39,8 +37,13 @@ redirect_from:
 </div>
 <!-- MINICARD-END -->
 <h3 style="text-align: center;">{{pattern.name}}</h3>
-<h4>What this pattern does:</h4><p>{{pattern.patternInfo}}</p>
-<h4>Caveats and Consideration: </h4><p>{{pattern.patternCaveats}}</p></p>
+{%if pattern.patternInfo%}
+  <h4>What this pattern does:</h4><p>{{pattern.patternInfo}}</p>
+  <h4>Caveats and Consideration: </h4><p>{{pattern.patternCaveats}}</p></p>
+{%else%}
+  <h4>What this pattern does:</h4><p>{{pattern.filterInfo}}</p>
+  <h4>Caveats and Consideration: </h4><p>{{pattern.filterCaveats}}</p></p>
+{%endif%}
 <h4>Compatibilty:</h4>
 
 {% include partials/compatibility.html%}
