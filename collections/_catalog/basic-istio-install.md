@@ -10,5 +10,6 @@ patternInfo: "A demo configuration designed to showcase Istio functionality with
 patternCaveats: "Not a suitable production deployment configuration. "
 URL: "https://raw.githubusercontent.com/service-mesh-patterns/service-mesh-patterns/master/samples/IstioFilterPattern.yaml"
 downloadLink: IstioFilterPattern.yaml
+by: Layer5 
 ---
     
