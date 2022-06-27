@@ -1,10 +1,5 @@
-{% assign pattern = page %}
-<h1>{{pattern.name}}</h1>
-<div>
-    <div class="chip chip-modal">
-      <h6 class="pattern-type"> {{pattern.type}}</h6>
-  </div>
-  <p><div class="modal-image-container"><div class="modal-image" ><img src="{{pattern.image}}" /> <h4 class="related-patterns">Related Patterns</h4>
+{% assign pattern = page | sort: 'patternId' %}
+<div class="modal-image-container"><div class="modal-image" ><img src="{{pattern.image}}" /> <h4 class="related-patterns">Related Patterns</h4>
 <!-- MINICARD-START -->
 {% include related-patterns.html %}
 
@@ -24,5 +19,5 @@
 
 {% include partials/compatibility.html%}
 {% include copy-and-download.html %}
-</div>
+
 
