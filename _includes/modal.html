@@ -1,0 +1,24 @@
+<div id="open-modal" class="modal-window">
+    <div>
+        <div style="display: flex; justify-content: space-between;">
+        <button style="margin: 0;" class = "modal-close close">&times;</button>
+        {% include read-more.html %}
+        </div>
+         <div class="chip chip-modal" >
+            <a style="text-decoration: none; color: #333;" href="{{ site.baseurl }}/catalog/{{ pattern.type | slugify }}/">
+            <h6 class="pattern-type"> {{pattern.type}}</h6>
+            </a>
+        </div>  
+<div class="modal-image" style=" padding-bottom: 19rem;">
+    <img src="{{pattern.image}}" /> 
+    <h4 class="related-patterns">Related Patterns</h4>
+    {% include related-patterns.html %}
+</div>
+<h3 style="text-align: center">{{pattern.name}}</h3>
+<h4>What this pattern does:</h4><p>{{pattern.patternInfo}}</p>
+<h4>Caveats and Consideration: </h4><p>{{pattern.patternCaveats}}</p>
+<h4>Compatibilty:</h4>
+{% include partials/compatibility.html%}
+{% include copy-and-download.html %}
+</div>
+</div>

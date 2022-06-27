@@ -21,31 +21,7 @@ title: Service Mesh Catalog
   
   <!-- MODAL-START -->
   {% if pattern.type == "Deployment" and pattern.Status != "ComingSoon" %}
-    <div id="open-modal" class="modal-window">
-      <div>
-      <div class="modal-close">
-        <h6 class="category-label">{{pattern.type}}</h6>
-        <a href="{{pattern.url}}">
-          <img src="{{site.baseurl}}/images/buttons/external-link_gray.svg" />
-        </a>
-        <button class="modal-close close">&times;</button>
-    </div>
-      <p><div class="modal-image-container"><div class="modal-image" ><img src="{{pattern.image}}" /> <h4 class="related-patterns">Related Patterns</h4>
-      
-      
-      <!-- MINICARD-START -->
-      {% include related-patterns.html %}
-    </div>
-    </div>
-      <!-- MINICARD-END -->
-     <h3 style="text-align: center;">{{pattern.name}}</h3>
-      <h4>What this pattern does:</h4><p>{{pattern.patternInfo}}</p>
-      <h4>Caveats and Consideration: </h4><p>{{pattern.patternCaveats}}</p></p>
-      <h4>Compatibilty:</h4>
-  
-      {% include partials/compatibility.html %}
-      {% include copy-and-download.html %}
-      </div></div>
+   {% include modal.html %}
       {% endif %}{% endfor %} 
       <!-- MODAL-END -->
   </div>
