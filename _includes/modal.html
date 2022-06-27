@@ -15,8 +15,14 @@
     {% include related-patterns.html %}
 </div>
 <h3 style="text-align: center">{{pattern.name}}</h3>
-<h4>What this pattern does:</h4><p>{{pattern.patternInfo}}</p>
-<h4>Caveats and Consideration: </h4><p>{{pattern.patternCaveats}}</p>
+
+{%if pattern.patternInfo%}
+  <h4>What this pattern does:</h4><p>{{pattern.patternInfo}}</p>
+  <h4>Caveats and Consideration: </h4><p>{{pattern.patternCaveats}}</p></p>
+{%else%}
+  <h4>What this pattern does:</h4><p>{{pattern.filterInfo}}</p>
+  <h4>Caveats and Consideration: </h4><p>{{pattern.filterCaveats}}</p></p>
+{%endif%}
 <h4>Compatibilty:</h4>
 {% include partials/compatibility.html%}
 {% include copy-and-download.html %}
