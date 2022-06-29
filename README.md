@@ -92,6 +92,10 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   ```bash
   $ git clone https://github.com/YOUR-USERNAME/meshery.io
   ```
+- cd into project using
+  ```bash
+  $ cd meshery.io
+  ```
 - Install any Ruby dependencies
   ```bash
   $ bundle install
