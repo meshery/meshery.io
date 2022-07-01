@@ -2,28 +2,6 @@
 layout: catalog
 permalink: /catalog/workloads
 title: Service Mesh Catalog
+filter: Workloads
 ---
-      {% for pattern in site.catalog %}
-      <div class="row">
-        <div class="column">
-          {% if pattern.type == "Workloads" and pattern.Status != "ComingSoon"%}      
-            {% include card.html %}
-            {% endif %}
-           {% if pattern.type == "Workloads" and pattern.Status == "ComingSoon" %}
-              {% include coming-soon.html %}
-            {% endif %}
-            
-    </div>
-  
-  <!-- CARD-END -->
-  
-  
-  <!-- MODAL-START -->
-  {% if pattern.type == "Workloads"  and pattern.Status != "ComingSoon" %}
-  {% include modal.html %}
-      {% endif %}{% endfor %} 
-      <!-- MODAL-END -->
-  </div>
-  <script>
-    document.getElementById("workloads").checked = true;
-  </script>
+{% include catalog-filters.html %}

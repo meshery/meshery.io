@@ -1,36 +1,94 @@
 ---
 layout: catalog
+title: all catalog
 permalink: /catalog
-title: Service Mesh Catalog
-heading: Service Mesh Catalog
-redirect_from: 
- - /service-mesh-patterns
- - /catalog
+pagination:
+    enabled: true
+    collection: catalog
 ---
 
-<!-- CARD-START -->
+<style>
+  .pager a, .pager span {
+    padding: 7px 18px;
+    border: 1px solid #eee;
+    margin-left: -2px;
+    margin-right: -2px;
+    background-color: #ffffff;
+    display: inline-block;
 
-  {% assign catalog = site.catalog | sort: 'patternId' %}
-  {% for pattern in catalog %}
+  }
+  .pager a :hover{
+    background-color: #f1f1f1;
+    color:#333
+  }
+.selected a{
+  background-color: #627f7a;
+}
+.pager {
+    text-align: center;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+ }
+</style>
+
+{% for pattern in paginator.posts %}
   <div class="row">
     <div class="column">
-      
-      {% if pattern.Status == "ComingSoon" %}
-      {% include coming-soon.html %}
-      {% elsif pattern.patternInfo %}
-      {% include card.html %}
-      {% else %}
-      {%include wasm-card.html %}  
-      {% endif %}
-    </div>
-      {% include modal.html %}
-      {% endfor %}   
+        {% if pattern.Status == "ComingSoon" %}
+        {% include coming-soon.html %}
+        {% elsif pattern.patternInfo %}
+        {% include card.html %}
+        {% else %}
+        {%include wasm-card.html %}  
+        {% endif %}
+      </div>
+        {% include modal.html %}
+        {% endfor %}    
   </div>
+
+
+  {% if paginator.total_pages > 1 %}
+  <ul class="pager">
+      {% if paginator.first_page %}
+      <li class="previous">
+          <a href="{{ paginator.first_page_path | prepend: site.baseurl | replace: '//', '/' }}">First</a>
+      </li>
+      {% endif %}
+
+      {% if paginator.previous_page %}
+      <li class="previous">
+          <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"> &laquo;Prev</a>
+      </li>
+      {% endif %}
+
+      {% if paginator.page_trail %}
+        {% for trail in paginator.page_trail %}
+          <li {% if page.url == trail.path %}class="selected"{% endif %}>
+              <a href="{{ trail.path | prepend: site.baseurl | replace: '//', '/' }}" title="{{trail.title}}">{{ trail.num }}</a>
+          </li>
+        {% endfor %}
+      {% endif %}
+
+      {% if paginator.next_page %}
+      <li class="next">
+          <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
+      </li>
+      {% endif %}
+
+       {% if paginator.last_page %}
+      <li class="previous">
+          <a href="{{ paginator.last_page_path | prepend: site.baseurl | replace: '//', '/' }}">Last</a>
+      </li>
+      {% endif %}
+  </ul>
+  {% endif %}
+
 <script>
   document.getElementById("all").checked = true;
 </script>
 
-<script src="../../js/pagination.js"></script>
+
 
 <!-- <script>
 const handleChange = () => {
@@ -127,3 +185,7 @@ for (var i = 0; i < checkboxes.length; i++) {
   }
 </script>
  -->
+<!-- 
+    Showing buttons to move to the next and to the previous list of posts (pager buttons).
+  -->
+  

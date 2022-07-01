@@ -2,29 +2,6 @@
 layout: catalog
 permalink: /catalog/troubleshooting
 title: Service Mesh Catalog
+filter: Troubleshooting
 ---
-
-{% for pattern in site.catalog %}
-      <div class="row">
-        <div class="column">
-          {% if pattern.type == "Troubleshooting" and pattern.Status != "ComingSoon"%}      
-            {% include card.html %}
-            {% endif %}
-           {% if pattern.type == "Troubleshooting" and pattern.Status == "ComingSoon" %}
-              {% include coming-soon.html %}
-            {% endif %}
-            
-    </div>
-  
-  <!-- CARD-END -->
-  
-  
-  <!-- MODAL-START -->
-  {% if pattern.type == "Troubleshooting"  and pattern.Status != "ComingSoon" %}
-  {% include modal.html %}
-      {% endif %}{% endfor %} 
-      <!-- MODAL-END -->
-  </div>
-  <script>
-    document.getElementById("troubleshooting").checked = true;
-  </script>
+{% include catalog-filters.html %}

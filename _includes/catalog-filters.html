@@ -1,0 +1,29 @@
+  <!-- CARD-START -->
+{% for pattern in site.catalog %}
+      <div class="row">
+        <div class="column">
+            {% if pattern.type == {{page.filter}} and pattern.Status != "ComingSoon" and pattern.patternInfo%}
+              {% include card.html %}
+            {% elsif pattern.type == {{page.filter}} and pattern.filterInfo %}
+                {% include wasm-card.html %}
+            {% endif %}
+            {% if pattern.type == {{page.filter}} and pattern.Status == "ComingSoon" %}
+              {% include coming-soon.html %}
+            {% endif %}
+    </div>
+  
+  <!-- CARD-END -->
+
+  
+  <!-- MODAL-START -->
+  {% if pattern.type == {{page.filter}} and pattern.Status != "ComingSoon" %}
+   {% include modal.html %}
+      {% endif %}{% endfor %} 
+      <!-- MODAL-END -->
+  </div>
+  
+
+  <script>
+    document.getElementById("{{page.filter}}".toLocaleLowerCase().split(" ").join("-")).checked = true;
+  </script>
+  
