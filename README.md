@@ -113,7 +113,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
 
 - After making changes, don't forget to commit with the sign-off flag (-s)!
   ```bash
-  $ commit -s -m “my commit message w/signoff”
+  $ git commit -s -m “my commit message w/signoff”
   ```
 - Once all changes have been committed, push the changes.
   ```bash
