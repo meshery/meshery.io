@@ -1,6 +1,6 @@
 ---
 layout: catalog
-title: all catalog
+title: Cloud Native Catalog
 permalink: /catalog
 ---
 
@@ -29,7 +29,8 @@ permalink: /catalog
  }
 </style>
 
-{% for pattern in site.catalog %}
+{% assign catalog = site.catalog | sort: 'patternId' %}
+{% for pattern in catalog %}
   <div class="row">
     <div class="column">
         {% if pattern.Status == "ComingSoon" %}
