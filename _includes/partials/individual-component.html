@@ -8,8 +8,13 @@
 </div>
 <!-- MINICARD-END -->
 
-<h4>What this pattern does:</h4><p>{{pattern.patternInfo}}</p>
-<h4>Caveats and Consideration: </h4><p>{{pattern.patternCaveats}}</p>
+{%if pattern.patternInfo%}
+  <h4>What this pattern does:</h4><p>{{pattern.patternInfo}}</p>
+  <h4>Caveats and Consideration: </h4><p>{{pattern.patternCaveats}}</p></p>
+{%else%}
+  <h4>What this pattern does:</h4><p>{{pattern.filterInfo}}</p>
+  <h4>Caveats and Consideration: </h4><p>{{pattern.filterCaveats}}</p></p>
+{%endif%}
 <h4>Compatibilty:</h4>
 
 {% include partials/compatibility.html%}
