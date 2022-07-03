@@ -26,9 +26,6 @@
 ![Meshery.io website screenshot](images/mesheryio_screenshot.png)
 _Visit [Meshery.io](https://meshery.io/) to learn more!_
 
-![Meshery.io website screenshot](images/mesheryio_screenshot.png)
-_Visit [Meshery.io](https://meshery.io/) to learn more!_
-
 ## What is Meshery?
 
 Meshery is the management plane for developing, deploying, and operating cloud native infrastructure and applications. Among other features, Meshery facilitates learning about the functionality and performance of service meshes. It incorporates the collection and display of metrics from applications running on or across service meshes. At a high level, Meshery provides performance benchmarking, service mesh lifecycle management, and service mesh interoperability and federation.
@@ -92,6 +89,10 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   ```bash
   $ git clone https://github.com/YOUR-USERNAME/meshery.io
   ```
+- cd into project using
+  ```bash
+  $ cd meshery.io
+  ```
 - Install any Ruby dependencies
   ```bash
   $ bundle install
@@ -109,7 +110,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
 
 - After making changes, don't forget to commit with the sign-off flag (-s)!
   ```bash
-  $ commit -s -m “my commit message w/signoff”
+  $ git commit -s -m “my commit message w/signoff”
   ```
 - Once all changes have been committed, push the changes.
   ```bash
