@@ -9,6 +9,8 @@
     transition: 0.4s ease-out;
     box-shadow: 2px 2px 6px 0px  #00D3A9;
     margin-bottom: 20px;
+    display: block;
+    margin-bottom: 20px;
   }
   .card:hover {
     background: rgba(0, 0, 0, 0.3);
@@ -35,12 +37,6 @@
     box-shadow: 2px 2px 6px 0px  #00D3A9;
     margin-bottom: 20px;
   }
-  .card:hover {
-    background: rgba(0, 0, 0, 0.3);
-    transition: 0.5s;
-    cursor: pointer;
-  }
-  
    .overlay-text{
     position: absolute;
     top: 40%;
@@ -66,12 +62,12 @@
   }
   
    h3{
-     font-weight: 300;
+     font-weight: bold;
    }
    p{
     font-family: "Qanelas Soft", "Open Sans", "sans-serif";
     -webkit-font-smoothing: antialiased;
-     font-size: .9rem;
+     font-size: 1.1rem;
    }
     .inner-span {
       font-size: 16px;
@@ -81,6 +77,7 @@
     .column {
     float: left;
     padding: 0 10px;
+    
   }
   .smp-overlay{
     width: 25px;
@@ -147,90 +144,19 @@
     content: "";
     display: table;
     clear: both;
-  }
 
-  /* Style The Dropdown Button */
-.dropbtn {
-    background-color: #00b39fff;
-    color: white;
-    padding: 13px;
-    font-size: 16px;
-    border: none;
-    width: 120px;
-    cursor: pointer;
-    border-radius: 10px;
-  }
-  
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
-    position: relative;
-    float: right; 
-  }
-  
+  }  
   .disabled-label {
     color: #aaa;
   }
-  
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    right: 0;
-    white-space: nowrap;
-
-  }
-  .disabled-option {
-      pointer-events: none;
-      background-color: white;
-  }
-  .disabled-text {
-      font-weight: bold;
-      font-size: 16.5px;
-  }
+ 
   .dropdown-icon {
       width: 20px;
       vertical-align: middle;
       padding: 2px;
   }
-  .dropdown-icon-mesh {
-    width: 25px;
-    vertical-align: middle;
-    padding: 2px;
-  }
-  .dropdown-icon-all {
-    width: 23px;
-    vertical-align: middle;
-    padding-right: 7px;
-}
-
-  .filter-icon {
-    white-space: nowrap;
-    width: 25px;
-    padding-right: 2px;
-  }
-  /* Links inside the dropdown */
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
   
-  /* Change color of dropdown links on hover */
-  .dropdown-content a:hover {background-color: #f1f1f1}
-  
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  
-
-
-  /* PATTERN-STYLES */
+  /* CARD-STYLES */
   .pattern-type {
     cursor: inherit;
       display: flex-start;
@@ -247,7 +173,7 @@
     background-color: #b6d7a8ff;
     border: none;
     cursor: default;
-    height: 23px;
+    height: 1.5rem;
     outline: none;
     padding-left: 5px;
     font-size: 14px;
@@ -260,8 +186,20 @@
     justify-content: center;
    }
   
+   .category-label {
+    display: inline;
+    font-family:"Open Sans", sans-serif;
+    font-weight: normal;
+    white-space: nowrap;
+    border-radius: 1rem;
+    background-color: #b6d7a8ff;
+    padding: .5rem;
+    margin: auto;
+   }
+
    .chip-modal{
-    float: left;
+    float: right;
+    box-shadow: 2px 2px 6px grey;
    }
   
   .pattern-name {
@@ -269,8 +207,9 @@
      font-weight: 1400;
      font-style: bold;
      white-space: nowrap;
+     text-overflow: ellipsis;
      text-align: center;
-    padding: 15px 0 3px 0;
+     padding: 15px 0 3px 0;
     
    }
    .pattern-id {
@@ -289,18 +228,27 @@
    
    }
    .patterns-coming-soon{
-     width: 20%;
-     z-index: 100;
-     top: 0; 
-     right: 0;
-     position: absolute;
-     -webkit-transform:rotate(30deg);
-     -moz-transform: rotate(30deg);
-     -ms-transform: rotate(30deg);
-     -o-transform: rotate(30deg);
-     transform: rotate(30deg);
+    max-width: 70%;
+    position: relative;
+    float: right;
+    z-index: 2;
+    margin-top:-2.5rem;
+    margin-right:-2rem;   
+     transform: translateY(0%) translateX(0%) rotate(10deg) ;
+     -webkit-transform:translateY(0%) translateX(-0%) rotate(10deg) ;
+     -moz-transform: translateY(0%) translateX(-0%) rotate(10deg) ;
+     -ms-transform: translateY(0%) translateX(-0%) rotate(10deg) ;
+     -o-transform: translateY(0%) translateX(-0%) rotate(10deg) ;
    }
   
+   .hidden {
+    visibility: hidden;
+   }
+   
+   .external-link {
+    width: 1rem;
+    padding-bottom: 0.5rem;
+   }
   
   /* CHECKBOX-STYLES */
   .filter-wrap {
@@ -339,20 +287,14 @@
     bottom: 0;
     left: 0;
     z-index: 200;
-    visibility: hidden;
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s;
   }
   .modal-image {
-    width: 250px;
+      width: 250px;
       margin: 30px 30px 2rem 0px;
       float: left;
-      padding-bottom: 19rem;
-  }
-  .align {
-    display: flex;
-    align-items: center;
   }
   ::-webkit-scrollbar {
         display: "none"
@@ -367,32 +309,29 @@
     top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 1.5em 1.5em 1.5em 0.5em;
+    padding: 1.5em 2.5em 1.5em 3em;
     background: #fff;
     border-radius: 1rem;
   }
-  ::-webkit-scrollbar-corner {background-color: transparent;}
-  .modal-window header {
-    font-weight: bold;
-  }
-  .modal-window h1 {
-    font-size: 150%;
-    margin: 0 0 15px;
-  }
+  ::-webkit-scrollbar-corner {background-color: transparent; display: none;}
+
   .service-mesh-image {
     height: 50px;
     width: 50px;
   }
   .modal-close {
-    color: #aaa;
-    line-height: 50px;
-    font-size: 80%;
-    position: absolute;
-    right: 0;
+    display: flex;
+    justify-content: space-between;
+    color: #222;
+    line-height: 1rem;
+    font-size: 1rem;
+    display: flex;
     text-align: center;
-    top: 0;
-    width: 70px;
     text-decoration: none;
+    img {
+      width: 1rem;
+      vertical-align: middle;
+    }
   }
   .modal-pattern-name {
     color:#333;
@@ -432,10 +371,6 @@
     transition: 0.4s ease-out;
     box-shadow: 2px 2px 6px 0px  #00D3A9;
   }
-  .modal-image-container {
-    width: 80%;
-    flex-grow: 1;
-  }
    .modal-smp{
     width: 20px;
     bottom: 0;
@@ -453,20 +388,6 @@
     border-radius: 15px;
     padding-bottom: 2px;
    }
-  .modal-small-header {
-    font-size: 15px;
-    display: block;
-  }
-  .modal-content {
-    font-size: 10px;
-    display: block;
-    padding: 10px;
-  
-  }
-  .modal-content h1{
-    font-size: large;
-    text-align: center;
-  }
   .modal-pattern-id {
     position: absolute;
     bottom: 0;
@@ -538,14 +459,16 @@
     white-space: nowrap;
   } 
   .close {
-    position: absolute;
+    display: flex;
+    justify-content: space-between; 
     transition: all 200ms;
-    font-size: 25px;
+    font-size: 2rem;
     font-weight: bold;
     text-decoration: none;
     color: #333;
     background: transparent;
     border : 0px;
+    padding:0px;
     cursor: pointer;
   }
   .close:hover {
@@ -553,20 +476,15 @@
     opacity: 0.8 !important;
     text-decoration: none;
   }
-  .open-modal-btn{
-    display: block;
-    margin: 0 auto;
-  
-  }
-
+ 
   .pattern-filter-image {
-    width: 80%;
+    display: flex;
+    width: 50%;
     -o-object-fit: contain;
-       object-fit: contain;
-    position: absolute;
-    margin-left: 2%;
-   
+    object-fit: contain;
+    margin: auto;   
    }
+
    .wasm {
     width: 20px;
     bottom: 0;
@@ -575,9 +493,9 @@
     padding-right: 2px;
     padding-bottom: 3px;
    }
-  
-  
-  
+  label{
+    white-space: nowrap;
+  }
   @media screen and (max-width: 700px) {
     .column {
       width: 100%;
@@ -595,8 +513,9 @@
   }
   @media screen and (max-width: 770px){
   .filter-wrap{
-  display: none;
+    height: 70rem;
   }
+}
   @media screen and (max-width: 644px){
   .modal-image{
     width:230px;
@@ -610,7 +529,7 @@
     display: none;
   }
   }
-  }
+
 
 
 
