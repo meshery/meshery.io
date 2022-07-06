@@ -1,4 +1,9 @@
-<p style="text-align:center;" align="center"><a href="https://layer5.io/meshery"><img align="center" style="margin-bottom:20px;" src="https://raw.githubusercontent.com/layer5io/layer5/master/.github/assets/images/meshery/meshery-logo-tag-light-text-side.png"  width="70%" /></a><br /><br /></p>
+<picture>
+  <p style="text-align:center;" align="center">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/meshery/meshery.io/master/images/logos/meshery-logo-light-text-side.png" width="70%" align="center" style="margin-bottom:20px;">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/meshery/meshery.io/master/images/logos/meshery-logo-light-white-text-side.svg" width="70%" align="center" style="margin-bottom:20px;">
+  <img  alt="Shows an illustrated light mode official meshery logo in light color mode and a dark mode meshery logo dark color mode." src="https://raw.githubusercontent.com/meshery/meshery.io/master/images/logos/meshery-logo-light-white-text-side.svg" width="70%" align="center" style="margin-bottom:20px;"/></a><br /><br /></p>
+</picture>
  
 # Meshery.io
 <div align="center">
@@ -17,9 +22,6 @@
 </div>
 
 <h2>Preview of <a href="https://meshery.io">Meshery.io</a> Website<h2>
-
-![Meshery.io website screenshot](images/mesheryio_screenshot.png)
-_Visit [Meshery.io](https://meshery.io/) to learn more!_
 
 ![Meshery.io website screenshot](images/mesheryio_screenshot.png)
 _Visit [Meshery.io](https://meshery.io/) to learn more!_
@@ -49,7 +51,11 @@ Find out more about the <a href="https://layer5.io/community#meshmate">Layer5 co
 
 </p>
 
-<a href="https://meshery.io/community"><img alt="Layer5 Service Mesh Community" src="images/social/slack-128.png" style="margin-left:10px;padding-top:5px;" width="110px" align="right" /></a>
+<picture align="right">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/meshery/meshery/master/docs/assets/img/readme/slack-dark-128.png"  width="110px" align="right" style="margin-left:10px;margin-top:10px;">
+  <source media="(prefers-color-scheme: light)" srcset=https://raw.githubusercontent.com/meshery/meshery/master/docs/assets/img/readme/slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:5px;">
+  <img alt="Shows an illustrated light mode meshery logo in light color mode and a dark mode meshery logo dark color mode." src="https://raw.githubusercontent.com/meshery/meshery/master/docs/assets/img/readme/slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:13px;">
+</picture>
 
 <a href="http://slack.layer5.io"><img alt="Layer5 Service Mesh Community" src="images/social/community.png" style="margin-right:8px;padding-top:5px;" width="140px" align="left" /></a>
 
@@ -83,6 +89,10 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   ```bash
   $ git clone https://github.com/YOUR-USERNAME/meshery.io
   ```
+- cd into project using
+  ```bash
+  $ cd meshery.io
+  ```
 - Install any Ruby dependencies
   ```bash
   $ bundle install
@@ -100,7 +110,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
 
 - After making changes, don't forget to commit with the sign-off flag (-s)!
   ```bash
-  $ commit -s -m “my commit message w/signoff”
+  $ git commit -s -m “my commit message w/signoff”
   ```
 - Once all changes have been committed, push the changes.
   ```bash
