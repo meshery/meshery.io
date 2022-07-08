@@ -30,19 +30,40 @@ permalink: /catalog
 </style>
 
 {% assign catalog = site.catalog | sort: 'patternId' %}
-{% for pattern in catalog %}
-  <div class="row">
-    <div class="column">
-        {% if pattern.Status == "ComingSoon" %}
-        {% include coming-soon.html %}
-        {% elsif pattern.patternInfo %}
-        {% include card.html %}
-        {% else %}
-        {%include wasm-card.html %}  
+<div class = "row">
+  {% for pattern in catalog %}
+      <div class="column">
+        {% if pattern.patternInfo and pattern.Status != "ComingSoon" %}
+          {% include card.html %}
+        {% include modal.html %}
         {% endif %}
       </div>
-        {% include modal.html %}
-        {% endfor %}    
+      
+      {% endfor %}
+    
+  
+
+  {% for pattern in catalog %}
+
+      <div class="column">
+        {% if pattern.filterInfo and pattern.Status != "ComingSoon" %}
+          {% include wasm-card.html %}
+          {% include modal.html %}
+        {% endif %}
+      </div>
+      
+    {% endfor %}
+    
+  
+  {% for pattern in catalog %}
+
+      <div class="column">
+        {% if pattern.patternInfo and pattern.Status == "ComingSoon" %}
+          {% include coming-soon.html %}
+        {% endif %}
+      </div>
+    {% endfor %}
+    
   </div>
 
 
