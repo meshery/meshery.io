@@ -1,6 +1,6 @@
 ---
 layout: item
-name: Istio + SPIRE
+name: Istio and SPIRE
 type: Deployment
 compatibility:
     - Istio
@@ -11,6 +11,8 @@ patternCaveats: "Not configured for federated SPIRE deployment."
 URL: "https://raw.githubusercontent.com/service-mesh-patterns/service-mesh-patterns/master/samples/IstioSPIRE.yaml"
 downloadLink: IstioSPIRE.yaml
 by: Layer5 
+pagination: 
+  enabled: true
 ---
     
 name: IstioSpireNew
