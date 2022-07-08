@@ -1,0 +1,528 @@
+---
+layout: item
+name: Istio + SPIRE
+type: Deployment
+compatibility:
+    - Istio
+patternId: MESHERY021
+image: /images/patterns/service-mesh.svg
+patternInfo: "An Istio configuration with SPIRE as the integrated CA.  This configuraiton is suitable to for production deployments."
+patternCaveats: "Not configured for federated SPIRE deployment."
+URL: "https://raw.githubusercontent.com/service-mesh-patterns/service-mesh-patterns/master/samples/IstioSPIRE.yaml"
+downloadLink: IstioSPIRE.yaml
+by: Layer5 
+---
+    
+name: IstioSpireNew
+services:
+  4a0acb06-10f9-4417-90ef-3200948f2fd2:
+    name: spire
+    type: Namespace.K8s
+    namespace: default
+  7a1f2315-d88a-4411-84a2-4efc25c68f11:
+    name: csi.spiffe.io
+    type: CSIDriver.K8s
+    namespace: default
+    settings:
+      attachRequired: false
+      fsGroupPolicy: None
+      podInfoOnMount: true
+      volumeLifecycleModes:
+        - Ephemeral
+  27bd3195-00d3-4f0a-a302-cb67940093b6:
+    name: spire-server
+    type: ConfigMap.K8s
+    namespace: spire
+    settings:
+      data:
+        server.conf: |-
+          server {
+            bind_address = "0.0.0.0"
+            bind_port = "8081"
+            socket_path = "/run/spire/sockets/server.sock"
+            trust_domain = "example.org"
+            data_dir = "/run/spire/data"
+            log_level = "DEBUG"
+            ca_key_type = "rsa-2048"
+            default_svid_ttl = "1h"
+            ca_subject = {
+              country = ["US"],
+              organization = ["SPIFFE"],
+              common_name = "",
+            }
+          }
+          plugins {
+            DataStore "sql" {
+              plugin_data {
+                database_type = "sqlite3"
+                connection_string = "/run/spire/data/datastore.sqlite3"
+              }
+            }
+            NodeAttestor "k8s_psat" {
+              plugin_data {
+                clusters = {
+                  # NOTE: Change this to your cluster name
+                  "demo-cluster" = {
+                    use_token_review_api_validation = true
+                    service_account_allow_list = ["spire:spire-agent"]
+                  }
+                }
+              }
+            }
+            KeyManager "disk" {
+              plugin_data {
+                keys_path = "/run/spire/data/keys.json"
+              }
+            }
+            Notifier "k8sbundle" {
+              plugin_data {
+                namespace = "spire"
+                config_map = "trust-bundle"
+                config_map_key = "root-cert.pem"
+              }
+            }
+          }
+          health_checks {
+            listener_enabled = true
+            bind_address = "0.0.0.0"
+            bind_port = "8080"
+            live_path = "/live"
+            ready_path = "/ready"
+          }
+  82d05cee-eb6f-4de9-83b1-9d3a2f2877eb:
+    name: spire-agent-cluster-role-binding
+    type: ClusterRoleBinding.K8s
+    namespace: default
+  100d549b-f83a-4ca0-9fea-ab324d4dc362:
+    name: spire-agent
+    type: ServiceAccount.K8s
+    namespace: spire
+  1390fc74-b50b-48ee-9451-2ce037cb8095:
+    name: spire-server-trust-role
+    type: ClusterRole.K8s
+    namespace: default
+  1805e4f5-d481-41e0-a533-6c49235f25d2:
+    name: spire-server
+    type: Service.K8s
+    namespace: spire
+    settings:
+      spec:
+        ports:
+          - name: grpc
+            port: 8081
+            protocol: TCP
+            targetPort: 8081
+        selector:
+          app: spire-server
+        type: NodePort
+  6807f01d-69b2-4a29-b909-2358672a8961:
+    name: spire-agent-cluster-role
+    type: ClusterRole.K8s
+    namespace: default
+  17312d5e-8048-4d25-bd22-74c661f731df:
+    name: spire-agent
+    type: DaemonSet.K8s
+    namespace: spire
+    labels:
+      app: spire-agent
+    settings:
+      spec:
+        selector:
+          matchLabels:
+            app: spire-agent
+        template:
+          metadata:
+            labels:
+              app: spire-agent
+            namespace: spire
+          spec:
+            containers:
+              - args:
+                  - '-config'
+                  - /run/spire/config/agent.conf
+                image: gcr.io/spiffe-io/spire-agent:1.2.0
+                livenessProbe:
+                  failureThreshold: 2
+                  httpGet:
+                    path: /live
+                    port: 8080
+                  initialDelaySeconds: 15
+                  periodSeconds: 60
+                  timeoutSeconds: 3
+                name: spire-agent
+                readinessProbe:
+                  httpGet:
+                    path: /ready
+                    port: 8080
+                  initialDelaySeconds: 5
+                  periodSeconds: 5
+                volumeMounts:
+                  - mountPath: /run/spire/config
+                    name: spire-config
+                    readOnly: true
+                  - mountPath: /run/spire/bundle
+                    name: spire-bundle
+                  - mountPath: /run/secrets/workload-spiffe-uds
+                    name: spire-agent-socket-dir
+                  - mountPath: /var/run/secrets/tokens
+                    name: spire-token
+              - args:
+                  - '-node-id'
+                  - CSI_NODE
+                  - '-workload-api-socket-dir'
+                  - /spire-agent-socket
+                  - '-csi-socket-path'
+                  - /spiffe-csi/csi.sock
+                image: ghcr.io/spiffe/spiffe-csi-driver:0.1.0
+                imagePullPolicy: IfNotPresent
+                name: spiffe-csi-driver
+                securityContext:
+                  privileged: true
+                volumeMounts:
+                  - mountPath: /spire-agent-socket
+                    name: spire-agent-socket-dir
+                    readOnly: true
+                  - mountPath: /spiffe-csi
+                    name: spiffe-csi-socket-dir
+                  - mountPath: /var/lib/kubelet/pods
+                    mountPropagation: Bidirectional
+                    name: mountpoint-dir
+              - args:
+                  - '-csi-address'
+                  - /spiffe-csi/csi.sock
+                  - '-kubelet-registration-path'
+                  - /var/lib/kubelet/plugins/csi.spiffe.io/csi.sock
+                image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.4.0
+                imagePullPolicy: IfNotPresent
+                name: node-driver-registrar
+                volumeMounts:
+                  - mountPath: /spiffe-csi
+                    name: spiffe-csi-socket-dir
+                  - mountPath: /registration
+                    name: kubelet-plugin-registration-dir
+            dnsPolicy: ClusterFirstWithHostNet
+            hostNetwork: true
+            hostPID: true
+            initContainers:
+              - args:
+                  - '-t'
+                  - '30'
+                  - spire-server:8081
+                image: gcr.io/spiffe-io/wait-for-it
+                name: init
+            serviceAccountName: spire-agent
+            volumes:
+              - configMap:
+                  name: spire-agent
+                name: spire-config
+              - configMap:
+                  name: trust-bundle
+                name: spire-bundle
+              - name: spire-token
+                projected:
+                  sources:
+                    - serviceAccountToken:
+                        audience: spire-server
+                        expirationSeconds: 7200
+                        path: spire-agent
+              - hostPath:
+                  path: /run/spire/socket-dir
+                  type: DirectoryOrCreate
+                name: spire-agent-socket-dir
+              - hostPath:
+                  path: /var/lib/kubelet/plugins/csi.spiffe.io
+                  type: DirectoryOrCreate
+                name: spiffe-csi-socket-dir
+              - hostPath:
+                  path: /var/lib/kubelet/pods
+                  type: Directory
+                name: mountpoint-dir
+              - hostPath:
+                  path: /var/lib/kubelet/plugins_registry
+                  type: Directory
+                name: kubelet-plugin-registration-dir
+  38945373-1ab4-48e3-9807-92d52220dff2:
+    name: spire-server-trust-role-binding
+    type: ClusterRoleBinding.K8s
+    namespace: default
+  3b8e2fd3-f5be-4819-8403-adf0f446045e:
+    name: k8s-workload-registrar
+    type: ConfigMap.K8s
+    namespace: spire
+    settings:
+      data:
+        k8s-workload-registrar.conf: |-
+          trust_domain = "example.org"
+          server_socket_path = "/run/spire/sockets/server.sock"
+          cluster = "demo-cluster"
+          mode = "crd"
+          metrics_bind_addr = "0"
+  ab5c92bc-569a-4388-8867-0d20f6e348f5:
+    name: spiffeids.spiffeid.spiffe.io
+    type: CustomResourceDefinition.K8s
+    namespace: default
+    annotations:
+      controller-gen.kubebuilder.io/version: v0.2.4
+    settings:
+      group: spiffeid.spiffe.io
+      names:
+        kind: SpiffeID
+        listKind: SpiffeIDList
+        plural: spiffeids
+        singular: spiffeid
+      scope: Namespaced
+      versions:
+        - name: v1beta1
+          schema:
+            openAPIV3Schema:
+              description: SpiffeID is the Schema for the spiffeid API
+              properties:
+                apiVersion:
+                  description: >-
+                    APIVersion defines the versioned schema of this
+                    representation of an object. Servers should convert
+                    recognized schemas to the latest internal value, and may
+                    reject unrecognized values. More info:
+                    https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+                  type: string
+                kind:
+                  description: >-
+                    Kind is a string value representing the REST resource this
+                    object represents. Servers may infer this from the endpoint
+                    the client submits requests to. Cannot be updated. In
+                    CamelCase. More info:
+                    https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+                  type: string
+                metadata:
+                  type: object
+                spec:
+                  description: SpiffeIDSpec defines the desired state of SpiffeID
+                  properties:
+                    dnsNames:
+                      items:
+                        type: string
+                      type: array
+                    downstream:
+                      type: boolean
+                    federatesWith:
+                      items:
+                        type: string
+                      type: array
+                    parentId:
+                      type: string
+                    selector:
+                      properties:
+                        agent_node_uid:
+                          description: UID of the node
+                          type: string
+                        arbitrary:
+                          description: Arbitrary selectors
+                          items:
+                            type: string
+                          type: array
+                        cluster:
+                          description: The k8s_psat cluster name
+                          type: string
+                        containerImage:
+                          description: Container image to match for this spiffe ID
+                          type: string
+                        containerName:
+                          description: Container name to match for this spiffe ID
+                          type: string
+                        namespace:
+                          description: Namespace to match for this spiffe ID
+                          type: string
+                        nodeName:
+                          description: Node name to match for this spiffe ID
+                          type: string
+                        podLabel:
+                          additionalProperties:
+                            type: string
+                          description: Pod label name/value to match for this spiffe ID
+                          type: object
+                        podName:
+                          description: Pod name to match for this spiffe ID
+                          type: string
+                        podUid:
+                          description: Pod UID to match for this spiffe ID
+                          type: string
+                        serviceAccount:
+                          description: ServiceAccount to match for this spiffe ID
+                          type: string
+                      type: object
+                    spiffeId:
+                      type: string
+                  required:
+                    - parentId
+                    - selector
+                    - spiffeId
+                  type: object
+                status:
+                  description: SpiffeIDStatus defines the observed state of SpiffeID
+                  properties:
+                    entryId:
+                      description: >-
+                        INSERT ADDITIONAL STATUS FIELD - define observed state
+                        of cluster Important: Run "make" to regenerate code
+                        after modifying this file
+                      type: string
+                  type: object
+              type: object
+          served: true
+          storage: true
+          subresources:
+            status: {}
+  b15ea2bc-f496-47bc-a149-2169d08e23de:
+    name: spire-agent
+    type: ConfigMap.K8s
+    namespace: spire
+    settings:
+      data:
+        agent.conf: |-
+          agent {
+            data_dir = "/run/spire"
+            log_level = "DEBUG"
+            server_address = "spire-server"
+            server_port = "8081"
+            socket_path = "/run/secrets/workload-spiffe-uds/socket"
+            trust_bundle_path = "/run/spire/bundle/root-cert.pem"
+            trust_domain = "example.org"
+          }
+          plugins {
+            NodeAttestor "k8s_psat" {
+              plugin_data {
+                # NOTE: Change this to your cluster name
+                cluster = "demo-cluster"
+              }
+            }
+            KeyManager "memory" {
+              plugin_data {
+              }
+            }
+            WorkloadAttestor "k8s" {
+              plugin_data {
+                # Defaults to the secure kubelet port by default.
+                # Minikube does not have a cert in the cluster CA bundle that
+                # can authenticate the kubelet cert, so skip validation.
+                skip_kubelet_verification = true
+              }
+            }
+            WorkloadAttestor "unix" {
+                plugin_data {
+                }
+            }
+          }
+          health_checks {
+            listener_enabled = true
+            bind_address = "0.0.0.0"
+            bind_port = "8080"
+            live_path = "/live"
+            ready_path = "/ready"
+          }
+  cbd36a2a-0091-4af0-b32d-336da60b12d7:
+    name: spire-server
+    type: StatefulSet.K8s
+    namespace: spire
+    labels:
+      app: spire-server
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: spire-server
+        serviceName: spire-server
+        template:
+          metadata:
+            labels:
+              app: spire-server
+            namespace: spire
+          spec:
+            containers:
+              - args:
+                  - '-config'
+                  - /run/spire/config/server.conf
+                image: gcr.io/spiffe-io/spire-server:1.2.0
+                livenessProbe:
+                  failureThreshold: 2
+                  httpGet:
+                    path: /live
+                    port: 8080
+                  initialDelaySeconds: 15
+                  periodSeconds: 60
+                  timeoutSeconds: 3
+                name: spire-server
+                ports:
+                  - containerPort: 8081
+                readinessProbe:
+                  httpGet:
+                    path: /ready
+                    port: 8080
+                  initialDelaySeconds: 5
+                  periodSeconds: 5
+                volumeMounts:
+                  - mountPath: /run/spire/config
+                    name: spire-config
+                    readOnly: true
+                  - mountPath: /run/spire/data
+                    name: spire-data
+                    readOnly: false
+                  - mountPath: /run/spire/sockets
+                    name: spire-registration-socket
+                    readOnly: false
+              - args:
+                  - '-config'
+                  - /run/spire/config/k8s-workload-registrar.conf
+                image: gcr.io/spiffe-io/k8s-workload-registrar:1.2.0
+                name: k8s-workload-registrar
+                ports:
+                  - containerPort: 9443
+                    name: webhook
+                    protocol: TCP
+                volumeMounts:
+                  - mountPath: /run/spire/config
+                    name: k8s-workload-registrar-config
+                    readOnly: true
+                  - mountPath: /run/spire/sockets
+                    name: spire-registration-socket
+                    readOnly: true
+            serviceAccountName: spire-server
+            shareProcessNamespace: true
+            volumes:
+              - configMap:
+                  name: spire-server
+                name: spire-config
+              - configMap:
+                  name: k8s-workload-registrar
+                name: k8s-workload-registrar-config
+              - hostPath:
+                  path: /run/spire/server-sockets
+                  type: DirectoryOrCreate
+                name: spire-registration-socket
+        volumeClaimTemplates:
+          - metadata:
+              name: spire-data
+              namespace: spire
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 1Gi
+  db591e2d-cadd-44a0-afba-fbdfd355108a:
+    name: trust-bundle
+    type: ConfigMap.K8s
+    namespace: spire
+  e4ee1fcd-9701-4fb9-b7e8-50491269fcc0:
+    name: spire-server
+    type: ServiceAccount.K8s
+    namespace: spire
+  e3046546-2c99-409c-afab-aee292413690:
+    name: k8s-workload-registrar-role
+    type: ClusterRole.K8s
+    namespace: default
+  f49628fe-a1d4-4c25-8c46-a3f81f4db92e:
+    name: k8s-workload-registrar-role-binding
+    type: ClusterRoleBinding.K8s
+    namespace: default
+
