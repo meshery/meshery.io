@@ -1,6 +1,7 @@
 <!-- more conditions will be needed to be added when more patterns are introduced.  -->
-{% if pattern.type == "Deployment" %}
-    {% include partials/mini-card.html %}
-{% elsif pattern.type == "Traffic Management" %}
-      {% include partials/mini-card.html %}
-{% endif %}
+{% for pttrn in site.catalog %}
+    {% if pttrn.type == pattern.type and pttrn.patternId != pattern.patternId %}
+        {% include partials/mini-card.html %}
+        {% break %}
+    {% endif %}
+{% endfor %}
