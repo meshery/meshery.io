@@ -1,35 +1,37 @@
 ---
 layout: page
 title: All Cupcakes
-pagination: 
-  enabled: true
-  collection: catalog
+pagination:
+enabled: true
+collection: catalog
 ---
 <div class="blog-post text-container">
 	{% include type.html post=page %}
 
-	<p class="editor-link"><a href="cloudcannon:collections/{{ page.path }}" class="btn"><strong>&#9998;</strong> Edit Post</a></p>
+	<p class="editor-link"><a href="cloudcannon:collections/{{ page.path }}" class="btn"><strong>&#9998;</strong> Edit
+			Post</a></p>
 	<div class="post-content">
 		{{ content }}
 
-		
-        {% assign catalog = site.catalog | sort: 'patternId' %}
-        {% for author in catalog %}
-        <!-- <p  style= "font-size:20px;"> 
+
+		{% assign catalog = site.catalog | sort: 'patternId' %}
+		{% for author in catalog %}
+		<!-- <p  style= "font-size:20px;"> 
           {{ author.by }} 
         </p> -->
-       {% endfor %}
-        
-        
-	   <div class="blog-navigation">
-		<div style="justify-content:space-between; display: flex;">
-			{% if page.previous.url %}
+		{% endfor %}
+
+
+		<div class="blog-navigation">
+			<div style="justify-content:space-between; display: flex;">
+				{% if page.previous.url %}
 				<a href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.title }}</a>
-			{% endif %}
-			{% if page.next.url %}
-				<a  href="{% include relative-src.html src=page.next.url %}">{{ page.next.title }} &raquo;</a>
-			{% endif %}
-		</div>
+				{% endif %}
+				{% if page.next.url %}
+				<a href="{% include relative-src.html src=page.next.url %}">{{ page.next.title }} &raquo;</a>
+				{% endif %}
+			</div>
 		</div>
 	</div>
+</div>
 </div>
