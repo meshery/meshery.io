@@ -15,7 +15,5 @@ group :jekyll_plugins do
   gem 'jekyll-seo-tag', '2.8.0'
   gem 'jekyll-sitemap', '1.4.0'
   gem 'jekyll-redirect-from'
-  gem 'tzinfo-data'
   gem 'tzinfo'
-  gem 'eventmachine', '1.2.7'
 end
