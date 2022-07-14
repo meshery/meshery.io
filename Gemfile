@@ -18,4 +18,4 @@ group :jekyll_plugins do
   gem 'tzinfo'
 end
 
-gem "webrick", "~> 1.7"
+
