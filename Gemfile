@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '3.0.3'
+ruby '2.7.5'
 
 gem 'jekyll', '4.2.2'
 gem 'tzinfo-data', platforms: [:x64_mingw]
