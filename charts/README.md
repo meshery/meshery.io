@@ -1,6 +1,6 @@
 # Meshery Chart
 
-Meshery is the Cloud Native management plane. This repository include meshery Helm chart.
+Meshery is the cloud native management plane. This repository include meshery Helm chart.
 
 The chart source code:
 
