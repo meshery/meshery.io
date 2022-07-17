@@ -1,0 +1,154 @@
+<style>
+    .help-modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 100; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  background-color: #00D3A9;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #00B39F;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #1E2117;
+  color: "#fff"
+}
+
+/* Style the tab content */
+.tabcontent {
+  padding: 6px 12px;
+  border-top: none;
+}
+
+/* Modal Content/Box */
+.help-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  border: 1px solid #888;
+  width: 60%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.closed {
+  color: black;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.closed:hover,
+.closed:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+Easily <span style="color: #00D3A9; cursor: pointer;" id="myBtn">import any catalog item</span> into Meshery. Have a design pattern to share? <a style ="color: #00D3AF; text-decoration: none;" href="https://github.com/meshery/meshery.io/issues/new?assignees=&labels=area%2Fcatalog&template=add-new-pattern.md&title=%5BCatalog%5D">Add yours to the catalog.</a>
+<div id="myModal" class="help-modal">
+    <div class="help-modal-content">
+       
+        <div class="tab">
+            <span class="closed" style=" padding: 4px 4px">&times;</span>
+            <button class="tablinks active" onclick="openTab(event, 'MesheryUI')">Meshery UI</button>
+            <button class="tablinks" onclick="openTab(event, 'MesheryCLI')">Meshery CLI</button>
+          </div>
+          
+          <!-- Tab content -->
+          <div id="MesheryUI" class="tabcontent">
+            <h3>Meshery UI</h3>
+            <a href="{{ site.baseurl }}/images/screens/pattern-import.mp4"
+				data-fancybox="images" data-caption="Import your patterns">
+        <div style="text-align: center;">
+				<iframe width="860" height="540" src="{{ site.baseurl }}/images/screens/pattern-import.mp4" alt="Import your patterns" 
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen	></iframe>
+          </div>
+			</a>
+          </div>
+          
+          <div id="MesheryCLI" class="tabcontent" style="display: none;">
+            <h3>Meshery CLI</h3>
+            <p>1. Apply a pattern file. </p>
+            <div id="start-pattern" class="highlight-code">
+                <p class="code-box" style="height: 40px; line-height: 15px; color: white"><code style="position: absolute;">
+                    mesheryctl pattern apply -f [file | URL]
+                 </code></p>
+                  <!-- copy to clipboard -->
+                  <a class="btn tooltip" style="position: absolute; top:0.10rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-brew"
+                    data-clipboard-text="mesheryctl pattern apply -f [file | URL]" onmouseout="resetCopyText(this)">
+                    <i class="far fa-copy"></i>
+                    <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 2rem; left: -80px;">Copy to clipboard</span>
+                  </a>
+              </div>
+            <p>2. Onboard an application.</p>
+            <div id="start-app" class="highlight-code">
+                <p class="code-box" style="height: 40px; line-height: 15px; color: white"><code style="position: absolute;">
+                    mesheryctl app onboard -f [file-path]
+                 </code></p>
+                  <!-- copy to clipboard -->
+                  <a class="btn tooltip" style="position: absolute; top:0.10rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-brew"
+                    data-clipboard-text="mesheryctl app onboard -f [file-path]" onmouseout="resetCopyText(this)">
+                    <i class="far fa-copy"></i>
+                    <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 2rem; left: -80px;">Copy to clipboard</span>
+                  </a>
+              </div>
+            <p>3. Apply a WASM filter file.</p>
+            <div id="start-pattern" class="highlight-code">
+                <p class="code-box" style="height: 40px; line-height: 15px; color: white"><code style="position: absolute;">
+                    mesheryctl exp filter apply --file [GitHub Link]
+                 </code></p>
+                  <!-- copy to clipboard -->
+                  <a class="btn tooltip" style="position: absolute; top:0.10rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-brew"
+                    data-clipboard-text="mesheryctl exp filter apply --file [GitHub Link]" onmouseout="resetCopyText(this)">
+                    <i class="far fa-copy"></i>
+                    <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 2rem; left: -80px;">Copy to clipboard</span>
+                  </a>
+              </div>
+          </div>
+          
+</div>
+</div>
+
+<script src="{{  site.baseurl }}/assets/js/help-modal.js"></script>
+<script>
+function openTab(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+</script>
