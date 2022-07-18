@@ -1,7 +1,7 @@
 ---
 layout: item
 name: JWT-Filter
-type: wasm filter
+type: JWT
 compatibility:
         - 
 patternId: FILTER007
