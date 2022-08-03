@@ -3,30 +3,41 @@
     var btnOpen = document.querySelectorAll('.link');
     var btnClose = document.querySelectorAll('.close');
     var cont = document.querySelectorAll('.pattern')
+    var modal_container = document.querySelectorAll('.click-container')
 
+    for (i = 0; i < cont.length; i++) {
 
-    console.log(cont);
-    for(i=0;i<cont.length;i++){
-        console.log(cont[i]);
-        if(i%2!=0){
+        if (i % 2 != 0) {
             cont[i].style.flexDirection = "row-reverse";
         }
     }
-    console.log(modal);
-    for(let i in modal){
-    btnClose[i].addEventListener('click',function(){
-        modal[i].style.visiblity = "hidden";
-        modal[i].style.opacity = "0";
-        modal[i].style.pointerEvents= "none";
-        console.log('clicked btn');
-    });
-    btnOpen[i].addEventListener('click',function(){
-        modal[i].style.visibility = "visible";
-        modal[i].style.opacity = "1";
-        modal[i].style.pointerEvents="auto";
-        console.log('click btn open');
-        console.log(modal);
-    });
+
+    for (let i in modal) {
+        btnClose[i].addEventListener('click', function () {
+            modal[i].style.visiblity = "hidden";
+            modal[i].style.opacity = "0";
+            modal[i].style.pointerEvents = "none";
+
+        });
+        btnOpen[i].addEventListener('click', function () {
+            modal[i].style.visibility = "visible";
+            modal[i].style.opacity = "1";
+            modal[i].style.pointerEvents = "auto";
+
+
+        });
+
+        modal[i].addEventListener('click', function (event) {
+            let clickId = event.path[0].id
+            if (clickId === "open-modal") {
+                modal[i].style.visiblity = "hidden";
+                modal[i].style.opacity = "0";
+                modal[i].style.pointerEvents = "none";
+            }
+        })
+
     }
+
+
 
 </script>

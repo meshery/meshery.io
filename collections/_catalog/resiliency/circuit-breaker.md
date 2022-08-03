@@ -1,7 +1,7 @@
 ---
 layout: item
 name: Circuit Breaker
-type: Traffic Management
+type: Resiliency
 compatibility:
     - Istio
     - Linkerd
