@@ -13,12 +13,6 @@
     }
 
     for (let i in modal) {
-        btnClose[i].addEventListener('click', function () {
-            modal[i].style.visiblity = "hidden";
-            modal[i].style.opacity = "0";
-            modal[i].style.pointerEvents = "none";
-
-        });
         btnOpen[i].addEventListener('click', function () {
             modal[i].style.visibility = "visible";
             modal[i].style.opacity = "1";
@@ -27,8 +21,15 @@
 
         });
 
+        btnClose[i].addEventListener('click', function () {
+            modal[i].style.visiblity = "hidden";
+            modal[i].style.opacity = "0";
+            modal[i].style.pointerEvents = "none";
+
+        });
+
         modal[i].addEventListener('click', function (event) {
-            let clickId = event.path[0].id
+            let clickId = event.target.id
             if (clickId === "open-modal") {
                 modal[i].style.visiblity = "hidden";
                 modal[i].style.opacity = "0";
