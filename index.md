@@ -1,6 +1,6 @@
 ---
 layout: home
 title: Meshery | The Cloud Native Manager
-description: Lifecycle, performance, and configuration management across any service mesh. Confidently operate service meshes like Istio, Linkerd, Envoy, Citrix, Cilium Service Mesh, App Mesh, Consul, Kuma, Traefik Mesh, Tanzu, NGINX, and Open Service Mesh. Patterns and best practices of service mesh operation.
-image: images/logos/meshery-logo-tag-dark-text-side.png
+description: Meshery is the open source, cloud native management plane that enables the adoption, operation, and management of Kubernetes, any service mesh, and their workloads.
+image: images/logos/meshery-gradient.png
 ---
