@@ -11,8 +11,8 @@
     <label><input type="radio" value="Scaling" id="scaling" onchange='window.location.assign("/catalog/scaling")'/> Scaling </label>
     <label><input type="radio" value="Resiliency" id="resiliency" onchange='window.location.assign("/catalog/resiliency")'/> Resiliency </label>   
   </div>
-  <p><strong>Compatibilty:</strong></p>
-  <div class="compatibility-div">
+  <p id="compatibility-para" class="compatibility-para"><strong>Compatibilty:</strong></p>
+  <div id="compatibility-div" class="compatibility-div">
       <label><input type="radio" value="Istio" id="istio" onchange='window.location.assign("/catalog/istio")' /> <img class="dropdown-icon" src="/images/istio.svg"/> Istio </label>
       <label><input type="radio" value="Linkerd" id="linkerd" onchange='window.location.assign("/catalog/linkerd")'/> <img class="dropdown-icon" src="/images/linkerd.svg"/> Linkerd </label>
       <label><input type="radio" value="Consul" id="consul" onchange='window.location.assign("/catalog/consul")'/> <img class="dropdown-icon" src="/images/consul.svg"/> Consul </label>
@@ -23,11 +23,42 @@
       <label><input type="radio" value="Nginx" id="nginx" onchange='window.location.assign("/catalog/nginx")'/> <img class="dropdown-icon" src="/images/nginx-sm.svg"/> NGINX </label>
       <label><input type="radio" value="NSM" id="nsm" onchange='window.location.assign("/catalog/nsm")'/> <img class="dropdown-icon" src="/images/nsm.svg"/> Network Service Mesh </label>   
     </div>
-    <p><strong>Technology:</strong></p>
-    <div class="tech-div">
+    <p id="tech-para" class="tech-para"><strong>Technology:</strong></p>
+    <div id="tech-div" class="tech-div">
       <label><input type="radio" value="WebAssembly" id="webassembly" onchange='window.location.assign("/catalog/webassembly")'/> WebAssembly </label>
       <label><input type="radio" value="JWT" onchange='window.location.assign("/catalog/jwt")'/> JWT </label>
       <label class="disabled-label"><input type="radio" value="JWT" onchange='window.location.assign("/catalog/eBPF")' disabled/> eBPF </label>
       <label class="disabled-label"><input type="radio" value="JWT" onchange='window.location.assign("/catalog/OPA")' disabled/> OPA policies </label>
     </div>
+    <button class="load-more" id="load-more">Load more filters</button>
   </div>
+<script>
+  // target elements to toggle
+  var comp_p = document.getElementById("compatibility-para")
+  var comp_div = document.getElementById("compatibility-div")
+  var tech_p = document.getElementById("tech-para")
+  var tech_div = document.getElementById("tech-div")
+  // toggler
+  var show_more_button = document.getElementById("load-more")
+  //logic
+  show_more_button.addEventListener("click",handleClick)
+
+  function handleClick(){
+    var innerHtml = show_more_button.innerHTML
+    if(innerHtml === "Load more filters"){
+      comp_p.style.display = 'block'
+      tech_p.style.display = 'block'
+      comp_div.style.display = "grid"
+      tech_div.style.display = "grid"
+      show_more_button.innerHTML = "Show Less"
+    }
+    else{
+      comp_p.style.display = 'none'
+      tech_p.style.display = 'none'
+      comp_div.style.display = "none"
+      tech_div.style.display = "none"
+       show_more_button.innerHTML = "Load more filters"
+    }
+  }
+
+</script>
