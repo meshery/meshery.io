@@ -1,6 +1,6 @@
 ---
 layout: item
-name: Istio and SPIRE
+name: Istio-ready SPIRE
 type: Deployment
 compatibility:
     - Istio
