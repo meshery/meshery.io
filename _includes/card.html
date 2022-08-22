@@ -3,7 +3,12 @@
            <small class="pattern-type"> {{pattern.type}}</small>
        </div>
        <h4 class="pattern-name">{{pattern.name}}</h4>
-       <img class= "pattern-image" src="{{pattern.image}}" />
+       {% if pattern.name == "Istio and SPIRE" %}
+        <img class= "pattern-image-istio" src="{{pattern.image[0]}}" />
+        <img class= "pattern-image-spire" src="{{pattern.image[1]}}" />
+       {% else %}
+        <img class= "pattern-image" src="{{pattern.image}}" />
+       {% endif %}
      <h6 class="pattern-id">
       <img class="smp"
         src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
