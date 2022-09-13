@@ -1,147 +1,322 @@
 <style>
-.dropbtn {
-  background-color: #00B39F;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
+  .dropbtn {
+    background-color: #00b39f;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
 
+  #myInput {
+    box-sizing: border-box;
+    background-image: url("searchicon.png");
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
 
-#myInput {
-  box-sizing: border-box;
-  background-image: url('searchicon.png');
-  background-position: 14px 12px;
-  background-repeat: no-repeat;
-  font-size: 16px;
-  padding: 14px 20px 12px 45px;
-  border: none;
-  border-bottom: 1px solid #ddd;
-}
+  #myInput:focus {
+    outline: 3px solid #ddd;
+  }
 
-#myInput:focus {outline: 3px solid #ddd;}
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 1;
+  }
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f6f6f6;
-  min-width: 230px;
-  overflow: auto;
-  border: 1px solid #ddd;
-  z-index: 1;
-}
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
+  .dropdown a:hover {
+    background-color: #ddd;
+    cursor: pointer;
+  }
 
-.dropdown a:hover {
-  background-color: #ddd;
-  cursor: pointer;
-}
-
-.show {display: block;}
+  .show {
+    display: block;
+  }
 </style>
 
 <div class="filter-wrap">
   <div class="dropdown">
-  <button onclick="handleDropdown()" class="dropbtn">Catalog Filters</button>
-  <div id="myDropdown" class="dropdown-content">
-    <a id="category-li">Categories</a>
-    <a id="compatibility-li">Compatibilty</a>
-    <a id="technology-li">Technology</a>
+    <button onclick="handleDropdown()" class="dropbtn">Catalog Filters</button>
+    <div id="myDropdown" class="dropdown-content">
+      <a id="category-li">Categories</a>
+      <a id="compatibility-li">Compatibilty</a>
+      <a id="technology-li">Technology</a>
+    </div>
+  </div>
+  <p id="category-para"><strong>Categories:</strong></p>
+  <div id="category-div" class="category-div">
+    <label
+      ><input
+        type="radio"
+        value="All"
+        id="all"
+        onchange='window.location.assign("/catalog")'
+      />
+      All
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="Deployment"
+        id="deployment"
+        onchange='window.location.assign("/catalog/deployment")'
+      />
+      Deployment
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="Traffic Management"
+        id="traffic-management"
+        onchange='window.location.assign("/catalog/traffic-management")'
+      />
+      Traffic Management
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="Security"
+        id="security"
+        onchange='window.location.assign("/catalog/security")'
+      />
+      Security
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="Workloads"
+        id="workloads"
+        onchange='window.location.assign("/catalog/workloads")'
+      />
+      Workloads
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="Observability"
+        id="observability"
+        onchange='window.location.assign("/catalog/observability")'
+      />
+      Observability
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="Troubleshooting"
+        id="troubleshooting"
+        onchange='window.location.assign("/catalog/troubleshooting")'
+      />
+      Troubleshooting
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="Scaling"
+        id="scaling"
+        onchange='window.location.assign("/catalog/scaling")'
+      />
+      Scaling
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="Resiliency"
+        id="resiliency"
+        onchange='window.location.assign("/catalog/resiliency")'
+      />
+      Resiliency
+    </label>
+    <hr />
+    <p><strong>Compatibility:</strong></p>
+    <label
+      ><input
+        type="radio"
+        value="Istio"
+        id="istio"
+        onchange='window.location.assign("/catalog/istio")'
+      />
+      <img class="dropdown-icon" src="/images/istio.svg" /> Istio
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="Linkerd"
+        id="linkerd"
+        onchange='window.location.assign("/catalog/linkerd")'
+      />
+      <img class="dropdown-icon" src="/images/linkerd.svg" /> Linkerd
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="Consul"
+        id="consul"
+        onchange='window.location.assign("/catalog/consul")'
+      />
+      <img class="dropdown-icon" src="/images/consul.svg" /> Consul
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="Kuma"
+        id="kuma"
+        onchange='window.location.assign("/catalog/kuma")'
+      />
+      <img class="dropdown-icon" src="/images/Kuma.svg" /> Kuma
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="App Mesh"
+        id="app-mesh"
+        onchange='window.location.assign("/catalog/app-mesh")'
+      />
+      <img class="dropdown-icon" src="/images/aws-app-mesh.svg" /> App Mesh
+    </label>
+    <label class="open-service-mesh"
+      ><input
+        type="radio"
+        value="OSM"
+        id="osm"
+        onchange='window.location.assign("/catalog/open-service-mesh")'
+      />
+      <img class="dropdown-icon" src="/images/osm.svg" /> Open Service Mesh
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="Traefik"
+        id="traefik"
+        onchange='window.location.assign("/catalog/traefik")'
+      />
+      <img class="dropdown-icon" src="/images/traefik-mesh.svg" /> Traefik Mesh
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="Nginx"
+        id="nginx"
+        onchange='window.location.assign("/catalog/nginx")'
+      />
+      <img class="dropdown-icon" src="/images/nginx-sm.svg" /> NGINX
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="NSM"
+        id="nsm"
+        onchange='window.location.assign("/catalog/nsm")'
+      />
+      <img class="dropdown-icon" src="/images/nsm.svg" /> Network Service Mesh
+    </label>
+  </div>
+  <p id="tech-para" class="tech-para"><strong>Technology:</strong></p>
+  <div id="tech-div" class="tech-div">
+    <label
+      ><input
+        type="radio"
+        value="WebAssembly"
+        id="webassembly"
+        onchange='window.location.assign("/catalog/webassembly")'
+      />
+      WebAssembly
+    </label>
+    <label
+      ><input
+        type="radio"
+        value="JWT"
+        onchange='window.location.assign("/catalog/jwt")'
+      />
+      JWT
+    </label>
+    <label class="disabled-label"
+      ><input
+        type="radio"
+        value="JWT"
+        onchange='window.location.assign("/catalog/eBPF")'
+        disabled
+      />
+      eBPF
+    </label>
+    <label class="disabled-label"
+      ><input
+        type="radio"
+        value="JWT"
+        onchange='window.location.assign("/catalog/OPA")'
+        disabled
+      />
+      OPA policies
+    </label>
   </div>
 </div>
-  <p id="category-para"> <strong>Categories:</strong></p>   
-  <div id="category-div" class="category-div">
-    <label><input type="radio" value="All" id="all" onchange='window.location.assign("/catalog")'/> All </label>
-    <label><input type="radio" value="Deployment" id="deployment" onchange='window.location.assign("/catalog/deployment")'/> Deployment </label>
-    <label><input type="radio" value="Traffic Management" id="traffic-management" onchange='window.location.assign("/catalog/traffic-management")' /> Traffic Management </label>
-    <label><input type="radio" value="Security" id="security" onchange='window.location.assign("/catalog/security")' /> Security </label> 
-    <label><input type="radio" value="Workloads" id="workloads" onchange='window.location.assign("/catalog/workloads")'/> Workloads </label> 
-    <label><input type="radio" value="Observability" id="observability" onchange='window.location.assign("/catalog/observability")'/> Observability </label>
-    <label><input type="radio" value="Troubleshooting" id="troubleshooting" onchange='window.location.assign("/catalog/troubleshooting")' /> Troubleshooting </label>
-    <label><input type="radio" value="Scaling" id="scaling" onchange='window.location.assign("/catalog/scaling")'/> Scaling </label>
-    <label><input type="radio" value="Resiliency" id="resiliency" onchange='window.location.assign("/catalog/resiliency")'/> Resiliency </label>   
-  </div>
-  <p id="compatibility-para" class="compatibility-para"><strong>Compatibilty:</strong></p>
-  <div id="compatibility-div" class="compatibility-div">
-      <label><input type="radio" value="Istio" id="istio" onchange='window.location.assign("/catalog/istio")' /> <img class="dropdown-icon" src="/images/istio.svg"/> Istio </label>
-      <label><input type="radio" value="Linkerd" id="linkerd" onchange='window.location.assign("/catalog/linkerd")'/> <img class="dropdown-icon" src="/images/linkerd.svg"/> Linkerd </label>
-      <label><input type="radio" value="Consul" id="consul" onchange='window.location.assign("/catalog/consul")'/> <img class="dropdown-icon" src="/images/consul.svg"/> Consul </label>
-      <label><input type="radio" value="Kuma" id="kuma" onchange='window.location.assign("/catalog/kuma")'/> <img class="dropdown-icon" src="/images/Kuma.svg"/> Kuma </label>
-      <label><input type="radio" value="App Mesh" id="app-mesh" onchange='window.location.assign("/catalog/app-mesh")' /> <img class="dropdown-icon" src="/images/aws-app-mesh.svg"/> App Mesh </label>
-      <label class="open-service-mesh"><input type="radio" value="OSM" id="osm" onchange='window.location.assign("/catalog/open-service-mesh")'/> <img class="dropdown-icon" src="/images/osm.svg"/> Open Service Mesh </label>
-      <label><input type="radio" value="Traefik" id="traefik" onchange='window.location.assign("/catalog/traefik")'/> <img class="dropdown-icon" src="/images/traefik-mesh.svg"/> Traefik Mesh </label>
-      <label><input type="radio" value="Nginx" id="nginx" onchange='window.location.assign("/catalog/nginx")'/> <img class="dropdown-icon" src="/images/nginx-sm.svg"/> NGINX </label>
-      <label><input type="radio" value="NSM" id="nsm" onchange='window.location.assign("/catalog/nsm")'/> <img class="dropdown-icon" src="/images/nsm.svg"/> Network Service Mesh </label>   
-    </div>
-    <p id="tech-para" class="tech-para"><strong>Technology:</strong></p>
-    <div id="tech-div" class="tech-div">
-      <label><input type="radio" value="WebAssembly" id="webassembly" onchange='window.location.assign("/catalog/webassembly")'/> WebAssembly </label>
-      <label><input type="radio" value="JWT" onchange='window.location.assign("/catalog/jwt")'/> JWT </label>
-      <label class="disabled-label"><input type="radio" value="JWT" onchange='window.location.assign("/catalog/eBPF")' disabled/> eBPF </label>
-      <label class="disabled-label"><input type="radio" value="JWT" onchange='window.location.assign("/catalog/OPA")' disabled/> OPA policies </label>
-    </div>
-  </div>
 <script>
   function handleDropdown() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
   // target elements to toggle
-  var category_p = document.getElementById("category-para")
-  var category_div = document.getElementById("category-div")
-  var comp_p = document.getElementById("compatibility-para")
-  var comp_div = document.getElementById("compatibility-div")
-  var tech_p = document.getElementById("tech-para")
-  var tech_div = document.getElementById("tech-div")
+  var category_p = document.getElementById("category-para");
+  var category_div = document.getElementById("category-div");
+  var comp_p = document.getElementById("compatibility-para");
+  var comp_div = document.getElementById("compatibility-div");
+  var tech_p = document.getElementById("tech-para");
+  var tech_div = document.getElementById("tech-div");
   // toggler
- var categotyLink = document.getElementById("category-li") 
- var compatibilityLink = document.getElementById("compatibility-li") 
- var technologyLink = document.getElementById("technology-li") 
+  var categotyLink = document.getElementById("category-li");
+  var compatibilityLink = document.getElementById("compatibility-li");
+  var technologyLink = document.getElementById("technology-li");
 
- categotyLink.addEventListener("click",showCategory)
- compatibilityLink.addEventListener("click",showCompatibility)
- technologyLink.addEventListener("click",showTechnology)
+  categotyLink.addEventListener("click", showCategory);
+  compatibilityLink.addEventListener("click", showCompatibility);
+  technologyLink.addEventListener("click", showTechnology);
 
- function showCategory(){
-  category_div.style.display = "grid"
-  category_p.style.display = "grid"
-  comp_p.style.display = "none"
-  comp_div.style.display = "none"
-  tech_p.style.display = "none"
-  tech_div.style.display = "none"
-  document.getElementById("myDropdown").classList.toggle("show");
- }
- function showCompatibility(){
-   category_div.style.display = "none"
-   category_p.style.display = "none"
-   comp_p.style.display = "grid"
-   comp_div.style.display = "grid"
-   tech_p.style.display = "none"
-   tech_div.style.display = "none"
-   document.getElementById("myDropdown").classList.toggle("show");
-   return
- }
- function showTechnology(){
-   tech_p.style.display = "grid"
-   tech_div.style.display = "grid"
-   comp_p.style.display = "none"
-   comp_div.style.display = "none"
-   category_div.style.display = "none"
-   category_p.style.display = "none"
-   document.getElementById("myDropdown").classList.toggle("show");
-   return 
- }
-
-
+  function showCategory() {
+    category_div.style.display = "grid";
+    category_p.style.display = "grid";
+    comp_p.style.display = "none";
+    comp_div.style.display = "none";
+    tech_p.style.display = "none";
+    tech_div.style.display = "none";
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  function showCompatibility() {
+    category_div.style.display = "none";
+    category_p.style.display = "none";
+    comp_p.style.display = "grid";
+    comp_div.style.display = "grid";
+    tech_p.style.display = "none";
+    tech_div.style.display = "none";
+    document.getElementById("myDropdown").classList.toggle("show");
+    return;
+  }
+  function showTechnology() {
+    tech_p.style.display = "grid";
+    tech_div.style.display = "grid";
+    comp_p.style.display = "none";
+    comp_div.style.display = "none";
+    category_div.style.display = "none";
+    category_p.style.display = "none";
+    document.getElementById("myDropdown").classList.toggle("show");
+    return;
+  }
 </script>
