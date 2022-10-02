@@ -1,5 +1,89 @@
+<style>
+  .dropbtn {
+    background-color: #00b39f;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+
+  #myInput {
+    box-sizing: border-box;
+    background-image: url("searchicon.png");
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #myInput:focus {
+    outline: 3px solid #ddd;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 150px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 1;
+    left: -1rem;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown a:hover {
+    background-color: #ddd;
+    cursor: pointer;
+  }
+
+  .show {
+    display: block;
+  }
+.arrow-icon-up{
+  transform: rotate(180deg);
+  transition: transform 10s linear;
+}
+
+.arrow-icon-down{
+  transform: rotate(0deg);
+  transition: transform 1s linear;
+}
+</style>
+
 <div class="filter-wrap">
-    <h4>Categories:</h4>   
+  <div class="dropdown">
+    <button onclick="handleDropdown()" class="dropbtn">
+     <svg  style="height: 1rem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path fill="white" d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/>
+    </svg>
+      Filters
+      <svg id="arrow-icon" class="arrow-icon-down" style="height:1rem";" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+      <path  fill="white" d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/>
+      </svg>
+    </button>
+    <div id="myDropdown" class="dropdown-content">
+      <a id="category-li">Categories</a>
+      <a id="compatibility-li">Compatibilty</a>
+      <a id="technology-li">Technology</a>
+    </div>
+  </div>
+  <p id="category-para" class="category-para"> <strong>Categories:</strong></p>   
+  <div id="category-div" class="category-div">
     <label><input type="radio" value="All" id="all" onchange='window.location.assign("/catalog")'/> All </label>
     <label><input type="radio" value="Deployment" id="deployment" onchange='window.location.assign("/catalog/deployment")'/> Deployment </label>
     <label><input type="radio" value="Traffic Management" id="traffic-management" onchange='window.location.assign("/catalog/traffic-management")' /> Traffic Management </label>
@@ -9,21 +93,88 @@
     <label><input type="radio" value="Troubleshooting" id="troubleshooting" onchange='window.location.assign("/catalog/troubleshooting")' /> Troubleshooting </label>
     <label><input type="radio" value="Scaling" id="scaling" onchange='window.location.assign("/catalog/scaling")'/> Scaling </label>
     <label><input type="radio" value="Resiliency" id="resiliency" onchange='window.location.assign("/catalog/resiliency")'/> Resiliency </label>   
-  <hr>
-    <p><strong>Compatibility:</strong></p>
+  </div>
+  <p id="compatibility-para" class="compatibility-para"><strong>Compatibilty:</strong></p>
+  <div id="compatibility-div" class="compatibility-div">
       <label><input type="radio" value="Istio" id="istio" onchange='window.location.assign("/catalog/istio")' /> <img class="dropdown-icon" src="/images/istio.svg"/> Istio </label>
       <label><input type="radio" value="Linkerd" id="linkerd" onchange='window.location.assign("/catalog/linkerd")'/> <img class="dropdown-icon" src="/images/linkerd.svg"/> Linkerd </label>
       <label><input type="radio" value="Consul" id="consul" onchange='window.location.assign("/catalog/consul")'/> <img class="dropdown-icon" src="/images/consul.svg"/> Consul </label>
       <label><input type="radio" value="Kuma" id="kuma" onchange='window.location.assign("/catalog/kuma")'/> <img class="dropdown-icon" src="/images/Kuma.svg"/> Kuma </label>
       <label><input type="radio" value="App Mesh" id="app-mesh" onchange='window.location.assign("/catalog/app-mesh")' /> <img class="dropdown-icon" src="/images/aws-app-mesh.svg"/> App Mesh </label>
-      <label><input type="radio" value="OSM" id="osm" onchange='window.location.assign("/catalog/open-service-mesh")'/> <img class="dropdown-icon" src="/images/osm.svg"/> Open Service Mesh </label>
+      <label class="open-service-mesh"><input type="radio" value="OSM" id="osm" onchange='window.location.assign("/catalog/open-service-mesh")'/> <img class="dropdown-icon" src="/images/osm.svg"/> Open Service Mesh </label>
       <label><input type="radio" value="Traefik" id="traefik" onchange='window.location.assign("/catalog/traefik")'/> <img class="dropdown-icon" src="/images/traefik-mesh.svg"/> Traefik Mesh </label>
       <label><input type="radio" value="Nginx" id="nginx" onchange='window.location.assign("/catalog/nginx")'/> <img class="dropdown-icon" src="/images/nginx-sm.svg"/> NGINX </label>
       <label><input type="radio" value="NSM" id="nsm" onchange='window.location.assign("/catalog/nsm")'/> <img class="dropdown-icon" src="/images/nsm.svg"/> Network Service Mesh </label>   
-    <hr>
-    <p><strong>Technology:</strong></p>
+  </div>
+  <p id="tech-para" class="tech-para"><strong>Technology:</strong></p>
+  <div id="tech-div" class="tech-div">
       <label><input type="radio" value="WebAssembly" id="webassembly" onchange='window.location.assign("/catalog/webassembly")'/> WebAssembly </label>
       <label><input type="radio" value="JWT" onchange='window.location.assign("/catalog/jwt")'/> JWT </label>
       <label class="disabled-label"><input type="radio" value="JWT" onchange='window.location.assign("/catalog/eBPF")' disabled/> eBPF </label>
       <label class="disabled-label"><input type="radio" value="JWT" onchange='window.location.assign("/catalog/OPA")' disabled/> OPA policies </label>
   </div>
+</div>
+<script>
+  
+  var drop_button = document.getElementById("arrow-icon")
+  var open = true
+  function handleDropdown() {
+    document.getElementById("myDropdown").classList.toggle("show"); 
+    drop_button.style.transform = open ? "rotate(180deg)":"rotate(0deg)"
+    drop_button.style.transition = "transform 0.5s"
+    open = !open
+}
+  // target elements to toggle
+  var category_p = document.getElementById("category-para");
+  var category_div = document.getElementById("category-div");
+  var comp_p = document.getElementById("compatibility-para");
+  var comp_div = document.getElementById("compatibility-div");
+  var tech_p = document.getElementById("tech-para");
+  var tech_div = document.getElementById("tech-div");
+  // toggler
+  var categotyLink = document.getElementById("category-li");
+  var compatibilityLink = document.getElementById("compatibility-li");
+  var technologyLink = document.getElementById("technology-li");
+
+
+  categotyLink.addEventListener("click", showCategory);
+  compatibilityLink.addEventListener("click", showCompatibility);
+  technologyLink.addEventListener("click", showTechnology);
+
+  function showCategory() {
+    category_div.style.display = "grid";
+    category_p.style.display = "grid";
+    comp_p.style.display = "none";
+    comp_div.style.display = "none";
+    tech_p.style.display = "none";
+    tech_div.style.display = "none";
+    document.getElementById("myDropdown").classList.toggle("show");
+    drop_button.style.transform = "rotate(0deg)"
+    open = !open
+    return;
+  }
+  function showCompatibility() {
+    category_div.style.display = "none";
+    category_p.style.display = "none";
+    comp_p.style.display = "grid";
+    comp_div.style.display = "grid";
+    tech_p.style.display = "none";
+    tech_div.style.display = "none";
+    document.getElementById("myDropdown").classList.toggle("show");
+    drop_button.style.transform = "rotate(0deg)"
+    open = !open
+    return;
+  }
+  function showTechnology() { 
+    tech_p.style.display = "grid";
+    tech_div.style.display = "grid";
+    comp_p.style.display = "none";
+    comp_div.style.display = "none";
+    category_div.style.display = "none";
+    category_p.style.display = "none";
+    document.getElementById("myDropdown").classList.toggle("show");
+    drop_button.style.transform = "rotate(0deg)"
+    open = !open
+    return;
+  }
+</script>
