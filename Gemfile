@@ -6,7 +6,7 @@ gem 'jekyll', '4.2.2'
 gem 'tzinfo-data', platforms: [:x64_mingw]
 gem 'wdm', '>= 0.1.0'
 # gem 'eventmachine', '1.2.7'
-gem 'eventmachine', '1.2.7', git: 'https://github.com/eventmachine/eventmachine.git', tag: 'v1.2.7'
+gem 'eventmachine', '1.2.7'
 
 
 group :jekyll_plugins do
