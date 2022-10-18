@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Set env
         run : |
-          echo "MESHERY_CLOUD_BASE_URL=http://meshery.layer5.io" >> $GITHUB_ENV
+          echo "MESHERY_CLOUD_BASE_URL=https://meshery.layer5.io" >> $GITHUB_ENV
           echo "MESHERY_CATALOG_FILES_DIR=catalog" >> $GITHUB_ENV
       - name: Update Catalog Patterns
         run: |
@@ -19,7 +19,7 @@ jobs:
             >&2 echo "Error connecting to Meshery Cloud"
             >&2 echo "$(<err.txt)"
           fi
-          echo $catalogPatterns > temp.json
+          echo "$catalogPatterns" > temp.json
           patternCount=$(jq length temp.json)
           if [[ "$patternCount" == "" ]]; then
             patternCount=0
@@ -83,7 +83,7 @@ jobs:
             >&2 echo "$(<err.txt)"
           fi
 
-          echo $catalogFilters > temp.json
+          echo "$catalogFilters" > temp.json
           filterCount=$(jq length temp.json)
           if [[ "$filterCount" == "" ]]; then
             filterCount=0
@@ -142,10 +142,9 @@ jobs:
       - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          file_pattern: docs
+          file_pattern: catalog/* collections/_catalog/*
           commit_user_name: l5io
           commit_user_email: ci@layer5.io
           commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           commit_options: '--signoff'
           commit_message: '[Catalog] Update Catalog items'
-
