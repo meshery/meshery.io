@@ -1,8 +1,13 @@
 <picture>
   <p style="text-align:center;" align="center">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/meshery/meshery.io/master/images/logos/meshery-logo-light-text-side.png" width="70%" align="center" style="margin-bottom:20px;">
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/meshery/meshery.io/master/images/logos/meshery-logo-light-white-text-side.svg" width="70%" align="center" style="margin-bottom:20px;">
-  <img  alt="Shows an illustrated light mode official meshery logo in light color mode and a dark mode meshery logo dark color mode." src="https://raw.githubusercontent.com/meshery/meshery.io/master/images/logos/meshery-logo-light-white-text-side.svg" width="70%" align="center" style="margin-bottom:20px;"/></a><br /><br /></p>
+<a href="https://layer5.io/meshery">
+<picture align="center">
+<source media="(prefers-color-scheme: dark)" srcset="./images/logos/meshery-logo-dark-text-side.svg" width="70%" align="center" style="margin-bottom:20px;">
+<source media="(prefers-color-scheme: light)" srcset="./images/logos/meshery-logo-light-text-side.svg" width="70%" align="center" style="margin-bottom:20px;">
+<img alt="Shows an illustrated light mode meshery logo in light color mode and a dark mode meshery logo dark color mode." src="./images/logos/meshery-logo-light-text-side-new.svg" width="70%" align="center" style="margin-bottom:20px;"> </picture>
+</a>
+
+<br/><br/></p>
 </picture>
  
 # Meshery.io
@@ -50,11 +55,12 @@ Find out more about the <a href="https://layer5.io/community#meshmate">Layer5 co
 <br /><br /><br /><br />
 
 </p>
-<a href="http://slack.layer5.io">
+<a href="https://slack.layer5.io">
+
 <picture align="right">
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/meshery/meshery/master/docs/assets/img/readme/slack-dark-128.png"  width="110px" align="right" style="margin-left:10px;margin-top:10px;">
-  <source media="(prefers-color-scheme: light)" srcset=https://raw.githubusercontent.com/meshery/meshery/master/docs/assets/img/readme/slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:5px;">
-  <img alt="Shows an illustrated light mode meshery logo in light color mode and a dark mode meshery logo dark color mode." src="https://raw.githubusercontent.com/meshery/meshery/master/docs/assets/img/readme/slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:13px;">
+  <source media="(prefers-color-scheme: dark)" srcset="./images/logos/slack-dark-128.png"  width="110px" align="right" style="margin-left:10px;margin-top:10px;">
+  <source media="(prefers-color-scheme: light)" srcset="./images/logos/slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:5px;">
+  <img alt="Shows an illustrated light mode meshery logo in light color mode and a dark mode meshery logo dark color mode." src="./images/logos/slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:13px;">
 </picture>
 </a>
 
