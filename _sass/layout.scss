@@ -1,3 +1,4 @@
+
 .container,
 .text-container {
     margin: 0 auto;
@@ -54,7 +55,8 @@ header {
             @media #{$mid-point} {
                 &:hover {
                     border-bottom-color: rgba(80, 80, 80, 0.3);
-                    border-bottom-width: 5px;
+                    border: 1px #ccc solid;
+	                border-radius: 5px;
                 }
             }
         }
@@ -86,7 +88,15 @@ header {
             display: block;
             width: auto;
         }
+        @media (max-width: 568px){
+            position: absolute;
+            z-index: 2;
+            
+        }
     }
+}
+.full {
+    width: unset !important;
 }
 
 .filledHeader {
@@ -265,21 +275,18 @@ td {
 
 
 .hideDiv {
-    display:none;
+    max-height: 0px;
+    pointer-events: none;
+    opacity: 0;
+    transition: all .9s;
 }
 
-@keyframes smooth {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-}
 .showDiv {
-    animation: smooth 2s ease;
-    display: block;
+    max-height: 200rem;
+    pointer-events: all;
+    opacity: 1;
 }
+
 .docker {
     position: absolute;
     opacity: 0;
@@ -294,9 +301,6 @@ td {
     display: none;
 }
 
-nav a:hover {
-    border-bottom-width: 0px !important;
-}
 #bounce {
     height: 60px;
     width: 60px;
