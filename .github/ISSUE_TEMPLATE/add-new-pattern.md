@@ -1,11 +1,11 @@
 ---
-name: Request for a new pattern/filter.
-about: Issues related to patterns catalog
+name: Add/Update Meshery Catalog Content
+about: Issues related to meshery.io/catalog
 title: '[Catalog]'
 labels: 'area/catalog'
 assignees: ''
 ---
-Add a new pattern or filter to the cloud native catalog on https://meshery.io/catalog.
+Add or update the following [Meshery Catalog](https://meshery.io/catalog.) item(s):
 
 **Name:**  <!-- Name of pattern -->
 **Type:** <!-- Type of pattern-->
@@ -17,9 +17,6 @@ Add a new pattern or filter to the cloud native catalog on https://meshery.io/ca
 **URL:** <!-- url | format: (https://raw.githubusercontent.com/service-mesh-patterns/service-mesh-patterns/master/samples/IstioFilterPattern.yaml)>
 **Download link:** <!-- link to binary zip file or upload the file here -->
 
-
-[Optional] **Additional Context**
-Add any other context about the problem here.
 
 ### Contributor Resources
 
