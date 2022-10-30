@@ -213,12 +213,20 @@
 			// adds toggle button to li items that have children
 			nav.find('li a').each(function() {
 				if ($(this).next().length > 0) {
+					$(this).addClass('sub-list')
 					$(this).parent('li').addClass('has-sub').append('<a class="dd-toggle" href="#"><span class="icon-plus"></span></a>');
 				}
 			});
 
-			// expands the dropdown menu on each click
+			// expands the dropdown menu on each click of +
 			nav.find('li .dd-toggle').on('click', function(e) {
+				e.preventDefault();
+				$(this).parent('li').children('ul').stop(true, true).slideToggle(settings.openingSpeed);
+				$(this).parent('li').toggleClass('open');
+			});
+
+			// expands the dropdown menu on each click of nav-text
+			nav.find('li .sub-list').on('click', function(e) {
 				e.preventDefault();
 				$(this).parent('li').children('ul').stop(true, true).slideToggle(settings.openingSpeed);
 				$(this).parent('li').toggleClass('open');
