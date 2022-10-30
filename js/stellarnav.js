@@ -219,18 +219,16 @@
 			});
 
 			// expands the dropdown menu on each click of +
-			nav.find('li .dd-toggle').on('click', function(e) {
-				e.preventDefault();
-				$(this).parent('li').children('ul').stop(true, true).slideToggle(settings.openingSpeed);
-				$(this).parent('li').toggleClass('open');
-			});
+			nav.find('li .dd-toggle').on('click', navbarExpand);
 
 			// expands the dropdown menu on each click of nav-text
-			nav.find('li .sub-list').on('click', function(e) {
+			nav.find('li .sub-list').on('click', navbarExpand);
+
+			function navbarExpand(e) {
 				e.preventDefault();
 				$(this).parent('li').children('ul').stop(true, true).slideToggle(settings.openingSpeed);
 				$(this).parent('li').toggleClass('open');
-			});
+			}
 
 			var resetTriggers = function() {
 				nav.find('li').off('mouseenter');
