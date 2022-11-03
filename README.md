@@ -33,7 +33,7 @@ _Visit [Meshery.io](https://meshery.io/) to learn more!_
 
 ## What is Meshery?
 
-Meshery is the open source, cloud native management plane that enables the adoption, operation, and management of Kubernetes, any service mesh, and their workloads. Among other features, Meshery manages multi-cluster Kubernetes deployments. Offering telemetry from applications running on or off of a service meshes. At a high level, Meshery provides performance benchmarking, cloud native cluster and workload lifecycle management, and service mesh interoperability and federation.
+Meshery is the open source, cloud native management plane that enables the adoption, operation, and management of Kubernetes, any service mesh, and their workloads. Among other features, Meshery manages multi-cluster Kubernetes deployments. Offering visual and collaborative GitOps, Meshery frees you from the chains of YAML.
 
 For further information, refer to the [Meshery Docs](https://docs.meshery.io).
 
