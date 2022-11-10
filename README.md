@@ -21,7 +21,7 @@
 [![Website](https://img.shields.io/website/https/layer5.io/meshery.svg)](https://layer5.io/meshery/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/layer5.svg?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=mesheryio)
 [![Discuss Users](https://img.shields.io/discourse/users?server=https%3A%2F%2Fdiscuss.layer5.io)](https://discuss.layer5.io)
-[![Slack](https://img.shields.io/badge/Slack-@layer5.svg?logo=slack)](http://slack.layer5.io)
+[![Slack](https://img.shields.io/badge/Slack-@layer5.svg?logo=slack)](https://slack.meshery.io)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3564/badge)](https://bestpractices.coreinfrastructure.org/projects/3564)
 
 </div>
@@ -33,16 +33,16 @@ _Visit [Meshery.io](https://meshery.io/) to learn more!_
 
 ## What is Meshery?
 
-Meshery is the open source, cloud native management plane that enables the adoption, operation, and management of Kubernetes, any service mesh, and their workloads. Among other features, Meshery manages multi-cluster Kubernetes deployments. Offering telemetry from applications running on or off of a service meshes. At a high level, Meshery provides performance benchmarking, cloud native cluster and workload lifecycle management, and service mesh interoperability and federation.
+Meshery is the open source, cloud native management plane that enables the adoption, operation, and management of Kubernetes, any service mesh, and their workloads. Among other features, Meshery manages multi-cluster Kubernetes deployments. Offering visual and collaborative GitOps, Meshery frees you from the chains of YAML.
 
 For further information, refer to the [Meshery Docs](https://docs.meshery.io).
 
 <div>&nbsp;</div>
 
-## Join the service mesh community!
+## Join the Meshery community!
 
 <a name="contributing"></a><a name="community"></a>
-Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://docs.google.com/document/d/17OPtDE_rdnPQxmk2Kauhm3GwXF1R5dZ3Cj8qZLKdo5E/edit">Layer5 Community Welcome Guide</a> for a tour of resources available to you and jump into our <a href="http://slack.layer5.io">Slack</a>!
+Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://docs.google.com/document/d/17OPtDE_rdnPQxmk2Kauhm3GwXF1R5dZ3Cj8qZLKdo5E/edit">Community Welcome Guide</a> for a tour of resources available to you and jump into our <a href="https://slack.meshery.io">Slack</a>!
 
 <p style="clear:both;">
 <a href ="https://layer5.io/community"><img alt="MeshMates" src="images/logos/Layer5-MeshMentors.png" style="margin-right:10px; margin-bottom:7px;" width="28%" align="left" /></a>
@@ -55,7 +55,7 @@ Find out more about the <a href="https://layer5.io/community#meshmate">Layer5 co
 <br /><br /><br /><br />
 
 </p>
-<a href="https://slack.layer5.io">
+<a href="https://slack.meshery.io">
 
 <picture align="right">
   <source media="(prefers-color-scheme: dark)" srcset="./images/logos/slack-dark-128.png"  width="110px" align="right" style="margin-left:10px;margin-top:10px;">
@@ -64,7 +64,7 @@ Find out more about the <a href="https://layer5.io/community#meshmate">Layer5 co
 </picture>
 </a>
 
-<a href="https://meshery.io/community"><img alt="Layer5 Service Mesh Community" src="https://docs.meshery.io/assets/img/readme/community.png" style="margin-right:8px;padding-top:5px;" width="140px" align="left" /></a>
+<a href="https://meshery.io/community"><img alt="Meshery Community" src="https://docs.meshery.io/assets/img/readme/community.png" style="margin-right:8px;padding-top:5px;" width="140px" align="left" /></a>
 
 <p>
 
@@ -132,10 +132,10 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
                       
                       
                       
-## Add your patterns to the catalog.
+## Add your content to the cloud native catalog.
  
-To add your patterns to the Cloud Native Catalog -
-1. Create a new file in the catalog collection, under the respective pattern-type. 
+To add your content to the Cloud Native Catalog -
+1. Create a new file in the catalog collection, under the respective type. 
 1. Follow the template in the <a href="https://github.com/meshery/meshery.io/blob/master/collections/_catalog/_defaults.md">_defaults.md</a> and fill out the details.
 1. Add your pattern file to the <a href="https://github.com/meshery/meshery.io/tree/master/catalog">catalog</a> folder so that others can download the file.
 1. That's it! You're good to go. Create a PR for your change and sit tight till a maintainer gets a chance to review it.

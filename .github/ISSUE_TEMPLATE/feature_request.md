@@ -22,4 +22,4 @@ assignees: ''
 
 - 🎨 Wireframes and designs for Meshery Site in [Figma](https://www.figma.com/file/SMP3zxOjZztdOLtgN4dS2W/Meshery-UI)
 - 🖥 [Contributing to Meshery Website](https://github.com/meshery/meshery.io#contributing-to-the-mesheryio-website)
-- 🙋🏾🙋🏼 Questions: [Discussion Forum](https://discuss.layer5.io) and [Community Slack](http://slack.layer5.io)
+- 🙋🏾🙋🏼 Questions: [Discussion Forum](https://discuss.layer5.io) and [Community Slack](https://slack.meshery.io)

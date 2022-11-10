@@ -1,11 +1,11 @@
 ---
-name: Request for a new pattern/filter.
-about: Issues related to patterns catalog
+name: Add/Update Meshery Catalog Content
+about: Issues related to meshery.io/catalog
 title: '[Catalog]'
 labels: 'area/catalog'
 assignees: ''
 ---
-Add a new pattern or filter to the cloud native catalog on https://meshery.io/catalog.
+Add or update the following [Meshery Catalog](https://meshery.io/catalog.) item(s):
 
 **Name:**  <!-- Name of pattern -->
 **Type:** <!-- Type of pattern-->
@@ -18,11 +18,8 @@ Add a new pattern or filter to the cloud native catalog on https://meshery.io/ca
 **Download link:** <!-- link to binary zip file or upload the file here -->
 
 
-[Optional] **Additional Context**
-Add any other context about the problem here.
-
 ### Contributor Resources
 
 The meshery.io website uses Jekyll and GitHub Pages. Site content is found under the [`master` branch](https://github.com/meshery/meshery.io/tree/master).
 - See the [Contributing to Meshery.io Website](https://github.com/meshery/meshery.io#contributing-to-the-mesheryio-website) section of the readme.md and other [contributing instructions](https://docs.meshery.io/project/contributing), too.
-- See Meshery site designs in this [Figma designfile](https://www.figma.com/file/SMP3zxOjZztdOLtgN4dS2W/Meshery-UI?node-id=110%3A1). Fill-in the [Layer5 Community Member Form](https://layer5.io/newcomer) and join the [Layer5 Community Slack](http://slack.layer5.io) for access.
+- See Meshery site designs in this [Figma designfile](https://www.figma.com/file/SMP3zxOjZztdOLtgN4dS2W/Meshery-UI?node-id=110%3A1). Fill-in the [Layer5 Community Member Form](https://layer5.io/newcomer) and join the [Layer5 Community Slack](https://slack.meshery.io) for access.
