@@ -4,875 +4,358 @@ title: Integrations
 description: Built-In Integrations Support for your Cloud Native Infrastructure and Apps
 permalink: /integrations
 ---
-<!DOCTYPE html>
+
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>three.js css3d - periodic table</title>
-		<meta charset="utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-		/>
-		<link type="text/css" rel="stylesheet" href="{{ site.baseurl }}/integrations/main.css" />
-		<style>
-			a {
-				color: white;
-			}
-
-			#menu {
-				position: absolute;
-				bottom: 20px;
-				width: 100%;
-				text-align: center;
-			}
-
-			.element {
-				width: 120px;
-				height: 160px;
-				box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
-				border: 1px solid rgba(127, 255, 255, 0.25);
-				font-family: Helvetica, sans-serif;
-				text-align: center;
-				line-height: normal;
-				cursor: default;
-			}
-
-			.element:hover {
-				box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.75);
-				border: 1px solid white;
-			}
-
-			.element .number {
-				position: absolute;
-				top: 20px;
-				right: 20px;
-				font-size: 12px;
-				color: white;
-			}
-
-			.element .symbol {
-				position: absolute;
-				top: 40px;
-				left: 0px;
-				right: 0px;
-				font-size: 60px;
-				font-weight: bold;
-				color: rgba(255, 255, 255, 0.75);
-				text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
-			}
-
-			.element .details {
-				position: absolute;
-				bottom: 15px;
-				left: 0px;
-				right: 0px;
-				font-size: 12px;
-				color: white;
-			}
-
-			button {
-				color: white;
-				background: transparent;
-				outline: 1px solid white;
-				border: 0px;
-				padding: 5px 10px;
-				cursor: pointer;
-			}
-
-			button:hover {
-				background-color: rgba(0, 255, 255, 0.5);
-			}
-
-			button:active {
-				color: #000000;
-				background-color: rgba(0, 255, 255, 0.75);
-			}
-		</style>
-	</head>
-	<body>
-		<div id="info">
-			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a>
-			css3d - periodic table.
-		</div>
-		<div id="container"></div>
-		<div id="menu">
-			<button id="table">TABLE</button>
-			<button id="sphere">SPHERE</button>
-			<button id="helix">HELIX</button>
-			<button id="grid">GRID</button>
-		</div>
-
-		<!-- Import maps polyfill -->
-		<!-- Remove this when import maps will be widely supported -->
-		<script
-			async
-			src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"
-		></script>
-
-		<script type="importmap">
-			{
-				"imports": {
-					"three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.146.0/three.module.js",
-					"three/addons/": "{{ site.baseurl }}/integrations/jsm/"
-				}
-			}
-		</script>
-
-		<script type="module">
-			import * as THREE from 'three';
-
-			import { TWEEN } from 'three/addons/libs/tween.module.min.js';
-			import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
-			import {
-				CSS3DRenderer,
-				CSS3DObject,
-			} from 'three/addons/renderers/CSS3DRenderer.js';
-
-			const table = [
-				'AKS',
-				'https://layer5.io/static/f2ac23d3a4ab0194273e5255f36b3a82/aks.svg',
-				1,
-				1,
-				'Citrix Service Mesh',
-				'https://layer5.io/static/2668f2f72a2579be0964c7e49296fb4d/citrix_white.svg',
-				18,
-				1,
-				"Consul",
-        		"https://layer5.io/static/ed21c2c53f2c64e86b016cfdfe7018ae/consul.svg",
-				1,
-				2,
-				"EKS",
-        		"https://layer5.io/static/88f748805f379729bb09031d944381e5/eks.svg",
-				2,
-				2,
-				 "GKE",
-        		"https://layer5.io/static/e35b3f81ac5b9af8e4eec34b30b0cd10/gke_white.svg",
-				13,
-				2,
-				 "Helm",
-       			"https://layer5.io/static/a7efd0ede4d26ec0ea87c9837f5f547e/helm.svg",
-				14,
-				2,
-				"Kubesphere",
-        		"https://layer5.io/static/260881ce97636f4cb54b38de8e681772/kubesphere.svg",
-				15,
-				2,
-				"NGINX Service Mesh",
-        		"https://layer5.io/static/05ac926a1965267251ad2f6d3a8a294e/nginx-white.svg",
-				16,
-				2,
-				"Kuma",
-        		"https://layer5.io/static/0fa406ffb6a77bbc56f9b61f9cb28314/kuma-icon-color.svg",
-				17,
-				2,
-				"Linkerd",
-        		"https://layer5.io/static/b4f4020971de42f6fb2497075a67f325/linkerd.svg",
-				18,
-				2,
-				"Nats",
-        		"https://layer5.io/static/838515ea64a8863a39057792d63a1942/nats-icon-white.svg",
-				1,
-				3,
-				"Minikube",
-        		"https://layer5.io/static/657b50158ea48e31f95d01db8c8ecb1f/minikube_white.svg",
-				2,
-				3,
-				"Mac",
-        		"https://layer5.io/static/03f9bd6a176b482e442845a247588aa1/mac.svg",
-				13,
-				3,
-				"KinD",
-        		"https://layer5.io/static/1c5fe44912989b7dfef9f21c102af4c7/kind.svg",
-				14,
-				3,
-				"Kubernetes",
-        		"https://layer5.io/static/48ca7d1296bc1a4c95fb648ab64cb6ca/kubernetes-icon-white.svg",
-				15,
-				3,
-				"Open Service Mesh",
-        		"https://layer5.io/static/2a7bc3db07cd7c012fda15e3cd6f4b4b/openservicemesh-icon-white.svg",
-				16,
-				3,
-				"Argo",
-        		"https://layer5.io/static/64dc170ebd7c93c35f02cb81fdea2b41/argo-icon-white.svg",
-				17,
-				3,
-				"AWS App Mesh",
-        		"https://layer5.io/static/66fc3d440632eb0ae38f3c0ec8124858/aws-app-mesh_white.svg",
-				18,
-				3,
-				"Tanzu Service Mesh",
-        		"https://layer5.io/static/d042e3bcfa9d7f90f88bf56b02482060/tanzu.svg",
-				1,
-				4,
-				"SPIRE",
-        		"https://layer5.io/static/cdfa9d65f8392fdf455ce433c4b35119/spire-icon-white.svg",
-				2,
-				4,
-				"SPIFFE",
-       			"https://layer5.io/static/9e0c57c2a55968ec79b10f9daede1850/spiffe-icon-color.svg",
-				3,
-				4,
-				"Chaos Mesh",
-        		"https://layer5.io/static/444bfc1feefa24cc5e8a39c9d39bc91e/chaosmesh-icon-color.svg",
-				4,
-				4,
-				"Kyverno",
-        		"https://layer5.io/static/dbbd9d90d2fe12ac0c0069e4aa7a23cb/kyverno-icon-color.svg",
-				5,
-				4,
-				"Calico",
-        		"https://layer5.io/static/a2bdfebcefc2319e0c4b141f5f9c4f72/calico-icon-white.svg",
-				6,
-				4,
-				"Harbor",
-        		"https://layer5.io/static/5950398247c149274502f54ad53042cf/harbor-icon-white.svg",
-				7,
-				4,
-				"CubeFS",
-        		"https://layer5.io/static/59940b836cbd4037f1029fcdabc456a9/cubefs-icon-color.svg",
-				8,
-				4,
-				"Linux",
-        		"https://layer5.io/static/96ab6e18d7ecd9a82a0ef66d5f79152b/linux-dark.svg",
-				9,
-				4,
-				"Istio",
-        		"https://layer5.io/static/731763d720780a49c2ffdfede8c28f4b/istio-icon-color.svg",
-				10,
-				4,
-				"Traefik Mesh",
-        		"https://layer5.io/static/08d5f04af62305a91c98a9d14d1b7ed9/traefik.svg",
-				11,
-				4,
-				"Network Service Mesh",
-        		"https://layer5.io/static/3d8d41f4598eea2e14531c1077874b91/networkservicemesh-icon-color.svg",
-				12,
-				4,
-				"Dapr",
-        		"https://layer5.io/static/8d7f9f346053d56a30dbdc65e3ba18ef/dapr-icon-color.svg",
-				13,
-				4,
-				"Cilium",
-        		"https://layer5.io/static/8bbead9fb1a0551294d9f849ffb59504/cilium-icon-white.svg",
-				14,
-				4,
-				"Datadog",
-        		"https://layer5.io/static/4b5d60edfe8a696e6ab925d4593d6293/datadog-icon-white.svg",
-				15,
-				4,
-				"Emissary-Ingress",
-        		"https://layer5.io/static/c9113aea59ea034e95b30ab4d68be566/emissary-ingress-icon-white.svg",
-				16,
-				4,
-				"Envoy",
-        		"https://layer5.io/static/8994ed8f7351622115ce311b06b338a5/envoy-icon-color.svg",
-				17,
-				4,
-				"Fluid",
-        		"https://layer5.io/static/49f54977dd140b7207fbc4b98facc053/fluid-icon-color.svg",
-				18,
-				4,
-				"Crossplane",
-        		"https://layer5.io/static/1290d8fc2e2b0c1775f7296ff35d661b/crossplane-icon-white.svg",
-				1,
-				5,
-				"Grafana",
-        		"https://layer5.io/static/68cb88034b2a94e8272e081d5e2b4261/grafana.svg",
-				2,
-				5,
-				"Docker",
-        		"https://layer5.io/static/35d3da96a133c8222b06cb143d6c9b7b/docker.svg",
-				3,
-				5,
-				"GitHub",
-        		"https://layer5.io/static/a0f62c2768c33fc3eee171585c37208d/github.svg",
-				4,
-				5,
-				"Prometheus",
-        		"https://layer5.io/static/a0f8925deb8fc7a7f1e2c885863ae7c8/prometheus-icon-color.svg",
-				5,
-				5,
-				"Windows",
-        		"https://layer5.io/static/e2bc0b8359dd461f144a8c9090a297ec/wsl2.svg",
-				6,
-				5,
-				"Knative",
-        		"https://layer5.io/static/b8d3eff486dfc791da4bf63b4ac9518e/knative-icon-white.svg",
-				7,
-				5,
-				"Jaeger",
-        		"https://layer5.io/static/b249c3158933bee8a0aeba326886aa33/jaeger-icon-white.svg",
-				8,
-				5,
-				"Homebrew",
-        		"https://layer5.io/static/756151e732bb8da3fe66fc19d1933724/homebrew.svg",
-				9,
-				5,
-				"Falco",
-        		"https://layer5.io/static/487b58b521d0cbca386316dfec8069eb/falco-icon-color.svg",
-				10,
-				5,
-				"Dex",
-        		"https://layer5.io/static/be8a1caacf714f0254797033c2ac7215/dex-icon-color.svg",
-				11,
-				5,
-				"Contour",
-        		"https://layer5.io/static/0002595555eb4553c57e309eaff21089/contour-icon-color.svg",
-				12,
-				5,
-				"CoreDNS",
-        		"https://layer5.io/static/2eec8ca83a85fc0e7eede06d31967b08/coredns-icon-white.svg",
-				13,
-				5,
-				"Cortex",
-        		"https://layer5.io/static/1e9be4073cf571262d5b2ec0572a3cea/cortex-icon-color.svg",
-				14,
-				5,
-				"Telepresence",
-        		"https://layer5.io/static/e23895986b8fcd3be03622beed30958a/telepresence-icon-white.svg",
-				15,
-				5,
-				"Volcano",
-        		"https://layer5.io/static/79c5e7bb419d9787f26c12c64e5bb769/volcano-icon-color.svg",
-				16,
-				5,
-				"Keda",
-        		"https://layer5.io/static/74ea9e463a5315b4a78fe3f898acea1e/keda-icon-color.svg",
-				17,
-				5,
-				"Containerd",
-        		"https://layer5.io/static/c04e2409ea03b5ef32c545cedf85360a/containerd-icon-color.svg",
-				18,
-				5,
-				"ContainerSSH",
-        		"https://layer5.io/static/3958332df1bd99d0e52d078c1e22c843/containerssh-icon-white.svg",
-				1,
-				6,
-				"Akri",
-        		"https://layer5.io/static/c4b5d3db176b58ec74399429f8d13c23/akri-icon-white.svg",
-				2,
-				6,
-				"BFE",
-        		"https://layer5.io/static/9ca49edc10b459b920df1add94d7d17e/bfe-icon-color.svg",
-				3,
-				6,
-				"Buildpacks",
-        		"https://layer5.io/static/b0bb22efb7daa96b0557b5510bb8aa0b/buildpacks-icon-color.svg",
-				4,
-				6,
-				"Cloud Custodian",
-        		"https://layer5.io/static/2c587a2205a366a354e5f37a0f32ef91/cloudcustodian-icon-white.svg",
-				5,
-				6,
-				"Cloud Events",
-        		"https://layer5.io/static/d3766759ed6011fd2955d3586336f9bb/cloudevents-icon-color.svg",
-				6,
-				6,
-				"CRI-O",
-        		"https://layer5.io/static/5cbefce19c0ac5ba92fea411927611bd/crio-icon-white.svg",
-				7,
-				6,
-				"Flagger",
-        		"https://layer5.io/static/c2e4d5653cc4e65bf3ac579d7b0e794d/flagger-icon-color.svg",
-				8,
-				6,
-				"CDK for Kubernetes (CDK8s)",
-        		"https://layer5.io/static/87ec4264ad903f9091e4bbfcb794cd36/cdk8s-icon-color.svg",
-				9,
-				6,
-				 "Fluentd",
-        		"https://layer5.io/static/8755c227599a58444d930129a02c8384/fluentd-icon-color.svg",
-				10,
-				6,
-				"Flux",
-        		"https://layer5.io/static/facf624a6bbbc2a7372d9a8860d0a32c/flux-icon-white.svg",
-				11,
-				6,
-				"Fluentbit",
-        		"https://layer5.io/static/9abcd1bfa2f9aa914f234974f07ea5fc/fluentbit-icon-color.svg",
-				12,
-				6,
-				"Gatekeeper",
-        		"https://layer5.io/static/46d90ba761dadedb6d84a89ba59debe1/gatekeeper-color.svg",
-				13,
-				6,
-				"KubeDL",
-        		"https://layer5.io/static/d2c43beb509b4da34d6df956ba662a06/kubedl-icon-color.svg",
-				14,
-				6,
-				"KubeEdge",
-        		"https://layer5.io/static/6df8e1bedb41dd151de20d630e8cced7/kubeedge-icon-white.svg",
-				15,
-				6,
-				"Container Network Interface",
-        		"https://layer5.io/static/f2301ccd2a0d2243351207f6a652c8eb/cni-icon-color.svg",
-				16,
-				6,
-				"Parsec",
-        		"https://layer5.io/static/a18e6a4c6d7b9289c63de835cf41eb65/parsec-icon-color.svg",
-				17,
-				6,
-				"Strimzi",
-        		"https://layer5.io/static/3eb0053af559d3d0b824e3b349610688/strimzi-icon-white.svg",
-				18,
-				6,
-				"Vitess",
-       			"https://layer5.io/static/9a096025703d00d2bdf67be4c53711ea/vitess-icon-color.svg",
-				1,
-				7,
-				"Virtual Kubelet",
-        		"https://layer5.io/static/6b114b5c1526f706cf5135088fad3d9c/virtualkubelet-icon-color.svg",
-				2,
-				7,
-				"Teller",
-        		"https://layer5.io/static/c7e792de6f6ec447936415bfac1d5f75/teller-icon-white.svg",
-				3,
-				7,
-				"Terraform",
-        		"https://layer5.io/static/895ec8ea35cf68449389f73e4285cb39/terraform-icon-color.svg",
-				4,
-				7,
-				'Fairwinds Insights',
-				'https://landscape.cncf.io/logos/fairwinds-insights.svg',
-				5,
-				7,
-				'Falco',
-				'https://landscape.cncf.io/logos/falco.svg',
-				6,
-				7,
-				'FOSSA',
-				'https://landscape.cncf.io/logos/fossa.svg',
-				7,
-				7,
-				'FOSSID',
-				'https://landscape.cncf.io/logos/fossid.svg',
-				8,
-				7,
-				'Fugue',
-				'https://landscape.cncf.io/logos/fugue.svg',
-				9,
-				7,
-				'Goldilocks',
-				'https://landscape.cncf.io/logos/goldilocks.svg',
-				10,
-				7,
-				'Grafeas',
-				'https://landscape.cncf.io/logos/grafeas.svg',
-				11,
-				7,
-				'Hexa',
-				'https://landscape.cncf.io/logos/hexa.svg',
-				12,
-				7,
-				'in-toto',
-				'https://landscape.cncf.io/logos/in-toto.svg',
-				13,
-				7,
-				'Keylime',
-				'https://landscape.cncf.io/logos/keylime.svg',
-				14,
-				7,
-				'KICS',
-				'https://landscape.cncf.io/logos/kics.svg',
-				15,
-				7,
-				'kube-bench',
-				'https://landscape.cncf.io/logos/kube-bench.svg',
-				16,
-				7,
-				'kube-hunter',
-				'https://landscape.cncf.io/logos/kube-hunter.svg',
-				17,
-				7,
-				'KubeArmor',
-				'https://landscape.cncf.io/logos/kube-armor.svg',
-				18,
-				7,
-				'Kubewarden',
-				'https://landscape.cncf.io/logos/kubewarden.svg',
-				1,
-				9,
-				'Kyverno',
-				'https://landscape.cncf.io/logos/kyverno.svg',
-				2,
-				9,
-				'Mondoo',
-				'https://landscape.cncf.io/logos/mondoo.svg',
-				3,
-				9,
-				'NeuVector',
-				'https://landscape.cncf.io/logos/neu-vector.svg',
-				4,
-				9,
-				'Nirmata Cloud Native Policy Manager',
-				'https://landscape.cncf.io/logos/nirmata-cloud-native-policy-manager.svg',
-				5,
-				9,
-				'Notary',
-				'https://landscape.cncf.io/logos/notary.svg',
-				6,
-				9,
-				'Open Policy Agent (OPA)',
-				'https://landscape.cncf.io/logos/open-policy-agent-opa.svg',
-				7,
-				9,
-				'OpenFGA',
-				'https://landscape.cncf.io/logos/open-fga.svg',
-				8,
-				9,
-				'OpenSCAP',
-				'https://landscape.cncf.io/logos/open-scap.svg',
-				9,
-				9,
-				'Orca Security',
-				'https://landscape.cncf.io/logos/orca-security.svg',
-				10,
-				9,
-				'Oxeye',
-				'https://landscape.cncf.io/logos/oxeye.svg',
-				11,
-				9,
-				'Paladin Cloud',
-				'https://landscape.cncf.io/logos/paladin-cloud.svg',
-				12,
-				9,
-				'Parsec',
-				'https://landscape.cncf.io/logos/parsec.svg',
-				13,
-				9,
-				'Passage',
-				'https://landscape.cncf.io/logos/passage.svg',
-				14,
-				9,
-				'Pluto',
-				'https://landscape.cncf.io/logos/pluto.svg',
-				15,
-				9,
-				'Polaris',
-				'https://landscape.cncf.io/logos/polaris.svg',
-				16,
-				9,
-				'Portshift',
-				'https://landscape.cncf.io/logos/portshift.svg',
-				17,
-				9,
-				'Prisma Cloud',
-				'https://landscape.cncf.io/logos/prisma-cloud.svg',
-				18,
-				9,
-				'Qingteng',
-				'https://landscape.cncf.io/logos/qingteng.svg',
-				1,
-				10,
-				'RBAC Lookup',
-				'https://landscape.cncf.io/logos/rbac-lookup.svg',
-				2,
-				10,
-				'RBAC Manager',
-				'https://landscape.cncf.io/logos/rbac-manager.svg',
-				3,
-				10,
-				'Rudder',
-				'https://landscape.cncf.io/logos/rudder.svg',
-				4,
-				10,
-				'Scribe Security Platform',
-				'https://landscape.cncf.io/logos/scribe-security-platform.svg',
-				5,
-				10,
-				'sigstore',
-				'https://landscape.cncf.io/logos/sigstore.svg',
-				6,
-				10,
-				'Snyk',
-				'https://landscape.cncf.io/logos/snyk.svg',
-				7,
-				10,
-				'Sonatype Nexus',
-				'https://landscape.cncf.io/logos/sonatype-nexus.svg',
-				8,
-				10,
-				'Sonobuoy',
-				'https://landscape.cncf.io/logos/sonobuoy.svg',
-				9,
-				10,
-				'Spyderbat',
-				'https://landscape.cncf.io/logos/spyderbat.svg',
-				10,
-				10,
-				'StackHawk',
-				'https://landscape.cncf.io/logos/stack-hawk.svg',
-				11,
-				10,
-				'StackRox',
-				'https://landscape.cncf.io/logos/stack-rox.svg',
-				12,
-				10,
-				'Starboard',
-				'https://landscape.cncf.io/logos/starboard.svg',
-				13,
-				10,
-				'Sysdig Secure',
-				'https://landscape.cncf.io/logos/sysdig-secure.svg',
-				14,
-				10,
-				'Tensor Security',
-				'https://landscape.cncf.io/logos/tensor-security.svg',
-				15,
-				10,
-				'Terrascan',
-				'https://landscape.cncf.io/logos/terrascan.svg',
-				16,
-				10,
-				'Tetragon',
-				'https://landscape.cncf.io/logos/tetragon.svg',
-				17,
-				10,
-				'The Update Framework (TUF)',
-				'https://landscape.cncf.io/logos/the-update-framework-tuf.svg',
-				18,
-				10,
-			];
-
-			let camera, scene, renderer;
-			let controls;
-
-			const objects = [];
-			const targets = { table: [], sphere: [], helix: [], grid: [] };
-
-			init();
-			animate();
-
-			function init() {
-
-				camera = new THREE.PerspectiveCamera(
-					40,
-					window.innerWidth / window.innerHeight,
-					1,
-					10000
-				);
-				camera.position.z = 3000;
-
-				scene = new THREE.Scene();
-
-				// table
-
-				for ( let i = 0; i < table.length; i += 4 ) {
-
-					const element = document.createElement( 'div' );
-					element.className = 'element';
-					element.style.backgroundColor =
-						'rgba(0, 179, 159,' + ( Math.random() * 0.5 + 0.5 ) + ')';
-
-					const number = document.createElement( 'div' );
-					number.className = 'number';
-					number.textContent = i / 4 + 1;
-					element.appendChild( number );
-
-					const symbol = document.createElement( 'div' );
-					symbol.className = 'symbol';
-					symbol.innerHTML = '<img src="' + table[ i + 1 ] + `" style="height: 100%; width: 100%; filter: ${table[ i + 1 ].includes("white") ? "none" : "brightness(0) invert(1)"};" />`;
-					symbol.style.height = '80px';
-					element.appendChild( symbol );
-
-					const details = document.createElement( 'div' );
-					details.className = 'details';
-					details.innerHTML = table[ i ];
-					element.appendChild( details );
-
-					const objectCSS = new CSS3DObject( element );
-					objectCSS.position.x = Math.random() * 4000 - 2000;
-					objectCSS.position.y = Math.random() * 4000 - 2000;
-					objectCSS.position.z = Math.random() * 4000 - 2000;
-					scene.add( objectCSS );
-
-					objects.push( objectCSS );
-
-					//
-
-					const object = new THREE.Object3D();
-					object.position.x = table[ i + 2 ] * 140 - 1330;
-					object.position.y = - ( table[ i + 3 ] * 180 ) + 990;
-
-					targets.table.push( object );
-			
-				}
-
-				// sphere
-
-				const vector = new THREE.Vector3();
-
-				for ( let i = 0, l = objects.length; i < l; i ++ ) {
-
-					const phi = Math.acos( - 1 + ( 2 * i ) / l );
-					const theta = Math.sqrt( l * Math.PI ) * phi;
-
-					const object = new THREE.Object3D();
-
-					object.position.setFromSphericalCoords( 800, phi, theta );
-
-					vector.copy( object.position ).multiplyScalar( 2 );
-
-					object.lookAt( vector );
-
-					targets.sphere.push( object );
-			
-				}
-
-				// helix
-
-				for ( let i = 0, l = objects.length; i < l; i ++ ) {
-
-					const theta = i * 0.175 + Math.PI;
-					const y = - ( i * 8 ) + 450;
-
-					const object = new THREE.Object3D();
-
-					object.position.setFromCylindricalCoords( 900, theta, y );
-
-					vector.x = object.position.x * 2;
-					vector.y = object.position.y;
-					vector.z = object.position.z * 2;
-
-					object.lookAt( vector );
-
-					targets.helix.push( object );
-			
-				}
-
-				// grid
-
-				for ( let i = 0; i < objects.length; i ++ ) {
-
-					const object = new THREE.Object3D();
-
-					object.position.x = ( i % 5 ) * 400 - 800;
-					object.position.y = - ( Math.floor( i / 5 ) % 5 ) * 400 + 800;
-					object.position.z = Math.floor( i / 25 ) * 1000 - 2000;
-
-					targets.grid.push( object );
-			
-				}
-
-				//
-
-				renderer = new CSS3DRenderer();
-				renderer.setSize( window.innerWidth, window.innerHeight );
-				document.getElementById( 'container' ).appendChild( renderer.domElement );
-
-				//
-
-				controls = new TrackballControls( camera, renderer.domElement );
-				controls.minDistance = 500;
-				controls.maxDistance = 6000;
-				controls.addEventListener( 'change', render );
-
-				const buttonTable = document.getElementById( 'table' );
-				buttonTable.addEventListener( 'click', function () {
-
-					transform( targets.table, 2000 );
-			
-				} );
-
-				const buttonSphere = document.getElementById( 'sphere' );
-				buttonSphere.addEventListener( 'click', function () {
-
-					transform( targets.sphere, 2000 );
-			
-				} );
-
-				const buttonHelix = document.getElementById( 'helix' );
-				buttonHelix.addEventListener( 'click', function () {
-
-					transform( targets.helix, 2000 );
-			
-				} );
-
-				const buttonGrid = document.getElementById( 'grid' );
-				buttonGrid.addEventListener( 'click', function () {
-
-					transform( targets.grid, 2000 );
-			
-				} );
-
-				transform( targets.table, 2000 );
-
-				//
-
-				window.addEventListener( 'resize', onWindowResize );
-
-}
-
-			function transform( targets, duration ) {
-
-				TWEEN.removeAll();
-
-				for ( let i = 0; i < objects.length; i ++ ) {
-
-					const object = objects[ i ];
-					const target = targets[ i ];
-
-					new TWEEN.Tween( object.position )
-						.to(
-							{
-								x: target.position.x,
-								y: target.position.y,
-								z: target.position.z,
-							},
-							Math.random() * duration + duration
-						)
-						.easing( TWEEN.Easing.Exponential.InOut )
-						.start();
-
-					new TWEEN.Tween( object.rotation )
-						.to(
-							{
-								x: target.rotation.x,
-								y: target.rotation.y,
-								z: target.rotation.z,
-							},
-							Math.random() * duration + duration
-						)
-						.easing( TWEEN.Easing.Exponential.InOut )
-						.start();
-			
-	}
-
-				new TWEEN.Tween( this )
-					.to( {}, duration * 2 )
-					.onUpdate( render )
-					.start();
-
-}
-
-			function onWindowResize() {
-
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
-
-				renderer.setSize( window.innerWidth, window.innerHeight );
-
-				render();
-
-}
-
-			function animate() {
-
-				requestAnimationFrame( animate );
-
-				TWEEN.update();
-
-				controls.update();
-
-}
-
-			function render() {
-
-				renderer.render( scene, camera );
-
-}
-		</script>
-	</body>
+  <head>
+    <title>three.js css3d - periodic table</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{{ site.baseurl }}/integrations/main.css"
+    />
+    <style>
+      a {
+        color: black;
+      }
+
+      #menu {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .element {
+        width: 120px;
+        height: 160px;
+        /* box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5); */
+        filter: drop-shadow(rgba(0, 0, 0, 0.1) 0px 4px 20px);
+        border: 1px solid rgba(127, 255, 255, 0.25);
+        text-align: center;
+        line-height: normal;
+        cursor: default;
+      }
+
+      .element:hover {
+        box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.75);
+        /* filter: drop-shadow(rgba(0, 0, 0, 0.9) 0px 4px 20px); */
+        border: 1px solid white;
+      }
+
+      .element .number {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 12px;
+        color: black;
+      }
+
+      .element .symbol {
+        position: absolute;
+        top: 40px;
+        left: 0px;
+        right: 0px;
+        font-size: 60px;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.75);
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
+      }
+
+      .element .details {
+        position: absolute;
+        bottom: 15px;
+        left: 0px;
+        right: 0px;
+        font-size: 12px;
+        color: black;
+      }
+
+      button {
+        color: white;
+        background: transparent;
+        outline: 1px solid white;
+        border: 0px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: rgba(0, 255, 255, 0.5);
+      }
+
+      button:active {
+        color: #000000;
+        background-color: rgba(0, 255, 255, 0.75);
+      }
+    </style>
+  </head>
+  <body class="integration-page">
+    <div id="container"></div>
+    <div id="menu">
+      <button id="table">TABLE</button>
+      <button id="sphere">SPHERE</button>
+      <button id="helix">HELIX</button>
+      <button id="grid">GRID</button>
+    </div>
+
+    <!-- Import maps polyfill -->
+    <!-- Remove this when import maps will be widely supported -->
+    <script
+      async
+      src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"
+    ></script>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.146.0/three.module.js",
+          "three/addons/": "{{ site.baseurl }}/integrations/jsm/",
+          "images": "{{ site.baseurl }}/integrations/_images/"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import * as THREE from "three";
+
+      import { TWEEN } from "three/addons/libs/tween.module.min.js";
+      import { TrackballControls } from "three/addons/controls/TrackballControls.js";
+      import {
+        CSS3DRenderer,
+        CSS3DObject,
+      } from "three/addons/renderers/CSS3DRenderer.js";
+      import { data } from "./data.js";
+
+      const rows = 5;
+      const cols = Math.ceil(data.length / rows);
+      let i = 1,
+        j = 1;
+      const table = data.map((data) => {
+        if (j > cols) {
+          j = 1;
+          i++;
+        }
+        return { ...data, row: i, col: j++ };
+      });
+
+      console.log(rows, cols, table);
+
+      let camera, scene, renderer;
+      let controls;
+
+      const objects = [];
+      const targets = { table: [], sphere: [], helix: [], grid: [] };
+
+      init();
+      animate();
+
+      function init() {
+        camera = new THREE.PerspectiveCamera(
+          25,
+          window.innerWidth / window.innerHeight,
+          1,
+          10000
+        );
+        camera.position.z = 3000;
+
+        scene = new THREE.Scene();
+
+        // table
+
+        for (let i = 0; i < table.length; i++) {
+          const element = document.createElement("div");
+          element.className = "element";
+          element.style.backgroundColor = "rgba(255, 255, 255," + "1" + ")";
+          //   element.style.background = "rgb(33, 33, 33)";
+          //   element.style.background = "rgb(0, 179, 159)";
+
+          const symbol = document.createElement("div");
+          symbol.className = "symbol";
+          // symbol.innerHTML = '<img src="' + table[ i + 1 ] + `" style="height: 100%; width: 100%; filter: ${table[ i + 1 ].includes("white") ? "none" : "brightness(0) invert(1)"};" />`;
+          symbol.innerHTML =
+            '<img src="' +
+            table[i].color +
+            `" style="height: 100%; width: 100%;" />`;
+          symbol.style.height = "70px";
+          element.appendChild(symbol);
+
+          const details = document.createElement("div");
+          details.className = "details";
+          details.innerHTML = table[i].name;
+          //   details.style.color = "white";
+          element.appendChild(details);
+
+          const objectCSS = new CSS3DObject(element);
+          objectCSS.position.x = Math.random() * 4000 - 2000;
+          objectCSS.position.y = Math.random() * 4000 - 2000;
+          objectCSS.position.z = Math.random() * 4000 - 2000;
+          scene.add(objectCSS);
+
+          objects.push(objectCSS);
+
+          //
+
+          const object = new THREE.Object3D();
+          object.position.x = table[i].col * 140 - 1100;
+          object.position.y = -(table[i].row * 180) + 500;
+
+          targets.table.push(object);
+        }
+
+        // sphere
+
+        const vector = new THREE.Vector3();
+
+        for (let i = 0, l = objects.length; i < l; i++) {
+          const phi = Math.acos(-1 + (2 * i) / l);
+          const theta = Math.sqrt(l * Math.PI) * phi;
+
+          const object = new THREE.Object3D();
+
+          object.position.setFromSphericalCoords(500, phi, theta);
+
+          vector.copy(object.position).multiplyScalar(2);
+
+          object.lookAt(vector);
+
+          targets.sphere.push(object);
+        }
+
+        // helix
+
+        for (let i = 0, l = objects.length; i < l; i++) {
+          const theta = i * 0.185 + Math.PI;
+          const y = -(i * 8) + 250;
+
+          const object = new THREE.Object3D();
+
+          object.position.setFromCylindricalCoords(900, theta, y);
+
+          vector.x = object.position.x * 2;
+          vector.y = object.position.y;
+          vector.z = object.position.z * 2;
+
+          object.lookAt(vector);
+
+          targets.helix.push(object);
+        }
+
+        // grid
+
+        for (let i = 0; i < objects.length; i++) {
+          const object = new THREE.Object3D();
+
+          object.position.x = (i % 5) * 400 - 800;
+          object.position.y = -(Math.floor(i / 5) % 5) * 400 + 800;
+          object.position.z = Math.floor(i / 25) * 1000 - 2000;
+
+          targets.grid.push(object);
+        }
+
+        //
+
+        renderer = new CSS3DRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById("container").appendChild(renderer.domElement);
+
+        //
+
+        controls = new TrackballControls(camera, renderer.domElement);
+        controls.minDistance = 500;
+        controls.maxDistance = 6000;
+        controls.addEventListener("change", render);
+
+        const buttonTable = document.getElementById("table");
+        buttonTable.addEventListener("click", function () {
+          transform(targets.table, 2000);
+        });
+
+        const buttonSphere = document.getElementById("sphere");
+        buttonSphere.addEventListener("click", function () {
+          transform(targets.sphere, 2000);
+        });
+
+        const buttonHelix = document.getElementById("helix");
+        buttonHelix.addEventListener("click", function () {
+          transform(targets.helix, 2000);
+        });
+
+        const buttonGrid = document.getElementById("grid");
+        buttonGrid.addEventListener("click", function () {
+          transform(targets.grid, 2000);
+        });
+
+        transform(targets.table, 2000);
+
+        //
+
+        window.addEventListener("resize", onWindowResize);
+      }
+
+      function transform(targets, duration) {
+        TWEEN.removeAll();
+
+        for (let i = 0; i < objects.length; i++) {
+          const object = objects[i];
+          const target = targets[i];
+
+          new TWEEN.Tween(object.position)
+            .to(
+              {
+                x: target.position.x,
+                y: target.position.y,
+                z: target.position.z,
+              },
+              Math.random() * duration + duration
+            )
+            .easing(TWEEN.Easing.Exponential.InOut)
+            .start();
+
+          new TWEEN.Tween(object.rotation)
+            .to(
+              {
+                x: target.rotation.x,
+                y: target.rotation.y,
+                z: target.rotation.z,
+              },
+              Math.random() * duration + duration
+            )
+            .easing(TWEEN.Easing.Exponential.InOut)
+            .start();
+        }
+
+        new TWEEN.Tween(this)
+          .to({}, duration * 2)
+          .onUpdate(render)
+          .start();
+      }
+
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        render();
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        TWEEN.update();
+
+        controls.update();
+      }
+
+      function render() {
+        renderer.render(scene, camera);
+      }
+    </script>
+  </body>
 </html>
