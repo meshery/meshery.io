@@ -17,7 +17,13 @@ nav {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	
+	@media (min-width:1140px) {
+		align-items: center;
+	}
+}
+.stellarnav.desktop{
+	display: flex;
+	justify-content: flex-end;
 }
 .stellarnav.mobile{
 	text-align: end!important;
@@ -27,7 +33,28 @@ nav {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
-	gap: 1rem;
+	gap: 8px;
+}
+
+.nav-item:not(.has-sub) > a:not(.highlight).nav-text{
+	position: relative;
+	&:hover{
+		&::after{
+		  width: 100%;
+		}
+	  }
+
+	  &::after{
+		content: "";
+		width: 0px;
+		height: 2px;
+		bottom: -4px;
+		left: 50%;
+		transform: translateX(-50%);
+		position: absolute;
+		background: var(--background-primary);
+		transition: width .3s;
+	  }
 }
 
 .nav-text {
@@ -94,6 +121,7 @@ a.nav-text:hover {
 	background-image: var(--background-grey);
 	overflow: hidden;
 	width: fit-content;
+	box-shadow: var(--box-shadow-primary);
 	}
 }
 
@@ -103,7 +131,7 @@ a.nav-text:hover {
 
 
 .sub-nav-li {
-	@include btn-hover-primary;
+	@include btn-hover-secondary;
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -113,12 +141,8 @@ a.nav-text:hover {
 	}
 
 	&:hover{
-		& a{
-			color: #fff !important;
-		}
-
 		& img{
-			filter: brightness(0) invert(1);
+			filter:brightness(0) invert(1);
 		}
 	}
   
@@ -139,15 +163,25 @@ a.nav-text:hover {
 }
 
 .highlight {
-	border: 1px var(--color-secondary-light) solid;
-	border-radius: 5px;
+	border-radius: 7px;
+	padding: .5rem;
+	transition: all .4s;
 }
 
 a.highlight { 
-	&:hover{
-	border-color:var(--background-grey);
+	color: #fff ;
+	box-shadow: var(--box-shadow-primary);
+	border:2px solid var(--color-grey-light);
+	background: #868e96;
+	&:active{
+		transform: scale(.95);
 	}
-	@include btn-hover-primary;
+	&:hover{
+		text-decoration: none;
+		background: #00B4A0;
+		transform:  translateY(-2px);
+
+	}
 }
 
 
@@ -169,6 +203,7 @@ a.highlight {
 
 	& > ul > li > a {
 		padding: 15px !important;
+		
 	}
 
 	&  li a {
