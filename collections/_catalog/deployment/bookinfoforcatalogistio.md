@@ -3,7 +3,7 @@ layout: item
 name: BookInfoForCatalogIstio
 type: deployment
 compatibility: \n    - Istio
-patternId: MESHERY000
+patternId: MESHERY001
 image: /images/patterns/service-mesh.svg
 patternInfo: BookInfo sample app for Istio
 patternCaveats: ""

@@ -3,7 +3,7 @@ layout: item
 name: Untitled Design
 type: Deployment
 compatibility: 
-patternId: MESHERY001
+patternId: MESHERY002
 image: /images/patterns/service-mesh.svg
 patternInfo: ""
 patternCaveats: ""
