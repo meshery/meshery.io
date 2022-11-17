@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_ACCESS_TOKEN }}
       - name: Set env
         run : |
           echo "MESHERY_CLOUD_BASE_URL=https://meshery.layer5.io" >> $GITHUB_ENV
@@ -148,4 +150,3 @@ jobs:
           commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           commit_options: '--signoff'
           commit_message: '[Catalog] Update Catalog items'
-          token: ${{ secrets.GH_ACCESS_TOKEN }}
