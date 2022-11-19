@@ -1,12 +1,13 @@
 ---
 layout: item
 name: BookInfoForCatalogIstio
-type: Deployment
+type: deployment
 compatibility: 
+        - Istio
 patternId: MESHERY000
 image: /images/patterns/service-mesh.svg
-patternInfo: ""
+patternInfo: BookInfo sample app for Istio
 patternCaveats: ""
-URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/7c578d95-e9ed-4562-82b6-7cdc09454d78.yaml'
-downloadLink: 7c578d95-e9ed-4562-82b6-7cdc09454d78.yaml
+URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/a2f18d2b-5ae8-4bda-aeea-24e9ccf265c9.yaml'
+downloadLink: a2f18d2b-5ae8-4bda-aeea-24e9ccf265c9.yaml
 ---
