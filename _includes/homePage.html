@@ -1,6 +1,82 @@
 
 <!-- 1. Add latest jQuery and fancybox files -->
+<link
+      type="text/css"
+      rel="stylesheet"
+      href="{{ site.baseurl }}/integrations/main.css"
+    />
+    <style>
+      a {
+        color: black;
+      }
 
+      .element {
+        width: 120px;
+        height: 160px;
+        /* box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5); */
+        filter: drop-shadow(rgba(0, 0, 0, 0.1) 0px 4px 10px);
+        border: 1px solid rgba(127, 255, 255, 0.25);
+        text-align: center;
+        line-height: normal;
+        cursor: default;
+      }
+
+      .element:hover {
+        box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.75);
+        /* filter: drop-shadow(rgba(0, 0, 0, 0.9) 0px 4px 20px); */
+        border: 1px solid white;
+      }
+
+      .element .number {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 12px;
+        color: black;
+      }
+
+      .element .symbol {
+        position: absolute;
+        top: 40px;
+        left: 0px;
+        right: 0px;
+        font-size: 60px;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.75);
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
+      }
+
+      .element .details {
+        position: absolute;
+        bottom: 15px;
+        left: 0px;
+        right: 0px;
+        font-size: 12px;
+        color: black;
+      }
+
+      button {
+        color: white;
+        background: transparent;
+        outline: 1px solid white;
+        border: 0px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: rgba(0, 255, 255, 0.5);
+      }
+
+      button:active {
+        color: #000000;
+        background-color: rgba(0, 255, 255, 0.75);
+      }
+
+	  #integration-container > div:hover{
+		box-shadow: rgb(50 50 93 / 5%) 0px 30px 60px -12px inset, rgb(0 0 0 / 12%) 2px 8px 33px 8px inset;
+	  }
+    </style>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
@@ -222,10 +298,209 @@ h2.sub-text{
 			</div>
 		</div>
 	</section>
-	<section>
-	{% include partials/adapters-table.html %}
+	<section style="padding:0; padding-top: 80px; padding-bottom: 40px; margin: 0 20px;">
+	<!-- {% include partials/adapters-table.html %} -->
+	<div id="integration-container">
+		<h1 class="integration-heading">80+ Built-In Integrations</h1>
+		<h2 class="integration-subhead">Support for your Cloud Native Infrastructure and Apps</h2>
+	</div>
 	</section>
 </div>
+
+<!-- Import maps polyfill -->
+    <!-- Remove this when import maps will be widely supported -->
+    <script
+      async
+      src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"
+    ></script>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.146.0/three.module.js",
+          "three/addons/": "{{ site.baseurl }}/integrations/jsm/"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import * as THREE from "three";
+
+      import { TWEEN } from "three/addons/libs/tween.module.min.js";
+      import { TrackballControls } from "three/addons/controls/TrackballControls.js";
+      import {
+        CSS3DRenderer,
+        CSS3DObject,
+      } from "three/addons/renderers/CSS3DRenderer.js";
+      import { data } from "/integrations/data.js";
+
+      const rows = 5;
+      const cols = Math.ceil(data.length / rows);
+      let i = 1,
+        j = 1;
+      const table = data.map((data) => {
+        if (j > cols) {
+          j = 1;
+          i++;
+        }
+        return { ...data, row: i, col: j++ };
+      });
+
+      let camera, scene, renderer;
+      let controls;
+
+      const objects = [];
+      const targets = { table: [], sphere: [], helix: [], grid: [] };
+
+      init();
+      animate();
+
+      function init() {
+        camera = new THREE.PerspectiveCamera(
+          15,
+          window.innerWidth / window.innerHeight,
+          1,
+          10000
+        );
+        camera.position.z = 3000;
+
+        scene = new THREE.Scene();
+
+        // table
+
+        for (let i = 0; i < table.length; i++) {
+          const element = document.createElement("div");
+          element.className = "element";
+          element.style.backgroundColor = "rgba(255, 255, 255," + "1" + ")";
+
+          const symbol = document.createElement("div");
+          symbol.className = "symbol";
+          
+          symbol.innerHTML =
+            '<img src="' +
+            table[i].color +
+            `" style="height: 100%; width: 100%;" />`;
+          symbol.style.height = "70px";
+          element.appendChild(symbol);
+
+          const details = document.createElement("div");
+          details.className = "details";
+          details.innerHTML = table[i].name;
+          //   details.style.color = "white";
+          element.appendChild(details);
+
+          const objectCSS = new CSS3DObject(element);
+          objectCSS.position.x = Math.random() * 4000 - 2000;
+          objectCSS.position.y = Math.random() * 4000 - 2000;
+          objectCSS.position.z = Math.random() * 4000 - 2000;
+          scene.add(objectCSS);
+
+          objects.push(objectCSS);
+
+          
+        }
+
+        const vector = new THREE.Vector3();
+
+        // helix
+
+        for (let i = 0, l = objects.length; i < l; i++) {
+          const theta = i * 0.185 + Math.PI;
+          const y = -(i * 8) + 250;
+
+          const object = new THREE.Object3D();
+
+          object.position.setFromCylindricalCoords(900, theta, y);
+
+          vector.x = object.position.x * 2;
+          vector.y = object.position.y;
+          vector.z = object.position.z * 2;
+
+          object.lookAt(vector);
+
+          targets.helix.push(object);
+        }
+
+
+        //
+
+        renderer = new CSS3DRenderer();
+        renderer.setSize(window.innerWidth-40, window.innerHeight-300);
+        document.getElementById("integration-container").appendChild(renderer.domElement);
+
+        //
+
+        controls = new TrackballControls(camera, renderer.domElement);
+        controls.minDistance = 500;
+        controls.maxDistance = 6000;
+        controls.addEventListener("change", render);
+
+        transform(targets.helix, 2000);
+
+        //
+
+        window.addEventListener("resize", onWindowResize);
+      }
+
+      function transform(targets, duration) {
+        TWEEN.removeAll();
+
+        for (let i = 0; i < objects.length; i++) {
+          const object = objects[i];
+          const target = targets[i];
+
+          new TWEEN.Tween(object.position)
+            .to(
+              {
+                x: target.position.x,
+                y: target.position.y,
+                z: target.position.z,
+              },
+              Math.random() * duration + duration
+            )
+            .easing(TWEEN.Easing.Exponential.InOut)
+            .start();
+
+          new TWEEN.Tween(object.rotation)
+            .to(
+              {
+                x: target.rotation.x,
+                y: target.rotation.y,
+                z: target.rotation.z,
+              },
+              Math.random() * duration + duration
+            )
+            .easing(TWEEN.Easing.Exponential.InOut)
+            .start();
+        }
+
+        new TWEEN.Tween(this)
+          .to({}, duration * 2)
+          .onUpdate(render)
+          .start();
+      }
+
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(window.innerWidth-40, window.innerHeight-300);
+
+        render();
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        TWEEN.update();
+
+        controls.update();
+      }
+
+      function render() {
+        renderer.render(scene, camera);
+      }
+    </script>
 
 <div class="content">
 	<!-- Created By Section -->
