@@ -40,50 +40,86 @@
 	    {% endif %}
 		
 		<script src="{{ site.baseurl }}/js/main.js"></script>
+    
+<!-- Site Navigation Menu -->
+<script type="text/javascript">
+	jQuery(document).ready(function ($) {
+		jQuery('.stellarnav').stellarNav({ breakpoint: 1140 });
+		jQuery('.stellarnav.mobile').css('text-align', 'end');
+	});
+</script>
+<!--Script for Copy to Clipboard-->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
 
-		<!-- Site Navigation Menu -->
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				jQuery('.stellarnav').stellarNav({breakpoint: 840});
-				jQuery('.stellarnav.mobile').css('text-align','end');
-			});
-		</script>
-		<!--Script for Copy to Clipboard-->
-		<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-		<script>
-		
-		function resetCopyText(element) {
-			let childElements = element.childNodes
-			childElements[3].innerHTML="Copy to clipboard";
+	function resetCopyText(element) {
+		let childElements = element.childNodes
+		childElements[3].innerHTML = "Copy to clipboard";
+	}
+
+	var clipboard = new ClipboardJS('.btn');
+	clipboard.on('success', function (e) {
+		console.info('Action:', e.action);
+		console.info('Text:', e.text);
+		console.info('Trigger:', e.trigger);
+		let childElements = e.trigger.childNodes;
+		childElements[3].innerHTML = "Copied!";
+		e.clearSelection();
+	});
+	clipboard.on('error', function (e) {
+		console.error('Action:', e.action);
+		console.error('Trigger:', e.trigger);
+	});
+</script>
+
+<script>
+	function displayCode(id) {
+		var divId = id + "_code";
+		var element = document.getElementById(divId);
+		element.classList.toggle("showDiv");
+		var toggleDivs = document.getElementsByClassName("toggle");
+		if (element.style.maxHeight) {
+			element.style.maxHeight = null;
+		} else {
+			element.style.maxHeight = element.scrollHeight + "px";
+			console.log(element.style.maxHeight);
 		}
-		
-		var clipboard = new ClipboardJS('.btn');
-		clipboard.on('success', function(e) {
-			console.info('Action:', e.action);
-			console.info('Text:', e.text);
-			console.info('Trigger:', e.trigger);
-			let childElements = e.trigger.childNodes;
-			childElements[3].innerHTML = "Copied!";
-			e.clearSelection();
-		});
-		clipboard.on('error', function(e) {
-			console.error('Action:', e.action);
-			console.error('Trigger:', e.trigger);
-		});
-		</script>
-
-		<script>
-			function displayCode(id) {
-				var divId = id + "_code";
-				var element = document.getElementById(divId);
-				element.classList.toggle("showDiv");
-				var toggleDivs = document.getElementsByClassName("toggle");
-				for(let i=0; i<toggleDivs.length; i++) {
-					if(toggleDivs[i] != element)
-						toggleDivs[i].classList.remove("showDiv");
+		for (let i = 0; i < toggleDivs.length; i++) {
+			if (toggleDivs[i] != element) {
+				toggleDivs[i].classList.remove("showDiv");
+				if (toggleDivs[i].style.maxHeight) {
+					toggleDivs[i].style.maxHeight = null;
 				}
 			}
-		</script>
-		
-	</body>
+		}
+	}
+</script>
+<script type="text/javascript">
+	let toggleBtn = document.getElementById("mode-toggle-btn")
+	toggleBtn.onclick = setMode;
+	if (localStorage.getItem("mode")) setMode();
+	function setMode() {
+		document.body.classList.toggle("dark-mode")
+		let layer5Logos = document.querySelectorAll("#layer5-logo");
+		let allLogos=document.querySelectorAll("#logo-dark-light");
+		console.log(allLogos)
+		if (document.body.classList.contains("dark-mode")) {
+			layer5Logos.forEach(e => e.src = '../images/company-logo/layer5-dark-mode-logo.svg')
+			allLogos.forEach(e=>e.src=e.dataset.logoForDark)
+		} else {
+			layer5Logos.forEach(e => e.src = '../images/company-logo/layer5-no-trim.svg')
+			allLogos.forEach(e=>e.src=e.dataset.logoForLight)
+		}
+		if (document.body.classList.contains("dark-mode")) {
+			localStorage.setItem("mode", "dark-mode")
+		} else {
+			localStorage.setItem("mode", "")
+		}
+	}
+
+</script>
+
+
+</body>
+
 </html>

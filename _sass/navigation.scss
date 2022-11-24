@@ -1,3 +1,5 @@
+@import "./mixins/transitions.scss";
+
 nav {
 	font-size: .8rem;
 	width: 100%;
@@ -15,7 +17,13 @@ nav {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	
+	@media (min-width:1140px) {
+		align-items: center;
+	}
+}
+.stellarnav.desktop{
+	display: flex;
+	justify-content: flex-end;
 }
 .stellarnav.mobile{
 	text-align: end!important;
@@ -25,6 +33,28 @@ nav {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
+	gap: 8px;
+}
+
+.nav-item:not(.has-sub) > a:not(.highlight).nav-text{
+	position: relative;
+	&:hover{
+		&::after{
+		  width: 100%;
+		}
+	  }
+
+	  &::after{
+		content: "";
+		width: 0px;
+		height: 2px;
+		bottom: -4px;
+		left: 50%;
+		transform: translateX(-50%);
+		position: absolute;
+		background: var(--background-primary);
+		transition: width .3s;
+	  }
 }
 
 .nav-text {
@@ -33,49 +63,116 @@ nav {
 		padding: 0.5rem !important;
 		
 		margin: 0px 3px; 
-		color: rgba(255,255,255,.8) !important;
+		color: var(--color-secondary-medium) !important;
 	}
 	cursor: pointer;
 }
 
 a.nav-text:hover {
-	color: rgba(255,255,255,1) !important;
+	color: var(--color-secondary-dark) !important;
 
 }
 
 .nav-img {
 	width: 2rem;
 	height: 1.5rem;
-	filter: invert(27%) sepia(34%) saturate(217%) hue-rotate(154deg) brightness(92%) contrast(95%);
+	filter:var(--image-filter-light);
 	padding-left: 0.5rem;
 }
 
-.sub-nav-li {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: .25rem;
-  width: 100%;
+.menu-toggle {
+	color: var(--color-secondary-medium) !important;
+	& .bars span{
+		background-color:var(--color-grey-light) !important ;
+	}
+}
+
+.nav-mode-icon{
+
+	& > img {
+		padding: 0 !important;
+		margin-left: .5rem;
+		width: 2.2rem;
+		height: 2.2rem;
+		filter: var(--image-color);
+		transition: filter .3s;
+	}
+
+	@media (max-width:1140px) {
+		margin-left: .5rem !important;
+		margin-top: .5rem !important;
+	}
+
+	@media (max-width:840px) {
+		margin-left: 1rem !important;
+		margin-top: .5rem !important;
+	}
 }
 
 .stellarnav.desktop li.has-sub a {
     padding-right: 1rem;
+
+	&::after{
+		transform: translateY(-1.5px);
+	}
+
+	&.sublink-active{
+		&::after{
+			border-top: 6px solid var(--brand-color-secondary);
+		}
+	}
 }
 
 
-.stellarnav ul ul{
-  border-radius: 5px;
-  background-color: #f3f3f3;
+.stellarnav ul {
+	width:fit-content;
+	& li.has-sub > a{
+		margin-bottom: .3rem;
+	}
+	& ul{
+  	border-radius: 5px;
+	background-color: var(--color-secondary-light);
+	background-color: #dee2e6;
+	background-image: var(--background-grey);
+	overflow: hidden;
+	width: fit-content;
+	box-shadow: var(--box-shadow-primary);
+	}
+}
+
+.stellarnav li.has-sub > a:after {
+	border-top: 6px solid var(--color-secondary-medium); display: inline-block;
 }
 
 
-.sub-nav-li:hover {
-  color: rgba(0, 179, 159, 1) !important;
-  background-color: rgba(0, 179, 159, 0.1) !important;
+.sub-nav-li {
+	@include btn-hover-secondary;
+	position: relative;
+	display: flex;
+	align-items: center;
+
+	&--active{
+		&::after{
+			width: 100%  !important;
+		}
+		&  a{
+			color: #fff !important;
+			border-color: white;
+		}
+		& img{
+			filter:brightness(0) invert(1);
+		}
+	}
+
+	&:hover{
+		& img{
+			filter:brightness(0) invert(1);
+		}
+	}
+  
 }
 
 .subnav-item {
-	color: $brand-color !important;
 	white-space: nowrap;
 	display: block;
 	width:100%;
@@ -83,19 +180,60 @@ a.nav-text:hover {
 }
 
 
+
 .active {
-	color: #00B4A0 !important;
+	color: var(--brand-color-secondary) !important;
 	font-weight: bolder;
 }
 
-.highlight {
-	border: 1px #ccc solid;
-	border-radius: 5px;
+.highlight.nav-text {
+	border:1px solid var(--color-grey-light);
+	&:hover{
+		color: white !important;
+	}
 }
 
-a.highlight:hover {
+.highlight { 
+	color: #fff ;
+	border-radius: 7px;
+	padding: .5rem;
+	transition: all .4s;
+	background: #00d3a9;
+	&:active{
+		transform: scale(.95);
+	}
+	&:hover{
+		text-decoration: none;
+		background: #00B4A0;
+		transform:  translateY(-2px) scale(1.01);
+		color: white !important;
+	}
+}
+
+
+.stellarnav.mobile {
 	
-	background: #00B4A0;
-	// color: $brand-color !important;
-}
+	& .nav-list{
+	margin-left: auto;
+	width: 100%;
+	background: transparent;
+	}
 
+	& li a {
+		border: none;
+	}
+
+	& ul {
+		background: var(--background-grey);
+	}
+
+	& > ul > li > a {
+		padding: 15px !important;
+		
+	}
+
+	&  li a {
+		color: var(--color-secondary-dark);
+	}
+	
+}
