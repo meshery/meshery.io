@@ -14,7 +14,7 @@
 				{% elsif link.submenu %}
 					{% for sublink in link.subitems %}
 							{% if page.url == sublink.link %}
-								{%  assign class = class | append: " active" %}
+								{%  assign class = class | append: " sublink-active" %}
 								{% break %}
 							{% endif %}
 					{% endfor %}
@@ -28,7 +28,7 @@
 		<ul class="">
 					{% for sublink in link.subitems %}
 					<li >
-						<div class="sub-nav-li">
+						<div {% if sublink.link == page.url %} class="sub-nav-li sub-nav-li--active" {% else %} class="sub-nav-li" {% endif %}>
 							<div>
 								<img class="nav-img" src="{{sublink.img_src}}">
 							</div>
@@ -46,6 +46,9 @@
 				{% endif %}
 			</li>	
 			{% endfor %}
+			<li class="nav-mode-icon" id="mode-toggle-btn" style="text-align: center;">
+				<img class="nav-text" src="{{ site.baseurl }}/images/nav-icons/mode-toggle-icon.png">
+			</li>
 		</ul>
 	</div>
 </nav>

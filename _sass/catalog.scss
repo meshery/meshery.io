@@ -5,7 +5,7 @@
 }
 .catalog-subtext {
   text-align: center;
-  color: black;
+  color: var(--color-secondary-dark);
   font-size: 18px;
 }
 /* CARD-STYLES */
@@ -13,40 +13,84 @@
   position: relative;
   width: 220px;
   height: 250px;
-  padding: 20px;
   border-radius: 15px;
   border: 0;
   transition: 0.4s ease-out;
-  box-shadow: 2px 2px 6px 0px #00d3a9;
   margin-bottom: 20px;
   display: block;
   margin-bottom: 20px;
+  perspective: 1000px;
+  transition: all .9s;
+  // overflow: hidden;
+  // background:var(--background-light) ;
+
+  
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 15px;
+  }
+  
+  &:hover .card-inner {
+    // transform: rotateY(180deg);
+    transform: translateY(-2%);
+  }
+  
+  .front, .back {
+    box-shadow: 2px 2px 6px 0px #00d3a9;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    border-radius: 15px;
+    backface-visibility: hidden;
+  }
+  
+  .front {
+    background:var(--background-light-cards) ;
+  }
+  
+  .back {
+    color: white;
+    transform: rotateY(180deg);
+    background:var(--background-primary) ;
+  }
+  
 }
+
+
+
 .card:hover {
-  background: rgba(0, 0, 0, 0.3);
-  transition: 0.5s;
+  // transform: rotateY(180deg);
   cursor: pointer;
   .chip {
-    background: rgba(182, 215, 168, 0.4);
+    // background: rgba(182, 215, 168, 0.4);
   }
 }
 .pattern-image-overlay {
   opacity: 0.5;
   width: 60%;
-
   object-fit: contain;
   position: absolute;
   margin-left: 5%;
   border-radius: 15px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
 .card-overlay {
   position: relative;
   width: 220px;
   height: 250px;
-  padding: 20px;
+  // padding: 20px;
   border-radius: 15px;
   border: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7) !important;
   box-shadow: 2px 2px 6px 0px #00d3a9;
   margin-bottom: 20px;
 }
@@ -144,6 +188,7 @@ p {
 .btn-tooltip-grp {
   display: flex;
   flex-direction: row;
+  position: relative;
 }
 
 .vertical-center {
@@ -181,7 +226,9 @@ p {
   display: inline-flex;
   flex-direction: row-reverse;
   float: right;
-  background-color: rgb(182, 215, 168);
+  // margin: 4px;
+  // background-color: rgb(182, 215, 168);
+  background-color: var(--brand-color-primary);
   border: none;
   cursor: default;
   height: 1.5rem;
@@ -191,7 +238,8 @@ p {
   font-family: "Open Sans", sans-serif;
   white-space: nowrap;
   align-items: center;
-  border-radius: 16px;
+  border-top-right-radius: 16px;
+  border-bottom-left-radius: 16px;
   vertical-align: middle;
   text-decoration: none;
   justify-content: center;
@@ -215,7 +263,7 @@ p {
 }
 
 .pattern-name {
-  color: #333;
+  color: var(--color-secondary-light);
   font-weight: 1400;
   font-style: bold;
   text-overflow: ellipsis;
@@ -226,8 +274,9 @@ p {
   position: absolute;
   bottom: 0;
   right: 0;
-  padding-top: 10px;
-  margin-right: 14px;
+  margin-right: 14px;  
+  color: var(--color-secondary-light);
+  margin: 0 3px 3px 0;
 }
 .pattern-image-container {
   display: flex;
@@ -267,7 +316,13 @@ p {
   flex-grow: 1;
   width: 23%;
   padding-right: 1rem;
-  height: 100rem; /* height needs to be increased with regarding to the total no. of patterns */
+  padding: 4px;
+  border-radius: 15px;
+  margin-top: 5rem;
+  box-shadow: var(--box-shadow-primary);
+  box-shadow: 2px 2px 12px 2px rgba(0,0,0,.15);
+  // backgroud:var(--background-grey);
+  height: fit-content; /* height needs to be increased with regarding to the total no. of patterns */
   .load-more {
     display: none;
   }
@@ -330,7 +385,7 @@ input[type="checkbox"] {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
-  background: #fff;
+  background: var(--background-grey);
   padding: 1.5em 2.5em 1.5em 3em;
 }
 
@@ -339,11 +394,11 @@ input[type="checkbox"] {
 }
 
 .btn-tooltip-grp {
-  width: 10rem;
+  // width: 10rem;
 }
 
 .tooltip-modal .tooltiptext-modal {
-  margin-top: 1rem;
+  // margin-top: 1rem;
 }
 
 ::-webkit-scrollbar-corner {
@@ -507,6 +562,7 @@ open-modal-btn {
 }
 label {
   white-space: nowrap;
+  color: var(--color-secondary-dark);
 }
 
 .related-patterns {
@@ -763,9 +819,15 @@ label {
     justify-content: space-between;
   }
 
-  .tooltip-modal .tooltiptext-modal {
-    margin-top: 1rem;
-  }
+  .tooltip-modal {
+    position: relative;
+    & .tooltiptext-modal {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    transition: all .5s;
+  }}
 
   .related-patterns {
     display: none;

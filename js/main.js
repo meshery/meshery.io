@@ -11,7 +11,7 @@
     ) {
       scrollBuffer = 0;
     }
-    header.classList.toggle("header-background", scrollTop >= scrollBuffer);
+    header.classList.toggle("header-shadow", scrollTop >= scrollBuffer);
   }
 
   var didScroll = false;
