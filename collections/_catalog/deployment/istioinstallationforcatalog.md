@@ -1,12 +1,13 @@
 ---
 layout: item
 name: IstioInstallationForCatalog
-type: Deployment
+type: deployment
 compatibility: 
+        - Istio
 patternId: MESHERY000
 image: /images/patterns/service-mesh.svg
-patternInfo: ""
+patternInfo: Simple Istio Installation
 patternCaveats: ""
-URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/a7e1f00b-d9d8-469b-acb4-7abdce6c9813.yaml'
-downloadLink: a7e1f00b-d9d8-469b-acb4-7abdce6c9813.yaml
+URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/454dff6a-d988-4a09-8206-963eaa816c8c.yaml'
+downloadLink: 454dff6a-d988-4a09-8206-963eaa816c8c.yaml
 ---
