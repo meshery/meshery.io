@@ -2,10 +2,10 @@
 
 nav {
 	font-size: .8rem;
-	width: 100%;
+	width: fit-content;
 	padding-left: 0rem;
 	margin-left: .25rem;
-	margin-right: .5rem;
+	margin-left:auto ;
 
 	@media #{$mid-point} {
 		padding-right: 1rem;
@@ -16,7 +16,8 @@ nav {
 .nav-container {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	padding: 0 2vw;
+	align-items: center;
 	@media (min-width:1140px) {
 		align-items: center;
 	}
@@ -68,6 +69,85 @@ nav {
 	cursor: pointer;
 }
 
+#mode-toggle-btn {
+	width: 50px;
+	position: relative;
+	list-style: none;
+	
+	& input {
+		width: 0;
+		height: 0;
+		visibility: hidden;
+		
+		&:checked {
+			&+label {
+				background: #495057;
+
+				& img:nth-child(2) {
+					opacity: 0;
+				}
+
+				&::after {
+					left: calc(100% - 19px);
+					background-image: linear-gradient(to right top, #868e96, #8d959d, #949ca4, #9ca4ac, #a3abb3, #a3abb3, #a3abb3, #a3abb3, #9ca4ac, #949ca4, #8d959d, #868e96);
+				}
+			}
+
+		}
+
+		&:not(:checked) {
+			&+label img:nth-child(1) {
+				opacity: 0;
+			}
+		}
+	}
+	
+	
+	
+	& label {
+		transition: all .3s;
+		height: 22px;
+		border-radius: 20px;
+		position: absolute;
+		background-color: #ffffff;
+		top: 0%;
+		left: 0%;
+		transform: translate(0%, 0%);
+		box-shadow: inset 0px 1px 5px rgba(0, 0, 0, .4), inset 0px -2px 5px rgba(255, 255, 255, .4);
+		margin: 0;
+		& img {
+			width: 17px;
+			height: 17px;
+			position: absolute;
+			transform: translateY(-50%);
+			top: 50%;
+
+			&:nth-child(1) {
+				left: 4px;
+			}
+
+			&:nth-child(2) {
+				right: 4px;
+				fill: rgb(55, 55, 55);
+				// font-color:ref
+			}
+		}
+
+		&::after {
+			transition: all .3s;
+			content: "";
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			left: 2px;
+			width: 17px;
+			height: 17px;
+			border-radius: 100%;
+			background-image: linear-gradient(to right top, #fcc419, #fcc92d, #fdcf3c, #fdd449, #fed956, #fed956, #fed956, #fed956, #fdd449, #fdcf3c, #fcc92d, #fcc419);
+		}
+	}
+}
+
 a.nav-text:hover {
 	color: var(--color-secondary-dark) !important;
 
@@ -87,27 +167,6 @@ a.nav-text:hover {
 	}
 }
 
-.nav-mode-icon{
-
-	& > img {
-		padding: 0 !important;
-		margin-left: .5rem;
-		width: 2.2rem;
-		height: 2.2rem;
-		filter: var(--image-color);
-		transition: filter .3s;
-	}
-
-	@media (max-width:1140px) {
-		margin-left: .5rem !important;
-		margin-top: .5rem !important;
-	}
-
-	@media (max-width:840px) {
-		margin-left: 1rem !important;
-		margin-top: .5rem !important;
-	}
-}
 
 .stellarnav.desktop li.has-sub a {
     padding-right: 1rem;
