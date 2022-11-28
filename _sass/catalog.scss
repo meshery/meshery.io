@@ -116,6 +116,20 @@
 }
 .catalog {
   padding-top: 5rem;
+  display: flex;
+
+  & .row{
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 0 75%;
+    gap: 1rem;
+    justify-content: space-around;
+    height: fit-content;
+  }
+
+  @media (max-width:770px) {
+    flex-direction: column;
+  }
 }
 
 h3 {
@@ -131,9 +145,14 @@ p {
   position: relative;
   color: black;
 }
-.column {
-  float: left;
-  padding: 0 10px;
+.column:has(.card) {
+  // float: left;
+  // padding: 0 10px;
+  display: block;
+  // margin: 0 1rem;
+}
+.column{
+  display: none;
 }
 .smp-overlay {
   width: 25px;
@@ -312,13 +331,13 @@ p {
 
 /* CHECKBOX-STYLES */
 .filter-wrap {
-  float: left;
-  flex-grow: 1;
+  // float: left;
+  flex:0 0 25%;
   width: 23%;
   padding-right: 1rem;
   padding: 4px;
   border-radius: 15px;
-  margin-top: 5rem;
+  // margin-top: 5rem;
   box-shadow: var(--box-shadow-primary);
   box-shadow: 2px 2px 12px 2px rgba(0,0,0,.15);
   // backgroud:var(--background-grey);
@@ -669,7 +688,14 @@ label {
   cursor: pointer;
 }
 .mobile_column_sm {
-  display: none;
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 1rem;
+
+  &:nth-child(1){
+    margin-top: 3rem;
+  }
 }
 .catalog-load-more {
   display: none;
@@ -856,7 +882,7 @@ label {
   }
   .row {
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -878,6 +904,7 @@ label {
     gap: 1.5rem;
     padding-bottom: 5rem;
     padding-left: 1rem;
+    margin-bottom: 3rem;
     .dropdown {
       align-self: center;
     }
