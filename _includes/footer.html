@@ -1,46 +1,52 @@
 <footer>
-			<div class="container">
-				<p class="editor-link"><a href="cloudcannon:collections/_data/footer.yml" class="btn"><strong>&#9998;</strong> Edit footer</a></p>
-				<div class="footer-columns">
-					{% for column in site.data.footer %}
-					<ul class="footer-links">
-						<li><h2>{{ column.title }}</h2></li>
-						{% for link in column.links %}
-							<li><a {% if link.new_window %}target="_blank"{% endif %} href="{% include relative-src.html src=link.link %}" {% if link.social_icon %}class="{{ link.social_icon || downcase }}-icon"{% endif %}>
-								{% if link.social_icon %}
-									{% include social-icon.html icon=link.social_icon %}
-								{% endif %}
-								{{ link.name }}</a></li>
-						{% endfor %}
-					</ul>
-					{% endfor %}
-					
-					<ul class="feed">
-						<!-- <div class="col l4"> -->
-							<a class="twitter-timeline" data-width="320" data-height="320"
-							data-theme="light" data-link-color="#62ACCD" href="https://twitter.com/mesheryio"
-							data-chrome="nofooter circularborders noscrollbar">Tweets by Meshery</a> 
-							<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-						<!-- </div> -->
-					</ul>
-				</div>
-				
-				<div class="container flex copyright">
-					<div class="text">&copy; {{ site.time | date: '%Y' }} The Meshery Authors</div>
-					<div class="text">Confidently wrangling cloud native infrastructure</div>
-				 	<div class="text"><a href="https://github.com/meshery/meshery/blob/master/CODE_OF_CONDUCT.md">Code of Conduct</a></div>
-				</div>
-			</div>
-		</footer>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		{% if jekyll.environment == 'production' %}
-       		<script src="{{ site.baseurl }}/js/stellarnav.min.js"></script>
-        {% else %}
-		<script src="{{ site.baseurl }}/js/stellarnav.js"></script>
-	    {% endif %}
-		
-		<script src="{{ site.baseurl }}/js/main.js"></script>
-    
+	<div class="container">
+		<p class="editor-link"><a href="cloudcannon:collections/_data/footer.yml" class="btn"><strong>&#9998;</strong>
+				Edit footer</a></p>
+		<div class="footer-columns">
+			{% for column in site.data.footer %}
+			<ul class="footer-links">
+				<li>
+					<h2>{{ column.title }}</h2>
+				</li>
+				{% for link in column.links %}
+				<li><a {% if link.new_window %}target="_blank" {% endif %}
+						href="{% include relative-src.html src=link.link %}" {% if link.social_icon
+						%}class="{{ link.social_icon || downcase }}-icon" {% endif %}>
+						{% if link.social_icon %}
+						{% include social-icon.html icon=link.social_icon %}
+						{% endif %}
+						{{ link.name }}</a></li>
+				{% endfor %}
+			</ul>
+			{% endfor %}
+
+			<ul class="feed">
+				<!-- <div class="col l4"> -->
+				<a class="twitter-timeline" data-width="320" data-height="320" data-theme="light"
+					data-link-color="#62ACCD" href="https://twitter.com/mesheryio"
+					data-chrome="nofooter circularborders noscrollbar">Tweets by Meshery</a>
+				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+				<!-- </div> -->
+			</ul>
+		</div>
+
+		<div class="container flex copyright">
+			<div class="text">&copy; {{ site.time | date: '%Y' }} The Meshery Authors</div>
+			<div class="text">Confidently wrangling cloud native infrastructure</div>
+			<div class="text"><a href="https://github.com/meshery/meshery/blob/master/CODE_OF_CONDUCT.md">Code of
+					Conduct</a></div>
+		</div>
+	</div>
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{% if jekyll.environment == 'production' %}
+<script src="{{ site.baseurl }}/js/stellarnav.min.js"></script>
+{% else %}
+<script src="{{ site.baseurl }}/js/stellarnav.js"></script>
+{% endif %}
+
+<script src="{{ site.baseurl }}/js/main.js"></script>
+
 <!-- Site Navigation Menu -->
 <script type="text/javascript">
 	jQuery(document).ready(function ($) {
@@ -95,29 +101,20 @@
 	}
 </script>
 <script type="text/javascript">
-	let toggleBtn = document.getElementById("mode-toggle")
-	console.log(toggleBtn.checked)
-	toggleBtn.addEventListener("change",(e)=>{
-		setMode()
-		if(localStorage.getItem("mode"))e.target.checked=true;
-		return;
-	});
-	if (localStorage.getItem("mode")){
-		toggleBtn.checked=true;
-		setMode()
-	}
-	;
+	let toggleBtn = document.getElementById("mode-toggle-btn")
+	toggleBtn.onclick = setMode;
+	if (localStorage.getItem("mode")) setMode();
 	function setMode() {
 		document.body.classList.toggle("dark-mode")
 		let layer5Logos = document.querySelectorAll("#layer5-logo");
-		let allLogos=document.querySelectorAll("#logo-dark-light");
-		
+		let allLogos = document.querySelectorAll("#logo-dark-light");
+		console.log(allLogos)
 		if (document.body.classList.contains("dark-mode")) {
 			layer5Logos.forEach(e => e.src = '../images/company-logo/layer5-dark-mode-logo.svg')
-			allLogos.forEach(e=>e.src=e.dataset.logoForDark)
+			allLogos.forEach(e => e.src = e.dataset.logoForDark)
 		} else {
 			layer5Logos.forEach(e => e.src = '../images/company-logo/layer5-no-trim.svg')
-			allLogos.forEach(e=>e.src=e.dataset.logoForLight)
+			allLogos.forEach(e => e.src = e.dataset.logoForLight)
 		}
 		if (document.body.classList.contains("dark-mode")) {
 			localStorage.setItem("mode", "dark-mode")
