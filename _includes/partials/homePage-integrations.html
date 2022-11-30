@@ -9,7 +9,16 @@
     <div class="integrations-card" >
         <div class="integrations-card-inner" >
             <div class="card-front" >
-                <img src={{ link.color }} />
+                <img src={{ link.color }}
+                id="logo-dark-light"
+                {% if link.white %}
+                data-logo-for-dark={{ link.white }}
+                data-logo-for-light={{ link.color }}
+                {% else %}
+                data-logo-for-dark={{ link.color }}
+                data-logo-for-light={{ link.color }}
+                {% endif %}
+                 />
             </div>
             <div class="card-back" >
                 <span>{{ link.name }}</span>
@@ -17,4 +26,7 @@
         </div>
     </div>
     {% endfor %}
+    <div class="integrations-3d-link">
+        <a class="highlight" href="/integrations" style="display: block; margin: max(3vh,3vw) auto 0; width: fit-content;">View In 3d</a> 
+    </div>
 </div>
