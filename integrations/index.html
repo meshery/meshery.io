@@ -277,33 +277,12 @@ permalink: /integrations
         controls.addEventListener("change", render);
 
         const menuElement = document.getElementById("menu");
-        const buttonTable = document.getElementById("table");
-        buttonTable.addEventListener("click", function () {
-          buttonTable.classList.add("highlight_button");
-          removeClassFromElement("table");
-          transform(targets.table, 2000);
-        });
-
-        const buttonSphere = document.getElementById("sphere");
-        buttonSphere.addEventListener("click", function () {
-          buttonSphere.classList.add("highlight_button");
-          removeClassFromElement("sphere");
-          transform(targets.sphere, 2000);
-        });
-
-        const buttonHelix = document.getElementById("helix");
-        buttonHelix.addEventListener("click", function () {
-          buttonHelix.classList.add("highlight_button");
-          removeClassFromElement("helix");
-          transform(targets.helix, 2000);
-        });
-
-        const buttonGrid = document.getElementById("grid");
-        buttonGrid.addEventListener("click", function () {
-          buttonGrid.classList.add("highlight_button");
-          removeClassFromElement("grid");
-          transform(targets.grid, 2000);
-        });
+        menuElement.addEventListener("click", function(e){
+          const element = e.target;
+          element.classList.add("highlight_button");
+          removeClassFromElement(element.id);
+          transform(targets[element.id], 2000);
+        })
 
         transform(targets.table, 2000);
 
