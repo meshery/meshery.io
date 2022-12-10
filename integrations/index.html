@@ -90,9 +90,9 @@ permalink: /integrations
         color: #eee;
       }
 
-      button:active {
-        color: #000000;
+      .highlight_button {
         background-color: var(--brand-color-secondary);
+        color: #000000;
       }
     </style>
   </head>
@@ -276,29 +276,27 @@ permalink: /integrations
         controls.maxDistance = 6000;
         controls.addEventListener("change", render);
 
-        const buttonTable = document.getElementById("table");
-        buttonTable.addEventListener("click", function () {
-          transform(targets.table, 2000);
-        });
-
-        const buttonSphere = document.getElementById("sphere");
-        buttonSphere.addEventListener("click", function () {
-          transform(targets.sphere, 2000);
-        });
-
-        const buttonHelix = document.getElementById("helix");
-        buttonHelix.addEventListener("click", function () {
-          transform(targets.helix, 2000);
-        });
-
-        const buttonGrid = document.getElementById("grid");
-        buttonGrid.addEventListener("click", function () {
-          transform(targets.grid, 2000);
-        });
+        const menuElement = document.getElementById("menu");
+        menuElement.addEventListener("click", function(e){
+          const element = e.target;
+          element.classList.add("highlight_button");
+          removeClassFromElement(element.id);
+          transform(targets[element.id], 2000);
+        })
 
         transform(targets.table, 2000);
+        menuElement.children[0].classList.add("highlight_button");
 
-        //
+        function removeClassFromElement(elementName) {
+          const menuElements = menuElement.children;
+          const totalChildElements = menuElement.childElementCount;
+          
+          for(let i = 0; i < totalChildElements; i++) {
+            const element = menuElements[i];
+            if(element.id === elementName) continue;
+            element.classList.remove("highlight_button");
+          }
+        }
 
         window.addEventListener("resize", onWindowResize);
       }
