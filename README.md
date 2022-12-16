@@ -26,10 +26,21 @@
 
 </div>
 
-<h2>Preview of <a href="https://meshery.io">Meshery.io</a> Website<h2>
+<h1>Meshery Website</h1>
+
+<p>The meshery website has a light mode and a dark mode.</p>
+
+<p>Light mode</p>
 
 ![Meshery.io website screenshot](images/mesheryio_screenshot.png)
-_Visit [Meshery.io](https://meshery.io/) to learn more!_
+
+<p>Dark mode</p>
+
+![Meshery.io website dark mode](images/mesheryio_dark_mode.png)
+
+
+<h2>Preview of <a href="https://meshery.io">Meshery.io</a> Website<h2>
+<div>&nbsp;</div>
 
 ## What is Meshery?
 
