@@ -26,6 +26,8 @@
 
 </div>
 
+<div>
+
 ## Meshery.io Website
 
 
@@ -44,8 +46,9 @@
 
   ![Mesheryio light and dark mode switch](images/mesheryio_light_and_dark_mode_switch.png)
 
-  <div>&nbsp;</div>
 </div>
+
+  <div>&nbsp;</div>
 
 ## What is Meshery?
 
