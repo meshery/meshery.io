@@ -26,10 +26,26 @@
 
 </div>
 
-<h2>Preview of <a href="https://meshery.io">Meshery.io</a> Website<h2>
+## Meshery.io Website
 
-![Meshery.io website screenshot](images/mesheryio_screenshot.png)
-_Visit [Meshery.io](https://meshery.io/) to learn more!_
+
+
+  The meshery.io website has a light mode and a dark mode.
+
+  #### Light mode
+
+  ![Meshery.io website screenshot](images/mesheryio_screenshot.png)
+
+  #### Dark mode
+
+  ![Meshery.io website dark mode](images/mesheryio_dark_mode.png)
+
+  You can click on the the sun like image at the top right corner of the website to switch between light and dark mode.
+
+  ![Mesheryio light and dark mode switch](images/mesheryio_light_and_dark_mode_switch.png)
+
+  <div>&nbsp;</div>
+</div>
 
 ## What is Meshery?
 
