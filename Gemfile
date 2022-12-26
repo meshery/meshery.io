@@ -20,4 +20,3 @@ group :jekyll_plugins do
   gem 'tzinfo'
 end
 
-
