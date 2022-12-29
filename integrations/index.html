@@ -98,17 +98,16 @@ permalink: /integrations
 
 
       .loader{
-        position: relative;
+        position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        margin-bottom: 5vh;
-        margin-top: 20vh;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: opacity 0.75s, visibility 0.75s;
+        background-color: #7878787b;
       }
 
       .loader--hidden{
@@ -132,13 +131,16 @@ permalink: /integrations
       }
 
 
+      
+
+
    
     </style>
     <!-- loading animation script -->
     <script>
       window.addEventListener("load", () => {
     const loader = document.querySelector(".loader");
-  
+      
     loader.classList.add("loader--hidden");
   
     loader.addEventListener("transitionend", () => {
@@ -149,7 +151,7 @@ permalink: /integrations
 
   </head>
   
-  <body class="integration-page">
+  <body class="integration-page integration-page--opacity">
     <div class="heading">
       <h1 class="integration-heading">80+ Built-In Integrations</h1>
       <h2 class="integration-subhead">
@@ -158,9 +160,10 @@ permalink: /integrations
     </div>
 
     <!-- loading animation -->
-    <div class= "loader"></div>
+    
     <div id="container">
     </div>
+    <div class= "loader"></div>
     <div id="menu">
       <button id="table">TABLE</button>
       <button id="sphere">SPHERE</button>
