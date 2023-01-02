@@ -5,23 +5,23 @@ title: ''
 labels: 'kind/bug'
 assignees: ''
 ---
-#### Description
+### Description
 <!-- A brief description of the issue.-->
 
-#### Expected Behavior
+### Expected Behavior
 <!-- A brief description of what you expected to happen.-->
 
-#### Screenshots
+### Screenshots
 <!--- Add screenshots, if applicable, to help explain your problem.-->
 
-#### Enviroment:
+### Enviroment:
  - OS: Mac Linux Windows
  - Browser: Chrome Safari Firefox
  - Version: 
  - Device: Desktop Mobile
 
 ---
-### Contributor [Guides](https://docs.meshery.io/project/contributing) and [Handbook](https://layer5.io/community/handbook)
+## Contributor [Guides](https://docs.meshery.io/project/contributing) and [Handbook](https://layer5.io/community/handbook)
 
 The meshery.io website uses Jekyll and GitHub Pages. Site content is found under the [`master` branch](https://github.com/meshery/meshery.io/tree/master).
 - 📚 See the [Contributing to Meshery.io Website](https://github.com/meshery/meshery.io#contributing-to-the-mesheryio-website) section of the readme.md and other [contributing instructions](https://docs.meshery.io/project/contributing), too.
