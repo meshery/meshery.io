@@ -20,9 +20,15 @@
     <li class="post">
       <span class="post-date"> {{ post.created_at | date: "%b %d" }} | </span>
       <a href="https://discuss.layer5.io/t/{{ post.topics[0].slug }}/{{ post.id }}"> {{ post.title }}</a>
-      <span class="poost-author"> by {{ post.last_poster_username}} </span>
+      <span id="author" class="poost-author"> 
+        {%for user in users%}
+        {% if(post.posters[0].user_id == user.id)%}
+          {%assign author = user.name%}
+          {%break%}
+        {%endif%}
+      {%endfor%}
+      {{author}}
+      </span>
     </li>
     {% endfor %}
   </ul>
-
-  
