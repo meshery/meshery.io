@@ -19,6 +19,7 @@ permalink: /integrations
       rel="stylesheet"
       href="{{ site.baseurl }}/integrations/main.css"
     />
+    <!-- <script src="/integrations/jsm/renderers/IntegrationBtn.js"></script> -->
     <style>
       a {
         color: black;
@@ -90,13 +91,68 @@ permalink: /integrations
         color: #eee;
       }
 
-      button:active {
-        color: #000000;
+      .highlight_button {
         background-color: var(--brand-color-secondary);
+        color: #000000;
       }
+
+
+      .loader{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.75s, visibility 0.75s;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+      }
+
+      .loader--hidden{
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .loader::after{
+        content: "";
+        width: 55px;
+        height: 55px;
+        border: 12px solid #dddddd;
+        border-top-color: #00B39F;
+        border-radius: 50%;
+        animation: loading 0.75s ease infinite;
+      }
+
+      @keyframes loading {
+        from { transform: rotate(0turn)}
+        to { transform: rotate(1turn)}
+      }
+
+
+      
+
+
+   
     </style>
+    <!-- loading animation script -->
+    <script>
+      window.addEventListener("load", () => {
+    const loader = document.querySelector(".loader");
+      
+    loader.classList.add("loader--hidden");
+  
+    loader.addEventListener("transitionend", () => {
+      document.body.removeChild(loader);
+    });
+  });
+    </script>
+
   </head>
-  <body class="integration-page">
+  
+  <body class="integration-page integration-page--opacity">
     <div class="heading">
       <h1 class="integration-heading">80+ Built-In Integrations</h1>
       <h2 class="integration-subhead">
@@ -104,7 +160,11 @@ permalink: /integrations
       </h2>
     </div>
 
-    <div id="container"></div>
+    <!-- loading animation -->
+    
+    <div id="container">
+    </div>
+    <div class= "loader"></div>
     <div id="menu">
       <button id="table">TABLE</button>
       <button id="sphere">SPHERE</button>
@@ -116,8 +176,7 @@ permalink: /integrations
     <!-- Remove this when import maps will be widely supported -->
     <script
       async
-      src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"
-    ></script>
+      src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
 
     <script type="importmap">
       {
@@ -276,29 +335,27 @@ permalink: /integrations
         controls.maxDistance = 6000;
         controls.addEventListener("change", render);
 
-        const buttonTable = document.getElementById("table");
-        buttonTable.addEventListener("click", function () {
-          transform(targets.table, 2000);
-        });
-
-        const buttonSphere = document.getElementById("sphere");
-        buttonSphere.addEventListener("click", function () {
-          transform(targets.sphere, 2000);
-        });
-
-        const buttonHelix = document.getElementById("helix");
-        buttonHelix.addEventListener("click", function () {
-          transform(targets.helix, 2000);
-        });
-
-        const buttonGrid = document.getElementById("grid");
-        buttonGrid.addEventListener("click", function () {
-          transform(targets.grid, 2000);
-        });
+        const menuElement = document.getElementById("menu");
+        menuElement.addEventListener("click", function(e){
+          const element = e.target;
+          element.classList.add("highlight_button");
+          removeClassFromElement(element.id);
+          transform(targets[element.id], 2000);
+        })
 
         transform(targets.table, 2000);
+        menuElement.children[0].classList.add("highlight_button");
 
-        //
+        function removeClassFromElement(elementName) {
+          const menuElements = menuElement.children;
+          const totalChildElements = menuElement.childElementCount;
+          
+          for(let i = 0; i < totalChildElements; i++) {
+            const element = menuElements[i];
+            if(element.id === elementName) continue;
+            element.classList.remove("highlight_button");
+          }
+        }
 
         window.addEventListener("resize", onWindowResize);
       }
