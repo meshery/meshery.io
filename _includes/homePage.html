@@ -1,6 +1,82 @@
 
 <!-- 1. Add latest jQuery and fancybox files -->
+<link
+      type="text/css"
+      rel="stylesheet"
+      href="{{ site.baseurl }}/integrations/main.css"
+    />
+    <style>
+      a {
+        color: black;
+      }
 
+      .element {
+        width: 120px;
+        height: 160px;
+        /* box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5); */
+        filter: drop-shadow(rgba(0, 0, 0, 0.1) 0px 4px 10px);
+        border: 1px solid rgba(127, 255, 255, 0.25);
+        text-align: center;
+        line-height: normal;
+        cursor: default;
+      }
+
+      .element:hover {
+        box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.75);
+        /* filter: drop-shadow(rgba(0, 0, 0, 0.9) 0px 4px 20px); */
+        border: 1px solid white;
+      }
+
+      .element .number {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 12px;
+        color: black;
+      }
+
+      .element .symbol {
+        position: absolute;
+        top: 40px;
+        left: 0px;
+        right: 0px;
+        font-size: 60px;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.75);
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
+      }
+
+      .element .details {
+        position: absolute;
+        bottom: 15px;
+        left: 0px;
+        right: 0px;
+        font-size: 12px;
+        color: black;
+      }
+
+      button {
+        color: white;
+        background: transparent;
+        outline: 1px solid white;
+        border: 0px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: rgba(0, 255, 255, 0.5);
+      }
+
+      button:active {
+        color: #000000;
+        background-color: rgba(0, 255, 255, 0.75);
+      }
+
+	  #integration-container > div:hover{
+		box-shadow: rgb(50 50 93 / 5%) 0px 30px 60px -12px inset, rgb(0 0 0 / 12%) 2px 8px 33px 8px inset;
+	  }
+    </style>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
@@ -12,30 +88,30 @@ h2.sub-text{
 }</style>
 <a id="button-scroll-to-up" style="text-decoration: none; color: white;"></a>
 
-<section class="hero" style="padding-bottom: 1rem">
+<section class="hero"   style="padding-bottom: 1rem">
 	<div class="text-container">
-		<h1 style="margin: 3rem 0rem 3rem 0rem;">the <span style="font-weight: 300 !important">extensible</span> Kubernetes manager</h1>
+		<h1 style="margin: 3rem 0rem 3rem 0rem;">the <span class="special-text" style="animation-delay: .5s;"> extensible</span> Kubernetes manager</h1>
 		<div style="padding-bottom: 2rem;">
 			<a href="{{ site.baseurl }}/images/screens/meshmap.gif"
 				data-fancybox="images" data-caption="cloud native management plane">
-				<img src="{{ site.baseurl }}/images/screens/meshmap.gif" alt="cloud native management plane" style=" box-shadow: 6px 6px 20px #1a2421; width: 80%;"
-						/>
+				<img class="box-shadow-primary" src="{{ site.baseurl }}/images/screens/meshmap.gif" alt="cloud native management plane" style="width: 80%;"/>
 			</a>
 			<h2 class="sub-text" style="padding-top:1rem; font-size: 1rem; font-weight: 500;">cloud native management with plugins</h2>
 		</div>
 	</div>
 </section>
 
-<div class="content">
-	<section>
-		{% include partials/patterns.html %}
-	</section>
 	
-
-	<section>
+	<div class="content">
+		<section>
+			{% include partials/patterns.html %}
+		</section>
+		
+		
+		<section>
 		<div class="container flex">
 			<div class="text ">
-				<h2>Operate with <strong>configuration best practices</strong></h2>
+				<h2>Operate with <span class="special-text">configuration best practices</span></h2>
 				<p> Assess your Kubernetes and service mesh configuration against deployment and operational best practices with Meshery's configuration validator.
 					<!-- <br>
 				<div align="center" class="button-para" style="margin-top: 3rem;">
@@ -46,7 +122,7 @@ h2.sub-text{
 			<div class="image" >
 				<a href="images/screens/configuration-best-practices.gif" data-fancybox="images"
 					data-caption="Istio and Kuberentes configuration best practices">
-					<img src="{{ site.baseurl }}/images/screens/configuration-best-practices.gif"
+					<img class="screenshot" src="{{ site.baseurl }}/images/screens/configuration-best-practices.gif"
 						alt="Istio and Kuberentes configuration best practices" loading="lazy" 
 						style=" box-shadow: 3px 3px 10px grey;
 						border: 1px;" />
@@ -61,15 +137,18 @@ h2.sub-text{
 			<div class="text">
 				<a href="https://smp-spec.io" alt="Service Mesh Performance (SMP)">
 					<img src="{{ site.baseurl }}/images/logos/smp-dark-text-side.svg"
-						style="max-width:90%; text-align: center;margin-top:10px;"
+						data-logo-for-dark="{{ site.baseurl }}/images/logos/smp-light-text-side.png"
+						data-logo-for-light="{{ site.baseurl }}/images/logos/smp-dark-text-side.svg"
+						id="logo-dark-light"
+						style="height: 6rem; text-align: center;margin-top:10px;"
 						alt="Service Mesh Performance (SMP)" loading="lazy"/>
 				</a>
 				<span  style="position: relative; top:-30px;">
-				<h2>Use the <strong>Service Mesh Performance</strong> standard</h2>
+				<h2>Use the <span class="special-text">Service Mesh Performance</span> standard</h2>
 				<p>Weigh the value of your service mesh features in-context of it's overhead.
 				
 					<div align="center" class="button-para" style="margin-top: 2rem;">
-						<a href="https://smp-spec.io" class="link">See Service Mesh Performance (SMP)</a>
+						<a href="https://smp-spec.io" class="highlight">Service Mesh Performance (SMP)</a>
 						<p style="font-size: 1rem;margin-top:1rem;padding:0rem;color:#666;font-style: italic;">(smp-spec.io)</p>
 					</div>
 				</p>
@@ -80,7 +159,7 @@ h2.sub-text{
 				<a href="images/screens/service mesh performance example.gif" data-fancybox="images"
 					data-caption="Service Mesh Performance Specification">
 					<img src="{{ site.baseurl }}/images/screens/service mesh performance example.gif"
-						alt="Service Mesh Performance Specification" class="screenshot"
+						alt="Service Mesh Performance Project" class="screenshot"
 						style="
 						box-shadow: 3px 3px 10px grey;
 						border: 1px;" 
@@ -118,25 +197,25 @@ h2.sub-text{
 			<div class="text">
 				<a href="images/logos/servicemeshinterface-icon-color.svg" data-fancybox="images"
 						data-caption="Service Mesh Interface (SMI)">
-						<img src="{{ site.baseurl }}/images/logos/servicemeshinterface-icon-color.svg"
+						<img  src="{{ site.baseurl }}/images/logos/servicemeshinterface-icon-color.svg"
 							style="max-width:20%;position:relative;float:left;
 							margin-right:5px;"
 							alt="Service Mesh Interface (SMI)" 
 							loading="lazy" />
 					</a>
 
-				<h2>Is your service mesh <strong>SMI compliant</strong>?</h2>
+				<h2>Is your service mesh <span class="special-text">SMI compliant</span>?</h2>
 				<p> Validate your service mesh's conformance to Service Mesh Interface (SMI) specifications.
 					<br>
 				<div align="center" class="button-para" style="margin-top: 3rem;">
-					<a href="/service-mesh-interface" class="link" style="display: flex; flex-direction: column;">See the Service Mesh Interface Conformance Report</a>
+					<a href="/service-mesh-interface" class="highlight" style="display: flex; flex-direction: column;">Service Mesh Interface Conformance Report</a>
 				</div>
 				</p>
 			</div>
 			<div class="image" >
 				<a href="images/screens/smi-conformance.png" data-fancybox="images"
 					data-caption="Service Mesh configuration Comparison">
-					<img src="{{ site.baseurl }}/images/screens/smi-conformance.png"
+					<img class="screenshot" src="{{ site.baseurl }}/images/screens/smi-conformance.png"
 						alt="Service Mesh configuration Comparison" loading="lazy"
 						style=" box-shadow: 3px 3px 10px grey;
 						border: 1px;"/>
@@ -153,7 +232,7 @@ h2.sub-text{
 						style="max-width:30%;position:relative;float:left;
 						margin-right:20px;margin-bottom: 10px;"
 						alt="Webassembly based Envoy Filters" loading="lazy"/>
-				<h2>Manage data plane intelligence with <strong>WebAssembly filters</strong></h2>
+				<h2>Manage data plane intelligence with <span class="special-text">WebAssembly filters</span></h2>
 				<p>Dynamically load and manage your own WebAssembly filters in Envoy-based service meshes.
 					<!-- <br>
 				<div align="center" class="button-para" style="margin-top: 2rem;">
@@ -162,7 +241,7 @@ h2.sub-text{
 				</p>
 			</div>
 			<div class="image flex">
-				<a href="{{ site.baseurl }}/images/meshery-wasm.png" data-fancybox="images"
+				<a style="width: 100%;" href="{{ site.baseurl }}/images/meshery-wasm.png" data-fancybox="images"
 					data-caption="Webassembly based Envoy Filters">
 					<img src="{{ site.baseurl }}/images/meshery-wasm.png"
 						alt="Webassembly based Envoy Filters" class="screenshot" loading="lazy"/>
@@ -176,12 +255,12 @@ h2.sub-text{
 	<section>
 		<div class="container flex">
 			<div class="text">
-				<h2>Which service mesh should I use and how do I <strong>get started</strong>?</h2>
+				<h2>Which service mesh should I use and how do I <span class="special-text">get started</span> ?</h2>
 				<p>Learn about the functionality of different service meshes
 					and visually manipulate mesh configuration.
 					<br>
 				<div align="center" class="button-para" style="margin-top: 3rem;">
-					<a href="https://docs.meshery.io" class="link">See the Meshery documentation</a>
+					<a href="https://docs.meshery.io" class="highlight">Meshery documentation</a>
 				</div>
 				</p>
 			</div>
@@ -199,12 +278,12 @@ h2.sub-text{
 	<section>
 		<div class="container flex">
 			<div class="text ">
-				<h2>Manage the <strong>performance</strong> of your service mesh and its workloads</h2>
-				<p>Baseline and track your service mesh performance from release to release.
-				<ul style="line-height: 1.5em;height: auto;text-align: left;">
+				<h2>Manage the <span class="special-text">performance</span> of your service mesh and its workloads</h2>
+				<p style="color:var(--color-secondary-medium)">Baseline and track your service mesh performance from release to release.
+				<ul style="line-height: 1.5em;height: auto;text-align: left; color: var(--color-secondary-light)">
 					<li>Use performance profiles to track the historical performance of your workloads.</li>
 					<li>Track your application performance from version to version.</li>
-					<li>Understand behavioral differences between service meshes.</li>
+					<li>Understand behavioral differences between cloud native network functions.</li>
 					<li>Compare performance across service mesh deployments.</li>
 				</ul>
 				</p>
@@ -218,65 +297,113 @@ h2.sub-text{
 			</div>
 		</div>
 	</section>
-	<section>
-	{% include partials/adapters-table.html %}
+	<section id="getting-started" class="getting-started">
+		{% include getting-started.html %}
 	</section>
 </div>
 
+		<section id="integrations">
+			{% include partials/homePage-integrations.html %}
+		</section>
+
+
 <div class="content">
 	<!-- Created By Section -->
-	<section class="created-by-section">
-		<div class="created-by-container">
-			<h1 class="created-by">Created By</h1>
-			<div class="company-image">
-				<a href="https://layer5.io/" target="_blank">
-					<img src="./images/company-logo/layer5-no-trim.svg" alt="Layer5" loading="lazy" />
-				</a>
-			</div>
-		</div>
-	</section>
-
-
-	<!-- Used by Section -->
-	<section class="used-by-section">
-		<div class="used-by-container">
-			<h1 class="used-by">Used By</h1>
-			<div class="companies-image">
+	<div class="created-and-used-by-sections">
+		<section class="created-by-section">
+			<div class="created-by-container">
+				<h1 class="created-by">Created By</h1>
 				<div class="company-image">
-					<img src="./images/company-logo/hpe-logo-color-no-trim.svg" alt="Hewlett Packard" loading="lazy" />
-				</div>
-				<div class="company-image">
-					<img src="./images/company-logo/intraserve.png" alt="Intraserve" loading="lazy"/>
-				</div>
-				<div class="company-image">
-					<img src="./images/company-logo/solarwinds.svg" alt="SolarWinds" loading="lazy"/>
-				</div>
-				<div class="company-image">
-					<img src="./images/company-logo/book-my-show.png" alt="BookMyShow" loading="lazy"/>
-				</div>
-				<div id="ericsson-logo" class="company-image">
-					<img src="./images/company-logo/ericsson-logo.png" alt="Ericsson" loading="lazy"/>
-				</div>
-				<div id="metabob-logo" class="company-image">
-					<img src="./images/company-logo/Metabob-Logo_1.png" alt="Metabob" loading="lazy"/>
-				</div>
-				<div id="asteria-logo" class="company-image">
-					<img src="./images/company-logo/Asteria_Logo_horizontal_blue.svg" alt="asteria"loading="lazy"/>
-				</div>
-				<div id="Bootlabs-logo" class="company-image">
-					<img src="./images/company-logo/bootlabs-logo.png" alt="Bootlabs"loading="lazy"/>
+					<a href="https://layer5.io/" target="_blank">
+						<img id="layer5-logo" src="./images/company-logo/layer5-no-trim.svg" alt="Layer5" loading="lazy" />
+					</a>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+		<!-- Used by Section -->
+		<section class="used-by-section">
+			<div class="used-by-container">
+				<h1 class="used-by">Used By</h1>
+				<div class="companies-image">
+					<div class="company-image">
+						<img src="./images/company-logo/hpe-logo-color-no-trim.svg" alt="Hewlett Packard" loading="lazy"
+						id="logo-dark-light"
+						data-logo-for-dark="./images/company-logo/hpe-logo-dark.svg"
+						data-logo-for-light="./images/company-logo/hpe-logo-color-no-trim.svg"
+						style="filter: none;"
+						/>
+					</div>
+					<div class="company-image">
+						<img src="./images/company-logo/intraserve.png" alt="Intraserve" loading="lazy"/>
+					</div>
+					<div class="company-image">
+						<img src="./images/company-logo/solarwinds.svg" 
+						id="logo-dark-light"
+						data-logo-for-dark="/images/company-logo/solarwinds_white.svg"
+						data-logo-for-light="./images/company-logo/solarwinds.svg"
+						style="filter: none;"
+						alt="SolarWinds" 
+						loading="lazy"/>
+					</div>
+					<div class="company-image">
+						<img src="./images/company-logo/book-my-show-logo.png" alt="BookMyShow" loading="lazy"/>
+					</div>
+					<div id="ericsson-logo" class="company-image">
+						<img src="./images/company-logo/ericsson-logo.png" alt="Ericsson" loading="lazy"/>
+					</div>
+					<div id="metabob-logo" class="company-image">
+						<img src="./images/company-logo/metabob-logo-1.png" alt="Metabob" loading="lazy"/>
+					</div>
+					<div id="asteria-logo" class="company-image">
+						<img src="./images/company-logo/Asteria_Logo_horizontal_blue.svg" alt="asteria"loading="lazy"/>
+					</div>
+					<div id="Bootlabs-logo" class="company-image">
+						<img src="./images/company-logo/bootlabs-logo-2.png"
+						id="logo-dark-light"
+						data-logo-for-dark="/images/company-logo/bootlabs-white.svg"
+						data-logo-for-light="./images/company-logo/bootlabs-logo-2.png"
+						style="filter: none;"
+						 alt="Bootlabs"loading="lazy"/>
+					</div>
+					<div id="Intel-logo" class="company-image">
+						<img src="./images/company-logo/intel-logo.svg"
+						data-logo-for-dark="/images/company-logo/red-hat-dark-logo.png"
+						alt="Intel"
+						loading="lazy"
+						style="height: 5.3vh; width:auto"/>
+					</div>
+					<div id="Bootlabs-logo" class="company-image">
+						<img src="./images/company-logo/vmware-logo.svg" alt="VMWARE"loading="lazy"/>
+					</div>
+					<div id="Red-Hat-logo" class="company-image">
+						<img src="./images/company-logo/red-hat-logo.svg"
+						id="logo-dark-light"
+						data-logo-for-dark="/images/company-logo/red-hat-dark-logo.png"
+						data-logo-for-light="./images/company-logo/red-hat-logo.svg"
+						style="filter: none;"
+						alt="RedHat"
+						loading="lazy"/>
+
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+</div>
+
+
+<div class="content">
+
+
 
 	<!-- Adopter Section -->
 	<section class="adopter-section">
 		<div class="adopter-container">
 			<h3 class="adopter-title">Add yourself as an <strong>adopter</strong></h3>
-			<p class="adopter-description">and share your service mesh story with the community</p>
-			<div class="button-para">
-				<a href="https://github.com/layer5io/meshery/blob/master/ADOPTERS.md" target="_blank" class="link">
+			<p class="adopter-description">and share your cloud native story with the community</p>
+			<div class="button-para button-para--center">
+				<a href="https://github.com/layer5io/meshery/blob/master/ADOPTERS.md" target="_blank" class="highlight" style="align-self: center">
 					Become an Adopter
 				</a>
 			</div>
@@ -284,20 +411,6 @@ h2.sub-text{
 		</div>
 	</section>
 </div>
-	<section class="overview-section">
-		<div class="container">
-			<h1 class="overview-heading" style="text-align: center;">Overview</h1>
-			<div class="google-slides">
-				<iframe
-					src="https://docs.google.com/presentation/d/e/2PACX-1vSJdaOJ6MdmYQCyd2c3sbGsa9h7BVqauzBpdeVIKMpAh4eHoStLTMS8hmYJdzT0YTgXzS2chyrLPRzR/embed?start=true&loop=true&delayms=5000"
-					frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" loading="lazy">
-				</iframe>
-			</div>
-		</div>
-	</section>
-	<section id="getting-started" class="getting-started">
-		{% include getting-started.html %}
-	</section>
 
 	<section class="bg-white">
 		{% include partials/callouts.html %}
@@ -309,12 +422,18 @@ h2.sub-text{
 		<div class="container cncf-section" >
 			<h4>MESHERY IS A CLOUD NATIVE COMPUTING FOUNDATION PROJECT</h4>
 
-			<img src="./images/cncf-horizontal-color.svg" class="cncf-img" alt="CNCF Logo" loading="lazy"/>
+			<img src="./images/cncf-horizontal-color.svg"
+			id="logo-dark-light"
+			data-logo-for-dark="./images/cncf-light-logo.svg"
+			data-logo-for-light="./images/cncf-horizontal-color.svg"
+			class="cncf-img"
+			alt="CNCF Logo"
+			loading="lazy"/>
 			<p>
 				<span class="layer5-caption">
 					Created by
 					<a href="https://layer5.io/" target="_blank">
-						<img src="{{ site.baseurl }}/images/company-logo/layer5-no-trim.svg" alt="Layer5 Logo"/>
+						<img id="layer5-logo" src="{{ site.baseurl }}/images/company-logo/layer5-no-trim.svg" alt="Layer5 Logo"/>
 					</a>
 				and its open source community.
 				</span>
@@ -341,15 +460,6 @@ h2.sub-text{
     				
 			</div>
 		</div>
-
-	</section>
-	<section class="programs-section" style="margin: 4rem auto 4rem auto;">
-		<h3 style="text-align: center; color:aliceblue;">
-
-			Learn about Meshery's participation in <a href="/programs" style="text-decoration: none; color: gold;">various open source
-			programs</a>.
-		</h3>
-		{% include programs.html  %}
 
 	</section>
 </div>

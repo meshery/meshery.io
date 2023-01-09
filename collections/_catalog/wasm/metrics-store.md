@@ -6,8 +6,8 @@ compatibility:
         - 
 patternId: FILTER005
 image: /images/webassembly_logo.svg
-filterInfo: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam pulvinar placerat tellus sed posuere. Nulla venenatis fringilla faucibus. Etiam et commodo dolor, sit amet fringilla leo. Nullam tristique tristique condimentum. Maecenas sollicitudin scelerisque egestas. Suspendisse aliquet elit quis dolor gravida, et auctor ligula ornare. Nullam et sodales ante, quis varius elit. Nullam cursus, orci eleifend tristique semper, neque nisl tincidunt purus, sed ultricies felis arcu vel metus."
-filterCaveats: "llam tristique tristique condimentum. Maecenas sollicitudin scelerisque egestas. Suspendisse aliquet elit quis dolor gravida, et auctor ligula ornare. Nullam et sodales ante, quis varius elit. Nullam cursus, orci eleifend tristique semper, neque nisl tincidunt purus, sed ultricies felis arcu vel metus. "
-URL: "https://raw.githubusercontent.com/layer5io/wasm-filters/master/metrics-store/metrics-collector/src/lib.rs"
+filterInfo: This example showcases communication between a WASM filter and a service via shared queue. It combines the Singleton-HTTP-Call and TCP-Metrics examples. The filter collects metrics and enqueues it onto the queue while the service dequeues it and sends it to upstream server where it is stored.
+filterCaveats: "[Coming Soon]"
+URL: "https://github.com/layer5io/wasm-filters/releases"
 downloadLink: metrics_collector_bg.wasm
 ---

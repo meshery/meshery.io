@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     {% seo %} {% feed_meta %} {% if jekyll.environment == 'production' %}
-    <link rel="stylesheet" href="{{ site.baseurl }}/css/stellarnav.min.css" />
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/stellarnav.css" />
     {% else %}
     <link rel="stylesheet" href="{{ site.baseurl }}/css/stellarnav.css" />
     {% endif %}
@@ -69,17 +69,23 @@
             <img
               src="{{ site.baseurl }}/images/logos/meshery-logo.png"
               alt="Meshery Logo"
-              height="45"
             />&nbsp;
             <img
-              src="{{ site.baseurl }}/images/logos/meshery-logo-text.png"
+              src="{{ site.baseurl }}/images/logos/meshery-logo-text-dark.png"
+              data-logo-for-dark="{{ site.baseurl }}/images/logos/meshery-logo-text.png"
+              data-logo-for-light="{{ site.baseurl }}/images/logos/meshery-logo-text-dark.png"
               alt="Meshery Logo"
-              height="25"
+              id="logo-dark-light"
             />
           </a>
         </div>
         {% include navigation.html %}
-     
+        <div class="nav-mode-icon" id="mode-toggle-btn" style="text-align: center;">
+          <img class="nav-text" id="logo-dark-light" src="{{ site.baseurl }}/images/nav-icons/mode-toggle-icon-sun.png" 
+            data-logo-for-dark="{{ site.baseurl }}/images/nav-icons/mode-toggle-icon-moon.png"
+            data-logo-for-light="{{ site.baseurl }}/images/nav-icons/mode-toggle-icon-sun.png"
+          />          
+        </div>
       </div>
     </header>
   </body>
