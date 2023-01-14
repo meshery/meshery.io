@@ -7,7 +7,7 @@ The Meshery.io site is built using Jekyll and Javascript.
 ## Working with themes
 To differentiate between dark and light theme components, a base file ```rootvariables.scss``` has been created. It contains global CSS variables that can be accessed by using the ```var()``` keyword during styling elements. This file powers all the different styles (including font colors, background colors, image filters and image backgrounds) based on theme changes.
 
-It is advised to use these predefined styles for contributing to different features on the website that are theme dependent. Avoid creating your own CSS variabes.
+It is advised to use these predefined styles for contributing to different features on the website that are theme dependent. Avoid creating your own CSS variables.
 
 ### Example
 
