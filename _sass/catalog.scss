@@ -5,7 +5,7 @@
 }
 .catalog-subtext {
   text-align: center;
-  color: black;
+  color: var(--color-secondary-dark);
   font-size: 18px;
 }
 /* CARD-STYLES */
@@ -13,40 +13,84 @@
   position: relative;
   width: 220px;
   height: 250px;
-  padding: 20px;
   border-radius: 15px;
   border: 0;
   transition: 0.4s ease-out;
-  box-shadow: 2px 2px 6px 0px #00d3a9;
   margin-bottom: 20px;
   display: block;
   margin-bottom: 20px;
-}
-.card:hover {
-  background: rgba(0, 0, 0, 0.3);
-  transition: 0.5s;
-  cursor: pointer;
-  .chip {
-    background: rgba(182, 215, 168, 0.4);
+  perspective: 1000px;
+  transition: all .9s;
+  // overflow: hidden;
+  // background:var(--background-light) ;
+
+  
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border-radius: 15px;
   }
+  
+  &:hover .card-inner {
+    // transform: rotateY(180deg);
+    transform: translateY(-2%);
+  }
+  
+  .front, .back {
+    box-shadow: 2px 2px 6px 0px #00d3a9;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    border-radius: 15px;
+    backface-visibility: hidden;
+  }
+  
+  .front {
+    background:var(--background-light-cards) ;
+  }
+  
+  .back {
+    color: white;
+    transform: rotateY(180deg);
+    background:var(--background-primary) ;
+  }
+  
+}
+
+
+
+.card:hover {
+  // transform: rotateY(180deg);
+  cursor: pointer;
+  // .chip {
+  //   // background: rgba(182, 215, 168, 0.4);
+  // }
 }
 .pattern-image-overlay {
   opacity: 0.5;
   width: 60%;
-
   object-fit: contain;
   position: absolute;
   margin-left: 5%;
   border-radius: 15px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
 .card-overlay {
   position: relative;
   width: 220px;
   height: 250px;
-  padding: 20px;
+  // padding: 20px;
   border-radius: 15px;
   border: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7) !important;
   box-shadow: 2px 2px 6px 0px #00d3a9;
   margin-bottom: 20px;
 }
@@ -72,6 +116,20 @@
 }
 .catalog {
   padding-top: 5rem;
+  display: flex;
+
+  & .row{
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 0 75%;
+    gap: 1rem;
+    justify-content: space-around;
+    height: fit-content;
+  }
+
+  @media (max-width:770px) {
+    flex-direction: column;
+  }
 }
 
 h3 {
@@ -87,9 +145,14 @@ p {
   position: relative;
   color: black;
 }
-.column {
-  float: left;
-  padding: 0 10px;
+.column:has(.card) {
+  // float: left;
+  // padding: 0 10px;
+  display: block;
+  // margin: 0 1rem;
+}
+.column{
+  display: none;
 }
 .smp-overlay {
   width: 25px;
@@ -144,6 +207,7 @@ p {
 .btn-tooltip-grp {
   display: flex;
   flex-direction: row;
+  position: relative;
 }
 
 .vertical-center {
@@ -152,11 +216,6 @@ p {
 }
 /* Clear floats after the columns */
 
-.row:after {
-  content: "";
-  display: flex;
-  clear: both;
-}
 .disabled-label {
   color: #aaa;
 }
@@ -181,7 +240,9 @@ p {
   display: inline-flex;
   flex-direction: row-reverse;
   float: right;
-  background-color: rgb(182, 215, 168);
+  // margin: 4px;
+  // background-color: rgb(182, 215, 168);
+  background-color: var(--brand-color-primary);
   border: none;
   cursor: default;
   height: 1.5rem;
@@ -191,7 +252,8 @@ p {
   font-family: "Open Sans", sans-serif;
   white-space: nowrap;
   align-items: center;
-  border-radius: 16px;
+  border-top-right-radius: 16px;
+  border-bottom-left-radius: 16px;
   vertical-align: middle;
   text-decoration: none;
   justify-content: center;
@@ -215,19 +277,25 @@ p {
 }
 
 .pattern-name {
-  color: #333;
+  color: var(--color-secondary-light);
   font-weight: 1400;
   font-style: bold;
+  width: calc(80%);
+  margin: auto;
+  overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
   text-align: center;
-  padding: 15px 0 3px 0;
+  padding: 15px 0 15px 0;
 }
 .pattern-id {
   position: absolute;
   bottom: 0;
   right: 0;
-  padding-top: 10px;
-  margin-right: 14px;
+  left: 0;
+  margin-right: 14px;  
+  color: var(--color-secondary-light);
+  margin: 0 3px 3px 0;
 }
 .pattern-image-container {
   display: flex;
@@ -263,11 +331,14 @@ p {
 
 /* CHECKBOX-STYLES */
 .filter-wrap {
-  float: left;
-  flex-grow: 1;
+  // float: left;
+  flex:0 0 25%;
   width: 23%;
-  padding-right: 1rem;
-  height: 100rem; /* height needs to be increased with regarding to the total no. of patterns */
+  padding: 4px;
+  border-radius: 15px;
+  // margin-top: 5rem;
+  // backgroud:var(--background-grey);
+  height: fit-content; /* height needs to be increased with regarding to the total no. of patterns */
   .load-more {
     display: none;
   }
@@ -330,7 +401,7 @@ input[type="checkbox"] {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
-  background: #fff;
+  background: var(--background-grey);
   padding: 1.5em 2.5em 1.5em 3em;
 }
 
@@ -338,13 +409,13 @@ input[type="checkbox"] {
   text-align: center;
 }
 
-.btn-tooltip-grp {
-  width: 10rem;
-}
+// .btn-tooltip-grp {
+//   // width: 10rem;
+// }
 
-.tooltip-modal .tooltiptext-modal {
-  margin-top: 1rem;
-}
+// .tooltip-modal .tooltiptext-modal {
+//   // margin-top: 1rem;
+// }
 
 ::-webkit-scrollbar-corner {
   background-color: transparent;
@@ -389,7 +460,6 @@ input[type="checkbox"] {
   font-weight: 800;
   font-size: 12px;
   white-space: nowrap;
-  text-align: center;
   padding-top: 7px;
 }
 .modal-chip {
@@ -430,20 +500,18 @@ input[type="checkbox"] {
 }
 .modal-pattern-image {
   width: 55%;
-
+  margin-left: 11%;
   object-fit: contain;
   position: absolute;
-  margin-left: 5%;
   border-radius: 15px;
-  padding-bottom: 2px;
+  padding-bottom: 0px;
 }
 .modal-pattern-id {
   position: absolute;
-  bottom: 0;
-  font-size: 8px;
-  right: 0;
-  padding-top: 10px;
-  margin-right: 14px;
+	bottom: 0;
+	font-size: 8px;
+	right: 0;
+	margin: 0px 62px 4px 0px;
 }
 
 .modal-container {
@@ -506,7 +574,8 @@ open-modal-btn {
   padding-bottom: 3px;
 }
 label {
-  white-space: normal;
+  white-space: nowrap;
+  color: var(--color-secondary-dark);
 }
 
 .related-patterns {
@@ -520,23 +589,23 @@ label {
   vertical-align: middle;
   padding-right: 2px;
 }
-.modal-pattern-image {
-  width: 55%;
+// .modal-pattern-image {.
+//   width: 55%;
 
-  object-fit: contain;
-  position: absolute;
-  margin-left: 5%;
-  border-radius: 15px;
-  padding-bottom: 2px;
-}
-.modal-pattern-id {
-  position: absolute;
-  bottom: 0;
-  font-size: 8px;
-  right: 0;
-  padding-top: 10px;
-  margin-right: 14px;
-}
+//   object-fit: contain;
+//   position: absolute;
+//   margin-left: 5%;
+//   border-radius: 15px;
+//   padding-bottom: 2px;
+// }
+// .modal-pattern-id {.
+//   position: absolute;
+//   bottom: 0;
+//   font-size: 8px;
+//   right: 0;
+//   padding-top: 10px;
+//   margin-right: 14px;
+// }
 .modal-window div div:not(:last-of-type) {
   margin-bottom: 15px;
 }
@@ -613,7 +682,14 @@ label {
   cursor: pointer;
 }
 .mobile_column_sm {
-  display: none;
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 1rem;
+
+  &:nth-child(1){
+    margin-top: 3rem;
+  }
 }
 .catalog-load-more {
   display: none;
@@ -763,9 +839,15 @@ label {
     justify-content: space-between;
   }
 
-  .tooltip-modal .tooltiptext-modal {
-    margin-top: 1rem;
-  }
+  .tooltip-modal {
+    position: relative;
+    & .tooltiptext-modal {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    transition: all .5s;
+  }}
 
   .related-patterns {
     display: none;
@@ -792,13 +874,17 @@ label {
     justify-content: space-between;
     gap: 0.5rem;
   }
-  .row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+
+  .catalog{
+
+    .row {
+      display: flex;
+      // flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
 
     .column-lg {
       display: none;
@@ -816,8 +902,12 @@ label {
     gap: 1.5rem;
     padding-bottom: 5rem;
     padding-left: 1rem;
+    margin-bottom: 3rem;
     .dropdown {
       align-self: center;
+    }
+    .category-div {
+      padding-left: 15px;
     }
     .category-div,
     .compatibility-div,

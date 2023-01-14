@@ -14,7 +14,7 @@
 				{% elsif link.submenu %}
 					{% for sublink in link.subitems %}
 							{% if page.url == sublink.link %}
-								{%  assign class = class | append: " active" %}
+								{%  assign class = class | append: " sublink-active" %}
 								{% break %}
 							{% endif %}
 					{% endfor %}
@@ -28,15 +28,14 @@
 		<ul class="">
 					{% for sublink in link.subitems %}
 					<li >
-						<div class="sub-nav-li">
+						<div {% if sublink.link == page.url %} class="sub-nav-li sub-nav-li--active" {% else %} class="sub-nav-li" {% endif %}>
 							<div>
 								<img class="nav-img" src="{{sublink.img_src}}">
 							</div>
 							<a href="{{sublink.link}}" {% if sublink.new_window %}target="_blank" {% endif %}
 							class="subnav-item">{{sublink.name}}
 							{% if sublink.external %}
-							<img src="/images/buttons/external-link_gray.svg"
-							style="max-width:  10px; vertical-align:top;" />
+							<img src="/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
 							{% endif %}
 							</a>
 						</div>
@@ -47,5 +46,6 @@
 			</li>	
 			{% endfor %}
 		</ul>
+	
 	</div>
 </nav>
