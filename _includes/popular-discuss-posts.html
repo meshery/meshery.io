@@ -1,6 +1,6 @@
 
-  <h3>Most popular Discussions</h3>
-  <ul class="posts">
+  <h3>Most popular Discussions with "{{ include.tag }}" Tag</h3></h3>
+  <ul id="posts">
      <!-- -->
     {% assign item = site.data.discuss.meshery -%}
     <!-- -->
@@ -13,7 +13,7 @@
     {% for post in sortedTopics limit:10 %}
     <!-- -->
     <li class="post">
-      <span class="post-date"> {{ post.created_at | date: "%b %d" }} | </span>
+      <span class="post-date"> {{ post.created_at | date: " %Y %b %d " }}| </span>
       <a href="https://discuss.layer5.io/t/{{ post.topics[0].slug }}/{{ post.id }}"> {{ post.title }}</a>
       <span id="author" class="poost-author"> 
         {%for user in users%}
