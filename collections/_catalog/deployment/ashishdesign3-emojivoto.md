@@ -3,7 +3,7 @@ layout: item
 name: AshishDesign3-Emojivoto
 type: deployment
 compatibility: 
-patternId: MESHERY000
+patternId: MESHERY001
 image: /images/patterns/service-mesh.svg
 patternInfo: This design installs sample emojivoto app provided by linkerd
 patternCaveats: ""
