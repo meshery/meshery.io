@@ -3,7 +3,7 @@ layout: item
 name: AshishDesign1-NGINX
 type: deployment
 compatibility: 
-patternId: MESHERY000
+patternId: MESHERY001
 image: /images/patterns/service-mesh.svg
 patternInfo: This design deploys an nginx deployment and a service that maps to it of type loadbalancer. You can access nginx at port <IP>:80 where IP is the loadbalancerIP.
 patternCaveats: ""
