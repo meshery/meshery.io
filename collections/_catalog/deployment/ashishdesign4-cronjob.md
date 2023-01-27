@@ -3,7 +3,7 @@ layout: item
 name: AshishDesign4-CronJob
 type: deployment
 compatibility: 
-patternId: MESHERY003
+patternId: MESHERY000
 image: /images/patterns/service-mesh.svg
 patternInfo: This design runs a cronjob that echo's "Hello world"
 patternCaveats: ""

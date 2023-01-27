@@ -3,7 +3,7 @@ layout: item
 name: IstioInstallationForCatalogCop
 type: Deployment
 compatibility: 
-patternId: MESHERY004
+patternId: MESHERY001
 image: /images/patterns/service-mesh.svg
 patternInfo: ""
 patternCaveats: ""
