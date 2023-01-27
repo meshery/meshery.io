@@ -1,0 +1,13 @@
+---
+layout: item
+name: Emojivoto Application
+type: deployment
+compatibility: 
+        - Linkerd
+patternId: MESHERY000
+image: /images/patterns/service-mesh.svg
+patternInfo: This design deploys Linkerd sample emojivoto application
+patternCaveats: ""
+URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/1d3b05ee-7c11-4c01-be93-81c3bb1b6524.yaml'
+downloadLink: 1d3b05ee-7c11-4c01-be93-81c3bb1b6524.yaml
+---
