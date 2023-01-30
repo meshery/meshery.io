@@ -4,7 +4,7 @@ name: Emojivoto Application
 type: deployment
 compatibility: 
         - Linkerd
-patternId: MESHERY001
+patternId: MESHERY002
 image: /images/patterns/service-mesh.svg
 patternInfo: This design deploys Linkerd sample emojivoto application
 patternCaveats: ""
