@@ -3,7 +3,7 @@ layout: item
 name: Kubernetes Cronjob
 type: deployment
 compatibility: 
-patternId: MESHERY003
+patternId: MESHERY004
 image: /images/patterns/service-mesh.svg
 patternInfo: This design deploys a simple Kubernetes "Hello World" cronjob
 patternCaveats: ""
