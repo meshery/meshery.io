@@ -3,7 +3,7 @@ layout: item
 name: Nginx Deployment
 type: deployment
 compatibility: 
-patternId: MESHERY003
+patternId: MESHERY005
 image: /images/patterns/service-mesh.svg
 patternInfo: This design deploys an Nginx deployment and exposes it at port 80. You can access Nginx via the alloted loadbalancer IP.
 patternCaveats: ""
