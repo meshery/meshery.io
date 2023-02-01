@@ -4,7 +4,7 @@ name: Istio BookInfo Application
 type: deployment
 compatibility: 
         - Istio
-patternId: MESHERY002
+patternId: MESHERY003
 image: /images/patterns/service-mesh.svg
 patternInfo: This design deploys Istio demo BookInfo Application
 patternCaveats: You need to have Istio service mesh installed in your cluster.
