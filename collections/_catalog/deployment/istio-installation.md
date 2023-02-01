@@ -3,7 +3,7 @@ layout: item
 name: Istio Installation
 type: Deployment
 compatibility: 
-patternId: MESHERY000
+patternId: MESHERY001
 image: /images/patterns/service-mesh.svg
 patternInfo: ""
 patternCaveats: ""
