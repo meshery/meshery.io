@@ -3,7 +3,7 @@ layout: item
 name: Minimal Nginx Ingress
 type: traffic-management
 compatibility: 
-patternId: MESHERY000
+patternId: MESHERY001
 image: /images/patterns/service-mesh.svg
 patternInfo: This design deploys a minimal demo Kubernetes Ingress resource for Nginx
 patternCaveats: This design needs an nginx controller running to use the configuration.
