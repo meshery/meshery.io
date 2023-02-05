@@ -1,7 +1,7 @@
-name: Update Cloud Native Catalog
+name: Add Cloud Native Catalog Items
 on:
   repository_dispatch:
-    types: [update_catalog]
+    types: [add_catalog]
 jobs:
   UpdateCloudNativeCatalog:
     runs-on: ubuntu-22.04
@@ -36,7 +36,6 @@ jobs:
             patternCaveats="$(jq -r .[$idx].catalog_data.pattern_caveats temp.json)"
             patternType="$(jq -r .[$idx].catalog_data.type temp.json)"
             patternName="$(jq -r .[$idx].name temp.json)"
-            markdownName="$(echo "$patternName" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')"
             compatibility=""
 
             if [[ $patternInfo == "null" ]]; then
@@ -74,7 +73,7 @@ jobs:
           patternCaveats: $patternCaveats
           URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/$MESHERY_CATALOG_FILES_DIR/$filename.yaml'
           downloadLink: $filename.yaml
-          ---" > ./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"/$markdownName.md
+          ---" > ./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"/$filename.md
           done
           rm temp.json
           rm err.txt
@@ -101,7 +100,6 @@ jobs:
             filterCaveats="$(jq -r .[$idx].catalog_data.filter_caveats temp.json)"
             filterType="$(jq -r .[$idx].catalog_data.type temp.json)"
             filterName="$(jq -r .[$idx].name temp.json)"
-            markdownName="$(echo "$filterName" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')"
             compatibility=""
 
             if [[ $filterInfo == "null" ]]; then
@@ -139,7 +137,7 @@ jobs:
           filterCaveats: $filterCaveats
           URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/$MESHERY_CATALOG_FILES_DIR/$filename.yaml'
           downloadLink: $filename.yaml
-          ---" > ./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')"/$markdownName.md
+          ---" > ./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')"/$filterName.md
           done
           rm temp.json
           rm err.txt
