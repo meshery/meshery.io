@@ -1,0 +1,51 @@
+name: Kubernetes Cronjob 
+services:
+  cron-job:
+    name: cron-job
+    type: CronJob.K8s
+    apiVersion: batch/v1
+    namespace: cron-test
+    version: v1.25.2
+    model: kubernetes
+    dependsOn:
+    - cron-test
+    settings:
+      spec:
+        job Template:
+          spec:
+            template:
+              spec:
+                containers:
+                - command:
+                  - /bin/sh
+                  - -c
+                  - date; echo Hello from the Kubernetes cluster
+                  image: busybox:1.28
+                  image Pull Policy: IfNotPresent
+                  name: hello
+                restart Policy: OnFailure
+        schedule: '* * * * *'
+    traits:
+      meshmap:
+        edges: []
+        id: 029ed371-7d10-4951-9e78-ffb83ff3388c
+        label: cron-job
+        parent: 438a0050-a355-4ee0-93a9-27b5c8297919
+        position:
+          posX: 198.26522995360807
+          posY: 103.25952379377033
+  cron-test:
+    name: cron-test
+    type: Namespace.K8s
+    apiVersion: /v1
+    namespace: default
+    version: v1.25.2
+    model: kubernetes
+    traits:
+      meshmap:
+        edges: []
+        id: 438a0050-a355-4ee0-93a9-27b5c8297919
+        label: cron-test
+        position:
+          posX: 198.26522995360807
+          posY: 112.25952379377031
