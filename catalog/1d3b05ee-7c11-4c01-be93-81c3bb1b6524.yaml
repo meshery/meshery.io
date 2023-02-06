@@ -1,7 +1,7 @@
-name: AshishDesign3-Emojivoto
+name: Emojivoto Application
 services:
-  emoji-arxpn:
-    name: emoji-arxpn
+  emoji-fkqbr:
+    name: emoji-fkqbr
     type: Deployment.K8s
     namespace: ""
     dependsOn:
@@ -50,10 +50,10 @@ services:
         label: emoji
         parent: 01987642-d9ed-4e31-8d19-f587313f287e
         position:
-          posX: 15.427336761855148
-          posY: 202.19854714743673
-  emoji-hasdv:
-    name: emoji-hasdv
+          posX: 13.550957413489844
+          posY: 215.33320258599372
+  emoji-lbngn:
+    name: emoji-lbngn
     type: ServiceAccount.K8s
     namespace: emojivoto
     dependsOn:
@@ -65,8 +65,8 @@ services:
         label: emoji
         parent: 01987642-d9ed-4e31-8d19-f587313f287e
         position:
-          posX: 99.05132740697631
-          posY: 131.9090374642173
+          posX: 97.17494805861101
+          posY: 145.0436929027743
   emoji-svc:
     name: emoji-svc
     type: Service.K8s
@@ -98,8 +98,8 @@ services:
         label: emoji-svc
         parent: 01987642-d9ed-4e31-8d19-f587313f287e
         position:
-          posX: -93.26545108396321
-          posY: 201.3266887275825
+          posX: -95.14183043232852
+          posY: 214.4613441661395
   emojivoto:
     name: emojivoto
     type: Namespace.K8s
@@ -110,8 +110,8 @@ services:
         id: 01987642-d9ed-4e31-8d19-f587313f287e
         label: emojivoto
         position:
-          posX: 2.0912313744080393
-          posY: 184.66317044717147
+          posX: 0.21485202604273468
+          posY: 197.79782588572846
   vote-bot:
     name: vote-bot
     type: Deployment.K8s
@@ -149,60 +149,12 @@ services:
         label: vote-bot
         parent: 01987642-d9ed-4e31-8d19-f587313f287e
         position:
-          posX: -46.999047762265974
-          posY: 147.37364311570346
-  voting-svc:
-    name: voting-svc
-    type: Service.K8s
-    namespace: ""
-    dependsOn:
-    - emojivoto
-    settings:
-      spec:
-        ports:
-        - name: grpc
-          port: 8080
-          targetPort: 8080
-        - name: prom
-          port: 8801
-          targetPort: 8801
-        selector:
-          app: voting-svc
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 7885daa2-59ec-42c3-8bb6-fe47fe081c53
-            metadata:
-              port: 80
-              protocol: TCP
-            source: c3c9e331-6400-4053-a999-a5ed6ed78bd7
-            target: 072eaee8-3346-496d-88c2-29581ab3b8f3
-        id: c3c9e331-6400-4053-a999-a5ed6ed78bd7
-        label: voting-svc
-        parent: 01987642-d9ed-4e31-8d19-f587313f287e
-        position:
-          posX: -91.3070158621032
-          posY: 80.11083890289044
-  voting-wrjhl:
-    name: voting-wrjhl
-    type: ServiceAccount.K8s
-    namespace: emojivoto
-    dependsOn:
-    - emojivoto
-    traits:
-      meshmap:
-        edges: []
-        id: 6fb411d0-918f-4669-b2cc-c5f6538739a6
-        label: voting
-        parent: 01987642-d9ed-4e31-8d19-f587313f287e
-        position:
-          posX: 103.94791383277929
-          posY: 187.3471892254951
-  voting-wwhro:
-    name: voting-wwhro
+          posX: -48.87542711063128
+          posY: 160.50829855426045
+  voting-jyeqw:
+    name: voting-jyeqw
     type: Deployment.K8s
-    namespace: default
+    namespace: ""
     dependsOn:
     - emojivoto
     settings:
@@ -249,8 +201,71 @@ services:
         label: voting
         parent: 01987642-d9ed-4e31-8d19-f587313f287e
         position:
-          posX: -31.930039163667008
-          posY: 80.46907413412526
+          posX: -33.80641851203231
+          posY: 93.60372957268225
+  voting-qmavd:
+    name: voting-qmavd
+    type: ServiceAccount.K8s
+    namespace: emojivoto
+    dependsOn:
+    - emojivoto
+    traits:
+      meshmap:
+        edges: []
+        id: 6fb411d0-918f-4669-b2cc-c5f6538739a6
+        label: voting
+        parent: 01987642-d9ed-4e31-8d19-f587313f287e
+        position:
+          posX: 102.07153448441399
+          posY: 200.4818446640521
+  voting-svc:
+    name: voting-svc
+    type: Service.K8s
+    namespace: ""
+    dependsOn:
+    - emojivoto
+    settings:
+      spec:
+        ports:
+        - name: grpc
+          port: 8080
+          targetPort: 8080
+        - name: prom
+          port: 8801
+          targetPort: 8801
+        selector:
+          app: voting-svc
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 7885daa2-59ec-42c3-8bb6-fe47fe081c53
+            metadata:
+              port: 80
+              protocol: TCP
+            source: c3c9e331-6400-4053-a999-a5ed6ed78bd7
+            target: 072eaee8-3346-496d-88c2-29581ab3b8f3
+        id: c3c9e331-6400-4053-a999-a5ed6ed78bd7
+        label: voting-svc
+        parent: 01987642-d9ed-4e31-8d19-f587313f287e
+        position:
+          posX: -93.1833952104685
+          posY: 93.24549434144743
+  web-nuwxf:
+    name: web-nuwxf
+    type: ServiceAccount.K8s
+    namespace: emojivoto
+    dependsOn:
+    - emojivoto
+    traits:
+      meshmap:
+        edges: []
+        id: 37c0427c-88fc-444e-9c1e-1ca959353893
+        label: web
+        parent: 01987642-d9ed-4e31-8d19-f587313f287e
+        position:
+          posX: 93.78095158243299
+          posY: 94.9784606276432
   web-svc:
     name: web-svc
     type: Service.K8s
@@ -280,10 +295,10 @@ services:
         label: web-svc
         parent: 01987642-d9ed-4e31-8d19-f587313f287e
         position:
-          posX: -93.58425466268592
-          posY: 271.21550199145247
-  web-wfzue:
-    name: web-wfzue
+          posX: -95.46063401105123
+          posY: 284.35015743000946
+  web-yheej:
+    name: web-yheej
     type: Deployment.K8s
     namespace: ""
     dependsOn:
@@ -334,20 +349,5 @@ services:
         label: web
         parent: 01987642-d9ed-4e31-8d19-f587313f287e
         position:
-          posX: 12.54133011983875
-          posY: 269.60528907738967
-  web-yedyj:
-    name: web-yedyj
-    type: ServiceAccount.K8s
-    namespace: emojivoto
-    dependsOn:
-    - emojivoto
-    traits:
-      meshmap:
-        edges: []
-        id: 37c0427c-88fc-444e-9c1e-1ca959353893
-        label: web
-        parent: 01987642-d9ed-4e31-8d19-f587313f287e
-        position:
-          posX: 95.6573309307983
-          posY: 81.84380518908621
+          posX: 10.664950771473446
+          posY: 282.73994451594666
