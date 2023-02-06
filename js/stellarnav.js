@@ -15,7 +15,7 @@
 		var settings = $.extend( {
 			theme: 'plain', // adds default color to nav. (light, dark)
 			breakpoint: 768, // number in pixels to determine when the nav should turn mobile friendly
-			menuLabel: 'Menu', // label for the mobile nav
+			menuLabel: '', // label for the mobile nav
 			sticky: false, // makes nav sticky on scroll (desktop only)
 			position: 'static', // 'static', 'top', 'left', 'right' - when set to 'top', this forces the mobile nav to be placed absolutely on the very top of page
 			openingSpeed: 80, // how fast the dropdown should open in milliseconds
@@ -77,9 +77,9 @@
 
 			// adds the toggle button to open and close nav
 			if ( settings.position == 'right' || settings.position == 'left' ) {
-				nav.prepend('<a href="#" class="menu-toggle"><span class="bars"><span></span><span></span><span></span></span><div>' + menuLabel + '</div></a>');
+				nav.prepend('<a href="#" class="menu-toggle"><span class="bars"><span></span><span></span><span></span></span></a>');
 			} else {
-				nav.prepend('<a href="#" class="menu-toggle ' + cssClass + '"><span class="bars"><span></span><span></span><span></span></span><div>'+ menuLabel + '</div></a>');
+				nav.prepend('<a href="#" class="menu-toggle ' + cssClass + '"><span class="bars"><span></span><span></span><span></span></span></a>');
 			}
 
 			// adds a click-to-call link
