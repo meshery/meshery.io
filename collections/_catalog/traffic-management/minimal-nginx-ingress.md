@@ -1,0 +1,12 @@
+---
+layout: item
+name: Minimal Nginx Ingress
+type: traffic-management
+compatibility: 
+patternId: MESHERY001
+image: /images/patterns/service-mesh.svg
+patternInfo: This design deploys a minimal demo Kubernetes Ingress resource for Nginx
+patternCaveats: This design needs an nginx controller running to use the configuration.
+URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/ee3ba7b5-551e-4d2c-b988-211f5e4487ca.yaml'
+downloadLink: ee3ba7b5-551e-4d2c-b988-211f5e4487ca.yaml
+---

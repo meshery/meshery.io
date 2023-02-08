@@ -1,0 +1,94 @@
+name: Nginx Deployment
+services:
+  default:
+    name: default
+    type: Namespace.K8s
+    apiVersion: /v1
+    namespace: default
+    version: v1.25.2
+    model: kubernetes
+    traits:
+      meshmap:
+        edges: []
+        id: c70581ff-43f7-4378-a0ad-54f52e8551ad
+        label: default
+        position:
+          posX: 196.70040844465882
+          posY: 52.21918455837121
+  nginx-deployment:
+    name: nginx-deployment
+    type: Deployment.K8s
+    apiVersion: apps/v1
+    namespace: default
+    version: v1.25.2
+    model: kubernetes
+    labels:
+      app: nginx
+    dependsOn:
+    - default
+    settings:
+      spec:
+        replicas: 2
+        selector:
+          match Labels:
+            app: nginx
+        template:
+          metadata:
+            labels:
+              app: nginx
+          spec:
+            containers:
+            - image: nginx:1.14.2
+              name: nginx
+              ports:
+              - container Port: 80
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: e0111edb-0d66-4834-b05a-663bc7e944cb
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 6c1581dc-f5c6-42e9-a0cc-3a0c67610b79
+            target: 983489fc-9d25-41a2-8977-5efe9b486d71
+        id: 983489fc-9d25-41a2-8977-5efe9b486d71
+        label: nginx-deployment
+        parent: c70581ff-43f7-4378-a0ad-54f52e8551ad
+        position:
+          posX: 235.22603004915246
+          posY: 46.10185632832892
+  nginx-service:
+    name: nginx-service
+    type: Service.K8s
+    apiVersion: /v1
+    namespace: default
+    version: v1.25.2
+    model: kubernetes
+    dependsOn:
+    - default
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 80
+          protocol: TCP
+        selector:
+          app: nginx
+        type: LoadBalancer
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: e0111edb-0d66-4834-b05a-663bc7e944cb
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 6c1581dc-f5c6-42e9-a0cc-3a0c67610b79
+            target: 983489fc-9d25-41a2-8977-5efe9b486d71
+        id: 6c1581dc-f5c6-42e9-a0cc-3a0c67610b79
+        label: nginx-service
+        parent: c70581ff-43f7-4378-a0ad-54f52e8551ad
+        position:
+          posX: 158.17478684016518
+          posY: 43.8365127884135
