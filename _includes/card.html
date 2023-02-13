@@ -14,7 +14,16 @@
           <img class="smp"
           src="{{site.baseurl}}/images/logos/service-mesh-pattern.svg"
           loading="lazy" />
-          {{pattern.patternId}}
+          <span id="patId{{pattern.patternId}}" class="pat">
+            {% assign bigPatId = pattern.patternId |  split: " "%}
+            {% assign patId = bigPatId[1] | split: "-" %}
+            
+            {% if patId[2] %}
+              MESHERY{{patId[2]}}
+            {%else%}
+              {{pattern.patternId}}
+            {% endif %}
+          </span>
         </h6>
       </div> 
       <div class="back">
@@ -23,5 +32,8 @@
     </div>
   </div>  
 </a>
+<script>
+ 
+</script>
 
 
