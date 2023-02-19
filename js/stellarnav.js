@@ -15,7 +15,7 @@
 		var settings = $.extend( {
 			theme: 'plain', // adds default color to nav. (light, dark)
 			breakpoint: 768, // number in pixels to determine when the nav should turn mobile friendly
-			menuLabel: 'Menu', // label for the mobile nav
+			menuLabel: '', // label for the mobile nav
 			sticky: false, // makes nav sticky on scroll (desktop only)
 			position: 'static', // 'static', 'top', 'left', 'right' - when set to 'top', this forces the mobile nav to be placed absolutely on the very top of page
 			openingSpeed: 80, // how fast the dropdown should open in milliseconds
@@ -77,9 +77,9 @@
 
 			// adds the toggle button to open and close nav
 			if ( settings.position == 'right' || settings.position == 'left' ) {
-				nav.prepend('<a href="#" class="menu-toggle"><span class="bars"><span></span><span></span><span></span></span><div>' + menuLabel + '</div></a>');
+				nav.prepend('<a href="#" class="menu-toggle"><span class="bars"><span></span><span></span><span></span></span></a>');
 			} else {
-				nav.prepend('<a href="#" class="menu-toggle ' + cssClass + '"><span class="bars"><span></span><span></span><span></span></span><div>'+ menuLabel + '</div></a>');
+				nav.prepend('<a href="#" class="menu-toggle ' + cssClass + '"><span class="bars"><span></span><span></span><span></span></span></a>');
 			}
 
 			// adds a click-to-call link
@@ -213,16 +213,22 @@
 			// adds toggle button to li items that have children
 			nav.find('li a').each(function() {
 				if ($(this).next().length > 0) {
+					$(this).addClass('sub-list')
 					$(this).parent('li').addClass('has-sub').append('<a class="dd-toggle" href="#"><span class="icon-plus"></span></a>');
 				}
 			});
 
-			// expands the dropdown menu on each click
-			nav.find('li .dd-toggle').on('click', function(e) {
+			// expands the dropdown menu on each click of +
+			nav.find('li .dd-toggle').on('click', navbarExpand);
+
+			// expands the dropdown menu on each click of nav-text
+			nav.find('li .sub-list').on('click', navbarExpand);
+
+			function navbarExpand(e) {
 				e.preventDefault();
 				$(this).parent('li').children('ul').stop(true, true).slideToggle(settings.openingSpeed);
 				$(this).parent('li').toggleClass('open');
-			});
+			}
 
 			var resetTriggers = function() {
 				nav.find('li').off('mouseenter');
