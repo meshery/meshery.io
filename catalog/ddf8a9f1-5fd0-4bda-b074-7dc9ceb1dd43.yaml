@@ -3,7 +3,7 @@ services:
   bookinfo-vs:
     name: bookinfo-vs
     type: VirtualService.Istio
-    namespace: ""
+    namespace: default
     settings:
       gateways:
       - sample-app-gateway
@@ -57,7 +57,7 @@ services:
   details:
     name: details
     type: Application
-    namespace: ""
+    namespace: default
     settings:
       advanced:
         labels:
@@ -104,7 +104,7 @@ services:
   ratings:
     name: ratings
     type: Application
-    namespace: ""
+    namespace: default
     settings:
       advanced:
         labels:
@@ -127,7 +127,7 @@ services:
   reviews:
     name: reviews
     type: Service.K8s
-    namespace: ""
+    namespace: default
     dependsOn:
     - default
     settings:
@@ -149,7 +149,7 @@ services:
   reviews-v1:
     name: reviews-v1
     type: Application
-    namespace: ""
+    namespace: default
     settings:
       advanced:
         create_service: false
@@ -175,7 +175,7 @@ services:
   reviews-v2:
     name: reviews-v2
     type: Application
-    namespace: ""
+    namespace: default
     settings:
       advanced:
         create_service: false
@@ -201,7 +201,7 @@ services:
   reviews-v3:
     name: reviews-v3
     type: Application
-    namespace: ""
+    namespace: default
     settings:
       advanced:
         create_service: false
@@ -227,7 +227,7 @@ services:
   sample-app-gateway:
     name: sample-app-gateway
     type: Gateway.Istio
-    namespace: ""
+    namespace: default
     settings:
       selector:
         istio: ingressgateway
