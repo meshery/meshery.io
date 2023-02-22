@@ -2,9 +2,9 @@
   <p style="text-align:center;" align="center">
 <a href="https://layer5.io/meshery">
 <picture align="center">
-<source media="(prefers-color-scheme: dark)" srcset="./images/logos/meshery-logo-dark-text-side.svg" width="70%" align="center" style="margin-bottom:20px;">
-<source media="(prefers-color-scheme: light)" srcset="./images/logos/meshery-logo-light-text-side.svg" width="70%" align="center" style="margin-bottom:20px;">
-<img alt="Shows an illustrated light mode meshery logo in light color mode and a dark mode meshery logo dark color mode." src="./images/logos/meshery-logo-light-text-side-new.svg" width="70%" align="center" style="margin-bottom:20px;"> </picture>
+<source media="(prefers-color-scheme: dark)" srcset="./assets/images/logos/meshery-logo-dark-text-side.svg" width="70%" align="center" style="margin-bottom:20px;">
+<source media="(prefers-color-scheme: light)" srcset="./assets/images/logos/meshery-logo-light-text-side.svg" width="70%" align="center" style="margin-bottom:20px;">
+<img alt="Shows an illustrated light mode meshery logo in light color mode and a dark mode meshery logo dark color mode." src="./assets/images/logos/meshery-logo-light-text-side-new.svg" width="70%" align="center" style="margin-bottom:20px;"> </picture>
 </a>
 
 <br/><br/></p>
@@ -58,9 +58,9 @@ Find out more about the <a href="https://layer5.io/community#meshmate">Layer5 co
 <a href="https://slack.meshery.io">
 
 <picture align="right">
-  <source media="(prefers-color-scheme: dark)" srcset="./images/logos/slack-dark-128.png"  width="110px" align="right" style="margin-left:10px;margin-top:10px;">
-  <source media="(prefers-color-scheme: light)" srcset="./images/logos/slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:5px;">
-  <img alt="Shows an illustrated light mode meshery logo in light color mode and a dark mode meshery logo dark color mode." src="./images/logos/slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:13px;">
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/images/logos/slack-dark-128.png"  width="110px" align="right" style="margin-left:10px;margin-top:10px;">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/images/logos/slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:5px;">
+  <img alt="Shows an illustrated light mode meshery logo in light color mode and a dark mode meshery logo dark color mode." src="./assets/images/logos/slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:13px;">
 </picture>
 </a>
 
