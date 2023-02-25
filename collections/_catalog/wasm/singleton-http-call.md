@@ -5,7 +5,7 @@ type: wasm filter
 compatibility:
         - 
 patternId: FILTER004
-image: /assets/images/webassembly_logo.svg
+image: /images/webassembly_logo.svg
 filterInfo: "The filter is responsible for intercepting HTTP requests, authorizing them based on the stored cache, and performing rate limiting. In the context of the envoy, this component is an HTTP filter and gets executed in the worker threads. For each request, a context object gets created."
 filterCaveats: "[Coming Soon]"
 URL: https://github.com/layer5io/wasm-filters/releases
