@@ -5,7 +5,7 @@ type: JWT
 compatibility:
         - 
 patternId: FILTER007
-image: /assets/images/webassembly_logo.svg
+image: /images/webassembly_logo.svg
 filterInfo: "[Coming Soon]"
 filterCaveats: "[Coming Soon]"
 URL: "https://github.com/layer5io/wasm-filters/releases"
