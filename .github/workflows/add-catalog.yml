@@ -31,7 +31,7 @@ jobs:
 
           for (( idx=0; idx<$patternCount; idx++ ))
           do
-            filename=$(jq -r .[$idx].id temp.json)
+            designId=$(jq -r .[$idx].id temp.json)
             patternInfo="$(jq -r .[$idx].catalog_data.pattern_info temp.json)"
             patternCaveats="$(jq -r .[$idx].catalog_data.pattern_caveats temp.json)"
             patternType="$(jq -r .[$idx].catalog_data.type temp.json)"
@@ -60,7 +60,7 @@ jobs:
             done
 
             patternFile="$(jq -r .[$idx].pattern_file temp.json)"
-            echo "$patternFile" > $MESHERY_CATALOG_FILES_DIR/$filename.yaml
+            echo "$patternFile" > $MESHERY_CATALOG_FILES_DIR/$designId.yaml
 
             echo "---
           layout: item
@@ -71,9 +71,9 @@ jobs:
           image: /assets/images/patterns/service-mesh.svg
           patternInfo: $patternInfo
           patternCaveats: $patternCaveats
-          URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/$MESHERY_CATALOG_FILES_DIR/$filename.yaml'
-          downloadLink: $filename.yaml
-          ---" > ./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"/$filename.md
+          URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/$MESHERY_CATALOG_FILES_DIR/$designId.yaml'
+          downloadLink: $designId.yaml
+          ---" > ./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"/$designId.md
           done
           rm temp.json
           rm err.txt
@@ -95,7 +95,7 @@ jobs:
 
           for (( idx=0; idx<$filterCount; idx++ ))
           do
-            filename=$(jq -r .[$idx].id temp.json)
+            filterId=$(jq -r .[$idx].id temp.json)
             filterInfo="$(jq -r .[$idx].catalog_data.filter_info temp.json)"
             filterCaveats="$(jq -r .[$idx].catalog_data.filter_caveats temp.json)"
             filterType="$(jq -r .[$idx].catalog_data.type temp.json)"
@@ -124,7 +124,7 @@ jobs:
             done
 
             filterFile="$(jq -r .[$idx].filter_file temp.json)"
-            echo "$filterFile" > $MESHERY_CATALOG_FILES_DIR/$filename.yaml
+            echo "$filterFile" > $MESHERY_CATALOG_FILES_DIR/$filterId.yaml
 
             echo "---
           layout: item
@@ -135,9 +135,9 @@ jobs:
           image: /assets/images/webassembly_logo.svg
           filterInfo: $filterInfo
           filterCaveats: $filterCaveats
-          URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/$MESHERY_CATALOG_FILES_DIR/$filename.yaml'
-          downloadLink: $filename.yaml
-          ---" > ./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')"/$filterName.md
+          URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/$MESHERY_CATALOG_FILES_DIR/$filterId.yaml'
+          downloadLink: $filterId.yaml
+          ---" > ./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')"/$filterId.md
           done
           rm temp.json
           rm err.txt

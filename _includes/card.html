@@ -1,4 +1,4 @@
-<a class="external-link" href="{{pattern.url}}" target="_blank">
+<a class="external-link" href="{{pattern.url}}">
   <div class= "card link">  
     <div class="card-inner">
 
@@ -14,7 +14,16 @@
           <img class="smp"
           src="{{site.baseurl}}/assets/images/logos/service-mesh-pattern.svg"
           loading="lazy" />
-          {{pattern.patternId}}
+          <span id="patId{{pattern.patternId}}" class="pat">
+            {% assign bigPatId = pattern.patternId |  split: " "%}
+            {% assign patId = bigPatId[1] | split: "-" %}
+
+            {% if patId[2] %}
+              MESHERY{{patId[2]}}
+            {%else%}
+              {{pattern.patternId}}
+            {% endif %}
+          </span>
         </h6>
       </div> 
       <div class="back">

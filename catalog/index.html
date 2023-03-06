@@ -65,46 +65,6 @@ permalink: /catalog
     {% endfor %}
 
 
-      {% assign size = site.catalog | size | divided_by:5 | plus:1 %}
-      {% assign offset = 0 %}
-      {% for i in (1..size) %}
-      <div id="mobile{{i}}" class="mobile_column_sm">
-        {% for pattern in catalog limit:5 offset:offset %}
-        <div class="column_sm">
-        {% if pattern.patternInfo and pattern.Status != "ComingSoon" %}
-        {% include card.html %}
-        <!-- this is where the modal include is placed for future reference -->
-        {% elsif pattern.filterInfo and pattern.Status != "ComingSoon" %}
-        {% include wasm-card.html %}
-        <!-- this is where the modal include is placed for future reference -->
-        {% elsif pattern.patternInfo and pattern.Status == "ComingSoon" %}
-        {% include coming-soon.html %}
-        {% endif %}
-      </div>
-        {% endfor %}
-        {% assign offset = offset | plus:5 %}
-      </div>
-      {% endfor %}
-    <button class="import catalog-load-more" id="catalog-load-more">Load more items</button>
-  <script>
-    const childrenLength = document.querySelectorAll(".mobile_column_sm").length
-    var count = 2;
-    for(i=2;i<=childrenLength;i++){
-    document.getElementById("mobile"+i).style.display = "none"
-    }
-    var button = document.getElementById('catalog-load-more')
-    button.addEventListener("click",handleClick)
-    function handleClick(){
-      console
-      if(count<childrenLength){
-        document.getElementById("mobile"+count).style.display = "unset"
-      }
-      count++
-    }
-
-  </script>
-
-
 
   <!-- {% if paginator.total_pages > 1 %}
   <ul class="pager">
