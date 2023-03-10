@@ -1,6 +1,6 @@
 ---
 layout: item
-name: Metrics-Store
+name: Metrics Store
 type: wasm filter
 compatibility:
         -  Envoy
@@ -10,7 +10,7 @@ patternId: FILTER005
 image: /images/webassembly_logo.svg
 filterInfo: |
         <p>
-        This example showcases communication between a WASM filter and a service via shared queue. It combines the <b>Singleton-HTTP-Call</b> and <b>TCP-Metrics</b> examples. The filter collects metrics and enqueues it onto the queue while the service dequeues it and sends it to upstream server where it is stored.
+        This example showcases communication between a WASM filter and a service via shared queue. It combines the <b>Singleton HTTP Call</b> and <b>TCP Metrics</b> examples. The filter collects metrics and enqueues it onto the queue while the service dequeues it and sends it to upstream server where it is stored.
         </p>
 
         <p>

@@ -1,9 +1,11 @@
 ---
 layout: item
-name: JWT-Filter
+name: JWT Filter
 type: JWT
 compatibility:
-        - 
+        - Istio
+        - Envoy
+        - Consul
 patternId: FILTER007
 image: /images/webassembly_logo.svg
 filterInfo: |

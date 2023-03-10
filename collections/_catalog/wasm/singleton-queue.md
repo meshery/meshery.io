@@ -1,6 +1,6 @@
 ---
 layout: item
-name: Singleton-Queue
+name: Singleton Queue
 type: wasm filter
 compatibility:
         - Istio

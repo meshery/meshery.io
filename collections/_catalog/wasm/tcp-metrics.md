@@ -1,6 +1,6 @@
 ---
 layout: item
-name: TCP-Metrics
+name: TCP Metrics
 type: wasm filter
 compatibility:
         - Envoy

@@ -1,6 +1,6 @@
 ---
 layout: item
-name: TCP-Packet-Parse
+name: TCP Packet Parse
 type: wasm filter
 compatibility:
         - Istio

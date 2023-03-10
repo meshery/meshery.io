@@ -1,6 +1,6 @@
 ---
 layout: item
-name: Singleton-HTTP-Call
+name: Singleton HTTP Call
 type: wasm filter
 compatibility:
         - Istio
