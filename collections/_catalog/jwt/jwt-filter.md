@@ -7,7 +7,7 @@ compatibility:
         - Envoy
         - Consul
 patternId: FILTER007
-image: /images/webassembly_logo.svg
+image: /assets/images/webassembly_logo.svg
 filterInfo: |
         A WASM filter made to manipulate JWT token headers and payloads (currently only supports string parameters). Works best with Meshery.
 
