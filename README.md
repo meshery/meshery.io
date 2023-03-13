@@ -42,7 +42,7 @@ For further information, refer to the [Meshery Docs](https://docs.meshery.io).
 ## Join the Meshery community!
 
 <a name="contributing"></a><a name="community"></a>
-Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://layer5.io/community/handbook/repository-overview">Community Welcome Guide</a> for a tour of resources available to you and jump into our <a href="https://slack.meshery.io">Slack</a>!
+Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://layer5.io/community/newcomers/">Newcomers' Guide</a> for a tour of resources available to you and jump into our <a href="https://slack.meshery.io">Slack</a> to engage!
 
 <p style="clear:both;">
 <a href ="https://layer5.io/community"><img alt="MeshMates" src="assets/imageslogos/Layer5-MeshMentors.png" style="margin-right:10px; margin-bottom:7px;" width="28%" align="left" /></a>
