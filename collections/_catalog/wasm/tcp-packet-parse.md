@@ -7,7 +7,7 @@ compatibility:
         - Envoy
         - Consul
 patternId: FILTER003
-image: /images/webassembly_logo.svg
+image: /assets/images/webassembly_logo.svg
 filterInfo: |
         <p>
         Parses the contents of every TCP packet the proxy receives and logs it.

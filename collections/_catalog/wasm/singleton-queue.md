@@ -7,7 +7,7 @@ compatibility:
         - Envoy
         - Consul
 patternId: FILTER006
-image: /images/webassembly_logo.svg
+image: /assets/images/webassembly_logo.svg
 filterInfo: |
         An example which depicts a singleton HTTP WASM service which does an HTTP call once every 2 seconds.
 

@@ -6,7 +6,7 @@ compatibility:
         - Envoy
         - Istio
 patternId: FILTER002
-image: /images/webassembly_logo.svg
+image: /assets/images/webassembly_logo.svg
 filterInfo: |
         <p>
         Collects simple metrics for every TCP packet and logs it.
