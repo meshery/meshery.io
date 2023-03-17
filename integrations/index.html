@@ -154,7 +154,7 @@ permalink: /integrations
   
   <body class="integration-page integration-page--opacity">
     <div class="heading">
-      <h1 class="integration-heading">80+ Built-In Integrations</h1>
+      <h1 class="integration-heading">150+ Built-In Integrations</h1>
       <h2 class="integration-subhead">
         Support for your Cloud Native Infrastructure and Apps
       </h2>
@@ -196,8 +196,11 @@ permalink: /integrations
         CSS3DRenderer,
         CSS3DObject,
       } from "three/addons/renderers/CSS3DRenderer.js";
-      import { data } from "/integrations/data.js";
-
+      import data from '../integrations/data.js'
+      let integHeading = document.querySelector(".integration-heading")
+      let roundedIntegNumber = Math.floor(data.length/ 10) * 10;
+      integHeading.innerHTML = `${roundedIntegNumber}+ Built-In Integrations`
+      
       const rows = 5;
       const cols = Math.ceil(data.length / rows);
       let i = 1,
@@ -241,10 +244,10 @@ permalink: /integrations
 
           const symbol = document.createElement("div");
           symbol.className = "symbol";
-
+          let urlFromJSON = table[i].color.split('/integration');
           symbol.innerHTML =
             '<img src="' +
-            table[i].color +
+            urlFromJSON[0] + urlFromJSON[1] +
             `" style="height: 100%; width: 100%;" />`;
           symbol.style.height = "70px";
           element.appendChild(symbol);

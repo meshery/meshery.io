@@ -19,6 +19,10 @@
     }
 }
 
+.post-info{
+    color: var(--color-secondary-dark);
+}
+
 .anchor {
     position: relative;
 }
@@ -32,10 +36,11 @@
 header {
     background-color: var(--color-primary-light);
     color: $coolgray;
-    padding: 20px 0;
+    padding: 1.2vw 0px !important;
     // background: $brand-color; /* Old browsers */
     // background: linear-gradient(to bottom, $brand-color 0%, $middle-gradient-color 100%) no-repeat $brand-color;
-    position: fixed;
+    position: sticky;
+    top: 0;
     width: 100%;
     z-index: 101;
     margin-bottom: 5px;
@@ -268,14 +273,15 @@ td {
     background: black;
     margin-bottom: 15px;
     overflow:hidden;
+    padding: 15px;
 }
 
 .toggle .innerDiv {
-    width: 80%;
+    width: 100%;
     display: table;
+    table-layout: fixed;
     height: 80px; /* any arbitrary height but best at the minimum initial height you would want. */
     // background: #EEE;
-    margin: 0px auto;
     transition-timing-function: linear;
     transition: cubic-bezier(0, 1, 0, 1);
     
@@ -299,14 +305,18 @@ td {
     max-height: 0px;
     pointer-events: none;
     transition: all .4s;
-    // background: linear-gradient(to right top, #868e96, #767e86, #676e76, #585f66, #495057);
     border-radius: 7px;
     box-shadow: var(--box-shadow-primary);
     overflow: hidden;
+    box-sizing: border-box;
+    // background: linear-gradient(to right top, #868e96, #767e86, #676e76, #585f66, #495057);
 }
 
 .showDiv {
     pointer-events: all;
+    padding: 15px;
+    box-sizing: border-box;
+    max-height: max-content !important;
 }
 
 .docker {
@@ -355,22 +365,22 @@ hr {
 
 .code-box {
     position: relative;
-    overflow-x: auto;
-    height: 50px;
-    line-height: 50px;
-    margin-right: 3.5rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    overflow: auto;
+    min-height: 50px;
+    line-height: 25px;
+    width: 90%;
     font-size: 15px;
     white-space: pre-line;
     color: #fff !important;
-    margin-left: 15px;
-    & p{
-
-    }
 }
 
+
 .code-box::-webkit-scrollbar{
-    width: 6px;
-    height: 6px;
+    width: 3px;
+    height: 3px;
     border-radius: 3px;
     overflow: hidden;
     padding: 2px 0;
@@ -444,6 +454,8 @@ hr {
     .getting-started-heading {
         font-size: 55px;
     }
+
+
 
     .overview-heading {
         font-size: 55px;
