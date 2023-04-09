@@ -1,0 +1,66 @@
+<div class="testimonials-wrapper">
+
+  <h2>Hear what other users have to say...</h2>
+  <div class="slider">
+    {% for testimonial in site.data.testimonials %}
+    {% if testimonial.type == 1 %}
+    <div class="bq-section">
+      <div class="type-one-wrapper type-one-wrapper-boxed">
+        <div class="bq-quote type-one-quote">
+          <div class="type-one-quote-userpic"><img src="{{ testimonial.image }}"></div>
+          <div class="type-one-quote-qmark">&#10077;</div>
+          <div class="type-one-quote-pattern"></div>
+          <div class="type-one-quote-base">
+            <blockquote class="type-one-quote-text">{{ testimonial.quote }}</blockquote>
+            <div class="type-one-quote-meta">
+              <div class="type-one-meta-info">
+                <div class="type-one-author"><cite>{{ testimonial.person | default: "" }}</cite></div>
+                <div class="type-one-source"><span>{{ testimonial.title | default: "" }}</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% elsif testimonial.type == 2 %}
+    <div class="bq-section">
+      <div class="type-one-wrapper type-one-wrapper-boxed">
+        <div class="bq-quote type-two-quote">
+          <div class="type-two-quote-pattern">
+            <div class="type-two-quote-qmark">&#10077;</div>
+          </div>
+          <div class="type-two-quote-userpic"><img src="{{ testimonial.image }}"></div>
+          <div class="type-two-quote-base">
+            <blockquote class="type-two-quote-text">{{ testimonial.quote }}</blockquote>
+            <div class="type-two-quote-meta">
+              <div class="type-two-quote-meta-info">
+                <div class="type-two-quote-author"><cite>{{ testimonial.person | default: "" }}</cite></div>
+                <div class="type-two-quote-source"><span>{{ testimonial.title | default: "" }}</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% elsif testimonial.type == 3 %}
+    <div class="bq-section">
+      <div class="type-one-wrapper type-one-wrapper-boxed">
+        <div class="bq-quote type-three-quote">
+          <div class="type-three-quote-qmark">&#10078;</div>
+          <div class="type-three-quote-base">
+            <blockquote class="type-three-quote-text">{{ testimonial.quote }}</blockquote>
+            <div class="type-three-quote-meta">
+              <div class="type-three-quote-userpic"><img src="{{ testimonial.image }}"></div>
+              <div class="type-three-quote-meta-info">
+                <div class="type-three-quote-author"><cite>{{ testimonial.person | default: "" }}</cite></div>
+                <div class="type-three-quote-source"><span>{{ testimonial.title | default: "" }}</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>

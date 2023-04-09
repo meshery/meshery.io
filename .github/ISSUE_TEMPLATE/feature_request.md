@@ -2,7 +2,9 @@
 name: 💡 Feature request
 about: Suggest an enhancement to the Meshery website
 title: ''
-labels: 'kind/enhancement'
+labels: 
+ - 'kind/enhancement'
+ - 'area/website'
 assignees: ''
 ---
 ### Current Behavior
