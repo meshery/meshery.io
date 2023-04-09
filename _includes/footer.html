@@ -68,7 +68,9 @@
 
 	function resetCopyText(element) {
 		let childElements = element.childNodes
-		childElements[3].innerHTML = "Copy to clipboard";
+		childElements[1].innerHTML = "Copy URL";
+		childElements[1].style.color = 'white';
+		childElements[1].style.background = "#00b39fff";
 	}
 
 	var clipboard = new ClipboardJS('.btn');
@@ -77,7 +79,9 @@
 		console.info('Text:', e.text);
 		console.info('Trigger:', e.trigger);
 		let childElements = e.trigger.childNodes;
-		childElements[3].innerHTML = "Copied!";
+		childElements[1].innerHTML = "Copied";
+		childElements[1].style.color = 'white';
+		childElements[1].style.background = "#1a2421";
 		e.clearSelection();
 	});
 	clipboard.on('error', function (e) {
