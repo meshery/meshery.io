@@ -45,3 +45,17 @@ btnscroll.on('click', function(e) {
   $('html, body').animate({scrollTop:0}, '0');
 });
 
+const copyBtns = document.querySelectorAll('.tooltip');
+copyBtns.forEach(copyBtn => {
+  copyBtn.addEventListener('click', () => {
+    const tooltip = copyBtn.querySelector('.tooltiptext');
+    const originalText = tooltip.textContent;
+    navigator.clipboard.writeText(copyBtn.getAttribute('data-clipboard-text'));
+    tooltip.textContent = 'Copied';
+    setTimeout(() => {
+      tooltip.textContent = originalText;
+    }, 3000);
+  });
+});
+
+
