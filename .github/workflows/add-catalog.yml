@@ -80,7 +80,7 @@ jobs:
           rm err.txt
       - name: Update Catalog Filters
         run: |
-          catalogFilters=$(curl -sS "$MESHERY_CLOUD_BASE_URL/filters/catalog" 2>./err.txt)
+          catalogFilters=$(curl -sS "$MESHERY_CLOUD_BASE_URL/api/catalog/content/filter" 2>./err.txt)
           if [[ "$(<err.txt)" != "" ]]; then
             >&2 echo "Error connecting to Meshery Cloud"
             >&2 echo "$(<err.txt)"
