@@ -13,7 +13,7 @@ filterInfo: |
 
         Sample configuration:
         <pre>
-        <code style='color: var(--color-grey-light)'>
+        <code  style='color: var(--color-grey-light)'>
         {
         "add_header": [
         ["header1","value1"],
