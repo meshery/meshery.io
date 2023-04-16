@@ -13,14 +13,14 @@ filterInfo: |
         <p>
         Build and deploy:
         </p>
-        <code>
+        <code style='color: var(--color-grey-light)'>
         cd http-auth
         make run-filtered
         </code>
         <p>
         Test:
         </p>
-        <code>
+        <code style='color: var(--color-grey-light)'>
         curl  -H "token":"hello" 0.0.0.0:18000 -v # Authorized
         curl  -H "token":"world" 0.0.0.0:18000 -v # Unauthorized
         </code>
