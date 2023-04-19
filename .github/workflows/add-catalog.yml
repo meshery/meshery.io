@@ -73,11 +73,8 @@ jobs:
 
             echo "$userInfo" > info.json
 
-            userFirstName=$(jq .first_name info.json)
-            userLastName=$(jq .last_name info.json)
-
-            userFullName=$(userFirstName) $(userLastName)
-            userAvatarURL=$(jq .avatar_url info.json)
+            userFullName="$(jq -r .first_name info.json) $(jq -r .last_name info.json)"
+            userAvatarURL="$(jq -r .avatar_url info.json)"
 
             echo "---
           layout: item
@@ -157,11 +154,8 @@ jobs:
 
             echo "$userInfo" > info.json
 
-            userFirstName=$(jq .first_name info.json)
-            userLastName=$(jq .last_name info.json)
-
-            userFullName=$(userFirstName) $(userLastName)
-            userAvatarURL=$(jq .avatar_url info.json)
+            userFullName="$(jq -r .first_name info.json) $(jq -r .last_name info.json)"
+            userAvatarURL="$(jq -r .avatar_url info.json)"
 
             echo "---
           layout: item
