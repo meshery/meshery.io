@@ -63,9 +63,25 @@ jobs:
             patternFile="$(jq -r .[$idx].pattern_file temp.json)"
             echo "$patternFile" > $MESHERY_CATALOG_FILES_DIR/$designId.yaml
 
+            userId=$(jq -r .[$idx].user_id temp.json)
+            userInfo=$(curl -sS "$MESHERY_CLOUD_BASE_URL/api/identity/users/profile/$(userId)" 2>./err1.txt)
+
+            if [[ "$(<err1.txt)" != "" ]]; then
+            >&2 echo "Error fetcheing User details"
+            >&2 echo "$(<err1.txt)"
+            fi
+
+            echo "$userInfo" > info.json
+
+            userFirstName=$(jq first_name info.json)
+            userLastName=$(jq last_name info.json)
+
+            userFullName=$(userFirstName)+$(userLastName)
+
             echo "---
           layout: item
           name: $patternName
+          userName=$userFullName
           type: $patternType
           compatibility: $compatibility
           patternId: $(printf "MESHERY%03d" $idx)
