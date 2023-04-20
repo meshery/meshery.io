@@ -77,9 +77,9 @@
 
 			// adds the toggle button to open and close nav
 			if ( settings.position == 'right' || settings.position == 'left' ) {
-				nav.prepend('<div class="menu-toggle"><span class="bars"><span></span><span></span><span></span></span></div>');
+				nav.prepend('<a href="#" class="menu-toggle"><span class="bars"><span></span><span></span><span></span></span></a>');
 			} else {
-				nav.prepend('<div class="menu-toggle ' + cssClass + '"><span class="bars"><span></span><span></span><span></span></span></div>');
+				nav.prepend('<a href="#" class="menu-toggle ' + cssClass + '"><span class="bars"><span></span><span></span><span></span></span></a>');
 			}
 
 			// adds a click-to-call link
