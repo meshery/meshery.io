@@ -1,7 +1,19 @@
 <footer>
 	<div class="container">
-		<p class="editor-link"><a href="cloudcannon:collections/_data/footer.yml" class="btn"><strong>&#9998;</strong>
-				Edit footer</a></p>
+		{% if jekyll.environment == 'production' and
+		site.google_analytics_key != '' %}
+		<script>
+		  window.ga =
+			window.ga ||
+			function () {
+			  (ga.q = ga.q || []).push(arguments);
+			};
+		  ga.l = +new Date();
+		  ga("create", "{{ site.google_analytics_key }}", "auto");
+		  ga("send", "pageview");
+		</script>
+		<script async src="https://www.google-analytics.com/analytics.js"></script>
+		{% endif %}
 		<div class="footer-columns">
 			{% for column in site.data.footer %}
 			<ul class="footer-links">
