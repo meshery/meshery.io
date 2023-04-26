@@ -9,7 +9,7 @@ Add or update the following [Meshery Catalog](https://meshery.io/catalog.) item(
 
 **Name:**  <!-- Name of pattern -->
 **Type:** <!-- Type of pattern-->
-**Compatibility:** <!-- Service mesh it's compatible with -->
+**Compatibility:** <!-- integrated technologies -->
 **Pattern ID:** <!-- Unique identifier -->
 **image:** <!-- Link to image -->
 **Pattern Info:** <!-- brief information of the pattern -->
