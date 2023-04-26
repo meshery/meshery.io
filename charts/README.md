@@ -2,17 +2,13 @@
 
 Meshery is the cloud native management plane. This repository include meshery Helm chart.
 
-The chart source code:
+Meshery Helm Charts:
 
-* https://github.com/meshery/meshery/tree/master/install/kubernetes/helm/meshery
+* [https://github.com/meshery/meshery.io/blob/master/charts]
 
-The Meshery source code:
+Meshery Helm Chart source code:
 
-* https://github.com/meshery/meshery
-
-The repo source code:
-
-* https://github.com/meshery/meshery.io/blob/master/charts
+* [https://github.com/meshery/meshery/tree/master/install/kubernetes/helm/meshery]
 
 ## License
 
