@@ -1,9 +1,11 @@
 ---
 layout: item
 name: Istio BookInfo Application
+userName: Ashish Tiwari
+userAvatarURL: https://layer5.io/static/7b1f08e10d271cbfd963c7d435cf84ac/416c3/ashish-tiwari.webp
 type: Deployment
 compatibility: 
-patternId: MESHERY006
+patternId: MESHERY008
 image: /assets/images/patterns/service-mesh.svg
 patternInfo: ""
 patternCaveats: ""
