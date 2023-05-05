@@ -16,7 +16,7 @@ filterInfo: |
         Build and Deploy:
         </p>
 
-        <code style='color: var(--color-grey-light)'>
+        <code>
         cd tcp-metrics
         make run-filtered
         </code>
@@ -25,7 +25,7 @@ filterInfo: |
         Test this filer by executing:
         </p>
 
-        <code style='color: var(--color-grey-light)'>
+        <code>
         curl 0.0.0.0:18000 -v -d "request body"
         </code>
 filterCaveats: none

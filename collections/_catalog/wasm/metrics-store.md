@@ -17,7 +17,7 @@ filterInfo: |
         Build and Deploy:
         </p>
 
-        <code style='color: var(--color-grey-light)'>
+        <code>
         cd metrics-store
         make run-filtered
         </code>
@@ -26,14 +26,14 @@ filterInfo: |
         Test this filer by executing:
         </p>
 
-        <code style='color: var(--color-grey-light)'>
+        <code>
         # make a few of these calls
         curl 0.0.0.0:18000 -v -d "request body" 
         </code>
         
         <br />
 
-        <code style='color: var(--color-grey-light)'>
+        <code>
         # Retrieves the stored stats
         curl 0.0.0.0:8080/retrieve -v 
         x | y | z  === 
