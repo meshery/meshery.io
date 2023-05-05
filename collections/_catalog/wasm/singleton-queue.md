@@ -14,7 +14,7 @@ filterInfo: |
 
         Build and deploy:
         
-        <pre><code>
+        <pre><code style='color: var(--color-grey-light)'>
         cd singleton-http-call
         make run-filtered
         </code></pre>
