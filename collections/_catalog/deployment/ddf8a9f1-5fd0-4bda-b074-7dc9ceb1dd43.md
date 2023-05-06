@@ -5,7 +5,7 @@ userName: Ashish Tiwari
 userAvatarURL: https://layer5.io/static/7b1f08e10d271cbfd963c7d435cf84ac/416c3/ashish-tiwari.webp
 type: Deployment
 compatibility: 
-patternId: MESHERY008
+patternId: MESHERY014
 image: /assets/images/patterns/service-mesh.svg
 patternInfo: ""
 patternCaveats: ""
