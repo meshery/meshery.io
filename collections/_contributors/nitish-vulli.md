@@ -2,7 +2,7 @@
 layout: person
 name: Nitish Vulli
 position: Contributor
-image_path: /assets/images/photos/nitish-vulli.jpg
+image_path: /assets/images/photos/nitish-vulli.webp
 twitter: vullinitish
 github: nitishvu
 blurb: Mesh Head

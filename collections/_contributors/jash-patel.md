@@ -2,7 +2,7 @@
 layout: person
 name: Jash Patel
 position: Contributor
-image_path: /assets/images/photos/jash-patel.jpeg
+image_path: /assets/images/photos/jash-patel.webp
 github: Jashpatel1
 blurb: Mesh Head
 status: Active

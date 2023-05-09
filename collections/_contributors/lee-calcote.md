@@ -2,7 +2,7 @@
 layout: person
 name: Lee Calcote
 position: Maintainer
-image_path: https://pbs.twimg.com/profile_images/880205475643441152/V_vhfnzb_400x400.jpg
+image_path: https://pbs.twimg.com/profile_images/880205475643441152/V_vhfnzb_400x400.webp
 twitter: lcalcote
 github: leecalcote
 blurb: Cloud native and its management

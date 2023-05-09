@@ -2,7 +2,7 @@
 layout: person
 name: Girish Ranganathan
 position: Maintainer
-image_path: https://pbs.twimg.com/profile_images/946846523295444993/pgnyCSTD_400x400.jpg
+image_path: https://pbs.twimg.com/profile_images/946846523295444993/pgnyCSTD_400x400.webp
 twitter: ingenious_G
 github: girishranganathan
 blurb: Mesh Head

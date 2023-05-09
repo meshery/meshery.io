@@ -17,7 +17,7 @@ assignees: ''
 <!-- Add any other context or screenshots about the feature request here. -->
 
 ---
-<img src="https://raw.githubusercontent.com/meshery/meshery.io/master/assets/images/logos/meshery-logo.png" width="16px" align="left" /><h4>Contributor [Guides](https://docs.meshery.io/project/contributing) and Resources</h4>
+<img src="https://raw.githubusercontent.com/meshery/meshery.io/master/assets/images/logos/meshery-logo.webp" width="16px" align="left" /><h4>Contributor [Guides](https://docs.meshery.io/project/contributing) and Resources</h4>
 
 - 🎨 Wireframes and designs for Meshery Site in [Figma](https://www.figma.com/file/SMP3zxOjZztdOLtgN4dS2W/Meshery-UI)
 - 🖥 [Contributing to Meshery Website](https://github.com/meshery/meshery.io#contributing-to-the-mesheryio-website)
