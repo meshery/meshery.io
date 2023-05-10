@@ -18,7 +18,7 @@ filterInfo: |
         </p>
 
         <code>
-        cd metrics-store
+        cd metrics-store<br/>
         make run-filtered
         </code>
         
@@ -27,19 +27,19 @@ filterInfo: |
         </p>
 
         <code>
-        # make a few of these calls
+        # make a few of these calls<br/>
         curl 0.0.0.0:18000 -v -d "request body" 
         </code>
         
         <br />
 
         <code>
-        # Retrieves the stored stats
-        curl 0.0.0.0:8080/retrieve -v 
-        x | y | z  === 
-        # x : downstream bytes, 
-        # y : upstream bytes, 
-        # z: the latency for application server to respond 
+        # Retrieves the stored stats<br/>
+        curl 0.0.0.0:8080/retrieve -v <br/>
+        x | y | z  === <br/>
+        # x : downstream bytes, <br/>
+        # y : upstream bytes, <br/>
+        # z: the latency for application server to respond <br/>
         </code>
 
         <p>

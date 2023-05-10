@@ -15,7 +15,7 @@ filterInfo: |
         Build and deploy:
         
         <pre><code>
-        cd singleton-http-call
+        cd singleton-http-call<br/>
         make run-filtered
         </code></pre>
 

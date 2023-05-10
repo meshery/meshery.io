@@ -14,14 +14,14 @@ filterInfo: |
         Build and deploy:
         </p>
         <code>
-        cd http-auth
+        cd http-auth<br/>
         make run-filtered
         </code>
         <p>
         Test:
         </p>
         <code>
-        curl  -H "token":"hello" 0.0.0.0:18000 -v # Authorized
+        curl  -H "token":"hello" 0.0.0.0:18000 -v # Authorized<br/>
         curl  -H "token":"world" 0.0.0.0:18000 -v # Unauthorized
         </code>
 filterCaveats: 
