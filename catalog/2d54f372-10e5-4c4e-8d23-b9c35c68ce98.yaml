@@ -1,44 +1,7 @@
 name: Robot Shop Sample App
 services:
-  cart-pvreh:
-    name: cart-pvreh
-    type: Service
-    apiVersion: v1
-    model: kubernetes
-    settings:
-      spec:
-        ports:
-        - name: http
-          port: 8080
-          target Port: 8080
-        selector:
-          service: cart
-    traits:
-      meshmap:
-        edges: []
-        id: 66890543-9b46-4b16-9b9e-913629cf2ba6
-        label: cart
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-        position:
-          posX: -137.23533615172676
-          posY: 12.5
-  cart-vmfeh:
-    name: cart-vmfeh
+  cart-eepuk:
+    name: cart-eepuk
     type: Deployment
     apiVersion: apps/v1
     model: kubernetes
@@ -95,8 +58,8 @@ services:
         position:
           posX: 106.5
           posY: 83.86766807586338
-  catalogue-nooro:
-    name: catalogue-nooro
+  cart-hdzlp:
+    name: cart-hdzlp
     type: Service
     apiVersion: v1
     model: kubernetes
@@ -107,12 +70,12 @@ services:
           port: 8080
           target Port: 8080
         selector:
-          service: catalogue
+          service: cart
     traits:
       meshmap:
         edges: []
-        id: d66b7f4e-3f90-455e-a8aa-249566be0f56
-        label: catalogue
+        id: 66890543-9b46-4b16-9b9e-913629cf2ba6
+        label: cart
         meshmodel-metadata:
           genealogy: ""
           isCustomResource: false
@@ -130,12 +93,13 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: -21.5
+          posX: -137.23533615172676
           posY: 12.5
-  catalogue-rvkts:
-    name: catalogue-rvkts
+  catalogue-dpogy:
+    name: catalogue-dpogy
     type: Deployment
     apiVersion: apps/v1
+    namespace: default
     model: kubernetes
     settings:
       spec:
@@ -191,26 +155,24 @@ services:
         position:
           posX: 93.30150211379507
           posY: -146.73533615172676
-  dispatch-udnov:
-    name: dispatch-udnov
+  catalogue-xlwfi:
+    name: catalogue-xlwfi
     type: Service
     apiVersion: v1
-    namespace: default
     model: kubernetes
     settings:
       spec:
-        cluster IP: None
         ports:
-        - name: headless
-          port: 55555
-          target Port: 0
+        - name: http
+          port: 8080
+          target Port: 8080
         selector:
-          service: dispatch
+          service: catalogue
     traits:
       meshmap:
         edges: []
-        id: 169ad52c-5629-4968-a62c-e67b6307d024
-        label: dispatch
+        id: d66b7f4e-3f90-455e-a8aa-249566be0f56
+        label: catalogue
         meshmodel-metadata:
           genealogy: ""
           isCustomResource: false
@@ -228,10 +190,10 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: -79.36766807586338
-          posY: -64.36766807586338
-  dispatch-yvqye:
-    name: dispatch-yvqye
+          posX: -21.5
+          posY: 12.5
+  dispatch-gfmtq:
+    name: dispatch-gfmtq
     type: Deployment
     apiVersion: apps/v1
     model: kubernetes
@@ -287,10 +249,50 @@ services:
         position:
           posX: -38.669170189658445
           posY: 83.86766807586338
-  mongodb-rjbdp:
-    name: mongodb-rjbdp
+  dispatch-hmvzq:
+    name: dispatch-hmvzq
     type: Service
     apiVersion: v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        cluster IP: None
+        ports:
+        - name: headless
+          port: 55555
+          target Port: 0
+        selector:
+          service: dispatch
+    traits:
+      meshmap:
+        edges: []
+        id: 169ad52c-5629-4968-a62c-e67b6307d024
+        label: dispatch
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        position:
+          posX: -79.36766807586338
+          posY: -64.36766807586338
+  mongodb-jlzih:
+    name: mongodb-jlzih
+    type: Service
+    apiVersion: v1
+    namespace: default
     model: kubernetes
     settings:
       spec:
@@ -324,10 +326,11 @@ services:
         position:
           posX: 36.36766807586338
           posY: 12.5
-  mongodb-vgczq:
-    name: mongodb-vgczq
+  mongodb-sttxx:
+    name: mongodb-sttxx
     type: Deployment
     apiVersion: apps/v1
+    namespace: default
     model: kubernetes
     settings:
       spec:
@@ -378,47 +381,11 @@ services:
         position:
           posX: 93.30150211379507
           posY: -69.86766807586338
-  mysql-bucek:
-    name: mysql-bucek
-    type: Service
-    apiVersion: v1
-    model: kubernetes
-    settings:
-      spec:
-        ports:
-        - name: mysql
-          port: 3306
-          target Port: 3306
-        selector:
-          service: mysql
-    traits:
-      meshmap:
-        edges: []
-        id: 93f2ad7a-b150-46f0-b40d-8b57f686d1ab
-        label: mysql
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-        position:
-          posX: -21.5
-          posY: -141.23533615172676
-  mysql-gtfow:
-    name: mysql-gtfow
+  mysql-oqhqd:
+    name: mysql-oqhqd
     type: Deployment
     apiVersion: apps/v1
+    namespace: default
     model: kubernetes
     settings:
       spec:
@@ -473,8 +440,45 @@ services:
         position:
           posX: -142.23533615172676
           posY: 149.73533615172676
-  payment-flcva:
-    name: payment-flcva
+  mysql-wkvvw:
+    name: mysql-wkvvw
+    type: Service
+    apiVersion: v1
+    model: kubernetes
+    settings:
+      spec:
+        ports:
+        - name: mysql
+          port: 3306
+          target Port: 3306
+        selector:
+          service: mysql
+    traits:
+      meshmap:
+        edges: []
+        id: 93f2ad7a-b150-46f0-b40d-8b57f686d1ab
+        label: mysql
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        position:
+          posX: -21.5
+          posY: -141.23533615172676
+  payment-fhdye:
+    name: payment-fhdye
     type: Deployment
     apiVersion: apps/v1
     model: kubernetes
@@ -534,10 +538,11 @@ services:
         position:
           posX: -89.66917018965844
           posY: 83.86766807586338
-  payment-xyfoy:
-    name: payment-xyfoy
+  payment-vpgah:
+    name: payment-vpgah
     type: Service
     apiVersion: v1
+    namespace: default
     model: kubernetes
     settings:
       spec:
@@ -571,8 +576,8 @@ services:
         position:
           posX: -79.36766807586338
           posY: 12.5
-  rabbitmq-nagvi:
-    name: rabbitmq-nagvi
+  rabbitmq-ofdjr:
+    name: rabbitmq-ofdjr
     type: Service
     apiVersion: v1
     model: kubernetes
@@ -614,10 +619,11 @@ services:
         position:
           posX: -137.23533615172676
           posY: -64.36766807586338
-  rabbitmq-xdczk:
-    name: rabbitmq-xdczk
+  rabbitmq-sekxy:
+    name: rabbitmq-sekxy
     type: Deployment
     apiVersion: apps/v1
+    namespace: default
     model: kubernetes
     settings:
       spec:
@@ -669,8 +675,45 @@ services:
         position:
           posX: 91.80150211379507
           posY: 7
-  ratings-dkvcd:
-    name: ratings-dkvcd
+  ratings-hieic:
+    name: ratings-hieic
+    type: Service
+    apiVersion: v1
+    model: kubernetes
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 80
+          target Port: 80
+        selector:
+          service: ratings
+    traits:
+      meshmap:
+        edges: []
+        id: 1b9ed80b-5e2f-4086-bbb8-803e5dad63f6
+        label: ratings
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        position:
+          posX: -21.5
+          posY: -64.36766807586338
+  ratings-qyral:
+    name: ratings-qyral
     type: Deployment
     apiVersion: apps/v1
     namespace: default
@@ -732,24 +775,25 @@ services:
         position:
           posX: 10.764663848273244
           posY: 83.86766807586338
-  ratings-tqrtz:
-    name: ratings-tqrtz
+  redis-yijdi:
+    name: redis-yijdi
     type: Service
     apiVersion: v1
+    namespace: default
     model: kubernetes
     settings:
       spec:
         ports:
-        - name: http
-          port: 80
-          target Port: 80
+        - name: redis
+          port: 6379
+          target Port: 6379
         selector:
-          service: ratings
+          service: redis
     traits:
       meshmap:
         edges: []
-        id: 1b9ed80b-5e2f-4086-bbb8-803e5dad63f6
-        label: ratings
+        id: 8db0315f-697d-4b89-b1e2-40a42c240bce
+        label: redis
         meshmodel-metadata:
           genealogy: ""
           isCustomResource: false
@@ -767,10 +811,10 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: -21.5
-          posY: -64.36766807586338
-  redis-fmxsw:
-    name: redis-fmxsw
+          posX: -79.36766807586338
+          posY: -141.23533615172676
+  redis-zvynx:
+    name: redis-zvynx
     type: StatefulSet
     apiVersion: apps/v1
     namespace: default
@@ -839,45 +883,8 @@ services:
         position:
           posX: -95.36766807586338
           posY: 149.23533615172676
-  redis-qdzri:
-    name: redis-qdzri
-    type: Service
-    apiVersion: v1
-    model: kubernetes
-    settings:
-      spec:
-        ports:
-        - name: redis
-          port: 6379
-          target Port: 6379
-        selector:
-          service: redis
-    traits:
-      meshmap:
-        edges: []
-        id: 8db0315f-697d-4b89-b1e2-40a42c240bce
-        label: redis
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-        position:
-          posX: -79.36766807586338
-          posY: -141.23533615172676
-  shipping-gkhqz:
-    name: shipping-gkhqz
+  shipping-aggtk:
+    name: shipping-aggtk
     type: Deployment
     apiVersion: apps/v1
     model: kubernetes
@@ -938,8 +945,8 @@ services:
         position:
           posX: -140.66917018965844
           posY: 83.86766807586338
-  shipping-jsebr:
-    name: shipping-jsebr
+  shipping-ygcst:
+    name: shipping-ygcst
     type: Service
     apiVersion: v1
     model: kubernetes
@@ -975,8 +982,46 @@ services:
         position:
           posX: 36.36766807586338
           posY: -64.36766807586338
-  user-merrv:
-    name: user-merrv
+  user-bfgzm:
+    name: user-bfgzm
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 8080
+          target Port: 8080
+        selector:
+          service: user
+    traits:
+      meshmap:
+        edges: []
+        id: 8c35260d-cd2d-49cc-a5f4-06bf95002d65
+        label: user
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        position:
+          posX: 36.36766807586338
+          posY: -141.23533615172676
+  user-xueyb:
+    name: user-xueyb
     type: Deployment
     apiVersion: apps/v1
     namespace: default
@@ -1035,11 +1080,10 @@ services:
         position:
           posX: 58.63233192413662
           posY: 83.86766807586338
-  user-pbfud:
-    name: user-pbfud
+  web-jhgkr:
+    name: web-jhgkr
     type: Service
     apiVersion: v1
-    namespace: default
     model: kubernetes
     settings:
       spec:
@@ -1048,12 +1092,13 @@ services:
           port: 8080
           target Port: 8080
         selector:
-          service: user
+          service: web
+        type: LoadBalancer
     traits:
       meshmap:
         edges: []
-        id: 8c35260d-cd2d-49cc-a5f4-06bf95002d65
-        label: user
+        id: 0fd6e7f6-25c2-4a81-a1f7-177b2e40319e
+        label: web
         meshmodel-metadata:
           genealogy: ""
           isCustomResource: false
@@ -1071,12 +1116,13 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: 36.36766807586338
+          posX: -137.23533615172676
           posY: -141.23533615172676
-  web-gbcye:
-    name: web-gbcye
+  web-pjssq:
+    name: web-pjssq
     type: Deployment
     apiVersion: apps/v1
+    namespace: default
     model: kubernetes
     settings:
       spec:
@@ -1127,41 +1173,3 @@ services:
         position:
           posX: 142.23533615172676
           posY: 7
-  web-mkhug:
-    name: web-mkhug
-    type: Service
-    apiVersion: v1
-    model: kubernetes
-    settings:
-      spec:
-        ports:
-        - name: http
-          port: 8080
-          target Port: 8080
-        selector:
-          service: web
-        type: LoadBalancer
-    traits:
-      meshmap:
-        edges: []
-        id: 0fd6e7f6-25c2-4a81-a1f7-177b2e40319e
-        label: web
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-        position:
-          posX: -137.23533615172676
-          posY: -141.23533615172676
