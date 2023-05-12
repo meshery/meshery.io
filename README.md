@@ -28,7 +28,7 @@
 
 <h2>Preview of <a href="https://meshery.io">Meshery.io</a> Website<h2>
 
-![Meshery.io website screenshot](./assets/images/mesheryio_screenshot.png)
+![Meshery.io website screenshot](assets/images/mesheryio_screenshot.png)
 _Visit [Meshery.io](https://meshery.io/) to learn more!_
 
 ## What is Meshery?
