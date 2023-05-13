@@ -1,49 +1,57 @@
 <nav class="navmenu-container">
 	<a class="editor-link btn" href="cloudcannon:collections/_data/navigation.yml" class="btn"><strong>&#9998;</strong>
-		Edit navigation</a>
-	<div class="stellarnav">
-		<ul class="nav-list">
-			{% for link in site.data.navigation %}
-			<li class="nav-item">
-				{% assign class = "nav-text" %}
-				{% if link.highlight %}
-					{% assign class = class | append: " highlight" %}
-				{% endif %}
-				{% if link.link == page.url %}
-					{% assign class = class | append: " active" %}
-				{% elsif link.submenu %}
-					{% for sublink in link.subitems %}
-							{% if page.url == sublink.link %}
-								{%  assign class = class | append: " sublink-active" %}
-								{% break %}
-							{% endif %}
-					{% endfor %}
-				{% endif %}			
-				<a {% if link.link %}href="{% include relative-src.html src=link.link %}" {% endif %} {% if link.submenu %} {% endif %} class="{{class}}"
-					{% if link.new_window %} target="_blank" {% endif %}>
-					{{ link.name }}
-				</a>
+		Edit navigation
+	</a>
+	<div class="nav-list-container">
+		<div class="stellarnav">
+			<ul class="nav-list">
+				{% for link in site.data.navigation %}
+				<li class="nav-item">
+					{% assign class = "nav-text" %}
+					{% if link.highlight %}
+						{% assign class = class | append: " highlight" %}
+					{% endif %}
+					{% if link.link == page.url %}
+						{% assign class = class | append: " active" %}
+					{% elsif link.submenu %}
+						{% for sublink in link.subitems %}
+								{% if page.url == sublink.link %}
+									{%  assign class = class | append: " sublink-active" %}
+									{% break %}
+								{% endif %}
+						{% endfor %}
+					{% endif %}			
+					<a {% if link.link %}href="{% include relative-src.html src=link.link %}" {% endif %} {% if link.submenu %} {% endif %} class="{{class}}"
+						{% if link.new_window %} target="_blank" {% endif %}>
+						{{ link.name }}
+					</a>
 
-				{% if link.subitems[0] %}
-		<ul class="">
-					{% for sublink in link.subitems %}
-					<li >
-						<div {% if sublink.link == page.url %} class="sub-nav-li sub-nav-li--active" {% else %} class="sub-nav-li" {% endif %}>
-								<img class="nav-img" src="{{sublink.img_src}}">
-							<a href="{{sublink.link}}" {% if sublink.new_window %}target="_blank" {% endif %}
-							class="subnav-item">{{sublink.name}}
-							{% if sublink.external %}
-							<img src="/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
-							{% endif %}
-							</a>
-						</div>
-					</li>
-					{% endfor %}
-				</ul>
-				{% endif %}
-			</li>	
-			{% endfor %}
-		</ul>
-	
+					{% if link.subitems[0] %}
+					<ul class="">
+						{% for sublink in link.subitems %}
+						<li >
+							<div {% if sublink.link == page.url %} class="sub-nav-li sub-nav-li--active" {% else %} class="sub-nav-li" {% endif %}>
+									<img class="nav-img" src="{{sublink.img_src}}">
+								<a href="{{sublink.link}}" {% if sublink.new_window %}target="_blank" {% endif %}
+								class="subnav-item">{{sublink.name}}
+								{% if sublink.external %}
+								<img src="/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
+								{% endif %}
+								</a>
+							</div>
+						</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</li>	
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="nav-mode-icon" id="mode-toggle-btn">
+			<img class="nav-text" id="logo-dark-light" src="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-sun.png" 
+			data-logo-for-dark="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-moon.png"
+			data-logo-for-light="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-sun.png"
+			/>          
+		</div>
 	</div>
 </nav>

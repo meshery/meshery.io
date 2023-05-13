@@ -5,7 +5,6 @@ nav {
 	width: fit-content;
 	padding-left: 0rem;
 	margin-left: .25rem;
-	margin-left:auto ;
 
 	@media #{$mid-point} {
 		padding-right: 1rem;
@@ -13,7 +12,8 @@ nav {
 		width: 40%;
 	}
 	@media only screen and (max-width: 620px) {
-		width: 99%;
+	margin-left: auto;
+	width: 99%;
 	}
 }
 
@@ -23,12 +23,19 @@ nav {
 	padding: 0 2vw;
 	justify-content: space-between;
 }
+
 .stellarnav.desktop{
 	display: flex;
 	justify-content: flex-end;
 }
 .stellarnav.mobile{
 	text-align: end!important;
+}
+
+.nav-list-container {
+	width: auto;
+	display: flex;
+	align-items: center;
 }
 
 .nav-list {
@@ -74,10 +81,11 @@ nav {
 .nav-mode-icon{
 
 	& > img {
-		padding: 0 !important;
-		margin-left: .5rem;
-		width: 2rem;
-		height: 2rem;
+		display: flex;
+		justify-content: center;
+		padding-left: 1rem !important;
+		width: 1.5rem;
+		height: 1.5rem;
 		filter: var(--image-color);
 		transition: filter .3s;
 	}
@@ -239,7 +247,7 @@ a.nav-text:hover {
 	& .nav-list{
         position: absolute;
 		width: 100%;
-		left:0;
+		left: 0;
 		background: transparent;
 		background-color: var(--color-primary-light);
 		max-height: 400px;
@@ -270,9 +278,14 @@ a.nav-text:hover {
 }
 
 @media screen and (max-width: 1140px)  {
+	
 	.nav-mode-icon {
-		padding-top: 10px;
+		& > img {
+			margin-bottom: 3px;
+			padding: 0 !important;
+		}
 	}
+
 	.project-name {
 		padding-top: 10px;
 	}
