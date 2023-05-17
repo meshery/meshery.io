@@ -44,8 +44,65 @@ services:
         position:
           posX: 351.5443683765185
           posY: 150.85057184324745
-  productpage-jrhdz:
-    name: productpage-jrhdz
+  productpage-kruax:
+    name: productpage-kruax
+    type: Service
+    apiVersion: v1
+    namespace: default
+    version: v1.25.2
+    model: kubernetes
+    dependsOn:
+    - my-bookinfo
+    settings:
+      spec:
+        ports:
+        - port: 9080
+          protocol: HTTP
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: a2ab459f-0265-4ac6-974b-19986c8c4ff6
+            metadata:
+              port: 9080
+              protocol: HTTP
+            source: ddd166d9-9403-457a-b4ca-b22006fe2a91
+            subType: Network
+            target: c27051eb-e5d9-4bef-81f2-be5f0f4724e8
+        id: ddd166d9-9403-457a-b4ca-b22006fe2a91
+        label: productpage
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Kubernetes
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+          name: kubernetes
+          version: v1.25.2
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        parent: c41a499e-1acb-43e8-837d-c2f7487a2864
+        position:
+          posX: 317.8817234633282
+          posY: 141.85057184324745
+  productpage-qlytq:
+    name: productpage-qlytq
     type: Deployment
     apiVersion: apps/v1
     version: v1.25.2
@@ -119,60 +176,3 @@ services:
         position:
           posX: 385.20701328970875
           posY: 140.4649892824034
-  productpage-kegft:
-    name: productpage-kegft
-    type: Service
-    apiVersion: v1
-    namespace: default
-    version: v1.25.2
-    model: kubernetes
-    dependsOn:
-    - my-bookinfo
-    settings:
-      spec:
-        ports:
-        - port: 9080
-          protocol: HTTP
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: a2ab459f-0265-4ac6-974b-19986c8c4ff6
-            metadata:
-              port: 9080
-              protocol: HTTP
-            source: ddd166d9-9403-457a-b4ca-b22006fe2a91
-            subType: Network
-            target: c27051eb-e5d9-4bef-81f2-be5f0f4724e8
-        id: ddd166d9-9403-457a-b4ca-b22006fe2a91
-        label: productpage
-        meshmodel-data:
-          category:
-            metadata: null
-            name: Orchestration & Management
-          displayName: Kubernetes
-          metadata:
-            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-          name: kubernetes
-          version: v1.25.2
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-        parent: c41a499e-1acb-43e8-837d-c2f7487a2864
-        position:
-          posX: 317.8817234633282
-          posY: 141.85057184324745
