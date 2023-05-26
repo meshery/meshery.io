@@ -44,6 +44,7 @@ services:
     name: prometheus-config
     type: ConfigMap
     apiVersion: v1
+    namespace: default
     model: kubernetes
     dependsOn:
     - monitoring
@@ -179,24 +180,43 @@ services:
         position:
           posX: -14.34377464174484
           posY: -16.874013440689865
-  prometheus-lnopk:
-    name: prometheus-lnopk
-    type: ClusterRoleBinding
+  prometheus-rdgtf:
+    name: prometheus-rdgtf
+    type: ClusterRole
     apiVersion: rbac.authorization.k8s.io/v1
     model: kubernetes
     settings:
-      role Ref:
-        api Group: rbac.authorization.k8s.io
-        kind: ClusterRole
-        name: prometheus
-      subjects:
-      - kind: ServiceAccount
-        name: default
-        namespace: monitoring
+      rules:
+      - api Groups:
+        - ""
+        non Resource URLs:
+        - ""
+        resources:
+        - nodes
+        - nodes/proxy
+        - services
+        - endpoints
+        - pods
+        verbs:
+        - get
+        - list
+        - watch
+      - api Groups:
+        - extensions
+        resources:
+        - ingresses
+        verbs:
+        - get
+        - list
+        - watch
+      - non Resource URLs:
+        - /metrics
+        verbs:
+        - get
     traits:
       meshmap:
         edges: []
-        id: 8f94e01d-8fdb-4bb9-94bf-2936efc6479a
+        id: 7574c6e8-9345-48eb-a2a5-7cc3aa0ef7a4
         label: prometheus
         meshmodel-metadata:
           genealogy: ""
@@ -209,14 +229,14 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-rectangle
-          styleOverrides: '{"height":"22px","width":"16px","padding":"6px", "z-index":9999}'
+          styleOverrides: '{"height":"22px","width":"16px","padding":"6px"}'
           subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
           svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
         position:
-          posX: 111.21601209777306
-          posY: 24.32498028660414
+          posX: 108.17842338749166
+          posY: -32.399615144022164
   prometheus-service:
     name: prometheus-service
     type: Service
@@ -267,41 +287,24 @@ services:
         position:
           posX: -92.91446326192232
           posY: -17.01825179199595
-  prometheus-smhlt:
-    name: prometheus-smhlt
-    type: ClusterRole
+  prometheus-wcelw:
+    name: prometheus-wcelw
+    type: ClusterRoleBinding
     apiVersion: rbac.authorization.k8s.io/v1
     model: kubernetes
     settings:
-      rules:
-      - api Groups:
-        - ""
-        resources:
-        - nodes
-        - nodes/proxy
-        - services
-        - endpoints
-        - pods
-        verbs:
-        - get
-        - list
-        - watch
-      - api Groups:
-        - extensions
-        resources:
-        - ingresses
-        verbs:
-        - get
-        - list
-        - watch
-      - non Resource URLs:
-        - /metrics
-        verbs:
-        - get
+      role Ref:
+        api Group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: prometheus
+      subjects:
+      - kind: ServiceAccount
+        name: default
+        namespace: monitoring
     traits:
       meshmap:
         edges: []
-        id: 7574c6e8-9345-48eb-a2a5-7cc3aa0ef7a4
+        id: 8f94e01d-8fdb-4bb9-94bf-2936efc6479a
         label: prometheus
         meshmodel-metadata:
           genealogy: ""
@@ -314,11 +317,11 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-rectangle
-          styleOverrides: '{"height":"22px","width":"16px","padding":"6px"}'
+          styleOverrides: '{"height":"22px","width":"16px","padding":"6px", "z-index":9999}'
           subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
           svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
         position:
-          posX: 108.17842338749166
-          posY: -32.399615144022164
+          posX: 111.21601209777306
+          posY: 24.32498028660414
