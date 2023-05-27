@@ -179,8 +179,8 @@ services:
         position:
           posX: -14.34377464174484
           posY: -16.874013440689865
-  prometheus-eolpq:
-    name: prometheus-eolpq
+  prometheus-dkkvc:
+    name: prometheus-dkkvc
     type: ClusterRoleBinding
     apiVersion: rbac.authorization.k8s.io/v1
     model: kubernetes
@@ -217,6 +217,63 @@ services:
         position:
           posX: 111.21601209777306
           posY: 24.32498028660414
+  prometheus-lprcf:
+    name: prometheus-lprcf
+    type: ClusterRole
+    apiVersion: rbac.authorization.k8s.io/v1
+    model: kubernetes
+    settings:
+      rules:
+      - api Groups:
+        - ""
+        non Resource URLs:
+        - ""
+        resources:
+        - nodes
+        - nodes/proxy
+        - services
+        - endpoints
+        - pods
+        verbs:
+        - get
+        - list
+        - watch
+      - api Groups:
+        - extensions
+        resources:
+        - ingresses
+        verbs:
+        - get
+        - list
+        - watch
+      - non Resource URLs:
+        - /metrics
+        verbs:
+        - get
+    traits:
+      meshmap:
+        edges: []
+        id: 7574c6e8-9345-48eb-a2a5-7cc3aa0ef7a4
+        label: prometheus
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: false
+          logoURL: Created by Lee
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides: '{"height":"22px","width":"16px","padding":"6px"}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
+        position:
+          posX: 108.17842338749166
+          posY: -32.399615144022164
   prometheus-service:
     name: prometheus-service
     type: Service
@@ -266,58 +323,3 @@ services:
         position:
           posX: -92.91446326192232
           posY: -17.01825179199595
-  prometheus-wdsib:
-    name: prometheus-wdsib
-    type: ClusterRole
-    apiVersion: rbac.authorization.k8s.io/v1
-    model: kubernetes
-    settings:
-      rules:
-      - api Groups:
-        - ""
-        resources:
-        - nodes
-        - nodes/proxy
-        - services
-        - endpoints
-        - pods
-        verbs:
-        - get
-        - list
-        - watch
-      - api Groups:
-        - extensions
-        resources:
-        - ingresses
-        verbs:
-        - get
-        - list
-        - watch
-      - non Resource URLs:
-        - /metrics
-        verbs:
-        - get
-    traits:
-      meshmap:
-        edges: []
-        id: 7574c6e8-9345-48eb-a2a5-7cc3aa0ef7a4
-        label: prometheus
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: false
-          logoURL: Created by Lee
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          styleOverrides: '{"height":"22px","width":"16px","padding":"6px"}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
-        position:
-          posX: 108.17842338749166
-          posY: -32.399615144022164

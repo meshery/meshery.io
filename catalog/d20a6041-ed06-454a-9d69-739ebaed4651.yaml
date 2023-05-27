@@ -4,6 +4,7 @@ services:
     name: pod
     type: Pod
     apiVersion: v1
+    namespace: default
     version: v1.25.2
     model: kubernetes
     settings:
@@ -68,6 +69,8 @@ services:
           port: 80
           protocol: TCP
           target Port: 8080
+        - port: 80
+          protocol: TCP
     traits:
       meshmap:
         edges:
@@ -79,6 +82,14 @@ services:
             source: c6d9a587-e10d-4645-adf1-ee367f8f151e
             subType: Network
             target: 7f7dae0d-f3a9-4f41-95d5-e6031a3cb263
+        - data:
+            id: 24e76532-a033-4afc-a4c1-bcc699ccdb93
+            metadata:
+              port: 80
+              protocol: TCP
+            source: c6d9a587-e10d-4645-adf1-ee367f8f151e
+            subType: Network
+            target: c6d9a587-e10d-4645-adf1-ee367f8f151e
         id: c6d9a587-e10d-4645-adf1-ee367f8f151e
         label: service
         meshmodel-data:
