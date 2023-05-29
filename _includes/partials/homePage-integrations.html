@@ -1,25 +1,43 @@
-<div class="integrations-container container" style="column-gap:max(2vh,2vw);row-gap:1.5rem">
+<div id="integContainer" class="integrations-container container" style="column-gap:max(2vh,2vw);row-gap:1.5rem">
     <div class="integrations-heading">
-        <h1>80+ Built-In Integrations</h1>
+        <h1 id="integration-heading">200+ Built-In Integrations</h1>
         <h2>
             Support for your Cloud Native Infrastructure and Apps
         </h2>
+        <p style="margin:auto 10vw;">
+            Meshery seamlessly integrates with every CNCF project, your existing tools and Kubernetes clusters, allowing you to enhance use your preferred monitoring, CI/CD, and security solutions. 
+          </p><p style="margin:2vw 10vw 0vw 10vw;">
+            Meshery's Kubernetes-native approach means you can easily incorporate Meshery into your existing workflow without additional setup or integration effort.
+          </p>
         <div class="integrations-3d-link">
             <a class="highlight" href="/integrations"
                 style="display: block; margin: max(3vh,3vw) auto 0; width: fit-content;">See All Integrations</a>
         </div>
     </div>
-    {% for link in site.data.integrations-data %}
-    <div class="integrations-card">
+</div>
+<script type="module">
+    import data from '../../integrations/data.js'
+    let integHeading = document.getElementById("integration-heading")
+    let roundedIntegNumber = Math.floor(data.length/ 10) * 10;
+    integHeading.innerHTML = `${roundedIntegNumber}+ Built-In Integrations`
+    
+    let integContainer = document.getElementById("integContainer")
+    for (let i = 0;i<data.length;i++){
+        let urlFromJSON = data[i].color.split('/integration');
+        let indivCard = `
+        <div class="integrations-card">
         <div class="integrations-card-inner">
             <div class="card-front">
-                <img src={{ link.color }} id="logo-dark-light" data-logo-for-dark={{ link.color }}
-                    data-logo-for-light={{ link.color }} />
+                <img src="${urlFromJSON[0]}${urlFromJSON[1]}" id="logo-dark-light" data-logo-for-dark="${urlFromJSON[0]}${urlFromJSON[1]}"
+                    data-logo-for-light="${urlFromJSON[0]}${urlFromJSON[1]}" />
             </div>
             <div class="card-back">
-                <span>{{ link.name }}</span>
+                <span>${data[i].name }</span>
             </div>
         </div>
     </div>
-    {% endfor %}
-</div>
+        `
+        integContainer.innerHTML+=indivCard
+    }
+   
+</script>

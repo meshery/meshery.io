@@ -7,6 +7,7 @@
   text-align: center;
   color: var(--color-secondary-dark);
   font-size: 18px;
+  font-weight: 400;
 }
 /* CARD-STYLES */
 .card {
@@ -103,7 +104,7 @@
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   z-index: 2;
-  white-space: nowrap;
+  white-space: wrap;
 }
 .pattern-id-overlay {
   position: absolute;
@@ -132,9 +133,13 @@
   }
 }
 
-h3 {
+.modal-h3 {
   font-weight: bold;
+  font-size: 1.1rem !important;
+  text-transform: uppercase;
+
 }
+
 p {
   font-family: "Qanelas Soft", "Open Sans", "sans-serif";
   -webkit-font-smoothing: antialiased;
@@ -169,25 +174,7 @@ p {
   vertical-align: middle;
   padding-right: 1px;
 }
-.tooltip-modal:hover .tooltiptext-modal {
-  visibility: visible;
-}
 
-.tooltip-modal .tooltiptext-modal {
-  visibility: hidden;
-  width: 140px;
-  display: inline-block;
-  color: white;
-  background-color: #1a2421;
-  text-align: center;
-  font-size: 1em;
-  border-radius: 7px;
-  z-index: 1;
-  font-size: 15px;
-  height: 40px;
-  line-height: 40px;
-  margin-left: 1rem;
-}
 .import {
   background-color: #00b39fff;
   color: white;
@@ -388,7 +375,32 @@ input[type="checkbox"] {
 
 .modal-content {
   display: flex;
+  justify-content: flex-end;
+  code {
+    
+    padding: 1rem;
+    margin: 1rem .5rem;
+    border-radius: .5rem;
+    font-size: .9rem;
+    background-color: #1a2421;
+    line-height: 1rem;
+
+    color: #eee;
+    display: block;
+    // & p ul {
+    text-align: left;
+    // }
+    a {
+        color: white;
+    }
+  }
+  p {
+    color: var(--color-secondary-dark);
+
+  }
+  
 }
+
 
 .modal-window > div {
   position: absolute;
@@ -403,9 +415,11 @@ input[type="checkbox"] {
   transform: translate(-50%, -50%);
   border-radius: 15px;
   background: var(--background-grey);
-  padding: 1.5em 2.5em 1.5em 3em;
+  padding: 1.5rem 2.5rem 1.5rem 3rem;
 }
-
+.modal-window > div::-webkit-scrollbar {
+  display: none;
+}
 .catalog-info {
   text-align: center;
 }
@@ -472,9 +486,9 @@ input[type="checkbox"] {
   background-color: #b6d7a8ff;
   border: none;
   cursor: default;
-  height: 18px;
+  height: 1rem;
   outline: none;
-  padding: 1px;
+  padding: .1rem .5rem;
   font-size: 10px;
   font-family: "Open Sans", sans-serif;
   white-space: nowrap;
@@ -486,6 +500,7 @@ input[type="checkbox"] {
 }
 .modal-card {
   position: relative;
+  background: var(--background-light-cards);
   width: 150px;
   height: 180px;
   padding: 20px;
@@ -928,7 +943,6 @@ label {
       grid-template-columns: 1fr 1fr;
       label {
         margin: 0;
-        padding: 0;
       }
       row-gap: 2rem;
       column-gap: 2rem;

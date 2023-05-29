@@ -11,21 +11,21 @@ It is advised to use these predefined styles for contributing to different featu
 
 ### Example
 
-To change text color in CSS, this can be used:
+To change the text color in CSS, this can be used:
 
 ```
 color: var(--color-primary-light);
 ```
 
-To change background color in CSS, this can be executed:
+To change the background color in CSS, this can be executed:
 ```
 background: var(--background-primary);
 ```
 
 These global variables will change automatically based on the theme selection. This is done by modifying the body classlist.
 
-## Changing images according to theme
-The Meshery.io website contains icons for various organisations, and these are set to change according to the website theme.
+## Changing images according to the theme
+The Meshery.io website contains icons for various organizations, and these are set to change according to the website theme.
 
 The format for SVG or other images is as follows:
 ```
@@ -34,7 +34,7 @@ id = "logo-dark-light"
 data-logo-for-dark = " *path for image SVG to be used for dark theme* "
 data-logo-for-light = " *path for image SVG to be used for light theme* "
 ```
-The id **logo-dark-light** is used as a CSS selector and ensures that the image is effected by the theme changes.
+The id **logo-dark-light** is used as a CSS selector and ensures that the image is affected by the theme changes.
 
 The images can be found at the path ```meshery.io/ images```
 
