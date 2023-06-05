@@ -39,9 +39,54 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
         position:
           posX: 533.5412461921295
-          posY: 84.01793374445226
-  frontend-lpybr:
-    name: frontend-lpybr
+          posY: 84.76793374445226
+  frontend-wnrrj:
+    name: frontend-wnrrj
+    type: Service
+    apiVersion: v1
+    model: kubernetes
+    settings:
+      spec:
+        ports:
+        - port: 80
+          protocol: TCP
+        selector:
+          app: guestbook
+          tier: frontend
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 4b8f77a0-1572-4624-ba5c-b9578237ef1f
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 4ae55da0-82eb-405e-9410-75623cee1043
+            subType: Network
+            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
+        id: 4ae55da0-82eb-405e-9410-75623cee1043
+        label: frontend
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        position:
+          posX: 316.06719963743905
+          posY: 6.121912475095979
+  frontend-yqcvr:
+    name: frontend-yqcvr
     type: Deployment
     apiVersion: apps/v1
     model: kubernetes
@@ -94,51 +139,6 @@ services:
         position:
           posX: 470.60142199999996
           posY: 154.970587
-  frontend-qwuaj:
-    name: frontend-qwuaj
-    type: Service
-    apiVersion: v1
-    model: kubernetes
-    settings:
-      spec:
-        ports:
-        - port: 80
-          protocol: TCP
-        selector:
-          app: guestbook
-          tier: frontend
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 4b8f77a0-1572-4624-ba5c-b9578237ef1f
-            metadata:
-              port: 80
-              protocol: TCP
-            source: 4ae55da0-82eb-405e-9410-75623cee1043
-            subType: Network
-            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
-        id: 4ae55da0-82eb-405e-9410-75623cee1043
-        label: frontend
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-        position:
-          posX: 316.06719963743905
-          posY: 6.121912475095979
   guestbook:
     name: guestbook
     type: Namespace
@@ -169,8 +169,8 @@ services:
         position:
           posX: 415.60142199999996
           posY: 154.970587
-  redis-follower-vussz:
-    name: redis-follower-vussz
+  redis-follower-cweqk:
+    name: redis-follower-cweqk
     type: Deployment
     apiVersion: apps/v1
     model: kubernetes
@@ -228,10 +228,11 @@ services:
         position:
           posX: 363.67162710918217
           posY: 91.81778493253775
-  redis-follower-zpckv:
-    name: redis-follower-zpckv
+  redis-follower-nnvaj:
+    name: redis-follower-nnvaj
     type: Service
     apiVersion: v1
+    namespace: default
     model: kubernetes
     settings:
       spec:
@@ -265,11 +266,10 @@ services:
         position:
           posX: 419.60142199999996
           posY: 10.470586999999995
-  redis-leader-exfwe:
-    name: redis-leader-exfwe
+  redis-leader-mdbdu:
+    name: redis-leader-mdbdu
     type: Service
     apiVersion: v1
-    namespace: default
     model: kubernetes
     dependsOn:
     - default
@@ -307,11 +307,10 @@ services:
         position:
           posX: 533.5412461921295
           posY: 75.76793374445226
-  redis-leader-jpity:
-    name: redis-leader-jpity
+  redis-leader-udqcy:
+    name: redis-leader-udqcy
     type: Deployment
     apiVersion: apps/v1
-    namespace: default
     model: kubernetes
     settings:
       spec:
