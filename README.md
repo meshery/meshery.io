@@ -126,21 +126,6 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   $ git push origin <branch-name>
   ```
 - Then on Github, navigate to the [Meshery.io repository](https://github.com/meshery/meshery.io) and create a pull request from your recently pushed changes!
-                      
-
-                     
-                      
-                      
-                      
-## Add your content to the cloud native catalog.
- 
-To add your content to the Cloud Native Catalog -
-1. Create a new file in the catalog collection, under the respective type. 
-1. Follow the template in the <a href="https://github.com/meshery/meshery.io/blob/master/collections/_catalog/_defaults.md">_defaults.md</a> and fill out the details.
-1. Add your pattern file to the <a href="https://github.com/meshery/meshery.io/tree/master/catalog">catalog</a> folder so that others can download the file.
-1. That's it! You're good to go. Create a PR for your change and sit tight till a maintainer gets a chance to review it.
-                    
-                      
 
                                                                                                    
 
