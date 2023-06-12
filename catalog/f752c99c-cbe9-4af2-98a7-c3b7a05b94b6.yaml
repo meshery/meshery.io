@@ -1,112 +1,132 @@
-name: Elasticsearch Rbac
+name: RBAC for ElasticSearch
 services:
-  elastic-rbac:
-    name: elastic-rbac
-    type: Namespace
-    apiVersion: v1
-    version: v1.25.2
+  zk:
+    name: zk
+    type: StatefulSet
+    apiVersion: apps/v1
+    namespace: default
     model: kubernetes
+    settings:
+      spec:
+        pod Management Policy: OrderedReady
+        replicas: 3
+        selector:
+          match Labels:
+            app: zk
+        service Name: zk-hs
+        template:
+          metadata:
+            labels:
+              app: zk
+          spec:
+            affinity:
+              pod Anti Affinity:
+                required During Scheduling Ignored During Execution:
+                - label Selector:
+                    match Expressions:
+                    - key: app
+                      operator: In
+                      values:
+                      - zk
+                  topology Key: kubernetes.io/hostname
+            containers:
+            - command:
+              - sh
+              - -c
+              - start-zookeeper --servers=3 --data_dir=/var/lib/zookeeper/data --data_log_dir=/var/lib/zookeeper/data/log
+                --conf_dir=/opt/zookeeper/conf --client_port=2181 --election_port=3888
+                --server_port=2888 --tick_time=2000 --init_limit=10 --sync_limit=5
+                --heap=512M --max_client_cnxns=60 --snap_retain_count=3 --purge_interval=12
+                --max_session_timeout=40000 --min_session_timeout=4000 --log_level=INFO
+              image: registry.k8s.io/kubernetes-zookeeper:1.0-3.4.10
+              image Pull Policy: Always
+              liveness Probe:
+                exec:
+                  command:
+                  - sh
+                  - -c
+                  - zookeeper-ready 2181
+                initial Delay Seconds: 10
+                timeout Seconds: 5
+              name: kubernetes-zookeeper
+              ports:
+              - container Port: 2181
+                name: client
+              - container Port: 2888
+                name: server
+              - container Port: 3888
+                name: leader-election
+              readiness Probe:
+                exec:
+                  command:
+                  - sh
+                  - -c
+                  - zookeeper-ready 2181
+                initial Delay Seconds: 10
+                timeout Seconds: 5
+              resources:
+                requests:
+                  cpu: "0.5"
+                  memory: 1Gi
+              volume Mounts:
+              - mount Path: /var/lib/zookeeper
+                name: datadir
+            security Context:
+              fs Group: 1000
+              run As User: 1000
+        update Strategy:
+          type: RollingUpdate
+        volume Claim Templates:
+        - metadata:
+            name: datadir
+          spec:
+            access Modes:
+            - ReadWriteOnce
+            resources:
+              requests:
+                storage: 10Gi
     traits:
       meshmap:
         edges: []
-        id: 015b2dfc-4ecd-4097-9290-8e4d4397fbf1
-        label: elastic-rbac
-        meshmodel-data:
-          category:
-            metadata: null
-            name: Orchestration & Management
-          displayName: Kubernetes
-          metadata:
-            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-          name: kubernetes
-          version: v1.25.2
+        id: 8129ed4a-9927-4b0c-ad95-882929c952b6
+        label: zk
         meshmodel-metadata:
-          genealogy: parent
+          genealogy: ""
           isCustomResource: false
-          isNamespaced: false
+          isNamespaced: true
           logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
-          shape: rectangle
-          styleOverrides: '{"background-image":"none","border-width":2,"border-style":"dashed","background-opacity":0.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/namespace-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
-        position:
-          posX: 168.1724197979069
-          posY: 106.13469654174966
-  elasticsearch:
-    name: elasticsearch
-    type: Elasticsearch
-    apiVersion: elasticsearch.k8s.elastic.co/v1
-    namespace: elastic-rbac
-    version: 1.0.3
-    model: elasticsearch-operator
-    dependsOn:
-    - elastic-rbac
-    traits:
-      meshmap:
-        edges: []
-        id: 5ffc6321-bf75-48d3-9731-1b5722ca7ef5
-        label: elasticsearch
-        meshmodel-data:
-          category:
-            metadata: null
-            name: Observability and Analysis
-          displayName: elasticsearch-operator
-          metadata:
-            svgColor: ui/public/static/img/meshmodels/elasticsearch-operator/color/apmserver-color.svg
-            svgWhite: ui/public/static/img/meshmodels/elasticsearch-operator/white/apmserver-white.svg
-          name: elasticsearch-operator
-          version: 1.0.3
-        meshmodel-metadata:
-          genealogy: ""
-          isNamespaced: true
-          logoURL: ""
-          model: elasticsearch-operator
-          modelDisplayName: elasticsearch-operator
-          primaryColor: '#FEC514'
-          published: true
-          secondaryColor: '#00D3A9'
           shape: circle
           styleOverrides: ""
-          subCategory: Logging
-          svgColor: ui/public/static/img/meshmodels/elasticsearch-operator/color/apmserver-color.svg
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
           svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/elasticsearch-operator/white/apmserver-white.svg
-        parent: 015b2dfc-4ecd-4097-9290-8e4d4397fbf1
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: 148.08158281946032
-          posY: 98.04451887724565
-  role:
-    name: role
-    type: Role
-    apiVersion: rbac.authorization.k8s.io/v1
-    namespace: elastic-rbac
-    version: v1.25.2
+          posX: 13
+          posY: 39
+  zk-cs:
+    name: zk-cs
+    type: Service
+    apiVersion: v1
+    namespace: default
     model: kubernetes
-    dependsOn:
-    - elastic-rbac
+    settings:
+      spec:
+        ports:
+        - name: client
+          port: 2181
+        selector:
+          app: zk
     traits:
       meshmap:
         edges: []
-        id: 71aca754-3912-4dc6-a51d-55fb7c7b7141
-        label: role
-        meshmodel-data:
-          category:
-            metadata: null
-            name: Orchestration & Management
-          displayName: Kubernetes
-          metadata:
-            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-          name: kubernetes
-          version: v1.25.2
+        id: 226fa52e-e5a0-4239-b909-9b442972bab5
+        label: zk-cs
         meshmodel-metadata:
           genealogy: ""
           isCustomResource: false
@@ -117,13 +137,88 @@ services:
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          styleOverrides: '{"height":"22px","width":"16px","padding":"6px"}'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4}'
           subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
           svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
-        parent: 015b2dfc-4ecd-4097-9290-8e4d4397fbf1
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: 198.26325677635353
-          posY: 96.22487420625366
+          posX: -28
+          posY: -30
+  zk-hs:
+    name: zk-hs
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        cluster IP: None
+        ports:
+        - name: server
+          port: 2888
+        - name: leader-election
+          port: 3888
+        selector:
+          app: zk
+    traits:
+      meshmap:
+        edges: []
+        id: 974b880f-34e9-439a-8d9a-24db8c1293be
+        label: zk-hs
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        position:
+          posX: 28
+          posY: -30
+  zk-pdb:
+    name: zk-pdb
+    type: PodDisruptionBudget
+    apiVersion: policy/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        max Unavailable: 1
+        selector:
+          match Labels:
+            app: zk
+    traits:
+      meshmap:
+        edges: []
+        id: 3851b428-cc0b-47f2-a0ec-08d4c79b7a0a
+        label: zk-pdb
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: circle
+          styleOverrides: ""
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        position:
+          posX: -32.5
+          posY: 39
