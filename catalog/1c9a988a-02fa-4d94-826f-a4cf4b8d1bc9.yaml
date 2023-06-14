@@ -5,6 +5,7 @@ services:
     type: IstioOperator
     apiVersion: install.istio.io/v1alpha1
     model: kubernetes
+    namespace: istio-system
     settings:
       spec:
         components:
@@ -219,6 +220,7 @@ services:
     type: Deployment
     apiVersion: apps/v1
     model: kubernetes
+    namespace: istio-operator
     settings:
       spec:
         replicas: 1
@@ -334,6 +336,7 @@ services:
     type: Service
     apiVersion: v1
     model: kubernetes
+    namespace: istio-operator
     settings:
       spec:
         ports:
@@ -371,7 +374,6 @@ services:
     name: istiooperators.install.istio.io
     type: CustomResourceDefinition
     apiVersion: apiextensions.k8s.io/v1
-    namespace: default
     model: kubernetes
     settings:
       spec:
