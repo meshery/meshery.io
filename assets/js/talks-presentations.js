@@ -5,16 +5,6 @@ var recordingLink = document.querySelectorAll('.recording-link')
 var n = recordingLink.length;
 
 for(let i=0;i<n;i++){
-    modal[i].addEventListener('click',function(){
-        modal[i].style.visiblity = "hidden";
-        modal[i].style.opacity = "0";
-        modal[i].style.pointerEvents= "none";
-        let iframeTEST = modal[i].childNodes[1].childNodes[5].childNodes[1];
-        let src = iframeTEST.src;
-        iframeTEST.src = src;
-
-    });
-
     btnClose[i].addEventListener('click',function(){
         modal[i].style.visiblity = "hidden";
         modal[i].style.opacity = "0";
@@ -36,15 +26,6 @@ for(let i=0;i<n;i++){
 // n+1 because of the one on top apart from the table
 // nth modal (0 indexed) is not traversed in the loop because if we do that we would also have to traverse nth recording link which is not present and an error would appear on console.
 
-modal[n].addEventListener('click',function(){
-    modal[n].style.visiblity = "hidden";
-    modal[n].style.opacity = "0";
-    modal[n].style.pointerEvents= "none";
-    let iframeTEST = modal[n].childNodes[1].childNodes[5].childNodes[1];
-    let src = iframeTEST.src;
-    iframeTEST.src = src;
-
-});
 btnClose[n].addEventListener('click',function(){
     modal[n].style.visiblity = "hidden";
     modal[n].style.opacity = "0";
@@ -59,3 +40,5 @@ btnOpen.addEventListener('click',function(){
     modal[0].style.opacity = "1";
     modal[0].style.pointerEvents="auto";
 });
+
+
