@@ -1,8 +1,15 @@
 var modal = document.querySelectorAll('.modal-window');
+var talkPresentationModal = document.querySelector("#open-modal")
 var btnOpen = document.querySelector('.link');
 var btnClose = document.querySelectorAll('.close');
 var recordingLink = document.querySelectorAll('.recording-link')
 var n = recordingLink.length;
+
+window.addEventListener("click", function(event){
+    if(event.target == talkPresentationModal){
+        talkPresentationModal.style.visibility = "hidden";
+       }
+})
 
 for(let i=0;i<n;i++){
     btnClose[i].addEventListener('click',function(){
