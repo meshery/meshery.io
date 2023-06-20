@@ -16,8 +16,8 @@ filterInfo: |
         Build and deploy:
         </p>
 
-        <code style='color: var(--color-grey-light)'>
-        cd tcp-packet-parse
+        <code>
+        cd tcp-packet-parse<br/>
         make run-filtered
         </code>
         
@@ -25,7 +25,7 @@ filterInfo: |
         Test this filter by executing:
         </p>
 
-        <code style='color: var(--color-grey-light)'>
+        <code>
         curl 0.0.0.0:18000 -v -d "request body"
         </code>
         
