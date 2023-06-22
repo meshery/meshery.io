@@ -20,15 +20,16 @@
     let integHeading = document.getElementById("integration-heading")
     let roundedIntegNumber = Math.floor(data.length/ 10) * 10;
     integHeading.innerHTML = `${roundedIntegNumber}+ Built-In Integrations`
-    
+    const integrationImagePlaceholder = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
     let integContainer = document.getElementById("integContainer")
+    
     for (let i = 0;i<data.length;i++){
-        let urlFromJSON = data[i].color.split('/integration');
+        let urlFromJSON = data[i].color.split('/integration')
         let indivCard = `
         <div class="integrations-card">
         <div class="integrations-card-inner">
             <div class="card-front">
-                <img src="${urlFromJSON[0]}${urlFromJSON[1]}" id="logo-dark-light" data-logo-for-dark="${urlFromJSON[0]}${urlFromJSON[1]}"
+                <img src="${integrationImagePlaceholder}" id="logo-dark-light" class="lazy-image" data-logo-for-dark="${urlFromJSON[0]}${urlFromJSON[1]}"
                     data-logo-for-light="${urlFromJSON[0]}${urlFromJSON[1]}" />
             </div>
             <div class="card-back">
@@ -39,5 +40,29 @@
         `
         integContainer.innerHTML+=indivCard
     }
+
+    const lazyImages = document.querySelectorAll('.lazy-image')
+
+    const isInViewport = (element) => {
+        const rect = element.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        )
+    }
+
+    const lazyLoad = () => {
+        lazyImages.forEach((image) => {
+            if (isInViewport(image)) {
+                image.src = image.getAttribute('data-logo-for-dark')
+                image.classList.remove('lazy-image')
+            }
+        });
+    }
+
+    window.addEventListener('scroll', lazyLoad)
+
    
 </script>
