@@ -25,9 +25,18 @@ permalink: /integrations
         color: black;
       }
 
+      #container {
+        background-color: var(--integrations-3d-bg);
+        margin: 20px 40px;
+        overflow: hidden;
+        position: relative;
+        border: 1px dashed var(--color-secondary-light);
+        cursor: grab;
+      }
+
       #menu {
-        position: absolute;
-        bottom: 40px;
+        position: relative;
+        margin-bottom: 40px;
         width: 100%;
         text-align: center;
       }
@@ -76,24 +85,28 @@ permalink: /integrations
         font-size: 12px;
         color: black;
       }
-
-      button {
-        color: var(--color-secondary-light);
-        background: transparent;
-        outline: 1px solid var(--color-secondary-light);
-        border: 0px;
-        padding: 5px 10px;
+      #menu button{
+        border-radius: 3px;
+        background-color: var(--color-primary-dark);
+        border:none;
+        outline: none;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        margin: 0 5px;
+        padding: 8px 18px;
         cursor: pointer;
+        color: var(--color-primary-qtext);
       }
 
-      button:hover {
-        background-color: var(--brand-color-secondary);
-        color: #eee;
+
+      #menu button:hover {
+        color: var(--color-primary-qtext);
+        font-weight: 600;
       }
 
-      .highlight_button {
+      #menu button.highlight_button {
         background-color: var(--brand-color-secondary);
         color: #000000;
+        font-weight: 700;
       }
 
 
@@ -140,18 +153,18 @@ permalink: /integrations
     <!-- loading animation script -->
     <script>
       window.addEventListener("load", () => {
-    const loader = document.querySelector(".loader");
-      
-    loader.classList.add("loader--hidden");
-  
-    loader.addEventListener("transitionend", () => {
-      document.body.removeChild(loader);
-    });
-  });
+        const loader = document.querySelector(".loader");
+
+        loader.classList.add("loader--hidden");
+
+        loader.addEventListener("transitionend", () => {
+          document.body.removeChild(loader);
+        });
+      });
     </script>
 
   </head>
-  
+
   <body class="integration-page integration-page--opacity">
     <div class="heading">
       <h1 class="integration-heading">200+ Built-In Integrations</h1>
@@ -162,14 +175,12 @@ permalink: /integrations
       Meshery seamlessly integrates with every CNCF project, your existing tools and Kubernetes clusters, allowing you to enhance use your preferred monitoring, CI/CD, and security solutions. 
     </p><p style="margin:2vw 10vw 0vw 10vw;">
       Meshery's Kubernetes-native approach means you can easily incorporate Meshery into your existing workflow without additional setup or integration effort.
-    </p>
+      </p>
     </div>
 
     <!-- loading animation -->
-    
-    <div id="container">
-    </div>
-    <div class= "loader"></div>
+
+    <div id="container"><div class="loader"></div></div>
     <div id="menu">
       <button id="table">TABLE</button>
       <button id="sphere">SPHERE</button>
@@ -205,8 +216,8 @@ permalink: /integrations
       let integHeading = document.querySelector(".integration-heading")
       let roundedIntegNumber = Math.floor(data.length/ 10) * 10;
       integHeading.innerHTML = `${roundedIntegNumber}+ Built-In Integrations`
-      
-      const rows = 5;
+
+      const rows = 9;
       const cols = Math.ceil(data.length / rows);
       let i = 1,
         j = 1;
@@ -236,7 +247,7 @@ permalink: /integrations
           1,
           10000
         );
-        camera.position.z = 3000;
+        camera.position.z = 3600;
 
         scene = new THREE.Scene();
 
@@ -274,8 +285,8 @@ permalink: /integrations
           //
 
           const object = new THREE.Object3D();
-          object.position.x = table[i].col * 140 - 1100;
-          object.position.y = -(table[i].row * 180) + 500;
+          object.position.x = table[i].col * 140 - 1850;
+          object.position.y = -(table[i].row * 180) + 900;
 
           targets.table.push(object);
         }
@@ -290,7 +301,7 @@ permalink: /integrations
 
           const object = new THREE.Object3D();
 
-          object.position.setFromSphericalCoords(500, phi, theta);
+          object.position.setFromSphericalCoords(800, phi, theta);
 
           vector.copy(object.position).multiplyScalar(2);
 
@@ -303,7 +314,7 @@ permalink: /integrations
 
         for (let i = 0, l = objects.length; i < l; i++) {
           const theta = i * 0.185 + Math.PI;
-          const y = -(i * 8) + 250;
+          const y = -(i * 6.5) + 650;
 
           const object = new THREE.Object3D();
 
@@ -357,7 +368,7 @@ permalink: /integrations
         function removeClassFromElement(elementName) {
           const menuElements = menuElement.children;
           const totalChildElements = menuElement.childElementCount;
-          
+
           for(let i = 0; i < totalChildElements; i++) {
             const element = menuElements[i];
             if(element.id === elementName) continue;
