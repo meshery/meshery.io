@@ -18,17 +18,17 @@
 <script type="module">
     import data from '../../integrations/data.js'
     let integHeading = document.getElementById("integration-heading")
-    let roundedIntegNumber = Math.floor(data.length/ 10) * 10;
+    let roundedIntegNumber = Math.floor(data.length/ 10) * 10
     integHeading.innerHTML = `${roundedIntegNumber}+ Built-In Integrations`
-    
     let integContainer = document.getElementById("integContainer")
+    
     for (let i = 0;i<data.length;i++){
-        let urlFromJSON = data[i].color.split('/integration');
+        let urlFromJSON = data[i].color.split('/integration')
         let indivCard = `
         <div class="integrations-card">
         <div class="integrations-card-inner">
             <div class="card-front">
-                <img src="${urlFromJSON[0]}${urlFromJSON[1]}" id="logo-dark-light" data-logo-for-dark="${urlFromJSON[0]}${urlFromJSON[1]}"
+                <img src="${urlFromJSON[0]}${urlFromJSON[1]}" loading="lazy" id="logo-dark-light" data-logo-for-dark="${urlFromJSON[0]}${urlFromJSON[1]}"
                     data-logo-for-light="${urlFromJSON[0]}${urlFromJSON[1]}" />
             </div>
             <div class="card-back">
@@ -39,5 +39,4 @@
         `
         integContainer.innerHTML+=indivCard
     }
-   
 </script>
