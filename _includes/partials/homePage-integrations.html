@@ -5,10 +5,13 @@
             Support for your Cloud Native Infrastructure and Apps
         </h2>
         <p style="margin:auto 10vw;">
-            Meshery seamlessly integrates with every CNCF project, your existing tools and Kubernetes clusters, allowing you to enhance use your preferred monitoring, CI/CD, and security solutions. 
-          </p><p style="margin:2vw 10vw 0vw 10vw;">
-            Meshery's Kubernetes-native approach means you can easily incorporate Meshery into your existing workflow without additional setup or integration effort.
-          </p>
+            Meshery seamlessly integrates with every CNCF project, your existing tools and Kubernetes clusters, allowing
+            you to enhance use your preferred monitoring, CI/CD, and security solutions.
+        </p>
+        <p style="margin:2vw 10vw 0vw 10vw;">
+            Meshery's Kubernetes-native approach means you can easily incorporate Meshery into your existing workflow
+            without additional setup or integration effort.
+        </p>
         <div class="integrations-3d-link">
             <a class="highlight" href="/integrations"
                 style="display: block; margin: max(3vh,3vw) auto 0; width: fit-content;">See All Integrations</a>
@@ -18,26 +21,26 @@
 <script type="module">
     import data from '../../integrations/data.js'
     let integHeading = document.getElementById("integration-heading")
-    let roundedIntegNumber = Math.floor(data.length/ 10) * 10;
+    let roundedIntegNumber = Math.floor(data.length / 10) * 10
     integHeading.innerHTML = `${roundedIntegNumber}+ Built-In Integrations`
-    
     let integContainer = document.getElementById("integContainer")
-    for (let i = 0;i<data.length;i++){
-        let urlFromJSON = data[i].color.split('/integration');
+
+    for (let i = 0; i < data.length; i++) {
+        let urlFromJSON = data[i].color.split('/integration')
         let indivCard = `
         <div class="integrations-card">
         <div class="integrations-card-inner">
             <div class="card-front">
+                <img src="${urlFromJSON[0]}${urlFromJSON[1]}" loading="lazy" id="logo-dark-light" data-logo-for-dark="${urlFromJSON[0]}${urlFromJSON[1]}"
                 <img loading="lazy" src="${urlFromJSON[0]}${urlFromJSON[1]}" id="logo-dark-light" data-logo-for-dark="${urlFromJSON[0]}${urlFromJSON[1]}"
                     data-logo-for-light="${urlFromJSON[0]}${urlFromJSON[1]}" />
             </div>
             <div class="card-back">
-                <span>${data[i].name }</span>
+                <span>${data[i].name}</span>
             </div>
         </div>
     </div>
         `
-        integContainer.innerHTML+=indivCard
+        integContainer.innerHTML += indivCard
     }
-   
 </script>
