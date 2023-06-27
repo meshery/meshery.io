@@ -11,9 +11,10 @@ categories:
 permalink: /blog/changing-meshery-release-channels
 ---
 
-<div style="text-align:center">
-<img src="../../assets/images/posts/2023-06-16-changing-meshery-release-channels/change-meshery-release-channels.png#center" style="width:75%;padding-bottom:20px"></img>
+<div class="row" style="width:220px;float:right;padding:20px;text-align:center;">
+<img src="../../assets/images/posts/2023-06-16-changing-meshery-release-channels/change-meshery-release-channels.png" />
 </div>
+
 <p>
   Meshery is constantly evolving and improving, with new features and bug fixes being added regularly. To stay up to date with the latest Meshery features and updates, you can switch between different release channels.
 </p>
