@@ -13,15 +13,15 @@ filterInfo: |
         <p>
         Build and deploy:
         </p>
-        <code style='color: var(--color-grey-light)'>
-        cd http-auth
+        <code>
+        cd http-auth<br/>
         make run-filtered
         </code>
         <p>
         Test:
         </p>
-        <code style='color: var(--color-grey-light)'>
-        curl  -H "token":"hello" 0.0.0.0:18000 -v # Authorized
+        <code>
+        curl  -H "token":"hello" 0.0.0.0:18000 -v # Authorized<br/>
         curl  -H "token":"world" 0.0.0.0:18000 -v # Unauthorized
         </code>
 filterCaveats: 
