@@ -40,7 +40,7 @@
 
 			<ul class="feed">
 				<!-- <div class="col l4"> -->
-				<a class="twitter-timeline" data-width="320" data-height="320" data-theme="light"
+				<a class="twitter-timeline" id="twitter-timeline" data-width="320" data-height="320" data-theme="light"
 					data-link-color="#62ACCD" href="https://twitter.com/mesheryio"
 					data-chrome="nofooter circularborders noscrollbar">Tweets by Meshery</a>
 				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -141,14 +141,38 @@
 		document.body.classList.toggle("dark-mode")
 		let layer5Logos = document.querySelectorAll("#layer5-logo");
 		let allLogos = document.querySelectorAll("#logo-dark-light");
+		let twitterTimeline = document.querySelector(".twitter-timeline");
+  		let parentTwitterTimeline = twitterTimeline.parentNode;
 		// console.log(allLogos)
 		if (document.body.classList.contains("dark-mode")) {
 			layer5Logos.forEach(e => e.src = '../assets/images/company-logo/layer5-dark-mode-logo.svg')
 			allLogos.forEach(e => e.src = e.dataset.logoForDark)
+		    twitterTimeline.dataset.theme = "dark";
 		} else {
 			layer5Logos.forEach(e => e.src = '../assets/images/company-logo/layer5-no-trim.svg')
 			allLogos.forEach(e => e.src = e.dataset.logoForLight)
+		    twitterTimeline.dataset.theme = "light";
 		}
+
+		parentTwitterTimeline.removeChild(twitterTimeline);
+
+		// Create a new Twitter timeline element
+		let newTimeline = document.createElement('a');
+		newTimeline.innerHTML = 'Tweets by Meshery';
+		newTimeline.setAttribute('class', 'twitter-timeline');
+		newTimeline.setAttribute('data-width', '320');
+		newTimeline.setAttribute('data-height', '320');
+		newTimeline.setAttribute('data-theme', twitterTimeline.dataset.theme);
+		newTimeline.setAttribute('data-link-color', '#62ACCD');
+		newTimeline.setAttribute('data-chrome', 'nofooter circularborders noscrollbar');
+		newTimeline.setAttribute('href', 'https://twitter.com/mesheryio');
+
+		// Append the new Twitter timeline element to the parent
+		parentTwitterTimeline.appendChild(newTimeline);
+
+		// Load the Twitter widget for the new timeline
+		window.twttr.widgets.load();
+
 		if (document.body.classList.contains("dark-mode")) {
 			localStorage.setItem("mode", "dark-mode")
 		} else {
