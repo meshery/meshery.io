@@ -22,12 +22,8 @@ jobs:
             >&2 echo "Error connecting to Meshery Cloud"
             >&2 echo "$(<err.txt)"
           fi
-          echo "$catalogPatterns" > temp.json
-          patternCount=$(jq length temp.json)
-          if [[ "$patternCount" == "" ]]; then
-            patternCount=0
-          fi
-
+          echo "$catalogPatterns" | jq -r '.patterns' > temp.json
+          patternCount=$(echo "$catalogPatterns" | jq '.total_count')
           echo "Found $patternCount catalog patterns"
 
           for (( idx=0; idx<$patternCount; idx++ ))
