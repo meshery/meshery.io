@@ -100,11 +100,9 @@ jobs:
             >&2 echo "$(<err.txt)"
           fi
 
-          echo "$catalogFilters" > temp.json
-          filterCount=$(jq length temp.json)
-          if [[ "$filterCount" == "" ]]; then
-            filterCount=0
-          fi
+          echo "$catalogFilters" | jq -r '.filters' > temp.json
+          filterCount=$(echo "$catalogFilters" | jq '.total_count')
+          echo "Found $filterCount catalog filters"
 
           echo "Found $filterCount catalog filters"
 
