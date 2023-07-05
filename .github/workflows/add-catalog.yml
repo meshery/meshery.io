@@ -88,7 +88,7 @@ jobs:
             userFullName="$(jq -r .first_name info.json) $(jq -r .last_name info.json)"
             userAvatarURL="$(jq -r .avatar_url info.json)"
 
-            echo "---
+          echo "---
           layout: item
           name: $patternName
           userId: $userId
@@ -98,8 +98,10 @@ jobs:
           compatibility: $compatibility
           patternId: $designId
           image: /assets/images/patterns/service-mesh.svg
-          patternInfo: $patternInfo
-          patternCaveats: $patternCaveats
+          patternInfo: |
+            $patternInfo
+          patternCaveats: |
+            $patternCaveats
           URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/$MESHERY_CATALOG_FILES_DIR/$designId.yaml'
           downloadLink: $designId.yaml
           ---" > ./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"/$designId.md
@@ -179,8 +181,10 @@ jobs:
           compatibility: $compatibility
           patternId: $filterId
           image: /assets/images/webassembly_logo.svg
-          filterInfo: $filterInfo
-          filterCaveats: $filterCaveats
+          filterInfo: |
+            $filterInfo
+          filterCaveats: |
+            $filterCaveats
           URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/$MESHERY_CATALOG_FILES_DIR/$filterId.yaml'
           downloadLink: $filterId.yaml
           ---" > ./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')"/$filterId.md
