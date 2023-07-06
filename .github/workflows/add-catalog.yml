@@ -19,17 +19,10 @@ jobs:
           echo "MESHERY_CATALOG_FILES_DIR=catalog" >> $GITHUB_ENV
       - name: Cleanup
         run: |
-          find $MESHERY_CATALOG_FILES_DIR ! -name 'index.html' -maxdepth 1 -type f -delete 
-          rm ./collections/_catalog/deployment/*
-          rm ./collections/_catalog/jwt/*
-          rm ./collections/_catalog/observability/*
-          rm ./collections/_catalog/resiliency/*
-          rm ./collections/_catalog/scaling/*
-          rm ./collections/_catalog/security/*
-          rm ./collections/_catalog/traffic-management/*
-          rm ./collections/_catalog/troubleshooting/*
-          rm ./collections/_catalog/wasm/*
-          rm ./collections/_catalog/workloads/*
+          find $MESHERY_CATALOG_FILES_DIR ! -name 'index.html' -maxdepth 1 -type f -delete
+          cd ./collections/_catalog
+          for dir in */; do find $dir -maxdepth 1 -type f -delete; done
+          cd ../../
       - name: Update Catalog Patterns
         if: ${{ success() }}
         run: |
