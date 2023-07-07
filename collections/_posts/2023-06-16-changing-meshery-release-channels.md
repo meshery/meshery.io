@@ -2,7 +2,6 @@
 date: 2023-06-16 10:30:05 -0530
 heading: Changing Meshery Release Channels
 title: Changing Meshery Release Channels
-author_contributor: Lee Calcote
 categories: 
   - Meshery
   - Open Source
