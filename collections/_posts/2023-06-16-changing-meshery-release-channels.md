@@ -2,7 +2,7 @@
 date: 2023-06-16 10:30:05 -0530
 heading: Changing Meshery Release Channels
 title: Changing Meshery Release Channels
-author_contributor: Karan Thakur
+author_contributor: Lee Calcote
 categories: 
   - Meshery
   - Open Source
@@ -42,8 +42,8 @@ To subscribe to a specific release channel or version using mesheryctl you can u
 
 
 This command will update your local Meshery configuration to use the selected channel for future updates. To set the channel to a specific version, replace Version with the desired version number. Example: 
-<code style="padding: 2px;background-color: var(--color-primary-qtext);color: var(--color-primary-testimonial-wrapper);border-radius:3px">mesheryctl system channel set stable</code>
-or <code style="padding: 2px;background-color: var(--color-primary-qtext);color: var(--color-primary-testimonial-wrapper);border-radius:3px">mesheryctl system channel set stable-v0.5.56</code>
+<code class="code-block">mesheryctl system channel set stable</code>
+or <code class="code-block">mesheryctl system channel set stable-v0.5.56</code>
 
 <h2> Switching between Release Channels</h2>
 <p>There are two ways to switch between Meshery release channels: using mesheryctl or by editing your meshconfig file. In this blog post, we'll cover both methods.</p>
@@ -52,12 +52,12 @@ or <code style="padding: 2px;background-color: var(--color-primary-qtext);color:
 
 <p>
   Meshconfig is a configuration file that is used to configure Meshery. It is typically located in the 
-  <code style="padding: 2px;background-color: var(--color-primary-qtext);color: var(--color-primary-testimonial-wrapper);border-radius:3px">~/.meshery/config.yaml</code> directory. It contains information about the current release channel, the version of Meshery that is installed, and other configuration options that are specific to your Meshery installation. 
+  <code class="code-block">~/.meshery/config.yaml</code> directory. It contains information about the current release channel, the version of Meshery that is installed, and other configuration options that are specific to your Meshery installation. 
   Meshconfig is automatically generated when you run Meshery for the first time. It is also automatically updated when you update Meshery
 </p>
 
 <h3>Switching between Meshery release channels using meshconfig file.</h3>
-<p>Open your terminal and confirm that you have mesheryctl installed by running  </p><code style="padding: 2px;background-color: var(--color-primary-qtext);color: var(--color-primary-testimonial-wrapper);border-radius:3px">mesheryctl version</code>. If you don't have mesheryctl installed, you can install it by following the instructions in the  <a href="https://docs.meshery.io/installation/mesheryctl">Meshery documentation</a>.
+<p>Open your terminal and confirm that you have mesheryctl installed by running  </p><code class="code-block">mesheryctl version</code>. If you don't have mesheryctl installed, you can install it by following the instructions in the  <a href="https://docs.meshery.io/installation/mesheryctl">Meshery documentation</a>.
 
 <p>1. Create new Meshery config.yaml file</p> 
 <div id="contextcreate" class="highlight-code">
@@ -71,7 +71,7 @@ or <code style="padding: 2px;background-color: var(--color-primary-qtext);color:
     </a>
 </div>
 
-Example: <br/> <code style="padding: 2px;background-color: var(--color-primary-qtext);color: var(--color-primary-testimonial-wrapper);border-radius:3px">mesheryctl system context create new-context --components meshery-istio meshery-osm meshery-linkerd --platform docker --url http://localhost:9081 --set --yes </code>
+Example: <br/> <code class="code-block">mesheryctl system context create new-context --components meshery-istio meshery-osm meshery-linkerd --platform docker --url http://localhost:9081 --set --yes </code>
 <p>2. To view the newly created meshery context use</p> 
 <div id="contextviewname" class="highlight-code">
   <code class="code-box">mesheryctl system context view [context-name] 
