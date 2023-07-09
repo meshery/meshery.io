@@ -1,5 +1,7 @@
 name: Add Cloud Native Catalog Items
 on:
+  schedule:
+    - cron: "0 0 * * *"
   workflow_dispatch:
   repository_dispatch:
     types: [add_catalog]
@@ -15,19 +17,22 @@ jobs:
         run : |
           echo "MESHERY_CLOUD_BASE_URL=https://meshery.layer5.io" >> $GITHUB_ENV
           echo "MESHERY_CATALOG_FILES_DIR=catalog" >> $GITHUB_ENV
+      - name: Cleanup
+        run: |
+          find $MESHERY_CATALOG_FILES_DIR ! -name 'index.html' -maxdepth 1 -type f -delete
+          cd ./collections/_catalog
+          for dir in */; do find $dir -maxdepth 1 -type f -delete; done
+          cd ../../
       - name: Update Catalog Patterns
+        if: ${{ success() }}
         run: |
           catalogPatterns=$(curl -sS "$MESHERY_CLOUD_BASE_URL/api/catalog/content/pattern" 2>./err.txt)
           if [[ "$(<err.txt)" != "" ]]; then
             >&2 echo "Error connecting to Meshery Cloud"
             >&2 echo "$(<err.txt)"
           fi
-          echo "$catalogPatterns" > temp.json
-          patternCount=$(jq length temp.json)
-          if [[ "$patternCount" == "" ]]; then
-            patternCount=0
-          fi
-
+          echo "$catalogPatterns" | jq -r '.patterns' > temp.json
+          patternCount=$(echo "$catalogPatterns" | jq '.total_count')
           echo "Found $patternCount catalog patterns"
 
           for (( idx=0; idx<$patternCount; idx++ ))
@@ -76,7 +81,7 @@ jobs:
             userFullName="$(jq -r .first_name info.json) $(jq -r .last_name info.json)"
             userAvatarURL="$(jq -r .avatar_url info.json)"
 
-            echo "---
+          echo "---
           layout: item
           name: $patternName
           userId: $userId
@@ -86,8 +91,10 @@ jobs:
           compatibility: $compatibility
           patternId: $designId
           image: /assets/images/patterns/service-mesh.svg
-          patternInfo: $patternInfo
-          patternCaveats: $patternCaveats
+          patternInfo: |
+            $patternInfo
+          patternCaveats: |
+            $patternCaveats
           URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/$MESHERY_CATALOG_FILES_DIR/$designId.yaml'
           downloadLink: $designId.yaml
           ---" > ./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"/$designId.md
@@ -97,6 +104,7 @@ jobs:
           rm info.json
           rm err1.txt
       - name: Update Catalog Filters
+        if: ${{ success() }}
         run: |
           catalogFilters=$(curl -sS "$MESHERY_CLOUD_BASE_URL/api/catalog/content/filter" 2>./err.txt)
           if [[ "$(<err.txt)" != "" ]]; then
@@ -104,11 +112,9 @@ jobs:
             >&2 echo "$(<err.txt)"
           fi
 
-          echo "$catalogFilters" > temp.json
-          filterCount=$(jq length temp.json)
-          if [[ "$filterCount" == "" ]]; then
-            filterCount=0
-          fi
+          echo "$catalogFilters" | jq -r '.filters' > temp.json
+          filterCount=$(echo "$catalogFilters" | jq '.total_count')
+          echo "Found $filterCount catalog filters"
 
           echo "Found $filterCount catalog filters"
 
@@ -168,8 +174,10 @@ jobs:
           compatibility: $compatibility
           patternId: $filterId
           image: /assets/images/webassembly_logo.svg
-          filterInfo: $filterInfo
-          filterCaveats: $filterCaveats
+          filterInfo: |
+            $filterInfo
+          filterCaveats: |
+            $filterCaveats
           URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/$MESHERY_CATALOG_FILES_DIR/$filterId.yaml'
           downloadLink: $filterId.yaml
           ---" > ./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')"/$filterId.md
