@@ -64,6 +64,38 @@
   transform: rotate(0deg);
   transition: transform 1s linear;
 }
+
+#compatibility-div label{
+  margin: 0;
+  display: flex;
+  align-items: center;
+  width:100%;
+  text-indent: unset;
+}
+
+#compatibility-div input{
+  flex-shrink: 0;
+  top: 0;
+}
+
+#compatibility-div img{
+  max-width: 50px;
+  height:100%;
+}
+#compatibility-div .input-container .name{
+  margin-left:10px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#compatibility-div .input-container{
+  display: flex;
+  align-items: center; 
+  margin: 20px 0; 
+}
+
 </style>
 
 <div class="filter-wrap">
@@ -95,18 +127,8 @@
     <label><input type="radio" value="Scaling" id="scaling" onchange='window.location.assign("/catalog/scaling")'/> Scaling </label>
     <label><input type="radio" value="Resiliency" id="resiliency" onchange='window.location.assign("/catalog/resiliency")'/> Resiliency </label>   
   </div>
-  <p id="compatibility-para" class="compatibility-para"><strong>Compatibility:</strong></p>
-  <div id="compatibility-div" class="compatibility-div">
-      <label><input type="radio" value="Istio" id="istio" onchange='window.location.assign("/catalog/istio")' /> <img class="dropdown-icon" src="/assets/images/istio.svg"/> Istio </label>
-      <label><input type="radio" value="Linkerd" id="linkerd" onchange='window.location.assign("/catalog/linkerd")'/> <img class="dropdown-icon" src="/assets/images/linkerd.svg"/> Linkerd </label>
-      <label><input type="radio" value="Consul" id="consul" onchange='window.location.assign("/catalog/consul")'/> <img class="dropdown-icon" src="/assets/images/consul.svg"/> Consul </label>
-      <label><input type="radio" value="Kuma" id="kuma" onchange='window.location.assign("/catalog/kuma")'/> <img class="dropdown-icon" src="/assets/images/kuma-color.svg" id="logo-dark-light" data-logo-for-dark="/assets/images/kuma-white.svg" data-logo-for-light="/assets/images/kuma-color.svg" style="filter: none;"/> Kuma </label>
-      <label><input type="radio" value="App Mesh" id="app-mesh" onchange='window.location.assign("/catalog/app-mesh")' /> <img class="dropdown-icon" src="/assets/images/aws-app-mesh.svg"/> App Mesh </label>
-      <label class="open-service-mesh"><input type="radio" value="OSM" id="osm" onchange='window.location.assign("/catalog/open-service-mesh")'/> <img class="dropdown-icon" src="/assets/images/osm.svg"/> Open Service Mesh </label>
-      <label><input type="radio" value="Traefik" id="traefik" onchange='window.location.assign("/catalog/traefik")'/> <img class="dropdown-icon" src="/assets/images/traefik-mesh.svg"/> Traefik Mesh </label>
-      <label><input type="radio" value="Nginx" id="nginx" onchange='window.location.assign("/catalog/nginx")'/> <img class="dropdown-icon" src="/assets/images/nginx-sm.svg"/> NGINX </label>
-      <label><input type="radio" value="NSM" id="nsm" onchange='window.location.assign("/catalog/nsm")'/> <img class="dropdown-icon" src="/assets/images/nsm.svg"/> Network Service Mesh </label>   
-  </div>
+  <p id="compatibility-para" class="compatibility-para"><strong>Category:</strong></p>
+  <div id="compatibility-div" class="compatibility-div"></div>
   <p id="tech-para" class="tech-para"><strong>Technology:</strong></p>
   <div id="tech-div" class="tech-div">
       <label><input type="radio" value="WebAssembly" id="webassembly" onchange='window.location.assign("/catalog/webassembly")'/> WebAssembly </label>
@@ -178,5 +200,73 @@
     drop_button.style.transform = "rotate(0deg)"
     open = !open
     return;
+  }
+</script>
+
+<script type="module">
+  // Show filters as checkboxes
+
+  import data from "../integrations/data.js";
+  
+  const container = document.getElementById("compatibility-div");
+
+  for (let i = 0; i < data.length; i++) {
+    const inputContainer = document.createElement("div");
+    inputContainer.style.display = "flex";
+    inputContainer.className = "input-container";
+
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.name = data[i].name;
+    input.id = data[i].name;
+    input.onclick = function () {
+      showFilterCards();
+    };
+    inputContainer.appendChild(input);
+
+    const label = document.createElement("label");
+    let urlFromJSON = data[i].color.split("/integration");
+    label.innerHTML = `<img src="${urlFromJSON[0]}${urlFromJSON[1]}" id="logo-dark-light" data-logo-for-dark="${urlFromJSON[0]}${urlFromJSON[1]}"
+                    data-logo-for-light="${urlFromJSON[0]}${urlFromJSON[1]}" /><div class="name">${data[i].name}</div>`;
+    label.style.height = "20px";
+    label.setAttribute("for", data[i].name);
+    inputContainer.appendChild(label);
+
+    container.appendChild(inputContainer);
+  }
+
+  function showFilterCards() {
+    let filterArray = [];
+    document
+      .getElementById("compatibility-div")
+      .querySelectorAll("input[type=checkbox]:checked")
+      .forEach(function (el) {
+        filterArray.push(el.value);
+      });
+    console.log("filterArray : ", filterArray);
+    const patternCards = document.querySelectorAll(".patternCard");
+
+    if (!filterArray.length) {
+      for (let j = 0; j < patternCards.length; j++) {
+        patternCards[j].style.display = "block";
+      }
+    } else {
+      for (let j = 0; j < patternCards.length; j++) {
+        const filter = patternCards[j].getAttribute("filter");
+        let showCard = false;
+
+        for (let i = 0; i < filterArray.length; i++) {
+          if (filter.includes(filterArray[i])) {
+            showCard = true;
+            break;
+          }
+        }
+        if (showCard) {
+          patternCards[j].style.display = "block";
+        } else {
+          patternCards[j].style.display = "none";
+        }
+      }
+    }
   }
 </script>
