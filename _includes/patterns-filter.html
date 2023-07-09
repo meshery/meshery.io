@@ -127,7 +127,7 @@
     <label><input type="radio" value="Scaling" id="scaling" onchange='window.location.assign("/catalog/scaling")'/> Scaling </label>
     <label><input type="radio" value="Resiliency" id="resiliency" onchange='window.location.assign("/catalog/resiliency")'/> Resiliency </label>   
   </div>
-  <p id="compatibility-para" class="compatibility-para"><strong>Category:</strong></p>
+  <p id="compatibility-para" class="compatibility-para"><strong>Technologies:</strong></p>
   <div id="compatibility-div" class="compatibility-div"></div>
   <p id="tech-para" class="tech-para"><strong>Technology:</strong></p>
   <div id="tech-div" class="tech-div">
@@ -207,7 +207,7 @@
   // Show filters as checkboxes
 
   import data from "../integrations/data.js";
-  
+
   const container = document.getElementById("compatibility-div");
 
   for (let i = 0; i < data.length; i++) {
@@ -225,9 +225,11 @@
     inputContainer.appendChild(input);
 
     const label = document.createElement("label");
-    let urlFromJSON = data[i].color.split("/integration");
-    label.innerHTML = `<img src="${urlFromJSON[0]}${urlFromJSON[1]}" id="logo-dark-light" data-logo-for-dark="${urlFromJSON[0]}${urlFromJSON[1]}"
-                    data-logo-for-light="${urlFromJSON[0]}${urlFromJSON[1]}" /><div class="name">${data[i].name}</div>`;
+    let colorImg = data[i].color?.split("/integration")?.join("");
+    let whiteImg = data[i].white?.split("/integration")?.join("");
+
+    label.innerHTML = `<img src="${colorImg}" id="logo-dark-light" data-logo-for-dark="${whiteImg ?? colorImg}"
+                    data-logo-for-light="${colorImg}" /><div class="name">${data[i].name}</div>`;
     label.style.height = "20px";
     label.setAttribute("for", data[i].name);
     inputContainer.appendChild(label);
@@ -243,7 +245,6 @@
       .forEach(function (el) {
         filterArray.push(el.value);
       });
-    console.log("filterArray : ", filterArray);
     const patternCards = document.querySelectorAll(".patternCard");
 
     if (!filterArray.length) {
