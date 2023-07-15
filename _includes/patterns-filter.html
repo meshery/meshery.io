@@ -65,7 +65,7 @@
   transition: transform 1s linear;
 }
 
-#compatibility-div label{
+#compatibility-div label, #category-div label{
   margin: 0;
   display: flex;
   align-items: center;
@@ -73,14 +73,29 @@
   text-indent: unset;
 }
 
-#compatibility-div input{
+#compatibility-div input, #category-div input{
   flex-shrink: 0;
   top: 0;
+  cursor: pointer;
 }
 
 #compatibility-div img{
   max-width: 50px;
   height:100%;
+}
+#compatibility-div .badge{
+  background: var(--color-secondary-dark);
+  border-radius: 50%;
+  color: var(--color-primary-light);
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
 }
 #compatibility-div .input-container .name{
   margin-left:10px;
@@ -90,7 +105,7 @@
   text-overflow: ellipsis;
 }
 
-#compatibility-div .input-container{
+#compatibility-div .input-container, #category-div .input-container{
   display: flex;
   align-items: center; 
   margin: 20px 0; 
@@ -116,17 +131,7 @@
     </div>
   </div>
   <p id="category-para" class="category-para"> <strong>Categories:</strong></p>   
-  <div id="category-div" class="category-div">
-    <label><input type="radio" value="All" id="all" onchange='window.location.assign("/catalog")'/> All </label>
-    <label><input type="radio" value="Deployment" id="deployment" onchange='window.location.assign("/catalog/deployment")'/> Deployment </label>
-    <label><input type="radio" value="Traffic Management" id="traffic-management" onchange='window.location.assign("/catalog/traffic-management")' /> Traffic Management </label>
-    <label><input type="radio" value="Security" id="security" onchange='window.location.assign("/catalog/security")' /> Security </label> 
-    <label><input type="radio" value="Workloads" id="workloads" onchange='window.location.assign("/catalog/workloads")'/> Workloads </label> 
-    <label><input type="radio" value="Observability" id="observability" onchange='window.location.assign("/catalog/observability")'/> Observability </label>
-    <label><input type="radio" value="Troubleshooting" id="troubleshooting" onchange='window.location.assign("/catalog/troubleshooting")' /> Troubleshooting </label>
-    <label><input type="radio" value="Scaling" id="scaling" onchange='window.location.assign("/catalog/scaling")'/> Scaling </label>
-    <label><input type="radio" value="Resiliency" id="resiliency" onchange='window.location.assign("/catalog/resiliency")'/> Resiliency </label>   
-  </div>
+  <div id="category-div" class="category-div"></div>
   <p id="compatibility-para" class="compatibility-para"><strong>Technologies:</strong></p>
   <div id="compatibility-div" class="compatibility-div"></div>
   <p id="tech-para" class="tech-para"><strong>Technology:</strong></p>
@@ -206,11 +211,63 @@
 <script type="module">
   // Show filters as checkboxes
 
-  import data from "../integrations/data.js";
+  import data from "{{ site.baseurl }}/integrations/data.js";
 
   const container = document.getElementById("compatibility-div");
+  const categoryContainer = document.getElementById("category-div");
+  
+  const patternCards = document.querySelectorAll(".patternCard");
+  const cardFilters = [];
+  let cardType = new Set();
+  let cardTechnology = new Set();
 
+  for(let i=0; i<patternCards.length; i++){
+      const filter = patternCards[i].getAttribute("filter")
+      cardFilters.push(filter);
+      const type = patternCards[i].getAttribute("type")
+      if(type) cardType.add(type);
+      const technology = patternCards[i].getAttribute("technology")
+      cardTechnology.add(technology);
+  }
+
+  cardType = ["All", ...Array.from(cardType)];
+  cardTechnology = Array.from(cardTechnology);
+
+  for(let i = 0; i<cardType.length; i++){
+    const inputContainer = document.createElement("div");
+    inputContainer.style.display = "flex";
+    inputContainer.className = "input-container";
+
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = "type";
+    input.value = cardType[i];
+    input.id = cardType[i];
+    input.onclick = function () {
+      filterByType(cardType[i]);
+    };
+    inputContainer.appendChild(input);
+
+    const count = cardFilters.filter((filter) => filter.includes(data[i].name)).length;
+
+    const label = document.createElement("label");
+    label.innerHTML = cardType[i].replace(/-/g, " "); 
+    label.setAttribute("for", cardType[i]);
+    inputContainer.appendChild(label);
+
+    categoryContainer.appendChild(inputContainer);
+  }
+
+  //To remove duplicate entries of integrations in filter section 
+  const filterEntries = [];
+  
+  // For checkboxes
   for (let i = 0; i < data.length; i++) {
+    const count = cardFilters.filter((filter) => filter.includes(data[i].name)).length;
+    if(count === 0 || filterEntries.includes(data[i].name))
+      continue;
+    
+    filterEntries.push(data[i].name);
     const inputContainer = document.createElement("div");
     inputContainer.style.display = "flex";
     inputContainer.className = "input-container";
@@ -230,7 +287,7 @@
     let whiteImg = data[i].white?.split("/integration")?.join("");
 
     label.innerHTML = `<img src="${colorImg}" id="logo-dark-light" data-logo-for-dark="${whiteImg ?? colorImg}"
-                    data-logo-for-light="${colorImg}" /><div class="name">${data[i].name}</div>`;
+                    data-logo-for-light="${colorImg}" /><div class="name">${data[i].name}</div><div class="badge">${count}</div>`;
     label.style.height = "20px";
     label.setAttribute("for", data[i].name);
     inputContainer.appendChild(label);
@@ -240,6 +297,9 @@
 
   function showFilterCards() {
     let filterArray = [];
+    document.querySelectorAll("input[type=radio]:checked").forEach(function (el) {
+      el.checked = false;
+    });
     document
       .getElementById("compatibility-div")
       .querySelectorAll("input[type=checkbox]:checked")
@@ -268,6 +328,25 @@
         } else {
           patternCards[j].style.display = "none";
         }
+      }
+    }
+  }
+
+  function filterByType(value){
+    document.querySelectorAll("input[type=checkbox]:checked").forEach(function (el) {
+      el.checked = false;
+    });
+    const patternCards = document.querySelectorAll(".patternCard");
+    for (let j = 0; j < patternCards.length; j++) {
+      const filter = patternCards[j].getAttribute("type");
+      let showCard = false;
+      if (value === "All" || filter.includes(value)) {
+        showCard = true;
+      }
+      if (showCard) {
+        patternCards[j].style.display = "block";
+      } else {
+        patternCards[j].style.display = "none";
       }
     }
   }
