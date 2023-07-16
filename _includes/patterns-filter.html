@@ -246,6 +246,7 @@
     input.onclick = function () {
       filterByType(cardType[i]);
     };
+    if(cardType[i] === "All") input.checked = true;
     inputContainer.appendChild(input);
 
     const count = cardFilters.filter((filter) => filter.includes(data[i].name)).length;
@@ -312,6 +313,7 @@
       for (let j = 0; j < patternCards.length; j++) {
         patternCards[j].style.display = "block";
       }
+      document.getElementById("All").checked = true;
     } else {
       for (let j = 0; j < patternCards.length; j++) {
         const filter = patternCards[j].getAttribute("filter");
