@@ -209,33 +209,37 @@
 </script>
 
 <script type="module">
-  // Show filters as checkboxes
 
+  // import all integrations data
   import data from "{{ site.baseurl }}/integrations/data.js";
 
+  // get all empty filter containers
   const container = document.getElementById("compatibility-div");
   const categoryContainer = document.getElementById("category-div");
   
+  // get all pattern cards
   const patternCards = document.querySelectorAll(".patternCard");
-  const cardFilters = [];
+  const cardCompatibility = [];
   let cardType = new Set();
   let cardTechnology = new Set();
 
+  // Loop over all pattern cards to get there compatibility, type and technology so we can make a unique list out of it
   for(let i=0; i<patternCards.length; i++){
       const filter = patternCards[i].getAttribute("filter")
-      cardFilters.push(filter);
+      cardCompatibility.push(filter);
       const type = patternCards[i].getAttribute("type")
       if(type) cardType.add(type);
       const technology = patternCards[i].getAttribute("technology")
-      cardTechnology.add(technology);
+      if(technology) cardTechnology.add(technology);
   }
 
+  // Add an "All" option to the type list and convert the set to array
   cardType = ["All", ...Array.from(cardType)];
   cardTechnology = Array.from(cardTechnology);
 
+  // For creating a list of radio buttons for Categories section
   for(let i = 0; i<cardType.length; i++){
     const inputContainer = document.createElement("div");
-    inputContainer.style.display = "flex";
     inputContainer.className = "input-container";
 
     const input = document.createElement("input");
@@ -249,8 +253,6 @@
     if(cardType[i] === "All") input.checked = true;
     inputContainer.appendChild(input);
 
-    const count = cardFilters.filter((filter) => filter.includes(data[i].name)).length;
-
     const label = document.createElement("label");
     label.innerHTML = cardType[i].replace(/-/g, " "); 
     label.setAttribute("for", cardType[i]);
@@ -259,18 +261,24 @@
     categoryContainer.appendChild(inputContainer);
   }
 
-  //To remove duplicate entries of integrations in filter section 
+  // remove duplicate entries of integrations in filter section 
+  // Maintain a list of filterEntries, whenever you come across a new one, add it to list, else if the filter already exists in the list skip the further process of creating nodes
   const filterEntries = [];
   
-  // For checkboxes
+  // For creating a list of checkboxes for Technologies section
   for (let i = 0; i < data.length; i++) {
-    const count = cardFilters.filter((filter) => filter.includes(data[i].name)).length;
+    const count = cardCompatibility.filter((filter) => filter.includes(data[i].name)).length;
+
+    // Skip adding the filter to list if it is not used in any of the pattern cards
+    // Skip adding the filter to list if it is already added to the list
     if(count === 0 || filterEntries.includes(data[i].name))
       continue;
     
+    // Add the filter to list
     filterEntries.push(data[i].name);
+
+    // Create nodes
     const inputContainer = document.createElement("div");
-    inputContainer.style.display = "flex";
     inputContainer.className = "input-container";
 
     const input = document.createElement("input");
@@ -296,25 +304,36 @@
     container.appendChild(inputContainer);
   }
 
+  // Function called when user clicks on any of Technology checkboxes
   function showFilterCards() {
     let filterArray = [];
+
+    // Deselect the radio button when checkbox is selected
     document.querySelectorAll("input[type=radio]:checked").forEach(function (el) {
       el.checked = false;
     });
+
+    // Get all the checked checkboxes and add it to filterArray
     document
       .getElementById("compatibility-div")
       .querySelectorAll("input[type=checkbox]:checked")
       .forEach(function (el) {
         filterArray.push(el.value);
       });
+
+    // Select all pattern cards
     const patternCards = document.querySelectorAll(".patternCard");
 
+    // If no checkbox is selected, show all pattern cards and enable the "All" radio button
     if (!filterArray.length) {
       for (let j = 0; j < patternCards.length; j++) {
         patternCards[j].style.display = "block";
       }
       document.getElementById("All").checked = true;
     } else {
+
+      // Loop over all pattern cards and check if any of the filter in filterArray is present in pattern card's filter attribute
+      // If yes, the show the card, else hide it
       for (let j = 0; j < patternCards.length; j++) {
         const filter = patternCards[j].getAttribute("filter");
         let showCard = false;
@@ -334,10 +353,17 @@
     }
   }
 
+  // Function called when user clicks on any of the Type radio buttons
   function filterByType(value){
+
+    // Deselect all the checkboxes when radio button is selected
     document.querySelectorAll("input[type=checkbox]:checked").forEach(function (el) {
       el.checked = false;
     });
+
+    // Loop over all patern cards and check if the "type" of pattern card matches with the radio button value received as argument to function
+    // If yes, show the card, else hide it
+    // Show all cards if "All" radio button is selected
     const patternCards = document.querySelectorAll(".patternCard");
     for (let j = 0; j < patternCards.length; j++) {
       const filter = patternCards[j].getAttribute("type");
