@@ -95,7 +95,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
+  font-weight: 200;
 }
 #compatibility-div .input-container .name{
   margin-left:10px;
@@ -127,21 +127,21 @@
     <div id="myDropdown" class="dropdown-content">
       <a id="category-li">Categories</a>
       <a id="compatibility-li">Compatibility</a>
-      <a id="technology-li">Technology</a>
+      <!-- <a id="technology-li">Technology</a> -->
     </div>
   </div>
   <p id="category-para" class="category-para"> <strong>Categories:</strong></p>   
   <div id="category-div" class="category-div"></div>
   <p id="compatibility-para" class="compatibility-para"><strong>Technologies:</strong></p>
   <div id="compatibility-div" class="compatibility-div"></div>
-  <p id="tech-para" class="tech-para"><strong>Technology:</strong></p>
+  <!-- <p id="tech-para" class="tech-para"><strong>Technology:</strong></p>
   <div id="tech-div" class="tech-div">
       <label><input type="radio" value="WebAssembly" id="webassembly" onchange='window.location.assign("/catalog/webassembly")'/> WebAssembly </label>
       <label><input type="radio" value="JWT" onchange='window.location.assign("/catalog/jwt")'/> JWT </label>
       <label class="disabled-label"><input type="radio" value="JWT" onchange='window.location.assign("/catalog/eBPF")' disabled/> eBPF </label>
       <label class="disabled-label"><input type="radio" value="JWT" onchange='window.location.assign("/catalog/opa")' disabled/> OPA policies </label>
       <label class="disabled-label"><input type="radio" value="JWT" onchange='window.location.assign("/catalog/nats")' disabled/> NATS </label>
-  </div>
+  </div> -->
 </div>
 <script>
   
@@ -212,6 +212,25 @@
 
   // import all integrations data
   import data from "{{ site.baseurl }}/integrations/data.js";
+
+  // Function to compare the names of all catalog entries by technology
+  // TODO: Improve so that catalog entries can be sorted by pattern name, too.
+  function compare(a, b) {
+    // Use toUpperCase() to ignore character casing
+    const nameA = a.name.toUpperCase();
+    const nameB = b.name.toUpperCase();
+
+    let comparison = 0;
+    if (nameA > nameB) {
+      comparison = 1;
+    } else if (nameA < nameB) {
+      comparison = -1;
+    }
+    return comparison;
+  }
+
+  // sort catalog entries by alphabetically by technology type
+  data.sort(compare);
 
   // get all empty filter containers
   const container = document.getElementById("compatibility-div");
