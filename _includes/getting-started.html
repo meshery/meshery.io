@@ -142,10 +142,15 @@ mesheryctl system start" onmouseout="resetCopyText(this)">
       <div id="docker_code" class="toggle hideDiv">
         <div class="innerDiv">
           <h3>Docker User:</h3>
+
+          <h4 style="font-size: 1.5em;">Get mesheryctl</h4>
+            <p style="font-size: 1em;margin-left:1rem;">Install mesheryctl with <a onclick="displayCode('bash');">Bash</a>, <a onclick="displayCode('brew');">Brew</a>, <a onclick="displayCode('windows');">Scoop</a>, or <a href="https://github.com/meshery/meshery/releases/latest">download directly</a>.</p>
+
             <!-- Docker - mesheryctl -->
-            <h4 style="font-size: 1.5em;">Use curl</h4>
+            <h4 style="font-size: 1.5em;">Use mesheryctl</h4>
             <div id="start-helm-v3" class="highlight-code">
-              <code class="code-box">curl -L https://meshery.io/install | PLATFORM=docker bash -</code>
+              <code class="code-box">mesheryctl system context create docker --platform docker --set
+                mesheryctl system start</code>
                 <!-- copy to clipboard -->
                 <a class="btn tooltip" style="position: absolute; top:0.10rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-helm-v3"
                   data-clipboard-text="mesheryctl system context create docker --platform docker --set
@@ -173,11 +178,14 @@ mesheryctl system start" onmouseout="resetCopyText(this)">
         <div class="innerDiv">
           <h3>Kubernetes User:</h3>
 
-        
+          <h4 style="font-size: 1.5em;">Get mesheryctl</h4>
+            <p style="font-size: 1em;margin-left:1rem;">Install mesheryctl with <a onclick="displayCode('bash');">Bash</a>, <a onclick="displayCode('brew');">Brew</a>, <a onclick="displayCode('windows');">Scoop</a>, or <a href="https://github.com/meshery/meshery/releases/latest">download directly</a>.</p>
+
             <!-- Kubernetes - mesheryctl -->
-            <h4 style="font-size: 1.5em;">Use curl</h4>
+            <h4 style="font-size: 1.5em;">Use mesheryctl</h4>
             <div id="start-helm-v3" class="highlight-code">
-              <code class="code-box">curl -L https://meshery.io/install | PLATFORM=kubernetes bash -</code>
+              <code class="code-box">mesheryctl system context create k8s --platform kubernetes --set
+                mesheryctl system start</code>
                 <!-- copy to clipboard -->
                 <a class="btn tooltip" style="position: absolute; top:0.10rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-helm-v3"
                   data-clipboard-text="mesheryctl system context create k8s --platform kubernetes --set
@@ -290,7 +298,21 @@ mesheryctl system start " onmouseout="resetCopyText(this)">
                 <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 2rem; left: -80px;">Copy to clipboard</span>
               </a>
             </div>
-          
+            <p style="font-size: 1em;">Not a Helm user? Use the Meshery manifests directly.</p>
+            <h4 style="font-size: 1.5em;">Using Manifests</h4>
+          <div id="start-k8s-in-cluster" class="highlight-code">
+              <code class="code-box">$ git clone https://github.com/meshery/meshery.git; cd meshery
+                $ kubectl create ns meshery
+                $ kubectl -n meshery apply -f install/deployment_yamls/k8s</code>
+              <!-- copy to clipboard -->
+              <a class="btn tooltip" style="position: absolute; top:0.10rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#start-k8s-in-cluster"
+                data-clipboard-text="git clone https://github.com/meshery/meshery.git; cd meshery
+kubectl create ns meshery
+kubectl -n meshery apply -f install/deployment_yamls/k8s" onmouseout="resetCopyText(this)">
+                <i class="far fa-copy"></i>
+                <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 2rem; left: -80px;">Copy to clipboard</span>
+              </a>
+          </div>
           <p style="font-size: 1em;">Don't forget to grab a copy of mesheryctl. Install with <a onclick="displayCode('bash');">Bash</a>, <a onclick="displayCode('brew');">Brew</a>, <a onclick="displayCode('windows');">Scoop</a>, or <a href="https://github.com/meshery/meshery/releases/latest">download directly</a>.</p>
         </div>
       </div>
