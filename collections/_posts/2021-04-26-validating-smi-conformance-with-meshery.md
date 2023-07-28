@@ -5,7 +5,7 @@ heading: Validating SMI Conformance with Meshery
 categories:
   - SMI Conformance
 # layout: post
-permalink: /blog/validating-smi-conformance-with-meshery
+# permalink: /blog/validating-smi-conformance-with-meshery
 ---
 
 <div class="row" style="width:220px;float:left;padding:20px;text-align:center;">
