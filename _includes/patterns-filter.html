@@ -213,6 +213,14 @@
   // import all integrations data
   import data from "{{ site.baseurl }}/integrations/data.js";
 
+  // add wasmFilter to data array
+  const wasmFilter = {
+    "name": "WASM Filter",
+    "color": "../assets/images/integration/webassembly_logo.svg",
+    "white": "../assets/images/integration/webassembly_logo.svg"
+  };
+  data.push(wasmFilter);
+
   // Function to compare the names of all catalog entries by technology
   // TODO: Improve so that catalog entries can be sorted by pattern name, too.
   function compare(a, b) {
@@ -247,7 +255,7 @@
       const filter = patternCards[i].getAttribute("filter")
       cardCompatibility.push(filter);
       const type = patternCards[i].getAttribute("type")
-      if(type) cardType.add(type);
+      if(type && type !== "wasm filter") cardType.add(type.toLowerCase()); 
       const technology = patternCards[i].getAttribute("technology")
       if(technology) cardTechnology.add(technology);
   }
@@ -385,7 +393,7 @@
     // Show all cards if "All" radio button is selected
     const patternCards = document.querySelectorAll(".patternCard");
     for (let j = 0; j < patternCards.length; j++) {
-      const filter = patternCards[j].getAttribute("type");
+      const filter = patternCards[j].getAttribute("type").toLowerCase();
       let showCard = false;
       if (value === "All" || filter.includes(value)) {
         showCard = true;
