@@ -8,7 +8,7 @@ categories:
   - multi-mesh
 # layout: post
 image: /assets/images/posts/2019-05-21-a-standard-interface-for-service-meshes/smi-logo.png
-permalink: /blog/a-standard-interface-for-service-meshes
+# permalink: /blog/a-standard-interface-for-service-meshes
 ---
 <div class="row" style="width:220px;float:right;padding:20px;text-align:center;">
 <a href="https://smi-spec.io" rel="nofollow"></a><img src="/assets/images/posts/2019-05-21-a-standard-interface-for-service-meshes/smi-logo.png" alt="" width="70%">
