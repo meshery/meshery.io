@@ -4,4 +4,18 @@ permalink: /catalog/webassembly
 title: Cloud Native Catalog
 filter: wasm filter
 ---
-{% include catalog-filters.html %}
+<div class="row">
+    {% for pattern in site.data.wasm %} {% if pattern.filterInfo
+        and pattern.Status != "ComingSoon" %}
+        <div
+          class="column column-lg patternCard"
+          filter="{{ pattern.compatibility }}"
+          type="{{ pattern.filters.type }}"
+          technology="{{ pattern.technology }}"
+        >
+          {% include wasm-card.html %}
+          <!-- modal included -->
+          {% include modal.html %}
+        </div>
+        {% endif %} {% endfor %}
+</div>
