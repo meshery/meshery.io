@@ -5,7 +5,7 @@ heading: Validating SMI Conformance with Meshery
 categories:
   - SMI Conformance
 # layout: post
-permalink: /blog/validating-smi-conformance-with-meshery
+# permalink: /blog/validating-smi-conformance-with-meshery
 ---
 
 <div class="row" style="width:220px;float:left;padding:20px;text-align:center;">
@@ -16,7 +16,8 @@ From my time spent creating the v1.0 versions of other specifications like Redfi
 
 ## Conforming to SMI
 
-![SMI Conformance Program Overview](/assets/images/posts/2021-04-26-validating-smi-conformance-with-meshery/smi-comformance-initiative-overview.png)
+<div style="text-align:center;padding:10px">
+<img src="/assets/images/posts/2021-04-26-validating-smi-conformance-with-meshery/smi-comformance-initiative-overview.png" style="width:100%" alt="SMI Conformance Program Overview"/></div>
 
 The scope of the [SMI Conformance](https://layer5.io/projects/service-mesh-interface-conformance) initiative includes all service mesh projects participating in the Service Mesh Interface specification. The goal of this initiative is to provide open tooling for validation of SMI specifications, instilling user confidence in the SMI implementation of their chosen service mesh. This validation initiative is not a full-blown certification program, yet, but has all of the makings to become one:
 
@@ -27,13 +28,15 @@ The scope of the [SMI Conformance](https://layer5.io/projects/service-mesh-inter
 
 Delivering on these requirements required a tool specifically suited to SMI.
 
-<img src="/assets/images/posts/2021-04-26-validating-smi-conformance-with-meshery/meshery-logo-light-text-side.svg#center" height="75" alt="Meshery">
+<div style="text-align:center;padding:10px">
+<img src="/assets/images/posts/2021-04-26-validating-smi-conformance-with-meshery/meshery-logo-light-text-side.svg#center" height="75" alt="Meshery" /></div>
 
 ## SMI Conformance Tool: Meshery
 
 Meshery, the service mesh management plane, is service mesh agnostic, which is an important characteristic as a compliance tool. No better tool for the job exists (in fact, no other tool is capable of the job) than Meshery, which has been [a partner of SMI](https://meshery.io/blog/a-standard-interface-for-service-meshes) since its inception.
 
-![SMI Conformance Tool](/assets/images/posts/2021-04-26-validating-smi-conformance-with-meshery/meshery-service-mesh-compliance-tool.png).
+<div style="text-align:center;padding:10px">
+<img src="/assets/images/posts/2021-04-26-validating-smi-conformance-with-meshery/meshery-service-mesh-compliance-tool.png" style="width:100%" alt="SMI Conformance Tool"/></div>
 
 Meshery is ideal tooling in that it provides lifecycle management of a large number of service meshes and sample applications which need to be provisioned, tested, and deprovisioned in the process of validating conformance. And  Meshery is capable of generating load and verifying test assertions. Meshery will be extended to validate any service mesh that claims to implement and conform SMI specifications. And, more broadly, Meshery will leverage the same tooling to validate service mesh standards at-large, including SMI and [Service Mesh Performance](https://smp-spec.io) (SMP).
 
@@ -60,7 +63,9 @@ The following list highlights the sequence of steps taken to perform conformance
   - Tests that are run by the service mesh project team are identified by a pre-approved service account and are publicly published the [SMI Conformance dashboard](https://meshery.io/service-mesh-interface).
 
 
-<img src="/assets/images/posts/2021-04-26-validating-smi-conformance-with-meshery/smi-conformance-results.svg" height="400" alt="Results Mockup">
+<div style="text-align:center;padding:10px">
+<img src="/assets/images/posts/2021-04-26-validating-smi-conformance-with-meshery/smi-conformance-results.svg" height="450" alt="Results Mockup">
+</div>
 
 ## Validate Your Service Mesh's Conformance
 
