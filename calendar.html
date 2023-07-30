@@ -5,23 +5,22 @@ description: Meshery is community-built and welcomes collaboration!
 permalink: /calendar
 ---
 <div class="calendar-meetings">
-  <h1>Community Calendar</h3>
+  <h1>Community Calendar</h1>
   <p>Join any or all of the weekly meetings</p>
   <!--Spinner Loader-->
   <div class="preloader"></div><div id='calendar'></div>
 </div>
-<div class="container {% if page.full_width %}max-container{% endif %}">
-  <h2>Engage in the Community</h2>
-  <p style="margin:auto;text-align:center;width:100%;">We are a warm and welcoming collection of open sourcers.</p>
-  <div style="margin: 4rem auto 4rem auto;">
-  {% include partials/community.html %}
+    <div class="row">
+      <div style="width: 50%;">
+        {% include newcomers-map.html %}
+      </div>
+      <div style="width: 70%; text-align: center;">
+        <h2 class="subheading">Newcomers Welcome!</h2>
+        <h3>Are you new to the community?</h3>      
+        <p>Begin your journey by joining the community Slack. Then, use the resources linked in our Contributor's Journey Map and engage in the community and projects.</p>
+        <a class="highlight" href="https://slack.layer5.io" style="display: block; margin: max(3vh,3vw) auto 0; width: fit-content;">Join Community</a>
+      </div>
   </div>
-  <a href="https://slack.meshery.io/" style="text-decoration: none !important;">
-    <h3 style="text-align:center;color:aliceblue;font-size: 1.6rem;">
-      <input style="padding-bottom:3rem; padding-top:0.9rem; margin:auto; width:80%;" type="submit" value="Join the Community"  >
-    </h3>
-  </a>
-</div>
 <!-- Fullcalender CDN's -->
 <link rel="stylesheet" href="/css/fullcalender.css">
 <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/core@4.4.0/main.min.css">
@@ -89,10 +88,64 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
+  
+  .fc-day {
+  overflow: visible !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
 
 .fc-unthemed td.fc-today {
     background: var(--brand-color-secondary) !important;
 }
+
+
+.fc-view{
+  white-space:normal;
+}
+ 
+
+.fc-day-grid-event .fc-content {
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+  transition: all 0.3s ease; 
+  font-size:0.9rem;
+}
+
+.fc-day-grid-event:hover .fc-content{
+  white-space: normal;
+  overflow: visible;
+  width: auto;
+  height:auto;
+  position: relative;
+  z-index: 9999;
+}
+
+.fc-row{
+  height:auto !important;
+}
+.fc-scroller{
+  height:auto !important;
+}
+
+@media (max-width: 820px) {
+  .fc-day-grid-event:hover .fc-content {
+      font-size:0.8rem;
+  }
+}
+@media (max-width: 680px) {
+  .fc-day-grid-event:hover .fc-content {
+    font-size:0.6rem;
+  }
+}
+@media (max-width: 534px) {
+  .fc-day-grid-event:hover .fc-content {
+    font-size:0.4rem;
+  }
+}
+
 
 .preloader {
     color: #00b39f;
@@ -109,6 +162,19 @@ document.addEventListener('DOMContentLoaded', function() {
     transform: translateZ(0);
     -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
     animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+  }
+
+  .row{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  @media screen and (min-width: 900px) {
+    .row {
+      /* change the flex direction */
+      flex-direction: row;
+    }
   }
 
   @-webkit-keyframes load6 {
