@@ -73,3 +73,42 @@
     <div class="description opa">Applied across the cloud native infrastructure under management, policies may be applied broadly and specificly.</div>
    </div>
 </div>
+
+<script type="module">
+  import data from "{{ site.baseurl }}/integrations/data.js";
+
+const pattern = document.getElementById("pattern");
+const filter = document.getElementById("filter");
+
+const patternCards = document.querySelectorAll(".ptrn");
+const filterCards = document.querySelectorAll(".wsm");
+const ComingSoonCards = document.querySelectorAll(".cmg");
+
+
+pattern.addEventListener("click",getPatterns);
+function getPatterns() {
+  filterCards.forEach((element) => {
+      element.style.display = "none";
+    })
+    patternCards.forEach((element) => {
+      element.style.display = "block";
+    })
+    ComingSoonCards.forEach((element) => {
+      element.style.display = "block";
+    })
+    }  
+    
+  filter.addEventListener("click",getFilters);
+  function getFilters() {
+    patternCards.forEach((element) => {
+      element.style.display = "none";
+    })
+    ComingSoonCards.forEach((element) => {
+      element.style.display = "none";
+    })
+    filterCards.forEach((element) => {
+      element.style.display = "block";
+    })
+  }
+    
+</script>
