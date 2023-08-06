@@ -102,10 +102,6 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   ```bash
   $ cd meshery.io
   ```
-- Install any Ruby dependencies
-  ```bash
-  $ bundle install
-  ```
 
 ### 3. Serve the site
 
