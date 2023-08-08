@@ -109,7 +109,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   ```bash
   $ make site
   ```
-  _Note: From the Makefile, this command is actually running `$ bundle exec jekyll serve --drafts --livereload`_
+  _Note: From the Makefile, this command is actually running `$ bundle install exec jekyll serve --drafts --livereload`_
 
 ### 4. Create a Pull Request
 
