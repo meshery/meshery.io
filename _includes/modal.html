@@ -2,7 +2,7 @@
   <div class="click-container">
     <div style="display: flex; justify-content: space-between;">
       <button style="margin: 0;" class="modal-close close">&times;</button>
-      {% include read-more.html %}
+     
     </div>
     <div class="chip chip-modal">
       {% if pattern.filters.type == "wasm filter" %}
@@ -14,31 +14,35 @@
           <h6 class="pattern-type"> {{pattern.type}}</h6>
         </a>
     </div>
+    <h2 class="modal-h2" style="text-transform: uppercase; margin: 1.5rem;" >{{pattern.name}} {% include read-more.html %}</h2>
+
     <div class="modal-content">
+
       <div class="modal-image">
         <img  style="width:inherit" src="{{pattern.image}}" />
-        <h4 class="related-patterns">Related Patterns</h4>
+        <h4 class="related-patterns">RELATED PATTERNS</h4>
         {% include related-patterns.html %}
       </div>
 
-      <h2 class="modal-h2" >{{pattern.name}}</h2>
-
-      {%if pattern.patternInfo%}
-      <h3 class="modal-h3">What this pattern does</h3>
-      <p>{{pattern.patternInfo}}</p>
-      <h3 class="modal-h3">Caveats and Considerations</h3>
-      <p>{{pattern.patternCaveats}}</p>
-      </p>
-      {%else%}
-      <h3 class="modal-h3">What this fiter does</h3>
-      <p>{{pattern.filterInfo}}</p>
-      <h3 class="modal-h3">Caveats and Considerations</h3>
-      <p>{{pattern.filterCaveats}}</p>
-      </p>
-      {%endif%}
-      <h3 class="modal-h3">Compatibility</h3>
-      {% include partials/compatibility.html%}
-      {% include copy-and-download.html %}
+      <div>
+        {%if pattern.patternInfo%}
+        <h3 class="modal-h3">What this pattern does</h3>
+        <p>{{pattern.patternInfo}}</p>
+        <h3 class="modal-h3">Caveats and Considerations</h3>
+        <p>{{pattern.patternCaveats}}</p>
+        </p>
+        {%else%}
+        <h3 class="modal-h3">What this fiter does</h3>
+        <p>{{pattern.filterInfo}}</p>
+        <h3 class="modal-h3">Caveats and Considerations</h3>
+        <p>{{pattern.filterCaveats}}</p>
+        </p>
+        {%endif%}
+        <h3 class="modal-h3">Compatibility</h3>
+        {% include partials/compatibility.html%}
+        {% include copy-and-download.html %}
+      </div>
+    
     </div>
   </div>
 </div>
