@@ -31,6 +31,25 @@ permalink: /catalog
 
 {% assign catalog = site.catalog | sort: 'name' %}
 
+<div style="display: flex; flex-direction: column; margin-left: 20px">
+  <div class="sort-dropdown" style="margin-bottom: 30px">
+    <select
+      id="sort-patterns"
+      style="
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: #f9f9f9;
+        color: #333;
+        position: relative;
+      "
+    >
+      <option value="" disabled selected hidden>Sort by:</option>
+      <option value="name-asc">Alphabetically (A-Z)</option>
+      <option value="name-desc">Alphabetically (Z-A)</option>
+    </select>
+  </div>
 
   <div class="row">
     {% for pattern in catalog %} {% if pattern.patternInfo and pattern.Status !=
@@ -69,9 +88,53 @@ permalink: /catalog
     </div>
     {% endif %} {% endfor %}
   </div>
+</div>
 
+<script>
+  // Get the sort dropdown element
+  const sortDropdown = document.querySelector("#sort-patterns");
 
+  // Get the parent container of the pattern cards
+  const patternContainer = document.querySelector(".row");
 
+  // Function to sort the pattern cards
+  function sortPatterns() {
+    // Get the selected sort option
+    const sortOption = sortDropdown.value;
+
+    // Get all the pattern cards
+    const patternCards = Array.from(
+      document.querySelectorAll(".column.column-lg.patternCard")
+    );
+
+    // Sort the pattern cards based on the selected option
+    if (sortOption === "name-asc") {
+      patternCards.sort((a, b) => {
+        const aName = a.querySelector(".pattern-name").textContent;
+        const bName = b.querySelector(".pattern-name").textContent;
+        return aName.localeCompare(bName);
+      });
+    } else if (sortOption === "name-desc") {
+      patternCards.sort((a, b) => {
+        const aName = a.querySelector(".pattern-name").textContent;
+        const bName = b.querySelector(".pattern-name").textContent;
+        return bName.localeCompare(aName);
+      });
+    }
+
+    // Clear the pattern container
+    patternContainer.innerHTML = "";
+
+    // Append the sorted pattern cards back to the container
+    patternCards.forEach((card) => patternContainer.appendChild(card));
+  }
+
+  // Listen for changes to the sort dropdown and update the patterns accordingly
+  sortDropdown.addEventListener("change", sortPatterns);
+
+  // Initial sorting
+  sortPatterns();
+</script>
 
 <!-- {% if paginator.total_pages > 1 %}
   <ul class="pager">
