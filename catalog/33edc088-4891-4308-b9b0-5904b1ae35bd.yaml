@@ -4,10 +4,14 @@ services:
     name: Helm Chart
     type: HelmChart
     apiVersion: v1beta1
+    namespace: default
     version: 0.1.1
     model: helm-controller
     settings:
       source Ref: {}
+      spec:
+        source Ref: {}
+        version: '**'
       version: '**'
     traits:
       meshmap:
@@ -21,11 +25,9 @@ services:
     name: Runner
     type: Runner
     apiVersion: v1alpha1
+    namespace: default
     version: 0.1.2
     model: github-actions-runners
-    settings:
-      work Volume Claim Template:
-        resources: {}
     traits:
       meshmap:
         edges: []
