@@ -64,6 +64,53 @@
   transform: rotate(0deg);
   transition: transform 1s linear;
 }
+
+#compatibility-div label, #category-div label{
+  margin: 0;
+  display: flex;
+  align-items: center;
+  width:100%;
+  text-indent: unset;
+}
+
+#compatibility-div input, #category-div input{
+  flex-shrink: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+#compatibility-div img{
+  max-width: 50px;
+  height:100%;
+}
+#compatibility-div .badge{
+  background: var(--color-secondary-dark);
+  border-radius: 50%;
+  color: var(--color-primary-light);
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 200;
+}
+#compatibility-div .input-container .name{
+  margin-left:10px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#compatibility-div .input-container, #category-div .input-container{
+  display: flex;
+  align-items: center; 
+  margin: 20px 0; 
+}
+
 </style>
 
 <div class="filter-wrap">
@@ -80,41 +127,21 @@
     <div id="myDropdown" class="dropdown-content">
       <a id="category-li">Categories</a>
       <a id="compatibility-li">Compatibility</a>
-      <a id="technology-li">Technology</a>
+      <!-- <a id="technology-li">Technology</a> -->
     </div>
   </div>
   <p id="category-para" class="category-para"> <strong>Categories:</strong></p>   
-  <div id="category-div" class="category-div">
-    <label><input type="radio" value="All" id="all" onchange='window.location.assign("/catalog")'/> All </label>
-    <label><input type="radio" value="Deployment" id="deployment" onchange='window.location.assign("/catalog/deployment")'/> Deployment </label>
-    <label><input type="radio" value="Traffic Management" id="traffic-management" onchange='window.location.assign("/catalog/traffic-management")' /> Traffic Management </label>
-    <label><input type="radio" value="Security" id="security" onchange='window.location.assign("/catalog/security")' /> Security </label> 
-    <label><input type="radio" value="Workloads" id="workloads" onchange='window.location.assign("/catalog/workloads")'/> Workloads </label> 
-    <label><input type="radio" value="Observability" id="observability" onchange='window.location.assign("/catalog/observability")'/> Observability </label>
-    <label><input type="radio" value="Troubleshooting" id="troubleshooting" onchange='window.location.assign("/catalog/troubleshooting")' /> Troubleshooting </label>
-    <label><input type="radio" value="Scaling" id="scaling" onchange='window.location.assign("/catalog/scaling")'/> Scaling </label>
-    <label><input type="radio" value="Resiliency" id="resiliency" onchange='window.location.assign("/catalog/resiliency")'/> Resiliency </label>   
-  </div>
-  <p id="compatibility-para" class="compatibility-para"><strong>Compatibility:</strong></p>
-  <div id="compatibility-div" class="compatibility-div">
-      <label><input type="radio" value="Istio" id="istio" onchange='window.location.assign("/catalog/istio")' /> <img class="dropdown-icon" src="/assets/images/istio.svg"/> Istio </label>
-      <label><input type="radio" value="Linkerd" id="linkerd" onchange='window.location.assign("/catalog/linkerd")'/> <img class="dropdown-icon" src="/assets/images/linkerd.svg"/> Linkerd </label>
-      <label><input type="radio" value="Consul" id="consul" onchange='window.location.assign("/catalog/consul")'/> <img class="dropdown-icon" src="/assets/images/consul.svg"/> Consul </label>
-      <label><input type="radio" value="Kuma" id="kuma" onchange='window.location.assign("/catalog/kuma")'/> <img class="dropdown-icon" src="/assets/images/kuma.svg"/> Kuma </label>
-      <label><input type="radio" value="App Mesh" id="app-mesh" onchange='window.location.assign("/catalog/app-mesh")' /> <img class="dropdown-icon" src="/assets/images/aws-app-mesh.svg"/> App Mesh </label>
-      <label class="open-service-mesh"><input type="radio" value="OSM" id="osm" onchange='window.location.assign("/catalog/open-service-mesh")'/> <img class="dropdown-icon" src="/assets/images/osm.svg"/> Open Service Mesh </label>
-      <label><input type="radio" value="Traefik" id="traefik" onchange='window.location.assign("/catalog/traefik")'/> <img class="dropdown-icon" src="/assets/images/traefik-mesh.svg"/> Traefik Mesh </label>
-      <label><input type="radio" value="Nginx" id="nginx" onchange='window.location.assign("/catalog/nginx")'/> <img class="dropdown-icon" src="/assets/images/nginx-sm.svg"/> NGINX </label>
-      <label><input type="radio" value="NSM" id="nsm" onchange='window.location.assign("/catalog/nsm")'/> <img class="dropdown-icon" src="/assets/images/nsm.svg"/> Network Service Mesh </label>   
-  </div>
-  <p id="tech-para" class="tech-para"><strong>Technology:</strong></p>
+  <div id="category-div" class="category-div"></div>
+  <p id="compatibility-para" class="compatibility-para"><strong>Technologies:</strong></p>
+  <div id="compatibility-div" class="compatibility-div"></div>
+  <!-- <p id="tech-para" class="tech-para"><strong>Technology:</strong></p>
   <div id="tech-div" class="tech-div">
       <label><input type="radio" value="WebAssembly" id="webassembly" onchange='window.location.assign("/catalog/webassembly")'/> WebAssembly </label>
       <label><input type="radio" value="JWT" onchange='window.location.assign("/catalog/jwt")'/> JWT </label>
       <label class="disabled-label"><input type="radio" value="JWT" onchange='window.location.assign("/catalog/eBPF")' disabled/> eBPF </label>
       <label class="disabled-label"><input type="radio" value="JWT" onchange='window.location.assign("/catalog/opa")' disabled/> OPA policies </label>
       <label class="disabled-label"><input type="radio" value="JWT" onchange='window.location.assign("/catalog/nats")' disabled/> NATS </label>
-  </div>
+  </div> -->
 </div>
 <script>
   
@@ -178,5 +205,204 @@
     drop_button.style.transform = "rotate(0deg)"
     open = !open
     return;
+  }
+</script>
+
+<script type="module">
+
+  // import all integrations data
+  import data from "{{ site.baseurl }}/integrations/data.js";
+
+  // add wasmFilter to data array
+  const wasmFilter = {
+    "name": "WASM Filter",
+    "color": "../assets/images/integration/webassembly_logo.svg",
+    "white": "../assets/images/integration/webassembly_logo.svg"
+  };
+  data.push(wasmFilter);
+
+  // Function to compare the names of all catalog entries by technology
+  // TODO: Improve so that catalog entries can be sorted by pattern name, too.
+  function compare(a, b) {
+    // Use toUpperCase() to ignore character casing
+    const nameA = a.name.toUpperCase();
+    const nameB = b.name.toUpperCase();
+
+    let comparison = 0;
+    if (nameA > nameB) {
+      comparison = 1;
+    } else if (nameA < nameB) {
+      comparison = -1;
+    }
+    return comparison;
+  }
+
+  // sort catalog entries by alphabetically by technology type
+  data.sort(compare);
+
+  // get all empty filter containers
+  const container = document.getElementById("compatibility-div");
+  const categoryContainer = document.getElementById("category-div");
+  
+  // get all pattern cards
+  const patternCards = document.querySelectorAll(".patternCard");
+  const cardCompatibility = [];
+  let cardType = new Set();
+  let cardTechnology = new Set();
+
+  // Loop over all pattern cards to get there compatibility, type and technology so we can make a unique list out of it
+  for(let i=0; i<patternCards.length; i++){
+      const filter = patternCards[i].getAttribute("filter")
+      cardCompatibility.push(filter);
+      const type = patternCards[i].getAttribute("type")
+      if(type && type !== "wasm filter") cardType.add(type.toLowerCase()); 
+      const technology = patternCards[i].getAttribute("technology")
+      if(technology) cardTechnology.add(technology);
+  }
+
+  // Add an "All" option to the type list and convert the set to array
+  cardType = ["All", ...Array.from(cardType)];
+  cardTechnology = Array.from(cardTechnology);
+
+  // For creating a list of radio buttons for Categories section
+  for(let i = 0; i<cardType.length; i++){
+    const inputContainer = document.createElement("div");
+    inputContainer.className = "input-container";
+
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = "type";
+    input.value = cardType[i];
+    input.id = cardType[i];
+    input.onclick = function () {
+      filterByType(cardType[i]);
+    };
+    if(cardType[i] === "All") input.checked = true;
+    inputContainer.appendChild(input);
+
+    const label = document.createElement("label");
+    label.innerHTML = cardType[i].replace(/-/g, " "); 
+    label.setAttribute("for", cardType[i]);
+    inputContainer.appendChild(label);
+
+    categoryContainer.appendChild(inputContainer);
+  }
+
+  // remove duplicate entries of integrations in filter section 
+  // Maintain a list of filterEntries, whenever you come across a new one, add it to list, else if the filter already exists in the list skip the further process of creating nodes
+  const filterEntries = [];
+  
+  // For creating a list of checkboxes for Technologies section
+  for (let i = 0; i < data.length; i++) {
+    const count = cardCompatibility.filter((filter) => filter.includes(data[i].name)).length;
+
+    // Skip adding the filter to list if it is not used in any of the pattern cards
+    // Skip adding the filter to list if it is already added to the list
+    if(count === 0 || filterEntries.includes(data[i].name))
+      continue;
+    
+    // Add the filter to list
+    filterEntries.push(data[i].name);
+
+    // Create nodes
+    const inputContainer = document.createElement("div");
+    inputContainer.className = "input-container";
+
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.name = data[i].name;
+    input.value = data[i].name;
+    input.id = data[i].name;
+    input.onclick = function () {
+      showFilterCards();
+    };
+    inputContainer.appendChild(input);
+
+    const label = document.createElement("label");
+    let colorImg = data[i].color?.split("/integration")?.join("");
+    let whiteImg = data[i].white?.split("/integration")?.join("");
+
+    label.innerHTML = `<img src="${colorImg}" id="logo-dark-light" data-logo-for-dark="${whiteImg ?? colorImg}"
+                    data-logo-for-light="${colorImg}" /><div class="name">${data[i].name}</div><div class="badge">${count}</div>`;
+    label.style.height = "20px";
+    label.setAttribute("for", data[i].name);
+    inputContainer.appendChild(label);
+
+    container.appendChild(inputContainer);
+  }
+
+  // Function called when user clicks on any of Technology checkboxes
+  function showFilterCards() {
+    let filterArray = [];
+
+    // Deselect the radio button when checkbox is selected
+    document.querySelectorAll("input[type=radio]:checked").forEach(function (el) {
+      el.checked = false;
+    });
+
+    // Get all the checked checkboxes and add it to filterArray
+    document
+      .getElementById("compatibility-div")
+      .querySelectorAll("input[type=checkbox]:checked")
+      .forEach(function (el) {
+        filterArray.push(el.value);
+      });
+
+    // Select all pattern cards
+    const patternCards = document.querySelectorAll(".patternCard");
+
+    // If no checkbox is selected, show all pattern cards and enable the "All" radio button
+    if (!filterArray.length) {
+      for (let j = 0; j < patternCards.length; j++) {
+        patternCards[j].style.display = "block";
+      }
+      document.getElementById("All").checked = true;
+    } else {
+
+      // Loop over all pattern cards and check if any of the filter in filterArray is present in pattern card's filter attribute
+      // If yes, the show the card, else hide it
+      for (let j = 0; j < patternCards.length; j++) {
+        const filter = patternCards[j].getAttribute("filter");
+        let showCard = false;
+
+        for (let i = 0; i < filterArray.length; i++) {
+          if (filter.includes(filterArray[i])) {
+            showCard = true;
+            break;
+          }
+        }
+        if (showCard) {
+          patternCards[j].style.display = "block";
+        } else {
+          patternCards[j].style.display = "none";
+        }
+      }
+    }
+  }
+
+  // Function called when user clicks on any of the Type radio buttons
+  function filterByType(value){
+
+    // Deselect all the checkboxes when radio button is selected
+    document.querySelectorAll("input[type=checkbox]:checked").forEach(function (el) {
+      el.checked = false;
+    });
+
+    // Loop over all patern cards and check if the "type" of pattern card matches with the radio button value received as argument to function
+    // If yes, show the card, else hide it
+    // Show all cards if "All" radio button is selected
+    const patternCards = document.querySelectorAll(".patternCard");
+    for (let j = 0; j < patternCards.length; j++) {
+      const filter = patternCards[j].getAttribute("type").toLowerCase();
+      let showCard = false;
+      if (value === "All" || filter.includes(value)) {
+        showCard = true;
+      }
+      if (showCard) {
+        patternCards[j].style.display = "block";
+      } else {
+        patternCards[j].style.display = "none";
+      }
+    }
   }
 </script>

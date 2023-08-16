@@ -259,6 +259,11 @@ p {
 }
 
 .chip-modal {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 2.5rem;
+  font-size: 1.6rem;
   align-self: flex-end;
   float: right;
   box-shadow: 2px 2px 6px grey;
@@ -313,8 +318,17 @@ p {
 }
 
 .external-link {
+  display:inline-block;
   width: 1rem;
-  padding-bottom: 0.5rem;
+  ;
+}
+
+.external-link img {
+  content: url('../assets/images/buttons/external-link_green.svg');
+}
+
+.external-link:hover img {
+  content: url('../assets/images/buttons/external-link_black.svg');
 }
 
 /* CHECKBOX-STYLES */
@@ -365,9 +379,10 @@ input[type="checkbox"] {
 }
 .modal-image {
   width: 220px;
-  margin: 30px 30px 2rem 0px;
+  margin: 24px 30px 2rem 0px;
   float: left;
-  height: 100%;
+  height: 90%;
+  padding: 13px;
 }
 ::-webkit-scrollbar {
   display: "none";
@@ -376,10 +391,11 @@ input[type="checkbox"] {
 .modal-content {
   display: flex;
   justify-content: flex-end;
+  padding-bottom: 3rem;
   code {
     
     padding: 1rem;
-    margin: 1rem .5rem;
+    margin: 1rem auto auto 15rem;
     border-radius: .5rem;
     font-size: .9rem;
     background-color: #1a2421;
@@ -406,15 +422,15 @@ input[type="checkbox"] {
   position: absolute;
   display: flex;
   flex-direction: column;
-  height: 78%;
+  height: 80%;
   overflow-x: hidden;
   overflow-y: auto;
   width: 60%;
-  top: 55%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
-  background: var(--background-grey);
+  background: linear-gradient(45deg,var(--color-primary-dark),var(--color-primary-light));
   padding: 1.5rem 2.5rem 1.5rem 3rem;
 }
 .modal-window > div::-webkit-scrollbar {
@@ -444,7 +460,6 @@ input[type="checkbox"] {
 .modal-content {
   font-size: 10px;
   display: block;
-  padding: 10px;
 }
 
 .modal-content h2 {
@@ -458,7 +473,7 @@ input[type="checkbox"] {
 .modal-close {
   display: flex;
   justify-content: space-between;
-  color: #222;
+  color:   var(--brand-color-primary);
   line-height: 1rem;
   font-size: 1rem;
   display: flex;
@@ -483,7 +498,7 @@ input[type="checkbox"] {
   display: inline-flex;
   flex-direction: row-reverse;
   float: right;
-  background-color: #b6d7a8ff;
+  background-color: var(--brand-color-primary);
   border: none;
   cursor: default;
   height: 1rem;
@@ -493,12 +508,16 @@ input[type="checkbox"] {
   font-family: "Open Sans", sans-serif;
   white-space: nowrap;
   align-items: center;
-  border-radius: 16px;
+  border-radius: 0 0 0 5px;
   vertical-align: middle;
   text-decoration: none;
   justify-content: center;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 .modal-card {
+  overflow: hidden;
   position: relative;
   background: var(--background-light-cards);
   width: 150px;
@@ -551,7 +570,7 @@ input[type="checkbox"] {
   font-size: 2rem;
   font-weight: bold;
   text-decoration: none;
-  color: #333;
+  color: var(--brand-color-secondary-50);
   background: transparent;
   border: 0px;
   padding: 0px;
@@ -694,19 +713,7 @@ label {
   z-index: 2;
   white-space: nowrap;
 }
-.close {
-  display: flex;
-  justify-content: space-between;
-  transition: all 200ms;
-  font-size: 2rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-  background: transparent;
-  border: 0px;
-  padding: 0px;
-  cursor: pointer;
-}
+
 .mobile_column_sm {
   display: flex !important;
   flex-wrap: wrap;
@@ -734,7 +741,7 @@ label {
   .modal-image {
     width: 200px;
     margin: 0;
-    height: 100%;
+
   }
   .btn-tooltip-grp {
     justify-content: center;
@@ -752,9 +759,13 @@ label {
     display: flex;
     flex-direction: column;
     align-items: center;
+    code {
+      margin: auto auto;
+    }
   }
   .modal-image {
     margin: 0;
+    
   }
   .modal-smp {
     width: 20px;
@@ -847,7 +858,6 @@ label {
     font-size: 2rem;
     font-weight: bold;
     text-decoration: none;
-    color: #333;
     background: transparent;
     border: 0px;
     padding: 0px;
@@ -927,7 +937,6 @@ label {
     flex-direction: column;
     gap: 1.5rem;
     padding-bottom: 5rem;
-    padding-left: 1rem;
     margin-bottom: 3rem;
     .dropdown {
       align-self: center;
@@ -973,6 +982,7 @@ label {
   .modal-h1,
   .modal-h2 {
     font-size: 1rem;
+    
   }
   .related-patterns {
     display: none;
