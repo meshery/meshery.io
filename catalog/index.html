@@ -29,29 +29,56 @@ permalink: /catalog
  }
 </style> -->
 
+<style>
+  .categories {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sort-dropdown {
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 27em;
+  }
+
+  #sort-patterns {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #333;
+    position: relative;
+  }
+
+  @media (max-width: 768px) {
+    .sort-dropdown {
+      position: absolute;
+      top: 102rem;
+      margin-bottom: 20px;
+    }
+
+    #sort-patterns {
+      font-size: 12px;
+      padding: 11px;
+    }
+  }
+</style>
+
 {% assign catalog = site.catalog | sort: 'name' %}
 
-<div style="display: flex; flex-direction: column; margin-left: 20px">
-  <div class="sort-dropdown" style="margin-bottom: 30px">
-    <select
-      id="sort-patterns"
-      style="
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 16px;
-        background-color: #f9f9f9;
-        color: #333;
-        position: relative;
-      "
-    >
+<div class="categories">
+  <div class="sort-dropdown">
+    <select id="sort-patterns">
       <option value="" disabled selected hidden>Sort by:</option>
       <option value="name-asc">Alphabetically (A-Z)</option>
       <option value="name-desc">Alphabetically (Z-A)</option>
+      <option value="last-modified">Last modified</option>
     </select>
   </div>
 
-  <div class="row">
+  <div class="row" style="margin-top: 50px">
     {% for pattern in catalog %} {% if pattern.patternInfo and pattern.Status !=
     "ComingSoon" %}
     <div
@@ -119,6 +146,12 @@ permalink: /catalog
         const aName = a.querySelector(".pattern-name").textContent;
         const bName = b.querySelector(".pattern-name").textContent;
         return bName.localeCompare(aName);
+      });
+    } else if (sortOption === "last-modified") {
+      patternCards.sort((a, b) => {
+        const aModified = new Date(a.dataset.modified);
+        const bModified = new Date(b.dataset.modified);
+        return bModified - aModified;
       });
     }
 
