@@ -9,6 +9,9 @@
   font-size: 18px;
   font-weight: 400;
 }
+.tabcontent h3{
+  color: var(--color-secondary-dark);
+}
 /* CARD-STYLES */
 .card {
   position: relative;
@@ -22,8 +25,6 @@
   margin-bottom: 20px;
   perspective: 1000px;
   transition: all .9s;
-  // overflow: hidden;
-  // background:var(--background-light) ;
 
   
   .card-inner {
@@ -99,7 +100,6 @@
   position: absolute;
   top: 40%;
   left: 50%;
-  color: white;
   font-size: 19px;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -112,7 +112,6 @@
   right: 0;
   padding-top: 10px;
   margin-right: 14px;
-  color: white;
   opacity: 0.7;
 }
 .catalog {
@@ -131,13 +130,6 @@
   @media (max-width:770px) {
     flex-direction: column;
   }
-}
-
-.modal-h3 {
-  font-weight: bold;
-  font-size: 1.1rem !important;
-  text-transform: uppercase;
-
 }
 
 p {
@@ -259,6 +251,11 @@ p {
 }
 
 .chip-modal {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 2.5rem;
+  font-size: 1.6rem;
   align-self: flex-end;
   float: right;
   box-shadow: 2px 2px 6px grey;
@@ -276,6 +273,7 @@ p {
   text-align: center;
   padding: 15px 0 15px 0;
 }
+
 .pattern-id {
   position: absolute;
   bottom: .5rem;
@@ -313,16 +311,16 @@ p {
 }
 
 .external-link {
-  width: 1rem;
-  padding-bottom: 0.5rem;
-}
-
-.external-link img {
-  content: url('../assets/images/buttons/external-link_black.svg');
-}
-
-.external-link:hover img {
-  content: url('../assets/images/buttons/external-link_green.svg');
+  display:inline-block;
+  width: 1.5rem;
+  img {
+    content: url('../assets/images/buttons/external-link_green.svg');
+    // on hover 
+    &:hover {
+      content: url('../assets/images/buttons/external-black.svg');
+    }
+  }
+  
 }
 
 /* CHECKBOX-STYLES */
@@ -372,22 +370,27 @@ input[type="checkbox"] {
   transition: all 0.3s;
 }
 .modal-image {
-  width: 220px;
-  margin: 30px 30px 2rem 0px;
-  float: left;
-  height: 100%;
+  margin: 2rem 0.5rem;
+  width: 25%;
+  border-radius: 1rem;
+  padding: 2rem;
+  height: fit-content;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  img{
+    max-width: 80%;
+  }
 }
+  
 ::-webkit-scrollbar {
   display: "none";
 }
 
 .modal-content {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-evenly;
+  padding-bottom: 3rem;
   code {
-    
     padding: 1rem;
-    margin: 1rem auto auto 15rem;
     border-radius: .5rem;
     font-size: .9rem;
     background-color: #1a2421;
@@ -408,21 +411,30 @@ input[type="checkbox"] {
   }
   
 }
+.modal-h2 {
+  color: var(--color-secondary-dark);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: inherit;
+}
 
+.modal-info{
+  width: 60%;
+}
 
 .modal-window > div {
   position: absolute;
   display: flex;
   flex-direction: column;
-  height: 78%;
+  height: 80%;
   overflow-x: hidden;
   overflow-y: auto;
   width: 60%;
-  top: 55%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
-  background-color: var(--color-primary-dark);
+  background: linear-gradient(45deg,var(--color-primary-dark),var(--color-primary-light));
   padding: 1.5rem 2.5rem 1.5rem 3rem;
 }
 .modal-window > div::-webkit-scrollbar {
@@ -432,13 +444,6 @@ input[type="checkbox"] {
   text-align: center;
 }
 
-// .btn-tooltip-grp {
-//   // width: 10rem;
-// }
-
-// .tooltip-modal .tooltiptext-modal {
-//   // margin-top: 1rem;
-// }
 
 ::-webkit-scrollbar-corner {
   background-color: transparent;
@@ -449,14 +454,7 @@ input[type="checkbox"] {
   font-size: 15px;
   display: block;
 }
-.modal-content {
-  font-size: 10px;
-  display: block;
-}
 
-.modal-content h2 {
-  font-size: 2rem;
-}
 
 .service-mesh-image {
   height: 50px;
@@ -465,7 +463,7 @@ input[type="checkbox"] {
 .modal-close {
   display: flex;
   justify-content: space-between;
-  color: #222;
+  color:   var(--brand-color-secondary);
   line-height: 1rem;
   font-size: 1rem;
   display: flex;
@@ -490,7 +488,7 @@ input[type="checkbox"] {
   display: inline-flex;
   flex-direction: row-reverse;
   float: right;
-  background-color: #b6d7a8ff;
+  background-color: var(--brand-color-primary);
   border: none;
   cursor: default;
   height: 1rem;
@@ -500,12 +498,16 @@ input[type="checkbox"] {
   font-family: "Open Sans", sans-serif;
   white-space: nowrap;
   align-items: center;
-  border-radius: 16px;
+  border-radius: 0 0 0 5px;
   vertical-align: middle;
   text-decoration: none;
   justify-content: center;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 .modal-card {
+  overflow: hidden;
   position: relative;
   background: var(--background-light-cards);
   width: 150px;
@@ -558,7 +560,7 @@ input[type="checkbox"] {
   font-size: 2rem;
   font-weight: bold;
   text-decoration: none;
-  color: #333;
+  color: var(--brand-color-secondary-50);
   background: transparent;
   border: 0px;
   padding: 0px;
@@ -701,19 +703,7 @@ label {
   z-index: 2;
   white-space: nowrap;
 }
-.close {
-  display: flex;
-  justify-content: space-between;
-  transition: all 200ms;
-  font-size: 2rem;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-  background: transparent;
-  border: 0px;
-  padding: 0px;
-  cursor: pointer;
-}
+
 .mobile_column_sm {
   display: flex !important;
   flex-wrap: wrap;
@@ -738,11 +728,6 @@ label {
     margin-top: 2rem;
     align-items: center;
   }
-  .modal-image {
-    width: 200px;
-    margin: 0;
-    height: 100%;
-  }
   .btn-tooltip-grp {
     justify-content: center;
   }
@@ -762,9 +747,6 @@ label {
     code {
       margin: auto auto;
     }
-  }
-  .modal-image {
-    margin: 0;
   }
   .modal-smp {
     width: 20px;
@@ -857,7 +839,6 @@ label {
     font-size: 2rem;
     font-weight: bold;
     text-decoration: none;
-    color: #333;
     background: transparent;
     border: 0px;
     padding: 0px;
@@ -872,7 +853,7 @@ label {
     gap: 1rem;
     padding-bottom: 2rem;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
 
   .tooltip-modal {
@@ -890,6 +871,9 @@ label {
   }
   .modal-card {
     display: none;
+  }
+  .modal-info{
+    width: 100%;
   }
 }
 
@@ -974,15 +958,7 @@ label {
     }
   }
 }
-@media screen and (max-width: 644px) {
-  .modal-image {
-    width: 230px;
-    padding-bottom: 2rem;
-  }
-  .modal-h1,
-  .modal-h2 {
-    font-size: 1rem;
-  }
+@media screen and (max-width: 644px) {  
   .related-patterns {
     display: none;
   }

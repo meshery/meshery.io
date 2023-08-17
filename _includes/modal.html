@@ -1,44 +1,39 @@
 <div id="open-modal" class="modal-window">
   <div class="click-container">
-    <div style="display: flex; justify-content: space-between;">
-      <button style="margin: 0;" class="modal-close close">&times;</button>
-      {% include read-more.html %}
-    </div>
+      <button class="modal-close close">&times;</button>
     <div class="chip chip-modal">
       {% if pattern.filters.type == "wasm filter" %}
-      <a style="text-decoration: none; color: #333;" href="{{ site.baseurl }}/catalog/webassembly">
-        <h6 class="pattern-type"> {{pattern.filters.type }}</h6>
-        {%else%}
-        <a style="text-decoration: none; color: #333;" href="{{ site.baseurl }}/catalog/{{ pattern.type | slugify }}">
-          {%endif%}
+      <a href="{{ site.baseurl }}/catalog/webassembly">
+        <h6 class="pattern-type"> {{pattern.filters.type | upcase }}</h6>
+      {% else %}
+        <a href="{{ site.baseurl }}/catalog/{{ pattern.type | slugify }}">
+      {% endif %}
           <h6 class="pattern-type"> {{pattern.type | upcase }}</h6>
         </a>
     </div>
     <div class="modal-content">
       <div class="modal-image">
-        <img  style="width:inherit" src="{{pattern.image}}" />
-        <h4 class="related-patterns">Related Patterns</h4>
+        <img src="{{pattern.image}}" />
+        <h4 class="related-patterns">RELATED PATTERNS</h4>
         {% include related-patterns.html %}
       </div>
-
-      <h2 class="modal-h2" >{{pattern.name}}</h2>
-
-      {%if pattern.patternInfo%}
-      <h3 class="modal-h3">What this pattern does</h3>
-      <p>{{pattern.patternInfo}}</p>
-      <h3 class="modal-h3">Caveats and Considerations</h3>
-      <p>{{pattern.patternCaveats}}</p>
-      </p>
-      {%else%}
-      <h3 class="modal-h3">What this fiter does</h3>
-      <p>{{pattern.filterInfo}}</p>
-      <h3 class="modal-h3">Caveats and Considerations</h3>
-      <p>{{pattern.filterCaveats}}</p>
-      </p>
-      {%endif%}
-      <h3 class="modal-h3">Compatibility</h3>
-      {% include partials/compatibility.html%}
-      {% include copy-and-download.html %}
+      <div class="modal-info">
+        <h2 class="modal-h2">{{pattern.name | upcase }} {% include read-more.html %}</h2>
+        {% if pattern.patternInfo %}
+        <h3 class="modal-h3">What this pattern does</h3>
+        <p>{{pattern.patternInfo | replace: '\\n', '<br/>'| replace: '\n', '<br/>' }}</p>
+        <h3 class="modal-h3">Caveats and Considerations</h3>
+        <p>{{pattern.patternCaveats}}</p>
+        {% else %}
+        <h3 class="modal-h3">What this filter does</h3>
+        <p>{{pattern.filterInfo }}</p>
+        <h3 class="modal-h3">Caveats and Considerations</h3>
+        <p>{{pattern.filterCaveats}}</p>
+        {% endif %}
+          <h3 class="modal-h3">Compatibility</h3>
+          {% include partials/compatibility.html %}
+        {% include copy-and-download.html %}
+      </div>
     </div>
   </div>
 </div>

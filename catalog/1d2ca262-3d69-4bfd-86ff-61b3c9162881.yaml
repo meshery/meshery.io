@@ -133,7 +133,51 @@ services:
         position:
           posX: -29.01349421188297
           posY: -1.2183944788846968
-  httpbin-ddkug:
+  httpbin-auocl:
+    name: httpbin
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    labels:
+      app: httpbin
+      service: httpbin
+    dependsOn:
+    - default
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 8000
+          target Port: 80
+        selector:
+          app: httpbin
+    traits:
+      meshmap:
+        edges: []
+        id: f2b498d5-e5bb-4657-ada4-54e6300572ce
+        label: httpbin
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        parent: fa9340ed-69d0-4c55-a582-cd3f226d49ab
+        position:
+          posX: -94.10245013350087
+          posY: 42.411044078382105
+  httpbin-iblap:
     name: httpbin
     type: ServiceAccount
     apiVersion: v1
@@ -166,7 +210,7 @@ services:
         position:
           posX: 67.89754986649913
           posY: 36.411044078382105
-  httpbin-dlwdm:
+  httpbin-vvlkk:
     name: httpbin
     type: Deployment
     apiVersion: apps/v1
@@ -225,50 +269,6 @@ services:
         position:
           posX: 21.897549866499126
           posY: 36.911044078382105
-  httpbin-tckrr:
-    name: httpbin
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    labels:
-      app: httpbin
-      service: httpbin
-    dependsOn:
-    - default
-    settings:
-      spec:
-        ports:
-        - name: http
-          port: 8000
-          target Port: 80
-        selector:
-          app: httpbin
-    traits:
-      meshmap:
-        edges: []
-        id: f2b498d5-e5bb-4657-ada4-54e6300572ce
-        label: httpbin
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-        parent: fa9340ed-69d0-4c55-a582-cd3f226d49ab
-        position:
-          posX: -94.10245013350087
-          posY: 42.411044078382105
   wasm-pv:
     name: wasm-pv
     type: PersistentVolume
