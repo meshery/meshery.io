@@ -1,37 +1,53 @@
+
 .features {
 	@extend %flexbox;
 	@include flex-flow(wrap);
 	padding: 50px 0 30px 0;
+	background-color: var(--background-grey-secondary);
 
 	.feature {
 		list-style: none;
 		padding: 0;
 		margin: 0 10px 50px 10px;
 		text-align: center;
-		border: 1px solid #eee;
-		border-radius: 5px;
-		box-shadow: 0px 0px 10px #eee;
+		background-color: var(--color-primary-light-tbase);
+		border-radius: 1.25rem;
+		box-shadow: rgba(0, 0, 0, 0.5) 2px 4px 2.5rem 0.5rem;
 		width: 100%;
 
 		&_li{
 			margin: 0 25px;
 			margin-left: 35px;
 			text-align: left;
-			list-style:circle;
-			text-align: center;
-			border-bottom: 1.5px solid rgb(233, 233, 233);
-
+			// change list style to square box with checkmark
+			list-style: none;
+			&:before {
+				content: "✔";
+				color: var(--brand-color-secondary);
+				font-size: 1.5rem;
+				margin-right: 10px;
+				// contain the checkmark in a square box
+				display: inline-block;
+				width: 1rem;
+				height: 1rem;
+				text-align: center;
+				line-height: 1rem;
+				background-color: var(--color-primary-medium);
+				border: 5px solid var(--color-primary-medium);
+				border-radius: 0.25em;
+			}
 		}
 		
 		
 		.highlighted {
 			text-align: center;
-			height: 110px;
+			height: 5rem;
 			font-weight: 600;
 			color: #272727d3;
 			font-size: 1.2em;
 			padding: 30px 15px;
-			background-color: rgb(247, 247, 247);
+			// set text color to white
+			color: var(--color-secondary-light);
 			border-top-right-radius:0;
 			border-top-left-radius: 0;
 			box-shadow: inset 0 2px 12.5px rgba(0,0,0,0.01);
@@ -43,7 +59,7 @@
 			a {
 				display: block;
 				box-sizing: border-box;
-				padding: 20px 0;
+				padding: 2rem 0;
 				border-radius: 0 0 2px 2px;
 				border: 0;
 				color: white;
@@ -52,10 +68,10 @@
 				text-align: center;
 				margin: auto;
 				position: relative;
-				background-color: $coolgray;
+				background-color: var(--color-grey-light);
 			}
 			.start:hover  {
-				background-color: $darkgreen;
+				background-color: var(--brand-color-secondary);
 			}
 		}
 
@@ -66,64 +82,8 @@
 		}
 
 		li {
-			border-top-right-radius: 5px;
-			border-top-left-radius: 5px;
-			padding: 20px 0;
-			h3 {
-				padding: 0;
-				margin: 0;
-				font-size: 1.75rem;
-				color: #fff;
-				font-weight: bold;
-			}	
+			border-radius: 1rem;
+			padding: 10px 0;
 		}
-	}
-}
-
-@media(max-width:1025px){
-	.highlighted{
-		height: 90px !important;
-	}
-}
-
-@media(max-width:875px){
-	.features .feature li{
-		padding: 30px 0;
-	}
-}
-
-@media(max-width:750px){
-	.highlighted{
-		height: 60px !important;
-	}
-}
-
-.performance {
-	font-size: large;
-	@media (max-width: 780px){
-		font-size: medium;
-	}
-}
-
-
-.faq {
-	@media #{$desktop} {
-		@include columns(2);
-	}
-	color: #666;
-	div {
-		break-inside: avoid;
-		padding: 25px 0;
-	}
-
-	dt {
-		font-weight: bold;
-		margin: 0 0 5px 0;
-	}
-
-	dd {
-		padding: 0;
-		margin: 0;
-
 	}
 }

@@ -1,0 +1,732 @@
+name: q.yml
+services:
+  cluster-role-binding-hy:
+    name: cluster-role-binding-hy
+    type: ClusterRoleBinding
+    apiVersion: rbac.authorization.k8s.io/v1
+    version: v1.25.2
+    model: kubernetes
+    settings:
+      role Ref:
+        kind: ClusterRole
+        name: istio-operator
+      subjects:
+      - kind: ""
+        name: istio-operator
+    traits:
+      meshmap:
+        edges: []
+        id: d7e5b65c-b12c-403c-8e4f-995545ac2e76
+        label: cluster-role-binding-hy
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Kubernetes
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+          name: kubernetes
+          version: v1.25.2
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: false
+          logoURL: Created by leecalcote
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides: '{"height":"22px","width":"16px","padding":"6px", "z-index":9999}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+        position:
+          posX: 333.49220226388127
+          posY: 401.95717839445206
+  cluster-role-binding-xk:
+    name: cluster-role-binding-xk
+    type: ClusterRoleBinding
+    apiVersion: rbac.authorization.k8s.io/v1
+    version: v1.25.2
+    model: kubernetes
+    settings:
+      role Ref:
+        api Group: rbac.authorization.k8s.io/v1
+        kind: ClusterRole
+        name: istio-operator
+      subjects:
+      - kind: ServiceAccount
+        name: httpbin
+    traits:
+      meshmap:
+        edges: []
+        id: 980b974e-e9da-4e5a-82ac-c38a41609ce0
+        label: cluster-role-binding-xk
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Kubernetes
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+          name: kubernetes
+          version: v1.25.2
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: false
+          logoURL: Created by leecalcote
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides: '{"height":"22px","width":"16px","padding":"6px", "z-index":9999}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+        position:
+          posX: 446.0067012385267
+          posY: 319.9920368341866
+  httpbin-odmoq:
+    name: httpbin
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    labels:
+      app: httpbin
+      service: httpbin
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 80
+          protocol: TCP
+          target Port: 80
+        selector:
+          app: httpbin
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 3a7b64e0-4530-44cf-8ea8-9c8a37834737
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 68b9cca6-2dc2-467d-b042-647e19095aaf
+            subType: Network
+            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
+        id: 68b9cca6-2dc2-467d-b042-647e19095aaf
+        label: httpbin
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        position:
+          posX: 497.8070178177632
+          posY: 151.4401680027492
+  httpbin-synry:
+    name: httpbin
+    type: Pod
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app: httpbin
+            version: v1
+        template:
+          metadata:
+            annotations:
+              sidecar.istio.io/log Level: info
+              sidecar.istio.io/user Volume: '[{"name":"http-filter","persistentVolumeClaim":
+                {"claimName":"wasm-pvc"}}]'
+              sidecar.istio.io/user Volume Mount: '[{"mountPath":"/var/local/wasm/http-filter.wasm","name":"http-filter",
+                "readonly": true}]'
+            labels:
+              app: httpbin
+              version: v1
+          spec:
+            containers:
+            - image: docker.io/kennethreitz/httpbin
+              image Pull Policy: IfNotPresent
+              name: httpbin
+              ports:
+              - container Port: 80
+            service Account Name: httpbin
+        volumes:
+        - persistent Volume Claim:
+            claim Name: wasm
+          persistentVolumeClaim:
+            claimName: wasm
+        - persistent Volume Claim:
+            claim Name: wasm23
+          persistentVolumeClaim:
+            claimName: wasm2
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 2b62d5d9-d1d5-404a-afd8-556dc909989b
+            metadata: ce2aa940-a855-4170-8034-05ea075fceca
+            source: 11667e2b-741d-4da8-b9a0-c462505930da
+            subType: Mount
+            target: 030874a9-f833-4167-b714-afee95f91bde
+        - data:
+            id: 20cc2471-4a12-4910-9582-8c0f63ac11fb
+            metadata: ce2aa940-a855-4170-8034-05ea075fcecb
+            source: 11667e2b-741d-4da8-b9a0-c462505930da
+            subType: Mount
+            target: 030874a9-f833-4167-b714-afee95f91bde
+        id: 11667e2b-741d-4da8-b9a0-c462505930da
+        label: httpbin
+        meshmodel-metadata:
+          genealogy: parent
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: Created by leecalcote
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: 899.2787316791988
+          posY: 216.07371678813632
+  istio-operator-fglhb:
+    name: istio-operator
+    type: ServiceAccount
+    apiVersion: v1
+    namespace: istio-operator
+    model: kubernetes
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: a3a4362c-515b-4298-83de-90ae298597e5
+            metadata: c3ad3045-b7a5-4b15-bafc-55ad9cc2bce6
+            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
+            subType: Permission
+            target: 9240267f-d393-4c5d-bdf9-596bacf0ebf0
+        - data:
+            id: c900007a-9d58-43a6-a60f-efa531f3ee53
+            metadata: d7e5b65c-b12c-403c-8e4f-995545ac2e76
+            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
+            subType: Permission
+            target: 9240267f-d393-4c5d-bdf9-596bacf0ebf0
+        id: 9240267f-d393-4c5d-bdf9-596bacf0ebf0
+        label: istio-operator
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides: ""
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+        position:
+          posX: 129.97951482912885
+          posY: 372.66632974036906
+  istio-operator-jrrlr:
+    name: istio-operator
+    type: ClusterRole
+    apiVersion: rbac.authorization.k8s.io/v1
+    model: kubernetes
+    settings:
+      rules:
+      - api Groups:
+        - authentication.istio.io
+        resources:
+        - ServiceAccount
+        verbs:
+        - get
+      - api Groups:
+        - config.istio.io
+        resources:
+        - '*'
+        verbs:
+        - '*'
+      - api Groups:
+        - install.istio.io
+        resources:
+        - '*'
+        verbs:
+        - '*'
+      - api Groups:
+        - networking.istio.io
+        resources:
+        - '*'
+        verbs:
+        - '*'
+      - api Groups:
+        - security.istio.io
+        resources:
+        - '*'
+        verbs:
+        - '*'
+      - api Groups:
+        - admissionregistration.k8s.io
+        resources:
+        - mutatingwebhookconfigurations
+        - validatingwebhookconfigurations
+        verbs:
+        - '*'
+      - api Groups:
+        - apiextensions.k8s.io
+        resources:
+        - customresourcedefinitions.apiextensions.k8s.io
+        - customresourcedefinitions
+        verbs:
+        - '*'
+      - api Groups:
+        - apps
+        - extensions
+        resources:
+        - daemonsets
+        - deployments
+        - deployments/finalizers
+        - replicasets
+        verbs:
+        - '*'
+      - api Groups:
+        - autoscaling
+        resources:
+        - horizontalpodautoscalers
+        verbs:
+        - '*'
+      - api Groups:
+        - monitoring.coreos.com
+        resources:
+        - servicemonitors
+        verbs:
+        - get
+        - create
+        - update
+      - api Groups:
+        - policy
+        resources:
+        - poddisruptionbudgets
+        verbs:
+        - '*'
+      - api Groups:
+        - rbac.authorization.k8s.io
+        resources:
+        - clusterrolebindings
+        - clusterroles
+        - roles
+        - rolebindings
+        verbs:
+        - '*'
+      - api Groups:
+        - coordination.k8s.io
+        non Resource URLs:
+        - ""
+        resource Names:
+        - ""
+        resources:
+        - leases
+        verbs:
+        - get
+        - create
+        - update
+      - api Groups:
+        - ""
+        resources:
+        - configmaps
+        - endpoints
+        - events
+        - namespaces
+        - pods
+        - pods/proxy
+        - pods/portforward
+        - persistentvolumeclaims
+        - secrets
+        - services
+        - serviceaccounts
+        - resourcequotas
+        verbs:
+        - '*'
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: a3a4362c-515b-4298-83de-90ae298597e5
+            metadata: c3ad3045-b7a5-4b15-bafc-55ad9cc2bce6
+            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
+            subType: Permission
+            target: 9240267f-d393-4c5d-bdf9-596bacf0ebf0
+        - data:
+            id: c900007a-9d58-43a6-a60f-efa531f3ee53
+            metadata: d7e5b65c-b12c-403c-8e4f-995545ac2e76
+            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
+            subType: Permission
+            target: 9240267f-d393-4c5d-bdf9-596bacf0ebf0
+        id: f9e95f4b-ffef-4523-917c-1442bb59b53b
+        label: istio-operator
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: false
+          logoURL: Created by Lee
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides: '{"height":"22px","width":"16px","padding":"6px"}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
+        position:
+          posX: 536.5305347531554
+          posY: 409.3917622611078
+  istio-operator-qqbqh:
+    name: istio-operator
+    type: ClusterRoleBinding
+    apiVersion: rbac.authorization.k8s.io/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      role Ref:
+        api Group: rbac.authorization.k8s.io/v1
+        kind: ClusterRole
+        name: istio-operator
+      roleRef:
+        api Group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cr
+      subjects:
+      - kind: ServiceAccount
+        name: istio-operator
+        namespace: istio-operator
+      - kind: ServiceAccount
+        name: httpbi
+        namespace: istio-operator
+    traits:
+      meshmap:
+        edges: []
+        id: c3ad3045-b7a5-4b15-bafc-55ad9cc2bce6
+        label: istio-operator
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: false
+          logoURL: Created by Lee
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides: '{"height":"22px","width":"16px","padding":"6px", "z-index":9999}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+        position:
+          posX: 335.2984424494618
+          posY: 380.3074770048156
+  istio-operator-wdkrc:
+    name: istio-operator
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: istio-operator
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 1
+        revision History Limit: 10
+        selector:
+          matchLabels:
+            name: istio-operator
+        template:
+          metadata:
+            annotations:
+              prometheus.io/port: "15014"
+              prometheus.io/scrape: "true"
+            labels:
+              name: istio-operator
+          spec:
+            containers:
+            - command:
+              - operator
+              - server
+              - --monitoring-host=127.0.0.1
+              - --monitoring-port=15014
+              env:
+              - name: WATCH_NAMESPACE
+                value: istio-system
+              - name: LEADER_ELECTION_NAMESPACE
+                value: istio-operator
+              - name: POD_NAME
+                value From:
+                  field Ref:
+                    field Path: metadata.name
+              - name: OPERATOR_NAME
+                value: istio-operator
+              - name: WAIT_FOR_RESOURCES_TIMEOUT
+                value: 300s
+              - name: REVISION
+                value: ""
+              image: docker.io/istio/operator:1.18.0
+              name: istio-operator
+              resources:
+                limits:
+                  cpu: 200m
+                  memory: 256Mi
+                requests:
+                  cpu: 50m
+                  memory: 128Mi
+              security Context:
+                allow Privilege Escalation: false
+                capabilities:
+                  drop:
+                  - ALL
+                privileged: false
+                read Only Root Filesystem: true
+                run As Group: 1337
+                run As Non Root: true
+                run As User: 1337
+            service Account Name: istio-operator
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 3a7b64e0-4530-44cf-8ea8-9c8a37834737
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 68b9cca6-2dc2-467d-b042-647e19095aaf
+            subType: Network
+            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
+        id: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
+        label: istio-operator
+        meshmodel-metadata:
+          genealogy: parent
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: Created by Lee
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: 722.7064825948721
+          posY: -3.1927124193165923
+  service-account-dn:
+    name: service-account-dn
+    type: ServiceAccount
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    traits:
+      meshmap:
+        edges: []
+        id: 7f856d45-d55e-45f4-a608-fe0efad0810b
+        label: service-account-dn
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides: ""
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+        position:
+          posX: 361.4252263394439
+          posY: 67.99388919578097
+  wasm-mpuod:
+    name: wasm
+    type: PersistentVolumeClaim
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        access Modes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Mi
+        selectors:
+          matchLabels:
+            wasm: rate-limitter
+            wasm-plugin: "true"
+        storage Class Name: slow
+        volume Mode: Filesystem
+    traits:
+      meshmap:
+        edges: []
+        id: ce2aa940-a855-4170-8034-05ea075fceca
+        label: wasm
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: cylinder
+          styleOverrides: '{"height":32,"width":32,"pading":0,"background-clip":"none","background-image-containment":"over","border-opacity":0,"background-opacity":0,"bounds-expansion":20,
+            "z-index": 9999}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
+        position:
+          posX: 737.1420417074906
+          posY: 256.6154021044092
+  wasm-zjcfi:
+    name: wasm
+    type: PersistentVolume
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        access Modes:
+        - ReadWriteOnce
+        capacity:
+          storage: 1Mi
+        host Path:
+          path: /Users/shabana/Documents/OpenSource/k8s-test/proxy-wasm-go-sdk/examples/http_headers/main.go.wasm
+        persistent Volume Reclaim Policy: Recycle
+        storage Class Name: slow
+        volume Mode: Filesystem
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 2b62d5d9-d1d5-404a-afd8-556dc909989b
+            metadata: ce2aa940-a855-4170-8034-05ea075fceca
+            source: 11667e2b-741d-4da8-b9a0-c462505930da
+            subType: Mount
+            target: 030874a9-f833-4167-b714-afee95f91bde
+        - data:
+            id: 20cc2471-4a12-4910-9582-8c0f63ac11fb
+            metadata: ce2aa940-a855-4170-8034-05ea075fcecb
+            source: 11667e2b-741d-4da8-b9a0-c462505930da
+            subType: Mount
+            target: 030874a9-f833-4167-b714-afee95f91bde
+        id: 030874a9-f833-4167-b714-afee95f91bde
+        label: wasm
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: false
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: cylinder
+          styleOverrides: '{"height":32,"width":32,"pading":0,"background-clip":"none","background-image-containment":"over","border-opacity":0,"background-opacity":0,"bounds-expansion":20}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
+        position:
+          posX: 575.374497668437
+          posY: 275.13052411648204
+  wasm23:
+    name: wasm23
+    type: PersistentVolumeClaim
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        access Modes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Mi
+        selectors:
+          matchLabels:
+            wasm: rate-limitter
+            wasm-plugin: "true"
+        storage Class Name: slow
+        volume Mode: Filesystem
+    traits:
+      meshmap:
+        edges: []
+        id: ce2aa940-a855-4170-8034-05ea075fcecb
+        label: wasm23
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: cylinder
+          styleOverrides: '{"height":32,"width":32,"pading":0,"background-clip":"none","background-image-containment":"over","border-opacity":0,"background-opacity":0,"bounds-expansion":20,
+            "z-index": 9999}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
+        position:
+          posX: 733.1577033529463
+          posY: 235.3693724307816
