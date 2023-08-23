@@ -1,12 +1,28 @@
 name: cypress-des-1-no-modify
 services:
+  cyto-test:
+    name: cyto-test
+    type: Namespace
+    apiVersion: v1
+    version: v1.25.2
+    model: kubernetes
+    traits:
+      meshmap:
+        edges: []
+        id: 82477a34-a249-4b70-8d1d-0e4c92a68cc9
+        label: cyto-test
+        position:
+          posX: 547.0000002360458
+          posY: 319.98252362937717
   pod:
     name: pod
     type: Pod
     apiVersion: v1
-    namespace: default
+    namespace: cyto-test
     version: v1.25.2
     model: kubernetes
+    dependsOn:
+    - cyto-test
     traits:
       meshmap:
         edges: []
@@ -38,6 +54,7 @@ services:
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        parent: 82477a34-a249-4b70-8d1d-0e4c92a68cc9
         position:
-          posX: 521.5
-          posY: 330.9511142531476
+          posX: 547.0000002360458
+          posY: 310.98252362937717
