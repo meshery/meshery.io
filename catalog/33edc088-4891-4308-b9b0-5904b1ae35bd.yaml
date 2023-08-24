@@ -4,10 +4,14 @@ services:
     name: Helm Chart
     type: HelmChart
     apiVersion: v1beta1
+    namespace: default
     version: 0.1.1
     model: helm-controller
     settings:
       source Ref: {}
+      spec: 
+        source Ref: {}
+        version: '**'
       version: '**'
     traits:
       meshmap:
@@ -21,19 +25,17 @@ services:
     name: Runner
     type: Runner
     apiVersion: v1alpha1
+    namespace: default
     version: 0.1.2
     model: github-actions-runners
-    settings:
-      work Volume Claim Template:
-        resources: {}
     traits:
       meshmap:
         edges: []
         id: 209d2e50-0585-4611-9844-f971717d9619
         label: Runner
         position:
-          posX: 154.9074222175576
-          posY: 53.882003933179824
+          posX: 109.22830425432298
+          posY: 66.93318049410402
   playground-deployment:
     name: playground-deployment
     type: Deployment

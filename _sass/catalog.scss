@@ -9,6 +9,9 @@
   font-size: 18px;
   font-weight: 400;
 }
+.tabcontent h3{
+  color: var(--color-secondary-dark);
+}
 /* CARD-STYLES */
 .card {
   position: relative;
@@ -22,8 +25,6 @@
   margin-bottom: 20px;
   perspective: 1000px;
   transition: all .9s;
-  // overflow: hidden;
-  // background:var(--background-light) ;
 
   
   .card-inner {
@@ -99,7 +100,6 @@
   position: absolute;
   top: 40%;
   left: 50%;
-  color: white;
   font-size: 19px;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -112,7 +112,6 @@
   right: 0;
   padding-top: 10px;
   margin-right: 14px;
-  color: white;
   opacity: 0.7;
 }
 .catalog {
@@ -132,13 +131,6 @@
   @media (max-width:770px) {
     flex-direction: column;
   }
-}
-
-.modal-h3 {
-  font-weight: bold;
-  font-size: 1.1rem !important;
-  text-transform: uppercase;
-
 }
 
 p {
@@ -282,6 +274,7 @@ p {
   text-align: center;
   padding: 15px 0 15px 0;
 }
+
 .pattern-id {
   position: absolute;
   bottom: .5rem;
@@ -320,16 +313,15 @@ p {
 
 .external-link {
   display:inline-block;
-  width: 1rem;
-  ;
-}
-
-.external-link img {
-  content: url('../assets/images/buttons/external-link_green.svg');
-}
-
-.external-link:hover img {
-  content: url('../assets/images/buttons/external-link_black.svg');
+  width: 1.5rem;
+  img {
+    content: url('../assets/images/buttons/external-link_green.svg');
+    // on hover 
+    &:hover {
+      content: url('../assets/images/buttons/external-black.svg');
+    }
+  }
+  
 }
 
 /* CHECKBOX-STYLES */
@@ -380,24 +372,27 @@ input[type="checkbox"] {
   transition: all 0.3s;
 }
 .modal-image {
-  width: 220px;
-  margin: 24px 30px 2rem 0px;
-  float: left;
-  height: 90%;
-  padding: 13px;
+  margin: 2rem 0.5rem;
+  width: 25%;
+  border-radius: 1rem;
+  padding: 2rem;
+  height: fit-content;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  img{
+    max-width: 80%;
+  }
 }
+  
 ::-webkit-scrollbar {
   display: "none";
 }
 
 .modal-content {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-evenly;
   padding-bottom: 3rem;
   code {
-    
     padding: 1rem;
-    margin: 1rem auto auto 15rem;
     border-radius: .5rem;
     font-size: .9rem;
     background-color: #1a2421;
@@ -418,7 +413,16 @@ input[type="checkbox"] {
   }
   
 }
+.modal-h2 {
+  color: var(--color-secondary-dark);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: inherit;
+}
 
+.modal-info{
+  width: 60%;
+}
 
 .modal-window > div {
   position: absolute;
@@ -442,13 +446,6 @@ input[type="checkbox"] {
   text-align: center;
 }
 
-// .btn-tooltip-grp {
-//   // width: 10rem;
-// }
-
-// .tooltip-modal .tooltiptext-modal {
-//   // margin-top: 1rem;
-// }
 
 ::-webkit-scrollbar-corner {
   background-color: transparent;
@@ -459,14 +456,7 @@ input[type="checkbox"] {
   font-size: 15px;
   display: block;
 }
-.modal-content {
-  font-size: 10px;
-  display: block;
-}
 
-.modal-content h2 {
-  font-size: 2rem;
-}
 
 .service-mesh-image {
   height: 50px;
@@ -475,7 +465,7 @@ input[type="checkbox"] {
 .modal-close {
   display: flex;
   justify-content: space-between;
-  color:   var(--brand-color-primary);
+  color:   var(--brand-color-secondary);
   line-height: 1rem;
   font-size: 1rem;
   display: flex;
@@ -740,11 +730,6 @@ label {
     margin-top: 2rem;
     align-items: center;
   }
-  .modal-image {
-    width: 200px;
-    margin: 0;
-
-  }
   .btn-tooltip-grp {
     justify-content: center;
   }
@@ -764,10 +749,6 @@ label {
     code {
       margin: auto auto;
     }
-  }
-  .modal-image {
-    margin: 0;
-    
   }
   .modal-smp {
     width: 20px;
@@ -874,7 +855,7 @@ label {
     gap: 1rem;
     padding-bottom: 2rem;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
 
   .tooltip-modal {
@@ -892,6 +873,9 @@ label {
   }
   .modal-card {
     display: none;
+  }
+  .modal-info{
+    width: 100%;
   }
 }
 .viewall{
@@ -1015,16 +999,7 @@ label {
   }
 }
 
-@media screen and (max-width: 644px) {
-  .modal-image {
-    width: 230px;
-    padding-bottom: 2rem;
-  }
-  .modal-h1,
-  .modal-h2 {
-    font-size: 1rem;
-    
-  }
+@media screen and (max-width: 644px) {  
   .related-patterns {
     display: none;
   }
