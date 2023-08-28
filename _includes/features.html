@@ -1,0 +1,165 @@
+{% for features in site.data.features %}
+{% if features.type == 1 %}
+<section>
+    <div class="container flex">
+        <div class="text ">
+            <div style="display: flex;">
+                <img src="{{ features.logoLightMode }}" data-logo-for-light="{{ features.logoLightMode }}"
+                    data-logo-for-dark="{{ features.logoDarkMode }}" id="logo-dark-light"
+                    alt="{{ features.logoDescription}}" style="height: 4rem;" loading="lazy" />
+                <span>
+            </div>
+            <h2>{{ features.title }}</h2>
+            <p>{{ features.description }}</p>
+            <div class="button-para">
+                <a href="/catalog" class="highlight">View Catalog</a>
+            </div>
+        </div>
+        <div class="image flex" style="flex-flow: column wrap;">
+            <div align="center" style="margin-top: 3rem;">
+                <button id="video-modal" class="link recording-link" style="width:100%"><img
+                        src="{{ features.videoPoster }}" loading="lazy" class="screenshot"></button>
+                <p style="font-size: 1rem;margin:0rem;padding:0rem;color:#666;font-style: italic;">(excerpt: patterns
+                    in-action)</p>
+                {% include video-modal.html
+                title="Service Mesh Patterns"
+                video="assets/images/patterns/service-mesh-patterns-clip.mov" %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% elsif features.type == 2 %}
+<section>
+    <div class="container flex">
+        <div class="text ">
+            <h2>{{ features.title }}</span></h2>
+            <p> {{ features.description }}
+            </p>
+        </div>
+        <div class="image">
+            <a href="{{ features.image }}" data-fancybox="images" data-caption="{{ features.imageDescription }}">
+                <img class="screenshot" src="{{ features.image }}" alt="{{ features.imageDescription }}"
+                    loading="lazy" />
+            </a>
+        </div>
+    </div>
+</section>
+
+{% elsif features.type == 3 %}
+<section>
+    <div class="container flex">
+        <div class="text ">
+            <img src="{{ features.logo }}" style="max-width:30%;position:relative;float:left;
+                    margin-right:20px;margin-bottom: 10px;" alt="{{ features.imageDescription }}" loading="lazy" />
+            <h2>{{ features.title }}</h2>
+            <p>{{ features.description }}</p>
+        </div>
+        <div class="image flex">
+            <a style="width: 100%;" href="{{ features.image }}" data-fancybox="images"
+                data-caption="{{ features.imageDescription }}">
+                <img src="{{ features.image }}" alt="{{ features.imageDescription }}" class="screenshot"
+                    loading="lazy" />
+            </a>
+        </div>
+    </div>
+</section>
+
+{% elsif features.type == 4 %}
+<section>
+    <div class="container flex">
+        <div class="text ">
+            <h2>{{ features.title }}</h2>
+            <p>{{ features.description }}</p>
+        </div>
+        <div class="image flex">
+            <a style="width: 100%;" href="{{ features.image }}" data-fancybox="images"
+                data-caption="Webassembly based Envoy Filters">
+                <img src="{{ features.image }}" class="screenshot" loading="lazy" />
+            </a>
+        </div>
+    </div>
+</section>
+
+{% elsif features.type == 5 %}
+<section>
+    <div class="container flex">
+        <div class="text ">
+            <img src="{{ features.logo }}" style="max-width:30%;position:relative;float:left;
+                    margin-right:20px;margin-bottom: 10px;" alt="Unified policy engine" loading="lazy" />
+            <h2>{{ features.title }}</h2>
+            <p>{{ features.description }}</p>
+        </div>
+        <div class="image flex">
+            <a style="width: auto;" href="{{ features.image }}" data-fancybox="images">
+                <img src="{{ features.image }}" style="max-width:100%" alt="{{ features.imageDescription }}"
+                    loading="lazy" />
+            </a>
+        </div>
+    </div>
+</section>
+
+{% elsif features.type == 6 %}
+<section>
+    <div class="container flex">
+        <div class="text ">
+            <img src="{{ features.logo }}" style="max-width:20%;position:relative;float:left;
+                    margin-right:20px;margin-bottom: 10px;" loading="lazy" />
+            <h2>{{ features.title }}</h2>
+            <p>{{ features.description }}
+            <ul style="line-height: 1.5em;height: auto;text-align: left; color: var(--color-secondary-light)">
+                {% for listItem in features.list %}
+                <li>{{ listItem }}</li>
+                {% endfor %}
+            </ul>
+            </p>
+        </div>
+        <div class="image flex">
+            <a style="width: 100%;" href="{{ features.image }}" data-fancybox="images"
+                data-caption="Webassembly based Envoy Filters">
+                <img src="{{ features.image }}" class="screenshot" loading="lazy" />
+            </a>
+        </div>
+    </div>
+</section>
+
+{% elsif features.type == 7 %}
+<section>
+    <div class="container flex">
+        <div class="text ">
+            <h2>{{ features.title }}</h2>
+            <p>{{ features.description }}
+            <ul style="line-height: 1.5em;height: auto;text-align: left; color: var(--color-secondary-light)">
+                {% for listItem in features.list %}
+                <li>{{ listItem }}</li>
+                {% endfor %}
+            </ul>
+            </p>
+        </div>
+        <div class="image">
+            <a href="{{ features.imageURL }}" data-fancybox="images" data-caption="{{ features.imageDescription }}">
+                <img src="{{ features.image }}" alt="{{ features.imageDescription }}" class="screenshot"
+                    loading="lazy" />
+            </a>
+        </div>
+    </div>
+</section>
+
+{% elsif features.type == 8 %}
+<section>
+    <div class="container flex">
+        <div class="text ">
+            <h2>{{ features.title }}</h2>
+            <p>{{ features.description }}</p>
+        </div>
+        <div class="image flex">
+            <a style="width: auto;" href="{{ features.imageURL }}" data-fancybox="images"
+                data-caption="{{ features.imageDescription }}">
+                <img src="{{ features.image }}" style="max-width:100%" alt="{{ features.imageDescription }}"
+                    loading="lazy" />
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endfor %}
