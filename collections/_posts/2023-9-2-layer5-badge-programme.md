@@ -1,13 +1,13 @@
 ---
 date: 2023-09-01 10:30:05 -0530
-heading: Layer5 Recognition Programm
-title:  Layer5 Recognition Programm
+heading: Layer5 Recognition Program
+title:  Layer5 Recognition Program
 categories: 
   - Meshery
   - Open Source
   - Community
 # layout: post
-permalink: /blog/Layer5-Recognition-Programm
+permalink: /blog/Layer5-Recognition-Program
 ---
 <div style="text-align:center;padding:20px">
 <img src="../../assets/images/posts/2023-9-2-layer5-badge-programme/recognition-banner.png" style="width:75%" /></div>
