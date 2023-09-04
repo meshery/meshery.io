@@ -2,6 +2,7 @@
 date: 2021-04-26T05:00:00-13:00
 title: Validating SMI Conformance with Meshery
 heading: Validating SMI Conformance with Meshery
+author_contributor: Lee Calcote
 categories:
   - SMI Conformance
 # layout: post
