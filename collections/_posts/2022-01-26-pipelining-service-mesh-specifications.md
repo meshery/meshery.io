@@ -35,24 +35,24 @@ An example of the action configuration which runs on every release is shown belo
 
 <div id="channelset" class="highlight-code">
   <code class="code-box">
-   name: SMI Conformance with Meshery
- on:
-   push:
-     tags:
-       - 'v*'
+name: SMI Conformance with Meshery
+on:
+&nbsp;&nbsp;push:
+&nbsp;&nbsp;&nbsp;tags:
+&nbsp;&nbsp;&nbsp;&nbsp;- 'v*'
 
- jobs:
-   smi-conformance:
-     name: SMI Conformance
-     runs-on: ubuntu-latest
-     steps:
+jobs:
+&nbsp;smi-conformance:
+&nbsp;&nbsp;&nbsp;name: SMI Conformance
+&nbsp;&nbsp;&nbsp;runs-on: ubuntu-latest
+&nbsp;&nbsp;&nbsp;steps:
 
-       - name: SMI conformance tests
-         uses: layer5io/mesheryctl-smi-conformance-action@master
-         with:
-           provider_token: $
-           service_mesh: open_service_mesh
-           mesh_deployed: false 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: SMI conformance tests
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uses: layer5io/mesheryctl-smi-conformance-action@master
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provider_token: $
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;service_mesh: open_service_mesh
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mesh_deployed: false 
   </code>
     <!-- copy to clipboard -->
     <a class="btn tooltip" style="position: absolute; top:0.10rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#channelset"
@@ -85,39 +85,39 @@ You can also bring in their own cluster with specific capabilities and with a se
   <code class="code-box">
   name: SMI Conformance with Meshery
 on:
-  push:
-    branches:
-      - 'master'
+&nbsp;&nbsp;push:
+&nbsp;&nbsp;&nbsp;branches:
+&nbsp;&nbsp;&nbsp;&nbsp;- 'master'
 
 jobs:
-  smi-conformance:
-    name: SMI Conformance tests on master
-    runs-on: ubuntu-latest
-    steps:
+&nbsp;smi-conformance:
+&nbsp;&nbsp;&nbsp;name: SMI Conformance tests on master
+&nbsp;&nbsp;&nbsp;runs-on: ubuntu-latest
+&nbsp;&nbsp;&nbsp;steps:
 
-      - name: Deploy k8s-minikube
-        uses: manusa/actions-setup-minikube@v2.4.1
-        with:
-          minikube version: 'v1.21.0'
-          kubernetes version: 'v1.20.7'
-          driver: docker
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Deploy k8s-minikube
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uses: manusa/actions-setup-minikube@v2.4.1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minikube version: 'v1.21.0'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kubernetes version: 'v1.20.7'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;driver: docker
 
-      - name: Install OSM
-        run: |
-           curl -LO https://github.com/openservicemesh/
-           osm/releases/download/v0.9.1/osm-v0.9.1-linux-amd64.tar.gz
-           tar -xzf osm-v0.9.1-linux-amd64.tar.gz
-           mkdir -p ~/osm/bin
-           mv ./linux-amd64/osm ~/osm/bin/osm-bin
-           PATH="$PATH:$HOME/osm/bin/"
-           osm-bin install --osm-namespace default
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Install OSM
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;run: |
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;curl -LO https://github.com/openservicemesh/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;osm/releases/download/v0.9.1/osm-v0.9.1-linux-amd64.tar.gz
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tar -xzf osm-v0.9.1-linux-amd64.tar.gz
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mkdir -p ~/osm/bin
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mv ./linux-amd64/osm ~/osm/bin/osm-bin
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PATH="$PATH:$HOME/osm/bin/"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;osm-bin install --osm-namespace default
 
-      - name: SMI conformance tests
-        uses: layer5io/mesheryctl-smi-conformance-action@master
-        with:
-          provider_token: $
-          service_mesh: open_service_mesh
-          mesh_deployed: true 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: SMI conformance tests
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uses: layer5io/mesheryctl-smi-conformance-action@master
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provider_token: $
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;service_mesh: open_service_mesh
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mesh_deployed: true 
   </code>
     <!-- copy to clipboard -->
     <a class="btn tooltip" style="position: absolute; top:0.10rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#channelset"
@@ -175,39 +175,40 @@ The <a href="https://github.com/marketplace/actions/performance-testing-with-mes
 
 <div id="channelset" class="highlight-code">
   <code class="code-box">
-   name: Meshery SMP Action
+&nbsp;name: Meshery SMP Action
 on:
-  push:
-    branches:
-      'master'
+&nbsp;&nbsp;push:
+&nbsp;&nbsp;&nbsp;branches:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'master'
 
 jobs:
-  performance-test:
-    name: Performance Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
-        with:
-          ref: 'perf'
+&nbsp;performance-test:
+&nbsp;&nbsp;&nbsp;name: Performance Test
+&nbsp;&nbsp;&nbsp;runs-on: ubuntu-latest
+&nbsp;&nbsp;&nbsp;steps:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: checkout
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uses: actions/checkout@v2
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ref: 'perf'
 
-      - name: Deploy k8s-minikube
-        uses: manusa/actions-setup-minikube@v2.4.1
-        with:
-          minikube version: 'v1.21.0'
-          kubernetes version: 'v1.20.7'
-          driver: docker
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Deploy k8s-minikube
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uses: manusa/actions-setup-minikube@v2.4.1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;minikube version: 'v1.21.0'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kubernetes version: 'v1.20.7'
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;driver: docker
 
-      - name: Run Performance Test
-        uses: layer5io/meshery-smp-action@master
-        with:
-          provider_token: $
-          platform: docker
-          profile_name: soak-test 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- name: Run Performance Test
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uses: layer5io/meshery-smp-action@master
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;provider_token: $
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;platform: docker
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;profile_name: soak-test 
   </code>
     <!-- copy to clipboard -->
     <a class="btn tooltip" style="position: absolute; top:0.10rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#channelset"
-      data-clipboard-text="name: Meshery SMP Action
+      data-clipboard-text="
+ name: Meshery SMP Action
 on:
   push:
     branches:
@@ -248,16 +249,16 @@ name: Istio Performance Test
 labels: {}
 clients:
 - internal: false
-  load_generator: fortio
-  protocol: 1
-  connections: 2
-  rps: 10
-  headers: {}
-  cookies: {}
-  body: ""
-  content_type: ""
-  endpoint_urls:
-  - http://localhost:2323/productpage
+&nbsp;load_generator: fortio
+&nbsp;protocol: 1
+&nbsp;connections: 2
+&nbsp;rps: 10
+&nbsp;headers: {}
+&nbsp;cookies: {}
+&nbsp;body: ""
+&nbsp;content_type: ""
+&nbsp;endpoint_urls:
+&nbsp;- http://localhost:2323/productpage
 duration: "30m"
   </code>
     <!-- copy to clipboard -->
