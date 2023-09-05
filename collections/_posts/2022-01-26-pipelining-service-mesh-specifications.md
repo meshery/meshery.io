@@ -8,7 +8,7 @@ categories:
   - Service Mesh
 permalink: /blog/pipelining-service-mesh-specifications
 ---
-<div style="text-align:center;margin-bottom:4rem;">
+<div style="text-align:center;margin-bottom:0.75rem;">
   <img src="../../assets/images/posts/2022-01-26-pipelining-service-mesh-specifications/service-mesh-specifications.png" alt="service-mesh-specifications" width="80%"  />
 </div>
 With growing adoption of service meshes in cloud native environments, service mesh abstractions - service mesh-neutral specifications - have emerged. Service Mesh Performance and <a href="https://layer5.io/projects/service-mesh-interface-conformance">Service Mesh Interface</a> are two open specifications that address the need for universal interfaces for interacting with and managing any type of service mesh. Let’s examine what each specification provides.
@@ -56,22 +56,24 @@ An example of the action configuration which runs on every release is shown belo
   </code>
     <!-- copy to clipboard -->
     <a class="btn tooltip" style="position: absolute; top:0.10rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#channelset"
-      data-clipboard-text="name: SMI Conformance with Meshery
- on:
+      data-clipboard-text="
+    name: SMI Conformance with Meshery
+  on:
    push:
      tags:
-       - 'v*'
+       - 'v*'&#xa;
  jobs:
    smi-conformance:
      name: SMI Conformance
      runs-on: ubuntu-latest
-     steps:
+     steps:&#xa; 
        - name: SMI conformance tests
          uses: layer5io/mesheryctl-smi-conformance-action@master
          with:
            provider_token: ${{ secrets.MESHERY_PROVIDER_TOKEN }}
            service_mesh: open_service_mesh
-           mesh_deployed: false" onmouseout="resetCopyText(this)">
+           mesh_deployed: false"
+          onmouseout="resetCopyText(this)">
       <i class="far fa-copy"></i>
       <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 2rem; left: -80px;">Copy to clipboard</span>
     </a>
@@ -123,18 +125,18 @@ jobs:
 on:
   push:
     branches:
-      - 'master'
+      - 'master'&#xa;
 jobs:
   smi-conformance:
     name: SMI Conformance tests on master
     runs-on: ubuntu-latest
-    steps:
+    steps:&#xa;
       - name: Deploy k8s-minikube
         uses: manusa/actions-setup-minikube@v2.4.1
         with:
           minikube version: 'v1.21.0'
           kubernetes version: 'v1.20.7'
-          driver: docker
+          driver: docker&#xa;
       - name: Install OSM
         run: |
            curl -LO https://github.com/openservicemesh/
@@ -143,7 +145,7 @@ jobs:
            mkdir -p ~/osm/bin
            mv ./linux-amd64/osm ~/osm/bin/osm-bin
            PATH='$PATH:$HOME/osm/bin/'
-           osm-bin install --osm-namespace default
+           osm-bin install --osm-namespace default&#xa;
       - name: SMI conformance tests
         uses: layer5io/mesheryctl-smi-conformance-action@master
         with:
@@ -209,22 +211,22 @@ jobs:
 on:
   push:
     branches:
-      'master'
+      'master'&#xa;
 jobs:
   performance-test:
     name: Performance Test
     runs-on: ubuntu-latest
-    steps:
+    steps:&#xa;
       - name: checkout
         uses: actions/checkout@v2
         with:
-          ref: 'perf'
+          ref: 'perf'&#xa;
       - name: Deploy k8s-minikube
         uses: manusa/actions-setup-minikube@v2.4.1
         with:
           minikube version: 'v1.21.0'
           kubernetes version: 'v1.20.7'
-          driver: docker
+          driver: docker&#xa;
       - name: Run Performance Test
         uses: layer5io/meshery-smp-action@master
         with:

@@ -9,7 +9,7 @@ categories:
   - CloudNativeCon
 permalink: /blog/kubecon-cloudnativecon
 ---
-<div style="text-align:center;padding:10px">
+<div style="text-align:center;padding:5px">
 <img src="../../assets/images/posts/2020-12-02-kubecon+cloudnativecon/service-mesh-implementations.png" style="width:100%" /></div>
 As more organizations implement service meshes, they are finding what works and what needs more work, and they are creating new management practices around this knowledge. A few tried-and-tested best practices were detailed last month during KubeCon+CloudNativeCon.
 

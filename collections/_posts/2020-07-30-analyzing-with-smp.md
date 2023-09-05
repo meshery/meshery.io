@@ -8,12 +8,12 @@ categories:
   - SMP
 permalink: /blog/getting-started-with-service-mesh-performance-analysis
 ---
-<div style="text-align:center;padding:10px">
+<div style="text-align:center;padding:5px">
 <img src="../../assets/images/posts/2020-07-30-analyzing-with-smp/mesh-cubes.svg#center" style="width:70%" /></div>
 Anytime performance questions are to be answered, they are subjective to the specific workload and infrastructure used for measurement. Given the variety of this measurement challenge, the Envoy project, for example, refuses to publish performance data because such tests can be
 
-- Time consuming and Redundant
-- Misinterpreted
+1. Time consuming and Redundant
+2. Misinterpreted
 
 Such tests are complicated in part, because there are different types of performance testing, which include: soak testing, stress testing, load testing, capacity testing, and spike testing. Let’s examine each in context of service meshes and their workloads.
 

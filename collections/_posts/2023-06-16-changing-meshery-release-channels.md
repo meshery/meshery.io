@@ -11,7 +11,7 @@ categories:
 permalink: /blog/changing-meshery-release-channels
 ---
 
-<div style="text-align:center;padding:20px">
+<div style="text-align:center;padding:5px">
 <img src="../../assets/images/posts/2023-06-16-changing-meshery-release-channels/change-meshery-release-channels.png#center" style="width:75%" /></div> Meshery is constantly evolving and improving, with new features and bug fixes being added regularly. To stay up to date with the latest Meshery features and updates, you can switch between different release channels.
 <p>
   Artifacts of the builds for Meshery and its components are published under two different release channels, so that improved controls may be provided to both  Meshery users and Meshery developers. The two release channels are edge and stable release channels. Relative to stable releases, edge releases occur much more frequently. Edge releases are made with each merge to master, unless that merge to master is for a stable release. Stable releases are made with each
