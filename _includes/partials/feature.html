@@ -85,30 +85,28 @@ const filterCards = document.querySelectorAll(".wsm");
 const ComingSoonCards = document.querySelectorAll(".cmg");
 
 
-pattern.addEventListener("click",getPatterns);
-function getPatterns() {
-  filterCards.forEach((element) => {
-      element.style.display = "none";
-    })
-    patternCards.forEach((element) => {
+function showElements(elements) {
+    elements.forEach((element) => {
       element.style.display = "block";
-    })
-    ComingSoonCards.forEach((element) => {
-      element.style.display = "block";
-    })
-    }  
-    
-  filter.addEventListener("click",getFilters);
-  function getFilters() {
-    patternCards.forEach((element) => {
-      element.style.display = "none";
-    })
-    ComingSoonCards.forEach((element) => {
-      element.style.display = "none";
-    })
-    filterCards.forEach((element) => {
-      element.style.display = "block";
-    })
+    });
   }
+
+  function hideElements(elements) {
+    elements.forEach((element) => {
+      element.style.display = "none";
+    });
+  }
+
+  pattern.addEventListener("click", () => {
+    hideElements(filterCards);
+    showElements(patternCards);
+    showElements(ComingSoonCards);
+  });
+
+  filter.addEventListener("click", () => {
+    hideElements(patternCards);
+    hideElements(ComingSoonCards);
+    showElements(filterCards);
+  });
     
 </script>
