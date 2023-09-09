@@ -25,7 +25,9 @@ integHeading.textContent = `${roundedIntegNumber}+ Built-In Integrations`;
 const integContainer = document.getElementById("integContainer");
 
 function renderIntegrationCards(data) {
-    return data.map(item => {
+    const limitedData = data.slice(0, 30);
+
+    return limitedData.map(item => {
         const urlFromJSON = item.color.split('/integration');
         
         return `
@@ -43,6 +45,7 @@ function renderIntegrationCards(data) {
             </div>`;
     }).join('');
 }
+
 
 integContainer.innerHTML = renderIntegrationCards(data);
 </script>
