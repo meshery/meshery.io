@@ -10,7 +10,7 @@ categories:
 permalink: /blog/mesheryctl-system-provider
 ---
 
-<div style="text-align:center;padding:5px">
+<div style="text-align:center;padding:20px">
 <img src="../../assets/images/posts/2023-01-26-meshery-system-provider/system-provider.png#center" style="width:75%" /></div> Meshery offers Providers as a point of extensibility. With a built-in Local Provider (named “None”), Meshery Remote Providers are designed to be pluggable. Remote Providers offer points of extension to users / integrators to deliver enhanced functionality, using Meshery as a platform. 
 
 <p>

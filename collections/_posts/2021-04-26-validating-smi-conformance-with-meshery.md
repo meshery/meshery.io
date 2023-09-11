@@ -9,7 +9,7 @@ categories:
 # permalink: /blog/validating-smi-conformance-with-meshery
 ---
 
-<div class="row" style="width:220px;float:left;padding:5px;text-align:center;">
+<div class="row" style="width:220px;float:left;padding:20px;text-align:center;">
 <img src="/assets/images/posts/2021-04-26-validating-smi-conformance-with-meshery/smi-conformance.png#left" style="width:70%;" alt="SMI Conformance Checklist" />
 </div>With the increasing adoption of Service Mesh Interface by what is a vibrant and diverse community of both service mesh providers and ecosystem integrators, the need for verification and validation of SMI implementations is clear. We're still counting, however, as of this writing SMI has been adopted by more than 10 of the available service meshes and ecosystem tools. As you can see on the [service mesh landscape](https://layer5.io/service-mesh-landscape), the last few significant, new service mesh project / product announcements have proclaimed SMI compatibility from the start. Validating consistency of these implementations is key to upholding the value of SMI itself.
 
