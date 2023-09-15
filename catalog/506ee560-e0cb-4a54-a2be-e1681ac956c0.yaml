@@ -41,8 +41,8 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
         position:
           posX: 544.7050420884677
-          posY: 442.8864148957964
-  frontend-gnsnt:
+          posY: 442.1364148957964
+  frontend-blczg:
     name: frontend
     type: Service
     apiVersion: v1
@@ -98,7 +98,7 @@ services:
         position:
           posX: 788.3321138205181
           posY: 612.9518845779089
-  frontend-wnino:
+  frontend-emwpj:
     name: frontend
     type: Deployment
     apiVersion: apps/v1
@@ -158,157 +158,7 @@ services:
         position:
           posX: 415.4458592207284
           posY: 686.4337580113934
-  redis-follower-dulrc:
-    name: redis-follower
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    settings:
-      spec:
-        ports:
-        - port: 6379
-          protocol: TCP
-        - port: 6379
-          protocol: TCP
-        selector:
-          app: redis
-          role: follower
-          tier: backend
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: c6b42b76-ad06-4192-aa5c-776feeac1327
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: 7e403128-5022-409a-a1f2-26e0a5d25685
-            subType: Network
-            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
-        - data:
-            id: 0e53f2b4-478c-4dc7-b538-1a0299249287
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: 7e403128-5022-409a-a1f2-26e0a5d25685
-            subType: Network
-            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
-        - data:
-            id: b146be29-a258-465b-a69c-1fe15dcee1f5
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: 7e403128-5022-409a-a1f2-26e0a5d25685
-            subType: Network
-            target: redis-follower-0.2051073139195705
-        id: 7e403128-5022-409a-a1f2-26e0a5d25685
-        label: redis-follower
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-        position:
-          posX: 704.1980370908317
-          posY: 491.0454391221015
-  redis-follower-hrrsh:
-    name: redis-follower
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
-    settings:
-      spec:
-        replicas: 2
-        selector:
-          match Labels:
-            app: redis
-        template:
-          metadata:
-            labels:
-              app: redis
-              role: follower
-              tier: backend
-          spec:
-            containers:
-            - image: gcr.io/google_samples/gb-redis-follower:v2
-              name: follower
-              ports:
-              - container Port: 6379
-              resources:
-                requests:
-                  cpu: 100m
-                  memory: 100Mi
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: b146be29-a258-465b-a69c-1fe15dcee1f5
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: 7e403128-5022-409a-a1f2-26e0a5d25685
-            subType: Network
-            target: redis-follower-0.2051073139195705
-        id: redis-follower-0.2051073139195705
-        label: redis-follower
-        position:
-          posX: 748.5803096045724
-          posY: 539.5576022227765
-  redis-follower-oeyfy:
-    name: redis-follower
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    settings:
-      spec:
-        ports:
-        - port: 6379
-          protocol: TCP
-        - port: 6379
-          protocol: TCP
-        selector:
-          app: redis
-          role: follower
-          tier: backend
-    traits:
-      meshmap:
-        edges: []
-        id: redis-follower-0.08295362138087481
-        label: redis-follower
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-        position:
-          posX: 769.1980370908317
-          posY: 426.0454391221015
-  redis-follower-rdozk:
+  redis-follower-bfqit:
     name: redis-follower
     type: Deployment
     apiVersion: apps/v1
@@ -362,12 +212,202 @@ services:
             source: 6badde68-595b-4e86-9be8-61318e52b476
             subType: Network
             target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
+        - data:
+            id: 1815606a-86fd-411d-8695-e0de2ae248da
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: redis-follower-0.08295362138087481
+            subType: Network
+            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
         id: 9407d316-5e5a-4212-8767-2bcd60c9ac17
         label: redis-follower
         position:
           posX: 683.5803096045724
           posY: 604.5576022227765
-  redis-leader-dbttj:
+  redis-follower-hgcsd:
+    name: redis-follower
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        ports:
+        - port: 6379
+          protocol: TCP
+        - port: 6379
+          protocol: TCP
+        selector:
+          app: redis
+          role: follower
+          tier: backend
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 1815606a-86fd-411d-8695-e0de2ae248da
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: redis-follower-0.08295362138087481
+            subType: Network
+            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
+        - data:
+            id: f85dc619-9804-4523-9ad8-43750b45cb36
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: redis-follower-0.08295362138087481
+            subType: Network
+            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
+        - data:
+            id: e58537bc-4d0c-4079-b684-484d966da4e5
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: redis-follower-0.08295362138087481
+            subType: Network
+            target: redis-follower-0.2051073139195705
+        id: redis-follower-0.08295362138087481
+        label: redis-follower
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        position:
+          posX: 769.1980370908317
+          posY: 426.0454391221015
+  redis-follower-lfewm:
+    name: redis-follower
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        ports:
+        - port: 6379
+          protocol: TCP
+        - port: 6379
+          protocol: TCP
+        selector:
+          app: redis
+          role: follower
+          tier: backend
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: c6b42b76-ad06-4192-aa5c-776feeac1327
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 7e403128-5022-409a-a1f2-26e0a5d25685
+            subType: Network
+            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
+        - data:
+            id: b146be29-a258-465b-a69c-1fe15dcee1f5
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 7e403128-5022-409a-a1f2-26e0a5d25685
+            subType: Network
+            target: redis-follower-0.2051073139195705
+        - data:
+            id: 0e53f2b4-478c-4dc7-b538-1a0299249287
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 7e403128-5022-409a-a1f2-26e0a5d25685
+            subType: Network
+            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
+        id: 7e403128-5022-409a-a1f2-26e0a5d25685
+        label: redis-follower
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        position:
+          posX: 704.1980370908317
+          posY: 491.0454391221015
+  redis-follower-vhszx:
+    name: redis-follower
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 2
+        selector:
+          match Labels:
+            app: redis
+        template:
+          metadata:
+            labels:
+              app: redis
+              role: follower
+              tier: backend
+          spec:
+            containers:
+            - image: gcr.io/google_samples/gb-redis-follower:v2
+              name: follower
+              ports:
+              - container Port: 6379
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 100Mi
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: b146be29-a258-465b-a69c-1fe15dcee1f5
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 7e403128-5022-409a-a1f2-26e0a5d25685
+            subType: Network
+            target: redis-follower-0.2051073139195705
+        - data:
+            id: e58537bc-4d0c-4079-b684-484d966da4e5
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: redis-follower-0.08295362138087481
+            subType: Network
+            target: redis-follower-0.2051073139195705
+        id: redis-follower-0.2051073139195705
+        label: redis-follower
+        position:
+          posX: 748.5803096045724
+          posY: 539.5576022227765
+  redis-leader-emmjv:
     name: redis-leader
     type: Deployment
     apiVersion: apps/v1
@@ -408,13 +448,21 @@ services:
             source: 7e403128-5022-409a-a1f2-26e0a5d25685
             subType: Network
             target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
+        - data:
+            id: f85dc619-9804-4523-9ad8-43750b45cb36
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: redis-follower-0.08295362138087481
+            subType: Network
+            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
         id: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
         label: redis-leader
         parent: 3e8540ea-0bc1-4d50-a2fe-1ca9688987d2
         position:
           posX: 548.1490083783218
           posY: 392.5662419886065
-  redis-leader-sluat:
+  redis-leader-kvqek:
     name: redis-leader
     type: Service
     apiVersion: v1
