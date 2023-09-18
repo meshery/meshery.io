@@ -128,7 +128,53 @@ services:
         position:
           posX: 544.0233473265575
           posY: 226.1269759546878
-  frontend-gsodm:
+  frontend-bdyfz:
+    name: frontend
+    type: Deployment
+    apiVersion: apps/v1
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 3
+        selector:
+          match Labels:
+            app: guestbook
+            tier: frontend
+        template:
+          metadata:
+            labels:
+              app: guestbook
+              tier: frontend
+          spec:
+            containers:
+            - env:
+              - name: GET_HOSTS_FROM
+                value: dns
+              image: gcr.io/google_samples/gb-frontend:v5
+              name: php-redis
+              ports:
+              - container Port: 80
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 100Mi
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 499a0982-138b-48f0-bfc0-4b2c9f711510
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 4ae55da0-82eb-405e-9410-75623cee1043
+            subType: Network
+            target: 43a7b935-6109-4f5c-84fb-5e3454f9c6d1
+        id: 43a7b935-6109-4f5c-84fb-5e3454f9c6d1
+        label: frontend
+        position:
+          posX: 617.8765083999082
+          posY: 586.1282542776714
+  frontend-jcskn:
     name: frontend
     type: Service
     apiVersion: v1
@@ -184,52 +230,6 @@ services:
         position:
           posX: 615.5689243422067
           posY: 473.56225675684726
-  frontend-jinor:
-    name: frontend
-    type: Deployment
-    apiVersion: apps/v1
-    model: kubernetes
-    settings:
-      spec:
-        replicas: 3
-        selector:
-          match Labels:
-            app: guestbook
-            tier: frontend
-        template:
-          metadata:
-            labels:
-              app: guestbook
-              tier: frontend
-          spec:
-            containers:
-            - env:
-              - name: GET_HOSTS_FROM
-                value: dns
-              image: gcr.io/google_samples/gb-frontend:v5
-              name: php-redis
-              ports:
-              - container Port: 80
-              resources:
-                requests:
-                  cpu: 100m
-                  memory: 100Mi
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 499a0982-138b-48f0-bfc0-4b2c9f711510
-            metadata:
-              port: 80
-              protocol: TCP
-            source: 4ae55da0-82eb-405e-9410-75623cee1043
-            subType: Network
-            target: 43a7b935-6109-4f5c-84fb-5e3454f9c6d1
-        id: 43a7b935-6109-4f5c-84fb-5e3454f9c6d1
-        label: frontend
-        position:
-          posX: 617.8765083999082
-          posY: 586.1282542776714
   guestbook:
     name: guestbook
     type: Namespace
@@ -244,59 +244,7 @@ services:
         position:
           posX: 325.6674592571951
           posY: 367.722876966476
-  redis-follower-jfixb:
-    name: redis-follower
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
-    settings:
-      spec:
-        replicas: 2
-        selector:
-          match Labels:
-            app: redis
-        template:
-          metadata:
-            labels:
-              app: redis
-              role: follower
-              tier: backend
-          spec:
-            containers:
-            - image: gcr.io/google_samples/gb-redis-follower:v2
-              name: follower
-              ports:
-              - container Port: 6379
-              resources:
-                requests:
-                  cpu: 100m
-                  memory: 100Mi
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: b146be29-a258-465b-a69c-1fe15dcee1f5
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: 7e403128-5022-409a-a1f2-26e0a5d25685
-            subType: Network
-            target: redis-follower-0.2051073139195705
-        - data:
-            id: 68c244ee-b33b-4f8d-9735-364a269784f2
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: redis-follower-0.08295362138087481
-            subType: Network
-            target: redis-follower-0.2051073139195705
-        id: redis-follower-0.2051073139195705
-        label: redis-follower
-        position:
-          posX: 731.6229742893868
-          posY: 226.14950697312474
-  redis-follower-jydcc:
+  redis-follower-fkhkm:
     name: redis-follower
     type: Deployment
     apiVersion: apps/v1
@@ -363,7 +311,59 @@ services:
         position:
           posX: 621.9042506805724
           posY: 359.07117385335664
-  redis-follower-khkvk:
+  redis-follower-suvvy:
+    name: redis-follower
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 2
+        selector:
+          match Labels:
+            app: redis
+        template:
+          metadata:
+            labels:
+              app: redis
+              role: follower
+              tier: backend
+          spec:
+            containers:
+            - image: gcr.io/google_samples/gb-redis-follower:v2
+              name: follower
+              ports:
+              - container Port: 6379
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 100Mi
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: b146be29-a258-465b-a69c-1fe15dcee1f5
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 7e403128-5022-409a-a1f2-26e0a5d25685
+            subType: Network
+            target: redis-follower-0.2051073139195705
+        - data:
+            id: 68c244ee-b33b-4f8d-9735-364a269784f2
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: redis-follower-0.08295362138087481
+            subType: Network
+            target: redis-follower-0.2051073139195705
+        id: redis-follower-0.2051073139195705
+        label: redis-follower
+        position:
+          posX: 731.6229742893868
+          posY: 226.14950697312474
+  redis-follower-tsvhe:
     name: redis-follower
     type: Service
     apiVersion: v1
@@ -430,7 +430,7 @@ services:
         position:
           posX: 704.0742613205998
           posY: 351.1666549760461
-  redis-follower-nglpz:
+  redis-follower-yhisd:
     name: redis-follower
     type: Service
     apiVersion: v1
@@ -495,7 +495,7 @@ services:
         position:
           posX: 774.332540742805
           posY: 321.4076268719174
-  redis-leader-adkkm:
+  redis-leader-dqkus:
     name: redis-leader
     type: Service
     apiVersion: v1
@@ -547,7 +547,7 @@ services:
         position:
           posX: 466.56947334990286
           posY: 242.1317238863156
-  redis-leader-dubzw:
+  redis-leader-gdsfd:
     name: redis-leader
     type: Deployment
     apiVersion: apps/v1
