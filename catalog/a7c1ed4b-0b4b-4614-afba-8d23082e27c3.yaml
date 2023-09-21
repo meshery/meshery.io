@@ -1,16 +1,65 @@
 name: Fortio-server
 services:
-  fortio-server-service:
+  fortio-server:
     name: fortio-server
+    type: Deployment
     namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: fortio-server
+        template:
+          metadata:
+            labels:
+              app: fortio-server
+          spec:
+            containers:
+            - image: fortio/fortio:1.32.1
+              imagePullPolicy: IfNotPresent
+              name: fortio-server
+              ports:
+              - containerPort: 80
+                name: tcp
+              resources:
+                requests:
+                  cpu: "1"
+            serviceAccountName: default
+    traits:
+      meshmap:
+        edges: []
+        id: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
+        label: fortio-server
+        meshmodel-metadata:
+          genealogy: parent
+          isCustomResource: false
+          logoURL: Created by Lee
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: 530.9999834219484
+          posY: 240.50099084784136
+  istio-operator:
+    name: istio-operator
     type: Service
     apiVersion: v1
+    namespace: default
     model: kubernetes
     settings:
       spec:
         ports:
         - name: http
-          port: 8080
           protocol: TCP
           targetPort: 8080
         selector:
@@ -38,60 +87,5 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: 484.9355395872588
-          posY: 168.2587641981373
-  fortio-server-deployment:
-    name: fortio-server
-    type: Deployment
-    namespace: default
-    model: kubernetes
-    settings:
-      spec:
-        replicas: 1
-        selector:
-          matchLabels:
-            app: fortio-server
-        template:
-          metadata:
-            labels:
-              app: fortio-server
-#          annotations:
-#            proxy.istio.io/config: |
-#              privateKeyProvider:
-#                 cryptomb:
-#                  pollDelay: 10ms
-          spec:
-            serviceAccountName: default
-            containers:
-            - image: fortio/fortio:1.32.1
-              imagePullPolicy: IfNotPresent
-              name: fortio-server
-              ports:
-              - containerPort: 80
-                name: tcp
-              resources:
-                requests:
-                  cpu: "1"
-    traits:
-      meshmap:
-        edges: []
-        id: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
-        label: fortio-server
-        meshmodel-metadata:
-          genealogy: parent
-          isCustomResource: false
-          logoURL: Created by Lee
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-pentagon
-          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-        position:
-          posX: 492.1229787505797
-          posY: 234.6048777043293
+          posX: 464.9999834219484
+          posY: 246.00099084784136
