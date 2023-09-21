@@ -96,9 +96,14 @@ services:
     name: cd-pipeline-ti
     type: CDPipeline
     apiVersion: v2.edp.epam.com/v1
-    namespace: default
+    namespace: defaultss
     version: 2.14.0-SNAPSHOT.32
     model: cd-pipeline-operator
+    settings:
+      spec:
+        applications: []
+        applications To Promote: []
+        input Docker Streams: []
     traits:
       meshmap:
         edges: []
@@ -186,40 +191,9 @@ services:
     name: notebook
     type: Notebook
     apiVersion: kubeflow.org/v1
-    namespace: defaults
+    namespace: defaultsd
     version: 1.6.1
     model: kubeflow
-    settings:
-      spec:
-        template:
-          spec:
-            affinity:
-              node Affinity:
-                preferred During Scheduling Ignored During Execution: []
-                required During Scheduling Ignored During Execution:
-                  node Selector Terms: []
-              pod Affinity:
-                preferred During Scheduling Ignored During Execution: []
-                required During Scheduling Ignored During Execution: []
-              pod Anti Affinity:
-                preferred During Scheduling Ignored During Execution: []
-                required During Scheduling Ignored During Execution: []
-            containers: []
-            dns Config:
-              nameservers: []
-              options: []
-              searches: []
-            ephemeral Containers: []
-            host Aliases: []
-            image Pull Secrets: []
-            init Containers: []
-            readiness Gates: []
-            security Context:
-              supplemental Groups: []
-              sysctls: []
-            tolerations: []
-            topology Spread Constraints: []
-            volumes: []
     traits:
       meshmap:
         edges: []
