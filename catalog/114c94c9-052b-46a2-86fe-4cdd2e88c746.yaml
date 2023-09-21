@@ -41,8 +41,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/namespace-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
         position:
-          posX: 624.2537407495893
-          posY: 205.23195790354612
+          posX: 315.9997149676864
+          posY: 183.74999052107842
   build-ir:
     name: build-ir
     type: Build
@@ -90,8 +90,8 @@ services:
           svgWhite: ui/public/static/img/meshmodels/camel-k/white/build-white.svg
         parent: 29c92597-d0a0-428b-91fa-86258cb2e013
         position:
-          posX: 569.7537407495893
-          posY: 241.73195790354612
+          posX: 261.4997149676864
+          posY: 220.24999052107842
   cd-pipeline-ti:
     name: cd-pipeline-ti
     type: CDPipeline
@@ -134,8 +134,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/admin-console-operator/white/adminconsole-white.svg
         position:
-          posX: 580.9874582706514
-          posY: 325.72190027538676
+          posX: 265.9997149676864
+          posY: 305.9999905210784
   customer:
     name: customer
     type: Customer
@@ -180,15 +180,46 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/jira-service-desk-operator/white/customer-white.svg
         position:
-          posX: 696.9874582706514
-          posY: 325.72190027538676
+          posX: 381.9997149676864
+          posY: 305.2499905210784
   notebook:
     name: notebook
     type: Notebook
     apiVersion: kubeflow.org/v1
-    namespace: default
+    namespace: defaults
     version: 1.6.1
     model: kubeflow
+    settings:
+      spec:
+        template:
+          spec:
+            affinity:
+              node Affinity:
+                preferred During Scheduling Ignored During Execution: []
+                required During Scheduling Ignored During Execution:
+                  node Selector Terms: []
+              pod Affinity:
+                preferred During Scheduling Ignored During Execution: []
+                required During Scheduling Ignored During Execution: []
+              pod Anti Affinity:
+                preferred During Scheduling Ignored During Execution: []
+                required During Scheduling Ignored During Execution: []
+            containers: []
+            dns Config:
+              nameservers: []
+              options: []
+              searches: []
+            ephemeral Containers: []
+            host Aliases: []
+            image Pull Secrets: []
+            init Containers: []
+            readiness Gates: []
+            security Context:
+              supplemental Groups: []
+              sysctls: []
+            tolerations: []
+            topology Spread Constraints: []
+            volumes: []
     traits:
       meshmap:
         edges: []
@@ -221,8 +252,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubeflow/white/authcode-white.svg
         position:
-          posX: 642.4874582706514
-          posY: 325.72190027538676
+          posX: 327.4997149676864
+          posY: 305.2499905210784
   persistent-volume-ac:
     name: persistent-volume-ac
     type: PersistentVolume
@@ -264,8 +295,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 795.0856424788464
-          posY: 166.81241892882042
+          posX: 453.4997149676864
+          posY: 137.24999052107842
   persistent-volume-claim-fm:
     name: persistent-volume-claim-fm
     type: PersistentVolumeClaim
@@ -312,8 +343,8 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         parent: 29c92597-d0a0-428b-91fa-86258cb2e013
         position:
-          posX: 599.7537407495893
-          posY: 164.73195790354612
+          posX: 291.4997149676864
+          posY: 143.24999052107842
   pod-en:
     name: pod-en
     type: Pod
@@ -362,5 +393,5 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         parent: 29c92597-d0a0-428b-91fa-86258cb2e013
         position:
-          posX: 677.7537407495893
-          posY: 150.73195790354612
+          posX: 369.4997149676864
+          posY: 129.24999052107842
