@@ -33,7 +33,7 @@ services:
         position:
           posX: 130.43014677402795
           posY: 416.9587085613557
-  cluster role binding-bqpnm:
+  cluster role binding-filub:
     name: Cluster Role Binding
     type: ClusterRoleBinding
     apiVersion: rbac.authorization.k8s.io/v1
@@ -76,7 +76,7 @@ services:
         position:
           posX: 201.93014677402795
           posY: 353.9587085613557
-  cluster role binding-ezpxs:
+  cluster role binding-yehop:
     name: Cluster Role Binding
     type: ClusterRoleBinding
     apiVersion: rbac.authorization.k8s.io/v1
@@ -119,7 +119,7 @@ services:
         position:
           posX: 131.93014677402795
           posY: 353.9587085613557
-  cluster-role-binding-iexaz:
+  cluster-role-binding-epgir:
     name: cluster-role-binding
     type: ClusterRoleBinding
     apiVersion: rbac.authorization.k8s.io/v1
@@ -167,6 +167,52 @@ services:
         position:
           posX: 195.93014677402795
           posY: 479.9587085613557
+  cluster-role-binding-gidlq:
+    name: cluster-role-binding
+    type: ClusterRoleBinding
+    apiVersion: rbac.authorization.k8s.io/v1
+    version: v1.25.2
+    model: kubernetes
+    settings:
+      role Ref: {}
+      subjects: []
+    traits:
+      meshmap:
+        edges: []
+        id: 66e81770-e9b2-4623-9f7a-9db6affb96bf
+        label: cluster-role-binding
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Kubernetes
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+          name: kubernetes
+          version: v1.25.2
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: false
+          logoURL: Created by leecalcote
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides: '{"height":"22px","width":"16px","padding":"6px", "z-index":9999}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+        position:
+          posX: 263.93014677402795
+          posY: 416.9587085613557
   cluster-role-binding-tjfff:
     name: cluster-role-binding-tjfff
     type: ClusterRoleBinding
@@ -219,52 +265,6 @@ services:
         position:
           posX: 261.93014677402795
           posY: 479.9587085613557
-  cluster-role-binding-utsqq:
-    name: cluster-role-binding
-    type: ClusterRoleBinding
-    apiVersion: rbac.authorization.k8s.io/v1
-    version: v1.25.2
-    model: kubernetes
-    settings:
-      role Ref: {}
-      subjects: []
-    traits:
-      meshmap:
-        edges: []
-        id: 66e81770-e9b2-4623-9f7a-9db6affb96bf
-        label: cluster-role-binding
-        meshmodel-data:
-          category:
-            metadata: null
-            name: Orchestration & Management
-          displayName: Kubernetes
-          displayhostname: ""
-          hostID: 00000000-0000-0000-0000-000000000000
-          hostname: ""
-          metadata:
-            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-          name: kubernetes
-          version: v1.25.2
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: false
-          logoURL: Created by leecalcote
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          styleOverrides: '{"height":"22px","width":"16px","padding":"6px", "z-index":9999}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
-        position:
-          posX: 263.93014677402795
-          posY: 416.9587085613557
   cluster-role-binding-xs:
     name: cluster-role-binding-xs
     type: ClusterRoleBinding
@@ -610,9 +610,218 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/daemonset-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/daemonset-color.svg
         position:
-          posX: 643.6468453272633
-          posY: 246.7570562409177
-  istio-operator-bnckf:
+          posX: 636.913125732706
+          posY: 235.2135369359623
+  istio-operator-jgocj:
+    name: istio-operator
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 1
+        revision History Limit: 10
+        selector:
+          match Labels:
+            name: istio-operator
+        template:
+          metadata:
+            annotations:
+              prometheus.io/port: "15014"
+              prometheus.io/scrape: "true"
+            labels:
+              name: istio-operator
+          spec:
+            containers:
+            - command:
+              - operator
+              - server
+              - --monitoring-host=127.0.0.1
+              - --monitoring-port=15014
+              env:
+              - name: WATCH_NAMESPACE
+                value: istio-system
+              - name: LEADER_ELECTION_NAMESPACE
+                value: istio-operator
+              - name: POD_NAME
+                value From:
+                  field Ref:
+                    field Path: metadata.name
+              - name: OPERATOR_NAME
+                value: istio-operator
+              - name: WAIT_FOR_RESOURCES_TIMEOUT
+                value: 300s
+              - name: REVISION
+                value: ""
+              image: docker.io/istio/operator:1.18.0
+              name: istio-operator
+              resources:
+                limits:
+                  cpu: 200m
+                  memory: 256Mi
+                requests:
+                  cpu: 50m
+                  memory: 128Mi
+              security Context:
+                allow Privilege Escalation: false
+                capabilities:
+                  drop:
+                  - ALL
+                privileged: false
+                read Only Root Filesystem: true
+                run As Group: 1337
+                run As Non Root: true
+                run As User: 1337
+            service Account Name: istio-operator
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 783740fd-cb75-473c-b91a-8334ef25521e
+            metadata: 02b55af3-131d-47fb-bc51-c130b89c4049
+            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
+            subType: Permission
+            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
+        - data:
+            id: 8eccca70-774d-4323-a283-dd4ffd0692e4
+            metadata:
+              port: 80
+              protocol: TCP
+            source: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+            subType: Network
+            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
+        - data:
+            id: 7729d915-9db8-4de7-919c-239abdb9825f
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+            subType: Network
+            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
+        - data:
+            id: cddec786-134e-4c0f-9745-6818509d642c
+            metadata:
+              port: 80
+              protocol: TCP
+            source: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+            subType: Network
+            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
+        id: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
+        label: istio-operator
+        position:
+          posX: 539.3072356407439
+          posY: 462.028398762631
+  istio-operator-tsbcn:
+    name: istio-operator
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        ports:
+        - name: http-metrics
+          node Port: 33285
+          port: 80
+          protocol: TCP
+          target Port: 8383
+        - node Port: 39238
+          port: 8080
+          protocol: TCP
+        - port: 80
+          protocol: TCP
+        - port: 80
+          protocol: TCP
+        - port: 8080
+          protocol: TCP
+        - port: 80
+          protocol: TCP
+        - port: 8080
+          protocol: TCP
+        - port: 80
+          protocol: TCP
+        selector:
+          name: istio-operator
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: a3aa9690-16d0-4ea8-8a53-654c87a311e1
+            metadata: d0f7b429-1304-474f-95d1-bff9cb719964
+            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
+            subType: Permission
+            target: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+        - data:
+            id: 57a95e60-2d59-47e4-b81f-03bf06ea7296
+            metadata: d0f7b429-1304-474f-95d1-bff9cb719964
+            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
+            subType: Permission
+            target: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+        - data:
+            id: 9ac4d25a-d8f7-4f05-ad12-225ef5d12ad9
+            metadata: 02b55af3-131d-47fb-bc51-c130b89c4049
+            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
+            subType: Permission
+            target: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+        - data:
+            id: bad288d5-00ba-44b2-8e3c-b23b01a90e32
+            metadata: 66e81770-e9b2-4623-9f7a-9db6affb96bf
+            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
+            subType: Permission
+            target: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+        - data:
+            id: 25406e5b-555d-407a-b7df-e4595b746af9
+            metadata: 66e81770-e9b2-4623-9f7a-9db6affb96bf
+            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
+            subType: Permission
+            target: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+        - data:
+            id: 8eccca70-774d-4323-a283-dd4ffd0692e4
+            metadata:
+              port: 80
+              protocol: TCP
+            source: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+            subType: Network
+            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
+        - data:
+            id: 7729d915-9db8-4de7-919c-239abdb9825f
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+            subType: Network
+            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
+        - data:
+            id: cddec786-134e-4c0f-9745-6818509d642c
+            metadata:
+              port: 80
+              protocol: TCP
+            source: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+            subType: Network
+            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
+        id: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+        label: istio-operator
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        position:
+          posX: 390.49751055928203
+          posY: 358.52989064787454
+  istio-operator-udjhj:
     name: istio-operator
     type: ClusterRole
     apiVersion: rbac.authorization.k8s.io/v1
@@ -807,217 +1016,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
         position:
-          posX: 522.6706610548341
-          posY: 262.074909740714
-  istio-operator-kujbw:
-    name: istio-operator
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
-    settings:
-      spec:
-        replicas: 1
-        revision History Limit: 10
-        selector:
-          match Labels:
-            name: istio-operator
-        template:
-          metadata:
-            annotations:
-              prometheus.io/port: "15014"
-              prometheus.io/scrape: "true"
-            labels:
-              name: istio-operator
-          spec:
-            containers:
-            - command:
-              - operator
-              - server
-              - --monitoring-host=127.0.0.1
-              - --monitoring-port=15014
-              env:
-              - name: WATCH_NAMESPACE
-                value: istio-system
-              - name: LEADER_ELECTION_NAMESPACE
-                value: istio-operator
-              - name: POD_NAME
-                value From:
-                  field Ref:
-                    field Path: metadata.name
-              - name: OPERATOR_NAME
-                value: istio-operator
-              - name: WAIT_FOR_RESOURCES_TIMEOUT
-                value: 300s
-              - name: REVISION
-                value: ""
-              image: docker.io/istio/operator:1.18.0
-              name: istio-operator
-              resources:
-                limits:
-                  cpu: 200m
-                  memory: 256Mi
-                requests:
-                  cpu: 50m
-                  memory: 128Mi
-              security Context:
-                allow Privilege Escalation: false
-                capabilities:
-                  drop:
-                  - ALL
-                privileged: false
-                read Only Root Filesystem: true
-                run As Group: 1337
-                run As Non Root: true
-                run As User: 1337
-            service Account Name: istio-operator
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 783740fd-cb75-473c-b91a-8334ef25521e
-            metadata: 02b55af3-131d-47fb-bc51-c130b89c4049
-            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
-            subType: Permission
-            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
-        - data:
-            id: 8eccca70-774d-4323-a283-dd4ffd0692e4
-            metadata:
-              port: 80
-              protocol: TCP
-            source: d24ca3fc-fb37-40d6-86b7-a2665b24f120
-            subType: Network
-            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
-        - data:
-            id: 7729d915-9db8-4de7-919c-239abdb9825f
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: d24ca3fc-fb37-40d6-86b7-a2665b24f120
-            subType: Network
-            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
-        - data:
-            id: cddec786-134e-4c0f-9745-6818509d642c
-            metadata:
-              port: 80
-              protocol: TCP
-            source: d24ca3fc-fb37-40d6-86b7-a2665b24f120
-            subType: Network
-            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
-        id: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
-        label: istio-operator
-        position:
-          posX: 539.3072356407439
-          posY: 462.028398762631
-  istio-operator-otnhz:
-    name: istio-operator
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    settings:
-      spec:
-        ports:
-        - name: http-metrics
-          node Port: 33285
-          port: 80
-          protocol: TCP
-          target Port: 8383
-        - node Port: 39238
-          port: 8080
-          protocol: TCP
-        - port: 80
-          protocol: TCP
-        - port: 80
-          protocol: TCP
-        - port: 8080
-          protocol: TCP
-        - port: 80
-          protocol: TCP
-        - port: 8080
-          protocol: TCP
-        - port: 80
-          protocol: TCP
-        selector:
-          name: istio-operator
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: a3aa9690-16d0-4ea8-8a53-654c87a311e1
-            metadata: d0f7b429-1304-474f-95d1-bff9cb719964
-            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
-            subType: Permission
-            target: d24ca3fc-fb37-40d6-86b7-a2665b24f120
-        - data:
-            id: 57a95e60-2d59-47e4-b81f-03bf06ea7296
-            metadata: d0f7b429-1304-474f-95d1-bff9cb719964
-            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
-            subType: Permission
-            target: d24ca3fc-fb37-40d6-86b7-a2665b24f120
-        - data:
-            id: 9ac4d25a-d8f7-4f05-ad12-225ef5d12ad9
-            metadata: 02b55af3-131d-47fb-bc51-c130b89c4049
-            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
-            subType: Permission
-            target: d24ca3fc-fb37-40d6-86b7-a2665b24f120
-        - data:
-            id: bad288d5-00ba-44b2-8e3c-b23b01a90e32
-            metadata: 66e81770-e9b2-4623-9f7a-9db6affb96bf
-            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
-            subType: Permission
-            target: d24ca3fc-fb37-40d6-86b7-a2665b24f120
-        - data:
-            id: 25406e5b-555d-407a-b7df-e4595b746af9
-            metadata: 66e81770-e9b2-4623-9f7a-9db6affb96bf
-            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
-            subType: Permission
-            target: d24ca3fc-fb37-40d6-86b7-a2665b24f120
-        - data:
-            id: 8eccca70-774d-4323-a283-dd4ffd0692e4
-            metadata:
-              port: 80
-              protocol: TCP
-            source: d24ca3fc-fb37-40d6-86b7-a2665b24f120
-            subType: Network
-            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
-        - data:
-            id: 7729d915-9db8-4de7-919c-239abdb9825f
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: d24ca3fc-fb37-40d6-86b7-a2665b24f120
-            subType: Network
-            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
-        - data:
-            id: cddec786-134e-4c0f-9745-6818509d642c
-            metadata:
-              port: 80
-              protocol: TCP
-            source: d24ca3fc-fb37-40d6-86b7-a2665b24f120
-            subType: Network
-            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
-        id: d24ca3fc-fb37-40d6-86b7-a2665b24f120
-        label: istio-operator
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-        position:
-          posX: 404.92690969047635
-          posY: 258.4860566715945
+          posX: 519.3038012575554
+          posY: 243.79767084120127
   my-auth4:
     name: my-auth4
     type: WASMFilter
