@@ -50,8 +50,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/meshery/color/comment-color.svg
         position:
-          posX: 788.0161526918798
-          posY: 596.8701971931048
+          posX: 376.4944895815154
+          posY: 328.68183840946824
   example-istiocontrolplane:
     name: example-istiocontrolplane
     type: IstioOperator
@@ -88,8 +88,8 @@ services:
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: 800.0161526918798
-          posY: 532.8701971931048
+          posX: 434.0383661148126
+          posY: 209.19159803556587
   intel-qat-plugin:
     name: intel-qat-plugin
     type: DaemonSet
@@ -181,9 +181,9 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/daemonset-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/daemonset-color.svg
         position:
-          posX: 732.5161526918798
-          posY: 533.3701971931048
-  istio-operator-abbkv:
+          posX: 366.5383661148126
+          posY: 209.69159803556587
+  istio-operator-ejgvm:
     name: istio-operator
     type: ServiceAccount
     apiVersion: v1
@@ -224,9 +224,9 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
         position:
-          posX: 631.1816052930816
-          posY: 397.05776700538974
-  istio-operator-deaue:
+          posX: 530.4168123730637
+          posY: 516.6738941322512
+  istio-operator-garck:
     name: istio-operator
     type: Deployment
     apiVersion: apps/v1
@@ -318,9 +318,56 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
-          posX: 905.763931799472
-          posY: 282.66359001618497
-  istio-operator-lnrtm:
+          posX: 257.4715548501929
+          posY: 308.2542360923034
+  istio-operator-mhhcg:
+    name: istio-operator
+    type: Service
+    apiVersion: v1
+    namespace: istio-operator
+    model: kubernetes
+    settings:
+      spec:
+        ports:
+        - name: http-metrics
+          port: 80
+          protocol: TCP
+          target Port: 8383
+        selector:
+          name: istio-operator
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 4d38fff7-27e5-4ad1-a2df-f09e377ffc0f
+            metadata:
+              port: 80
+              protocol: TCP
+            source: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+            subType: Network
+            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
+        id: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+        label: istio-operator
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        position:
+          posX: 256.53216476306534
+          posY: 416.20650383081477
+  istio-operator-uoqvc:
     name: istio-operator
     type: ClusterRole
     apiVersion: rbac.authorization.k8s.io/v1
@@ -470,9 +517,9 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
         position:
-          posX: 632.6704034818235
-          posY: 291.00058164647925
-  istio-operator-pjtsf:
+          posX: 531.8933540501388
+          posY: 410.61819982703696
+  istio-operator-urqnt:
     name: istio-operator
     type: ClusterRoleBinding
     apiVersion: rbac.authorization.k8s.io/v1
@@ -509,52 +556,5 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
         position:
-          posX: 645.0867375505638
-          posY: 343.8031014541329
-  istio-operator-pzihq:
-    name: istio-operator
-    type: Service
-    apiVersion: v1
-    namespace: istio-operator
-    model: kubernetes
-    settings:
-      spec:
-        ports:
-        - name: http-metrics
-          port: 80
-          protocol: TCP
-          target Port: 8383
-        selector:
-          name: istio-operator
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 4d38fff7-27e5-4ad1-a2df-f09e377ffc0f
-            metadata:
-              port: 80
-              protocol: TCP
-            source: d24ca3fc-fb37-40d6-86b7-a2665b24f120
-            subType: Network
-            target: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
-        id: d24ca3fc-fb37-40d6-86b7-a2665b24f120
-        label: istio-operator
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-        position:
-          posX: 907.3335602702109
-          posY: 395.1991851673856
+          posX: 518.0045956983475
+          posY: 463.13651701530694
