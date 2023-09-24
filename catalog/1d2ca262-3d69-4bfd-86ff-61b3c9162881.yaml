@@ -74,7 +74,72 @@ services:
         label: default
         position:
           posX: 770.2948468890693
-          posY: 512.321136190832
+          posY: 527.3607323229787
+  e38a6bc3-55fa-11ee-bd4d-0242ac110003:
+    name: e38a6bc3-55fa-11ee-bd4d-0242ac110003
+    type: WASMFilter
+    apiVersion: core.meshery.io/v1alpha1
+    version: v1.0.0
+    model: meshery
+    isAnnotation: true
+    dependsOn:
+    - golang-filter
+    settings:
+      config: |-
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.http.wasm.v3.Wasm
+          config:
+            name: "my_plugin"
+            # if your wasm filter requires custom configuration you can add as follows
+            configuration:
+              "@type": "type.googleapis.com/google.protobuf.StringValue"
+              value: |
+                {
+                  "rules":"SecRuleEngine On\nSecRule ARGS:param1 \"test\" \"id:1,phase:1,pass,status:200,msg:'Test rule'\"\nSecRule ARGS:param1 \"attack\" \"id:2,phase:1,deny,status:400,msg:'Test rule'\""
+                }
+            vm_config:
+              runtime: "envoy.wasm.runtime.v8"
+              vm_id: "my_vm_id"
+              code:
+                local:
+                  filename: https://github.com/gyohuangxin/istiocon2023_demos/blob/main/plugin.wasm
+      name: e38a6bc3-55fa-11ee-bd4d-0242ac110003
+      wasm Filter: https://meshery.layer5.io/api/content/filters/download/15d26768-92d9-4919-971c-5cd0d76e94d2
+    traits:
+      meshmap:
+        id: 15d26768-92d9-4919-971c-5cd0d76e94d2
+        isFilter: true
+        label: e38a6bc3-55fa-11ee-bd4d-0242ac110003
+        meshmodel-metadata:
+          genealogy: ""
+          isAnnotation: true
+          isNamespaced: false
+          logoURL: ""
+          model: meshery
+          modelDisplayName: Meshery
+          primaryColor: '#654ff0'
+          published: true
+          secondaryColor: '#654ff0'
+          shape: rectangle
+          styleOverrides: ""
+          subCategory: App Definition and Development
+          svgColor: ui/public/static/img/meshmodels/meshery/color/wasmfilter-color.svg
+          svgComplete: ui/public/static/img/meshmodels/meshery/complete/wasmfilter-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/meshery/white/wasmfilter-white.svg
+        meshmodel-model:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Meshery
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/meshery/color/broker-color.svg
+            svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
+          name: meshery
+          version: v1.0.0
+        parent: d5710f01-40ca-49c5-a517-9fc6e293cd2b
   golang-filter:
     name: golang-filter
     type: EnvoyFilter
@@ -109,6 +174,26 @@ services:
                                 local:
                                   filename: /var/local/wasm/http-filter.wasm
                               runtime: envoy.wasm.runtime.v8
+        - patch: {}
+        - patch:
+            value: |-
+              typed_config:
+                "@type": type.googleapis.com/envoy.extensions.filters.http.wasm.v3.Wasm
+                config:
+                  name: "my_plugin"
+                  # if your wasm filter requires custom configuration you can add as follows
+                  configuration:
+                    "@type": "type.googleapis.com/google.protobuf.StringValue"
+                    value: |
+                      {
+                        "rules":"SecRuleEngine On\nSecRule ARGS:param1 \"test\" \"id:1,phase:1,pass,status:200,msg:'Test rule'\"\nSecRule ARGS:param1 \"attack\" \"id:2,phase:1,deny,status:400,msg:'Test rule'\""
+                      }
+                  vm_config:
+                    runtime: "envoy.wasm.runtime.v8"
+                    vm_id: "my_vm_id"
+                    code:
+                      local:
+                        filename: https://github.com/gyohuangxin/istiocon2023_demos/blob/main/plugin.wasm
         workload Selector:
           labels:
             app: httpbin
@@ -134,9 +219,9 @@ services:
           svgWhite: ui/public/static/img/meshmodels/istio-base/white/authorizationpolicy-white.svg
         parent: fa9340ed-69d0-4c55-a582-cd3f226d49ab
         position:
-          posX: 781.0981164304468
-          posY: 361.42297551004003
-  httpbin-kcwiz:
+          posX: 735.6844339921998
+          posY: 391.5021677743335
+  httpbin-aiowx:
     name: httpbin
     type: Service
     apiVersion: v1
@@ -189,7 +274,7 @@ services:
         position:
           posX: 962.4542557097869
           posY: 574.7022631569031
-  httpbin-yavcz:
+  httpbin-toyiv:
     name: httpbin
     type: Deployment
     apiVersion: apps/v1
@@ -256,7 +341,7 @@ services:
         position:
           posX: 573.1354380683515
           posY: 628.6044997762901
-  httpbin-zadzo:
+  httpbin-vsckx:
     name: httpbin
     type: ServiceAccount
     apiVersion: v1
@@ -289,6 +374,52 @@ services:
         position:
           posX: 866.7807516825201
           posY: 408.04468894874657
+  my-http_auth1 (Copy):
+    name: my-http_auth1 (Copy)
+    type: WASMFilter
+    apiVersion: core.meshery.io/v1alpha1
+    version: v1.0.0
+    model: meshery
+    dependsOn:
+    - golang-filter
+    settings:
+      name: my-http_auth1 (Copy)
+      wasm Filter: https://meshery.layer5.io/api/content/filters/download/93f3dcbb-1ee7-4769-9b5d-957b98b527b5
+    traits:
+      meshmap:
+        id: 93f3dcbb-1ee7-4769-9b5d-957b98b527b5
+        isFilter: true
+        label: my-http_auth1 (Copy)
+        meshmodel-metadata:
+          genealogy: ""
+          isAnnotation: true
+          isNamespaced: false
+          logoURL: ""
+          model: meshery
+          modelDisplayName: Meshery
+          primaryColor: '#654ff0'
+          published: true
+          secondaryColor: '#654ff0'
+          shape: rectangle
+          styleOverrides: ""
+          subCategory: App Definition and Development
+          svgColor: ui/public/static/img/meshmodels/meshery/color/wasmfilter-color.svg
+          svgComplete: ui/public/static/img/meshmodels/meshery/complete/wasmfilter-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/meshery/white/wasmfilter-white.svg
+        meshmodel-model:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Meshery
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/meshery/color/broker-color.svg
+            svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
+          name: meshery
+          version: v1.0.0
+        parent: d5710f01-40ca-49c5-a517-9fc6e293cd2b
   wasm-pv:
     name: wasm-pv
     type: PersistentVolume
