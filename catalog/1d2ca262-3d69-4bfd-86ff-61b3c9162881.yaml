@@ -59,49 +59,6 @@ services:
           name: meshery
           version: v1.0.0
         parent: 923546cc-7ef6-42ae-bcd4-86175dba7292
-  cluster-workflow-template-nk:
-    name: cluster-workflow-template-nk
-    type: ClusterWorkflowTemplate
-    apiVersion: argoproj.io/v1alpha1
-    version: 5.1.12
-    model: argo-workflows
-    traits:
-      meshmap:
-        edges: []
-        id: b19d8e08-1871-4806-bc1f-442120203bc6
-        label: cluster-workflow-template-nk
-        meshmodel-data:
-          category:
-            metadata: null
-            name: App Definition and Development
-          displayName: Argo Workflows
-          displayhostname: ""
-          hostID: 00000000-0000-0000-0000-000000000000
-          hostname: ""
-          metadata:
-            source_uri: https://charts.bitnami.com/bitnami/argo-workflows-5.3.10.tgz
-            svgColor: ui/public/static/img/meshmodels/argo-workflows/color/clusterworkflowtemplate-color.svg
-            svgWhite: ui/public/static/img/meshmodels/argo-workflows/white/clusterworkflowtemplate-white.svg
-          name: argo-workflows
-          version: 5.1.12
-        meshmodel-metadata:
-          genealogy: ""
-          isNamespaced: false
-          logoURL: https://github.com/cncf/artwork/blob/master/examples/incubating.md#argo-logos
-          model: argo-workflows
-          modelDisplayName: Argo Workflows
-          primaryColor: '#fe733e'
-          published: true
-          secondaryColor: '#FFB885'
-          shape: circle
-          styleOverrides: ""
-          subCategory: Continuous Integration & Delivery
-          svgColor: ui/public/static/img/meshmodels/argo-workflows/color/clusterworkflowtemplate-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/argo-workflows/white/clusterworkflowtemplate-white.svg
-        position:
-          posX: 413.81747682846446
-          posY: 462.07337622066376
   comment-yt:
     name: comment-yt
     type: Comment
@@ -109,13 +66,31 @@ services:
     version: v1.0.0
     model: meshery
     settings:
-      user Messages: []
       usersMessages:
       - avatarUrl: https://avatars.githubusercontent.com/u/7570704?v=4
         firstName: Lee
         lastName: Calcote
         message: Looks, good did you configured GitHub creds?
         timestamp: "2023-09-24T21:52:36.636Z"
+        userid: b9029c89-926f-42cd-bbe7-7c0281ca16e7
+      - avatarUrl: https://layer5.io/static/eae4fdbc2821af8482c01638a7e47b30/6c7e0/xin-huang.webp
+        firstName: Xin
+        lastName: Huang
+        message: Oh, right... no, I didn't connect the GH app...
+        timestamp: "2023-09-24T21:53:23.733Z"
+        userid: b26fc444-c246-4be8-9863-dfffeb70c41f
+      - avatarUrl: https://layer5.io/static/eae4fdbc2821af8482c01638a7e47b30/6c7e0/xin-huang.webp
+        firstName: Xin
+        lastName: Huang
+        message: |
+          ok, that's ok, though.
+        timestamp: "2023-09-24T21:53:32.505Z"
+        userid: b26fc444-c246-4be8-9863-dfffeb70c41f
+      - avatarUrl: https://avatars.githubusercontent.com/u/7570704?v=4
+        firstName: Lee
+        lastName: Calcote
+        message: Ok, let's try EnvoyFilter next time.
+        timestamp: "2023-09-24T21:53:57.265Z"
         userid: b9029c89-926f-42cd-bbe7-7c0281ca16e7
     traits:
       meshmap:
@@ -171,7 +146,40 @@ services:
         position:
           posX: 627.1008576356331
           posY: 413.3100624790343
-  httpbin-ctkuk:
+  httpbin-bpkmw:
+    name: httpbin
+    type: ServiceAccount
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    dependsOn:
+    - default
+    traits:
+      meshmap:
+        edges: []
+        id: ab411c34-abb3-49c4-abaa-f62855c1849d
+        label: httpbin
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides: ""
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+        parent: fa9340ed-69d0-4c55-a582-cd3f226d49ab
+        position:
+          posX: 528.5447893498725
+          posY: 398.96734920943635
+  httpbin-nixnb:
     name: httpbin
     type: Deployment
     apiVersion: apps/v1
@@ -238,40 +246,7 @@ services:
         position:
           posX: 677.161593597696
           posY: 475.51082754141834
-  httpbin-idzyy:
-    name: httpbin
-    type: ServiceAccount
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    dependsOn:
-    - default
-    traits:
-      meshmap:
-        edges: []
-        id: ab411c34-abb3-49c4-abaa-f62855c1849d
-        label: httpbin
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          styleOverrides: ""
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-        parent: fa9340ed-69d0-4c55-a582-cd3f226d49ab
-        position:
-          posX: 528.5447893498725
-          posY: 398.96734920943635
-  httpbin-mgagw:
+  httpbin-poond:
     name: httpbin
     type: Service
     apiVersion: v1
@@ -494,50 +469,6 @@ services:
         position:
           posX: 540.3206973777534
           posY: 497.79029634218625
-  runner-lr:
-    name: runner-lr
-    type: Runner
-    apiVersion: actions.summerwind.dev/v1alpha1
-    namespace: default
-    version: 0.1.2
-    model: github-actions-runners
-    traits:
-      meshmap:
-        edges: []
-        id: f599753a-44f8-44db-bb99-dbdf741d85cb
-        label: runner-lr
-        meshmodel-data:
-          category:
-            metadata: null
-            name: App Definition and Development
-          displayName: Github Actions Runners
-          displayhostname: ""
-          hostID: 00000000-0000-0000-0000-000000000000
-          hostname: ""
-          metadata:
-            source_uri: https://github.com/snowplow-devops/helm-charts/releases/download/github-actions-runners-0.1.2/github-actions-runners-0.1.2.tgz
-            svgColor: ui/public/static/img/meshmodels/github-actions-runner-operator/color/githubactionrunner-color.svg
-            svgWhite: ui/public/static/img/meshmodels/github-actions-runner-operator/white/githubactionrunner-white.svg
-          name: github-actions-runners
-          version: 0.1.2
-        meshmodel-metadata:
-          genealogy: ""
-          isNamespaced: true
-          logoURL: ""
-          model: github-actions-runners
-          modelDisplayName: Github Actions Runners
-          primaryColor: '#000000'
-          published: true
-          secondaryColor: '#00D3A9'
-          shape: circle
-          styleOverrides: ""
-          subCategory: Source Version Control
-          svgColor: ui/public/static/img/meshmodels/github-actions-runner-operator/color/githubactionrunner-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/github-actions-runner-operator/white/githubactionrunner-white.svg
-        position:
-          posX: 346.3523164517933
-          posY: 432.3403073154672
   wasm-plugin-dp:
     name: wasm-plugin-dp
     type: WasmPlugin
