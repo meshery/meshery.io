@@ -1,5 +1,53 @@
 name: Istio HTTP Header Filter (Clone)
 services:
+  Http-Rate -Limitter:
+    name: Http-Rate -Limitter
+    type: WASMFilter
+    apiVersion: core.meshery.io/v1alpha1
+    version: v1.0.0
+    model: meshery
+    isAnnotation: true
+    dependsOn:
+    - wasm-plugin-dp
+    settings:
+      config: ""
+      name: Http-Rate -Limitter
+      wasm Filter: https://meshery.layer5.io/api/content/filters/download/076cc384-c1ba-43dc-8c79-a74ec2f92e79
+    traits:
+      meshmap:
+        id: 076cc384-c1ba-43dc-8c79-a74ec2f92e79
+        isFilter: true
+        label: Http-Rate -Limitter
+        meshmodel-metadata:
+          genealogy: ""
+          isAnnotation: true
+          isNamespaced: false
+          logoURL: ""
+          model: meshery
+          modelDisplayName: Meshery
+          primaryColor: '#654ff0'
+          published: true
+          secondaryColor: '#654ff0'
+          shape: rectangle
+          styleOverrides: ""
+          subCategory: App Definition and Development
+          svgColor: ui/public/static/img/meshmodels/meshery/color/wasmfilter-color.svg
+          svgComplete: ui/public/static/img/meshmodels/meshery/complete/wasmfilter-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/meshery/white/wasmfilter-white.svg
+        meshmodel-model:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Meshery
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/meshery/color/broker-color.svg
+            svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
+          name: meshery
+          version: v1.0.0
+        parent: 923546cc-7ef6-42ae-bcd4-86175dba7292
   comment-yt:
     name: comment-yt
     type: Comment
@@ -83,9 +131,9 @@ services:
         id: 90a03569-99e7-4ec4-96c1-972d36723e05
         label: default
         position:
-          posX: 626.069732275472
+          posX: 623.0505689710615
           posY: 400.1712237646607
-  httpbin-umpip:
+  httpbin-fgsww:
     name: httpbin
     type: ServiceAccount
     apiVersion: v1
@@ -118,7 +166,7 @@ services:
         position:
           posX: 532.5915666222872
           posY: 386.3773754730359
-  httpbin-vevnt:
+  httpbin-sukgp:
     name: httpbin
     type: Deployment
     apiVersion: apps/v1
@@ -169,7 +217,7 @@ services:
         position:
           posX: 715.8307986452123
           posY: 470.1151245115324
-  httpbin-woqwm:
+  httpbin-tbosy:
     name: httpbin
     type: Service
     apiVersion: v1
@@ -403,22 +451,8 @@ services:
     - default
     settings:
       spec:
-        match: []
-        plugin Config: |-
-          name: envoy.filters.http.wasm-updateed
-          typed_config:
-                          '@type': type.googleapis.com/udpa.type.v1.TypedStruct
-                          type_url: type.googleapis.com/envoy.extensions.filters.http.wasm.v3.Wasm
-                          value:
-                            config:
-                              vm_config:
-                                code:
-                                  local:
-                                    filename: /var/local/wasm/http-filter.wasm
-                                runtime: envoy.wasm.runtimes
-        url: https://meshery.layer5.io/api/content/filters/download/922530e1-5b51-4442-9800-9d292faf5a5d
-        vm Config:
-          env: []
+        plugin Config: ""
+        url: https://meshery.layer5.io/api/content/filters/download/076cc384-c1ba-43dc-8c79-a74ec2f92e79
     traits:
       meshmap:
         edges: []
