@@ -1,53 +1,5 @@
 name: Istio HTTP Header Filter (Clone)
 services:
-  Http-Rate -Limitter:
-    name: Http-Rate -Limitter
-    type: WASMFilter
-    apiVersion: core.meshery.io/v1alpha1
-    version: v1.0.0
-    model: meshery
-    isAnnotation: true
-    dependsOn:
-    - wasm-plugin-dp
-    settings:
-      config: ""
-      name: Http-Rate -Limitter
-      wasm Filter: https://meshery.layer5.io/api/content/filters/download/076cc384-c1ba-43dc-8c79-a74ec2f92e79
-    traits:
-      meshmap:
-        id: 076cc384-c1ba-43dc-8c79-a74ec2f92e79
-        isFilter: true
-        label: Http-Rate -Limitter
-        meshmodel-metadata:
-          genealogy: ""
-          isAnnotation: true
-          isNamespaced: false
-          logoURL: ""
-          model: meshery
-          modelDisplayName: Meshery
-          primaryColor: '#654ff0'
-          published: true
-          secondaryColor: '#654ff0'
-          shape: rectangle
-          styleOverrides: ""
-          subCategory: App Definition and Development
-          svgColor: ui/public/static/img/meshmodels/meshery/color/wasmfilter-color.svg
-          svgComplete: ui/public/static/img/meshmodels/meshery/complete/wasmfilter-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/meshery/white/wasmfilter-white.svg
-        meshmodel-model:
-          category:
-            metadata: null
-            name: Orchestration & Management
-          displayName: Meshery
-          displayhostname: ""
-          hostID: 00000000-0000-0000-0000-000000000000
-          hostname: ""
-          metadata:
-            svgColor: ui/public/static/img/meshmodels/meshery/color/broker-color.svg
-            svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
-          name: meshery
-          version: v1.0.0
-        parent: 923546cc-7ef6-42ae-bcd4-86175dba7292
   comment-yt:
     name: comment-yt
     type: Comment
@@ -116,75 +68,9 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/meshery/color/comment-color.svg
         position:
-          posX: 376.1057002427155
-          posY: 345.33112952023174
-  default:
-    name: default
-    type: Namespace
-    apiVersion: v1
-    namespace: default
-    version: v1.25.2
-    model: kubernetes
-    traits:
-      meshmap:
-        edges: []
-        id: 90a03569-99e7-4ec4-96c1-972d36723e05
-        label: default
-        position:
-          posX: 623.0505689710615
-          posY: 400.1712237646607
-  httpbin-bavfk:
-    name: httpbin
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
-    dependsOn:
-    - default
-    settings:
-      spec:
-        replicas: 1
-        selector:
-          match Labels:
-            app: httpbin
-            version: v1
-        template:
-          metadata:
-            annotations:
-              sidecar.istio.io/log Level: info
-              sidecar.istio.io/user Volume: '[{"name":"http-filter","persistentVolumeClaim":
-                {"claimName":"wasm-pvc"}}]'
-              sidecar.istio.io/user Volume Mount: '[{"mountPath":"/var/local/wasm/http-filter.wasm","name":"http-filter",
-                "readonly": true}]'
-            labels:
-              app: httpbin
-              version: v1
-          spec:
-            containers:
-            - image: docker.io/kennethreitz/httpbin
-              image Pull Policy: IfNotPresent
-              name: httpbin
-              ports:
-              - container Port: 80
-            service Account Name: httpbin
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: b568ae89-798d-4b10-9354-a0b8cc472329
-            metadata:
-              port: 8000
-              protocol: TCP
-            source: f2b498d5-e5bb-4657-ada4-54e6300572ce
-            subType: Network
-            target: 6cea8f56-695c-4523-91c9-97596ac7c827
-        id: 6cea8f56-695c-4523-91c9-97596ac7c827
-        label: httpbin
-        parent: 90a03569-99e7-4ec4-96c1-972d36723e05
-        position:
-          posX: 715.8307986452123
-          posY: 470.1151245115324
-  httpbin-drmsu:
+          posX: 463.5409104751429
+          posY: 381.64302010856227
+  httpbin-dszcu:
     name: httpbin
     type: Service
     apiVersion: v1
@@ -193,8 +79,6 @@ services:
     labels:
       app: httpbin
       service: httpbin
-    dependsOn:
-    - default
     settings:
       spec:
         ports:
@@ -238,14 +122,61 @@ services:
         position:
           posX: 639.2873203132301
           posY: 462.67180715525706
-  httpbin-gqywg:
+  httpbin-peyuo:
+    name: httpbin
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app: httpbin
+            version: v1
+        template:
+          metadata:
+            annotations:
+              sidecar.istio.io/log Level: info
+              sidecar.istio.io/user Volume: '[{"name":"http-filter","persistentVolumeClaim":
+                {"claimName":"wasm-pvc"}}]'
+              sidecar.istio.io/user Volume Mount: '[{"mountPath":"/var/local/wasm/http-filter.wasm","name":"http-filter",
+                "readonly": true}]'
+            labels:
+              app: httpbin
+              version: v1
+          spec:
+            containers:
+            - image: docker.io/kennethreitz/httpbin
+              image Pull Policy: IfNotPresent
+              name: httpbin
+              ports:
+              - container Port: 80
+            service Account Name: httpbin
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: b568ae89-798d-4b10-9354-a0b8cc472329
+            metadata:
+              port: 8000
+              protocol: TCP
+            source: f2b498d5-e5bb-4657-ada4-54e6300572ce
+            subType: Network
+            target: 6cea8f56-695c-4523-91c9-97596ac7c827
+        id: 6cea8f56-695c-4523-91c9-97596ac7c827
+        label: httpbin
+        parent: 90a03569-99e7-4ec4-96c1-972d36723e05
+        position:
+          posX: 715.8307986452123
+          posY: 470.1151245115324
+  httpbin-zgidz:
     name: httpbin
     type: ServiceAccount
     apiVersion: v1
     namespace: default
     model: kubernetes
-    dependsOn:
-    - default
     traits:
       meshmap:
         edges: []
@@ -333,8 +264,6 @@ services:
     namespace: default
     version: v1.25.2
     model: kubernetes
-    dependsOn:
-    - default
     settings:
       spec:
         containers:
@@ -396,8 +325,6 @@ services:
     namespace: default
     version: 45.7.1
     model: kube-prometheus-stack
-    dependsOn:
-    - default
     settings:
       spec:
         port Name: web
@@ -447,8 +374,6 @@ services:
     namespace: default
     version: 1.16.0
     model: istio-base
-    dependsOn:
-    - default
     settings:
       spec:
         plugin Config: ""
