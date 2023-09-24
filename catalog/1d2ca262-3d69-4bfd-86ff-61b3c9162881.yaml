@@ -1,64 +1,5 @@
-name: Istio HTTP Header Filter (Clone)
+name: Istio HTTP Header Filter
 services:
-  HTTP-Filter:
-    name: HTTP-Filter
-    type: WASMFilter
-    apiVersion: core.meshery.io/v1alpha1
-    version: v1.0.0
-    model: meshery
-    isAnnotation: true
-    dependsOn:
-    - wasm-plugin-dp
-    settings:
-      config: |-
-        name: envoy.filters.http.wasm-updateed
-        typed_config:
-                        '@type': type.googleapis.com/udpa.type.v1.TypedStruct
-                        type_url: type.googleapis.com/envoy.extensions.filters.http.wasm.v3.Wasm
-                        value:
-                          config:
-                            vm_config:
-                              code:
-                                local:
-                                  filename: /var/local/wasm/http-filter.wasm
-                              runtime: envoy.wasm.runtimes
-      name: HTTP-Filter
-      wasm Filter: https://meshery.layer5.io/api/content/filters/download/922530e1-5b51-4442-9800-9d292faf5a5d
-    traits:
-      meshmap:
-        id: 922530e1-5b51-4442-9800-9d292faf5a5d
-        isFilter: true
-        label: HTTP-Filter
-        meshmodel-metadata:
-          genealogy: ""
-          isAnnotation: true
-          isNamespaced: false
-          logoURL: ""
-          model: meshery
-          modelDisplayName: Meshery
-          primaryColor: '#654ff0'
-          published: true
-          secondaryColor: '#654ff0'
-          shape: rectangle
-          styleOverrides: ""
-          subCategory: App Definition and Development
-          svgColor: ui/public/static/img/meshmodels/meshery/color/wasmfilter-color.svg
-          svgComplete: ui/public/static/img/meshmodels/meshery/complete/wasmfilter-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/meshery/white/wasmfilter-white.svg
-        meshmodel-model:
-          category:
-            metadata: null
-            name: Orchestration & Management
-          displayName: Meshery
-          displayhostname: ""
-          hostID: 00000000-0000-0000-0000-000000000000
-          hostname: ""
-          metadata:
-            svgColor: ui/public/static/img/meshmodels/meshery/color/broker-color.svg
-            svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
-          name: meshery
-          version: v1.0.0
-        parent: 923546cc-7ef6-42ae-bcd4-86175dba7292
   comment-yt:
     name: comment-yt
     type: Comment
@@ -131,118 +72,19 @@ services:
           posY: 189.26479004267637
   default:
     name: default
-    namespace: default
-    labels:
-      istio-injection: enabled
+    type: Namespace
+    apiVersion: v1
+    version: v1.25.2
+    model: kubernetes
     traits:
       meshmap:
         edges: []
-        id: fa9340ed-69d0-4c55-a582-cd3f226d49ab
+        id: 90a03569-99e7-4ec4-96c1-972d36723e05
         label: default
         position:
-          posX: 640.4824017941897
-          posY: 417.9421354569962
-  httpbin-prloj:
-    name: httpbin
-    type: ServiceAccount
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    dependsOn:
-    - default
-    traits:
-      meshmap:
-        edges: []
-        id: ab411c34-abb3-49c4-abaa-f62855c1849d
-        label: httpbin
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          styleOverrides: ""
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-        parent: fa9340ed-69d0-4c55-a582-cd3f226d49ab
-        position:
-          posX: 541.9263335084291
-          posY: 403.5994221873982
-  httpbin-rtxaq:
-    name: httpbin
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
-    dependsOn:
-    - default
-    settings:
-      spec:
-        replicas: 1
-        selector:
-          match Labels:
-            app: httpbin
-            version: v1
-        template:
-          metadata:
-            annotations:
-              sidecar.istio.io/log Level: info
-              sidecar.istio.io/user Volume: '[{"name":"http-filter","persistentVolumeClaim":
-                {"claimName":"wasm-pvc"}}]'
-              sidecar.istio.io/user Volume Mount: '[{"mountPath":"/var/local/wasm/http-filter.wasm","name":"http-filter",
-                "readonly": true}]'
-            labels:
-              app: httpbin
-              version: v1
-          spec:
-            containers:
-            - image: docker.io/kennethreitz/httpbin
-              image Pull Policy: IfNotPresent
-              name: httpbin
-              ports:
-              - container Port: 80
-            service Account Name: httpbin
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: b568ae89-798d-4b10-9354-a0b8cc472329
-            metadata:
-              port: 8000
-              protocol: TCP
-            source: f2b498d5-e5bb-4657-ada4-54e6300572ce
-            subType: Network
-            target: 6cea8f56-695c-4523-91c9-97596ac7c827
-        id: 6cea8f56-695c-4523-91c9-97596ac7c827
-        label: httpbin
-        meshmodel-metadata:
-          genealogy: parent
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: Created by leecalcote
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-pentagon
-          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-        parent: fa9340ed-69d0-4c55-a582-cd3f226d49ab
-        position:
-          posX: 690.5431377562526
-          posY: 480.1429005193802
-  httpbin-sdmzs:
+          posX: 606.2792270662433
+          posY: 292.46090748106576
+  httpbin-czqgr:
     name: httpbin
     type: Service
     apiVersion: v1
@@ -251,8 +93,6 @@ services:
     labels:
       app: httpbin
       service: httpbin
-    dependsOn:
-    - default
     settings:
       spec:
         ports:
@@ -292,10 +132,87 @@ services:
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-        parent: fa9340ed-69d0-4c55-a582-cd3f226d49ab
         position:
-          posX: 613.9996594242706
-          posY: 474.04850892057624
+          posX: 622.426255929058
+          posY: 401.67891540887246
+  httpbin-udcor:
+    name: httpbin
+    type: ServiceAccount
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    traits:
+      meshmap:
+        edges: []
+        id: ab411c34-abb3-49c4-abaa-f62855c1849d
+        label: httpbin
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides: ""
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+        position:
+          posX: 541.9263335084291
+          posY: 403.5994221873982
+  httpbin-yfeso:
+    name: httpbin
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app: httpbin
+            version: v1
+        template:
+          metadata:
+            annotations:
+              sidecar.istio.io/log Level: info
+              sidecar.istio.io/user Volume: '[{"name":"http-filter","persistentVolumeClaim":
+                {"claimName":"wasm-pvc"}}]'
+              sidecar.istio.io/user Volume Mount: '[{"mountPath":"/var/local/wasm/http-filter.wasm","name":"http-filter",
+                "readonly": true}]'
+            labels:
+              app: httpbin
+              version: v1
+          spec:
+            containers:
+            - image: docker.io/kennethreitz/httpbin
+              image Pull Policy: IfNotPresent
+              name: httpbin
+              ports:
+              - container Port: 80
+            service Account Name: httpbin
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: b568ae89-798d-4b10-9354-a0b8cc472329
+            metadata:
+              port: 8000
+              protocol: TCP
+            source: f2b498d5-e5bb-4657-ada4-54e6300572ce
+            subType: Network
+            target: 6cea8f56-695c-4523-91c9-97596ac7c827
+        id: 6cea8f56-695c-4523-91c9-97596ac7c827
+        label: httpbin
+        position:
+          posX: 725.3296727085077
+          posY: 458.82212103251413
   persistent-volume-claim-tk:
     name: persistent-volume-claim-tk
     type: PersistentVolumeClaim
@@ -349,8 +266,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 673.7208540144245
-          posY: 324.63351620054254
+          posX: 748.8157749725401
+          posY: 286.66538275881055
   pod-hq:
     name: pod-hq
     type: Pod
@@ -358,8 +275,6 @@ services:
     namespace: default
     version: v1.25.2
     model: kubernetes
-    dependsOn:
-    - default
     settings:
       spec:
         containers:
@@ -410,10 +325,9 @@ services:
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        parent: fa9340ed-69d0-4c55-a582-cd3f226d49ab
         position:
-          posX: 617.143303934774
-          posY: 319.31023274862685
+          posX: 692.3561437938334
+          posY: 263.3184519646603
   prometheus-agent-kq:
     name: prometheus-agent-kq
     type: PrometheusAgent
@@ -421,8 +335,6 @@ services:
     namespace: default
     version: 45.7.1
     model: kube-prometheus-stack
-    dependsOn:
-    - default
     settings:
       spec:
         port Name: web
@@ -461,7 +373,6 @@ services:
           svgColor: ui/public/static/img/meshmodels/kube-prometheus-stack/color/alertmanager-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kube-prometheus-stack/white/alertmanager-white.svg
-        parent: fa9340ed-69d0-4c55-a582-cd3f226d49ab
         position:
           posX: 553.70224153631
           posY: 502.4223693201481
@@ -472,8 +383,6 @@ services:
     namespace: default
     version: 1.16.0
     model: istio-base
-    dependsOn:
-    - default
     settings:
       spec:
         plugin Config: |-
@@ -523,18 +432,15 @@ services:
           svgColor: ui/public/static/img/meshmodels/istio-base/color/authorizationpolicy-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/istio-base/white/authorizationpolicy-white.svg
-        parent: fa9340ed-69d0-4c55-a582-cd3f226d49ab
         position:
-          posX: 726.2938658765762
-          posY: 403.59942218739815
+          posX: 775.6683025830029
+          posY: 390.1336667220091
   wasm-pvc:
     name: wasm-pvc
     type: PersistentVolume
     apiVersion: v1
     namespace: default
     model: kubernetes
-    dependsOn:
-    - default
     settings:
       spec:
         access Modes:
@@ -574,7 +480,6 @@ services:
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
-        parent: fa9340ed-69d0-4c55-a582-cd3f226d49ab
         position:
-          posX: 725.0384700799503
-          posY: 329.46190159384423
+          posX: 797.7442152770411
+          posY: 306.8980496361264
