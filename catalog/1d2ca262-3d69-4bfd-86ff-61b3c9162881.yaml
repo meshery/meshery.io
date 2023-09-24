@@ -186,7 +186,60 @@ services:
         position:
           posX: 781.0981164304468
           posY: 361.42297551004003
-  httpbin-cqxfr:
+  httpbin-gnsbf:
+    name: httpbin
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    labels:
+      app: httpbin
+      service: httpbin
+    dependsOn:
+    - default
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 8000
+          protocol: TCP
+          target Port: 80
+        selector:
+          app: httpbin
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: b568ae89-798d-4b10-9354-a0b8cc472329
+            metadata:
+              port: 8000
+              protocol: TCP
+            source: f2b498d5-e5bb-4657-ada4-54e6300572ce
+            subType: Network
+            target: 6cea8f56-695c-4523-91c9-97596ac7c827
+        id: f2b498d5-e5bb-4657-ada4-54e6300572ce
+        label: httpbin
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        parent: fa9340ed-69d0-4c55-a582-cd3f226d49ab
+        position:
+          posX: 696.2498481021423
+          posY: 622.5065757906702
+  httpbin-tvgfc:
     name: httpbin
     type: Deployment
     apiVersion: apps/v1
@@ -253,7 +306,7 @@ services:
         position:
           posX: 573.1354380683515
           posY: 628.6044997762901
-  httpbin-ndhln:
+  httpbin-ylvvd:
     name: httpbin
     type: ServiceAccount
     apiVersion: v1
@@ -286,61 +339,8 @@ services:
         position:
           posX: 697.9673297883221
           posY: 527.8691178226676
-  httpbin-tzyqs:
-    name: httpbin
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    labels:
-      app: httpbin
-      service: httpbin
-    dependsOn:
-    - default
-    settings:
-      spec:
-        ports:
-        - name: http
-          port: 8000
-          protocol: TCP
-          target Port: 80
-        selector:
-          app: httpbin
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: b568ae89-798d-4b10-9354-a0b8cc472329
-            metadata:
-              port: 8000
-              protocol: TCP
-            source: f2b498d5-e5bb-4657-ada4-54e6300572ce
-            subType: Network
-            target: 6cea8f56-695c-4523-91c9-97596ac7c827
-        id: f2b498d5-e5bb-4657-ada4-54e6300572ce
-        label: httpbin
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-        parent: fa9340ed-69d0-4c55-a582-cd3f226d49ab
-        position:
-          posX: 696.2498481021423
-          posY: 622.5065757906702
-  persistent-volume-claim-rm:
-    name: persistent-volume-claim-rm
+  persistent-volume-claim-tk:
+    name: persistent-volume-claim-tk
     type: PersistentVolumeClaim
     apiVersion: v1
     namespace: default
@@ -349,8 +349,8 @@ services:
     traits:
       meshmap:
         edges: []
-        id: c986807a-63a6-4635-ba3a-a051a26a6435
-        label: persistent-volume-claim-rm
+        id: 3f8a1626-ce96-4738-bc48-0bc7cd36362d
+        label: persistent-volume-claim-tk
         meshmodel-data:
           category:
             metadata: null
@@ -382,8 +382,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 1227.1622283486308
-          posY: 644.9322290903615
+          posX: 936.825354097145
+          posY: 463.0357045695342
   persistent-volume-ln:
     name: persistent-volume-ln
     type: PersistentVolume
@@ -394,9 +394,9 @@ services:
       meshmap:
         edges:
         - data:
-            id: 63120874-e1ab-4b10-8de2-853070e7edaf
+            id: ee4ada07-994c-4663-b564-11343264364c
             metadata:
-              binded_by: c986807a-63a6-4635-ba3a-a051a26a6435
+              binded_by: 3f8a1626-ce96-4738-bc48-0bc7cd36362d
             source: 4f630f86-c29f-4149-9dc7-d88026d96769
             subType: Mount
             target: 8294b0c4-f95f-429b-9695-77c0ec6c7d43
@@ -432,8 +432,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 1019.6675997248551
-          posY: 593.0731486466676
+          posX: 962.7344456742626
+          posY: 579.832880262809
   pod-hq:
     name: pod-hq
     type: Pod
@@ -443,17 +443,26 @@ services:
     model: kubernetes
     settings:
       spec:
-        volumes: []
+        volumes:
+        - persistent Volume Claim:
+            claim Name: persistent-volume-claim-tk
     traits:
       meshmap:
         edges:
         - data:
-            id: 63120874-e1ab-4b10-8de2-853070e7edaf
+            id: ee4ada07-994c-4663-b564-11343264364c
             metadata:
-              binded_by: c986807a-63a6-4635-ba3a-a051a26a6435
+              binded_by: 3f8a1626-ce96-4738-bc48-0bc7cd36362d
             source: 4f630f86-c29f-4149-9dc7-d88026d96769
             subType: Mount
             target: 8294b0c4-f95f-429b-9695-77c0ec6c7d43
+        - data:
+            id: 1ffa67d0-d3db-4a44-a651-0712212170bb
+            metadata:
+              binded_by: 3f8a1626-ce96-4738-bc48-0bc7cd36362d
+            source: 4f630f86-c29f-4149-9dc7-d88026d96769
+            subType: Mount
+            target: e38ddd90-4777-41d9-af1c-835ade57638b
         id: 4f630f86-c29f-4149-9dc7-d88026d96769
         label: pod-hq
         meshmodel-data:
@@ -486,8 +495,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
-          posX: 1105.6273264733143
-          posY: 440.10002582505615
+          posX: 1039.425984554021
+          posY: 389.7870059663932
   prometheus-agent-kq:
     name: prometheus-agent-kq
     type: PrometheusAgent
@@ -560,7 +569,14 @@ services:
         volume Mode: Filesystem
     traits:
       meshmap:
-        edges: []
+        edges:
+        - data:
+            id: 1ffa67d0-d3db-4a44-a651-0712212170bb
+            metadata:
+              binded_by: 3f8a1626-ce96-4738-bc48-0bc7cd36362d
+            source: 4f630f86-c29f-4149-9dc7-d88026d96769
+            subType: Mount
+            target: e38ddd90-4777-41d9-af1c-835ade57638b
         id: e38ddd90-4777-41d9-af1c-835ade57638b
         label: wasm-pv
         meshmodel-metadata:
@@ -583,43 +599,3 @@ services:
         position:
           posX: 840.8593902106745
           posY: 531.5477783606841
-  wasm-pvc:
-    name: wasm-pvc
-    type: PersistentVolumeClaim
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    settings:
-      spec:
-        access Modes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 1Mi
-        storage Class Name: slow
-        volume Mode: Filesystem
-    traits:
-      meshmap:
-        edges: []
-        id: f6e67a8c-9b6f-4e64-a24e-434102bc76b0
-        label: wasm-pvc
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: cylinder
-          styleOverrides: '{"height":32,"width":32,"pading":0,"background-clip":"none","background-image-containment":"over","border-opacity":0,"background-opacity":0,"bounds-expansion":20,
-            "z-index": 9999}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
-        position:
-          posX: 1066.9830328828268
-          posY: 543.9493411123938
