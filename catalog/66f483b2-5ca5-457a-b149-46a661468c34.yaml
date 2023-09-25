@@ -1,0 +1,155 @@
+name: webserver.yaml
+services:
+  default:
+    name: default
+    type: Namespace
+    apiVersion: v1
+    version: v1.25.2
+    model: kubernetes
+    traits:
+      meshmap:
+        edges: []
+        id: ac22cbeb-1ad4-4cf2-80ff-68b04a36fcf0
+        label: default
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Kubernetes
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          name: kubernetes
+          version: v1.25.2
+        meshmodel-metadata:
+          genealogy: parent
+          isCustomResource: false
+          isNamespaced: false
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: rectangle
+          styleOverrides: '{"background-image":"none","border-width":2,"border-style":"dashed","background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/namespace-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
+        position:
+          posX: 0.7273716381315438
+          posY: 18.319245109914036
+  webserver-simple-deployment:
+    name: webserver-simple-deployment
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    dependsOn:
+    - default
+    settings:
+      spec:
+        replicas: 2
+        selector:
+          match Labels:
+            app: webserver-simple-app
+        template:
+          metadata:
+            labels:
+              app: webserver-simple-app
+          spec:
+            containers:
+            - command:
+              - python
+              - -m
+              - http.server
+              image: python:3
+              name: webserver-simple-container
+              ports:
+              - container Port: 8000
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: e519ab5e-7257-47a2-80d1-9e743b497f67
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 0693df3a-4c0e-4539-bb40-e2c4c7f620b8
+            subType: Network
+            target: 8476eb0c-092b-458b-8fa8-1a3ca1a2ca1d
+        id: 8476eb0c-092b-458b-8fa8-1a3ca1a2ca1d
+        label: webserver-simple-deployment
+        meshmodel-metadata:
+          genealogy: parent
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: Created by leecalcote
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        parent: ac22cbeb-1ad4-4cf2-80ff-68b04a36fcf0
+        position:
+          posX: 41.18265892411807
+          posY: 9.638218214966368
+  webserver-simple-service:
+    name: webserver-simple-service
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    dependsOn:
+    - default
+    settings:
+      spec:
+        ports:
+        - port: 80
+          protocol: TCP
+          target Port: 8000
+        selector:
+          app: webserver-simple-app
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: e519ab5e-7257-47a2-80d1-9e743b497f67
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 0693df3a-4c0e-4539-bb40-e2c4c7f620b8
+            subType: Network
+            target: 8476eb0c-092b-458b-8fa8-1a3ca1a2ca1d
+        id: 0693df3a-4c0e-4539-bb40-e2c4c7f620b8
+        label: webserver-simple-service
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        parent: ac22cbeb-1ad4-4cf2-80ff-68b04a36fcf0
+        position:
+          posX: -39.72791564785499
+          posY: 9.31924510991404
