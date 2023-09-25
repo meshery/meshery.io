@@ -1,0 +1,115 @@
+name: istio-ingress-service-web-api-v1-only.yaml
+services:
+  virtualservice-ingress-web-api-web-app:
+    name: virtualservice-ingress-web-api-web-app
+    type: VirtualService
+    apiVersion: networking.istio.io/v1alpha3
+    namespace: default
+    model: istio-base
+    settings:
+      spec:
+        gateways:
+        - default-gateway-ingress-http
+        hosts:
+        - '*'
+        http:
+        - match:
+          - uri:
+              prefix: /kiali
+          route:
+          - destination:
+              host: kiali.istio-system.svc.cluster.local
+              port:
+                number: 20001
+        - match:
+          - uri:
+              prefix: /web-api/v1/getmultiple
+          route:
+          - destination:
+              host: web-api
+              subset: v1
+        - match:
+          - uri:
+              prefix: /web-api/v1/create
+          route:
+          - destination:
+              host: web-api
+              subset: v1
+        - match:
+          - uri:
+              prefix: /web-api/v1/manage
+          route:
+          - destination:
+              host: web-api
+              subset: v1
+        - match:
+          - uri:
+              prefix: /openapi/ui/
+          route:
+          - destination:
+              host: web-api
+              port:
+                number: 9080
+        - match:
+          - uri:
+              prefix: /openapi
+          route:
+          - destination:
+              host: web-api
+              port:
+                number: 9080
+        - match:
+          - uri:
+              prefix: /loginwithtoken
+          route:
+          - destination:
+              host: web-app
+              port:
+                number: 80
+        - match:
+          - uri:
+              prefix: /login
+          route:
+          - destination:
+              host: authentication
+              port:
+                number: 3000
+        - match:
+          - uri:
+              prefix: /callback
+          route:
+          - destination:
+              host: authentication
+              port:
+                number: 3000
+        - match:
+          - uri:
+              prefix: /
+          route:
+          - destination:
+              host: web-app
+              port:
+                number: 80
+    traits:
+      meshmap:
+        edges: []
+        id: e53f38e9-6b09-46f7-99cd-aa9d5a40104d
+        label: virtualservice-ingress-web-api-web-app
+        meshmodel-metadata:
+          genealogy: ""
+          isNamespaced: true
+          logoURL: https://github.com/istio/istio/blob/master/logo/istio-bluelogo-whitebackground-unframed.svg
+          model: istio-base
+          modelDisplayName: Istio
+          primaryColor: '#466BB0'
+          published: true
+          secondaryColor: '#93b0e7'
+          shape: circle
+          styleOverrides: ""
+          subCategory: Service Mesh
+          svgColor: ui/public/static/img/meshmodels/istio-base/color/authorizationpolicy-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/istio-base/white/authorizationpolicy-white.svg
+        position:
+          posX: -26.185378972735414
+          posY: 1.1363141809342365
