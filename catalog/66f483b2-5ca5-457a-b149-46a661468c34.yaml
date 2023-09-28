@@ -41,8 +41,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/meshery/color/comment-color.svg
         position:
-          posX: 119.24656235623834
-          posY: -14.483168739706043
+          posX: 102.15371653062277
+          posY: 17.15677991622068
   default:
     name: default
     type: Namespace
@@ -84,8 +84,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/namespace-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
         position:
-          posX: 9.273794550939336
-          posY: 13.773275475441807
+          posX: 2.5457594919204354
+          posY: 12.136726407031809
   webserver-simple-deployment:
     name: webserver-simple-deployment
     type: Deployment
@@ -125,6 +125,14 @@ services:
             source: 0693df3a-4c0e-4539-bb40-e2c4c7f620b8
             subType: Network
             target: 8476eb0c-092b-458b-8fa8-1a3ca1a2ca1d
+        - data:
+            id: 1fb5104d-36c8-4d2c-a6f1-d611662f5a14
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 0693df3a-4c0e-4539-bb40-e2c4c7f620b8
+            subType: Network
+            target: 8476eb0c-092b-458b-8fa8-1a3ca1a2ca1d
         id: 8476eb0c-092b-458b-8fa8-1a3ca1a2ca1d
         label: webserver-simple-deployment
         meshmodel-metadata:
@@ -145,8 +153,8 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         parent: ac22cbeb-1ad4-4cf2-80ff-68b04a36fcf0
         position:
-          posX: 49.72908183692587
-          posY: 5.092248580494136
+          posX: 43.001046777906964
+          posY: 3.4556995120841396
   webserver-simple-service:
     name: webserver-simple-service
     type: Service
@@ -161,6 +169,8 @@ services:
         - port: 80
           protocol: TCP
           target Port: 8000
+        - port: 80
+          protocol: TCP
         selector:
           app: webserver-simple-app
     traits:
@@ -168,6 +178,14 @@ services:
         edges:
         - data:
             id: e519ab5e-7257-47a2-80d1-9e743b497f67
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 0693df3a-4c0e-4539-bb40-e2c4c7f620b8
+            subType: Network
+            target: 8476eb0c-092b-458b-8fa8-1a3ca1a2ca1d
+        - data:
+            id: 1fb5104d-36c8-4d2c-a6f1-d611662f5a14
             metadata:
               port: 80
               protocol: TCP
@@ -194,5 +212,5 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         parent: ac22cbeb-1ad4-4cf2-80ff-68b04a36fcf0
         position:
-          posX: -31.181492735047204
-          posY: 4.773275475441807
+          posX: -37.9095277940661
+          posY: 3.1367264070318104
