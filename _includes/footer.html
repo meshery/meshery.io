@@ -120,31 +120,37 @@
 	}
 </script>
 <script type="text/javascript">
-	let toggleBtn = document.getElementById("mode-toggle-btn");
-	document.body.classList.add("dark-mode");
-	toggleBtn.onclick = toggleMode;
+	let toggleBtn = document.getElementById("mode-toggle-btn")
+	// console.log(document.body.classList);
+	// console.log(localStorage.getItem("mode"));
+	toggleBtn.onclick = setMode;
+	
+	if (localStorage.getItem("mode") === null) {
+    	localStorage.setItem("mode", "dark-mode");
+    }
 
-	function toggleMode() {
-		document.body.classList.toggle("dark-mode");
+	const isDark = document.body.classList.contains("dark-mode");
+	const currentMode = localStorage.getItem("mode");
+	if (isDark ^ (currentMode === "dark-mode")) {
+		setMode();
+	}
+
+	function setMode() {
+		document.body.classList.toggle("dark-mode")
+		let layer5Logos = document.querySelectorAll("#layer5-logo");
+		let allLogos = document.querySelectorAll("#logo-dark-light");
 		if (document.body.classList.contains("dark-mode")) {
-			setDarkModeImages();
+			layer5Logos.forEach(e => e.src = '../assets/images/company-logo/layer5-dark-mode-logo.svg')
+			allLogos.forEach(e => e.src = e.dataset.logoForDark)
 		} else {
-			setLightModeImages();
+			layer5Logos.forEach(e => e.src = '../assets/images/company-logo/layer5-no-trim.svg')
+			allLogos.forEach(e => e.src = e.dataset.logoForLight)
 		}
-	}
-
-	function setDarkModeImages() {
-		let layer5Logos = document.querySelectorAll("#layer5-logo");
-		let allLogos = document.querySelectorAll("#logo-dark-light");
-		layer5Logos.forEach(e => e.src = '../assets/images/company-logo/layer5-dark-mode-logo.svg');
-		allLogos.forEach(e => e.src = e.dataset.logoForDark);
-	}
-
-	function setLightModeImages() {
-		let layer5Logos = document.querySelectorAll("#layer5-logo");
-		let allLogos = document.querySelectorAll("#logo-dark-light");
-		layer5Logos.forEach(e => e.src = '../assets/images/company-logo/layer5-no-trim.svg');
-		allLogos.forEach(e => e.src = e.dataset.logoForLight);
+		if (document.body.classList.contains("dark-mode")) {
+			localStorage.setItem("mode", "dark-mode")
+		} else {
+			localStorage.setItem("mode", "light-mode")
+		}
 	}
 	
 </script>
