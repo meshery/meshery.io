@@ -1,4 +1,4 @@
-name: bank-of-anthos.yml
+name: bank-of-anthos
 services:
   accounts-db-config:
     name: accounts-db-config
@@ -20,32 +20,76 @@ services:
         POSTGRES_USER: accounts-admin
     traits:
       meshmap:
-        edges: []
         id: ab29e114-9723-44a4-995c-f4d2b9907eec
         label: accounts-db-config
         meshmodel-metadata:
-          genealogy: ''
+          genealogy: ""
           isCustomResource: false
           isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
           shape: circle
-          styleOverrides: ''
+          styleOverrides: ""
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
           posX: 132.7533993086964
           posY: 156.82463738720375
-  accounts-db-jjcgi:
+        style: []
+        whiteboardData:
+          style: {}
+  accounts-db-sprrz:
+    name: accounts-db
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    labels:
+      environment: development
+    settings:
+      spec:
+        ports:
+        - name: tcp
+          port: 5432
+          protocol: TCP
+          target Port: 5432
+        selector:
+          app: accounts-db
+          environment: development
+        type: ClusterIP
+    traits:
+      meshmap:
+        id: cf390327-c950-4cb9-b1b4-c9b3378e1d54
+        label: accounts-db
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: 65.2533993086964
+          posY: -51.17536261279625
+        style: []
+        whiteboardData:
+          style: {}
+  accounts-db-wukot:
     name: accounts-db
     type: StatefulSet
     apiVersion: apps/v1
@@ -68,44 +112,41 @@ services:
               environment: development
           spec:
             containers:
-              - env From:
-                  - config Map Ref:
-                      name: environment-config
-                  - config Map Ref:
-                      name: accounts-db-config
-                  - config Map Ref:
-                      name: demo-data-config
-                image: >-
-                  us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/accounts-db:v0.6.1@sha256:7c4cf161904b4ef869cc8796d7b5bcde1dda6f861898c0cfed6afd4e4affe659
-                name: accounts-db
-                ports:
-                  - container Port: 5432
-                resources:
-                  limits:
-                    cpu: 250m
-                    memory: 512Mi
-                  requests:
-                    cpu: 100m
-                    memory: 128Mi
-                volume Mounts:
-                  - mount Path: /var/lib/postgresql/data
-                    name: postgresdb
-                    sub Path: postgres
+            - env From:
+              - config Map Ref:
+                  name: environment-config
+              - config Map Ref:
+                  name: accounts-db-config
+              - config Map Ref:
+                  name: demo-data-config
+              image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/accounts-db:v0.6.1@sha256:7c4cf161904b4ef869cc8796d7b5bcde1dda6f861898c0cfed6afd4e4affe659
+              name: accounts-db
+              ports:
+              - container Port: 5432
+              resources:
+                limits:
+                  cpu: 250m
+                  memory: 512Mi
+                requests:
+                  cpu: 100m
+                  memory: 128Mi
+              volume Mounts:
+              - mount Path: /var/lib/postgresql/data
+                name: postgresdb
+                sub Path: postgres
             service Account Name: default
             volumes:
-              - empty Dir: {}
-                name: postgresd
+            - empty Dir: {}
+              name: postgresd
     traits:
       meshmap:
-        edges: []
         id: a3901cd1-fefb-4aa4-b19b-186bd05d21ff
         label: accounts-db
         meshmodel-metadata:
-          genealogy: ''
+          genealogy: ""
           isCustomResource: false
           isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
@@ -114,62 +155,74 @@ services:
           shape: cylinder
           styleOverrides: '{"height":"15","width":"15","x":"12","y":"20"}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
           posX: 65.2533993086964
           posY: 156.82463738720375
-  accounts-db-kgvbc:
-    name: accounts-db
+        style: []
+        whiteboardData:
+          style: {}
+  balancereader-dnhcd:
+    name: balancereader
     type: Service
     apiVersion: v1
     namespace: default
     model: kubernetes
     labels:
+      application: bank-of-anthos
       environment: development
+      team: ledger
+      tier: backend
     settings:
       spec:
         ports:
-          - name: tcp
-            port: 5432
-            protocol: TCP
-            target Port: 5432
+        - name: http
+          port: 8080
+          target Port: 8080
         selector:
-          app: accounts-db
+          app: balancereader
+          application: bank-of-anthos
           environment: development
+          team: ledger
+          tier: backend
         type: ClusterIP
     traits:
       meshmap:
-        edges: []
-        id: cf390327-c950-4cb9-b1b4-c9b3378e1d54
-        label: accounts-db
+        id: 4b23ec9e-ec0b-4ec9-a6e6-7630d0f16ce9
+        label: balancereader
         meshmodel-metadata:
-          genealogy: ''
+          genealogy: ""
           isCustomResource: false
           isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-triangle
-          styleOverrides: >-
-            {"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
-          posX: 65.2533993086964
-          posY: -51.17536261279625
-  balancereader-mgqvu:
+          posX: -174.4435331298761
+          posY: 89.69167797470824
+        style:
+        - data:
+            id: eeb7a5c6-2f53-438a-8cd6-789ee3d64e83
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: 4b23ec9e-ec0b-4ec9-a6e6-7630d0f16ce9
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+        whiteboardData:
+          style: {}
+  balancereader-edudk:
     name: balancereader
     type: Deployment
     apiVersion: apps/v1
@@ -201,79 +254,77 @@ services:
               tier: backend
           spec:
             containers:
-              - env:
-                  - name: VERSION
-                    value: v0.6.1
-                  - name: PORT
-                    value: '8080'
-                  - name: ENABLE_TRACING
-                    value: 'true'
-                  - name: ENABLE_METRICS
-                    value: 'true'
-                  - name: POLL_MS
-                    value: '100'
-                  - name: CACHE_SIZE
-                    value: '1000000'
-                  - name: JVM_OPTS
-                    value: >-
-                      -XX:+UnlockExperimentalVMOptions
-                      -XX:+UseCGroupMemoryLimitForHeap -Xms256m -Xmx512m
-                  - name: LOG_LEVEL
-                    value: info
-                  - name: NAMESPACE
-                    value From:
-                      field Ref:
-                        field Path: metadata.namespace
-                env From:
-                  - config Map Ref:
-                      name: environment-config
-                  - config Map Ref:
-                      name: ledger-db-config
-                image: >-
-                  us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/balancereader:v0.6.1@sha256:100dabaeec6e8975a3a459b709a316178c3125301d164e1a1c861bd4a217bc8e
-                liveness Probe:
-                  http Get:
-                    path: /healthy
-                    port: 8080
-                  initial Delay Seconds: 120
-                  period Seconds: 5
-                  timeout Seconds: 10
-                name: balancereader
-                readiness Probe:
-                  http Get:
-                    path: /ready
-                    port: 8080
-                  initial Delay Seconds: 60
-                  period Seconds: 5
-                  timeout Seconds: 10
-                resources:
-                  limits:
-                    cpu: 500m
-                    ephemeral-storage: 0.5Gi
-                    memory: 512Mi
-                  requests:
-                    cpu: 100m
-                    ephemeral-storage: 0.5Gi
-                    memory: 256Mi
-                security Context:
-                  allow Privilege Escalation: false
-                  capabilities:
-                    drop:
-                      - all
-                  privileged: false
-                  read Only Root Filesystem: true
-                startup Probe:
-                  failure Threshold: 30
-                  http Get:
-                    path: /healthy
-                    port: 8080
-                  period Seconds: 10
-                volume Mounts:
-                  - mount Path: /tmp
-                    name: tmp
-                  - mount Path: /tmp/.ssh
-                    name: publickey
-                    read Only: true
+            - env:
+              - name: VERSION
+                value: v0.6.1
+              - name: PORT
+                value: "8080"
+              - name: ENABLE_TRACING
+                value: "true"
+              - name: ENABLE_METRICS
+                value: "true"
+              - name: POLL_MS
+                value: "100"
+              - name: CACHE_SIZE
+                value: "1000000"
+              - name: JVM_OPTS
+                value: -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap
+                  -Xms256m -Xmx512m
+              - name: LOG_LEVEL
+                value: info
+              - name: NAMESPACE
+                value From:
+                  field Ref:
+                    field Path: metadata.namespace
+              env From:
+              - config Map Ref:
+                  name: environment-config
+              - config Map Ref:
+                  name: ledger-db-config
+              image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/balancereader:v0.6.1@sha256:100dabaeec6e8975a3a459b709a316178c3125301d164e1a1c861bd4a217bc8e
+              liveness Probe:
+                http Get:
+                  path: /healthy
+                  port: 8080
+                initial Delay Seconds: 120
+                period Seconds: 5
+                timeout Seconds: 10
+              name: balancereader
+              readiness Probe:
+                http Get:
+                  path: /ready
+                  port: 8080
+                initial Delay Seconds: 60
+                period Seconds: 5
+                timeout Seconds: 10
+              resources:
+                limits:
+                  cpu: 500m
+                  ephemeral-storage: 0.5Gi
+                  memory: 512Mi
+                requests:
+                  cpu: 100m
+                  ephemeral-storage: 0.5Gi
+                  memory: 256Mi
+              security Context:
+                allow Privilege Escalation: false
+                capabilities:
+                  drop:
+                  - all
+                privileged: false
+                read Only Root Filesystem: true
+              startup Probe:
+                failure Threshold: 30
+                http Get:
+                  path: /healthy
+                  port: 8080
+                period Seconds: 10
+              volume Mounts:
+              - mount Path: /tmp
+                name: tmp
+              - mount Path: /tmp/.ssh
+                name: publickey
+                read Only: true
             security Context:
               fs Group: 1000
               run As Group: 1000
@@ -282,17 +333,16 @@ services:
             service Account Name: bank-of-anthos
             termination Grace Period Seconds: 5
             volumes:
-              - empty Dir: {}
-                name: tmp
-              - name: publickey
-                secret:
-                  items:
-                    - key: jwtRS256.key.pub
-                      path: publickey
-                  secret Name: jwt-key
+            - empty Dir: {}
+              name: tmp
+            - name: publickey
+              secret:
+                items:
+                - key: jwtRS256.key.pub
+                  path: publickey
+                secret Name: jwt-key
     traits:
       meshmap:
-        edges: []
         id: 93e3a62f-0d2c-4fce-96bb-27fc22e48496
         label: balancereader
         meshmodel-metadata:
@@ -306,78 +356,16 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-pentagon
-          styleOverrides: >-
-            {"background-image":"none","border-width":2,"background-opacity":0.5}
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: >-
-            ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
           posX: 65.7533993086964
           posY: 18.32463738720375
-  balancereader-zjuzs:
-    name: balancereader
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    labels:
-      application: bank-of-anthos
-      environment: development
-      team: ledger
-      tier: backend
-    settings:
-      spec:
-        ports:
-          - name: http
-            port: 8080
-            target Port: 8080
-        selector:
-          app: balancereader
-          application: bank-of-anthos
-          environment: development
-          team: ledger
-          tier: backend
-        type: ClusterIP
-    traits:
-      meshmap:
-        edges:
-          - data:
-              id: eeb7a5c6-2f53-438a-8cd6-789ee3d64e83
-              metadata:
-                port: 8080
-                protocol: TCP
-              source: 4b23ec9e-ec0b-4ec9-a6e6-7630d0f16ce9
-              subType: Network
-              target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-        id: 4b23ec9e-ec0b-4ec9-a6e6-7630d0f16ce9
-        label: balancereader
-        meshmodel-metadata:
-          genealogy: ''
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: >-
-            {"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}
-          subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        position:
-          posX: -174.4435331298761
-          posY: 89.69167797470824
+        style: []
+        whiteboardData: {}
   bank-of-anthos:
     name: bank-of-anthos
     type: ServiceAccount
@@ -388,32 +376,31 @@ services:
       iam.gke.io/gcp-service-account: gke-workload-development@bank-of-anthos-ci.iam.gserviceaccount.com
     traits:
       meshmap:
-        edges: []
         id: 151f97f1-7a72-4d51-8866-607fc14aa81f
         label: bank-of-anthos
         meshmodel-metadata:
-          genealogy: ''
+          genealogy: ""
           isCustomResource: false
           isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-rectangle
-          styleOverrides: ''
+          styleOverrides: ""
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
         position:
           posX: 263.25339930869643
           posY: 17.82463738720375
-  contacts-fujbi:
+        style: []
+        whiteboardData:
+          style: {}
+  contacts-dccrd:
     name: contacts
     type: Service
     apiVersion: v1
@@ -427,9 +414,9 @@ services:
     settings:
       spec:
         ports:
-          - name: http
-            port: 8080
-            target Port: 8080
+        - name: http
+          port: 8080
+          target Port: 8080
         selector:
           app: contacts
           application: bank-of-anthos
@@ -439,41 +426,39 @@ services:
         type: ClusterIP
     traits:
       meshmap:
-        edges:
-          - data:
-              id: 4beadc26-455a-484b-9901-429d26efe22c
-              metadata:
-                port: 8080
-                protocol: TCP
-              source: a742186c-9607-471e-bf94-23898c3ac909
-              subType: Network
-              target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
         id: a742186c-9607-471e-bf94-23898c3ac909
         label: contacts
         meshmodel-metadata:
-          genealogy: ''
+          genealogy: ""
           isCustomResource: false
           isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-triangle
-          styleOverrides: >-
-            {"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
           posX: -82.96320794731162
           posY: 71.70983705843764
-  contacts-mgamd:
+        style:
+        - data:
+            id: 4beadc26-455a-484b-9901-429d26efe22c
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: a742186c-9607-471e-bf94-23898c3ac909
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+        whiteboardData:
+          style: {}
+  contacts-sdvsg:
     name: contacts
     type: Deployment
     apiVersion: apps/v1
@@ -505,52 +490,51 @@ services:
               tier: backend
           spec:
             containers:
-              - env:
-                  - name: VERSION
-                    value: v0.6.1
-                  - name: PORT
-                    value: '8080'
-                  - name: ENABLE_TRACING
-                    value: 'true'
-                  - name: LOG_LEVEL
-                    value: info
-                env From:
-                  - config Map Ref:
-                      name: environment-config
-                  - config Map Ref:
-                      name: accounts-db-config
-                image: >-
-                  us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/contacts:v0.6.1@sha256:b355abdaf59d23f5ab4ee08226fd1296dce8f764892ae3916a420d9d6bb20db4
-                name: contacts
-                readiness Probe:
-                  http Get:
-                    path: /ready
-                    port: 8080
-                  initial Delay Seconds: 10
-                  period Seconds: 5
-                  timeout Seconds: 10
-                resources:
-                  limits:
-                    cpu: 250m
-                    ephemeral-storage: 0.25Gi
-                    memory: 128Mi
-                  requests:
-                    cpu: 100m
-                    ephemeral-storage: 0.25Gi
-                    memory: 64Mi
-                security Context:
-                  allow Privilege Escalation: false
-                  capabilities:
-                    drop:
-                      - all
-                  privileged: false
-                  read Only Root Filesystem: true
-                volume Mounts:
-                  - mount Path: /tmp
-                    name: tmp
-                  - mount Path: /tmp/.ssh
-                    name: publickey
-                    read Only: true
+            - env:
+              - name: VERSION
+                value: v0.6.1
+              - name: PORT
+                value: "8080"
+              - name: ENABLE_TRACING
+                value: "true"
+              - name: LOG_LEVEL
+                value: info
+              env From:
+              - config Map Ref:
+                  name: environment-config
+              - config Map Ref:
+                  name: accounts-db-config
+              image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/contacts:v0.6.1@sha256:b355abdaf59d23f5ab4ee08226fd1296dce8f764892ae3916a420d9d6bb20db4
+              name: contacts
+              readiness Probe:
+                http Get:
+                  path: /ready
+                  port: 8080
+                initial Delay Seconds: 10
+                period Seconds: 5
+                timeout Seconds: 10
+              resources:
+                limits:
+                  cpu: 250m
+                  ephemeral-storage: 0.25Gi
+                  memory: 128Mi
+                requests:
+                  cpu: 100m
+                  ephemeral-storage: 0.25Gi
+                  memory: 64Mi
+              security Context:
+                allow Privilege Escalation: false
+                capabilities:
+                  drop:
+                  - all
+                privileged: false
+                read Only Root Filesystem: true
+              volume Mounts:
+              - mount Path: /tmp
+                name: tmp
+              - mount Path: /tmp/.ssh
+                name: publickey
+                read Only: true
             security Context:
               fs Group: 1000
               run As Group: 1000
@@ -559,16 +543,15 @@ services:
             service Account Name: bank-of-anthos
             termination Grace Period Seconds: 5
             volumes:
-              - name: tmp
-              - name: publickey
-                secret:
-                  items:
-                    - key: jwtRS256.key.pub
-                      path: publickey
-                  secret Name: jwt-key
+            - name: tmp
+            - name: publickey
+              secret:
+                items:
+                - key: jwtRS256.key.pub
+                  path: publickey
+                secret Name: jwt-key
     traits:
       meshmap:
-        edges: []
         id: bb99ec82-ade4-4023-9dff-440a4a6dfee2
         label: contacts
         meshmodel-metadata:
@@ -582,18 +565,16 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-pentagon
-          styleOverrides: >-
-            {"background-image":"none","border-width":2,"background-opacity":0.5}
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: >-
-            ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
           posX: 262.75339930869643
           posY: -56.67536261279625
+        style: []
+        whiteboardData: {}
   demo-data-config:
     name: demo-data-config
     type: ConfigMap
@@ -604,34 +585,33 @@ services:
       data:
         DEMO_LOGIN_PASSWORD: bankofanthos
         DEMO_LOGIN_USERNAME: testuser
-        USE_DEMO_DATA: 'True'
+        USE_DEMO_DATA: "True"
     traits:
       meshmap:
-        edges: []
         id: ddc49026-c678-4d0d-b892-d083dd36be1f
         label: demo-data-config
         meshmodel-metadata:
-          genealogy: ''
+          genealogy: ""
           isCustomResource: false
           isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
           shape: circle
-          styleOverrides: ''
+          styleOverrides: ""
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
           posX: 66.2533993086964
           posY: 92.82463738720375
+        style: []
+        whiteboardData:
+          style: {}
   environment-config:
     name: environment-config
     type: ConfigMap
@@ -640,36 +620,93 @@ services:
     model: kubernetes
     settings:
       data:
-        LOCAL_ROUTING_NUM: '883745000'
+        LOCAL_ROUTING_NUM: "883745000"
         PUB_KEY_PATH: /tmp/.ssh/publickey
     traits:
       meshmap:
-        edges: []
         id: abffbfde-0cca-4424-a72c-20af869e685e
         label: environment-config
         meshmodel-metadata:
-          genealogy: ''
+          genealogy: ""
           isCustomResource: false
           isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
           shape: circle
-          styleOverrides: ''
+          styleOverrides: ""
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
           posX: 203.2533993086964
           posY: -57.17536261279625
-  frontend-hfxfa:
+        style: []
+        whiteboardData:
+          style: {}
+  frontend-kulkr:
+    name: frontend
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    labels:
+      application: bank-of-anthos
+      environment: development
+      team: frontend
+      tier: web
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 80
+          target Port: 8080
+        selector:
+          app: frontend
+          application: bank-of-anthos
+          environment: development
+          team: frontend
+          tier: web
+        type: LoadBalancer
+    traits:
+      meshmap:
+        id: c114a0f5-ef57-4cbd-8be7-70f94256972c
+        label: frontend
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: -76.37473293783776
+          posY: -135.89588989417248
+        style:
+        - data:
+            id: 54abf9e1-eb7a-400c-815f-0df469500438
+            metadata:
+              port: 80
+              protocol: TCP
+            source: c114a0f5-ef57-4cbd-8be7-70f94256972c
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+        whiteboardData:
+          style: {}
+  frontend-kvglk:
     name: frontend
     type: Deployment
     apiVersion: apps/v1
@@ -701,81 +738,80 @@ services:
               tier: web
           spec:
             containers:
-              - env:
-                  - name: VERSION
-                    value: v0.6.1
-                  - name: PORT
-                    value: '8080'
-                  - name: ENABLE_TRACING
-                    value: 'true'
-                  - name: SCHEME
-                    value: http
-                  - name: LOG_LEVEL
-                    value: info
-                  - name: DEFAULT_USERNAME
-                    value From:
-                      config Map Key Ref:
-                        key: DEMO_LOGIN_USERNAME
-                        name: demo-data-config
-                  - name: DEFAULT_PASSWORD
-                    value From:
-                      config Map Key Ref:
-                        key: DEMO_LOGIN_PASSWORD
-                        name: demo-data-config
-                  - name: REGISTERED_OAUTH_CLIENT_ID
-                    value From:
-                      config Map Key Ref:
-                        key: DEMO_OAUTH_CLIENT_ID
-                        name: oauth-config
-                        optional: true
-                  - name: ALLOWED_OAUTH_REDIRECT_URI
-                    value From:
-                      config Map Key Ref:
-                        key: DEMO_OAUTH_REDIRECT_URI
-                        name: oauth-config
-                        optional: true
-                env From:
-                  - config Map Ref:
-                      name: environment-config
-                  - config Map Ref:
-                      name: service-api-config
-                image: >-
-                  us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/frontend:v0.6.1@sha256:07cb2c7f9a08cf820a81d59670a59b53d183717ce998a035625f0441b24e7544
-                liveness Probe:
-                  http Get:
-                    path: /ready
-                    port: 8080
-                  initial Delay Seconds: 60
-                  period Seconds: 15
-                  timeout Seconds: 30
-                name: front
-                readiness Probe:
-                  http Get:
-                    path: /ready
-                    port: 8080
-                  initial Delay Seconds: 10
-                  period Seconds: 5
-                  timeout Seconds: 10
-                resources:
-                  limits:
-                    cpu: 250m
-                    memory: 128Mi
-                  requests:
-                    cpu: 100m
-                    memory: 64Mi
-                security Context:
-                  allow Privilege Escalation: false
-                  capabilities:
-                    drop:
-                      - all
-                  privileged: false
-                  read Only Root Filesystem: true
-                volume Mounts:
-                  - mount Path: /tmp
-                    name: tmp
-                  - mount Path: /tmp/.ssh
-                    name: publickey
-                    read Only: true
+            - env:
+              - name: VERSION
+                value: v0.6.1
+              - name: PORT
+                value: "8080"
+              - name: ENABLE_TRACING
+                value: "true"
+              - name: SCHEME
+                value: http
+              - name: LOG_LEVEL
+                value: info
+              - name: DEFAULT_USERNAME
+                value From:
+                  config Map Key Ref:
+                    key: DEMO_LOGIN_USERNAME
+                    name: demo-data-config
+              - name: DEFAULT_PASSWORD
+                value From:
+                  config Map Key Ref:
+                    key: DEMO_LOGIN_PASSWORD
+                    name: demo-data-config
+              - name: REGISTERED_OAUTH_CLIENT_ID
+                value From:
+                  config Map Key Ref:
+                    key: DEMO_OAUTH_CLIENT_ID
+                    name: oauth-config
+                    optional: true
+              - name: ALLOWED_OAUTH_REDIRECT_URI
+                value From:
+                  config Map Key Ref:
+                    key: DEMO_OAUTH_REDIRECT_URI
+                    name: oauth-config
+                    optional: true
+              env From:
+              - config Map Ref:
+                  name: environment-config
+              - config Map Ref:
+                  name: service-api-config
+              image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/frontend:v0.6.1@sha256:07cb2c7f9a08cf820a81d59670a59b53d183717ce998a035625f0441b24e7544
+              liveness Probe:
+                http Get:
+                  path: /ready
+                  port: 8080
+                initial Delay Seconds: 60
+                period Seconds: 15
+                timeout Seconds: 30
+              name: front
+              readiness Probe:
+                http Get:
+                  path: /ready
+                  port: 8080
+                initial Delay Seconds: 10
+                period Seconds: 5
+                timeout Seconds: 10
+              resources:
+                limits:
+                  cpu: 250m
+                  memory: 128Mi
+                requests:
+                  cpu: 100m
+                  memory: 64Mi
+              security Context:
+                allow Privilege Escalation: false
+                capabilities:
+                  drop:
+                  - all
+                privileged: false
+                read Only Root Filesystem: true
+              volume Mounts:
+              - mount Path: /tmp
+                name: tmp
+              - mount Path: /tmp/.ssh
+                name: publickey
+                read Only: true
             security Context:
               fs Group: 1000
               run As Group: 1000
@@ -784,17 +820,16 @@ services:
             service Account Name: bank-of-anthos
             termination Grace Period Seconds: 5
             volumes:
-              - empty Dir: {}
-                name: tmp
-              - name: publickey
-                secret:
-                  items:
-                    - key: jwtRS256.key.pub
-                      path: publickey
-                  secret Name: jwt-key
+            - empty Dir: {}
+              name: tmp
+            - name: publickey
+              secret:
+                items:
+                - key: jwtRS256.key.pub
+                  path: publickey
+                secret Name: jwt-key
     traits:
       meshmap:
-        edges: []
         id: f8fd9da1-d6f4-4a98-9958-8361b575f965
         label: frontend
         meshmodel-metadata:
@@ -808,78 +843,16 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-pentagon
-          styleOverrides: >-
-            {"background-image":"none","border-width":2,"background-opacity":0.5}
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: >-
-            ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
           posX: 262.75339930869643
           posY: 93.32463738720375
-  frontend-ilywa:
-    name: frontend
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    labels:
-      application: bank-of-anthos
-      environment: development
-      team: frontend
-      tier: web
-    settings:
-      spec:
-        ports:
-          - name: http
-            port: 80
-            target Port: 8080
-        selector:
-          app: frontend
-          application: bank-of-anthos
-          environment: development
-          team: frontend
-          tier: web
-        type: LoadBalancer
-    traits:
-      meshmap:
-        edges:
-          - data:
-              id: 54abf9e1-eb7a-400c-815f-0df469500438
-              metadata:
-                port: 80
-                protocol: TCP
-              source: c114a0f5-ef57-4cbd-8be7-70f94256972c
-              subType: Network
-              target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-        id: c114a0f5-ef57-4cbd-8be7-70f94256972c
-        label: frontend
-        meshmodel-metadata:
-          genealogy: ''
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: >-
-            {"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}
-          subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        position:
-          posX: -76.37473293783776
-          posY: -135.89588989417248
+        style: []
+        whiteboardData: {}
   ledger-db-config:
     name: ledger-db-config
     type: ConfigMap
@@ -902,32 +875,31 @@ services:
         SPRING_DATASOURCE_USERNAME: admin
     traits:
       meshmap:
-        edges: []
         id: 8ce77712-9f41-4e7a-8955-125ab3565f8f
         label: ledger-db-config
         meshmodel-metadata:
-          genealogy: ''
+          genealogy: ""
           isCustomResource: false
           isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
           shape: circle
-          styleOverrides: ''
+          styleOverrides: ""
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
           posX: 203.2533993086964
           posY: 92.82463738720375
-  ledger-db-ddizg:
+        style: []
+        whiteboardData:
+          style: {}
+  ledger-db-jqqwr:
     name: ledger-db
     type: Service
     apiVersion: v1
@@ -938,42 +910,40 @@ services:
     settings:
       spec:
         ports:
-          - name: tcp
-            port: 5432
-            target Port: 5432
+        - name: tcp
+          port: 5432
+          target Port: 5432
         selector:
           app: ledger-db
           environment: development
         type: ClusterIP
     traits:
       meshmap:
-        edges: []
         id: 9f6e7ca4-4009-42d2-8cbc-20436817491b
         label: ledger-db
         meshmodel-metadata:
-          genealogy: ''
+          genealogy: ""
           isCustomResource: false
           isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-triangle
-          styleOverrides: >-
-            {"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
           posX: 129.7533993086964
           posY: 23.82463738720375
-  ledger-db-diyjr:
+        style: []
+        whiteboardData:
+          style: {}
+  ledger-db-zdlmd:
     name: ledger-db
     type: StatefulSet
     apiVersion: apps/v1
@@ -996,44 +966,41 @@ services:
               environment: development
           spec:
             containers:
-              - env From:
-                  - config Map Ref:
-                      name: environment-config
-                  - config Map Ref:
-                      name: ledger-db-config
-                  - config Map Ref:
-                      name: demo-data-config
-                image: >-
-                  us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/ledger-db:v0.6.1@sha256:2fe07029725a4ae2cf7beaec17dbdd6f8fc11caa8a9725708b42a603532e7b84
-                name: postgres
-                ports:
-                  - container Port: 5432
-                resources:
-                  limits:
-                    cpu: 250m
-                    memory: 1Gi
-                  requests:
-                    cpu: 100m
-                    memory: 512Mi
-                volume Mounts:
-                  - mount Path: /var/lib/postgresql/data
-                    name: postgresdb
-                    sub Path: postgres
+            - env From:
+              - config Map Ref:
+                  name: environment-config
+              - config Map Ref:
+                  name: ledger-db-config
+              - config Map Ref:
+                  name: demo-data-config
+              image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/ledger-db:v0.6.1@sha256:2fe07029725a4ae2cf7beaec17dbdd6f8fc11caa8a9725708b42a603532e7b84
+              name: postgres
+              ports:
+              - container Port: 5432
+              resources:
+                limits:
+                  cpu: 250m
+                  memory: 1Gi
+                requests:
+                  cpu: 100m
+                  memory: 512Mi
+              volume Mounts:
+              - mount Path: /var/lib/postgresql/data
+                name: postgresdb
+                sub Path: postgres
             service Account Name: default
             volumes:
-              - empty Dir: {}
-                name: postgresdb
+            - empty Dir: {}
+              name: postgresdb
     traits:
       meshmap:
-        edges: []
         id: 6e7c7eb1-357a-444a-8123-d0b0cd4c5ca6
         label: ledger-db
         meshmodel-metadata:
-          genealogy: ''
+          genealogy: ""
           isCustomResource: false
           isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
@@ -1042,75 +1009,16 @@ services:
           shape: cylinder
           styleOverrides: '{"height":"15","width":"15","x":"12","y":"20"}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
           posX: 258.75339930869643
           posY: 156.82463738720375
-  ledgerwriter-cbhyw:
-    name: ledgerwriter
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    labels:
-      application: bank-of-anthos
-      environment: development
-      team: ledger
-      tier: backend
-    settings:
-      spec:
-        ports:
-          - name: http
-            port: 8080
-            target Port: 8080
-        selector:
-          app: ledgerwriter
-          application: bank-of-anthos
-          environment: development
-          team: ledger
-          tier: backend
-        type: ClusterIP
-    traits:
-      meshmap:
-        edges:
-          - data:
-              id: a928bc62-33df-4bb7-80ed-11aa4ccc06a5
-              metadata:
-                port: 8080
-                protocol: TCP
-              source: 8e248f7f-b5ba-4543-abe3-df3d3af30453
-              subType: Network
-              target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-        id: 8e248f7f-b5ba-4543-abe3-df3d3af30453
-        label: ledgerwriter
-        meshmodel-metadata:
-          genealogy: ''
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: >-
-            {"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}
-          subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        position:
-          posX: -256.2964465485592
-          posY: 13.288174670773216
-  ledgerwriter-xnuwt:
+        style: []
+        whiteboardData:
+          style: {}
+  ledgerwriter-bqyay:
     name: ledgerwriter
     type: Deployment
     apiVersion: apps/v1
@@ -1142,70 +1050,68 @@ services:
               tier: backend
           spec:
             containers:
-              - env:
-                  - name: VERSION
-                    value: v0.6.1
-                  - name: PORT
-                    value: '8080'
-                  - name: ENABLE_TRACING
-                    value: 'true'
-                  - name: ENABLE_METRICS
-                    value: 'true'
-                  - name: JVM_OPTS
-                    value: >-
-                      -XX:+UnlockExperimentalVMOptions
-                      -XX:+UseCGroupMemoryLimitForHeap -Xms256m -Xmx512m
-                  - name: LOG_LEVEL
-                    value: info
-                  - name: NAMESPACE
-                    value From:
-                      field Ref:
-                        field Path: metadata.namespace
-                env From:
-                  - config Map Ref:
-                      name: environment-config
-                  - config Map Ref:
-                      name: service-api-config
-                  - config Map Ref:
-                      name: ledger-db-config
-                image: >-
-                  us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/ledgerwriter:v0.6.1@sha256:5087bc9f032dee70fda80063d659c3e1e34c7058c8b650d2128a8bdbbd4e5f4d
-                name: ledgerwriter
-                readiness Probe:
-                  http Get:
-                    path: /ready
-                    port: 8080
-                  initial Delay Seconds: 60
-                  period Seconds: 5
-                  timeout Seconds: 10
-                resources:
-                  limits:
-                    cpu: 500m
-                    ephemeral-storage: 0.5Gi
-                    memory: 512Mi
-                  requests:
-                    cpu: 100m
-                    ephemeral-storage: 0.5Gi
-                    memory: 256Mi
-                security Context:
-                  allow Privilege Escalation: false
-                  capabilities:
-                    drop:
-                      - all
-                  privileged: false
-                  read Only Root Filesystem: true
-                startup Probe:
-                  failure Threshold: 30
-                  http Get:
-                    path: /ready
-                    port: 8080
-                  period Seconds: 10
-                volume Mounts:
-                  - mount Path: /tmp
-                    name: tmp
-                  - mount Path: /tmp/.ssh
-                    name: publickey
-                    read Only: true
+            - env:
+              - name: VERSION
+                value: v0.6.1
+              - name: PORT
+                value: "8080"
+              - name: ENABLE_TRACING
+                value: "true"
+              - name: ENABLE_METRICS
+                value: "true"
+              - name: JVM_OPTS
+                value: -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap
+                  -Xms256m -Xmx512m
+              - name: LOG_LEVEL
+                value: info
+              - name: NAMESPACE
+                value From:
+                  field Ref:
+                    field Path: metadata.namespace
+              env From:
+              - config Map Ref:
+                  name: environment-config
+              - config Map Ref:
+                  name: service-api-config
+              - config Map Ref:
+                  name: ledger-db-config
+              image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/ledgerwriter:v0.6.1@sha256:5087bc9f032dee70fda80063d659c3e1e34c7058c8b650d2128a8bdbbd4e5f4d
+              name: ledgerwriter
+              readiness Probe:
+                http Get:
+                  path: /ready
+                  port: 8080
+                initial Delay Seconds: 60
+                period Seconds: 5
+                timeout Seconds: 10
+              resources:
+                limits:
+                  cpu: 500m
+                  ephemeral-storage: 0.5Gi
+                  memory: 512Mi
+                requests:
+                  cpu: 100m
+                  ephemeral-storage: 0.5Gi
+                  memory: 256Mi
+              security Context:
+                allow Privilege Escalation: false
+                capabilities:
+                  drop:
+                  - all
+                privileged: false
+                read Only Root Filesystem: true
+              startup Probe:
+                failure Threshold: 30
+                http Get:
+                  path: /ready
+                  port: 8080
+                period Seconds: 10
+              volume Mounts:
+              - mount Path: /tmp
+                name: tmp
+              - mount Path: /tmp/.ssh
+                name: publickey
+                read Only: true
             security Context:
               fs Group: 1000
               run As Group: 1000
@@ -1214,17 +1120,16 @@ services:
             service Account Name: bank-of-anthos
             termination Grace Period Seconds: 5
             volumes:
-              - empty Dir: {}
-                name: tmp
-              - name: publickey
-                secret:
-                  items:
-                    - key: jwtRS256.key.pub
-                      path: publickey
-                  secret Name: jwt-key
+            - empty Dir: {}
+              name: tmp
+            - name: publickey
+              secret:
+                items:
+                - key: jwtRS256.key.pub
+                  path: publickey
+                secret Name: jwt-key
     traits:
       meshmap:
-        edges: []
         id: 2ad41e6d-30c7-4477-b082-88844453bd90
         label: ledgerwriter
         meshmodel-metadata:
@@ -1238,18 +1143,74 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-pentagon
-          styleOverrides: >-
-            {"background-image":"none","border-width":2,"background-opacity":0.5}
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: >-
-            ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
           posX: 197.7533993086964
           posY: 157.32463738720375
+        style: []
+        whiteboardData: {}
+  ledgerwriter-lofqg:
+    name: ledgerwriter
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    labels:
+      application: bank-of-anthos
+      environment: development
+      team: ledger
+      tier: backend
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 8080
+          target Port: 8080
+        selector:
+          app: ledgerwriter
+          application: bank-of-anthos
+          environment: development
+          team: ledger
+          tier: backend
+        type: ClusterIP
+    traits:
+      meshmap:
+        id: 8e248f7f-b5ba-4543-abe3-df3d3af30453
+        label: ledgerwriter
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: -256.2964465485592
+          posY: 13.288174670773216
+        style:
+        - data:
+            id: a928bc62-33df-4bb7-80ed-11aa4ccc06a5
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: 8e248f7f-b5ba-4543-abe3-df3d3af30453
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+        whiteboardData:
+          style: {}
   loadgenerator:
     name: loadgenerator
     type: Deployment
@@ -1272,7 +1233,7 @@ services:
         template:
           metadata:
             annotations:
-              sidecar.istio.io/rewrite App HTTP Probers: 'true'
+              sidecar.istio.io/rewrite App HTTP Probers: "true"
             labels:
               app: loadgenerator
               environment: development
@@ -1280,30 +1241,29 @@ services:
               tier: test
           spec:
             containers:
-              - env:
-                  - name: FRONTEND_ADDR
-                    value: frontend:80
-                  - name: USERS
-                    value: '5'
-                  - name: LOG_LEVEL
-                    value: error
-                image: >-
-                  us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/loadgenerator:v0.6.1@sha256:3bb01473ed1b71b97e0a9c77f1e16db2f8e281344add5fb53d2bb2d889158f46
-                name: loadgenerator
-                resources:
-                  limits:
-                    cpu: 250m
-                    memory: 1Gi
-                  requests:
-                    cpu: 100m
-                    memory: 512Mi
-                security Context:
-                  allow Privilege Escalation: false
-                  capabilities:
-                    drop:
-                      - all
-                  privileged: false
-                  read Only Root Filesystem: true
+            - env:
+              - name: FRONTEND_ADDR
+                value: frontend:80
+              - name: USERS
+                value: "5"
+              - name: LOG_LEVEL
+                value: error
+              image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/loadgenerator:v0.6.1@sha256:3bb01473ed1b71b97e0a9c77f1e16db2f8e281344add5fb53d2bb2d889158f46
+              name: loadgenerator
+              resources:
+                limits:
+                  cpu: 250m
+                  memory: 1Gi
+                requests:
+                  cpu: 100m
+                  memory: 512Mi
+              security Context:
+                allow Privilege Escalation: false
+                capabilities:
+                  drop:
+                  - all
+                privileged: false
+                read Only Root Filesystem: true
             restart Policy: Always
             security Context:
               fs Group: 1000
@@ -1314,7 +1274,6 @@ services:
             termination Grace Period Seconds: 5
     traits:
       meshmap:
-        edges: []
         id: c1570a4b-0933-457c-908e-771fbede7bf3
         label: loadgenerator
         meshmodel-metadata:
@@ -1328,18 +1287,16 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-pentagon
-          styleOverrides: >-
-            {"background-image":"none","border-width":2,"background-opacity":0.5}
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: >-
-            ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
           posX: 135.2533993086964
           posY: 93.32463738720375
+        style: []
+        whiteboardData: {}
   service-api-config:
     name: service-api-config
     type: ConfigMap
@@ -1355,32 +1312,31 @@ services:
         USERSERVICE_API_ADDR: userservice:8080
     traits:
       meshmap:
-        edges: []
         id: 5b4d8455-b1f5-4431-aa09-d9a78cac118c
         label: service-api-config
         meshmodel-metadata:
-          genealogy: ''
+          genealogy: ""
           isCustomResource: false
           isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
           shape: circle
-          styleOverrides: ''
+          styleOverrides: ""
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
           posX: 194.2533993086964
           posY: 17.82463738720375
-  transactionhistory-gbalv:
+        style: []
+        whiteboardData:
+          style: {}
+  transactionhistory-rqxil:
     name: transactionhistory
     type: Service
     apiVersion: v1
@@ -1394,9 +1350,9 @@ services:
     settings:
       spec:
         ports:
-          - name: http
-            port: 8080
-            target Port: 8080
+        - name: http
+          port: 8080
+          target Port: 8080
         selector:
           app: transactionhistory
           application: bank-of-anthos
@@ -1406,41 +1362,39 @@ services:
         type: ClusterIP
     traits:
       meshmap:
-        edges:
-          - data:
-              id: 54d56a68-49c6-4413-8c04-be1df71d98dc
-              metadata:
-                port: 8080
-                protocol: TCP
-              source: 54b55de6-31d4-414d-83f5-5ae13e6f8c46
-              subType: Network
-              target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
         id: 54b55de6-31d4-414d-83f5-5ae13e6f8c46
         label: transactionhistory
         meshmodel-metadata:
-          genealogy: ''
+          genealogy: ""
           isCustomResource: false
           isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-triangle
-          styleOverrides: >-
-            {"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
           posX: -262.25339930869643
           posY: -86.84758629913466
-  transactionhistory-mlbxl:
+        style:
+        - data:
+            id: 54d56a68-49c6-4413-8c04-be1df71d98dc
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: 54b55de6-31d4-414d-83f5-5ae13e6f8c46
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+        whiteboardData:
+          style: {}
+  transactionhistory-zpaif:
     name: transactionhistory
     type: Deployment
     apiVersion: apps/v1
@@ -1472,83 +1426,81 @@ services:
               tier: backend
           spec:
             containers:
-              - env:
-                  - name: VERSION
-                    value: v0.6.1
-                  - name: PORT
-                    value: '8080'
-                  - name: ENABLE_TRACING
-                    value: 'true'
-                  - name: ENABLE_METRICS
-                    value: 'true'
-                  - name: POLL_MS
-                    value: '100'
-                  - name: CACHE_SIZE
-                    value: '1000'
-                  - name: CACHE_MINUTES
-                    value: '60'
-                  - name: HISTORY_LIMIT
-                    value: '100'
-                  - name: JVM_OPTS
-                    value: >-
-                      -XX:+UnlockExperimentalVMOptions
-                      -XX:+UseCGroupMemoryLimitForHeap -Xms256m -Xmx512m
-                  - name: LOG_LEVEL
-                    value: info
-                  - name: NAMESPACE
-                    value From:
-                      field Ref:
-                        field Path: metadata.namespace
-                env From:
-                  - config Map Ref:
-                      name: environment-config
-                  - config Map Ref:
-                      name: ledger-db-config
-                image: >-
-                  us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/transactionhistory:v0.6.1@sha256:bba73286ab53f8adba4381562e1c0b6c9b6a69c331a5acb3133379c356b5672f
-                liveness Probe:
-                  http Get:
-                    path: /healthy
-                    port: 8080
-                  initial Delay Seconds: 120
-                  period Seconds: 5
-                  timeout Seconds: 10
-                name: transactionhistory
-                readiness Probe:
-                  http Get:
-                    path: /ready
-                    port: 8080
-                  initial Delay Seconds: 60
-                  period Seconds: 5
-                  timeout Seconds: 10
-                resources:
-                  limits:
-                    cpu: 500m
-                    ephemeral-storage: 0.5Gi
-                    memory: 512Mi
-                  requests:
-                    cpu: 100m
-                    ephemeral-storage: 0.5Gi
-                    memory: 256Mi
-                security Context:
-                  allow Privilege Escalation: false
-                  capabilities:
-                    drop:
-                      - all
-                  privileged: false
-                  read Only Root Filesystem: true
-                startup Probe:
-                  failure Threshold: 30
-                  http Get:
-                    path: /healthy
-                    port: 8080
-                  period Seconds: 10
-                volume Mounts:
-                  - mount Path: /tmp
-                    name: tmp
-                  - mount Path: /tmp/.ssh
-                    name: publickey
-                    read Only: true
+            - env:
+              - name: VERSION
+                value: v0.6.1
+              - name: PORT
+                value: "8080"
+              - name: ENABLE_TRACING
+                value: "true"
+              - name: ENABLE_METRICS
+                value: "true"
+              - name: POLL_MS
+                value: "100"
+              - name: CACHE_SIZE
+                value: "1000"
+              - name: CACHE_MINUTES
+                value: "60"
+              - name: HISTORY_LIMIT
+                value: "100"
+              - name: JVM_OPTS
+                value: -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap
+                  -Xms256m -Xmx512m
+              - name: LOG_LEVEL
+                value: info
+              - name: NAMESPACE
+                value From:
+                  field Ref:
+                    field Path: metadata.namespace
+              env From:
+              - config Map Ref:
+                  name: environment-config
+              - config Map Ref:
+                  name: ledger-db-config
+              image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/transactionhistory:v0.6.1@sha256:bba73286ab53f8adba4381562e1c0b6c9b6a69c331a5acb3133379c356b5672f
+              liveness Probe:
+                http Get:
+                  path: /healthy
+                  port: 8080
+                initial Delay Seconds: 120
+                period Seconds: 5
+                timeout Seconds: 10
+              name: transactionhistory
+              readiness Probe:
+                http Get:
+                  path: /ready
+                  port: 8080
+                initial Delay Seconds: 60
+                period Seconds: 5
+                timeout Seconds: 10
+              resources:
+                limits:
+                  cpu: 500m
+                  ephemeral-storage: 0.5Gi
+                  memory: 512Mi
+                requests:
+                  cpu: 100m
+                  ephemeral-storage: 0.5Gi
+                  memory: 256Mi
+              security Context:
+                allow Privilege Escalation: false
+                capabilities:
+                  drop:
+                  - all
+                privileged: false
+                read Only Root Filesystem: true
+              startup Probe:
+                failure Threshold: 30
+                http Get:
+                  path: /healthy
+                  port: 8080
+                period Seconds: 10
+              volume Mounts:
+              - mount Path: /tmp
+                name: tmp
+              - mount Path: /tmp/.ssh
+                name: publickey
+                read Only: true
             security Context:
               fs Group: 1000
               run As Group: 1000
@@ -1557,17 +1509,16 @@ services:
             service Account Name: bank-of-anthos
             termination Grace Period Seconds: 5
             volumes:
-              - empty Dir: {}
-                name: tmp
-              - name: publickey
-                secret:
-                  items:
-                    - key: jwtRS256.key.pub
-                      path: publickey
-                  secret Name: jwt-key
+            - empty Dir: {}
+              name: tmp
+            - name: publickey
+              secret:
+                items:
+                - key: jwtRS256.key.pub
+                  path: publickey
+                secret Name: jwt-key
     traits:
       meshmap:
-        edges: []
         id: 257d419f-7306-41ce-88ea-9805a0d35360
         label: transactionhistory
         meshmodel-metadata:
@@ -1581,19 +1532,17 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-pentagon
-          styleOverrides: >-
-            {"background-image":"none","border-width":2,"background-opacity":0.5}
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: >-
-            ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
           posX: 134.2533993086964
           posY: -56.67536261279625
-  userservice-duwrz:
+        style: []
+        whiteboardData: {}
+  userservice-dmajj:
     name: userservice
     type: Deployment
     apiVersion: apps/v1
@@ -1625,59 +1574,58 @@ services:
               tier: backend
           spec:
             containers:
-              - env:
-                  - name: VERSION
-                    value: v0.6.1
-                  - name: PORT
-                    value: '8080'
-                  - name: ENABLE_TRACING
-                    value: 'true'
-                  - name: TOKEN_EXPIRY_SECONDS
-                    value: '3600'
-                  - name: PRIV_KEY_PATH
-                    value: /tmp/.ssh/privatekey
-                  - name: LOG_LEVEL
-                    value: info
-                env From:
-                  - config Map Ref:
-                      name: environment-config
-                  - config Map Ref:
-                      name: accounts-db-config
-                image: >-
-                  us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/userservice:v0.6.1@sha256:b73e5b03c077ff1e7214885b986f6e9ecb444f78d206c4d3864265449c71b19b
-                name: userservice
-                ports:
-                  - container Port: 8080
-                    name: http-server
-                readiness Probe:
-                  http Get:
-                    path: /ready
-                    port: 8080
-                  initial Delay Seconds: 10
-                  period Seconds: 5
-                  timeout Seconds: 10
-                resources:
-                  limits:
-                    cpu: 500m
-                    ephemeral-storage: 0.25Gi
-                    memory: 256Mi
-                  requests:
-                    cpu: 260m
-                    ephemeral-storage: 0.25Gi
-                    memory: 128Mi
-                security Context:
-                  allow Privilege Escalation: false
-                  capabilities:
-                    drop:
-                      - all
-                  privileged: false
-                  read Only Root Filesystem: true
-                volume Mounts:
-                  - mount Path: /tmp
-                    name: tmp
-                  - mount Path: /tmp/.ssh
-                    name: keys
-                    read Only: true
+            - env:
+              - name: VERSION
+                value: v0.6.1
+              - name: PORT
+                value: "8080"
+              - name: ENABLE_TRACING
+                value: "true"
+              - name: TOKEN_EXPIRY_SECONDS
+                value: "3600"
+              - name: PRIV_KEY_PATH
+                value: /tmp/.ssh/privatekey
+              - name: LOG_LEVEL
+                value: info
+              env From:
+              - config Map Ref:
+                  name: environment-config
+              - config Map Ref:
+                  name: accounts-db-config
+              image: us-central1-docker.pkg.dev/bank-of-anthos-ci/bank-of-anthos/userservice:v0.6.1@sha256:b73e5b03c077ff1e7214885b986f6e9ecb444f78d206c4d3864265449c71b19b
+              name: userservice
+              ports:
+              - container Port: 8080
+                name: http-server
+              readiness Probe:
+                http Get:
+                  path: /ready
+                  port: 8080
+                initial Delay Seconds: 10
+                period Seconds: 5
+                timeout Seconds: 10
+              resources:
+                limits:
+                  cpu: 500m
+                  ephemeral-storage: 0.25Gi
+                  memory: 256Mi
+                requests:
+                  cpu: 260m
+                  ephemeral-storage: 0.25Gi
+                  memory: 128Mi
+              security Context:
+                allow Privilege Escalation: false
+                capabilities:
+                  drop:
+                  - all
+                privileged: false
+                read Only Root Filesystem: true
+              volume Mounts:
+              - mount Path: /tmp
+                name: tmp
+              - mount Path: /tmp/.ssh
+                name: keys
+                read Only: true
             security Context:
               fs Group: 1000
               run As Group: 1000
@@ -1686,67 +1634,18 @@ services:
             service Account Name: bank-of-anthos
             termination Grace Period Seconds: 5
             volumes:
-              - empty Dir: {}
-                name: tmp
-              - name: keys
-                secret:
-                  items:
-                    - key: jwtRS256.key
-                      path: privatekey
-                    - key: jwtRS256.key.pub
-                      path: publickey
-                  secret Name: jwt-key
+            - empty Dir: {}
+              name: tmp
+            - name: keys
+              secret:
+                items:
+                - key: jwtRS256.key
+                  path: privatekey
+                - key: jwtRS256.key.pub
+                  path: publickey
+                secret Name: jwt-key
     traits:
       meshmap:
-        edges:
-          - data:
-              id: 54abf9e1-eb7a-400c-815f-0df469500438
-              metadata:
-                port: 80
-                protocol: TCP
-              source: c114a0f5-ef57-4cbd-8be7-70f94256972c
-              subType: Network
-              target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-          - data:
-              id: eeb7a5c6-2f53-438a-8cd6-789ee3d64e83
-              metadata:
-                port: 8080
-                protocol: TCP
-              source: 4b23ec9e-ec0b-4ec9-a6e6-7630d0f16ce9
-              subType: Network
-              target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-          - data:
-              id: 54d56a68-49c6-4413-8c04-be1df71d98dc
-              metadata:
-                port: 8080
-                protocol: TCP
-              source: 54b55de6-31d4-414d-83f5-5ae13e6f8c46
-              subType: Network
-              target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-          - data:
-              id: a928bc62-33df-4bb7-80ed-11aa4ccc06a5
-              metadata:
-                port: 8080
-                protocol: TCP
-              source: 8e248f7f-b5ba-4543-abe3-df3d3af30453
-              subType: Network
-              target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-          - data:
-              id: 4beadc26-455a-484b-9901-429d26efe22c
-              metadata:
-                port: 8080
-                protocol: TCP
-              source: a742186c-9607-471e-bf94-23898c3ac909
-              subType: Network
-              target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-          - data:
-              id: 0449de8e-60ef-4ea6-81d5-3d75924c97ca
-              metadata:
-                port: 8080
-                protocol: TCP
-              source: fe65732e-126b-419b-bb2f-7b1585f68ac5
-              subType: Network
-              target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
         id: df7db55f-5535-4e9e-a19f-d71d8aa024a3
         label: userservice
         meshmodel-metadata:
@@ -1760,19 +1659,65 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-pentagon
-          styleOverrides: >-
-            {"background-image":"none","border-width":2,"background-opacity":0.5}
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: >-
-            ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
           posX: -155.2005721966884
           posY: -32.116389537614424
-  userservice-hmjfw:
+        style:
+        - data:
+            id: 54d56a68-49c6-4413-8c04-be1df71d98dc
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: 54b55de6-31d4-414d-83f5-5ae13e6f8c46
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+        - data:
+            id: 54abf9e1-eb7a-400c-815f-0df469500438
+            metadata:
+              port: 80
+              protocol: TCP
+            source: c114a0f5-ef57-4cbd-8be7-70f94256972c
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+        - data:
+            id: a928bc62-33df-4bb7-80ed-11aa4ccc06a5
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: 8e248f7f-b5ba-4543-abe3-df3d3af30453
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+        - data:
+            id: 0449de8e-60ef-4ea6-81d5-3d75924c97ca
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: fe65732e-126b-419b-bb2f-7b1585f68ac5
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+        - data:
+            id: eeb7a5c6-2f53-438a-8cd6-789ee3d64e83
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: 4b23ec9e-ec0b-4ec9-a6e6-7630d0f16ce9
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+        - data:
+            id: 4beadc26-455a-484b-9901-429d26efe22c
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: a742186c-9607-471e-bf94-23898c3ac909
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+        whiteboardData: {}
+  userservice-ndkpl:
     name: userservice
     type: Service
     apiVersion: v1
@@ -1786,9 +1731,9 @@ services:
     settings:
       spec:
         ports:
-          - name: http
-            port: 8080
-            target Port: 8080
+        - name: http
+          port: 8080
+          target Port: 8080
         selector:
           app: userservice
           application: bank-of-anthos
@@ -1798,37 +1743,35 @@ services:
         type: ClusterIP
     traits:
       meshmap:
-        edges:
-          - data:
-              id: 0449de8e-60ef-4ea6-81d5-3d75924c97ca
-              metadata:
-                port: 8080
-                protocol: TCP
-              source: fe65732e-126b-419b-bb2f-7b1585f68ac5
-              subType: Network
-              target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
         id: fe65732e-126b-419b-bb2f-7b1585f68ac5
         label: userservice
         meshmodel-metadata:
-          genealogy: ''
+          genealogy: ""
           isCustomResource: false
           isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-triangle
-          styleOverrides: >-
-            {"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
           posX: -172.2246304778116
           posY: -148.82463738720375
+        style:
+        - data:
+            id: 0449de8e-60ef-4ea6-81d5-3d75924c97ca
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: fe65732e-126b-419b-bb2f-7b1585f68ac5
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+        whiteboardData:
+          style: {}
