@@ -7,6 +7,7 @@ services:
     version: v1.0.0
     model: meshery
     settings:
+      user Messages: []
       usersMessages:
       - avatarUrl: https://avatars.githubusercontent.com/u/7570704?v=4
         firstName: Lee
@@ -85,58 +86,7 @@ services:
         position:
           posX: 623.0505689710615
           posY: 400.1712237646607
-  httpbin-bbqky:
-    name: httpbin
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
-    dependsOn:
-    - default
-    settings:
-      spec:
-        replicas: 1
-        selector:
-          match Labels:
-            app: httpbin
-            version: v1
-        template:
-          metadata:
-            annotations:
-              sidecar.istio.io/log Level: info
-              sidecar.istio.io/user Volume: '[{"name":"http-filter","persistentVolumeClaim":
-                {"claimName":"wasm-pvc"}}]'
-              sidecar.istio.io/user Volume Mount: '[{"mountPath":"/var/local/wasm/http-filter.wasm","name":"http-filter",
-                "readonly": true}]'
-            labels:
-              app: httpbin
-              version: v1
-          spec:
-            containers:
-            - image: docker.io/kennethreitz/httpbin
-              image Pull Policy: IfNotPresent
-              name: httpbin
-              ports:
-              - container Port: 80
-            service Account Name: httpbin
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: b568ae89-798d-4b10-9354-a0b8cc472329
-            metadata:
-              port: 8000
-              protocol: TCP
-            source: f2b498d5-e5bb-4657-ada4-54e6300572ce
-            subType: Network
-            target: 6cea8f56-695c-4523-91c9-97596ac7c827
-        id: 6cea8f56-695c-4523-91c9-97596ac7c827
-        label: httpbin
-        parent: 90a03569-99e7-4ec4-96c1-972d36723e05
-        position:
-          posX: 715.8307986452123
-          posY: 470.1151245115324
-  httpbin-hbybd:
+  httpbin-mvqpm:
     name: httpbin
     type: Service
     apiVersion: v1
@@ -190,7 +140,58 @@ services:
         position:
           posX: 639.2873203132301
           posY: 462.67180715525706
-  httpbin-uinzb:
+  httpbin-njsad:
+    name: httpbin
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    dependsOn:
+    - default
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app: httpbin
+            version: v1
+        template:
+          metadata:
+            annotations:
+              sidecar.istio.io/log Level: info
+              sidecar.istio.io/user Volume: '[{"name":"http-filter","persistentVolumeClaim":
+                {"claimName":"wasm-pvc"}}]'
+              sidecar.istio.io/user Volume Mount: '[{"mountPath":"/var/local/wasm/http-filter.wasm","name":"http-filter",
+                "readonly": true}]'
+            labels:
+              app: httpbin
+              version: v1
+          spec:
+            containers:
+            - image: docker.io/kennethreitz/httpbin
+              image Pull Policy: IfNotPresent
+              name: httpbin
+              ports:
+              - container Port: 80
+            service Account Name: httpbin
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: b568ae89-798d-4b10-9354-a0b8cc472329
+            metadata:
+              port: 8000
+              protocol: TCP
+            source: f2b498d5-e5bb-4657-ada4-54e6300572ce
+            subType: Network
+            target: 6cea8f56-695c-4523-91c9-97596ac7c827
+        id: 6cea8f56-695c-4523-91c9-97596ac7c827
+        label: httpbin
+        parent: 90a03569-99e7-4ec4-96c1-972d36723e05
+        position:
+          posX: 715.8307986452123
+          posY: 470.1151245115324
+  httpbin-nmvok:
     name: httpbin
     type: ServiceAccount
     apiVersion: v1
