@@ -1,5 +1,51 @@
 name: GuestBook App
 services:
+  comment-ak:
+    name: comment-ak
+    type: Comment
+    apiVersion: core.meshery.io/v1alpha1
+    version: v1.0.0
+    model: meshery
+    settings:
+      user Messages: []
+    traits:
+      meshmap:
+        id: 00a1c0c2-f416-418f-953d-2c93743cbd86
+        label: comment-ak
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Meshery
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/meshery/color/broker-color.svg
+            svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
+          name: meshery
+          version: v1.0.0
+        meshmodel-metadata:
+          genealogy: ""
+          isAnnotation: true
+          isNamespaced: false
+          logoURL: ""
+          model: meshery
+          modelDisplayName: Meshery
+          primaryColor: '#FFDE00'
+          published: true
+          secondaryColor: '#FFDE00'
+          shape: tag
+          styleOverrides: '{"height":"22px","width":"22px","x":"3.5px","y":"3.5px"}'
+          subCategory: App Definition and Development
+          svgColor: ui/public/static/img/meshmodels/meshery/color/comment-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/meshery/color/comment-color.svg
+        position:
+          posX: 347.0257008929924
+          posY: 437.85666855084844
+        style: []
+        whiteboardData: {}
   comment-if:
     name: comment-if
     type: Comment
@@ -8,7 +54,6 @@ services:
     model: meshery
     traits:
       meshmap:
-        edges: []
         id: 4d148de8-d618-4a83-ab2e-d02b7ad97e7a
         label: comment-if
         meshmodel-data:
@@ -43,7 +88,10 @@ services:
         position:
           posX: 166.19411922770138
           posY: 276.63799174280916
-  frontend-fuwwn:
+        style: []
+        whiteboardData:
+          style: {}
+  frontend-bhbbq:
     name: frontend
     type: Deployment
     apiVersion: apps/v1
@@ -78,15 +126,6 @@ services:
                   memory: 100Mi
     traits:
       meshmap:
-        edges:
-        - data:
-            id: 99920761-7e95-402c-ad25-254f5df480f5
-            metadata:
-              port: 80
-              protocol: TCP
-            source: 4ae55da0-82eb-405e-9410-75623cee1043
-            subType: Network
-            target: 43a7b935-6109-4f5c-84fb-5e3454f9c6d1
         id: 43a7b935-6109-4f5c-84fb-5e3454f9c6d1
         label: frontend
         meshmodel-metadata:
@@ -107,9 +146,19 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         parent: 1e3a8397-8740-49ab-8591-d8276626c023
         position:
-          posX: 253.22560865625263
-          posY: 285.33695306367645
-  frontend-qysdk:
+          posX: 235.12164554015538
+          posY: 268.87880477631523
+        style:
+        - data:
+            id: 54a87987-08e0-481a-9ea1-2110f1eaed34
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 4ae55da0-82eb-405e-9410-75623cee1043
+            subType: Network
+            target: 43a7b935-6109-4f5c-84fb-5e3454f9c6d1
+        whiteboardData: {}
+  frontend-rvdkf:
     name: frontend
     type: Service
     apiVersion: v1
@@ -128,23 +177,6 @@ services:
           tier: frontend
     traits:
       meshmap:
-        edges:
-        - data:
-            id: 4b8f77a0-1572-4624-ba5c-b9578237ef1f
-            metadata:
-              port: 80
-              protocol: TCP
-            source: 4ae55da0-82eb-405e-9410-75623cee1043
-            subType: Network
-            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
-        - data:
-            id: 99920761-7e95-402c-ad25-254f5df480f5
-            metadata:
-              port: 80
-              protocol: TCP
-            source: 4ae55da0-82eb-405e-9410-75623cee1043
-            subType: Network
-            target: 43a7b935-6109-4f5c-84fb-5e3454f9c6d1
         id: 4ae55da0-82eb-405e-9410-75623cee1043
         label: frontend
         meshmodel-metadata:
@@ -165,8 +197,19 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         parent: 1e3a8397-8740-49ab-8591-d8276626c023
         position:
-          posX: 349.71605945560765
-          posY: 284.21808294158734
+          posX: 331.6120963395104
+          posY: 267.75993465422613
+        style:
+        - data:
+            id: 54a87987-08e0-481a-9ea1-2110f1eaed34
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 4ae55da0-82eb-405e-9410-75623cee1043
+            subType: Network
+            target: 43a7b935-6109-4f5c-84fb-5e3454f9c6d1
+        whiteboardData:
+          style: {}
   guestbook:
     name: guestbook
     type: Namespace
@@ -175,7 +218,6 @@ services:
     model: kubernetes
     traits:
       meshmap:
-        edges: []
         id: 1e3a8397-8740-49ab-8591-d8276626c023
         label: guestbook
         meshmodel-metadata:
@@ -195,9 +237,11 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/namespace-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
         position:
-          posX: 450
-          posY: 293.406
-  redis-follower-beflw:
+          posX: 431.89603688390287
+          posY: 276.9478517126388
+        style: []
+        whiteboardData: {}
+  redis-follower-gqrje:
     name: redis-follower
     type: Service
     apiVersion: v1
@@ -218,23 +262,6 @@ services:
           tier: backend
     traits:
       meshmap:
-        edges:
-        - data:
-            id: d5463cb2-d23f-482a-8cc9-8dee24d81461
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: 7e403128-5022-409a-a1f2-26e0a5d25685
-            subType: Network
-            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
-        - data:
-            id: e80b028e-865d-4d2e-8c32-5d51083b6ab8
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: 7e403128-5022-409a-a1f2-26e0a5d25685
-            subType: Network
-            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
         id: 7e403128-5022-409a-a1f2-26e0a5d25685
         label: redis-follower
         meshmodel-metadata:
@@ -255,9 +282,28 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         parent: 1e3a8397-8740-49ab-8591-d8276626c023
         position:
-          posX: 546.5770107725145
-          posY: 191.78837127301486
-  redis-follower-doubn:
+          posX: 528.4730476564175
+          posY: 175.33022298565365
+        style:
+        - data:
+            id: f1055812-fc3a-40cd-89a9-10850b6f91ac
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 7e403128-5022-409a-a1f2-26e0a5d25685
+            subType: Network
+            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
+        - data:
+            id: 6985e17c-d4c0-4600-94ed-4809afe3df6f
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 7e403128-5022-409a-a1f2-26e0a5d25685
+            subType: Network
+            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
+        whiteboardData:
+          style: {}
+  redis-follower-gwiei:
     name: redis-follower
     type: Deployment
     apiVersion: apps/v1
@@ -289,31 +335,6 @@ services:
                   memory: 100Mi
     traits:
       meshmap:
-        edges:
-        - data:
-            id: e80b028e-865d-4d2e-8c32-5d51083b6ab8
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: 7e403128-5022-409a-a1f2-26e0a5d25685
-            subType: Network
-            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
-        - data:
-            id: 4b8f77a0-1572-4624-ba5c-b9578237ef1f
-            metadata:
-              port: 80
-              protocol: TCP
-            source: 4ae55da0-82eb-405e-9410-75623cee1043
-            subType: Network
-            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
-        - data:
-            id: b348c867-6d19-4a31-bcdb-4a2d77529b59
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: 6badde68-595b-4e86-9be8-61318e52b476
-            subType: Network
-            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
         id: 9407d316-5e5a-4212-8767-2bcd60c9ac17
         label: redis-follower
         meshmodel-metadata:
@@ -334,9 +355,27 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         parent: 1e3a8397-8740-49ab-8591-d8276626c023
         position:
-          posX: 454.0751019812851
-          posY: 285.7148469897157
-  redis-leader-hfngl:
+          posX: 435.97113886518787
+          posY: 269.25669870235447
+        style:
+        - data:
+            id: c586a713-2ded-42b5-8dba-51bda8f2be08
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 6badde68-595b-4e86-9be8-61318e52b476
+            subType: Network
+            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
+        - data:
+            id: f1055812-fc3a-40cd-89a9-10850b6f91ac
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 7e403128-5022-409a-a1f2-26e0a5d25685
+            subType: Network
+            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
+        whiteboardData: {}
+  redis-leader-acgpu:
     name: redis-leader
     type: Deployment
     apiVersion: apps/v1
@@ -368,23 +407,6 @@ services:
                   memory: 100Mi
     traits:
       meshmap:
-        edges:
-        - data:
-            id: d5463cb2-d23f-482a-8cc9-8dee24d81461
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: 7e403128-5022-409a-a1f2-26e0a5d25685
-            subType: Network
-            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
-        - data:
-            id: 7b9e13fe-26a8-49a9-9e7b-9d9b904aa9b4
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: 6badde68-595b-4e86-9be8-61318e52b476
-            subType: Network
-            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
         id: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
         label: redis-leader
         meshmodel-metadata:
@@ -405,9 +427,27 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         parent: 1e3a8397-8740-49ab-8591-d8276626c023
         position:
-          posX: 639.7743913437473
-          posY: 285.24700426117744
-  redis-leader-qecxl:
+          posX: 621.6704282276503
+          posY: 268.7888559738162
+        style:
+        - data:
+            id: 3e1af5c1-72db-4a65-83d4-21190c16c0fe
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 6badde68-595b-4e86-9be8-61318e52b476
+            subType: Network
+            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
+        - data:
+            id: 6985e17c-d4c0-4600-94ed-4809afe3df6f
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 7e403128-5022-409a-a1f2-26e0a5d25685
+            subType: Network
+            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
+        whiteboardData: {}
+  redis-leader-uwufw:
     name: redis-leader
     type: Service
     apiVersion: v1
@@ -429,23 +469,6 @@ services:
           tier: backend
     traits:
       meshmap:
-        edges:
-        - data:
-            id: b348c867-6d19-4a31-bcdb-4a2d77529b59
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: 6badde68-595b-4e86-9be8-61318e52b476
-            subType: Network
-            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
-        - data:
-            id: 7b9e13fe-26a8-49a9-9e7b-9d9b904aa9b4
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: 6badde68-595b-4e86-9be8-61318e52b476
-            subType: Network
-            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
         id: 6badde68-595b-4e86-9be8-61318e52b476
         label: redis-leader
         meshmodel-metadata:
@@ -466,5 +489,24 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         parent: 1e3a8397-8740-49ab-8591-d8276626c023
         position:
-          posX: 546.9138029834044
-          posY: 377.0236287269852
+          posX: 528.8098398673073
+          posY: 360.56548043962397
+        style:
+        - data:
+            id: c586a713-2ded-42b5-8dba-51bda8f2be08
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 6badde68-595b-4e86-9be8-61318e52b476
+            subType: Network
+            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
+        - data:
+            id: 3e1af5c1-72db-4a65-83d4-21190c16c0fe
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 6badde68-595b-4e86-9be8-61318e52b476
+            subType: Network
+            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
+        whiteboardData:
+          style: {}
