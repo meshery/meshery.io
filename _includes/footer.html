@@ -1,4 +1,8 @@
 <footer>
+	<script>
+		const theme = localStorage.getItem('mode') || 'light-mode';
+		document.documentElement.dataset.theme = theme;
+	</script>
 	<div class="container">
 		<div class="footer-columns">
 			{% for column in site.data.footer %}
@@ -119,15 +123,17 @@
 		}
 	}
 </script>
-<script type="text/javascript">
+
+<script>
 	$(document).ready(function () {
 		let toggleBtn = document.getElementById("mode-toggle-btn")
-		// console.log(document.body.classList);
-		// console.log(localStorage.getItem("mode"));
+		console.log(document.body.classList);
+		console.log(localStorage.getItem("mode"));
 		toggleBtn.onclick = setMode;
 
 		if (localStorage.getItem("mode") === null) {
 			localStorage.setItem("mode", "dark-mode");
+			console.log("check");
 		}
 
 		const isDark = document.body.classList.contains("dark-mode");
@@ -154,8 +160,6 @@
 			}
 		}
 	});
-
-
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
