@@ -164,7 +164,7 @@ You can download a token from Meshery and add it as a GitHub secret (in the exam
 <img width="100%" src="../../assets/images/posts/2022-01-26-pipelining-service-mesh-specifications/smi-conformance-result.png" alt="smi conformance dashboard">
 </div>
 
-Participating service mesh projects can also <a href="https://docs.meshery.io/functionality/service-mesh-interface#reporting-conformance">automatically report their conformance test results</a> to the <a href="https://meshery.io/service-mesh-interface">SMI Conformance dashboard</a>
+Participating service mesh projects can also <a href="https://docs.meshery.io/tasks/service-mesh-interface#reporting-conformance">automatically report their conformance test results</a> to the <a href="https://meshery.io/service-mesh-interface">SMI Conformance dashboard</a>
 
 #### Service Mesh Performance GitHub Action
 
