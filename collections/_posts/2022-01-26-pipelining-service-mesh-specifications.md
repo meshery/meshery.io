@@ -34,7 +34,7 @@ The <a href="https://github.com/marketplace/actions/service-mesh-interface-confo
 An example of the action configuration which runs on every release is shown below. The action handles setting up a Kubernetes environment, deploying the service mesh (see supported service meshes), running the conformance tests and reporting back the results to the SMI Conformance dashboard in Meshery.
 
 <div id="channelset" class="highlight-code">
-  <code class="code-box">
+  <code class="code-box" style="white-space:pre-wrap;">
 name: SMI Conformance with Meshery
 on:
   push:
@@ -82,7 +82,7 @@ jobs:
 You can also bring in their own cluster with specific capabilities and with a service mesh already installed.
 
 <div id="channelset" class="highlight-code">
-  <code class="code-box">
+  <code class="code-box" style="white-space:pre-wrap;">
 name: SMI Conformance with Meshery
 on:
   push:
@@ -175,7 +175,7 @@ Measuring and managing the performance of a service mesh is key to efficient ope
 The <a href="https://github.com/marketplace/actions/performance-testing-with-meshery">Service Mesh Performance GitHub Action</a> is available in the GitHub Marketplace.You can create your own performance profiles to run repeatable tests with Meshery. You can configure this action to trigger with each of your releases, on every pull request. or any GitHub workflow trigger event. A sample configuration of the action is shown below.
 
 <div id="channelset" class="highlight-code">
-  <code class="code-box">
+  <code class="code-box" style="white-space:pre-wrap;">
 name: Meshery SMP Action
 on:
   push:
@@ -243,7 +243,7 @@ jobs:
 You can also define your test configuration in an SMP compatible configuration file as shown below.
 
 <div id="channelset" class="highlight-code">
-  <code class="code-box">
+  <code class="code-box" style="white-space:pre-wrap;">
 smp_version: v0.0.1
 id:
 name: Istio Performance Test
