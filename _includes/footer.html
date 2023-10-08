@@ -1,69 +1,30 @@
-<body>
-	<script>
-		// $(document).ready(function () {
-			let toggleBtn = document.getElementById("mode-toggle-btn")
-			console.log(document.body.classList);
-			console.log(localStorage.getItem("mode"));
-			toggleBtn.onclick = setMode;
-
-			if (localStorage.getItem("mode") === null) {
-				localStorage.setItem("mode", "dark-mode");
-				console.log("check");
-			}
-
-			const isDark = document.body.classList.contains("dark-mode");
-			const currentMode = localStorage.getItem("mode");
-			if (isDark ^ (currentMode === "dark-mode")) {
-				setMode();
-			}
-
-			function setMode() {
-				document.body.classList.toggle("dark-mode")
-				let layer5Logos = document.querySelectorAll("#layer5-logo");
-				let allLogos = document.querySelectorAll("#logo-dark-light");
-				if (document.body.classList.contains("dark-mode")) {
-					layer5Logos.forEach(e => e.src = '../assets/images/company-logo/layer5-dark-mode-logo.svg')
-					allLogos.forEach(e => e.src = e.dataset.logoForDark)
-				} else {
-					layer5Logos.forEach(e => e.src = '../assets/images/company-logo/layer5-no-trim.svg')
-					allLogos.forEach(e => e.src = e.dataset.logoForLight)
-				}
-				if (document.body.classList.contains("dark-mode")) {
-					localStorage.setItem("mode", "dark-mode")
-				} else {
-					localStorage.setItem("mode", "light-mode")
-				}
-			}
-		// });
-	</script>
-	
-	<footer>
-		<div class="container">
-			<div class="footer-columns">
-				{% for column in site.data.footer %}
-				<ul class="footer-links">
-					<li>
-						<h2><a {% if column.new_window %}target="_blank" {% endif %}
-								href="{% include relative-src.html src=column.link %}" {% if column.social_icon
-								%}class="{{ column.social_icon || downcase }}-icon" {% endif %}>
-								{% if column.social_icon %}
-								{% include social-icon.html icon=column.social_icon %}
-								{% endif %}
-								{{ column.title }}</a></h2>
-					</li>
-					{% for link in column.links %}
-					<li><a {% if link.new_window %}target="_blank" {% endif %}
-							href="{% include relative-src.html src=link.link %}" {% if link.social_icon
-							%}class="{{ link.social_icon || downcase }}-icon" {% endif %}>
-							{% if link.social_icon %}
-							{% include social-icon.html icon=link.social_icon %}
+<footer>
+	<div class="container">
+		<div class="footer-columns">
+			{% for column in site.data.footer %}
+			<ul class="footer-links">
+				<li>
+					<h2><a {% if column.new_window %}target="_blank" {% endif %}
+							href="{% include relative-src.html src=column.link %}" {% if column.social_icon
+							%}class="{{ column.social_icon || downcase }}-icon" {% endif %}>
+							{% if column.social_icon %}
+							{% include social-icon.html icon=column.social_icon %}
 							{% endif %}
-							{{ link.name }}</a></li>
-					{% endfor %}
-				</ul>
+							{{ column.title }}</a></h2>
+				</li>
+				{% for link in column.links %}
+				<li><a {% if link.new_window %}target="_blank" {% endif %}
+						href="{% include relative-src.html src=link.link %}" {% if link.social_icon
+						%}class="{{ link.social_icon || downcase }}-icon" {% endif %}>
+						{% if link.social_icon %}
+						{% include social-icon.html icon=link.social_icon %}
+						{% endif %}
+						{{ link.name }}</a></li>
 				{% endfor %}
+			</ul>
+			{% endfor %}
 
-				<!-- 
+			<!-- 
 			<ul class="feed">
 				<a class="twitter-timeline" data-width="320" data-height="320" data-theme="light"
 					data-link-color="#62ACCD" href="https://twitter.com/mesheryio"
@@ -71,95 +32,95 @@
 				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 			</ul>
  			-->
-			</div>
-
-			<div class="container flex copyright">
-				<div class="text">&copy; {{ site.time | date: '%Y' }} The Meshery Authors</div>
-				<div class="text">Confidently wrangling cloud native infrastructure</div>
-				<div class="text"><a href="https://github.com/meshery/meshery/blob/master/CODE_OF_CONDUCT.md">Code of
-						Conduct</a></div>
-			</div>
 		</div>
-	</footer>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	{% if jekyll.environment == 'production' %}
-	<script src="{{ site.baseurl }}/js/stellarnav.min.js"></script>
-	{% else %}
-	<script src="{{ site.baseurl }}/js/stellarnav.js"></script>
-	{% endif %}
 
-	<script src="{{ site.baseurl }}/js/main.js"></script>
+		<div class="container flex copyright">
+			<div class="text">&copy; {{ site.time | date: '%Y' }} The Meshery Authors</div>
+			<div class="text">Confidently wrangling cloud native infrastructure</div>
+			<div class="text"><a href="https://github.com/meshery/meshery/blob/master/CODE_OF_CONDUCT.md">Code of
+					Conduct</a></div>
+		</div>
+	</div>
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{% if jekyll.environment == 'production' %}
+<script src="{{ site.baseurl }}/js/stellarnav.min.js"></script>
+{% else %}
+<script src="{{ site.baseurl }}/js/stellarnav.js"></script>
+{% endif %}
 
-	<!-- Site Navigation Menu -->
-	<script type="text/javascript">
-		jQuery(document).ready(function ($) {
-			jQuery('.stellarnav').stellarNav({ breakpoint: 1140 });
-			jQuery('.stellarnav.mobile').css('text-align', 'end');
-		});
-	</script>
-	<!--Script for Copy to Clipboard-->
-	<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-	<script src="{{ site.baseurl }}/js/vanilla-tilt.min.js"></script>
+<script src="{{ site.baseurl }}/js/main.js"></script>
 
-	<script>
+<!-- Site Navigation Menu -->
+<script type="text/javascript">
+	jQuery(document).ready(function ($) {
+		jQuery('.stellarnav').stellarNav({ breakpoint: 1140 });
+		jQuery('.stellarnav.mobile').css('text-align', 'end');
+	});
+</script>
+<!--Script for Copy to Clipboard-->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="{{ site.baseurl }}/js/vanilla-tilt.min.js"></script>
 
-		function resetCopyText(element) {
-			let childElements = element.childNodes
-			if (childElements.length > 3) {
-				childElements[3].innerHTML = "Copy to clipboard";
-			} else {
-				childElements[1].innerHTML = "Copy URL";
-				childElements[1].style.color = 'white';
-				childElements[1].style.background = "#00b39fff";
-			}
+<script>
+
+	function resetCopyText(element) {
+		let childElements = element.childNodes
+		if (childElements.length > 3) {
+			childElements[3].innerHTML = "Copy to clipboard";
+		} else {
+			childElements[1].innerHTML = "Copy URL";
+			childElements[1].style.color = 'white';
+			childElements[1].style.background = "#00b39fff";
 		}
+	}
 
 
-		var clipboard = new ClipboardJS('.btn');
-		clipboard.on('success', function (e) {
-			console.info('Action:', e.action);
-			console.info('Text:', e.text);
-			console.info('Trigger:', e.trigger);
-			let childElements = e.trigger.childNodes;
-			if (childElements.length > 3) {
-				childElements[3].innerHTML = "Copied!";
-			} else {
-				childElements[1].innerHTML = "Copied";
-				childElements[1].style.color = 'white';
-				childElements[1].style.background = "#1a2421";
-			}
-			e.clearSelection();
-		});
-		clipboard.on('error', function (e) {
-			console.error('Action:', e.action);
-			console.error('Trigger:', e.trigger);
-		});
-	</script>
+	var clipboard = new ClipboardJS('.btn');
+	clipboard.on('success', function (e) {
+		console.info('Action:', e.action);
+		console.info('Text:', e.text);
+		console.info('Trigger:', e.trigger);
+		let childElements = e.trigger.childNodes;
+		if (childElements.length > 3) {
+			childElements[3].innerHTML = "Copied!";
+		} else {
+			childElements[1].innerHTML = "Copied";
+			childElements[1].style.color = 'white';
+			childElements[1].style.background = "#1a2421";
+		}
+		e.clearSelection();
+	});
+	clipboard.on('error', function (e) {
+		console.error('Action:', e.action);
+		console.error('Trigger:', e.trigger);
+	});
+</script>
 
-	<script>
-		function displayCode(id) {
-			var divId = id + "_code";
-			var element = document.getElementById(divId);
-			element.classList.toggle("showDiv");
-			var toggleDivs = document.getElementsByClassName("toggle");
-			if (element.style.maxHeight) {
-				element.style.maxHeight = null;
-			} else {
-				element.style.maxHeight = element.scrollHeight + "px";
-				console.log(element.style.maxHeight);
-			}
-			for (let i = 0; i < toggleDivs.length; i++) {
-				if (toggleDivs[i] != element) {
-					toggleDivs[i].classList.remove("showDiv");
-					if (toggleDivs[i].style.maxHeight) {
-						toggleDivs[i].style.maxHeight = null;
-					}
+<script>
+	function displayCode(id) {
+		var divId = id + "_code";
+		var element = document.getElementById(divId);
+		element.classList.toggle("showDiv");
+		var toggleDivs = document.getElementsByClassName("toggle");
+		if (element.style.maxHeight) {
+			element.style.maxHeight = null;
+		} else {
+			element.style.maxHeight = element.scrollHeight + "px";
+			console.log(element.style.maxHeight);
+		}
+		for (let i = 0; i < toggleDivs.length; i++) {
+			if (toggleDivs[i] != element) {
+				toggleDivs[i].classList.remove("showDiv");
+				if (toggleDivs[i].style.maxHeight) {
+					toggleDivs[i].style.maxHeight = null;
 				}
 			}
 		}
-	</script>
+	}
+</script>
 
-	<!-- <script>
+<!-- <script>
 	$(document).ready(function () {
 		let toggleBtn = document.getElementById("mode-toggle-btn")
 		console.log(document.body.classList);
@@ -197,90 +158,128 @@
 	});
 </script> -->
 
-	<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-	<script>
-		$(document).ready(function () {
-			$('.slider').slick({
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$('.slider').slick({
 
-				dots: false,
-				arrows: false,
-				infinite: true,
-				speed: 400,
-				slidesToShow: 3,
-				slidesToScroll: 0.5,
-				autoplay: true, // true
-				autoplaySpeed: 1500,
+			dots: false,
+			arrows: false,
+			infinite: true,
+			speed: 400,
+			slidesToShow: 3,
+			slidesToScroll: 0.5,
+			autoplay: true, // true
+			autoplaySpeed: 1500,
 
 
-				responsive: [
-					{
-						breakpoint: 1300,
-						settings: {
-							slidesToShow: 2.5,
-						}
-					},
-					{
-						breakpoint: 1200,
-						settings: {
-							slidesToShow: 2,
-						}
-					},
-					{
-						breakpoint: 1024,
-						settings: {
-							slidesToShow: 2,
-						}
-					},
-					{
-						breakpoint: 800,
-						settings: {
-							slidesToShow: 1.5,
-							slidesToScroll: 0.5,
-						}
-					},
-					{
-						breakpoint: 600,
-						settings: {
-							slidesToShow: 1,
-							slidesToScroll: 1,
-							autoplaySpeed: 2000,
-						}
-					},
-					{
-						breakpoint: 480,
-						settings: {
-							slidesToShow: 1,
-							slidesToScroll: 1
-						}
-					},
-					{
-						breakpoint: 400,
-						settings: {
-							slidesToShow: 1,
-							adaptiveWidth: true,
-							slidesToScroll: 1
-						}
-					},
-					{
-						breakpoint: 380,
-						settings: {
-							slidesToShow: 1,
-							slidesToScroll: 1,
-							adaptiveWidth: true,
-						}
-					},
-					{
-						breakpoint: 360,
-						settings: {
-							slidesToShow: 1,
-							slidesToScroll: 1,
-							adaptiveWidth: true,
-						}
+			responsive: [
+				{
+					breakpoint: 1300,
+					settings: {
+						slidesToShow: 2.5,
 					}
-				]
-			});
+				},
+				{
+					breakpoint: 1200,
+					settings: {
+						slidesToShow: 2,
+					}
+				},
+				{
+					breakpoint: 1024,
+					settings: {
+						slidesToShow: 2,
+					}
+				},
+				{
+					breakpoint: 800,
+					settings: {
+						slidesToShow: 1.5,
+						slidesToScroll: 0.5,
+					}
+				},
+				{
+					breakpoint: 600,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1,
+						autoplaySpeed: 2000,
+					}
+				},
+				{
+					breakpoint: 480,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1
+					}
+				},
+				{
+					breakpoint: 400,
+					settings: {
+						slidesToShow: 1,
+						adaptiveWidth: true,
+						slidesToScroll: 1
+					}
+				},
+				{
+					breakpoint: 380,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1,
+						adaptiveWidth: true,
+					}
+				},
+				{
+					breakpoint: 360,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1,
+						adaptiveWidth: true,
+					}
+				}
+			]
 		});
-	</script>
+	});
+</script>
+
+<script>
+	$(document).ready(function () {
+		let toggleBtn = document.getElementById("mode-toggle-btn")
+		console.log(document.body.classList);
+		console.log(localStorage.getItem("mode"));
+		toggleBtn.onclick = setMode;
+
+		if (localStorage.getItem("mode") === null) {
+			localStorage.setItem("mode", "dark-mode");
+			console.log("check");
+		}
+
+		const isDark = document.body.classList.contains("dark-mode");
+		const currentMode = localStorage.getItem("mode");
+		if (isDark ^ (currentMode === "dark-mode")) {
+			setMode();
+		}
+
+		function setMode() {
+			document.body.classList.toggle("dark-mode")
+			let layer5Logos = document.querySelectorAll("#layer5-logo");
+			let allLogos = document.querySelectorAll("#logo-dark-light");
+			if (document.body.classList.contains("dark-mode")) {
+				layer5Logos.forEach(e => e.src = '../assets/images/company-logo/layer5-dark-mode-logo.svg')
+				allLogos.forEach(e => e.src = e.dataset.logoForDark)
+			} else {
+				layer5Logos.forEach(e => e.src = '../assets/images/company-logo/layer5-no-trim.svg')
+				allLogos.forEach(e => e.src = e.dataset.logoForLight)
+			}
+			if (document.body.classList.contains("dark-mode")) {
+				localStorage.setItem("mode", "dark-mode")
+			} else {
+				localStorage.setItem("mode", "light-mode")
+			}
+		}
+	});
+</script>
 </body>
 
 </html>
