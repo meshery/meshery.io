@@ -1,0 +1,115 @@
+name: test-prometheus2
+services:
+  comment-xd:
+    name: comment-xd
+    type: Comment
+    apiVersion: core.meshery.io/v1alpha1
+    version: v1.0.0
+    model: meshery
+    settings:
+      usersMessages:
+      - avatarUrl: https://pbs.twimg.com/profile_images/880205475643441152/V_vhfnzb_400x400.jpg
+        firstName: Lee
+        lastName: Calcote
+        message: don't seem to go where they are told.
+        timestamp: "2023-09-04T19:52:08.198Z"
+        userid: 090e7114-509a-4046-81f1-9c5fb8daf724
+    traits:
+      meshmap:
+        edges: []
+        id: 2480d2e7-23da-43cc-af7f-9c1d937d5bcf
+        label: comment-xd
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Meshery
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/meshery/color/broker-color.svg
+            svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
+          name: meshery
+          version: v1.0.0
+        meshmodel-metadata:
+          genealogy: ""
+          isAnnotation: true
+          isNamespaced: false
+          logoURL: ""
+          model: meshery
+          modelDisplayName: Meshery
+          primaryColor: '#FFDE00'
+          published: true
+          secondaryColor: '#FFDE00'
+          shape: tag
+          styleOverrides: '{"height":"22px","width":"22px","x":"3.5px","y":"3.5px"}'
+          subCategory: App Definition and Development
+          svgColor: ui/public/static/img/meshmodels/meshery/color/comment-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/meshery/color/comment-color.svg
+        position:
+          posX: 458.02242808522624
+          posY: 467.6899588343207
+  prometheus-tk:
+    name: prometheus-tk
+    type: Prometheus
+    apiVersion: monitoring.coreos.com/v1
+    namespace: default
+    version: 45.7.1
+    model: kube-prometheus-stack
+    labels:
+      app: Prometheus
+    settings:
+      spec:
+        additional Args:
+        - name: kind
+          value: Prometheus
+        base Image: quay.io/prometheus/prometheus:v2.22.1
+        enforced Sample Limit: 0
+        evaluation Interval: 30s
+        node Selector:
+          kubernetes.io/os: linux
+          newKey: New Value
+        port Name: web
+        replicas: 2
+        scrape Interval: 30s
+        thanos:
+          block Size: 2h
+    traits:
+      meshmap:
+        edges: []
+        id: aacce67c-15ff-4df0-bc24-0c03512fa995
+        label: prometheus-tk
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Observability and Analysis
+          displayName: Kube Prometheus Stack
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            source_uri: https://github.com/prometheus-community/helm-charts/releases/download/kube-prometheus-stack-48.3.1/kube-prometheus-stack-48.3.1.tgz
+            svgColor: ui/public/static/img/meshmodels/kube-prometheus-stack/color/alertmanager-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kube-prometheus-stack/white/alertmanager-white.svg
+          name: kube-prometheus-stack
+          version: 45.7.1
+        meshmodel-metadata:
+          genealogy: ""
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/examples/graduated.md#prometheus-logos
+          model: kube-prometheus-stack
+          modelDisplayName: Kube Prometheus Stack
+          primaryColor: '#e75225'
+          published: true
+          secondaryColor: '#ec7551'
+          shape: circle
+          styleOverrides: ""
+          subCategory: Monitoring
+          svgColor: ui/public/static/img/meshmodels/kube-prometheus-stack/color/alertmanager-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kube-prometheus-stack/white/alertmanager-white.svg
+        position:
+          posX: 524.5224280852262
+          posY: 466.93995883432063
