@@ -1,5 +1,5 @@
 <picture>
-  <p style="text-align:center;" align="center">
+  <p style="text-align: center;">
 <a href="https://layer5.io/meshery">
 <picture align="center">
 <source media="(prefers-color-scheme: dark)" srcset="./assets/images/logos/meshery-logo-dark-text-side.svg" width="70%" align="center" style="margin-bottom:20px;">
@@ -26,7 +26,7 @@
 
 </div>
 
-<h2>Preview of <a href="https://meshery.io">Meshery.io</a> Website<h2>
+<h2>Preview of <a href="https://meshery.io">Meshery.io</a> Website</h2>
 
 ![Meshery.io website screenshot](assets/images/mesheryio_screenshot.png)
 _Visit [Meshery.io](https://meshery.io/) to learn more!_
@@ -51,9 +51,9 @@ Our projects are community-built and welcome collaboration. 👍 Be sure to see 
 <p>MeshMates are experienced Layer5 community members, who will help you learn your way around, discover live projects and expand your community network. 
 Become a <b>Meshtee</b> today!</p>
 
+<p>
 Find out more about the <a href="https://layer5.io/community#meshmate">Layer5 community</a>. <br />
 <br /><br /><br /><br />
-
 </p>
 <a href="https://slack.meshery.io">
 
