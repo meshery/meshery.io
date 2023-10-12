@@ -121,13 +121,24 @@
 </script>
 <script type="text/javascript">
 	let toggleBtn = document.getElementById("mode-toggle-btn")
+	// console.log(document.body.classList);
+	// console.log(localStorage.getItem("mode"));
 	toggleBtn.onclick = setMode;
-	if (localStorage.getItem("mode")) setMode();
+	
+	if (localStorage.getItem("mode") === null) {
+    	localStorage.setItem("mode", "dark-mode");
+    }
+
+	const isDark = document.body.classList.contains("dark-mode");
+	const currentMode = localStorage.getItem("mode");
+	if (isDark ^ (currentMode === "dark-mode")) {
+		setMode();
+	}
+
 	function setMode() {
 		document.body.classList.toggle("dark-mode")
 		let layer5Logos = document.querySelectorAll("#layer5-logo");
 		let allLogos = document.querySelectorAll("#logo-dark-light");
-		// console.log(allLogos)
 		if (document.body.classList.contains("dark-mode")) {
 			layer5Logos.forEach(e => e.src = '../assets/images/company-logo/layer5-dark-mode-logo.svg')
 			allLogos.forEach(e => e.src = e.dataset.logoForDark)
@@ -138,10 +149,10 @@
 		if (document.body.classList.contains("dark-mode")) {
 			localStorage.setItem("mode", "dark-mode")
 		} else {
-			localStorage.setItem("mode", "")
+			localStorage.setItem("mode", "light-mode")
 		}
 	}
-
+	
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
