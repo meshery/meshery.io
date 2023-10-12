@@ -26,7 +26,7 @@ jobs:
       - name: Update Catalog Patterns
         if: ${{ success() }}
         run: |
-          catalogPatterns=$(curl -sS "$MESHERY_CLOUD_BASE_URL/api/catalog/content/pattern" -b ${{ secrets.MESHERY_CATALOG_SECRET }} 2>./err.txt)
+          catalogPatterns=$(curl -sS "$MESHERY_CLOUD_BASE_URL/api/catalog/content/pattern" 2>./err.txt)
           if [[ "$(<err.txt)" != "" ]]; then
             >&2 echo "Error connecting to Meshery Cloud"
             >&2 echo "$(<err.txt)"
