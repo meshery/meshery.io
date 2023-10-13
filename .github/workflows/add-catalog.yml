@@ -134,6 +134,13 @@ jobs:
             filterName="$(jq -r .[$idx].name temp.json)"
             compatibility=""
 
+            # check if directory doesn't exists; then create it
+            if [ ! -d "./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')"" ]; then
+              echo "$(echo $filterType | tr '[:upper:]' '[:lower:]') doesn't exist."
+              echo "Creating directory...$(echo $filterType | tr '[:upper:]' '[:lower:]')"
+              mkdir "./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')""
+            fi
+
             if [[ $filterInfo == "null" ]]; then
               filterInfo="\"\""
             fi
