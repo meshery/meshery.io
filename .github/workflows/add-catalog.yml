@@ -44,6 +44,13 @@ jobs:
             patternName="$(jq -r .[$idx].name temp.json)"
             compatibility=""
 
+            # check if directory doesn't exists; then create it
+            if [ ! -d "./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"" ]; then
+              echo "$(echo $patternType | tr '[:upper:]' '[:lower:]') doesn't exist."
+              echo "Creating directory...$(echo $patternType | tr '[:upper:]' '[:lower:]')"
+              mkdir "./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')""
+            fi
+
             if [[ $patternInfo == "null" ]]; then
               patternInfo="\"\""
             fi
