@@ -52,40 +52,54 @@
 
   </head>
 
-  <body style="overflow-x: hidden">
+  
+    <body style="overflow-x: hidden" class="dark-mode">
+      <script>
+        const body = document.body;
+    
+        if (localStorage.getItem("mode") === "light-mode") {
+          body.classList.remove("dark-mode");
+    
+          let allLogos = document.querySelectorAll("#logo-dark-light");
+          allLogos.forEach(e => e.src = e.dataset.logoForLight);
+        }
+    
+        // Automatically set logos based on initial theme
+        window.addEventListener('load', () => {
+          let allLogos = document.querySelectorAll("#logo-dark-light");
+          allLogos.forEach(e => {
+            e.src = body.classList.contains("dark-mode") ? e.dataset.logoForDark : e.dataset.logoForLight;
+          });
+        });
+      </script>
+
     {% if page.title != "Meshery | The Kubernetes and Cloud Native Manager" and page.title != "Programs" %}
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KL6SSW5"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->        
-    <header id="mainHeader" class="filledHeader">
-    {% else %}
-    <header id="mainHeader">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KL6SSW5" height="0" width="0"
+    style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<header id="mainHeader" class="filledHeader">
+  {% else %}
+  <header id="mainHeader">
     {% endif %}
-      <div class="container nav-container">
-        <div class="project-name">
-          <a href="{{ site.baseurl }}/">
-            <img
-              src="{{ site.baseurl }}/assets/images/logos/meshery-logo.png"
-              alt="Meshery Logo"
-            />&nbsp;
-            <img
-              src="{{ site.baseurl }}/assets/images/logos/meshery-logo-text-dark.png"
-              data-logo-for-dark="{{ site.baseurl }}/assets/images/logos/meshery-logo-text.png"
-              data-logo-for-light="{{ site.baseurl }}/assets/images/logos/meshery-logo-text-dark.png"
-              alt="Meshery Logo"
-              id="logo-dark-light"
-            />
-          </a>
-        </div>
-        {% include navigation.html %}
-        <div class="nav-mode-icon" id="mode-toggle-btn" style="text-align: center;">
-          <img class="nav-text" id="logo-dark-light" src="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-sun.png" 
-            data-logo-for-dark="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-moon.png"
-            data-logo-for-light="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-sun.png"
-          />          
-        </div>
+    <div class="container nav-container">
+      <div class="project-name">
+        <a href="{{ site.baseurl }}/">
+          <img src="{{ site.baseurl }}/assets/images/logos/meshery-logo.png" alt="Meshery Logo" />&nbsp;
+          <img src="{{ site.baseurl }}/assets/images/logos/meshery-logo-text.png"
+            data-logo-for-dark="{{ site.baseurl }}/assets/images/logos/meshery-logo-text.png"
+            data-logo-for-light="{{ site.baseurl }}/assets/images/logos/meshery-logo-text-dark.png" alt="Meshery Logo"
+            id="logo-dark-light" />
+        </a>
       </div>
-    </header>
+      {% include navigation.html %}
+      <div class="nav-mode-icon" id="mode-toggle-btn" style="text-align: center;">
+        <img class="nav-text" id="logo-dark-light"
+          src="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-moon.png"
+          data-logo-for-dark="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-moon.png"
+          data-logo-for-light="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-sun.png" />
+      </div>
+    </div>
+  </header>
   </body>
 </html>
