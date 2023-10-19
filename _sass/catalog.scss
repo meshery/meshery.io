@@ -220,7 +220,6 @@ p {
 .chip {
   display: inline-flex;
   flex-direction: row-reverse;
-  float: right;
   // margin: 4px;
   // background-color: rgb(182, 215, 168);
   background-color: var(--brand-color-primary);
@@ -233,8 +232,9 @@ p {
   font-family: "Open Sans", sans-serif;
   white-space: nowrap;
   align-items: center;
-  border-top-right-radius: 16px;
-  border-bottom-left-radius: 16px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 16px;
   vertical-align: middle;
   text-decoration: none;
   justify-content: center;
@@ -254,7 +254,7 @@ p {
 .chip-modal {
   position: absolute;
   top: 0px;
-  right: 0px;
+  left: 0px;
   height: 2.5rem;
   font-size: 1.6rem;
   align-self: flex-end;
@@ -372,12 +372,11 @@ input[type="checkbox"] {
   transition: all 0.3s;
 }
 .modal-image {
-  margin: 2rem 0.5rem;
+  // margin: 2rem 0.5rem;
   width: 25%;
-  border-radius: 1rem;
-  padding: 2rem;
-  height: fit-content;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  padding: 3rem;
+  // height: fit-content;
+  background: linear-gradient(195deg,var(--color-primary-light-dark),var(--color-primary-medium-dark));
   img{
     max-width: 80%;
   }
@@ -389,8 +388,7 @@ input[type="checkbox"] {
 
 .modal-content {
   display: flex;
-  justify-content: space-evenly;
-  padding-bottom: 3rem;
+  flex-direction: row;
   code {
     padding: 1rem;
     border-radius: .5rem;
@@ -422,22 +420,23 @@ input[type="checkbox"] {
 
 .modal-info{
   width: 60%;
+  padding: 25px;
 }
 
 .modal-window > div {
   position: absolute;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 80%;
   overflow-x: hidden;
   overflow-y: auto;
-  width: 60%;
+  width: 70%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
   background: linear-gradient(45deg,var(--color-primary-dark),var(--color-primary-light));
-  padding: 1.5rem 2.5rem 1.5rem 3rem;
+  // padding: 1.5rem 2.5rem 1.5rem 3rem;
 }
 .modal-window > div::-webkit-scrollbar {
   display: none;
@@ -555,9 +554,15 @@ input[type="checkbox"] {
   flex-basis: 70%;
 }
 
+.vertical-line {
+  border-left: 1px solid var(--color-secondary-light);
+  height: 100%; 
+}
+
 .close {
   display: flex;
   justify-content: space-between;
+  float: right;
   transition: all 200ms;
   font-size: 2rem;
   font-weight: bold;
@@ -642,9 +647,9 @@ label {
 //   padding-top: 10px;
 //   margin-right: 14px;
 // }
-.modal-window div div:not(:last-of-type) {
-  margin-bottom: 15px;
-}
+// .modal-window div div:not(:last-of-type) {
+//   margin-bottom: 15px;
+// }
 .modal-container {
   padding: 20px 40px 40px;
   max-width: 600px;
