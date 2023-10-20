@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
       content.style.display = "inline"; 
     } else{
       readMore.style.display = "none"; 
+      content.style.display = "inline";
     }
 
     readMore.addEventListener("click", function () {
