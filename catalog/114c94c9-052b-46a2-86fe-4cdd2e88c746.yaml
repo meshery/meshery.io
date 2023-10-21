@@ -1,58 +1,14 @@
-name: my first design
+name: my first app design
 services:
-  M K:
-    name: M K
-    type: Namespace
-    apiVersion: v1
-    version: v1.25.2
-    model: kubernetes
-    traits:
-      meshmap:
-        edges: []
-        id: 29c92597-d0a0-428b-91fa-86258cb2e013
-        label: M K
-        meshmodel-data:
-          category:
-            metadata: null
-            name: Orchestration & Management
-          displayName: Kubernetes
-          displayhostname: ""
-          hostID: 00000000-0000-0000-0000-000000000000
-          hostname: ""
-          metadata:
-            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-          name: kubernetes
-          version: v1.25.2
-        meshmodel-metadata:
-          genealogy: parent
-          isCustomResource: false
-          isNamespaced: false
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: rectangle
-          styleOverrides: '{"background-image":"none","border-width":2,"border-style":"dashed","background-opacity":0.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/namespace-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
-        position:
-          posX: 903.602329167973
-          posY: 481.50206969889996
   build-ir:
     name: build-ir
     type: Build
     apiVersion: camel.apache.org/v1
-    namespace: default
+    namespace: M K
     version: 0.13.0
     model: camel-k
     settings:
-      spec:
-        tasks: []
+      spec: {}
     traits:
       meshmap:
         edges: []
@@ -87,9 +43,54 @@ services:
           svgColor: ui/public/static/img/meshmodels/camel-k/color/build-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/camel-k/white/build-white.svg
+        parent: 29c92597-d0a0-428b-91fa-86258cb2e013
         position:
-          posX: 755.9841365699194
-          posY: 465.3817244686689
+          posX: 312.5072093522184
+          posY: 181.1663259926708
+  cd-pipeline-ti:
+    name: cd-pipeline-ti
+    type: CDPipeline
+    apiVersion: v2.edp.epam.com/v1
+    namespace: defaultss
+    version: 2.14.0-SNAPSHOT.32
+    model: cd-pipeline-operator
+    traits:
+      meshmap:
+        edges: []
+        id: 897011fa-9db5-4813-bd6c-5adee989d947
+        label: cd-pipeline-ti
+        meshmodel-data:
+          category:
+            metadata: null
+            name: App Definition and Development
+          displayName: CD Pipeline Operator
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            source_uri: https://epam.github.io/edp-helm-charts/snapshot/packages/cd-pipeline-operator-2.15.0-SNAPSHOT.24.tgz
+            svgColor: ui/public/static/img/meshmodels/admin-console-operator/color/adminconsole-color.svg
+            svgWhite: ui/public/static/img/meshmodels/admin-console-operator/white/adminconsole-white.svg
+          name: cd-pipeline-operator
+          version: 2.14.0-SNAPSHOT.32
+        meshmodel-metadata:
+          genealogy: ""
+          isNamespaced: true
+          logoURL: https://www.epam.com/content/dam/epam/global/logo_white-blue.svg
+          model: cd-pipeline-operator
+          modelDisplayName: CD Pipeline Operator
+          primaryColor: '#00ABCD'
+          published: true
+          secondaryColor: '#00D3A9'
+          shape: circle
+          styleOverrides: ""
+          subCategory: Continuous Integration & Delivery
+          svgColor: ui/public/static/img/meshmodels/admin-console-operator/color/adminconsole-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/admin-console-operator/white/adminconsole-white.svg
+        position:
+          posX: 265.9997149676864
+          posY: 305.9999905210784
   customer:
     name: customer
     type: Customer
@@ -134,13 +135,13 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/jira-service-desk-operator/white/customer-white.svg
         position:
-          posX: 785.9133840570175
-          posY: 492.7352226778479
+          posX: 381.9997149676864
+          posY: 305.2499905210784
   notebook:
     name: notebook
     type: Notebook
     apiVersion: kubeflow.org/v1
-    namespace: default
+    namespace: defaultsd
     version: 1.6.1
     model: kubeflow
     traits:
@@ -175,8 +176,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubeflow/white/authcode-white.svg
         position:
-          posX: 759.5945758410452
-          posY: 511.0984508726016
+          posX: 327.4997149676864
+          posY: 305.2499905210784
   persistent-volume-ac:
     name: persistent-volume-ac
     type: PersistentVolume
@@ -218,8 +219,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 815.0753891692943
-          posY: 445.19883938996907
+          posX: 453.4997149676864
+          posY: 137.24999052107842
   persistent-volume-claim-fm:
     name: persistent-volume-claim-fm
     type: PersistentVolumeClaim
@@ -227,8 +228,6 @@ services:
     namespace: M K
     version: v1.25.2
     model: kubernetes
-    dependsOn:
-    - M K
     traits:
       meshmap:
         edges: []
@@ -266,8 +265,8 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         parent: 29c92597-d0a0-428b-91fa-86258cb2e013
         position:
-          posX: 882.9060336741696
-          posY: 481.5020696988999
+          posX: 342.5072093522184
+          posY: 104.1663259926708
   pod-en:
     name: pod-en
     type: Pod
@@ -275,8 +274,6 @@ services:
     namespace: M K
     version: v1.25.2
     model: kubernetes
-    dependsOn:
-    - M K
     settings:
       spec:
         volumes: []
@@ -316,5 +313,5 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         parent: 29c92597-d0a0-428b-91fa-86258cb2e013
         position:
-          posX: 959.7986246617763
-          posY: 470.8365447299869
+          posX: 420.5072093522184
+          posY: 90.1663259926708

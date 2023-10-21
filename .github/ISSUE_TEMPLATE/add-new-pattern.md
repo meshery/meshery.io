@@ -5,7 +5,7 @@ title: '[Catalog]'
 labels: 'area/catalog'
 assignees: ''
 ---
-Add or update the following [Meshery Catalog](https://meshery.io/catalog.) item(s):
+Add or update the following [Meshery Catalog](https://meshery.io/catalog) item(s):
 
 **Name:**  <!-- Name of pattern -->
 **Type:** <!-- Type of pattern-->

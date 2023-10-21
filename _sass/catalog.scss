@@ -125,6 +125,7 @@
     gap: 1rem;
     justify-content: space-around;
     height: fit-content;
+    padding-top: 1rem;
   }
 
   @media (max-width:770px) {
@@ -148,9 +149,9 @@ p {
   display: block;
   // margin: 0 1rem;
 }
-.column{
-  display: none;
-}
+// .column{
+//   // display: none;
+// }
 .smp-overlay {
   width: 16px;
   bottom: 0;
@@ -342,6 +343,7 @@ label {
   padding-left: 15px;
   text-indent: -15px;
 }
+
 input {
   width: 20px;
   height: 20px;
@@ -875,11 +877,34 @@ label {
     width: 100%;
   }
 }
+.viewall{
+  display: flex;
+    padding: 5px;
+    margin: 5px;
+}
+.viewallbtn{
+  cursor: pointer;
+  border: none;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 7px;
+  padding: 0.5rem;
+  background: #00B39F;
+}
 
 @media screen and (max-width: 650px) {
   .modal-window {
     width: 100%;
     height: 100%;
+  }
+}
+@media screen and (min-width: 770px) {
+
+  .viewallbtn{
+    position: relative;
+    left:60%;
   }
 }
 @media screen and (max-width: 770px) {
@@ -892,7 +917,9 @@ label {
     justify-content: space-between;
     gap: 0.5rem;
   }
-
+  .viewall{
+    justify-content: center;
+  }
   .catalog{
 
     .row {
@@ -904,8 +931,8 @@ label {
       height: 100%;
     }
 
-    .column-lg {
-      display: none;
+    .column-lg:has(.card) {
+      display: block;
     }
     .mobile_column_sm {
       display: unset;
@@ -917,9 +944,9 @@ label {
     width: 100%;
     height: auto;
     flex-direction: column;
-    gap: 1.5rem;
-    padding-bottom: 5rem;
-    margin-bottom: 3rem;
+    gap: 1rem;
+    padding-bottom: 3rem;
+    margin-bottom: 1.5rem;
     .dropdown {
       align-self: center;
       margin-bottom: 7rem;
@@ -931,11 +958,9 @@ label {
     .compatibility-div,
     .tech-div {
       display: grid;
-      grid-template-columns: 1fr 1fr;
       label {
         margin: 0;
       }
-      row-gap: 2rem;
       column-gap: 2rem;
       .open-service-mesh {
         grid-row: 4/5;
@@ -956,7 +981,31 @@ label {
     }
   }
 }
+@media screen and (max-width:770px) and  (min-width:450px){
+  .category-div,
+  .compatibility-div,
+  .tech-div {
+    row-gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width:450px) {
+  .category-div,
+  .compatibility-div,
+  .tech-div {
+    row-gap: 1rem;
+  }
+}
+
 @media screen and (max-width: 644px) {  
+  .modal-image {
+    width: 230px;
+    padding-bottom: 2rem;
+  }
+  .modal-h1,
+  .modal-h2 {
+    font-size: 1rem;
+  }
   .related-patterns {
     display: none;
   }
