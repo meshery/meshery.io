@@ -19,7 +19,7 @@ Every aspect of what we do revolves around our users and contributors. We are th
 
 ### What Are Layer5 Badges?
 
-These badges are a representation of your participation and milestones that you achieve together and in solidarity with the Layer5 community. Badges are how users demonstrate their prowess with the projects and how contributors identify their ownership, dedication, aand skills. There are several badges each representing a specific user achievement or contributor skill.
+These badges are a representation of your participation and milestones that you achieve together and in solidarity with the Layer5 community. Badges are how users demonstrate their prowess with the projects and how contributors identify their ownership, dedication, and skills. There are several badges each representing a specific user achievement or contributor skill.
 
 Layer5 Badges are a tangible way for us to recognize and honor the exceptional efforts put forth by our contributors and the milestones achieved by our users. These badges are a symbol of your dedication, commitment, and passion for making a positive impact within the Layer5 community and projects. They serve as a testament to the hours spent using, coding, testing, documenting, and collaborating.
 
