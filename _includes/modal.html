@@ -1,39 +1,50 @@
 <div id="open-modal" class="modal-window">
-  <div class="click-container">
-      <button class="modal-close close">&times;</button>
-    <div class="chip chip-modal">
-      {% if pattern.filters.type == "wasm filter" %}
-      <a href="{{ site.baseurl }}/catalog/webassembly">
-        <h6 class="pattern-type"> {{pattern.filters.type | upcase }}</h6>
-      {% else %}
-        <a href="{{ site.baseurl }}/catalog/{{ pattern.type | slugify }}">
-      {% endif %}
-          <h6 class="pattern-type"> {{pattern.type | upcase }}</h6>
-        </a>
-    </div>
+  <!-- <div class="click-container"> -->
     <div class="modal-content">
       <div class="modal-image">
-        <img src="{{pattern.image}}" />
+        <div class="chip chip-modal">
+          {% if pattern.filters.type == "wasm filter" %}
+          <a href="{{ site.baseurl }}/catalog/webassembly">
+            <h6 class="pattern-type"> {{pattern.filters.type | upcase }}</h6>
+          {% else %}
+            <a href="{{ site.baseurl }}/catalog/{{ pattern.type | slugify }}">
+          {% endif %}
+              <h6 class="pattern-type"> {{pattern.type | upcase }}</h6>
+            </a>
+        </div>
+        <button class="modal-close close">&times;</button>
+        <img class="image-class" src="{{pattern.image}}" />
         <h4 class="related-patterns">RELATED PATTERNS</h4>
         {% include related-patterns.html %}
       </div>
+      <div class="vertical-line"></div>
       <div class="modal-info">
         <h2 class="modal-h2">{{pattern.name | upcase }} {% include read-more.html %}</h2>
         {% if pattern.patternInfo %}
         <h3 class="modal-h3">What this pattern does</h3>
-        <p>{{pattern.patternInfo | replace: '\\n', '<br/>'| replace: '\n', '<br/>' }}</p>
+        <p class="content-toggle contentdata">
+          {{pattern.patternInfo | replace: '\\n', '<br/>' | replace: '\n', '<br/>' }}
+        </p>
+        <span class="read-more" href="read-more.html">{% include expand.html %}</span>
         <h3 class="modal-h3">Caveats and Considerations</h3>
         <p>{{pattern.patternCaveats}}</p>
         {% else %}
         <h3 class="modal-h3">What this filter does</h3>
-        <p>{{pattern.filterInfo }}</p>
+        <p class="content-toggle contentdata">
+          {{pattern.filterInfo }}
+        </p>
+        <span class="read-more">...read more</span>
         <h3 class="modal-h3">Caveats and Considerations</h3>
         <p>{{pattern.filterCaveats}}</p>
         {% endif %}
-          <h3 class="modal-h3">Compatibility</h3>
+          <h3 class="modal-h3">Technologies</h3>
           {% include partials/compatibility.html %}
         {% include copy-and-download.html %}
       </div>
     </div>
-  </div>
+     
+ <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
+    
+   
+  <!-- </div> -->
 </div>
