@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
   const contentElements = document.querySelectorAll(".contentdata");
   const readMoreElements = document.querySelectorAll(".read-more");
@@ -9,9 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // Split text into words
     const words = content.textContent.trim().split(/\s+/);
 
-    if (words.length > 100) { // hide content if more than 100 words
-      const visibleContent = words.slice(0, 100).join(" ");
-      const hiddenContent = words.slice(100).join(" ");
+    if (words.length > 80) { // hide content if more than 100 words
+      const visibleContent = words.slice(0, 80).join(" ");
+      const hiddenContent = words.slice(80).join(" ");
 
       content.innerHTML = `
         <span class="visible-content">${visibleContent}</span>
@@ -24,18 +25,5 @@ document.addEventListener("DOMContentLoaded", function () {
       readMore.style.display = "none"; 
       content.style.display = "inline";
     }
-
-    readMore.addEventListener("click", function () {
-      const visibleContent = content.querySelector(".visible-content");
-      const hiddenContent = content.querySelector(".hidden-content");
-
-     if (hiddenContent.style.display === "inline") {
-        hiddenContent.style.display = "none";
-        readMore.textContent = "Read more";
-      } else {
-        hiddenContent.style.display = "inline";
-        readMore.textContent = "Read less";
-      }
-    });
   }
 });
