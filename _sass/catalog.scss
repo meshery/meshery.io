@@ -220,7 +220,6 @@ p {
 .chip {
   display: inline-flex;
   flex-direction: row-reverse;
-  float: right;
   // margin: 4px;
   // background-color: rgb(182, 215, 168);
   background-color: var(--brand-color-primary);
@@ -233,8 +232,9 @@ p {
   font-family: "Open Sans", sans-serif;
   white-space: nowrap;
   align-items: center;
-  border-top-right-radius: 16px;
-  border-bottom-left-radius: 16px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 16px;
   vertical-align: middle;
   text-decoration: none;
   justify-content: center;
@@ -254,7 +254,7 @@ p {
 .chip-modal {
   position: absolute;
   top: 0px;
-  right: 0px;
+  left: 0px;
   height: 2.5rem;
   font-size: 1.6rem;
   align-self: flex-end;
@@ -313,12 +313,11 @@ p {
 
 .external-link {
   display:inline-block;
-  width: 1.5rem;
+  width: 1rem;
   img {
-    content: url('../assets/images/buttons/external-link_green.svg');
-    // on hover 
+    margin-bottom: 3px;
     &:hover {
-      content: url('../assets/images/buttons/external-black.svg');
+      opacity: 0.7;
     }
   }
   
@@ -372,15 +371,21 @@ input[type="checkbox"] {
   transition: all 0.3s;
 }
 .modal-image {
-  margin: 2rem 0.5rem;
+  // margin: 2rem 0.5rem;
   width: 25%;
-  border-radius: 1rem;
-  padding: 2rem;
-  height: fit-content;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  padding: 2.5rem;
+  // height: fit-content;
+  height: 100%;
+  background:(var(--color-primary-light-dark));
   img{
     max-width: 80%;
+    // margin-top: 25px;
   }
+}
+
+.image-class{
+  max-width: 80%;
+  margin-top: 30px;
 }
   
 ::-webkit-scrollbar {
@@ -389,8 +394,7 @@ input[type="checkbox"] {
 
 .modal-content {
   display: flex;
-  justify-content: space-evenly;
-  padding-bottom: 3rem;
+  flex-direction: row;
   code {
     padding: 1rem;
     border-radius: .5rem;
@@ -418,26 +422,32 @@ input[type="checkbox"] {
   font-size: 1.5rem;
   margin-bottom: 1rem;
   text-align: inherit;
+  font-weight: 600;
+}
+
+.modal-h3{
+  font-weight: 400;
 }
 
 .modal-info{
   width: 60%;
+  padding: 25px;
 }
 
 .modal-window > div {
   position: absolute;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 80%;
   overflow-x: hidden;
   overflow-y: auto;
-  width: 60%;
+  width: 70%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
   background: linear-gradient(45deg,var(--color-primary-dark),var(--color-primary-light));
-  padding: 1.5rem 2.5rem 1.5rem 3rem;
+  // padding: 1.5rem 2.5rem 1.5rem 3rem;
 }
 .modal-window > div::-webkit-scrollbar {
   display: none;
@@ -534,6 +544,7 @@ input[type="checkbox"] {
   position: absolute;
   border-radius: 15px;
   padding-bottom: 0px;
+  margin-bottom: 0px;
 }
 .modal-pattern-id {
   color: var(--color-secondary-dark);
@@ -555,14 +566,29 @@ input[type="checkbox"] {
   flex-basis: 70%;
 }
 
+.vertical-line {
+  border-left: 1px solid var(--color-secondary-light);
+  height: 114%; 
+}
+
+.redirect {
+  width: 0rem;
+  color: var(--brand-color-secondary);
+}
+
 .close {
   display: flex;
   justify-content: space-between;
+  position: absolute;
+  right: 0;
+  margin-right: 18px;
+  top: 18px;
+  float: right;
   transition: all 200ms;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
   text-decoration: none;
-  color: var(--brand-color-secondary-50);
+  color: var(--color-secondary-dark);
   background: transparent;
   border: 0px;
   padding: 0px;
@@ -616,6 +642,7 @@ label {
 
 .related-patterns {
   font-size: 1rem;
+  margin-top: 40px;
 }
 
 .modal-smp {
@@ -642,9 +669,9 @@ label {
 //   padding-top: 10px;
 //   margin-right: 14px;
 // }
-.modal-window div div:not(:last-of-type) {
-  margin-bottom: 15px;
-}
+// .modal-window div div:not(:last-of-type) {
+//   margin-bottom: 15px;
+// }
 .modal-container {
   padding: 20px 40px 40px;
   max-width: 600px;
@@ -722,6 +749,29 @@ label {
 .dropbtn {
   display: none;
 }
+.contentdata {
+  display: none;
+}
+
+.read-more {
+  cursor: pointer;
+  color: var( --brand-color-primary);
+}
+
+.visible-content {
+  display: inline; /* Initially show the visible content */
+}
+
+
+
+.hidden-content {
+  display: none; /* Initially hide the hidden content */
+  max-height: none; /* Remove the max-height limit to allow it to expand */
+  opacity: 1; /* Set opacity to fully visible */
+  overflow: visible; /* Allow the content to be fully visible */
+  transition: max-height 0.5s, opacity 0.5s;
+}
+
 
 @media screen and (max-width: 700px) {
   .modal-window {
