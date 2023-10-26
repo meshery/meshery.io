@@ -1,69 +1,76 @@
 <div class="integrations-heading" style="padding: 1rem;">
-<h1 id="integration-heading"></h1>
-<h2>
-Support for your Cloud Native Infrastructure and Apps
-</h2>
-<p style="margin: auto 10vw;">
-Meshery seamlessly integrates with every CNCF project, your existing tools and Kubernetes clusters, allowing you to enhance use your preferred monitoring, CI/CD, and security solutions.
-</p>
-<p style="margin: 2vw 10vw 0vw 10vw;">
-Meshery's Kubernetes-native approach means you can easily incorporate Meshery into your existing workflow without additional setup or integration effort.
-</p>
+    <h1 id="integration-heading"></h1>
+    <h2>
+        Support for your Cloud Native Infrastructure and Apps
+    </h2>
+    <p style="margin: auto 10vw;">
+        Meshery seamlessly integrates with every CNCF project, your existing tools and Kubernetes clusters, allowing you
+        to enhance use your preferred monitoring, CI/CD, and security solutions.
+    </p>
+    <p style="margin: 2vw 10vw 0vw 10vw;">
+        Meshery's Kubernetes-native approach means you can easily incorporate Meshery into your existing workflow
+        without additional setup or integration effort.
+    </p>
 </div>
-<div id="integContainer" class="integrations-container container" style="column-gap: max(2vh, 2vw); row-gap: 1.5rem; display: flex; flex-wrap: wrap;">
+<div id="integContainer" class="integrations-container container"
+    style="column-gap: max(2vh, 2vw); row-gap: 1.5rem; display: flex; flex-wrap: wrap;">
 </div>
 <div class="integrations-3d-link">
-<div class="button-container">
-<a class="highlight show-all-button" style="display: inline-block; margin: max(3vh, 3vw) auto 0; margin-right: 10px; width: fit-content;">See All Integrations</a>
-<a class="highlight show-all-button" href="/integrations" style="display: inline-block; margin: max(3vh, 3vw) auto 0; margin-left: 10px; width: fit-content;">View Integrations in 3D</a>
-</div>
+    <div class="button-container">
+        <a class="highlight show-all-button"
+            style="display: inline-block; margin: max(3vh, 3vw) auto 0; margin-right: 10px; width: fit-content;">See All
+            Integrations</a>
+        <a class="highlight show-all-button" href="/integrations"
+            style="display: inline-block; margin: max(3vh, 3vw) auto 0; margin-left: 10px; width: fit-content;">View
+            Integrations in 3D</a>
+    </div>
 </div>
 
 <script type="module">
-// integrations.js
-import data from '../../integrations/data.js';
+    // integrations.js
+    import data from '../../integrations/data.js';
 
-const integHeading = document.getElementById("integration-heading");
-const roundedIntegNumber = Math.floor(data.length / 10) * 10;
-integHeading.textContent = `${roundedIntegNumber}+ Built-In Integrations`;
+    const integHeading = document.getElementById("integration-heading");
+    const roundedIntegNumber = Math.floor(data.length / 10) * 10;
+    integHeading.textContent = `${roundedIntegNumber}+ Built-In Integrations`;
 
-const integContainer = document.getElementById("integContainer");
+    const integContainer = document.getElementById("integContainer");
 
-let allDataShown = false;
+    let allDataShown = false;
 
-function renderIntegrationCards(data, showAll) {
-const cardsToShow = showAll ? data.length : 40;
-return data.slice(0, cardsToShow).map(item => {
-const urlFromJSON = item.color.split('/integration');
+    function renderIntegrationCards(data, showAll) {
+        const cardsToShow = showAll ? data.length : 40;
+        return data.slice(0, cardsToShow).map(item => {
+            const urlFromJSON = item.color.split('/integration');
 
-return `
-<div class="integrations-card">
-<div class="integrations-card-inner">
-<div class="card-front">
-<img src="${urlFromJSON[0]}${urlFromJSON[1]}" loading="lazy" id="logo-dark-light"
-data-logo-for-dark="${urlFromJSON[0]}${urlFromJSON[1]}"
-data-logo-for-light="${urlFromJSON[0]}${urlFromJSON[1]}" />
-</div>
-<div class="card-back">
-<p> ${item.name} </p>
-</div>
-</div>
-</div>`;
-}).join('');
-}
+            return `
+                <div class="integrations-card">
+                <div class="integrations-card-inner">
+                <div class="card-front">
+                <img src="${urlFromJSON[0]}${urlFromJSON[1]}" loading="lazy" id="logo-dark-light"
+                data-logo-for-dark="${urlFromJSON[0]}${urlFromJSON[1]}"
+                data-logo-for-light="${urlFromJSON[0]}${urlFromJSON[1]}" />
+                </div>
+                <div class="card-back">
+                <p> ${item.name} </p>
+                </div>
+                </div>
+                </div>`;
+        }).join('');
+    }
 
-const scrollOptions = { behavior: "smooth" };
+    const scrollOptions = { behavior: "smooth" };
 
-integContainer.innerHTML = renderIntegrationCards(data, allDataShown);
+    integContainer.innerHTML = renderIntegrationCards(data, allDataShown);
 
-document.querySelector('.show-all-button').addEventListener('click', () => {
-allDataShown = !allDataShown;
-integContainer.innerHTML = renderIntegrationCards(data, allDataShown);
+    document.querySelector('.show-all-button').addEventListener('click', () => {
+        allDataShown = !allDataShown;
+        integContainer.innerHTML = renderIntegrationCards(data, allDataShown);
 
-// Scroll to the <h2> tag
-if (!allDataShown) {
-const h2Tag = document.querySelector('h2');
-h2Tag.scrollIntoView(scrollOptions);
-}
-});
+        // Scroll to the <h2> tag
+        if (!allDataShown) {
+            const h2Tag = document.querySelector('h2');
+            h2Tag.scrollIntoView(scrollOptions);
+        }
+    });
 </script>
