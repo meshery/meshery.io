@@ -4,6 +4,30 @@ title: Cloud Native Catalog
 permalink: /catalog
 ---
 
+<!-- <style>
+  .pager a, .pager span {
+    padding: 7px 18px;
+    border: 1px solid #eee;
+    margin-left: -2px;
+    margin-right: -2px;
+    background-color: #ffffff;
+    display: inline-block;
+
+  }
+  .pager a :hover{
+    background-color: #f1f1f1;
+    color:#333
+  }
+.selected a{
+  background-color: #222222
+}
+.pager {
+    text-align: center;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+ }
+</style> -->
 <style>
   .selected a {
     background-color: #222222;
@@ -93,3 +117,136 @@ permalink: /catalog
     });
   });
 </script>
+<!-- {% if paginator.total_pages > 1 %}
+  <ul class="pager">
+      {% if paginator.first_page %}
+      <li class="previous">
+          <a href="{{ paginator.first_page_path | prepend: site.baseurl | replace: '//', '/' }}">First</a>
+      </li>
+      {% endif %}
+
+      {% if paginator.previous_page %}
+      <li class="previous">
+          <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"> &laquo;Prev</a>
+      </li>
+      {% endif %}
+
+      {% if paginator.page_trail %}
+        {% for trail in paginator.page_trail %}
+          <li {% if page.url == trail.path %}class="selected"{% endif %}>
+              <a href="{{ trail.path | prepend: site.baseurl | replace: '//', '/' }}" title="{{trail.title}}">{{ trail.num }}</a>
+          </li>
+        {% endfor %}
+      {% endif %}
+
+      {% if paginator.next_page %}
+      <li class="next">
+          <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
+      </li>
+      {% endif %}
+
+       {% if paginator.last_page %}
+      <li class="previous">
+          <a href="{{ paginator.last_page_path | prepend: site.baseurl | replace: '//', '/' }}">Last</a>
+      </li>
+      {% endif %}
+  </ul>
+  {% endif %} -->
+<!-- <script>
+const handleChange = () => {
+    var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+    var filters = [];
+    var Categories = ["Deployment", "Traffic Management", "Security", "Workloads", "Observability", "Troubleshooting", "Scaling", "Resiliency"];
+    var Compatibility = ["Istio", "Linkerd", "Consul", "Kuma", "App Mesh", "OSM", "Traefik", "Nginx", "NSM"];
+    var Technology = ["WebAssembly", "JWT"];
+    var categoryDATA =[];
+    var compDATA = [];
+    var techDATA = [];
+    var allPatterns = {{ site.data.patterns | jsonify }};
+    var finalCategories = [];
+    var finalCompatibility = [];
+    var finalTechnology = [];
+    var Result = [];
+    var data = [];
+
+for (var i = 0; i < checkboxes.length; i++) {
+     
+      filters.push(checkboxes[i].value)
+      
+    }
+
+  filters.forEach((x) => { 
+    Categories.map((y) => { 
+      if( x === y ) {
+        categoryDATA.push(y);
+       }
+    }) 
+  })
+
+  filters.forEach((x) => { 
+    Compatibility.map((y) => { 
+      if( x === y ) {
+         compDATA.push(y);
+       }
+    }) 
+  })
+
+  filters.forEach((x) => { 
+    Technology.map((y) => { 
+      if( x === y ) {
+        techDATA.push(y);
+       }
+    }) 
+  })
+
+  allPatterns.forEach((x) => {
+    categoryDATA.map((category) => {
+        if(x.filters.type === category)
+        {
+         finalCategories.push(x);
+        }
+      })
+  })
+
+  allPatterns.forEach((x) => {
+  compDATA.map((compatibility) => {
+    for(i=0;i< x.filters.compatibility.length;i++)
+    {
+      if(x.filters.compatibility[i] === compatibility)
+      {
+        finalCompatibility.push(x);
+      }
+    }
+    })
+})
+
+  allPatterns.forEach((x) => {
+    techDATA.map((tech) => {
+        if(x.filters.technology === tech)
+        {
+         finalTechnology.push(x);
+        }
+      })
+  })
+
+  if(categoryDATA.length === 0) finalCategories = allPatterns;
+      if(compDATA.length === 0) finalCompatibility = allPatterns;
+      if(techDATA.length === 0) finalTechnology = allPatterns;
+
+  Result = [finalCategories, finalCompatibility, finalTechnology, allPatterns],
+      data = Result.reduce((a, b) => a.filter(c => b.includes(c)));
+      console.log(data);
+
+
+      data = document.getElementById("card");
+
+   var JsonData = JSON.stringify(data);
+
+  console.log(JsonData);
+     
+  }
+</script>
+ -->
+<!-- 
+    Showing buttons to move to the next and to the previous list of posts (pager buttons).
+  -->
