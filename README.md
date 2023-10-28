@@ -33,7 +33,7 @@ _Visit [Meshery.io](https://meshery.io/) to learn more!_
 
 ## What is Meshery?
 
-Meshery is a self-service engineering platform, an open-source, cloud-native manager that enables the design and management of all Kubernetes-based infrastructure and applications. Among its many features, Meshery excels at managing multi-cluster Kubernetes deployments. As an extensible platform, Meshery offers visual and collaborative GitOps, freeing you from the constraints of YAML.
+Meshery is a self-service engineering platform, an open-source, cloud-native manager that enables the design and management of all Kubernetes-based infrastructure and applications. Among its many features, Meshery excels at managing multi-cluster Kubernetes deployments. As an extensible platform, Meshery offers visual and collaborative GitOps, freeing you from the chains of YAML.
 
 For further information, refer to the [Meshery Docs](https://docs.meshery.io).
 
@@ -42,7 +42,7 @@ For further information, refer to the [Meshery Docs](https://docs.meshery.io).
 ## Join the Meshery community!
 
 <a name="contributing"></a><a name="community"></a>
-Our projects are community-built and we welcome collaboration. 👍 Be sure to see <a href="https://layer5.io/community/newcomers/">Newcomers' Guide</a> for a tour of resources available to you and jump into our <a href="https://slack.meshery.io">Slack</a> to engage!
+Our projects are community-built and we welcome collaboration. 👍 Be sure to see the <a href="https://layer5.io/community/newcomers/">Newcomers' Guide</a> for a tour of resources available to you and jump into our <a href="https://slack.meshery.io">Slack</a> to engage!
 
 <p style="clear:both;">
 <a href ="https://layer5.io/community"><img alt="MeshMates" src="assets/images/logos/Layer5-MeshMentors.png" style="margin-right:10px; margin-bottom:7px;" width="28%" align="left" /></a>
