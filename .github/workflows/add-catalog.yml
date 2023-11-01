@@ -26,7 +26,7 @@ jobs:
       - name: Update Catalog Patterns
         if: ${{ success() }}
         run: |
-          catalogPatterns=$(curl -sS "$MESHERY_CLOUD_BASE_URL/api/catalog/content/pattern" -b ${{ secrets.MESHERY_CATALOG_SECRET }} 2>./err.txt)
+          catalogPatterns=$(curl -sS "$MESHERY_CLOUD_BASE_URL/api/catalog/content/pattern" 2>./err.txt)
           if [[ "$(<err.txt)" != "" ]]; then
             >&2 echo "Error connecting to Meshery Cloud"
             >&2 echo "$(<err.txt)"
@@ -43,6 +43,13 @@ jobs:
             patternType="$(jq -r .[$idx].catalog_data.type temp.json)"
             patternName="$(jq -r .[$idx].name temp.json)"
             compatibility=""
+
+            # check if directory doesn't exists; then create it
+            if [ ! -d "./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"" ]; then
+              echo "$(echo $patternType | tr '[:upper:]' '[:lower:]') doesn't exist."
+              echo "Creating directory...$(echo $patternType | tr '[:upper:]' '[:lower:]')"
+              mkdir "./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')""
+            fi
 
             if [[ $patternInfo == "null" ]]; then
               patternInfo="\"\""
@@ -126,6 +133,13 @@ jobs:
             filterType="$(jq -r .[$idx].catalog_data.type temp.json)"
             filterName="$(jq -r .[$idx].name temp.json)"
             compatibility=""
+
+            # check if directory doesn't exists; then create it
+            if [ ! -d "./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')"" ]; then
+              echo "$(echo $filterType | tr '[:upper:]' '[:lower:]') doesn't exist."
+              echo "Creating directory...$(echo $filterType | tr '[:upper:]' '[:lower:]')"
+              mkdir "./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')""
+            fi
 
             if [[ $filterInfo == "null" ]]; then
               filterInfo="\"\""
