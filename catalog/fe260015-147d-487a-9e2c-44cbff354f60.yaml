@@ -1,0 +1,58 @@
+name: Kubernetes Deployment with Azure File Storage
+services:
+  nginxdeployment:
+    name: nginxdeployment
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 2
+        selector:
+          match Labels:
+            app: nginxdeployment
+        template:
+          metadata:
+            labels:
+              app: nginxdeployment
+          spec:
+            containers:
+            - image: nginx:latest
+              name: nginx
+              volume Mounts:
+              - mount Path: /youtube
+                name: azure
+            volumes:
+            - azure File:
+                read Only: false
+                secret Name: azure-secret
+                share Name: youtube
+              name: azure
+    traits:
+      meshmap:
+        edges: []
+        id: c635c510-279d-49e9-bac3-1fb61b380849
+        label: nginxdeployment
+        meshmodel-metadata:
+          genealogy: parent
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: Created by leecalcote
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: 0
+          posY: 0
+        whiteboardData:
+          style:
+            z-index: 3
