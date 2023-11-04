@@ -1,4 +1,4 @@
-name: '"Kubernetes Metrics Server Configuration'
+name: Kubernetes Metrics Server Configuration
 services:
   metrics-server-auth-reader:
     name: metrics-server-auth-reader
@@ -43,7 +43,49 @@ services:
         whiteboardData:
           style:
             z-index: 9
-  metrics-server-cgvyc:
+  metrics-server-erjcu:
+    name: metrics-server
+    type: ServiceAccount
+    apiVersion: v1
+    namespace: kube-system
+    model: kubernetes
+    labels:
+      k8s-app: metrics-server
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: dd82aedf-87c7-4491-80d8-18bc39585a36
+            metadata:
+              binded_by: f923357d-b595-40fa-ab7b-a2802854c658
+            source: 49d332ae-3900-4c13-9cd8-de0112d31aff
+            subType: Permission
+            target: 4817661a-967a-4e0d-afb9-df155c5645e0
+        id: 4817661a-967a-4e0d-afb9-df155c5645e0
+        label: metrics-server
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: bottom-round-rectangle
+          styleOverrides: ""
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+        position:
+          posX: 52.5
+          posY: -53.5
+        whiteboardData:
+          style:
+            z-index: 5
+  metrics-server-euebi:
     name: metrics-server
     type: Deployment
     apiVersion: apps/v1
@@ -139,7 +181,7 @@ services:
         whiteboardData:
           style:
             z-index: 13
-  metrics-server-fljdt:
+  metrics-server-vdxcu:
     name: metrics-server
     type: Service
     apiVersion: v1
@@ -183,48 +225,6 @@ services:
         whiteboardData:
           style:
             z-index: 11
-  metrics-server-qcvet:
-    name: metrics-server
-    type: ServiceAccount
-    apiVersion: v1
-    namespace: kube-system
-    model: kubernetes
-    labels:
-      k8s-app: metrics-server
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: dd82aedf-87c7-4491-80d8-18bc39585a36
-            metadata:
-              binded_by: f923357d-b595-40fa-ab7b-a2802854c658
-            source: 49d332ae-3900-4c13-9cd8-de0112d31aff
-            subType: Permission
-            target: 4817661a-967a-4e0d-afb9-df155c5645e0
-        id: 4817661a-967a-4e0d-afb9-df155c5645e0
-        label: metrics-server
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: bottom-round-rectangle
-          styleOverrides: ""
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-        position:
-          posX: 52.5
-          posY: -53.5
-        whiteboardData:
-          style:
-            z-index: 5
   metrics-server:system:auth-delegator:
     name: metrics-server:system:auth-delegator
     type: ClusterRoleBinding
@@ -246,6 +246,7 @@ services:
       meshmap:
         edges: []
         id: 3724dcfc-a0f3-4ebc-b596-ce2ab5b785b3
+        label: metrics-server:system:auth-delegator
         meshmodel-metadata:
           genealogy: ""
           isCustomResource: false
@@ -317,7 +318,7 @@ services:
         whiteboardData:
           style:
             z-index: 12
-  system:metrics-server-nzhmm:
+  system:metrics-server-kvsjg:
     name: system:metrics-server
     type: ClusterRole
     apiVersion: rbac.authorization.k8s.io/v1
@@ -375,7 +376,7 @@ services:
         whiteboardData:
           style:
             z-index: 10
-  system:metrics-server-wfhxe:
+  system:metrics-server-prdls:
     name: system:metrics-server
     type: ClusterRoleBinding
     apiVersion: rbac.authorization.k8s.io/v1
@@ -396,6 +397,7 @@ services:
       meshmap:
         edges: []
         id: f923357d-b595-40fa-ab7b-a2802854c658
+        label: system:metrics-server
         meshmodel-metadata:
           genealogy: ""
           isCustomResource: false
