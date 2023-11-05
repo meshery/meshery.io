@@ -6,7 +6,7 @@
     <div class="box">
       <div class="title pattern">Patterns</div>
       <img class="patterns-coming-soon hidden" src="{{site.baseurl}}/assets/images/coming-soon.png" />
-      <div class="circlecont">
+      <div class="circlecont" style="cursor:pointer;" id="pattern">
         <div class="circle"></div>
         <div class="hover-circles">
           <div class="circle"><img src="/assets/images/logos/service-mesh-pattern.svg" /></div>
@@ -24,7 +24,7 @@
     <div class="box">
       <div class="title wasm">Filters</div>
       <img class="patterns-coming-soon hidden" src="{{site.baseurl}}/assets/images/coming-soon.png" />
-      <div class="circlecont">
+      <div class="circlecont" style="cursor:pointer;" id="filter">
         <div class="circle"></div>
         <div class="hover-circles">
           <div class="circle"><img src="/assets/images/webassembly_logo.svg" /></div>
@@ -73,3 +73,40 @@
     <div class="description opa">Applied across the cloud native infrastructure under management, policies may be applied broadly and specificly.</div>
    </div>
 </div>
+
+<script type="module">
+  import data from "{{ site.baseurl }}/integrations/data.js";
+
+const pattern = document.getElementById("pattern");
+const filter = document.getElementById("filter");
+
+const patternCards = document.querySelectorAll(".ptrn");
+const filterCards = document.querySelectorAll(".wsm");
+const ComingSoonCards = document.querySelectorAll(".cmg");
+
+
+function showElements(elements) {
+    elements.forEach((element) => {
+      element.style.display = "block";
+    });
+  }
+
+  function hideElements(elements) {
+    elements.forEach((element) => {
+      element.style.display = "none";
+    });
+  }
+
+  pattern.addEventListener("click", () => {
+    hideElements(filterCards);
+    showElements(patternCards);
+    showElements(ComingSoonCards);
+  });
+
+  filter.addEventListener("click", () => {
+    hideElements(patternCards);
+    hideElements(ComingSoonCards);
+    showElements(filterCards);
+  });
+    
+</script>
