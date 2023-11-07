@@ -8,6 +8,9 @@ on:
 jobs:
   UpdateCloudNativeCatalog:
     runs-on: ubuntu-22.04
+    outputs:
+      designID: ${{ steps.update_catalog_patterns.outputs.designID }}
+      assetLocation: ${{ steps.update_catalog_patterns.outputs.assetLocation }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -23,7 +26,9 @@ jobs:
           cd ./collections/_catalog
           for dir in */; do find $dir -maxdepth 1 -type f -delete; done
           cd ../../
-      - name: Update Catalog Patterns
+      - id: update_catalog_patterns
+        name: Update Catalog Patterns
+        shell: bash
         if: ${{ success() }}
         run: |
           catalogPatterns=$(curl -sS "$MESHERY_CLOUD_BASE_URL/api/catalog/content/pattern" 2>./err.txt)
@@ -42,8 +47,10 @@ jobs:
             patternCaveats="$(jq -r .[$idx].catalog_data.pattern_caveats temp.json)"
             patternType="$(jq -r .[$idx].catalog_data.type temp.json)"
             patternName="$(jq -r .[$idx].name temp.json)"
+            patternImageURL="$(jq -r .[$idx].catalog_data.imageURL temp.json)"
             compatibility=""
-
+            echo "designID=$designId" >> $GITHUB_OUTPUT
+            echo "assetLocation=$patternImageURL" >> $GITHUB_OUTPUT
             # check if directory doesn't exists; then create it
             if [ ! -d "./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"" ]; then
               echo "$(echo $patternType | tr '[:upper:]' '[:lower:]') doesn't exist."
@@ -207,3 +214,16 @@ jobs:
           commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           commit_options: '--signoff'
           commit_message: '[Catalog] Update Catalog items'
+  call_meshmap_snapshot:
+    secrets: inherit
+    uses: ./.github/workflows/meshmap.yml
+    needs: [UpdateCloudNativeCatalog]
+    with:
+      designID: ${{ needs.UpdateCloudNativeCatalog.outputs.designID }} 
+      assetLocation: ${{ needs.UpdateCloudNativeCatalog.outputs.assetLocation }}
+  output_resource_url:
+    needs: [call_meshmap_snapshot]
+    runs-on: ubuntu-latest
+    steps:
+    - name: "Resource URL"
+      run: echo ${{needs.call_meshmap_snapshot.outputs.resource_url}}
