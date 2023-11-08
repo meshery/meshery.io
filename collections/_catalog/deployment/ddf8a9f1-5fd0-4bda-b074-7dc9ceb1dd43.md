@@ -9,7 +9,7 @@ compatibility:
         - Kubernetes
         - Istio
 patternId: ddf8a9f1-5fd0-4bda-b074-7dc9ceb1dd43
-image: null
+image: /assets/images/patterns/service-mesh.svg
 patternInfo: |
   This design deploys Istio BookInfo App. \nThe Bookinfo application is broken into four separate microservices: \nproductpage. The productpage microservice calls the details and reviews microservices to populate the page. \ndetails. The details microservice contains book information. \nreviews. The reviews microservice contains book reviews. It also calls the ratings microservice. \nratings. The ratings microservice contains book ranking information that accompanies a book review.
 patternCaveats: |
