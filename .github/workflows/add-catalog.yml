@@ -9,7 +9,7 @@ jobs:
   UpdateCloudNativeCatalog:
     runs-on: ubuntu-22.04
     outputs:
-      designID: ${{ steps.update_catalog_patterns.outputs.designID }}
+      contentID: ${{ steps.update_catalog_patterns.outputs.contentID }}
       assetLocation: ${{ steps.update_catalog_patterns.outputs.assetLocation }}
     steps:
       - name: Checkout Code
@@ -48,8 +48,11 @@ jobs:
             patternType="$(jq -r .[$idx].catalog_data.type temp.json)"
             patternName="$(jq -r .[$idx].name temp.json)"
             patternImageURL="$(jq -r .[$idx].catalog_data.imageURL temp.json)"
+            if [[ $patternImageURL == "null" || $patternImageURL == "" ]]; then
+              patternImageURL=/assets/images/patterns/service-mesh.svg
+            fi
             compatibility=""
-            echo "designID=$designId" >> $GITHUB_OUTPUT
+            echo "contentID=$designId" >> $GITHUB_OUTPUT
             echo "assetLocation=$patternImageURL" >> $GITHUB_OUTPUT
             # check if directory doesn't exists; then create it
             if [ ! -d "./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"" ]; then
@@ -104,7 +107,7 @@ jobs:
           type: $patternType
           compatibility: $compatibility
           patternId: $designId
-          image: /assets/images/patterns/service-mesh.svg
+          image: $patternImageURL
           patternInfo: |
             $patternInfo
           patternCaveats: |
@@ -139,8 +142,11 @@ jobs:
             filterCaveats="$(jq -r .[$idx].catalog_data.filter_caveats temp.json)"
             filterType="$(jq -r .[$idx].catalog_data.type temp.json)"
             filterName="$(jq -r .[$idx].name temp.json)"
-            compatibility=""
+            filterImageURL="$(jq -r .[$idx].catalog_data.imageURL temp.json)"
 
+            compatibility=""
+            echo "contentID=$designId" >> $GITHUB_OUTPUT
+            echo "assetLocation=$patternImageURL" >> $GITHUB_OUTPUT
             # check if directory doesn't exists; then create it
             if [ ! -d "./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')"" ]; then
               echo "$(echo $filterType | tr '[:upper:]' '[:lower:]') doesn't exist."
@@ -219,8 +225,8 @@ jobs:
     uses: ./.github/workflows/meshmap.yml
     needs: [UpdateCloudNativeCatalog]
     with:
-      designID: ${{ needs.UpdateCloudNativeCatalog.outputs.designID }} 
-      assetLocation: ${{ needs.UpdateCloudNativeCatalog.outputs.assetLocation }}
+      contentID: ${{ github.event.client_payload.contentID }}
+      assetLocation: ${{ github.event.client_payload.assetURL }}
   output_resource_url:
     needs: [call_meshmap_snapshot]
     runs-on: ubuntu-latest
