@@ -13,7 +13,11 @@
             </a>
         </div>
         <button class="modal-close close">&times;</button>
-        <img class="image-class" src="{{pattern.image}}" />
+        {%if pattern.filters.type == "wasm filter" %}
+        <img class="image-class" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png" onerror="this.src='/assets/images/webassembly_logo.svg'"/>
+        {%else%}
+        <img class="image-class" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png" onerror="this.src='/assets/images/patterns/service-mesh.svg'"/>
+        {%endif%}
         <h4 class="related-patterns">RELATED PATTERNS</h4>
         {% include related-patterns.html %}
       </div>
