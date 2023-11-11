@@ -3,7 +3,11 @@
             <div class="front">
                 <h4 class="overlay-text">{{pattern.name}}</h4>
                 <h5>Coming Soon...</h5>
-                <img class="pattern-image-overlay" src="{{pattern.image}}" />
+                {%if pattern.image%}
+                  <img class="pattern-image-overlay" src="{{pattern.image}}" />
+                {%else%}
+                  <img class="pattern-image-overlay" src="/assets/images/patterns/service-mesh.svg" />
+                {%endif%}
                 <h6 class="pattern-id-overlay">
                     <img class="smp-overlay" src="{{site.baseurl}}/assets/images/logos/service-mesh-pattern.svg"
                         loading="lazy" />{{pattern.patternId}}
