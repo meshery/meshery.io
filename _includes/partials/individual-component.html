@@ -2,7 +2,12 @@
 <div class="single-page">
 
   <div class="modal-image-container">
-    <div class="modal-image-single"><img style="width: inherit;" src="{{pattern.image}}" />
+    <div class="modal-image-single">
+      {%if pattern.image%}
+        <img style="width: inherit;" src="{{pattern.image}}" />
+      {%else%}
+        <img style="width: inherit;" src="/assets/images/patterns/service-mesh.svg" />
+      {%endif%}
       <h4 class="related-patterns">Related Patterns</h4>
       <!-- MINICARD-START -->
       {% include related-patterns.html %}
@@ -14,7 +19,7 @@
   {%if pattern.patternInfo%}
   <div>
     <h3>What this pattern does:</h3>
-    <p>{{pattern.patternInfo | replace: '\\n', '<br/>'| replace: '\n', '<br/>' }}</p>
+    <p>{{pattern.patternInfo | replace: '\\n', '<br />'| replace: '\n', '<br />' }}</p>
     <h3>Caveats and Consideration: </h3>
     <p>{{pattern.patternCaveats}}</p>
     </p>
@@ -31,7 +36,7 @@
       {% include partials/compatibility.html%}
       {% include copy-and-download.html %}
     </div>
-    
+
   </div>
   <br>
   {% include related-discussion.html tag="meshery" %}
