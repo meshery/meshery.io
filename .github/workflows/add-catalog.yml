@@ -49,7 +49,7 @@ jobs:
             patternName="$(jq -r .[$idx].name temp.json)"
             patternImageURL="$(jq -r .[$idx].catalog_data.imageURL temp.json)"
             if [[ $patternImageURL == "null" || $patternImageURL == "" ]]; then
-              patternImageURL=/assets/images/patterns/service-mesh.svg
+              patternImageURL=https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/$designId.png
             fi
             compatibility=""
             echo "contentID=$designId" >> $GITHUB_OUTPUT
@@ -115,6 +115,14 @@ jobs:
           URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/$MESHERY_CATALOG_FILES_DIR/$designId.yaml'
           downloadLink: $designId.yaml
           ---" > ./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"/$designId.md
+          curl -L \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer ${{ secrets.GH_ACCESS_TOKEN }}" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          "https://api.github.com/repos/meshery/meshery.io/actions/workflows/meshmap.yml/dispatches" \
+          -d '{"ref":"master","inputs":{"contentID":"'$designId'","assetLocation":"'$patternImageURL'"}}'
+          
           done
           rm temp.json
           rm err.txt
@@ -220,16 +228,3 @@ jobs:
           commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           commit_options: '--signoff'
           commit_message: '[Catalog] Update Catalog items'
-  call_meshmap_snapshot:
-    secrets: inherit
-    uses: ./.github/workflows/meshmap.yml
-    needs: [UpdateCloudNativeCatalog]
-    with:
-      contentID: ${{ github.event.client_payload.contentID }}
-      assetLocation: ${{ github.event.client_payload.assetURL }}
-  output_resource_url:
-    needs: [call_meshmap_snapshot]
-    runs-on: ubuntu-latest
-    steps:
-    - name: "Resource URL"
-      run: echo ${{needs.call_meshmap_snapshot.outputs.resource_url}}
