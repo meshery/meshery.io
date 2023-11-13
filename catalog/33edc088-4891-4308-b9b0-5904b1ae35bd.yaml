@@ -9,7 +9,7 @@ services:
     model: helm-controller
     settings:
       source Ref: {}
-      spec: 
+      spec:
         source Ref: {}
         version: '**'
       version: '**'
@@ -21,6 +21,9 @@ services:
         position:
           posX: 315.02464737294457
           posY: 121.3732746043549
+        whiteboardData:
+          style:
+            z-index: 4
   Runner:
     name: Runner
     type: Runner
@@ -28,6 +31,44 @@ services:
     namespace: default
     version: 0.1.2
     model: github-actions-runners
+    settings:
+      spec:
+        affinity:
+          node Affinity:
+            preferred During Scheduling Ignored During Execution: []
+            required During Scheduling Ignored During Execution:
+              node Selector Terms: []
+          pod Affinity:
+            preferred During Scheduling Ignored During Execution: []
+            required During Scheduling Ignored During Execution: []
+          pod Anti Affinity:
+            preferred During Scheduling Ignored During Execution: []
+            required During Scheduling Ignored During Execution: []
+        containers: []
+        dns Config:
+          nameservers: []
+          options: []
+          searches: []
+        docker Env: []
+        docker Volume Mounts: []
+        env: []
+        env From: []
+        ephemeral Containers: []
+        host Aliases: []
+        image Pull Secrets: []
+        init Containers: []
+        labels: []
+        security Context:
+          supplemental Groups: []
+          sysctls: []
+        sidecar Containers: []
+        tolerations: []
+        topology Spread Constraints: []
+        volume Mounts: []
+        volumes: []
+        work Volume Claim Template:
+          access Modes: []
+          resources: {}
     traits:
       meshmap:
         edges: []
@@ -36,6 +77,9 @@ services:
         position:
           posX: 109.22830425432298
           posY: 66.93318049410402
+        whiteboardData:
+          style:
+            z-index: 5
   playground-deployment:
     name: playground-deployment
     type: Deployment
@@ -65,3 +109,6 @@ services:
         position:
           posX: 234.8541065675802
           posY: 58.68864468483095
+        whiteboardData:
+          style:
+            z-index: 3

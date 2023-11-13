@@ -1,6 +1,6 @@
-name: tns.yml
+name: the-new-stack
 services:
-  app-rilxv:
+  app-zdtrj:
     name: app
     type: Service
     apiVersion: v1
@@ -9,66 +9,131 @@ services:
     settings:
       spec:
         ports:
-          - node Port: 30030
-            port: 80
-            protocol: TCP
-            target Port: 80
+        - node Port: 30030
+          port: 80
+          protocol: TCP
+          target Port: 80
         selector:
           name: app
         type: NodePort
     traits:
       meshmap:
         edges:
-          - data:
-              id: 5c0e9d6f-78ea-4a12-b440-9bbf19cba9be
-              metadata:
-                port: 80
-                protocol: TCP
-              source: f5ecce46-1371-46c6-8b99-203c374aaf99
-              subType: Network
-              target: 5d255ed5-8532-4bdc-b8c4-01aa553f144a
-          - data:
-              id: 39cc15b6-efef-42a4-8d1f-163653ca5f55
-              metadata:
-                port: 80
-                protocol: TCP
-              source: f5ecce46-1371-46c6-8b99-203c374aaf99
-              subType: Network
-              target: 6134ffc4-26f3-4f37-9d2d-407d35dbae6d
-          - data:
-              id: 34945a4c-4588-45f1-bc99-ee50ab7940a6
-              metadata:
-                port: 80
-                protocol: TCP
-              source: f5ecce46-1371-46c6-8b99-203c374aaf99
-              subType: Network
-              target: 7e395701-cb8b-4cec-b56a-5b16e232f180
+        - data:
+            id: 5c0e9d6f-78ea-4a12-b440-9bbf19cba9be
+            metadata:
+              port: 80
+              protocol: TCP
+            source: f5ecce46-1371-46c6-8b99-203c374aaf99
+            subType: Network
+            target: 5d255ed5-8532-4bdc-b8c4-01aa553f144a
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
         id: f5ecce46-1371-46c6-8b99-203c374aaf99
         label: app
         meshmodel-metadata:
-          genealogy: ''
+          genealogy: ""
           isCustomResource: false
           isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-triangle
-          styleOverrides: >-
-            {"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
           posX: -128.47145646657242
           posY: 47.447642209565
-  app-uunja:
+        whiteboardData:
+          style: {}
+  app-zqjjk:
     name: app
     type: Deployment
     apiVersion: apps/v1
@@ -86,51 +151,27 @@ services:
               name: app
           spec:
             containers:
-              - args:
-                  - '-log.level=debug'
-                  - http://db
-                env:
-                  - name: JAEGER_AGENT_HOST
-                    value: jaeger.default.svc.cluster.local
-                  - name: JAEGER_TAGS
-                    value: cluster=docker,namespace=default
-                  - name: JAEGER_SAMPLER_TYPE
-                    value: const
-                  - name: JAEGER_SAMPLER_PARAM
-                    value: '1'
-                image: grafana/tns-app:latest
-                image Pull Policy: IfNotPresent
-                name: app
-                ports:
-                  - container Port: 80
-                    name: http-metrics
+            - args:
+              - -log.level=debug
+              - http://db
+              env:
+              - name: JAEGER_AGENT_HOST
+                value: jaeger.default.svc.cluster.local
+              - name: JAEGER_TAGS
+                value: cluster=docker,namespace=default
+              - name: JAEGER_SAMPLER_TYPE
+                value: const
+              - name: JAEGER_SAMPLER_PARAM
+                value: "1"
+              image: grafana/tns-app:latest
+              image Pull Policy: IfNotPresent
+              name: app
+              ports:
+              - container Port: 80
+                name: http-metrics
     traits:
       meshmap:
-        edges:
-          - data:
-              id: 34945a4c-4588-45f1-bc99-ee50ab7940a6
-              metadata:
-                port: 80
-                protocol: TCP
-              source: f5ecce46-1371-46c6-8b99-203c374aaf99
-              subType: Network
-              target: 7e395701-cb8b-4cec-b56a-5b16e232f180
-          - data:
-              id: f95a94c6-349d-4611-9c24-287baaa660ec
-              metadata:
-                port: 80
-                protocol: TCP
-              source: 095664f6-1025-4108-bd74-65f6427d3f78
-              subType: Network
-              target: 7e395701-cb8b-4cec-b56a-5b16e232f180
-          - data:
-              id: c341cd01-d606-444b-be9a-dd5caebc18a3
-              metadata:
-                port: 80
-                protocol: TCP
-              source: 7e9cfa03-6811-41c5-b202-0202018303c7
-              subType: Network
-              target: 7e395701-cb8b-4cec-b56a-5b16e232f180
+        edges: []
         id: 7e395701-cb8b-4cec-b56a-5b16e232f180
         label: app
         meshmodel-metadata:
@@ -144,19 +185,56 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-pentagon
-          styleOverrides: >-
-            {"background-image":"none","border-width":2,"background-opacity":0.5}
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: >-
-            ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
           posX: 89.4061397979861
           posY: 83.33585788759973
-  db-iisve:
+        whiteboardData: {}
+  db-akduk:
+    name: db
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        ports:
+        - port: 80
+          protocol: TCP
+          target Port: 80
+        selector:
+          name: db
+    traits:
+      meshmap:
+        edges: []
+        id: 095664f6-1025-4108-bd74-65f6427d3f78
+        label: db
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: -42.95562119713975
+          posY: 97.22830878008428
+        whiteboardData:
+          style: {}
+  db-cyler:
     name: db
     type: Deployment
     apiVersion: apps/v1
@@ -174,50 +252,117 @@ services:
               name: db
           spec:
             containers:
-              - args:
-                  - '-log.level=debug'
-                env:
-                  - name: JAEGER_AGENT_HOST
-                    value: jaeger.default.svc.cluster.local
-                  - name: JAEGER_TAGS
-                    value: cluster=docker,namespace=default
-                  - name: JAEGER_SAMPLER_TYPE
-                    value: const
-                  - name: JAEGER_SAMPLER_PARAM
-                    value: '1'
-                image: grafana/tns-db:latest
-                image Pull Policy: IfNotPresent
-                name: db
-                ports:
-                  - container Port: 80
-                    name: http-metrics
+            - args:
+              - -log.level=debug
+              env:
+              - name: JAEGER_AGENT_HOST
+                value: jaeger.default.svc.cluster.local
+              - name: JAEGER_TAGS
+                value: cluster=docker,namespace=default
+              - name: JAEGER_SAMPLER_TYPE
+                value: const
+              - name: JAEGER_SAMPLER_PARAM
+                value: "1"
+              image: grafana/tns-db:latest
+              image Pull Policy: IfNotPresent
+              name: db
+              ports:
+              - container Port: 80
+                name: http-metrics
     traits:
       meshmap:
         edges:
-          - data:
-              id: 5c0e9d6f-78ea-4a12-b440-9bbf19cba9be
-              metadata:
-                port: 80
-                protocol: TCP
-              source: f5ecce46-1371-46c6-8b99-203c374aaf99
-              subType: Network
-              target: 5d255ed5-8532-4bdc-b8c4-01aa553f144a
-          - data:
-              id: b1a3ff44-a6b7-42af-8855-b580df54d63e
-              metadata:
-                port: 80
-                protocol: TCP
-              source: 095664f6-1025-4108-bd74-65f6427d3f78
-              subType: Network
-              target: 5d255ed5-8532-4bdc-b8c4-01aa553f144a
-          - data:
-              id: ea283bc3-0b97-4391-8e62-fb736970139d
-              metadata:
-                port: 80
-                protocol: TCP
-              source: 7e9cfa03-6811-41c5-b202-0202018303c7
-              subType: Network
-              target: 5d255ed5-8532-4bdc-b8c4-01aa553f144a
+        - data:
+            id: 5c0e9d6f-78ea-4a12-b440-9bbf19cba9be
+            metadata:
+              port: 80
+              protocol: TCP
+            source: f5ecce46-1371-46c6-8b99-203c374aaf99
+            subType: Network
+            target: 5d255ed5-8532-4bdc-b8c4-01aa553f144a
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
         id: 5d255ed5-8532-4bdc-b8c4-01aa553f144a
         label: db
         meshmodel-metadata:
@@ -231,85 +376,16 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-pentagon
-          styleOverrides: >-
-            {"background-image":"none","border-width":2,"background-opacity":0.5}
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: >-
-            ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
           posX: 98.93565565334974
           posY: -59.26140435398565
-  db-zyvmu:
-    name: db
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    settings:
-      spec:
-        ports:
-          - port: 80
-            protocol: TCP
-            target Port: 80
-        selector:
-          name: db
-    traits:
-      meshmap:
-        edges:
-          - data:
-              id: b1a3ff44-a6b7-42af-8855-b580df54d63e
-              metadata:
-                port: 80
-                protocol: TCP
-              source: 095664f6-1025-4108-bd74-65f6427d3f78
-              subType: Network
-              target: 5d255ed5-8532-4bdc-b8c4-01aa553f144a
-          - data:
-              id: 5237451b-d088-4e7d-8a30-24e7a51fbe04
-              metadata:
-                port: 80
-                protocol: TCP
-              source: 095664f6-1025-4108-bd74-65f6427d3f78
-              subType: Network
-              target: 6134ffc4-26f3-4f37-9d2d-407d35dbae6d
-          - data:
-              id: f95a94c6-349d-4611-9c24-287baaa660ec
-              metadata:
-                port: 80
-                protocol: TCP
-              source: 095664f6-1025-4108-bd74-65f6427d3f78
-              subType: Network
-              target: 7e395701-cb8b-4cec-b56a-5b16e232f180
-        id: 095664f6-1025-4108-bd74-65f6427d3f78
-        label: db
-        meshmodel-metadata:
-          genealogy: ''
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: >-
-            {"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}
-          subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        position:
-          posX: -42.95562119713975
-          posY: 97.22830878008428
-  loadgen-gnuwx:
+        whiteboardData: {}
+  loadgen-idjxs:
     name: loadgen
     type: Deployment
     apiVersion: apps/v1
@@ -327,51 +403,27 @@ services:
               name: loadgen
           spec:
             containers:
-              - args:
-                  - '-log.level=debug'
-                  - http://app
-                env:
-                  - name: JAEGER_AGENT_HOST
-                    value: jaeger.default.svc.cluster.local
-                  - name: JAEGER_TAGS
-                    value: cluster=docker,namespace=default
-                  - name: JAEGER_SAMPLER_TYPE
-                    value: const
-                  - name: JAEGER_SAMPLER_PARAM
-                    value: '1'
-                image: grafana/tns-loadgen:latest
-                image Pull Policy: IfNotPresent
-                name: loadgen
-                ports:
-                  - container Port: 80
-                    name: http-metrics
+            - args:
+              - -log.level=debug
+              - http://app
+              env:
+              - name: JAEGER_AGENT_HOST
+                value: jaeger.default.svc.cluster.local
+              - name: JAEGER_TAGS
+                value: cluster=docker,namespace=default
+              - name: JAEGER_SAMPLER_TYPE
+                value: const
+              - name: JAEGER_SAMPLER_PARAM
+                value: "1"
+              image: grafana/tns-loadgen:latest
+              image Pull Policy: IfNotPresent
+              name: loadgen
+              ports:
+              - container Port: 80
+                name: http-metrics
     traits:
       meshmap:
-        edges:
-          - data:
-              id: 39cc15b6-efef-42a4-8d1f-163653ca5f55
-              metadata:
-                port: 80
-                protocol: TCP
-              source: f5ecce46-1371-46c6-8b99-203c374aaf99
-              subType: Network
-              target: 6134ffc4-26f3-4f37-9d2d-407d35dbae6d
-          - data:
-              id: 5237451b-d088-4e7d-8a30-24e7a51fbe04
-              metadata:
-                port: 80
-                protocol: TCP
-              source: 095664f6-1025-4108-bd74-65f6427d3f78
-              subType: Network
-              target: 6134ffc4-26f3-4f37-9d2d-407d35dbae6d
-          - data:
-              id: e4762798-f429-4b4d-a8ef-e8d801c1ac20
-              metadata:
-                port: 80
-                protocol: TCP
-              source: 7e9cfa03-6811-41c5-b202-0202018303c7
-              subType: Network
-              target: 6134ffc4-26f3-4f37-9d2d-407d35dbae6d
+        edges: []
         id: 6134ffc4-26f3-4f37-9d2d-407d35dbae6d
         label: loadgen
         meshmodel-metadata:
@@ -385,19 +437,16 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-pentagon
-          styleOverrides: >-
-            {"background-image":"none","border-width":2,"background-opacity":0.5}
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: >-
-            ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
           posX: -79.12045529542891
           posY: -45.0272417672968
-  loadgen-lcbki:
+        whiteboardData: {}
+  loadgen-yklng:
     name: loadgen
     type: Service
     apiVersion: v1
@@ -406,60 +455,34 @@ services:
     settings:
       spec:
         ports:
-          - port: 80
-            protocol: TCP
-            target Port: 80
+        - port: 80
+          protocol: TCP
+          target Port: 80
         selector:
           name: loadgen
     traits:
       meshmap:
-        edges:
-          - data:
-              id: ea283bc3-0b97-4391-8e62-fb736970139d
-              metadata:
-                port: 80
-                protocol: TCP
-              source: 7e9cfa03-6811-41c5-b202-0202018303c7
-              subType: Network
-              target: 5d255ed5-8532-4bdc-b8c4-01aa553f144a
-          - data:
-              id: e4762798-f429-4b4d-a8ef-e8d801c1ac20
-              metadata:
-                port: 80
-                protocol: TCP
-              source: 7e9cfa03-6811-41c5-b202-0202018303c7
-              subType: Network
-              target: 6134ffc4-26f3-4f37-9d2d-407d35dbae6d
-          - data:
-              id: c341cd01-d606-444b-be9a-dd5caebc18a3
-              metadata:
-                port: 80
-                protocol: TCP
-              source: 7e9cfa03-6811-41c5-b202-0202018303c7
-              subType: Network
-              target: 7e395701-cb8b-4cec-b56a-5b16e232f180
+        edges: []
         id: 7e9cfa03-6811-41c5-b202-0202018303c7
         label: loadgen
         meshmodel-metadata:
-          genealogy: ''
+          genealogy: ""
           isCustomResource: false
           isNamespaced: true
-          logoURL: >-
-            https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-triangle
-          styleOverrides: >-
-            {"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
           subCategory: Scheduling & Orchestration
-          svgColor: >-
-            ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ''
-          svgWhite: >-
-            ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
           posX: 0.3741852238402359
           posY: -94.22830878008428
+        whiteboardData:
+          style: {}
