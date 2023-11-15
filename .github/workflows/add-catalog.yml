@@ -85,7 +85,7 @@ jobs:
               "
               compatibility+="    - $(jq -r ".[$idx].catalog_data.compatibility[$compatIdx]" temp.json)"
             done
-
+            echo "$patternFile" > $MESHERY_CATALOG_FILES_DIR/$designId.yaml
             services=$(yq '.services' $MESHERY_CATALOG_FILES_DIR/$designId.yaml)
             echo $services
             if [[ $services == "null" ]]; then
