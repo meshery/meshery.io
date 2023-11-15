@@ -87,11 +87,9 @@ jobs:
             done
             echo "$patternFile" > $MESHERY_CATALOG_FILES_DIR/$designId.yaml
             services=$(yq '.services' $MESHERY_CATALOG_FILES_DIR/$designId.yaml 2>/dev/null)
-            echo $services
             if [[ $services == "null" || $services == "" ]]; then
               patternImageURL="/assets/images/logos/service-mesh-pattern.svg"
             fi
-            echo $patternImageURL
             userId=$(jq -r .[$idx].user_id temp.json)
             userInfo=$(curl -sS "$MESHERY_CLOUD_BASE_URL/api/identity/users/profile/$userId" 2>./err1.txt)
 
