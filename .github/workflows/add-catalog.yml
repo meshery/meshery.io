@@ -50,7 +50,7 @@ jobs:
             patternImageURL="$(jq -r .[$idx].catalog_data.imageURL temp.json)"
             
             patternFile="$(jq -r .[$idx].pattern_file temp.json)"
-            services="$(echo $patternFile | jq .services)"
+            services="$(echo $patternFile | yq .services)"
 
             if [[ $patternImageURL == "null" || $patternImageURL == "" ]]; then
               patternImageURL=https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/$designId.png
