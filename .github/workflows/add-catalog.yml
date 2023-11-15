@@ -50,14 +50,9 @@ jobs:
             patternImageURL="$(jq -r .[$idx].catalog_data.imageURL temp.json)"
             
             patternFile="$(jq -r .[$idx].pattern_file temp.json)"
-            services="$(echo $patternFile | yq .services)"
 
             if [[ $patternImageURL == "null" || $patternImageURL == "" ]]; then
               patternImageURL=https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/$designId.png
-            fi
-
-            if [[ $services == "null" ]]; then
-              patternImageURL="/assets/images/logos/service-mesh-pattern.svg"
             fi
             
             compatibility=""
@@ -91,9 +86,12 @@ jobs:
               compatibility+="    - $(jq -r ".[$idx].catalog_data.compatibility[$compatIdx]" temp.json)"
             done
 
-            
-            echo "$patternFile" > $MESHERY_CATALOG_FILES_DIR/$designId.yaml
-
+            services=$(yq '.services' $MESHERY_CATALOG_FILES_DIR/$designId.yaml)
+            echo $services
+            if [[ $services == "null" ]]; then
+              patternImageURL="/assets/images/logos/service-mesh-pattern.svg"
+            fi
+            echo $patternImageURL
             userId=$(jq -r .[$idx].user_id temp.json)
             userInfo=$(curl -sS "$MESHERY_CLOUD_BASE_URL/api/identity/users/profile/$userId" 2>./err1.txt)
 
