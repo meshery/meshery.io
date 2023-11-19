@@ -118,7 +118,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
 
 ### 4. Create a Pull Request
 
-- After making changes, don't forget to commit with the sign-off flag (-s)!
+- After making changes, don't forget to commit with the sign-off flag (-s)
   ```bash
   $ git commit -s -m “my commit message w/signoff”
   ```
@@ -126,7 +126,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   ```bash
   $ git push origin <branch-name>
   ```
-- Then on Github, navigate to the [Meshery.io repository](https://github.com/meshery/meshery.io) and create a pull request from your recently pushed changes!
+- Then on Github, navigate to the [Meshery.io repository](https://github.com/meshery/meshery.io) and create a pull request from your recently pushed changes.
 
                                                                                                    
 
