@@ -31,6 +31,9 @@ services:
         position:
           posX: -125.02957534216418
           posY: 198.1608332065167
+        whiteboardData:
+          style:
+            z-index: 3
   jiva-volume:
     name: jiva-volume
     type: JivaVolume
@@ -74,6 +77,9 @@ services:
         position:
           posX: -138.48505549142743
           posY: 291.81847786266246
+        whiteboardData:
+          style:
+            z-index: 4
   myApp:
     name: myApp
     type: Application
@@ -139,6 +145,9 @@ services:
         position:
           posX: -112.9362862424473
           posY: 243.50495747197226
+        whiteboardData:
+          style:
+            z-index: 5
   transport-server-1:
     name: transport-server-1
     type: TransportServer
@@ -180,14 +189,24 @@ services:
         position:
           posX: -193.26111687760493
           posY: 268.3150975899273
+        whiteboardData:
+          style:
+            z-index: 6
   virtual-server-1:
     name: virtual-server-1
     type: VirtualServer
     apiVersion: k8s.nginx.org/v1
+    namespace: default
     version: 0.16.2
     model: nginx-ingress
     settings:
       host: 127.0.1.1
+      spec:
+        external DNS:
+          provider Specific: []
+        policies: []
+        routes: []
+        upstreams: []
     traits:
       meshmap:
         edges: []
@@ -220,3 +239,6 @@ services:
         position:
           posX: -176.2903037218441
           posY: 222.52038923792543
+        whiteboardData:
+          style:
+            z-index: 7
