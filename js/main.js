@@ -45,3 +45,7 @@ btnscroll.on('click', function(e) {
   $('html, body').animate({scrollTop:0}, '0');
 });
 
+const container = document.querySelector('.container-div');
+document.querySelector('.slider').addEventListener('input', (e) => {
+  container.style.setProperty('--position', `${e.target.value}%`);
+})
