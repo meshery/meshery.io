@@ -1,5 +1,67 @@
 name: Accelerated mTLS handshake for Envoy data planes
 services:
+  Auth copy test upload:
+    name: Auth copy test upload
+    type: WASMFilter
+    apiVersion: core.meshery.io/v1alpha1
+    version: v1.0.0
+    model: meshery
+    isAnnotation: true
+    dependsOn:
+    - wasm-plugin-xl
+    settings:
+      config: |-
+        typed_config:
+          "@type": type.googleapis.com/envoy.extensions.filters.http.wasm.v3.Wasm
+          config:
+            name: example-filter
+            rootId: my_root_id
+            vmConfig:
+              code:
+                local:
+                  filename: /var/local/lib/wasm-filters/example-filter.wasm
+              runtime: envoy.wasm.runtime.v8
+              vmId: example-filter
+              allow_precompiled: true
+        name: envoy.filters.http.wasm
+      name: Auth copy test upload
+      wasm Filter: https://meshery.layer5.io/api/content/filters/download/42c3a068-0a44-4917-9138-e25c3df33b5a
+    traits:
+      meshmap:
+        id: 42c3a068-0a44-4917-9138-e25c3df33b5a
+        isFilter: true
+        label: Auth copy test upload
+        meshmodel-metadata:
+          PublishToRegistry: "FALSE"
+          genealogy: ""
+          isAnnotation: true
+          isNamespaced: false
+          logoURL: ""
+          model: meshery
+          modelDisplayName: Meshery
+          primaryColor: '#654ff0'
+          published: true
+          secondaryColor: '#654ff0'
+          shape: rectangle
+          styleOverrides: ""
+          subCategory: App Definition and Development
+          svgColor: ui/public/static/img/meshmodels/meshery/color/wasmfilter-color.svg
+          svgComplete: ui/public/static/img/meshmodels/meshery/complete/wasmfilter-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/meshery/white/wasmfilter-white.svg
+        meshmodel-model:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Meshery
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/meshery/color/broker-color.svg
+            svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
+          name: meshery
+          version: v1.0.0
+        parent: 6f02290b-aae9-4b87-935c-29a711322863
   SA-istio-operatovvr:
     name: SA-istio-operatovvr
     type: ServiceAccount
@@ -36,7 +98,7 @@ services:
         whiteboardData:
           style:
             z-index: 10007
-  cluster role binding-dqpth:
+  cluster role binding-rerqt:
     name: Cluster Role Binding
     type: ClusterRoleBinding
     apiVersion: rbac.authorization.k8s.io/v1
@@ -82,7 +144,7 @@ services:
         whiteboardData:
           style:
             z-index: 10006
-  cluster role binding-kdobi:
+  cluster role binding-zatwf:
     name: Cluster Role Binding
     type: ClusterRoleBinding
     apiVersion: rbac.authorization.k8s.io/v1
@@ -128,7 +190,7 @@ services:
         whiteboardData:
           style:
             z-index: 10008
-  cluster-role-binding-cjdof:
+  cluster-role-binding-tfash:
     name: cluster-role-binding
     type: ClusterRoleBinding
     apiVersion: rbac.authorization.k8s.io/v1
@@ -232,6 +294,57 @@ services:
         whiteboardData:
           style:
             z-index: 10005
+  cluster-role-binding-vgfbg:
+    name: cluster-role-binding
+    type: ClusterRoleBinding
+    apiVersion: rbac.authorization.k8s.io/v1
+    version: v1.25.2
+    model: kubernetes
+    settings:
+      role Ref:
+        api Group: hdffjj
+        kind: f
+        name: ffffff
+    traits:
+      meshmap:
+        edges: []
+        id: 02b55af3-131d-47fb-bc51-c130b89c4049
+        label: cluster-role-binding
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Kubernetes
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+          name: kubernetes
+          version: v1.25.2
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: false
+          logoURL: Created by leecalcote
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides: '{"height":"22px","width":"16px","padding":"6px", "z-index":9999}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+        position:
+          posX: 668.4040416124512
+          posY: 185.0292938143478
+        whiteboardData:
+          style:
+            z-index: 10004
   cluster-role-binding-xs:
     name: cluster-role-binding-xs
     type: ClusterRoleBinding
@@ -342,57 +455,6 @@ services:
         whiteboardData:
           style:
             z-index: 10001
-  cluster-role-binding-yqkor:
-    name: cluster-role-binding
-    type: ClusterRoleBinding
-    apiVersion: rbac.authorization.k8s.io/v1
-    version: v1.25.2
-    model: kubernetes
-    settings:
-      role Ref:
-        api Group: hdffjj
-        kind: f
-        name: ffffff
-    traits:
-      meshmap:
-        edges: []
-        id: 02b55af3-131d-47fb-bc51-c130b89c4049
-        label: cluster-role-binding
-        meshmodel-data:
-          category:
-            metadata: null
-            name: Orchestration & Management
-          displayName: Kubernetes
-          displayhostname: ""
-          hostID: 00000000-0000-0000-0000-000000000000
-          hostname: ""
-          metadata:
-            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-          name: kubernetes
-          version: v1.25.2
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: false
-          logoURL: Created by leecalcote
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          styleOverrides: '{"height":"22px","width":"16px","padding":"6px", "z-index":9999}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
-        position:
-          posX: 668.4040416124512
-          posY: 185.0292938143478
-        whiteboardData:
-          style:
-            z-index: 10004
   comment-jl:
     name: comment-jl
     type: Comment
@@ -753,8 +815,8 @@ services:
           posY: 354.88905293443054
         whiteboardData:
           style:
-            z-index: 10015
-  istio-operator-ixzgz:
+            z-index: 10018
+  istio-operator-grewv:
     name: istio-operator
     type: Service
     apiVersion: v1
@@ -812,80 +874,7 @@ services:
         whiteboardData:
           style:
             z-index: 10011
-  istio-operator-lviup:
-    name: istio-operator
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
-    settings:
-      spec:
-        replicas: 1
-        revision History Limit: 10
-        selector:
-          match Labels:
-            name: istio-operator
-        template:
-          metadata:
-            annotations:
-              prometheus.io/port: "15014"
-              prometheus.io/scrape: "true"
-            labels:
-              name: istio-operator
-          spec:
-            containers:
-            - command:
-              - operator
-              - server
-              - --monitoring-host=127.0.0.1
-              - --monitoring-port=15014
-              env:
-              - name: WATCH_NAMESPACE
-                value: istio-system
-              - name: LEADER_ELECTION_NAMESPACE
-                value: istio-operator
-              - name: POD_NAME
-                value From:
-                  field Ref:
-                    field Path: metadata.name
-              - name: OPERATOR_NAME
-                value: istio-operator
-              - name: WAIT_FOR_RESOURCES_TIMEOUT
-                value: 300s
-              - name: REVISION
-                value: ""
-              image: docker.io/istio/operator:1.18.0
-              name: istio-operator
-              resources:
-                limits:
-                  cpu: 200m
-                  memory: 256Mi
-                requests:
-                  cpu: 50m
-                  memory: 128Mi
-              security Context:
-                allow Privilege Escalation: false
-                capabilities:
-                  drop:
-                  - ALL
-                privileged: false
-                read Only Root Filesystem: true
-                run As Group: 1337
-                run As Non Root: true
-                run As User: 1337
-            service Account Name: istio-operator
-    traits:
-      meshmap:
-        edges: []
-        id: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
-        label: istio-operator
-        position:
-          posX: 260.43555603307993
-          posY: 232.66368392276948
-        whiteboardData:
-          style:
-            z-index: 10012
-  istio-operator-xmdul:
+  istio-operator-qcgiy:
     name: istio-operator
     type: ClusterRole
     apiVersion: rbac.authorization.k8s.io/v1
@@ -1155,6 +1144,79 @@ services:
         whiteboardData:
           style:
             z-index: 10009
+  istio-operator-rfuys:
+    name: istio-operator
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 1
+        revision History Limit: 10
+        selector:
+          match Labels:
+            name: istio-operator
+        template:
+          metadata:
+            annotations:
+              prometheus.io/port: "15014"
+              prometheus.io/scrape: "true"
+            labels:
+              name: istio-operator
+          spec:
+            containers:
+            - command:
+              - operator
+              - server
+              - --monitoring-host=127.0.0.1
+              - --monitoring-port=15014
+              env:
+              - name: WATCH_NAMESPACE
+                value: istio-system
+              - name: LEADER_ELECTION_NAMESPACE
+                value: istio-operator
+              - name: POD_NAME
+                value From:
+                  field Ref:
+                    field Path: metadata.name
+              - name: OPERATOR_NAME
+                value: istio-operator
+              - name: WAIT_FOR_RESOURCES_TIMEOUT
+                value: 300s
+              - name: REVISION
+                value: ""
+              image: docker.io/istio/operator:1.18.0
+              name: istio-operator
+              resources:
+                limits:
+                  cpu: 200m
+                  memory: 256Mi
+                requests:
+                  cpu: 50m
+                  memory: 128Mi
+              security Context:
+                allow Privilege Escalation: false
+                capabilities:
+                  drop:
+                  - ALL
+                privileged: false
+                read Only Root Filesystem: true
+                run As Group: 1337
+                run As Non Root: true
+                run As User: 1337
+            service Account Name: istio-operator
+    traits:
+      meshmap:
+        edges: []
+        id: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
+        label: istio-operator
+        position:
+          posX: 260.43555603307993
+          posY: 232.66368392276948
+        whiteboardData:
+          style:
+            z-index: 10012
   my-auth4:
     name: my-auth4
     type: WASMFilter
@@ -1174,6 +1236,7 @@ services:
         isFilter: true
         label: my-auth4
         meshmodel-metadata:
+          PublishToRegistry: "FALSE"
           genealogy: ""
           isAnnotation: true
           isNamespaced: false
@@ -1259,8 +1322,21 @@ services:
     model: istio-base
     settings:
       spec:
-        plugin Config: testconfig
-        url: https://meshery.layer5.io/api/content/filters/download/c42da891-77d5-4119-8ca1-6e2d13a61b4c
+        plugin Config: |-
+          typed_config:
+            "@type": type.googleapis.com/envoy.extensions.filters.http.wasm.v3.Wasm
+            config:
+              name: example-filter
+              rootId: my_root_id
+              vmConfig:
+                code:
+                  local:
+                    filename: /var/local/lib/wasm-filters/example-filter.wasm
+                runtime: envoy.wasm.runtime.v8
+                vmId: example-filter
+                allow_precompiled: true
+          name: envoy.filters.http.wasm
+        url: https://meshery.layer5.io/api/content/filters/download/42c3a068-0a44-4917-9138-e25c3df33b5a
     traits:
       meshmap:
         edges: []
@@ -1296,8 +1372,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/istio-base/white/authorizationpolicy-white.svg
         position:
-          posX: 534.9040416124512
-          posY: 185.0292938143478
+          posX: 439.53084683328245
+          posY: 221.0279996868772
         whiteboardData:
           style:
             z-index: 10010
