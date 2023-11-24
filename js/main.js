@@ -45,15 +45,7 @@ btnscroll.on('click', function(e) {
   $('html, body').animate({scrollTop:0}, '0');
 });
 
-$(document).ready(function() {
-  $('#slider').slick({
-    vertical: true,
-    dots: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    speed: 800,
-    arrows: false,
-    dots: false,
-  });
+$("#slider").on("input change", (e)=>{
+  const sliderPos = e.target.value;
+  $('.foreground-img').css('width', `${sliderPos}%`)
 });
-

@@ -88,14 +88,71 @@
 	}
 }
 
-.slick-slider {
-	width: 100%;
-	height: 100%;
+.container-slider {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    margin-right: 20px;
+    
+    @media (min-width: 576px) { 
+        width: 70vh;
+    }
+
+    @media (min-width: 992px) {
+        width: 70vh;
+        -webkit-flex: 1;
+        flex: 1;
+        min-width: 220px;
+    }
+    
+    .img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+    }
+    .background-img {
+      background-image: url('../images/gitops-snapshot.png');
+    }
+    .foreground-img {
+      background-image: url('../images/gitops-yaml-content.png');
+      width: 50%;
+
+      @media (min-width: 576px) { 
+        width: 50%;
+      }
+
+      @media (min-width: 992px) {
+        width: 50%;
+      }
+    }
 }
 
-.slide {
-	width: 100%;
-	height: 100%;
-	background-size: cover;
-	background-position: center center;
+@mixin center() {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+  
+  .slider {
+    position: absolute;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    background: rgba(#f2f2f2, .10) !important;
+    outline: none;
+    margin: 0;
+    transition: all .2s;
+    @include center;
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 3px;
+	  height: 60vh;
+      background: white;
+	  cursor: pointer;
+  }
 }
