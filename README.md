@@ -128,6 +128,15 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   ```
 - Then on Github, navigate to the [Meshery.io repository](https://github.com/meshery/meshery.io) and create a pull request from your recently pushed changes.
 
+
+### Stargazers
+
+<p align="center">
+  <i>If you like Meshery, please <a href="../../stargazers">★</a> star this repository to show your support! 🤩</i>
+ <br />
+<a href="../../stargazers">
+ <img align="center" src="https://api.star-history.com/svg?repos=meshery/meshery.io&type=Date" />
+</a></p>
                                                                                                    
 
 #### License
