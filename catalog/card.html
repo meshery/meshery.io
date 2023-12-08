@@ -1,0 +1,37 @@
+<div class= "card link">  
+    <div class="card-inner">
+      <div class="front">
+        <div class="chip">
+          <small class="pattern-type"> {{pattern.type | upcase }}</small>
+        </div>
+        <h4 class="pattern-name">{{pattern.name}}</h4>
+        <div class="pattern-image-container">
+          <img class= "pattern-image" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png" onerror="this.src='/assets/images/patterns/service-mesh.svg'" loading="lazy"/>
+        </div>
+        <h6 class="pattern-id">
+          <img class="smp"
+          src="{{site.baseurl}}/assets/images/logos/service-mesh-pattern.svg"
+          loading="lazy" />
+          <span id="patId{{pattern.patternId}}" class="pat">
+            {% assign bigPatId = pattern.patternId%}
+            {% assign patId = bigPatId | split: "-" %}
+
+            {% if patId[2] %}
+              MESHERY{{patId[2]}}
+            {%else%}
+              {{pattern.patternId}}
+            {% endif %}
+          </span>
+        </h6>
+      </div> 
+      <div class="back">
+        
+      </div>
+    </div>
+  </div>  
+
+<style>
+  .chip{
+    float: left;
+  }
+</style>
