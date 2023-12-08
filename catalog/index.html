@@ -58,11 +58,6 @@ permalink: /catalog
 
   <div class="row" id="rowid">
 
-    <div id="patterncard" class="column column-lg patternCard">
-      {% include card.html %}
-      <!-- modal included -->
-      {% include modal.html %}
-    </div>
   </div>
 </div>
 
@@ -76,10 +71,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (patternloop.patternInfo && patternloop.Status != "ComingSoon") {
       var newDiv = document.createElement('div');
       newDiv.id = 'patterncard';
+      newDiv.setAttribute('class', "column column-lg patternCard")
       newDiv.setAttribute('filter', patternloop.name);
       newDiv.setAttribute('type', patternloop.type);
       newDiv.setAttribute('technology', patternloop.technology);
       newDiv.setAttribute('status', patternloop.Status);
+      newDiv.innerHTML += "{% include card.html %}      <!-- modal included -->      {% include modal.html %}";
       toAdd.appendChild(newDiv);
     }
   }
