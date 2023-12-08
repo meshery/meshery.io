@@ -56,45 +56,7 @@ permalink: /catalog
     <input type="text" id="search" placeholder="Search..." />
   </div>
 
-  <div class="row">
-    {% for pattern in catalog %} {% if pattern.patternInfo and pattern.Status !=
-    "ComingSoon" %}
-    <div
-      class="column column-lg patternCard"
-      filter="{{ pattern.name }}"
-      type="{{ pattern.type }}"
-      technology="{{ pattern.technology }}"
-      status="{{ pattern.Status }}"
-    >
-      {% include card.html %}
-      <!-- modal included -->
-      {% include modal.html %}
-    </div>
-    {% endif %} {% endfor %} {% for pattern in site.data.wasm %} {% if
-    pattern.filterInfo and pattern.Status != "ComingSoon" %}
-    <div
-      class="column column-lg patternCard"
-      filter="{{ pattern.name }}"
-      type="{{ pattern.filters.type }}"
-      technology="{{ pattern.technology }}"
-    >
-      {% include wasm-card.html %}
-      <!-- modal included -->
-      {% include modal.html %} {% include card-modal.html %}
-    </div>
-    {% endif %} {% endfor %} {% for pattern in catalog %} {% if
-    pattern.patternInfo and pattern.Status == "ComingSoon" %}
-    <div
-      class="column column-lg patternCard"
-      filter="{{ pattern.compatibility }}"
-      type="{{ pattern.type }}"
-      technology="{{ pattern.technology }}"
-      status="{{ pattern.Status }}"
-    >
-      {% include coming-soon.html %}
-    </div>
-    {% endif %} {% endfor %}
-  </div>
+
 </div>
 
 <script>
