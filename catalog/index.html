@@ -67,16 +67,17 @@ document.addEventListener('DOMContentLoaded', function() {
   var toAdd = document.createDocumentFragment();
 
   // Loop to generate and append content
-  for (let patternloop of catalog) {
-    if (patternloop.patternInfo && patternloop.Status != "ComingSoon") {
+  for (let pattern of catalog) {
+    if (pattern.patternInfo && pattern.Status != "ComingSoon") {
       var newDiv = document.createElement('div');
       newDiv.id = 'patterncard';
       newDiv.setAttribute('class', "column column-lg patternCard")
-      newDiv.setAttribute('filter', patternloop.name);
-      newDiv.setAttribute('type', patternloop.type);
-      newDiv.setAttribute('technology', patternloop.technology);
-      newDiv.setAttribute('status', patternloop.Status);
-      newDiv.innerHTML += "{% include card.html %}      <!-- modal included -->      {% include modal.html %}";
+      newDiv.setAttribute('filter', pattern.name);
+      newDiv.setAttribute('type', pattern.type);
+      newDiv.setAttribute('technology', pattern.technology);
+      newDiv.setAttribute('status', pattern.Status);
+      let str = "{% include card.html %}      <!-- modal included -->      {% include modal.html %}";
+      newDiv.innerHTML += str;
       toAdd.appendChild(newDiv);
     }
   }
