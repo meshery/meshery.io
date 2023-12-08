@@ -43,15 +43,6 @@ permalink: /catalog
   .column.column-lg.patternCard {
     display: block;
   }
-
-  .patternCard {
-    opacity: 0;
-    transition: opacity 0.5s;
-  }
-  
-  .patternCard.visible {
-    opacity: 1;
-  }
 </style>
 
 {% assign catalog = site.catalog | sort: 'name' %}
@@ -65,80 +56,19 @@ permalink: /catalog
     <input type="text" id="search" placeholder="Search..." />
   </div>
 
-  <div class="row" id="patternRow">
+  <div class="row">
     {% for pattern in catalog %} {% if pattern.patternInfo and pattern.Status !=
     "ComingSoon" %}
-    <div
-      class="column column-lg patternCard"
-      filter="{{ pattern.name }}"
-      type="{{ pattern.type }}"
-      technology="{{ pattern.technology }}"
-      status="{{ pattern.Status }}"
-    >
-      {% include card.html %}
-      <!-- modal included -->
-      {% include modal.html %}
-    </div>
+    
     {% endif %} {% endfor %} {% for pattern in site.data.wasm %} {% if
     pattern.filterInfo and pattern.Status != "ComingSoon" %}
-    <div
-      class="column column-lg patternCard"
-      filter="{{ pattern.name }}"
-      type="{{ pattern.filters.type }}"
-      technology="{{ pattern.technology }}"
-    >
-      {% include wasm-card.html %}
-      <!-- modal included -->
-      {% include modal.html %} {% include card-modal.html %}
-    </div>
+    
     {% endif %} {% endfor %} {% for pattern in catalog %} {% if
     pattern.patternInfo and pattern.Status == "ComingSoon" %}
-    <div
-      class="column column-lg patternCard"
-      filter="{{ pattern.compatibility }}"
-      type="{{ pattern.type }}"
-      technology="{{ pattern.technology }}"
-      status="{{ pattern.Status }}"
-    >
-      {% include coming-soon.html %}
-    </div>
+    
     {% endif %} {% endfor %}
   </div>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const patternRow = document.getElementById('patternRow');
-
-    const observer = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            // Load more patterns or perform any other action
-            loadMorePatterns();
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.5 } // Adjust the threshold as needed
-    );
-
-    // Observe the last patternCard in the row
-    const patternCards = document.querySelectorAll('.patternCard');
-    const lastPatternCard = patternCards[patternCards.length - 1];
-    observer.observe(lastPatternCard);
-
-    function loadMorePatterns() {
-      // Code to load more patterns or reveal hidden patterns
-      // For example, you could reveal the next 4 hidden patterns
-      const hiddenPatterns = document.querySelectorAll('.patternCard:not(.visible)');
-      for (let i = 0; i < Math.min(4, hiddenPatterns.length); i++) {
-        hiddenPatterns[i].classList.add('visible');
-      }
-    }
-  });
-</script>
-
 
 <script>
   document.getElementById("sort").addEventListener("change", function () {
