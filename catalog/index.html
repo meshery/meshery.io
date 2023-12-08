@@ -57,18 +57,37 @@ permalink: /catalog
   </div>
 
   <div class="row">
-    {% for pattern in catalog %} {% if pattern.patternInfo and pattern.Status !=
-    "ComingSoon" %}
-    
-    {% endif %} {% endfor %} {% for pattern in site.data.wasm %} {% if
-    pattern.filterInfo and pattern.Status != "ComingSoon" %}
-    
-    {% endif %} {% endfor %} {% for pattern in catalog %} {% if
-    pattern.patternInfo and pattern.Status == "ComingSoon" %}
-    
-    {% endif %} {% endfor %}
+
+    <div id="patterncard"></div>
   </div>
 </div>
+
+<script>
+// JavaScript loop to fill the div with content
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the reference to the content container
+  const contentContainer = document.getElementById('patterncard');
+  let htmlstring = "";
+
+  // Loop to generate and append content
+  for (let patternloop of catalog) {
+    if (patternloop.patternInfo && patternloop.Status != "ComingSoon") {
+      htmlstring += `
+        <div class="column column-lg patternCard"
+          filter="${patternloop.name}"
+          type="${patternloop.type}"
+          technology="${patternloop.technology}"
+          status="${patternloop.Status}">
+          {% include card.html %}
+          <!-- modal included -->
+          {% include modal.html %}
+        </div>`;
+    }
+    // Set the generated HTML to the content container
+  contentContainer.innerHTML = htmlstring;
+  }
+});
+</script>
 
 <script>
   document.getElementById("sort").addEventListener("change", function () {
