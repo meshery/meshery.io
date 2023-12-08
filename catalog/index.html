@@ -56,7 +56,7 @@ permalink: /catalog
     <input type="text" id="search" placeholder="Search..." />
   </div>
 
-  <div class="row">
+  <div class="row" id="rowid">
 
     <div id="patterncard" class="column column-lg patternCard">
       {% include card.html %}
@@ -69,19 +69,21 @@ permalink: /catalog
 <script>
 // JavaScript loop to fill the div with content
 document.addEventListener('DOMContentLoaded', function() {
-  // Get the reference to the content container
-  const contentContainer = document.getElementById('patterncard');
-  let htmlstring = "";
+  var toAdd = document.createDocumentFragment();
 
   // Loop to generate and append content
   for (let patternloop of catalog) {
     if (patternloop.patternInfo && patternloop.Status != "ComingSoon") {
-      document.getElementById('patterncard').setAttribute('filter', patternloop.name);
-      document.getElementById('patterncard').setAttribute('type', patternloop.type);
-      document.getElementById('patterncard').setAttribute('technology', patternloop.technology);
-      document.getElementById('patterncard').setAttribute('status', patternloop.Status);
+      var newDiv = document.createElement('div');
+      newDiv.id = 'patterncard';
+      newDiv.setAttribute('filter', patternloop.name);
+      newDiv.setAttribute('type', patternloop.type);
+      newDiv.setAttribute('technology', patternloop.technology);
+      newDiv.setAttribute('status', patternloop.Status);
+      toAdd.appendChild(newDiv);
     }
   }
+  document.getElementById('rowid').appendChild(toAdd);
 });
 </script>
 
