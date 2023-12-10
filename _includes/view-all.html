@@ -10,9 +10,11 @@
   var maxCount = cards.length;
 
   function showCards() {
-    if (count === 15) count += 5;
+    // if (count === 15) count += 5;
     for (let i = count; i < count + 5 && count + 5 <= maxCount; i++) {
-      cards[i].style.display = "block";
+      console.log("cards[i].type : ", cards[i].getAttribute("type"));
+      if (cards[i].getAttribute("type").toLowerCase() !== "workloads")
+        cards[i].style.display = "block";
     }
     count += 5;
     if (count >= maxCount) viewAllButton.style.display = "none";
