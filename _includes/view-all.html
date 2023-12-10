@@ -10,10 +10,12 @@
   var maxCount = cards.length;
 
   function showCards() {
-    for (let i = count; i < count + 5 && count + 5 < maxCount; i++) {
+    if (count === 15) count += 5;
+    for (let i = count; i < count + 5 && count + 5 <= maxCount; i++) {
       cards[i].style.display = "block";
     }
     count += 5;
+    if (count >= maxCount) viewAllButton.style.display = "none";
   }
 
   viewAllButton.addEventListener("click", () => {
