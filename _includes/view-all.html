@@ -1,32 +1,63 @@
-<div class="viewall">
-  <button class="viewallbtn">View More</button>
+<div style="display: flex; justify-content: space-between">
+  <div class="viewall prev">
+    <button class="viewallbtn prevBtn">Prev</button>
+  </div>
+  <div class="viewall next">
+    <button class="viewallbtn nextBtn">Next</button>
+  </div>
 </div>
 
-<script>
+<script type="module">
   var cardRow = document.querySelector(".row");
-  var viewAllButton = document.querySelector(".viewallbtn");
-  const cards = document.querySelectorAll(".patternCard");
-  var count = 5;
+  var prevButton = document.querySelector(".prevBtn");
+  var nextButton = document.querySelector(".nextBtn");
+  var cards = document.querySelectorAll(".patternCard");
+  var count = 0;
   var maxCount = cards.length;
+  // console.log("maxCount : ", maxCount, cards);
 
-  function showCards() {
-    if (count === 15) count += 5;
-    if (count === 20) count += 5;
-    for (let i = count; i < count + 5 && count + 5 <= maxCount; i++) {
-      console.log("cards[i].type : ", cards[i].getAttribute("type"));
+  document.addEventListener("DOMContentLoaded", () => {
+    cards = document.querySelectorAll(".patternCard");
+    // console.log(document.querySelectorAll(".patternCard"));
+  });
+
+  function showCards(coun) {
+    // if (count === 15) count += 5;
+    // if (count === 20) count += 5;
+    // console.log("coun : ", coun);
+    cards.forEach((card) => {
+      card.style.display = "none";
+    });
+    for (let i = coun; i < coun + 5 && coun + 5 <= maxCount; i++) {
+      // console.log("cards[i].type : ", cards[i].getAttribute("type"));
       if (cards[i].getAttribute("type").toLowerCase() !== "workloads")
         cards[i].style.display = "block";
     }
-    count += 5;
-    if (count >= maxCount) viewAllButton.style.display = "none";
+    // if (count >= maxCount) viewAllButton.style.display = "none";
   }
 
-  viewAllButton.addEventListener("click", () => {
-    if (count + 1 < maxCount) {
-      showCards();
+  prevButton.addEventListener("click", () => {
+    console.log("[prev] count : ", count);
+    if (count > 0) {
+      showCards((count -= 5));
     }
-    if (count == maxCount) {
-      viewAllButton.style.display = "none";
+    if (count <= 0) {
+      prevButton.style.display = "none";
+    } else {
+      prevButton.style.display = "block";
+    }
+  });
+
+  nextButton.addEventListener("click", () => {
+    console.log("[next] count : ", count + 5, maxCount);
+    if (count + 5 < maxCount) {
+      showCards((count += 5));
+    }
+
+    if (count + 5 >= maxCount) {
+      nextButton.style.display = "none";
+    } else {
+      nextButton.style.display = "block";
     }
   });
 </script>
