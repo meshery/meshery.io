@@ -19,19 +19,15 @@
   document.addEventListener("DOMContentLoaded", () => {
     cards = document.querySelectorAll(".patternCard");
     // console.log(document.querySelectorAll(".patternCard"));
+    prevButton.style.display = "none";
   });
 
   function showCards(coun) {
-    // if (count === 15) count += 5;
-    // if (count === 20) count += 5;
-    // console.log("coun : ", coun);
     cards.forEach((card) => {
       card.style.display = "none";
     });
-    for (let i = coun; i < coun + 5 && coun + 5 <= maxCount; i++) {
-      // console.log("cards[i].type : ", cards[i].getAttribute("type"));
-      if (cards[i].getAttribute("type").toLowerCase() !== "workloads")
-        cards[i].style.display = "block";
+    for (let i = coun; i < coun + 10 && coun + 10 <= maxCount; i++) {
+      cards[i].style.display = "block";
     }
     // if (count >= maxCount) viewAllButton.style.display = "none";
   }
@@ -39,24 +35,26 @@
   prevButton.addEventListener("click", () => {
     console.log("[prev] count : ", count);
     if (count > 0) {
-      showCards((count -= 5));
+      showCards((count -= 10));
     }
     if (count <= 0) {
       prevButton.style.display = "none";
     } else {
       prevButton.style.display = "block";
+      nextButton.style.display = "block";
     }
   });
 
   nextButton.addEventListener("click", () => {
-    console.log("[next] count : ", count + 5, maxCount);
-    if (count + 5 < maxCount) {
-      showCards((count += 5));
+    console.log("[next] count : ", count + 10, maxCount);
+    if (count + 10 < maxCount) {
+      showCards((count += 10));
     }
 
-    if (count + 5 >= maxCount) {
+    if (count + 10 >= maxCount) {
       nextButton.style.display = "none";
     } else {
+      prevButton.style.display = "block";
       nextButton.style.display = "block";
     }
   });
