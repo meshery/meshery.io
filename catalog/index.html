@@ -65,6 +65,7 @@ permalink: /catalog
       type="{{ pattern.type }}"
       technology="{{ pattern.technology }}"
       status="{{ pattern.Status }}"
+      style="display: none"
     >
       {% include card.html %}
       <!-- modal included -->
@@ -77,6 +78,7 @@ permalink: /catalog
       filter="{{ pattern.name }}"
       type="{{ pattern.filters.type }}"
       technology="{{ pattern.technology }}"
+      style="display: none"
     >
       {% include wasm-card.html %}
       <!-- modal included -->
@@ -90,6 +92,7 @@ permalink: /catalog
       type="{{ pattern.type }}"
       technology="{{ pattern.technology }}"
       status="{{ pattern.Status }}"
+      style="display: none"
     >
       {% include coming-soon.html %}
     </div>
@@ -147,6 +150,19 @@ permalink: /catalog
         pattern.style.display = "block";
       } else {
         pattern.style.display = "none";
+      }
+    });
+  });
+</script>
+
+<script>
+  const patternCards = document.querySelectorAll(".patternCard");
+  document.addEventListener("DOMContentLoaded", () => {
+    // display none for patternCards after number 10
+    patternCards.forEach((card, index) => {
+      // Hide patternCards after number 10
+      if (index < 5) {
+        card.style.display = "block";
       }
     });
   });

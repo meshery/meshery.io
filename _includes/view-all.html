@@ -1,30 +1,27 @@
 <div class="viewall">
-    <button class="viewallbtn">View All</button>
-    </div>
-    
-    <script>
-    var cardRow = document.querySelector('.row');
-    var viewAllButton = document.querySelector('.viewallbtn');
-    
-    function toggleViewAllButton() {
-          if (cardRow.offsetHeight > 1135) {
-            viewAllButton.style.display = 'block';
-          } else {
-            viewAllButton.style.display = 'none';
-          }
-        }
-    
-        toggleViewAllButton();
-    
-    
-    viewAllButton.addEventListener('click', function () {
-      cardRow.style.maxHeight = 'none';
-      cardRow.style.overflow = 'visible';
-      viewAllButton.style.display = 'none';
-    });
-    
-    window.addEventListener('load', function () {
-      cardRow.style.maxHeight = '1135px'; 
-      cardRow.style.overflow = 'hidden';
-    });
-    </script>
+  <button class="viewallbtn">View More</button>
+</div>
+
+<script>
+  var cardRow = document.querySelector(".row");
+  var viewAllButton = document.querySelector(".viewallbtn");
+  const cards = document.querySelectorAll(".patternCard");
+  var count = 5;
+  var maxCount = cards.length;
+
+  function showCards() {
+    for (let i = count; i < count + 5 && count + 5 < maxCount; i++) {
+      cards[i].style.display = "block";
+    }
+    count += 5;
+  }
+
+  viewAllButton.addEventListener("click", () => {
+    if (count + 1 < maxCount) {
+      showCards();
+    }
+    if (count == maxCount) {
+      viewAllButton.style.display = "none";
+    }
+  });
+</script>
