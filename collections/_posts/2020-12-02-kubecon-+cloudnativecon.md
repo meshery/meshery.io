@@ -10,7 +10,7 @@ categories:
 permalink: /blog/kubecon-cloudnativecon
 ---
 <div style="text-align:center;padding:5px">
-<img src="../../assets/images/posts/2020-12-02-kubecon+cloudnativecon/service-mesh-implementations.png" style="width:100%" /></div>
+<img src="{{site.baseurl}}/assets/images/posts/2020-12-02-kubecon+cloudnativecon/service-mesh-implementations.png" style="width:100%" /></div>
 As more organizations implement service meshes, they are finding what works and what needs more work, and they are creating new management practices around this knowledge. A few tried-and-tested best practices were detailed last month during KubeCon+CloudNativeCon.
 
 “There’s a lot to say about each of these service meshes and how they work: their architecture, why they’re made, what they’re focused on, what they do when they came about and why some of them aren’t here anymore and why we’re still seeing new ones,” Lee Calcote, founder of Layer5, explained during his talk with Kush Trivedi, a Layer5 maintainer, entitled “Service Mesh Specifications and Why They Matter in Your Deployment.”
@@ -23,7 +23,7 @@ Organizations will likely look to use at least more than one API service layer a
 
 “How many specifications, how many standards are there that have come to the rescue, so to speak, for understanding and interoperating with the various service meshes that are out there?” Calcote said.
 
-<img src="../../assets/images/posts/2020-12-02-kubecon+cloudnativecon/service-mesh-abstractions.png" alt="service-mesh-abstractions" width="100%" />
+<img src="{{site.baseurl}}/assets/images/posts/2020-12-02-kubecon+cloudnativecon/service-mesh-abstractions.png" alt="service-mesh-abstractions" width="100%" />
 
 A service mesh can be used for testing router performance, service latency and other variables. However, determining service mesh performance in an apples-to-apples way can be challenging. When studying “published results from some of the service meshes [from providers] that do publish results about performance… what you’ll find is that they’re probably using an environment that isn’t necessarily like yours,” Calcote said. “They’re also using different statistics and metrics to measure [their service meshes] … and it doesn’t help.”
 
