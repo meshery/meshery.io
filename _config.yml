@@ -35,7 +35,10 @@ plugins:
   - jekyll-seo-tag
   - jekyll-feed
   - jekyll-redirect-from
-  - jekyll-paginate
+  - jekyll-paginate-v2
+
+gems:
+  - jekyll-paginate-v2
 
 timezone: Etc/UTC
 
@@ -50,15 +53,21 @@ collections:
   catalog:
     output: true
     sort_by: patternId
-    # permalink: /:collection/:path/:title
 
-paginate: 5
-paginate_path: "/blog/:num/"
-permalink: pretty
+# paginate: 5
+# paginate_path: "/blog/:num/"
+
 
 # # Site configuration for the Jekyll 3 Pagination Gem
 # # The values here represent the defaults if nothing is set
-# pagination:
+pagination:
+  enabled: true
+  per_page: 2
+  permalink: '/page/:num/'
+  title: ' - page :num'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
 
 #   # Site-wide kill switch, disabled here it doesn't run at all
 #   enabled: true
@@ -67,12 +76,14 @@ permalink: pretty
 #   debug: false
 
 #   # The default document collection to paginate if nothing is specified ('posts' is default)
-#   collection: 'posts'
+  # collection: 'posts'
 
 #   # How many objects per paginated page, used to be `paginate` (default: 0, means all)
-#   per_page: 15
+# per_page: 5
 
 #   # The permalink structure for the paginated pages (this can be any level deep)
+# permalink: /blog/:category/:title
+# permalink: pretty
 #   permalink: '/page/:num/' # Pages are index.html inside this folder (default)
 #   #permalink: '/page/:num.html' # Pages are simple html files
 #   #permalink: '/page/:num' # Pages are html files, linked jekyll extensionless permalink style.

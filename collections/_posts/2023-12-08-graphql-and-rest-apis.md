@@ -1,12 +1,13 @@
 ---
-date:   2023-12-08 13:00:00 +0000
-heading: Unleashing Power and Flexibility
-title: The Synergy of REST and GraphQL in Meshery
+date: 2023-12-08 13:00:00 +0000
+title: The Synergy of REST and GraphQL APIs in Meshery
+subheading: Unleashing Power and Flexibility
 author_contributor: Lee Calcote
 categories:
   - Meshery
   - Open Source
   - API
+# layout: post
 permalink: /blog/unleashing-power-and-flexibility-the-synergy-of-rest-and-graphql-in-meshery
 ---
 
