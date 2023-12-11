@@ -9,7 +9,7 @@ permalink: /catalog
     background-color: #222222;
   }
   .sorting-options {
-    margin: 0 20px 20px 20px;
+    margin: 0 20px 0 20px;
     display: flex;
     align-items: center;
     @media (max-width: 506px) {
@@ -28,8 +28,12 @@ permalink: /catalog
     background-repeat: no-repeat;
     background-position: right 10px top 50%;
     margin-right: 10px;
+    @media (max-width: 506px) {
+     display: none;
+    }
   }
   #search {
+    width: 30%;
     flex-grow: 1;
     padding: 20px 10px;
     border: 1px solid #ddd;
@@ -47,14 +51,6 @@ permalink: /catalog
 
 {% assign catalog = site.catalog | sort: 'name' %}
 <div class="section-container">
-  <div class="sorting-options">
-    <select id="sort">
-      <option disabled selected value>Sort by</option>
-      <option value="asc">Alphabetically (A-Z)</option>
-      <option value="desc">Alphabetically (Z-A)</option>
-    </select>
-    <input type="text" id="search" placeholder="Search..." />
-  </div>
   {% include view-all.html %} {% include card-modal.html %}
 
   <div class="row">
