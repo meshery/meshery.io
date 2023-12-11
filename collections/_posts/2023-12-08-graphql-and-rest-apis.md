@@ -7,15 +7,15 @@ categories:
   - Meshery
   - Open Source
   - API
+featured-image: /assets/images/posts/2023-12-08-graphql-and-rest-apis/meshery-apis.jpeg
 permalink: /blog/unleashing-power-and-flexibility-the-synergy-of-rest-and-graphql-in-meshery
 ---
-
+{{site.baseurl}}/
 As an extensible engineering platform, Meshery's focus on flexibility and adaptability are key. Meshery has embraced this philosophy wholeheartedly as evident by the myriad ways in which it is [extensible](https://docs.meshery.io/extensibility). By incorporating both REST and GraphQL APIs into its architecture. This dual approach allows Meshery to cater to a diverse range of use cases and developer preferences, ensuring that the platform remains a powerful and versatile tool for managing infrastructure and applications.
 
 ## Understanding Meshery
 
 Meshery is an open source, cloud native management platform that facilitates the deployment, management, and operation of Kubernetes and any resource represented on Kubernetes (e.g. GCP and AWS as cloud platforms). Meshery balances on the fine line of engineering empowerment, while offering necessary safeguards to help developers from shooting themselves in the foot. The ability for developers to understand, configure, and collaborate over the infratructure that runs their microservices-based applications, plays a crucial role in enhancing the observability, security, and reliability of their applications.
-
 
 https://docs.meshery.io/extensibility/api
 
