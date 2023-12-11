@@ -1,23 +1,23 @@
 ---
 date: 2023-12-08 13:00:00 +0000
 title: The Synergy of REST and GraphQL APIs in Meshery
-subheading: Unleashing Power and Flexibility
+subheading: Extending Meshery as an engineering platform
 author_contributor: Lee Calcote
 categories:
   - Meshery
   - Open Source
   - API
-# layout: post
 permalink: /blog/unleashing-power-and-flexibility-the-synergy-of-rest-and-graphql-in-meshery
 ---
 
-
-
-As an extensible engineering platform, Meshery's focus on flexibility and adaptability are key. Meshery has embraced this philosophy wholeheartedly by incorporating both REST and GraphQL APIs into its architecture. This dual approach allows Meshery to cater to a diverse range of use cases and developer preferences, ensuring that the platform remains a powerful and versatile tool for managing service meshes.
+As an extensible engineering platform, Meshery's focus on flexibility and adaptability are key. Meshery has embraced this philosophy wholeheartedly as evident by the myriad ways in which it is [extensible](https://docs.meshery.io/extensibility). By incorporating both REST and GraphQL APIs into its architecture. This dual approach allows Meshery to cater to a diverse range of use cases and developer preferences, ensuring that the platform remains a powerful and versatile tool for managing infrastructure and applications.
 
 ## Understanding Meshery
 
-Meshery is an open-source, cloud-native service mesh management plane that facilitates the deployment, management, and operation of service meshes on Kubernetes and other orchestrators. Service meshes play a crucial role in enhancing the observability, security, and reliability of microservices-based applications.
+Meshery is an open source, cloud native management platform that facilitates the deployment, management, and operation of Kubernetes and any resource represented on Kubernetes (e.g. GCP and AWS as cloud platforms). Meshery balances on the fine line of engineering empowerment, while offering necessary safeguards to help developers from shooting themselves in the foot. The ability for developers to understand, configure, and collaborate over the infratructure that runs their microservices-based applications, plays a crucial role in enhancing the observability, security, and reliability of their applications.
+
+
+https://docs.meshery.io/extensibility/api
 
 - [REST API Reference](https://docs.meshery.io/reference/rest-apis)
 - [GraphQL API Reference](https://docs.meshery.io/reference/graphql-apis)
@@ -29,6 +29,7 @@ The inclusion of a RESTful API in Meshery aligns with the conventional approach 
 Familiarity and Ease of Use: Many developers are already familiar with RESTful APIs, making Meshery accessible to a broad audience. The straightforward nature of REST makes it easy to understand and integrate into existing workflows.
 Industry Standards: REST is a tried-and-true approach with established industry standards. This ensures compatibility with a myriad of tools, libraries, and frameworks, enabling seamless integration with other services and systems.
 Statelessness: REST's stateless nature simplifies server-side implementation and promotes scalability. Each request from a client contains all the information needed to understand and process the request, reducing server overhead.
+
 GraphQL API: Empowering Developers with Flexibility
 
 ## Authn and Authz

@@ -1,8 +1,7 @@
 jekyll=bundle exec jekyll
 
 site:
-	bundle install; $(jekyll) serve --drafts --incremental
-# --livereload 
+	bundle install; $(jekyll) serve --drafts --incremental --livereload 
 
 build:
 	$(jekyll) build --drafts
