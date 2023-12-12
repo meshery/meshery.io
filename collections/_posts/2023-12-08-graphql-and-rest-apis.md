@@ -19,16 +19,22 @@ Meshery is an open source, cloud native management platform that facilitates the
 
 <img alt="Meshery Extension Points" src="/assets/images/posts/2023-12-08-graphql-and-rest-apis/meshery-extension-points.webp" width="90%" />
 
-Incumbent upon Meshery is the necessity to balance the freedoms of these extension points with that of platform-enforced safeguards to help prevent the incidental mishaps that occur when an engineer "shoots themself in the foot", so to speak.
-
-The Meshery platform is designed to be extensible and flexible, allowing developers to customize and tailor the platform to their specific needs. This flexibility is achieved through the use of a plugin architecture that enables developers to extend Meshery's functionality by adding new features and capabilities. Meshery's plugin architecture is based on the [Operator Pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/), which is a Kubernetes-native approach to managing complex applications. The Operator Pattern provides a declarative way to manage applications and their dependencies, making it easier for developers to build and deploy applications on Kubernetes.
+Incumbent upon Meshery is the necessity to balance the freedoms of these extension points with that of platform-enforced safeguards to help prevent the incidental mishaps that occur when an engineer "shoots themself in the foot", so to speak. Meshery's APIs are designed to be flexible and expressive, while also being stable and predictable. This balance is achieved by providing both REST and GraphQL APIs.
 
 ## Meshery's APIs
 
-[Meshery's APIs](https://docs.meshery.io/extensibility/api) are just one type of extension point. Meshery's APIs are used by the Meshery UI and CLI to interact with the Meshery Server. Meshery's APIs are also used by the Meshery Adapters to interact with the Meshery Server. Meshery's APIs are also used by the Meshery Operator to interact with the Meshery Server. Meshery's APIs are also used by the Meshery Server to interact with Meshery Server.
+[Meshery's APIs](https://docs.meshery.io/extensibility/api) are just one type of extension point. Meshery's APIs are used by every Meshery component. This includes:
 
-- [Meshery REST API Reference](https://docs.meshery.io/reference/rest-apis)
-- [Meshery GraphQL API Reference](https://docs.meshery.io/reference/graphql-apis)
+- the two clients, [Meshery UI](https://docs.meshery.io/concepts/architecture), and [mesheryctl](https://docs.meshery.io/reference/mesheryctl) to interact with the Meshery Server.
+- [Meshery Adapters](https://docs.meshery.io/concepts/architecture/adapters) to register capabilities with with Meshery Server.
+- Meshery's APIs are also used by the [Meshery Operator](https://docs.meshery.io/concepts/architecture/operator) and it runs [MeshSync](https://docs.meshery.io/concepts/architecture/broker) and [Meshery Broker](https://docs.meshery.io/concepts/architecture/broker).
+
+<div class="callout">
+<h5>Meshery REST API Reference</h5>
+<ul><li><a href="(https://docs.meshery.io/reference/rest-apis">Meshery REST API Reference</a></li>
+<li><a href="(https://docs.meshery.io/reference/graphql-apis">Meshery GraphQL API Reference</a></li>
+</ul>
+</div>
 
 ### REST API: Traditional and Battle-Tested
 
@@ -40,22 +46,23 @@ The inclusion of a RESTful API in Meshery aligns with the conventional approach 
 
 - **Statelessness:** REST's stateless nature simplifies server-side implementation and promotes scalability. Each request from a client contains all the information needed to understand and process the request, reducing server overhead.
 
-## GraphQL API: Empowering Developers with Flexibility
+### GraphQL API: Empowering Developers with Flexibility
 
 Meshery's GraphQL API provides a more expressive and flexible approach to querying data. In addition to REST, Meshery has embraced GraphQL, a query language for APIs that provides a more flexible and efficient alternative to traditional RESTful approaches.
 
 - **Fine-Grained Queries:** GraphQL allows clients to request only the data they need, minimizing bandwidth usage and reducing the over-fetching of data. This granularity in querying enhances performance and responsiveness, especially in scenarios with limited network resources.
-Single Request, Multiple Responses: Unlike REST, where multiple endpoints might be required to gather disparate data, GraphQL allows clients to retrieve all the necessary information in a single request. This reduces the number of network requests and optimizes data fetching.
-Schema Evolution: GraphQL supports incremental schema updates, providing flexibility in evolving APIs over time without breaking existing clients. This is particularly beneficial in a rapidly changing technology landscape.
 
-## The Synergy of REST and GraphQL in Meshery
+- **Single Request, Multiple Responses:** Unlike REST, where multiple endpoints might be required to gather disparate data, GraphQL allows clients to retrieve all the necessary information in a single request. This reduces the number of network requests and optimizes data fetching.
+
+- **Schema Evolution:** GraphQL supports incremental schema updates, providing flexibility in evolving APIs over time without breaking existing clients. This is particularly beneficial in a rapidly changing technology landscape.
+
+## Synergy of REST and GraphQL in Meshery
 
 The decision to incorporate both REST and GraphQL APIs in Meshery is a strategic move that maximizes the benefits of both paradigms. Developers can choose the approach that best suits their requirements, taking advantage of the simplicity of REST or the flexibility of GraphQL.
 
 ### Authn and Authz
 
 Irrespective of whether you use the REST or GraphQL API, Meshery requires authentication and authorization for all API requests. Requests to any of the API endpoints must be authenticated and include a valid JWT access token in the HTTP headers. Type of authentication is determined by the selected [Provider](https://docs.meshery.io/extensibility/providers). Use of the Local Provider, "None", puts Meshery into single-user mode and does not require authentication.
-
 
 #### Compatibility and Integration
 
