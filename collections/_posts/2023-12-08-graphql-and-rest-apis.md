@@ -40,15 +40,9 @@ The inclusion of a RESTful API in Meshery aligns with the conventional approach 
 
 - **Statelessness:** REST's stateless nature simplifies server-side implementation and promotes scalability. Each request from a client contains all the information needed to understand and process the request, reducing server overhead.
 
-GraphQL API: Empowering Developers with Flexibility
+## GraphQL API: Empowering Developers with Flexibility
 
-## Authn and Authz
-
-Meshery's GraphQL API provides a more expressive and flexible approach to querying data.
-
-Irrespective of whether you use the REST or GraphQL API, Meshery requires authentication and authorization for all API requests. Requests to any of the API endpoints must be authenticated and include a valid JWT access token in the HTTP headers. Type of authentication is determined by the selected [Provider](https://docs.meshery.io/extensibility/providers). Use of the Local Provider, "None", puts Meshery into single-user mode and does not require authentication.
-
-In addition to REST, Meshery has embraced GraphQL, a query language for APIs that provides a more flexible and efficient alternative to traditional RESTful approaches.
+Meshery's GraphQL API provides a more expressive and flexible approach to querying data. In addition to REST, Meshery has embraced GraphQL, a query language for APIs that provides a more flexible and efficient alternative to traditional RESTful approaches.
 
 - **Fine-Grained Queries:** GraphQL allows clients to request only the data they need, minimizing bandwidth usage and reducing the over-fetching of data. This granularity in querying enhances performance and responsiveness, especially in scenarios with limited network resources.
 Single Request, Multiple Responses: Unlike REST, where multiple endpoints might be required to gather disparate data, GraphQL allows clients to retrieve all the necessary information in a single request. This reduces the number of network requests and optimizes data fetching.
@@ -57,6 +51,11 @@ Schema Evolution: GraphQL supports incremental schema updates, providing flexibi
 ## The Synergy of REST and GraphQL in Meshery
 
 The decision to incorporate both REST and GraphQL APIs in Meshery is a strategic move that maximizes the benefits of both paradigms. Developers can choose the approach that best suits their requirements, taking advantage of the simplicity of REST or the flexibility of GraphQL.
+
+### Authn and Authz
+
+Irrespective of whether you use the REST or GraphQL API, Meshery requires authentication and authorization for all API requests. Requests to any of the API endpoints must be authenticated and include a valid JWT access token in the HTTP headers. Type of authentication is determined by the selected [Provider](https://docs.meshery.io/extensibility/providers). Use of the Local Provider, "None", puts Meshery into single-user mode and does not require authentication.
+
 
 #### Compatibility and Integration
 
