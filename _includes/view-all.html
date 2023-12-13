@@ -1,30 +1,61 @@
-<div class="viewall">
-    <button class="viewallbtn">View All</button>
-    </div>
-    
-    <script>
-    var cardRow = document.querySelector('.row');
-    var viewAllButton = document.querySelector('.viewallbtn');
-    
-    function toggleViewAllButton() {
-          if (cardRow.offsetHeight > 1135) {
-            viewAllButton.style.display = 'block';
-          } else {
-            viewAllButton.style.display = 'none';
-          }
-        }
-    
-        toggleViewAllButton();
-    
-    
-    viewAllButton.addEventListener('click', function () {
-      cardRow.style.maxHeight = 'none';
-      cardRow.style.overflow = 'visible';
-      viewAllButton.style.display = 'none';
+<div style="display: flex; justify-content: space-between">
+  <div class="viewall prev">
+    <button class="viewallbtn prevBtn">Prev</button>
+  </div>
+  <div class="sorting-options">
+    <select id="sort">
+      <option disabled selected value>Sort by</option>
+      <option value="asc">Alphabetically (A-Z)</option>
+      <option value="desc">Alphabetically (Z-A)</option>
+    </select>
+    <input type="text" id="search" placeholder="Search..." />
+  </div>
+  <div class="viewall next">
+    <button class="viewallbtn nextBtn">Next</button>
+  </div>
+</div>
+
+<script type="module">
+
+  const prevButton = document.querySelector(".prevBtn");
+  const nextButton = document.querySelector(".nextBtn");
+  const cards = document.querySelectorAll(".patternCard");
+  let count = 0;
+  const maxCount = cards.length;
+
+
+  document.addEventListener("DOMContentLoaded", () => {
+
+    prevButton.style.display = "none";
+  });
+
+  function showCards(coun) {
+    cards.forEach((card) => {
+      card.style.display = "none";
     });
-    
-    window.addEventListener('load', function () {
-      cardRow.style.maxHeight = '1135px'; 
-      cardRow.style.overflow = 'hidden';
-    });
-    </script>
+    for (let i = coun; i < coun + 10 && coun + 10 <= maxCount; i++) {
+      cards[i].style.display = "block";
+    }
+
+  }
+
+  function updateButtonVisibility() {
+      prevButton.style.display = count <= 0 ? "none" : "block";
+      nextButton.style.display = count + 10 >= maxCount ? "none" : "block";
+    }
+  prevButton.addEventListener("click", () => {
+
+    if (count > 0) {
+      showCards((count -= 10));
+    }
+    updateButtonVisibility();
+  });
+
+  nextButton.addEventListener("click", () => {
+
+    if (count + 10 < maxCount) {
+      showCards((count += 10));
+    }
+    updateButtonVisibility();
+  });
+</script>
