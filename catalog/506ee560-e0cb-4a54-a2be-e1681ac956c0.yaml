@@ -44,7 +44,8 @@ services:
           posX: 190.1674592571951
           posY: 493.972876966476
         whiteboardData:
-          style: {}
+          style:
+            z-index: 3
   comment-jk:
     name: comment-jk
     type: Comment
@@ -89,7 +90,8 @@ services:
           posX: 255.6674592571951
           posY: 493.972876966476
         whiteboardData:
-          style: {}
+          style:
+            z-index: 12
   default:
     name: default
     type: Namespace
@@ -132,8 +134,251 @@ services:
         position:
           posX: 544.0233473265575
           posY: 225.1269759546878
-        whiteboardData: {}
-  frontend-bmfbg:
+        whiteboardData:
+          style:
+            z-index: 13
+  frontend-dgghf:
+    name: frontend
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        ports:
+        - port: 80
+          protocol: TCP
+        - port: 80
+          protocol: TCP
+        selector:
+          app: guestbook
+          tier: frontend
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 499a0982-138b-48f0-bfc0-4b2c9f711510
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 4ae55da0-82eb-405e-9410-75623cee1043
+            subType: Network
+            target: 43a7b935-6109-4f5c-84fb-5e3454f9c6d1
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              bypassed:
+                mapping:
+                  mapped:
+                    fn: true
+                    mapping: true
+                  name: line-color
+                  prevFnValue: '#7aa1f0'
+                  strValue: fn
+                name: line-color
+                pfValue:
+                - 122
+                - 161
+                - 240
+                strValue: rgb(122,161,240)
+                value:
+                - 122
+                - 161
+                - 240
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 80/TCP
+              value: 80/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: 4ae55da0-82eb-405e-9410-75623cee1043
+        label: frontend
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        position:
+          posX: 615.5689243422067
+          posY: 473.56225675684726
+        whiteboardData:
+          style:
+            z-index: 15
+  frontend-tkzcd:
     name: frontend
     type: Deployment
     apiVersion: apps/v1
@@ -176,29 +421,60 @@ services:
             target: 43a7b935-6109-4f5c-84fb-5e3454f9c6d1
           style:
             curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
               name: curve-style
               strValue: bezier
               value: bezier
             font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
               name: font-family
               strValue: Qanelas Soft, sans-serif
               value:
               - Qanelas Soft, sans-serif
               - Qanelas Soft, sans-serif
             font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
               name: font-size
               pfValue: 6
               strValue: 6px
               units: px
               value: 6
             line-color:
-              mapping:
-                mapped:
-                  fn: true
-                  mapping: true
+              bypass: true
+              bypassed:
+                mapping:
+                  mapped:
+                    fn: true
+                    mapping: true
+                  name: line-color
+                  prevFnValue: '#7aa1f0'
+                  strValue: fn
                 name: line-color
-                prevFnValue: '#7aa1f0'
-                strValue: fn
+                pfValue:
+                - 122
+                - 161
+                - 240
+                strValue: rgb(122,161,240)
+                value:
+                - 122
+                - 161
+                - 240
               name: line-color
               pfValue:
               - 122
@@ -210,18 +486,64 @@ services:
               - 161
               - 240
             line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
               name: line-style
               strValue: dotted
               value: dotted
             target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
               name: target-arrow-shape
               strValue: vee
               value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 80/TCP
+              value: 80/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
             text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
               name: text-events
               strValue: "yes"
               value: "yes"
             text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
               name: text-outline-color
               pfValue:
               - 255
@@ -233,27 +555,57 @@ services:
               - 255
               - 255
             text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
               name: text-outline-width
               pfValue: 1
               strValue: 1px
               units: px
               value: 1
             text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
               name: text-wrap
               strValue: wrap
               value: wrap
             width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
               name: width
               pfValue: 1.5
               strValue: 1.5px
               units: px
               value: 1.5
             z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
               name: z-index
               pfValue: 999
               strValue: "999"
               value: 999
             z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
               name: z-index-compare
               strValue: manual
               value: manual
@@ -263,9 +615,27 @@ services:
           posX: 617.8765083999082
           posY: 586.1282542776714
         whiteboardData:
-          style: {}
-  frontend-rkavt:
-    name: frontend
+          style:
+            z-index: 9
+  guestbook:
+    name: guestbook
+    type: Namespace
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    traits:
+      meshmap:
+        edges: []
+        id: 1e3a8397-8740-49ab-8591-d8276626c023
+        label: guestbook
+        position:
+          posX: 325.6674592571951
+          posY: 367.722876966476
+        whiteboardData:
+          style:
+            z-index: 16
+  redis-follower-ionln:
+    name: redis-follower
     type: Service
     apiVersion: v1
     namespace: default
@@ -273,24 +643,25 @@ services:
     settings:
       spec:
         ports:
-        - port: 80
+        - port: 6379
           protocol: TCP
-        - port: 80
+        - port: 6379
           protocol: TCP
         selector:
-          app: guestbook
-          tier: frontend
+          app: redis
+          role: follower
+          tier: backend
     traits:
       meshmap:
         edges:
         - data:
-            id: 499a0982-138b-48f0-bfc0-4b2c9f711510
+            id: bdadcea6-f0bf-4bcf-bac1-f19ade81cafb
             metadata:
-              port: 80
+              port: 6379
               protocol: TCP
-            source: 4ae55da0-82eb-405e-9410-75623cee1043
+            source: redis-follower-0.08295362138087481
             subType: Network
-            target: 43a7b935-6109-4f5c-84fb-5e3454f9c6d1
+            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
           style:
             curve-style:
               name: curve-style
@@ -310,6 +681,7 @@ services:
               value: 6
             line-color:
               mapping:
+                fnValue: '#7aa1f0'
                 mapped:
                   fn: true
                   mapping: true
@@ -334,6 +706,25 @@ services:
               name: target-arrow-shape
               strValue: vee
               value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 6379/TCP
+              value: 6379/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
             text-events:
               name: text-events
               strValue: "yes"
@@ -374,65 +765,228 @@ services:
               name: z-index-compare
               strValue: manual
               value: manual
-        id: 4ae55da0-82eb-405e-9410-75623cee1043
-        label: frontend
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-        position:
-          posX: 615.5689243422067
-          posY: 473.56225675684726
-        whiteboardData:
-          style: {}
-  guestbook:
-    name: guestbook
-    type: Namespace
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    traits:
-      meshmap:
-        edges: []
-        id: 1e3a8397-8740-49ab-8591-d8276626c023
-        label: guestbook
-        position:
-          posX: 325.6674592571951
-          posY: 367.722876966476
-        whiteboardData:
-          style: {}
-  redis-follower-dbxll:
-    name: redis-follower
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    settings:
-      spec:
-        ports:
-        - port: 6379
-          protocol: TCP
-        - port: 6379
-          protocol: TCP
-        selector:
-          app: redis
-          role: follower
-          tier: backend
-    traits:
-      meshmap:
-        edges: []
+        - data:
+            id: 475263ea-f0be-48b5-98ba-2767ce2417a2
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: redis-follower-0.08295362138087481
+            subType: Network
+            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 6379/TCP
+              value: 6379/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 381802f5-4cbe-4cc0-9424-9a0968eb99e1
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: redis-follower-0.08295362138087481
+            subType: Network
+            target: redis-follower-0.2051073139195705
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 6379/TCP
+              value: 6379/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
         id: redis-follower-0.08295362138087481
         label: redis-follower
         meshmodel-metadata:
@@ -455,8 +1009,9 @@ services:
           posX: 774.332540742805
           posY: 321.4076268719174
         whiteboardData:
-          style: {}
-  redis-follower-mpeao:
+          style:
+            z-index: 6
+  redis-follower-jplky:
     name: redis-follower
     type: Deployment
     apiVersion: apps/v1
@@ -486,15 +1041,238 @@ services:
                   memory: 100Mi
     traits:
       meshmap:
-        edges: []
+        edges:
+        - data:
+            id: 0e6be822-083e-4475-aeaa-e655068e9641
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 7e403128-5022-409a-a1f2-26e0a5d25685
+            subType: Network
+            target: redis-follower-0.2051073139195705
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 6379/TCP
+              value: 6379/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 381802f5-4cbe-4cc0-9424-9a0968eb99e1
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: redis-follower-0.08295362138087481
+            subType: Network
+            target: redis-follower-0.2051073139195705
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 6379/TCP
+              value: 6379/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
         id: redis-follower-0.2051073139195705
         label: redis-follower
         position:
           posX: 731.6229742893868
           posY: 226.14950697312474
         whiteboardData:
-          style: {}
-  redis-follower-nlrhm:
+          style:
+            z-index: 17
+  redis-follower-sfrqu:
     name: redis-follower
     type: Deployment
     apiVersion: apps/v1
@@ -523,15 +1301,238 @@ services:
                   memory: 100Mi
     traits:
       meshmap:
-        edges: []
+        edges:
+        - data:
+            id: 8d912cf3-80d1-48a3-b88a-9971d9fabf2e
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 7e403128-5022-409a-a1f2-26e0a5d25685
+            subType: Network
+            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 6379/TCP
+              value: 6379/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: bdadcea6-f0bf-4bcf-bac1-f19ade81cafb
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: redis-follower-0.08295362138087481
+            subType: Network
+            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 6379/TCP
+              value: 6379/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
         id: 9407d316-5e5a-4212-8767-2bcd60c9ac17
         label: redis-follower
         position:
           posX: 621.9042506805724
           posY: 359.07117385335664
         whiteboardData:
-          style: {}
-  redis-follower-qogis:
+          style:
+            z-index: 7
+  redis-follower-tlrxb:
     name: redis-follower
     type: Service
     apiVersion: v1
@@ -552,7 +1553,340 @@ services:
           tier: backend
     traits:
       meshmap:
-        edges: []
+        edges:
+        - data:
+            id: 8d912cf3-80d1-48a3-b88a-9971d9fabf2e
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 7e403128-5022-409a-a1f2-26e0a5d25685
+            subType: Network
+            target: 9407d316-5e5a-4212-8767-2bcd60c9ac17
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 6379/TCP
+              value: 6379/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 11b0d52b-2358-41c1-9ec3-3a073590b9c1
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 7e403128-5022-409a-a1f2-26e0a5d25685
+            subType: Network
+            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 6379/TCP
+              value: 6379/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 0e6be822-083e-4475-aeaa-e655068e9641
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 7e403128-5022-409a-a1f2-26e0a5d25685
+            subType: Network
+            target: redis-follower-0.2051073139195705
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 6379/TCP
+              value: 6379/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
         id: 7e403128-5022-409a-a1f2-26e0a5d25685
         label: redis-follower
         meshmodel-metadata:
@@ -575,8 +1909,273 @@ services:
           posX: 704.0742613205998
           posY: 351.1666549760461
         whiteboardData:
-          style: {}
-  redis-leader-jayho:
+          style:
+            z-index: 4
+  redis-leader-fkzim:
+    name: redis-leader
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    dependsOn:
+    - default
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app: redis
+        template:
+          metadata:
+            labels:
+              app: redis
+              role: leader
+              tier: backend
+          spec:
+            containers:
+            - image: docker.io/redis:6.0.5
+              name: leader
+              ports:
+              - container Port: 6379
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 100Mi
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 11b0d52b-2358-41c1-9ec3-3a073590b9c1
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 7e403128-5022-409a-a1f2-26e0a5d25685
+            subType: Network
+            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 6379/TCP
+              value: 6379/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 475263ea-f0be-48b5-98ba-2767ce2417a2
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: redis-follower-0.08295362138087481
+            subType: Network
+            target: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 6379/TCP
+              value: 6379/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
+        label: redis-leader
+        parent: 3e8540ea-0bc1-4d50-a2fe-1ca9688987d2
+        position:
+          posX: 621.4772213032122
+          posY: 186.12222802305993
+        whiteboardData:
+          style:
+            z-index: 22
+  redis-leader-snoxo:
     name: redis-leader
     type: Service
     apiVersion: v1
@@ -621,48 +2220,8 @@ services:
           posX: 466.56947334990286
           posY: 242.1317238863156
         whiteboardData:
-          style: {}
-  redis-leader-jzbqv:
-    name: redis-leader
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
-    dependsOn:
-    - default
-    settings:
-      spec:
-        replicas: 1
-        selector:
-          match Labels:
-            app: redis
-        template:
-          metadata:
-            labels:
-              app: redis
-              role: leader
-              tier: backend
-          spec:
-            containers:
-            - image: docker.io/redis:6.0.5
-              name: leader
-              ports:
-              - container Port: 6379
-              resources:
-                requests:
-                  cpu: 100m
-                  memory: 100Mi
-    traits:
-      meshmap:
-        edges: []
-        id: a6361bc8-7f4e-4e11-9406-e1bfd5578a53
-        label: redis-leader
-        parent: 3e8540ea-0bc1-4d50-a2fe-1ca9688987d2
-        position:
-          posX: 621.4772213032122
-          posY: 186.12222802305993
-        whiteboardData:
-          style: {}
+          style:
+            z-index: 23
   round-barrel-kf:
     name: round-barrel-kf
     type: RoundBarrel
@@ -707,7 +2266,8 @@ services:
           posX: 191.1674592571951
           posY: 430.972876966476
         whiteboardData:
-          style: {}
+          style:
+            z-index: 18
   round-rectangle-vx:
     name: round-rectangle-vx
     type: RoundRectangle
@@ -760,7 +2320,8 @@ services:
           posX: 260.1674592571951
           posY: 430.972876966476
         whiteboardData:
-          style: {}
+          style:
+            z-index: 5
   round-triangle-ug:
     name: round-triangle-ug
     type: RoundTriangle
@@ -805,7 +2366,8 @@ services:
           posX: 191.1674592571951
           posY: 367.472876966476
         whiteboardData:
-          style: {}
+          style:
+            z-index: 8
   star-bs:
     name: star-bs
     type: Star
@@ -850,7 +2412,8 @@ services:
           posX: 370.1674592571951
           posY: 493.972876966476
         whiteboardData:
-          style: {}
+          style:
+            z-index: 19
   storage-class-db:
     name: storage-class-db
     type: StorageClass
@@ -899,7 +2462,8 @@ services:
           posX: 261.1674592571951
           posY: 367.472876966476
         whiteboardData:
-          style: {}
+          style:
+            z-index: 10
   triangle-ag:
     name: triangle-ag
     type: Triangle
@@ -944,7 +2508,8 @@ services:
           posX: 317.1674592571951
           posY: 493.972876966476
         whiteboardData:
-          style: {}
+          style:
+            z-index: 20
   vee-vt:
     name: vee-vt
     type: Vee
@@ -989,7 +2554,8 @@ services:
           posX: 178.1674592571951
           posY: 556.972876966476
         whiteboardData:
-          style: {}
+          style:
+            z-index: 21
   volume-attachment-ip:
     name: volume-attachment-ip
     type: VolumeAttachment
@@ -1034,4 +2600,5 @@ services:
           posX: 328.1674592571951
           posY: 430.972876966476
         whiteboardData:
-          style: {}
+          style:
+            z-index: 11
