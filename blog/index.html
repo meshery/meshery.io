@@ -1,20 +1,20 @@
 ---
 title: Blog
 description: Keep up with the latest news.
-pagination: 
- enabled: true
- category: meshery
- sort_field: 'date'
- sort_reverse: true
+paginate:
+  collection: posts
+  paginate: 2
+  permalink: /page/:num/
 ---
+
 <div class="text-container">
   <div class="section-bar"><h1>Blog</h1></div>
   <ul class="blog-posts">
     {% include list-posts.html posts=paginator.posts %}
   </ul>
-  {% include pagination.html %}
-  <!-- {% if paginator.total_pages > 1 %}
 
+  {% if paginator.total_pages > 1 %}
+  <!-- Pagination links -->
   <div class="pagination">
     {% if paginator.previous_page %}
     <a
@@ -36,5 +36,5 @@ pagination:
     >
     {% endif %}
   </div>
-  {% endif %} -->
-</div> 
+  {% endif %}
+</div>
