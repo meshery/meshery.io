@@ -47,6 +47,10 @@ permalink: /catalog
   .column.column-lg.patternCard {
     display: block;
   }
+
+  .section-container {
+    width: 100%;
+  }
 </style>
 
 {% assign catalog = site.catalog | sort: 'name' %}
@@ -54,6 +58,9 @@ permalink: /catalog
   {% include view-all.html %} {% include card-modal.html %}
 
   <div class="row">
+    <h2 class="not-found" style="display: none;" id="not-found">
+      No results found
+    </h2>
     {% for pattern in catalog %} {% if pattern.patternInfo and pattern.Status !=
     "ComingSoon" %}
     <div
@@ -140,15 +147,25 @@ permalink: /catalog
     var searchValue = this.value.toLowerCase();
     var cardsContainer = document.querySelector(".row");
     var cards = cardsContainer.querySelectorAll(".patternCard");
+    var notFound = document.getElementById("not-found");
+
+    let found = false;
 
     cards.forEach(function (pattern) {
       var filterValue = pattern.getAttribute("filter").toLowerCase();
       if (filterValue.includes(searchValue)) {
         pattern.style.display = "block";
+        found = true;
       } else {
         pattern.style.display = "none";
       }
     });
+
+    if (!found) {
+      notFound.style.display = "block";
+    } else {
+      notFound.style.display = "none";
+    }
   });
 </script>
 
