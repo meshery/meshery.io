@@ -1,54 +1,86 @@
 <div id="open-modal" class="modal-window">
   <!-- <div class="click-container"> -->
-    <div class="modal-content">
-      <div class="modal-image">
-        <div class="chip chip-modal">
-          {% if pattern.filters.type == "wasm filter" %}
-          <a href="{{ site.baseurl }}/catalog/webassembly">
-            <h6 class="pattern-type"> {{pattern.filters.type | upcase }}</h6>
+  <div id="modalcontent{{pattern.patternId}}" class="modal-content">
+    <div class="modal-image">
+      <div class="chip chip-modal">
+        {% if pattern.filters.type == "wasm filter" %}
+        <a href="{{ site.baseurl }}/catalog/webassembly">
+          <h6 class="pattern-type"> {{pattern.filters.type | upcase }}</h6>
           {% else %}
-            <a href="{{ site.baseurl }}/catalog/{{ pattern.type | slugify }}">
-          {% endif %}
-              <h6 class="pattern-type"> {{pattern.type | upcase }}</h6>
-            </a>
-        </div>
-        <button class="modal-close close">&times;</button>
-        {%if pattern.filters.type == "wasm filter" %}
-        <img class="image-class" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png" onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy"/>
-        {%else%}
-        <img class="image-class" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png" onerror="this.src='/assets/images/patterns/service-mesh.svg'" loading="lazy"/>
-        {%endif%}
-        <h4 class="related-patterns">RELATED PATTERNS</h4>
-        {% include related-patterns.html %}
+          <a href="{{ site.baseurl }}/catalog/{{ pattern.type | slugify }}">
+            {% endif %}
+            <h6 class="pattern-type"> {{pattern.type | upcase }}</h6>
+          </a>
       </div>
-      <div class="vertical-line"></div>
-      <div class="modal-info">
-        <h2 class="modal-h2">{{pattern.name | upcase }} {% include read-more.html %}</h2>
-        {% if pattern.patternInfo %}
-        <h3 class="modal-h3">What this pattern does</h3>
-        <p class="content-toggle contentdata">
-          {{pattern.patternInfo | replace: '\\n', '<br/>' | replace: '\n', '<br/>' }}
-        </p>
-        <span class="read-more" href="read-more.html">{% include expand.html %}</span>
-        <h3 class="modal-h3">Caveats and Considerations</h3>
-        <p>{{pattern.patternCaveats}}</p>
-        {% else %}
-        <h3 class="modal-h3">What this filter does</h3>
-        <p class="content-toggle contentdata">
-          {{pattern.filterInfo }}
-        </p>
-        <span class="read-more">...read more</span>
-        <h3 class="modal-h3">Caveats and Considerations</h3>
-        <p>{{pattern.filterCaveats}}</p>
-        {% endif %}
-          <h3 class="modal-h3">Technologies</h3>
-          {% include partials/compatibility.html %}
-        {% include copy-and-download.html %}
+      <button class="modal-close close">&times;</button>
+      {%if pattern.filters.type == "wasm filter" %}
+      <img class="image-class"
+        src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png"
+        onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy"
+        onclick="toggleFullScreenImage('{{ pattern.patternId }}')" />
+      <div id="fullScreenImage{{ pattern.patternId }}" class="fullScreenImage"
+        onclick="toggleFullScreenImage('{{ pattern.patternId }}')">
+        <img class="image-class"
+          src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png"
+          onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy" />
       </div>
+      {%else%}
+      <img class="image-class"
+        src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png"
+        onerror="this.src='/assets/images/patterns/service-mesh.svg'" loading="lazy"
+        onclick="toggleFullScreenImage('{{ pattern.patternId }}')" />
+      <div id="fullScreenImage{{ pattern.patternId }}" class="fullScreenImage"
+        onclick="toggleFullScreenImage('{{ pattern.patternId }}')">
+        <img
+          src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png"
+          onerror="this.src='/assets/images/patterns/service-mesh.svg'" loading="lazy" />
+      </div>
+      {%endif%}
+      <h4 class="related-patterns">RELATED PATTERNS</h4>
+      {% include related-patterns.html %}
     </div>
-     
- <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
-    
-   
-  <!-- </div> -->
+    <div class="vertical-line"></div>
+    <div class="modal-info">
+      <h2 class="modal-h2">{{pattern.name | upcase }} {% include read-more.html %}</h2>
+      {% if pattern.patternInfo %}
+      <h3 class="modal-h3">What this pattern does</h3>
+      <p class="content-toggle contentdata">
+        {{pattern.patternInfo | replace: '\\n', '<br />' | replace: '\n', '<br />' }}
+      </p>
+      <span class="read-more" href="read-more.html">{% include expand.html %}</span>
+      <h3 class="modal-h3">Caveats and Considerations</h3>
+      <p>{{pattern.patternCaveats}}</p>
+      {% else %}
+      <h3 class="modal-h3">What this filter does</h3>
+      <p class="content-toggle contentdata">
+        {{pattern.filterInfo }}
+      </p>
+      <span class="read-more">...read more</span>
+      <h3 class="modal-h3">Caveats and Considerations</h3>
+      <p>{{pattern.filterCaveats}}</p>
+      {% endif %}
+      <h3 class="modal-h3">Technologies</h3>
+      {% include partials/compatibility.html %}
+      {% include copy-and-download.html %}
+    </div>
+  </div>
+
+  <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
+  <script>
+    function toggleFullScreenImage(patternId) {
+      var fullScreenImage = document.getElementById(`fullScreenImage${patternId}`);
+      var modalWindowDiv = document.getElementById(`modalcontent${patternId}`);
+      if (fullScreenImage.style.display === "none" || fullScreenImage.style.display === "") {
+        fullScreenImage.style.display = "block";
+        modalWindowDiv.style.overflowY = "hidden";
+
+      } else {
+        fullScreenImage.style.display = "none";
+        modalWindowDiv.style.overflowY = "auto";
+      }
+    }
+
+  </script>
+
+
 </div>
