@@ -10,7 +10,7 @@ categories:
 permalink: /blog/Layer5-Recognition-Program
 ---
 <div style="text-align:center;padding:20px">
-<img src="../../assets/images/posts/2023-9-2-layer5-badge-programme/recognition-banner.png" style="width:75%" /></div>
+<img src="/assets/images/posts/2023-9-2-layer5-badge-programme/recognition-banner.png" style="width:75%" /></div>
 Ready to take your open source journey to the next level? We're thrilled to announce an exciting update for all Layer5 users and contributors:  the launch of our improved recognition program! 🎉🎈
 
 Our users and contributors have always been celebrated at Layer5. Each participation milestone you achieve and every uplifting community interaction contributes to our shared mission of empowering engineers.
