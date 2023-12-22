@@ -1,7 +1,7 @@
 ---
 date: 2023-12-22 10:30:05 -0530
-heading: Meshery v0.7
-title: Release Announcement
+subheading: Release Announcement
+title: Meshery v0.7
 author_contributor: Jeremiah Obikoya, Pranav Singh
 categories:
   - Meshery
