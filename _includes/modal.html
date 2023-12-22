@@ -14,9 +14,27 @@
         </div>
         <button class="modal-close close">&times;</button>
         {%if pattern.filters.type == "wasm filter" %}
-        <img class="image-class" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png" onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy"/>
-        {%else%}
-        <img class="image-class" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png" onerror="this.src='/assets/images/patterns/service-mesh.svg'" loading="lazy"/>
+        <img class="image-class"
+        src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png"
+        onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy"
+        onclick="toggleFullScreenImage('{{ pattern.patternId }}')" />
+        <div id="fullScreenImage{{ pattern.patternId }}" class="fullScreenImage"
+        onclick="toggleFullScreenImage('{{ pattern.patternId }}')">
+        <img class="image-class"
+          src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png"
+          onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy" />
+        </div>
+      {%else%}
+        <img class="image-class"
+        src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png"
+        onerror="this.src='/assets/images/patterns/service-mesh.svg'" loading="lazy"
+        onclick="toggleFullScreenImage('{{ pattern.patternId }}')" />
+       <div id="fullScreenImage{{ pattern.patternId }}" class="fullScreenImage"
+        onclick="toggleFullScreenImage('{{ pattern.patternId }}')">
+        <img
+          src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png"
+          onerror="this.src='/assets/images/patterns/service-mesh.svg'" loading="lazy" />
+       </div>
         {%endif%}
         <h4 class="related-patterns">RELATED PATTERNS</h4>
         {% include related-patterns.html %}
@@ -48,7 +66,20 @@
     </div>
      
  <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
-    
+ <script>
+  function toggleFullScreenImage(patternId) {
+    var fullScreenImage = document.getElementById(`fullScreenImage${patternId}`);
+    var modalWindowDiv = document.getElementById(`modalcontent${patternId}`);
+    if (fullScreenImage.style.display === "none" || fullScreenImage.style.display === "") {
+      fullScreenImage.style.display = "block";
+      modalWindowDiv.style.overflowY = "hidden";
+
+    } else {
+      fullScreenImage.style.display = "none";
+      modalWindowDiv.style.overflowY = "auto";
+    }
+  }
+ </script>
    
   <!-- </div> -->
 </div>
