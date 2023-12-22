@@ -41,14 +41,16 @@ Now, you can streamline your development and operation process by using any serv
 Maintain a consistent design across your infrastructure and also have access to some of the best practices for creating cloud-native designs by enabling the Meshery Catalog.
 
 Can’t find a design you need in the catalog, then you can easily create and publish it to the catalog.
-Enhanced Multi-Cluster Support for Streamlined Environments:
+
+### Enhanced Multi-Cluster Support for Environments
+
 Effortlessly manage multiple Kubernetes clusters with enhanced multi-cluster support. Say goodbye to complexity and hello to operational efficiency. With Meshery, you have the control to simplify your multi-cluster configurations.
 
 Take full control of your clusters with Meshery and avoid any issues if any one cluster goes down.
 
 ### Kubernetes Management with Design Deployment Dry-run
 
-Design Deployment Dry-run is here to make your Kubernetes management smoother. With the power of dry-run testing, you can safeguard your deployments, ensuring error-free operations and peace of mind.
+Deployment dry-runs for designs are here to make your Kubernetes management smoother. First validate, then dry-run your you can safeguard your deployments, ensuring error-free operations and peace of mind.
 
 Meshery integration with MeshMap enables you to visualize your dry-run testing process and be aware of everything.
 
