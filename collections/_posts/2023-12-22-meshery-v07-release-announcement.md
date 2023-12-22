@@ -2,7 +2,7 @@
 date: 2023-12-22 10:30:05 -0530
 subheading: Release Announcement
 title: Meshery v0.7
-author_contributor: Jeremiah Obikoya, Pranav Singh
+author_contributor: Jeremiah Obikoya, Pranav Singh, Hauwa'u Ismail
 categories:
   - Meshery
   - Open Source
