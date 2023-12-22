@@ -56,9 +56,7 @@ Meshery integration with MeshMap enables you to visualize your dry-run testing p
 
 ### Meshery's Messaging Framework: Notification Center
 
-<a href=”/assets/images/posts/2023-12-22-v07-release/notification-center-overview.png”>
-<img src=”/assets/images/posts/2023-12-22-v07-release/notification-center-overview.png” class="text-container" style="max-width:700px" width="700px"  />
-</a>
+[![meshery catalog]({{site.baseurl}}/assets/images/posts/2023-12-22-v07-release/notification-center-overview.png)](https://docs.meshery.io/guides/events-management)
 
 Meshery ensures you're equipped with the insights you need right in the notification tab, using advanced filters to address deployment issues or errors efficiently.
 
