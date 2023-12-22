@@ -78,8 +78,6 @@ A new capability register browser is added to Meshery's UI to help you explore t
 
 Read more at [Meshery Models](https://docs.meshery.io/concepts/models)
 
-### Schema-driven design
-
 ### New Meshery Extension Points
 
 A handful of new extension points have been added to Meshery in this release.
@@ -132,7 +130,7 @@ Read more at [WASM Envoy Filter Management](https://docs.meshery.io/tasks/filter
 
 Meshery now supports multi-cluster management. This allows you to manage multiple Kubernetes clusters from a single Meshery deployment.
 
-<h2><a name=”#deprecations”></a>Deprecations</h2>
+<h2>Deprecations</h2><a name=”#deprecations”></a>
 
 - Meshery Adapter for Citrix Service Mesh
 - Meshery Adapter for Open Service Mesh
