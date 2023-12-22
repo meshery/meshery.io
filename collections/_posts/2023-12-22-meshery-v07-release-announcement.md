@@ -142,4 +142,4 @@ Meshery Maintainers are dedicated to enhancing your ability to deliver engineeri
 
 [v0.8.0 Release Planning](https://discuss.layer5.io/t/meshery-v0-8-0-roadmap/4336)
 
-For now, explore the unique features of Meshery v0.7 to expand your cloud infrastructure capabilities. Sign up to Meshery today and unlock a world of possibilities.
+*Try the latest v0.7.0 features of Meshery at [play.meshery.io](https://play.meshery.io).*
