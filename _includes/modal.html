@@ -26,20 +26,18 @@
         <h2 class="modal-h2">{{pattern.name | upcase }} {% include read-more.html %}</h2>
         {% if pattern.patternInfo %}
         <h3 class="modal-h3">What this pattern does</h3>
-        <p class="content-toggle contentdata">
-          {{pattern.patternInfo | replace: '\\n', '<br/>' | replace: '\n', '<br/>' }}
-        </p>
+        <p class="content-toggle contentdata pre-white-space">{{pattern.patternInfo | url_decode' }}</p>
         <span class="read-more" href="read-more.html">{% include expand.html %}</span>
         <h3 class="modal-h3">Caveats and Considerations</h3>
-        <p>{{pattern.patternCaveats}}</p>
+        <p class="pre-white-space">{{pattern.patternCaveats | url_decode}}</p>
         {% else %}
         <h3 class="modal-h3">What this filter does</h3>
-        <p class="content-toggle contentdata">
-          {{pattern.filterInfo }}
+        <p class="content-toggle contentdata pre-white-space">
+          {{pattern.filterInfo | url_decode}}
         </p>
         <span class="read-more">...read more</span>
         <h3 class="modal-h3">Caveats and Considerations</h3>
-        <p>{{pattern.filterCaveats}}</p>
+        <p class="pre-white-space">{{pattern.filterCaveats | url_decode}}</p>
         {% endif %}
           <h3 class="modal-h3">Technologies</h3>
           {% include partials/compatibility.html %}
