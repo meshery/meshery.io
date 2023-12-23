@@ -10,7 +10,7 @@ layout: post
 featured-image: /assets/images/posts/2023-12-22-v07-release/meshery-v07-release-announcement.webp
 permalink: /blog/meshery-v07-release-announcement
 ---
-v0.7.0 is the latest and most significant release of Meshery, the CNCF’s cloud native manager. In this latest release, ?? new feature areas entered beta. GitOps enabled, two API frameworks, completely new CLI commands, 200+ new integrations, and more are now generally available.
+v0.7.0 is the latest and most significant release of Meshery, the CNCF’s cloud native manager. Included in this release is GitOps-enablement, a complete GraphQL API (in addition to the REST API), completely new CLI commands, a number of new resources with an internal capabilities registry, 200+ new integrations, and much more is now generally available.
 
 With loads of feedback from Meshery users, Meshery contributors have been extremely hard at work. We’ve been working so hard and with so many contributors, that Meshery is the 10th fastest growing project out of 200+ CNCF projects!!
 
