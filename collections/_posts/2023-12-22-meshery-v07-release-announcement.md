@@ -19,16 +19,17 @@ No component of Meshery was left untouched in this release. Major architectural 
 ## New Feature Highlights
 
 - [Meshery Catalog](/catalog)
-- [Messaging Framework and Enhanced Notification Center]()
-- [Scheduled Workflow]()
-- [Basic Support for Tiered Discovery]()
-- [Migration from OAM to Meshery Models]()
+- [Messaging Framework and Enhanced Notification Center](#)
+- [Scheduled Workflow](#)
+- [Basic Support for Tiered Discovery](#)
+- [Migration from OAM to Meshery Models](#)
 - [Meshery Screenshots Service](#meshery-screenshot-service)
 - [New Plugins Support](#)
 - [Multi-tenancy with Organizations and Environments]()
-- [Multi-cluster Management]()
+- [Multi-cluster Management](#)
 - [WASM Envoy Filter Management](#wasm)
 - [Certificate support in Performance Profiles](#)
+- [Dry Running Design Deployments](#)
 
 ### Meshery Catalog: Cloud native templates and deployment best practices
 
@@ -142,4 +143,4 @@ Meshery Maintainers are dedicated to enhancing your ability to deliver engineeri
 
 [v0.8.0 Release Planning](https://discuss.layer5.io/t/meshery-v0-8-0-roadmap/4336)
 
-For now, explore the unique features of Meshery v0.7 to expand your cloud infrastructure capabilities. Sign up to Meshery today and unlock a world of possibilities.
+*Try the latest v0.7.0 features of Meshery at [play.meshery.io](https://play.meshery.io).*
