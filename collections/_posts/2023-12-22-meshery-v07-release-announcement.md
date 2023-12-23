@@ -65,7 +65,9 @@ Learn more about [Notification Center](https://docs.meshery.io/guides/events-man
 
 ### Meshery Screenshot Service: Automated Screenshots for Your GitOps Pipelines
 
-Meshery's Screenshot Service captures screenshots of your infrasture changes on every commit and visuallay displays the changes on your pull requests. This enables you to easily review changes and ensure that your infrastructure is deployed as expected. Read more at [Meshery Screenshot Service](/extensions/snapshot).
+Meshery's Screenshot Service captures screenshots of your infrasture changes on every commit and visuallay displays the changes on your pull requests. This enables you to easily review changes and ensure that your infrastructure is deployed as expected. 
+
+Read more about [Meshery Screenshot Service](https://docs.meshery.io/extensions/snapshot).
 
 ### Capabilities Registry and Meshery Models
 
@@ -73,7 +75,7 @@ Meshery's new capabilities registry captures the ability of your Meshery deploym
 
 A new capability register browser is added to Meshery's UI to help you explore the capabilities of your Meshery deployment. This can be explored under settings page of your Meshery UI.
 
-Read more at [Meshery Models](https://docs.meshery.io/concepts/models)
+Read more about [Meshery Models](https://docs.meshery.io/concepts/models)
 
 ### New Meshery Extension Points
 
@@ -82,7 +84,7 @@ A handful of new extension points have been added to Meshery in this release.
 - User Account Management: This enables you to manage your user account and your organization, teams, users.
 - Collaborators: the ability for Remote Providers to offer real-time presence of Meshery users to facilitate user collaboration and awareness.
 
-Read more at [Meshery Extension Points](https://docs.meshery.io/concepts/extension-points)
+Read more about [Meshery Extension Points](https://docs.meshery.io/concepts/extension-points)
 
 ### Multi-tenancy with Organizations and Environments
 
@@ -90,7 +92,7 @@ Meshery now supports multi-tenancy through the use of Organizations. This allows
 
 Environment is logical group of your organization's resources. This allows you to group your resources by environment. For example, you can have a production environment and a staging environment. This allows you to easily switch between environments and ensure that you are using the correct resources for your environment. And each of your environments can have a number of connections like Kubernetes clusters, Prometheus, Grafana, Jaeger, etc.
 
-Read more at [Environment](https://docs.meshery.io/concepts/environments)
+Read more about [Environments](https://docs.meshery.io/concepts/environments)
 
 ### Gain Insights with the New System Dashboard
 
@@ -106,7 +108,7 @@ MeshSync is now capable of discovering all types of Kubernetes API resources. Th
 
 Meshery also captures the discovered CRDs in the available kubernetes clusters through MeshSync enhanced discovery capabilities. This allows Meshery to register these CRDs as Meshery Models and capture inside the capabilities registry. This is know as dynamic registrating of Meshery Models.
 
-Read more at [MeshSync](https://docs.meshery.io/concepts/architecture/meshsync)
+Read more about [MeshSync](https://docs.meshery.io/concepts/architecture/meshsync).
 
 ### Efficient WASM Envoy Filter Management
 
@@ -123,7 +125,7 @@ All of these actions are available from both of Meshery’s clients: UI and CLI.
 
 Gain control over your infrastructure with ease within Meshery.
 
-Read more at [WASM Envoy Filter Management](https://docs.meshery.io/tasks/filter-management)
+Read more about [WASM Envoy Filter Management](https://docs.meshery.io/tasks/filter-management)
 
 #### Kubernetes Multi-Cluster Management
 
