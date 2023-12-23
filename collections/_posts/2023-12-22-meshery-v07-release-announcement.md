@@ -38,9 +38,7 @@ No component of Meshery was left untouched in this release. Major architectural 
 
 Now, you can streamline your development and operation process by using any services or designs in our catalog and selecting your desired technology without building from scratch.
 
-Maintain a consistent design across your infrastructure and also have access to some of the best practices for creating cloud-native designs by enabling the Meshery Catalog.
-
-Can’t find a design you need in the catalog, then you can easily create and publish it to the catalog.
+Maintain a consistent design across your infrastructure and also have access to some of the best practices for creating cloud-native designs by enabling the Meshery Catalog. If you don't see a design you need, you can easily create and publish your own to the catalog.
 
 ### Enhanced Multi-Cluster Support for Environments
 
@@ -68,7 +66,7 @@ Learn more about [Notification Center](https://docs.meshery.io/guides/events-man
 
 Meshery's Screenshot Service captures screenshots of your infrasture changes on every commit and visuallay displays the changes on your pull requests. This enables you to easily review changes and ensure that your infrastructure is deployed as expected. Read more at [Meshery Screenshot Service](/extensions/snapshot).
 
-### Capabilities Registry / Formation of Models
+### Capabilities Registry and Meshery Models
 
 Meshery's new capabilities registry captures the ability of your Meshery deployment to integrate with number of different cloud native technologies. This registry is uses Models, Components, Connections, Relationships, and Policies to articulate the capabilities of your Meshery deployment.
 
@@ -103,11 +101,13 @@ The new dashboards comes with enahanced fine tuned summarizes of your kubernetes
 
 MeshSync is now capable of discovering all types of Kubernetes API resources. This is further enahanced with the ability to fingerprint the discovered resources with the help of knowledge of different cloud native technologies through Meshery's new capabilities registry.
 
+[![meshery-operator-v07]({{site.baseurl}}/assets/images/posts/2023-12-22-v07-release/meshery-operator-v07.png)](https://docs.meshery.io/concepts/architecture/operator)
+
 Meshery also captures the discovered CRDs in the available kubernetes clusters through MeshSync enhanced discovery capabilities. This allows Meshery to register these CRDs as Meshery Models and capture inside the capabilities registry. This is know as dynamic registrating of Meshery Models.
 
 Read more at [MeshSync](https://docs.meshery.io/concepts/architecture/meshsync)
 
-### Efficient WASM Envoy Filter Management in Meshery UI and CLI
+### Efficient WASM Envoy Filter Management
 
 Manage and customise WebAssembly (WASM) Envoy filters efficiently through Meshery's UI and CLI.
 
@@ -124,11 +124,11 @@ Gain control over your infrastructure with ease within Meshery.
 
 Read more at [WASM Envoy Filter Management](https://docs.meshery.io/tasks/filter-management)
 
-#### Multi Kubernetes Cluster Management
+#### Kubernetes Multi-Cluster Management
 
 Meshery now supports multi-cluster management. This allows you to manage multiple Kubernetes clusters from a single Meshery deployment.
 
-<h2>Deprecations</h2><a name=”#deprecations”></a>
+<h2>Deprecations</h2><a name="deprecations"></a>
 
 - Meshery Adapter for Citrix Service Mesh
 - Meshery Adapter for Open Service Mesh
