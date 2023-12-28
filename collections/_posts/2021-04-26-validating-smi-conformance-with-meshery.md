@@ -10,7 +10,7 @@ categories:
 ---
 
 <div class="row" style="width:220px;float:left;padding:20px;text-align:center;">
-<img src="/assets/images/posts/2021-04-26-validating-smi-conformance-with-meshery/smi-conformance.png#left" style="width:70%;" alt="SMI Conformance Checklist" />
+<img src="{{site.baseurl}}/assets/images/posts/2021-04-26-validating-smi-conformance-with-meshery/smi-conformance.png#left" style="width:70%;" alt="SMI Conformance Checklist" />
 </div>With the increasing adoption of Service Mesh Interface by what is a vibrant and diverse community of both service mesh providers and ecosystem integrators, the need for verification and validation of SMI implementations is clear. We're still counting, however, as of this writing SMI has been adopted by more than 10 of the available service meshes and ecosystem tools. As you can see on the [service mesh landscape](https://layer5.io/service-mesh-landscape), the last few significant, new service mesh project / product announcements have proclaimed SMI compatibility from the start. Validating consistency of these implementations is key to upholding the value of SMI itself.
 
 From my time spent creating the v1.0 versions of other specifications like Redfish, Docker Benchmark, CloudEvents, and others, I can tell you that the promise of consistency lies at the heart of any specification. [SMI's specifications](https://github.com/servicemeshinterface/smi-spec) and their implementations are no different in this regard. Consistency enables portability and choice. Consistency enables great user experiences. Service Mesh Interface specifications present a consistent set of abstractions to describe functional service mesh configuration in a common way. SMI makes integrations with participating service meshes portable. In order to better serve these goals, the SMI community and Layer5 have developed an SMI Conformance initiative.
@@ -18,7 +18,7 @@ From my time spent creating the v1.0 versions of other specifications like Redfi
 ## Conforming to SMI
 
 <div style="text-align:center;padding:10px">
-<img src="/assets/images/posts/2021-04-26-validating-smi-conformance-with-meshery/smi-comformance-initiative-overview.png" style="width:100%" alt="SMI Conformance Program Overview"/></div>
+<img src="{{site.baseurl}}/assets/images/posts/2021-04-26-validating-smi-conformance-with-meshery/smi-comformance-initiative-overview.png" style="width:100%" alt="SMI Conformance Program Overview"/></div>
 
 The scope of the [SMI Conformance](https://layer5.io/projects/service-mesh-interface-conformance) initiative includes all service mesh projects participating in the Service Mesh Interface specification. The goal of this initiative is to provide open tooling for validation of SMI specifications, instilling user confidence in the SMI implementation of their chosen service mesh. This validation initiative is not a full-blown certification program, yet, but has all of the makings to become one:
 

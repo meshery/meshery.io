@@ -1,0 +1,65 @@
+name: meshery-cilium-deployment
+services:
+  meshery-cilium:
+    name: meshery-cilium
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    labels:
+      io.kompose.service: meshery-cilium
+    annotations:
+      kompose.cmd: kompose convert -f ../docker-compose.yaml
+      kompose.version: 1.17.0 ()
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            io.kompose.service: meshery-cilium
+        strategy: {}
+        template:
+          metadata:
+            creation Timestamp: null
+            labels:
+              io.kompose.service: meshery-cilium
+          spec:
+            containers:
+            - image: layer5/meshery-cilium:stable-latest
+              image Pull Policy: Always
+              name: meshery-cilium
+              ports:
+              - container Port: 10012
+              resources: {}
+            restart Policy: Always
+            service Account: meshery-server
+    traits:
+      meshmap:
+        edges: []
+        id: e5dbc233-5f37-402e-a7ce-8b54135d3e82
+        label: meshery-cilium
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: parent
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: 0
+          posY: 1
+        whiteboardData:
+          style:
+            z-index: 3
