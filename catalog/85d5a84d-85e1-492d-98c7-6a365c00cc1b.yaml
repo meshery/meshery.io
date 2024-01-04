@@ -20,7 +20,7 @@ services:
         edges:
         - data:
             group: labels-app-wordpress
-            id: 0a9f53af-2193-489a-91cb-5771fd04d199
+            id: 513627ad-984d-40e4-9c03-8b52d15df13f
             source: 7bbe358e-a645-4b27-b40e-7c15259b378e
             target: 4fd2c98d-55a8-4ee6-8c44-74fb737d3d2a
             temporarySiblingEdge: true
@@ -114,6 +114,7 @@ services:
               strValue: manual
               value: manual
         id: 7bbe358e-a645-4b27-b40e-7c15259b378e
+        label: mysql-pv-claim
         meshmodel-metadata:
           capabilities: ""
           genealogy: ""
@@ -139,7 +140,259 @@ services:
         whiteboardData:
           style:
             z-index: 3
-  wordpress-mysql-hmipm:
+  wordpress-mysql-juzvb:
+    name: wordpress-mysql
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    labels:
+      app: wordpress
+    settings:
+      spec:
+        cluster IP: None
+        ports:
+        - port: 3306
+        selector:
+          app: wordpress
+          tier: mysql
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: e6c5d173-06ec-4741-a929-3fe757e0f1ea
+            metadata:
+              port: 3306
+              protocol: TCP
+            source: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
+            subType: Network
+            target: 4fd2c98d-55a8-4ee6-8c44-74fb737d3d2a
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 3306/TCP
+              value: 3306/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            group: labels-app-wordpress
+            id: 70d70cfe-7933-43fe-9645-1e30e77606ce
+            source: 4fd2c98d-55a8-4ee6-8c44-74fb737d3d2a
+            target: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
+            temporarySiblingEdge: true
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            visibility:
+              bypass: true
+              name: visibility
+              strValue: hidden
+              value: hidden
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
+        label: wordpress-mysql
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":20,"width":20,"padding":12,"background-fit":"none","background-position-y":4.5,"x":"10px","y":"12px"}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/connection-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/connection-white.svg
+        position:
+          posX: -50
+          posY: 10
+        whiteboardData:
+          style:
+            z-index: 6
+  wordpress-mysql-ofpuf:
     name: wordpress-mysql
     type: Deployment
     apiVersion: apps/v1
@@ -304,7 +557,7 @@ services:
               value: manual
         - data:
             group: labels-app-wordpress
-            id: 0a9f53af-2193-489a-91cb-5771fd04d199
+            id: 513627ad-984d-40e4-9c03-8b52d15df13f
             source: 7bbe358e-a645-4b27-b40e-7c15259b378e
             target: 4fd2c98d-55a8-4ee6-8c44-74fb737d3d2a
             temporarySiblingEdge: true
@@ -399,7 +652,7 @@ services:
               value: manual
         - data:
             group: labels-app-wordpress
-            id: 82a5f102-2277-4c8d-b8da-f8477679bd62
+            id: 70d70cfe-7933-43fe-9645-1e30e77606ce
             source: 4fd2c98d-55a8-4ee6-8c44-74fb737d3d2a
             target: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
             temporarySiblingEdge: true
@@ -519,255 +772,3 @@ services:
         whiteboardData:
           style:
             z-index: 7
-  wordpress-mysql-lacxp:
-    name: wordpress-mysql
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    labels:
-      app: wordpress
-    settings:
-      spec:
-        cluster IP: None
-        ports:
-        - port: 3306
-        selector:
-          app: wordpress
-          tier: mysql
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: e6c5d173-06ec-4741-a929-3fe757e0f1ea
-            metadata:
-              port: 3306
-              protocol: TCP
-            source: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
-            subType: Network
-            target: 4fd2c98d-55a8-4ee6-8c44-74fb737d3d2a
-          style:
-            curve-style:
-              name: curve-style
-              strValue: bezier
-              value: bezier
-            font-family:
-              name: font-family
-              strValue: Qanelas Soft, sans-serif
-              value:
-              - Qanelas Soft, sans-serif
-              - Qanelas Soft, sans-serif
-            font-size:
-              name: font-size
-              pfValue: 6
-              strValue: 6px
-              units: px
-              value: 6
-            line-color:
-              mapping:
-                fnValue: '#7aa1f0'
-                mapped:
-                  fn: true
-                  mapping: true
-                name: line-color
-                prevFnValue: '#7aa1f0'
-                strValue: fn
-              name: line-color
-              pfValue:
-              - 122
-              - 161
-              - 240
-              strValue: rgb(122,161,240)
-              value:
-              - 122
-              - 161
-              - 240
-            line-style:
-              name: line-style
-              strValue: dotted
-              value: dotted
-            target-arrow-shape:
-              name: target-arrow-shape
-              strValue: vee
-              value: vee
-            target-label:
-              bypass: true
-              name: target-label
-              strValue: 3306/TCP
-              value: 3306/TCP
-            target-text-margin-y:
-              bypass: true
-              name: target-text-margin-y
-              pfValue: -6
-              strValue: -6px
-              units: px
-              value: -6
-            target-text-offset:
-              bypass: true
-              name: target-text-offset
-              pfValue: 16
-              strValue: 16px
-              units: px
-              value: 16
-            text-events:
-              name: text-events
-              strValue: "yes"
-              value: "yes"
-            text-outline-color:
-              name: text-outline-color
-              pfValue:
-              - 255
-              - 255
-              - 255
-              strValue: rgb(255,255,255)
-              value:
-              - 255
-              - 255
-              - 255
-            text-outline-width:
-              name: text-outline-width
-              pfValue: 1
-              strValue: 1px
-              units: px
-              value: 1
-            text-wrap:
-              name: text-wrap
-              strValue: wrap
-              value: wrap
-            width:
-              name: width
-              pfValue: 1.5
-              strValue: 1.5px
-              units: px
-              value: 1.5
-            z-index:
-              name: z-index
-              pfValue: 999
-              strValue: "999"
-              value: 999
-            z-index-compare:
-              name: z-index-compare
-              strValue: manual
-              value: manual
-        - data:
-            group: labels-app-wordpress
-            id: 82a5f102-2277-4c8d-b8da-f8477679bd62
-            source: 4fd2c98d-55a8-4ee6-8c44-74fb737d3d2a
-            target: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
-            temporarySiblingEdge: true
-          style:
-            curve-style:
-              name: curve-style
-              strValue: bezier
-              value: bezier
-            font-family:
-              name: font-family
-              strValue: Qanelas Soft, sans-serif
-              value:
-              - Qanelas Soft, sans-serif
-              - Qanelas Soft, sans-serif
-            font-size:
-              name: font-size
-              pfValue: 6
-              strValue: 6px
-              units: px
-              value: 6
-            line-color:
-              mapping:
-                fnValue: '#7aa1f0'
-                mapped:
-                  fn: true
-                  mapping: true
-                name: line-color
-                prevFnValue: '#7aa1f0'
-                strValue: fn
-              name: line-color
-              pfValue:
-              - 122
-              - 161
-              - 240
-              strValue: rgb(122,161,240)
-              value:
-              - 122
-              - 161
-              - 240
-            line-style:
-              name: line-style
-              strValue: dotted
-              value: dotted
-            target-arrow-shape:
-              name: target-arrow-shape
-              strValue: vee
-              value: vee
-            text-events:
-              name: text-events
-              strValue: "yes"
-              value: "yes"
-            text-outline-color:
-              name: text-outline-color
-              pfValue:
-              - 255
-              - 255
-              - 255
-              strValue: rgb(255,255,255)
-              value:
-              - 255
-              - 255
-              - 255
-            text-outline-width:
-              name: text-outline-width
-              pfValue: 1
-              strValue: 1px
-              units: px
-              value: 1
-            text-wrap:
-              name: text-wrap
-              strValue: wrap
-              value: wrap
-            visibility:
-              bypass: true
-              name: visibility
-              strValue: hidden
-              value: hidden
-            width:
-              name: width
-              pfValue: 1.5
-              strValue: 1.5px
-              units: px
-              value: 1.5
-            z-index:
-              name: z-index
-              pfValue: 999
-              strValue: "999"
-              value: 999
-            z-index-compare:
-              name: z-index-compare
-              strValue: manual
-              value: manual
-        id: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
-        label: wordpress-mysql
-        meshmodel-metadata:
-          capabilities: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":20,"width":20,"padding":12,"background-fit":"none","background-position-y":4.5,"x":"10px","y":"12px"}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/connection-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/connection-white.svg
-        position:
-          posX: -50
-          posY: 10
-        whiteboardData:
-          style:
-            z-index: 6
