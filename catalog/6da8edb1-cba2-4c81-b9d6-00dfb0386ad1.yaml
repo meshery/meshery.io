@@ -21,7 +21,7 @@ services:
         edges:
         - data:
             group: labels-type-local
-            id: f034134f-c20a-4264-9c13-960605abc856
+            id: 9e349a60-e9af-4d5c-8311-faf0e01317a6
             source: 5f734f86-bf2f-468b-9182-7ce8e554d3ae
             target: 685dc0b0-d218-4c12-9b6a-e61ea413b6ad
             temporarySiblingEdge: true
@@ -136,8 +136,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: -168.66577406043385
-          posY: -53.327065467620535
+          posX: -150
+          posY: -30
         whiteboardData:
           style:
             z-index: 4
@@ -162,7 +162,7 @@ services:
         edges:
         - data:
             group: labels-type-local
-            id: f034134f-c20a-4264-9c13-960605abc856
+            id: 9e349a60-e9af-4d5c-8311-faf0e01317a6
             source: 5f734f86-bf2f-468b-9182-7ce8e554d3ae
             target: 685dc0b0-d218-4c12-9b6a-e61ea413b6ad
             temporarySiblingEdge: true
@@ -256,6 +256,7 @@ services:
               strValue: manual
               value: manual
         id: 685dc0b0-d218-4c12-9b6a-e61ea413b6ad
+        label: local-pv-2
         meshmodel-metadata:
           capabilities: ""
           genealogy: ""
@@ -276,8 +277,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: -96.02831465822966
-          posY: 38.498915000745534
+          posX: -70
+          posY: 50
         whiteboardData:
           style:
             z-index: 3
@@ -301,7 +302,102 @@ services:
         edges:
         - data:
             group: labels-app-wordpress-sql
-            id: e1b17731-7e1f-43f7-9131-b48fc9b33dd7
+            id: b0bf9a4a-e3e3-4ee8-a701-6e2c892c82cb
+            source: 4fd2c98d-55a8-4ee6-8c44-74fb737d3d2a
+            target: 7bbe358e-a645-4b27-b40e-7c15259b378e
+            temporarySiblingEdge: true
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            visibility:
+              bypass: true
+              name: visibility
+              strValue: hidden
+              value: hidden
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            group: labels-app-wordpress-sql
+            id: a7a4ead4-9e69-41dc-acb5-0606d14887f8
             source: 7bbe358e-a645-4b27-b40e-7c15259b378e
             target: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
             temporarySiblingEdge: true
@@ -416,38 +512,39 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 26.996748711737563
-          posY: 40.27563485454231
+          posX: 30
+          posY: 70
         whiteboardData:
           style:
             z-index: 3
-  wordpress-mysql-ifweu:
-    name: wordpress-mysql
+  wordpress-epiii:
+    name: wordpress
     type: Service
     apiVersion: v1
     namespace: default
     model: kubernetes
     labels:
-      app: wordpress-sql
+      app: wordpress
     settings:
       spec:
-        cluster IP: None
         ports:
-        - port: 3306
+        - port: 80
+          protocol: TCP
         selector:
           app: wordpress
-          tier: mysql
+          tier: frontend
+        type: LoadBalancer
     traits:
       meshmap:
         edges:
         - data:
-            id: c1a38722-be4e-41ad-ac5c-ade5c2768399
+            id: bab415d6-8ac2-4fb3-a746-89465f514ce2
             metadata:
-              port: 3306
+              port: 80
               protocol: TCP
-            source: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
+            source: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
             subType: Network
-            target: 4fd2c98d-55a8-4ee6-8c44-74fb737d3d2a
+            target: f3df161e-75c3-49ba-9ea4-0778ca2515f3
           style:
             curve-style:
               bypass: true
@@ -535,8 +632,8 @@ services:
             target-label:
               bypass: true
               name: target-label
-              strValue: 3306/TCP
-              value: 3306/TCP
+              strValue: 80/TCP
+              value: 80/TCP
             target-text-margin-y:
               bypass: true
               name: target-text-margin-y
@@ -639,10 +736,10 @@ services:
               strValue: manual
               value: manual
         - data:
-            group: labels-app-wordpress-sql
-            id: e1b17731-7e1f-43f7-9131-b48fc9b33dd7
-            source: 7bbe358e-a645-4b27-b40e-7c15259b378e
-            target: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
+            group: labels-app-wordpress
+            id: 9577cdff-0714-47ca-a6bc-bae975a54b92
+            source: f3df161e-75c3-49ba-9ea4-0778ca2515f3
+            target: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
             temporarySiblingEdge: true
           style:
             curve-style:
@@ -734,10 +831,10 @@ services:
               strValue: manual
               value: manual
         - data:
-            group: labels-app-wordpress-sql
-            id: 9258e093-36fd-4cae-970c-59173b9e5649
-            source: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
-            target: 4fd2c98d-55a8-4ee6-8c44-74fb737d3d2a
+            group: labels-app-wordpress
+            id: 39e45581-8741-4518-84a6-11314cbe535d
+            source: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
+            target: 25c5de76-e54b-4d49-866b-c2fdad327e5f
             temporarySiblingEdge: true
           style:
             curve-style:
@@ -828,8 +925,7 @@ services:
               name: z-index-compare
               strValue: manual
               value: manual
-        id: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
-        label: wordpress-mysql
+        id: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
         meshmodel-metadata:
           capabilities: ""
           genealogy: ""
@@ -850,12 +946,12 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/connection-white.svg
         position:
-          posX: -20.31948900876025
-          posY: 122.65052982210125
+          posX: -70
+          posY: -130
         whiteboardData:
           style:
-            z-index: 6
-  wordpress-mysql-zutwz:
+            z-index: 5
+  wordpress-mysql-kcdov:
     name: wordpress-mysql
     type: Deployment
     apiVersion: apps/v1
@@ -1102,9 +1198,9 @@ services:
               value: manual
         - data:
             group: labels-app-wordpress-sql
-            id: 9258e093-36fd-4cae-970c-59173b9e5649
-            source: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
-            target: 4fd2c98d-55a8-4ee6-8c44-74fb737d3d2a
+            id: b0bf9a4a-e3e3-4ee8-a701-6e2c892c82cb
+            source: 4fd2c98d-55a8-4ee6-8c44-74fb737d3d2a
+            target: 7bbe358e-a645-4b27-b40e-7c15259b378e
             temporarySiblingEdge: true
           style:
             curve-style:
@@ -1222,33 +1318,33 @@ services:
         whiteboardData:
           style:
             z-index: 7
-  wordpress-nkurg:
-    name: wordpress
+  wordpress-mysql-lnegi:
+    name: wordpress-mysql
     type: Service
     apiVersion: v1
     namespace: default
     model: kubernetes
     labels:
-      app: wordpress
+      app: wordpress-sql
     settings:
       spec:
+        cluster IP: None
         ports:
-        - port: 80
+        - port: 3306
         selector:
           app: wordpress
-          tier: frontend
-        type: LoadBalancer
+          tier: mysql
     traits:
       meshmap:
         edges:
         - data:
-            id: bab415d6-8ac2-4fb3-a746-89465f514ce2
+            id: c1a38722-be4e-41ad-ac5c-ade5c2768399
             metadata:
-              port: 80
+              port: 3306
               protocol: TCP
-            source: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
+            source: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
             subType: Network
-            target: f3df161e-75c3-49ba-9ea4-0778ca2515f3
+            target: 4fd2c98d-55a8-4ee6-8c44-74fb737d3d2a
           style:
             curve-style:
               bypass: true
@@ -1336,8 +1432,8 @@ services:
             target-label:
               bypass: true
               name: target-label
-              strValue: 80/TCP
-              value: 80/TCP
+              strValue: 3306/TCP
+              value: 3306/TCP
             target-text-margin-y:
               bypass: true
               name: target-text-margin-y
@@ -1440,10 +1536,10 @@ services:
               strValue: manual
               value: manual
         - data:
-            group: labels-app-wordpress
-            id: 67f8244c-ff9e-43d8-b5f7-92f000678178
-            source: 25c5de76-e54b-4d49-866b-c2fdad327e5f
-            target: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
+            group: labels-app-wordpress-sql
+            id: a7a4ead4-9e69-41dc-acb5-0606d14887f8
+            source: 7bbe358e-a645-4b27-b40e-7c15259b378e
+            target: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
             temporarySiblingEdge: true
           style:
             curve-style:
@@ -1534,102 +1630,8 @@ services:
               name: z-index-compare
               strValue: manual
               value: manual
-        - data:
-            group: labels-app-wordpress
-            id: 02e859cb-7b15-423c-b1cc-6aa838f23a55
-            source: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
-            target: f3df161e-75c3-49ba-9ea4-0778ca2515f3
-            temporarySiblingEdge: true
-          style:
-            curve-style:
-              name: curve-style
-              strValue: bezier
-              value: bezier
-            font-family:
-              name: font-family
-              strValue: Qanelas Soft, sans-serif
-              value:
-              - Qanelas Soft, sans-serif
-              - Qanelas Soft, sans-serif
-            font-size:
-              name: font-size
-              pfValue: 6
-              strValue: 6px
-              units: px
-              value: 6
-            line-color:
-              mapping:
-                fnValue: '#7aa1f0'
-                mapped:
-                  fn: true
-                  mapping: true
-                name: line-color
-                prevFnValue: '#7aa1f0'
-                strValue: fn
-              name: line-color
-              pfValue:
-              - 122
-              - 161
-              - 240
-              strValue: rgb(122,161,240)
-              value:
-              - 122
-              - 161
-              - 240
-            line-style:
-              name: line-style
-              strValue: dotted
-              value: dotted
-            target-arrow-shape:
-              name: target-arrow-shape
-              strValue: vee
-              value: vee
-            text-events:
-              name: text-events
-              strValue: "yes"
-              value: "yes"
-            text-outline-color:
-              name: text-outline-color
-              pfValue:
-              - 255
-              - 255
-              - 255
-              strValue: rgb(255,255,255)
-              value:
-              - 255
-              - 255
-              - 255
-            text-outline-width:
-              name: text-outline-width
-              pfValue: 1
-              strValue: 1px
-              units: px
-              value: 1
-            text-wrap:
-              name: text-wrap
-              strValue: wrap
-              value: wrap
-            visibility:
-              bypass: true
-              name: visibility
-              strValue: hidden
-              value: hidden
-            width:
-              name: width
-              pfValue: 1.5
-              strValue: 1.5px
-              units: px
-              value: 1.5
-            z-index:
-              name: z-index
-              pfValue: 999
-              strValue: "999"
-              value: 999
-            z-index-compare:
-              name: z-index-compare
-              strValue: manual
-              value: manual
-        id: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
+        id: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
+        label: wordpress-mysql
         meshmodel-metadata:
           capabilities: ""
           genealogy: ""
@@ -1650,12 +1652,12 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/connection-white.svg
         position:
-          posX: -94.34025253209232
-          posY: -144.50107982160728
+          posX: -10
+          posY: 150
         whiteboardData:
           style:
-            z-index: 5
-  wordpress-onfmd:
+            z-index: 6
+  wordpress-pouiy:
     name: wordpress
     type: Deployment
     apiVersion: apps/v1
@@ -1901,9 +1903,9 @@ services:
               value: manual
         - data:
             group: labels-app-wordpress
-            id: 02e859cb-7b15-423c-b1cc-6aa838f23a55
-            source: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
-            target: f3df161e-75c3-49ba-9ea4-0778ca2515f3
+            id: 9577cdff-0714-47ca-a6bc-bae975a54b92
+            source: f3df161e-75c3-49ba-9ea4-0778ca2515f3
+            target: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
             temporarySiblingEdge: true
           style:
             curve-style:
@@ -1995,6 +1997,7 @@ services:
               strValue: manual
               value: manual
         id: f3df161e-75c3-49ba-9ea4-0778ca2515f3
+        label: wordpress
         meshmodel-metadata:
           capabilities: ""
           genealogy: parent
@@ -2062,8 +2065,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 144.38229669257987
-          posY: -122.29482133089235
+          posX: 170
+          posY: -110
         whiteboardData:
           style:
             z-index: 4
@@ -2109,8 +2112,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 185.50580399476166
-          posY: 0.03617109034793131
+          posX: 210
+          posY: 30
         whiteboardData:
           style:
             z-index: 3
@@ -2134,9 +2137,9 @@ services:
         edges:
         - data:
             group: labels-app-wordpress
-            id: 67f8244c-ff9e-43d8-b5f7-92f000678178
-            source: 25c5de76-e54b-4d49-866b-c2fdad327e5f
-            target: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
+            id: 39e45581-8741-4518-84a6-11314cbe535d
+            source: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
+            target: 25c5de76-e54b-4d49-866b-c2fdad327e5f
             temporarySiblingEdge: true
           style:
             curve-style:
@@ -2249,8 +2252,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: -9.428731928432974
-          posY: -90.4374408783521
+          posX: 10
+          posY: -70
         whiteboardData:
           style:
             z-index: 6
