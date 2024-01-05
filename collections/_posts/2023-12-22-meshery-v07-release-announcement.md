@@ -10,7 +10,7 @@ layout: post
 featured-image: /assets/images/posts/2023-12-22-v07-release/meshery-v07-release-announcement.webp
 permalink: /blog/meshery-v07-release-announcement
 ---
-v0.7.0 is the latest and most significant release of Meshery, the CNCF’s cloud-native manager. Included in this release is GitOps-enablement, a complete GraphQL API (in addition to the REST API), completely new CLI commands, a number of new resources with an internal capabilities registry, 200+ new integrations, and much more is now generally available.
+v0.7.0 is the latest and most significant release of Meshery, the CNCF’s cloud native manager. Included in this release is GitOps-enablement, a complete GraphQL API (in addition to the REST API), completely new CLI commands, a number of new resources with an internal capabilities registry, 200+ new integrations, and much more is now generally available.
 
 With loads of feedback from Meshery users, Meshery contributors have been extremely hard at work. We’ve been working so hard, and with so many contributors, that Meshery is the 10th fastest-growing project out of 200+ CNCF projects!!
 
@@ -33,16 +33,17 @@ No component of Meshery was left untouched in this release. Major architectural 
 - [Migration from OAM to Meshery Models](#)
 - [New Plugins Support](#)
 - [Certificate support in Performance Profiles](#)
+- [Dry Running Design Deployments](#)
 
-### Meshery Catalog: Cloud-native templates and deployment best practices
+### Meshery Catalog: Cloud native templates and deployment best practices
 
-[Meshery Catalog](/catalog) is your marketplace for configurations, filters, and patterns for cloud-native infrastructure, simplifying deployment, observation, traffic management, and more.
+[Meshery Catalog](/catalog) is your marketplace for configurations, filters, and patterns for cloud native infrastructure, simplifying deployment, observation, traffic management, and more.
 
 ![meshery catalog]({{site.baseurl}}/assets/images/posts/2023-12-22-v07-release/meshery-catalog-cards.png)
 
 Now, you can streamline your development and operation process by using any services or designs in our catalog and selecting your desired technology without building from scratch.
 
-Maintain a consistent design across your infrastructure and also have access to some of the best practices for creating cloud-native designs by enabling the Meshery Catalog. If you don't see a design you need, you can easily create and publish your own to the catalog.
+Maintain a consistent design across your infrastructure and also have access to some of the best practices for creating cloud native designs by enabling the Meshery Catalog. If you don't see a design you need, you can easily create and publish your own to the catalog.
 
 ### Enhanced Multi-Cluster Support for Environments
 
@@ -99,7 +100,7 @@ Read more about [Environments](https://docs.meshery.io/concepts/environments)
 
 ### Gain Insights with the New System Dashboard
 
-With Meshery's new System Dashboard, you can monitor and manage your system with ease. Gain insights into your cloud-native infrastructure and make informed decisions. This dashboard also provides a high-level summarization of your Meshery's deployment capabilities, that is, registered Meshery models, components, connections, relationships, and policies.
+With Meshery's new System Dashboard, you can monitor and manage your system with ease. Gain insights into your cloud native infrastructure and make informed decisions. This dashboard also provides a high-level summarization of your Meshery's deployment capabilities, that is, registered Meshery models, components, connections, relationships, and policies.
 
 The new dashboard comes with enhanced fine-tuned summaries of your Kubernetes workloads. You can now filter your workloads based on all types of Kubernetes API resources.
 
@@ -129,6 +130,10 @@ These actions are available from both of Meshery’s clients: UI and CLI.
 Gain control over your infrastructure with ease within Meshery.
 
 Read more about [WASM Envoy Filter Management](https://docs.meshery.io/tasks/filter-management)
+
+#### Kubernetes Multi-Cluster Management
+
+Meshery now supports multi-cluster management. This allows you to manage multiple Kubernetes clusters from a single Meshery deployment.
 
 <h2>Deprecations</h2><a name="deprecations"></a>
 
