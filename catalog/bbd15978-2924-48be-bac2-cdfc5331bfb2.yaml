@@ -20,6 +20,7 @@ services:
         POSTGRES_USER: accounts-admin
     traits:
       meshmap:
+        edges: []
         id: ab29e114-9723-44a4-995c-f4d2b9907eec
         label: accounts-db-config
         meshmodel-metadata:
@@ -41,10 +42,10 @@ services:
         position:
           posX: 132.7533993086964
           posY: 156.82463738720375
-        style: []
         whiteboardData:
-          style: {}
-  accounts-db-sprrz:
+          style:
+            z-index: 26
+  accounts-db-tsyfr:
     name: accounts-db
     type: Service
     apiVersion: v1
@@ -65,6 +66,7 @@ services:
         type: ClusterIP
     traits:
       meshmap:
+        edges: []
         id: cf390327-c950-4cb9-b1b4-c9b3378e1d54
         label: accounts-db
         meshmodel-metadata:
@@ -86,10 +88,10 @@ services:
         position:
           posX: 65.2533993086964
           posY: -51.17536261279625
-        style: []
         whiteboardData:
-          style: {}
-  accounts-db-wukot:
+          style:
+            z-index: 27
+  accounts-db-ydwlb:
     name: accounts-db
     type: StatefulSet
     apiVersion: apps/v1
@@ -140,6 +142,7 @@ services:
               name: postgresd
     traits:
       meshmap:
+        edges: []
         id: a3901cd1-fefb-4aa4-b19b-186bd05d21ff
         label: accounts-db
         meshmodel-metadata:
@@ -161,10 +164,10 @@ services:
         position:
           posX: 65.2533993086964
           posY: 156.82463738720375
-        style: []
         whiteboardData:
-          style: {}
-  balancereader-dnhcd:
+          style:
+            z-index: 17
+  balancereader-nijbs:
     name: balancereader
     type: Service
     apiVersion: v1
@@ -190,6 +193,118 @@ services:
         type: ClusterIP
     traits:
       meshmap:
+        edges:
+        - data:
+            id: ad90ae16-06de-41c4-b433-cfd5bdabea35
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: 4b23ec9e-ec0b-4ec9-a6e6-7630d0f16ce9
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 8080/TCP
+              value: 8080/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
         id: 4b23ec9e-ec0b-4ec9-a6e6-7630d0f16ce9
         label: balancereader
         meshmodel-metadata:
@@ -211,18 +326,10 @@ services:
         position:
           posX: -174.4435331298761
           posY: 89.69167797470824
-        style:
-        - data:
-            id: eeb7a5c6-2f53-438a-8cd6-789ee3d64e83
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: 4b23ec9e-ec0b-4ec9-a6e6-7630d0f16ce9
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
         whiteboardData:
-          style: {}
-  balancereader-edudk:
+          style:
+            z-index: 31
+  balancereader-rnekl:
     name: balancereader
     type: Deployment
     apiVersion: apps/v1
@@ -343,6 +450,7 @@ services:
                 secret Name: jwt-key
     traits:
       meshmap:
+        edges: []
         id: 93e3a62f-0d2c-4fce-96bb-27fc22e48496
         label: balancereader
         meshmodel-metadata:
@@ -364,8 +472,9 @@ services:
         position:
           posX: 65.7533993086964
           posY: 18.32463738720375
-        style: []
-        whiteboardData: {}
+        whiteboardData:
+          style:
+            z-index: 18
   bank-of-anthos:
     name: bank-of-anthos
     type: ServiceAccount
@@ -376,6 +485,7 @@ services:
       iam.gke.io/gcp-service-account: gke-workload-development@bank-of-anthos-ci.iam.gserviceaccount.com
     traits:
       meshmap:
+        edges: []
         id: 151f97f1-7a72-4d51-8866-607fc14aa81f
         label: bank-of-anthos
         meshmodel-metadata:
@@ -397,10 +507,10 @@ services:
         position:
           posX: 263.25339930869643
           posY: 17.82463738720375
-        style: []
         whiteboardData:
-          style: {}
-  contacts-dccrd:
+          style:
+            z-index: 15
+  contacts-mdxlz:
     name: contacts
     type: Service
     apiVersion: v1
@@ -426,6 +536,118 @@ services:
         type: ClusterIP
     traits:
       meshmap:
+        edges:
+        - data:
+            id: 75d7ce0f-b4a8-49aa-ae58-8a9c6aa81dfd
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: a742186c-9607-471e-bf94-23898c3ac909
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 8080/TCP
+              value: 8080/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
         id: a742186c-9607-471e-bf94-23898c3ac909
         label: contacts
         meshmodel-metadata:
@@ -447,18 +669,10 @@ services:
         position:
           posX: -82.96320794731162
           posY: 71.70983705843764
-        style:
-        - data:
-            id: 4beadc26-455a-484b-9901-429d26efe22c
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: a742186c-9607-471e-bf94-23898c3ac909
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
         whiteboardData:
-          style: {}
-  contacts-sdvsg:
+          style:
+            z-index: 20
+  contacts-pyzpv:
     name: contacts
     type: Deployment
     apiVersion: apps/v1
@@ -552,6 +766,7 @@ services:
                 secret Name: jwt-key
     traits:
       meshmap:
+        edges: []
         id: bb99ec82-ade4-4023-9dff-440a4a6dfee2
         label: contacts
         meshmodel-metadata:
@@ -573,8 +788,9 @@ services:
         position:
           posX: 262.75339930869643
           posY: -56.67536261279625
-        style: []
-        whiteboardData: {}
+        whiteboardData:
+          style:
+            z-index: 8
   demo-data-config:
     name: demo-data-config
     type: ConfigMap
@@ -588,6 +804,7 @@ services:
         USE_DEMO_DATA: "True"
     traits:
       meshmap:
+        edges: []
         id: ddc49026-c678-4d0d-b892-d083dd36be1f
         label: demo-data-config
         meshmodel-metadata:
@@ -609,9 +826,9 @@ services:
         position:
           posX: 66.2533993086964
           posY: 92.82463738720375
-        style: []
         whiteboardData:
-          style: {}
+          style:
+            z-index: 16
   environment-config:
     name: environment-config
     type: ConfigMap
@@ -624,6 +841,7 @@ services:
         PUB_KEY_PATH: /tmp/.ssh/publickey
     traits:
       meshmap:
+        edges: []
         id: abffbfde-0cca-4424-a72c-20af869e685e
         label: environment-config
         meshmodel-metadata:
@@ -645,10 +863,10 @@ services:
         position:
           posX: 203.2533993086964
           posY: -57.17536261279625
-        style: []
         whiteboardData:
-          style: {}
-  frontend-kulkr:
+          style:
+            z-index: 21
+  frontend-rhddk:
     name: frontend
     type: Service
     apiVersion: v1
@@ -674,6 +892,118 @@ services:
         type: LoadBalancer
     traits:
       meshmap:
+        edges:
+        - data:
+            id: f96294f7-c6ba-4099-b576-d1938769c4e2
+            metadata:
+              port: 80
+              protocol: TCP
+            source: c114a0f5-ef57-4cbd-8be7-70f94256972c
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 80/TCP
+              value: 80/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
         id: c114a0f5-ef57-4cbd-8be7-70f94256972c
         label: frontend
         meshmodel-metadata:
@@ -695,18 +1025,10 @@ services:
         position:
           posX: -76.37473293783776
           posY: -135.89588989417248
-        style:
-        - data:
-            id: 54abf9e1-eb7a-400c-815f-0df469500438
-            metadata:
-              port: 80
-              protocol: TCP
-            source: c114a0f5-ef57-4cbd-8be7-70f94256972c
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
         whiteboardData:
-          style: {}
-  frontend-kvglk:
+          style:
+            z-index: 10
+  frontend-slnzf:
     name: frontend
     type: Deployment
     apiVersion: apps/v1
@@ -830,6 +1152,7 @@ services:
                 secret Name: jwt-key
     traits:
       meshmap:
+        edges: []
         id: f8fd9da1-d6f4-4a98-9958-8361b575f965
         label: frontend
         meshmodel-metadata:
@@ -851,99 +1174,10 @@ services:
         position:
           posX: 262.75339930869643
           posY: 93.32463738720375
-        style: []
-        whiteboardData: {}
-  ledger-db-config:
-    name: ledger-db-config
-    type: ConfigMap
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    labels:
-      app: postgres
-      application: bank-of-anthos
-      environment: development
-      team: ledger
-      tier: db
-    settings:
-      data:
-        POSTGRES_DB: postgresdb
-        POSTGRES_PASSWORD: password
-        POSTGRES_USER: admin
-        SPRING_DATASOURCE_PASSWORD: password
-        SPRING_DATASOURCE_URL: jdbc:postgresql://ledger-db:5432/postgresdb
-        SPRING_DATASOURCE_USERNAME: admin
-    traits:
-      meshmap:
-        id: 8ce77712-9f41-4e7a-8955-125ab3565f8f
-        label: ledger-db-config
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: circle
-          styleOverrides: ""
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        position:
-          posX: 203.2533993086964
-          posY: 92.82463738720375
-        style: []
         whiteboardData:
-          style: {}
-  ledger-db-jqqwr:
-    name: ledger-db
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    labels:
-      environment: development
-    settings:
-      spec:
-        ports:
-        - name: tcp
-          port: 5432
-          target Port: 5432
-        selector:
-          app: ledger-db
-          environment: development
-        type: ClusterIP
-    traits:
-      meshmap:
-        id: 9f6e7ca4-4009-42d2-8cbc-20436817491b
-        label: ledger-db
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        position:
-          posX: 129.7533993086964
-          posY: 23.82463738720375
-        style: []
-        whiteboardData:
-          style: {}
-  ledger-db-zdlmd:
+          style:
+            z-index: 11
+  ledger-db-abpdn:
     name: ledger-db
     type: StatefulSet
     apiVersion: apps/v1
@@ -994,6 +1228,7 @@ services:
               name: postgresdb
     traits:
       meshmap:
+        edges: []
         id: 6e7c7eb1-357a-444a-8123-d0b0cd4c5ca6
         label: ledger-db
         meshmodel-metadata:
@@ -1015,10 +1250,264 @@ services:
         position:
           posX: 258.75339930869643
           posY: 156.82463738720375
-        style: []
         whiteboardData:
-          style: {}
-  ledgerwriter-bqyay:
+          style:
+            z-index: 4
+  ledger-db-config:
+    name: ledger-db-config
+    type: ConfigMap
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    labels:
+      app: postgres
+      application: bank-of-anthos
+      environment: development
+      team: ledger
+      tier: db
+    settings:
+      data:
+        POSTGRES_DB: postgresdb
+        POSTGRES_PASSWORD: password
+        POSTGRES_USER: admin
+        SPRING_DATASOURCE_PASSWORD: password
+        SPRING_DATASOURCE_URL: jdbc:postgresql://ledger-db:5432/postgresdb
+        SPRING_DATASOURCE_USERNAME: admin
+    traits:
+      meshmap:
+        edges: []
+        id: 8ce77712-9f41-4e7a-8955-125ab3565f8f
+        label: ledger-db-config
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: circle
+          styleOverrides: ""
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: 203.2533993086964
+          posY: 92.82463738720375
+        whiteboardData:
+          style:
+            z-index: 32
+  ledger-db-tvzgz:
+    name: ledger-db
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    labels:
+      environment: development
+    settings:
+      spec:
+        ports:
+        - name: tcp
+          port: 5432
+          target Port: 5432
+        selector:
+          app: ledger-db
+          environment: development
+        type: ClusterIP
+    traits:
+      meshmap:
+        edges: []
+        id: 9f6e7ca4-4009-42d2-8cbc-20436817491b
+        label: ledger-db
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: 129.7533993086964
+          posY: 23.82463738720375
+        whiteboardData:
+          style:
+            z-index: 3
+  ledgerwriter-dycfd:
+    name: ledgerwriter
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    labels:
+      application: bank-of-anthos
+      environment: development
+      team: ledger
+      tier: backend
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 8080
+          target Port: 8080
+        selector:
+          app: ledgerwriter
+          application: bank-of-anthos
+          environment: development
+          team: ledger
+          tier: backend
+        type: ClusterIP
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 2c51c104-d5cb-4c26-8984-bdd3e0af8005
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: 8e248f7f-b5ba-4543-abe3-df3d3af30453
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 8080/TCP
+              value: 8080/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: 8e248f7f-b5ba-4543-abe3-df3d3af30453
+        label: ledgerwriter
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: -256.2964465485592
+          posY: 13.288174670773216
+        whiteboardData:
+          style:
+            z-index: 28
+  ledgerwriter-exumu:
     name: ledgerwriter
     type: Deployment
     apiVersion: apps/v1
@@ -1130,6 +1619,7 @@ services:
                 secret Name: jwt-key
     traits:
       meshmap:
+        edges: []
         id: 2ad41e6d-30c7-4477-b082-88844453bd90
         label: ledgerwriter
         meshmodel-metadata:
@@ -1151,66 +1641,9 @@ services:
         position:
           posX: 197.7533993086964
           posY: 157.32463738720375
-        style: []
-        whiteboardData: {}
-  ledgerwriter-lofqg:
-    name: ledgerwriter
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    labels:
-      application: bank-of-anthos
-      environment: development
-      team: ledger
-      tier: backend
-    settings:
-      spec:
-        ports:
-        - name: http
-          port: 8080
-          target Port: 8080
-        selector:
-          app: ledgerwriter
-          application: bank-of-anthos
-          environment: development
-          team: ledger
-          tier: backend
-        type: ClusterIP
-    traits:
-      meshmap:
-        id: 8e248f7f-b5ba-4543-abe3-df3d3af30453
-        label: ledgerwriter
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        position:
-          posX: -256.2964465485592
-          posY: 13.288174670773216
-        style:
-        - data:
-            id: a928bc62-33df-4bb7-80ed-11aa4ccc06a5
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: 8e248f7f-b5ba-4543-abe3-df3d3af30453
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
         whiteboardData:
-          style: {}
+          style:
+            z-index: 22
   loadgenerator:
     name: loadgenerator
     type: Deployment
@@ -1274,6 +1707,7 @@ services:
             termination Grace Period Seconds: 5
     traits:
       meshmap:
+        edges: []
         id: c1570a4b-0933-457c-908e-771fbede7bf3
         label: loadgenerator
         meshmodel-metadata:
@@ -1295,8 +1729,9 @@ services:
         position:
           posX: 135.2533993086964
           posY: 93.32463738720375
-        style: []
-        whiteboardData: {}
+        whiteboardData:
+          style:
+            z-index: 24
   service-api-config:
     name: service-api-config
     type: ConfigMap
@@ -1312,6 +1747,7 @@ services:
         USERSERVICE_API_ADDR: userservice:8080
     traits:
       meshmap:
+        edges: []
         id: 5b4d8455-b1f5-4431-aa09-d9a78cac118c
         label: service-api-config
         meshmodel-metadata:
@@ -1333,68 +1769,10 @@ services:
         position:
           posX: 194.2533993086964
           posY: 17.82463738720375
-        style: []
         whiteboardData:
-          style: {}
-  transactionhistory-rqxil:
-    name: transactionhistory
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    labels:
-      application: bank-of-anthos
-      environment: development
-      team: ledger
-      tier: backend
-    settings:
-      spec:
-        ports:
-        - name: http
-          port: 8080
-          target Port: 8080
-        selector:
-          app: transactionhistory
-          application: bank-of-anthos
-          environment: development
-          team: ledger
-          tier: backend
-        type: ClusterIP
-    traits:
-      meshmap:
-        id: 54b55de6-31d4-414d-83f5-5ae13e6f8c46
-        label: transactionhistory
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        position:
-          posX: -262.25339930869643
-          posY: -86.84758629913466
-        style:
-        - data:
-            id: 54d56a68-49c6-4413-8c04-be1df71d98dc
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: 54b55de6-31d4-414d-83f5-5ae13e6f8c46
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-        whiteboardData:
-          style: {}
-  transactionhistory-zpaif:
+          style:
+            z-index: 13
+  transactionhistory-tyxkh:
     name: transactionhistory
     type: Deployment
     apiVersion: apps/v1
@@ -1519,6 +1897,7 @@ services:
                 secret Name: jwt-key
     traits:
       meshmap:
+        edges: []
         id: 257d419f-7306-41ce-88ea-9805a0d35360
         label: transactionhistory
         meshmodel-metadata:
@@ -1540,9 +1919,334 @@ services:
         position:
           posX: 134.2533993086964
           posY: -56.67536261279625
-        style: []
-        whiteboardData: {}
-  userservice-dmajj:
+        whiteboardData:
+          style:
+            z-index: 5
+  transactionhistory-vnrnd:
+    name: transactionhistory
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    labels:
+      application: bank-of-anthos
+      environment: development
+      team: ledger
+      tier: backend
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 8080
+          target Port: 8080
+        selector:
+          app: transactionhistory
+          application: bank-of-anthos
+          environment: development
+          team: ledger
+          tier: backend
+        type: ClusterIP
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 7539a07a-1556-4fc8-913e-80941dbae472
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: 54b55de6-31d4-414d-83f5-5ae13e6f8c46
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 8080/TCP
+              value: 8080/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: 54b55de6-31d4-414d-83f5-5ae13e6f8c46
+        label: transactionhistory
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: -262.25339930869643
+          posY: -86.84758629913466
+        whiteboardData:
+          style:
+            z-index: 14
+  userservice-klbrh:
+    name: userservice
+    type: Service
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    labels:
+      application: bank-of-anthos
+      environment: development
+      team: accounts
+      tier: backend
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 8080
+          target Port: 8080
+        selector:
+          app: userservice
+          application: bank-of-anthos
+          environment: development
+          team: accounts
+          tier: backend
+        type: ClusterIP
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: e1ca9134-99f8-46f4-8488-ac210ed201e1
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: fe65732e-126b-419b-bb2f-7b1585f68ac5
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 8080/TCP
+              value: 8080/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: fe65732e-126b-419b-bb2f-7b1585f68ac5
+        label: userservice
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: -172.2246304778116
+          posY: -148.82463738720375
+        whiteboardData:
+          style:
+            z-index: 7
+  userservice-sgrch:
     name: userservice
     type: Deployment
     apiVersion: apps/v1
@@ -1646,6 +2350,673 @@ services:
                 secret Name: jwt-key
     traits:
       meshmap:
+        edges:
+        - data:
+            id: f96294f7-c6ba-4099-b576-d1938769c4e2
+            metadata:
+              port: 80
+              protocol: TCP
+            source: c114a0f5-ef57-4cbd-8be7-70f94256972c
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 80/TCP
+              value: 80/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: ad90ae16-06de-41c4-b433-cfd5bdabea35
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: 4b23ec9e-ec0b-4ec9-a6e6-7630d0f16ce9
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 8080/TCP
+              value: 8080/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 7539a07a-1556-4fc8-913e-80941dbae472
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: 54b55de6-31d4-414d-83f5-5ae13e6f8c46
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 8080/TCP
+              value: 8080/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 2c51c104-d5cb-4c26-8984-bdd3e0af8005
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: 8e248f7f-b5ba-4543-abe3-df3d3af30453
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 8080/TCP
+              value: 8080/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 75d7ce0f-b4a8-49aa-ae58-8a9c6aa81dfd
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: a742186c-9607-471e-bf94-23898c3ac909
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 8080/TCP
+              value: 8080/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: e1ca9134-99f8-46f4-8488-ac210ed201e1
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: fe65732e-126b-419b-bb2f-7b1585f68ac5
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                fnValue: '#7aa1f0'
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 8080/TCP
+              value: 8080/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
         id: df7db55f-5535-4e9e-a19f-d71d8aa024a3
         label: userservice
         meshmodel-metadata:
@@ -1667,111 +3038,6 @@ services:
         position:
           posX: -155.2005721966884
           posY: -32.116389537614424
-        style:
-        - data:
-            id: 54d56a68-49c6-4413-8c04-be1df71d98dc
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: 54b55de6-31d4-414d-83f5-5ae13e6f8c46
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-        - data:
-            id: 54abf9e1-eb7a-400c-815f-0df469500438
-            metadata:
-              port: 80
-              protocol: TCP
-            source: c114a0f5-ef57-4cbd-8be7-70f94256972c
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-        - data:
-            id: a928bc62-33df-4bb7-80ed-11aa4ccc06a5
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: 8e248f7f-b5ba-4543-abe3-df3d3af30453
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-        - data:
-            id: 0449de8e-60ef-4ea6-81d5-3d75924c97ca
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: fe65732e-126b-419b-bb2f-7b1585f68ac5
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-        - data:
-            id: eeb7a5c6-2f53-438a-8cd6-789ee3d64e83
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: 4b23ec9e-ec0b-4ec9-a6e6-7630d0f16ce9
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-        - data:
-            id: 4beadc26-455a-484b-9901-429d26efe22c
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: a742186c-9607-471e-bf94-23898c3ac909
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-        whiteboardData: {}
-  userservice-ndkpl:
-    name: userservice
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    labels:
-      application: bank-of-anthos
-      environment: development
-      team: accounts
-      tier: backend
-    settings:
-      spec:
-        ports:
-        - name: http
-          port: 8080
-          target Port: 8080
-        selector:
-          app: userservice
-          application: bank-of-anthos
-          environment: development
-          team: accounts
-          tier: backend
-        type: ClusterIP
-    traits:
-      meshmap:
-        id: fe65732e-126b-419b-bb2f-7b1585f68ac5
-        label: userservice
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        position:
-          posX: -172.2246304778116
-          posY: -148.82463738720375
-        style:
-        - data:
-            id: 0449de8e-60ef-4ea6-81d5-3d75924c97ca
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: fe65732e-126b-419b-bb2f-7b1585f68ac5
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
         whiteboardData:
-          style: {}
+          style:
+            z-index: 29

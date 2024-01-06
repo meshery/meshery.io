@@ -1,4 +1,4 @@
-name: istio-ingress-service-web-api-v1-only.yaml
+name: istio-ingress-service-web-api-v1-only
 services:
   virtualservice-ingress-web-api-web-app:
     name: virtualservice-ingress-web-api-web-app
@@ -8,88 +8,261 @@ services:
     model: istio-base
     settings:
       spec:
+        export To: []
         gateways:
         - default-gateway-ingress-http
         hosts:
         - '*'
         http:
-        - match:
-          - uri:
+        - cors Policy:
+            allow Headers: []
+            allow Methods: []
+            allow Origin: []
+            allow Origins: []
+            expose Headers: []
+          headers:
+            request:
+              remove: []
+            response:
+              remove: []
+          match:
+          - gateways: []
+            uri:
               prefix: /kiali
           route:
           - destination:
               host: kiali.istio-system.svc.cluster.local
               port:
                 number: 20001
-        - match:
-          - uri:
+            headers:
+              request:
+                remove: []
+              response:
+                remove: []
+        - cors Policy:
+            allow Headers: []
+            allow Methods: []
+            allow Origin: []
+            allow Origins: []
+            expose Headers: []
+          headers:
+            request:
+              remove: []
+            response:
+              remove: []
+          match:
+          - gateways: []
+            uri:
               prefix: /web-api/v1/getmultiple
           route:
           - destination:
               host: web-api
               subset: v1
-        - match:
-          - uri:
+            headers:
+              request:
+                remove: []
+              response:
+                remove: []
+        - cors Policy:
+            allow Headers: []
+            allow Methods: []
+            allow Origin: []
+            allow Origins: []
+            expose Headers: []
+          headers:
+            request:
+              remove: []
+            response:
+              remove: []
+          match:
+          - gateways: []
+            uri:
               prefix: /web-api/v1/create
           route:
           - destination:
               host: web-api
               subset: v1
-        - match:
-          - uri:
+            headers:
+              request:
+                remove: []
+              response:
+                remove: []
+        - cors Policy:
+            allow Headers: []
+            allow Methods: []
+            allow Origin: []
+            allow Origins: []
+            expose Headers: []
+          headers:
+            request:
+              remove: []
+            response:
+              remove: []
+          match:
+          - gateways: []
+            uri:
               prefix: /web-api/v1/manage
           route:
           - destination:
               host: web-api
               subset: v1
-        - match:
-          - uri:
+            headers:
+              request:
+                remove: []
+              response:
+                remove: []
+        - cors Policy:
+            allow Headers: []
+            allow Methods: []
+            allow Origin: []
+            allow Origins: []
+            expose Headers: []
+          headers:
+            request:
+              remove: []
+            response:
+              remove: []
+          match:
+          - gateways: []
+            uri:
               prefix: /openapi/ui/
           route:
           - destination:
               host: web-api
               port:
                 number: 9080
-        - match:
-          - uri:
+            headers:
+              request:
+                remove: []
+              response:
+                remove: []
+        - cors Policy:
+            allow Headers: []
+            allow Methods: []
+            allow Origin: []
+            allow Origins: []
+            expose Headers: []
+          headers:
+            request:
+              remove: []
+            response:
+              remove: []
+          match:
+          - gateways: []
+            uri:
               prefix: /openapi
           route:
           - destination:
               host: web-api
               port:
                 number: 9080
-        - match:
-          - uri:
+            headers:
+              request:
+                remove: []
+              response:
+                remove: []
+        - cors Policy:
+            allow Headers: []
+            allow Methods: []
+            allow Origin: []
+            allow Origins: []
+            expose Headers: []
+          headers:
+            request:
+              remove: []
+            response:
+              remove: []
+          match:
+          - gateways: []
+            uri:
               prefix: /loginwithtoken
           route:
           - destination:
               host: web-app
               port:
                 number: 80
-        - match:
-          - uri:
+            headers:
+              request:
+                remove: []
+              response:
+                remove: []
+        - cors Policy:
+            allow Headers: []
+            allow Methods: []
+            allow Origin: []
+            allow Origins: []
+            expose Headers: []
+          headers:
+            request:
+              remove: []
+            response:
+              remove: []
+          match:
+          - gateways: []
+            uri:
               prefix: /login
           route:
           - destination:
               host: authentication
               port:
                 number: 3000
-        - match:
-          - uri:
+            headers:
+              request:
+                remove: []
+              response:
+                remove: []
+        - cors Policy:
+            allow Headers: []
+            allow Methods: []
+            allow Origin: []
+            allow Origins: []
+            expose Headers: []
+          headers:
+            request:
+              remove: []
+            response:
+              remove: []
+          match:
+          - gateways: []
+            uri:
               prefix: /callback
           route:
           - destination:
               host: authentication
               port:
                 number: 3000
-        - match:
-          - uri:
+            headers:
+              request:
+                remove: []
+              response:
+                remove: []
+        - cors Policy:
+            allow Headers: []
+            allow Methods: []
+            allow Origin: []
+            allow Origins: []
+            expose Headers: []
+          headers:
+            request:
+              remove: []
+            response:
+              remove: []
+          match:
+          - gateways: []
+            uri:
               prefix: /
           route:
           - destination:
               host: web-app
               port:
                 number: 80
+            headers:
+              request:
+                remove: []
+              response:
+                remove: []
+        tcp: []
+        tls: []
     traits:
       meshmap:
         edges: []
@@ -113,3 +286,6 @@ services:
         position:
           posX: -16.184018948426754
           posY: -0.1365861857959565
+        whiteboardData:
+          style:
+            z-index: 3

@@ -1,12 +1,12 @@
-name: CryptoMB-TLS-handshake-acceleration-for-Istio
+name: CryptoMB.yml
 services:
   example-istiocontrolplane:
     name: example-istiocontrolplane
     type: IstioOperator
     apiVersion: install.istio.io/v1alpha1
     namespace: istio-system
-    model: istio-base
     version: 1.16.0
+    model: istio-base
     settings:
       spec:
         components:
@@ -39,7 +39,52 @@ services:
         position:
           posX: 448.11615449152737
           posY: 115.57287677378196
-  istio-operator-btexb:
+        whiteboardData:
+          style:
+            z-index: 10000
+  istio-operator-dldws:
+    name: istio-operator
+    type: Service
+    apiVersion: v1
+    namespace: istio-operator
+    model: kubernetes
+    settings:
+      spec:
+        ports:
+        - name: http-metrics
+          port: 80
+          protocol: TCP
+          target Port: 8383
+        selector:
+          name: istio-operator
+    traits:
+      meshmap:
+        edges: []
+        id: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+        label: istio-operator
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        position:
+          posX: 484.9355395872588
+          posY: 168.2587641981373
+        whiteboardData:
+          style:
+            z-index: 10002
+  istio-operator-duylb:
     name: istio-operator
     type: ClusterRole
     apiVersion: rbac.authorization.k8s.io/v1
@@ -156,7 +201,97 @@ services:
         - '*'
     traits:
       meshmap:
-        edges: []
+        edges:
+        - data:
+            id: d5836de8-1c45-460c-b88d-20bb6b669fa9
+            metadata:
+              binded_by: c3ad3045-b7a5-4b15-bafc-55ad9cc2bce6
+            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
+            subType: Permission
+            target: 9240267f-d393-4c5d-bdf9-596bacf0ebf0
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
         id: f9e95f4b-ffef-4523-917c-1442bb59b53b
         label: istio-operator
         meshmodel-metadata:
@@ -178,25 +313,112 @@ services:
         position:
           posX: 671.5732114890026
           posY: 194.95822565413835
-  istio-operator-danjd:
+        whiteboardData:
+          style:
+            z-index: 10001
+  istio-operator-ldxiu:
     name: istio-operator
-    type: Service
+    type: ServiceAccount
     apiVersion: v1
     namespace: istio-operator
     model: kubernetes
     settings:
-      spec:
-        ports:
-        - name: http-metrics
-          port: 80
-          protocol: TCP
-          target Port: 8383
-        selector:
-          name: istio-operator
+      image Pull Secrets: []
+      secrets: []
     traits:
       meshmap:
-        edges: []
-        id: d24ca3fc-fb37-40d6-86b7-a2665b24f120
+        edges:
+        - data:
+            id: d5836de8-1c45-460c-b88d-20bb6b669fa9
+            metadata:
+              binded_by: c3ad3045-b7a5-4b15-bafc-55ad9cc2bce6
+            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
+            subType: Permission
+            target: 9240267f-d393-4c5d-bdf9-596bacf0ebf0
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: 9240267f-d393-4c5d-bdf9-596bacf0ebf0
         label: istio-operator
         meshmodel-metadata:
           genealogy: ""
@@ -208,16 +430,19 @@ services:
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4.5}'
+          shape: round-rectangle
+          styleOverrides: ""
           subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
           svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
         position:
-          posX: 484.9355395872588
-          posY: 168.2587641981373
-  istio-operator-gblro:
+          posX: 561.5
+          posY: 194.5
+        whiteboardData:
+          style:
+            z-index: 10006
+  istio-operator-pfcrx:
     name: istio-operator
     type: Deployment
     apiVersion: apps/v1
@@ -303,7 +528,10 @@ services:
         position:
           posX: 492.1229787505797
           posY: 234.6048777043293
-  istio-operator-ioxyg:
+        whiteboardData:
+          style:
+            z-index: 10003
+  istio-operator-xwuwb:
     name: istio-operator
     type: ClusterRoleBinding
     apiVersion: rbac.authorization.k8s.io/v1
@@ -340,35 +568,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
         position:
-          posX: 583.5433705937176
-          posY: 276.8033383692807
-  istio-operator-kgmgw:
-    name: istio-operator
-    type: ServiceAccount
-    apiVersion: v1
-    namespace: istio-operator
-    model: kubernetes
-    traits:
-      meshmap:
-        edges: []
-        id: 9240267f-d393-4c5d-bdf9-596bacf0ebf0
-        label: istio-operator
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          styleOverrides: ""
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-        position:
-          posX: 561.5
-          posY: 194.5
+          posX: 617.9303523327258
+          posY: 194.73491487857157
+        whiteboardData:
+          style:
+            z-index: 10005
