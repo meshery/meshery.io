@@ -9,8 +9,9 @@
 
 <br/><br/></p>
 </picture>
- 
+
 # Meshery.io
+
 <div align="center">
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/layer5/meshery.svg)](https://hub.docker.com/r/layer5/meshery-io)
@@ -40,6 +41,7 @@ For further information, refer to the [Meshery Docs](https://docs.meshery.io).
 <div>&nbsp;</div>
 
 ## 💻Tech Stack
+
 ![Javascript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
@@ -128,7 +130,6 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   ```
 - Then on Github, navigate to the [Meshery.io repository](https://github.com/meshery/meshery.io) and create a pull request from your recently pushed changes.
 
-
 ### Stargazers
 
 <p align="center">
@@ -137,8 +138,9 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
 <a href="../../stargazers">
  <img align="center" src="https://api.star-history.com/svg?repos=meshery/meshery.io&type=Date" />
 </a></p>
-                                                                                                   
 
 #### License
 
 This repository and site are available as open source under the terms of the [Apache 2.0 License](https://opensource.org/licenses/Apache-2.0).
+
+[Back to top](#-mesheryio)
