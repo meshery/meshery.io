@@ -5,7 +5,7 @@
     <div class="modal-image-single">
       <img style="width: inherit; cursor: pointer;" 
       src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png" 
-      onerror="this.src='/assets/images/patterns/service-mesh.svg'" loading="lazy" onclick="handleClick(this.src)"/>
+      onerror="this.src='/assets/images/patterns/service-mesh.svg'" loading="lazy" onclick="toggleFullScreenImage('{{ pattern.patternId }}')"/>
       <h4 class="related-patterns">Related Patterns</h4>
       <!-- MINICARD-START -->
       {% include related-patterns.html %}
@@ -17,16 +17,16 @@
   {%if pattern.patternInfo%}
   <div>
     <h3>What this pattern does:</h3>
-    <p>{{pattern.patternInfo | replace: '\\n', '<br/>'| replace: '\n', '<br/>' }}</p>
+    <p class="pre-white-space">{{pattern.patternInfo | url_decode | replace: '\\n', '<br/>'| replace: '\n', '<br/>' }}</p>
     <h3>Caveats and Consideration: </h3>
-    <p>{{pattern.patternCaveats}}</p>
+    <p class="pre-white-space">{{pattern.patternCaveats | url_decode}}</p>
     </p>
     {%else%}
     <div>
       <h3>What this pattern does:</h3>
-      <p>{{pattern.filterInfo}}</p>
+      <p class="pre-white-space">{{pattern.filterInfo | url_decode}}</p>
       <h3>Caveats and Consideration: </h3>
-      <p>{{pattern.filterCaveats}}</p>
+      <p class="pre-white-space">{{pattern.filterCaveats | url_decode}}</p>
       </p>
       {%endif%}
       <h3>Compatibility:</h3>
@@ -43,9 +43,4 @@
 <script>
   document.title = "{{pattern.name}} | Meshery Catalog";
 </script>
-
-<script>
-  function handleClick(link){
-    window.open(link);
-  }
-</script>
+<script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>

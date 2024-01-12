@@ -14,9 +14,9 @@
         </div>
         <button class="modal-close close">&times;</button>
         {%if pattern.filters.type == "wasm filter" %}
-        <img class="image-class" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png" onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy"/>
+        <img class="image-class" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png" onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy" onclick="toggleFullScreenImage('{{ pattern.patternId }}')" />
         {%else%}
-        <img class="image-class" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png" onerror="this.src='/assets/images/patterns/service-mesh.svg'" loading="lazy"/>
+        <img class="image-class" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png" onerror="this.src='/assets/images/patterns/service-mesh.svg'" loading="lazy" onclick="toggleFullScreenImage('{{ pattern.patternId }}')" />
         {%endif%}
         <h4 class="related-patterns">RELATED PATTERNS</h4>
         {% include related-patterns.html %}
@@ -26,20 +26,18 @@
         <h2 class="modal-h2">{{pattern.name | upcase }} {% include read-more.html %}</h2>
         {% if pattern.patternInfo %}
         <h3 class="modal-h3">What this pattern does</h3>
-        <p class="content-toggle contentdata">
-          {{pattern.patternInfo | replace: '\\n', '<br/>' | replace: '\n', '<br/>' }}
-        </p>
+        <p class="content-toggle contentdata pre-white-space">{{pattern.patternInfo | url_decode | replace: '\\n', '<br/>' | replace: '\n', '<br/>' }}</p>
         <span class="read-more" href="read-more.html">{% include expand.html %}</span>
         <h3 class="modal-h3">Caveats and Considerations</h3>
-        <p>{{pattern.patternCaveats}}</p>
+        <p class="pre-white-space">{{pattern.patternCaveats | url_decode | replace: '\\n', '<br/>' | replace: '\n', '<br/>'}}</p>
         {% else %}
         <h3 class="modal-h3">What this filter does</h3>
-        <p class="content-toggle contentdata">
-          {{pattern.filterInfo }}
+        <p class="content-toggle contentdata pre-white-space">
+          {{pattern.filterInfo | url_decode | replace: '\\n', '<br/>' | replace: '\n', '<br/>'}}
         </p>
         <span class="read-more">...read more</span>
         <h3 class="modal-h3">Caveats and Considerations</h3>
-        <p>{{pattern.filterCaveats}}</p>
+        <p class="pre-white-space">{{pattern.filterCaveats | url_decode | replace: '\\n', '<br/>' | replace: '\n', '<br/>'}}</p>
         {% endif %}
           <h3 class="modal-h3">Technologies</h3>
           {% include partials/compatibility.html %}
@@ -48,7 +46,7 @@
     </div>
      
  <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
-    
+ <script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>
    
   <!-- </div> -->
 </div>

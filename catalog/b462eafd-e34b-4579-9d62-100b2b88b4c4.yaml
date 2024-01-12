@@ -1,0 +1,63 @@
+name: deployment
+services:
+  meshery-nginx-sm:
+    name: meshery-nginx-sm
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    labels:
+      io.kompose.service: meshery-nginx-sm
+    annotations:
+      kompose.cmd: kompose convert -f ../docker-compose.yaml
+      kompose.version: 1.17.0 ()
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            io.kompose.service: meshery-nginx-sm
+        template:
+          metadata:
+            creation Timestamp: null
+            labels:
+              io.kompose.service: meshery-nginx-sm
+          spec:
+            containers:
+            - image: layer5/meshery-nginx-sm:stable-latest
+              image Pull Policy: Always
+              name: meshery-nginx-sm
+              ports:
+              - container Port: 10010
+            restart Policy: Always
+            service Account: meshery-server
+    traits:
+      meshmap:
+        edges: []
+        id: bcdfa112-5229-498c-8aea-3801ca654ffb
+        label: meshery-nginx-sm
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: parent
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: 0
+          posY: 1
+        whiteboardData:
+          style:
+            z-index: 3
