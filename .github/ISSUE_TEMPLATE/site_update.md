@@ -1,7 +1,7 @@
 ---
 name: Site Update
 about: Suggest an update to the Meshery.io website
-title: ''
+title: '[Website] '
 labels: 'area/website'
 assignees: ''
 ---
