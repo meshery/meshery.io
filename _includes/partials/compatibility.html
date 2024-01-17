@@ -1,31 +1,32 @@
     <div class="comatibility-grid">
-    {% for item in pattern.compatibility %}
+    {% for items in pattern.compatibility %}
+    {% if items %}
+    {% for item in items %}
     {% if item == "Istio" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/istio.svg" />
-    {% endif %}
-    {% if item == "Linkerd" %}
+    {% elsif item == "Linkerd" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/linkerd.svg" />
-    {% endif %}
-    {% if item == "Consul" %}
+    {% elsif item == "Consul" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/consul.svg" />
-    {% endif %}
-    {% if item == "Traefik" %}
+    {% elsif item == "Traefik" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/traefik-mesh.svg" />
-    {% endif %}
-    {% if item == "OSM" %}
+    {% elsif item == "OSM" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/osm.svg" />
-    {% endif %}
-    {% if item == "App Mesh" %}
+    {% elsif item == "App Mesh" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/aws-app-mesh.svg" />
-    {% endif %}
-    {% if item == "Kuma" %}
+    {% elsif item == "Kuma" or item contains "kuma" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/kuma-color.svg" />
-    {% endif %}
-    {% if item == "Nginx" %}
+    {% elsif item == "Nginx" or item contains "nginx" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/nginx-sm.svg" />
-    {% endif %}
-    {% if item == "NSM" %}
+    {% elsif item == "NSM" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/nsm.svg" />
+    {% else %}
+    <img class="service-mesh-image" src="{{site.baseurl}}/images/{{ item | slugify }}-color.svg" loading="lazy" id="logo-dark-light"
+    data-logo-for-dark="{{site.baseurl}}/images/{{ item | slugify }}-white.svg"
+    data-logo-for-light="{{site.baseurl}}/images/{{ item | slugify }}-color.svg" />
     {% endif %}
+    {% endfor %}
+    {%endif%}
+
     {% endfor %}
 </div>
