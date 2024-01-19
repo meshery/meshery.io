@@ -43,15 +43,15 @@
     function renderIntegrationCards(data, showAll) {
         const cardsToShow = showAll ? data.length : 40;
         return data.slice(0, cardsToShow).map(item => {
-            const urlFromJSON = item.color.split('/integration');
+            const iconURL = item.color;
 
             return `
                 <a href="${item.permalink}" class="integrations-card">
                 <div class="integrations-card-inner">
                 <div class="card-front">
-                <img src="${urlFromJSON[0]}${urlFromJSON[1]}" loading="lazy" id="logo-dark-light"
-                data-logo-for-dark="${urlFromJSON[0]}${urlFromJSON[1]}"
-                data-logo-for-light="${urlFromJSON[0]}${urlFromJSON[1]}" />
+                <img src="${iconURL}" loading="lazy" id="logo-dark-light"
+                data-logo-for-dark="${iconURL}"
+                data-logo-for-light="${iconURL}" />
                 </div>
                 <div class="card-back">
                 <p> ${item.name} </p>
