@@ -251,23 +251,17 @@
   
   // get all pattern cards
   const patternCards = document.querySelectorAll(".patternCard");
-  console.log("patternCards: ", patternCards)
   const cardCompatibility = [];
   let cardType = new Set();
   let cardTechnology = new Set();
 
   // Loop over all pattern cards to get there compatibility, type and technology so we can make a unique list out of it
   for(let i=0; i<patternCards.length; i++){
-    // console.log("patternCards[i]: ", patternCards[i])
-      // const filter = patternCards[i].getAttribute("filter")
-      // console.log("filter: ", filter)
       const type = patternCards[i].getAttribute("type")
-      // console.log("type: ", type)
       if(type && type !== "wasm filter") cardType.add(type.toLowerCase()); 
       const technology = patternCards[i].getAttribute("technology")
       if(technology){
         let t = JSON.parse(technology)
-        console.log("t: ", t)
         for (let i = 0; i < t.length; i++) {
           cardTechnology.add(t[i]);
           cardCompatibility.push(t[i]);
@@ -278,7 +272,6 @@
   // Add an "All" option to the type list and convert the set to array
   cardType = ["All", ...Array.from(cardType)];
   cardTechnology = Array.from(cardTechnology);
-  console.log("cardTech: ", cardTechnology)
 
   // For creating a list of radio buttons for Categories section
   for(let i = 0; i<cardType.length; i++){
@@ -307,14 +300,12 @@
   // remove duplicate entries of integrations in filter section 
   // Maintain a list of filterEntries, whenever you come across a new one, add it to list, else if the filter already exists in the list skip the further process of creating nodes
   const filterEntries = [];
-  console.log("data: ", data)
   // For creating a list of checkboxes for Technologies section
   for (let i = 0; i < data.length; i++) {
     const count = cardCompatibility.filter((filter) => filter.includes(data[i].name)).length;
 
     // Skip adding the filter to list if it is not used in any of the pattern cards
     // Skip adding the filter to list if it is already added to the list
-    // console.log("count: ", count, data[i].name, filterEntries)
     if(count === 0 || filterEntries.includes(data[i].name))
       continue;
     
@@ -326,9 +317,7 @@
     inputContainer.className = "input-container";
 
     const input = document.createElement("input");
-    input.type = "checkbox";
     input.name = data[i].name;
-    console.log("name: ", data[i])
     input.value = data[i].name;
     input.id = data[i].name;
     input.onclick = function () {
@@ -368,8 +357,6 @@
 
     // Select all pattern cards
     // const patternCards = document.querySelectorAll(".patternCard");
-    console.log("patternCards: ", patternCards)
-    console.log("filterArr: ", filterArray)
 
     // If no checkbox is selected, show all pattern cards and enable the "All" radio button
     if (!filterArray.length) {
@@ -381,51 +368,17 @@
 
       // Loop over all pattern cards and check if any of the filter in filterArray is present in pattern card's filter attribute
       // If yes, the show the card, else hide it
-      // for (let j = 0; j < patternCards.length; j++) {
-      //   let cc = [];
-      //   const technology = patternCards[i].getAttribute("technology")
-      //   // console.log("technology11: ", technology)
-      //   if(technology){
-      //     let t = JSON.parse(technology)
-      //     console.log("t: ", t)
-      //     for (let k = 0; k < t.length; k++) {
-      //       cc.push(t[k]);
-      //     }
-      //   }
-      //   let showCard = false;
-
-      //   // console.log("cardCompatibility: ", cardCompatibility)
-
-      //   for (let i = 0; i < filterArray.length; i++) {
-      //     // console.log("filterArray[i]: ", filterArray[i])
-      //     if (cc.includes(filterArray[i])) {
-      //       showCard = true;
-      //       break;
-      //     }
-      //   }
-      //   if (showCard) {
-      //     patternCards[j].style.display = "block";
-      //   } else {
-      //     patternCards[j].style.display = "none";
-      //   }
-      // }
-
       for(let i=0; i<patternCards.length; i++){
         let cc = [];
         const type = patternCards[i].getAttribute("type")
         const technology = patternCards[i].getAttribute("technology")
         if(technology){
           let t = JSON.parse(technology)
-          console.log("t: ", t)
           for (let k = 0; k < t.length; k++) {
             cc.push(t[k]);
           }
         }
-        console.log("cc: ", cc)
          let showCard = false;
-
-        // console.log("cardCompatibility: ", cardCompatibility)
-        console.log("filterArray: ", filterArray)
 
           for (let j = 0; j < filterArray.length; j++) {
             if (cc.includes(filterArray[j])) {
