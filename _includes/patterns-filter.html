@@ -251,6 +251,7 @@
   
   // get all pattern cards
   const patternCards = document.querySelectorAll(".patternCard");
+  console.log("patternCards: ", patternCards)
   const cardCompatibility = [];
   let cardType = new Set();
   let cardTechnology = new Set();
@@ -268,6 +269,7 @@
   // Add an "All" option to the type list and convert the set to array
   cardType = ["All", ...Array.from(cardType)];
   cardTechnology = Array.from(cardTechnology);
+  console.log("cardTech: ", cardTechnology)
 
   // For creating a list of radio buttons for Categories section
   for(let i = 0; i<cardType.length; i++){
@@ -355,6 +357,7 @@
 
     // Select all pattern cards
     const patternCards = document.querySelectorAll(".patternCard");
+    console.log("filterArr: ", filterArray)
 
     // If no checkbox is selected, show all pattern cards and enable the "All" radio button
     if (!filterArray.length) {
@@ -410,4 +413,10 @@
       }
     }
   }
+
+
+  window.onload = function() {
+    showFilterCards();
+  }
+
 </script>
