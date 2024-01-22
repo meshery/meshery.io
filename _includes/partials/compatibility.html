@@ -1,31 +1,27 @@
     <div class="comatibility-grid">
     {% for item in pattern.compatibility %}
+    <!-- Please remove these hardcoding -->
+    <!-- This would require updating the already published content with correct compatibility -->
     {% if item == "Istio" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/istio.svg" />
-    {% endif %}
-    {% if item == "Linkerd" %}
+    {% elsif item == "Linkerd" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/linkerd.svg" />
-    {% endif %}
-    {% if item == "Consul" %}
+    {% elsif item == "Consul" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/consul.svg" />
-    {% endif %}
-    {% if item == "Traefik" %}
+    {% elsif item == "Traefik" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/traefik-mesh.svg" />
-    {% endif %}
-    {% if item == "OSM" %}
+    {% elsif item == "OSM" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/osm.svg" />
-    {% endif %}
-    {% if item == "App Mesh" %}
+    {% elsif item == "App Mesh" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/aws-app-mesh.svg" />
-    {% endif %}
-    {% if item == "Kuma" %}
+    {% elsif item == "Kuma" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/kuma-color.svg" />
-    {% endif %}
-    {% if item == "Nginx" %}
+    {% elsif item == "Nginx" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/nginx-sm.svg" />
-    {% endif %}
-    {% if item == "NSM" %}
+    {% elsif item == "NSM" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/nsm.svg" />
+    {% else %}
+        <img class="service-mesh-image" src="{{site.baseurl}}/images/integrations/{{ item | downcase }}/icons/color/{{ item | downcase }}-color.svg" />
     {% endif %}
     {% endfor %}
 </div>
