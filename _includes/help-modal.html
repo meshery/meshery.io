@@ -1,147 +1,171 @@
 <style>
-    .help-modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 100; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Style the tab */
-.tab {
-  overflow: hidden;
-  background-color: #00D3A9;
-}
-
-/* Style the buttons that are used to open the tab content */
-.tab button {
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #00B39F;
-}
-
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: #1E2117;
-  color: "#fff"
-}
-
-/* Style the tab content */
-.tabcontent {
-  padding: 6px 12px;
-  border-top: none;
-  background-color: var(--integrations-bg);
-}
-
-/* Modal Content/Box */
-.help-modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  border: 1px solid #888;
-  width: 60%; /* Could be more or less, depending on screen size */
-  @media (max-width: 768px) {
-    margin: 25% auto;
-    width: 85%; /* Change width to 85% */
+  .help-modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 100;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
   }
-}
 
-/* The Close Button */
-.closed {
-  color: black;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  /* margin-right: 10px; */
-}
+  /* Style the tab */
+  .tab {
+    overflow: hidden;
+    background-color: #00D3A9;
+  }
 
-.closed:hover,
-.closed:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
+  /* Style the buttons that are used to open the tab content */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+  }
+
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #00B39F;
+  }
+
+  /* Create an active/current tablink class */
+  .tab button.active {
+    background-color: #1E2117;
+    color: "#fff"
+  }
+
+  /* Style the tab content */
+  .tabcontent {
+    padding: 6px 12px;
+    border-top: none;
+    background-color: var(--integrations-bg);
+  }
+
+  /* Modal Content/Box */
+  .help-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    border: 1px solid #888;
+    width: 60%;
+
+    /* Could be more or less, depending on screen size */
+    @media (max-width: 768px) {
+      margin: 25% auto;
+      width: 85%;
+      /* Change width to 85% */
+    }
+  }
+
+  /* The Close Button */
+  .closed {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    /* margin-right: 10px; */
+  }
+
+  .closed:hover,
+  .closed:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
 </style>
 <p class="catalog-subtext">
-Easily <span style="color: #00D3A9; cursor: pointer;" id="myBtn">import any catalog item</span> into Meshery. Have a design pattern to share? <a style ="color: #00D3AF; text-decoration: none;" href="https://docs.meshery.io/concepts/catalog#to-create-a-design-pattern-using-meshery-ui" target="_blank">Add yours to the catalog.</a></p>
+  Easily <span style="color: #00D3A9; cursor: pointer;" id="myBtn">import any catalog item</span> into Meshery. Have a
+  design pattern to share? <a style="color: #00D3AF; text-decoration: none;"
+    href="https://docs.meshery.io/concepts/catalog#to-create-a-design-pattern-using-meshery-ui" target="_blank">Add
+    yours to the catalog.</a></p>
 <div id="myModal" class="help-modal">
-    <div class="help-modal-content">
-       
-        <div class="tab">
-            <span class="closed" style=" padding: 4px 10px">&times;</span>
-            <button class="tablinks active" onclick="openTab(event, 'MesheryUI')">Meshery UI</button>
-            <button class="tablinks" onclick="openTab(event, 'MesheryCLI')">Meshery CLI</button>
-          </div>
-          
-          <!-- Tab content -->
-          <div id="MesheryUI" class="tabcontent">
-            <h3>Meshery UI</h3>
-            <p>To import designs, visit <a href="https://docs.meshery.io/guides/meshery-design#import-your-designs">docs</a></p>
-            
-            <!-- <a href="{{ site.baseurl }}/assets/images/screens/pattern-import.mp4"
+  <div class="help-modal-content">
+
+    <div class="tab">
+      <span class="closed" style=" padding: 4px 10px">&times;</span>
+      <button class="tablinks active" onclick="openTab(event, 'MesheryUI')">Meshery UI</button>
+      <button class="tablinks" onclick="openTab(event, 'MesheryCLI')">Meshery CLI</button>
+    </div>
+
+    <!-- Tab content -->
+    <div id="MesheryUI" class="tabcontent">
+      <h3>Meshery UI</h3>
+      <p>To import designs, visit <a
+          href="https://docs.meshery.io/guides/configuration-management/importing-apps#import-apps-using-meshery-ui"
+          target="_blank">docs</a>
+      </p>
+
+      <!-- <a href="{{ site.baseurl }}/assets/images/screens/pattern-import.mp4"
 				data-fancybox="images" data-caption="Import your patterns"> -->
-        <div style="text-align: center;">
-          <video width="100%" preload="metadata" controls>
-            <source src="{{ site.baseurl }}/assets/images/screens/pattern-import.mp4#t=0.01" type="video/mp4">
-          </video>
-				<!-- <iframe width="98%" height="540" preload="metadata" src="{{ site.baseurl }}/assets/images/screens/pattern-import.mp4#t=0.01" alt="Import your patterns" 
+      <div style="text-align: center;">
+        <video width="100%" preload="metadata" controls>
+          <source src="{{ site.baseurl }}/assets/images/screens/pattern-import.mp4#t=0.01" type="video/mp4">
+        </video>
+        <!-- <iframe width="98%" height="540" preload="metadata" src="{{ site.baseurl }}/assets/images/screens/pattern-import.mp4#t=0.01" alt="Import your patterns" 
         frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen	></iframe> -->
-          </div>
-			</a>
-          </div>
-          
-          <div id="MesheryCLI" class="tabcontent" style="display: none;">
-            <h3>Meshery CLI</h3>
-            <p>Import using mesheryctl, visit <a href="https://docs.meshery.io/installation/mesheryctl">docs</a> for steps.</p>
-            
-            <!-- <h3>Meshery CLI</h3> -->
-            <p>1. Apply a pattern file. </p>
-            <div id="start-pattern" class="highlight-code">
-                <p class="code-box" style="height: 40px; line-height: 15px; color: white"><code style="position: absolute;">
+      </div>
+      </a>
+    </div>
+
+    <div id="MesheryCLI" class="tabcontent" style="display: none;">
+      <h3>Meshery CLI</h3>
+      <p>Import using mesheryctl, visit <a
+          href="https://docs.meshery.io/guides/configuration-management/importing-apps#import-apps-using-meshery-cli"
+          target="_blank">docs</a>
+        for steps.</p>
+
+      <!-- <h3>Meshery CLI</h3> -->
+      <p>1. Apply a pattern file. </p>
+      <div id="start-pattern" class="highlight-code">
+        <p class="code-box" style="height: 40px; line-height: 15px; color: white"><code style="position: absolute;">
                     mesheryctl pattern apply -f [file | URL]
                  </code></p>
-<!-- copy to clipboard -->
-                  {% include copy-to-clipboard.html clipboard_target="#start-pattern" clipboard_text="mesheryctl pattern apply -f [file | URL]" %}
-              </div>
-            <p>2. Onboard an application.</p>
-            <div id="start-app" class="highlight-code">
-                <p class="code-box" style="height: 40px; line-height: 15px; color: white"><code style="position: absolute;">
+        <!-- copy to clipboard -->
+        {% include copy-to-clipboard.html clipboard_target="#start-pattern" clipboard_text="mesheryctl pattern apply -f
+        [file | URL]" %}
+      </div>
+      <p>2. Onboard an application.</p>
+      <div id="start-app" class="highlight-code">
+        <p class="code-box" style="height: 40px; line-height: 15px; color: white"><code style="position: absolute;">
                     mesheryctl app onboard -f [file-path]
                  </code></p>
-<!-- copy to clipboard -->
-                  {% include copy-to-clipboard.html clipboard_target="#start-app" clipboard_text="mesheryctl app onboard -f [file-path]" %} 
-              </div>
-            <p>3. Apply a WASM filter file.</p>
-            <div id="start-pattern" class="highlight-code">
-                <p class="code-box" style="height: 40px; line-height: 15px; color: white"><code style="position: absolute;">
+        <!-- copy to clipboard -->
+        {% include copy-to-clipboard.html clipboard_target="#start-app" clipboard_text="mesheryctl app onboard -f
+        [file-path]" %}
+      </div>
+      <p>3. Apply a WASM filter file.</p>
+      <div id="start-pattern" class="highlight-code">
+        <p class="code-box" style="height: 40px; line-height: 15px; color: white"><code style="position: absolute;">
                     mesheryctl exp filter apply --file [GitHub Link]
                  </code></p>
-<!-- copy to clipboard -->
-                  {% include copy-to-clipboard.html clipboard_target="#start-pattern" clipboard_text="mesheryctl exp filter apply --file [GitHub Link]" %} 
-              </div>
-          </div>
-          
-</div>
+        <!-- copy to clipboard -->
+        {% include copy-to-clipboard.html clipboard_target="#start-pattern" clipboard_text="mesheryctl exp filter apply
+        --file [GitHub Link]" %}
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <script src="{{  site.baseurl }}/assets/js/help-modal.js"></script>
 <script>
-function openTab(evt, cityName) {
+  function openTab(evt, cityName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
