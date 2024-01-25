@@ -79,7 +79,7 @@ Meshery's new capabilities registry captures the ability of your Meshery deploym
 
 A new capability register browser is added to Meshery's UI to help you explore the capabilities of your Meshery deployment. This can be explored under the settings page of your Meshery UI.
 
-Read more about [Meshery Models](https://docs.meshery.io/concepts/models)
+Read more about [Meshery Models](https://docs.meshery.io/concepts/logical/models)
 
 ### New Meshery Extension Points
 
