@@ -96,7 +96,7 @@ Meshery now supports multi-tenancy through the use of Organizations. This allows
 
 Environment is a logical group of your organization's resources. This allows you to group your resources by environment. For example, you can have a production environment and a staging environment. This allows you to easily switch between environments and ensure that you are using the correct resources for your environment. Each of your environments can have a number of connections, like Kubernetes clusters, Prometheus, Grafana, Jaeger, etc.
 
-Read more about [Environments](https://docs.meshery.io/concepts/environments)
+Read more about [Environments](https://docs.meshery.io/concepts/logical/environments)
 
 ### Gain Insights with the New System Dashboard
 
