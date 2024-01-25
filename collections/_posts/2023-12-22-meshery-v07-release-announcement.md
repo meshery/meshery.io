@@ -88,7 +88,7 @@ A handful of new extension points have been added to Meshery in this release.
 - User Account Management: This enables you to manage your user account, your organization, teams, and users.
 - Collaborators: the ability for Remote Providers to offer real-time presence of Meshery users to facilitate user collaboration and awareness.
 
-Read more about [Meshery Extension Points](https://docs.meshery.io/concepts/extension-points)
+Read more about [Meshery Extension Points](https://docs.meshery.io/extensibility#extension-points)
 
 ### Multi-tenancy with Organizations and Environments
 
