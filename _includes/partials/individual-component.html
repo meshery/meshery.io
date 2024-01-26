@@ -5,7 +5,7 @@
     <div class="modal-image-single">
       <img style="width: inherit; cursor: pointer;" 
       src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png" 
-      onerror="this.src='/assets/images/patterns/service-mesh.svg'" loading="lazy" onclick="handleClick(this.src)"/>
+      onerror="this.src='/assets/images/patterns/service-mesh.svg'" loading="lazy" onclick="toggleFullScreenImage('{{ pattern.patternId }}')"/>
       <h4 class="related-patterns">Related Patterns</h4>
       <!-- MINICARD-START -->
       {% include related-patterns.html %}
@@ -43,9 +43,4 @@
 <script>
   document.title = "{{pattern.name}} | Meshery Catalog";
 </script>
-
-<script>
-  function handleClick(link){
-    window.open(link);
-  }
-</script>
+<script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>

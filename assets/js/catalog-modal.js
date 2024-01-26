@@ -8,8 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const numberOfLines = getNumberOfLines(content);
 
-    console.log("numberOfLines", numberOfLines);
-
     if (numberOfLines > 3) {
       readMore.style.display = 'inline';
     } else {
