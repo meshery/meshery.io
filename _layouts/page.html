@@ -11,8 +11,14 @@ layout: default
 				<img src="{{- postImage | relative_url -}}" alt="" class="featured-image"> -->
 			{%- endif -%}
 
-			{% if page.title %}
-				<h2>{{ page.title }}</h2>
+			{% if page.heading %}	
+					<h2>
+					  {% if page.collection == "Catalog" %}
+					    {{ page.heading }}
+					  {% else %}
+					    {{ page.title }}
+					  {% endif %} 
+					</h2>
 				{% if page.subheading %}
 				<h3 class="subheading">{{ page.subheading }}</h3>
 				{% endif %}
