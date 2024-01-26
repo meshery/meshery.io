@@ -257,12 +257,16 @@
 
   // Loop over all pattern cards to get there compatibility, type and technology so we can make a unique list out of it
   for(let i=0; i<patternCards.length; i++){
-      const filter = patternCards[i].getAttribute("filter")
-      cardCompatibility.push(filter);
       const type = patternCards[i].getAttribute("type")
       if(type && type !== "wasm filter") cardType.add(type.toLowerCase()); 
       const technology = patternCards[i].getAttribute("technology")
-      if(technology) cardTechnology.add(technology);
+      if(technology){
+        let t = JSON.parse(technology)
+        for (let i = 0; i < t.length; i++) {
+          cardTechnology.add(t[i]);
+          cardCompatibility.push(t[i]);
+        }
+      }
   }
 
   // Add an "All" option to the type list and convert the set to array
@@ -296,7 +300,6 @@
   // remove duplicate entries of integrations in filter section 
   // Maintain a list of filterEntries, whenever you come across a new one, add it to list, else if the filter already exists in the list skip the further process of creating nodes
   const filterEntries = [];
-  
   // For creating a list of checkboxes for Technologies section
   for (let i = 0; i < data.length; i++) {
     const count = cardCompatibility.filter((filter) => filter.includes(data[i].name)).length;
@@ -324,8 +327,8 @@
     inputContainer.appendChild(input);
 
     const label = document.createElement("label");
-    let colorImg = data[i].color?.split("/integration")?.join("");
-    let whiteImg = data[i].white?.split("/integration")?.join("");
+    let colorImg = data[i].color;
+    let whiteImg = data[i].white;
 
     label.innerHTML = `<img src="${colorImg}" id="logo-dark-light" data-logo-for-dark="${whiteImg ?? colorImg}"
                     data-logo-for-light="${colorImg}" /><div class="name">${data[i].name}</div><div class="badge">${count}</div>`;
@@ -354,7 +357,7 @@
       });
 
     // Select all pattern cards
-    const patternCards = document.querySelectorAll(".patternCard");
+    // const patternCards = document.querySelectorAll(".patternCard");
 
     // If no checkbox is selected, show all pattern cards and enable the "All" radio button
     if (!filterArray.length) {
@@ -366,21 +369,29 @@
 
       // Loop over all pattern cards and check if any of the filter in filterArray is present in pattern card's filter attribute
       // If yes, the show the card, else hide it
-      for (let j = 0; j < patternCards.length; j++) {
-        const filter = patternCards[j].getAttribute("filter");
-        let showCard = false;
-
-        for (let i = 0; i < filterArray.length; i++) {
-          if (filter.includes(filterArray[i])) {
-            showCard = true;
-            break;
+      for(let i=0; i<patternCards.length; i++){
+        let cc = [];
+        const type = patternCards[i].getAttribute("type")
+        const technology = patternCards[i].getAttribute("technology")
+        if(technology){
+          let t = JSON.parse(technology)
+          for (let k = 0; k < t.length; k++) {
+            cc.push(t[k]);
           }
         }
-        if (showCard) {
-          patternCards[j].style.display = "block";
-        } else {
-          patternCards[j].style.display = "none";
-        }
+         let showCard = false;
+
+          for (let j = 0; j < filterArray.length; j++) {
+            if (cc.includes(filterArray[j])) {
+              showCard = true;
+              break;
+            }
+          }
+          if (showCard) {
+            patternCards[i].style.display = "block";
+          } else {
+            patternCards[i].style.display = "none";
+          }
       }
     }
   }
@@ -410,4 +421,11 @@
       }
     }
   }
+
+
+  // load defaul all selection on page load
+  window.onload = function() {
+    showFilterCards();
+  }
+
 </script>
