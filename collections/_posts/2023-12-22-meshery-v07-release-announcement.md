@@ -79,7 +79,7 @@ Meshery's new capabilities registry captures the ability of your Meshery deploym
 
 A new capability register browser is added to Meshery's UI to help you explore the capabilities of your Meshery deployment. This can be explored under the settings page of your Meshery UI.
 
-Read more about [Meshery Models](https://docs.meshery.io/concepts/models)
+Read more about [Meshery Models](https://docs.meshery.io/concepts/logical/models)
 
 ### New Meshery Extension Points
 
@@ -88,7 +88,7 @@ A handful of new extension points have been added to Meshery in this release.
 - User Account Management: This enables you to manage your user account, your organization, teams, and users.
 - Collaborators: the ability for Remote Providers to offer real-time presence of Meshery users to facilitate user collaboration and awareness.
 
-Read more about [Meshery Extension Points](https://docs.meshery.io/concepts/extension-points)
+Read more about [Meshery Extension Points](https://docs.meshery.io/extensibility#extension-points)
 
 ### Multi-tenancy with Organizations and Environments
 
@@ -96,7 +96,7 @@ Meshery now supports multi-tenancy through the use of Organizations. This allows
 
 Environment is a logical group of your organization's resources. This allows you to group your resources by environment. For example, you can have a production environment and a staging environment. This allows you to easily switch between environments and ensure that you are using the correct resources for your environment. Each of your environments can have a number of connections, like Kubernetes clusters, Prometheus, Grafana, Jaeger, etc.
 
-Read more about [Environments](https://docs.meshery.io/concepts/environments)
+Read more about [Environments](https://docs.meshery.io/concepts/logical/environments)
 
 ### Gain Insights with the New System Dashboard
 

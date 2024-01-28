@@ -1,0 +1,239 @@
+name: Argo CD w/Dex
+services:
+  argocd-application-controller:
+    name: argocd-application-controller
+    type: StatefulSet
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        template:
+          spec:
+            containers:
+            - name: argocd-application-controller
+              security Context:
+                run As Non Root: false
+    traits:
+      meshmap:
+        edges: []
+        id: 0e9fdb94-b5a7-4d91-852a-21c380fb0c90
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: cylinder
+          styleOverrides: '{"height":"15","width":"15","x":"12","y":"20","background-opacity":"0"}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: 67.5
+          posY: 30
+        whiteboardData:
+          style:
+            z-index: 3
+  argocd-dex-server:
+    name: argocd-dex-server
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        template:
+          spec:
+            containers:
+            - env:
+              - name: DEX_OAUTH_CLIENT_SECRET
+                value From:
+                  secret Key Ref:
+                    key: token
+                    name: argocd-dex-server-oauth-token
+              name: dex
+    traits:
+      meshmap:
+        edges: []
+        id: acb24f23-8a51-42a9-8050-aaf682f452a3
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: parent
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: -68
+          posY: -31
+        whiteboardData:
+          style:
+            z-index: 6
+  argocd-redis:
+    name: argocd-redis
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        template:
+          spec:
+            security Context: null
+    traits:
+      meshmap:
+        edges: []
+        id: 95d32121-c807-44d4-88f5-14f78fd08285
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: parent
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: -68.5
+          posY: 33
+        whiteboardData:
+          style:
+            z-index: 4
+  argocd-repo-server:
+    name: argocd-repo-server
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        template:
+          spec:
+            containers:
+            - env:
+              - name: GNUPGHOME
+                value: /home/argocd/.gnupg
+              lifecycle:
+                post Start:
+                  exec:
+                    command:
+                    - /bin/sh
+                    - -c
+                    - gpg --import /key/*
+              name: argocd-repo-server
+              security Context:
+                read Only Root Filesystem: false
+              volume Mounts:
+              - mount Path: /key
+                name: key
+            volumes:
+            - name: key
+              secret:
+                secret Name: ksops-pgp-key
+    traits:
+      meshmap:
+        edges: []
+        id: 2fa37c53-8f4b-4512-826a-a284c5aa4390
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: parent
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: -1
+          posY: 33
+        whiteboardData:
+          style:
+            z-index: 8
+  argocd-server:
+    name: argocd-server
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        template:
+          spec:
+            containers:
+            - command:
+              - argocd-server
+              - --staticassets
+              - /shared/app
+              - --insecure
+              name: argocd-server
+    traits:
+      meshmap:
+        edges: []
+        id: 365c84ca-fe44-4b7d-8bda-caa235e837c6
+        label: argocd-server
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: parent
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: 1
+          posY: -31
+        whiteboardData:
+          style:
+            z-index: 10
