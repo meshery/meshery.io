@@ -1,5 +1,6 @@
 #integrations {
   background: var(--integrations-bg);
+  position: relative;
 
   & .integrations-heading {
     flex: 0 0 100%;
@@ -7,7 +8,7 @@
     flex-direction: column;
     text-align: center;
     z-index:2;
-    position:relative;
+    overflow: hidden;
 
     & h1 {
       line-height: 3.75rem;
@@ -27,28 +28,44 @@
     .parallel-right {
       position:absolute;
       display: inline;
-      top:-8rem;
-      right:-8rem;
+      top: -8rem;
+      right: 0;
       background-color: var(--integrations-bg);
       height:18rem;
-      width: 29%;
-      z-index:1;
+      width: 25%;
+      z-index:2;
       overflow: hidden;
-      -webkit-clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
-      clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+      -webkit-clip-path: polygon(25% 0, 100% 0, 100% 100%, 0 100%);
+      clip-path: polygon(25% 0, 100% 0, 100% 100%, 0 100%);
     }
     .parallel-left {
       position:absolute;
       display: inline;
       top:-8rem;
-      left:-8rem;
+      left: 0;
       background-color: var(--integrations-bg);
       height:18rem;
-      width: 29%;
-      z-index:1;
+      width: 25%;
+      z-index:2;
       overflow: hidden;
-      -webkit-clip-path: polygon(0 0, 75% 0, 100% 100%, 25% 100%);
-      clip-path: polygon(0 0, 75% 0, 100% 100%, 25% 100%);
+      -webkit-clip-path: polygon(0 0, 75% 0, 100% 100%, 0 100%);
+      clip-path: polygon(0 0, 75% 0, 100% 100%, 0 100%);
+    }
+
+    @media (max-width: 1192px) {
+      .parallel-left, .parallel-right {
+        top: -6rem;
+      }
+    }
+    @media (max-width: 786px) {
+      .parallel-left, .parallel-right {
+        top: -4.5rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .parallel-left, .parallel-right {
+        top: 0;
+      }
     }
   }
 
