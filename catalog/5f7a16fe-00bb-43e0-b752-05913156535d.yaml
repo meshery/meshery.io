@@ -1,5 +1,112 @@
 name: Relationship Master Design
 services:
+  deployment-kq:
+    name: deployment-kq
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    version: v1.25.2
+    model: kubernetes
+    traits:
+      meshmap:
+        edges: []
+        id: 5001101c-f759-4aa9-bad9-df589a02177f
+        label: Deployment
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          components: []
+          displayName: Kubernetes
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          id: bf0328dc-09bf-532e-952e-4d20b81ab5b0
+          metadata:
+            isAnnotation: false
+            svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          name: kubernetes
+          relationships: []
+          version: v1.25.2
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: parent
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: 781.5946040551047
+          posY: -202.13278408458746
+        whiteboardData:
+          style:
+            z-index: 1008
+  horizontal-pod-autoscaler-wa:
+    name: horizontal-pod-autoscaler-wa
+    type: HorizontalPodAutoscaler
+    apiVersion: autoscaling/v1
+    namespace: default
+    version: v1.25.2
+    model: kubernetes
+    traits:
+      meshmap:
+        edges: []
+        id: 14a02ef4-e89d-417e-9dfe-580d61279d2a
+        label: Horizontal Pod Autoscaler
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          components: []
+          displayName: Kubernetes
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          id: bf0328dc-09bf-532e-952e-4d20b81ab5b0
+          metadata:
+            isAnnotation: false
+            svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          name: kubernetes
+          relationships: []
+          version: v1.25.2
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: circle
+          styleOverrides: ""
+          subCategory: Orchestration & Management
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: 782.2056929916218
+          posY: -142.24606830590162
+        whiteboardData:
+          style:
+            z-index: 1009
   my-config:
     name: my-config
     type: ConfigMap
@@ -686,7 +793,8 @@ services:
         - image: nginx
           name: container
         volumes:
-        - persistent Volume Claim:
+        - name: my-volume
+          persistent Volume Claim:
             claim Name: persistent-volume-claim-kq
     traits:
       meshmap:
