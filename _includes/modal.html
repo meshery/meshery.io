@@ -16,7 +16,11 @@
         {%if pattern.filters.type == "wasm filter" %}
         <img class="image-class" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png" onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy" onclick="toggleFullScreenImage('{{ pattern.patternId }}')" />
         {%else%}
-        <img class="image-class" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png" onerror="this.src='/assets/images/patterns/service-mesh.svg'" loading="lazy" onclick="toggleFullScreenImage('{{ pattern.patternId }}')" />
+        <img class="image-class pattern-snapshot"  
+        data-snapshot-light="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png"
+        data-snapshot-dark="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-dark.png"
+        src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-dark.png"
+        onerror="this.src='/assets/images/patterns/service-mesh.svg'" loading="lazy" onclick="toggleFullScreenImage('{{ pattern.patternId }}')" />
         {%endif%}
         <h4 class="related-patterns">RELATED PATTERNS</h4>
         {% include related-patterns.html %}

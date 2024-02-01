@@ -1,0 +1,47 @@
+name: Simple-Daemon-Set
+services:
+  918d7cc1-328d-45e4-8ab0-e58cee749bc0:
+    name: fluentd-elasticsearch
+    type: DaemonSet
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        selector:
+          match Labels:
+            name: fluentd-elasticsearch
+        template:
+          metadata:
+            labels:
+              name: fluentd-elasticsearch
+          spec:
+            containers:
+            - image: quay.io/fluentd_elasticsearch/fluentd:v2.5.2
+              name: fluentd-elasticsearch
+            termination Grace Period Seconds: 30
+            tolerations:
+            - effect: NoSchedule
+              key: node-role.kubernetes.io/master
+    traits:
+      meshmap:
+        id: 0024ca78-6058-4581-b6a8-2019b5c22211
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: circle
+          styleOverrides: ""
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/daemonset-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/daemonset-color.svg

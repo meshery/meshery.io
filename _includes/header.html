@@ -70,6 +70,12 @@
           allLogos.forEach(e => {
             e.src = body.classList.contains("dark-mode") ? e.dataset.logoForDark : e.dataset.logoForLight;
           });
+          
+          // emit the theme event 
+          document.dispatchEvent(new CustomEvent("themeChange",{
+			      detail : {value : localStorage.getItem("mode")},
+			      bubbles: true ,
+		      }))
         });
       </script>
 

@@ -259,7 +259,7 @@ services:
           posY: 509.4720622841096
         whiteboardData:
           style:
-            z-index: 17
+            z-index: 29
   currencyservice:
     name: currencyservice
     type: Deployment
@@ -343,7 +343,7 @@ services:
           posY: 436.4720622841096
         whiteboardData:
           style:
-            z-index: 31
+            z-index: 33
   emailservice:
     name: emailservice
     type: Deployment
@@ -1220,8 +1220,8 @@ services:
           posY: 230.01338023275076
         whiteboardData:
           style:
-            z-index: 19
-  frontend-szmer:
+            z-index: 17
+  frontend-dgear:
     name: frontend
     type: Service
     apiVersion: v1
@@ -3642,7 +3642,7 @@ services:
         whiteboardData:
           style:
             z-index: 13
-  frontend-wdjrv:
+  frontend-nhprn:
     name: frontend
     type: Deployment
     apiVersion: apps/v1
@@ -5428,7 +5428,7 @@ services:
           posY: 183.28225762901275
         whiteboardData:
           style:
-            z-index: 33
+            z-index: 31
   productcatalogservice:
     name: productcatalogservice
     type: Deployment
@@ -5511,7 +5511,7 @@ services:
           posY: 509.4720622841096
         whiteboardData:
           style:
-            z-index: 29
+            z-index: 19
   recommendationservice:
     name: recommendationservice
     type: Deployment
@@ -6474,883 +6474,8 @@ services:
           posY: 509.4720622841096
         whiteboardData:
           style:
-            z-index: 21
-  shippingservice-snhbs:
-    name: shippingservice
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
-    settings:
-      spec:
-        selector:
-          match Labels:
-            app: shippingservice
-        template:
-          metadata:
-            labels:
-              app: shippingservice
-          spec:
-            containers:
-            - env:
-              - name: PORT
-                value: "50051"
-              - name: DISABLE_PROFILER
-                value: "1"
-              image: shippingservice
-              liveness Probe:
-                grpc:
-                  port: 50051
-              name: server
-              ports:
-              - container Port: 50051
-              readiness Probe:
-                grpc:
-                  port: 50051
-                period Seconds: 5
-              resources:
-                limits:
-                  cpu: 200m
-                  memory: 128Mi
-                requests:
-                  cpu: 100m
-                  memory: 64Mi
-              security Context:
-                allow Privilege Escalation: false
-                capabilities:
-                  drop:
-                  - ALL
-                privileged: false
-                read Only Root Filesystem: true
-            security Context:
-              fs Group: 1000
-              run As Group: 1000
-              run As Non Root: true
-              run As User: 1000
-            service Account Name: default
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: ff31d7b0-4b13-4c29-ba32-407797ff28ef
-            metadata:
-              port: 50051
-              protocol: TCP
-            source: c3361357-cf69-4980-8a4f-b7ca3559d85e
-            subType: Network
-            target: f0214331-04e0-473d-9fd4-942a34a1d81e
-          style:
-            curve-style:
-              bypass: true
-              bypassed:
-                name: curve-style
-                strValue: bezier
-                value: bezier
-              name: curve-style
-              strValue: bezier
-              value: bezier
-            font-family:
-              bypass: true
-              bypassed:
-                name: font-family
-                strValue: Qanelas Soft, sans-serif
-                value:
-                - Qanelas Soft, sans-serif
-                - Qanelas Soft, sans-serif
-              name: font-family
-              strValue: Qanelas Soft, sans-serif
-              value:
-              - Qanelas Soft, sans-serif
-              - Qanelas Soft, sans-serif
-            font-size:
-              bypass: true
-              bypassed:
-                name: font-size
-                pfValue: 6
-                strValue: 6px
-                units: px
-                value: 6
-              name: font-size
-              pfValue: 6
-              strValue: 6px
-              units: px
-              value: 6
-            line-color:
-              bypass: true
-              bypassed:
-                mapping:
-                  mapped:
-                    fn: true
-                    mapping: true
-                  name: line-color
-                  prevFnValue: '#7aa1f0'
-                  strValue: fn
-                name: line-color
-                pfValue:
-                - 122
-                - 161
-                - 240
-                strValue: rgb(122,161,240)
-                value:
-                - 122
-                - 161
-                - 240
-              name: line-color
-              pfValue:
-              - 122
-              - 161
-              - 240
-              strValue: rgb(122,161,240)
-              value:
-              - 122
-              - 161
-              - 240
-            line-style:
-              bypass: true
-              bypassed:
-                name: line-style
-                strValue: dotted
-                value: dotted
-              name: line-style
-              strValue: dotted
-              value: dotted
-            target-arrow-shape:
-              bypass: true
-              bypassed:
-                name: target-arrow-shape
-                strValue: vee
-                value: vee
-              name: target-arrow-shape
-              strValue: vee
-              value: vee
-            target-label:
-              bypass: true
-              name: target-label
-              strValue: 50051/TCP
-              value: 50051/TCP
-            target-text-margin-y:
-              bypass: true
-              name: target-text-margin-y
-              pfValue: -6
-              strValue: -6px
-              units: px
-              value: -6
-            target-text-offset:
-              bypass: true
-              name: target-text-offset
-              pfValue: 16
-              strValue: 16px
-              units: px
-              value: 16
-            text-events:
-              bypass: true
-              bypassed:
-                name: text-events
-                strValue: "yes"
-                value: "yes"
-              name: text-events
-              strValue: "yes"
-              value: "yes"
-            text-outline-color:
-              bypass: true
-              bypassed:
-                name: text-outline-color
-                pfValue:
-                - 255
-                - 255
-                - 255
-                strValue: rgb(255,255,255)
-                value:
-                - 255
-                - 255
-                - 255
-              name: text-outline-color
-              pfValue:
-              - 255
-              - 255
-              - 255
-              strValue: rgb(255,255,255)
-              value:
-              - 255
-              - 255
-              - 255
-            text-outline-width:
-              bypass: true
-              bypassed:
-                name: text-outline-width
-                pfValue: 1
-                strValue: 1px
-                units: px
-                value: 1
-              name: text-outline-width
-              pfValue: 1
-              strValue: 1px
-              units: px
-              value: 1
-            text-wrap:
-              bypass: true
-              bypassed:
-                name: text-wrap
-                strValue: wrap
-                value: wrap
-              name: text-wrap
-              strValue: wrap
-              value: wrap
-            width:
-              bypass: true
-              bypassed:
-                name: width
-                pfValue: 1.5
-                strValue: 1.5px
-                units: px
-                value: 1.5
-              name: width
-              pfValue: 1.5
-              strValue: 1.5px
-              units: px
-              value: 1.5
-            z-index:
-              bypass: true
-              bypassed:
-                name: z-index
-                pfValue: 999
-                strValue: "999"
-                value: 999
-              name: z-index
-              pfValue: 999
-              strValue: "999"
-              value: 999
-            z-index-compare:
-              bypass: true
-              bypassed:
-                name: z-index-compare
-                strValue: manual
-                value: manual
-              name: z-index-compare
-              strValue: manual
-              value: manual
-        - data:
-            id: a240c5d6-f8c5-4c14-a5b9-2d0613af2862
-            metadata:
-              port: 50051
-              protocol: TCP
-            source: c3361357-cf69-4980-8a4f-b7ca3559d85e
-            subType: Network
-            target: f0214331-04e0-473d-9fd4-942a34a1d81e
-          style:
-            curve-style:
-              bypass: true
-              bypassed:
-                name: curve-style
-                strValue: bezier
-                value: bezier
-              name: curve-style
-              strValue: bezier
-              value: bezier
-            font-family:
-              bypass: true
-              bypassed:
-                name: font-family
-                strValue: Qanelas Soft, sans-serif
-                value:
-                - Qanelas Soft, sans-serif
-                - Qanelas Soft, sans-serif
-              name: font-family
-              strValue: Qanelas Soft, sans-serif
-              value:
-              - Qanelas Soft, sans-serif
-              - Qanelas Soft, sans-serif
-            font-size:
-              bypass: true
-              bypassed:
-                name: font-size
-                pfValue: 6
-                strValue: 6px
-                units: px
-                value: 6
-              name: font-size
-              pfValue: 6
-              strValue: 6px
-              units: px
-              value: 6
-            line-color:
-              bypass: true
-              bypassed:
-                mapping:
-                  mapped:
-                    fn: true
-                    mapping: true
-                  name: line-color
-                  prevFnValue: '#7aa1f0'
-                  strValue: fn
-                name: line-color
-                pfValue:
-                - 122
-                - 161
-                - 240
-                strValue: rgb(122,161,240)
-                value:
-                - 122
-                - 161
-                - 240
-              name: line-color
-              pfValue:
-              - 122
-              - 161
-              - 240
-              strValue: rgb(122,161,240)
-              value:
-              - 122
-              - 161
-              - 240
-            line-style:
-              bypass: true
-              bypassed:
-                name: line-style
-                strValue: dotted
-                value: dotted
-              name: line-style
-              strValue: dotted
-              value: dotted
-            target-arrow-shape:
-              bypass: true
-              bypassed:
-                name: target-arrow-shape
-                strValue: vee
-                value: vee
-              name: target-arrow-shape
-              strValue: vee
-              value: vee
-            target-label:
-              bypass: true
-              name: target-label
-              strValue: 50051/TCP
-              value: 50051/TCP
-            target-text-margin-y:
-              bypass: true
-              name: target-text-margin-y
-              pfValue: -6
-              strValue: -6px
-              units: px
-              value: -6
-            target-text-offset:
-              bypass: true
-              name: target-text-offset
-              pfValue: 16
-              strValue: 16px
-              units: px
-              value: 16
-            text-events:
-              bypass: true
-              bypassed:
-                name: text-events
-                strValue: "yes"
-                value: "yes"
-              name: text-events
-              strValue: "yes"
-              value: "yes"
-            text-outline-color:
-              bypass: true
-              bypassed:
-                name: text-outline-color
-                pfValue:
-                - 255
-                - 255
-                - 255
-                strValue: rgb(255,255,255)
-                value:
-                - 255
-                - 255
-                - 255
-              name: text-outline-color
-              pfValue:
-              - 255
-              - 255
-              - 255
-              strValue: rgb(255,255,255)
-              value:
-              - 255
-              - 255
-              - 255
-            text-outline-width:
-              bypass: true
-              bypassed:
-                name: text-outline-width
-                pfValue: 1
-                strValue: 1px
-                units: px
-                value: 1
-              name: text-outline-width
-              pfValue: 1
-              strValue: 1px
-              units: px
-              value: 1
-            text-wrap:
-              bypass: true
-              bypassed:
-                name: text-wrap
-                strValue: wrap
-                value: wrap
-              name: text-wrap
-              strValue: wrap
-              value: wrap
-            width:
-              bypass: true
-              bypassed:
-                name: width
-                pfValue: 1.5
-                strValue: 1.5px
-                units: px
-                value: 1.5
-              name: width
-              pfValue: 1.5
-              strValue: 1.5px
-              units: px
-              value: 1.5
-            z-index:
-              bypass: true
-              bypassed:
-                name: z-index
-                pfValue: 999
-                strValue: "999"
-                value: 999
-              name: z-index
-              pfValue: 999
-              strValue: "999"
-              value: 999
-            z-index-compare:
-              bypass: true
-              bypassed:
-                name: z-index-compare
-                strValue: manual
-                value: manual
-              name: z-index-compare
-              strValue: manual
-              value: manual
-        - data:
-            id: aef50800-2157-4fa6-b707-76acc0235823
-            metadata:
-              port: 50051
-              protocol: TCP
-            source: c3361357-cf69-4980-8a4f-b7ca3559d85e
-            subType: Network
-            target: f0214331-04e0-473d-9fd4-942a34a1d81e
-          style:
-            curve-style:
-              bypass: true
-              bypassed:
-                name: curve-style
-                strValue: bezier
-                value: bezier
-              name: curve-style
-              strValue: bezier
-              value: bezier
-            font-family:
-              bypass: true
-              bypassed:
-                name: font-family
-                strValue: Qanelas Soft, sans-serif
-                value:
-                - Qanelas Soft, sans-serif
-                - Qanelas Soft, sans-serif
-              name: font-family
-              strValue: Qanelas Soft, sans-serif
-              value:
-              - Qanelas Soft, sans-serif
-              - Qanelas Soft, sans-serif
-            font-size:
-              bypass: true
-              bypassed:
-                name: font-size
-                pfValue: 6
-                strValue: 6px
-                units: px
-                value: 6
-              name: font-size
-              pfValue: 6
-              strValue: 6px
-              units: px
-              value: 6
-            line-color:
-              bypass: true
-              bypassed:
-                mapping:
-                  mapped:
-                    fn: true
-                    mapping: true
-                  name: line-color
-                  prevFnValue: '#7aa1f0'
-                  strValue: fn
-                name: line-color
-                pfValue:
-                - 122
-                - 161
-                - 240
-                strValue: rgb(122,161,240)
-                value:
-                - 122
-                - 161
-                - 240
-              name: line-color
-              pfValue:
-              - 122
-              - 161
-              - 240
-              strValue: rgb(122,161,240)
-              value:
-              - 122
-              - 161
-              - 240
-            line-style:
-              bypass: true
-              bypassed:
-                name: line-style
-                strValue: dotted
-                value: dotted
-              name: line-style
-              strValue: dotted
-              value: dotted
-            target-arrow-shape:
-              bypass: true
-              bypassed:
-                name: target-arrow-shape
-                strValue: vee
-                value: vee
-              name: target-arrow-shape
-              strValue: vee
-              value: vee
-            target-label:
-              bypass: true
-              name: target-label
-              strValue: 50051/TCP
-              value: 50051/TCP
-            target-text-margin-y:
-              bypass: true
-              name: target-text-margin-y
-              pfValue: -6
-              strValue: -6px
-              units: px
-              value: -6
-            target-text-offset:
-              bypass: true
-              name: target-text-offset
-              pfValue: 16
-              strValue: 16px
-              units: px
-              value: 16
-            text-events:
-              bypass: true
-              bypassed:
-                name: text-events
-                strValue: "yes"
-                value: "yes"
-              name: text-events
-              strValue: "yes"
-              value: "yes"
-            text-outline-color:
-              bypass: true
-              bypassed:
-                name: text-outline-color
-                pfValue:
-                - 255
-                - 255
-                - 255
-                strValue: rgb(255,255,255)
-                value:
-                - 255
-                - 255
-                - 255
-              name: text-outline-color
-              pfValue:
-              - 255
-              - 255
-              - 255
-              strValue: rgb(255,255,255)
-              value:
-              - 255
-              - 255
-              - 255
-            text-outline-width:
-              bypass: true
-              bypassed:
-                name: text-outline-width
-                pfValue: 1
-                strValue: 1px
-                units: px
-                value: 1
-              name: text-outline-width
-              pfValue: 1
-              strValue: 1px
-              units: px
-              value: 1
-            text-wrap:
-              bypass: true
-              bypassed:
-                name: text-wrap
-                strValue: wrap
-                value: wrap
-              name: text-wrap
-              strValue: wrap
-              value: wrap
-            width:
-              bypass: true
-              bypassed:
-                name: width
-                pfValue: 1.5
-                strValue: 1.5px
-                units: px
-                value: 1.5
-              name: width
-              pfValue: 1.5
-              strValue: 1.5px
-              units: px
-              value: 1.5
-            z-index:
-              bypass: true
-              bypassed:
-                name: z-index
-                pfValue: 999
-                strValue: "999"
-                value: 999
-              name: z-index
-              pfValue: 999
-              strValue: "999"
-              value: 999
-            z-index-compare:
-              bypass: true
-              bypassed:
-                name: z-index-compare
-                strValue: manual
-                value: manual
-              name: z-index-compare
-              strValue: manual
-              value: manual
-        - data:
-            id: 647db698-0fd9-4df5-9358-c9cfb36c200a
-            metadata:
-              port: 50051
-              protocol: TCP
-            source: c3361357-cf69-4980-8a4f-b7ca3559d85e
-            subType: Network
-            target: f0214331-04e0-473d-9fd4-942a34a1d81e
-          style:
-            curve-style:
-              bypass: true
-              bypassed:
-                name: curve-style
-                strValue: bezier
-                value: bezier
-              name: curve-style
-              strValue: bezier
-              value: bezier
-            font-family:
-              bypass: true
-              bypassed:
-                name: font-family
-                strValue: Qanelas Soft, sans-serif
-                value:
-                - Qanelas Soft, sans-serif
-                - Qanelas Soft, sans-serif
-              name: font-family
-              strValue: Qanelas Soft, sans-serif
-              value:
-              - Qanelas Soft, sans-serif
-              - Qanelas Soft, sans-serif
-            font-size:
-              bypass: true
-              bypassed:
-                name: font-size
-                pfValue: 6
-                strValue: 6px
-                units: px
-                value: 6
-              name: font-size
-              pfValue: 6
-              strValue: 6px
-              units: px
-              value: 6
-            line-color:
-              bypass: true
-              bypassed:
-                mapping:
-                  mapped:
-                    fn: true
-                    mapping: true
-                  name: line-color
-                  prevFnValue: '#7aa1f0'
-                  strValue: fn
-                name: line-color
-                pfValue:
-                - 122
-                - 161
-                - 240
-                strValue: rgb(122,161,240)
-                value:
-                - 122
-                - 161
-                - 240
-              name: line-color
-              pfValue:
-              - 122
-              - 161
-              - 240
-              strValue: rgb(122,161,240)
-              value:
-              - 122
-              - 161
-              - 240
-            line-style:
-              bypass: true
-              bypassed:
-                name: line-style
-                strValue: dotted
-                value: dotted
-              name: line-style
-              strValue: dotted
-              value: dotted
-            target-arrow-shape:
-              bypass: true
-              bypassed:
-                name: target-arrow-shape
-                strValue: vee
-                value: vee
-              name: target-arrow-shape
-              strValue: vee
-              value: vee
-            target-label:
-              bypass: true
-              name: target-label
-              strValue: 50051/TCP
-              value: 50051/TCP
-            target-text-margin-y:
-              bypass: true
-              name: target-text-margin-y
-              pfValue: -6
-              strValue: -6px
-              units: px
-              value: -6
-            target-text-offset:
-              bypass: true
-              name: target-text-offset
-              pfValue: 16
-              strValue: 16px
-              units: px
-              value: 16
-            text-events:
-              bypass: true
-              bypassed:
-                name: text-events
-                strValue: "yes"
-                value: "yes"
-              name: text-events
-              strValue: "yes"
-              value: "yes"
-            text-outline-color:
-              bypass: true
-              bypassed:
-                name: text-outline-color
-                pfValue:
-                - 255
-                - 255
-                - 255
-                strValue: rgb(255,255,255)
-                value:
-                - 255
-                - 255
-                - 255
-              name: text-outline-color
-              pfValue:
-              - 255
-              - 255
-              - 255
-              strValue: rgb(255,255,255)
-              value:
-              - 255
-              - 255
-              - 255
-            text-outline-width:
-              bypass: true
-              bypassed:
-                name: text-outline-width
-                pfValue: 1
-                strValue: 1px
-                units: px
-                value: 1
-              name: text-outline-width
-              pfValue: 1
-              strValue: 1px
-              units: px
-              value: 1
-            text-wrap:
-              bypass: true
-              bypassed:
-                name: text-wrap
-                strValue: wrap
-                value: wrap
-              name: text-wrap
-              strValue: wrap
-              value: wrap
-            width:
-              bypass: true
-              bypassed:
-                name: width
-                pfValue: 1.5
-                strValue: 1.5px
-                units: px
-                value: 1.5
-              name: width
-              pfValue: 1.5
-              strValue: 1.5px
-              units: px
-              value: 1.5
-            z-index:
-              bypass: true
-              bypassed:
-                name: z-index
-                pfValue: 999
-                strValue: "999"
-                value: 999
-              name: z-index
-              pfValue: 999
-              strValue: "999"
-              value: 999
-            z-index-compare:
-              bypass: true
-              bypassed:
-                name: z-index-compare
-                strValue: manual
-                value: manual
-              name: z-index-compare
-              strValue: manual
-              value: manual
-        id: f0214331-04e0-473d-9fd4-942a34a1d81e
-        label: shippingservice
-        meshmodel-metadata:
-          capabilities: ""
-          genealogy: parent
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: Created by Meshery Authors
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-pentagon
-          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-        position:
-          posX: -166.69640375761045
-          posY: 162.52793771589043
-        whiteboardData:
-          style:
             z-index: 25
-  shippingservice-tersw:
+  shippingservice-rqjih:
     name: shippingservice
     type: Service
     apiVersion: v1
@@ -7361,7 +6486,22 @@ services:
         ports:
         - name: grpc
           port: 50051
+          protocol: TCP
           target Port: 50051
+        - port: 50051
+          protocol: TCP
+        - port: 50051
+          protocol: TCP
+        - port: 50051
+          protocol: TCP
+        - port: 50051
+          protocol: TCP
+        - port: 50051
+          protocol: TCP
+        - port: 50051
+          protocol: TCP
+        - port: 50051
+          protocol: TCP
         selector:
           app: shippingservice
         type: ClusterIP
@@ -8979,3 +8119,878 @@ services:
         whiteboardData:
           style:
             z-index: 14
+  shippingservice-sxcpd:
+    name: shippingservice
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        selector:
+          match Labels:
+            app: shippingservice
+        template:
+          metadata:
+            labels:
+              app: shippingservice
+          spec:
+            containers:
+            - env:
+              - name: PORT
+                value: "50051"
+              - name: DISABLE_PROFILER
+                value: "1"
+              image: shippingservice
+              liveness Probe:
+                grpc:
+                  port: 50051
+              name: server
+              ports:
+              - container Port: 50051
+              readiness Probe:
+                grpc:
+                  port: 50051
+                period Seconds: 5
+              resources:
+                limits:
+                  cpu: 200m
+                  memory: 128Mi
+                requests:
+                  cpu: 100m
+                  memory: 64Mi
+              security Context:
+                allow Privilege Escalation: false
+                capabilities:
+                  drop:
+                  - ALL
+                privileged: false
+                read Only Root Filesystem: true
+            security Context:
+              fs Group: 1000
+              run As Group: 1000
+              run As Non Root: true
+              run As User: 1000
+            service Account Name: default
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: ff31d7b0-4b13-4c29-ba32-407797ff28ef
+            metadata:
+              port: 50051
+              protocol: TCP
+            source: c3361357-cf69-4980-8a4f-b7ca3559d85e
+            subType: Network
+            target: f0214331-04e0-473d-9fd4-942a34a1d81e
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              bypassed:
+                mapping:
+                  mapped:
+                    fn: true
+                    mapping: true
+                  name: line-color
+                  prevFnValue: '#7aa1f0'
+                  strValue: fn
+                name: line-color
+                pfValue:
+                - 122
+                - 161
+                - 240
+                strValue: rgb(122,161,240)
+                value:
+                - 122
+                - 161
+                - 240
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 50051/TCP
+              value: 50051/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: a240c5d6-f8c5-4c14-a5b9-2d0613af2862
+            metadata:
+              port: 50051
+              protocol: TCP
+            source: c3361357-cf69-4980-8a4f-b7ca3559d85e
+            subType: Network
+            target: f0214331-04e0-473d-9fd4-942a34a1d81e
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              bypassed:
+                mapping:
+                  mapped:
+                    fn: true
+                    mapping: true
+                  name: line-color
+                  prevFnValue: '#7aa1f0'
+                  strValue: fn
+                name: line-color
+                pfValue:
+                - 122
+                - 161
+                - 240
+                strValue: rgb(122,161,240)
+                value:
+                - 122
+                - 161
+                - 240
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 50051/TCP
+              value: 50051/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: aef50800-2157-4fa6-b707-76acc0235823
+            metadata:
+              port: 50051
+              protocol: TCP
+            source: c3361357-cf69-4980-8a4f-b7ca3559d85e
+            subType: Network
+            target: f0214331-04e0-473d-9fd4-942a34a1d81e
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              bypassed:
+                mapping:
+                  mapped:
+                    fn: true
+                    mapping: true
+                  name: line-color
+                  prevFnValue: '#7aa1f0'
+                  strValue: fn
+                name: line-color
+                pfValue:
+                - 122
+                - 161
+                - 240
+                strValue: rgb(122,161,240)
+                value:
+                - 122
+                - 161
+                - 240
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 50051/TCP
+              value: 50051/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 647db698-0fd9-4df5-9358-c9cfb36c200a
+            metadata:
+              port: 50051
+              protocol: TCP
+            source: c3361357-cf69-4980-8a4f-b7ca3559d85e
+            subType: Network
+            target: f0214331-04e0-473d-9fd4-942a34a1d81e
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              bypassed:
+                mapping:
+                  mapped:
+                    fn: true
+                    mapping: true
+                  name: line-color
+                  prevFnValue: '#7aa1f0'
+                  strValue: fn
+                name: line-color
+                pfValue:
+                - 122
+                - 161
+                - 240
+                strValue: rgb(122,161,240)
+                value:
+                - 122
+                - 161
+                - 240
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            target-label:
+              bypass: true
+              name: target-label
+              strValue: 50051/TCP
+              value: 50051/TCP
+            target-text-margin-y:
+              bypass: true
+              name: target-text-margin-y
+              pfValue: -6
+              strValue: -6px
+              units: px
+              value: -6
+            target-text-offset:
+              bypass: true
+              name: target-text-offset
+              pfValue: 16
+              strValue: 16px
+              units: px
+              value: 16
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: f0214331-04e0-473d-9fd4-942a34a1d81e
+        label: shippingservice
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: parent
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: -166.69640375761045
+          posY: 162.52793771589043
+        whiteboardData:
+          style:
+            z-index: 21

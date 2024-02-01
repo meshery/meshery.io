@@ -137,6 +137,7 @@
 
 	function setMode() {
 		document.body.classList.toggle("dark-mode")
+		
 		let layer5Logos = document.querySelectorAll("#layer5-logo");
 		let allLogos = document.querySelectorAll("#logo-dark-light");
 		if (document.body.classList.contains("dark-mode")) {
@@ -151,6 +152,10 @@
 		} else {
 			localStorage.setItem("mode", "light-mode")
 		}
+		document.dispatchEvent(new CustomEvent("themeChange",{
+			detail : {value : localStorage.getItem("mode")},
+			bubbles: true ,
+		}))
 	}
 	
 </script>
