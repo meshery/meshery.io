@@ -1,71 +1,26 @@
 name: Relationship Master Design
 services:
-  deployment-kq:
-    name: deployment-kq
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: default
-    version: v1.25.2
-    model: kubernetes
-    traits:
-      meshmap:
-        edges: []
-        id: 5001101c-f759-4aa9-bad9-df589a02177f
-        label: Deployment
-        meshmodel-data:
-          category:
-            metadata: null
-            name: Orchestration & Management
-          components: []
-          displayName: Kubernetes
-          displayhostname: ""
-          hostID: 00000000-0000-0000-0000-000000000000
-          hostname: ""
-          id: bf0328dc-09bf-532e-952e-4d20b81ab5b0
-          metadata:
-            isAnnotation: false
-            svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-          name: kubernetes
-          relationships: []
-          version: v1.25.2
-        meshmodel-metadata:
-          capabilities: ""
-          genealogy: parent
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: Created by Meshery Authors
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-pentagon
-          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-        position:
-          posX: 781.5946040551047
-          posY: -202.13278408458746
-        whiteboardData:
-          style:
-            z-index: 1008
-  horizontal-pod-autoscaler-wa:
-    name: horizontal-pod-autoscaler-wa
+  hpa:
+    name: hpa
     type: HorizontalPodAutoscaler
     apiVersion: autoscaling/v1
     namespace: default
     version: v1.25.2
     model: kubernetes
+    settings:
+      spec:
+        max Replicas: 100
+        min Replicas: 1
+        scale Target Ref:
+          api Version: v1
+          kind: deployment
+          name: my-deployment
+        target CPU Utilization Percentage: 42
     traits:
       meshmap:
         edges: []
         id: 14a02ef4-e89d-417e-9dfe-580d61279d2a
-        label: Horizontal Pod Autoscaler
+        label: hpa
         meshmodel-data:
           category:
             metadata: null
@@ -102,8 +57,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
-          posX: 782.2056929916218
-          posY: -142.24606830590162
+          posX: 773.6523557069055
+          posY: -128.19415705243898
         whiteboardData:
           style:
             z-index: 1009
@@ -166,6 +121,73 @@ services:
         whiteboardData:
           style:
             z-index: 4
+  my-deployment:
+    name: my-deployment
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    version: v1.25.2
+    model: kubernetes
+    settings:
+      spec:
+        selector:
+          match Labels:
+            app: my-app
+        template:
+          metadata:
+            labels:
+              app: my-app
+          spec:
+            containers:
+            - image: nginx
+              name: my-container
+    traits:
+      meshmap:
+        edges: []
+        id: 5001101c-f759-4aa9-bad9-df589a02177f
+        label: my-deployment
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          components: []
+          displayName: Kubernetes
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          id: bf0328dc-09bf-532e-952e-4d20b81ab5b0
+          metadata:
+            isAnnotation: false
+            svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          name: kubernetes
+          relationships: []
+          version: v1.25.2
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: parent
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: 774.8741247599703
+          posY: -187.4699201679308
+        whiteboardData:
+          style:
+            z-index: 1008
   my-pod:
     name: my-pod
     type: Pod
