@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-22.04
     outputs:
       contentID: ${{ steps.update_catalog_patterns.outputs.contentID }}
-      assetLocation: ${{ steps.update_catalog_patterns.outputs.assetLocation }}
+      # assetLocation: ${{ steps.update_catalog_patterns.outputs.assetLocation }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -47,17 +47,17 @@ jobs:
             patternCaveats="$(jq -r .[$idx].catalog_data.pattern_caveats temp.json)"
             patternType="$(jq -r .[$idx].catalog_data.type temp.json)"
             patternName="$(jq -r .[$idx].name temp.json)"
-            patternImageURL="$(jq -r .[$idx].catalog_data.imageURL temp.json)"
+            # patternImageURL="$(jq -r .[$idx].catalog_data.imageURL temp.json)"
             
             patternFile="$(jq -r .[$idx].pattern_file temp.json)"
 
-            if [[ $patternImageURL == "null" || $patternImageURL == "" ]]; then
-              patternImageURL=https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/$designId.png
-            fi
+            # if [[ $patternImageURL == "null" || $patternImageURL == "" ]]; then
+            #   patternImageURL=https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/$designId.png
+            # fi
             
             compatibility=""
             echo "contentID=$designId" >> $GITHUB_OUTPUT
-            echo "assetLocation=$patternImageURL" >> $GITHUB_OUTPUT
+            # echo "assetLocation=$patternImageURL" >> $GITHUB_OUTPUT
             # check if directory doesn't exists; then create it
             if [ ! -d "./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"" ]; then
               echo "$(echo $patternType | tr '[:upper:]' '[:lower:]') doesn't exist."
@@ -159,7 +159,7 @@ jobs:
 
             compatibility=""
             echo "contentID=$designId" >> $GITHUB_OUTPUT
-            echo "assetLocation=$patternImageURL" >> $GITHUB_OUTPUT
+            # echo "assetLocation=$patternImageURL" >> $GITHUB_OUTPUT
             # check if directory doesn't exists; then create it
             if [ ! -d "./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')"" ]; then
               echo "$(echo $filterType | tr '[:upper:]' '[:lower:]') doesn't exist."
