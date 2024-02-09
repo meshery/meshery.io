@@ -49,6 +49,7 @@ jobs:
             patternFile="$(jq -r .[$idx].pattern_file temp.json)"
             patternImageURL="$(jq -r .[$idx].catalog_data.imageURL temp.json)"
             if [[ "$patternImageURL" == "null" || "$patternImageURL" == "" ]]; then
+                # set default snapshot url
                 patternImageURL="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/$designId-light.png,https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/$designId-dark.png"
             else 
               url_type=$(jq -r ".[$idx].catalog_data.imageURL | type" temp.json)
