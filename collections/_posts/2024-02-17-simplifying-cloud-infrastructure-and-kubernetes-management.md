@@ -2,7 +2,7 @@
 date: 2024-02-17 4:30:05 -0530
 title: Simplifying Cloud Infrastructure and Kubernetes Management
 subheading: with Meshery
-author: James Horton
+author_contributor: James Horton
 categories: 
   - Meshery
   - Open Source
