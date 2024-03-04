@@ -63,11 +63,19 @@ jobs:
             
             compatibility=""
             echo "contentID=$designId" >> $GITHUB_OUTPUT
+
+            # sets default
+            if [[ $patternType == "null" ]]; then
+              patternType="Deployment"
+            fi
+
+            # updates patternType by converting upper to lower case and switching spaces with hyphen
+            updatedPatternType=$(echo $patternType | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
             # check if directory doesn't exists; then create it
-            if [ ! -d "./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"" ]; then
-              echo "$(echo $patternType | tr '[:upper:]' '[:lower:]') doesn't exist."
-              echo "Creating directory...$(echo $patternType | tr '[:upper:]' '[:lower:]')"
-              mkdir "./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')""
+            if [ ! -d "./collections/_catalog/"$updatedPatternType"" ]; then
+              echo "$updatedPatternType doesn't exist."
+              echo "Creating directory... $updatedPatternType"
+              mkdir "./collections/_catalog/"$updatedPatternType""
             fi
 
             if [[ $patternInfo == "null" ]]; then
@@ -76,10 +84,6 @@ jobs:
 
             if [[ $patternCaveats == "null" ]]; then
               patternCaveats="\"\""
-            fi
-
-            if [[ $patternType == "null" ]]; then
-              patternType="Deployment"
             fi
 
             compatLength=$(jq -r ".[$idx].catalog_data.compatibility | length" temp.json)
