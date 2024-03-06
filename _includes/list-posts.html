@@ -1,8 +1,15 @@
 {% for post in include.posts %}
 	<li class="blog-post">
 		<h3><a href="{% include relative-src.html src=post.url %}">{{ post.title }}</a></h3>
+
 		{% include post-title.html post=post %}
 		<div class="post-content">
+			{%- if post.featured-image -%}
+			<img src="{{- post.featured-image | relative_url -}}" alt="" class="featured-image">
+		{%- else -%}
+			<!-- {%- assign postImage = "/assets/images/image-default.jpg" -%}
+			<img src="{{- postImage | relative_url -}}" alt="" class="featured-image"> -->
+		{%- endif -%}
 			{{ post.excerpt }}
 			<div class="button-para"><a class="link" href="{% include relative-src.html src=post.url %}">Read More</a></div>
 		</div>

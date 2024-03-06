@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function () {
   const contentElements = document.querySelectorAll(".contentdata");
   const readMoreElements = document.querySelectorAll(".read-more");
@@ -7,23 +6,28 @@ document.addEventListener("DOMContentLoaded", function () {
     const content = contentElements[i];
     const readMore = readMoreElements[i];
 
-    // Split text into words
-    const words = content.textContent.trim().split(/\s+/);
+    const numberOfLines = getNumberOfLines(content);
 
-    if (words.length > 80) { // hide content if more than 100 words
-      const visibleContent = words.slice(0, 80).join(" ");
-      const hiddenContent = words.slice(80).join(" ");
-
-      content.innerHTML = `
-        <span class="visible-content">${visibleContent}</span>
-        <span class="hidden-content">${hiddenContent}</span>
-      `;
-
-      readMore.style.display = "inline"; 
-      content.style.display = "inline"; 
-    } else{
-      readMore.style.display = "none"; 
-      content.style.display = "inline";
+    if (numberOfLines > 3) {
+      readMore.style.display = 'inline';
+    } else {
+      readMore.style.display = 'none';
     }
   }
 });
+
+function getNumberOfLines(element) {
+  const clone = element.cloneNode(true);
+  clone.style.visibility = 'hidden';
+  clone.style.position = 'absolute';
+  clone.style.overflow = 'visible';
+  document.body.appendChild(clone);
+
+  const lineHeight = parseFloat(window.getComputedStyle(clone).lineHeight);
+  const height = clone.clientHeight;
+
+  document.body.removeChild(clone);
+
+  const numberOfLines = Math.round(height / lineHeight);
+  return numberOfLines;
+}

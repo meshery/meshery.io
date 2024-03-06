@@ -220,6 +220,7 @@ p {
 .chip {
   display: inline-flex;
   flex-direction: row-reverse;
+  box-shadow: 1px 1px 5px var(--brand-color-primary);
   // margin: 4px;
   // background-color: rgb(182, 215, 168);
   background-color: var(--brand-color-primary);
@@ -386,6 +387,7 @@ input[type="checkbox"] {
 .image-class{
   max-width: 80%;
   margin-top: 30px;
+  cursor: pointer;
 }
   
 ::-webkit-scrollbar {
@@ -613,7 +615,11 @@ open-modal-btn {
   text-decoration: none;
 }
 
-.post-update{
+.catalog-details li  span {
+font-size: .25rem;
+  
+}
+.catalog-item-detail {
   color: var(--color-secondary-dark);
 }
 
@@ -750,8 +756,17 @@ label {
   display: none;
 }
 .contentdata {
-  display: none;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /* Limit to 3 lines, adjust as needed */
+  -webkit-line-clamp: 5;
 }
+
+.pre-white-space {
+  white-space: pre-wrap;
+}
+
 
 .read-more {
   cursor: pointer;
@@ -917,12 +932,6 @@ label {
     transition: all .5s;
   }}
 
-  .related-patterns {
-    display: none;
-  }
-  .modal-card {
-    display: none;
-  }
   .modal-info{
     width: 100%;
   }
@@ -970,7 +979,6 @@ label {
 
   .viewallbtn{
     position: relative;
-    left:60%;
   }
 }
 @media screen and (max-width: 770px) {

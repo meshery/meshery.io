@@ -1,4 +1,4 @@
-# Copyright 2023 Meshery Authors
+# Copyright The Meshery Authors.
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -229,13 +229,14 @@ fi
 # tanzu
 # app
 # cilium
+# nighthawk
 
 ## Any adapter other than above would be ignored
 if [ ! -z "$ADAPTERS" ]; then
     adapterString=
     for adapter in $ADAPTERS; do
         case $adapter in
-            consul|istio|linkerd|nsm|kuma|osm|cilium)
+            consul|istio|linkerd|nsm|kuma|osm|cilium|nighthawk)
                 adapterString="$adapterString -a meshery-$adapter "
             ;;
             nginx|tanzu)

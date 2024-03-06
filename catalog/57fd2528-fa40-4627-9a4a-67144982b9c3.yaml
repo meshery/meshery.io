@@ -1,0 +1,141 @@
+name: Acme Operator
+services:
+  letsencrypt-live:
+    name: letsencrypt-live
+    type: ConfigMap
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    labels:
+      managed-by: openshift-acme
+      type: CertIssuer
+    annotations:
+      acme.openshift.io/priority: "100"
+      argocd.argoproj.io/compare-options: IgnoreExtraneous
+    settings:
+      data:
+        cert-issuer.types.acme.openshift.io: '{"type":"ACME","acmeCertIssuer":{"directoryUrl":"https://acme-v02.api.letsencrypt.org/directory"}}'
+    traits:
+      meshmap:
+        edges: []
+        id: 3df1dc1d-dc5c-4dd4-9e6b-be4fcc0e9b4a
+        label: letsencrypt-live
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: bottom-round-rectangle
+          styleOverrides: ""
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: 32.22684270762802
+          posY: -16.176473651948516
+        whiteboardData:
+          style:
+            z-index: 5
+  openshift-acme-indwg:
+    name: openshift-acme
+    type: ServiceAccount
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    labels:
+      app: openshift-acme
+    traits:
+      meshmap:
+        edges: []
+        id: 472340aa-0b4d-4323-a066-6133c94c968e
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: bottom-round-rectangle
+          styleOverrides: ""
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+        position:
+          posX: -34.5
+          posY: 34
+        whiteboardData:
+          style:
+            z-index: 6
+  openshift-acme-lqchg:
+    name: openshift-acme
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app: openshift-acme
+        strategy:
+          type: RollingUpdate
+        template:
+          metadata:
+            labels:
+              app: openshift-acme
+          spec:
+            containers:
+            - args:
+              - --exposer-image=quay.io/tnozicka/openshift-acme:exposer
+              - --loglevel=4
+              image: quay.io/tnozicka/openshift-acme:controller
+              image Pull Policy: Always
+              name: openshift-acme
+            service Account Name: openshift-acme
+    traits:
+      meshmap:
+        edges: []
+        id: da9bb7b0-bc2d-4e79-8407-6095d375a441
+        label: openshift-acme
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: parent
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: -43.5939806597997
+          posY: -55.96314584743917
+        whiteboardData:
+          style:
+            z-index: 7

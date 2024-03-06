@@ -1,28 +1,40 @@
 ---
 title: Blog
 description: Keep up with the latest news.
-permalink: /blog
+paginate:
+  collection: posts
+  paginate: 2
+  permalink: /page/:num/
 ---
 
 <div class="text-container">
-	<p class="editor-link"><a href="cloudcannon:collections/_posts" class="btn"><strong>&#9998;</strong> Add Post</a></p>
-	<ul class="blog-posts">
-		{% include list-posts.html posts=paginator.posts %}
-	</ul>
+  <div class="section-bar"><h1>Blog</h1></div>
+  <ul class="blog-posts">
+    {% include list-posts.html posts=paginator.posts %}
+  </ul>
 
-	{% if paginator.total_pages > 1 %}
-		<!-- Pagination links -->
-		<div class="pagination">
-			{% if paginator.previous_page %}
-				<a href="{% include relative-src.html src=paginator.previous_page_path %}" class="previous btn">&larr; Newer posts</a>
-			{% endif %}
+  {% if paginator.total_pages > 1 %}
+  <!-- Pagination links -->
+  <div class="pagination">
+    {% if paginator.previous_page %}
+    <a
+      href="{% include relative-src.html src=paginator.previous_page_path %}"
+      class="previous btn"
+      >&larr; Newer posts</a
+    >
+    {% endif %}
 
-			<span class="page_number ">{{ paginator.page }} of {{ paginator.total_pages }}</span>
+    <span class="page_number"
+      >{{ paginator.page }} of {{ paginator.total_pages }}</span
+    >
 
-			{% if paginator.next_page %}
-				<a href="{% include relative-src.html src=paginator.next_page_path %}" class="next btn">Older posts &rarr;</a>
-			{% endif %}
-		</div>
-	{% endif %}
-	
+    {% if paginator.next_page %}
+    <a
+      href="{% include relative-src.html src=paginator.next_page_path %}"
+      class="next btn"
+      >Older posts &rarr;</a
+    >
+    {% endif %}
+  </div>
+  {% endif %}
 </div>

@@ -1,353 +1,62 @@
 name: Emojivoto Application
 services:
-  emoji-fkqbr:
-    name: emoji-fkqbr
-    type: Deployment.K8s
-    namespace: ""
-    dependsOn:
-    - emojivoto
-    settings:
-      spec:
-        replicas: 1
-        selector:
-          matchLabels:
-            app: emoji-svc
-            version: v11
-        template:
-          metadata:
-            labels:
-              app: emoji-svc
-              version: v11
-          spec:
-            containers:
-            - env:
-              - name: GRPC_PORT
-                value: "8080"
-              - name: PROM_PORT
-                value: "8801"
-              image: docker.l5d.io/buoyantio/emojivoto-emoji-svc:v11
-              name: emoji-svc
-              ports:
-              - containerPort: 8080
-                name: grpc
-              - containerPort: 8801
-                name: prom
-              resources:
-                requests:
-                  cpu: 100m
-            serviceAccountName: emoji
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 31bd4e43-d835-4b7e-baa1-d2eaf3f5ce52
-            metadata:
-              port: 80
-              protocol: TCP
-            source: bb6ee524-0341-40ad-92dc-c4cf6a573812
-            target: 0e954988-8dea-4f76-9f70-d4132b3a4189
-        id: 0e954988-8dea-4f76-9f70-d4132b3a4189
-        label: emoji
-        parent: 01987642-d9ed-4e31-8d19-f587313f287e
-        position:
-          posX: 13.550957413489844
-          posY: 215.33320258599372
-  emoji-lbngn:
-    name: emoji-lbngn
-    type: ServiceAccount.K8s
-    namespace: emojivoto
-    dependsOn:
-    - emojivoto
-    traits:
-      meshmap:
-        edges: []
-        id: 58f2cdf1-c045-4511-bab1-3d874250cc29
-        label: emoji
-        parent: 01987642-d9ed-4e31-8d19-f587313f287e
-        position:
-          posX: 97.17494805861101
-          posY: 145.0436929027743
-  emoji-svc:
-    name: emoji-svc
-    type: Service.K8s
-    namespace: ""
-    dependsOn:
-    - emojivoto
-    settings:
-      spec:
-        ports:
-        - name: grpc
-          port: 8080
-          targetPort: 8080
-        - name: prom
-          port: 8801
-          targetPort: 8801
-        selector:
-          app: emoji-svc
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 31bd4e43-d835-4b7e-baa1-d2eaf3f5ce52
-            metadata:
-              port: 80
-              protocol: TCP
-            source: bb6ee524-0341-40ad-92dc-c4cf6a573812
-            target: 0e954988-8dea-4f76-9f70-d4132b3a4189
-        id: bb6ee524-0341-40ad-92dc-c4cf6a573812
-        label: emoji-svc
-        parent: 01987642-d9ed-4e31-8d19-f587313f287e
-        position:
-          posX: -95.14183043232852
-          posY: 214.4613441661395
-  emojivoto:
-    name: emojivoto
-    type: Namespace.K8s
+  round-pentagon-tp:
+    name: round-pentagon-tp
+    type: RoundPentagon
+    apiVersion: core.meshery.io/v1alpha1
     namespace: default
+    version: 1.0.0
+    model: meshery-shapes
     traits:
       meshmap:
         edges: []
-        id: 01987642-d9ed-4e31-8d19-f587313f287e
-        label: emojivoto
-        position:
-          posX: 0.21485202604273468
-          posY: 197.79782588572846
-  vote-bot:
-    name: vote-bot
-    type: Deployment.K8s
-    namespace: ""
-    dependsOn:
-    - emojivoto
-    settings:
-      spec:
-        replicas: 1
-        selector:
-          matchLabels:
-            app: vote-bot
-            version: v11
-        template:
+        id: 62af7ebf-2505-41bd-858c-a05b7a489d03
+        label: ""
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Meshery Shapes
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
           metadata:
-            labels:
-              app: vote-bot
-              version: v11
-          spec:
-            containers:
-            - command:
-              - emojivoto-vote-bot
-              env:
-              - name: WEB_HOST
-                value: web-svc.emojivoto:80
-              image: docker.l5d.io/buoyantio/emojivoto-web:v11
-              name: vote-bot
-              resources:
-                requests:
-                  cpu: 10m
-    traits:
-      meshmap:
-        edges: []
-        id: dedec0d0-490a-4398-84e2-b49eeba7d653
-        label: vote-bot
-        parent: 01987642-d9ed-4e31-8d19-f587313f287e
+            isAnnotation: true
+            svgColor: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
+            svgWhite: ui/public/static/img/meshmodels/amd-gpu/white/nodefeature-white.svg
+          name: meshery-shapes
+          version: 1.0.0
+        meshmodel-metadata:
+          capabilities:
+            designer:
+              edit:
+                config: false
+                lock: true
+                shape:
+                  convert-shape: true
+                style: true
+              label:
+                edit: true
+                show: true
+                sync-with-config-property: label
+          genealogy: ""
+          isAnnotation: true
+          isNamespaced: "false"
+          logoURL: ""
+          model: meshery-shapes
+          modelDisplayName: Meshery Shapes
+          primaryColor: '#00B39F'
+          published: true
+          secondaryColor: '#00D3A9'
+          shape: round-pentagon
+          styleOverrides: '{"height":"30px","width":"30px", "background-image":"none","border-width":1,"border-style":"solid","background-opacity":0.1,"data":{"label":""}}'
+          subCategory: App Definition and Development
+          svgColor: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/amd-gpu/white/nodefeature-white.svg
         position:
-          posX: -48.87542711063128
-          posY: 160.50829855426045
-  voting-jyeqw:
-    name: voting-jyeqw
-    type: Deployment.K8s
-    namespace: ""
-    dependsOn:
-    - emojivoto
-    settings:
-      spec:
-        replicas: 1
-        selector:
-          matchLabels:
-            app: voting-svc
-            version: v11
-        template:
-          metadata:
-            labels:
-              app: voting-svc
-              version: v11
-          spec:
-            containers:
-            - env:
-              - name: GRPC_PORT
-                value: "8080"
-              - name: PROM_PORT
-                value: "8801"
-              image: docker.l5d.io/buoyantio/emojivoto-voting-svc:v11
-              name: voting-svc
-              ports:
-              - containerPort: 8080
-                name: grpc
-              - containerPort: 8801
-                name: prom
-              resources:
-                requests:
-                  cpu: 100m
-            serviceAccountName: voting
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 7885daa2-59ec-42c3-8bb6-fe47fe081c53
-            metadata:
-              port: 80
-              protocol: TCP
-            source: c3c9e331-6400-4053-a999-a5ed6ed78bd7
-            target: 072eaee8-3346-496d-88c2-29581ab3b8f3
-        id: 072eaee8-3346-496d-88c2-29581ab3b8f3
-        label: voting
-        parent: 01987642-d9ed-4e31-8d19-f587313f287e
-        position:
-          posX: -33.80641851203231
-          posY: 93.60372957268225
-  voting-qmavd:
-    name: voting-qmavd
-    type: ServiceAccount.K8s
-    namespace: emojivoto
-    dependsOn:
-    - emojivoto
-    traits:
-      meshmap:
-        edges: []
-        id: 6fb411d0-918f-4669-b2cc-c5f6538739a6
-        label: voting
-        parent: 01987642-d9ed-4e31-8d19-f587313f287e
-        position:
-          posX: 102.07153448441399
-          posY: 200.4818446640521
-  voting-svc:
-    name: voting-svc
-    type: Service.K8s
-    namespace: ""
-    dependsOn:
-    - emojivoto
-    settings:
-      spec:
-        ports:
-        - name: grpc
-          port: 8080
-          targetPort: 8080
-        - name: prom
-          port: 8801
-          targetPort: 8801
-        selector:
-          app: voting-svc
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 7885daa2-59ec-42c3-8bb6-fe47fe081c53
-            metadata:
-              port: 80
-              protocol: TCP
-            source: c3c9e331-6400-4053-a999-a5ed6ed78bd7
-            target: 072eaee8-3346-496d-88c2-29581ab3b8f3
-        id: c3c9e331-6400-4053-a999-a5ed6ed78bd7
-        label: voting-svc
-        parent: 01987642-d9ed-4e31-8d19-f587313f287e
-        position:
-          posX: -93.1833952104685
-          posY: 93.24549434144743
-  web-nuwxf:
-    name: web-nuwxf
-    type: ServiceAccount.K8s
-    namespace: emojivoto
-    dependsOn:
-    - emojivoto
-    traits:
-      meshmap:
-        edges: []
-        id: 37c0427c-88fc-444e-9c1e-1ca959353893
-        label: web
-        parent: 01987642-d9ed-4e31-8d19-f587313f287e
-        position:
-          posX: 93.78095158243299
-          posY: 94.9784606276432
-  web-svc:
-    name: web-svc
-    type: Service.K8s
-    namespace: ""
-    dependsOn:
-    - emojivoto
-    settings:
-      spec:
-        ports:
-        - name: http
-          port: 80
-          targetPort: 8080
-        selector:
-          app: web-svc
-        type: ClusterIP
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: cbbe0a1b-8215-4ccb-baef-4390071a575f
-            metadata:
-              port: 80
-              protocol: TCP
-            source: c0493818-b3ba-40e6-a99e-a5181ee54033
-            target: 0e64bbd9-5a49-487f-95f1-a7f1d2a500de
-        id: c0493818-b3ba-40e6-a99e-a5181ee54033
-        label: web-svc
-        parent: 01987642-d9ed-4e31-8d19-f587313f287e
-        position:
-          posX: -95.46063401105123
-          posY: 284.35015743000946
-  web-yheej:
-    name: web-yheej
-    type: Deployment.K8s
-    namespace: ""
-    dependsOn:
-    - emojivoto
-    settings:
-      spec:
-        replicas: 1
-        selector:
-          matchLabels:
-            app: web-svc
-            version: v11
-        template:
-          metadata:
-            labels:
-              app: web-svc
-              version: v11
-          spec:
-            containers:
-            - env:
-              - name: WEB_PORT
-                value: "8080"
-              - name: EMOJISVC_HOST
-                value: emoji-svc.emojivoto:8080
-              - name: VOTINGSVC_HOST
-                value: voting-svc.emojivoto:8080
-              - name: INDEX_BUNDLE
-                value: dist/index_bundle.js
-              image: docker.l5d.io/buoyantio/emojivoto-web:v11
-              name: web-svc
-              ports:
-              - containerPort: 8080
-                name: http
-              resources:
-                requests:
-                  cpu: 100m
-            serviceAccountName: web
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: cbbe0a1b-8215-4ccb-baef-4390071a575f
-            metadata:
-              port: 80
-              protocol: TCP
-            source: c0493818-b3ba-40e6-a99e-a5181ee54033
-            target: 0e64bbd9-5a49-487f-95f1-a7f1d2a500de
-        id: 0e64bbd9-5a49-487f-95f1-a7f1d2a500de
-        label: web
-        parent: 01987642-d9ed-4e31-8d19-f587313f287e
-        position:
-          posX: 10.664950771473446
-          posY: 282.73994451594666
+          posX: -29.838128607632516
+          posY: 225.57793761214364
+        whiteboardData:
+          style:
+            z-index: 4

@@ -9,15 +9,16 @@ permalink: /catalog
     background-color: #222222;
   }
   .sorting-options {
-    margin: 0 20px 20px 20px;
-    text-align: right;
+    margin: 0 20px 0 20px;
+    display: flex;
+    align-items: center;
     @media (max-width: 506px) {
       text-align: center;
       margin: auto;
     }
   }
   #sort {
-    padding: 10px 25px 10px 10px;
+    padding: 10px;
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -26,55 +27,50 @@ permalink: /catalog
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M7 10l5 5 5-5z"/></svg>');
     background-repeat: no-repeat;
     background-position: right 10px top 50%;
+    margin-right: 10px;
+    @media (max-width: 506px) {
+     display: none;
+    }
+  }
+  #search {
+    width: 30%;
+    flex-grow: 1;
+    padding: 20px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    top: 0;
   }
   .row {
     margin: 10px;
   }
+  .column.column-lg.patternCard {
+    display: block;
+  }
+
+  .section-container {
+    width: 100%;
+  }
 </style>
 
-<!-- <style>
-  .pager a, .pager span {
-    padding: 7px 18px;
-    border: 1px solid #eee;
-    margin-left: -2px;
-    margin-right: -2px;
-    background-color: #ffffff;
-    display: inline-block;
-
-  }
-  .pager a :hover{
-    background-color: #f1f1f1;
-    color:#333
-  }
-.selected a{
-  background-color: #222222
-}
-.pager {
-    text-align: center;
-    display: flex;
-    list-style: none;
-    justify-content: center;
- }
-</style> -->
 {% assign catalog = site.catalog | sort: 'name' %}
 <div class="section-container">
-  <div class="sorting-options">
-    <select id="sort">
-      <option disabled selected value>Sort by</option>
-      <option value="asc">Alphabetically (A-Z)</option>
-      <option value="desc">Alphabetically (Z-A)</option>
-    </select>
-  </div>
+  {% include view-all.html %} {% include card-modal.html %}
 
   <div class="row">
+    <h2 class="not-found" style="display: none;" id="not-found">
+      No results found
+    </h2>
     {% for pattern in catalog %} {% if pattern.patternInfo and pattern.Status !=
     "ComingSoon" %}
+    {% assign last = pattern.compatibility | last %}
     <div
       class="column column-lg patternCard"
       filter="{{ pattern.name }}"
       type="{{ pattern.type }}"
-      technology="{{ pattern.technology }}"
+      technology='[{% for item in pattern.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
       status="{{ pattern.Status }}"
+      style="display: none"
     >
       {% include card.html %}
       <!-- modal included -->
@@ -82,11 +78,14 @@ permalink: /catalog
     </div>
     {% endif %} {% endfor %} {% for pattern in site.data.wasm %} {% if
     pattern.filterInfo and pattern.Status != "ComingSoon" %}
+    {% assign last = pattern.compatibility | last %}
     <div
       class="column column-lg patternCard"
       filter="{{ pattern.name }}"
-      type="{{ pattern.filters.type }}"
-      technology="{{ pattern.technology }}"
+      type="{{ pattern.type }}"
+      technology='[{% for item in pattern.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
+      status="{{ pattern.Status }}"
+      style="display: none"
     >
       {% include wasm-card.html %}
       <!-- modal included -->
@@ -94,12 +93,14 @@ permalink: /catalog
     </div>
     {% endif %} {% endfor %} {% for pattern in catalog %} {% if
     pattern.patternInfo and pattern.Status == "ComingSoon" %}
-    <div
+    {% assign last = pattern.compatibility | last %}
+     <div
       class="column column-lg patternCard"
-      filter="{{ pattern.compatibility }}"
+      filter="{{ pattern.name }}"
       type="{{ pattern.type }}"
-      technology="{{ pattern.technology }}"
+      technology='[{% for item in pattern.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
       status="{{ pattern.Status }}"
+      style="display: none"
     >
       {% include coming-soon.html %}
     </div>
@@ -145,137 +146,50 @@ permalink: /catalog
       cardsContainer.appendChild(pattern);
     });
   });
-</script>
-<!-- {% if paginator.total_pages > 1 %}
-  <ul class="pager">
-      {% if paginator.first_page %}
-      <li class="previous">
-          <a href="{{ paginator.first_page_path | prepend: site.baseurl | replace: '//', '/' }}">First</a>
-      </li>
-      {% endif %}
 
-      {% if paginator.previous_page %}
-      <li class="previous">
-          <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"> &laquo;Prev</a>
-      </li>
-      {% endif %}
+  document.getElementById("search").addEventListener("input", function () {
+    var searchValue = this.value.toLowerCase();
+    var cardsContainer = document.querySelector(".row");
+    var cards = cardsContainer.querySelectorAll(".patternCard");
+    var notFound = document.getElementById("not-found");
 
-      {% if paginator.page_trail %}
-        {% for trail in paginator.page_trail %}
-          <li {% if page.url == trail.path %}class="selected"{% endif %}>
-              <a href="{{ trail.path | prepend: site.baseurl | replace: '//', '/' }}" title="{{trail.title}}">{{ trail.num }}</a>
-          </li>
-        {% endfor %}
-      {% endif %}
+    let found = false;
 
-      {% if paginator.next_page %}
-      <li class="next">
-          <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
-      </li>
-      {% endif %}
-
-       {% if paginator.last_page %}
-      <li class="previous">
-          <a href="{{ paginator.last_page_path | prepend: site.baseurl | replace: '//', '/' }}">Last</a>
-      </li>
-      {% endif %}
-  </ul>
-  {% endif %} -->
-<!-- <script>
-const handleChange = () => {
-    var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
-    var filters = [];
-    var Categories = ["Deployment", "Traffic Management", "Security", "Workloads", "Observability", "Troubleshooting", "Scaling", "Resiliency"];
-    var Compatibility = ["Istio", "Linkerd", "Consul", "Kuma", "App Mesh", "OSM", "Traefik", "Nginx", "NSM"];
-    var Technology = ["WebAssembly", "JWT"];
-    var categoryDATA =[];
-    var compDATA = [];
-    var techDATA = [];
-    var allPatterns = {{ site.data.patterns | jsonify }};
-    var finalCategories = [];
-    var finalCompatibility = [];
-    var finalTechnology = [];
-    var Result = [];
-    var data = [];
-
-for (var i = 0; i < checkboxes.length; i++) {
-     
-      filters.push(checkboxes[i].value)
-      
-    }
-
-  filters.forEach((x) => { 
-    Categories.map((y) => { 
-      if( x === y ) {
-        categoryDATA.push(y);
-       }
-    }) 
-  })
-
-  filters.forEach((x) => { 
-    Compatibility.map((y) => { 
-      if( x === y ) {
-         compDATA.push(y);
-       }
-    }) 
-  })
-
-  filters.forEach((x) => { 
-    Technology.map((y) => { 
-      if( x === y ) {
-        techDATA.push(y);
-       }
-    }) 
-  })
-
-  allPatterns.forEach((x) => {
-    categoryDATA.map((category) => {
-        if(x.filters.type === category)
-        {
-         finalCategories.push(x);
-        }
-      })
-  })
-
-  allPatterns.forEach((x) => {
-  compDATA.map((compatibility) => {
-    for(i=0;i< x.filters.compatibility.length;i++)
-    {
-      if(x.filters.compatibility[i] === compatibility)
-      {
-        finalCompatibility.push(x);
+    cards.forEach(function (pattern) {
+      var filterValue = pattern.getAttribute("filter").toLowerCase();
+      if (filterValue.includes(searchValue)) {
+        pattern.style.display = "block";
+        found = true;
+      } else {
+        pattern.style.display = "none";
       }
+    });
+
+    if (!found) {
+      notFound.style.display = "block";
+    } else {
+      notFound.style.display = "none";
     }
-    })
-})
-
-  allPatterns.forEach((x) => {
-    techDATA.map((tech) => {
-        if(x.filters.technology === tech)
-        {
-         finalTechnology.push(x);
-        }
-      })
-  })
-
-  if(categoryDATA.length === 0) finalCategories = allPatterns;
-      if(compDATA.length === 0) finalCompatibility = allPatterns;
-      if(techDATA.length === 0) finalTechnology = allPatterns;
-
-  Result = [finalCategories, finalCompatibility, finalTechnology, allPatterns],
-      data = Result.reduce((a, b) => a.filter(c => b.includes(c)));
-      console.log(data);
-
-
-      data = document.getElementById("card");
-
-   var JsonData = JSON.stringify(data);
-
-  console.log(JsonData);
-     
-  }
+  });
 </script>
- -->
-<!-- 
-    Showing buttons to move to the next and to the previous list of posts (pager buttons).
-  -->
+
+<script>
+  const patternCards = document.querySelectorAll(".patternCard");
+  document.addEventListener("DOMContentLoaded", () => {
+    // display none for patternCards after number 10
+    patternCards.forEach((card, index) => {
+      // Hide patternCards after number 10
+      if (index < 10) {
+        card.style.display = "block";
+      }
+    });
+  });
+
+  document.addEventListener("themeChange",(e)=> {
+    // load the snapshot version based on theme 
+    document.querySelectorAll(".pattern-image").forEach(e => {
+      e.src = event.detail.value == "dark-mode" ? e.dataset.snapshotDark : e.dataset.snapshotLight;
+    });
+  
+  }) 
+</script>
