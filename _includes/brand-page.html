@@ -5,183 +5,9 @@
   href="{{ site.baseurl }}/integrations/main.css"
 />
 
-<script>
-  $(document).ready(function () {
-    // Select all links with hashes
-    $('a[href*="#"]')
-      // Remove links that don't actually link to anything
-      .not('[href="#"]')
-      .not('[href="#0"]')
-      .click(function (event) {
-        // On-page links
-        if (
-          location.pathname.replace(/^\//, "") ==
-            this.pathname.replace(/^\//, "") &&
-          location.hostname == this.hostname
-        ) {
-          // Figure out element to scroll to
-          var target = $(this.hash);
-          target = target.length
-            ? target
-            : $("[name=" + this.hash.slice(1) + "]");
-          // Does a scroll target exist?
-          if (target.length) {
-            // Only prevent default if animation is actually going to happen
-            event.preventDefault();
-            $("html, body").animate(
-              {
-                scrollTop: target.offset().top,
-              },
-              1000,
-              function () {
-                // Callback after animation
-                // Must change focus!
-                var $target = $(target);
-                $target.focus();
-                if ($target.is(":focus")) {
-                  // Checking if the target was focused
-                  return false;
-                } else {
-                  $target.attr("tabindex", "-1"); // Adding tabindex for elements not focusable
-                  $target.focus(); // Set focus again
-                }
-              }
-            );
-          }
-        }
-      });
-  });
-</script>
+<script src="{{ site.baseurl }}/assets/js/route-smooth.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
 
-<style>
-  .button1 {
-    background-color: #ffd700;
-    color: #000;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  button:hover {
-    background-color: #ffa500;
-  }
-  .nav-fixed {
-    position: sticky;
-    z-index: 10; /* Ensure it's above other content */
-    margin-left: 5rem; /* Align to the right */
-    border-radius: 5px; /* Rounded corners as per the image */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    padding: 1rem; /* Padding inside the navbar */
-    margin-top: 8rem;
-  }
-
-  ul {
-    list-style-type: none; /* Remove default list styling */
-    padding: 0; /* Remove default padding */
-    margin: 0; /* Remove default margin */
-  }
-
-  .header_link {
-    display: block;
-    margin-bottom: 0.5rem;
-    margin-top: 1.5rem; /* Space between links */
-    color: white; /* Link color, assuming a dark grey */
-    text-decoration: none; /* Remove underline */
-    transition: color 0.3s; /* Smooth transition for hover effect */
-    font-size: 1.1rem;
-  }
-
-  .header_link:hover,
-  .header_link:focus {
-    color: #007bff; /* Color when link is hovered or focused */
-    text-decoration: none; /* Ensure underline doesn't re-appear on hover */
-  }
-
-  @media (max-width: 1020px) {
-    .nav-fixed {
-      display: none;
-    }
-  }
-
-  @media (max-width: 725px) {
-    .nav-fixed {
-      position: relative; /* Adjust position for smaller screens */
-      width: 100%; /* Full width */
-      margin-left: 0; /* Align with the edge */
-      border-radius: 0; /* Remove rounded corners for a cleaner look */
-      padding: 0.5rem; /* Adjust padding */
-      height: auto; /* Let the height adjust based on content */
-      background-color: rgba(
-        21,
-        39,
-        47,
-        0.5
-      ); /* Optional: Adjust background opacity for readability */
-    }
-
-    .nav-fixed ul {
-      text-align: center; /* Center-align the list items */
-    }
-
-    .header_link {
-      margin-top: 0.75rem; /* Adjust spacing between links */
-      margin-bottom: 0.75rem; /* Adjust spacing */
-      font-size: 1rem; /* Adjust font size for readability */
-    }
-
-    /* Adjust the main content or other elements as needed for smaller screens */
-    #meshkit-hero,
-    #meshery,
-    #meshmap,
-    #mascot {
-      padding: 0 1rem; /* Add some padding on the sides for smaller screens */
-    }
-  }
-</style>
-
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css"
-/>
-<link
-  rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css"
-/>
-<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-
-<script>
-  $(window).on('load', function () {
-    // Your existing smooth scrolling code...
-
-    // Adjust nav-fixed background color
-    function adjustNavBackgroundColor() {
-      var pageBackgroundColor = $('body').css('background-color');
-      if (pageBackgroundColor === 'rgb(255, 255, 255)' || pageBackgroundColor === '#fff') {
-        $('.nav-fixed').attr('style', 'background-color: #E7EFF3 !important');
-      }
-    }
-
-    adjustNavBackgroundColor();
-
-    // Optional: If the background color can change dynamically, you might want to run this function on specific events or observe changes.
-  });
-</script>
-
-
-<style>
-  h2.sub-text {
-    font-family: "Qanelas Soft", "Open Sans", sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-</style>
 
 <div id="meshkit-hero" class="" ref="{mesheryRef}">
   {% include meshkit-hero.html %}
@@ -193,45 +19,26 @@
     width: 100%;
     justify-content: center;
     margin-left: -1rem;
+    overflow: hidden;
   "
 >
   <div>
-    <div id="meshery" class="" ref="{mesheryRef}" style="margin-top: -3rem">
+    <div id="meshery" style="margin-top: -3rem">
       {% include meshery-brand.html %}
     </div>
 
-    <div id="zoom" class="" ref="{meshsyncRef}" style="margin-top: -5.5rem">
-      {% include zoom.html %}
-    </div>
+    <div id="zoom" style="margin-top: -5.5rem">{% include zoom.html %}</div>
 
-    <div
-      id="presentation"
-      class=""
-      ref="{meshsyncRef}"
-      style="margin-top: -5.5rem"
-    >
+    <div id="presentation" style="margin-top: -5.5rem">
       {% include presentation.html %}
     </div>
 
-    <div id="social" class="" ref="{meshsyncRef}" style="margin-top: -5.5rem">
-      {% include social.html %}
-    </div>
+    <div id="social" style="margin-top: -5.5rem">{% include social.html %}</div>
 
-    <div id="mascot" class="" ref="{meshsyncRef}" style="margin-top: -5.5rem">
-      {% include mascot.html %}
-    </div>
+    <div id="mascot" style="margin-top: -5.5rem">{% include mascot.html %}</div>
   </div>
 
-  <div
-    class="nav-fixed"
-    style="
-      width: 100%;
-      background-color: #15272f80;
-      color: white;
-      font-size: 15px;
-      height: 16rem;
-    "
-  >
+  <div class="nav-fixed">
     On this Page
     <ul>
       <li><a href="#meshery" class="header_link">Meshery</a></li>
