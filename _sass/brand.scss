@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   font-family: "Qanelas Soft", "Open Sans", sans-serif;
   box-sizing: border-box;
   max-width: 100%;
@@ -35,17 +36,18 @@ html, body {
 
 .nav-fixed {
   position: sticky;
+  margin-left: 2rem;
   z-index: 10; /* Ensure it's above other content */
-  margin-left: 5rem; /* Align to the right */
   border-radius: 5px; /* Rounded corners as per the image */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
   padding: 1rem; /* Padding inside the navbar */
-  margin-top: 8rem;
+  padding-top: 0;
+  margin-top: 2rem;
   width: 100%;
-  background-color: #15272f80;
-  color: white;
+  background: var(--background-nav-fixed);
+  color: var(--color-nav-fixed);
   font-size: 15px;
-  height: 17rem;
+  height: 18rem;
   top: 0;
 }
 
@@ -57,9 +59,9 @@ ul {
 
 .header_link {
   display: block;
+  color: var(--color-nav-fixed);
   margin-bottom: 0.5rem;
   margin-top: 1.5rem; /* Space between links */
-  color: white; /* Link color, assuming a dark grey */
   text-decoration: none; /* Remove underline */
   transition: color 0.3s; /* Smooth transition for hover effect */
   font-size: 1.1rem;
@@ -241,9 +243,8 @@ h2.sub-text {
 
 .ImgDiv {
   width: 100%;
-  margin: auto;
+  margin-left: 2%;
   display: flex;
-  justify-content: center;
   margin-top: 3rem;
   padding: 2rem;
   width: 80%;
@@ -345,14 +346,14 @@ h2.sub-text {
 
 /* Existing styles */
 .color-palette {
-  width: 70%;
+  width: 100%;
   display: flex;
   color: white;
-  margin-left: 5rem;
   gap: 1rem; /* space between color boxes */
   margin-top: 2rem; /* space above the color palette */
   flex-wrap: wrap; /* Allow color boxes to wrap */
-  justify-content: space-around; /* Distribute items evenly */
+  justify-content: center; /* Distribute items evenly */
+  align-items: center;
 }
 
 .color-box {
@@ -368,22 +369,6 @@ h2.sub-text {
   box-sizing: border-box;
 }
 
-/* Media query for screens with a max-width of 620px */
-@media (max-width: 620px) {
-  .color-box {
-    /* Adjust width to ensure two boxes can fit in one row, considering the gap and padding */
-    width: calc(
-      (100% - 1rem) / 2
-    ); /* Subtract the gap (1rem) and divide by 2 for two boxes */
-  }
-
-  .color-palette {
-    /* Ensure the container is wide enough to hold two boxes plus the gap */
-    width: 100%; /* Adjusted to 100% of its parent container to ensure it has enough space */
-    margin-left: 1rem; /* Adjust as needed to align with your layout */
-  }
-}
-
 .color-name {
   margin-top: 0.5rem;
   font-weight: bold;
@@ -393,43 +378,31 @@ h2.sub-text {
   font-size: 0.8rem;
 }
 
-.img1 {
-  width: 220px;
+.img2 {
+  width: 400px;
+  padding-left: 4rem;
+  border-left: 2px solid #3d4f57;
+  height: 15rem;
 }
 
-.img2 {
-  width: 300px;
+.img1 {
+  width: 200px;
 }
 
 @media (max-width: 768px) {
+  .img2 {
+    width: 100%;
+    border-top: 2px solid #3d4f57;
+    border-left: none;
+    height: 100%;
+    padding-top: 2rem;
+    padding-left: 0;
+    margin-left: 0;
+  }
+
   .img1 {
     width: 70%;
-  }
-
-  .img2 {
-    width: 90%;
     margin-top: 3rem;
     margin-left: -2rem;
-  }
-}
-
-
-/* Assume dark mode by default */
-.dark-mode-logo {
-  display: block;
-}
-
-.light-mode-logo {
-  display: none;
-}
-
-/* If the user prefers light mode, show light mode logos and hide dark mode logos */
-@media (prefers-color-scheme: light) {
-  .dark-mode-logo {
-    display: none;
-  }
-
-  .light-mode-logo {
-    display: block;
   }
 }
