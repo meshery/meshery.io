@@ -1,7 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
   updateHeroImages();
   // Add event listener to run the function on window resize
-  
+
+  var navLinks = document.querySelectorAll("#nav-fixed .header_link");
+
+  // Add click event listener to each link
+  navLinks.forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      e.preventDefault(); // Prevent the default anchor link behavior
+
+      var targetId = this.getAttribute("href"); // Get the href attribute of the clicked link
+      smoothScroll(targetId, 1000); // Call the smoothScroll function with the targetId and duration
+    });
+  });
 });
 
 window.addEventListener("resize", updateHeroImages);
@@ -56,9 +67,13 @@ function updateHeroImages() {
     }
   }
 }
-
-window.smoothScroll = function smoothScroll(target, duration) {
+function smoothScroll(target, duration) {
   var targetElement = document.querySelector(target);
+  if (!targetElement) {
+    console.error("SmoothScroll target not found: ", target);
+    return;
+  }
+
   var targetPosition = targetElement.getBoundingClientRect().top;
   var startPosition = window.pageYOffset;
   var startTime = null;
@@ -84,4 +99,4 @@ window.smoothScroll = function smoothScroll(target, duration) {
   }
 
   requestAnimationFrame(animation);
-};
+}
