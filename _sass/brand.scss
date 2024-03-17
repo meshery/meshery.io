@@ -3,9 +3,11 @@ body {
   font-family: "Qanelas Soft", "Open Sans", sans-serif;
   box-sizing: border-box;
   max-width: 100%;
-  overflow-x: hidden;
 }
 
+.subhead {
+  font-size: 24px;
+}
 .button1 {
   background-color: #ebc017;
   color: #000;
@@ -35,9 +37,11 @@ body {
 }
 
 .nav-fixed {
+  position: -webkit-sticky;
   position: sticky;
+  top: 100px;
   margin-left: 2rem;
-  z-index: 10; /* Ensure it's above other content */
+  z-index: 100; /* Ensure it's above other content */
   border-radius: 5px; /* Rounded corners as per the image */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
   padding: 1rem; /* Padding inside the navbar */
@@ -48,7 +52,6 @@ body {
   color: var(--color-nav-fixed);
   font-size: 15px;
   height: 100%;
-  top: 0;
 }
 
 ul {
@@ -74,6 +77,10 @@ ul {
 }
 
 @media (max-width: 1020px) {
+  body,
+  html {
+    overflow-x: hidden;
+  }
   .nav-fixed {
     display: none;
   }
@@ -91,7 +98,7 @@ ul {
   #meshery,
   #meshmap,
   #mascot {
-    padding: 0 1rem; /* Add some padding on the sides for smaller screens */
+    padding: 0;
   }
 }
 
@@ -106,6 +113,8 @@ h2.sub-text {
   justify-content: left;
   color: white;
   width: 100%;
+  overflow: visible;
+  margin-top: -0.5rem;
 }
 
 .hero-left,
@@ -122,6 +131,11 @@ h2.sub-text {
 .hero-right {
   width: 100%;
   margin-left: 20%;
+}
+
+.hero-left-mobile,
+.hero-right-mobile {
+  display: none;
 }
 
 .brand-kit {
@@ -176,11 +190,36 @@ h2.sub-text {
 .meshery-kit {
   display: flex;
   justify-content: left;
+  font-size: 3.5rem;
+  font-weight: 700;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
   /* Adjust the flex layout for mobile */
+
+  .hero-left,
+  .hero-right {
+    display: none;
+  }
+
+  .hero-left-mobile,
+  .hero-right-mobile {
+    position: absolute;
+    top: 0;
+    margin-top: 0;
+  }
+
+  .hero-left-mobile {
+    display: flex;
+    margin-left: -600%;
+  }
+
+  .hero-right-mobile {
+    display: flex;
+    width: 100%;
+  }
+
   .container1 {
     flex-direction: column;
     align-items: center;
@@ -189,6 +228,7 @@ h2.sub-text {
 
   .meshery-kit {
     justify-content: center;
+    font-size: 32px;
   }
 
   /* Make the brand kit take the full available width */
@@ -324,14 +364,6 @@ h2.sub-text {
 
 .layerH3 {
   margin-top: 8rem;
-}
-
-.row {
-  display: flex;
-  justify-content: space-between;
-  /* Adjust as needed */
-  flex-wrap: wrap;
-  /* Allows divs to wrap to the next line if they don't fit */
 }
 
 /* Styles for the logo images container */
