@@ -39,7 +39,7 @@ No component of Meshery was left untouched in this release. Major architectural 
 
 [Meshery Catalog](/catalog) is your marketplace for configurations, filters, and patterns for cloud native infrastructure, simplifying deployment, observation, traffic management, and more.
 
-![meshery catalog]({{site.baseurl}}/assets/images/posts/2023-12-22-v07-release/meshery-catalog-cards.png)
+<img alt="Meshery Extension Points" src="/assets/images/posts/2023-12-22-v07-release/meshery-catalog-cards.png" width="100%" />
 
 Now, you can streamline your development and operation process by using any services or designs in our catalog and selecting your desired technology without building from scratch.
 
@@ -59,7 +59,9 @@ Meshery integration with MeshMap enables you to visualize your dry-run testing p
 
 ### Meshery's Messaging Framework: Notification Center
 
-[![meshery catalog]({{site.baseurl}}/assets/images/posts/2023-12-22-v07-release/notification-center-overview.png)](https://docs.meshery.io/guides/events-management)
+<a href="https://docs.meshery.io/guides/events-management">
+  <img alt="Meshery Extension Points" src="/assets/images/posts/2023-12-22-v07-release/notification-center-overview.png" width="100%" />
+</a>
 
 Meshery ensures you're equipped with the insights you need right in the notification tab, using advanced filters to address deployment issues or errors efficiently.
 
@@ -108,7 +110,9 @@ The new dashboard comes with enhanced fine-tuned summaries of your Kubernetes wo
 
 MeshSync is now capable of discovering all types of Kubernetes API resources. This is further enhanced by the ability to fingerprint the discovered resources with the help of knowledge of different cloud native technologies through Meshery's new capabilities registry.
 
-[![meshery-operator-v07]({{site.baseurl}}/assets/images/posts/2023-12-22-v07-release/meshery-operator-v07.png)](https://docs.meshery.io/concepts/architecture/operator)
+<a href="https://docs.meshery.io/concepts/architecture/operator">
+  <img alt="Meshery Extension Points" src="/assets/images/posts/2023-12-22-v07-release/meshery-operator-v07.png" width="100%" />
+</a>
 
 Meshery also captures the discovered CRDs in the available Kubernetes clusters through MeshSync enhanced discovery capabilities. This allows Meshery to register these CRDs as Meshery Models and capture them inside the capabilities registry. This is known as **Dynamic Registration** of Meshery Models.
 
