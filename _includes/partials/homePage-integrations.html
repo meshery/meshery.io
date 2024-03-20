@@ -15,15 +15,15 @@
     </p>
 </div>
 <div id="integContainer" class="integrations-container container"
-    style="column-gap: max(2vh, 2vw); row-gap: 1.5rem; display: flex; flex-wrap: wrap;">
+    style="column-gap: max(2vh, 2vw); row-gap: 1.5rem; display: flex; flex-wrap: wrap; padding-bottom: 3.5rem;">
 </div>
 <div class="integrations-3d-link">
-    <div class="button-container">
-        <a class="highlight show-all-button"
-            style="display: inline-block; margin: max(3vh, 3vw) auto 0; margin-right: 10px; width: fit-content;">See All
+    <div class="button-container" style="display: flex; align-items: center; justify-content: center; row-gap: 18px; column-gap: 32px; flex-wrap: wrap;">
+        <a class="highlight show-all-button toggle-text"
+            style="display: inline-block; width: fit-content; cursor:pointer;">Show More
             Integrations</a>
         <a class="highlight show-all-button" href="/integrations"
-            style="display: inline-block; margin: max(3vh, 3vw) auto 0; margin-left: 10px; width: fit-content;">View
+            style="display: inline-block; width: fit-content;">View
             Integrations in 3D</a>
     </div>
 </div>
@@ -67,6 +67,16 @@
 
     document.querySelector('.show-all-button').addEventListener('click', () => {
         allDataShown = !allDataShown;
+
+        const button = document.querySelector('.toggle-text');  
+    
+        if (allDataShown) {
+            button.textContent = 'See Less Integrations'; // Change button text when allDataShown is true
+        } else {
+            button.textContent = 'See All Integrations'; // Change button text when allDataShown is false
+        }
+
+
         integContainer.innerHTML = renderIntegrationCards(data, allDataShown);
 
         // Scroll to the <h2> tag
