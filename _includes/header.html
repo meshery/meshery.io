@@ -51,9 +51,9 @@
     <meta name="og:image" content="https://raw.githubusercontent.com/meshery/meshery.io/master/assets/images/logos/meshery-gradient.png" />
 
   </head>
-
-  
+ 
     <body style="overflow-x: hidden" class="dark-mode">
+
       <script>
         const body = document.body;
     
@@ -77,6 +77,16 @@
 			      bubbles: true ,
 		      }))
         });
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+          // $('.sitewide-banner').animate({top: 0});
+          const banner = document.querySelector(".sitewide-banner");
+          setTimeout(function() {
+            banner.classList.remove("hidden");
+            
+          }, 0); // Add a delay of 1 second before showing the banner
+        });
       </script>
 
     {% if page.title != "Meshery | The Kubernetes and Cloud Native Manager" and page.title != "Programs" %}
@@ -84,11 +94,18 @@
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KL6SSW5" height="0" width="0"
     style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
+
+<div class="sitewide-banner hidden"><p>Meshery's CNCF incubation proposal is here. Are you a fan of Meshery?</p>
+  <p><a href="https://github.com/cncf/toc/pull/1264">Show your support by adding a reaction!</a></p>
+  </div>
 <header id="mainHeader" class="filledHeader">
   {% else %}
   <header id="mainHeader">
     {% endif %}
+
     <div class="container nav-container">
+  
       <div class="project-name">
         <a href="{{ site.baseurl }}/">
           <img src="{{ site.baseurl }}/assets/images/logos/meshery-logo.png" alt="Meshery Logo" />&nbsp;
