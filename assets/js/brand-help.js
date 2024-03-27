@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Add event listener to run the function on window resize
 
-  var navLinks = document.querySelectorAll("#nav-fixed .header_link");
+  var navLinks = document.querySelectorAll("#nav-fixed .header-link");
 
   // Add click event listener to each link
   navLinks.forEach(function (link) {
