@@ -1,0 +1,1027 @@
+name: prometheus_kubernetes
+services:
+  Generic Node:
+    name: Generic Node
+    type: GenericNode
+    apiVersion: core.meshery.io/v1alpha1
+    namespace: default
+    version: v1.0.0
+    model: meshery-core
+    settings:
+      user Messages: []
+    traits:
+      meshmap:
+        edges: []
+        id: 0c854cd5-8837-4d0f-88f5-99093c779ea9
+        label: Generic Node
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          components: []
+          displayName: Meshery Core
+          hostID: 00000000-0000-0000-0000-000000000000
+          id: abf31830-2ad6-54c4-90e1-d4c52807deef
+          metadata:
+            isAnnotation: false
+            svgColor: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
+            svgWhite: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
+          name: meshery-core
+          relationships: []
+          status: registered
+          version: v1.0.0
+        meshmodel-metadata:
+          capabilities: '{"designer":{"edit":{"config":false,"lock":true,"shape":{"convert-shape":false},"style":false},"label":{"edit":true,"show":false,"sync-with-config-property":"none"}}}'
+          defaultData: '{"label":""}'
+          genealogy: ""
+          isAnnotation: true
+          isModelAnnotation: "TRUE"
+          isNamespaced: false
+          logoURL: ""
+          model: meshery-core
+          modelDisplayName: Meshery Core
+          primaryColor: '#00B39F'
+          published: true
+          secondaryColor: '#00D3A9'
+          shape: circle
+          shapePolygonPoints: ""
+          styleOverrides:
+            background-image: none
+            border-style: dashed
+            border-width: 0
+            data:
+              label: ""
+            height: 30px
+            width: 30px
+            z-index: 6
+          styles: '{"height":"30px","width":"30px", "background-image":"none","border-width":0,"border-style":"dashed"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/meshery-core/color/genericnode-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/meshery-core/white/genericnode-white.svg
+        parent: de446104-d42b-482c-a7ec-369b447f0530
+        position:
+          posX: 110
+          posY: 50
+        whiteboardData:
+          style:
+            backgroundOpacity: 0
+            visibility: hidden
+            z-index: 17
+  Node Group Inventory Wallet:
+    name: Node Group Inventory Wallet
+    type: NodeGroupInventoryWallet
+    apiVersion: core.meshery.io/v1alpha1
+    namespace: default
+    version: v1.0.0
+    model: meshery-core
+    settings:
+      user Messages: []
+    traits:
+      meshmap:
+        edges: []
+        id: 1941f26e-c58b-42c5-b2a2-d06ff5b9a747
+        label: Node Group Inventory Wallet
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          components: []
+          displayName: Meshery Core
+          hostID: 00000000-0000-0000-0000-000000000000
+          id: abf31830-2ad6-54c4-90e1-d4c52807deef
+          metadata:
+            isAnnotation: false
+            svgColor: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
+            svgWhite: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
+          name: meshery-core
+          relationships: []
+          status: registered
+          version: v1.0.0
+        meshmodel-metadata:
+          capabilities: '{"designer":{"edit":{"config":false,"lock":true,"shape":{"convert-shape":true},"style":false},"label":{"edit":true,"show":false,"sync-with-config-property":"label"}}}'
+          defaultData: '{"label":""}'
+          genealogy: parent
+          isAnnotation: true
+          isModelAnnotation: "TRUE"
+          isNamespaced: false
+          logoURL: ""
+          model: meshery-core
+          modelDisplayName: Meshery Core
+          primaryColor: '#00B39F'
+          published: true
+          secondaryColor: '#00D3A9'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          styleOverrides:
+            background-image: none
+            background-opacity: 0.1
+            border-style: dashed
+            border-width: 1
+            data:
+              label: ""
+            height: 30px
+            width: 30px
+            z-index: 6
+          styles: '{"height":"30px","width":"30px", "background-image":"none","border-width":1,"border-style":"dashed","background-opacity":0.1}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/meshery-core/color/genericnode-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/meshery-core/white/genericnode-white.svg
+        parent: de446104-d42b-482c-a7ec-369b447f0530
+        position:
+          posX: 70
+          posY: 10
+        whiteboardData:
+          style:
+            z-index: 16
+  prometheus-arabo:
+    name: prometheus
+    type: ClusterRole
+    apiVersion: rbac.authorization.k8s.io/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      rules:
+      - api Groups:
+        - ""
+        resources:
+        - nodes
+        - nodes/proxy
+        - services
+        - endpoints
+        - pods
+        verbs:
+        - get
+        - list
+        - watch
+      - api Groups:
+        - extensions
+        resources:
+        - ingresses
+        verbs:
+        - get
+        - list
+        - watch
+      - non Resource URLs:
+        - /metrics
+        verbs:
+        - get
+    traits:
+      meshmap:
+        edges: []
+        id: fc0fa4d6-de9d-4ec8-a3c6-5c14a8c2a974
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          styleOverrides:
+            height: 22px
+            width: 22px
+            x: "8.5"
+            "y": "7.5"
+            z-index: 3
+          styles: '{"height":"22px", "width":"22px", "x":"8.5", "y":"7.5"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
+        position:
+          posX: 10
+          posY: 110
+        whiteboardData:
+          style:
+            z-index: 9
+  prometheus-secret:
+    name: prometheus-secret
+    type: Secret
+    apiVersion: v1
+    namespace: monitoring
+    model: kubernetes
+    settings:
+      data:
+        tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZpVENDQkhHZ0F3SUJBZ0lCQVRBTkJna3Foa2lHOXcwQkFRc0ZBRENCd0RFak1DRUdBMVVFQXhNYWFXNTAKWlhKdFpXUnBZWFJsTG5Ob1lXdGxjakkwTWk1c1lXSXhDekFKQmdOVkJBWVRBbFZUTVJFd0R3WURWUVFJRXdoVwphWEpuYVc1cFlURVFNQTRHQTFVRUJ4TUhRbkpwYzNSdmR6RXNNQ29HQTFVRUNoTWpVMGhCUzBWU01qUXlJRXhoCllpQkRaWEowYVdacFkyRjBaU0JCZFhSb2IzSnBkSGt4T1RBM0JnTlZCQXNUTUZOSVFVdEZVakkwTWlCTVlXSWcKU1c1MFpYSnRaV1JwWVhSbElFTmxjblJwWm1sallYUmxJRUYxZEdodmNtbDBlVEFlRncweE9URXdNVGN4TmpFMgpNekZhRncweU1URXdNVFl4TmpFMk16RmFNSUdBTVIwd0d3WURWUVFERkJRcUxtRndjSE11YzJoaGEyVnlNalF5CkxteGhZakVMTUFrR0ExVUVCaE1DVlZNeEVUQVBCZ05WQkFnVENGWnBjbWRwYm1saE1SQXdEZ1lEVlFRSEV3ZEMKY21semRHOTNNUll3RkFZRFZRUUtFdzFUU0VGTFJWSXlORElnVEdGaU1SVXdFd1lEVlFRTEV3eE1ZV0lnVjJWaQpjMmwwWlhNd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURsRm16QVd0U09JcXZNCkpCV3Vuc0VIUmxraXozUmpSK0p1NTV0K0hCUG95YnZwVkJJeXMxZ3prby9INlkxa2Zxa1JCUzZZYVFHM2lYRFcKaDgzNlNWc3pNVUNVS3BtNXlZQXJRNzB4YlpPTXRJcjc1VEcrejFaRGJaeFUzbnh6RXdHdDN3U3c5OVJ0bjhWbgo5dEpTVXI0MHBHUytNemMzcnZOUFZRMjJoYTlhQTdGL2NVcGxtZUpkUnZEVnJ3Q012UklEcndXVEZjZkU3bUtxCjFSUkRxVDhETnlydlJmeUlubytmSkUxTmRuVEVMY0dTYVZlajhZVVFONHY0WFRnLzJncmxIN1pFT1VXNy9oYm8KUXh6NVllejVSam1wOWVPVUpvdVdmWk5FNEJBbGRZeVYxd2NPRXhRTmswck5BOU45ZXBjNWtUVVZQR3pOTWRucgovVXQxOWMweEFnTUJBQUdqZ2dIS01JSUJ4akFKQmdOVkhSTUVBakFBTUJFR0NXQ0dTQUdHK0VJQkFRUUVBd0lHClFEQUxCZ05WSFE4RUJBTUNCYUF3TXdZSllJWklBWWI0UWdFTkJDWVdKRTl3Wlc1VFUwd2dSMlZ1WlhKaGRHVmsKSUZObGNuWmxjaUJEWlhKMGFXWnBZMkYwWlRBZEJnTlZIUTRFRmdRVWRhYy94MTR6dXl3RVZPSi9vTjdQeU82bApDZ2N3Z2RzR0ExVWRJd1NCMHpDQjBJQVVzZFM1WWxuWEpWTk5mRVpkTEQvL2RyNE5mV3FoZ2JTa2diRXdnYTR4CkdUQVhCZ05WQkFNVEVHTmhMbk5vWVd0bGNqSTBNaTVzWVdJeEN6QUpCZ05WQkFZVEFsVlRNUkV3RHdZRFZRUUkKRXdoV2FYSm5hVzVwWVRFUU1BNEdBMVVFQnhNSFFuSnBjM1J2ZHpFc01Db0dBMVVFQ2hNalUwaEJTMFZTTWpReQpJRXhoWWlCRFpYSjBhV1pwWTJGMFpTQkJkWFJvYjNKcGRIa3hNVEF2QmdOVkJBc1RLRk5JUVV0RlVqSTBNaUJNCllXSWdVbTl2ZENCRFpYSjBhV1pwWTJGMFpTQkJkWFJvYjNKcGRIbUNBUUV3SFFZRFZSMGxCQll3RkFZSUt3WUIKQlFVSEF3RUdDQ3NHQVFVRkNBSUNNRWdHQTFVZEVRUkJNRCtDRFhOb1lXdGxjakkwTWk1c1lXS0NFbUZ3Y0hNdQpjMmhoYTJWeU1qUXlMbXhoWW9JVUtpNWhjSEJ6TG5Ob1lXdGxjakkwTWk1c1lXS0hCTUNvQ3hBd0RRWUpLb1pJCmh2Y05BUUVMQlFBRGdnRUJBRzA3ZHFNdFZYdVQrckduQlN4SkVTNjNSa2pHaWd0c3ZtNTk4NSsrbjZjRW5kSDIKb2hjaGdmRUo5V0UxYUFWSDR4QlJSdVRIUFVJOFcvd3N1OFBxQ1o4NHpRQ2U2elAyeThEcmEwbjFzK2lIeHFwRAorS3BwZS91NkNLVTFEL0VWRU9MakpZd3pRYlFLSUlPL2Y1Q0JVbUpGWjBuZ1VIUEtvUDNyTXordTlBOWFvRkVrCnF3dDBadHFHcWpjMkh3Q09UOTlOVmFsZ29ISXljOElxQXJXdjNSWklraUlyaW9kSUdDMS94MVQ2dHhKcEUyRisKQzZ0Tzk0U0FVSUJwc2VORjNFbGNLNUsyTW44YVAzR3NnNFRHeElPN2Q1eUIvb3YwNGhOV2Q1S2QwWGorL1BvQgpLOU43cFQ1SVU2citLekNoeGlSdmRvZlAzV0VYN1ZkNEtLWG94K0U9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+        tls.key: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2d0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktrd2dnU2xBZ0VBQW9JQkFRRGxGbXpBV3RTT0lxdk0KSkJXdW5zRUhSbGtpejNSalIrSnU1NXQrSEJQb3lidnBWQkl5czFnemtvL0g2WTFrZnFrUkJTNllhUUczaVhEVwpoODM2U1Zzek1VQ1VLcG01eVlBclE3MHhiWk9NdElyNzVURyt6MVpEYlp4VTNueHpFd0d0M3dTdzk5UnRuOFZuCjl0SlNVcjQwcEdTK016YzNydk5QVlEyMmhhOWFBN0YvY1VwbG1lSmRSdkRWcndDTXZSSURyd1dURmNmRTdtS3EKMVJSRHFUOEROeXJ2UmZ5SW5vK2ZKRTFOZG5URUxjR1NhVmVqOFlVUU40djRYVGcvMmdybEg3WkVPVVc3L2hibwpReHo1WWV6NVJqbXA5ZU9VSm91V2ZaTkU0QkFsZFl5VjF3Y09FeFFOazByTkE5TjllcGM1a1RVVlBHek5NZG5yCi9VdDE5YzB4QWdNQkFBRUNnZ0VCQU5zOHRjRDBiQnpHZzRFdk8yek0wMUJoKzZYN3daZk4wSjV3bW5kNjZYYkwKc1VEZ1N6WW9PbzNJZ2o5QWZTY2lyQ3YwdUozMVNFWmNpeGRVQ2tTdjlVNnRvTzdyUWdqeUZPM1N1dm5Wc3ZKaQpTZXc5Y0hqNk5jVDczak8rWkgxQVFFZ2tlWG5mQTNZU0JEcTFsSnhpUVZOaHpHUFY0Yzh4Wi9xUkhEbUVBTWR6CmwyaTB6dHJtcWRqSng4aTQxOXpGL1pVektoa2JtcVZVb3JjZ1lNdEt5QVloSENMYms2RFZtQ1FhbDlndEUrNjUKTmFTOEwxUW9yVWNVS0FoSTNKT2Q2TTRwbWRPaExITjZpZ0VwWFdVWGxBZjRITUZicHd5M1oxejNqZzVqTE9ragp6SWNDSVRaai9CYVZvSVc4QzJUb0pieUJKWkN6UDVjUVJTdkJOOGV4aUFFQ2dZRUEvV0Nxb2xVUWtOQkQrSnlPCklXOUJIRVlPS3oxRFZxNWxHRFhoNFMyTStpOU1pck5nUlcvL0NFRGhRUVVMZmtBTDgxMERPQmxsMXRRRUpGK3cKb1V6dWt6U1lkK1hTSnhicTM5YTF1ZGJldTNZU1ljeC8wTEEweGFQOW1sN1l1NXUraUZ4NGhwcnYyL2UrVklZQQpzTWV4WkZSODA3Q3M5YXN5MkdFT1l2aEdKb0VDZ1lFQTUzVm1weFlQbDFOYTVTMElJbEpuYm40dTl0RHpwYm5TCnpsMjBVQ3Q0d0N4STR6YjY1S1o4V1VaYlFzVTVaZ0VqTmxJWURXUisrd3kwVXh2SmNxUG5nS0xuOEdoSzhvOVEKeVJuR2dSYXAxWmNuUEdsbGdCeHQzM0s5TDNWMmJzMXBPcGJKMGlpOVdySWM4MU1wUVFpQjZ1RDRSZ216M0ZWSQpnUk5Ec2ZHS0xyRUNnWUVBbWY5ZXRqc3RUbGJHZVJ2dDVyUlB4bmR0dFNvTysyZ1RXWnVtSmM0aG1RMldYOWFWCjlKNFZTMWJqa1RrWHV5d0NGMis0dlNmeWxaZFd6U1M3bmMyOFV3dnNmekxYZjVxV05tV3hIYnBTdFcwVnp3c1QKeENyVWFDczd2ODlWdXZEMTVMc1BKZ0NWT0FSalVjd0FMM0d2aDJNeVd4ZE9pQ0g5VFRYd0lJYjFYQUVDZ1lBMwp4ZUptZ0xwaERJVHFsRjlSWmVubWhpRnErQTY5OEhrTG9TakI2TGZBRnV1NVZKWkFZcDIwSlcvNE51NE4xbGhWCnpwSmRKOG94Vkc1ZldHTENiUnhyc3RXUTZKQ213a0lGTTJEUjJsUXlVNm53dExUd21la2YzdFlYaVlad1RLNysKbnpjaW5RNkR2RWVkbW54bVgxWnU4cWJndVpYTmtmOVdtdjNFOHg4SkFRS0JnUUNNeDFWNHJIcUpwVXJMdkRVVQo4RzhXVGNrT2VFM2o2anhlcHMwcnExdEd1cE9XWW5saFlNYyt5VkMzMDZUc2dXUmJ5R1Y4YWNaRkF4WS9Ub2N5CmxpcXlUS1NGNUloYXhZQVpRTzVkOU1oTmN0bTRReDNaOUtTekZ5ZG01QlZVL0grMFFmUnRwM29TeFVneXRZNXkKV3ZDTFZ5bmNGZlZpL0VkaTdaZHM2aW82QVE9PQotLS0tLUVORCBQUklWQVRFIEtFWS0tLS0tCg==
+    traits:
+      meshmap:
+        edges: []
+        id: 9466f34a-06b9-4c8d-99c3-a703597e56ea
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: sheild
+          shapePolygonPoints: ""
+          styleOverrides:
+            background-clip: node
+            background-image-containment: over
+            background-opacity: "0"
+            height: 32
+            padding: 1
+            width: 32
+            z-index: 6
+          styles: '{"height":32,"width":32,"background-clip":"node","background-image-containment":"over","padding":1,"background-opacity":"0"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/secret-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/secret-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/secret-white.svg
+        position:
+          posX: 50
+          posY: 110
+        whiteboardData:
+          style:
+            z-index: 11
+  prometheus-server-conf:
+    name: prometheus-server-conf
+    type: ConfigMap
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    labels:
+      name: prometheus-server-conf
+    settings:
+      data:
+        prometheus.rules: |-
+          groups:
+          - name: devopscube demo alert
+            rules:
+            - alert: High Pod Memory
+              expr: sum(container_memory_usage_bytes) > 1
+              for: 1m
+              labels:
+                severity: slack
+              annotations:
+                summary: High Memory Usage
+        prometheus.yml: |-
+          global:
+            scrape_interval: 5s
+            evaluation_interval: 5s
+          rule_files:
+            - /etc/prometheus/prometheus.rules
+          alerting:
+            alertmanagers:
+            - scheme: http
+              static_configs:
+              - targets:
+                - "alertmanager.monitoring.svc:9093"
+          scrape_configs:
+            - job_name: 'node-exporter'
+              kubernetes_sd_configs:
+                - role: endpoints
+              relabel_configs:
+              - source_labels: [__meta_kubernetes_endpoints_name]
+                regex: 'node-exporter'
+                action: keep
+            - job_name: 'kubernetes-apiservers'
+              kubernetes_sd_configs:
+              - role: endpoints
+              scheme: https
+              tls_config:
+                ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+              bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              relabel_configs:
+              - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+                action: keep
+                regex: default;kubernetes;https
+            - job_name: 'kubernetes-nodes'
+              scheme: https
+              tls_config:
+                ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+              bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              kubernetes_sd_configs:
+              - role: node
+              relabel_configs:
+              - action: labelmap
+                regex: __meta_kubernetes_node_label_(.+)
+              - target_label: __address__
+                replacement: kubernetes.default.svc:443
+              - source_labels: [__meta_kubernetes_node_name]
+                regex: (.+)
+                target_label: __metrics_path__
+                replacement: /api/v1/nodes/${1}/proxy/metrics
+            - job_name: 'kubernetes-pods'
+              kubernetes_sd_configs:
+              - role: pod
+              relabel_configs:
+              - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+                action: keep
+                regex: true
+              - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+                action: replace
+                target_label: __metrics_path__
+                regex: (.+)
+              - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+                action: replace
+                regex: ([^:]+)(?::\d+)?;(\d+)
+                replacement: $1:$2
+                target_label: __address__
+              - action: labelmap
+                regex: __meta_kubernetes_pod_label_(.+)
+              - source_labels: [__meta_kubernetes_namespace]
+                action: replace
+                target_label: kubernetes_namespace
+              - source_labels: [__meta_kubernetes_pod_name]
+                action: replace
+                target_label: kubernetes_pod_name
+            - job_name: 'kube-state-metrics'
+              static_configs:
+                - targets: ['kube-state-metrics.kube-system.svc.cluster.local:8080']
+            - job_name: 'kubernetes-cadvisor'
+              scheme: https
+              tls_config:
+                ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+              bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+              kubernetes_sd_configs:
+              - role: node
+              relabel_configs:
+              - action: labelmap
+                regex: __meta_kubernetes_node_label_(.+)
+              - target_label: __address__
+                replacement: kubernetes.default.svc:443
+              - source_labels: [__meta_kubernetes_node_name]
+                regex: (.+)
+                target_label: __metrics_path__
+                replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor
+            - job_name: 'kubernetes-service-endpoints'
+              kubernetes_sd_configs:
+              - role: endpoints
+              relabel_configs:
+              - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
+                action: keep
+                regex: true
+              - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scheme]
+                action: replace
+                target_label: __scheme__
+                regex: (https?)
+              - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_path]
+                action: replace
+                target_label: __metrics_path__
+                regex: (.+)
+              - source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]
+                action: replace
+                target_label: __address__
+                regex: ([^:]+)(?::\d+)?;(\d+)
+                replacement: $1:$2
+              - action: labelmap
+                regex: __meta_kubernetes_service_label_(.+)
+              - source_labels: [__meta_kubernetes_namespace]
+                action: replace
+                target_label: kubernetes_namespace
+              - source_labels: [__meta_kubernetes_service_name]
+                action: replace
+                target_label: kubernetes_name
+    traits:
+      meshmap:
+        edges: []
+        id: 6442fcca-d80f-4b5f-981c-3e640756df56
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: bottom-round-rectangle
+          shapePolygonPoints: ""
+          styleOverrides:
+            z-index: 5
+          styles: ""
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/configmap-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/configmap-white.svg
+        position:
+          posX: 10
+          posY: 70
+        whiteboardData:
+          style:
+            z-index: 3
+  prometheus-service:
+    name: prometheus-service
+    type: Service
+    apiVersion: v1
+    namespace: monitoring
+    model: kubernetes
+    annotations:
+      prometheus.io/port: "9090"
+      prometheus.io/scrape: "true"
+    settings:
+      spec:
+        ports:
+        - node Port: 30000
+          port: 8080
+          protocol: TCP
+          target Port: 9090
+        selector:
+          app: prometheus-server
+        type: NodePort
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: bd7000f1-3367-4189-8f00-672911dea824
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: b2e2a852-201f-41c1-b4e6-1f78ded3807b
+            subType: Network
+            target: de446104-d42b-482c-a7ec-369b447f0530
+          style:
+            active-bg-color: rgb(0,0,0)
+            active-bg-opacity: "0.15"
+            active-bg-size: 30px
+            activeBgColor: rgb(0,0,0)
+            activeBgOpacity: "0.15"
+            activeBgSize: 30px
+            arrow-scale: "1"
+            arrowScale: "1"
+            background-blacken: "0"
+            background-clip: node
+            background-color: rgb(153,153,153)
+            background-fill: solid
+            background-fit: none
+            background-gradient-direction: to-bottom
+            background-gradient-stop-colors: rgb(153,153,153)
+            background-gradient-stop-positions: 0%
+            background-height: auto
+            background-height-relative-to: include-padding
+            background-image: none
+            background-image-containment: inside
+            background-image-crossorigin: anonymous
+            background-image-opacity: "1"
+            background-image-smoothing: "yes"
+            background-offset-x: 0px
+            background-offset-y: 0px
+            background-opacity: "1"
+            background-position-x: 50%
+            background-position-y: 50%
+            background-repeat: no-repeat
+            background-width: auto
+            background-width-relative-to: include-padding
+            backgroundBlacken: "0"
+            backgroundClip: node
+            backgroundColor: rgb(153,153,153)
+            backgroundFill: solid
+            backgroundFit: none
+            backgroundGradientDirection: to-bottom
+            backgroundGradientStopColors: rgb(153,153,153)
+            backgroundGradientStopPositions: 0%
+            backgroundHeight: auto
+            backgroundHeightRelativeTo: include-padding
+            backgroundImage: none
+            backgroundImageContainment: inside
+            backgroundImageCrossorigin: anonymous
+            backgroundImageOpacity: "1"
+            backgroundImageSmoothing: "yes"
+            backgroundOffsetX: 0px
+            backgroundOffsetY: 0px
+            backgroundOpacity: "1"
+            backgroundPositionX: 50%
+            backgroundPositionY: 50%
+            backgroundRepeat: no-repeat
+            backgroundWidth: auto
+            backgroundWidthRelativeTo: include-padding
+            border-color: rgb(0,0,0)
+            border-opacity: "1"
+            border-style: solid
+            border-width: 0px
+            borderColor: rgb(0,0,0)
+            borderOpacity: "1"
+            borderStyle: solid
+            borderWidth: 0px
+            bounds-expansion: 0px
+            boundsExpansion: 0px
+            color: rgb(0,0,0)
+            compound-sizing-wrt-labels: include
+            compoundSizingWrtLabels: include
+            content: ""
+            control-point-step-size: 40px
+            control-point-weight: "0.5"
+            control-point-weights: "0.5"
+            controlPointStepSize: 40px
+            controlPointWeight: "0.5"
+            controlPointWeights: "0.5"
+            curve-style: bezier
+            curveStyle: bezier
+            display: element
+            edge-distances: intersection
+            edge-text-rotation: none
+            edgeDistances: intersection
+            edgeTextRotation: none
+            events: "yes"
+            font-family: Qanelas Soft, sans-serif
+            font-size: 6px
+            font-style: normal
+            font-weight: normal
+            fontFamily: Qanelas Soft, sans-serif
+            fontSize: 6px
+            fontStyle: normal
+            fontWeight: normal
+            ghost: "no"
+            ghost-offset-x: 0px
+            ghost-offset-y: 0px
+            ghost-opacity: "0"
+            ghostOffsetX: 0px
+            ghostOffsetY: 0px
+            ghostOpacity: "0"
+            haystack-radius: "0"
+            haystackRadius: "0"
+            height: 30px
+            label: ""
+            line-cap: butt
+            line-color: rgb(153,153,153)
+            line-dash-offset: "0"
+            line-dash-pattern: 6 3
+            line-fill: solid
+            line-gradient-stop-colors: rgb(153,153,153)
+            line-gradient-stop-positions: 0%
+            line-height: "1"
+            line-opacity: "1"
+            line-style: dotted
+            lineCap: butt
+            lineColor: rgb(153,153,153)
+            lineDashOffset: "0"
+            lineDashPattern: 6 3
+            lineFill: solid
+            lineGradientStopColors: rgb(153,153,153)
+            lineGradientStopPositions: 0%
+            lineHeight: "1"
+            lineOpacity: "1"
+            lineStyle: dotted
+            loop-direction: -45deg
+            loop-sweep: -90deg
+            loopDirection: -45deg
+            loopSweep: -90deg
+            mid-source-arrow-color: rgb(153,153,153)
+            mid-source-arrow-fill: filled
+            mid-source-arrow-shape: none
+            mid-source-arrow-width: 1px
+            mid-target-arrow-color: rgb(153,153,153)
+            mid-target-arrow-fill: filled
+            mid-target-arrow-shape: none
+            mid-target-arrow-width: 1px
+            midSourceArrowColor: rgb(153,153,153)
+            midSourceArrowFill: filled
+            midSourceArrowShape: none
+            midSourceArrowWidth: 1px
+            midTargetArrowColor: rgb(153,153,153)
+            midTargetArrowFill: filled
+            midTargetArrowShape: none
+            midTargetArrowWidth: 1px
+            min-height: 0px
+            min-height-bias-bottom: 0px
+            min-height-bias-top: 0px
+            min-width: 0px
+            min-width-bias-left: 0px
+            min-width-bias-right: 0px
+            min-zoomed-font-size: 0px
+            minHeight: 0px
+            minHeightBiasBottom: 0px
+            minHeightBiasTop: 0px
+            minWidth: 0px
+            minWidthBiasLeft: 0px
+            minWidthBiasRight: 0px
+            minZoomedFontSize: 0px
+            opacity: "1"
+            outline-color: rgb(153,153,153)
+            outline-offset: 0px
+            outline-opacity: "1"
+            outline-style: solid
+            outline-width: 0px
+            outlineColor: rgb(153,153,153)
+            outlineOffset: 0px
+            outlineOpacity: "1"
+            outlineStyle: solid
+            outlineWidth: 0px
+            outside-texture-bg-color: rgb(0,0,0)
+            outside-texture-bg-opacity: "0.125"
+            outsideTextureBgColor: rgb(0,0,0)
+            outsideTextureBgOpacity: "0.125"
+            overlay-color: rgb(0,0,0)
+            overlay-opacity: "0"
+            overlay-padding: 10px
+            overlay-shape: round-rectangle
+            overlayColor: rgb(0,0,0)
+            overlayOpacity: "0"
+            overlayPadding: 10px
+            overlayShape: round-rectangle
+            padding: 0px
+            padding-bottom: 0px
+            padding-left: 0px
+            padding-relative-to: width
+            padding-right: 0px
+            padding-top: 0px
+            paddingBottom: 0px
+            paddingLeft: 0px
+            paddingRelativeTo: width
+            paddingRight: 0px
+            paddingTop: 0px
+            pie-1-background-color: rgb(0,0,0)
+            pie-1-background-opacity: "1"
+            pie-1-background-size: 0%
+            pie-2-background-color: rgb(0,0,0)
+            pie-2-background-opacity: "1"
+            pie-2-background-size: 0%
+            pie-3-background-color: rgb(0,0,0)
+            pie-3-background-opacity: "1"
+            pie-3-background-size: 0%
+            pie-4-background-color: rgb(0,0,0)
+            pie-4-background-opacity: "1"
+            pie-4-background-size: 0%
+            pie-5-background-color: rgb(0,0,0)
+            pie-5-background-opacity: "1"
+            pie-5-background-size: 0%
+            pie-6-background-color: rgb(0,0,0)
+            pie-6-background-opacity: "1"
+            pie-6-background-size: 0%
+            pie-7-background-color: rgb(0,0,0)
+            pie-7-background-opacity: "1"
+            pie-7-background-size: 0%
+            pie-8-background-color: rgb(0,0,0)
+            pie-8-background-opacity: "1"
+            pie-8-background-size: 0%
+            pie-9-background-color: rgb(0,0,0)
+            pie-9-background-opacity: "1"
+            pie-9-background-size: 0%
+            pie-10-background-color: rgb(0,0,0)
+            pie-10-background-opacity: "1"
+            pie-10-background-size: 0%
+            pie-11-background-color: rgb(0,0,0)
+            pie-11-background-opacity: "1"
+            pie-11-background-size: 0%
+            pie-12-background-color: rgb(0,0,0)
+            pie-12-background-opacity: "1"
+            pie-12-background-size: 0%
+            pie-13-background-color: rgb(0,0,0)
+            pie-13-background-opacity: "1"
+            pie-13-background-size: 0%
+            pie-14-background-color: rgb(0,0,0)
+            pie-14-background-opacity: "1"
+            pie-14-background-size: 0%
+            pie-15-background-color: rgb(0,0,0)
+            pie-15-background-opacity: "1"
+            pie-15-background-size: 0%
+            pie-16-background-color: rgb(0,0,0)
+            pie-16-background-opacity: "1"
+            pie-16-background-size: 0%
+            pie-size: 100%
+            pie2BackgroundColor: rgb(0,0,0)
+            pie2BackgroundOpacity: "1"
+            pie2BackgroundSize: 0%
+            pie3BackgroundColor: rgb(0,0,0)
+            pie3BackgroundOpacity: "1"
+            pie3BackgroundSize: 0%
+            pie4BackgroundColor: rgb(0,0,0)
+            pie4BackgroundOpacity: "1"
+            pie4BackgroundSize: 0%
+            pie5BackgroundColor: rgb(0,0,0)
+            pie5BackgroundOpacity: "1"
+            pie5BackgroundSize: 0%
+            pie6BackgroundColor: rgb(0,0,0)
+            pie6BackgroundOpacity: "1"
+            pie6BackgroundSize: 0%
+            pie7BackgroundColor: rgb(0,0,0)
+            pie7BackgroundOpacity: "1"
+            pie7BackgroundSize: 0%
+            pie8BackgroundColor: rgb(0,0,0)
+            pie8BackgroundOpacity: "1"
+            pie8BackgroundSize: 0%
+            pie9BackgroundColor: rgb(0,0,0)
+            pie9BackgroundOpacity: "1"
+            pie9BackgroundSize: 0%
+            pie10BackgroundColor: rgb(0,0,0)
+            pie10BackgroundOpacity: "1"
+            pie10BackgroundSize: 0%
+            pie11BackgroundColor: rgb(0,0,0)
+            pie11BackgroundOpacity: "1"
+            pie11BackgroundSize: 0%
+            pie12BackgroundColor: rgb(0,0,0)
+            pie12BackgroundOpacity: "1"
+            pie12BackgroundSize: 0%
+            pie13BackgroundColor: rgb(0,0,0)
+            pie13BackgroundOpacity: "1"
+            pie13BackgroundSize: 0%
+            pie14BackgroundColor: rgb(0,0,0)
+            pie14BackgroundOpacity: "1"
+            pie14BackgroundSize: 0%
+            pie15BackgroundColor: rgb(0,0,0)
+            pie15BackgroundOpacity: "1"
+            pie15BackgroundSize: 0%
+            pie16BackgroundColor: rgb(0,0,0)
+            pie16BackgroundOpacity: "1"
+            pie16BackgroundSize: 0%
+            pie1BackgroundColor: rgb(0,0,0)
+            pie1BackgroundOpacity: "1"
+            pie1BackgroundSize: 0%
+            pieSize: 100%
+            position: origin
+            segment-distances: 20px
+            segment-weights: "0.5"
+            segmentDistances: 20px
+            segmentWeights: "0.5"
+            selection-box-border-color: rgb(170,170,170)
+            selection-box-border-width: 1px
+            selection-box-color: rgb(221,221,221)
+            selection-box-opacity: "0.65"
+            selectionBoxBorderColor: rgb(170,170,170)
+            selectionBoxBorderWidth: 1px
+            selectionBoxColor: rgb(221,221,221)
+            selectionBoxOpacity: "0.65"
+            shape: ellipse
+            shape-polygon-points: -1 -1 1 -1 1 1 -1 1
+            shapePolygonPoints: -1 -1 1 -1 1 1 -1 1
+            source-arrow-color: rgb(153,153,153)
+            source-arrow-fill: filled
+            source-arrow-shape: none
+            source-arrow-width: 1px
+            source-distance-from-node: 0px
+            source-endpoint: outside-to-line
+            source-label: ""
+            source-text-margin-x: 0px
+            source-text-margin-y: 0px
+            source-text-offset: 0px
+            source-text-rotation: none
+            sourceArrowColor: rgb(153,153,153)
+            sourceArrowFill: filled
+            sourceArrowShape: none
+            sourceArrowWidth: 1px
+            sourceDistanceFromNode: 0px
+            sourceEndpoint: outside-to-line
+            sourceLabel: ""
+            sourceTextMarginX: 0px
+            sourceTextMarginY: 0px
+            sourceTextOffset: 0px
+            sourceTextRotation: none
+            target-arrow-color: rgb(153,153,153)
+            target-arrow-fill: filled
+            target-arrow-shape: vee
+            target-arrow-width: 1px
+            target-distance-from-node: 0px
+            target-endpoint: outside-to-line
+            target-label: 8080/TCP
+            target-text-margin-x: 0px
+            target-text-margin-y: -6px
+            target-text-offset: 16px
+            target-text-rotation: none
+            targetArrowColor: rgb(153,153,153)
+            targetArrowFill: filled
+            targetArrowShape: vee
+            targetArrowWidth: 1px
+            targetDistanceFromNode: 0px
+            targetEndpoint: outside-to-line
+            targetLabel: 8080/TCP
+            targetTextMarginX: 0px
+            targetTextMarginY: -6px
+            targetTextOffset: 16px
+            targetTextRotation: none
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            taxiDirection: auto
+            taxiTurn: 50%
+            taxiTurnMinDistance: 10px
+            text-background-color: rgb(0,0,0)
+            text-background-opacity: "0"
+            text-background-padding: 0px
+            text-background-shape: rectangle
+            text-border-color: rgb(0,0,0)
+            text-border-opacity: "0"
+            text-border-style: solid
+            text-border-width: 0px
+            text-events: "yes"
+            text-halign: center
+            text-justification: auto
+            text-margin-x: 0px
+            text-margin-y: 0px
+            text-max-width: 9999px
+            text-opacity: "1"
+            text-outline-color: rgb(255,255,255)
+            text-outline-opacity: "1"
+            text-outline-width: 1px
+            text-overflow-wrap: whitespace
+            text-rotation: none
+            text-transform: none
+            text-valign: top
+            text-wrap: wrap
+            textBackgroundColor: rgb(0,0,0)
+            textBackgroundOpacity: "0"
+            textBackgroundPadding: 0px
+            textBackgroundShape: rectangle
+            textBorderColor: rgb(0,0,0)
+            textBorderOpacity: "0"
+            textBorderStyle: solid
+            textBorderWidth: 0px
+            textEvents: "yes"
+            textHalign: center
+            textJustification: auto
+            textMarginX: 0px
+            textMarginY: 0px
+            textMaxWidth: 9999px
+            textOpacity: "1"
+            textOutlineColor: rgb(255,255,255)
+            textOutlineOpacity: "1"
+            textOutlineWidth: 1px
+            textOverflowWrap: whitespace
+            textRotation: none
+            textTransform: none
+            textValign: top
+            textWrap: wrap
+            transition-delay: 0ms
+            transition-duration: 0ms
+            transition-property: none
+            transition-timing-function: linear
+            transitionDelay: 0ms
+            transitionDuration: 0ms
+            transitionProperty: none
+            transitionTimingFunction: linear
+            underlay-color: rgb(0,0,0)
+            underlay-opacity: "0"
+            underlay-padding: 10px
+            underlay-shape: round-rectangle
+            underlayColor: rgb(0,0,0)
+            underlayOpacity: "0"
+            underlayPadding: 10px
+            underlayShape: round-rectangle
+            visibility: visible
+            width: 1.5px
+            z-compound-depth: auto
+            z-index: "999"
+            z-index-compare: manual
+            zCompoundDepth: auto
+            zIndex: "999"
+            zIndexCompare: manual
+        id: b2e2a852-201f-41c1-b4e6-1f78ded3807b
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          shapePolygonPoints: ""
+          styleOverrides:
+            background-position-y: 4.5
+            height: 20
+            padding: 12
+            width: 20
+            x: 10px
+            "y": 12px
+            z-index: 6
+          styles: '{"height":20,"width":20,"padding":12,"background-position-y":4.5,"x":"10px","y":"12px"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/service-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
+        position:
+          posX: 30
+          posY: 10
+        whiteboardData:
+          style:
+            z-index: 13
+  prometheus-ui:
+    name: prometheus-ui
+    type: Ingress
+    apiVersion: networking.k8s.io/v1
+    namespace: default
+    model: kubernetes
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    settings:
+      spec:
+        rules:
+        - host: prometheus.example.com
+          http:
+            paths:
+            - backend:
+                service:
+                  name: prometheus-service
+                  port:
+                    number: 8080
+              path: /
+              path Type: Prefix
+        tls:
+        - hosts:
+          - prometheus.apps.shaker242.lab
+          secret Name: prometheus-secret
+    traits:
+      meshmap:
+        edges: []
+        id: 0edaf726-745a-4278-b29b-00d49fe175c4
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: circle
+          shapePolygonPoints: ""
+          styleOverrides:
+            z-index: 6
+          styles: ""
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/ingress-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/ingress-white.svg
+        position:
+          posX: 70
+          posY: 70
+        whiteboardData:
+          style:
+            z-index: 15
+  prometheus-xxmgi:
+    name: prometheus
+    type: ClusterRoleBinding
+    apiVersion: rbac.authorization.k8s.io/v1
+    namespace: default
+    model: kubernetes
+    settings:
+      role Ref:
+        api Group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: prometheus
+      subjects:
+      - kind: ServiceAccount
+        name: default
+        namespace: monitoring
+    traits:
+      meshmap:
+        edges: []
+        id: d9b3fa77-9ad6-41ca-9d41-5b7105657d59
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          styleOverrides:
+            height: 25px
+            width: 25px
+            x: "7"
+            "y": "7"
+            z-index: 4
+          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+        position:
+          posX: 110
+          posY: 70
+        whiteboardData:
+          style:
+            z-index: 7
