@@ -1,0 +1,55 @@
+name: Pod Service Account Token
+services:
+  volumes-sa-token-pod:
+    name: volumes-sa-token-pod
+    type: Pod
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        containers:
+        - image: busybox
+          name: container-test
+          volume Mounts:
+          - mount Path: /service-account
+            name: volumes-sa-token-volume
+            read Only: true
+        volumes:
+        - name: volumes-sa-token-volume
+          projected:
+            sources:
+            - service Account Token:
+                audience: api
+                expiration Seconds: 3600
+                path: token
+    traits:
+      meshmap:
+        edges: []
+        id: b476484e-ae24-400a-a7e8-dbd5f03794a5
+        label: volumes-sa-token-pod
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides: ""
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: 70
+          posY: 70
+        whiteboardData:
+          style:
+            z-index: 3
