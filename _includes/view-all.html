@@ -33,7 +33,7 @@
     cards.forEach((card) => {
       card.style.display = "none";
     });
-    for (let i = coun; i < coun + 12 && coun + 12 <= maxCount; i++) {
+    for (let i = coun; i < coun + 9 && coun + 9 <= maxCount; i++) {
       cards[i].style.display = "block";
     }
 
@@ -41,20 +41,20 @@
 
   function updateButtonVisibility() {
       prevButton.style.display = count <= 0 ? "none" : "block";
-      nextButton.style.display = count + 12 >= maxCount ? "none" : "block";
+      nextButton.style.display = count + 9 >= maxCount ? "none" : "block";
     }
   prevButton.addEventListener("click", () => {
 
     if (count > 0) {
-      showCards((count -= 12));
+      showCards((count -= 9));
     }
     updateButtonVisibility();
   });
 
   nextButton.addEventListener("click", () => {
 
-    if (count + 12 < maxCount) {
-      showCards((count += 12));
+    if (count + 9 < maxCount) {
+      showCards((count += 9));
     }
     updateButtonVisibility();
   });
