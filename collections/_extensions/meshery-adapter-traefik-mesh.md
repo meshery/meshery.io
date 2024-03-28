@@ -1,7 +1,7 @@
 ---
 layout: item
-name: MeshMap Snapshot
-kind: GitOps
+name: Meshery Adapter for Traefik Mesh
+kind: Collaboration
 userName: Layer5, Inc.
 userAvatarURL: https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg
 type: gitops
