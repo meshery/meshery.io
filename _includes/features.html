@@ -296,3 +296,62 @@
 </section>
 {% endif %}
 {% endfor %}
+<script>
+    window.onload = function() {
+    document.querySelector('.tab button.active').click();
+};
+    let timeOutId;
+    function openTab(evt, relationshipType) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        evt.currentTarget.className += " active";
+       // document.getElementById(relationshipType).style.display = "block";
+       clearTimeout(timeOutId);
+        displayRelationships(relationshipType)
+        
+      }
+      function displayRelationships(relationships) {
+    
+        let index = 0;
+        displayImages();
+        function displayImages() {
+            let i;
+            const images = document.getElementsByClassName(`${relationships}`);
+            for (i = 0; i < images.length; i++) {
+                images[i].style.display = "none";
+            }
+            index++;
+            if (index > images.length) {
+                index = 1;
+            }
+            images[index-1].style.display = "block";
+            console.log(index);
+            console.log(relationships)
+            timeOutId = setTimeout(displayImages, 2000); 
+        }
+      }
+    </script>
+    <style>
+        .tab {
+         
+    box-shadow: var(--box-shadow-primary) !important;
+    border-radius: 13px;
+        & button {
+            padding: .5em;
+            color:var(--color-secondary-dark);
+
+            &:hover{ 
+            background-color: #00d3a9;
+            color: white !important;
+        }
+        }
+
+    }
+    </style>
