@@ -1,47 +1,55 @@
-  <!-- CARD-START -->
-  <div class="row">
-{% for pattern in site.catalog %}
-    {% if page.compatibility == true %}
-      {% for entry in pattern.compatibility %}
-      <div class="column">
-          {% if entry == {{page.filter}} and pattern.Status != "ComingSoon" and pattern.patternInfo%}
-            {% include card.html %}
-          {% elsif pattern.type == {{page.filter}} and pattern.filterInfo %}
-              {% include wasm-card.html %}
-          {% endif %}
-          {% if entry == {{page.filter}} and pattern.Status == "ComingSoon" %}
-            {% include coming-soon.html %}
-          {% endif %}
-        </div>
-        <!-- MODAL-START -->
-          {% if entry == {{page.filter}} and pattern.Status != "ComingSoon" %}
-          {% include modal.html %}
-            {% endif %}{% endfor %}
-         <!-- MODAL-END -->
-      {% else %}
-        <!-- <div class="row"> -->
+<!-- CARD-START -->
+<div class="row">
+  {% assign card_count = 0 %}
+  {% for pattern in site.catalog %}
+    {% if card_count < 9 %}
+      {% if page.compatibility == true %}
+        {% for entry in pattern.compatibility %}
           <div class="column">
-            {% if pattern.type == {{page.filter}} and pattern.Status != "ComingSoon" and pattern.patternInfo%}
+            {% if entry == page.filter and pattern.Status != "ComingSoon" and pattern.patternInfo %}
               {% include card.html %}
-            {% elsif pattern.type == {{page.filter}} and pattern.filterInfo %}
-                {% include wasm-card.html %}
+              {% assign card_count = card_count | plus: 1 %}
+            {% elsif pattern.type == page.filter and pattern.filterInfo %}
+              {% include wasm-card.html %}
+              {% assign card_count = card_count | plus: 1 %}
             {% endif %}
-            {% if pattern.type == {{page.filter}} and pattern.Status == "ComingSoon" %}
+            {% if entry == page.filter and pattern.Status == "ComingSoon" %}
               {% include coming-soon.html %}
             {% endif %}
           </div>
           <!-- MODAL-START -->
-          {% if pattern.type == {{page.filter}} and pattern.Status != "ComingSoon" %}
+          {% if entry == page.filter and pattern.Status != "ComingSoon" %}
+            {% include modal.html %}
+          {% endif %}
+          <!-- MODAL-END -->
+        {% endfor %}
+      {% else %}
+        <div class="column">
+          {% if pattern.type == page.filter and pattern.Status != "ComingSoon" and pattern.patternInfo %}
+            {% include card.html %}
+            {% assign card_count = card_count | plus: 1 %}
+          {% elsif pattern.type == page.filter and pattern.filterInfo %}
+            {% include wasm-card.html %}
+            {% assign card_count = card_count | plus: 1 %}
+          {% endif %}
+          {% if pattern.type == page.filter and pattern.Status == "ComingSoon" %}
+            {% include coming-soon.html %}
+          {% endif %}
+        </div>
+        <!-- MODAL-START -->
+        {% if pattern.type == page.filter and pattern.Status != "ComingSoon" %}
           {% include modal.html %}
-            {% endif %}
-            <!-- MODAL-END -->
         {% endif %}
-      {% endfor %} 
-  <!-- CARD-END -->
-  </div>
-  
+        <!-- MODAL-END -->
+      {% endif %}
+    {% endif %}
+  {% endfor %} 
+<!-- CARD-END -->
+</div>
 
-  <script>
-    document.getElementById("{{page.filter}}".toLocaleLowerCase().split(" ").join("-")).checked = true;
-  </script>
-  
+
+<script>
+  document.getElementById(
+    "{{page.filter}}".toLocaleLowerCase().split(" ").join("-")
+  ).checked = true;
+</script>
