@@ -10,7 +10,7 @@ compatibility:
   - kubernetes
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: /assets/images/meshery-logo.svg
-image: /assets/images/gitops-snapshot.png
+image: /images/integrations/cilium/icons/color/cilium-color.svg
 extensionInfo: |
   Deploy the Meshery Adapter for Cilium Service Mesh in order to enable deeper lifecycle management of Cilium Service Mesh.
 extensionCaveats: |

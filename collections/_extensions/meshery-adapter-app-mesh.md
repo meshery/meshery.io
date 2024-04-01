@@ -10,7 +10,7 @@ compatibility:
   - kubernetes
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: https://playground.meshery.io/static/img/meshmap-snapshot-logo.svg
-image: /assets/images/gitops-snapshot.png
+image: /images/integrations/appmesh-controller/icons/color/appmesh-controller-color.svg
 extensionInfo: |
   Deploy the Meshery Adapter for App Mesh in order to enable deeper lifecycle management of App Mesh.
 extensionCaveats: |
