@@ -1,70 +1,5 @@
 name: Simple Kubernetes Pod
 services:
-  Unitled Filter File:
-    name: Unitled Filter File
-    type: WASMFilter
-    apiVersion: core.meshery.io/v1alpha1
-    version: v1.0.0
-    model: meshery-core
-    isAnnotation: true
-    dependsOn:
-    - envoy-filter-vi
-    settings:
-      config: |2-
-
-        name: envoy.filters.http.wasm
-        typed_config:
-          '@type': type.googleapis.com/udpa.type.v1.TypedStruct
-          type_url: type.googleapis.com/envoy.extensions.filters.http.wasm.v3.Wasm
-          value:
-            config:
-              vm_config:
-                code:
-                  local:
-                    filename: /var/local/wasm/http-filter.wasm
-                runtime: envoy.wasm.runtime.v8
-      name: Unitled Filter File
-      wasm Filter: https://meshery.layer5.io/api/content/filters/download/8be55256-2a60-4aec-b7b4-8182128c1438
-    traits:
-      meshmap:
-        id: 8be55256-2a60-4aec-b7b4-8182128c1438
-        isFilter: true
-        label: Unitled Filter File
-        meshmodel-metadata:
-          capabilities: ""
-          genealogy: ""
-          isAnnotation: true
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
-          logoURL: ""
-          model: meshery-core
-          modelDisplayName: Meshery Core
-          parentId: 2f683171-d928-4e7e-bec4-afb089004bd0
-          primaryColor: '#654ff0'
-          published: true
-          secondaryColor: '#654ff0'
-          shape: rectangle
-          styleOverrides: ""
-          subCategory: App Definition and Development
-          svgColor: ui/public/static/img/meshmodels/meshery-core/color/wasmfilter-color.svg
-          svgComplete: ui/public/static/img/meshmodels/meshery-core/complete/wasmfilter-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/meshery-core/white/wasmfilter-white.svg
-        meshmodel-model:
-          category:
-            metadata: null
-            name: Orchestration & Management
-          components: []
-          displayName: Meshery Core
-          hostID: 00000000-0000-0000-0000-000000000000
-          id: 62489087-21df-53b6-be33-986c79770d15
-          metadata:
-            isAnnotation: false
-            svgColor: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
-            svgWhite: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
-          name: meshery-core
-          relationships: []
-          version: v1.0.0
-        parent: 2f683171-d928-4e7e-bec4-afb089004bd0
   envoy-filter-vi:
     name: envoy-filter-vi
     type: EnvoyFilter
@@ -149,18 +84,19 @@ services:
           published: true
           secondaryColor: '#93b0e7'
           shape: circle
-          styleOverrides: ""
+          styleOverrides:
+            z-index: 10000
           subCategory: Service Mesh
           svgColor: ui/public/static/img/meshmodels/istio-base/color/authorizationpolicy-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/istio-base/white/authorizationpolicy-white.svg
         position:
-          posX: 343.35117458149546
-          posY: 79.64624026881556
+          posX: 350
+          posY: 70
         whiteboardData:
           style:
             z-index: 10005
-  persistent volume claim-fahis:
+  persistent volume claim-chnfx:
     name: Persistent Volume Claim
     type: PersistentVolumeClaim
     apiVersion: v1
@@ -202,59 +138,12 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 421.25439385035827
-          posY: 145.44877670979187
+          posX: 430
+          posY: 150
         whiteboardData:
           style:
             z-index: 10000
-  persistent volume claim-maeau:
-    name: Persistent Volume Claim
-    type: PersistentVolumeClaim
-    apiVersion: v1
-    version: v1.25.2
-    model: kubernetes
-    traits:
-      meshmap:
-        edges: []
-        id: d1ebb6b7-cd1a-4b2c-a88c-d4f2974e8adc
-        label: Persistent Volume Claim
-        meshmodel-data:
-          category:
-            metadata: null
-            name: Orchestration & Management
-          displayName: Kubernetes
-          displayhostname: ""
-          hostID: 00000000-0000-0000-0000-000000000000
-          hostname: ""
-          metadata:
-            svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-          name: kubernetes
-          version: v1.25.2
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: cylinder
-          styleOverrides: '{"height":32,"width":32,"pading":0,"background-clip":"none","background-image-containment":"over","border-opacity":0,"background-opacity":0,"bounds-expansion":20,
-            "z-index": 9999}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
-        position:
-          posX: 487.65765269353767
-          posY: 122.36945251196079
-        whiteboardData:
-          style:
-            z-index: 10010
-  persistent volume claim-psfbc:
+  persistent volume claim-huxyq:
     name: Persistent Volume Claim
     type: PersistentVolumeClaim
     apiVersion: v1
@@ -290,19 +179,27 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: cylinder
-          styleOverrides: '{"height":32,"width":32,"pading":0,"background-clip":"none","background-image-containment":"over","border-opacity":0,"background-opacity":0,"bounds-expansion":20,
-            "z-index": 9999}'
+          styleOverrides:
+            background-clip: none
+            background-image-containment: over
+            background-opacity: 0
+            border-opacity: 0
+            bounds-expansion: 20
+            height: 32
+            pading: 0
+            width: 32
+            z-index: 10000
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 400.52362668663466
-          posY: 92.24987100452248
+          posX: 410
+          posY: 90
         whiteboardData:
           style:
             z-index: 10001
-  persistent volume claim-rdiuh:
+  persistent volume claim-kemtg:
     name: Persistent Volume Claim
     type: PersistentVolumeClaim
     apiVersion: v1
@@ -311,7 +208,7 @@ services:
     traits:
       meshmap:
         edges: []
-        id: badddecb-b26d-4cbc-bffa-60eb1bdf00f0
+        id: d1ebb6b7-cd1a-4b2c-a88c-d4f2974e8adc
         label: Persistent Volume Claim
         meshmodel-data:
           category:
@@ -337,19 +234,27 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: cylinder
-          styleOverrides: '{"height":32,"width":32,"pading":0,"background-clip":"none","background-image-containment":"over","border-opacity":0,"background-opacity":0,"bounds-expansion":20,
-            "z-index": 9999}'
+          styleOverrides:
+            background-clip: none
+            background-image-containment: over
+            background-opacity: 0
+            border-opacity: 0
+            bounds-expansion: 20
+            height: 32
+            pading: 0
+            width: 32
+            z-index: 10000
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 599.9460656137976
-          posY: 84.25221264013965
+          posX: 490
+          posY: 130
         whiteboardData:
           style:
-            z-index: 10003
-  persistent volume claim-szkag:
+            z-index: 10010
+  persistent volume claim-oznnh:
     name: Persistent Volume Claim
     type: PersistentVolumeClaim
     apiVersion: v1
@@ -384,18 +289,81 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: cylinder
-          styleOverrides: '{"height":32,"width":32,"pading":0,"background-clip":"none","background-image-containment":"over","border-opacity":0,"background-opacity":0,"bounds-expansion":20,
-            "z-index": 9999}'
+          styleOverrides:
+            background-clip: none
+            background-image-containment: over
+            background-opacity: 0
+            border-opacity: 0
+            bounds-expansion: 20
+            height: 32
+            pading: 0
+            width: 32
+            z-index: 10000
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 281.16819903617903
-          posY: 109.27283571363742
+          posX: 290
+          posY: 110
         whiteboardData:
           style:
             z-index: 10009
+  persistent volume claim-ymrtg:
+    name: Persistent Volume Claim
+    type: PersistentVolumeClaim
+    apiVersion: v1
+    version: v1.25.2
+    model: kubernetes
+    traits:
+      meshmap:
+        edges: []
+        id: badddecb-b26d-4cbc-bffa-60eb1bdf00f0
+        label: Persistent Volume Claim
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Kubernetes
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          name: kubernetes
+          version: v1.25.2
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: cylinder
+          styleOverrides:
+            background-clip: none
+            background-image-containment: over
+            background-opacity: 0
+            border-opacity: 0
+            bounds-expansion: 20
+            height: 32
+            pading: 0
+            width: 32
+            z-index: 10000
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
+        position:
+          posX: 590
+          posY: 90
+        whiteboardData:
+          style:
+            z-index: 10003
   persistent-volume-claim-bo:
     name: persistent-volume-claim-bo
     type: PersistentVolumeClaim
@@ -432,15 +400,23 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: cylinder
-          styleOverrides: '{"height":32,"width":32,"pading":0,"background-clip":"none","background-image-containment":"over","border-opacity":0,"background-opacity":0,"bounds-expansion":20,
-            "z-index": 9999}'
+          styleOverrides:
+            background-clip: none
+            background-image-containment: over
+            background-opacity: 0
+            border-opacity: 0
+            bounds-expansion: 20
+            height: 32
+            pading: 0
+            width: 32
+            z-index: 10000
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 360.47061330429096
-          posY: 267.1438864071736
+          posX: 370
+          posY: 270
         whiteboardData:
           style:
             z-index: 10006
@@ -480,15 +456,23 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: cylinder
-          styleOverrides: '{"height":32,"width":32,"pading":0,"background-clip":"none","background-image-containment":"over","border-opacity":0,"background-opacity":0,"bounds-expansion":20,
-            "z-index": 9999}'
+          styleOverrides:
+            background-clip: none
+            background-image-containment: over
+            background-opacity: 0
+            border-opacity: 0
+            bounds-expansion: 20
+            height: 32
+            pading: 0
+            width: 32
+            z-index: 10000
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 467.7416198760131
-          posY: 210.93853166008026
+          posX: 470
+          posY: 210
         whiteboardData:
           style:
             z-index: 10004
@@ -527,14 +511,23 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: cylinder
-          styleOverrides: '{"height":32,"width":32,"pading":0,"background-clip":"none","background-image-containment":"over","border-opacity":0,"background-opacity":0,"bounds-expansion":20}'
+          styleOverrides:
+            background-clip: none
+            background-image-containment: over
+            background-opacity: 0
+            border-opacity: 0
+            bounds-expansion: 20
+            height: 32
+            pading: 0
+            width: 32
+            z-index: 10000
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 410.4272991702491
-          posY: 138.04448661431704
+          posX: 410
+          posY: 130
         whiteboardData:
           style:
             z-index: 10011
@@ -573,14 +566,23 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: cylinder
-          styleOverrides: '{"height":32,"width":32,"pading":0,"background-clip":"none","background-image-containment":"over","border-opacity":0,"background-opacity":0,"bounds-expansion":20}'
+          styleOverrides:
+            background-clip: none
+            background-image-containment: over
+            background-opacity: 0
+            border-opacity: 0
+            bounds-expansion: 20
+            height: 32
+            pading: 0
+            width: 32
+            z-index: 10000
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 454.395491761794
-          posY: 269.1327665566496
+          posX: 450
+          posY: 270
         whiteboardData:
           style:
             z-index: 10007
@@ -626,14 +628,15 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-rectangle
-          styleOverrides: ""
+          styleOverrides:
+            z-index: 10000
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: 267.3294724382355
-          posY: 265.17160207515974
+          posX: 270
+          posY: 270
         whiteboardData:
           style:
             z-index: 10002
@@ -687,112 +690,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: 691.3571140166083
-          posY: 265.67174365440076
+          posX: 690
+          posY: 270
         whiteboardData:
           style:
             z-index: 10008
-  tcp_metrics_bg.wasm:
-    name: tcp_metrics_bg.wasm
-    type: WASMFilter
-    apiVersion: core.meshery.io/v1alpha1
-    version: v1.0.0
-    model: meshery-core
-    dependsOn:
-    - envoy-filter-vi
-    settings:
-      name: tcp_metrics_bg.wasm
-      wasm Filter: https://meshery.layer5.io/api/content/filters/download/c132ee7d-718d-49d5-862d-45be4269e980
-    traits:
-      meshmap:
-        id: c132ee7d-718d-49d5-862d-45be4269e980
-        isFilter: true
-        label: tcp_metrics_bg.wasm
-        meshmodel-metadata:
-          capabilities: ""
-          genealogy: ""
-          isAnnotation: true
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
-          logoURL: ""
-          model: meshery-core
-          modelDisplayName: Meshery Core
-          parentId: 2f683171-d928-4e7e-bec4-afb089004bd0
-          primaryColor: '#654ff0'
-          published: true
-          secondaryColor: '#654ff0'
-          shape: rectangle
-          styleOverrides: ""
-          subCategory: App Definition and Development
-          svgColor: ui/public/static/img/meshmodels/meshery-core/color/wasmfilter-color.svg
-          svgComplete: ui/public/static/img/meshmodels/meshery-core/complete/wasmfilter-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/meshery-core/white/wasmfilter-white.svg
-        meshmodel-model:
-          category:
-            metadata: null
-            name: Orchestration & Management
-          components: []
-          displayName: Meshery Core
-          hostID: 00000000-0000-0000-0000-000000000000
-          id: 62489087-21df-53b6-be33-986c79770d15
-          metadata:
-            isAnnotation: false
-            svgColor: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
-            svgWhite: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
-          name: meshery-core
-          relationships: []
-          version: v1.0.0
-        parent: 2f683171-d928-4e7e-bec4-afb089004bd0
-  tcp_packet_parse_bg.wasm:
-    name: tcp_packet_parse_bg.wasm
-    type: WASMFilter
-    apiVersion: core.meshery.io/v1alpha1
-    version: v1.0.0
-    model: meshery-core
-    dependsOn:
-    - envoy-filter-vi
-    settings:
-      annotations:
-        IstioCon: "2023"
-      name: tcp_packet_parse_bg.wasm
-      wasm Filter: https://meshery.layer5.io/api/content/filters/download/92cada4c-1eaa-44b3-a749-3cd1157afed2
-    traits:
-      meshmap:
-        id: 92cada4c-1eaa-44b3-a749-3cd1157afed2
-        isFilter: true
-        label: tcp_packet_parse_bg.wasm
-        meshmodel-metadata:
-          capabilities: ""
-          genealogy: ""
-          isAnnotation: true
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
-          logoURL: ""
-          model: meshery-core
-          modelDisplayName: Meshery Core
-          parentId: 2f683171-d928-4e7e-bec4-afb089004bd0
-          primaryColor: '#654ff0'
-          published: true
-          secondaryColor: '#654ff0'
-          shape: rectangle
-          styleOverrides: ""
-          subCategory: App Definition and Development
-          svgColor: ui/public/static/img/meshmodels/meshery-core/color/wasmfilter-color.svg
-          svgComplete: ui/public/static/img/meshmodels/meshery-core/complete/wasmfilter-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/meshery-core/white/wasmfilter-white.svg
-        meshmodel-model:
-          category:
-            metadata: null
-            name: Orchestration & Management
-          components: []
-          displayName: Meshery Core
-          hostID: 00000000-0000-0000-0000-000000000000
-          id: 62489087-21df-53b6-be33-986c79770d15
-          metadata:
-            isAnnotation: false
-            svgColor: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
-            svgWhite: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
-          name: meshery-core
-          relationships: []
-          version: v1.0.0
-        parent: 2f683171-d928-4e7e-bec4-afb089004bd0
