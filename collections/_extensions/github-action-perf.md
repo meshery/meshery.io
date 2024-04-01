@@ -17,6 +17,6 @@ extensionCaveats: |
   - See your deployment before you merge.
   - Connect MeshMap to your GitHub repo and see changes pull request-to-pull request
   - Get snapshots of your infrastructure directly in your PRs
-URL: 'https://github.com/marketplace/actions/meshmap-snapshot'
+URL: 'https://github.com/marketplace/actions/performance-testing-with-meshery'
 downloadLink: https://meshery.layer5.io/connect/github/new
 ---
