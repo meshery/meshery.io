@@ -1,3 +1,28 @@
+
+<section style="position: relative;">
+    <div class="container flex" style="align-items: normal;"  >
+        <div class="text " style="padding: 0 20px 20px 0;">
+
+            <h2><span class="special-text">Relationships</span> for components</h2>
+            <p>Meshery uses relationships to map how interconnected components interact to each other. Currently three type of relationships are supported: Hierarchical, Edge, and Sibling.
+                <div class="button-para">
+                    <a href="https://docs.meshery.io/concepts/logical/relationships#types-of-relationships" class="highlight">View Docs</a>
+                </div>
+            </p>
+        </div>
+        <div style="display: flex;flex-direction: column;align-items: center;flex-basis: 40%;" >
+        <div class="tab">
+            <button class="tablinks active" onclick="openTab(event, 'edge')">Edge</button>
+            <button class="tablinks" onclick="openTab(event, 'hierarchical')">Hierarchical</button>
+            <button class="tablinks" onclick="openTab(event, 'sibling')">Sibling</button>
+          </div>
+        
+            {% include partials/relationships.html %}
+
+        
+        </div>
+    </div>
+</section>
 <section>
     <div class="container flex">
         <div class="text ">
@@ -271,3 +296,62 @@
 </section>
 {% endif %}
 {% endfor %}
+<script>
+    window.onload = function() {
+    document.querySelector('.tab button.active').click();
+};
+    let timeOutId;
+    function openTab(evt, relationshipType) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        evt.currentTarget.className += " active";
+       // document.getElementById(relationshipType).style.display = "block";
+       clearTimeout(timeOutId);
+        displayRelationships(relationshipType)
+        
+      }
+      function displayRelationships(relationships) {
+    
+        let index = 0;
+        displayImages();
+        function displayImages() {
+            let i;
+            const images = document.getElementsByClassName(`${relationships}`);
+            for (i = 0; i < images.length; i++) {
+                images[i].style.display = "none";
+            }
+            index++;
+            if (index > images.length) {
+                index = 1;
+            }
+            images[index-1].style.display = "block";
+            console.log(index);
+            console.log(relationships)
+            timeOutId = setTimeout(displayImages, 2000); 
+        }
+      }
+    </script>
+    <style>
+        .tab {
+         
+    box-shadow: var(--box-shadow-primary) !important;
+    border-radius: 13px;
+        & button {
+            padding: .5em;
+            color:var(--color-secondary-dark);
+
+            &:hover{ 
+            background-color: #00d3a9;
+            color: white !important;
+        }
+        }
+
+    }
+    </style>

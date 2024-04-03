@@ -1,0 +1,3170 @@
+name: Load Balanced AWS Architecture
+services:
+  ec2-gh:
+    name: ec2-gh
+    type: EC2
+    apiVersion: core.meshery.io/v1alpha1
+    namespace: default
+    version: 1.0.0
+    model: aws
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: a9173428-25b8-4cfb-8655-abf8bfc3120e
+            source: 3100e754-1ac8-454a-980c-8829d3a0cac2
+            subType: Annotation
+            target: dbecf01e-71a1-449a-9844-58c88746ed14
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 676a15f5-ddb6-43cb-871e-7b339d098e37
+            source: 2e29dbbd-604e-4cd5-8e6b-e6ee0c23219e
+            subType: Annotation
+            target: 3100e754-1ac8-454a-980c-8829d3a0cac2
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 4914c566-1706-476f-bcf6-72f8ff1205b3
+            source: 3100e754-1ac8-454a-980c-8829d3a0cac2
+            subType: Annotation
+            target: a2dca259-6615-4f6b-9bdf-bbc24d15f756
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: 3100e754-1ac8-454a-980c-8829d3a0cac2
+        label: EC2
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Provisioning
+          components: []
+          displayName: Amazon Web Services
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            isAnnotation: true
+            svgColor: ui/public/static/img/meshmodels/aws/color/aws-color.svg
+            svgWhite: ui/public/static/img/meshmodels/aws/white/aws-white.svg
+          name: aws
+          relationships: []
+          version: 1.0.0
+        meshmodel-metadata:
+          capabilities: '{ "designer": { "edit": { "config": false, "lock": true,
+            "shape": { "convert-shape": true }, "style": true }, "label": { "edit":
+            true, "show": true, "sync-with-config-property": "label" } } }'
+          genealogy: ""
+          isAnnotation: true
+          isModelAnnotation: "TRUE"
+          isNamespaced: "false"
+          logoURL: ""
+          model: aws
+          modelDisplayName: Amazon Web Services
+          primaryColor: '#ED7100'
+          published: true
+          secondaryColor: ""
+          shape: rectangle
+          styleOverrides: ""
+          subCategory: Compute
+          svgColor: ui/public/static/img/meshmodels/aws/color/ec2-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/aws/white/ec2-white.svg
+        position:
+          posX: 210
+          posY: 30
+        whiteboardData:
+          style:
+            z-index: 5
+  ec2-tf:
+    name: ec2-tf
+    type: EC2
+    apiVersion: core.meshery.io/v1alpha1
+    namespace: default
+    version: 1.0.0
+    model: aws
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 5196252d-c2d9-4040-a601-b24762ebda9e
+            source: 687bf864-0ff9-4e67-8daa-bbc786d2bddf
+            subType: Annotation
+            target: dbecf01e-71a1-449a-9844-58c88746ed14
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 85d66306-2235-463a-9fbe-1f6848e6aec3
+            source: 2e29dbbd-604e-4cd5-8e6b-e6ee0c23219e
+            subType: Annotation
+            target: 687bf864-0ff9-4e67-8daa-bbc786d2bddf
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: d5ca220c-d3c3-446e-84d4-e2c09957e264
+            source: 687bf864-0ff9-4e67-8daa-bbc786d2bddf
+            subType: Annotation
+            target: a2dca259-6615-4f6b-9bdf-bbc24d15f756
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: 687bf864-0ff9-4e67-8daa-bbc786d2bddf
+        label: EC2
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Provisioning
+          components: []
+          displayName: Amazon Web Services
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            isAnnotation: true
+            svgColor: ui/public/static/img/meshmodels/aws/color/aws-color.svg
+            svgWhite: ui/public/static/img/meshmodels/aws/white/aws-white.svg
+          name: aws
+          relationships: []
+          version: 1.0.0
+        meshmodel-metadata:
+          capabilities: '{ "designer": { "edit": { "config": false, "lock": true,
+            "shape": { "convert-shape": true }, "style": true }, "label": { "edit":
+            true, "show": true, "sync-with-config-property": "label" } } }'
+          genealogy: ""
+          isAnnotation: true
+          isModelAnnotation: "TRUE"
+          isNamespaced: "false"
+          logoURL: ""
+          model: aws
+          modelDisplayName: Amazon Web Services
+          primaryColor: '#ED7100'
+          published: true
+          secondaryColor: ""
+          shape: rectangle
+          styleOverrides: ""
+          subCategory: Compute
+          svgColor: ui/public/static/img/meshmodels/aws/color/ec2-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/aws/white/ec2-white.svg
+        position:
+          posX: 210
+          posY: -30
+        whiteboardData:
+          style:
+            z-index: 4
+  ec2-xo:
+    name: ec2-xo
+    type: EC2
+    apiVersion: core.meshery.io/v1alpha1
+    namespace: default
+    version: 1.0.0
+    model: aws
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 723293d7-4e14-4982-b481-1fc8bbafafce
+            source: 42fa0db4-b997-4f9f-8a71-a75994594551
+            subType: Annotation
+            target: dbecf01e-71a1-449a-9844-58c88746ed14
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: e9aba474-ab93-4ebd-8a65-0104b4a9d191
+            source: 2e29dbbd-604e-4cd5-8e6b-e6ee0c23219e
+            subType: Annotation
+            target: 42fa0db4-b997-4f9f-8a71-a75994594551
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 30e2b616-e412-466d-abe1-2325031a7962
+            source: 42fa0db4-b997-4f9f-8a71-a75994594551
+            subType: Annotation
+            target: a2dca259-6615-4f6b-9bdf-bbc24d15f756
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: 42fa0db4-b997-4f9f-8a71-a75994594551
+        label: EC2
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Provisioning
+          components: []
+          displayName: Amazon Web Services
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            isAnnotation: true
+            svgColor: ui/public/static/img/meshmodels/aws/color/aws-color.svg
+            svgWhite: ui/public/static/img/meshmodels/aws/white/aws-white.svg
+          name: aws
+          relationships: []
+          version: 1.0.0
+        meshmodel-metadata:
+          capabilities: '{ "designer": { "edit": { "config": false, "lock": true,
+            "shape": { "convert-shape": true }, "style": true }, "label": { "edit":
+            true, "show": true, "sync-with-config-property": "label" } } }'
+          genealogy: ""
+          isAnnotation: true
+          isModelAnnotation: "TRUE"
+          isNamespaced: "false"
+          logoURL: ""
+          model: aws
+          modelDisplayName: Amazon Web Services
+          primaryColor: '#ED7100'
+          published: true
+          secondaryColor: ""
+          shape: rectangle
+          styleOverrides: ""
+          subCategory: Compute
+          svgColor: ui/public/static/img/meshmodels/aws/color/ec2-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/aws/white/ec2-white.svg
+        position:
+          posX: 210
+          posY: 90
+        whiteboardData:
+          style:
+            z-index: 6
+  elastic-load-balancing-im:
+    name: elastic-load-balancing-im
+    type: Elastic Load Balancing
+    apiVersion: core.meshery.io/v1alpha1
+    namespace: default
+    version: 1.0.0
+    model: aws
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 676a15f5-ddb6-43cb-871e-7b339d098e37
+            source: 2e29dbbd-604e-4cd5-8e6b-e6ee0c23219e
+            subType: Annotation
+            target: 3100e754-1ac8-454a-980c-8829d3a0cac2
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 85d66306-2235-463a-9fbe-1f6848e6aec3
+            source: 2e29dbbd-604e-4cd5-8e6b-e6ee0c23219e
+            subType: Annotation
+            target: 687bf864-0ff9-4e67-8daa-bbc786d2bddf
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: e9aba474-ab93-4ebd-8a65-0104b4a9d191
+            source: 2e29dbbd-604e-4cd5-8e6b-e6ee0c23219e
+            subType: Annotation
+            target: 42fa0db4-b997-4f9f-8a71-a75994594551
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: 2e29dbbd-604e-4cd5-8e6b-e6ee0c23219e
+        label: Elastic Load Balancing
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Provisioning
+          components: []
+          displayName: Amazon Web Services
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            isAnnotation: true
+            svgColor: ui/public/static/img/meshmodels/aws/color/aws-color.svg
+            svgWhite: ui/public/static/img/meshmodels/aws/white/aws-white.svg
+          name: aws
+          relationships: []
+          version: 1.0.0
+        meshmodel-metadata:
+          capabilities: '{ "designer": { "edit": { "config": false, "lock": true,
+            "shape": { "convert-shape": true }, "style": true }, "label": { "edit":
+            true, "show": true, "sync-with-config-property": "label" } } }'
+          genealogy: ""
+          isAnnotation: true
+          isModelAnnotation: "TRUE"
+          isNamespaced: "false"
+          logoURL: ""
+          model: aws
+          modelDisplayName: Amazon Web Services
+          primaryColor: '#8C4FFF'
+          published: true
+          secondaryColor: ""
+          shape: rectangle
+          styleOverrides: ""
+          subCategory: Networking Content Delivery
+          svgColor: ui/public/static/img/meshmodels/aws/color/elastic load balancing-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/aws/white/elastic load balancing-white.svg
+        position:
+          posX: 110
+          posY: 30
+        whiteboardData:
+          style:
+            z-index: 3
+  rds-va:
+    name: rds-va
+    type: RDS
+    apiVersion: core.meshery.io/v1alpha1
+    namespace: default
+    version: 1.0.0
+    model: aws
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 4914c566-1706-476f-bcf6-72f8ff1205b3
+            source: 3100e754-1ac8-454a-980c-8829d3a0cac2
+            subType: Annotation
+            target: a2dca259-6615-4f6b-9bdf-bbc24d15f756
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: d5ca220c-d3c3-446e-84d4-e2c09957e264
+            source: 687bf864-0ff9-4e67-8daa-bbc786d2bddf
+            subType: Annotation
+            target: a2dca259-6615-4f6b-9bdf-bbc24d15f756
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 30e2b616-e412-466d-abe1-2325031a7962
+            source: 42fa0db4-b997-4f9f-8a71-a75994594551
+            subType: Annotation
+            target: a2dca259-6615-4f6b-9bdf-bbc24d15f756
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: a2dca259-6615-4f6b-9bdf-bbc24d15f756
+        label: RDS
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Provisioning
+          components: []
+          displayName: Amazon Web Services
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            isAnnotation: true
+            svgColor: ui/public/static/img/meshmodels/aws/color/aws-color.svg
+            svgWhite: ui/public/static/img/meshmodels/aws/white/aws-white.svg
+          name: aws
+          relationships: []
+          version: 1.0.0
+        meshmodel-metadata:
+          capabilities: '{ "designer": { "edit": { "config": false, "lock": true,
+            "shape": { "convert-shape": true }, "style": true }, "label": { "edit":
+            true, "show": true, "sync-with-config-property": "label" } } }'
+          genealogy: ""
+          isAnnotation: true
+          isModelAnnotation: "TRUE"
+          isNamespaced: "false"
+          logoURL: ""
+          model: aws
+          modelDisplayName: Amazon Web Services
+          primaryColor: '#C925D1'
+          published: true
+          secondaryColor: ""
+          shape: rectangle
+          styleOverrides: ""
+          subCategory: Database
+          svgColor: ui/public/static/img/meshmodels/aws/color/rds-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/aws/white/rds-white.svg
+        position:
+          posX: 330
+          posY: 50
+        whiteboardData:
+          style:
+            z-index: 8
+  s3-on-outposts-rr:
+    name: s3-on-outposts-rr
+    type: S3 on Outposts
+    apiVersion: core.meshery.io/v1alpha1
+    namespace: default
+    version: 1.0.0
+    model: aws
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: a9173428-25b8-4cfb-8655-abf8bfc3120e
+            source: 3100e754-1ac8-454a-980c-8829d3a0cac2
+            subType: Annotation
+            target: dbecf01e-71a1-449a-9844-58c88746ed14
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 5196252d-c2d9-4040-a601-b24762ebda9e
+            source: 687bf864-0ff9-4e67-8daa-bbc786d2bddf
+            subType: Annotation
+            target: dbecf01e-71a1-449a-9844-58c88746ed14
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        - data:
+            id: 723293d7-4e14-4982-b481-1fc8bbafafce
+            source: 42fa0db4-b997-4f9f-8a71-a75994594551
+            subType: Annotation
+            target: dbecf01e-71a1-449a-9844-58c88746ed14
+          style:
+            curve-style:
+              bypass: true
+              bypassed:
+                name: curve-style
+                strValue: bezier
+                value: bezier
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              bypass: true
+              bypassed:
+                name: font-family
+                strValue: Qanelas Soft, sans-serif
+                value:
+                - Qanelas Soft, sans-serif
+                - Qanelas Soft, sans-serif
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              bypass: true
+              bypassed:
+                name: font-size
+                pfValue: 6
+                strValue: 6px
+                units: px
+                value: 6
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              bypass: true
+              name: line-color
+              pfValue:
+              - 0
+              - 179
+              - 159
+              strValue: rgb(0,179,159)
+              value:
+              - 0
+              - 179
+              - 159
+            line-style:
+              bypass: true
+              bypassed:
+                name: line-style
+                strValue: dotted
+                value: dotted
+              name: line-style
+              strValue: solid
+              value: solid
+            target-arrow-shape:
+              bypass: true
+              bypassed:
+                name: target-arrow-shape
+                strValue: vee
+                value: vee
+              name: target-arrow-shape
+              strValue: triangle
+              value: triangle
+            text-events:
+              bypass: true
+              bypassed:
+                name: text-events
+                strValue: "yes"
+                value: "yes"
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              bypass: true
+              bypassed:
+                name: text-outline-color
+                pfValue:
+                - 255
+                - 255
+                - 255
+                strValue: rgb(255,255,255)
+                value:
+                - 255
+                - 255
+                - 255
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              bypass: true
+              bypassed:
+                name: text-outline-width
+                pfValue: 1
+                strValue: 1px
+                units: px
+                value: 1
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              bypass: true
+              bypassed:
+                name: text-wrap
+                strValue: wrap
+                value: wrap
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              bypass: true
+              bypassed:
+                name: width
+                pfValue: 1.5
+                strValue: 1.5px
+                units: px
+                value: 1.5
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              bypass: true
+              bypassed:
+                name: z-index
+                pfValue: 999
+                strValue: "999"
+                value: 999
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              bypass: true
+              bypassed:
+                name: z-index-compare
+                strValue: manual
+                value: manual
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: dbecf01e-71a1-449a-9844-58c88746ed14
+        label: S3 on Outposts
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Provisioning
+          components: []
+          displayName: Amazon Web Services
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            isAnnotation: true
+            svgColor: ui/public/static/img/meshmodels/aws/color/aws-color.svg
+            svgWhite: ui/public/static/img/meshmodels/aws/white/aws-white.svg
+          name: aws
+          relationships: []
+          version: 1.0.0
+        meshmodel-metadata:
+          capabilities: '{ "designer": { "edit": { "config": false, "lock": true,
+            "shape": { "convert-shape": true }, "style": true }, "label": { "edit":
+            true, "show": true, "sync-with-config-property": "label" } } }'
+          genealogy: ""
+          isAnnotation: true
+          isModelAnnotation: "TRUE"
+          isNamespaced: "false"
+          logoURL: ""
+          model: aws
+          modelDisplayName: Amazon Web Services
+          primaryColor: '#7AA116'
+          published: true
+          secondaryColor: ""
+          shape: rectangle
+          styleOverrides: ""
+          subCategory: Storage
+          svgColor: ui/public/static/img/meshmodels/aws/color/s3 on outposts-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/aws/white/s3 on outposts-white.svg
+        position:
+          posX: 310
+          posY: -30
+        whiteboardData:
+          style:
+            z-index: 7
