@@ -43,7 +43,11 @@ published: true
     top: 0;
   }
   .row {
-    margin: 10px;
+    margin: 3rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
   }
   .column.column-lg.extensionCard {
     display: block;
@@ -62,7 +66,7 @@ published: true
     <h2 class="not-found" style="display: none;" id="not-found">
       No results found
     </h2>
-    {% for extension in extensions %} {% if extension.extensionInfo and extension.Status !=
+    {% for extension in extensions %} {% if extension.extensionInfo or extension.patternInfo and extension.Status !=
     "ComingSoon" %}
     {% assign last = extension.compatibility | last %}
     <div
@@ -152,7 +156,7 @@ published: true
     // display none for extensionCards after number 10
     extensionCards.forEach((card, index) => {
       // Hide extensionCards after number 10
-      if (index < 10) {
+      if (index < 20) {
         card.style.display = "block";
       }
     });
