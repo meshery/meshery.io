@@ -49,10 +49,28 @@
           {% include partials/compatibility.html %}
         {% include copy-and-download.html %}
       </div>
-    </div>
-     
- <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
- <script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>
-   
+    </div>   
   <!-- </div> -->
 </div>
+
+<script>
+  // Lazy load the catalog-modal.js script
+  function loadCatalogModalScript() {
+    const script = document.createElement('script');
+    script.src = "{{ site.baseurl }}/assets/js/catalog-modal.js";
+    document.body.appendChild(script);
+  }
+
+  // Lazy load the thumbnail-clickable.js script
+  function loadThumbnailClickableScript() {
+    const script = document.createElement('script');
+    script.src = "{{ site.baseurl }}/assets/js/thumbnail-clickable.js";
+    document.body.appendChild(script);
+  }
+
+  // Lazy load scripts when the modal is opened
+  document.getElementById('open-modal').addEventListener('click', function() {
+    loadCatalogModalScript();
+    loadThumbnailClickableScript();
+  });
+</script>
