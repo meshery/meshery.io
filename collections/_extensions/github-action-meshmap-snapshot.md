@@ -1,5 +1,6 @@
 ---
 layout: item
+item-type: extension
 name: MeshMap Snapshot
 kind: GitOps
 userName: Layer5, Inc.

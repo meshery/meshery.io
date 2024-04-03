@@ -1,10 +1,11 @@
 ---
 layout: item
+item-type: extension
 name: Layer5 Cloud
 kind: Remote Provider
 userName: Layer5, Inc.
 userAvatarURL: https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg
-type: collaboration
+type: Collaboration
 compatibility: 
   - meshery
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98

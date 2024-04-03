@@ -23,11 +23,15 @@
       </div>
       <div class="vertical-line"></div>
       <div class="modal-info">
-        <h2 class="modal-h2">{{extension.name | upcase }} <a class="external-link" href="{{extension.URL}}" target="_blank">
-          <img class="link-image" src="{{site.baseurl}}/assets/images/buttons/external-link_green.svg"/>
-        </a>  </h2> 
-        <h3 class="modal-h3">What This Extension Does?</h3>
+        <h2 class="modal-h2">
+          <a href="/extensions/{{extension.slug}}" target="_blank">{{extension.name | upcase }}<img class="internal-link" src="{{site.baseurl}}/assets/images/buttons/internal-link.svg"/></a>
+        </h2> 
+        <h3 class="modal-h3">Description</h3>
         <p class="content-toggle contentdata pre-white-space">{{extension.extensionInfo | url_decode | replace: '\\n', '<br/>' | replace: '\n', '<br/>' }}</p>
+        <span class="read-more" href="read-more.html">{% include expand.html %}</span>
+
+        <h3 class="modal-h3">Considerations</h3>
+        <p class="content-toggle contentdata pre-white-space">{{extension.extensionCaveats | url_decode | replace: '\\n', '<br/>' | replace: '\n', '<br/>' }}</p>
         <span class="read-more" href="read-more.html">{% include expand.html %}</span>
       </div>
     </div>

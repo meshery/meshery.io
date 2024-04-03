@@ -1,12 +1,12 @@
 ---
 layout: item
 name: Meshery Adapter for Traefik Mesh
-kind: Collaboration
-userName: Layer5, Inc.
+kind: Adapter
+userName: Meshery Authors
 userAvatarURL: https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg
-type: gitops
+type: Lifecycle
 compatibility: 
-  - github
+  - traefik-mesh
   - kubernetes
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: https://playground.meshery.io/static/img/meshmap-snapshot-logo.svg

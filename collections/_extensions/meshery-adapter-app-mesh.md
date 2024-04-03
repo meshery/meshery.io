@@ -1,10 +1,11 @@
 ---
 layout: item
+item-type: extension
 name: Meshery Adapter for App Mesh
-kind: Collaboration
-userName: Layer5, Inc.
+kind: Adapter
+userName: Meshery Authors
 userAvatarURL: https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg
-type: gitops
+type: Lifecycle
 compatibility: 
   - github
   - kubernetes

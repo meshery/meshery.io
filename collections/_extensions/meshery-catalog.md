@@ -1,10 +1,10 @@
 ---
 layout: item
 name: Meshery Catalog
-kind: Collaboration
-userName: Layer5, Inc.
+kind: Catalog
+userName: Meshery Authors
 userAvatarURL: https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg
-type: collaboration
+type: Configuration
 compatibility: 
   - aws
   - kubernetes
