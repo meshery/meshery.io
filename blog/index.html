@@ -14,27 +14,22 @@ paginate:
   </ul>
 
   {% if paginator.total_pages > 1 %}
-  <!-- Pagination links -->
   <div class="pagination">
-    {% if paginator.previous_page %}
-    <a
-      href="{% include relative-src.html src=paginator.previous_page_path %}"
-      class="previous-btn"
-      >&larr; Newer posts</a
-    >
-    {% endif %}
-
-    <span class="page_number"
-      >{{ paginator.page }} of {{ paginator.total_pages }}</span
-    >
-
-    {% if paginator.next_page %}
-    <a
-      href="{% include relative-src.html src=paginator.next_page_path %}"
-      class="next-btn"
-      >Older posts &rarr;</a
-    >
-    {% endif %}
+    <div class="previous-btn">
+      {% if paginator.previous_page %}
+        <a href="{% include relative-src.html src=paginator.previous_page_path %}">&larr; Newer posts</a>
+      {% endif %}
+    </div>
+    
+    <span class="page_number">{{ paginator.page }} of {{ paginator.total_pages }}</span>
+    
+    <div class="next-btn">
+      {% if paginator.next_page %}
+        <a href="{% include relative-src.html src=paginator.next_page_path %}">Older posts &rarr;</a>
+      {% endif %}
+    </div>
   </div>
+  
   {% endif %}
 </div>
+
