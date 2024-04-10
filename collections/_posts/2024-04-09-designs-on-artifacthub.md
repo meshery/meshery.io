@@ -40,8 +40,8 @@ Once you’ve set up your repository, new versions and packages will be automati
 
 Our collaboration with Artifact Hub doesn’t stop here. There is a proposed integration of Meshery Snapshots on the horizon. What does this mean? For every Helm Chart hosted on Artifact Hub, Meshery will create a visual snapshot — a visual diagram that captures the essence of the Helm Chart’s components. Exciting, right?
 
+Follow the progress of this set of features on GitHub:
+
 - Expand Meshery's Integration with Artifact Hub [#9966](https://github.com/meshery/meshery/issues/9966)
-- Generate and include artifacthub-pkg.yml in Meshery Design exports [#10713](https://github.com/meshery/meshery/issues/10713)
-- [Artifact Hub] Official status for Meshery helm chart repo [#10712](https://github.com/meshery/meshery/issues/10712)
 
 Making Meshery Designs available through Artifact Hub is an important milestone and was only possible through excellent support from the Artifact Hub team. We hope that you enjoy using Artifact Hub even more now that Meshery Designs are now available on Artifact Hub as a new artifact kind!
