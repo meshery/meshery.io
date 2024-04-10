@@ -33,6 +33,7 @@ Ready to add your own Meshery Designs on Artifact Hub? Add your Meshery Designs 
 1. **Repository Hosting**: Meshery Designs repositories should be hosted on GitHub, GitLab, or Bitbucket. The repository URL format is straightforward—just the path to your packages. No git hosting platform-specific parts needed!
 2. **Repository Metadata**: A `artifacthub-repo.yml` file that describes the repository and its packages.
 3. **Metadata Files**: Each Meshery design file needs an adjoining `artifacthub-pkg.yml` metadata file to fully characterize your Meshery design in a way in which Artifact Hub can understand.
+4. **Official Documentation** See the [official Artifact Hub documentation](https://artifacthub.io/docs/topics/repositories/meshery-designs/) for further details.
 
 Once you’ve set up your repository, new versions and packages will be automatically indexed and listed in Artifact Hub.
 
@@ -43,5 +44,7 @@ Our collaboration with Artifact Hub doesn’t stop here. There is a proposed int
 Follow the progress of this set of features on GitHub:
 
 - Expand Meshery's Integration with Artifact Hub [#9966](https://github.com/meshery/meshery/issues/9966)
+- Generate and include artifacthub-pkg.yml in Meshery Design exports [#10713](https://github.com/meshery/meshery/issues/10713)
+- [Artifact Hub] Official status for Meshery helm chart repo [#10712](https://github.com/meshery/meshery/issues/10712)
 
 Making Meshery Designs available through Artifact Hub is an important milestone and was only possible through excellent support from the Artifact Hub team. We hope that you enjoy using Artifact Hub even more now that Meshery Designs are now available on Artifact Hub as a new artifact kind!
