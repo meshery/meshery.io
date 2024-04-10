@@ -7,12 +7,37 @@ categories:
   - Meshery
   - OpenSource
 permalink: /blog/designs-on-artifact-hub
+featured-image: /assets/images/posts/2024-04-09-designs-on-artifacthub/meshery-designs-on-artifact-hub-featured.png
 ---
+# 📢 Meshery Designs Now Supported on Artifact Hub!
 
-We are excited to announce that Meshery Designs are now available on Artifact Hub as a new artifact kind. Meshery Designs allow you to create, manage, and deploy complex architectures seamlessly, which make them a great addition to the growing collection of Artifact Hub artifacts such as Helm charts, ArgoCD templates, and <a href="https://artifacthub.io/docs/topics/repositories/" target="_blank">many more</a>. 
+As a proud contributor to the Meshery project, I’m thrilled to announce that Artifact Hub has officially recognized Meshery Designs as a native artifact kind. 🎉 Meshery Designs allow you to create, manage, and deploy complex architectures seamlessly, which make them a great addition to the growing collection of Artifact Hub artifacts such as Helm charts, Argo templates, and <a href="https://artifacthub.io/docs/topics/repositories/" target="_blank">many more</a>.
 
-<a href="https://artifacthub.io" target="_blank"><img alt="Artifact Hub Kinds" src="/assets/images/posts/2024-04-09-designs-on-artifacthub/artifacthub-kinds.png" width="100%" /></a>
+<a href="https://artifacthub.io" target="_blank"><img alt="Artifact Hub Kinds" src="/assets/images/posts/2024-04-09-designs-on-artifacthub/meshery-designs-on-artifact-hub.png" width="100%" /></a>
+
+## Artifact Hub's first Meshery Designs
+
+[Meshery Catalog](/catalog) is the first repository to have it's Meshery Designs listed on Artifact Hub. Meshery Catalog functions much like a cloud marketplace, providing a user-friendly interface for browsing, discovering, and sharing configurations and patterns for cloud native infrastructure.
+
+Learn more about [Meshery Catalog](https://docs.meshery.io/concepts/catalog).
+
+## What Are Meshery Designs?
+
+Meshery Designs provide a powerful way to represent and visualize cloud-native infrastructure. They offer a topological layout of Helm Charts, making it easier for contributors like us to understand the components within a chart and their relationships. Whether you’re a seasoned Kubernetes enthusiast or just diving into the containerized world, Meshery Designs bring clarity and insight.
 
 For more information on how Designs work in Meshery visit the most recent <a href="/blog/lego-bricks-and-lego-instructions" target="_blank">blog post on the topic</a>.
 
-Making Meshery Designs available through Artifact Hub is an important milestone and was only possible through excellent support from the Artifact Hub team.
+## Getting Started
+
+Ready to explore Meshery Designs on Artifact Hub? Here’s the lowdown:
+
+1. **Repository Hosting**: Meshery Designs repositories should be hosted on GitHub, GitLab, or Bitbucket. The repository URL format is straightforward—just the path to your packages. No git hosting platform-specific parts needed!
+1. **Metadata Files**: Each Meshery package version needs an `artifacthub-pkg.yml` metadata file and a design.yml file to describe its resources and properties.
+
+Once you’ve set up your repository, new versions and packages will be automatically indexed and listed in Artifact Hub.
+
+### Roadmap
+
+Our collaboration with Artifact Hub doesn’t stop here. There is a proposed integration of Meshery Snapshots on the horizon. What does this mean? For every Helm Chart hosted on Artifact Hub, Meshery will create a visual snapshot — a visual diagram that captures the essence of the Helm Chart’s components. Exciting, right?
+
+Making Meshery Designs available through Artifact Hub is an important milestone and was only possible through excellent support from the Artifact Hub team. We hope that you enjoy using Artifact Hub even more now that Meshery Designs are now available on Artifact Hub as a new artifact kind!
