@@ -14,9 +14,9 @@ image: /images/integrations/consul/icons/color/consul-color.svg
 extensionInfo: |
   Deploy the Meshery Adapter for Consul in order to enable deeper lifecycle management of Consul.
 extensionCaveats: |
-  - See your deployment before you merge.
-  - Connect MeshMap to your GitHub repo and see changes pull request-to-pull request
-  - Get snapshots of your infrastructure directly in your PRs
+  - The Meshery Adapter for Consul Service Mesh offers comprehensive lifecycle management for Consul.
+  - Use the Meshery Adapter for Consul Service Mesh for efficient lifecycle management of Consul and its sample applications.
+  - Utilize Prometheus and Grafana integration to monitor and optimize Consul's performance.
 URL: 'https://docs.meshery.io/extensibility/adapters/consul'
 downloadLink: https://meshery.layer5.io/connect/github/new
 ---
