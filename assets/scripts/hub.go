@@ -105,7 +105,9 @@ func main() {
 	}
 
 	rootDir := filepath.Join(pwd, "..", "..")
+	fmt.Println("rootDir", rootDir)
 	libraryPath := filepath.Join(rootDir, entryPoint)
+	fmt.Println("libraryPath", libraryPath)
 	dirEntry, err := os.ReadDir(libraryPath)
 	if err != nil {
 		fmt.Println("error while listing directories under catalog")
@@ -123,31 +125,30 @@ func main() {
 			}
 
 			for _, dir := range directories {
+				// if dir.Type().IsDir()  {
 				fmt.Println("dir ", dir)
-
-				if dir.Type().IsDir() {
-					fmt.Println("Generating artifact hub content for ", filepath.Join(basePath, dir.Name()))
-					constraintTemplateContent, err := os.ReadFile(filepath.Join(basePath, dir.Name(), "template.yaml"))
-					if err != nil {
-						fmt.Println("error while reading template.yaml")
-						panic(err)
-					}
-
-					constraintTemplate := make(map[string]interface{})
-					err = yaml.Unmarshal(constraintTemplateContent, &constraintTemplate)
-					if err != nil {
-						fmt.Println("error while unmarshaling template.yaml")
-						panic(err)
-					}
-
-					githubSourceRelativePath := filepath.Join(entryPoint, entry.Name(), dir.Name(), "template.yaml")
-					createVersionDirectory(
-						rootDir,
-						filepath.Join(entryPoint, entry.Name(), dir.Name()),
-						githubSourceRelativePath,
-						constraintTemplate,
-					)
+				fmt.Println("Generating artifact hub content for ", filepath.Join(basePath, dir.Name()))
+				constraintTemplateContent, err := os.ReadFile(filepath.Join(basePath, dir.Name(), "template.yaml"))
+				if err != nil {
+					fmt.Println("error while reading template.yaml")
+					panic(err)
 				}
+
+				constraintTemplate := make(map[string]interface{})
+				err = yaml.Unmarshal(constraintTemplateContent, &constraintTemplate)
+				if err != nil {
+					fmt.Println("error while unmarshaling template.yaml")
+					panic(err)
+				}
+
+				githubSourceRelativePath := filepath.Join(entryPoint, entry.Name(), dir.Name(), "template.yaml")
+				createVersionDirectory(
+					rootDir,
+					filepath.Join(entryPoint, entry.Name(), dir.Name()),
+					githubSourceRelativePath,
+					constraintTemplate,
+				)
+				// }
 			}
 		}
 	}
@@ -201,18 +202,17 @@ func addArtifactHubMetadata(sourceDirectory, destinationPath, ahBasePath, github
 			CreatedAt:   currentDateTime.Format(time.RFC3339),
 			Description: getConstraintTemplateDescription(constraintTemplate),
 			License:     "Apache-2.0",
-			HomeURL:     "https://open-policy-agent.github.io/gatekeeper-library/website/" + sourceDirectory,
+			HomeURL:     "https://meshery.io/catalog", // + sourceDirectory,
 			Keywords: []string{
-				"gatekeeper",
-				"open-policy-agent",
-				"policies",
+				"meshery",
+				"meshery-designs",
 			},
 			Provider: struct {
 				Name string `yaml:"name,omitempty"`
 			}{
-				Name: "Gatekeeper Library",
+				Name: "Meshery Catalog",
 			},
-			Install: fmt.Sprintf("### Usage\n```shell\nkubectl apply -f %s\n```", sourceURL+filepath.Join(ahBasePath, "template.yaml")),
+			Install: fmt.Sprintf("### Usage\n```shell\nmesheryctl design apply -f %s\n```", sourceURL+filepath.Join(ahBasePath, ".yaml")),
 			Readme: fmt.Sprintf(`# %s
 %s`, getConstraintTemplateTitle(constraintTemplate), getConstraintTemplateDescription(constraintTemplate)),
 		}
