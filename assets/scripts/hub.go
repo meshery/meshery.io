@@ -128,7 +128,7 @@ func main() {
 				// if dir.Type().IsDir()  {
 				fmt.Println("dir ", dir)
 				fmt.Println("Generating artifact hub content for ", filepath.Join(basePath, dir.Name()))
-				constraintTemplateContent, err := os.ReadFile(filepath.Join(basePath, dir.Name(), "template.yaml"))
+				constraintTemplateContent, err := os.ReadFile(filepath.Join(basePath, dir.Name()))
 				if err != nil {
 					fmt.Println("error while reading template.yaml")
 					panic(err)
