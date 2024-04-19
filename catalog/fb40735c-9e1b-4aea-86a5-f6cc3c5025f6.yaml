@@ -1,4 +1,4 @@
-name: Single Pod
+name: Single Pods
 services:
   NodeGroupInventoryWallet:
     name: NodeGroupInventoryWallet
@@ -51,8 +51,8 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: 09008ba0-de0d-4a46-ab81-8285de88c433
         position:
-          posX: 705.1120927411453
-          posY: 117.22361611023291
+          posX: 686.0217264595398
+          posY: 115.0418599637637
         whiteboardData: {}
   config-map-nd:
     name: config-map-nd
@@ -110,8 +110,8 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/configmap-white.svg
         parent: 5e3eb491-7a93-46ae-b832-a113746a0a29
         position:
-          posX: 705.1120927411453
-          posY: 108.2236161102329
+          posX: 686.0217264595398
+          posY: 106.0418599637637
         whiteboardData: {}
   cron-job-od:
     name: cron-job-od
@@ -120,6 +120,16 @@ services:
     namespace: default
     version: v1.25.2
     model: kubernetes
+    settings:
+      spec:
+        job Template:
+          spec:
+            template:
+              spec:
+                containers:
+                - env From:
+                  - config Map Ref:
+                      name: config-map-nd
     traits:
       meshmap:
         edges: []
@@ -176,6 +186,6 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/cronjob-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/cronjob-white.svg
         position:
-          posX: 705.1120927411453
-          posY: 117.22361611023291
+          posX: 686.0217264595398
+          posY: 115.0418599637637
         whiteboardData: {}
