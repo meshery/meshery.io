@@ -16,8 +16,8 @@ extensionInfo: |
   Connect MeshMap to your GitHub repo and see changes pull request-to-pull request. Get snapshots of your infrastructure directly in your PRs.
 extensionCaveats: |
   - See your deployment before you merge.
-  - Connect MeshMap to your GitHub repo and see changes pull request-to-pull request
-  - Get snapshots of your infrastructure directly in your PRs
+  - Utilize MeshMap Snapshot when you need to automate your software development process using GitHub Actions.
+  - Customize snapshot workflow triggers to run based on specific GitHub activities, such as creating a pull request, pushing code, or releasing a new version.
 URL: 'https://github.com/marketplace/actions/meshmap-snapshot'
 downloadLink: https://meshery.layer5.io/connect/github/new
 ---
