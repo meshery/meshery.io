@@ -11,11 +11,11 @@ extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: /assets/images/meshery-logo.svg
 image: /images/integrations/nginx-ingress/icons/color/nginx-ingress-color.svg
 extensionInfo: |
-  Collaboratively design and manage your Kubernetes clusters, service mesh deployments, and cloud native apps. MeshMap is now in private beta.
+  Deploy the Meshery Adapter for NGINX Service Mesh to enable comprehensive lifecycle management of NGINX service meshes.
 extensionCaveats: |
-  - See your deployment before you merge.
-  - Connect MeshMap to your GitHub repo and see changes pull request-to-pull request
-  - Get snapshots of your infrastructure directly in your PRs
+  - Use Meshery Adapter for NGINX Service Mesh for lifecycle management of NGINX Service Mesh deployments.
+  - Manage NGINX Service Mesh lifecycle, including installation, with Meshery Adapter for NGINX Service Mesh.
+  - Integrate Prometheus and Grafana for monitoring and visualizing NGINX Service Mesh performance metrics.
 URL: 'https://docs.meshery.io/extensibility/adapters/nginx-sm'
 downloadLink: https://meshery.layer5.io/connect/github/new
 ---

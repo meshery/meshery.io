@@ -14,9 +14,9 @@ image: /images/integrations/istio-operator/icons/color/istio-operator-color.svg
 extensionInfo: |
   Deploy the Meshery Adapter for Istio in order to enable deeper lifecycle management of Istio.
 extensionCaveats: |
-  - See your deployment before you merge.
-  - Connect MeshMap to your GitHub repo and see changes pull request-to-pull request
-  - Get snapshots of your infrastructure directly in your PRs
+  - Use Meshery Adapter for Istio for lifecycle management of your service mesh, leveraging Cloud Native standards.
+  - Employ Meshery Adapter for Istio for performance monitoring, integrating with Prometheus and Grafana for metrics visualization.
+  - Utilize the adapter for configuration analysis, best practices, and custom configurations in Istio deployments.
 URL: 'https://docs.meshery.io/extensibility/adapters/istio'
 downloadLink: https://meshery.layer5.io/connect/github/new
 ---
