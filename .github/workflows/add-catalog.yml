@@ -21,7 +21,7 @@ jobs:
           echo "MESHERY_CATALOG_FILES_DIR=catalog" >> $GITHUB_ENV
       - name: Cleanup
         run: |
-          find $MESHERY_CATALOG_FILES_DIR ! -name 'index.html' -name 'artifacthub-repo.yml' -maxdepth 1 -type f -delete
+          find $MESHERY_CATALOG_FILES_DIR ! -name 'index.html' ! -name 'artifacthub-repo.yml' -maxdepth 1 -type f -delete
           cd ./collections/_catalog
           for dir in */; do find $dir -maxdepth 1 -type f -delete; done
           cd ../../
