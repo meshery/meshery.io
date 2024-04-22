@@ -91,7 +91,7 @@ const (
 	ahEntryPoint = "artifacthub"
 
 	// directory entry point for source of designs.
-	entryPoint = "catalog"
+	entryPoint = "collections/_catalog"
 
 	// raw github source URL.
 	sourceURL = "https://raw.githubusercontent.com/meshery/meshery.io/master/"
@@ -376,11 +376,12 @@ func copyFile(src, dst string) error {
 }
 
 func getConstraintTemplateMetadata(constraintTemplate map[string]interface{}) map[string]interface{} {
-	metadata, ok := constraintTemplate["metadata"].(map[string]interface{})
-	if !ok {
-		panic("error while retrieving constraintTemplate metadata")
-	}
-	return metadata
+	fmt.Println("meta:", constraintTemplate)
+	// metadata, ok := constraintTemplate[""].(map[string]interface{})
+	// if !ok {
+	// 	panic("error while retrieving constraintTemplate metadata")
+	// }
+	return constraintTemplate
 }
 
 func getConstraintTemplateAnnotations(constraintTemplate map[string]interface{}) map[string]interface{} {
