@@ -20,6 +20,8 @@ As a proud contributor to the Meshery project, I’m thrilled to announce that A
 
 Learn more about [Meshery Catalog](https://docs.meshery.io/concepts/catalog).
 
+You can now browse Meshery Designs in the [Artifact Hub search](https://artifacthub.io/packages/search?kind=24&sort=relevance&page=1).
+
 ## What Are Meshery Designs?
 
 Meshery Designs provide a powerful way to represent and visualize cloud-native infrastructure. They offer a topological layout of Helm Charts, making it easier for contributors like us to understand the components within a chart and their relationships. Whether you’re a seasoned Kubernetes enthusiast or just diving into the containerized world, Meshery Designs bring clarity and insight.
