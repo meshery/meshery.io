@@ -123,14 +123,19 @@ if ! command_exists tar; then
 fi
 
 if [ "x${MESHERY_VERSION}" = "x" ] ; then
-  MESHERY_VERSION=$(curl -L -s https://github.com/meshery/meshery/releases/latest | \
-                  grep "meshery/releases/tag/" | head -1 | awk -F '"' '{print $4}' | \
-                  awk -F '/' '{print $NF}' )
+  MESHERY_VERSION=$(curl -L -s https://docs.meshery.io/project/releases/latest)
 fi
 
 if [ "x${MESHERY_VERSION}" = "x" ] ; then
   printf "Unable to get latest mesheryctl version. Set MESHERY_VERSION env var and re-run. For example: export MESHERY_VERSION=v0.1.6\n"
   exit;
+fi
+
+# For patch releases, the meshery tar ball will not be generated, so fall back to last stable release
+if [[ "$MESHERY_VERSION" ==  *"patch"* ]] ; then
+    LAST_MESHERY_VERSION=`echo $MESHERY_VERSION | awk -F '-patch' '{print $1}'`
+    printf "Patch release %s is not supported, falling back to last stable release: %s\n\n" "$MESHERY_VERSION" "$LAST_MESHERY_VERSION"
+    MESHERY_VERSION=$LAST_MESHERY_VERSION
 fi
 
 NAME="mesheryctl-${MESHERY_VERSION}"
