@@ -1,4 +1,4 @@
-# Contributing to Meshery
+# Contributing to Meshery.io 
 You want to contribute to the project? Yay! 🎈 Please do. 🎈
 
 ## Issues & Pull Requests
