@@ -28,3 +28,6 @@ We are now exposing the ability to switch between different organization and dif
 
 - Different spaces have different level of restriction 
 - Switch to an organization where they have the required permissions.
+
+Try Meshery's new organization and workspace switcher in the [Meshery Playground](https://play.meshery.io) and [let us know what you think](https://meshery.io/subscribe)!
+
