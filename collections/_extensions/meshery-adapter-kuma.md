@@ -14,9 +14,9 @@ image: /images/integrations/kuma/icons/color/kuma-color.svg
 extensionInfo: |
   Deploy the Meshery Adapter for Kuma in order to enable deeper lifecycle management of Kuma.
 extensionCaveats: |
-  - See your deployment before you merge.
-  - Connect MeshMap to your GitHub repo and see changes pull request-to-pull request
-  - Get snapshots of your infrastructure directly in your PRs
+  - Use Meshery Adapter for Kuma for lifecycle management of the Envoy-based service mesh with universal support.
+  - Universal Envoy-based service mesh for distributed service connectivity.
+  - Utilize the Meshery Adapter for Kuma for managing Kuma's lifecycle, including deployment and configuration.
 URL: 'https://docs.meshery.io/extensibility/adapters/kuma'
 downloadLink: https://meshery.layer5.io/connect/github/new
 ---

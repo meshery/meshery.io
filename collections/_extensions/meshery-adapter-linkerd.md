@@ -14,9 +14,9 @@ image: /images/integrations/linkerd/icons/color/linkerd-color.svg
 extensionInfo: |
   Deploy the Meshery Adapter for Linkerd in order to enable deeper lifecycle management of Linkerd service meshes.
 extensionCaveats: |
-  - See your deployment before you merge.
-  - Connect MeshMap to your GitHub repo and see changes pull request-to-pull request
-  - Get snapshots of your infrastructure directly in your PRs
+  - Use Meshery Adapter for Linkerd for lifecycle management of Linkerd service mesh.
+  - Manage Linkerd installation with Meshery Adapter.
+  - Monitor and optimize Linkerd performance with Prometheus and Grafana.
 URL: 'https://docs.meshery.io/extensibility/adapters/linkerd'
 downloadLink: https://meshery.layer5.io/connect/github/new
 ---

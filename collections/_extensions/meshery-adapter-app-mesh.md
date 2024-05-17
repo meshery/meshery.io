@@ -15,9 +15,9 @@ image: /images/integrations/appmesh-controller/icons/color/appmesh-controller-co
 extensionInfo: |
   Deploy the Meshery Adapter for App Mesh in order to enable deeper lifecycle management of App Mesh.
 extensionCaveats: |
-  - See your deployment before you merge.
-  - Connect MeshMap to your GitHub repo and see changes pull request-to-pull request
-  - Get snapshots of your infrastructure directly in your PRs
+  - Use the Meshery Adapter for App Mesh for lifecycle management of App Mesh and sample applications.
+  - Performance testing to identify overhead involved in running App Mesh and various configurations.
+  - Utilize Prometheus and Grafana integration for monitoring App Mesh's performance.
 URL: 'https://docs.meshery.io/extensibility/adapters/app-mesh'
 downloadLink: https://meshery.layer5.io/connect/github/new
 ---

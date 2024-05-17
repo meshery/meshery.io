@@ -14,9 +14,9 @@ image: /assets/images/meshery-color.svg
 extensionInfo: |
   The Meshery Remote Provider with identity and collaboration services, private catalogs, GitOps, and multi-Meshery management.
 extensionCaveats: |
-  - See your deployment before you merge.
-  - Connect MeshMap to your GitHub repo and see changes pull request-to-pull request
-  - Get snapshots of your infrastructure directly in your PRs
+  - Layer5 Cloud offers a comprehensive platform for managing and deploying cloud infrastructure with ease.
+  - Employ Layer5 Cloud for its extensible authorization framework, tenant entitlement services, and organizational hierarchy to streamline cloud infrastructure management.
+  - Leverage its content catalog for hosting both public and private cloud-native architectures.
 URL: 'https://docs.layer5.io/cloud/getting-started/'
 downloadLink: https://meshery.layer5.io
 ---

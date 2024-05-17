@@ -14,9 +14,9 @@ image: /images/integrations/cilium/icons/color/cilium-color.svg
 extensionInfo: |
   Deploy the Meshery Adapter for Cilium Service Mesh in order to enable deeper lifecycle management of Cilium Service Mesh.
 extensionCaveats: |
-  - See your deployment before you merge.
-  - Connect MeshMap to your GitHub repo and see changes pull request-to-pull request
-  - Get snapshots of your infrastructure directly in your PRs
+  - Deploy the Meshery Adapter for Cilium Service Mesh for managing and installing Cilium.
+  - Deploy it to install sample applications easily with Cilium stable release.
+  - Use Cilium for network connectivity in container workloads, utilizing eBPF Linux kernel technology.
 URL: 'https://docs.meshery.io/extensibility/adapters/cilium'
 downloadLink: https://meshery.layer5.io/connect/github/new
 ---
