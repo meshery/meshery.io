@@ -1,7 +1,7 @@
 ---
-title: Meshery support different Spaces!
-subheading: Distribute your work on different spaces 
-date: 2024-05-14
+title: "Meshery Boosts Productivity: Multiple Organizations & Dynamic Workspaces!"
+subheading: Streamline Your Tasks Across Different Technologies!
+date: 2024-05-17
 author_contributor: Akshay Sharma
 categories: 
   - Meshery
@@ -10,19 +10,22 @@ permalink: /blog/organization-workspace-switcher
 featured-image: /assets/images/posts/2024-05-14-organization-workspace-switcher/organization-workspace-switcher.png
 ---
 
-Meshery facilitates organization and workspace management, enabling diverse architectural spaces to thrive. Within the Layer5 Cloud ecosystem, organizations form the bedrock of multi-tenancy, while Meshery Workspaces provide virtual arenas for collaborative team endeavors. Delve deeper into the intricacies of organization and workspace dynamics <a href="https://docs.layer5.io/cloud/spaces" target="_blank">here</a>.
+Meshery facilitates organization and workspace management, enabling diverse architectural spaces to thrive. Within the Layer5 Cloud ecosystem, organizations form the bedrock of multi-tenancy, while Meshery Workspaces provide virtual arenas for collaborative team endeavors. Delve deeper into the intricacies of <a href="https://docs.layer5.io/cloud/identity/organizations/" target="_blank">organization</a> and <a href="https://docs.layer5.io/cloud/spaces" target="_blank">workspace</a>.
 
-## Spaces
-Spaces facilitate collaboration between you and your teams, allow you to control access to resources, and track activity and report on related events.Organizations can have any number of teams. Teams can have any number of users. Users can belong to any number of teams. Users may belong to any number of organizations.
+## Organization
+In Meshery, organizations form the core of tenancy, grouping users effectively. These organizations host multiple teams, each accommodating various users. Users can belong to multiple teams and organizations. Teams play a key role in managing access to workspaces and their resources, enhancing efficiency and security.
 
-<a href="https://artifacthub.io" target="_blank"><img alt="Artifact Hub Kinds" src="/assets/images/posts/2024-05-14-organization-workspace-switcher/organization_units.svg" width="50%" height="80%" align="right" /></a>
+<a href="https://artifacthub.io" target="_blank"><img alt="Artifact Hub Kinds" src="/assets/images/posts/2024-05-14-organization-workspace-switcher/organization_units.svg" width="50%" align="right" /></a>
+
+## Workspaces
+Workspaces empower collaboration with your teams, enabling resource control and activity tracking. Organizations support multiple teams, with each team accommodating diverse users. Users have the flexibility to join multiple teams and organizations, fostering fluidity and efficiency in workflow management.
+
 
 ### Key Features
-  - **Resource Sharing**: Spaces allow for seamless resource sharing among team members, fostering collaboration.
-  - **Logical Grouping**: Within Spaces, you can group related components such as environments and infrastructure designs.
-  - **Flexibility**: Spaces support various resources like Kubernetes, Prometheus, Jaeger, Nginx, and more.
-  - **Simplified Management**: Managing and deploying resources is made easy within Spaces.
-  - **Access Control**: Spaces allow you to control access to resources by granting permissions to users and teams.
+1. **Resource Sharing:** Workspaces allow for resource sharing among team members, fostering collaboration.
+2. **Extension Possibilities:** Remote Providers can extend Meshery for hierarchical organizations and user groups.
+3. **Resource Ownership:** Organizations own all resources created by users, including Workspaces, Designs, Environments, etc.
+4. **Access Control:** Workspaces allow you to control access to resources by granting permissions to users and teams.
 
 We are now exposing the ability to switch between different organization and different workspace,this will enable users to :
 
