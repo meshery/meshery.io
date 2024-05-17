@@ -22,10 +22,10 @@ Workspaces empower collaboration with your teams, enabling resource control and 
 
 
 ### Key Features
-1. **Resource Sharing:** Workspaces allow for resource sharing among team members, fostering collaboration.
-2. **Extension Possibilities:** Remote Providers can extend Meshery for hierarchical organizations and user groups.
-3. **Resource Ownership:** Organizations own all resources created by users, including Workspaces, Designs, Environments, etc.
-4. **Access Control:** Workspaces allow you to control access to resources by granting permissions to users and teams.
+1. **Resource Sharing:** <small>Workspaces allow for resource sharing among team members, fostering collaboration.</small>
+2. **Extension Possibilities:** <small>Remote Providers can extend Meshery for hierarchical organizations and user groups.</small>
+3. **Resource Ownership:** <small>Organizations own all resources created by users, including Workspaces, Designs, Environments, etc.</small>
+4. **Access Control:** <small>Workspaces allow you to control access to resources by granting permissions to users and teams.</small>
 
 We are now exposing the ability to switch between different organization and different workspace,this will enable users to :
 
