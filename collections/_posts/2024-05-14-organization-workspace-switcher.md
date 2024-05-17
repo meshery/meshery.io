@@ -18,7 +18,7 @@ In Meshery, organizations form the core of tenancy, grouping users effectively. 
 <a href="https://artifacthub.io" target="_blank"><img alt="Artifact Hub Kinds" src="/assets/images/posts/2024-05-14-organization-workspace-switcher/organization_units.svg" width="50%" align="right" /></a>
 
 ## Workspaces
-Workspaces empower collaboration with your teams, enabling resource control and activity tracking. Organizations support multiple teams, with each team accommodating diverse users. Users have the flexibility to join multiple teams and organizations, fostering fluidity and efficiency in workflow management.
+Workspaces empower collaboration with your teams, enabling resource control and activity tracking. Workspaces support multiple teams, with each team accommodating diverse users. Users have the flexibility to join multiple teams and organizations, fostering fluidity and efficiency in workflow management.
 
 
 ### Key Features
