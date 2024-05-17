@@ -1,12 +1,14 @@
-{% if pattern.URL and pattern.downloadLink %}
+{% assign type = pattern | default: extension %}
+
+{% if type.URL and type.downloadLink %}
 <div id="copy-url">
   <div class="btn-class">
-    <div class="vertical-center" id="{{pattern.name}}">
+    <div class="vertical-center" id="{{type.name}}">
       <div class="btn-grp">
-        <a href="/catalog/{{pattern.downloadLink}}" download>
+        <a href="{{type.downloadLink}}" download>
           <button class="import" style="width: 7rem;">Download</button></a>
           <div class="btn-tooltip-grp">
-            <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="{{pattern.URL}}"
+            <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="{{type.URL}}"
             onmouseout="resetCopyText(this)">
             <button class="import" style="width: 7rem;">Copy URL</button>
           </a>
@@ -17,7 +19,7 @@
 {% else %}
 <div id="copy-url">
   <div class="btn-class">
-    <div class="vertical-center" id="{{pattern.name}}">
+    <div class="vertical-center" id="{{type.name}}">
  <div class="btn-grp">
           <button class="import-disabled">Download</button>
           <div class="btn-tooltip-grp">

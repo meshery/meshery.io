@@ -1,3 +1,28 @@
+
+<section>
+    <div class="container flex" style="align-items: normal;"  >
+        <div class="text " style="padding: 0 20px 20px 0;">
+
+            <h2><span class="special-text">Intelligent inference</span> for your infrastructure</h2>
+            <p>Meshery uses <a href="https://docs.meshery.io/concepts/logical/relationships">relationships</a> to map how interconnected components interact to each other.
+                <div class="button-para">
+                    <a href="https://docs.meshery.io/concepts/logical/relationships#types-of-relationships" class="highlight">See more examples</a>
+                </div>
+            </p>
+        </div>
+        <div class="tab-container" >
+        <div class="tab">
+            <button class="tablinks active" onclick="openTab(event, 'edge')">Edge</button>
+            <button class="tablinks" onclick="openTab(event, 'hierarchical')">Hierarchical</button>
+            <button class="tablinks" onclick="openTab(event, 'sibling')">Sibling</button>
+          </div>
+        
+            {% include partials/relationships.html %}
+
+        
+        </div>
+    </div>
+</section>
 <section>
     <div class="container flex">
         <div class="text ">
@@ -271,3 +296,71 @@
 </section>
 {% endif %}
 {% endfor %}
+<script>
+    window.onload = function() {
+    document.querySelector('.tab button.active').click();
+};
+    let timeOutId;
+    function openTab(evt, relationshipType) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        evt.currentTarget.className += " active";
+       // document.getElementById(relationshipType).style.display = "block";
+       clearTimeout(timeOutId);
+        displayRelationships(relationshipType)
+        
+      }
+      function displayRelationships(relationships) {
+    
+        let index = 0;
+        displayImages();
+        function displayImages() {
+            let i;
+            const images = document.getElementsByClassName(`${relationships}`);
+            for (i = 0; i < images.length; i++) {
+                images[i].style.display = "none";
+            }
+            index++;
+            if (index > images.length) {
+                index = 1;
+            }
+            images[index-1].style.display = "block";
+            timeOutId = setTimeout(displayImages, 3000); 
+        }
+      }
+    </script>
+    <style>
+    .tab {
+         
+    box-shadow: var(--box-shadow-primary) !important;
+    border-radius: .5rem;
+    padding: .5rem 1.5rem;
+        & button {
+            padding: .5em;
+            color:var(--color-secondary-dark);
+
+            &:hover{ 
+            background-color: #00d3a9;
+            color: white !important;
+            border-radius: .5rem;
+        }
+        }
+
+    }
+    .feature-section {
+        max-height: 300px;
+    }
+    .tab-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-basis: 40%;
+    }
+    </style>

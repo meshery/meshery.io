@@ -1,0 +1,44 @@
+<style>
+  .modal-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .modal-image > img {
+    width: 100%;
+    object-fit: contain;
+  }
+</style>
+<div id="open-modal" class="modal-window">
+  <!-- <div class="click-container"> -->
+    <div class="modal-content">
+      <div class="modal-image">
+        <button class="modal-close close">&times;</button>
+        <img class="image-class"  
+        data-snapshot-light="{{extension.image}}"
+        data-snapshot-dark="{{extension.image}}"
+        src="{{extension.image}}"
+        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage('{{ extension.extensionId }}')" />
+      </div>
+      <div class="vertical-line"></div>
+      <div class="modal-info">
+        <h2 class="modal-h2">
+          <a href="/extensions/{{extension.slug}}" target="_blank">{{extension.name | upcase }}<img class="internal-link" src="{{site.baseurl}}/assets/images/buttons/internal-link.svg"/></a>
+        </h2> 
+        <h3 class="modal-h3">Description</h3>
+        <p class="content-toggle contentdata pre-white-space">{{extension.extensionInfo | url_decode | replace: '\\n', '<br/>' | replace: '\n', '<br/>' }}</p>
+        <span class="read-more" href="read-more.html">{% include expand.html %}</span>
+
+        <h3 class="modal-h3">Considerations</h3>
+        <p class="content-toggle contentdata pre-white-space">{{extension.extensionCaveats | url_decode | replace: '\\n', '<br/>' | replace: '\n', '<br/>' }}</p>
+        <span class="read-more" href="read-more.html">{% include expand.html %}</span>
+        {% include copy-and-download.html %}
+      </div>
+    </div>
+     
+ <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
+ <script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>
+   
+  <!-- </div> -->
+</div>

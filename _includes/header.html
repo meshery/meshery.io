@@ -36,12 +36,22 @@
     page.title == 'Google Summer of Code' or page.title == 'GSOD2020' or
     page.title == 'MLH' %}
     <link rel="stylesheet" href="{{ site.baseurl }}/css/program.css" />
-    {% endif %} 
+    {% endif %}
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content="Meshery" />
     <meta name="twitter:site" content="@mesheryio" />
     <meta name="twitter:creator" content="@mesheryio" />
     <meta name="author" content="Meshery Authors">
+    {% if page.featured-image %}
+    <meta
+      name="twitter:image"
+      content="https://raw.githubusercontent.com/meshery/meshery.io/master/{{ page.featured-image }}"
+    />
+    <meta name="image" property="og:image" content="https://raw.githubusercontent.com/meshery/meshery.io/master/{{page.featured-image}}" />
+    <meta property="og:type" content="website">
+    <meta name="og:image" content="https://raw.githubusercontent.com/meshery/meshery.io/master/{{page.featured-image}}" />
+    {% else %}
     <meta
       name="twitter:image"
       content="https://raw.githubusercontent.com/meshery/meshery.io/master/assets/images/logos/meshery-gradient.png"
@@ -49,7 +59,7 @@
     <meta name="image" property="og:image" content="https://raw.githubusercontent.com/meshery/meshery.io/master/assets/images/logos/meshery-gradient.png" />
     <meta property="og:type" content="website">
     <meta name="og:image" content="https://raw.githubusercontent.com/meshery/meshery.io/master/assets/images/logos/meshery-gradient.png" />
-
+    {% endif %}
   </head>
  
     <body style="overflow-x: hidden" class="dark-mode">
