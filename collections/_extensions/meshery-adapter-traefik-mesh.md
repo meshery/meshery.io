@@ -17,6 +17,5 @@ extensionCaveats: |
   - Use Meshery Adapter for Traefik Mesh for lifecycle management of Traefik Mesh deployments.
   - Manage Traefik Mesh lifecycle, including installation, with Meshery Adapter for Traefik Mesh.
   - Ensure existing services remain unaffected with opt-in by default until explicitly added to the mesh.
-URL: 'https://docs.meshery.io/extensibility/adapters/traefik-mesh'
-downloadLink: https://meshery.layer5.io/connect/github/new
+docsURL: 'https://docs.meshery.io/extensibility/adapters/traefik-mesh'
 ---

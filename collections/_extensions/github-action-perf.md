@@ -19,5 +19,5 @@ extensionCaveats: |
   - Ensure stability and efficiency with performance testing using this action.
   - Use for Kubernetes systems for enhanced analysis with Meshery.
 URL: 'https://github.com/marketplace/actions/performance-testing-with-meshery'
-downloadLink: https://meshery.layer5.io/connect/github/new
+docsURL: 'https://docs.meshery.io/guides/performance-management/performance-management'
 ---
