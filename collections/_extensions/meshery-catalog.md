@@ -18,5 +18,5 @@ extensionCaveats: |
   - Build upon published cloud native patterns, promoting community collaboration.
   - Share experiences and best practices in its collaborative environment.
 URL: 'https://meshery.io/catalog'
-downloadLink: https://meshery.layer5.io/connect/github/new
+docsURL: 'https://docs.meshery.io/concepts/catalog'
 ---

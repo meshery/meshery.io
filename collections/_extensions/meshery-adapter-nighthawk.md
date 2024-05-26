@@ -17,6 +17,5 @@ extensionCaveats: |
   - Use Meshery Adapter for Nighthawk for performance characterization and load testing of HTTP services.
   - Identify overhead and test various configurations and workloads with Meshery Adapter for Nighthawk.
   - Characterize performance and load test HTTP services with adaptive load controllers supporting HTTP/HTTPS/HTTP2 protocols.
-URL: 'https://docs.meshery.io/extensibility/adapters/nighthawk'
-downloadLink: https://meshery.layer5.io/connect/github/new
+docsURL: 'https://docs.meshery.io/extensibility/adapters/nighthawk'
 ---

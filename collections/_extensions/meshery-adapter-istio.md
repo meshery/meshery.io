@@ -17,6 +17,6 @@ extensionCaveats: |
   - Use Meshery Adapter for Istio for lifecycle management of your service mesh, leveraging Cloud Native standards.
   - Employ Meshery Adapter for Istio for performance monitoring, integrating with Prometheus and Grafana for metrics visualization.
   - Utilize the adapter for configuration analysis, best practices, and custom configurations in Istio deployments.
-URL: 'https://docs.meshery.io/extensibility/adapters/istio'
-downloadLink: https://meshery.layer5.io/connect/github/new
+docsURL: 'https://docs.meshery.io/extensibility/adapters/istio'
+
 ---
