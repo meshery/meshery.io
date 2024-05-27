@@ -18,5 +18,4 @@ extensionCaveats: |
   - Employ Meshery Adapter for Istio for performance monitoring, integrating with Prometheus and Grafana for metrics visualization.
   - Utilize the adapter for configuration analysis, best practices, and custom configurations in Istio deployments.
 docsURL: 'https://docs.meshery.io/extensibility/adapters/istio'
-
 ---
