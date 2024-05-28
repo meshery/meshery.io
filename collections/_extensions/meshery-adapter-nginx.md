@@ -16,6 +16,5 @@ extensionCaveats: |
   - Use Meshery Adapter for NGINX Service Mesh for lifecycle management of NGINX Service Mesh deployments.
   - Manage NGINX Service Mesh lifecycle, including installation, with Meshery Adapter for NGINX Service Mesh.
   - Integrate Prometheus and Grafana for monitoring and visualizing NGINX Service Mesh performance metrics.
-URL: 'https://docs.meshery.io/extensibility/adapters/nginx-sm'
-downloadLink: https://meshery.layer5.io/connect/github/new
+docsURL: 'https://docs.meshery.io/extensibility/adapters/nginx-sm'
 ---

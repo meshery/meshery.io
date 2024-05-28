@@ -24,16 +24,37 @@
       <div class="vertical-line"></div>
       <div class="modal-info">
         <h2 class="modal-h2">
-          <a href="/extensions/{{extension.slug}}" target="_blank">{{extension.name | upcase }}<img class="internal-link" src="{{site.baseurl}}/assets/images/buttons/internal-link.svg"/></a>
+          {{extension.name | upcase }}
+          <!--<a href="https://docs.meshery.io/extensions/{{extension.slug}}" target="_blank">{{extension.name | upcase }}
+             <img class="internal-link" src="{{site.baseurl}}/assets/images/buttons/external-link_black.svg"/> 
+          </a>-->
         </h2> 
         <h3 class="modal-h3">Description</h3>
         <p class="content-toggle contentdata pre-white-space">{{extension.extensionInfo | url_decode | replace: '\\n', '<br/>' | replace: '\n', '<br/>' }}</p>
-        <span class="read-more" href="read-more.html">{% include expand.html %}</span>
+        <!-- <span class="read-more" href="read-more.html">{% include expand.html %}</span> -->
 
-        <h3 class="modal-h3">Considerations</h3>
+        <h3 class="modal-h3">Features</h3>
         <p class="content-toggle contentdata pre-white-space">{{extension.extensionCaveats | url_decode | replace: '\\n', '<br/>' | replace: '\n', '<br/>' }}</p>
-        <span class="read-more" href="read-more.html">{% include expand.html %}</span>
-        {% include copy-and-download.html %}
+        <!-- <span class="read-more" href="read-more.html">{% include expand.html %}</span> -->
+        <div id="copy-url">
+          <div class="btn-class">
+            <div class="vertical-center" id="{{type.name}}">
+              <div class="btn-grp">
+                {% if {{extension.docsURL}} %}
+                <a href="{{extension.docsURL}}">
+                  <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
+                {% endif %}
+                <div class="btn-tooltip-grp">
+                {% if {{extension.URL}} %}
+                  <a href="{{extension.URL}}">
+                    <button class="import" style="width: 7rem;">Visit</button></a>
+                {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
       </div>
     </div>
      
