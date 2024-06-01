@@ -28,10 +28,8 @@ Workspaces empower collaboration with your teams, enabling resource control and 
 3. **Resource Ownership:** <small>Organizations own all resources created by users, including Workspaces, Designs, Environments, etc.</small>
 4. **Access Control:** <small>Workspaces allow you to control access to resources by granting permissions to users and teams.</small>
 
-<div style="margin:10rem 5rem 0rem 0rem;">
-<!-- Learn more at https://docs.layer5.io/meshmap/designer/export-designs/#exporting-as-embedding -->
+<div style="margin:10rem 0rem 5rem 0rem; border: 1px solid var(--color-secondary-dark);">
 <div id="embedded-design-538d1bc7-ddd1-40f4-9ea6-4133799820d7" style="height:40rem; color:var(--color-secondary-dark);"></div>
-<!-- assets/images/posts/2024-05-14-organization-workspace-switcher/embedded-design-invite-based-loop.js -->
 <script src="/assets/images/posts/2024-06-01-organization-workspace-switcher/embedded-design-invite-based-loop.js" type="module" ></script>
 </div>
 
