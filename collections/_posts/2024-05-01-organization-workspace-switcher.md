@@ -1,13 +1,13 @@
 ---
 title: "Meshery Boosts Productivity: Multiple Organizations & Dynamic Workspaces!"
 subheading: Streamline Your Tasks Across Different Technologies!
-date: 2024-05-27
+date: 2024-06-01
 author_contributor: Akshay Sharma
 categories: 
   - Meshery
   - Cloud
 permalink: /blog/organization-workspace-switcher
-featured-image: /assets/images/posts/2024-05-14-organization-workspace-switcher/organization-workspace-switcher.png
+featured-image: /assets/images/posts/2024-06-01-organization-workspace-switcher/organization-workspace-switcher.png
 ---
 
 Meshery facilitates organization and workspace management, enabling diverse architectural spaces to thrive. Within the Layer5 Cloud ecosystem, organizations form the bedrock of multi-tenancy, while Meshery Workspaces provide virtual arenas for collaborative team endeavors. Delve deeper into the intricacies of <a href="https://docs.layer5.io/cloud/identity/organizations/" target="_blank">organization</a> and <a href="https://docs.layer5.io/cloud/spaces" target="_blank">workspace</a>.
@@ -16,7 +16,7 @@ Meshery facilitates organization and workspace management, enabling diverse arch
 ## Organization
 In Meshery, organizations form the core of tenancy, grouping users effectively. These organizations host multiple teams, each accommodating various users. Users can belong to multiple teams and organizations. Teams play a key role in managing access to workspaces and their resources, enhancing efficiency and security.
 
-<img alt="Org" src="/assets/images/posts/2024-05-14-organization-workspace-switcher/organization_units.svg" width="50%" align="right" />
+<img alt="Org" src="/assets/images/posts/2024-06-01-organization-workspace-switcher/organization_units.svg" width="50%" align="right" />
 
 ## Workspaces
 Workspaces empower collaboration with your teams, enabling resource control and activity tracking. Workspaces support multiple teams, with each team accommodating diverse users. Users have the flexibility to join multiple teams and organizations, fostering fluidity and efficiency in workflow management.
@@ -28,7 +28,12 @@ Workspaces empower collaboration with your teams, enabling resource control and 
 3. **Resource Ownership:** <small>Organizations own all resources created by users, including Workspaces, Designs, Environments, etc.</small>
 4. **Access Control:** <small>Workspaces allow you to control access to resources by granting permissions to users and teams.</small>
 
-<a href="play.meshery.io" target="_blank"><img alt="Organization Meshmap" src="/assets/images/posts/2024-05-14-organization-workspace-switcher/Org&Workspace-meshmap.png" width="100%" /></a>
+<div style="margin:10rem 5rem 0rem 0rem;">
+<!-- Learn more at https://docs.layer5.io/meshmap/designer/export-designs/#exporting-as-embedding -->
+<div id="embedded-design-538d1bc7-ddd1-40f4-9ea6-4133799820d7" style="height:40rem; color:var(--color-secondary-dark);"></div>
+<!-- assets/images/posts/2024-05-14-organization-workspace-switcher/embedded-design-invite-based-loop.js -->
+<script src="/assets/images/posts/2024-06-01-organization-workspace-switcher/embedded-design-invite-based-loop.js" type="module" ></script>
+</div>
 
 We are now exposing the ability to switch between different organization and different workspace,this will enable users to :
 
