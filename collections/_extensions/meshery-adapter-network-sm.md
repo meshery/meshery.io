@@ -17,6 +17,5 @@ extensionCaveats: |
   - Use Meshery Adapter for Network Service Mesh for lifecycle management of Network Service Mesh deployments.
   - Manage Network Service Mesh lifecycle, including installation, with Meshery Adapter for Network Service Mesh.
   - Leverage Network Service Mesh capabilities like L3 Zero Trust and seamless Kubernetes integration with Meshery Adapter for Network Service Mesh.
-URL: 'https://docs.meshery.io/extensibility/adapters/nsm'
-downloadLink: https://meshery.layer5.io/connect/github/new
+docsURL: 'https://docs.meshery.io/extensibility/adapters/nsm'
 ---

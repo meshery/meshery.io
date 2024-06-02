@@ -17,6 +17,5 @@ extensionCaveats: |
   - The Meshery Adapter for Consul Service Mesh offers comprehensive lifecycle management for Consul.
   - Use the Meshery Adapter for Consul Service Mesh for efficient lifecycle management of Consul and its sample applications.
   - Utilize Prometheus and Grafana integration to monitor and optimize Consul's performance.
-URL: 'https://docs.meshery.io/extensibility/adapters/consul'
-downloadLink: https://meshery.layer5.io/connect/github/new
+docsURL: 'https://docs.meshery.io/extensibility/adapters/consul'
 ---

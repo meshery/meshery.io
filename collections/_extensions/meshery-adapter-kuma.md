@@ -17,6 +17,5 @@ extensionCaveats: |
   - Use Meshery Adapter for Kuma for lifecycle management of the Envoy-based service mesh with universal support.
   - Universal Envoy-based service mesh for distributed service connectivity.
   - Utilize the Meshery Adapter for Kuma for managing Kuma's lifecycle, including deployment and configuration.
-URL: 'https://docs.meshery.io/extensibility/adapters/kuma'
-downloadLink: https://meshery.layer5.io/connect/github/new
+docsURL: 'https://docs.meshery.io/extensibility/adapters/kuma'
 ---
