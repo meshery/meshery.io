@@ -225,7 +225,7 @@ userName: %s
 userAvatarURL: %s
 type: %s
 compatibility: 
-  %s
+%s
 patternId: %s
 image: %s
 patternInfo: |
