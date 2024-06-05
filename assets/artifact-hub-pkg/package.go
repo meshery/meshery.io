@@ -217,6 +217,12 @@ func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternC
 	}
 	userFullName := fmt.Sprintf("%s %s", userInfo.FirstName, userInfo.LastName)
 
+	// Use yaml.Marshal for pattern.Name to ensure proper escaping
+	nameYAML, err := yaml.Marshal(pattern.Name)
+	if err != nil {
+		return err
+	}
+
 	content := fmt.Sprintf(`---
 layout: item
 name: %s
@@ -234,7 +240,7 @@ patternCaveats: |
   %s
 URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/%s/%s/design.yml'
 downloadLink: %s/design.yml
----`, pattern.Name, pattern.UserID, userFullName, userInfo.AvatarURL, patternType, compatibility, pattern.ID, patternImageURL, patternInfo, patternCaveats, mesheryCatalogFilesDir, pattern.ID, pattern.ID)
+---`, strings.TrimSpace(string(nameYAML)), pattern.UserID, userFullName, userInfo.AvatarURL, patternType, compatibility, pattern.ID, patternImageURL, patternInfo, patternCaveats, mesheryCatalogFilesDir, pattern.ID, pattern.ID)
 
 	if err := ioutil.WriteFile(fmt.Sprintf(filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md")), []byte(content), 0644); err != nil {
 		return utils.ErrWriteFile(err, filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md"))
