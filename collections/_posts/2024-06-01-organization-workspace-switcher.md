@@ -1,6 +1,6 @@
 ---
-title: "Meshery Boosts Productivity: Multiple Organizations & Dynamic Workspaces!"
-subheading: Streamline Your Tasks Across Different Technologies!
+title: "Multiple Organizations in Meshery"
+subheading: Conveniently switch between organizations and workspaces in Meshery
 date: 2024-06-01
 author_contributor: Akshay Sharma
 categories: 
@@ -16,7 +16,7 @@ Meshery facilitates organization and workspace management, enabling diverse arch
 ## Organization
 In Meshery, organizations form the core of tenancy, grouping users effectively. These organizations host multiple teams, each accommodating various users. Users can belong to multiple teams and organizations. Teams play a key role in managing access to workspaces and their resources, enhancing efficiency and security.
 
-<img alt="Org" src="/assets/images/posts/2024-06-01-organization-workspace-switcher/organization_units.svg" width="50%" align="right" />
+<img alt="Org" src="/assets/images/posts/2024-06-01-organization-workspace-switcher/organization-units.svg" width="50%" align="right" />
 
 ## Workspaces
 Workspaces empower collaboration with your teams, enabling resource control and activity tracking. Workspaces support multiple teams, with each team accommodating diverse users. Users have the flexibility to join multiple teams and organizations, fostering fluidity and efficiency in workflow management.
