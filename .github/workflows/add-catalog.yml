@@ -33,7 +33,8 @@ jobs:
         name: Update Catalog Patterns in Go
         run: |
           cd assets/actions
-          go run package.go
+          patternId=$(go run package.go)
+          echo "contentID=$patternId" >> $GITHUB_OUTPUT
         env:
           GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
       - name: Update Catalog Filters
