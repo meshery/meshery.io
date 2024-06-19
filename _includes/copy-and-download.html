@@ -1,18 +1,31 @@
 {% assign type = pattern | default: extension %}
 
+<!-- Hidden iframe to handle the GET request -->
+<iframe id="hiddenFrame" name="hiddenFrame" style="display: none;"></iframe>
+
 {% if type.URL and type.downloadLink %}
 <div id="copy-url">
   <div class="btn-class">
     <div class="vertical-center" id="{{type.name}}">
       <div class="btn-grp">
-        <a href="{{type.downloadLink}}" download>
-          <button class="import" style="width: 7rem;">Download</button></a>
+        {% if type.patternId %}
+        <a href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id={{type.patternId}}&name={{type.name}}" target="_blank" > 
+           <button class="import" style="width: 15rem;">Open in playground </button>
+        </a>
+        {% endif %}
+        <a  href="{{type.downloadLink}}"   download>
+          <button  id="resourceDownloadBtn" data-patternId="{{type.patternId}}" onclick="sendCloudTelemetry()" class="import" style="width: 7rem;">Download</button>
+        </a>
+        
           <div class="btn-tooltip-grp">
             <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="{{type.URL}}"
             onmouseout="resetCopyText(this)">
-            <button class="import" style="width: 7rem;">Copy URL</button>
+            <button class="import" style="width: 7rem;">Copy URL IS
+            </button>
           </a>
         </div>
+
+        
       </div>
     </div>
   </div>
@@ -30,3 +43,16 @@
     </div>
   </div></div>
 {% endif %}
+
+
+<script>
+
+ function sendCloudTelemetry(){
+
+    const element = document.getElementById("resourceDownloadBtn")  
+    const patternId = element.dataset.patternid
+    patternId && fetch(`https://playground.meshery.io/api/pattern/download/${patternId}`)
+  }
+
+</script>
+
