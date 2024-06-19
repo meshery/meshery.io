@@ -115,57 +115,10 @@
 #compatibility-div {
   flex-wrap: wrap;
 }
-.checkbox-slider {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
-  height: 300px; /* Adjust as needed */
+#compatibility-div {
+  max-height: 360px; /* Adjust to display exactly 9 checkboxes */
+  overflow-y: auto;
 }
-
-.checkbox-container {
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.5s ease;
-  overflow: hidden;
-  height: 100%;
-  flex-wrap: nowrap;
-}
-
-.checkbox-container .input-container {
-  flex: 0 0 auto;
-  width: 100%;
-  box-sizing: border-box;
-  margin: 10px; /* Adjust spacing as needed */
-}
-
-.nav-button {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #00b39f;
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  z-index: 1;
-}
-
-.nav-button.top {
-  top: 0;
-}
-
-.nav-button.bottom {
-  bottom: 0;
-}
-
-/* Hide the navigation buttons initially */
-.nav-button.hidden {
-  display: none;
-}
-
-
 </style>
 
 <div class="filter-wrap">
@@ -188,16 +141,7 @@
   <p id="category-para" class="category-para"> <strong>Categories:</strong></p>   
   <div id="category-div" class="category-div"></div>
   <p id="compatibility-para" class="compatibility-para"><strong>Technologies:</strong></p>
-  <div id="compatibility-div" class="compatibility-div">
-    <div class="checkbox-slider">
-      <button class="nav-button left hidden" onclick="slide(-1)">&#10094;</button>
-      <div class="checkbox-container" id="checkbox-container">
-        <!-- The checkboxes will be dynamically added here by JavaScript -->
-      </div>
-      <button class="nav-button right" onclick="slide(1)">&#10095;</button>
-    </div>
-  </div>
-  
+  <div id="compatibility-div" class="compatibility-div"></div>
   <!-- <p id="tech-para" class="tech-para"><strong>Technology:</strong></p>
   <div id="tech-div" class="tech-div">
       <label><input type="radio" value="WebAssembly" id="webassembly" onchange='window.location.assign("/catalog/webassembly")'/> WebAssembly </label>
@@ -273,6 +217,7 @@
 </script>
 
 <script type="module">
+
   // import all integrations data
   import data from "{{ site.baseurl }}/integrations/data.js";
 
@@ -285,7 +230,9 @@
   data.push(wasmFilter);
 
   // Function to compare the names of all catalog entries by technology
+  // TODO: Improve so that catalog entries can be sorted by pattern name, too.
   function compare(a, b) {
+    // Use toUpperCase() to ignore character casing
     const nameA = a.name.toUpperCase();
     const nameB = b.name.toUpperCase();
 
@@ -302,18 +249,19 @@
   data.sort(compare);
 
   // get all empty filter containers
+  const container = document.getElementById("compatibility-div");
   const categoryContainer = document.getElementById("category-div");
-
+  
   // get all pattern cards
   const patternCards = document.querySelectorAll(".patternCard");
   const cardCompatibility = [];
   let cardType = new Set();
   let cardTechnology = new Set();
 
-  // Loop over all pattern cards to get their compatibility, type, and technology
-  for(let i = 0; i < patternCards.length; i++){
+  // Loop over all pattern cards to get there compatibility, type and technology so we can make a unique list out of it
+  for(let i=0; i<patternCards.length; i++){
       const type = patternCards[i].getAttribute("type")
-      if(type && type !== "wasm filter") cardType.add(type.toLowerCase());
+      if(type && type !== "wasm filter") cardType.add(type.toLowerCase()); 
       const technology = patternCards[i].getAttribute("technology")
       if(technology){
         let t = JSON.parse(technology)
@@ -329,7 +277,7 @@
   cardTechnology = Array.from(cardTechnology);
 
   // For creating a list of radio buttons for Categories section
-  for(let i = 0; i < cardType.length; i++){
+  for(let i = 0; i<cardType.length; i++){
     const inputContainer = document.createElement("div");
     inputContainer.className = "input-container";
 
@@ -345,75 +293,53 @@
     inputContainer.appendChild(input);
 
     const label = document.createElement("label");
-    label.innerHTML = cardType[i].replace(/-/g, " ");
+    label.innerHTML = cardType[i].replace(/-/g, " "); 
     label.setAttribute("for", cardType[i]);
     inputContainer.appendChild(label);
 
     categoryContainer.appendChild(inputContainer);
   }
 
-  // Function to render checkboxes and handle slider functionality
-  function renderCheckboxes(data) {
-    const container = document.getElementById("checkbox-container");
-    container.innerHTML = ''; // Clear existing checkboxes
+  // remove duplicate entries of integrations in filter section 
+  // Maintain a list of filterEntries, whenever you come across a new one, add it to list, else if the filter already exists in the list skip the further process of creating nodes
+  const filterEntries = [];
+  // For creating a list of checkboxes for Technologies section
+  for (let i = 0; i < data.length; i++) {
+    const count = cardCompatibility.filter((filter) => filter.includes(data[i].name)).length;
 
-    const filterEntries = [];
-    for (let i = 0; i < data.length; i++) {
-      const count = cardCompatibility.filter((filter) => filter.includes(data[i].name)).length;
+    // Skip adding the filter to list if it is not used in any of the pattern cards
+    // Skip adding the filter to list if it is already added to the list
+    if(count === 0 || filterEntries.includes(data[i].name))
+      continue;
+    
+    // Add the filter to list
+    filterEntries.push(data[i].name);
 
-      if (count === 0 || filterEntries.includes(data[i].name)) continue;
+    // Create nodes
+    const inputContainer = document.createElement("div");
+    inputContainer.className = "input-container";
 
-      filterEntries.push(data[i].name);
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.name = data[i].name;
+    input.value = data[i].name;
+    input.id = data[i].name;
+    input.onclick = function () {
+      showFilterCards();
+    };
+    inputContainer.appendChild(input);
 
-      const inputContainer = document.createElement("div");
-      inputContainer.className = "input-container";
+    const label = document.createElement("label");
+    let colorImg = data[i].color;
+    let whiteImg = data[i].white;
 
-      const input = document.createElement("input");
-      input.type = "checkbox";
-      input.name = data[i].name;
-      input.value = data[i].name;
-      input.id = data[i].name;
-      input.onclick = function () {
-        showFilterCards();
-      };
-      inputContainer.appendChild(input);
-
-      const label = document.createElement("label");
-      let colorImg = data[i].color;
-      let whiteImg = data[i].white;
-
-      label.innerHTML = `<img src="${colorImg}" id="logo-dark-light" data-logo-for-dark="${whiteImg ?? colorImg}"
+    label.innerHTML = `<img src="${colorImg}" id="logo-dark-light" data-logo-for-dark="${whiteImg ?? colorImg}"
                     data-logo-for-light="${colorImg}" /><div class="name">${data[i].name.replace(/-/g, " ")}</div><div class="badge">${count}</div>`;
-      label.style.height = "20px";
-      label.setAttribute("for", data[i].name);
-      inputContainer.appendChild(label);
+    label.style.height = "20px";
+    label.setAttribute("for", data[i].name);
+    inputContainer.appendChild(label);
 
-      container.appendChild(inputContainer);
-    }
-
-    updateNavigationButtons();
-  }
-
-  const checkboxesPerView = 9;
-  let currentSlide = 0;
-
-  function slide(direction) {
-    const container = document.getElementById("checkbox-container");
-    const totalCheckboxes = container.children.length;
-    const maxSlides = Math.ceil(totalCheckboxes / checkboxesPerView);
-
-    currentSlide = Math.min(Math.max(currentSlide + direction, 0), maxSlides - 1);
-    container.style.transform = `translateY(-${currentSlide * 100}%)`;
-
-    updateNavigationButtons();
-  }
-
-  function updateNavigationButtons() {
-    const totalCheckboxes = document.getElementById("checkbox-container").children.length;
-    const maxSlides = Math.ceil(totalCheckboxes / checkboxesPerView);
-
-    document.querySelector('.nav-button.top').classList.toggle('hidden', currentSlide === 0);
-    document.querySelector('.nav-button.bottom').classList.toggle('hidden', currentSlide === maxSlides - 1);
+    container.appendChild(inputContainer);
   }
 
   // Function called when user clicks on any of Technology checkboxes
@@ -433,42 +359,76 @@
         filterArray.push(el.value);
       });
 
+    // Select all pattern cards
+    // const patternCards = document.querySelectorAll(".patternCard");
+
     // If no checkbox is selected, show all pattern cards and enable the "All" radio button
     if (!filterArray.length) {
+      // for (let j = 0; j < patternCards.length; j++) {
+      //   patternCards[j].style.display = "block";
+      // }
       document.getElementById("All").checked = true;
     } else {
-      for(let i = 0; i < patternCards.length; i++){
+
+      // Loop over all pattern cards and check if any of the filter in filterArray is present in pattern card's filter attribute
+      // If yes, the show the card, else hide it
+      for(let i=0; i<patternCards.length; i++){
         let cc = [];
-        const type = patternCards[i].getAttribute("type");
-        const technology = patternCards[i].getAttribute("technology");
+        const type = patternCards[i].getAttribute("type")
+        const technology = patternCards[i].getAttribute("technology")
         if(technology){
-          let t = JSON.parse(technology);
+          let t = JSON.parse(technology)
           for (let k = 0; k < t.length; k++) {
             cc.push(t[k]);
           }
         }
-        let showCard = false;
+         let showCard = false;
 
-        for (let j = 0; j < filterArray.length; j++) {
-          if (cc.includes(filterArray[j])) {
-            showCard = true;
-            break;
+          for (let j = 0; j < filterArray.length; j++) {
+            if (cc.includes(filterArray[j])) {
+              showCard = true;
+              break;
+            }
           }
-        }
-        if (showCard) {
-          patternCards[i].style.display = "block";
-        } else {
-          patternCards[i].style.display = "none";
-        }
+          if (showCard) {
+            patternCards[i].style.display = "block";
+          } else {
+            patternCards[i].style.display = "none";
+          }
       }
     }
   }
 
-  // Call this function to render checkboxes
-  renderCheckboxes(data);
+  // Function called when user clicks on any of the Type radio buttons
+  function filterByType(value){
 
+    // Deselect all the checkboxes when radio button is selected
+    document.querySelectorAll("input[type=checkbox]:checked").forEach(function (el) {
+      el.checked = false;
+    });
+
+    // Loop over all patern cards and check if the "type" of pattern card matches with the radio button value received as argument to function
+    // If yes, show the card, else hide it
+    // Show all cards if "All" radio button is selected
+    const patternCards = document.querySelectorAll(".patternCard");
+    for (let j = 0; j < patternCards.length; j++) {
+      const filter = patternCards[j].getAttribute("type").toLowerCase();
+      let showCard = false;
+      if (value === "All" || filter.includes(value)) {
+        showCard = true;
+      }
+      if (showCard) {
+        patternCards[j].style.display = "block";
+      } else {
+        patternCards[j].style.display = "none";
+      }
+    }
+  }
+
+
+  // load defaul all selection on page load
   window.onload = function() {
     showFilterCards();
   }
-</script>
 
+</script>
