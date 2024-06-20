@@ -63,13 +63,15 @@ func main() {
 
 	catalogPatterns := fetchCatalogPatterns()
 
-	var patterns []CatalogPattern
+	var patterns struct {
+		Patterns []CatalogPattern `json:"patterns"`
+	}
 	if err := json.Unmarshal(catalogPatterns, &patterns); err != nil {
 		log.Error(meshkitErrors.New(ErrUnmarshalCatalogPatternCode, meshkitErrors.Alert, []string{"Unable to unmarshal the catalog pattern"}, []string{err.Error()}, []string{}, []string{}))
 		return
 	}
 
-	for _, pattern := range patterns {
+	for _, pattern := range patterns.Patterns {
 		if err := processPattern(pattern, token); err != nil {
 			log.Error(meshkitErrors.New(ErrProcessPatternCode, meshkitErrors.Alert,
 				[]string{"unable to process catalog pattern"},
