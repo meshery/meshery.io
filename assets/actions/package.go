@@ -78,11 +78,15 @@ func fetchCatalogPatterns() []byte {
 
 func processPattern(pattern CatalogPattern, ghAccessToken string) {
 	patternImageURL := getPatternImageURL(pattern)
-	patternType := getPatternType(pattern.CatalogData.Type)
+	patternType := getPatternType(string(pattern.CatalogData.Type))
 	patternInfo := getStringOrEmpty(pattern.CatalogData.PatternInfo)
 	patternCaveats := getStringOrEmpty(pattern.CatalogData.PatternCaveats)
 
-	compatibility := getCompatibility(pattern.CatalogData.Compatibility)
+	compatibilityStrings := make([]string, len(pattern.CatalogData.Compatibility))
+    for i, v := range pattern.CatalogData.Compatibility {
+        compatibilityStrings[i] = string(v) 
+    }
+	compatibility := getCompatibility(compatibilityStrings)
 
 	dir := filepath.Join("..", "..", "collections", "_catalog", patternType)
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
@@ -98,18 +102,13 @@ func processPattern(pattern CatalogPattern, ghAccessToken string) {
 
 func getPatternImageURL(pattern CatalogPattern) string {
 	var imageURL string
-	if pattern.CatalogData.ImageURL == nil {
+	if pattern.CatalogData.SnapshotURL == nil {
 		imageURL = fmt.Sprintf("https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/%s-light.png,https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/%s-dark.png", pattern.ID, pattern.ID)
 	} else {
-		switch v := pattern.CatalogData.ImageURL.(type) {
-		case string:
-			imageURL = v
-		case []interface{}:
-			var urls []string
-			for _, u := range v {
-				urls = append(urls, u.(string))
-			}
-			imageURL = strings.Join(urls, ",")
+		if len(pattern.CatalogData.SnapshotURL) == 1 {
+			imageURL = pattern.CatalogData.SnapshotURL[0]
+		} else if len(pattern.CatalogData.SnapshotURL) > 1 {
+			imageURL = strings.Join(pattern.CatalogData.SnapshotURL, ",")
 		}
 	}
 	return imageURL
@@ -181,7 +180,7 @@ func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternC
         Compatibility:  convertedCompatibility,
     }
 
-	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(dir, "deploy.yml"), pattern.UserID, "1.0.0", currentDateTime.Format(time.RFC3339), convertedCatalogData)
+	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(dir, "deploy.yml"), pattern.UserID, "1.0.0", currentDateTime.Format(time.RFC3339), &pattern.CatalogData)
 	data, err := yaml.Marshal(artifactHubPkg)
 	if err != nil {
 		return fmt.Errorf("failed to marshal YML: %w", err)
@@ -244,7 +243,7 @@ func invokeGitHubActions(contentID, assetLocation string, ghAccessToken string) 
 		return
 	}
 	req.Header.Set("Accept", "application/vnd.github+json")
-	req.Header.Set("Authorization", "Bearer "+ghAccessToken)
+	req.Header.Set("Authorization", "Bearer "+ ghAccessToken)
 	req.Header.Set("X-GitHub-Api-Version", "2022-11-28")
 
 	client := &http.Client{}
