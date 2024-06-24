@@ -65,6 +65,7 @@ func main() {
 	catalogPatterns, err := fetchCatalogPatterns()
 	if err != nil {
 		log.Error(err)
+		return
 	}
 
 	var patterns struct {
