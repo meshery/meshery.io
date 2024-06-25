@@ -24,12 +24,12 @@ import (
 type CatalogPattern struct {
 	ID           string `json:"id"`
 	Name         string `json:"name"`
+	Version      string `json:"version"`
 	PatternFile  string `json:"pattern_file"`
 	CatalogData  v1alpha1.CatalogData `json:"catalog_data"`
 	UserID string `json:"user_id"`
 }
 
-// UserProfile represents the user profile structure
 type UserInfo struct {
 	UserID    string `json:"user_id"`
 	FirstName string `json:"first_name"`
@@ -187,11 +187,10 @@ func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternC
 		patternImageURL = "/assets/images/logos/service-mesh-pattern.svg"
 	}
 
-	//process for versioning is needed 
 	format := "2006-01-02 15:04:05Z"
 	currentDateTime, err := time.Parse(format, time.Now().UTC().Format(format))
 
-	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(dir, "deploy.yml"), pattern.UserID, "1.0.0", currentDateTime.Format(time.RFC3339), &pattern.CatalogData)
+	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(dir, "deploy.yml"), pattern.UserID, pattern.Version, currentDateTime.Format(time.RFC3339), &pattern.CatalogData)
 	data, err := yaml.Marshal(artifactHubPkg)
 	if err != nil {
 		return utils.ErrMarshal(err)
