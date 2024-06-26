@@ -1,0 +1,381 @@
+name: bookInfoPatternIstio.yaml
+services:
+  bookinfo-vs:
+    name: bookinfo-vs
+    type: VirtualService
+    apiVersion: networking.istio.io/v1alpha3
+    model: istio
+    namespace: default
+    settings:
+      gateways:
+      - sample-app-gateway
+      hosts:
+      - book
+      http:
+      - cors Policy:
+          allow Credentials: false
+        fault:
+          delay:
+            fixedDelay: 7s
+            percentage:
+              value: 100
+        match:
+        - ignore Uri Case: false
+          uri:
+            exact: /productpage
+        - ignore Uri Case: false
+          uri:
+            prefix: /static
+        - ignore Uri Case: false
+          uri:
+            exact: /login
+        - ignore Uri Case: false
+          uri:
+            exact: /logout
+        - ignore Uri Case: false
+          uri:
+            prefix: /api/v1/products
+        retries:
+          attempts: 2
+          retry Remote Localities: false
+        route:
+        - destination:
+            host: productpage
+            port:
+              number: 9080
+      name: bookinfo-vs
+      namespace: default
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 6e352f2e-bdbb-4f45-a77f-ace2629eda50
+            meatadata:
+              port: 80
+              protocol: TCP
+            source: bookinfo-vs
+            target: productpage
+        - data:
+            id: c8314d33-28cf-4ae9-8934-6c0701e99a96
+            meatadata:
+              port: 80
+              protocol: TCP
+            source: sample-app-gateway
+            target: bookinfo-vs
+        id: bookinfo-vs
+        label: bookinfo-vs
+        position:
+          posX: 60.76374840468791
+          posY: 252.91020252903866
+  details:
+    name: details
+    type: Deployment
+    namespace: default
+    apiVersion: apps/v1
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app: details
+            version: v1
+        template:
+          metadata:
+            labels:
+              app: details
+              version: v1
+          spec:
+            containers:
+            - image: docker.io/istio/examples-bookinfo-details-v1:1.16.4
+              name: details
+              ports:
+              - container Port: 9080
+                protocol: TCP
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 2f4825cd-7230-4b85-8c64-75a0146ff966
+            meatadata:
+              port: 80
+              protocol: TCP
+            source: productpage
+            target: details
+        id: details
+        label: details
+        position:
+          posX: 370.4806417507766
+          posY: 354.42308525274734
+  productpage:
+    name: productpage
+    type: Deployment
+    namespace: default
+    apiVersion: apps/v1
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app: productpage
+            version: v1
+        template:
+          metadata:
+            labels:
+              app: productpage
+              version: v1
+          spec:
+            containers:
+            - image: docker.io/istio/examples-bookinfo-productpage-v1:1.16.4
+              name: productpage
+              ports:
+              - container Port: 9080
+                protocol: TCP
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 2f4825cd-7230-4b85-8c64-75a0146ff966
+            meatadata:
+              port: 80
+              protocol: TCP
+            source: productpage
+            target: details
+        - data:
+            id: 6e352f2e-bdbb-4f45-a77f-ace2629eda50
+            meatadata:
+              port: 80
+              protocol: TCP
+            source: bookinfo-vs
+            target: productpage
+        - data:
+            id: f8700d75-ef61-4258-b258-fb1351eafb33
+            meatadata:
+              port: 80
+              protocol: TCP
+            source: productpage
+            target: reviews
+        id: productpage
+        label: productpage
+        position:
+          posX: 156.51845840458358
+          posY: 251.99096159520772
+  ratings:
+    name: ratings
+    type: Deployment
+    namespace: default
+    apiVersion: apps/v1
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app: ratings
+            version: v1
+        template:
+          metadata:
+            labels:
+              app: ratings
+              version: v1
+          spec:
+            containers:
+            - image: docker.io/istio/examples-bookinfo-ratings-v1:1.16.4
+              name: ratings
+              ports:
+              - container Port: 9080
+                protocol: TCP
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: e92609a8-fcce-4866-abf9-a7ec64f40795
+            source: reviews-v3
+            target: ratings
+        id: ratings
+        label: ratings
+        position:
+          posX: 649
+          posY: 391
+  reviews:
+    name: reviews
+    type: Service
+    model: kubernetes
+    namespace: default
+    settings:
+      name: reviews
+      namespace: default
+      spec:
+        ports:
+        - name: http
+          port: 9080
+        selector:
+          app: reviews
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: f8700d75-ef61-4258-b258-fb1351eafb33
+            meatadata:
+              port: 80
+              protocol: TCP
+            source: productpage
+            target: reviews
+        - data:
+            id: 64ee6365-427d-47ca-9dad-715f2e258957
+            meatadata:
+              port: 80
+              protocol: TCP
+            source: reviews
+            target: 7207724b-9e0f-4ee1-95aa-de844edd2941
+        id: reviews
+        label: reviews
+        position:
+          posX: 367.5296097663336
+          posY: 123.46391470815172
+  reviews-v1:
+    name: reviews-v1
+    type: Deployment
+    namespace: default
+    apiVersion: apps/v1
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app: reviews
+            version: v1
+        template:
+          metadata:
+            labels:
+              app: reviews
+              version: v1
+          spec:
+            containers:
+            - image: docker.io/istio/examples-bookinfo-reviews-v1:1.16.4
+              name: reviews-v1
+              ports:
+              - container Port: 9080
+                protocol: TCP
+    traits:
+      meshmap:
+        edges: []
+        id: reviews-v1
+        label: reviews-v1
+        parent: 7207724b-9e0f-4ee1-95aa-de844edd2941
+        position:
+          posX: 475.73105750943614
+          posY: 91.09492322951635
+  reviews-v2:
+    name: reviews-v2
+    type: Deployment
+    namespace: default
+    apiVersion: apps/v1
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app: reviews
+            version: v2
+        template:
+          metadata:
+            labels:
+              app: reviews
+              version: v2
+          spec:
+            containers:
+            - image: docker.io/istio/examples-bookinfo-reviews-v2:1.16.4
+              name: reviews-v2
+              ports:
+              - container Port: 9080
+                protocol: TCP
+    traits:
+      meshmap:
+        edges: []
+        id: reviews-v2
+        label: reviews-v2
+        parent: 7207724b-9e0f-4ee1-95aa-de844edd2941
+        position:
+          posX: 480.6820894938793
+          posY: 152.15247972754568
+  reviews-v3:
+    name: reviews-v2
+    type: Deployment
+    namespace: default
+    apiVersion: apps/v1
+    model: kubernetes
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app: reviews
+            version: v2
+        template:
+          metadata:
+            labels:
+              app: reviews
+              version: v2
+          spec:
+            containers:
+            - image: docker.io/istio/examples-bookinfo-reviews-v2:1.16.4
+              name: reviews-v2
+              ports:
+              - container Port: 9080
+                protocol: TCP
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 399f6a99-e86d-4773-8520-2fb79f6fc73f
+            source: reviews-v3
+            target: 3663225e-771c-4a6c-ad32-9a70f73de212
+        - data:
+            id: e92609a8-fcce-4866-abf9-a7ec64f40795
+            source: reviews-v3
+            target: ratings
+        id: reviews-v3
+        label: reviews-v3
+        parent: 7207724b-9e0f-4ee1-95aa-de844edd2941
+        position:
+          posX: 487.1949722175878
+          posY: 216.40590828780256
+  sample-app-gateway:
+    name: sample-app-gateway
+    type: Gateway
+    apiVersion: networking.istio.io/v1alpha3
+    model: istio
+    namespace: default
+    settings:
+      name: sample-app-gateway
+      namespace: default
+      selector:
+        istio: ingressgateway
+      servers:
+      - hosts:
+        - bookinfo.meshery.io
+        port:
+          name: http
+          number: 80
+          protocol: HTTP
+        tls:
+          https Redirect: false
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: c8314d33-28cf-4ae9-8934-6c0701e99a96
+            meatadata:
+              port: 80
+              protocol: TCP
+            source: sample-app-gateway
+            target: bookinfo-vs
+        id: sample-app-gateway
+        label: sample-app-gateway
+        position:
+          posX: -26.034353929889633
+          posY: 253.89302556409393
