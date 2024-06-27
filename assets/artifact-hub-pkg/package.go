@@ -167,15 +167,15 @@ func getCompatibility(compatibility []string) string {
 
 func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternCaveats, compatibility, patternImageURL string) error {
 	dir := filepath.Join("..", "..", mesheryCatalogFilesDir, pattern.ID)
-	deployFilePath := filepath.Join(dir, "design.yml")
+	designFilePath := filepath.Join(dir, "design.yml")
 	os.MkdirAll(dir, 0755)
-	if err := ioutil.WriteFile(deployFilePath, []byte(pattern.PatternFile), 0644); err != nil {
-		return utils.ErrWriteFile(err, deployFilePath)
+	if err := ioutil.WriteFile(designFilePath, []byte(pattern.PatternFile), 0644); err != nil {
+		return utils.ErrWriteFile(err, designFilePath)
 	}
 
-	contenttemp, err := ioutil.ReadFile(deployFilePath)
+	contenttemp, err := ioutil.ReadFile(designFilePath)
 	if err != nil {
-		return utils.ErrReadFile(err, deployFilePath)
+		return utils.ErrReadFile(err, designFilePath)
 	}
 
 	var datatemp map[string]interface{}
