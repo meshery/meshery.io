@@ -1,33 +1,33 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
-	"os"
-	"bytes"
 	"io/ioutil"
-	"strings"
 	"net/http"
-	"time"
+	"os"
 	"path/filepath"
+	"strings"
+	"time"
 
 	"gopkg.in/yaml.v3"
 
-	"github.com/layer5io/meshkit/utils"
 	meshkitErrors "github.com/layer5io/meshkit/errors"
 	"github.com/layer5io/meshkit/logger"
+	"github.com/layer5io/meshkit/utils"
 
-	"github.com/layer5io/meshkit/utils/catalog"
 	"github.com/layer5io/meshkit/models/catalog/v1alpha1"
+	"github.com/layer5io/meshkit/utils/catalog"
 )
 
 type CatalogPattern struct {
-	ID           string `json:"id"`
-	Name         string `json:"name"`
-	Version      string `json:"version"`
-	PatternFile  string `json:"pattern_file"`
-	CatalogData  v1alpha1.CatalogData `json:"catalog_data"`
-	UserID string `json:"user_id"`
+	ID          string               `json:"id"`
+	Name        string               `json:"name"`
+	Version     string               `json:"version"`
+	PatternFile string               `json:"pattern_file"`
+	CatalogData v1alpha1.CatalogData `json:"catalog_data"`
+	UserID      string               `json:"user_id"`
 }
 
 type UserInfo struct {
@@ -42,20 +42,20 @@ const (
 	mesheryCatalogFilesDir = "catalog"
 )
 
-var(
+var (
 	ErrUnmarshalCatalogPatternCode = "test_code"
 	ErrProcessPatternCode          = "test_code"
 	ErrHTTPGetRequestCode          = "test_code"
 	ErrReadRespBodyCode            = "test_code"
 	ErrCreateGitHubRequestCode     = "test_code"
-    ErrInvokeGitHubActionsCode     = "test_code"
+	ErrInvokeGitHubActionsCode     = "test_code"
 )
 
 func main() {
 	token := os.Getenv("GH_ACCESS_TOKEN")
 	log, err := logger.New("mesheryio_package", logger.Options{
-		Format:     logger.SyslogLogFormat,
-		LogLevel:   5,
+		Format:   logger.SyslogLogFormat,
+		LogLevel: 5,
 	})
 	if err != nil {
 		fmt.Println(err)
@@ -71,9 +71,9 @@ func main() {
 	var patterns struct {
 		Patterns []CatalogPattern `json:"patterns"`
 	}
-	if err := json.Unmarshal(catalogPatterns, &patterns); err != nil {	
+	if err := json.Unmarshal(catalogPatterns, &patterns); err != nil {
 		log.Error(utils.ErrUnmarshal(err))
-		return 
+		return
 	}
 
 	for _, pattern := range patterns.Patterns {
@@ -99,7 +99,7 @@ func fetchCatalogPatterns() ([]byte, error) {
 	if err != nil {
 		return nil, ErrReadRespBody(err)
 	}
-	return body, nil 
+	return body, nil
 }
 
 func processPattern(pattern CatalogPattern, token string) error {
@@ -109,9 +109,9 @@ func processPattern(pattern CatalogPattern, token string) error {
 	patternCaveats := getStringOrEmpty(pattern.CatalogData.PatternCaveats)
 
 	compatibilityStrings := make([]string, len(pattern.CatalogData.Compatibility))
-    for i, v := range pattern.CatalogData.Compatibility {
-        compatibilityStrings[i] = string(v) 
-    }
+	for i, v := range pattern.CatalogData.Compatibility {
+		compatibilityStrings[i] = string(v)
+	}
 	compatibility := getCompatibility(compatibilityStrings)
 
 	dir := filepath.Join("..", "..", "collections", "_catalog", patternType)
@@ -167,7 +167,7 @@ func getCompatibility(compatibility []string) string {
 
 func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternCaveats, compatibility, patternImageURL string) error {
 	dir := filepath.Join("..", "..", mesheryCatalogFilesDir, pattern.ID)
-	deployFilePath := filepath.Join(dir, "deploy.yml")
+	deployFilePath := filepath.Join(dir, "design.yml")
 	os.MkdirAll(dir, 0755)
 	if err := ioutil.WriteFile(deployFilePath, []byte(pattern.PatternFile), 0644); err != nil {
 		return utils.ErrWriteFile(err, deployFilePath)
@@ -190,7 +190,7 @@ func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternC
 	format := "2006-01-02 15:04:05Z"
 	currentDateTime, err := time.Parse(format, time.Now().UTC().Format(format))
 
-	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(dir, "deploy.yml"), pattern.UserID, pattern.Version, currentDateTime.Format(time.RFC3339), &pattern.CatalogData)
+	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(dir, "design.yml"), pattern.UserID, pattern.Version, currentDateTime.Format(time.RFC3339), &pattern.CatalogData)
 	data, err := yaml.Marshal(artifactHubPkg)
 	if err != nil {
 		return utils.ErrMarshal(err)
@@ -220,8 +220,8 @@ patternInfo: |
   %s
 patternCaveats: |
   %s
-URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/%s/%s/deploy.yml'
-downloadLink: %s/deploy.yml
+URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/%s/%s/design.yml'
+downloadLink: %s/design.yml
 ---`, pattern.Name, pattern.UserID, userFullName, userInfo.AvatarURL, patternType, compatibility, pattern.ID, patternImageURL, patternInfo, patternCaveats, mesheryCatalogFilesDir, pattern.ID, pattern.ID)
 
 	if err := ioutil.WriteFile(fmt.Sprintf(filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md")), []byte(content), 0644); err != nil {
@@ -247,7 +247,7 @@ func fetchUserInfo(userID string) (UserInfo, error) {
 	if err := json.Unmarshal(body, &userInfo); err != nil {
 		return UserInfo{}, utils.ErrUnmarshal(err)
 	}
-	
+
 	return userInfo, nil
 }
 
@@ -280,17 +280,17 @@ func invokeGitHubAction(contentID, assetLocation string, ghAccessToken string) e
 }
 
 func ErrHTTPGetRequest(err error, ep string) error {
-    return meshkitErrors.New(ErrHTTPGetRequestCode, meshkitErrors.Alert,
-        []string{"HTTP GET request failed"},
-        []string{fmt.Sprintf("Failed to fetch data from endpoint: %s\nError: %v", ep, err)},
-        []string{"The server might be down", "The endpoint URL might be incorrect"},
-        []string{"Check the endpoint URL", "Ensure the server is running"})
+	return meshkitErrors.New(ErrHTTPGetRequestCode, meshkitErrors.Alert,
+		[]string{"HTTP GET request failed"},
+		[]string{fmt.Sprintf("Failed to fetch data from endpoint: %s\nError: %v", ep, err)},
+		[]string{"The server might be down", "The endpoint URL might be incorrect"},
+		[]string{"Check the endpoint URL", "Ensure the server is running"})
 }
 
 func ErrReadRespBody(err error) error {
-    return meshkitErrors.New(ErrReadRespBodyCode, meshkitErrors.Alert,
-        []string{"Failed to read response body"},
-        []string{fmt.Sprintf("Unable to read the response body from the server.\nError: %v", err)},
-        []string{"The response body might be too large", "There could be a network issue"},
-        []string{"Ensure the server returns a valid and readable response body."})
+	return meshkitErrors.New(ErrReadRespBodyCode, meshkitErrors.Alert,
+		[]string{"Failed to read response body"},
+		[]string{fmt.Sprintf("Unable to read the response body from the server.\nError: %v", err)},
+		[]string{"The response body might be too large", "There could be a network issue"},
+		[]string{"Ensure the server returns a valid and readable response body."})
 }
