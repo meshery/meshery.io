@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"gopkg.in/yaml.v3"
 	"github.com/Masterminds/semver/v3"
+	"gopkg.in/yaml.v3"
 
 	meshkitErrors "github.com/layer5io/meshkit/errors"
 	"github.com/layer5io/meshkit/logger"
@@ -50,6 +50,7 @@ var (
 	ErrReadRespBodyCode            = "test_code"
 	ErrCreateGitHubRequestCode     = "test_code"
 	ErrInvokeGitHubActionsCode     = "test_code"
+	ErrInvalidVersionCode          = "test_code"
 )
 
 func main() {
@@ -197,7 +198,11 @@ func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternC
 	} else {
 		v, err := semver.NewVersion(version)
 		if err != nil {
-			return err
+			return meshkitErrors.New(ErrInvalidVersionCode, meshkitErrors.Alert,
+				[]string{"Failed to parse the version"},
+				[]string{fmt.Sprintf("The provided version '%s' is invalid.\nError: %v", version, err)},
+				[]string{"The version string is not in a valid semantic version format"},
+				[]string{"Ensure the version string follows semantic versioning format", "Check for typos or incorrect format"})
 		}
 		version = v.IncPatch().String()
 	}
