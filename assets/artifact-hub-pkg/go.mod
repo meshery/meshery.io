@@ -3,6 +3,7 @@ module package.go
 go 1.21.0
 
 require (
+	github.com/Masterminds/semver/v3 v3.2.1
 	github.com/layer5io/meshkit v0.7.36
 	gopkg.in/yaml.v3 v3.0.1
 )
