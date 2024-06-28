@@ -11,6 +11,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Masterminds/semver/v3"
 	"gopkg.in/yaml.v3"
 
 	meshkitErrors "github.com/layer5io/meshkit/errors"
@@ -49,6 +50,7 @@ var (
 	ErrReadRespBodyCode            = "test_code"
 	ErrCreateGitHubRequestCode     = "test_code"
 	ErrInvokeGitHubActionsCode     = "test_code"
+	ErrInvalidVersionCode          = "test_code"
 )
 
 func main() {
@@ -190,7 +192,12 @@ func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternC
 	format := "2006-01-02 15:04:05Z"
 	currentDateTime, err := time.Parse(format, time.Now().UTC().Format(format))
 
-	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(dir, "design.yml"), pattern.UserID, pattern.Version, currentDateTime.Format(time.RFC3339), &pattern.CatalogData)
+	version := pattern.CatalogData.PublishedVersion
+	if version == "" {
+		version = semver.New(0, 0, 1, "", "").String()
+	}
+
+	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(dir, "design.yml"), pattern.UserID, version, currentDateTime.Format(time.RFC3339), &pattern.CatalogData)
 	data, err := yaml.Marshal(artifactHubPkg)
 	if err != nil {
 		return utils.ErrMarshal(err)
