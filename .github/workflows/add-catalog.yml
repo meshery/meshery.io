@@ -20,7 +20,7 @@ jobs:
         with:
           go-version: '1.21'
       - name: Set env
-        run : |
+        run: |
           echo "MESHERY_CLOUD_BASE_URL=https://meshery.layer5.io" >> $GITHUB_ENV
           echo "MESHERY_CATALOG_FILES_DIR=catalog" >> $GITHUB_ENV
       - name: Cleanup
@@ -65,7 +65,7 @@ jobs:
             # check if directory doesn't exists; then create it
             if [ ! -d "./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')"" ]; then
               echo "$(echo $filterType | tr '[:upper:]' '[:lower:]') doesn't exist."
-              echo "Creating directory...$(echo $filterType | tr '[:upper:]' '[:lower:]')"
+               echo "Creating directory...$(echo $filterType | tr '[:upper:]' '[:lower:]')"
               mkdir "./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')""
             fi
 
@@ -94,11 +94,11 @@ jobs:
             echo "$filterFile" > $MESHERY_CATALOG_FILES_DIR/$filterId.yaml
 
             userId=$(jq -r .[$idx].user_id temp.json)
-            userInfo=$(curl -sS "$MESHERY_CLOUD_BASE_URL/api/identity/users/profile/$userId" 2>./err1.txt)
+            userInfo=$(curl -sS "$MESHERY_CLOUD_BASE_URL/api/identity/users/profile/$userId" 2>>./err.txt)
 
-            if [[ "$(<err1.txt)" != "" ]]; then
-            >&2 echo "Error fetching User details"
-            >&2 echo "$(<err1.txt)"
+            if [[ "$(<err.txt)" != "" ]]; then
+              >&2 echo "Error fetching User details"
+              >&2 echo "$(<err.txt)"
             fi
 
             echo "$userInfo" > info.json
@@ -125,7 +125,6 @@ jobs:
           ---" > ./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')"/$filterId.md
           done
           rm temp.json
-          rm err.txt
       - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
@@ -148,5 +147,6 @@ jobs:
             "Catalog Update Workflow" <no-reply@meshery.io>
           to: developers@meshery.io
           body: |
-            The GitHub Actions workflow in ${{ github.repository }} has failed.
-            You can find more details in the GitHub Actions log ${{ github.workflow }}.
+            Meshery's Add Cloud Native Catalog Items <a href="https://github.com/meshery/meshery.io/actions/workflows/add-catalog.yml">workflow</a> encountered error(s). Refer to the attached error log for details or review the [results of the failed workflow](https://github.com/meshery/meshery.io/actions/runs/${{ github.run_id }}).
+
+          attachments: err.txt
