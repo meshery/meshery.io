@@ -195,16 +195,6 @@ func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternC
 	version := pattern.CatalogData.PublishedVersion
 	if version == "" {
 		version = semver.New(0, 0, 1, "", "").String()
-	} else {
-		v, err := semver.NewVersion(version)
-		if err != nil {
-			return meshkitErrors.New(ErrInvalidVersionCode, meshkitErrors.Alert,
-				[]string{"Failed to parse the version"},
-				[]string{fmt.Sprintf("The provided version '%s' is invalid.\nError: %v", version, err)},
-				[]string{"The version string is not in a valid semantic version format"},
-				[]string{"Ensure the version string follows semantic versioning format", "Check for typos or incorrect format"})
-		}
-		version = v.IncPatch().String()
 	}
 
 	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(dir, "design.yml"), pattern.UserID, version, currentDateTime.Format(time.RFC3339), &pattern.CatalogData)
