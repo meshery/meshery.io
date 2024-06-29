@@ -190,6 +190,10 @@ func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternC
 	format := "2006-01-02 15:04:05Z"
 	currentDateTime, err := time.Parse(format, time.Now().UTC().Format(format))
 
+	if pattern.CatalogData.PatternInfo == "" {
+		pattern.CatalogData.PatternInfo = pattern.Name
+	}
+
 	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(dir, "deploy.yml"), pattern.UserID, pattern.Version, currentDateTime.Format(time.RFC3339), &pattern.CatalogData)
 	data, err := yaml.Marshal(artifactHubPkg)
 	if err != nil {
