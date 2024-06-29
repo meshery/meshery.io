@@ -192,12 +192,17 @@ func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternC
 	format := "2006-01-02 15:04:05Z"
 	currentDateTime, err := time.Parse(format, time.Now().UTC().Format(format))
 
-	version := pattern.CatalogData.PublishedVersion
+	if pattern.CatalogData.PatternInfo == "" {
+		pattern.CatalogData.PatternInfo = pattern.Name
+	}
+   
+  version := pattern.CatalogData.PublishedVersion
 	if version == "" {
 		version = semver.New(0, 0, 1, "", "").String()
 	}
 
 	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(dir, "design.yml"), pattern.UserID, version, currentDateTime.Format(time.RFC3339), &pattern.CatalogData)
+
 	data, err := yaml.Marshal(artifactHubPkg)
 	if err != nil {
 		return utils.ErrMarshal(err)
