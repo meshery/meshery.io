@@ -1,72 +1,24 @@
-# Artifact Hub package metadata file
-version: 1.0.0
+version: 0.0.1
 name: run-daemonset-on-gke-autopilot
-# alternativeName: RunDaemonSetonGKEAutopilot
-category: networking
 displayName: Run DaemonSet on GKE Autopilot
-createdAt: "2024-04-18T04:08:37Z"
-description: |
-  GKE uses the total size of your deployed workloads to determine the size of the nodes that Autopilot provisions for the cluster. If you add or resize a DaemonSet after Autopilot provisions a node, GKE won't resize existing nodes to accommodate the new total workload size. DaemonSets with resource requests larger than the allocatable capacity of existing nodes, after accounting for system pods, also won't get scheduled on those nodes.
-
-  Starting in GKE version 1.27.6-gke.1248000 clusters in Autopilot mode detect nodes that can't fit all DaemonSets, and over time, migrate workloads to larger nodes that can fit all DaemonSets. This process takes some time, especially if the nodes run system Pods, which need extra time to gracefully terminate so that there's no disruption to core cluster capabilities.
-  
-  In GKE version 1.27.5-gke.200 or earlier, we recommend cordoning and draining nodes that can't accommodate DaemonSet Pods.
-logoPath: ../../assets/images/brand/meshery-logo.svg
+createdAt: "2024-06-30T09:55:04Z"
+description: GKE%20uses%20the%20total%20size%20of%20your%20deployed%20workloads%20to%20determine%20the%20size%20of%20the%20nodes%20that%20Autopilot%20provisions%20for%20the%20cluster.%20If%20you%20add%20or%20resize%20a%20DaemonSet%20after%20Autopilot%20provisions%20a%20node%2C%20GKE%20won't%20resize%20existing%20nodes%20to%20accommodate%20the%20new%20total%20workload%20size.%20DaemonSets%20with%20resource%20requests%20larger%20than%20the%20allocatable%20capacity%20of%20existing%20nodes%2C%20after%20accounting%20for%20system%20pods%2C%20also%20won't%20get%20scheduled%20on%20those%20nodes.%0A%0AStarting%20in%20GKE%20version%201.27.6-gke.1248000%2C%20clusters%20in%20Autopilot%20mode%20detect%20nodes%20that%20can't%20fit%20all%20DaemonSets%20and%2C%20over%20time%2C%20migrate%20workloads%20to%20larger%20nodes%20that%20can%20fit%20all%20DaemonSets.%20This%20process%20takes%20some%20time%2C%20especially%20if%20the%20nodes%20run%20system%20Pods%2C%20which%20need%20extra%20time%20to%20gracefully%20terminate%20so%20that%20there's%20no%20disruption%20to%20core%20cluster%20capabilities.%0A%0AIn%20GKE%20version%201.27.5-gke.200%20or%20earlier%2C%20we%20recommend%20cordoning%20and%20draining%20nodes%20that%20can't%20accommodate%20DaemonSet%20Pods.
 logoURL: https://raw.githubusercontent.com/meshery/meshery.io/0b8585231c6e2b3251d38f749259360491c9ee6b/assets/images/brand/meshery-logo.svg
-# digest: String that uniquely identifies this package version (optional)
 license: Apache-2.0
-homeURL: https://meshery.io/catalog
-appVersion: v1.0.0
-# containersImages: # (optional)
-#   - name: Image identifier (optional)
-#     image: The format should match ${REGISTRYHOST}/${USERNAME}/${NAME}:${TAG}
-#     whitelisted: When set to true, this image won't be scanned for security vulnerabilities
-#     platforms: # (optional)
-#       - A list of platforms supported by this image (linux/amd64, etc)
-# containsSecurityUpdates: Whether this package version contains security updates (optional, boolean)
-operator: false
-deprecated: false
-prerelease: false
-keywords: # (optional)
-  - kubernetes-pods
-  - meshery
-  - meshery-designs
-links: # (optional)
-  - name: Meshery Catalog
-    url: https://meshery.io/catalog
-readme: | # (optional, can be provided from a README.md file as well)
-  This design maps to the "Exploring Kubernetes Pods with Meshery" tutorial and is the end result of the design. It can be used to quickly deploy an nginx pod exposed through a service.
-install: | 
-  ```shell
-  mesheryctl design import -f 
-  ```
-# changes: # (optional - it is also possible to provide a list of strings with just the descriptions instead of using objects)
-#   - kind: added # Supported kinds are: added, changed, deprecated, removed, fixed and security
-#     description: cool feature
-#     links:
-#       - name: GitHub Issue
-#         url: https://github.com/issue-url
-#       - name: GitHub PR
-#         url: https://github.com/pr-url
-#   - kind: fixed
-#     description: minor bug
-#     links:
-#       - name: GitHub Issue
-#         url: https://github.com/issue-url
-maintainers: # (optional)
-  - name: Meshery Authors
-    email: maintainers@meshery.io
-provider: 
-  name: Meshery Catalog
-# ignore: # (optional, used to ignore some falco rules or opa policies files in a package)
-  # - lib # Entries use .gitignore syntax)
-# recommendations: # (optional, list of recommended packages)
-#   - url: https://artifacthub.io/packages/helm/artifact-hub/artifact-hub
-screenshots: # (optional, list of screenshots)
-  - title: MeshMap Snapshot
-    url: https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/2024%404/dea82811-74ba-474f-b9e4-426e7401707exao2jBg%3D.png
-  - title: Meshery project
-    url: https://raw.githubusercontent.com/meshery/meshery.io/master/assets/images/logos/meshery-gradient.png
-# annotations: # (optional, keys and values must be strings)
-#   key1: value1
-#   key2: value2
+homeURL: https://docs.meshery.io/concepts/logical/designs
+links:
+    - name: download
+      url: ../../catalog/0aa86dd0-415c-4bf8-ae76-832560470b74/design.yml
+    - name: Meshery Catalog
+      url: https://meshery.io/catalog
+readme: "For%20all%20GKE%20versions%2C%20we%20recommend%20the%20following%20best%20practices%20when%20deploying%20DaemonSets%20on%20Autopilot%3A%0A%0ADeploy%20DaemonSets%20before%20any%20other%20workloads.%0ASet%20a%20higher%20PriorityClass%20on%20DaemonSets%20than%20regular%20Pods.%20The%20higher%20PriorityClass%20lets%20GKE%20evict%20lower-priority%20Pods%20to%20accommodate%20DaemonSet%20pods%20if%20the%20node%20can%20accommodate%20those%20pods.%20This%20helps%20to%20ensure%20that%20the%20DaemonSet%20is%20present%20on%20each%20node%20without%20triggering%20node%20recreation.%0A \n ##h4 Caveats and Consideration \n"
+install: mesheryctl design import -f
+provider:
+    name: 62b081a5-1273-4c58-807f-b6be539275d0
+screenshots:
+    - title: MeshMap Snapshot
+      url: https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/0aa86dd0-415c-4bf8-ae76-832560470b74-light.png
+    - title: MeshMap Snapshot
+      url: https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/0aa86dd0-415c-4bf8-ae76-832560470b74-dark.png
+    - title: Meshery Project
+      url: https://raw.githubusercontent.com/meshery/meshery.io/master/assets/images/logos/meshery-gradient.png
