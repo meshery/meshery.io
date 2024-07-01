@@ -6,7 +6,7 @@ userName: Deepak Reddy
 userAvatarURL: https://lh3.googleusercontent.com/a/ACg8ocIGbiDtE0q65qVvAUdzHw8Qky81rM0kSAknIqbgysfDCw=s96-c
 type: traffic-management
 compatibility: 
-      - kubernetes
+    - kubernetes
 patternId: 7b2e40b0-3cc8-4da3-bccd-b66bc6cd206a
 image: https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/7b2e40b0-3cc8-4da3-bccd-b66bc6cd206a-light.png,https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/7b2e40b0-3cc8-4da3-bccd-b66bc6cd206a-dark.png
 patternInfo: |

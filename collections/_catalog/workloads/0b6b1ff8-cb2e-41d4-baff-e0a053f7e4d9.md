@@ -6,7 +6,7 @@ userName: Deepak Reddy
 userAvatarURL: https://lh3.googleusercontent.com/a/ACg8ocIGbiDtE0q65qVvAUdzHw8Qky81rM0kSAknIqbgysfDCw=s96-c
 type: workloads
 compatibility: 
-      - kubernetes
+    - kubernetes
 patternId: 0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9
 image: https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9-light.png,https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9-dark.png
 patternInfo: |

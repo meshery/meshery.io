@@ -6,7 +6,7 @@ userName: Shubham Pandey
 userAvatarURL: 
 type: deployment
 compatibility: 
-      - kubernetes
+    - kubernetes
 patternId: 69afafc0-f0a6-4c6c-beae-c96956b40a4f
 image: https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/69afafc0-f0a6-4c6c-beae-c96956b40a4f-light.png,https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/69afafc0-f0a6-4c6c-beae-c96956b40a4f-dark.png
 patternInfo: |

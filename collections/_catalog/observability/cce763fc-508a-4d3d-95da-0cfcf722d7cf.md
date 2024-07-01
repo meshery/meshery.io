@@ -6,7 +6,7 @@ userName: Deepak Reddy
 userAvatarURL: https://lh3.googleusercontent.com/a/ACg8ocIGbiDtE0q65qVvAUdzHw8Qky81rM0kSAknIqbgysfDCw=s96-c
 type: observability
 compatibility: 
-      - kubernetes
+    - kubernetes
 patternId: cce763fc-508a-4d3d-95da-0cfcf722d7cf
 image: https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/cce763fc-508a-4d3d-95da-0cfcf722d7cf-light.png,https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/cce763fc-508a-4d3d-95da-0cfcf722d7cf-dark.png
 patternInfo: |
