@@ -1,10 +1,10 @@
 
-<section>
+<section style="display:block;">
     <div class="container flex" style="align-items: normal;"  >
-        <div class="text " style="padding: 0 20px 20px 0;">
+        <div class="text" style="padding: 0 20px 20px 0;">
 
             <h2><span class="special-text">Intelligent inference</span> for your infrastructure</h2>
-            <p>Meshery uses <a href="https://docs.meshery.io/concepts/logical/relationships">relationships</a> to define how and when components interrelate with one another.
+            <p>Meshery uses <a href="https://docs.meshery.io/concepts/logical/relationships">relationships</a> to define how and when components interrelate with one another. Meshery supports a variety of relationships between components. These relationships are categorized into two types: semantic and non-semantic. 
                 <div class="button-para">
                     <a href="https://docs.meshery.io/concepts/logical/relationships#types-of-relationships" class="highlight">See more examples</a>
                 </div>
@@ -76,10 +76,10 @@
 <section>
     <div class="container flex">
         <div class="text ">
-            <h2>Organize project-based work with <span class="special-text">Workspaces</span></h2>
-            <p> Workspace let's you organize your work and serve as the central point of collaboration for you and your teams and a central point of access control to Environments and their resources.</p>
+            <h2><span class="special-text">Workspaces</span>: Your team's Google Drive for cloud native projects</h2>
+            <p>Workspace let's you organize your work and serve as the central point of collaboration for you and your teams and point of access control to Environments and their resources.</p>
             <div class="button-para">
-                <a href="https://docs.meshery.io/concepts/logical/workspaces" class="highlight">View Docs</a>
+                <a href="https://docs.meshery.io/concepts/logical/workspaces" class="highlight">Learn about Workspaces</a>
             </div>
         </div>
         <div class="image flex" style="flex-flow: column wrap;">
@@ -102,7 +102,9 @@
         <div class="text ">
 
             <h2>Manage infra performance with <span class="special-text">Performance Profiles</span></h2>
-            <p>Performance Profile is a new and improved way to save performance test configurations, schedule performance tests, etc.</p>
+
+
+<p>Create and reuse performance profiles for consistent characterization of the configuration of your infrastructure in context of how it performs.</p>
             <div class="button-para">
                 <a href="https://docs.meshery.io/tasks/performance/managing-performance" class="highlight">View Docs</a>
             </div>
@@ -123,38 +125,39 @@
 </section>
 
 
-{% for features in site.data.features %}
-{% if features.type == 1 %}
 <section>
     <div class="container flex">
         <div class="text ">
-            <div style="display: flex;">
-                <img src="{{ features.logoLightMode }}" data-logo-for-light="{{ features.logoLightMode }}"
-                    data-logo-for-dark="{{ features.logoDarkMode }}" id="logo-dark-light"
-                    alt="{{ features.logoDescription}}" style="height: 4rem;" loading="lazy" />
-                <span>
-            </div>
-            <h2>{{ features.title }}</h2>
-            <p>{{ features.description }}</p>
-            <div class="button-para">
-                <a href="/catalog" class="highlight">View Catalog</a>
-            </div>
+            <img src="/assets/images/meshmap-icon.svg" style="max-width:20%;position:relative;float:left;
+                    margin-right:20px;margin-bottom: 10px;" loading="lazy" />
+            <h2>See changes to your infra <span class="special-text">before you merge</span></h2>
+            <p>Get snapshots of your infrastructure directly in your PRs. Preview your deployment, view changes pull request-to-pull request and get infrastructure snapshots within your PRs by connecting MeshMap to your GitHub repositories.</p>
+            <!-- <ul style="line-height: 1.5em;height: auto;text-align: left; color: var(--color-secondary-light)">
+                <li>See your deployment before you merge</li>
+                <li>Connect MeshMap to your GitHub repo and see changes pull request-to-pull request</li>
+                <li>Get snapshots of your infrastructure directly in your PRs</li>
+            </ul> -->
+            <div class="button-para"><a href="https://docs.meshery.io/extensions/snapshot" class="highlight">View Docs</a></div>
         </div>
-        <div class="image flex" style="flex-flow: column wrap;">
-            <div align="center" style="margin-top: 3rem;">
-                <button id="video-modal" class="link recording-link" style="width:100%"><img
-                        src="{{ features.videoPoster }}" loading="lazy" class="screenshot"></button>
-                <!-- <p style="font-size: 1rem;margin:0rem;padding:0rem;color:#666;font-style: italic;">(excerpt: patterns
-                    in-action)</p> -->
-                {% include video-modal.html
-                title="Service Mesh Patterns"
-                video="assets/images/patterns/service-mesh-patterns-clip.mov" %}
+            <div class="container-slider">
+                <div class='img background-img'>
+                    <div class="overlay">
+                        <div class="gradient-box-after">After</div>
+                    </div>
+                </div>
+                <div class='img foreground-img'>
+                    <div class="overlay">
+                        <div class="gradient-box-before">Before</div>
+                    </div>
+                </div>
+                <input type="range" min="1" max="100" value="50" class="slider" name='slider' id="slider">
+                <div class='slider-button'></div>
             </div>
-        </div>
     </div>
 </section>
 
-{% elsif features.type == 2 %}
+{% for features in site.data.features %}
+{% if features.type == 2 %}
 <section>
     <div class="container flex">
         <div class="text ">
@@ -228,31 +231,29 @@
 <section>
     <div class="container flex">
         <div class="text ">
-            <img src="{{ features.logo }}" style="max-width:20%;position:relative;float:left;
-                    margin-right:20px;margin-bottom: 10px;" loading="lazy" />
-            <h2>{{ features.title }}</h2>
-            <p>{{ features.description }}
-            <ul style="line-height: 1.5em;height: auto;text-align: left; color: var(--color-secondary-light)">
-                {% for listItem in features.list %}
-                <li>{{ listItem }}</li>
-                {% endfor %}
-            </ul>
-            </p>
-        </div>
-            <div class="container-slider">
-                <div class='img background-img'>
-                    <div class="overlay">
-                        <div class="gradient-box-after">After</div>
-                    </div>
-                </div>
-                <div class='img foreground-img'>
-                    <div class="overlay">
-                        <div class="gradient-box-before">Before</div>
-                    </div>
-                </div>
-                <input type="range" min="1" max="100" value="50" class="slider" name='slider' id="slider">
-                <div class='slider-button'></div>
+            <div style="display: flex;">
+                <img src="{{ features.logoLightMode }}" data-logo-for-light="{{ features.logoLightMode }}"
+                    data-logo-for-dark="{{ features.logoDarkMode }}" id="logo-dark-light"
+                    alt="{{ features.logoDescription}}" style="height: 4rem;" loading="lazy" />
+                <span>
             </div>
+            <h2>{{ features.title }}</h2>
+            <p>{{ features.description }}</p>
+            <div class="button-para">
+                <a href="/catalog" class="highlight">View Catalog</a>
+            </div>
+        </div>
+        <div class="image flex" style="flex-flow: column wrap;">
+            <div align="center" style="margin-top: 3rem;">
+                <button id="video-modal" class="link recording-link" style="width:100%"><img
+                        src="{{ features.videoPoster }}" loading="lazy" class="screenshot"></button>
+                <!-- <p style="font-size: 1rem;margin:0rem;padding:0rem;color:#666;font-style: italic;">(excerpt: patterns
+                    in-action)</p> -->
+                {% include video-modal.html
+                title="Service Mesh Patterns"
+                video="assets/images/patterns/service-mesh-patterns-clip.mov" %}
+            </div>
+        </div>
     </div>
 </section>
 
@@ -338,7 +339,11 @@
     </script>
     <style>
     .tab {
-         
+        display: flex;
+        flex-direction: row;
+        align-self: center;
+        justify-content: space-between;
+        width: 70%;
     box-shadow: var(--box-shadow-primary) !important;
     border-radius: .5rem;
     padding: .5rem 1.5rem;
@@ -361,6 +366,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      justify-items: center;
       flex-basis: 40%;
+      height: 22rem;
+      width: 100%;
+      margin: auto 1rem auto auto;
     }
     </style>
