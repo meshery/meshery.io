@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
 	"strings"
@@ -167,6 +168,14 @@ func getCompatibility(compatibility []string) string {
 	return strings.Join(compatLines, "\n")
 }
 
+func decodeURIComponent(encodedURI string) (string, error) {
+	decoded, err := url.QueryUnescape(encodedURI)
+	if err != nil {
+		return "", err
+	}
+	return decoded, nil
+}
+
 func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternCaveats, compatibility, patternImageURL string) error {
 	dir := filepath.Join("..", "..", mesheryCatalogFilesDir, pattern.ID)
 	designFilePath := filepath.Join(dir, "design.yml")
@@ -195,8 +204,18 @@ func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternC
 	if pattern.CatalogData.PatternInfo == "" {
 		pattern.CatalogData.PatternInfo = pattern.Name
 	}
+
+	pattern.CatalogData.PatternInfo, err = decodeURIComponent(pattern.CatalogData.PatternInfo)
+	if err != nil {
+		return ErrDecodingContent(err)
+	}
+	
+	pattern.CatalogData.PatternCaveats, err = decodeURIComponent(pattern.CatalogData.PatternCaveats)
+	if err != nil {
+		return ErrDecodingContent(err)
+	}
    
-  version := pattern.CatalogData.PublishedVersion
+  	version := pattern.CatalogData.PublishedVersion
 	if version == "" {
 		version = semver.New(0, 0, 1, "", "").String()
 	}
@@ -312,4 +331,18 @@ func ErrReadRespBody(err error) error {
 		[]string{fmt.Sprintf("Unable to read the response body from the server.\nError: %v", err)},
 		[]string{"The response body might be too large", "There could be a network issue"},
 		[]string{"Ensure the server returns a valid and readable response body."})
+}
+
+func ErrDecodingContent(err error) error {
+	return meshkitErrors.New(ErrReadRespBodyCode, meshkitErrors.Alert,
+		[]string{"Error decoding content"},
+		[]string{fmt.Sprintf("Unable to decode design caveats and info.\nError: %v", err)},
+		[]string{
+			"Content may be an invalid string.",
+			"The content might be missing or incomplete.",
+		},
+		[]string{
+			"Ensure that the content is a valid string.",
+			"Check if the content is complete and not truncated.",
+		})
 }

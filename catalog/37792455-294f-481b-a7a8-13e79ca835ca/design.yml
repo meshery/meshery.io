@@ -1,13 +1,18 @@
 name: AWS cloudfront controller
+version: 0.0.1
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
     - ack-cloudfront-controller
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
@@ -92,12 +97,14 @@ services:
           posX: 90
           posY: 90
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   ack-cloudfront-controller:
-    name: ack-cloudfront-controller
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: ack-system
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app.kubernetes.io/instance: ack-cloudfront-controller
       app.kubernetes.io/managed-by: Helm
@@ -105,6 +112,9 @@ services:
       app.kubernetes.io/version: 1.0.0
       helm.sh/chart: ack-cloudfront-controller-1.0.0
       k8s-app: ack-cloudfront-controller
+    model: kubernetes
+    name: ack-cloudfront-controller
+    namespace: ack-system
     settings:
       spec:
         replicas: 1
@@ -242,3 +252,5 @@ services:
           posY: 90
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""
