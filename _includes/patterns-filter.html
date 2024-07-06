@@ -268,6 +268,7 @@
       const technology = patternCards[i].getAttribute("technology")
       if(technology){
         let t = JSON.parse(technology)
+        console.log(t);
         for (let i = 0; i < t.length; i++) {
           cardTechnology.add(t[i]);
           cardCompatibility.push(t[i]);
@@ -306,10 +307,11 @@
   // remove duplicate entries of integrations in filter section 
   // Maintain a list of filterEntries, whenever you come across a new one, add it to list, else if the filter already exists in the list skip the further process of creating nodes
   const filterEntries = [];
+  cardTechnology = Array.from(new Set(cardTechnology));
   // For creating a list of checkboxes for Technologies section
   for (let i = 0; i < data.length; i++) {
-    const count = cardCompatibility.filter((filter) => filter.includes(data[i].name)).length;
-
+    const count = cardCompatibility.filter(item => item === data[i].name).length;
+    console.log("Single Data Item: ", data[i]);
     // Skip adding the filter to list if it is not used in any of the pattern cards
     // Skip adding the filter to list if it is already added to the list
     if(count === 0 || filterEntries.includes(data[i].name))
