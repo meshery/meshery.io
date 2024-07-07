@@ -253,8 +253,13 @@
   // get all empty filter containers
   const container = document.getElementById("compatibility-div");
   const categoryContainer = document.getElementById("category-div");
-  const globalFilterArray = [];
+
+  // globalTechnologyList stores all the technologies checked by user as strings
+  // example: ["gcp", "keda"]
   let globalTechnologyList = [];
+
+  // globalCategorySelected stores the category selected by the user since only one can be selected at a time we don't need any array
+  // initially it is set to "All"
   let globalCategorySelected = "All";
   // get all pattern cards
   const patternCards = document.querySelectorAll(".patternCard");
@@ -268,7 +273,6 @@
       const technology = patternCards[i].getAttribute("technology")
       if(technology){
         let t = JSON.parse(technology)
-        console.log(t);
         for (let i = 0; i < t.length; i++) {
           cardTechnology.add(t[i]);
           cardCompatibility.push(t[i]);
@@ -307,11 +311,11 @@
   // remove duplicate entries of integrations in filter section 
   // Maintain a list of filterEntries, whenever you come across a new one, add it to list, else if the filter already exists in the list skip the further process of creating nodes
   const filterEntries = [];
+  // to remove duplicates, a set is used
   cardTechnology = Array.from(new Set(cardTechnology));
   // For creating a list of checkboxes for Technologies section
   for (let i = 0; i < data.length; i++) {
     const count = cardCompatibility.filter(item => item === data[i].name).length;
-    console.log("Single Data Item: ", data[i]);
     // Skip adding the filter to list if it is not used in any of the pattern cards
     // Skip adding the filter to list if it is already added to the list
     if(count === 0 || filterEntries.includes(data[i].name))
@@ -350,12 +354,6 @@
   // Function called when user clicks on any of Technology checkboxes
   function showFilterCards() {
     let filterArray = [];
-
-    // Deselect the radio button when checkbox is selected
-    // document.querySelectorAll("input[type=radio]:checked").forEach(function (el) {
-    //   el.checked = false;
-    // });
-
     // Get all the checked checkboxes and add it to filterArray
     document
       .getElementById("compatibility-div")
@@ -363,18 +361,23 @@
       .forEach(function (el) {
         filterArray.push(el.value);
       });
+      // Now filterArray has all the technologies checked by the user
+      // example: ["gcp", "keda"]
+      // we copy this filterArray to globalTechnologyList
       globalTechnologyList = [...filterArray];
-    // Select all pattern cards
-    // const patternCards = document.querySelectorAll(".patternCard");
       
-    // If no checkbox is selected, show all pattern cards and enable the "All" radio button
+    // If no checkbox is selected, filter by category, by default category is set to "All"
     if (!filterArray.length) {
       filterByType(globalCategorySelected);
       return;
     } else {
 
-      // Loop over all pattern cards and check if any of the filter in filterArray is present in pattern card's filter attribute
-      // If yes, the show the card, else hide it
+      // Loop over all pattern cards and check if any of the filter in globalTechnologyList is present in pattern card's filter attribute
+      // If yes then set showCardTech to true
+      // also check if the selected category matches the card type (category the card belongs to)
+      // If yes then set showCardCat to true
+    
+      // If both showCardTech and showCardCat are true, then show the card otherwise hide it
       for(let i=0; i<patternCards.length; i++){
         let cc = [];
         let cardCategory;
@@ -395,7 +398,7 @@
             break;
           }
         }
-        if ((cardCategory.includes(globalCategorySelected.toLowerCase())) || globalCategorySelected == "All") {
+        if ((cardCategory.includes(globalCategorySelected.toLowerCase())) || globalCategorySelected.toLowerCase() ==  "all") {
             showCardCat = true;
           }
           
@@ -410,19 +413,17 @@
 
   // Function called when user clicks on any of the Type radio buttons
   function filterByType(value){
-
-    // Deselect all the checkboxes when radio button is selected
-    // document.querySelectorAll("input[type=checkbox]:checked").forEach(function (el) {
-      //   el.checked = false;
-      // });
-      
-      if(value.toLowerCase() == "all"){
+    // if no technology is selected, and the category is set to "all" then render all the cards
+      if(value.toLowerCase() == "all" && globalTechnologyList.length == 0){
         globalCategorySelected = "All";
         for (let j = 0; j < patternCards.length; j++) {
           patternCards[j].style.display = "block";
         }
         return;
       }
+      // if no technology is selected but we have a category value,
+      // Loop over all patern cards and check if the "type" of pattern card matches with the radio button value received as argument to function
+      // If yes, show the card, else hide it
       if(globalTechnologyList.length == 0){
           globalCategorySelected = value.toLowerCase();
           for (let j = 0; j < patternCards.length; j++) {
@@ -439,15 +440,14 @@
         }
         return;
       }
+
+    // if globalTechnologyList is not empty, i.e some technology is checked by the user, and the user selects some category as well, then the globalCategorySelected is set to the set category
+    // and then showFilterCards is called.
     globalCategorySelected = value.toLowerCase();
     showFilterCards();
-    // Loop over all patern cards and check if the "type" of pattern card matches with the radio button value received as argument to function
-    // If yes, show the card, else hide it
-    // Show all cards if "All" radio button is selected
-    
   }
 
-  // load defaul all selection on page load
+  // load default all selection on page load
   window.onload = function() {
     showFilterCards();
   }
