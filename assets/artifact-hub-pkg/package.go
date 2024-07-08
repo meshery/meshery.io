@@ -53,6 +53,7 @@ var (
 	ErrCreateGitHubRequestCode     = "test_code"
 	ErrInvokeGitHubActionsCode     = "test_code"
 	ErrInvalidVersionCode          = "test_code"
+	ErrCreateVersionDirCode		   = "test_code"
 )
 
 func main() {
@@ -134,7 +135,7 @@ func processPattern(pattern CatalogPattern, token string) error {
     if _, err := os.Stat(versionDir); os.IsNotExist(err) {
 		err = os.MkdirAll(versionDir, 0755)
 		if err != nil {
-			return err
+			return ErrCreatingVersionDir(err)
 		}
     }
 
@@ -365,5 +366,19 @@ func ErrDecodingContent(err error) error {
 		[]string{
 			"Ensure that the content is a valid string.",
 			"Check if the content is complete and not truncated.",
+		})
+}
+
+func ErrCreatingVersionDir(err error) error {
+	return meshkitErrors.New(ErrCreateVersionDirCode, meshkitErrors.Alert,
+		[]string{"Error creating version directory"},
+		[]string{fmt.Sprintf("Unable to create version directory.\nError: %v", err)},
+		[]string{
+			"The specified path might be incorrect or insufficient permissions.",
+			"There might be an issue with the file system.",
+		},
+		[]string{
+			"Ensure the path is correct and you have the necessary permissions.",
+			"Check the file system for errors or space issues.",
 		})
 }
