@@ -54,6 +54,7 @@ var (
 	ErrInvokeGitHubActionsCode     = "test_code"
 	ErrInvalidVersionCode          = "test_code"
 	ErrCreateVersionDirCode		   = "test_code"
+	ErrParseCreatedAtCode		   = "test_code"
 )
 
 func main() {
@@ -215,7 +216,7 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 
 	parsedTime, err := time.Parse(time.RFC3339Nano, pattern.CreatedAt)
 	if err != nil {
-		return err
+		return ErrParsingCreatedAt(err)
 	}
 	
 	// Format the parsed time into the desired format
@@ -380,5 +381,19 @@ func ErrCreatingVersionDir(err error) error {
 		[]string{
 			"Ensure the path is correct and you have the necessary permissions.",
 			"Check the file system for errors or space issues.",
+		})
+}
+
+func ErrParsingCreatedAt(err error) error {
+	return meshkitErrors.New(ErrParseCreatedAtCode, meshkitErrors.Alert,
+		[]string{"Error parsing CreatedAt timestamp"},
+		[]string{fmt.Sprintf("Unable to parse CreatedAt timestamp.\nError: %v", err)},
+		[]string{
+			"The timestamp format might be incorrect.",
+			"The provided CreatedAt value could be malformed.",
+		},
+		[]string{
+			"Ensure the timestamp format follows the RFC3339Nano standard.",
+			"Verify the CreatedAt value is properly formatted.",
 		})
 }
