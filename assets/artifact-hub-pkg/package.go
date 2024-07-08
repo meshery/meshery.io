@@ -218,7 +218,7 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 	}
 	
 	// Format the parsed time into the desired format
-	desiredFormat := "2006-01-02 15:04:05Z"
+	desiredFormat := "2006-01-02T15:04:05Z"
 	currentDateTime := parsedTime.Format(desiredFormat)
 
 	if pattern.CatalogData.PatternInfo == "" {
@@ -240,7 +240,7 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 		version = semver.New(0, 0, 1, "", "").String()
 	}
 
-	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(versionDir, "design.yml"), pattern.UserID, version, currentDateTime.Format(time.RFC3339), &pattern.CatalogData)
+	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(versionDir, "design.yml"), pattern.UserID, version, currentDateTime, &pattern.CatalogData)
 
 	data, err := yaml.Marshal(artifactHubPkg)
 	if err != nil {
