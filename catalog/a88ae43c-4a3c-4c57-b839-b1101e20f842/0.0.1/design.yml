@@ -1,0 +1,350 @@
+name: Kubernetes Service for Product Page App
+services:
+  my-bookinfo:
+    name: my-bookinfo
+    type: Namespace
+    apiVersion: v1
+    version: v1.25.2
+    model: kubernetes
+    settings:
+      spec:
+        finalizers:
+        - ""
+    traits:
+      meshmap:
+        edges: []
+        id: c41a499e-1acb-43e8-837d-c2f7487a2864
+        label: my-bookinfo
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Kubernetes
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+          name: kubernetes
+          version: v1.25.2
+        meshmodel-metadata:
+          genealogy: parent
+          isCustomResource: false
+          isNamespaced: false
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: rectangle
+          styleOverrides: '{"background-image":"none","border-width":2,"border-style":"dashed","background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/namespace-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
+        position:
+          posX: 352.5443683765185
+          posY: 150.85057184324745
+        whiteboardData: {}
+  productpage-qvbht:
+    name: productpage-qvbht
+    type: Service
+    apiVersion: v1
+    namespace: default
+    version: v1.25.2
+    model: kubernetes
+    dependsOn:
+    - my-bookinfo
+    settings:
+      spec:
+        ports:
+        - port: 9080
+          protocol: HTTP
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: a2ab459f-0265-4ac6-974b-19986c8c4ff6
+            metadata:
+              port: 9080
+              protocol: HTTP
+            source: ddd166d9-9403-457a-b4ca-b22006fe2a91
+            subType: Network
+            target: c27051eb-e5d9-4bef-81f2-be5f0f4724e8
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: ddd166d9-9403-457a-b4ca-b22006fe2a91
+        label: productpage-qvbht
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Kubernetes
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+          name: kubernetes
+          version: v1.25.2
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides: '{"height":16,"width":17,"padding":12,"background-fit":"none","background-position-y":4}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+        parent: c41a499e-1acb-43e8-837d-c2f7487a2864
+        position:
+          posX: 317.8817234633282
+          posY: 141.85057184324745
+        whiteboardData:
+          style:
+            z-index: 5
+  productpage-tndyg:
+    name: productpage-tndyg
+    type: Deployment
+    apiVersion: apps/v1
+    namespace: default
+    version: v1.25.2
+    model: kubernetes
+    dependsOn:
+    - my-bookinfo
+    settings:
+      spec:
+        cluster IPs:
+        - ""
+        ports:
+        - port: 9080
+          protocol: HTTP
+        replicas: 1
+        selector:
+          match Labels:
+            newKey: New Value
+        session Affinity Config:
+          client IP:
+            timeout Seconds: 0
+        strategy:
+          type: RollingUpdate
+        template:
+          spec:
+            containers:
+            - image: <your-productpage-image>
+              name: ""
+              ports:
+              - container Port: 9080
+                protocol: TCP
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: a2ab459f-0265-4ac6-974b-19986c8c4ff6
+            metadata:
+              port: 9080
+              protocol: HTTP
+            source: ddd166d9-9403-457a-b4ca-b22006fe2a91
+            subType: Network
+            target: c27051eb-e5d9-4bef-81f2-be5f0f4724e8
+          style:
+            curve-style:
+              name: curve-style
+              strValue: bezier
+              value: bezier
+            font-family:
+              name: font-family
+              strValue: Qanelas Soft, sans-serif
+              value:
+              - Qanelas Soft, sans-serif
+              - Qanelas Soft, sans-serif
+            font-size:
+              name: font-size
+              pfValue: 6
+              strValue: 6px
+              units: px
+              value: 6
+            line-color:
+              mapping:
+                mapped:
+                  fn: true
+                  mapping: true
+                name: line-color
+                prevFnValue: '#7aa1f0'
+                strValue: fn
+              name: line-color
+              pfValue:
+              - 122
+              - 161
+              - 240
+              strValue: rgb(122,161,240)
+              value:
+              - 122
+              - 161
+              - 240
+            line-style:
+              name: line-style
+              strValue: dotted
+              value: dotted
+            target-arrow-shape:
+              name: target-arrow-shape
+              strValue: vee
+              value: vee
+            text-events:
+              name: text-events
+              strValue: "yes"
+              value: "yes"
+            text-outline-color:
+              name: text-outline-color
+              pfValue:
+              - 255
+              - 255
+              - 255
+              strValue: rgb(255,255,255)
+              value:
+              - 255
+              - 255
+              - 255
+            text-outline-width:
+              name: text-outline-width
+              pfValue: 1
+              strValue: 1px
+              units: px
+              value: 1
+            text-wrap:
+              name: text-wrap
+              strValue: wrap
+              value: wrap
+            width:
+              name: width
+              pfValue: 1.5
+              strValue: 1.5px
+              units: px
+              value: 1.5
+            z-index:
+              name: z-index
+              pfValue: 999
+              strValue: "999"
+              value: 999
+            z-index-compare:
+              name: z-index-compare
+              strValue: manual
+              value: manual
+        id: c27051eb-e5d9-4bef-81f2-be5f0f4724e8
+        label: productpage-tndyg
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Kubernetes
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+          name: kubernetes
+          version: v1.25.2
+        meshmodel-metadata:
+          genealogy: parent
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: Created by Lee
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        parent: c41a499e-1acb-43e8-837d-c2f7487a2864
+        position:
+          posX: 385.20701328970875
+          posY: 140.4649892824034
+        whiteboardData: {}

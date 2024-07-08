@@ -1,0 +1,62 @@
+name: Pod Volume Mount SubPath-expr
+services:
+  volumes-subpathexpr-pod:
+    name: volumes-subpathexpr-pod
+    type: Pod
+    apiVersion: v1
+    namespace: default
+    model: kubernetes
+    settings:
+      spec:
+        containers:
+        - command:
+          - sleep
+          - "3600"
+          env:
+          - name: POD_NAME
+            value From:
+              field Ref:
+                api Version: v1
+                field Path: metadata.name
+          image: busybox
+          name: volumes-subpathexpr-container
+          volume Mounts:
+          - mount Path: /logs
+            name: volumes-subpathexpr-volume
+            sub Path Expr: $(POD_NAME)
+        restart Policy: Never
+        volumes:
+        - host Path:
+            path: /var/log/pods
+          name: volumes-subpathexpr-volume
+    traits:
+      meshmap:
+        edges: []
+        id: eec6b5d9-0243-4a01-9b5d-998672178162
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides: ""
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: 170
+          posY: 170
+        whiteboardData:
+          style:
+            height: 32.06550475288432
+            width: 36.69046132903666
+            z-index: 3
