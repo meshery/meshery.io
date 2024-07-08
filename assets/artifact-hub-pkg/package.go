@@ -251,10 +251,6 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
         return utils.ErrWriteFile(err, filepath.Join(versionDir, "artifacthub-pkg.yml"))
     }
 	
-	// if err := os.WriteFile(filepath.Join(dir, "artifacthub-pkg.yml"), data, 0644); err != nil {
-	// 	return utils.ErrWriteFile(err, filepath.Join(dir, "artifacthub-pkg.yml"))
-	// }
-
 	userInfo, err := fetchUserInfo(pattern.UserID)
 	if err != nil {
 		return err
