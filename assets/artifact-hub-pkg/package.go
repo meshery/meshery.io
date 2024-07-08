@@ -122,7 +122,22 @@ func processPattern(pattern CatalogPattern, token string) error {
 		os.MkdirAll(dir, 0755)
 	}
 
-	if err := writePatternFile(pattern, patternType, patternInfo, patternCaveats, compatibility, patternImageURL); err != nil {
+	version := pattern.CatalogData.PublishedVersion
+	if version == "" {
+		version = semver.New(0, 0, 1, "", "").String()
+	}
+
+	catalogFilePath := filepath.Join("..","..", mesheryCatalogFilesDir, pattern.ID)
+	versionDir := filepath.Join(catalogFilePath, version)
+    if _, err := os.Stat(versionDir); os.IsNotExist(err) {
+		err = os.MkdirAll(versionDir, 0755)
+		if err != nil {
+			fmt.Println("error while creating version directory")
+			panic(err)
+		}
+    }
+
+	if err := writePatternFile(pattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL); err != nil {
 		return err
 	}
 	if err := invokeGitHubAction(pattern.ID, patternImageURL, token); err != nil {
@@ -176,13 +191,18 @@ func decodeURIComponent(encodedURI string) (string, error) {
 	return decoded, nil
 }
 
-func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternCaveats, compatibility, patternImageURL string) error {
-	dir := filepath.Join("..", "..", mesheryCatalogFilesDir, pattern.ID)
-	designFilePath := filepath.Join(dir, "design.yml")
-	os.MkdirAll(dir, 0755)
-	if err := ioutil.WriteFile(designFilePath, []byte(pattern.PatternFile), 0644); err != nil {
-		return utils.ErrWriteFile(err, designFilePath)
-	}
+func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL string) error {
+	// dir := filepath.Join("..", "..", mesheryCatalogFilesDir, pattern.ID)
+	// designFilePath := filepath.Join(dir, "design.yml")
+	// os.MkdirAll(dir, 0755)
+	// if err := ioutil.WriteFile(designFilePath, []byte(pattern.PatternFile), 0644); err != nil {
+	// 	return utils.ErrWriteFile(err, designFilePath)
+	// }
+
+	designFilePath := filepath.Join(versionDir, "design.yml")
+    if err := ioutil.WriteFile(designFilePath, []byte(pattern.PatternFile), 0644); err != nil {
+        return utils.ErrWriteFile(err, designFilePath)
+    }
 
 	contenttemp, err := ioutil.ReadFile(designFilePath)
 	if err != nil {
@@ -220,15 +240,20 @@ func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternC
 		version = semver.New(0, 0, 1, "", "").String()
 	}
 
-	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(dir, "design.yml"), pattern.UserID, version, currentDateTime.Format(time.RFC3339), &pattern.CatalogData)
+	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(versionDir, "design.yml"), pattern.UserID, version, currentDateTime.Format(time.RFC3339), &pattern.CatalogData)
 
 	data, err := yaml.Marshal(artifactHubPkg)
 	if err != nil {
 		return utils.ErrMarshal(err)
 	}
-	if err := os.WriteFile(filepath.Join(dir, "artifacthub-pkg.yml"), data, 0644); err != nil {
-		return utils.ErrWriteFile(err, filepath.Join(dir, "artifacthub-pkg.yml"))
-	}
+
+	if err := os.WriteFile(filepath.Join(versionDir, "artifacthub-pkg.yml"), data, 0644); err != nil {
+        return utils.ErrWriteFile(err, filepath.Join(versionDir, "artifacthub-pkg.yml"))
+    }
+	
+	// if err := os.WriteFile(filepath.Join(dir, "artifacthub-pkg.yml"), data, 0644); err != nil {
+	// 	return utils.ErrWriteFile(err, filepath.Join(dir, "artifacthub-pkg.yml"))
+	// }
 
 	userInfo, err := fetchUserInfo(pattern.UserID)
 	if err != nil {
