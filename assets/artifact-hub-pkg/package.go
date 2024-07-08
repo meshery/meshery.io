@@ -30,6 +30,7 @@ type CatalogPattern struct {
 	PatternFile string               `json:"pattern_file"`
 	CatalogData v1alpha1.CatalogData `json:"catalog_data"`
 	UserID      string               `json:"user_id"`
+	CreatedAt   string 				 `json:"created_at"`
 }
 
 type UserInfo struct {
@@ -52,6 +53,8 @@ var (
 	ErrCreateGitHubRequestCode     = "test_code"
 	ErrInvokeGitHubActionsCode     = "test_code"
 	ErrInvalidVersionCode          = "test_code"
+	ErrCreateVersionDirCode		   = "test_code"
+	ErrParseCreatedAtCode		   = "test_code"
 )
 
 func main() {
@@ -122,7 +125,22 @@ func processPattern(pattern CatalogPattern, token string) error {
 		os.MkdirAll(dir, 0755)
 	}
 
-	if err := writePatternFile(pattern, patternType, patternInfo, patternCaveats, compatibility, patternImageURL); err != nil {
+	version := pattern.CatalogData.PublishedVersion
+	if version == "" {
+		version = semver.New(0, 0, 1, "", "").String()
+	}
+
+	// Ensure the version directory exists within the catalog file path, creating it if necessary
+	catalogFilePath := filepath.Join("..","..", mesheryCatalogFilesDir, pattern.ID)
+	versionDir := filepath.Join(catalogFilePath, version)
+    if _, err := os.Stat(versionDir); os.IsNotExist(err) {
+		err = os.MkdirAll(versionDir, 0755)
+		if err != nil {
+			return ErrCreatingVersionDir(err)
+		}
+    }
+
+	if err := writePatternFile(pattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL); err != nil {
 		return err
 	}
 	if err := invokeGitHubAction(pattern.ID, patternImageURL, token); err != nil {
@@ -176,13 +194,11 @@ func decodeURIComponent(encodedURI string) (string, error) {
 	return decoded, nil
 }
 
-func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternCaveats, compatibility, patternImageURL string) error {
-	dir := filepath.Join("..", "..", mesheryCatalogFilesDir, pattern.ID)
-	designFilePath := filepath.Join(dir, "design.yml")
-	os.MkdirAll(dir, 0755)
-	if err := ioutil.WriteFile(designFilePath, []byte(pattern.PatternFile), 0644); err != nil {
-		return utils.ErrWriteFile(err, designFilePath)
-	}
+func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL string) error {
+	designFilePath := filepath.Join(versionDir, "design.yml")
+    if err := ioutil.WriteFile(designFilePath, []byte(pattern.PatternFile), 0644); err != nil {
+        return utils.ErrWriteFile(err, designFilePath)
+    }
 
 	contenttemp, err := ioutil.ReadFile(designFilePath)
 	if err != nil {
@@ -198,8 +214,14 @@ func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternC
 		patternImageURL = "/assets/images/logos/service-mesh-pattern.svg"
 	}
 
-	format := "2006-01-02 15:04:05Z"
-	currentDateTime, err := time.Parse(format, time.Now().UTC().Format(format))
+	parsedTime, err := time.Parse(time.RFC3339Nano, pattern.CreatedAt)
+	if err != nil {
+		return ErrParsingCreatedAt(err)
+	}
+	
+	// Format the parsed time into the desired format
+	desiredFormat := "2006-01-02T15:04:05Z"
+	currentDateTime := parsedTime.Format(desiredFormat)
 
 	if pattern.CatalogData.PatternInfo == "" {
 		pattern.CatalogData.PatternInfo = pattern.Name
@@ -220,16 +242,17 @@ func writePatternFile(pattern CatalogPattern, patternType, patternInfo, patternC
 		version = semver.New(0, 0, 1, "", "").String()
 	}
 
-	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(dir, "design.yml"), pattern.UserID, version, currentDateTime.Format(time.RFC3339), &pattern.CatalogData)
+	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(versionDir, "design.yml"), pattern.UserID, version, currentDateTime, &pattern.CatalogData)
 
 	data, err := yaml.Marshal(artifactHubPkg)
 	if err != nil {
 		return utils.ErrMarshal(err)
 	}
-	if err := os.WriteFile(filepath.Join(dir, "artifacthub-pkg.yml"), data, 0644); err != nil {
-		return utils.ErrWriteFile(err, filepath.Join(dir, "artifacthub-pkg.yml"))
-	}
 
+	if err := os.WriteFile(filepath.Join(versionDir, "artifacthub-pkg.yml"), data, 0644); err != nil {
+        return utils.ErrWriteFile(err, filepath.Join(versionDir, "artifacthub-pkg.yml"))
+    }
+	
 	userInfo, err := fetchUserInfo(pattern.UserID)
 	if err != nil {
 		return err
@@ -344,5 +367,33 @@ func ErrDecodingContent(err error) error {
 		[]string{
 			"Ensure that the content is a valid string.",
 			"Check if the content is complete and not truncated.",
+		})
+}
+
+func ErrCreatingVersionDir(err error) error {
+	return meshkitErrors.New(ErrCreateVersionDirCode, meshkitErrors.Alert,
+		[]string{"Error creating version directory"},
+		[]string{fmt.Sprintf("Unable to create version directory.\nError: %v", err)},
+		[]string{
+			"The specified path might be incorrect or insufficient permissions.",
+			"There might be an issue with the file system.",
+		},
+		[]string{
+			"Ensure the path is correct and you have the necessary permissions.",
+			"Check the file system for errors or space issues.",
+		})
+}
+
+func ErrParsingCreatedAt(err error) error {
+	return meshkitErrors.New(ErrParseCreatedAtCode, meshkitErrors.Alert,
+		[]string{"Error parsing CreatedAt timestamp"},
+		[]string{fmt.Sprintf("Unable to parse CreatedAt timestamp.\nError: %v", err)},
+		[]string{
+			"The timestamp format might be incorrect.",
+			"The provided CreatedAt value could be malformed.",
+		},
+		[]string{
+			"Ensure the timestamp format follows the RFC3339Nano standard.",
+			"Verify the CreatedAt value is properly formatted.",
 		})
 }
