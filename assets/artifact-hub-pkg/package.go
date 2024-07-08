@@ -30,6 +30,7 @@ type CatalogPattern struct {
 	PatternFile string               `json:"pattern_file"`
 	CatalogData v1alpha1.CatalogData `json:"catalog_data"`
 	UserID      string               `json:"user_id"`
+	CreatedAt   string 				 `json:"created_at"`
 }
 
 type UserInfo struct {
@@ -127,13 +128,13 @@ func processPattern(pattern CatalogPattern, token string) error {
 		version = semver.New(0, 0, 1, "", "").String()
 	}
 
+	// Ensure the version directory exists within the catalog file path, creating it if necessary
 	catalogFilePath := filepath.Join("..","..", mesheryCatalogFilesDir, pattern.ID)
 	versionDir := filepath.Join(catalogFilePath, version)
     if _, err := os.Stat(versionDir); os.IsNotExist(err) {
 		err = os.MkdirAll(versionDir, 0755)
 		if err != nil {
-			fmt.Println("error while creating version directory")
-			panic(err)
+			return err
 		}
     }
 
@@ -192,13 +193,6 @@ func decodeURIComponent(encodedURI string) (string, error) {
 }
 
 func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL string) error {
-	// dir := filepath.Join("..", "..", mesheryCatalogFilesDir, pattern.ID)
-	// designFilePath := filepath.Join(dir, "design.yml")
-	// os.MkdirAll(dir, 0755)
-	// if err := ioutil.WriteFile(designFilePath, []byte(pattern.PatternFile), 0644); err != nil {
-	// 	return utils.ErrWriteFile(err, designFilePath)
-	// }
-
 	designFilePath := filepath.Join(versionDir, "design.yml")
     if err := ioutil.WriteFile(designFilePath, []byte(pattern.PatternFile), 0644); err != nil {
         return utils.ErrWriteFile(err, designFilePath)
@@ -218,8 +212,14 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 		patternImageURL = "/assets/images/logos/service-mesh-pattern.svg"
 	}
 
-	format := "2006-01-02 15:04:05Z"
-	currentDateTime, err := time.Parse(format, time.Now().UTC().Format(format))
+	parsedTime, err := time.Parse(time.RFC3339Nano, pattern.CreatedAt)
+	if err != nil {
+		return err
+	}
+	
+	// Format the parsed time into the desired format
+	desiredFormat := "2006-01-02 15:04:05Z"
+	currentDateTime := parsedTime.Format(desiredFormat)
 
 	if pattern.CatalogData.PatternInfo == "" {
 		pattern.CatalogData.PatternInfo = pattern.Name
