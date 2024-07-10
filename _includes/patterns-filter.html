@@ -257,10 +257,9 @@
   // globalTechnologyList stores all the technologies checked by user as strings
   // example: ["gcp", "keda"]
   let globalTechnologyList = [];
-
-  // globalCategorySelected stores the category selected by the user since only one can be selected at a time we don't need any array
+  // globalCategorySelected stores the category selected by the user, users can select multiple categories at the same time for sorting
   // initially it is set to "All"
-  let globalCategorySelected = "All";
+  let globalCategoryList = ["All"];
   // get all pattern cards
   const patternCards = document.querySelectorAll(".patternCard");
   const cardCompatibility = [];
@@ -290,12 +289,13 @@
     inputContainer.className = "input-container";
 
     const input = document.createElement("input");
-    input.type = "radio";
+    input.type = "checkbox";
     input.name = "type";
     input.value = cardType[i];
     input.id = cardType[i];
     input.onclick = function () {
-      filterByType(cardType[i]);
+      updateCategoryList(cardType[i]);
+      showFilterCards();
     };
     if(cardType[i] === "All") input.checked = true;
     inputContainer.appendChild(input);
@@ -327,13 +327,14 @@
     // Create nodes
     const inputContainer = document.createElement("div");
     inputContainer.className = "input-container";
-
+    // Here the categories are generated with a "checkbox" input type
     const input = document.createElement("input");
     input.type = "checkbox";
     input.name = data[i].name;
     input.value = data[i].name;
     input.id = data[i].name;
     input.onclick = function () {
+      updateTechnologyList(data[i].name);
       showFilterCards();
     };
     inputContainer.appendChild(input);
@@ -351,32 +352,71 @@
     container.appendChild(inputContainer);
   }
 
+
+  // This function checks if the gloabalTechnologyList contains the value, and updates the list accordingly..
+  // When the user selects a technology, it is not present in the globalTechnologyList, so the else part is called and the technology is pushed in the globalTechnologyList
+  // When the user deselcts the technology, the list is filtered to the cards that don't contain that technology, that is, the value that is unchecked is removed from the list.
+  function updateTechnologyList(value) {
+    if(globalTechnologyList.includes(value)){
+      globalTechnologyList = globalTechnologyList.filter(item => item !== value);
+    } else {
+      globalTechnologyList.push(value);
+    }
+  }
+
+  // This function updates the category list
+  function updateCategoryList(value) {
+    // This variable gets the checkbox with "All" label
+    const allCheckbox = document.getElementById("All");
+    const categoryCheckboxes = document.querySelectorAll('input[name="type"]:not(#All)'); // This gets all other checkboxes other than "All" checkbox
+    
+    // If the value received is "All" i.e. category "All" is checked or unchecked..
+    if (value.toLowerCase() === "all") {
+      // If "All" category checkbox just got checked then,
+      if (allCheckbox.checked) {
+        // Uncheck all other checkboxes when "All" is checked
+        categoryCheckboxes.forEach(checkbox => {
+          checkbox.checked = false;
+        });
+        // set globalCategoryList to contain just "All"
+        globalCategoryList = ["All"];
+      } else {
+        // If All is unchecked then globalCategoryList is set to empty
+        globalCategoryList = [];
+      }
+    } else {
+      // When we receive any other category other than "All"
+      if (document.getElementById(value).checked) {
+        // Uncheck the "All" checkbox when any other checkbox is checked
+        allCheckbox.checked = false;
+        globalCategoryList.push(value);
+        globalCategoryList = globalCategoryList.filter(item => item !== "All");
+      } else {
+        globalCategoryList = globalCategoryList.filter(item => item !== value);
+        if(globalCategoryList.length === 0){
+          globalCategoryList=["All"];
+          allCheckbox.checked=true;
+        }
+      }
+      
+      // If all category checkboxes are checked, check the "All" checkbox and uncheck others
+      if (globalCategoryList.length === categoryCheckboxes.length) {
+        allCheckbox.checked = true;
+        categoryCheckboxes.forEach(checkbox => {
+          checkbox.checked = false;
+        });
+        globalCategoryList = ["All"];
+      }
+    }
+  }
+
   // Function called when user clicks on any of Technology checkboxes
   function showFilterCards() {
-    let filterArray = [];
-    // Get all the checked checkboxes and add it to filterArray
-    document
-      .getElementById("compatibility-div")
-      .querySelectorAll("input[type=checkbox]:checked")
-      .forEach(function (el) {
-        filterArray.push(el.value);
-      });
-      // Now filterArray has all the technologies checked by the user
-      // example: ["gcp", "keda"]
-      // we copy this filterArray to globalTechnologyList
-      globalTechnologyList = [...filterArray];
-      
-    // If no checkbox is selected, filter by category, by default category is set to "All"
-    if (!filterArray.length) {
-      filterByType(globalCategorySelected);
-      return;
-    } else {
-
-      // Loop over all pattern cards and check if any of the filter in globalTechnologyList is present in pattern card's filter attribute
+     // Loop over all pattern cards and check if any of the filter in globalTechnologyList is present in pattern card's filter attribute
       // If yes then set showCardTech to true
-      // also check if the selected category matches the card type (category the card belongs to)
+      // also check if any of the selected category(ies) matche the card type (category the card belongs to)
       // If yes then set showCardCat to true
-    
+      // Also if "All" is ticked, we wish to show all the cards
       // If both showCardTech and showCardCat are true, then show the card otherwise hide it
       for(let i=0; i<patternCards.length; i++){
         let cc = [];
@@ -390,62 +430,17 @@
           }
         }
         cardCategory = type;
-        let showCardTech = false;
-        let showCardCat = false;
-        for (let j = 0; j < globalTechnologyList.length; j++) {
-          if (cc.includes(globalTechnologyList[j])) {
-            showCardTech = true;
-            break;
-          }
+        let showCardTech = globalTechnologyList.length === 0 || globalTechnologyList.some(tech => cc.includes(tech));
+        let showCardCat = globalCategoryList.some(cat => cardCategory.includes(cat)) || globalCategoryList[0] === "All";
+        if (showCardTech && showCardCat) {
+          patternCards[i].style.display = "block";
+        } else {
+          patternCards[i].style.display = "none";
         }
-        if ((cardCategory.includes(globalCategorySelected.toLowerCase())) || globalCategorySelected.toLowerCase() ==  "all") {
-            showCardCat = true;
-          }
-          
-          if (showCardTech && showCardCat) {
-            patternCards[i].style.display = "block";
-          } else {
-            patternCards[i].style.display = "none";
-          }
       }
-    }
   }
 
-  // Function called when user clicks on any of the Type radio buttons
-  function filterByType(value){
-    // if no technology is selected, and the category is set to "all" then render all the cards
-      if(value.toLowerCase() == "all" && globalTechnologyList.length == 0){
-        globalCategorySelected = "All";
-        for (let j = 0; j < patternCards.length; j++) {
-          patternCards[j].style.display = "block";
-        }
-        return;
-      }
-      // if no technology is selected but we have a category value,
-      // Loop over all patern cards and check if the "type" of pattern card matches with the radio button value received as argument to function
-      // If yes, show the card, else hide it
-      if(globalTechnologyList.length == 0){
-          globalCategorySelected = value.toLowerCase();
-          for (let j = 0; j < patternCards.length; j++) {
-            const filter = patternCards[j].getAttribute("type").toLowerCase();
-            let showCard = false;
-            if (filter.includes(value.toLowerCase())) {
-              showCard = true;
-            }
-            if (showCard) {
-              patternCards[j].style.display = "block";
-            } else {
-              patternCards[j].style.display = "none";
-            }
-        }
-        return;
-      }
-
-    // if globalTechnologyList is not empty, i.e some technology is checked by the user, and the user selects some category as well, then the globalCategorySelected is set to the set category
-    // and then showFilterCards is called.
-    globalCategorySelected = value.toLowerCase();
-    showFilterCards();
-  }
+ 
 
   // load default all selection on page load
   window.onload = function() {
