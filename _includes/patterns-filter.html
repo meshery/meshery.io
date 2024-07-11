@@ -258,8 +258,8 @@
   // example: ["gcp", "keda"]
   let globalTechnologyList = [];
   // globalCategorySelected stores the category selected by the user, users can select multiple categories at the same time for sorting
-  // initially it is set to "All"
-  let globalCategoryList = ["All"];
+  // initially it is empty
+  let globalCategoryList = [];
   // get all pattern cards
   const patternCards = document.querySelectorAll(".patternCard");
   const cardCompatibility = [];
@@ -279,11 +279,10 @@
       }
   }
 
-  // Add an "All" option to the type list and convert the set to array
-  cardType = ["All", ...Array.from(cardType)];
+  cardType = Array.from(cardType);
   cardTechnology = Array.from(cardTechnology);
 
-  // For creating a list of radio buttons for Categories section
+  // For creating a list of checkboxes for Categories section
   for(let i = 0; i<cardType.length; i++){
     const inputContainer = document.createElement("div");
     inputContainer.className = "input-container";
@@ -293,18 +292,16 @@
     input.name = "type";
     input.value = cardType[i];
     input.id = cardType[i];
+    // When it is checked or unchecked, updateCategoryList function is called followed by showFilterCards function 
     input.onclick = function () {
       updateCategoryList(cardType[i]);
       showFilterCards();
     };
-    if(cardType[i] === "All") input.checked = true;
     inputContainer.appendChild(input);
-
     const label = document.createElement("label");
     label.innerHTML = cardType[i].replace(/-/g, " "); 
     label.setAttribute("for", cardType[i]);
     inputContainer.appendChild(label);
-
     categoryContainer.appendChild(inputContainer);
   }
 
@@ -333,22 +330,20 @@
     input.name = data[i].name;
     input.value = data[i].name;
     input.id = data[i].name;
+    // When technology checkbox is checked or unchecked, updateTechnologyList function is called, followed by showFilterCards function
     input.onclick = function () {
       updateTechnologyList(data[i].name);
       showFilterCards();
     };
     inputContainer.appendChild(input);
-
     const label = document.createElement("label");
     let colorImg = '/' + data[i].color.split('/').slice(1).join('/');
     let whiteImg = '/' + data[i].white.split('/').slice(1).join('/');
-
     label.innerHTML = `<img src="${colorImg}" id="logo-dark-light" data-logo-for-dark="${whiteImg ?? colorImg}"
                     data-logo-for-light="${colorImg}" /><div class="name">${data[i].name.replace(/-/g, " ")}</div><div class="badge">${count}</div>`;
     label.style.height = "20px";
     label.setAttribute("for", data[i].name);
     inputContainer.appendChild(label);
-
     container.appendChild(inputContainer);
   }
 
@@ -366,57 +361,27 @@
 
   // This function updates the category list
   function updateCategoryList(value) {
-    // This variable gets the checkbox with "All" label
-    const allCheckbox = document.getElementById("All");
-    const categoryCheckboxes = document.querySelectorAll('input[name="type"]:not(#All)'); // This gets all other checkboxes other than "All" checkbox
-    
-    // If the value received is "All" i.e. category "All" is checked or unchecked..
-    if (value.toLowerCase() === "all") {
-      // If "All" category checkbox just got checked then,
-      if (allCheckbox.checked) {
-        // Uncheck all other checkboxes when "All" is checked
-        categoryCheckboxes.forEach(checkbox => {
-          checkbox.checked = false;
-        });
-        // set globalCategoryList to contain just "All"
-        globalCategoryList = ["All"];
-      } else {
-        // If All is unchecked then globalCategoryList is set to empty
-        globalCategoryList = [];
-      }
+    // When user checks a category, that category category is pushed in globalCategoryList array which holds the categories selected
+    if (document.getElementById(value).checked) {
+      globalCategoryList.push(value);
     } else {
-      // When we receive any other category other than "All"
-      if (document.getElementById(value).checked) {
-        // Uncheck the "All" checkbox when any other checkbox is checked
-        allCheckbox.checked = false;
-        globalCategoryList.push(value);
-        globalCategoryList = globalCategoryList.filter(item => item !== "All");
-      } else {
-        globalCategoryList = globalCategoryList.filter(item => item !== value);
-        if(globalCategoryList.length === 0){
-          globalCategoryList=["All"];
-          allCheckbox.checked=true;
-        }
-      }
-      
-      // If all category checkboxes are checked, check the "All" checkbox and uncheck others
-      if (globalCategoryList.length === categoryCheckboxes.length) {
-        allCheckbox.checked = true;
-        categoryCheckboxes.forEach(checkbox => {
-          checkbox.checked = false;
-        });
-        globalCategoryList = ["All"];
+      // When user unchecks a category, it is removed from the array globalCategoryList
+      globalCategoryList = globalCategoryList.filter(item => item !== value);
+      // if after removing a category, no category remains then we empty the globalCategoryList (just a safety step)
+      if(globalCategoryList.length === 0){
+        globalCategoryList=[]
       }
     }
+    
   }
 
-  // Function called when user clicks on any of Technology checkboxes
+  // Function called when user clicks on any of Technology checkboxes or Category Boxes
   function showFilterCards() {
      // Loop over all pattern cards and check if any of the filter in globalTechnologyList is present in pattern card's filter attribute
       // If yes then set showCardTech to true
-      // also check if any of the selected category(ies) matche the card type (category the card belongs to)
+      // also check if any of the selected category(ies) match the card type (category the card belongs to)
+      // Also check if the globalCategoryList is empty, if yes, show all the cards (for all categories)
       // If yes then set showCardCat to true
-      // Also if "All" is ticked, we wish to show all the cards
       // If both showCardTech and showCardCat are true, then show the card otherwise hide it
       for(let i=0; i<patternCards.length; i++){
         let cc = [];
@@ -431,7 +396,7 @@
         }
         cardCategory = type;
         let showCardTech = globalTechnologyList.length === 0 || globalTechnologyList.some(tech => cc.includes(tech));
-        let showCardCat = globalCategoryList.some(cat => cardCategory.includes(cat)) || globalCategoryList[0] === "All";
+        let showCardCat = globalCategoryList.some(cat => cardCategory.includes(cat)) || globalCategoryList.length === 0;
         if (showCardTech && showCardCat) {
           patternCards[i].style.display = "block";
         } else {
