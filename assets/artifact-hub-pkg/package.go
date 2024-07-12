@@ -9,6 +9,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"time"
 
@@ -30,7 +31,7 @@ type CatalogPattern struct {
 	PatternFile string               `json:"pattern_file"`
 	CatalogData v1alpha1.CatalogData `json:"catalog_data"`
 	UserID      string               `json:"user_id"`
-	CreatedAt   string 				 `json:"created_at"`
+	CreatedAt   string               `json:"created_at"`
 }
 
 type UserInfo struct {
@@ -53,8 +54,8 @@ var (
 	ErrCreateGitHubRequestCode     = "test_code"
 	ErrInvokeGitHubActionsCode     = "test_code"
 	ErrInvalidVersionCode          = "test_code"
-	ErrCreateVersionDirCode		   = "test_code"
-	ErrParseCreatedAtCode		   = "test_code"
+	ErrCreateVersionDirCode        = "test_code"
+	ErrParseCreatedAtCode          = "test_code"
 )
 
 func main() {
@@ -93,7 +94,19 @@ func main() {
 		}
 	}
 }
+func slugify(name string) string {
+	// Convert to lowercase
+	s := strings.ToLower(name)
 
+	// Remove invalid characters
+	reg := regexp.MustCompile("[^a-z0-9]+")
+	s = reg.ReplaceAllString(s, "-")
+
+	// Remove leading and trailing hyphens
+	s = strings.Trim(s, "-")
+
+	return s
+}
 func fetchCatalogPatterns() ([]byte, error) {
 	resp, err := http.Get(fmt.Sprintf("%s/api/catalog/content/pattern", mesheryCloudBaseURL))
 	if err != nil {
@@ -131,14 +144,14 @@ func processPattern(pattern CatalogPattern, token string) error {
 	}
 
 	// Ensure the version directory exists within the catalog file path, creating it if necessary
-	catalogFilePath := filepath.Join("..","..", mesheryCatalogFilesDir, pattern.ID)
+	catalogFilePath := filepath.Join("..", "..", mesheryCatalogFilesDir, pattern.ID)
 	versionDir := filepath.Join(catalogFilePath, version)
-    if _, err := os.Stat(versionDir); os.IsNotExist(err) {
+	if _, err := os.Stat(versionDir); os.IsNotExist(err) {
 		err = os.MkdirAll(versionDir, 0755)
 		if err != nil {
 			return ErrCreatingVersionDir(err)
 		}
-    }
+	}
 
 	if err := writePatternFile(pattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL); err != nil {
 		return err
@@ -196,9 +209,9 @@ func decodeURIComponent(encodedURI string) (string, error) {
 
 func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL string) error {
 	designFilePath := filepath.Join(versionDir, "design.yml")
-    if err := ioutil.WriteFile(designFilePath, []byte(pattern.PatternFile), 0644); err != nil {
-        return utils.ErrWriteFile(err, designFilePath)
-    }
+	if err := ioutil.WriteFile(designFilePath, []byte(pattern.PatternFile), 0644); err != nil {
+		return utils.ErrWriteFile(err, designFilePath)
+	}
 
 	contenttemp, err := ioutil.ReadFile(designFilePath)
 	if err != nil {
@@ -218,7 +231,7 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 	if err != nil {
 		return ErrParsingCreatedAt(err)
 	}
-	
+
 	// Format the parsed time into the desired format
 	desiredFormat := "2006-01-02T15:04:05Z"
 	currentDateTime := parsedTime.Format(desiredFormat)
@@ -231,13 +244,13 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 	if err != nil {
 		return ErrDecodingContent(err)
 	}
-	
+
 	pattern.CatalogData.PatternCaveats, err = decodeURIComponent(pattern.CatalogData.PatternCaveats)
 	if err != nil {
 		return ErrDecodingContent(err)
 	}
-   
-  	version := pattern.CatalogData.PublishedVersion
+
+	version := pattern.CatalogData.PublishedVersion
 	if version == "" {
 		version = semver.New(0, 0, 1, "", "").String()
 	}
@@ -250,9 +263,9 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 	}
 
 	if err := os.WriteFile(filepath.Join(versionDir, "artifacthub-pkg.yml"), data, 0644); err != nil {
-        return utils.ErrWriteFile(err, filepath.Join(versionDir, "artifacthub-pkg.yml"))
-    }
-	
+		return utils.ErrWriteFile(err, filepath.Join(versionDir, "artifacthub-pkg.yml"))
+	}
+
 	userInfo, err := fetchUserInfo(pattern.UserID)
 	if err != nil {
 		return err
@@ -268,7 +281,6 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 	content := fmt.Sprintf(`---
 layout: item
 name: %s
-publishedVersion: %s
 userId: %s
 userName: %s
 userAvatarURL: %s
@@ -281,9 +293,10 @@ patternInfo: |
   %s
 patternCaveats: |
   %s
+permalink: catalog/%s/%s.html
 URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/%s/%s/design.yml'
 downloadLink: %s/design.yml
----`, strings.TrimSpace(string(nameYAML)), version, pattern.UserID, userFullName, userInfo.AvatarURL, patternType, compatibility, pattern.ID, patternImageURL, patternInfo, patternCaveats, mesheryCatalogFilesDir, pattern.ID, pattern.ID)
+---`, strings.TrimSpace(string(nameYAML)), pattern.UserID, userFullName, userInfo.AvatarURL, patternType, compatibility, pattern.ID, patternImageURL, patternInfo, patternCaveats, patternType, slugify(pattern.Name), mesheryCatalogFilesDir, pattern.ID, pattern.ID)
 
 	if err := ioutil.WriteFile(fmt.Sprintf(filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md")), []byte(content), 0644); err != nil {
 		return utils.ErrWriteFile(err, filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md"))
