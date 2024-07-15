@@ -17,6 +17,6 @@ patternInfo: |
 patternCaveats: |
   %20%20Networking%20should%20be%20properly%20configured%20to%20enable%20communication%20between%20the%20different%20services%20of%20the%20app
 permalink: catalog/deployment/istio-bookinfo-application-ddf8a9f1-5fd0-4bda-b074-7dc9ceb1dd43.html
-URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/ddf8a9f1-5fd0-4bda-b074-7dc9ceb1dd43/design.yml'
+URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/ddf8a9f1-5fd0-4bda-b074-7dc9ceb1dd43/0.0.1/design.yml'
 downloadLink: ddf8a9f1-5fd0-4bda-b074-7dc9ceb1dd43/design.yml
 ---
