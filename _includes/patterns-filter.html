@@ -396,6 +396,7 @@
       // Also check if the globalCategoryList is empty, if yes, show all the cards (for all categories)
       // If yes then set showCardCat to true
       // If both showCardTech and showCardCat are true, then show the card otherwise hide it
+      let cardsShown = false; // This variable tells if there is even a single card to show 
       for(let i=0; i<patternCards.length; i++){
         let cc = [];
         let cardCategory;
@@ -412,9 +413,17 @@
         let showCardCat = globalCategoryList.some(cat => cardCategory.includes(cat)) || globalCategoryList.length === 0;
         if (showCardTech && showCardCat) {
           patternCards[i].style.display = "block";
+          cardsShown = true;
         } else {
           patternCards[i].style.display = "none";
         }
+      }
+      // In the catalog folder, there is a file index.html, where a heading exists with Id: "not-found" for this purpose 
+      const noCard = document.getElementById("not-found");
+      if (!cardsShown) {      // If there is no card to show then show the "not-found" heading
+        noCard.style.display = "block";
+      } else {
+        noCard.style.display = "none";
       }
   }
 
