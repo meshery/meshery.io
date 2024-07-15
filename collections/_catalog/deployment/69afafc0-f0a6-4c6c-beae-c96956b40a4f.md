@@ -14,6 +14,7 @@ patternInfo: |
   This%20pattern%20establishes%20and%20visualizes%20the%20relationship%20between%20Runtime%20Class(a%20Kubernetes%20component)%20and%20other%20Kubernetes%20components
 patternCaveats: |
   The%20name%20of%20the%20Runtime%20Class%20is%20referenced%20by%20the%20other%20Kubernetes%20Components
+permalink: catalog/deployment/runtimeclass-69afafc0-f0a6-4c6c-beae-c96956b40a4f.html
 URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/69afafc0-f0a6-4c6c-beae-c96956b40a4f/design.yml'
 downloadLink: 69afafc0-f0a6-4c6c-beae-c96956b40a4f/design.yml
 ---
