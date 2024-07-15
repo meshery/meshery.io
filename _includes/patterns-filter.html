@@ -83,7 +83,7 @@
   max-width: 50px;
   height:100%;
 }
-#compatibility-div .badge{
+#compatibility-div .badge, #category-div .badge{
   background: var(--color-secondary-dark);
   border-radius: 50%;
   color: var(--color-primary-light);
@@ -97,7 +97,7 @@
   justify-content: center;
   font-weight: 200;
 }
-#compatibility-div .input-container .name{
+#compatibility-div .input-container .name, #category-div .input-container .name{
   margin: 0 10px 0 10px;
   width: 100%;
   white-space: nowrap;
@@ -263,7 +263,9 @@
   // get all pattern cards
   const patternCards = document.querySelectorAll(".patternCard");
   const cardCompatibility = [];
+  // cardType stores the names of all categories (unique)
   let cardType = new Set();
+  // cardTechnology stores the set of all technologies (unqiue)
   let cardTechnology = new Set();
   // Loop over all pattern cards to get there compatibility, type and technology so we can make a unique list out of it
   for(let i=0; i<patternCards.length; i++){
@@ -279,11 +281,21 @@
       }
   }
 
+  // This calculates the count of each technology and stores it in a object which looks like a key value pair
+  // example: {"deployment": 102, "security": 10 ...} and so on 
+  const categoryCardCount = Array.from(patternCards).reduce((acc, singleCard) => {
+    const type = singleCard.getAttribute("type").toLowerCase();
+    acc[type] = (acc[type] || 0) + 1;
+    return acc;
+  }, {});
+
   cardType = Array.from(cardType);
   cardTechnology = Array.from(cardTechnology);
 
   // For creating a list of checkboxes for Categories section
   for(let i = 0; i<cardType.length; i++){
+    // We get the count of each technology from the object we made at line 286, we access the count here like: categoryCardCount["deployment"] gives 102
+    const count = categoryCardCount[cardType[i]]
     const inputContainer = document.createElement("div");
     inputContainer.className = "input-container";
 
@@ -299,7 +311,8 @@
     };
     inputContainer.appendChild(input);
     const label = document.createElement("label");
-    label.innerHTML = cardType[i].replace(/-/g, " "); 
+    label.innerHTML = `<div class="name">${cardType[i].replace(/-/g, " ")}</div><div class="badge">${count}</div>`;
+    label.style.height = "20px";
     label.setAttribute("for", cardType[i]);
     inputContainer.appendChild(label);
     categoryContainer.appendChild(inputContainer);
