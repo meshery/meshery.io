@@ -1,16 +1,22 @@
 name: grafana deployment
+version: 0.0.1
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
     - grafana
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: f2337889-0ddd-4a2f-b3f2-0bdddc957364
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -60,15 +66,21 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: 496135da-50f3-4f1b-a88a-2c95be405ae3
         position:
-          posX: 50
-          posY: 50
+          posX: 90
+          posY: 90
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   grafana:
-    name: grafana
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: monitoring
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: grafana
+    namespace: monitoring
     settings:
       spec:
         replicas: 1
@@ -110,6 +122,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 496135da-50f3-4f1b-a88a-2c95be405ae3
         meshmodel-metadata:
           capabilities: |2-
@@ -143,7 +156,9 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 50
-          posY: 50
+          posX: 90
+          posY: 90
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""
