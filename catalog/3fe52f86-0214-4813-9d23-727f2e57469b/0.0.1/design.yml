@@ -1,62 +1,21 @@
 name: Serve an LLM using multi-host TPUs on GKE
+version: 0.0.3
 services:
-  0c26b368-31b6-4401-af97-102fb29ce28a:
-    name: 0c26b368-31b6-4401-af97-102fb29ce28a
-    traits:
-      meshmap:
-        edges: []
-        id: 0c26b368-31b6-4401-af97-102fb29ce28a
-        meshmodel-metadata:
-          styleOverrides:
-            z-index: 10
-        position:
-          posX: 10
-          posY: -10
-        whiteboardData: {}
-  d0ec551b-d3ab-47b5-9b3f-c39c80b5113a:
-    name: d0ec551b-d3ab-47b5-9b3f-c39c80b5113a
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 9a36f15a-23b7-4f85-a150-950a437026b4
-            metadata:
-              port: 8888
-              protocol: TCP
-            source: 64712f56-456e-4e14-a13c-902edab40642
-            subType: Network
-            target: d0ec551b-d3ab-47b5-9b3f-c39c80b5113a
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        id: d0ec551b-d3ab-47b5-9b3f-c39c80b5113a
-        position:
-          posX: 10
-          posY: 70
-        whiteboardData: {}
-  generic node-kshkk:
-    name: Generic Node
-    type: GenericNode
+  generic node-twoyd:
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: v1.0.0
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - d0ec551b-d3ab-47b5-9b3f-c39c80b5113a
+    name: Generic Node
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: ec3ed544-934e-40bd-b5f5-6b7785521bf7
         label: Generic Node
         meshmodel-data:
@@ -113,17 +72,23 @@ services:
             backgroundOpacity: 0
             visibility: hidden
             z-index: 11
-  generic node-vfmst:
-    name: Generic Node
     type: GenericNode
-    apiVersion: core.meshery.io/v1alpha1
     version: v1.0.0
+  generic node-ydedi:
+    annotations: {}
+    apiVersion: core.meshery.io/v1alpha1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - 0c26b368-31b6-4401-af97-102fb29ce28a
+    name: Generic Node
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: afcbb05e-dfd5-4a73-b7b9-2d2f4847b669
         label: Generic Node
         meshmodel-data:
@@ -180,18 +145,23 @@ services:
             backgroundOpacity: 0
             visibility: hidden
             z-index: 5
-  node group inventory wallet-uihex:
-    name: Node Group Inventory Wallet
-    type: NodeGroupInventoryWallet
-    apiVersion: core.meshery.io/v1alpha1
-    namespace: sax-admin-server
+    type: GenericNode
     version: v1.0.0
+  node group inventory wallet-fjtdm:
+    annotations: {}
+    apiVersion: core.meshery.io/v1alpha1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - 0c26b368-31b6-4401-af97-102fb29ce28a
+    name: Node Group Inventory Wallet
+    namespace: sax-admin-server
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 62c8fdf8-d964-4125-ad52-62ebac7be180
         label: Node Group Inventory Wallet
         meshmodel-data:
@@ -247,18 +217,23 @@ services:
         whiteboardData:
           style:
             z-index: 4
-  node group inventory wallet-vcgyi:
-    name: Node Group Inventory Wallet
     type: NodeGroupInventoryWallet
-    apiVersion: core.meshery.io/v1alpha1
-    namespace: sax-http
     version: v1.0.0
+  node group inventory wallet-ihjtw:
+    annotations: {}
+    apiVersion: core.meshery.io/v1alpha1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - d0ec551b-d3ab-47b5-9b3f-c39c80b5113a
+    name: Node Group Inventory Wallet
+    namespace: sax-http
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: e1ae67f2-200f-427d-8db4-f7f1b70c9cfa
         label: Node Group Inventory Wallet
         meshmodel-data:
@@ -314,12 +289,18 @@ services:
         whiteboardData:
           style:
             z-index: 10
+    type: NodeGroupInventoryWallet
+    version: v1.0.0
   sax-http-lb:
-    name: sax-http-lb
-    type: Service
+    annotations: {}
     apiVersion: v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: sax-http-lb
+    namespace: default
     settings:
       spec:
         ports:
@@ -355,6 +336,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: 64712f56-456e-4e14-a13c-902edab40642
         meshmodel-metadata:
           capabilities: ""
@@ -391,3 +373,5 @@ services:
         whiteboardData:
           style:
             z-index: 6
+    type: Service
+    version: ""

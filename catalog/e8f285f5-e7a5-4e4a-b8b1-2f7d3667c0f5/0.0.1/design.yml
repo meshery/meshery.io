@@ -1,11 +1,16 @@
 name: api-backend
+version: 0.0.3
 services:
   api-service:
-    name: api-service
-    type: APIService
+    annotations: {}
     apiVersion: apiregistration.k8s.io/v1
-    version: v1.25.4
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: api-service
+    namespace: ""
     settings:
       spec:
         group Priority Minimum: 1
@@ -13,6 +18,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 56f4cf47-8d54-4abd-8e89-2e19c5fb466b
         label: api-service
         meshmodel-data:
@@ -42,17 +48,22 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: 1250
-          posY: 90
+          posX: 1290
+          posY: 130
         whiteboardData:
           style: {}
+    type: APIService
+    version: v1.25.4
   backend:
-    name: backend
-    type: BackendGroup
+    annotations: {}
     apiVersion: appmesh.k8s.aws/v1beta2
-    namespace: default
-    version: 1.11.0
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: appmesh-controller
+    name: backend
+    namespace: default
     settings:
       spec:
         mesh Ref:
@@ -64,6 +75,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 72be4fe4-06bb-494f-8cd8-a43835a8730b
         label: backend
         meshmodel-data:
@@ -94,17 +106,22 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/appmesh-controller/white/backendgroup-white.svg
         position:
-          posX: 1290
-          posY: 10
+          posX: 1330
+          posY: 50
         whiteboardData:
           style: {}
+    type: BackendGroup
+    version: 1.11.0
   jenkins:
-    name: jenkins
-    type: Jenkins
+    annotations: {}
     apiVersion: jenkins.io/v1alpha2
-    namespace: default
-    version: 2.13.2
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: jenkins-operator
+    name: jenkins
+    namespace: default
     settings:
       spec:
         keycloak Spec:
@@ -114,6 +131,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 15263762-676b-45f8-8175-aa9282434a05
         label: jenkins
         meshmodel-data:
@@ -144,22 +162,28 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/jenkins-operator/white/jenkins-white.svg
         position:
-          posX: 1330
-          posY: 70
+          posX: 1370
+          posY: 110
         whiteboardData:
           style: {}
+    type: Jenkins
+    version: 2.13.2
   mysql-database:
-    name: mysql-database
-    type: MysqlDatabase
+    annotations: {}
     apiVersion: mysql.veilisorg.com/v1alpha1
-    namespace: default
-    version: 0.6.2999
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: mysql-operator
+    name: mysql-database
+    namespace: default
     settings:
       database: users
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: b3bcf796-837b-40c6-8620-40f947080273
         label: mysql-database
         meshmodel-data:
@@ -188,7 +212,9 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/mysql-operator/white/mysqlbackup-white.svg
         position:
-          posX: 1310
-          posY: 150
+          posX: 1350
+          posY: 190
         whiteboardData:
           style: {}
+    type: MysqlDatabase
+    version: 0.6.2999

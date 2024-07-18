@@ -1,16 +1,22 @@
 name: gitlab runner deployment
+version: 0.0.1
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
     - gitlab-runner
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 41ac1aa1-2823-4321-b183-a7105475cff5
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -92,14 +98,19 @@ services:
           posX: 30
           posY: 50
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   gitlab-runner:
-    name: gitlab-runner
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: gitlab-runner
-    model: kubernetes
     annotations:
       kubernetes.io/change-cause: Creation
+    apiVersion: apps/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: gitlab-runner
+    namespace: gitlab-runner
     settings:
       spec:
         replicas: 1
@@ -136,6 +147,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 68259d63-29de-4809-9d6c-2010dda539d6
         meshmodel-metadata:
           capabilities: |2-
@@ -173,3 +185,5 @@ services:
           posY: 50
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""
