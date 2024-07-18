@@ -267,10 +267,17 @@
   let cardType = new Set();
   // cardTechnology stores the set of all technologies (unqiue)
   let cardTechnology = new Set();
+  // This variable stores the count of each category in an object which looks like a key value pair
+  // example: {"deployment": 102, "security": 10, ...} and so on 
+  const categoryCardCount = {}
   // Loop over all pattern cards to get there compatibility, type and technology so we can make a unique list out of it
   for(let i=0; i<patternCards.length; i++){
       const type = patternCards[i].getAttribute("type")
-      if(type && type !== "wasm filter") cardType.add(type.toLowerCase()); 
+      if(type && type !== "wasm filter"){
+        const lowerCaseType = type.toLowerCase();
+        cardType.add(lowerCaseType);
+        categoryCardCount[lowerCaseType] = (categoryCardCount[lowerCaseType] || 0) + 1;   // count cards that have a certain category
+      } 
       const technology = patternCards[i].getAttribute("technology")
       if(technology){
         let t = JSON.parse(technology)
@@ -281,13 +288,6 @@
       }
   }
 
-  // This calculates the count of each technology and stores it in a object which looks like a key value pair
-  // example: {"deployment": 102, "security": 10 ...} and so on 
-  const categoryCardCount = Array.from(patternCards).reduce((acc, singleCard) => {
-    const type = singleCard.getAttribute("type").toLowerCase();
-    acc[type] = (acc[type] || 0) + 1;
-    return acc;
-  }, {});
 
   cardType = Array.from(cardType);
   cardTechnology = Array.from(cardTechnology);
