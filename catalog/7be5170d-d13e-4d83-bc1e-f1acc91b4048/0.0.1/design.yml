@@ -1,16 +1,22 @@
 name: 'nginx ingress '
+version: 0.0.2
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
     - nginx-deployment
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 98f7ccf1-44fd-4a0b-a0f5-f463d1e7c252
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -89,15 +95,21 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: 5c8e69ae-8790-4d8b-921d-64d6336b381c
         position:
-          posX: 110
-          posY: 90
+          posX: 150
+          posY: 130
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   nginx-deployment:
-    name: nginx-deployment
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: nginx-deployment
+    namespace: default
     settings:
       spec:
         replicas: 2
@@ -141,6 +153,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: 5c8e69ae-8790-4d8b-921d-64d6336b381c
         meshmodel-metadata:
           capabilities: |2-
@@ -174,16 +187,22 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 110
-          posY: 90
+          posX: 150
+          posY: 130
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""
   nginxservice:
-    name: nginxservice
-    type: Service
+    annotations: {}
     apiVersion: v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: nginxservice
+    namespace: default
     settings:
       spec:
         ports:
@@ -217,6 +236,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: 753859f2-90a4-44c4-a66f-97a0b1bcfba6
         meshmodel-metadata:
           capabilities: ""
@@ -248,7 +268,9 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
         position:
-          posX: 10
-          posY: 30
+          posX: 30
+          posY: 50
         whiteboardData:
           style: {}
+    type: Service
+    version: ""
