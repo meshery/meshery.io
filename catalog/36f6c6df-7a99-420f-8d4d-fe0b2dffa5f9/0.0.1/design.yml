@@ -1,5 +1,5 @@
 name: Prometheus-monitoring-ns
-version: 0.0.3
+version: 0.0.4
 services:
   apm-server-yl:
     annotations: {}
@@ -406,64 +406,7 @@ services:
           style: {}
     type: DaemonSet
     version: v1.25.2
-  default-aidni:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels: {}
-    model: kubernetes
-    name: default
-    namespace: ""
-    settings: {}
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: 48c3a2b4-3195-49da-9f1e-bee894218398
-        label: default
-        meshmodel-data:
-          category:
-            metadata: null
-            name: Orchestration & Management
-          displayName: Kubernetes
-          displayhostname: ""
-          hostID: 00000000-0000-0000-0000-000000000000
-          hostname: ""
-          metadata:
-            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
-            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
-          name: kubernetes
-          version: v1.25.2
-        meshmodel-metadata:
-          genealogy: parent
-          isCustomResource: false
-          isNamespaced: false
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: rectangle
-          styleOverrides:
-            background-image: none
-            background-opacity: 0.5
-            border-style: dashed
-            border-width: 2
-            z-index: 10005
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/namespace-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
-        position:
-          posX: 250
-          posY: 379
-        whiteboardData: {}
-    type: Namespace
-    version: v1.25.2
-  default-nspyq:
+  default-hwhkj:
     annotations: {}
     apiVersion: v1
     dependsOn: []
@@ -520,7 +463,7 @@ services:
         whiteboardData: {}
     type: Namespace
     version: v1.25.2
-  default-vxijz:
+  default-vnwsj:
     annotations: {}
     apiVersion: v1
     dependsOn: []
@@ -574,6 +517,63 @@ services:
         position:
           posX: 150
           posY: 459
+        whiteboardData: {}
+    type: Namespace
+    version: v1.25.2
+  default-xzzyj:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: default
+    namespace: ""
+    settings: {}
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 48c3a2b4-3195-49da-9f1e-bee894218398
+        label: default
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          displayName: Kubernetes
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
+          name: kubernetes
+          version: v1.25.2
+        meshmodel-metadata:
+          genealogy: parent
+          isCustomResource: false
+          isNamespaced: false
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: rectangle
+          styleOverrides:
+            background-image: none
+            background-opacity: 0.5
+            border-style: dashed
+            border-width: 2
+            z-index: 10005
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/namespace-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
+        position:
+          posX: 250
+          posY: 379
         whiteboardData: {}
     type: Namespace
     version: v1.25.2
@@ -865,7 +865,7 @@ services:
     annotations: {}
     apiVersion: v1
     dependsOn:
-    - default-vxijz
+    - default-vnwsj
     id: null
     isAnnotation: null
     labels: {}
@@ -1088,7 +1088,7 @@ services:
         whiteboardData: {}
     type: Deployment
     version: ""
-  prometheus-eadgy:
+  prometheus-prjci:
     annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
     dependsOn: []
@@ -1135,71 +1135,6 @@ services:
         whiteboardData:
           style: {}
     type: ClusterRoleBinding
-    version: ""
-  prometheus-pslds:
-    annotations: {}
-    apiVersion: rbac.authorization.k8s.io/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels: {}
-    model: kubernetes
-    name: prometheus
-    namespace: default
-    settings:
-      rules:
-      - api Groups:
-        - ""
-        resources:
-        - nodes
-        - nodes/proxy
-        - services
-        - endpoints
-        - pods
-        verbs:
-        - get
-        - list
-        - watch
-      - api Groups:
-        - extensions
-        resources:
-        - ingresses
-        verbs:
-        - get
-        - list
-        - watch
-      - non Resource URLs:
-        - /metrics
-        verbs:
-        - get
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: 05476151-6319-4da7-b2bd-03707d13fc24
-        label: prometheus
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: false
-          logoURL: Created by leecalcote
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          styleOverrides: '{"height":"22px","width":"16px","padding":"6px"}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
-        position:
-          posX: 250
-          posY: 590
-        whiteboardData:
-          style: {}
-    type: ClusterRole
     version: ""
   prometheus-service:
     annotations:
@@ -1281,6 +1216,71 @@ services:
           style: {}
     type: Service
     version: ""
+  prometheus-uvdfu:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: prometheus
+    namespace: default
+    settings:
+      rules:
+      - api Groups:
+        - ""
+        resources:
+        - nodes
+        - nodes/proxy
+        - services
+        - endpoints
+        - pods
+        verbs:
+        - get
+        - list
+        - watch
+      - api Groups:
+        - extensions
+        resources:
+        - ingresses
+        verbs:
+        - get
+        - list
+        - watch
+      - non Resource URLs:
+        - /metrics
+        verbs:
+        - get
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 05476151-6319-4da7-b2bd-03707d13fc24
+        label: prometheus
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: false
+          logoURL: Created by leecalcote
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides: '{"height":"22px","width":"16px","padding":"6px"}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
+        position:
+          posX: 250
+          posY: 590
+        whiteboardData:
+          style: {}
+    type: ClusterRole
+    version: ""
   scrape-config-jb:
     annotations: {}
     apiVersion: monitoring.coreos.com/v1alpha1
@@ -1339,7 +1339,7 @@ services:
     annotations: {}
     apiVersion: node.k8s.aws/v1alpha1
     dependsOn:
-    - default-aidni
+    - default-xzzyj
     id: null
     isAnnotation: null
     labels: {}

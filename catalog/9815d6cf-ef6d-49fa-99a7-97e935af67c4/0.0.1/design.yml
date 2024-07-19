@@ -1,11 +1,11 @@
 name: fluentd-kubernetes-aws
-version: 0.0.2
+version: 0.0.3
 services:
   NodeGroupInventoryWallet:
     annotations: {}
     apiVersion: core.meshery.io/v1alpha1
     dependsOn:
-    - fluentd-kubernetes-aws-vfeuo
+    - fluentd-kubernetes-aws-xmywy
     id: null
     isAnnotation: null
     labels: {}
@@ -91,7 +91,184 @@ services:
         whiteboardData: {}
     type: NodeGroupInventoryWallet
     version: 0.7.1
-  fluentd-kubernetes-aws-czffe:
+  fluentd-kubernetes-aws-esndo:
+    annotations: {}
+    apiVersion: monitoring.coreos.com/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app: prometheus-operator
+      app.kubernetes.io/instance: fluentd-kubernetes-aws
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: fluentd-kubernetes-aws
+      helm.sh/chart: fluentd-kubernetes-aws-0.2.1
+      release: prometheus-operator
+    model: contrail-analytics
+    name: fluentd-kubernetes-aws
+    namespace: default
+    settings:
+      spec:
+        groups:
+        - name: fluentd
+          rules:
+          - alert: FluentdNodeDown
+            annotations:
+              description: Prometheus could not scrape {{ $labels.job }} for more
+                than 10 minutes
+              summary: fluentd cannot be scraped
+            expr: |
+              up{job="fluentd-kubernetes-aws-prometheus"} == 0
+              or absent(up{job="fluentd-kubernetes-aws-prometheus"})
+            for: 10m
+            labels:
+              service: fluentd
+              severity: warning
+          - alert: FluentdNodeDown
+            annotations:
+              description: Prometheus could not scrape {{ $labels.job }} for more
+                than 30 minutes
+              summary: fluentd cannot be scraped
+            expr: |
+              up{job="fluentd-kubernetes-aws-prometheus"} == 0
+              or absent(up{job="fluentd-kubernetes-aws-prometheus"})
+            for: 30m
+            labels:
+              service: fluentd
+              severity: critical
+          - alert: FluentdQueueLength
+            annotations:
+              description: In the last 5 minutes, fluentd queues increased 30%. Current
+                value is {{ $value }}
+              summary: fluentd node are failing
+            expr: |
+              rate(fluentd_output_status_buffer_queue_length[5m]) > 0.3
+              or absent(fluentd_output_status_buffer_queue_length)
+            for: 1m
+            labels:
+              service: fluentd
+              severity: warning
+          - alert: FluentdQueueLength
+            annotations:
+              description: In the last 5 minutes, fluentd queues increased 50%. Current
+                value is {{ $value }}
+              summary: fluentd node are critical
+            expr: |
+              rate(fluentd_output_status_buffer_queue_length[5m]) > 0.5
+              or absent(fluentd_output_status_buffer_queue_length)
+            for: 1m
+            labels:
+              service: fluentd
+              severity: critical
+          - alert: FluentdRecordsCountsHigh
+            annotations:
+              description: In the last 5m, records counts increased 3 times, comparing
+                to the latest 15 min.
+              summary: fluentd records count are critical
+            expr: |
+              sum(rate(fluentd_output_status_emit_records{job="fluentd-kubernetes-aws-prometheus"}[5m])) BY (instance) >  (3 * sum(rate(fluentd_output_status_emit_records{job="fluentd-kubernetes-aws-prometheus"}[15m])) BY (instance))
+              or absent(fluentd_output_status_emit_records)
+            for: 1m
+            labels:
+              service: fluentd
+              severity: critical
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 4fcd0b4b-1566-4077-9c95-9664b43b0387
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isNamespaced: true
+          primaryColor: '#00B39F'
+          secondaryColor: '#00D3A9'
+          shape: circle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            z-index: 1005
+          styles: ""
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/contrail-analytics/color/contrail-analytics-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/contrail-analytics/white/contrail-analytics-white.svg
+        position:
+          posX: -50
+          posY: 90
+        whiteboardData:
+          style: {}
+    type: PrometheusRule
+    version: ""
+  fluentd-kubernetes-aws-jwwdz:
+    annotations: {}
+    apiVersion: monitoring.coreos.com/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app: prometheus-operator
+      chart: fluentd-kubernetes-aws-0.2.1
+      heritage: Helm
+      release: prometheus-operator
+    model: contrail-analytics
+    name: fluentd-kubernetes-aws
+    namespace: default
+    settings:
+      spec:
+        endpoints:
+        - metric Relabelings: []
+          oauth2:
+            client Id: {}
+            client Secret: {}
+            scopes: []
+          path: /metrics
+          port: prometheus
+          relabelings: []
+        namespace Selector:
+          match Names: []
+        pod Target Labels: []
+        selector:
+          match Expressions: []
+          match Labels:
+            app: fluentd-kubernetes-aws-prometheus
+            release: fluentd-kubernetes-aws
+          namespace Selector:
+            any: true
+        target Labels: []
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 332c5a33-a3a3-4528-af54-26feacf6daa9
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isNamespaced: true
+          primaryColor: '#00B39F'
+          secondaryColor: '#00D3A9'
+          shape: circle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            z-index: 1004
+          styles: ""
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/contrail-analytics/color/contrail-analytics-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/contrail-analytics/white/contrail-analytics-white.svg
+        position:
+          posX: 130
+          posY: 50
+        whiteboardData:
+          style: {}
+    type: ServiceMonitor
+    version: ""
+  fluentd-kubernetes-aws-ozmln:
     annotations: {}
     apiVersion: v1
     dependsOn: []
@@ -165,132 +342,6 @@ services:
           style: {}
     type: ServiceAccount
     version: ""
-  fluentd-kubernetes-aws-gurya:
-    annotations: {}
-    apiVersion: rbac.authorization.k8s.io/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app: fluentd-kubernetes-aws
-      chart: fluentd-kubernetes-aws-0.2.1
-      heritage: Helm
-      release: fluentd-kubernetes-aws
-    model: kubernetes
-    name: fluentd-kubernetes-aws
-    namespace: ""
-    settings:
-      role Ref:
-        api Group: rbac.authorization.k8s.io
-        kind: ClusterRole
-        name: fluentd-kubernetes-aws
-      subjects:
-      - kind: ServiceAccount
-        name: fluentd-kubernetes-aws
-        namespace: default
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: 8e6094c8-411c-446f-b67e-eecd3fc84971
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
-          logoURL: Created by Meshery Authors
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
-          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
-        position:
-          posX: 100.07248507200777
-          posY: 60.12080845334627
-        whiteboardData:
-          style:
-            height: 10.5
-            width: 10.5
-            z-index: 1000
-    type: ClusterRoleBinding
-    version: ""
-  fluentd-kubernetes-aws-nodvq:
-    annotations: {}
-    apiVersion: monitoring.coreos.com/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app: prometheus-operator
-      chart: fluentd-kubernetes-aws-0.2.1
-      heritage: Helm
-      release: prometheus-operator
-    model: contrail-analytics
-    name: fluentd-kubernetes-aws
-    namespace: default
-    settings:
-      spec:
-        endpoints:
-        - metric Relabelings: []
-          oauth2:
-            client Id: {}
-            client Secret: {}
-            scopes: []
-          path: /metrics
-          port: prometheus
-          relabelings: []
-        namespace Selector:
-          match Names: []
-        pod Target Labels: []
-        selector:
-          match Expressions: []
-          match Labels:
-            app: fluentd-kubernetes-aws-prometheus
-            release: fluentd-kubernetes-aws
-          namespace Selector:
-            any: true
-        target Labels: []
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: 332c5a33-a3a3-4528-af54-26feacf6daa9
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isNamespaced: true
-          primaryColor: '#00B39F'
-          secondaryColor: '#00D3A9'
-          shape: circle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            z-index: 1004
-          styles: ""
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/contrail-analytics/color/contrail-analytics-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/contrail-analytics/white/contrail-analytics-white.svg
-        position:
-          posX: 130
-          posY: 50
-        whiteboardData:
-          style: {}
-    type: ServiceMonitor
-    version: ""
   fluentd-kubernetes-aws-prometheus:
     annotations: {}
     apiVersion: v1
@@ -357,7 +408,67 @@ services:
           style: {}
     type: Service
     version: ""
-  fluentd-kubernetes-aws-rhcmj:
+  fluentd-kubernetes-aws-qazrv:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app: fluentd-kubernetes-aws
+      chart: fluentd-kubernetes-aws-0.2.1
+      heritage: Helm
+      release: fluentd-kubernetes-aws
+    model: kubernetes
+    name: fluentd-kubernetes-aws
+    namespace: ""
+    settings:
+      role Ref:
+        api Group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: fluentd-kubernetes-aws
+      subjects:
+      - kind: ServiceAccount
+        name: fluentd-kubernetes-aws
+        namespace: default
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 8e6094c8-411c-446f-b67e-eecd3fc84971
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
+          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+        position:
+          posX: 100.07248507200777
+          posY: 60.12080845334627
+        whiteboardData:
+          style:
+            height: 10.5
+            width: 10.5
+            z-index: 1000
+    type: ClusterRoleBinding
+    version: ""
+  fluentd-kubernetes-aws-sjuur:
     annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
     dependsOn: []
@@ -443,7 +554,7 @@ services:
           style: {}
     type: ClusterRole
     version: ""
-  fluentd-kubernetes-aws-vfeuo:
+  fluentd-kubernetes-aws-xmywy:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -571,115 +682,4 @@ services:
         whiteboardData:
           style: {}
     type: DaemonSet
-    version: ""
-  fluentd-kubernetes-aws-zddut:
-    annotations: {}
-    apiVersion: monitoring.coreos.com/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app: prometheus-operator
-      app.kubernetes.io/instance: fluentd-kubernetes-aws
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: fluentd-kubernetes-aws
-      helm.sh/chart: fluentd-kubernetes-aws-0.2.1
-      release: prometheus-operator
-    model: contrail-analytics
-    name: fluentd-kubernetes-aws
-    namespace: default
-    settings:
-      spec:
-        groups:
-        - name: fluentd
-          rules:
-          - alert: FluentdNodeDown
-            annotations:
-              description: Prometheus could not scrape {{ $labels.job }} for more
-                than 10 minutes
-              summary: fluentd cannot be scraped
-            expr: |
-              up{job="fluentd-kubernetes-aws-prometheus"} == 0
-              or absent(up{job="fluentd-kubernetes-aws-prometheus"})
-            for: 10m
-            labels:
-              service: fluentd
-              severity: warning
-          - alert: FluentdNodeDown
-            annotations:
-              description: Prometheus could not scrape {{ $labels.job }} for more
-                than 30 minutes
-              summary: fluentd cannot be scraped
-            expr: |
-              up{job="fluentd-kubernetes-aws-prometheus"} == 0
-              or absent(up{job="fluentd-kubernetes-aws-prometheus"})
-            for: 30m
-            labels:
-              service: fluentd
-              severity: critical
-          - alert: FluentdQueueLength
-            annotations:
-              description: In the last 5 minutes, fluentd queues increased 30%. Current
-                value is {{ $value }}
-              summary: fluentd node are failing
-            expr: |
-              rate(fluentd_output_status_buffer_queue_length[5m]) > 0.3
-              or absent(fluentd_output_status_buffer_queue_length)
-            for: 1m
-            labels:
-              service: fluentd
-              severity: warning
-          - alert: FluentdQueueLength
-            annotations:
-              description: In the last 5 minutes, fluentd queues increased 50%. Current
-                value is {{ $value }}
-              summary: fluentd node are critical
-            expr: |
-              rate(fluentd_output_status_buffer_queue_length[5m]) > 0.5
-              or absent(fluentd_output_status_buffer_queue_length)
-            for: 1m
-            labels:
-              service: fluentd
-              severity: critical
-          - alert: FluentdRecordsCountsHigh
-            annotations:
-              description: In the last 5m, records counts increased 3 times, comparing
-                to the latest 15 min.
-              summary: fluentd records count are critical
-            expr: |
-              sum(rate(fluentd_output_status_emit_records{job="fluentd-kubernetes-aws-prometheus"}[5m])) BY (instance) >  (3 * sum(rate(fluentd_output_status_emit_records{job="fluentd-kubernetes-aws-prometheus"}[15m])) BY (instance))
-              or absent(fluentd_output_status_emit_records)
-            for: 1m
-            labels:
-              service: fluentd
-              severity: critical
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: 4fcd0b4b-1566-4077-9c95-9664b43b0387
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isNamespaced: true
-          primaryColor: '#00B39F'
-          secondaryColor: '#00D3A9'
-          shape: circle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            z-index: 1005
-          styles: ""
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/contrail-analytics/color/contrail-analytics-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/contrail-analytics/white/contrail-analytics-white.svg
-        position:
-          posX: -50
-          posY: 90
-        whiteboardData:
-          style: {}
-    type: PrometheusRule
     version: ""
