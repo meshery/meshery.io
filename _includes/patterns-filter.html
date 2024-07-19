@@ -83,7 +83,7 @@
   max-width: 50px;
   height:100%;
 }
-#compatibility-div .badge{
+#compatibility-div .badge, #category-div .badge{
   background: var(--color-secondary-dark);
   border-radius: 50%;
   color: var(--color-primary-light);
@@ -97,7 +97,7 @@
   justify-content: center;
   font-weight: 200;
 }
-#compatibility-div .input-container .name{
+#compatibility-div .input-container .name, #category-div .input-container .name{
   margin: 0 10px 0 10px;
   width: 100%;
   white-space: nowrap;
@@ -263,12 +263,21 @@
   // get all pattern cards
   const patternCards = document.querySelectorAll(".patternCard");
   const cardCompatibility = [];
+  // cardType stores the names of all categories (unique)
   let cardType = new Set();
+  // cardTechnology stores the set of all technologies (unqiue)
   let cardTechnology = new Set();
+  // This variable stores the count of each category in an object which looks like a key value pair
+  // example: {"deployment": 102, "security": 10, ...} and so on 
+  const categoryCardCount = {}
   // Loop over all pattern cards to get there compatibility, type and technology so we can make a unique list out of it
   for(let i=0; i<patternCards.length; i++){
       const type = patternCards[i].getAttribute("type")
-      if(type && type !== "wasm filter") cardType.add(type.toLowerCase()); 
+      if(type && type !== "wasm filter"){
+        const lowerCaseType = type.toLowerCase();
+        cardType.add(lowerCaseType);
+        categoryCardCount[lowerCaseType] = (categoryCardCount[lowerCaseType] || 0) + 1;   // count cards that have a certain category
+      } 
       const technology = patternCards[i].getAttribute("technology")
       if(technology){
         let t = JSON.parse(technology)
@@ -279,11 +288,14 @@
       }
   }
 
+
   cardType = Array.from(cardType);
   cardTechnology = Array.from(cardTechnology);
 
   // For creating a list of checkboxes for Categories section
   for(let i = 0; i<cardType.length; i++){
+    // We get the count of each technology from the object we made at line 286, we access the count here like: categoryCardCount["deployment"] gives 102
+    const count = categoryCardCount[cardType[i]]
     const inputContainer = document.createElement("div");
     inputContainer.className = "input-container";
 
@@ -299,7 +311,8 @@
     };
     inputContainer.appendChild(input);
     const label = document.createElement("label");
-    label.innerHTML = cardType[i].replace(/-/g, " "); 
+    label.innerHTML = `<div class="name">${cardType[i].replace(/-/g, " ")}</div><div class="badge">${count}</div>`;
+    label.style.height = "20px";
     label.setAttribute("for", cardType[i]);
     inputContainer.appendChild(label);
     categoryContainer.appendChild(inputContainer);
@@ -383,6 +396,7 @@
       // Also check if the globalCategoryList is empty, if yes, show all the cards (for all categories)
       // If yes then set showCardCat to true
       // If both showCardTech and showCardCat are true, then show the card otherwise hide it
+      let cardsShown = false; // This variable tells if there is even a single card to show 
       for(let i=0; i<patternCards.length; i++){
         let cc = [];
         let cardCategory;
@@ -399,9 +413,17 @@
         let showCardCat = globalCategoryList.some(cat => cardCategory.includes(cat)) || globalCategoryList.length === 0;
         if (showCardTech && showCardCat) {
           patternCards[i].style.display = "block";
+          cardsShown = true;
         } else {
           patternCards[i].style.display = "none";
         }
+      }
+      // In the catalog folder, there is a file index.html, where a heading exists with Id: "not-found" for this purpose 
+      const noCard = document.getElementById("not-found");
+      if (!cardsShown) {      // If there is no card to show then show the "not-found" heading
+        noCard.style.display = "block";
+      } else {
+        noCard.style.display = "none";
       }
   }
 
