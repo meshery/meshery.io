@@ -1,16 +1,22 @@
 name: ArgoCD application controller
+version: 0.0.3
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
     - argocd-application-controller
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: bf17fc6d-6354-42ab-9632-c416ce918dff
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -92,16 +98,21 @@ services:
           posX: 50
           posY: 50
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   argocd-application-controller:
-    name: argocd-application-controller
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app.kubernetes.io/component: application-controller
       app.kubernetes.io/name: argocd-application-controller
       app.kubernetes.io/part-of: argocd
+    model: kubernetes
+    name: argocd-application-controller
+    namespace: default
     settings:
       spec:
         replicas: 1
@@ -350,6 +361,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: f9a6b5ec-cc53-4538-9589-094c8142efa5
         meshmodel-metadata:
           capabilities: |2-
@@ -387,3 +399,5 @@ services:
           posY: 50
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""

@@ -1,16 +1,22 @@
 name: Apache Airflow
+version: 0.0.2
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
     - airflow
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: a22cb5c4-6bff-4f2a-bba3-d01ed435d751
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -60,15 +66,21 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: 44723c33-d69d-436b-81ca-7640d31b2661
         position:
-          posX: 50
-          posY: -10
+          posX: 90
+          posY: 30
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   airflow:
-    name: airflow
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: airflow
+    namespace: default
     settings:
       spec:
         replicas: 1
@@ -116,6 +128,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: 44723c33-d69d-436b-81ca-7640d31b2661
         meshmodel-metadata:
           capabilities: |2-
@@ -149,16 +162,22 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 50
-          posY: -10
+          posX: 90
+          posY: 30
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""
   airflow-service:
-    name: airflow-service
-    type: Service
+    annotations: {}
     apiVersion: v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: airflow-service
+    namespace: default
     settings:
       spec:
         ports:
@@ -193,6 +212,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: 0dd98402-5736-45fa-84d0-72d810cc852a
         meshmodel-metadata:
           capabilities: ""
@@ -224,7 +244,9 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
         position:
-          posX: 30
-          posY: 70
+          posX: 50
+          posY: 90
         whiteboardData:
           style: {}
+    type: Service
+    version: ""

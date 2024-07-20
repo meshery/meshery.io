@@ -1,16 +1,22 @@
 name: Dapr with  Kubernetes events
+version: 0.0.4
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
-    - events-nodeapp-vhtai
+    - events-nodeapp-jfoem
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 1f0440b5-04db-482d-9e43-49c1c3ab2351
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -89,17 +95,22 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: 298162df-c5a5-4675-a245-71bdde4cd108
         position:
-          posX: -170
-          posY: 10
+          posX: -90
+          posY: 90
         whiteboardData: {}
-  events-nodeapp-obrxi:
-    name: events-nodeapp
-    type: Service
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
+  events-nodeapp-dgxue:
+    annotations: {}
     apiVersion: v1
-    namespace: kube-events
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app: node
+    model: kubernetes
+    name: events-nodeapp
+    namespace: kube-events
     settings:
       spec:
         ports:
@@ -135,6 +146,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: 00cb90dd-f328-459c-8ef4-a41c754f18e6
         meshmodel-metadata:
           capabilities: ""
@@ -166,18 +178,23 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
         position:
-          posX: -70
-          posY: 10
+          posX: -30
+          posY: 50
         whiteboardData:
           style: {}
-  events-nodeapp-vhtai:
-    name: events-nodeapp
-    type: Deployment
+    type: Service
+    version: ""
+  events-nodeapp-jfoem:
+    annotations: {}
     apiVersion: apps/v1
-    namespace: kube-events
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app: node
+    model: kubernetes
+    name: events-nodeapp
+    namespace: kube-events
     settings:
       spec:
         replicas: 1
@@ -225,6 +242,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: 298162df-c5a5-4675-a245-71bdde4cd108
         meshmodel-metadata:
           capabilities: |2-
@@ -261,16 +279,22 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: -170
-          posY: 10
+          posX: -90
+          posY: 90
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""
   events-reader:
-    name: events-reader
-    type: Role
+    annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
-    namespace: kube-events
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: events-reader
+    namespace: kube-events
     settings:
       rules:
       - api Groups:
@@ -284,6 +308,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 310d2149-582d-41f0-b050-c80865e4d582
         meshmodel-metadata:
           capabilities: ""
@@ -308,16 +333,22 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/role-white.svg
         position:
-          posX: 90
-          posY: -30
+          posX: 130
+          posY: 10
         whiteboardData:
           style: {}
+    type: Role
+    version: ""
   kube-events:
-    name: kube-events
-    type: Component
+    annotations: {}
     apiVersion: dapr.io/v1alpha1
-    namespace: kube-events
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: dapr
+    name: kube-events
+    namespace: kube-events
     settings:
       auth:
         secret Store: secretstores.kubernetes
@@ -333,6 +364,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 6723b521-3bc5-4595-b928-0195054a1b18
         meshmodel-metadata:
           capabilities: ""
@@ -356,16 +388,22 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/dapr/white/component-white.svg
         position:
-          posX: 90
-          posY: 30
+          posX: 130
+          posY: 70
         whiteboardData:
           style: {}
+    type: Component
+    version: ""
   read-events:
-    name: read-events
-    type: RoleBinding
+    annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
-    namespace: kube-events
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: read-events
+    namespace: kube-events
     settings:
       role Ref:
         api Group: ""
@@ -378,6 +416,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 94da22aa-8162-46b6-9916-6e97448f8ee7
         meshmodel-metadata:
           capabilities: ""
@@ -407,7 +446,9 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/rolebinding-white.svg
         position:
-          posX: 150
-          posY: -30
+          posX: 190
+          posY: 10
         whiteboardData:
           style: {}
+    type: RoleBinding
+    version: ""

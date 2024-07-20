@@ -1,14 +1,21 @@
 name: Envoy using BoringSSL
+version: 0.0.4
 services:
   Cluster Role Binding:
-    name: Cluster Role Binding
-    type: ClusterRoleBinding
+    annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
-    version: v1.25.2
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: Cluster Role Binding
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 9a595406-513a-4af3-9643-dfb23e0ffc39
         label: Cluster Role Binding
         meshmodel-data:
@@ -32,25 +39,34 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-rectangle
-          styleOverrides: '{"height":"22px","width":"16px","padding":"6px", "z-index":9999}'
+          styleOverrides:
+            height: 22px
+            padding: 6px
+            width: 16px
+            z-index: 10004
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
         position:
-          posX: 170.1254223500996
-          posY: 121.17869663928577
+          posX: 190
+          posY: 150
         whiteboardData:
           style: {}
-  httpbin-fkcka:
-    name: httpbin
-    type: Service
+    type: ClusterRoleBinding
+    version: v1.25.2
+  httpbin-iohoz:
+    annotations: {}
     apiVersion: v1
-    namespace: default
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app: httpbin
       service: httpbin
+    model: kubernetes
+    name: httpbin
+    namespace: default
     settings:
       spec:
         ports:
@@ -65,6 +81,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 68b9cca6-2dc2-467d-b042-647e19095aaf
         label: httpbin
         meshmodel-metadata:
@@ -84,16 +101,22 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: 129.83628129828247
-          posY: -98.56895812449847
+          posX: 150
+          posY: -70
         whiteboardData:
           style: {}
-  httpbin-frxek:
-    name: httpbin
-    type: Pod
+    type: Service
+    version: ""
+  httpbin-jdevc:
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: httpbin
+    namespace: default
     settings:
       spec:
         replicas: 1
@@ -128,6 +151,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 11667e2b-741d-4da8-b9a0-c462505930da
         label: httpbin
         meshmodel-metadata:
@@ -141,24 +165,36 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-pentagon
-          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          styleOverrides:
+            background-image: none
+            background-opacity: 0.5
+            border-width: 2
+            z-index: 10005
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
-          posX: 0
-          posY: 0
+          posX: 30
+          posY: 30
         whiteboardData: {}
-  httpbin-lmaji:
-    name: httpbin
-    type: ServiceAccount
+    type: Pod
+    version: ""
+  httpbin-vsmhg:
+    annotations: {}
     apiVersion: v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: httpbin
+    namespace: default
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 7f856d45-d55e-45f4-a608-fe0efad0810b
         label: httpbin
         meshmodel-metadata:
@@ -172,22 +208,146 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-rectangle
-          styleOverrides: ""
+          styleOverrides:
+            z-index: 10000
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
         position:
-          posX: -11.62437319717113
-          posY: 66.57595558379833
+          posX: 10
+          posY: 90
         whiteboardData:
           style: {}
-  istio-operator-curwv:
-    name: istio-operator
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: istio-operator
+    type: ServiceAccount
+    version: ""
+  istio-operator-aupqu:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: istio-operator
+    namespace: default
+    settings:
+      roleRef:
+        api Group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cr
+      subjects:
+      - kind: ServiceAccount
+        name: sa
+        namespace: istio-operator
+      - kind: ServiceAccount
+        name: sap
+        namespace: istio-operator
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: c3ad3045-b7a5-4b15-bafc-55ad9cc2bce6
+        label: istio-operator
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: false
+          logoURL: Created by Lee
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides:
+            height: 22px
+            padding: 6px
+            width: 16px
+            z-index: 10006
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+        position:
+          posX: 290
+          posY: 150
+        whiteboardData:
+          style: {}
+    type: ClusterRoleBinding
+    version: ""
+  istio-operator-nstzt:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: istio-operator
+    namespace: istio-operator
+    settings: {}
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 0bbc247d-3298-45ae-a4bf-fe6db1c79ada
+            metadata: 9a595406-513a-4af3-9643-dfb23e0ffc39
+            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
+            subType: Permission
+            target: 9240267f-d393-4c5d-bdf9-596bacf0ebf0
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 9240267f-d393-4c5d-bdf9-596bacf0ebf0
+        label: istio-operator
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides:
+            z-index: 10002
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+        position:
+          posX: 290
+          posY: 70
+        whiteboardData:
+          style: {}
+    type: ServiceAccount
+    version: ""
+  istio-operator-paagb:
+    annotations: {}
+    apiVersion: apps/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: istio-operator
+    namespace: istio-operator
     settings:
       spec:
         replicas: 1
@@ -247,6 +407,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 8e79be8c-da6a-49fe-8bc2-6decf12fd7c1
         label: istio-operator
         meshmodel-metadata:
@@ -260,185 +421,31 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-pentagon
-          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          styleOverrides:
+            background-image: none
+            background-opacity: 0.5
+            border-width: 2
+            z-index: 10001
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
-          posX: 287.405260882652
-          posY: -55.51610588907676
+          posX: 310
+          posY: -30
         whiteboardData: {}
-  istio-operator-jejqk:
-    name: istio-operator
-    type: ServiceAccount
-    apiVersion: v1
-    namespace: istio-operator
-    model: kubernetes
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 0bbc247d-3298-45ae-a4bf-fe6db1c79ada
-            metadata: 9a595406-513a-4af3-9643-dfb23e0ffc39
-            source: f9e95f4b-ffef-4523-917c-1442bb59b53b
-            subType: Permission
-            target: 9240267f-d393-4c5d-bdf9-596bacf0ebf0
-          style:
-            curve-style:
-              name: curve-style
-              strValue: bezier
-              value: bezier
-            font-family:
-              name: font-family
-              strValue: Qanelas Soft, sans-serif
-              value:
-              - Qanelas Soft, sans-serif
-              - Qanelas Soft, sans-serif
-            font-size:
-              name: font-size
-              pfValue: 6
-              strValue: 6px
-              units: px
-              value: 6
-            line-color:
-              mapping:
-                mapped:
-                  fn: true
-                  mapping: true
-                name: line-color
-                prevFnValue: '#7aa1f0'
-                strValue: fn
-              name: line-color
-              pfValue:
-              - 122
-              - 161
-              - 240
-              strValue: rgb(122,161,240)
-              value:
-              - 122
-              - 161
-              - 240
-            line-style:
-              name: line-style
-              strValue: dotted
-              value: dotted
-            target-arrow-shape:
-              name: target-arrow-shape
-              strValue: vee
-              value: vee
-            text-events:
-              name: text-events
-              strValue: "yes"
-              value: "yes"
-            text-outline-color:
-              name: text-outline-color
-              pfValue:
-              - 255
-              - 255
-              - 255
-              strValue: rgb(255,255,255)
-              value:
-              - 255
-              - 255
-              - 255
-            text-outline-width:
-              name: text-outline-width
-              pfValue: 1
-              strValue: 1px
-              units: px
-              value: 1
-            text-wrap:
-              name: text-wrap
-              strValue: wrap
-              value: wrap
-            width:
-              name: width
-              pfValue: 1.5
-              strValue: 1.5px
-              units: px
-              value: 1.5
-            z-index:
-              name: z-index
-              pfValue: 999
-              strValue: "999"
-              value: 999
-            z-index-compare:
-              name: z-index-compare
-              strValue: manual
-              value: manual
-        id: 9240267f-d393-4c5d-bdf9-596bacf0ebf0
-        label: istio-operator
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          styleOverrides: ""
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-        position:
-          posX: 263.61404256379905
-          posY: 53.450345590028036
-        whiteboardData:
-          style: {}
-  istio-operator-susjk:
-    name: istio-operator
-    type: ClusterRoleBinding
+    type: Deployment
+    version: ""
+  istio-operator-uwhjs:
+    annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
-    settings:
-      roleRef:
-        api Group: rbac.authorization.k8s.io
-        kind: ClusterRole
-        name: cr
-      subjects:
-      - kind: ServiceAccount
-        name: sa
-        namespace: istio-operator
-      - kind: ServiceAccount
-        name: sap
-        namespace: istio-operator
-    traits:
-      meshmap:
-        edges: []
-        id: c3ad3045-b7a5-4b15-bafc-55ad9cc2bce6
-        label: istio-operator
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: false
-          logoURL: Created by Lee
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          styleOverrides: '{"height":"22px","width":"16px","padding":"6px", "z-index":9999}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
-        position:
-          posX: 263.516353987512
-          posY: 120.8415675354475
-        whiteboardData:
-          style: {}
-  istio-operator-zavwj:
     name: istio-operator
-    type: ClusterRole
-    apiVersion: rbac.authorization.k8s.io/v1
-    model: kubernetes
+    namespace: ""
     settings:
       rules:
       - api Groups:
@@ -563,88 +570,21 @@ services:
             subType: Permission
             target: 9240267f-d393-4c5d-bdf9-596bacf0ebf0
           style:
-            curve-style:
-              name: curve-style
-              strValue: bezier
-              value: bezier
-            font-family:
-              name: font-family
-              strValue: Qanelas Soft, sans-serif
-              value:
-              - Qanelas Soft, sans-serif
-              - Qanelas Soft, sans-serif
-            font-size:
-              name: font-size
-              pfValue: 6
-              strValue: 6px
-              units: px
-              value: 6
-            line-color:
-              mapping:
-                mapped:
-                  fn: true
-                  mapping: true
-                name: line-color
-                prevFnValue: '#7aa1f0'
-                strValue: fn
-              name: line-color
-              pfValue:
-              - 122
-              - 161
-              - 240
-              strValue: rgb(122,161,240)
-              value:
-              - 122
-              - 161
-              - 240
-            line-style:
-              name: line-style
-              strValue: dotted
-              value: dotted
-            target-arrow-shape:
-              name: target-arrow-shape
-              strValue: vee
-              value: vee
-            text-events:
-              name: text-events
-              strValue: "yes"
-              value: "yes"
-            text-outline-color:
-              name: text-outline-color
-              pfValue:
-              - 255
-              - 255
-              - 255
-              strValue: rgb(255,255,255)
-              value:
-              - 255
-              - 255
-              - 255
-            text-outline-width:
-              name: text-outline-width
-              pfValue: 1
-              strValue: 1px
-              units: px
-              value: 1
-            text-wrap:
-              name: text-wrap
-              strValue: wrap
-              value: wrap
-            width:
-              name: width
-              pfValue: 1.5
-              strValue: 1.5px
-              units: px
-              value: 1.5
-            z-index:
-              name: z-index
-              pfValue: 999
-              strValue: "999"
-              value: 999
-            z-index-compare:
-              name: z-index-compare
-              strValue: manual
-              value: manual
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
         id: f9e95f4b-ffef-4523-917c-1442bb59b53b
         label: istio-operator
         meshmodel-metadata:
@@ -658,68 +598,32 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-rectangle
-          styleOverrides: '{"height":"22px","width":"16px","padding":"6px"}'
+          styleOverrides:
+            height: 22px
+            padding: 6px
+            width: 16px
+            z-index: 10003
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
         position:
-          posX: 465.64407921120653
-          posY: 52.72983829427385
+          posX: 490
+          posY: 70
         whiteboardData:
           style: {}
-  wasm-fhsje:
-    name: wasm
-    type: PersistentVolume
+    type: ClusterRole
+    version: ""
+  wasm-okajq:
+    annotations: {}
     apiVersion: v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
-    labels:
-      wasm: rate-limitter
-      wasm-plugin: "true"
-    settings:
-      spec:
-        access Modes:
-        - ReadWriteOnce
-        capacity:
-          storage: 1Mi
-        host Path:
-          path: /Users/shabana/Documents/OpenSource/k8s-test/proxy-wasm-go-sdk/examples/http_headers/main.go.wasm
-        persistent Volume Reclaim Policy: Recycle
-        storage Class Name: slow
-        volume Mode: Filesystem
-    traits:
-      meshmap:
-        edges: []
-        id: 030874a9-f833-4167-b714-afee95f91bde
-        label: wasm
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: false
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: cylinder
-          styleOverrides: '{"height":32,"width":32,"pading":0,"background-clip":"none","background-image-containment":"over","border-opacity":0,"background-opacity":0,"bounds-expansion":20}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
-        position:
-          posX: 26.63108630500445
-          posY: 115.13803346794587
-        whiteboardData:
-          style: {}
-  wasm-sskov:
     name: wasm
-    type: PersistentVolumeClaim
-    apiVersion: v1
     namespace: default
-    model: kubernetes
     settings:
       spec:
         access Modes:
@@ -736,6 +640,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: ce2aa940-a855-4170-8034-05ea075fceca
         label: wasm
         meshmodel-metadata:
@@ -756,16 +661,83 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 140.8005947968242
-          posY: 32.06948696239184
+          posX: 170
+          posY: 50
         whiteboardData:
           style: {}
-  wasm2:
-    name: wasm2
     type: PersistentVolumeClaim
+    version: ""
+  wasm-xaiqv:
+    annotations: {}
     apiVersion: v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      wasm: rate-limitter
+      wasm-plugin: "true"
     model: kubernetes
+    name: wasm
+    namespace: default
+    settings:
+      spec:
+        access Modes:
+        - ReadWriteOnce
+        capacity:
+          storage: 1Mi
+        host Path:
+          path: /Users/shabana/Documents/OpenSource/k8s-test/proxy-wasm-go-sdk/examples/http_headers/main.go.wasm
+        persistent Volume Reclaim Policy: Recycle
+        storage Class Name: slow
+        volume Mode: Filesystem
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 030874a9-f833-4167-b714-afee95f91bde
+        label: wasm
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: false
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: cylinder
+          styleOverrides:
+            background-clip: none
+            background-image-containment: over
+            background-opacity: 0
+            border-opacity: 0
+            bounds-expansion: 20
+            height: 32
+            pading: 0
+            width: 32
+            z-index: 10007
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
+        position:
+          posX: 50
+          posY: 130
+        whiteboardData:
+          style: {}
+    type: PersistentVolume
+    version: ""
+  wasm2:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: wasm2
+    namespace: default
     settings:
       spec:
         access Modes:
@@ -782,6 +754,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: ce2aa940-a855-4170-8034-05ea075fcecb
         label: wasm2
         meshmodel-metadata:
@@ -795,14 +768,24 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: cylinder
-          styleOverrides: '{"height":32,"width":32,"pading":0,"background-clip":"none","background-image-containment":"over","border-opacity":0,"background-opacity":0,"bounds-expansion":20,
-            "z-index": 9999}'
+          styleOverrides:
+            background-clip: none
+            background-image-containment: over
+            background-opacity: 0
+            border-opacity: 0
+            bounds-expansion: 20
+            height: 32
+            pading: 0
+            width: 32
+            z-index: 10008
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 72.9667387600697
-          posY: 84.96148824486819
+          posX: 90
+          posY: 110
         whiteboardData:
           style: {}
+    type: PersistentVolumeClaim
+    version: ""

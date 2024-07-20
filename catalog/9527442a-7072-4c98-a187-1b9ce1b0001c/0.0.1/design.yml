@@ -1,14 +1,16 @@
 name: Busybox (single)
+version: 0.0.3
 services:
   busybox-pod:
-    name: busybox-pod
-    type: Pod
+    annotations: {}
     apiVersion: v1
-    namespace: default
-    version: v1.25.2
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
-    dependsOn:
-    - c84bb621-2979-42ac-8740-8d1674bc0e5f
+    name: busybox-pod
+    namespace: default
     settings:
       spec:
         containers:
@@ -18,6 +20,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 7998bf70-168d-43d8-a208-3be128bddcc8
         label: busybox-pod
         meshmodel-data:
@@ -54,25 +57,18 @@ services:
         whiteboardData:
           style:
             z-index: 5
-  c84bb621-2979-42ac-8740-8d1674bc0e5f:
-    name: c84bb621-2979-42ac-8740-8d1674bc0e5f
-    traits:
-      meshmap:
-        edges: []
-        id: c84bb621-2979-42ac-8740-8d1674bc0e5f
-        position:
-          posX: 455
-          posY: 259
-        whiteboardData: {}
-  nginx:
-    name: nginx
     type: Pod
-    apiVersion: v1
-    namespace: layer5-test-ns
     version: v1.25.2
+  nginx:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
-    dependsOn:
-    - c84bb621-2979-42ac-8740-8d1674bc0e5f
+    name: nginx
+    namespace: layer5-test-ns
     settings:
       spec:
         containers:
@@ -87,6 +83,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: fd751fe3-ee76-4120-aafc-57978320aeb0
         label: nginx
         meshmodel-data:
@@ -123,3 +120,5 @@ services:
         whiteboardData:
           style:
             z-index: 6
+    type: Pod
+    version: v1.25.2

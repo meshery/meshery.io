@@ -1,15 +1,18 @@
 name: Kubernetes cronjob
+version: 0.0.2
 services:
   my-cron-job:
-    name: my-cron-job
-    type: CronJob
-    apiVersion: batch/v1
-    namespace: default
-    model: kubernetes
-    labels:
-      app: my-cron-job
     annotations:
       source_url: https://meshery.layer5.io/catalog
+    apiVersion: batch/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app: my-cron-job
+    model: kubernetes
+    name: my-cron-job
+    namespace: default
     settings:
       spec:
         concurrency Policy: Forbid
@@ -71,6 +74,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 10b3d4ae-726b-49b2-ad64-69bc28d24c9c
         label: my-cron-job
         meshmodel-metadata:
@@ -90,8 +94,10 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/cronjob-color.svg
         position:
-          posX: 310
-          posY: 310
+          posX: 330
+          posY: 330
         whiteboardData:
           style:
             z-index: 3
+    type: CronJob
+    version: ""
