@@ -1,26 +1,21 @@
 name: Hierarchical Inventory Relationship
+version: 0.0.3
 services:
-  704dec88-821a-411d-976a-3bfcd62fb67e:
-    name: 704dec88-821a-411d-976a-3bfcd62fb67e
-    traits:
-      meshmap:
-        edges: []
-        id: 704dec88-821a-411d-976a-3bfcd62fb67e
-        position:
-          posX: 604
-          posY: 430.5
-        whiteboardData: {}
   Generic Node:
-    name: Generic Node
-    type: GenericNode
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: v1.0.0
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - 704dec88-821a-411d-976a-3bfcd62fb67e
+    name: Generic Node
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: ef96e32b-ec62-4abb-bfb6-98fa1e951103
         label: Generic Node
         meshmodel-data:
@@ -73,18 +68,23 @@ services:
           posX: 510
           posY: 330
         whiteboardData: {}
-  Node Group Inventory Wallet:
-    name: Node Group Inventory Wallet
-    type: NodeGroupInventoryWallet
-    apiVersion: core.meshery.io/v1alpha1
-    namespace: default
+    type: GenericNode
     version: v1.0.0
+  Node Group Inventory Wallet:
+    annotations: {}
+    apiVersion: core.meshery.io/v1alpha1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - 704dec88-821a-411d-976a-3bfcd62fb67e
+    name: Node Group Inventory Wallet
+    namespace: default
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: a53462b3-c9c8-40c1-95ca-93eb9f29fb77
         label: Node Group Inventory Wallet
         meshmodel-data:
@@ -140,18 +140,24 @@ services:
         whiteboardData:
           style:
             z-index: 3
+    type: NodeGroupInventoryWallet
+    version: v1.0.0
   config-map-kv:
-    name: config-map-kv
-    type: ConfigMap
+    annotations: {}
     apiVersion: v1
-    namespace: Node Group Inventory Wallet
-    version: v1.25.2
-    model: kubernetes
     dependsOn:
     - Node Group Inventory Wallet
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: config-map-kv
+    namespace: Node Group Inventory Wallet
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 4c28d258-e99c-47be-9760-bbe2ec2544a5
         label: config-map-kv
         meshmodel-data:
@@ -199,18 +205,24 @@ services:
           posX: 650
           posY: 510
         whiteboardData: {}
-  secret-hp:
-    name: secret-hp
-    type: Secret
-    apiVersion: v1
-    namespace: Node Group Inventory Wallet
+    type: ConfigMap
     version: v1.25.2
-    model: kubernetes
+  secret-hp:
+    annotations: {}
+    apiVersion: v1
     dependsOn:
     - Node Group Inventory Wallet
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: secret-hp
+    namespace: Node Group Inventory Wallet
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 579eeeb8-6b62-47ba-a735-851217908733
         label: secret-hp
         meshmodel-data:
@@ -264,3 +276,5 @@ services:
           posX: 690
           posY: 510
         whiteboardData: {}
+    type: Secret
+    version: v1.25.2

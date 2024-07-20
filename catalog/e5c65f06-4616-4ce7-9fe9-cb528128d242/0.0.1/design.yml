@@ -1,16 +1,22 @@
 name: knative-service
+version: 0.0.2
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
-    - knative-service-dwqhh
+    - knative-service-bwgen
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 13061b72-f381-4a17-8d3e-9b9da632f31c
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -83,15 +89,19 @@ services:
           posX: 30
           posY: 30
         whiteboardData: {}
-  knative-service-dwqhh:
-    name: knative-service
-    type: Deployment
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
+  knative-service-bwgen:
+    annotations: {}
     apiVersion: apps/v1
-    namespace: knative-serving
-    version: v1.25.2
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app: ' knative-service'
+    model: kubernetes
+    name: knative-service
+    namespace: knative-serving
     settings:
       spec:
         replicas: 1
@@ -105,6 +115,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: ad72fab1-e361-4118-bf80-ad1ab3200c41
         label: Deployment
         meshmodel-data:
@@ -168,15 +179,19 @@ services:
           posX: 30
           posY: 30
         whiteboardData: {}
-  knative-service-rtdjv:
-    name: knative-service
-    type: Service
-    apiVersion: v1
-    namespace: knative-serving
+    type: Deployment
     version: v1.25.2
-    model: kubernetes
+  knative-service-frlru:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app: knative-service
+    model: kubernetes
+    name: knative-service
+    namespace: knative-serving
     settings:
       spec:
         ports:
@@ -189,6 +204,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: da423578-f98a-4c81-a09d-4ae57434dc83
         label: Service
         meshmodel-data:
@@ -247,15 +263,19 @@ services:
           posX: -130
           posY: 10
         whiteboardData: {}
-  knative-service-xctsd:
-    name: knative-service
     type: Service
+    version: v1.25.2
+  knative-service-kdxks:
+    annotations: {}
     apiVersion: serving.knative.dev/v1
-    namespace: knative-serving
-    version: 1.0.1
-    model: knative-serving
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app: knative-service
+    model: knative-serving
+    name: knative-service
+    namespace: knative-serving
     settings:
       spec:
         template:
@@ -272,6 +292,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 53d5958c-22fd-4aa3-9ff6-a61d0fbc3fd3
         label: Service
         meshmodel-data:
@@ -321,3 +342,5 @@ services:
           posX: -70
           posY: 10
         whiteboardData: {}
+    type: Service
+    version: 1.0.1

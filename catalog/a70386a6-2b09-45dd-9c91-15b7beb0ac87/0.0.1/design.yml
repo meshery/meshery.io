@@ -1,16 +1,22 @@
 name: HAProxy_Ingress_Controller
+version: 0.0.2
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
-    - haproxy-ingress-cgizu
+    - haproxy-ingress-tiuct
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: a050e59c-98c1-498f-9cf5-f72e0be66d50
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -92,228 +98,23 @@ services:
           posX: 170
           posY: 30
         whiteboardData: {}
-  haproxy-ingress-cgizu:
-    name: haproxy-ingress
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
-    labels:
-      app.kubernetes.io/instance: haproxy-ingress
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: haproxy-ingress
-      app.kubernetes.io/version: v0.15.0-alpha.2
-      helm.sh/chart: haproxy-ingress-0.15.0-alpha.2
-    settings:
-      spec:
-        min Ready Seconds: 0
-        replicas: 1
-        revision History Limit: null
-        selector:
-          match Labels:
-            app.kubernetes.io/instance: haproxy-ingress
-            app.kubernetes.io/name: haproxy-ingress
-        strategy:
-          rolling Update:
-            max Unavailable: 1
-          type: RollingUpdate
-        template:
-          metadata:
-            annotations: null
-            labels:
-              app.kubernetes.io/instance: haproxy-ingress
-              app.kubernetes.io/name: haproxy-ingress
-          spec:
-            containers:
-            - args:
-              - --configmap=default/haproxy-ingress
-              - --ingress-class=haproxy
-              - --sort-backends
-              env:
-              - name: POD_NAME
-                value From:
-                  field Ref:
-                    field Path: metadata.name
-              - name: POD_NAMESPACE
-                value From:
-                  field Ref:
-                    field Path: metadata.namespace
-              image: quay.io/jcmoraisjr/haproxy-ingress:v0.15.0-alpha.2
-              image Pull Policy: IfNotPresent
-              liveness Probe:
-                failure Threshold: 3
-                http Get:
-                  path: /healthz
-                  port: 10253
-                  scheme: HTTP
-                initial Delay Seconds: 60
-                period Seconds: 10
-                success Threshold: 1
-                timeout Seconds: 1
-              name: haproxy-ingress
-              ports:
-              - container Port: 80
-                name: http
-              - container Port: 443
-                name: https
-              - container Port: 10253
-                name: healthz
-              readiness Probe:
-                failure Threshold: 3
-                http Get:
-                  path: /healthz
-                  port: 10253
-                  scheme: HTTP
-                initial Delay Seconds: 10
-                period Seconds: 10
-                success Threshold: 1
-                timeout Seconds: 1
-              resources: {}
-            dns Policy: ClusterFirst
-            host Network: false
-            service Account Name: haproxy-ingress
-            termination Grace Period Seconds: 60
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 6b707888-d4f2-4998-a4cb-50f07363075c
-            metadata:
-              port: 80
-              protocol: TCP
-            source: 01959163-bef0-41b9-aebb-8b321449e1d2
-            subType: Network
-            target: 3c74bfe1-dea6-45c0-a378-3a1e86731720
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        id: 3c74bfe1-dea6-45c0-a378-3a1e86731720
-        meshmodel-metadata:
-          capabilities: |2-
-             {
-              "designer": {
-                "edit": {
-                  "shape": {
-                    "convert-shape": false
-                  }
-                }
-              }
-            }
-          defaultData: ""
-          genealogy: parent
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: Created by Meshery Authors
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-pentagon
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            background-opacity: 0.5
-            border-width: 2
-            z-index: 1001
-          styles: '{"border-width":2,"background-opacity":0.5}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
-        position:
-          posX: 170
-          posY: 30
-        whiteboardData:
-          style: {}
-  haproxy-ingress-dgilx:
-    name: haproxy-ingress
-    type: RoleBinding
-    apiVersion: rbac.authorization.k8s.io/v1
-    namespace: default
-    model: kubernetes
-    labels:
-      app.kubernetes.io/instance: haproxy-ingress
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: haproxy-ingress
-      app.kubernetes.io/version: v0.15.0-alpha.2
-      helm.sh/chart: haproxy-ingress-0.15.0-alpha.2
-    settings:
-      role Ref:
-        api Group: rbac.authorization.k8s.io
-        kind: Role
-        name: haproxy-ingress
-      subjects:
-      - kind: ServiceAccount
-        name: haproxy-ingress
-        namespace: default
-      - api Group: rbac.authorization.k8s.io
-        kind: User
-        name: haproxy-ingress
-    traits:
-      meshmap:
-        edges: []
-        id: e3ef4c42-9785-430b-8947-67a4cbac0888
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            height: 25px
-            width: 25px
-            x: "7"
-            "y": "7"
-            z-index: 1006
-          styles: '{"height":"25px","width":"25px","x":"7", "y":"7","z-index":4}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/rolebinding-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/rolebinding-white.svg
-        position:
-          posX: -39.89375
-          posY: 70
-        whiteboardData:
-          style:
-            height: 10.5
-            width: 10.5
-            z-index: 1000
-  haproxy-ingress-fpjcq:
-    name: haproxy-ingress
-    type: Service
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
+  haproxy-ingress-drdta:
+    annotations: {}
     apiVersion: v1
-    namespace: default
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app.kubernetes.io/instance: haproxy-ingress
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: haproxy-ingress
       app.kubernetes.io/version: v0.15.0-alpha.2
       helm.sh/chart: haproxy-ingress-0.15.0-alpha.2
+    model: kubernetes
+    name: haproxy-ingress
+    namespace: default
     settings:
       spec:
         external Traffic Policy: Local
@@ -356,6 +157,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: 01959163-bef0-41b9-aebb-8b321449e1d2
         meshmodel-metadata:
           capabilities: ""
@@ -391,17 +193,415 @@ services:
           posY: -30
         whiteboardData:
           style: {}
-  haproxy-ingress-hmuvx:
-    name: haproxy-ingress
-    type: ClusterRole
-    apiVersion: rbac.authorization.k8s.io/v1
-    model: kubernetes
+    type: Service
+    version: ""
+  haproxy-ingress-gqjmu:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app.kubernetes.io/instance: haproxy-ingress
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: haproxy-ingress
       app.kubernetes.io/version: v0.15.0-alpha.2
       helm.sh/chart: haproxy-ingress-0.15.0-alpha.2
+    model: kubernetes
+    name: haproxy-ingress
+    namespace: default
+    settings:
+      image Pull Secrets: []
+      secrets: []
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: c4355270-e391-4ce2-bac1-ccbbf3cb2d04
+            metadata:
+              binded_by: 0bb45e30-a808-490a-a1f8-d0d2895d9f21
+            source: 46c5e3d6-4928-4859-9bb0-8ba374610773
+            subType: Permission
+            target: 9926c597-de5b-4869-991d-675b293502bf
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        - data:
+            id: 231d6b91-78e6-4043-8d10-fbf4c6012a1e
+            metadata:
+              binded_by: e3ef4c42-9785-430b-8947-67a4cbac0888
+            source: cff706ba-7f5c-4218-93a8-67556954eadf
+            subType: Permission
+            target: 9926c597-de5b-4869-991d-675b293502bf
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 9926c597-de5b-4869-991d-675b293502bf
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: bottom-round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            z-index: 1004
+          styles: ""
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/serviceaccount-white.svg
+        position:
+          posX: 10
+          posY: 70
+        whiteboardData:
+          style: {}
+    type: ServiceAccount
+    version: ""
+  haproxy-ingress-gzbbl:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/instance: haproxy-ingress
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: haproxy-ingress
+      app.kubernetes.io/version: v0.15.0-alpha.2
+      helm.sh/chart: haproxy-ingress-0.15.0-alpha.2
+    model: kubernetes
+    name: haproxy-ingress
+    namespace: default
+    settings:
+      data:
+        healthz-port: "10253"
+        stats-port: "1936"
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 1ca4551f-4bb9-4be1-9196-d2a174ca64fc
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: bottom-round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            z-index: 1002
+          styles: ""
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/configmap-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/configmap-white.svg
+        position:
+          posX: 70
+          posY: 70
+        whiteboardData:
+          style: {}
+    type: ConfigMap
+    version: ""
+  haproxy-ingress-nlpoe:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/instance: haproxy-ingress
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: haproxy-ingress
+      app.kubernetes.io/version: v0.15.0-alpha.2
+      helm.sh/chart: haproxy-ingress-0.15.0-alpha.2
+    model: kubernetes
+    name: haproxy-ingress
+    namespace: default
+    settings:
+      rules:
+      - api Groups:
+        - coordination.k8s.io
+        resources:
+        - leases
+        verbs:
+        - get
+        - create
+        - update
+      - api Groups:
+        - ""
+        resources:
+        - pods
+        - secrets
+        - namespaces
+        verbs:
+        - get
+      - api Groups:
+        - ""
+        resources:
+        - configmaps
+        - endpoints
+        verbs:
+        - get
+        - create
+        - update
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 231d6b91-78e6-4043-8d10-fbf4c6012a1e
+            metadata:
+              binded_by: e3ef4c42-9785-430b-8947-67a4cbac0888
+            source: cff706ba-7f5c-4218-93a8-67556954eadf
+            subType: Permission
+            target: 9926c597-de5b-4869-991d-675b293502bf
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: cff706ba-7f5c-4218-93a8-67556954eadf
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            height: 22px
+            width: 22px
+            x: "8.5"
+            "y": "7.5"
+            z-index: 5
+          styles: '{"height":"22px", "width":"22px", "x":"8.5", "y":"7.5","z-index":4}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/role-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/role-white.svg
+        position:
+          posX: -90
+          posY: 70
+        whiteboardData:
+          style: {}
+    type: Role
+    version: ""
+  haproxy-ingress-pefnr:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/instance: haproxy-ingress
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: haproxy-ingress
+      app.kubernetes.io/version: v0.15.0-alpha.2
+      helm.sh/chart: haproxy-ingress-0.15.0-alpha.2
+    model: kubernetes
+    name: haproxy-ingress
+    namespace: default
+    settings:
+      role Ref:
+        api Group: rbac.authorization.k8s.io
+        kind: Role
+        name: haproxy-ingress
+      subjects:
+      - kind: ServiceAccount
+        name: haproxy-ingress
+        namespace: default
+      - api Group: rbac.authorization.k8s.io
+        kind: User
+        name: haproxy-ingress
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: e3ef4c42-9785-430b-8947-67a4cbac0888
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            height: 25px
+            width: 25px
+            x: "7"
+            "y": "7"
+            z-index: 1006
+          styles: '{"height":"25px","width":"25px","x":"7", "y":"7","z-index":4}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/rolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/rolebinding-white.svg
+        position:
+          posX: -39.89375
+          posY: 70
+        whiteboardData:
+          style:
+            height: 10.5
+            width: 10.5
+            z-index: 1000
+    type: RoleBinding
+    version: ""
+  haproxy-ingress-phlfy:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/instance: haproxy-ingress
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: haproxy-ingress
+      app.kubernetes.io/version: v0.15.0-alpha.2
+      helm.sh/chart: haproxy-ingress-0.15.0-alpha.2
+    model: kubernetes
+    name: haproxy-ingress
+    namespace: ""
+    settings:
+      role Ref:
+        api Group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: haproxy-ingress
+      subjects:
+      - kind: ServiceAccount
+        name: haproxy-ingress
+        namespace: default
+      - api Group: rbac.authorization.k8s.io
+        kind: User
+        name: haproxy-ingress
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 0bb45e30-a808-490a-a1f8-d0d2895d9f21
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            height: 25px
+            width: 25px
+            x: "7"
+            "y": "7"
+            z-index: 1006
+          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+        position:
+          posX: -39.7689473272671
+          posY: 30.184842138186315
+        whiteboardData:
+          style:
+            height: 10.5
+            width: 10.5
+            z-index: 1000
+    type: ClusterRoleBinding
+    version: ""
+  haproxy-ingress-sqkrh:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/instance: haproxy-ingress
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: haproxy-ingress
+      app.kubernetes.io/version: v0.15.0-alpha.2
+      helm.sh/chart: haproxy-ingress-0.15.0-alpha.2
+    model: kubernetes
+    name: haproxy-ingress
+    namespace: ""
     settings:
       rules:
       - api Groups:
@@ -501,6 +701,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: 46c5e3d6-4928-4859-9bb0-8ba374610773
         meshmodel-metadata:
           capabilities: ""
@@ -529,301 +730,158 @@ services:
           posY: -10
         whiteboardData:
           style: {}
-  haproxy-ingress-lqllh:
-    name: haproxy-ingress
-    type: ConfigMap
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
+    type: ClusterRole
+    version: ""
+  haproxy-ingress-tiuct:
+    annotations: {}
+    apiVersion: apps/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app.kubernetes.io/instance: haproxy-ingress
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: haproxy-ingress
       app.kubernetes.io/version: v0.15.0-alpha.2
       helm.sh/chart: haproxy-ingress-0.15.0-alpha.2
+    model: kubernetes
+    name: haproxy-ingress
+    namespace: default
     settings:
-      data:
-        healthz-port: "10253"
-        stats-port: "1936"
+      spec:
+        min Ready Seconds: 0
+        replicas: 1
+        revision History Limit: null
+        selector:
+          match Labels:
+            app.kubernetes.io/instance: haproxy-ingress
+            app.kubernetes.io/name: haproxy-ingress
+        strategy:
+          rolling Update:
+            max Unavailable: 1
+          type: RollingUpdate
+        template:
+          metadata:
+            annotations: null
+            labels:
+              app.kubernetes.io/instance: haproxy-ingress
+              app.kubernetes.io/name: haproxy-ingress
+          spec:
+            containers:
+            - args:
+              - --configmap=default/haproxy-ingress
+              - --ingress-class=haproxy
+              - --sort-backends
+              env:
+              - name: POD_NAME
+                value From:
+                  field Ref:
+                    field Path: metadata.name
+              - name: POD_NAMESPACE
+                value From:
+                  field Ref:
+                    field Path: metadata.namespace
+              image: quay.io/jcmoraisjr/haproxy-ingress:v0.15.0-alpha.2
+              image Pull Policy: IfNotPresent
+              liveness Probe:
+                failure Threshold: 3
+                http Get:
+                  path: /healthz
+                  port: 10253
+                  scheme: HTTP
+                initial Delay Seconds: 60
+                period Seconds: 10
+                success Threshold: 1
+                timeout Seconds: 1
+              name: haproxy-ingress
+              ports:
+              - container Port: 80
+                name: http
+              - container Port: 443
+                name: https
+              - container Port: 10253
+                name: healthz
+              readiness Probe:
+                failure Threshold: 3
+                http Get:
+                  path: /healthz
+                  port: 10253
+                  scheme: HTTP
+                initial Delay Seconds: 10
+                period Seconds: 10
+                success Threshold: 1
+                timeout Seconds: 1
+              resources: {}
+            dns Policy: ClusterFirst
+            host Network: false
+            service Account Name: haproxy-ingress
+            termination Grace Period Seconds: 60
     traits:
       meshmap:
-        edges: []
-        id: 1ca4551f-4bb9-4be1-9196-d2a174ca64fc
+        edges:
+        - data:
+            id: 6b707888-d4f2-4998-a4cb-50f07363075c
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 01959163-bef0-41b9-aebb-8b321449e1d2
+            subType: Network
+            target: 3c74bfe1-dea6-45c0-a378-3a1e86731720
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 3c74bfe1-dea6-45c0-a378-3a1e86731720
         meshmodel-metadata:
-          capabilities: ""
+          capabilities: |2-
+             {
+              "designer": {
+                "edit": {
+                  "shape": {
+                    "convert-shape": false
+                  }
+                }
+              }
+            }
           defaultData: ""
-          genealogy: ""
+          genealogy: parent
           isAnnotation: false
           isCustomResource: false
           isModelAnnotation: "FALSE"
           isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: bottom-round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            z-index: 1002
-          styles: ""
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/configmap-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/configmap-white.svg
-        position:
-          posX: 70
-          posY: 70
-        whiteboardData:
-          style: {}
-  haproxy-ingress-mkwfm:
-    name: haproxy-ingress
-    type: ClusterRoleBinding
-    apiVersion: rbac.authorization.k8s.io/v1
-    model: kubernetes
-    labels:
-      app.kubernetes.io/instance: haproxy-ingress
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: haproxy-ingress
-      app.kubernetes.io/version: v0.15.0-alpha.2
-      helm.sh/chart: haproxy-ingress-0.15.0-alpha.2
-    settings:
-      role Ref:
-        api Group: rbac.authorization.k8s.io
-        kind: ClusterRole
-        name: haproxy-ingress
-      subjects:
-      - kind: ServiceAccount
-        name: haproxy-ingress
-        namespace: default
-      - api Group: rbac.authorization.k8s.io
-        kind: User
-        name: haproxy-ingress
-    traits:
-      meshmap:
-        edges: []
-        id: 0bb45e30-a808-490a-a1f8-d0d2895d9f21
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
           logoURL: Created by Meshery Authors
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           secondaryColor: '#7aa1f0'
-          shape: round-rectangle
+          shape: round-pentagon
           shapePolygonPoints: ""
           status: enabled
           styleOverrides:
-            height: 25px
-            width: 25px
-            x: "7"
-            "y": "7"
-            z-index: 1006
-          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
+            background-opacity: 0.5
+            border-width: 2
+            z-index: 1001
+          styles: '{"border-width":2,"background-opacity":0.5}'
           subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: -39.7689473272671
-          posY: 30.184842138186315
-        whiteboardData:
-          style:
-            height: 10.5
-            width: 10.5
-            z-index: 1000
-  haproxy-ingress-ogedt:
-    name: haproxy-ingress
-    type: ServiceAccount
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    labels:
-      app.kubernetes.io/instance: haproxy-ingress
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: haproxy-ingress
-      app.kubernetes.io/version: v0.15.0-alpha.2
-      helm.sh/chart: haproxy-ingress-0.15.0-alpha.2
-    settings:
-      image Pull Secrets: []
-      secrets: []
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 231d6b91-78e6-4043-8d10-fbf4c6012a1e
-            metadata:
-              binded_by: e3ef4c42-9785-430b-8947-67a4cbac0888
-            source: cff706ba-7f5c-4218-93a8-67556954eadf
-            subType: Permission
-            target: 9926c597-de5b-4869-991d-675b293502bf
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        - data:
-            id: c4355270-e391-4ce2-bac1-ccbbf3cb2d04
-            metadata:
-              binded_by: 0bb45e30-a808-490a-a1f8-d0d2895d9f21
-            source: 46c5e3d6-4928-4859-9bb0-8ba374610773
-            subType: Permission
-            target: 9926c597-de5b-4869-991d-675b293502bf
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        id: 9926c597-de5b-4869-991d-675b293502bf
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: bottom-round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            z-index: 1004
-          styles: ""
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/serviceaccount-white.svg
-        position:
-          posX: 10
-          posY: 70
+          posX: 170
+          posY: 30
         whiteboardData:
           style: {}
-  haproxy-ingress-yhlbu:
-    name: haproxy-ingress
-    type: Role
-    apiVersion: rbac.authorization.k8s.io/v1
-    namespace: default
-    model: kubernetes
-    labels:
-      app.kubernetes.io/instance: haproxy-ingress
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: haproxy-ingress
-      app.kubernetes.io/version: v0.15.0-alpha.2
-      helm.sh/chart: haproxy-ingress-0.15.0-alpha.2
-    settings:
-      rules:
-      - api Groups:
-        - coordination.k8s.io
-        resources:
-        - leases
-        verbs:
-        - get
-        - create
-        - update
-      - api Groups:
-        - ""
-        resources:
-        - pods
-        - secrets
-        - namespaces
-        verbs:
-        - get
-      - api Groups:
-        - ""
-        resources:
-        - configmaps
-        - endpoints
-        verbs:
-        - get
-        - create
-        - update
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 231d6b91-78e6-4043-8d10-fbf4c6012a1e
-            metadata:
-              binded_by: e3ef4c42-9785-430b-8947-67a4cbac0888
-            source: cff706ba-7f5c-4218-93a8-67556954eadf
-            subType: Permission
-            target: 9926c597-de5b-4869-991d-675b293502bf
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        id: cff706ba-7f5c-4218-93a8-67556954eadf
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            height: 22px
-            width: 22px
-            x: "8.5"
-            "y": "7.5"
-            z-index: 5
-          styles: '{"height":"22px", "width":"22px", "x":"8.5", "y":"7.5","z-index":4}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/role-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/role-white.svg
-        position:
-          posX: -90
-          posY: 70
-        whiteboardData:
-          style: {}
+    type: Deployment
+    version: ""

@@ -1,16 +1,22 @@
 name: prometheus-opencost-exporter
+version: 0.0.2
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
-    - prometheus-opencost-exporter-idztj
+    - prometheus-opencost-exporter-vdpea
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 7a2c6f89-2dcb-4cf5-bfce-fbba4bd0639e
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -92,17 +98,23 @@ services:
           posX: -30
           posY: 50
         whiteboardData: {}
-  prometheus-opencost-exporter-aebxz:
-    name: prometheus-opencost-exporter
-    type: ClusterRoleBinding
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
+  prometheus-opencost-exporter-eodzi:
+    annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app.kubernetes.io/instance: prometheus-opencost-exporter
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: prometheus-opencost-exporter
       app.kubernetes.io/version: 1.108.0
       helm.sh/chart: prometheus-opencost-exporter-0.1.1
+    model: kubernetes
+    name: prometheus-opencost-exporter
+    namespace: ""
     settings:
       role Ref:
         api Group: rbac.authorization.k8s.io
@@ -115,6 +127,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 68bf4f36-4220-409b-9a1b-1f34b3b2681e
         meshmodel-metadata:
           capabilities: ""
@@ -151,81 +164,37 @@ services:
             height: 10.5
             width: 10.5
             z-index: 1000
-  prometheus-opencost-exporter-idztj:
-    name: prometheus-opencost-exporter
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
+    type: ClusterRoleBinding
+    version: ""
+  prometheus-opencost-exporter-hnkop:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app.kubernetes.io/instance: prometheus-opencost-exporter
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: prometheus-opencost-exporter
       app.kubernetes.io/version: 1.108.0
       helm.sh/chart: prometheus-opencost-exporter-0.1.1
+    model: kubernetes
+    name: prometheus-opencost-exporter
+    namespace: default
     settings:
-      spec:
-        replicas: 1
-        selector:
-          match Labels:
-            app.kubernetes.io/instance: prometheus-opencost-exporter
-            app.kubernetes.io/name: prometheus-opencost-exporter
-        strategy:
-          rolling Update:
-            max Surge: 1
-            max Unavailable: 1
-          type: RollingUpdate
-        template:
-          metadata:
-            labels:
-              app.kubernetes.io/instance: prometheus-opencost-exporter
-              app.kubernetes.io/name: prometheus-opencost-exporter
-          spec:
-            containers:
-            - env:
-              - name: PROMETHEUS_SERVER_ENDPOINT
-                value: http://my-prometheus.opencost.svc:9090
-              - name: CLUSTER_ID
-                value: default-cluster
-              image: quay.io/kubecost1/kubecost-cost-model:prod-1.108.0
-              image Pull Policy: IfNotPresent
-              liveness Probe:
-                failure Threshold: 3
-                http Get:
-                  path: /healthz
-                  port: 9003
-                initial Delay Seconds: 120
-                period Seconds: 10
-              name: prometheus-opencost-exporter
-              ports:
-              - container Port: 9003
-                name: http
-              readiness Probe:
-                failure Threshold: 3
-                http Get:
-                  path: /healthz
-                  port: 9003
-                initial Delay Seconds: 120
-                period Seconds: 10
-              resources:
-                limits:
-                  cpu: 999m
-                  memory: 1Gi
-                requests:
-                  cpu: 10m
-                  memory: 55Mi
-            service Account Name: prometheus-opencost-exporter
+      automount Service Account Token: true
+      image Pull Secrets: []
+      secrets: []
     traits:
       meshmap:
         edges:
         - data:
-            id: efa93fe6-8bd8-49eb-948e-1559b5ebd2b5
+            id: 43a12ca0-7f6f-447f-84df-b054a7811432
             metadata:
-              port: 9003
-              protocol: TCP
-            source: 0f51f884-abe0-4818-bf59-d5e873de3a84
-            subType: Network
-            target: 3c587ae5-b1b3-438a-9307-afbd42865d93
+              binded_by: 68bf4f36-4220-409b-9a1b-1f34b3b2681e
+            source: 741804c6-216e-4c26-a7aa-185a5224fad7
+            subType: Permission
+            target: 14579353-5f25-440b-ac1b-9809e06f402b
           style:
             control-point-distances: null
             control-point-weights: "0.5"
@@ -241,57 +210,52 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
-        id: 3c587ae5-b1b3-438a-9307-afbd42865d93
+        fieldRefData: {}
+        id: 14579353-5f25-440b-ac1b-9809e06f402b
         meshmodel-metadata:
-          capabilities: |2-
-             {
-              "designer": {
-                "edit": {
-                  "shape": {
-                    "convert-shape": false
-                  }
-                }
-              }
-            }
+          capabilities: ""
           defaultData: ""
-          genealogy: parent
+          genealogy: ""
           isAnnotation: false
           isCustomResource: false
           isModelAnnotation: "FALSE"
           isNamespaced: true
-          logoURL: Created by Meshery Authors
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           secondaryColor: '#7aa1f0'
-          shape: round-pentagon
+          shape: bottom-round-rectangle
           shapePolygonPoints: ""
           status: enabled
-          styleOverrides:
-            background-opacity: 0.5
-            border-width: 2
-            z-index: 1002
-          styles: '{"border-width":2,"background-opacity":0.5}'
+          styleOverrides: ""
+          styles: ""
           subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/serviceaccount-white.svg
         position:
-          posX: -30
+          posX: 70
           posY: 50
         whiteboardData:
           style: {}
-  prometheus-opencost-exporter-nvdlr:
-    name: prometheus-opencost-exporter
-    type: ClusterRole
+    type: ServiceAccount
+    version: ""
+  prometheus-opencost-exporter-myrgy:
+    annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app.kubernetes.io/instance: prometheus-opencost-exporter
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: prometheus-opencost-exporter
       app.kubernetes.io/version: 1.108.0
       helm.sh/chart: prometheus-opencost-exporter-0.1.1
+    model: kubernetes
+    name: prometheus-opencost-exporter
+    namespace: ""
     settings:
       rules:
       - api Groups:
@@ -391,6 +355,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: 741804c6-216e-4c26-a7aa-185a5224fad7
         meshmodel-metadata:
           capabilities: ""
@@ -424,32 +389,86 @@ services:
           posY: 90
         whiteboardData:
           style: {}
-  prometheus-opencost-exporter-pwvlk:
-    name: prometheus-opencost-exporter
-    type: ServiceAccount
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
+    type: ClusterRole
+    version: ""
+  prometheus-opencost-exporter-vdpea:
+    annotations: {}
+    apiVersion: apps/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app.kubernetes.io/instance: prometheus-opencost-exporter
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: prometheus-opencost-exporter
       app.kubernetes.io/version: 1.108.0
       helm.sh/chart: prometheus-opencost-exporter-0.1.1
+    model: kubernetes
+    name: prometheus-opencost-exporter
+    namespace: default
     settings:
-      automount Service Account Token: true
-      image Pull Secrets: []
-      secrets: []
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app.kubernetes.io/instance: prometheus-opencost-exporter
+            app.kubernetes.io/name: prometheus-opencost-exporter
+        strategy:
+          rolling Update:
+            max Surge: 1
+            max Unavailable: 1
+          type: RollingUpdate
+        template:
+          metadata:
+            labels:
+              app.kubernetes.io/instance: prometheus-opencost-exporter
+              app.kubernetes.io/name: prometheus-opencost-exporter
+          spec:
+            containers:
+            - env:
+              - name: PROMETHEUS_SERVER_ENDPOINT
+                value: http://my-prometheus.opencost.svc:9090
+              - name: CLUSTER_ID
+                value: default-cluster
+              image: quay.io/kubecost1/kubecost-cost-model:prod-1.108.0
+              image Pull Policy: IfNotPresent
+              liveness Probe:
+                failure Threshold: 3
+                http Get:
+                  path: /healthz
+                  port: 9003
+                initial Delay Seconds: 120
+                period Seconds: 10
+              name: prometheus-opencost-exporter
+              ports:
+              - container Port: 9003
+                name: http
+              readiness Probe:
+                failure Threshold: 3
+                http Get:
+                  path: /healthz
+                  port: 9003
+                initial Delay Seconds: 120
+                period Seconds: 10
+              resources:
+                limits:
+                  cpu: 999m
+                  memory: 1Gi
+                requests:
+                  cpu: 10m
+                  memory: 55Mi
+            service Account Name: prometheus-opencost-exporter
     traits:
       meshmap:
         edges:
         - data:
-            id: 43a12ca0-7f6f-447f-84df-b054a7811432
+            id: efa93fe6-8bd8-49eb-948e-1559b5ebd2b5
             metadata:
-              binded_by: 68bf4f36-4220-409b-9a1b-1f34b3b2681e
-            source: 741804c6-216e-4c26-a7aa-185a5224fad7
-            subType: Permission
-            target: 14579353-5f25-440b-ac1b-9809e06f402b
+              port: 9003
+              protocol: TCP
+            source: 0f51f884-abe0-4818-bf59-d5e873de3a84
+            subType: Network
+            target: 3c587ae5-b1b3-438a-9307-afbd42865d93
           style:
             control-point-distances: null
             control-point-weights: "0.5"
@@ -465,46 +484,64 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
-        id: 14579353-5f25-440b-ac1b-9809e06f402b
+        fieldRefData: {}
+        id: 3c587ae5-b1b3-438a-9307-afbd42865d93
         meshmodel-metadata:
-          capabilities: ""
+          capabilities: |2-
+             {
+              "designer": {
+                "edit": {
+                  "shape": {
+                    "convert-shape": false
+                  }
+                }
+              }
+            }
           defaultData: ""
-          genealogy: ""
+          genealogy: parent
           isAnnotation: false
           isCustomResource: false
           isModelAnnotation: "FALSE"
           isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          logoURL: Created by Meshery Authors
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           secondaryColor: '#7aa1f0'
-          shape: bottom-round-rectangle
+          shape: round-pentagon
           shapePolygonPoints: ""
           status: enabled
-          styleOverrides: ""
-          styles: ""
+          styleOverrides:
+            background-opacity: 0.5
+            border-width: 2
+            z-index: 1002
+          styles: '{"border-width":2,"background-opacity":0.5}'
           subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/serviceaccount-white.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 70
+          posX: -30
           posY: 50
         whiteboardData:
           style: {}
-  prometheus-opencost-exporter-qomdy:
-    name: prometheus-opencost-exporter
-    type: Service
+    type: Deployment
+    version: ""
+  prometheus-opencost-exporter-xzeha:
+    annotations: {}
     apiVersion: v1
-    namespace: default
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app.kubernetes.io/instance: prometheus-opencost-exporter
       app.kubernetes.io/managed-by: Helm
       app.kubernetes.io/name: prometheus-opencost-exporter
       app.kubernetes.io/version: 1.108.0
       helm.sh/chart: prometheus-opencost-exporter-0.1.1
+    model: kubernetes
+    name: prometheus-opencost-exporter
+    namespace: default
     settings:
       spec:
         ports:
@@ -541,6 +578,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: 0f51f884-abe0-4818-bf59-d5e873de3a84
         meshmodel-metadata:
           capabilities: ""
@@ -576,3 +614,5 @@ services:
           posY: -30
         whiteboardData:
           style: {}
+    type: Service
+    version: ""

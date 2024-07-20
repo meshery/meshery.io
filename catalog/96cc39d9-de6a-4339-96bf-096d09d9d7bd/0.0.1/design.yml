@@ -1,11 +1,16 @@
 name: Running ZooKeeper, A Distributed System Coordinator
+version: 0.0.3
 services:
   zk:
-    name: zk
-    type: StatefulSet
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: zk
+    namespace: default
     settings:
       spec:
         pod Management Policy: OrderedReady
@@ -88,6 +93,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 8129ed4a-9927-4b0c-ad95-882929c952b6
         label: zk
         meshmodel-metadata:
@@ -113,12 +119,18 @@ services:
         whiteboardData:
           style:
             z-index: 4
+    type: StatefulSet
+    version: ""
   zk-cs:
-    name: zk-cs
-    type: Service
+    annotations: {}
     apiVersion: v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: zk-cs
+    namespace: default
     settings:
       spec:
         ports:
@@ -129,6 +141,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 226fa52e-e5a0-4239-b909-9b442972bab5
         label: zk-cs
         meshmodel-metadata:
@@ -159,12 +172,18 @@ services:
         whiteboardData:
           style:
             z-index: 5
-  zk-hs:
-    name: zk-hs
     type: Service
+    version: ""
+  zk-hs:
+    annotations: {}
     apiVersion: v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: zk-hs
+    namespace: default
     settings:
       spec:
         cluster IP: None
@@ -178,6 +197,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 974b880f-34e9-439a-8d9a-24db8c1293be
         label: zk-hs
         meshmodel-metadata:
@@ -202,12 +222,18 @@ services:
         whiteboardData:
           style:
             z-index: 6
+    type: Service
+    version: ""
   zk-pdb:
-    name: zk-pdb
-    type: PodDisruptionBudget
+    annotations: {}
     apiVersion: policy/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: zk-pdb
+    namespace: default
     settings:
       spec:
         max Unavailable: 1
@@ -217,6 +243,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 3851b428-cc0b-47f2-a0ec-08d4c79b7a0a
         label: zk-pdb
         meshmodel-metadata:
@@ -242,3 +269,5 @@ services:
         whiteboardData:
           style:
             z-index: 3
+    type: PodDisruptionBudget
+    version: ""

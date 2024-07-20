@@ -1,16 +1,22 @@
 name: Jenkins operator
+version: 0.0.2
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
     - jenkins-operator-deployment
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: adf81142-1801-41d7-bd15-e93832e20159
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -89,19 +95,23 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: 981ce76a-8399-43fc-ab4b-3539a9dddf65
         position:
-          posX: 50
-          posY: 50
+          posX: 90
+          posY: 90
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   jenkins-operator-deployment:
-    name: jenkins-operator-deployment
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
-    labels:
-      app: jenkins-operator
     annotations:
       description: Deployment for Jenkins Operator
+    apiVersion: apps/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app: jenkins-operator
+    model: kubernetes
+    name: jenkins-operator-deployment
+    namespace: default
     settings:
       spec:
         replicas: 1
@@ -147,6 +157,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 981ce76a-8399-43fc-ab4b-3539a9dddf65
         meshmodel-metadata:
           capabilities: |2-
@@ -180,7 +191,9 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 50
-          posY: 50
+          posX: 90
+          posY: 90
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""

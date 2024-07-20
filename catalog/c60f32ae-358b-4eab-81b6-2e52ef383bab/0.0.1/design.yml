@@ -1,16 +1,22 @@
 name: mattermost operator
+version: 0.0.3
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
     - mattermost-operator
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: bb709e11-e061-4496-af80-6a393301cf14
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -92,12 +98,18 @@ services:
           posX: 50
           posY: 50
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   mattermost-operator:
-    name: mattermost-operator
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: mattermost-operator
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: mattermost-operator
+    namespace: mattermost-operator
     settings:
       spec:
         replicas: 1
@@ -132,6 +144,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 747c472c-1ba1-484e-a683-a725cd167e9b
         meshmodel-metadata:
           capabilities: |2-
@@ -169,3 +182,5 @@ services:
           posY: 50
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""

@@ -1,16 +1,22 @@
 name: mysql operator
+version: 0.0.4
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
     - mysql-operator
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: d4a45a50-5f9e-48a3-bc91-d41ff4612817
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -89,15 +95,17 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: a7aea6d4-bb08-4666-a80f-3e52a5c5e94f
         position:
-          posX: 50
-          posY: 50
+          posX: 90
+          posY: 90
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   mysql-operator:
-    name: mysql-operator
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: mysql-operator
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app.kubernetes.io/component: controller
       app.kubernetes.io/created-by: mysql-operator
@@ -106,6 +114,9 @@ services:
       app.kubernetes.io/name: mysql-operator
       app.kubernetes.io/version: 8.4.0-2.1.3
       version: "1.0"
+    model: kubernetes
+    name: mysql-operator
+    namespace: mysql-operator
     settings:
       spec:
         replicas: 1
@@ -158,6 +169,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: a7aea6d4-bb08-4666-a80f-3e52a5c5e94f
         meshmodel-metadata:
           capabilities: |2-
@@ -191,7 +203,9 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 50
-          posY: 50
+          posX: 90
+          posY: 90
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""

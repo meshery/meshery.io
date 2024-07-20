@@ -1,16 +1,22 @@
 name: Dapr OAuth Authorization to External Service
+version: 0.0.3
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
     - msgraphapp
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 0520a4db-d533-4cdc-a9c2-a33abe4d660f
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -89,17 +95,22 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: a1cd711e-85be-49cb-8926-f332639839c3
         position:
-          posX: 70
-          posY: 10
+          posX: 110
+          posY: 50
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   msgraphapp:
-    name: msgraphapp
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app: msgraph
+    model: kubernetes
+    name: msgraphapp
+    namespace: default
     settings:
       spec:
         replicas: 1
@@ -125,6 +136,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: a1cd711e-85be-49cb-8926-f332639839c3
         meshmodel-metadata:
           capabilities: |2-
@@ -161,18 +173,23 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 70
-          posY: 10
+          posX: 110
+          posY: 50
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""
   msgraphapp-dapr:
-    name: msgraphapp-dapr
-    type: Service
+    annotations: {}
     apiVersion: v1
-    namespace: default
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app: msgraph
+    model: kubernetes
+    name: msgraphapp-dapr
+    namespace: default
     settings:
       spec:
         cluster IP: None
@@ -182,6 +199,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 602f1625-45e1-4171-a1c8-52fa8a3729f8
         meshmodel-metadata:
           capabilities: ""
@@ -206,16 +224,22 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
         position:
-          posX: -30
-          posY: -30
+          posX: -10
+          posY: -10
         whiteboardData:
           style: {}
+    type: Service
+    version: ""
   msgraphpipeline:
-    name: msgraphpipeline
-    type: Configuration
+    annotations: {}
     apiVersion: dapr.io/v1alpha1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: dapr
+    name: msgraphpipeline
+    namespace: default
     settings:
       spec:
         access Control:
@@ -254,6 +278,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: c9d45a40-ceb9-4557-bc08-7420cf52949b
         meshmodel-metadata:
           capabilities: ""
@@ -278,16 +303,22 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/dapr/white/component-white.svg
         position:
-          posX: -30
-          posY: 50
+          posX: -10
+          posY: 70
         whiteboardData:
           style: {}
+    type: Configuration
+    version: ""
   msgraphsp:
-    name: msgraphsp
-    type: Component
+    annotations: {}
     apiVersion: dapr.io/v1alpha1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: dapr
+    name: msgraphsp
+    namespace: default
     settings:
       auth:
         secret Store: secretstores.kubernetes
@@ -313,6 +344,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 2dcc5273-f392-4caf-8e63-133d52ec4632
         meshmodel-metadata:
           capabilities: ""
@@ -337,7 +369,9 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/dapr/white/component-white.svg
         position:
-          posX: 10
-          posY: 50
+          posX: 30
+          posY: 70
         whiteboardData:
           style: {}
+    type: Component
+    version: ""
