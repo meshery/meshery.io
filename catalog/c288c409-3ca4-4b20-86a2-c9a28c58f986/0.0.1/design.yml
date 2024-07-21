@@ -1,5 +1,5 @@
 name: Guestbook App (All-in-One)
-version: 0.0.5
+version: 0.0.7
 services:
   comment-jt:
     annotations: {}
@@ -74,8 +74,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/meshery-core/color/comment-color.svg
         position:
-          posX: 550
-          posY: 170
+          posX: 570
+          posY: 190
         whiteboardData:
           style:
             z-index: 20
@@ -148,14 +148,14 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/meshery-core/color/comment-color.svg
         position:
-          posX: 670
-          posY: 530
+          posX: 690
+          posY: 550
         whiteboardData:
           style:
             z-index: 12
     type: Comment
     version: v1.0.0
-  frontend-irtmy:
+  frontend-vhcrr:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -245,14 +245,14 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
-          posX: 510
-          posY: 470
+          posX: 530
+          posY: 490
         whiteboardData:
           style:
             z-index: 33
     type: Deployment
     version: ""
-  frontend-ybzoj:
+  frontend-xlhwz:
     annotations: {}
     apiVersion: v1
     dependsOn: []
@@ -332,14 +332,133 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/connection-white.svg
         position:
-          posX: 350
-          posY: 270
+          posX: 370
+          posY: 290
         whiteboardData:
           style:
             z-index: 9
     type: Service
     version: ""
-  redis-master-ixpxd:
+  redis-master-kjehr:
+    annotations: {}
+    apiVersion: apps/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app: backend
+      env: prod
+    model: kubernetes
+    name: redis-master
+    namespace: default
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app: redis
+            role: master
+            tier: backend
+        template:
+          metadata:
+            labels:
+              app: redis
+              role: master
+              tier: backend
+          spec:
+            containers:
+            - image: registry.k8s.io/redis:e2e
+              name: master
+              ports:
+              - container Port: 6379
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 100Mi
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 9dca6b25-1a41-41fb-a22b-465f464e51ed
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: 5fec14fc-0873-4232-ab86-ceb6592a9767
+            subType: Network
+            target: 8aae645a-1f9e-48dd-9ed6-0457d2ebe4ae
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        - data:
+            id: 3d1f1503-91bc-49b1-a5eb-cf33e1539b1b
+            metadata:
+              port: 6379
+              protocol: TCP
+            source: a8126c59-8ff5-4736-8d8a-0aadfcfe19f0
+            subType: Network
+            target: 8aae645a-1f9e-48dd-9ed6-0457d2ebe4ae
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 8aae645a-1f9e-48dd-9ed6-0457d2ebe4ae
+        label: redis-master
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: parent
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: Created by leecalcote
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides:
+            background-image: none
+            background-opacity: 0.5
+            border-width: 2
+            z-index: 8
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: 610
+          posY: 330
+        whiteboardData:
+          style:
+            z-index: 29
+    type: Deployment
+    version: ""
+  redis-master-kxqfk:
     annotations: {}
     apiVersion: v1
     dependsOn: []
@@ -450,133 +569,14 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/connection-white.svg
         position:
-          posX: 1170
-          posY: 170
+          posX: 1190
+          posY: 190
         whiteboardData:
           style:
             z-index: 6
     type: Service
     version: ""
-  redis-master-zffua:
-    annotations: {}
-    apiVersion: apps/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app: backend
-      env: prod
-    model: kubernetes
-    name: redis-master
-    namespace: default
-    settings:
-      spec:
-        replicas: 1
-        selector:
-          match Labels:
-            app: redis
-            role: master
-            tier: backend
-        template:
-          metadata:
-            labels:
-              app: redis
-              role: master
-              tier: backend
-          spec:
-            containers:
-            - image: registry.k8s.io/redis:e2e
-              name: master
-              ports:
-              - container Port: 6379
-              resources:
-                requests:
-                  cpu: 100m
-                  memory: 100Mi
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 3d1f1503-91bc-49b1-a5eb-cf33e1539b1b
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: a8126c59-8ff5-4736-8d8a-0aadfcfe19f0
-            subType: Network
-            target: 8aae645a-1f9e-48dd-9ed6-0457d2ebe4ae
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        - data:
-            id: 9dca6b25-1a41-41fb-a22b-465f464e51ed
-            metadata:
-              port: 6379
-              protocol: TCP
-            source: 5fec14fc-0873-4232-ab86-ceb6592a9767
-            subType: Network
-            target: 8aae645a-1f9e-48dd-9ed6-0457d2ebe4ae
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: 8aae645a-1f9e-48dd-9ed6-0457d2ebe4ae
-        label: redis-master
-        meshmodel-metadata:
-          capabilities: ""
-          genealogy: parent
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: Created by leecalcote
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-pentagon
-          styleOverrides:
-            background-image: none
-            background-opacity: 0.5
-            border-width: 2
-            z-index: 8
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-        position:
-          posX: 590
-          posY: 310
-        whiteboardData:
-          style:
-            z-index: 29
-    type: Deployment
-    version: ""
-  redis-replica-gzhfl:
+  redis-replica-bsqzt:
     annotations:
       env: stg
     apiVersion: apps/v1
@@ -620,11 +620,11 @@ services:
       meshmap:
         edges:
         - data:
-            id: 66f17ab6-a3d7-4c1a-8af3-e812d8341d2d
+            id: fcf4a44e-3ac2-4b82-80be-3eccb3170de4
             metadata:
               port: 6379
               protocol: TCP
-            source: a8126c59-8ff5-4736-8d8a-0aadfcfe19f0
+            source: 5fec14fc-0873-4232-ab86-ceb6592a9767
             subType: Network
             target: 83acbd17-dfcb-4092-80c7-be033e38876d
           style:
@@ -643,11 +643,11 @@ services:
             taxi-turn-min-distance: 10px
             width: 1.5px
         - data:
-            id: fcf4a44e-3ac2-4b82-80be-3eccb3170de4
+            id: 66f17ab6-a3d7-4c1a-8af3-e812d8341d2d
             metadata:
               port: 6379
               protocol: TCP
-            source: 5fec14fc-0873-4232-ab86-ceb6592a9767
+            source: a8126c59-8ff5-4736-8d8a-0aadfcfe19f0
             subType: Network
             target: 83acbd17-dfcb-4092-80c7-be033e38876d
           style:
@@ -692,14 +692,14 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
-          posX: 910
-          posY: 450
+          posX: 930
+          posY: 470
         whiteboardData:
           style:
             z-index: 31
     type: Deployment
     version: ""
-  redis-replica-xhevn:
+  redis-replica-kslxq:
     annotations: {}
     apiVersion: v1
     dependsOn: []
@@ -732,13 +732,13 @@ services:
       meshmap:
         edges:
         - data:
-            id: fcf4a44e-3ac2-4b82-80be-3eccb3170de4
+            id: 9dca6b25-1a41-41fb-a22b-465f464e51ed
             metadata:
               port: 6379
               protocol: TCP
             source: 5fec14fc-0873-4232-ab86-ceb6592a9767
             subType: Network
-            target: 83acbd17-dfcb-4092-80c7-be033e38876d
+            target: 8aae645a-1f9e-48dd-9ed6-0457d2ebe4ae
           style:
             control-point-distances: null
             control-point-weights: "0.5"
@@ -755,13 +755,13 @@ services:
             taxi-turn-min-distance: 10px
             width: 1.5px
         - data:
-            id: 9dca6b25-1a41-41fb-a22b-465f464e51ed
+            id: fcf4a44e-3ac2-4b82-80be-3eccb3170de4
             metadata:
               port: 6379
               protocol: TCP
             source: 5fec14fc-0873-4232-ab86-ceb6592a9767
             subType: Network
-            target: 8aae645a-1f9e-48dd-9ed6-0457d2ebe4ae
+            target: 83acbd17-dfcb-4092-80c7-be033e38876d
           style:
             control-point-distances: null
             control-point-weights: "0.5"
@@ -808,8 +808,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/connection-white.svg
         position:
-          posX: 850
-          posY: 90
+          posX: 870
+          posY: 110
         whiteboardData:
           style:
             z-index: 5
@@ -879,8 +879,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
         position:
-          posX: 530
-          posY: 350
+          posX: 550
+          posY: 370
         whiteboardData:
           style:
             z-index: 28
@@ -954,8 +954,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
         position:
-          posX: 830
-          posY: 550
+          posX: 850
+          posY: 570
         whiteboardData:
           style:
             height: 49.71625466515845

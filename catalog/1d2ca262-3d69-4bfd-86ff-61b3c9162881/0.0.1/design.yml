@@ -1,5 +1,5 @@
 name: Istio HTTP Header Filter (Clone)
-version: 0.0.3
+version: 0.0.4
 services:
   Bottom Round Rectangle:
     annotations: {}
@@ -49,8 +49,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
         position:
-          posX: 1110
-          posY: 390
+          posX: 1130
+          posY: 410
         whiteboardData:
           style:
             backgroundColor: brown
@@ -111,8 +111,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
         position:
-          posX: 1150
-          posY: 230
+          posX: 1170
+          posY: 250
         whiteboardData:
           style:
             z-index: 10001
@@ -165,8 +165,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
         position:
-          posX: 1030
-          posY: 290
+          posX: 1050
+          posY: 310
         whiteboardData:
           style:
             backgroundOpacity: 0.1
@@ -221,8 +221,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
         position:
-          posX: 1310
-          posY: 330
+          posX: 1330
+          posY: 350
         whiteboardData:
           style:
             z-index: 10002
@@ -280,8 +280,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
         position:
-          posX: 1670
-          posY: 230
+          posX: 1690
+          posY: 250
         whiteboardData:
           style:
             z-index: 10003
@@ -335,8 +335,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
         position:
-          posX: 810
-          posY: 690
+          posX: 830
+          posY: 710
         whiteboardData:
           style:
             height: 259.2324655791349
@@ -422,42 +422,14 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/meshery/color/comment-color.svg
         position:
-          posX: 470
-          posY: 410
+          posX: 490
+          posY: 430
         whiteboardData:
           style:
             z-index: 10011
     type: Comment
     version: v1.0.0
-  default-mpxlq:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels: {}
-    model: kubernetes
-    name: default
-    namespace: default
-    settings: {}
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: 90a03569-99e7-4ec4-96c1-972d36723e05
-        label: default
-        meshmodel-metadata:
-          styleOverrides:
-            z-index: 10003
-        position:
-          posX: 675
-          posY: 429
-        whiteboardData:
-          style:
-            z-index: 10004
-    type: Namespace
-    version: v1.25.2
-  default-sbrgx:
+  default-jnsoj:
     annotations: {}
     apiVersion: v1
     dependsOn: []
@@ -509,12 +481,12 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/namespace-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
         position:
-          posX: 350
-          posY: 610
+          posX: 370
+          posY: 630
         whiteboardData: {}
     type: Namespace
     version: v1.25.2
-  default-slpuy:
+  default-rxvmu:
     annotations: {}
     apiVersion: v1
     dependsOn: []
@@ -535,18 +507,46 @@ services:
           styleOverrides:
             z-index: 10010
         position:
-          posX: 390
-          posY: 730
+          posX: 430
+          posY: 770
         whiteboardData:
           style:
             z-index: 10012
     type: Namespace
     version: v1.25.2
-  httpbin-dyqsj:
+  default-vnzcz:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: default
+    namespace: default
+    settings: {}
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 90a03569-99e7-4ec4-96c1-972d36723e05
+        label: default
+        meshmodel-metadata:
+          styleOverrides:
+            z-index: 10003
+        position:
+          posX: 715
+          posY: 469
+        whiteboardData:
+          style:
+            z-index: 10004
+    type: Namespace
+    version: v1.25.2
+  httpbin-dxnjc:
     annotations: {}
     apiVersion: v1
     dependsOn:
-    - default-mpxlq
+    - default-vnzcz
     id: null
     isAnnotation: null
     labels: {}
@@ -581,18 +581,96 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
         parent: 90a03569-99e7-4ec4-96c1-972d36723e05
         position:
-          posX: 590
-          posY: 390
+          posX: 630
+          posY: 430
         whiteboardData:
           style:
             z-index: 10017
     type: ServiceAccount
     version: ""
-  httpbin-frdcd:
+  httpbin-ehnfl:
+    annotations: {}
+    apiVersion: apps/v1
+    dependsOn:
+    - default-vnzcz
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: httpbin
+    namespace: default
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app: httpbin
+            version: v1
+        template:
+          metadata:
+            annotations:
+              sidecar.istio.io/log Level: info
+              sidecar.istio.io/user Volume: '[{"name":"http-filter","persistentVolumeClaim":
+                {"claimName":"wasm-pvc"}}]'
+              sidecar.istio.io/user Volume Mount: '[{"mountPath":"/var/local/wasm/http-filter.wasm","name":"http-filter",
+                "readonly": true}]'
+            labels:
+              app: httpbin
+              version: v1
+          spec:
+            containers:
+            - image: docker.io/kennethreitz/httpbin
+              image Pull Policy: IfNotPresent
+              name: httpbin
+              ports:
+              - container Port: 80
+            service Account Name: httpbin
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 81bd72b3-7e41-4e76-9a91-1290da80d615
+            metadata:
+              port: 8000
+              protocol: TCP
+            source: f2b498d5-e5bb-4657-ada4-54e6300572ce
+            subType: Network
+            target: 6cea8f56-695c-4523-91c9-97596ac7c827
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 6cea8f56-695c-4523-91c9-97596ac7c827
+        label: httpbin
+        meshmodel-metadata:
+          styleOverrides:
+            z-index: 10011
+        parent: 90a03569-99e7-4ec4-96c1-972d36723e05
+        position:
+          posX: 810
+          posY: 530
+        whiteboardData:
+          style:
+            z-index: 10020
+    type: Deployment
+    version: ""
+  httpbin-opiwp:
     annotations: {}
     apiVersion: v1
     dependsOn:
-    - default-mpxlq
+    - default-vnzcz
     id: null
     isAnnotation: null
     labels:
@@ -664,90 +742,12 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         parent: 90a03569-99e7-4ec4-96c1-972d36723e05
         position:
-          posX: 690
-          posY: 470
+          posX: 730
+          posY: 510
         whiteboardData:
           style:
             z-index: 10016
     type: Service
-    version: ""
-  httpbin-tiezu:
-    annotations: {}
-    apiVersion: apps/v1
-    dependsOn:
-    - default-mpxlq
-    id: null
-    isAnnotation: null
-    labels: {}
-    model: kubernetes
-    name: httpbin
-    namespace: default
-    settings:
-      spec:
-        replicas: 1
-        selector:
-          match Labels:
-            app: httpbin
-            version: v1
-        template:
-          metadata:
-            annotations:
-              sidecar.istio.io/log Level: info
-              sidecar.istio.io/user Volume: '[{"name":"http-filter","persistentVolumeClaim":
-                {"claimName":"wasm-pvc"}}]'
-              sidecar.istio.io/user Volume Mount: '[{"mountPath":"/var/local/wasm/http-filter.wasm","name":"http-filter",
-                "readonly": true}]'
-            labels:
-              app: httpbin
-              version: v1
-          spec:
-            containers:
-            - image: docker.io/kennethreitz/httpbin
-              image Pull Policy: IfNotPresent
-              name: httpbin
-              ports:
-              - container Port: 80
-            service Account Name: httpbin
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 81bd72b3-7e41-4e76-9a91-1290da80d615
-            metadata:
-              port: 8000
-              protocol: TCP
-            source: f2b498d5-e5bb-4657-ada4-54e6300572ce
-            subType: Network
-            target: 6cea8f56-695c-4523-91c9-97596ac7c827
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: 6cea8f56-695c-4523-91c9-97596ac7c827
-        label: httpbin
-        meshmodel-metadata:
-          styleOverrides:
-            z-index: 10011
-        parent: 90a03569-99e7-4ec4-96c1-972d36723e05
-        position:
-          posX: 770
-          posY: 490
-        whiteboardData:
-          style:
-            z-index: 10020
-    type: Deployment
     version: ""
   persistent-volume-claim-tk:
     annotations: {}
@@ -806,8 +806,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 690
-          posY: 310
+          posX: 710
+          posY: 330
         whiteboardData:
           style:
             z-index: 10013
@@ -817,7 +817,7 @@ services:
     annotations: {}
     apiVersion: v1
     dependsOn:
-    - default-mpxlq
+    - default-vnzcz
     id: null
     isAnnotation: null
     labels: {}
@@ -871,8 +871,8 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         parent: 90a03569-99e7-4ec4-96c1-972d36723e05
         position:
-          posX: 670
-          posY: 350
+          posX: 710
+          posY: 390
         whiteboardData:
           style:
             z-index: 10014
@@ -931,8 +931,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/aws-node-termination-handler-2/white/terminator-white.svg
         position:
-          posX: 1090
-          posY: 90
+          posX: 1110
+          posY: 110
         whiteboardData:
           style:
             height: 119.89819537987994
@@ -940,71 +940,11 @@ services:
             z-index: 10000
     type: Polygon
     version: v1.0.0
-  prometheus-agent-kq-hyxpt:
+  prometheus-agent-kq-lxnmd:
     annotations: {}
     apiVersion: monitoring.coreos.com/v1alpha1
     dependsOn:
-    - default-mpxlq
-    id: null
-    isAnnotation: null
-    labels: {}
-    model: kube-prometheus-stack
-    name: prometheus-agent-kq
-    namespace: default
-    settings:
-      spec:
-        port Name: web
-        scrape Interval: 30s
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: 92c6c4e0-8d61-46a9-ab77-2cd5e949eb76
-        label: prometheus-agent-kq
-        meshmodel-data:
-          category:
-            metadata: null
-            name: Observability and Analysis
-          displayName: Kube Prometheus Stack
-          displayhostname: ""
-          hostID: 00000000-0000-0000-0000-000000000000
-          hostname: ""
-          metadata:
-            source_uri: https://github.com/prometheus-community/helm-charts/releases/download/kube-prometheus-stack-48.3.1/kube-prometheus-stack-48.3.1.tgz
-            svgColor: ui/public/static/img/meshmodels/kube-prometheus-stack/color/alertmanager-color.svg
-            svgWhite: ui/public/static/img/meshmodels/kube-prometheus-stack/white/alertmanager-white.svg
-          name: kube-prometheus-stack
-          version: 45.7.1
-        meshmodel-metadata:
-          genealogy: ""
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/examples/graduated.md#prometheus-logos
-          model: kube-prometheus-stack
-          modelDisplayName: Kube Prometheus Stack
-          primaryColor: '#e75225'
-          published: true
-          secondaryColor: '#ec7551'
-          shape: circle
-          styleOverrides:
-            z-index: 10016
-          subCategory: Monitoring
-          svgColor: ui/public/static/img/meshmodels/kube-prometheus-stack/color/alertmanager-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kube-prometheus-stack/white/alertmanager-white.svg
-        parent: 90a03569-99e7-4ec4-96c1-972d36723e05
-        position:
-          posX: 590
-          posY: 490
-        whiteboardData:
-          style:
-            z-index: 10019
-    type: PrometheusAgent
-    version: 45.7.1
-  prometheus-agent-kq-snmmt:
-    annotations: {}
-    apiVersion: monitoring.coreos.com/v1alpha1
-    dependsOn:
-    - default-slpuy
+    - default-rxvmu
     id: null
     isAnnotation: null
     labels: {}
@@ -1053,18 +993,78 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kube-prometheus-stack/white/alertmanager-white.svg
         parent: default-0.36666712957812786
         position:
-          posX: 390
-          posY: 730
+          posX: 430
+          posY: 770
         whiteboardData:
           style:
             z-index: 10018
+    type: PrometheusAgent
+    version: 45.7.1
+  prometheus-agent-kq-xhltu:
+    annotations: {}
+    apiVersion: monitoring.coreos.com/v1alpha1
+    dependsOn:
+    - default-vnzcz
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kube-prometheus-stack
+    name: prometheus-agent-kq
+    namespace: default
+    settings:
+      spec:
+        port Name: web
+        scrape Interval: 30s
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 92c6c4e0-8d61-46a9-ab77-2cd5e949eb76
+        label: prometheus-agent-kq
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Observability and Analysis
+          displayName: Kube Prometheus Stack
+          displayhostname: ""
+          hostID: 00000000-0000-0000-0000-000000000000
+          hostname: ""
+          metadata:
+            source_uri: https://github.com/prometheus-community/helm-charts/releases/download/kube-prometheus-stack-48.3.1/kube-prometheus-stack-48.3.1.tgz
+            svgColor: ui/public/static/img/meshmodels/kube-prometheus-stack/color/alertmanager-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kube-prometheus-stack/white/alertmanager-white.svg
+          name: kube-prometheus-stack
+          version: 45.7.1
+        meshmodel-metadata:
+          genealogy: ""
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/examples/graduated.md#prometheus-logos
+          model: kube-prometheus-stack
+          modelDisplayName: Kube Prometheus Stack
+          primaryColor: '#e75225'
+          published: true
+          secondaryColor: '#ec7551'
+          shape: circle
+          styleOverrides:
+            z-index: 10016
+          subCategory: Monitoring
+          svgColor: ui/public/static/img/meshmodels/kube-prometheus-stack/color/alertmanager-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kube-prometheus-stack/white/alertmanager-white.svg
+        parent: 90a03569-99e7-4ec4-96c1-972d36723e05
+        position:
+          posX: 630
+          posY: 530
+        whiteboardData:
+          style:
+            z-index: 10019
     type: PrometheusAgent
     version: 45.7.1
   wasm-plugin-dp:
     annotations: {}
     apiVersion: extensions.istio.io/v1alpha1
     dependsOn:
-    - default-mpxlq
+    - default-vnzcz
     id: null
     isAnnotation: null
     labels: {}
@@ -1113,8 +1113,8 @@ services:
           svgWhite: ui/public/static/img/meshmodels/istio-base/white/authorizationpolicy-white.svg
         parent: 90a03569-99e7-4ec4-96c1-972d36723e05
         position:
-          posX: 770
-          posY: 410
+          posX: 810
+          posY: 450
         whiteboardData:
           style:
             z-index: 10015
@@ -1173,8 +1173,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 730
-          posY: 330
+          posX: 750
+          posY: 350
         whiteboardData:
           style:
             z-index: 10010

@@ -1,5 +1,5 @@
 name: Wordpress Deployment
-version: 0.0.5
+version: 0.0.7
 services:
   local-pv-1:
     annotations: {}
@@ -46,8 +46,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: -90
-          posY: 30
+          posX: -70
+          posY: 50
         whiteboardData:
           style:
             z-index: 4
@@ -104,8 +104,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: -10
-          posY: 110
+          posX: 10
+          posY: 130
         whiteboardData:
           style:
             z-index: 3
@@ -161,43 +161,70 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 90
-          posY: 90
+          posX: 110
+          posY: 110
         whiteboardData:
           style:
             z-index: 3
     type: PersistentVolumeClaim
     version: ""
-  wordpress-mysql-eyszm:
+  wordpress-gnwcx:
     annotations: {}
-    apiVersion: v1
+    apiVersion: apps/v1
     dependsOn: []
     id: null
     isAnnotation: null
     labels:
-      app: wordpress-sql
+      app: wordpress
     model: kubernetes
-    name: wordpress-mysql
+    name: wordpress
     namespace: default
     settings:
       spec:
-        cluster IP: None
-        ports:
-        - port: 3306
         selector:
-          app: wordpress
-          tier: mysql
+          match Labels:
+            app: wordpress
+            tier: frontend
+        strategy:
+          type: Recreate
+        template:
+          metadata:
+            labels:
+              app: wordpress
+              tier: frontend
+          spec:
+            containers:
+            - env:
+              - name: WORDPRESS_DB_HOST
+                value: wordpress-mysql
+              - name: WORDPRESS_DB_PASSWORD
+                value From:
+                  secret Key Ref:
+                    key: password
+                    name: mysql-pass
+              image: wordpress:4.8-apache
+              name: wordpress
+              ports:
+              - container Port: 80
+                name: wordpress
+              volume Mounts:
+              - mount Path: /var/www/html
+                name: wordpress-persistent-storage
+            volumes:
+            - name: wordpress-persistent-storage
+              persistent Volume Claim:
+                claim Name: wp-pv-claim
     traits:
       meshmap:
         edges:
         - data:
-            id: 391aadf0-4063-436d-af97-e8c7d3ddb529
+            id: 51df05b9-0fba-4265-880d-74d471a716d3
             metadata:
-              port: 3306
+              port: 80
               protocol: TCP
-            source: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
+            source: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
             subType: Network
-            target: 4fd2c98d-55a8-4ee6-8c44-74fb737d3d2a
+            target: f3df161e-75c3-49ba-9ea4-0778ca2515f3
           style:
             control-point-distances: null
             control-point-weights: "0.5"
@@ -214,8 +241,87 @@ services:
             taxi-turn-min-distance: 10px
             width: 1.5px
         fieldRefData: {}
-        id: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
-        label: wordpress-mysql
+        id: f3df161e-75c3-49ba-9ea4-0778ca2515f3
+        label: wordpress
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: parent
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          styleOverrides:
+            background-image: none
+            background-opacity: 0.5
+            border-width: 2
+            z-index: 9
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+        position:
+          posX: 130
+          posY: -90
+        whiteboardData:
+          style:
+            z-index: 7
+    type: Deployment
+    version: ""
+  wordpress-mqoma:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app: wordpress
+    model: kubernetes
+    name: wordpress
+    namespace: default
+    settings:
+      spec:
+        ports:
+        - port: 80
+          protocol: TCP
+        selector:
+          app: wordpress
+          tier: frontend
+        type: LoadBalancer
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 51df05b9-0fba-4265-880d-74d471a716d3
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
+            subType: Network
+            target: f3df161e-75c3-49ba-9ea4-0778ca2515f3
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
         meshmodel-metadata:
           capabilities: ""
           genealogy: ""
@@ -238,20 +344,20 @@ services:
             width: 20
             x: 10px
             "y": 12px
-            z-index: 3
+            z-index: 11
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/connection-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/connection-white.svg
         position:
-          posX: 90
-          posY: 190
+          posX: 10
+          posY: -50
         whiteboardData:
           style:
-            z-index: 6
+            z-index: 5
     type: Service
     version: ""
-  wordpress-mysql-ucoou:
+  wordpress-mysql-iikag:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -351,70 +457,43 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
-          posX: 190
-          posY: 90
+          posX: 210
+          posY: 110
         whiteboardData:
           style:
             z-index: 9
     type: Deployment
     version: ""
-  wordpress-phdgn:
+  wordpress-mysql-wwehq:
     annotations: {}
-    apiVersion: apps/v1
+    apiVersion: v1
     dependsOn: []
     id: null
     isAnnotation: null
     labels:
-      app: wordpress
+      app: wordpress-sql
     model: kubernetes
-    name: wordpress
+    name: wordpress-mysql
     namespace: default
     settings:
       spec:
+        cluster IP: None
+        ports:
+        - port: 3306
         selector:
-          match Labels:
-            app: wordpress
-            tier: frontend
-        strategy:
-          type: Recreate
-        template:
-          metadata:
-            labels:
-              app: wordpress
-              tier: frontend
-          spec:
-            containers:
-            - env:
-              - name: WORDPRESS_DB_HOST
-                value: wordpress-mysql
-              - name: WORDPRESS_DB_PASSWORD
-                value From:
-                  secret Key Ref:
-                    key: password
-                    name: mysql-pass
-              image: wordpress:4.8-apache
-              name: wordpress
-              ports:
-              - container Port: 80
-                name: wordpress
-              volume Mounts:
-              - mount Path: /var/www/html
-                name: wordpress-persistent-storage
-            volumes:
-            - name: wordpress-persistent-storage
-              persistent Volume Claim:
-                claim Name: wp-pv-claim
+          app: wordpress
+          tier: mysql
     traits:
       meshmap:
         edges:
         - data:
-            id: 51df05b9-0fba-4265-880d-74d471a716d3
+            id: 391aadf0-4063-436d-af97-e8c7d3ddb529
             metadata:
-              port: 80
+              port: 3306
               protocol: TCP
-            source: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
+            source: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
             subType: Network
-            target: f3df161e-75c3-49ba-9ea4-0778ca2515f3
+            target: 4fd2c98d-55a8-4ee6-8c44-74fb737d3d2a
           style:
             control-point-distances: null
             control-point-weights: "0.5"
@@ -431,38 +510,42 @@ services:
             taxi-turn-min-distance: 10px
             width: 1.5px
         fieldRefData: {}
-        id: f3df161e-75c3-49ba-9ea4-0778ca2515f3
-        label: wordpress
+        id: f8c27c9b-8e54-4ed2-a612-467ad2bb0397
+        label: wordpress-mysql
         meshmodel-metadata:
           capabilities: ""
-          genealogy: parent
+          genealogy: ""
           isAnnotation: false
           isCustomResource: false
           isModelAnnotation: "FALSE"
           isNamespaced: true
-          logoURL: Created by Meshery Authors
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
-          shape: round-pentagon
+          shape: round-triangle
           styleOverrides:
-            background-image: none
-            background-opacity: 0.5
-            border-width: 2
-            z-index: 9
+            background-fit: none
+            background-position-y: 4.5
+            height: 20
+            padding: 12
+            width: 20
+            x: 10px
+            "y": 12px
+            z-index: 3
           subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/connection-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/connection-white.svg
         position:
           posX: 110
-          posY: -110
+          posY: 210
         whiteboardData:
           style:
-            z-index: 7
-    type: Deployment
+            z-index: 6
+    type: Service
     version: ""
   wordpress-pv-1:
     annotations:
@@ -516,8 +599,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 230
-          posY: -50
+          posX: 250
+          posY: -30
         whiteboardData:
           style:
             z-index: 4
@@ -575,95 +658,12 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 270
-          posY: 90
+          posX: 290
+          posY: 110
         whiteboardData:
           style:
             z-index: 3
     type: PersistentVolume
-    version: ""
-  wordpress-vjygp:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app: wordpress
-    model: kubernetes
-    name: wordpress
-    namespace: default
-    settings:
-      spec:
-        ports:
-        - port: 80
-          protocol: TCP
-        selector:
-          app: wordpress
-          tier: frontend
-        type: LoadBalancer
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 51df05b9-0fba-4265-880d-74d471a716d3
-            metadata:
-              port: 80
-              protocol: TCP
-            source: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
-            subType: Network
-            target: f3df161e-75c3-49ba-9ea4-0778ca2515f3
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: 1461e0d7-561c-48b4-a8c9-b30438d1f16d
-        meshmodel-metadata:
-          capabilities: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides:
-            background-fit: none
-            background-position-y: 4.5
-            height: 20
-            padding: 12
-            width: 20
-            x: 10px
-            "y": 12px
-            z-index: 11
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/connection-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/connection-white.svg
-        position:
-          posX: -10
-          posY: -70
-        whiteboardData:
-          style:
-            z-index: 5
-    type: Service
     version: ""
   wp-pv-claim:
     annotations: {}
@@ -715,8 +715,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/persistentvolume-color.svg
         position:
-          posX: 70
-          posY: -10
+          posX: 90
+          posY: 10
         whiteboardData:
           style:
             z-index: 6

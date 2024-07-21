@@ -1,7 +1,91 @@
 name: Hello Kubernetes Tutorial
-version: 0.0.9
+version: 0.0.12
 services:
-  nodeapp-udgpf:
+  nodeapp-mqbcy:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app: node
+    model: kubernetes
+    name: nodeapp
+    namespace: default
+    settings:
+      spec:
+        ports:
+        - port: 80
+          protocol: TCP
+          target Port: 3000
+        selector:
+          app: node
+        type: LoadBalancer
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 229022c1-beed-45ca-bc02-c138af656303
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 6e167eb9-d90b-4673-844d-535b496f6627
+            subType: Network
+            target: e96eabec-6a07-4b34-b3b6-4ba3f9467c6c
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 6e167eb9-d90b-4673-844d-535b496f6627
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            background-position-y: 4.5
+            height: 20
+            padding: 12
+            width: 20
+            x: 10px
+            "y": 12px
+            z-index: 3
+          styles: '{"height":20,"width":20,"padding":12,"background-position-y":4.5,"x":"10px","y":"12px"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/service-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
+        position:
+          posX: 90
+          posY: 90
+        whiteboardData:
+          style: {}
+    type: Service
+    version: ""
+  nodeapp-odlpq:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -100,97 +184,13 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 190
-          posY: 270
+          posX: 230
+          posY: 310
         whiteboardData:
           style: {}
     type: Deployment
     version: ""
-  nodeapp-udldk:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app: node
-    model: kubernetes
-    name: nodeapp
-    namespace: default
-    settings:
-      spec:
-        ports:
-        - port: 80
-          protocol: TCP
-          target Port: 3000
-        selector:
-          app: node
-        type: LoadBalancer
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 229022c1-beed-45ca-bc02-c138af656303
-            metadata:
-              port: 80
-              protocol: TCP
-            source: 6e167eb9-d90b-4673-844d-535b496f6627
-            subType: Network
-            target: e96eabec-6a07-4b34-b3b6-4ba3f9467c6c
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: 6e167eb9-d90b-4673-844d-535b496f6627
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            background-position-y: 4.5
-            height: 20
-            padding: 12
-            width: 20
-            x: 10px
-            "y": 12px
-            z-index: 3
-          styles: '{"height":20,"width":20,"padding":12,"background-position-y":4.5,"x":"10px","y":"12px"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/service-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
-        position:
-          posX: 70
-          posY: 70
-        whiteboardData:
-          style: {}
-    type: Service
-    version: ""
-  nodegroupinventorywallet-sraee:
+  nodegroupinventorywallet-eleva:
     annotations: {}
     apiVersion: core.meshery.io/v1alpha1
     dependsOn:
@@ -284,16 +284,16 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: b1c027c0-9615-4eb0-b01d-6eb3d15a1dbb
         position:
-          posX: 250
-          posY: 210
+          posX: 290
+          posY: 250
         whiteboardData: {}
     type: NodeGroupInventoryWallet
     version: 0.7.1
-  nodegroupinventorywallet-zedzw:
+  nodegroupinventorywallet-useyv:
     annotations: {}
     apiVersion: core.meshery.io/v1alpha1
     dependsOn:
-    - nodeapp-udgpf
+    - nodeapp-odlpq
     id: null
     isAnnotation: null
     labels: {}
@@ -383,8 +383,8 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: e96eabec-6a07-4b34-b3b6-4ba3f9467c6c
         position:
-          posX: 190
-          posY: 270
+          posX: 230
+          posY: 310
         whiteboardData: {}
     type: NodeGroupInventoryWallet
     version: 0.7.1
@@ -454,8 +454,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 250
-          posY: 210
+          posX: 290
+          posY: 250
         whiteboardData:
           style: {}
     type: Deployment
@@ -512,8 +512,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/dapr/white/component-white.svg
         position:
-          posX: 110
-          posY: 50
+          posX: 130
+          posY: 70
         whiteboardData:
           style: {}
     type: Component
