@@ -1,7 +1,59 @@
 name: Bank of Anthos
-version: 0.0.5
+version: 0.0.6
 services:
-  accounts-db-bxqjc:
+  accounts-db-config:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app: accounts-db
+      application: bank-of-anthos
+      environment: development
+      team: accounts
+      tier: db
+    model: kubernetes
+    name: accounts-db-config
+    namespace: default
+    settings:
+      data:
+        ACCOUNTS_DB_URI: postgresql://accounts-admin:accounts-pwd@accounts-db:5432/accounts-db
+        POSTGRES_DB: accounts-db
+        POSTGRES_PASSWORD: accounts-pwd
+        POSTGRES_USER: accounts-admin
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: ab29e114-9723-44a4-995c-f4d2b9907eec
+        label: accounts-db-config
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: circle
+          styleOverrides:
+            z-index: 3
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: 170
+          posY: 190
+        whiteboardData:
+          style:
+            z-index: 26
+    type: ConfigMap
+    version: ""
+  accounts-db-gkdhz:
     annotations: {}
     apiVersion: v1
     dependsOn: []
@@ -59,59 +111,7 @@ services:
             z-index: 27
     type: Service
     version: ""
-  accounts-db-config:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app: accounts-db
-      application: bank-of-anthos
-      environment: development
-      team: accounts
-      tier: db
-    model: kubernetes
-    name: accounts-db-config
-    namespace: default
-    settings:
-      data:
-        ACCOUNTS_DB_URI: postgresql://accounts-admin:accounts-pwd@accounts-db:5432/accounts-db
-        POSTGRES_DB: accounts-db
-        POSTGRES_PASSWORD: accounts-pwd
-        POSTGRES_USER: accounts-admin
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: ab29e114-9723-44a4-995c-f4d2b9907eec
-        label: accounts-db-config
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: circle
-          styleOverrides:
-            z-index: 3
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        position:
-          posX: 170
-          posY: 190
-        whiteboardData:
-          style:
-            z-index: 26
-    type: ConfigMap
-    version: ""
-  accounts-db-gglgf:
+  accounts-db-xyusp:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -198,7 +198,93 @@ services:
             z-index: 17
     type: StatefulSet
     version: ""
-  balancereader-ongbo:
+  balancereader-cydcq:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      application: bank-of-anthos
+      environment: development
+      team: ledger
+      tier: backend
+    model: kubernetes
+    name: balancereader
+    namespace: default
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 8080
+          target Port: 8080
+        selector:
+          app: balancereader
+          application: bank-of-anthos
+          environment: development
+          team: ledger
+          tier: backend
+        type: ClusterIP
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 7173b134-7795-420a-9e08-33b4ae6cc186
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: 4b23ec9e-ec0b-4ec9-a6e6-7630d0f16ce9
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 4b23ec9e-ec0b-4ec9-a6e6-7630d0f16ce9
+        label: balancereader
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides:
+            background-fit: none
+            background-position-y: 4.5
+            height: 16
+            padding: 12
+            width: 17
+            z-index: 22
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: -130
+          posY: 130
+        whiteboardData:
+          style:
+            z-index: 31
+    type: Service
+    version: ""
+  balancereader-jqbsv:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -354,92 +440,6 @@ services:
             z-index: 18
     type: Deployment
     version: ""
-  balancereader-opmqg:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      application: bank-of-anthos
-      environment: development
-      team: ledger
-      tier: backend
-    model: kubernetes
-    name: balancereader
-    namespace: default
-    settings:
-      spec:
-        ports:
-        - name: http
-          port: 8080
-          target Port: 8080
-        selector:
-          app: balancereader
-          application: bank-of-anthos
-          environment: development
-          team: ledger
-          tier: backend
-        type: ClusterIP
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 7173b134-7795-420a-9e08-33b4ae6cc186
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: 4b23ec9e-ec0b-4ec9-a6e6-7630d0f16ce9
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: 4b23ec9e-ec0b-4ec9-a6e6-7630d0f16ce9
-        label: balancereader
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides:
-            background-fit: none
-            background-position-y: 4.5
-            height: 16
-            padding: 12
-            width: 17
-            z-index: 22
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        position:
-          posX: -130
-          posY: 130
-        whiteboardData:
-          style:
-            z-index: 31
-    type: Service
-    version: ""
   bank-of-anthos:
     annotations:
       iam.gke.io/gcp-service-account: gke-workload-development@bank-of-anthos-ci.iam.gserviceaccount.com
@@ -483,93 +483,7 @@ services:
             z-index: 15
     type: ServiceAccount
     version: ""
-  contacts-arpdn:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      application: bank-of-anthos
-      environment: development
-      team: accounts
-      tier: backend
-    model: kubernetes
-    name: contacts
-    namespace: default
-    settings:
-      spec:
-        ports:
-        - name: http
-          port: 8080
-          target Port: 8080
-        selector:
-          app: contacts
-          application: bank-of-anthos
-          environment: development
-          team: accounts
-          tier: backend
-        type: ClusterIP
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: ed7b7187-70c7-402d-8338-b9fb4c25f900
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: a742186c-9607-471e-bf94-23898c3ac909
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: a742186c-9607-471e-bf94-23898c3ac909
-        label: contacts
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides:
-            background-fit: none
-            background-position-y: 4.5
-            height: 16
-            padding: 12
-            width: 17
-            z-index: 15
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        position:
-          posX: -50
-          posY: 110
-        whiteboardData:
-          style:
-            z-index: 20
-    type: Service
-    version: ""
-  contacts-flrfx:
+  contacts-ewdpe:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -698,6 +612,92 @@ services:
             z-index: 8
     type: Deployment
     version: ""
+  contacts-fntan:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      application: bank-of-anthos
+      environment: development
+      team: accounts
+      tier: backend
+    model: kubernetes
+    name: contacts
+    namespace: default
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 8080
+          target Port: 8080
+        selector:
+          app: contacts
+          application: bank-of-anthos
+          environment: development
+          team: accounts
+          tier: backend
+        type: ClusterIP
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: ed7b7187-70c7-402d-8338-b9fb4c25f900
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: a742186c-9607-471e-bf94-23898c3ac909
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: a742186c-9607-471e-bf94-23898c3ac909
+        label: contacts
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides:
+            background-fit: none
+            background-position-y: 4.5
+            height: 16
+            padding: 12
+            width: 17
+            z-index: 15
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: -50
+          posY: 110
+        whiteboardData:
+          style:
+            z-index: 20
+    type: Service
+    version: ""
   demo-data-config:
     annotations: {}
     apiVersion: v1
@@ -789,7 +789,93 @@ services:
             z-index: 21
     type: ConfigMap
     version: ""
-  frontend-lomxf:
+  frontend-ekbns:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      application: bank-of-anthos
+      environment: development
+      team: frontend
+      tier: web
+    model: kubernetes
+    name: frontend
+    namespace: default
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 80
+          target Port: 8080
+        selector:
+          app: frontend
+          application: bank-of-anthos
+          environment: development
+          team: frontend
+          tier: web
+        type: LoadBalancer
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: f96294f7-c6ba-4099-b576-d1938769c4e2
+            metadata:
+              port: 80
+              protocol: TCP
+            source: c114a0f5-ef57-4cbd-8be7-70f94256972c
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: c114a0f5-ef57-4cbd-8be7-70f94256972c
+        label: frontend
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides:
+            background-fit: none
+            background-position-y: 4.5
+            height: 16
+            padding: 12
+            width: 17
+            z-index: 8
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: -30
+          posY: -90
+        whiteboardData:
+          style:
+            z-index: 10
+    type: Service
+    version: ""
+  frontend-rdxrw:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -944,62 +1030,87 @@ services:
             z-index: 11
     type: Deployment
     version: ""
-  frontend-pxlxr:
+  ledger-db-config:
     annotations: {}
     apiVersion: v1
     dependsOn: []
     id: null
     isAnnotation: null
     labels:
+      app: postgres
       application: bank-of-anthos
       environment: development
-      team: frontend
-      tier: web
+      team: ledger
+      tier: db
     model: kubernetes
-    name: frontend
+    name: ledger-db-config
+    namespace: default
+    settings:
+      data:
+        POSTGRES_DB: postgresdb
+        POSTGRES_PASSWORD: password
+        POSTGRES_USER: admin
+        SPRING_DATASOURCE_PASSWORD: password
+        SPRING_DATASOURCE_URL: jdbc:postgresql://ledger-db:5432/postgresdb
+        SPRING_DATASOURCE_USERNAME: admin
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 8ce77712-9f41-4e7a-8955-125ab3565f8f
+        label: ledger-db-config
+        meshmodel-metadata:
+          genealogy: ""
+          isCustomResource: false
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: circle
+          styleOverrides:
+            z-index: 16
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: 250
+          posY: 130
+        whiteboardData:
+          style:
+            z-index: 32
+    type: ConfigMap
+    version: ""
+  ledger-db-ctklv:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      environment: development
+    model: kubernetes
+    name: ledger-db
     namespace: default
     settings:
       spec:
         ports:
-        - name: http
-          port: 80
-          target Port: 8080
+        - name: tcp
+          port: 5432
+          target Port: 5432
         selector:
-          app: frontend
-          application: bank-of-anthos
+          app: ledger-db
           environment: development
-          team: frontend
-          tier: web
-        type: LoadBalancer
+        type: ClusterIP
     traits:
       meshmap:
-        edges:
-        - data:
-            id: f96294f7-c6ba-4099-b576-d1938769c4e2
-            metadata:
-              port: 80
-              protocol: TCP
-            source: c114a0f5-ef57-4cbd-8be7-70f94256972c
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
+        edges: []
         fieldRefData: {}
-        id: c114a0f5-ef57-4cbd-8be7-70f94256972c
-        label: frontend
+        id: 9f6e7ca4-4009-42d2-8cbc-20436817491b
+        label: ledger-db
         meshmodel-metadata:
           genealogy: ""
           isCustomResource: false
@@ -1017,20 +1128,20 @@ services:
             height: 16
             padding: 12
             width: 17
-            z-index: 8
+            z-index: 10
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
-          posX: -30
-          posY: -90
+          posX: 170
+          posY: 70
         whiteboardData:
           style:
-            z-index: 10
+            z-index: 3
     type: Service
     version: ""
-  ledger-db-bmuan:
+  ledger-db-dzpdy:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -1117,87 +1228,62 @@ services:
             z-index: 4
     type: StatefulSet
     version: ""
-  ledger-db-config:
+  ledgerwriter-hbtqg:
     annotations: {}
     apiVersion: v1
     dependsOn: []
     id: null
     isAnnotation: null
     labels:
-      app: postgres
       application: bank-of-anthos
       environment: development
       team: ledger
-      tier: db
+      tier: backend
     model: kubernetes
-    name: ledger-db-config
-    namespace: default
-    settings:
-      data:
-        POSTGRES_DB: postgresdb
-        POSTGRES_PASSWORD: password
-        POSTGRES_USER: admin
-        SPRING_DATASOURCE_PASSWORD: password
-        SPRING_DATASOURCE_URL: jdbc:postgresql://ledger-db:5432/postgresdb
-        SPRING_DATASOURCE_USERNAME: admin
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: 8ce77712-9f41-4e7a-8955-125ab3565f8f
-        label: ledger-db-config
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: circle
-          styleOverrides:
-            z-index: 16
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        position:
-          posX: 250
-          posY: 130
-        whiteboardData:
-          style:
-            z-index: 32
-    type: ConfigMap
-    version: ""
-  ledger-db-cpfew:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      environment: development
-    model: kubernetes
-    name: ledger-db
+    name: ledgerwriter
     namespace: default
     settings:
       spec:
         ports:
-        - name: tcp
-          port: 5432
-          target Port: 5432
+        - name: http
+          port: 8080
+          target Port: 8080
         selector:
-          app: ledger-db
+          app: ledgerwriter
+          application: bank-of-anthos
           environment: development
+          team: ledger
+          tier: backend
         type: ClusterIP
     traits:
       meshmap:
-        edges: []
+        edges:
+        - data:
+            id: 70945f25-700c-4ddb-b620-432c06343493
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: 8e248f7f-b5ba-4543-abe3-df3d3af30453
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
         fieldRefData: {}
-        id: 9f6e7ca4-4009-42d2-8cbc-20436817491b
-        label: ledger-db
+        id: 8e248f7f-b5ba-4543-abe3-df3d3af30453
+        label: ledgerwriter
         meshmodel-metadata:
           genealogy: ""
           isCustomResource: false
@@ -1215,20 +1301,20 @@ services:
             height: 16
             padding: 12
             width: 17
-            z-index: 10
+            z-index: 18
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
-          posX: 170
-          posY: 70
+          posX: -210
+          posY: 50
         whiteboardData:
           style:
-            z-index: 3
+            z-index: 28
     type: Service
     version: ""
-  ledgerwriter-djuyn:
+  ledgerwriter-vqhdf:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -1374,92 +1460,6 @@ services:
           style:
             z-index: 22
     type: Deployment
-    version: ""
-  ledgerwriter-sgdgx:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      application: bank-of-anthos
-      environment: development
-      team: ledger
-      tier: backend
-    model: kubernetes
-    name: ledgerwriter
-    namespace: default
-    settings:
-      spec:
-        ports:
-        - name: http
-          port: 8080
-          target Port: 8080
-        selector:
-          app: ledgerwriter
-          application: bank-of-anthos
-          environment: development
-          team: ledger
-          tier: backend
-        type: ClusterIP
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 70945f25-700c-4ddb-b620-432c06343493
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: 8e248f7f-b5ba-4543-abe3-df3d3af30453
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: 8e248f7f-b5ba-4543-abe3-df3d3af30453
-        label: ledgerwriter
-        meshmodel-metadata:
-          genealogy: ""
-          isCustomResource: false
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides:
-            background-fit: none
-            background-position-y: 4.5
-            height: 16
-            padding: 12
-            width: 17
-            z-index: 18
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        position:
-          posX: -210
-          posY: 50
-        whiteboardData:
-          style:
-            z-index: 28
-    type: Service
     version: ""
   loadgenerator:
     annotations: {}
@@ -1607,7 +1607,7 @@ services:
             z-index: 13
     type: ConfigMap
     version: ""
-  transactionhistory-nsfvg:
+  transactionhistory-flqae:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -1767,7 +1767,7 @@ services:
             z-index: 5
     type: Deployment
     version: ""
-  transactionhistory-qygmi:
+  transactionhistory-jlmya:
     annotations: {}
     apiVersion: v1
     dependsOn: []
@@ -1853,7 +1853,7 @@ services:
             z-index: 14
     type: Service
     version: ""
-  userservice-nudez:
+  userservice-jtppw:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -1961,6 +1961,29 @@ services:
     traits:
       meshmap:
         edges:
+        - data:
+            id: ed7b7187-70c7-402d-8338-b9fb4c25f900
+            metadata:
+              port: 8080
+              protocol: TCP
+            source: a742186c-9607-471e-bf94-23898c3ac909
+            subType: Network
+            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
         - data:
             id: 7173b134-7795-420a-9e08-33b4ae6cc186
             metadata:
@@ -2076,29 +2099,6 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
-        - data:
-            id: ed7b7187-70c7-402d-8338-b9fb4c25f900
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: a742186c-9607-471e-bf94-23898c3ac909
-            subType: Network
-            target: df7db55f-5535-4e9e-a19f-d71d8aa024a3
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
         fieldRefData: {}
         id: df7db55f-5535-4e9e-a19f-d71d8aa024a3
         label: userservice
@@ -2130,7 +2130,7 @@ services:
             z-index: 29
     type: Deployment
     version: ""
-  userservice-vpygx:
+  userservice-vfgdu:
     annotations: {}
     apiVersion: v1
     dependsOn: []
