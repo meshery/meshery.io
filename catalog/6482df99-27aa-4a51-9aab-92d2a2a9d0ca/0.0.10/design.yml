@@ -1,7 +1,190 @@
 name: Node Problem Detector
-version: 0.0.10
+version: 0.0.11
 services:
-  node-problem-detector-agdmw:
+  node-problem-detector-custom-config:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/instance: node-problem-detector
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: node-problem-detector
+      helm.sh/chart: node-problem-detector-2.3.13
+    model: kubernetes
+    name: node-problem-detector-custom-config
+    namespace: default
+    settings:
+      data: {}
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 7de1624e-2c79-43d1-aecb-32e082141ca1
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: bottom-round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            z-index: 3
+          styles: ""
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/configmap-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/configmap-white.svg
+        position:
+          posX: 130
+          posY: 90
+        whiteboardData:
+          style: {}
+    type: ConfigMap
+    version: ""
+  node-problem-detector-feirl:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/instance: node-problem-detector
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: node-problem-detector
+      helm.sh/chart: node-problem-detector-2.3.13
+    model: kubernetes
+    name: node-problem-detector
+    namespace: ""
+    settings:
+      role Ref:
+        api Group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: node-problem-detector
+      subjects:
+      - kind: ServiceAccount
+        name: node-problem-detector
+        namespace: default
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 296da4b5-dd96-49c5-8a50-00ff9c3b876f
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
+          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+        position:
+          posX: 30
+          posY: 130
+        whiteboardData:
+          style:
+            height: 10.5
+            width: 10.5
+            z-index: 1000
+    type: ClusterRoleBinding
+    version: ""
+  node-problem-detector-joqmw:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/instance: node-problem-detector
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: node-problem-detector
+      helm.sh/chart: node-problem-detector-2.3.13
+    model: kubernetes
+    name: node-problem-detector
+    namespace: default
+    settings: {}
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 3f798204-4e48-4a6d-b12d-7e449c4a8332
+            metadata:
+              binded_by: 296da4b5-dd96-49c5-8a50-00ff9c3b876f
+            source: c664f805-7c7c-4880-8c3a-07fb270830c1
+            subType: Permission
+            target: 98e326b9-bff6-4c27-8dde-40b2700ca498
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 98e326b9-bff6-4c27-8dde-40b2700ca498
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: bottom-round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            z-index: 1003
+          styles: ""
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/serviceaccount-white.svg
+        position:
+          posX: 30
+          posY: 150
+        whiteboardData:
+          style: {}
+    type: ServiceAccount
+    version: ""
+  node-problem-detector-pqtuq:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -125,64 +308,13 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/daemonset-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/daemonset-white.svg
         position:
-          posX: 110
-          posY: -10
+          posX: 130
+          posY: 10
         whiteboardData:
           style: {}
     type: DaemonSet
     version: ""
-  node-problem-detector-custom-config:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/instance: node-problem-detector
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: node-problem-detector
-      helm.sh/chart: node-problem-detector-2.3.13
-    model: kubernetes
-    name: node-problem-detector-custom-config
-    namespace: default
-    settings:
-      data: {}
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: 7de1624e-2c79-43d1-aecb-32e082141ca1
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: bottom-round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            z-index: 3
-          styles: ""
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/configmap-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/configmap-white.svg
-        position:
-          posX: 110
-          posY: 70
-        whiteboardData:
-          style: {}
-    type: ConfigMap
-    version: ""
-  node-problem-detector-iouqb:
+  node-problem-detector-rsibo:
     annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
     dependsOn: []
@@ -273,141 +405,9 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
         position:
-          posX: 10
-          posY: 70
+          posX: 30
+          posY: 90
         whiteboardData:
           style: {}
     type: ClusterRole
-    version: ""
-  node-problem-detector-lqtaq:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/instance: node-problem-detector
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: node-problem-detector
-      helm.sh/chart: node-problem-detector-2.3.13
-    model: kubernetes
-    name: node-problem-detector
-    namespace: default
-    settings: {}
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 3f798204-4e48-4a6d-b12d-7e449c4a8332
-            metadata:
-              binded_by: 296da4b5-dd96-49c5-8a50-00ff9c3b876f
-            source: c664f805-7c7c-4880-8c3a-07fb270830c1
-            subType: Permission
-            target: 98e326b9-bff6-4c27-8dde-40b2700ca498
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: 98e326b9-bff6-4c27-8dde-40b2700ca498
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: bottom-round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            z-index: 1003
-          styles: ""
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/serviceaccount-white.svg
-        position:
-          posX: 10
-          posY: 130
-        whiteboardData:
-          style: {}
-    type: ServiceAccount
-    version: ""
-  node-problem-detector-wwzlf:
-    annotations: {}
-    apiVersion: rbac.authorization.k8s.io/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/instance: node-problem-detector
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: node-problem-detector
-      helm.sh/chart: node-problem-detector-2.3.13
-    model: kubernetes
-    name: node-problem-detector
-    namespace: ""
-    settings:
-      role Ref:
-        api Group: rbac.authorization.k8s.io
-        kind: ClusterRole
-        name: node-problem-detector
-      subjects:
-      - kind: ServiceAccount
-        name: node-problem-detector
-        namespace: default
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: 296da4b5-dd96-49c5-8a50-00ff9c3b876f
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
-          logoURL: Created by Meshery Authors
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
-          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
-        position:
-          posX: 10
-          posY: 100.10625
-        whiteboardData:
-          style:
-            height: 10.5
-            width: 10.5
-            z-index: 1000
-    type: ClusterRoleBinding
     version: ""

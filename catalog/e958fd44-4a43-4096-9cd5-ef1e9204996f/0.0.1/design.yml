@@ -1,5 +1,5 @@
 name: KEDA Setup
-version: 0.0.4
+version: 0.0.11
 services:
   cloudeventsources.eventing.keda.sh:
     annotations:
@@ -937,97 +937,7 @@ services:
           style: {}
     type: ValidatingWebhookConfiguration
     version: ""
-  keda-admission-webhooks-jkhxu:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/component: operator
-      app.kubernetes.io/instance: keda
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: keda-admission-webhooks
-      app.kubernetes.io/part-of: keda-operator
-      app.kubernetes.io/version: 2.14.0
-      helm.sh/chart: keda-2.14.0
-    model: kubernetes
-    name: keda-admission-webhooks
-    namespace: default
-    settings:
-      spec:
-        ports:
-        - name: https
-          port: 443
-          protocol: TCP
-          target Port: 9443
-        selector:
-          app: keda-admission-webhooks
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 393d8c92-cea8-4dab-b8e1-c0c85c58c9b0
-            metadata:
-              port: 443
-              protocol: TCP
-            source: 41cfda67-cc22-4d0e-b9ec-c6a2759c6d29
-            subType: Network
-            target: 583dc5b7-9cb4-45cd-9f74-8ab7fe6acdb5
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: 41cfda67-cc22-4d0e-b9ec-c6a2759c6d29
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            background-position-y: 4.5
-            height: 20
-            padding: 12
-            width: 20
-            x: 10px
-            "y": 12px
-            z-index: 1012
-          styles: '{"height":20,"width":20,"padding":12,"background-position-y":4.5,"x":"10px","y":"12px"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/service-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
-        position:
-          posX: 250
-          posY: 370
-        whiteboardData:
-          style: {}
-    type: Service
-    version: ""
-  keda-admission-webhooks-mgfnx:
+  keda-admission-webhooks-hopto:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -1212,6 +1122,96 @@ services:
           style: {}
     type: Deployment
     version: ""
+  keda-admission-webhooks-iyltj:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/component: operator
+      app.kubernetes.io/instance: keda
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: keda-admission-webhooks
+      app.kubernetes.io/part-of: keda-operator
+      app.kubernetes.io/version: 2.14.0
+      helm.sh/chart: keda-2.14.0
+    model: kubernetes
+    name: keda-admission-webhooks
+    namespace: default
+    settings:
+      spec:
+        ports:
+        - name: https
+          port: 443
+          protocol: TCP
+          target Port: 9443
+        selector:
+          app: keda-admission-webhooks
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 393d8c92-cea8-4dab-b8e1-c0c85c58c9b0
+            metadata:
+              port: 443
+              protocol: TCP
+            source: 41cfda67-cc22-4d0e-b9ec-c6a2759c6d29
+            subType: Network
+            target: 583dc5b7-9cb4-45cd-9f74-8ab7fe6acdb5
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 41cfda67-cc22-4d0e-b9ec-c6a2759c6d29
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            background-position-y: 4.5
+            height: 20
+            padding: 12
+            width: 20
+            x: 10px
+            "y": 12px
+            z-index: 1012
+          styles: '{"height":20,"width":20,"padding":12,"background-position-y":4.5,"x":"10px","y":"12px"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/service-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
+        position:
+          posX: 250
+          posY: 370
+        whiteboardData:
+          style: {}
+    type: Service
+    version: ""
   keda-metrics-server:
     annotations: {}
     apiVersion: v1
@@ -1333,7 +1333,7 @@ services:
           style: {}
     type: RoleBinding
     version: ""
-  keda-operator-certs-dleor:
+  keda-operator-certs-hedym:
     annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
     dependsOn: []
@@ -1385,7 +1385,7 @@ services:
             width: 25px
             x: "7"
             "y": "7"
-            z-index: 1027
+            z-index: 1026
           styles: '{"height":"25px","width":"25px","x":"7", "y":"7","z-index":4}'
           subCategory: ""
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/rolebinding-color.svg
@@ -1401,7 +1401,7 @@ services:
             z-index: 1000
     type: RoleBinding
     version: ""
-  keda-operator-certs-mdueb:
+  keda-operator-certs-kctoy:
     annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
     dependsOn: []
@@ -1631,7 +1631,327 @@ services:
           style: {}
     type: ClusterRoleBinding
     version: ""
-  keda-operator-metrics-apiserver-bkbrs:
+  keda-operator-jzvpv:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/component: operator
+      app.kubernetes.io/instance: keda
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: keda-operator
+      app.kubernetes.io/part-of: keda-operator
+      app.kubernetes.io/version: 2.14.0
+      helm.sh/chart: keda-2.14.0
+    model: kubernetes
+    name: keda-operator
+    namespace: ""
+    settings:
+      role Ref:
+        api Group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: keda-operator
+      subjects:
+      - kind: ServiceAccount
+        name: keda-operator
+        namespace: default
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 72d17af4-0999-47f7-9c48-ecd3ab25c23f
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            height: 25px
+            width: 25px
+            x: "7"
+            "y": "7"
+            z-index: 1027
+          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+        position:
+          posX: 699.877526756879
+          posY: 449.9637116316678
+        whiteboardData:
+          style:
+            height: 10.5
+            width: 10.5
+            z-index: 1000
+    type: ClusterRoleBinding
+    version: ""
+  keda-operator-lcwul:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/component: operator
+      app.kubernetes.io/instance: keda
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: keda-operator
+      app.kubernetes.io/part-of: keda-operator
+      app.kubernetes.io/version: 2.14.0
+      helm.sh/chart: keda-2.14.0
+    model: kubernetes
+    name: keda-operator
+    namespace: ""
+    settings:
+      rules:
+      - api Groups:
+        - ""
+        resources:
+        - configmaps
+        - configmaps/status
+        - limitranges
+        - pods
+        - services
+        - serviceaccounts
+        verbs:
+        - get
+        - list
+        - watch
+      - api Groups:
+        - ""
+        resources:
+        - events
+        verbs:
+        - '*'
+      - api Groups:
+        - ""
+        resources:
+        - secrets
+        verbs:
+        - list
+        - watch
+      - api Groups:
+        - '*'
+        resources:
+        - '*/scale'
+        verbs:
+        - get
+        - list
+        - patch
+        - update
+        - watch
+      - api Groups:
+        - apps
+        resources:
+        - deployments
+        - statefulsets
+        verbs:
+        - get
+        - list
+        - watch
+      - api Groups:
+        - autoscaling
+        resources:
+        - horizontalpodautoscalers
+        verbs:
+        - '*'
+      - api Groups:
+        - batch
+        resources:
+        - jobs
+        verbs:
+        - '*'
+      - api Groups:
+        - eventing.keda.sh
+        resources:
+        - cloudeventsources
+        - cloudeventsources/status
+        verbs:
+        - '*'
+      - api Groups:
+        - keda.sh
+        resources:
+        - scaledjobs
+        - scaledjobs/finalizers
+        - scaledjobs/status
+        - scaledobjects
+        - scaledobjects/finalizers
+        - scaledobjects/status
+        - triggerauthentications
+        - triggerauthentications/status
+        verbs:
+        - '*'
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 6d531259-7ba2-4e81-836f-2996ff151903
+            metadata:
+              binded_by: 72d17af4-0999-47f7-9c48-ecd3ab25c23f
+            source: db2539a6-9ae6-470c-b5ba-cae45e247b27
+            subType: Permission
+            target: 55ae2789-de28-4faf-9861-f3b5e802050c
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: db2539a6-9ae6-470c-b5ba-cae45e247b27
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            height: 22px
+            width: 22px
+            x: "8.5"
+            "y": "7.5"
+            z-index: 1009
+          styles: '{"height":"22px", "width":"22px", "x":"8.5", "y":"7.5"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
+        position:
+          posX: 970
+          posY: 530
+        whiteboardData:
+          style: {}
+    type: ClusterRole
+    version: ""
+  keda-operator-metrics-apiserver-bltcn:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app: keda-operator-metrics-apiserver
+      app.kubernetes.io/component: operator
+      app.kubernetes.io/instance: keda
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: keda-operator-metrics-apiserver
+      app.kubernetes.io/part-of: keda-operator
+      app.kubernetes.io/version: 2.14.0
+      helm.sh/chart: keda-2.14.0
+    model: kubernetes
+    name: keda-operator-metrics-apiserver
+    namespace: default
+    settings:
+      spec:
+        ports:
+        - name: https
+          port: 443
+          protocol: TCP
+          target Port: 6443
+        - name: metrics
+          port: 8080
+          protocol: TCP
+          target Port: 8080
+        selector:
+          app: keda-operator-metrics-apiserver
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 0caa4d2e-cbcc-42ba-a993-49ff8d10832e
+            metadata:
+              port: 443
+              protocol: TCP
+            source: 71ccfc08-76f2-415c-9154-eb8aa7dd1c17
+            subType: Network
+            target: a6e460ff-3a47-4a4c-a1cb-a4f51c9b95b4
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 71ccfc08-76f2-415c-9154-eb8aa7dd1c17
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            background-position-y: 4.5
+            height: 20
+            padding: 12
+            width: 20
+            x: 10px
+            "y": 12px
+            z-index: 1010
+          styles: '{"height":20,"width":20,"padding":12,"background-position-y":4.5,"x":"10px","y":"12px"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/service-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
+        position:
+          posX: 870
+          posY: 370
+        whiteboardData:
+          style: {}
+    type: Service
+    version: ""
+  keda-operator-metrics-apiserver-djeqz:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -1824,101 +2144,6 @@ services:
           style: {}
     type: Deployment
     version: ""
-  keda-operator-metrics-apiserver-cgjmf:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app: keda-operator-metrics-apiserver
-      app.kubernetes.io/component: operator
-      app.kubernetes.io/instance: keda
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: keda-operator-metrics-apiserver
-      app.kubernetes.io/part-of: keda-operator
-      app.kubernetes.io/version: 2.14.0
-      helm.sh/chart: keda-2.14.0
-    model: kubernetes
-    name: keda-operator-metrics-apiserver
-    namespace: default
-    settings:
-      spec:
-        ports:
-        - name: https
-          port: 443
-          protocol: TCP
-          target Port: 6443
-        - name: metrics
-          port: 8080
-          protocol: TCP
-          target Port: 8080
-        selector:
-          app: keda-operator-metrics-apiserver
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 0caa4d2e-cbcc-42ba-a993-49ff8d10832e
-            metadata:
-              port: 443
-              protocol: TCP
-            source: 71ccfc08-76f2-415c-9154-eb8aa7dd1c17
-            subType: Network
-            target: a6e460ff-3a47-4a4c-a1cb-a4f51c9b95b4
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: 71ccfc08-76f2-415c-9154-eb8aa7dd1c17
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            background-position-y: 4.5
-            height: 20
-            padding: 12
-            width: 20
-            x: 10px
-            "y": 12px
-            z-index: 1010
-          styles: '{"height":20,"width":20,"padding":12,"background-position-y":4.5,"x":"10px","y":"12px"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/service-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
-        position:
-          posX: 870
-          posY: 370
-        whiteboardData:
-          style: {}
-    type: Service
-    version: ""
   keda-operator-minimal:
     annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
@@ -1971,7 +2196,7 @@ services:
             width: 25px
             x: "7"
             "y": "7"
-            z-index: 1026
+            z-index: 1028
           styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
           subCategory: ""
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
@@ -2094,96 +2319,7 @@ services:
           style: {}
     type: ClusterRole
     version: ""
-  keda-operator-mzcum:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/component: operator
-      app.kubernetes.io/instance: keda
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: keda-operator
-      app.kubernetes.io/part-of: keda-operator
-      app.kubernetes.io/version: 2.14.0
-      helm.sh/chart: keda-2.14.0
-    model: kubernetes
-    name: keda-operator
-    namespace: default
-    settings:
-      spec:
-        ports:
-        - name: metricsservice
-          port: 9666
-          target Port: 9666
-        selector:
-          app: keda-operator
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 7c2484ef-9125-4380-9c8c-830bd9432fd2
-            metadata:
-              port: 9666
-              protocol: TCP
-            source: 9ecb1ee8-8a87-46d7-b83f-952304c77e91
-            subType: Network
-            target: 3bf97d1d-33af-4c5c-b9d3-778067f59d60
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: 9ecb1ee8-8a87-46d7-b83f-952304c77e91
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            background-position-y: 4.5
-            height: 20
-            padding: 12
-            width: 20
-            x: 10px
-            "y": 12px
-            z-index: 5
-          styles: '{"height":20,"width":20,"padding":12,"background-position-y":4.5,"x":"10px","y":"12px"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/service-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
-        position:
-          posX: 1410
-          posY: 370
-        whiteboardData:
-          style: {}
-    type: Service
-    version: ""
-  keda-operator-rouok:
+  keda-operator-phuzx:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -2382,7 +2518,338 @@ services:
           style: {}
     type: Deployment
     version: ""
-  keda-operator-rpcdx:
+  keda-operator-system-auth-delegator:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/component: operator
+      app.kubernetes.io/instance: keda
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: keda-operator-system-auth-delegator
+      app.kubernetes.io/part-of: keda-operator
+      app.kubernetes.io/version: 2.14.0
+      helm.sh/chart: keda-2.14.0
+    model: kubernetes
+    name: keda-operator-system-auth-delegator
+    namespace: ""
+    settings:
+      role Ref:
+        api Group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: system:auth-delegator
+      subjects:
+      - kind: ServiceAccount
+        name: keda-metrics-server
+        namespace: default
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 36acee4d-2cf9-44e0-9b25-a122f7505831
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            height: 25px
+            width: 25px
+            x: "7"
+            "y": "7"
+            z-index: 1011
+          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+        position:
+          posX: 70
+          posY: 370
+        whiteboardData:
+          style: {}
+    type: ClusterRoleBinding
+    version: ""
+  keda-operator-tdhty:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/component: operator
+      app.kubernetes.io/instance: keda
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: keda-operator
+      app.kubernetes.io/part-of: keda-operator
+      app.kubernetes.io/version: 2.14.0
+      helm.sh/chart: keda-2.14.0
+    model: kubernetes
+    name: keda-operator
+    namespace: default
+    settings:
+      spec:
+        ports:
+        - name: metricsservice
+          port: 9666
+          target Port: 9666
+        selector:
+          app: keda-operator
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 7c2484ef-9125-4380-9c8c-830bd9432fd2
+            metadata:
+              port: 9666
+              protocol: TCP
+            source: 9ecb1ee8-8a87-46d7-b83f-952304c77e91
+            subType: Network
+            target: 3bf97d1d-33af-4c5c-b9d3-778067f59d60
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 9ecb1ee8-8a87-46d7-b83f-952304c77e91
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            background-position-y: 4.5
+            height: 20
+            padding: 12
+            width: 20
+            x: 10px
+            "y": 12px
+            z-index: 5
+          styles: '{"height":20,"width":20,"padding":12,"background-position-y":4.5,"x":"10px","y":"12px"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/service-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
+        position:
+          posX: 1410
+          posY: 370
+        whiteboardData:
+          style: {}
+    type: Service
+    version: ""
+  keda-operator-webhook-bqunf:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/component: operator
+      app.kubernetes.io/instance: keda
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: keda-operator-webhook
+      app.kubernetes.io/part-of: keda-operator
+      app.kubernetes.io/version: 2.14.0
+      helm.sh/chart: keda-2.14.0
+    model: kubernetes
+    name: keda-operator-webhook
+    namespace: ""
+    settings:
+      role Ref:
+        api Group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: keda-operator-webhook
+      subjects:
+      - kind: ServiceAccount
+        name: keda-webhook
+        namespace: default
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 69ddd58b-144c-4082-ad5f-8d6001d5e560
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            height: 25px
+            width: 25px
+            x: "7"
+            "y": "7"
+            z-index: 1028
+          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+        position:
+          posX: 239.89375
+          posY: 370
+        whiteboardData:
+          style:
+            height: 10.5
+            width: 10.5
+            z-index: 1000
+    type: ClusterRoleBinding
+    version: ""
+  keda-operator-webhook-vydsp:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/component: operator
+      app.kubernetes.io/instance: keda
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: keda-operator-webhook
+      app.kubernetes.io/part-of: keda-operator
+      app.kubernetes.io/version: 2.14.0
+      helm.sh/chart: keda-2.14.0
+    model: kubernetes
+    name: keda-operator-webhook
+    namespace: ""
+    settings:
+      rules:
+      - api Groups:
+        - autoscaling
+        resources:
+        - horizontalpodautoscalers
+        verbs:
+        - list
+        - watch
+      - api Groups:
+        - keda.sh
+        resources:
+        - scaledobjects
+        verbs:
+        - list
+        - watch
+      - api Groups:
+        - apps
+        resources:
+        - deployments
+        - statefulsets
+        verbs:
+        - get
+        - list
+        - watch
+      - api Groups:
+        - ""
+        resources:
+        - limitranges
+        verbs:
+        - list
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 6fd241c6-4358-4070-93bd-25db26c099d3
+            metadata:
+              binded_by: 69ddd58b-144c-4082-ad5f-8d6001d5e560
+            source: 570b8fee-adca-4e18-b231-3189187f7674
+            subType: Permission
+            target: 2c6c0800-96fb-45a5-b154-6a246e8ff667
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 570b8fee-adca-4e18-b231-3189187f7674
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            height: 22px
+            width: 22px
+            x: "8.5"
+            "y": "7.5"
+            z-index: 1019
+          styles: '{"height":"22px", "width":"22px", "x":"8.5", "y":"7.5"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
+        position:
+          posX: 510
+          posY: 370
+        whiteboardData:
+          style: {}
+    type: ClusterRole
+    version: ""
+  keda-operator-zgkdl:
     annotations: {}
     apiVersion: v1
     dependsOn: []
@@ -2504,473 +2971,6 @@ services:
           style: {}
     type: ServiceAccount
     version: ""
-  keda-operator-system-auth-delegator:
-    annotations: {}
-    apiVersion: rbac.authorization.k8s.io/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/component: operator
-      app.kubernetes.io/instance: keda
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: keda-operator-system-auth-delegator
-      app.kubernetes.io/part-of: keda-operator
-      app.kubernetes.io/version: 2.14.0
-      helm.sh/chart: keda-2.14.0
-    model: kubernetes
-    name: keda-operator-system-auth-delegator
-    namespace: ""
-    settings:
-      role Ref:
-        api Group: rbac.authorization.k8s.io
-        kind: ClusterRole
-        name: system:auth-delegator
-      subjects:
-      - kind: ServiceAccount
-        name: keda-metrics-server
-        namespace: default
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: 36acee4d-2cf9-44e0-9b25-a122f7505831
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
-          logoURL: Created by Meshery Authors
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            height: 25px
-            width: 25px
-            x: "7"
-            "y": "7"
-            z-index: 1011
-          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
-        position:
-          posX: 70
-          posY: 370
-        whiteboardData:
-          style: {}
-    type: ClusterRoleBinding
-    version: ""
-  keda-operator-webhook-tfckj:
-    annotations: {}
-    apiVersion: rbac.authorization.k8s.io/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/component: operator
-      app.kubernetes.io/instance: keda
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: keda-operator-webhook
-      app.kubernetes.io/part-of: keda-operator
-      app.kubernetes.io/version: 2.14.0
-      helm.sh/chart: keda-2.14.0
-    model: kubernetes
-    name: keda-operator-webhook
-    namespace: ""
-    settings:
-      role Ref:
-        api Group: rbac.authorization.k8s.io
-        kind: ClusterRole
-        name: keda-operator-webhook
-      subjects:
-      - kind: ServiceAccount
-        name: keda-webhook
-        namespace: default
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: 69ddd58b-144c-4082-ad5f-8d6001d5e560
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
-          logoURL: Created by Meshery Authors
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            height: 25px
-            width: 25px
-            x: "7"
-            "y": "7"
-            z-index: 1028
-          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
-        position:
-          posX: 239.89375
-          posY: 370
-        whiteboardData:
-          style:
-            height: 10.5
-            width: 10.5
-            z-index: 1000
-    type: ClusterRoleBinding
-    version: ""
-  keda-operator-webhook-zduyo:
-    annotations: {}
-    apiVersion: rbac.authorization.k8s.io/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/component: operator
-      app.kubernetes.io/instance: keda
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: keda-operator-webhook
-      app.kubernetes.io/part-of: keda-operator
-      app.kubernetes.io/version: 2.14.0
-      helm.sh/chart: keda-2.14.0
-    model: kubernetes
-    name: keda-operator-webhook
-    namespace: ""
-    settings:
-      rules:
-      - api Groups:
-        - autoscaling
-        resources:
-        - horizontalpodautoscalers
-        verbs:
-        - list
-        - watch
-      - api Groups:
-        - keda.sh
-        resources:
-        - scaledobjects
-        verbs:
-        - list
-        - watch
-      - api Groups:
-        - apps
-        resources:
-        - deployments
-        - statefulsets
-        verbs:
-        - get
-        - list
-        - watch
-      - api Groups:
-        - ""
-        resources:
-        - limitranges
-        verbs:
-        - list
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 6fd241c6-4358-4070-93bd-25db26c099d3
-            metadata:
-              binded_by: 69ddd58b-144c-4082-ad5f-8d6001d5e560
-            source: 570b8fee-adca-4e18-b231-3189187f7674
-            subType: Permission
-            target: 2c6c0800-96fb-45a5-b154-6a246e8ff667
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: 570b8fee-adca-4e18-b231-3189187f7674
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
-          logoURL: Created by Meshery Authors
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            height: 22px
-            width: 22px
-            x: "8.5"
-            "y": "7.5"
-            z-index: 1019
-          styles: '{"height":"22px", "width":"22px", "x":"8.5", "y":"7.5"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
-        position:
-          posX: 510
-          posY: 370
-        whiteboardData:
-          style: {}
-    type: ClusterRole
-    version: ""
-  keda-operator-xizks:
-    annotations: {}
-    apiVersion: rbac.authorization.k8s.io/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/component: operator
-      app.kubernetes.io/instance: keda
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: keda-operator
-      app.kubernetes.io/part-of: keda-operator
-      app.kubernetes.io/version: 2.14.0
-      helm.sh/chart: keda-2.14.0
-    model: kubernetes
-    name: keda-operator
-    namespace: ""
-    settings:
-      rules:
-      - api Groups:
-        - ""
-        resources:
-        - configmaps
-        - configmaps/status
-        - limitranges
-        - pods
-        - services
-        - serviceaccounts
-        verbs:
-        - get
-        - list
-        - watch
-      - api Groups:
-        - ""
-        resources:
-        - events
-        verbs:
-        - '*'
-      - api Groups:
-        - ""
-        resources:
-        - secrets
-        verbs:
-        - list
-        - watch
-      - api Groups:
-        - '*'
-        resources:
-        - '*/scale'
-        verbs:
-        - get
-        - list
-        - patch
-        - update
-        - watch
-      - api Groups:
-        - apps
-        resources:
-        - deployments
-        - statefulsets
-        verbs:
-        - get
-        - list
-        - watch
-      - api Groups:
-        - autoscaling
-        resources:
-        - horizontalpodautoscalers
-        verbs:
-        - '*'
-      - api Groups:
-        - batch
-        resources:
-        - jobs
-        verbs:
-        - '*'
-      - api Groups:
-        - eventing.keda.sh
-        resources:
-        - cloudeventsources
-        - cloudeventsources/status
-        verbs:
-        - '*'
-      - api Groups:
-        - keda.sh
-        resources:
-        - scaledjobs
-        - scaledjobs/finalizers
-        - scaledjobs/status
-        - scaledobjects
-        - scaledobjects/finalizers
-        - scaledobjects/status
-        - triggerauthentications
-        - triggerauthentications/status
-        verbs:
-        - '*'
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 6d531259-7ba2-4e81-836f-2996ff151903
-            metadata:
-              binded_by: 72d17af4-0999-47f7-9c48-ecd3ab25c23f
-            source: db2539a6-9ae6-470c-b5ba-cae45e247b27
-            subType: Permission
-            target: 55ae2789-de28-4faf-9861-f3b5e802050c
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: db2539a6-9ae6-470c-b5ba-cae45e247b27
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
-          logoURL: Created by Meshery Authors
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            height: 22px
-            width: 22px
-            x: "8.5"
-            "y": "7.5"
-            z-index: 1009
-          styles: '{"height":"22px", "width":"22px", "x":"8.5", "y":"7.5"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
-        position:
-          posX: 970
-          posY: 530
-        whiteboardData:
-          style: {}
-    type: ClusterRole
-    version: ""
-  keda-operator-zvdqc:
-    annotations: {}
-    apiVersion: rbac.authorization.k8s.io/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/component: operator
-      app.kubernetes.io/instance: keda
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: keda-operator
-      app.kubernetes.io/part-of: keda-operator
-      app.kubernetes.io/version: 2.14.0
-      helm.sh/chart: keda-2.14.0
-    model: kubernetes
-    name: keda-operator
-    namespace: ""
-    settings:
-      role Ref:
-        api Group: rbac.authorization.k8s.io
-        kind: ClusterRole
-        name: keda-operator
-      subjects:
-      - kind: ServiceAccount
-        name: keda-operator
-        namespace: default
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: 72d17af4-0999-47f7-9c48-ecd3ab25c23f
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
-          logoURL: Created by Meshery Authors
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            height: 25px
-            width: 25px
-            x: "7"
-            "y": "7"
-            z-index: 1028
-          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
-        position:
-          posX: 699.877526756879
-          posY: 449.9637116316678
-        whiteboardData:
-          style:
-            height: 10.5
-            width: 10.5
-            z-index: 1000
-    type: ClusterRoleBinding
-    version: ""
   keda-webhook:
     annotations: {}
     apiVersion: v1
@@ -3048,11 +3048,11 @@ services:
           style: {}
     type: ServiceAccount
     version: ""
-  nodegroupinventorywallet-ddxjh:
+  nodegroupinventorywallet-ijput:
     annotations: {}
     apiVersion: core.meshery.io/v1alpha1
     dependsOn:
-    - keda-admission-webhooks-mgfnx
+    - keda-admission-webhooks-hopto
     id: null
     isAnnotation: null
     labels: {}
@@ -3147,11 +3147,11 @@ services:
         whiteboardData: {}
     type: NodeGroupInventoryWallet
     version: 0.7.1
-  nodegroupinventorywallet-pamlq:
+  nodegroupinventorywallet-jxxny:
     annotations: {}
     apiVersion: core.meshery.io/v1alpha1
     dependsOn:
-    - keda-operator-rouok
+    - keda-operator-phuzx
     id: null
     isAnnotation: null
     labels: {}
@@ -3246,11 +3246,11 @@ services:
         whiteboardData: {}
     type: NodeGroupInventoryWallet
     version: 0.7.1
-  nodegroupinventorywallet-rzbrn:
+  nodegroupinventorywallet-rxipi:
     annotations: {}
     apiVersion: core.meshery.io/v1alpha1
     dependsOn:
-    - keda-operator-metrics-apiserver-bkbrs
+    - keda-operator-metrics-apiserver-djeqz
     id: null
     isAnnotation: null
     labels: {}
