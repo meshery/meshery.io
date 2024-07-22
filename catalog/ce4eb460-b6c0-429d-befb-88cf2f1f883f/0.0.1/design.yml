@@ -1,11 +1,11 @@
 name: Consul on kubernetes
-version: 0.0.8
+version: 0.0.9
 services:
   NodeGroupInventoryWallet:
     annotations: {}
     apiVersion: core.meshery.io/v1alpha1
     dependsOn:
-    - consul-hiryd
+    - consul-jmgwo
     id: null
     isAnnotation: null
     labels: {}
@@ -66,12 +66,120 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: d8eb27a6-aa79-4932-a5bc-6371b2281b54
         position:
-          posX: 330
-          posY: 250
+          posX: 370
+          posY: 290
         whiteboardData: {}
     type: NodeGroupInventoryWallet
     version: 0.7.1
-  consul-hiryd:
+  consul-bajjw:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: consul
+    namespace: default
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 8500
+          protocol: TCP
+          target Port: 8500
+        - name: dns
+          port: 8600
+          protocol: TCP
+          target Port: 8600
+        - name: serflan
+          port: 8301
+          protocol: TCP
+          target Port: 8301
+        - name: serfwan
+          port: 8302
+          protocol: TCP
+          target Port: 8302
+        - name: server
+          port: 8300
+          protocol: TCP
+          target Port: 8300
+        - name: serverudp
+          port: 8601
+          protocol: UDP
+          target Port: 8601
+        - name: grpc
+          port: 8502
+          protocol: TCP
+          target Port: 8502
+        selector:
+          app: consul
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 5499e82d-126a-47a9-8c67-0258564c7f32
+            metadata:
+              port: 8600
+              protocol: TCP
+            source: 9cb93bb5-faf5-495a-8b74-1cf8cbe1b329
+            subType: Network
+            target: d8eb27a6-aa79-4932-a5bc-6371b2281b54
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 9cb93bb5-faf5-495a-8b74-1cf8cbe1b329
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          shapePolygonPoints: ""
+          styleOverrides:
+            background-color: rgb(66,99,235)
+            background-position-y: 4.5
+            height: 20
+            padding: 12
+            width: 20
+            x: 10px
+            "y": 12px
+            z-index: 3
+          styles: '{"height":20,"width":20,"padding":12,"background-position-y":4.5,"x":"10px","y":"12px"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/service-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
+        position:
+          posX: 110
+          posY: 150
+        whiteboardData:
+          style: {}
+    type: Service
+    version: ""
+  consul-jmgwo:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -182,117 +290,9 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 330
-          posY: 250
+          posX: 370
+          posY: 290
         whiteboardData:
           style: {}
     type: Deployment
-    version: ""
-  consul-txsrn:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels: {}
-    model: kubernetes
-    name: consul
-    namespace: default
-    settings:
-      spec:
-        ports:
-        - name: http
-          port: 8500
-          protocol: TCP
-          target Port: 8500
-        - name: dns
-          port: 8600
-          protocol: TCP
-          target Port: 8600
-        - name: serflan
-          port: 8301
-          protocol: TCP
-          target Port: 8301
-        - name: serfwan
-          port: 8302
-          protocol: TCP
-          target Port: 8302
-        - name: server
-          port: 8300
-          protocol: TCP
-          target Port: 8300
-        - name: serverudp
-          port: 8601
-          protocol: UDP
-          target Port: 8601
-        - name: grpc
-          port: 8502
-          protocol: TCP
-          target Port: 8502
-        selector:
-          app: consul
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 5499e82d-126a-47a9-8c67-0258564c7f32
-            metadata:
-              port: 8600
-              protocol: TCP
-            source: 9cb93bb5-faf5-495a-8b74-1cf8cbe1b329
-            subType: Network
-            target: d8eb27a6-aa79-4932-a5bc-6371b2281b54
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: 9cb93bb5-faf5-495a-8b74-1cf8cbe1b329
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          shapePolygonPoints: ""
-          styleOverrides:
-            background-color: rgb(66,99,235)
-            background-position-y: 4.5
-            height: 20
-            padding: 12
-            width: 20
-            x: 10px
-            "y": 12px
-            z-index: 3
-          styles: '{"height":20,"width":20,"padding":12,"background-position-y":4.5,"x":"10px","y":"12px"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/service-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
-        position:
-          posX: 90
-          posY: 130
-        whiteboardData:
-          style: {}
-    type: Service
     version: ""
