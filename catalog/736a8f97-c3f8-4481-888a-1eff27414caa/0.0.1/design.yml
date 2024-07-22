@@ -1,266 +1,7 @@
 name: node-feature-discovery
-version: 0.0.7
+version: 0.0.10
 services:
-  node-feature-discovery-feiwk:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/instance: node-feature-discovery
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: node-feature-discovery
-      app.kubernetes.io/version: v0.16.0
-      helm.sh/chart: node-feature-discovery-0.16.0
-    model: kubernetes
-    name: node-feature-discovery
-    namespace: default
-    settings:
-      image Pull Secrets: []
-      secrets: []
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 33e300c6-a4b9-4dc9-aa7c-0ebfd458636f
-            metadata:
-              binded_by: cf93ad06-12db-4de6-ac77-899dc58774c5
-            source: 38606e45-1d22-472f-a9fe-b09b363d123a
-            subType: Permission
-            target: a15b3a17-3f22-4011-a439-c0609ade22aa
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: a15b3a17-3f22-4011-a439-c0609ade22aa
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: bottom-round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides: ""
-          styles: ""
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/serviceaccount-white.svg
-        position:
-          posX: 50
-          posY: 30
-        whiteboardData:
-          style: {}
-    type: ServiceAccount
-    version: ""
-  node-feature-discovery-gc-awwey:
-    annotations: {}
-    apiVersion: apps/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/instance: node-feature-discovery
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: node-feature-discovery
-      app.kubernetes.io/version: v0.16.0
-      helm.sh/chart: node-feature-discovery-0.16.0
-      role: gc
-    model: kubernetes
-    name: node-feature-discovery-gc
-    namespace: default
-    settings:
-      spec:
-        replicas: 1
-        selector:
-          match Labels:
-            app.kubernetes.io/instance: node-feature-discovery
-            app.kubernetes.io/name: node-feature-discovery
-            role: gc
-        template:
-          metadata:
-            labels:
-              app.kubernetes.io/instance: node-feature-discovery
-              app.kubernetes.io/name: node-feature-discovery
-              role: gc
-          spec:
-            containers:
-            - args:
-              - -gc-interval=1h
-              command:
-              - nfd-gc
-              env:
-              - name: NODE_NAME
-                value From:
-                  field Ref:
-                    field Path: spec.nodeName
-              image: registry.k8s.io/nfd/node-feature-discovery:v0.16.0
-              image Pull Policy: IfNotPresent
-              name: gc
-              ports:
-              - container Port: 8081
-                name: metrics
-              resources:
-                limits:
-                  cpu: 20m
-                  memory: 1Gi
-                requests:
-                  cpu: 10m
-                  memory: 128Mi
-              security Context:
-                allow Privilege Escalation: false
-                capabilities:
-                  drop:
-                  - ALL
-                read Only Root Filesystem: true
-                run As Non Root: true
-            dns Policy: ClusterFirstWithHostNet
-            security Context: {}
-            service Account Name: node-feature-discovery-gc
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: 41745d17-484f-477c-922a-03caee1855f8
-        meshmodel-metadata:
-          capabilities: |2-
-             {
-              "designer": {
-                "edit": {
-                  "shape": {
-                    "convert-shape": false
-                  }
-                }
-              }
-            }
-          defaultData: ""
-          genealogy: parent
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: Created by Meshery Authors
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-pentagon
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            background-opacity: 0.5
-            border-width: 2
-            z-index: 1002
-          styles: '{"border-width":2,"background-opacity":0.5}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
-        position:
-          posX: 10
-          posY: 10
-        whiteboardData:
-          style: {}
-    type: Deployment
-    version: ""
-  node-feature-discovery-gc-bqcqj:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/instance: node-feature-discovery
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: node-feature-discovery
-      app.kubernetes.io/version: v0.16.0
-      helm.sh/chart: node-feature-discovery-0.16.0
-    model: kubernetes
-    name: node-feature-discovery-gc
-    namespace: default
-    settings:
-      image Pull Secrets: []
-      secrets: []
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 4bd00e54-66c4-4def-ac31-a09766e38a71
-            metadata:
-              binded_by: 843de102-3e96-4ff6-b3db-0f2680e2a0e0
-            source: a6921bb3-da72-487a-8161-25249f81a3f7
-            subType: Permission
-            target: ddaadb28-fbd5-4f84-b3ac-7b368ea6b3a7
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: ddaadb28-fbd5-4f84-b3ac-7b368ea6b3a7
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: bottom-round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            z-index: 5
-          styles: ""
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/serviceaccount-white.svg
-        position:
-          posX: 90
-          posY: 70
-        whiteboardData:
-          style: {}
-    type: ServiceAccount
-    version: ""
-  node-feature-discovery-gc-mlumf:
+  node-feature-discovery-ammls:
     annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
     dependsOn: []
@@ -273,22 +14,22 @@ services:
       app.kubernetes.io/version: v0.16.0
       helm.sh/chart: node-feature-discovery-0.16.0
     model: kubernetes
-    name: node-feature-discovery-gc
+    name: node-feature-discovery
     namespace: ""
     settings:
       role Ref:
         api Group: rbac.authorization.k8s.io
         kind: ClusterRole
-        name: node-feature-discovery-gc
+        name: node-feature-discovery
       subjects:
       - kind: ServiceAccount
-        name: node-feature-discovery-gc
+        name: node-feature-discovery
         namespace: default
     traits:
       meshmap:
         edges: []
         fieldRefData: {}
-        id: 843de102-3e96-4ff6-b3db-0f2680e2a0e0
+        id: cf93ad06-12db-4de6-ac77-899dc58774c5
         meshmodel-metadata:
           capabilities: ""
           defaultData: ""
@@ -310,15 +51,15 @@ services:
             width: 25px
             x: "7"
             "y": "7"
-            z-index: 1018
+            z-index: 1017
           styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
           subCategory: ""
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
         position:
-          posX: 0.11562634505257563
-          posY: 50.025694743345014
+          posX: 30.10625
+          posY: 30
         whiteboardData:
           style:
             height: 10.5
@@ -326,112 +67,7 @@ services:
             z-index: 1000
     type: ClusterRoleBinding
     version: ""
-  node-feature-discovery-gc-urlww:
-    annotations: {}
-    apiVersion: rbac.authorization.k8s.io/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/instance: node-feature-discovery
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: node-feature-discovery
-      app.kubernetes.io/version: v0.16.0
-      helm.sh/chart: node-feature-discovery-0.16.0
-    model: kubernetes
-    name: node-feature-discovery-gc
-    namespace: ""
-    settings:
-      rules:
-      - api Groups:
-        - ""
-        resources:
-        - nodes
-        verbs:
-        - list
-        - watch
-      - api Groups:
-        - ""
-        resources:
-        - nodes/proxy
-        verbs:
-        - get
-      - api Groups:
-        - topology.node.k8s.io
-        resources:
-        - noderesourcetopologies
-        verbs:
-        - delete
-        - list
-      - api Groups:
-        - nfd.k8s-sigs.io
-        resources:
-        - nodefeatures
-        verbs:
-        - delete
-        - list
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 4bd00e54-66c4-4def-ac31-a09766e38a71
-            metadata:
-              binded_by: 843de102-3e96-4ff6-b3db-0f2680e2a0e0
-            source: a6921bb3-da72-487a-8161-25249f81a3f7
-            subType: Permission
-            target: ddaadb28-fbd5-4f84-b3ac-7b368ea6b3a7
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: a6921bb3-da72-487a-8161-25249f81a3f7
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
-          logoURL: Created by Meshery Authors
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            height: 22px
-            width: 22px
-            x: "8.5"
-            "y": "7.5"
-            z-index: 1003
-          styles: '{"height":"22px", "width":"22px", "x":"8.5", "y":"7.5"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
-        position:
-          posX: -90
-          posY: 30
-        whiteboardData:
-          style: {}
-    type: ClusterRole
-    version: ""
-  node-feature-discovery-gndfx:
+  node-feature-discovery-attdk:
     annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
     dependsOn: []
@@ -546,6 +182,436 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
         position:
           posX: 10
+          posY: 30
+        whiteboardData:
+          style: {}
+    type: ClusterRole
+    version: ""
+  node-feature-discovery-fwssb:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/instance: node-feature-discovery
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: node-feature-discovery
+      app.kubernetes.io/version: v0.16.0
+      helm.sh/chart: node-feature-discovery-0.16.0
+    model: kubernetes
+    name: node-feature-discovery
+    namespace: default
+    settings:
+      image Pull Secrets: []
+      secrets: []
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 33e300c6-a4b9-4dc9-aa7c-0ebfd458636f
+            metadata:
+              binded_by: cf93ad06-12db-4de6-ac77-899dc58774c5
+            source: 38606e45-1d22-472f-a9fe-b09b363d123a
+            subType: Permission
+            target: a15b3a17-3f22-4011-a439-c0609ade22aa
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: a15b3a17-3f22-4011-a439-c0609ade22aa
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: bottom-round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides: ""
+          styles: ""
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/serviceaccount-white.svg
+        position:
+          posX: 50
+          posY: 30
+        whiteboardData:
+          style: {}
+    type: ServiceAccount
+    version: ""
+  node-feature-discovery-gc-kbgyd:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/instance: node-feature-discovery
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: node-feature-discovery
+      app.kubernetes.io/version: v0.16.0
+      helm.sh/chart: node-feature-discovery-0.16.0
+    model: kubernetes
+    name: node-feature-discovery-gc
+    namespace: ""
+    settings:
+      role Ref:
+        api Group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: node-feature-discovery-gc
+      subjects:
+      - kind: ServiceAccount
+        name: node-feature-discovery-gc
+        namespace: default
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 843de102-3e96-4ff6-b3db-0f2680e2a0e0
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            height: 25px
+            width: 25px
+            x: "7"
+            "y": "7"
+            z-index: 1018
+          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+        position:
+          posX: 0.11562634505257563
+          posY: 50.025694743345014
+        whiteboardData:
+          style:
+            height: 10.5
+            width: 10.5
+            z-index: 1000
+    type: ClusterRoleBinding
+    version: ""
+  node-feature-discovery-gc-lzxms:
+    annotations: {}
+    apiVersion: apps/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/instance: node-feature-discovery
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: node-feature-discovery
+      app.kubernetes.io/version: v0.16.0
+      helm.sh/chart: node-feature-discovery-0.16.0
+      role: gc
+    model: kubernetes
+    name: node-feature-discovery-gc
+    namespace: default
+    settings:
+      spec:
+        replicas: 1
+        selector:
+          match Labels:
+            app.kubernetes.io/instance: node-feature-discovery
+            app.kubernetes.io/name: node-feature-discovery
+            role: gc
+        template:
+          metadata:
+            labels:
+              app.kubernetes.io/instance: node-feature-discovery
+              app.kubernetes.io/name: node-feature-discovery
+              role: gc
+          spec:
+            containers:
+            - args:
+              - -gc-interval=1h
+              command:
+              - nfd-gc
+              env:
+              - name: NODE_NAME
+                value From:
+                  field Ref:
+                    field Path: spec.nodeName
+              image: registry.k8s.io/nfd/node-feature-discovery:v0.16.0
+              image Pull Policy: IfNotPresent
+              name: gc
+              ports:
+              - container Port: 8081
+                name: metrics
+              resources:
+                limits:
+                  cpu: 20m
+                  memory: 1Gi
+                requests:
+                  cpu: 10m
+                  memory: 128Mi
+              security Context:
+                allow Privilege Escalation: false
+                capabilities:
+                  drop:
+                  - ALL
+                read Only Root Filesystem: true
+                run As Non Root: true
+            dns Policy: ClusterFirstWithHostNet
+            security Context: {}
+            service Account Name: node-feature-discovery-gc
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 41745d17-484f-477c-922a-03caee1855f8
+        meshmodel-metadata:
+          capabilities: |2-
+             {
+              "designer": {
+                "edit": {
+                  "shape": {
+                    "convert-shape": false
+                  }
+                }
+              }
+            }
+          defaultData: ""
+          genealogy: parent
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-pentagon
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            background-opacity: 0.5
+            border-width: 2
+            z-index: 1002
+          styles: '{"border-width":2,"background-opacity":0.5}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
+        position:
+          posX: 10
+          posY: 10
+        whiteboardData:
+          style: {}
+    type: Deployment
+    version: ""
+  node-feature-discovery-gc-wuyze:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/instance: node-feature-discovery
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: node-feature-discovery
+      app.kubernetes.io/version: v0.16.0
+      helm.sh/chart: node-feature-discovery-0.16.0
+    model: kubernetes
+    name: node-feature-discovery-gc
+    namespace: default
+    settings:
+      image Pull Secrets: []
+      secrets: []
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 4bd00e54-66c4-4def-ac31-a09766e38a71
+            metadata:
+              binded_by: 843de102-3e96-4ff6-b3db-0f2680e2a0e0
+            source: a6921bb3-da72-487a-8161-25249f81a3f7
+            subType: Permission
+            target: ddaadb28-fbd5-4f84-b3ac-7b368ea6b3a7
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: ddaadb28-fbd5-4f84-b3ac-7b368ea6b3a7
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: bottom-round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            z-index: 5
+          styles: ""
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/serviceaccount-white.svg
+        position:
+          posX: 90
+          posY: 70
+        whiteboardData:
+          style: {}
+    type: ServiceAccount
+    version: ""
+  node-feature-discovery-gc-wzxue:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/instance: node-feature-discovery
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: node-feature-discovery
+      app.kubernetes.io/version: v0.16.0
+      helm.sh/chart: node-feature-discovery-0.16.0
+    model: kubernetes
+    name: node-feature-discovery-gc
+    namespace: ""
+    settings:
+      rules:
+      - api Groups:
+        - ""
+        resources:
+        - nodes
+        verbs:
+        - list
+        - watch
+      - api Groups:
+        - ""
+        resources:
+        - nodes/proxy
+        verbs:
+        - get
+      - api Groups:
+        - topology.node.k8s.io
+        resources:
+        - noderesourcetopologies
+        verbs:
+        - delete
+        - list
+      - api Groups:
+        - nfd.k8s-sigs.io
+        resources:
+        - nodefeatures
+        verbs:
+        - delete
+        - list
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 4bd00e54-66c4-4def-ac31-a09766e38a71
+            metadata:
+              binded_by: 843de102-3e96-4ff6-b3db-0f2680e2a0e0
+            source: a6921bb3-da72-487a-8161-25249f81a3f7
+            subType: Permission
+            target: ddaadb28-fbd5-4f84-b3ac-7b368ea6b3a7
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: a6921bb3-da72-487a-8161-25249f81a3f7
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            height: 22px
+            width: 22px
+            x: "8.5"
+            "y": "7.5"
+            z-index: 1003
+          styles: '{"height":"22px", "width":"22px", "x":"8.5", "y":"7.5"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
+        position:
+          posX: -90
           posY: 30
         whiteboardData:
           style: {}
@@ -820,7 +886,88 @@ services:
           style: {}
     type: ConfigMap
     version: ""
-  node-feature-discovery-worker-hpbxt:
+  node-feature-discovery-worker-nievc:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/instance: node-feature-discovery
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: node-feature-discovery
+      app.kubernetes.io/version: v0.16.0
+      helm.sh/chart: node-feature-discovery-0.16.0
+    model: kubernetes
+    name: node-feature-discovery-worker
+    namespace: default
+    settings:
+      rules:
+      - api Groups:
+        - nfd.k8s-sigs.io
+        resources:
+        - nodefeatures
+        verbs:
+        - create
+        - get
+        - update
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: f8425948-ac51-431b-8a3f-3bd4361d3c62
+            metadata:
+              binded_by: 35f9494b-253e-4431-9f86-d85b7296d728
+            source: f09f7661-4f17-47eb-9ffd-60f944254944
+            subType: Permission
+            target: dc6a8b7c-464d-49c9-80c2-3960c66d10d7
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: f09f7661-4f17-47eb-9ffd-60f944254944
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides: '{"height":"22px", "width":"22px", "x":"8.5", "y":"7.5","z-index":4}'
+          styles: '{"height":"22px", "width":"22px", "x":"8.5", "y":"7.5","z-index":4}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/role-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/role-white.svg
+        position:
+          posX: 10
+          posY: -30
+        whiteboardData:
+          style: {}
+    type: Role
+    version: ""
+  node-feature-discovery-worker-ofreg:
     annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
     dependsOn: []
@@ -870,7 +1017,7 @@ services:
             width: 25px
             x: "7"
             "y": "7"
-            z-index: 1018
+            z-index: 1017
           styles: '{"height":"25px","width":"25px","x":"7", "y":"7","z-index":4}'
           subCategory: ""
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/rolebinding-color.svg
@@ -886,7 +1033,82 @@ services:
             z-index: 1000
     type: RoleBinding
     version: ""
-  node-feature-discovery-worker-lntdr:
+  node-feature-discovery-worker-xqpjp:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/instance: node-feature-discovery
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: node-feature-discovery
+      app.kubernetes.io/version: v0.16.0
+      helm.sh/chart: node-feature-discovery-0.16.0
+    model: kubernetes
+    name: node-feature-discovery-worker
+    namespace: default
+    settings:
+      image Pull Secrets: []
+      secrets: []
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: f8425948-ac51-431b-8a3f-3bd4361d3c62
+            metadata:
+              binded_by: 35f9494b-253e-4431-9f86-d85b7296d728
+            source: f09f7661-4f17-47eb-9ffd-60f944254944
+            subType: Permission
+            target: dc6a8b7c-464d-49c9-80c2-3960c66d10d7
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: dc6a8b7c-464d-49c9-80c2-3960c66d10d7
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: bottom-round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            z-index: 1008
+          styles: ""
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/serviceaccount-white.svg
+        position:
+          posX: 50
+          posY: -30
+        whiteboardData:
+          style: {}
+    type: ServiceAccount
+    version: ""
+  node-feature-discovery-worker-zhsmv:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -1074,228 +1296,6 @@ services:
         whiteboardData:
           style: {}
     type: DaemonSet
-    version: ""
-  node-feature-discovery-worker-qorzp:
-    annotations: {}
-    apiVersion: rbac.authorization.k8s.io/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/instance: node-feature-discovery
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: node-feature-discovery
-      app.kubernetes.io/version: v0.16.0
-      helm.sh/chart: node-feature-discovery-0.16.0
-    model: kubernetes
-    name: node-feature-discovery-worker
-    namespace: default
-    settings:
-      rules:
-      - api Groups:
-        - nfd.k8s-sigs.io
-        resources:
-        - nodefeatures
-        verbs:
-        - create
-        - get
-        - update
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: f8425948-ac51-431b-8a3f-3bd4361d3c62
-            metadata:
-              binded_by: 35f9494b-253e-4431-9f86-d85b7296d728
-            source: f09f7661-4f17-47eb-9ffd-60f944254944
-            subType: Permission
-            target: dc6a8b7c-464d-49c9-80c2-3960c66d10d7
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: f09f7661-4f17-47eb-9ffd-60f944254944
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides: '{"height":"22px", "width":"22px", "x":"8.5", "y":"7.5","z-index":4}'
-          styles: '{"height":"22px", "width":"22px", "x":"8.5", "y":"7.5","z-index":4}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/role-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/role-white.svg
-        position:
-          posX: 10
-          posY: -30
-        whiteboardData:
-          style: {}
-    type: Role
-    version: ""
-  node-feature-discovery-worker-wmzoq:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/instance: node-feature-discovery
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: node-feature-discovery
-      app.kubernetes.io/version: v0.16.0
-      helm.sh/chart: node-feature-discovery-0.16.0
-    model: kubernetes
-    name: node-feature-discovery-worker
-    namespace: default
-    settings:
-      image Pull Secrets: []
-      secrets: []
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: f8425948-ac51-431b-8a3f-3bd4361d3c62
-            metadata:
-              binded_by: 35f9494b-253e-4431-9f86-d85b7296d728
-            source: f09f7661-4f17-47eb-9ffd-60f944254944
-            subType: Permission
-            target: dc6a8b7c-464d-49c9-80c2-3960c66d10d7
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        fieldRefData: {}
-        id: dc6a8b7c-464d-49c9-80c2-3960c66d10d7
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: bottom-round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            z-index: 1008
-          styles: ""
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/serviceaccount-white.svg
-        position:
-          posX: 50
-          posY: -30
-        whiteboardData:
-          style: {}
-    type: ServiceAccount
-    version: ""
-  node-feature-discovery-ywpqo:
-    annotations: {}
-    apiVersion: rbac.authorization.k8s.io/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/instance: node-feature-discovery
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: node-feature-discovery
-      app.kubernetes.io/version: v0.16.0
-      helm.sh/chart: node-feature-discovery-0.16.0
-    model: kubernetes
-    name: node-feature-discovery
-    namespace: ""
-    settings:
-      role Ref:
-        api Group: rbac.authorization.k8s.io
-        kind: ClusterRole
-        name: node-feature-discovery
-      subjects:
-      - kind: ServiceAccount
-        name: node-feature-discovery
-        namespace: default
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: cf93ad06-12db-4de6-ac77-899dc58774c5
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
-          logoURL: Created by Meshery Authors
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            height: 25px
-            width: 25px
-            x: "7"
-            "y": "7"
-            z-index: 1017
-          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
-        position:
-          posX: 30.10625
-          posY: 30
-        whiteboardData:
-          style:
-            height: 10.5
-            width: 10.5
-            z-index: 1000
-    type: ClusterRoleBinding
     version: ""
   nodefeaturegroups.nfd.k8s-sigs.io:
     annotations:
@@ -2130,7 +2130,7 @@ services:
           style: {}
     type: CustomResourceDefinition
     version: ""
-  nodegroupinventorywallet-aqwqx:
+  nodegroupinventorywallet-abjcy:
     annotations: {}
     apiVersion: core.meshery.io/v1alpha1
     dependsOn:
@@ -2229,11 +2229,11 @@ services:
         whiteboardData: {}
     type: NodeGroupInventoryWallet
     version: 0.7.1
-  nodegroupinventorywallet-bmcqu:
+  nodegroupinventorywallet-prsdd:
     annotations: {}
     apiVersion: core.meshery.io/v1alpha1
     dependsOn:
-    - node-feature-discovery-gc-awwey
+    - node-feature-discovery-gc-lzxms
     id: null
     isAnnotation: null
     labels: {}
@@ -2328,11 +2328,11 @@ services:
         whiteboardData: {}
     type: NodeGroupInventoryWallet
     version: 0.7.1
-  nodegroupinventorywallet-kpsak:
+  nodegroupinventorywallet-tdgek:
     annotations: {}
     apiVersion: core.meshery.io/v1alpha1
     dependsOn:
-    - node-feature-discovery-worker-lntdr
+    - node-feature-discovery-worker-zhsmv
     id: null
     isAnnotation: null
     labels: {}
