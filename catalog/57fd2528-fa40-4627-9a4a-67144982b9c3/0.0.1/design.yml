@@ -1,19 +1,22 @@
 name: Acme Operator
+version: 0.0.4
 services:
   Generic Node:
-    name: Generic Node
-    type: GenericNode
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    namespace: openshift-acme
-    version: v1.0.0
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - da9bb7b0-bc2d-4e79-8407-6095d375a441
+    name: Generic Node
+    namespace: openshift-acme
     settings:
       user Messages: []
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 5730efd2-4d9e-48e6-bf12-46f0d6db3147
         label: Generic Node
         meshmodel-data:
@@ -63,27 +66,31 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/genericnode-white.svg
         parent: da9bb7b0-bc2d-4e79-8407-6095d375a441
         position:
-          posX: 210
-          posY: 210
+          posX: 250
+          posY: 250
         whiteboardData:
           style:
             backgroundOpacity: 0
             visibility: hidden
             z-index: 9
-  Node Group Inventory Wallet:
-    name: Node Group Inventory Wallet
-    type: NodeGroupInventoryWallet
-    apiVersion: core.meshery.io/v1alpha1
-    namespace: openshift-acme
+    type: GenericNode
     version: v1.0.0
+  Node Group Inventory Wallet:
+    annotations: {}
+    apiVersion: core.meshery.io/v1alpha1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - da9bb7b0-bc2d-4e79-8407-6095d375a441
+    name: Node Group Inventory Wallet
+    namespace: openshift-acme
     settings:
       user Messages: []
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 6910e93e-0278-4572-9371-eca81a6b1afb
         label: Node Group Inventory Wallet
         meshmodel-data:
@@ -134,39 +141,34 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/genericnode-white.svg
         parent: da9bb7b0-bc2d-4e79-8407-6095d375a441
         position:
-          posX: -10
-          posY: -10
+          posX: 30
+          posY: 30
         whiteboardData:
           style:
             z-index: 8
-  da9bb7b0-bc2d-4e79-8407-6095d375a441:
-    name: da9bb7b0-bc2d-4e79-8407-6095d375a441
-    traits:
-      meshmap:
-        edges: []
-        id: da9bb7b0-bc2d-4e79-8407-6095d375a441
-        position:
-          posX: 100
-          posY: 100
-        whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: v1.0.0
   letsencrypt-live:
-    name: letsencrypt-live
-    type: ConfigMap
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    labels:
-      managed-by: openshift-acme
-      type: CertIssuer
     annotations:
       acme.openshift.io/priority: "100"
       argocd.argoproj.io/compare-options: IgnoreExtraneous
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      managed-by: openshift-acme
+      type: CertIssuer
+    model: kubernetes
+    name: letsencrypt-live
+    namespace: default
     settings:
       data:
         cert-issuer.types.acme.openshift.io: '{"type":"ACME","acmeCertIssuer":{"directoryUrl":"https://acme-v02.api.letsencrypt.org/directory"}}'
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 3df1dc1d-dc5c-4dd4-9e6b-be4fcc0e9b4a
         label: letsencrypt-live
         meshmodel-metadata:
@@ -190,25 +192,31 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
-          posX: 170
-          posY: 130
+          posX: 190
+          posY: 150
         whiteboardData:
           style:
             z-index: 5
+    type: ConfigMap
+    version: ""
   openshift-acme:
-    name: openshift-acme
-    type: ServiceAccount
+    annotations: {}
     apiVersion: v1
-    namespace: default
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app: openshift-acme
+    model: kubernetes
+    name: openshift-acme
+    namespace: default
     settings:
       image Pull Secrets: []
       secrets: []
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 472340aa-0b4d-4323-a066-6133c94c968e
         meshmodel-metadata:
           capabilities: ""
@@ -231,8 +239,10 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
         position:
-          posX: 110
-          posY: 170
+          posX: 130
+          posY: 190
         whiteboardData:
           style:
             z-index: 6
+    type: ServiceAccount
+    version: ""

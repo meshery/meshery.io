@@ -1,20 +1,16 @@
-name: bookInfoWithoutK8s.yaml
+name: BookInfo App w/o Kubernetes
+version: 0.0.11
 services:
-  7207724b-9e0f-4ee1-95aa-de844edd2941:
-    name: 7207724b-9e0f-4ee1-95aa-de844edd2941
-    traits:
-      meshmap:
-        edges: []
-        id: 7207724b-9e0f-4ee1-95aa-de844edd2941
-        position:
-          posX: 481.46301486351194
-          posY: 162.75041575865947
-        whiteboardData: {}
   bookinfo-vs:
-    name: bookinfo-vs
-    type: VirtualService
-    namespace: default
+    annotations: {}
+    apiVersion: ""
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: istio
+    name: bookinfo-vs
+    namespace: default
     settings:
       gateways:
       - sample-app-gateway
@@ -63,100 +59,43 @@ services:
             source: bookinfo-vs
             target: productpage
           style:
-            curve-style:
-              name: curve-style
-              strValue: bezier
-              value: bezier
-            font-family:
-              name: font-family
-              strValue: Qanelas Soft, sans-serif
-              value:
-              - Qanelas Soft, sans-serif
-              - Qanelas Soft, sans-serif
-            font-size:
-              name: font-size
-              pfValue: 6
-              strValue: 6px
-              units: px
-              value: 6
-            line-color:
-              mapping:
-                mapped:
-                  fn: true
-                  mapping: true
-                name: line-color
-                prevFnValue: '#93b0e6'
-                strValue: fn
-              name: line-color
-              pfValue:
-              - 147
-              - 176
-              - 230
-              strValue: rgb(147,176,230)
-              value:
-              - 147
-              - 176
-              - 230
-            line-style:
-              name: line-style
-              strValue: dotted
-              value: dotted
-            target-arrow-shape:
-              name: target-arrow-shape
-              strValue: vee
-              value: vee
-            text-events:
-              name: text-events
-              strValue: "yes"
-              value: "yes"
-            text-outline-color:
-              name: text-outline-color
-              pfValue:
-              - 255
-              - 255
-              - 255
-              strValue: rgb(255,255,255)
-              value:
-              - 255
-              - 255
-              - 255
-            text-outline-width:
-              name: text-outline-width
-              pfValue: 1
-              strValue: 1px
-              units: px
-              value: 1
-            text-wrap:
-              name: text-wrap
-              strValue: wrap
-              value: wrap
-            width:
-              name: width
-              pfValue: 1.5
-              strValue: 1.5px
-              units: px
-              value: 1.5
-            z-index:
-              name: z-index
-              pfValue: 999
-              strValue: "999"
-              value: 999
-            z-index-compare:
-              name: z-index-compare
-              strValue: manual
-              value: manual
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
         id: bookinfo-vs
         label: bookinfo-vs
+        meshmodel-metadata:
+          styleOverrides:
+            z-index: 6
         position:
-          posX: 60.76374840468791
-          posY: 252.91020252903866
+          posX: 150
+          posY: 330
         whiteboardData:
           style: {}
+    type: VirtualService
+    version: ""
   details:
-    name: details
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: details
+    namespace: ""
     settings:
       spec:
         replicas: 1
@@ -179,19 +118,29 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: details
         label: details
+        meshmodel-metadata:
+          styleOverrides:
+            z-index: 7
         position:
-          posX: 369.86204304901764
-          posY: 343.90690732284475
+          posX: 450
+          posY: 430
         whiteboardData:
           style: {}
-  productpage:
-    name: productpage
     type: Deployment
+    version: ""
+  productpage:
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: productpage
+    namespace: default
     settings:
       spec:
         replicas: 1
@@ -222,100 +171,43 @@ services:
             source: bookinfo-vs
             target: productpage
           style:
-            curve-style:
-              name: curve-style
-              strValue: bezier
-              value: bezier
-            font-family:
-              name: font-family
-              strValue: Qanelas Soft, sans-serif
-              value:
-              - Qanelas Soft, sans-serif
-              - Qanelas Soft, sans-serif
-            font-size:
-              name: font-size
-              pfValue: 6
-              strValue: 6px
-              units: px
-              value: 6
-            line-color:
-              mapping:
-                mapped:
-                  fn: true
-                  mapping: true
-                name: line-color
-                prevFnValue: '#93b0e6'
-                strValue: fn
-              name: line-color
-              pfValue:
-              - 147
-              - 176
-              - 230
-              strValue: rgb(147,176,230)
-              value:
-              - 147
-              - 176
-              - 230
-            line-style:
-              name: line-style
-              strValue: dotted
-              value: dotted
-            target-arrow-shape:
-              name: target-arrow-shape
-              strValue: vee
-              value: vee
-            text-events:
-              name: text-events
-              strValue: "yes"
-              value: "yes"
-            text-outline-color:
-              name: text-outline-color
-              pfValue:
-              - 255
-              - 255
-              - 255
-              strValue: rgb(255,255,255)
-              value:
-              - 255
-              - 255
-              - 255
-            text-outline-width:
-              name: text-outline-width
-              pfValue: 1
-              strValue: 1px
-              units: px
-              value: 1
-            text-wrap:
-              name: text-wrap
-              strValue: wrap
-              value: wrap
-            width:
-              name: width
-              pfValue: 1.5
-              strValue: 1.5px
-              units: px
-              value: 1.5
-            z-index:
-              name: z-index
-              pfValue: 999
-              strValue: "999"
-              value: 999
-            z-index-compare:
-              name: z-index-compare
-              strValue: manual
-              value: manual
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
         id: productpage
         label: productpage
+        meshmodel-metadata:
+          styleOverrides:
+            z-index: 3
         position:
-          posX: 156.51845840458358
-          posY: 251.99096159520772
+          posX: 230
+          posY: 330
         whiteboardData:
           style: {}
-  ratings:
-    name: ratings
     type: Deployment
+    version: ""
+  ratings:
+    annotations: {}
     apiVersion: apps/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: ratings
+    namespace: ""
     settings:
       spec:
         replicas: 1
@@ -338,20 +230,29 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: ratings
         label: ratings
+        meshmodel-metadata:
+          styleOverrides:
+            z-index: 4
         position:
-          posX: 649
-          posY: 391
+          posX: 730
+          posY: 470
         whiteboardData:
           style: {}
-  reviews-v1:
-    name: reviews-v1
     type: Deployment
+    version: ""
+  reviews-v1:
+    annotations: {}
     apiVersion: apps/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
-    dependsOn:
-    - 7207724b-9e0f-4ee1-95aa-de844edd2941
+    name: reviews-v1
+    namespace: ""
     settings:
       spec:
         replicas: 1
@@ -375,22 +276,30 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: reviews-v1
         label: reviews-v1
+        meshmodel-metadata:
+          styleOverrides:
+            z-index: 8
         parent: 7207724b-9e0f-4ee1-95aa-de844edd2941
         position:
-          posX: 475.73105750943614
-          posY: 91.09492322951635
+          posX: 630
+          posY: 250
         whiteboardData:
           style: {}
-  reviews-v2:
-    name: reviews-v2
     type: Deployment
+    version: ""
+  reviews-v2:
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
-    dependsOn:
-    - 7207724b-9e0f-4ee1-95aa-de844edd2941
+    name: reviews-v2
+    namespace: default
     settings:
       spec:
         replicas: 1
@@ -414,22 +323,30 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: reviews-v2
         label: reviews-v2
+        meshmodel-metadata:
+          styleOverrides:
+            z-index: 9
         parent: 7207724b-9e0f-4ee1-95aa-de844edd2941
         position:
-          posX: 480.6820894938793
-          posY: 152.15247972754568
+          posX: 650
+          posY: 310
         whiteboardData:
           style: {}
-  reviews-v3:
-    name: reviews-v3
     type: Deployment
+    version: ""
+  reviews-v3:
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
-    dependsOn:
-    - 7207724b-9e0f-4ee1-95aa-de844edd2941
+    name: reviews-v3
+    namespace: default
     settings:
       spec:
         replicas: 1
@@ -453,19 +370,30 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: reviews-v3
         label: reviews-v3
+        meshmodel-metadata:
+          styleOverrides:
+            z-index: 10
         parent: 7207724b-9e0f-4ee1-95aa-de844edd2941
         position:
-          posX: 487.1949722175878
-          posY: 216.40590828780256
+          posX: 650
+          posY: 370
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""
   sample-app-gateway:
-    name: sample-app-gateway
-    type: Gateway
-    namespace: default
+    annotations: {}
+    apiVersion: ""
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: istio
+    name: sample-app-gateway
+    namespace: default
     settings:
       selector:
         istio: ingressgateway
@@ -481,10 +409,16 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: sample-app-gateway
         label: sample-app-gateway
+        meshmodel-metadata:
+          styleOverrides:
+            z-index: 11
         position:
-          posX: -26.034353929889633
-          posY: 253.89302556409393
+          posX: 50
+          posY: 330
         whiteboardData:
           style: {}
+    type: Gateway
+    version: ""

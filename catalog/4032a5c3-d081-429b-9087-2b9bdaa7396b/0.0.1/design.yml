@@ -1,48 +1,21 @@
 name: Mount(Pod -> PersistentVolume)
+version: 0.0.8
 services:
-  733fccfc-c6f1-4b9a-85bb-aa98fc62816b:
-    name: 733fccfc-c6f1-4b9a-85bb-aa98fc62816b
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: d8b68e53-7fa5-4a9e-833c-787f208bbb62
-            metadata:
-              binded_by: 452a4372-dbc0-45a4-aeed-76e3c8c3cce3
-            source: 733fccfc-c6f1-4b9a-85bb-aa98fc62816b
-            subType: Mount
-            target: d4c293ef-9bfa-4c19-8a1c-8913c82da0c6
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        id: 733fccfc-c6f1-4b9a-85bb-aa98fc62816b
-        position:
-          posX: 210
-          posY: 90
-        whiteboardData: {}
   Generic Node:
-    name: Generic Node
-    type: GenericNode
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: v1.0.0
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - 733fccfc-c6f1-4b9a-85bb-aa98fc62816b
+    name: Generic Node
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 8f186933-82ca-41ab-8e44-5484d428de87
         label: Generic Node
         meshmodel-data:
@@ -92,27 +65,31 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/genericnode-white.svg
         parent: 733fccfc-c6f1-4b9a-85bb-aa98fc62816b
         position:
-          posX: 250
-          posY: 130
+          posX: 490
+          posY: 370
         whiteboardData:
           style:
             backgroundOpacity: 0
             visibility: hidden
             z-index: 5
-  Node Group Inventory Wallet:
-    name: Node Group Inventory Wallet
-    type: NodeGroupInventoryWallet
-    apiVersion: core.meshery.io/v1alpha1
-    namespace: Pod
+    type: GenericNode
     version: v1.0.0
+  Node Group Inventory Wallet:
+    annotations: {}
+    apiVersion: core.meshery.io/v1alpha1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - 733fccfc-c6f1-4b9a-85bb-aa98fc62816b
+    name: Node Group Inventory Wallet
+    namespace: Pod
     settings:
       user Messages: []
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 954d6cb3-6097-4ade-86f1-a6f7f3434e43
         label: Node Group Inventory Wallet
         meshmodel-data:
@@ -163,24 +140,30 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/genericnode-white.svg
         parent: 733fccfc-c6f1-4b9a-85bb-aa98fc62816b
         position:
-          posX: 170
-          posY: 50
+          posX: 410
+          posY: 290
         whiteboardData:
           style:
             z-index: 4
+    type: NodeGroupInventoryWallet
+    version: v1.0.0
   persistent-volume-claim-cl:
-    name: persistent-volume-claim-cl
-    type: PersistentVolumeClaim
+    annotations: {}
     apiVersion: v1
-    namespace: default
-    version: v1.25.2
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: persistent-volume-claim-cl
+    namespace: default
     settings:
       spec:
         volume Name: persistent-volume-gk
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 452a4372-dbc0-45a4-aeed-76e3c8c3cce3
         label: persistent-volume-claim-cl
         meshmodel-data:
@@ -222,20 +205,26 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/persistentvolumeclaim-white.svg
         position:
-          posX: 326.10625037872103
-          posY: 89.9113817619677
+          posX: 486.71714006709317
+          posY: 228.62628794632548
         whiteboardData:
           style:
             height: 36.125
             width: 36.125
             z-index: 1000
-  persistent-volume-gk:
-    name: persistent-volume-gk
-    type: PersistentVolume
-    apiVersion: v1
-    namespace: default
+    type: PersistentVolumeClaim
     version: v1.25.2
+  persistent-volume-gk:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: persistent-volume-gk
+    namespace: default
+    settings: {}
     traits:
       meshmap:
         edges:
@@ -261,6 +250,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: d4c293ef-9bfa-4c19-8a1c-8913c82da0c6
         label: Persistent Volume
         meshmodel-data:
@@ -303,8 +293,10 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/persistentvolume-white.svg
         position:
-          posX: 390
-          posY: 90
+          posX: 510
+          posY: 210
         whiteboardData:
           style:
             z-index: 6
+    type: PersistentVolume
+    version: v1.25.2

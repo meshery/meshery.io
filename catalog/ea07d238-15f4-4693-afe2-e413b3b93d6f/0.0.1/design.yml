@@ -1,49 +1,21 @@
 name: MySQL installation with cinder volume plugin
+version: 0.0.1
 services:
-  91a41ddd-4349-4a11-b6ac-2fe47c743a7d:
-    name: 91a41ddd-4349-4a11-b6ac-2fe47c743a7d
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 53cfe6c7-a445-42f7-bc99-e678d3f19326
-            metadata:
-              port: 3306
-              protocol: TCP
-            source: 4f2d0d9d-0fdf-450e-859d-c14c7afb11e1
-            subType: Network
-            target: 91a41ddd-4349-4a11-b6ac-2fe47c743a7d
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        id: 91a41ddd-4349-4a11-b6ac-2fe47c743a7d
-        position:
-          posX: 210
-          posY: 100
-        whiteboardData: {}
   AnchorNode:
-    name: AnchorNode
-    type: AnchorNode
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - 91a41ddd-4349-4a11-b6ac-2fe47c743a7d
+    name: AnchorNode
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 07a0b234-0c9f-4b50-882f-17f8d55c73a3
         label: AnchorNode
         meshmodel-data:
@@ -95,17 +67,23 @@ services:
           posX: 250
           posY: 130
         whiteboardData: {}
-  NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
-    apiVersion: core.meshery.io/v1alpha1
+    type: AnchorNode
     version: 0.7.1
+  NodeGroupInventoryWallet:
+    annotations: {}
+    apiVersion: core.meshery.io/v1alpha1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - 91a41ddd-4349-4a11-b6ac-2fe47c743a7d
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 094f02ea-5ee9-4a9f-910d-48ec2ae7a83c
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -157,14 +135,19 @@ services:
           posX: 170
           posY: 70
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   mysql:
-    name: mysql
-    type: Service
+    annotations: {}
     apiVersion: v1
-    namespace: default
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       name: mysql
+    model: kubernetes
+    name: mysql
+    namespace: default
     settings:
       spec:
         ports:
@@ -197,6 +180,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: 4f2d0d9d-0fdf-450e-859d-c14c7afb11e1
         meshmodel-metadata:
           capabilities: ""
@@ -232,3 +216,5 @@ services:
           posY: 70
         whiteboardData:
           style: {}
+    type: Service
+    version: ""

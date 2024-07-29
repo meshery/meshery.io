@@ -1,16 +1,22 @@
 name: 'Gerrit operator '
+version: 0.0.10
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
     - gerrit-operator-deployment
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: d2b491fb-82cb-412f-9315-3d2a1ece3c82
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -89,17 +95,22 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: c6450665-6a4a-46f0-a5ef-76e206159291
         position:
-          posX: 90
-          posY: 70
+          posX: 290
+          posY: 270
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   gerrit-operator-deployment:
-    name: gerrit-operator-deployment
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app: gerrit-operator
+    model: kubernetes
+    name: gerrit-operator-deployment
+    namespace: default
     settings:
       spec:
         replicas: 1
@@ -147,6 +158,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: c6450665-6a4a-46f0-a5ef-76e206159291
         meshmodel-metadata:
           capabilities: |2-
@@ -180,7 +192,9 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 90
-          posY: 70
+          posX: 290
+          posY: 270
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""

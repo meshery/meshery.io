@@ -1,16 +1,22 @@
 name: Litmus Chaos Operator
+version: 0.0.2
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
     - litmus
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: da139f6c-2244-48a9-a116-b54d68f2673e
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -169,12 +175,14 @@ services:
           posX: 10
           posY: 30
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   litmus:
-    name: litmus
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: litmus
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app.kubernetes.io/component: operator
       app.kubernetes.io/managed-by: kubectl
@@ -182,6 +190,9 @@ services:
       app.kubernetes.io/part-of: litmus
       app.kubernetes.io/version: ci
       name: litmus
+    model: kubernetes
+    name: litmus
+    namespace: litmus
     settings:
       spec:
         replicas: 1
@@ -225,6 +236,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 63296b82-c8c6-49ba-8560-401288c4577e
         meshmodel-metadata:
           capabilities: |2-
@@ -262,3 +274,5 @@ services:
           posY: 30
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""

@@ -1,16 +1,22 @@
 name: minIO Deployment
+version: 0.0.6
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
     - minio
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: a6c4a1cf-6b9f-4cec-bb2d-13d177777a54
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -60,15 +66,21 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: 4ca17377-ad6c-4efb-b459-e62ad8e63ffd
         position:
-          posX: 90
-          posY: 110
+          posX: 210
+          posY: 230
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   minio:
-    name: minio
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: minio
+    namespace: default
     settings:
       spec:
         replicas: 1
@@ -130,6 +142,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 4ca17377-ad6c-4efb-b459-e62ad8e63ffd
         label: minio
         meshmodel-metadata:
@@ -164,6 +177,8 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 90
-          posY: 110
+          posX: 210
+          posY: 230
         whiteboardData: {}
+    type: Deployment
+    version: ""
