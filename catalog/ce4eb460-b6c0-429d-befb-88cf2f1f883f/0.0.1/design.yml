@@ -1,16 +1,22 @@
 name: Consul on kubernetes
+version: 0.0.9
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
-    - consul-xdxhc
+    - consul-jmgwo
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 06ab9d73-cf92-451a-bbcb-6370de7e7007
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -60,15 +66,21 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: d8eb27a6-aa79-4932-a5bc-6371b2281b54
         position:
-          posX: 170
-          posY: 90
+          posX: 370
+          posY: 290
         whiteboardData: {}
-  consul-svdfb:
-    name: consul
-    type: Service
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
+  consul-bajjw:
+    annotations: {}
     apiVersion: v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: consul
+    namespace: default
     settings:
       spec:
         ports:
@@ -128,6 +140,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: 9cb93bb5-faf5-495a-8b74-1cf8cbe1b329
         meshmodel-metadata:
           capabilities: ""
@@ -160,16 +173,22 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
         position:
-          posX: 10
-          posY: 50
+          posX: 110
+          posY: 150
         whiteboardData:
           style: {}
-  consul-xdxhc:
-    name: consul
-    type: Deployment
+    type: Service
+    version: ""
+  consul-jmgwo:
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: consul
+    namespace: default
     settings:
       spec:
         replicas: 1
@@ -237,6 +256,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: d8eb27a6-aa79-4932-a5bc-6371b2281b54
         meshmodel-metadata:
           capabilities: |2-
@@ -270,7 +290,9 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 170
-          posY: 90
+          posX: 370
+          posY: 290
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""

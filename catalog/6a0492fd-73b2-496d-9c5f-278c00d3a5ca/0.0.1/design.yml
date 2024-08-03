@@ -1,17 +1,22 @@
 name: My first k8s app
+version: 0.0.2
 services:
   connection-sm:
-    name: connection-sm
-    type: Connection
+    annotations: {}
     apiVersion: meshery.layer5.io/v1alpha1
-    namespace: my-app
-    version: '*'
-    model: kubernetes
     dependsOn:
     - my-app
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: connection-sm
+    namespace: my-app
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: c6667e82-7457-4f74-bf63-ff3fcf12aca0
         label: connection-sm
         meshmodel-data:
@@ -65,27 +70,32 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: circle
-          styleOverrides: ""
+          styleOverrides:
+            z-index: 4
           subCategory: Orchestration & Management
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/connection-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/connection-white.svg
         parent: c9a6df1f-4692-4021-9911-7d424634f2ae
         position:
-          posX: 113.87957203014271
-          posY: 64.17424552255234
+          posX: 110
+          posY: 70
         whiteboardData:
           style:
             z-index: 8
+    type: Connection
+    version: '*'
   deployment-xd:
-    name: deployment-xd
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: my-app
-    version: v1.25.2
-    model: kubernetes
     dependsOn:
     - my-app
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: deployment-xd
+    namespace: my-app
     settings:
       spec:
         replicas: -1
@@ -101,134 +111,21 @@ services:
             subType: Network
             target: d9fd9329-6fab-492c-94de-6b2d4af0888d
           style:
-            curve-style:
-              bypass: true
-              bypassed:
-                name: curve-style
-                strValue: bezier
-                value: bezier
-              name: curve-style
-              strValue: bezier
-              value: bezier
-            font-family:
-              name: font-family
-              strValue: Qanelas Soft, sans-serif
-              value:
-              - Qanelas Soft, sans-serif
-              - Qanelas Soft, sans-serif
-            font-size:
-              name: font-size
-              pfValue: 6
-              strValue: 6px
-              units: px
-              value: 6
-            line-color:
-              bypass: true
-              bypassed:
-                mapping:
-                  mapped:
-                    fn: true
-                    mapping: true
-                  name: line-color
-                  prevFnValue: '#7aa1f0'
-                  strValue: fn
-                name: line-color
-                pfValue:
-                - 122
-                - 161
-                - 240
-                strValue: rgb(122,161,240)
-                value:
-                - 122
-                - 161
-                - 240
-              name: line-color
-              pfValue:
-              - 122
-              - 161
-              - 240
-              strValue: rgb(122,161,240)
-              value:
-              - 122
-              - 161
-              - 240
-            line-style:
-              bypass: true
-              bypassed:
-                name: line-style
-                strValue: dotted
-                value: dotted
-              name: line-style
-              strValue: dotted
-              value: dotted
-            target-arrow-shape:
-              bypass: true
-              bypassed:
-                name: target-arrow-shape
-                strValue: vee
-                value: vee
-              name: target-arrow-shape
-              strValue: vee
-              value: vee
-            target-label:
-              bypass: true
-              name: target-label
-              strValue: 8080/TCP
-              value: 8080/TCP
-            target-text-margin-y:
-              bypass: true
-              name: target-text-margin-y
-              pfValue: -6
-              strValue: -6px
-              units: px
-              value: -6
-            target-text-offset:
-              bypass: true
-              name: target-text-offset
-              pfValue: 16
-              strValue: 16px
-              units: px
-              value: 16
-            text-events:
-              name: text-events
-              strValue: "yes"
-              value: "yes"
-            text-outline-color:
-              name: text-outline-color
-              pfValue:
-              - 255
-              - 255
-              - 255
-              strValue: rgb(255,255,255)
-              value:
-              - 255
-              - 255
-              - 255
-            text-outline-width:
-              name: text-outline-width
-              pfValue: 1
-              strValue: 1px
-              units: px
-              value: 1
-            text-wrap:
-              name: text-wrap
-              strValue: wrap
-              value: wrap
-            width:
-              name: width
-              pfValue: 1.5
-              strValue: 1.5px
-              units: px
-              value: 1.5
-            z-index:
-              name: z-index
-              pfValue: 999
-              strValue: "999"
-              value: 999
-            z-index-compare:
-              name: z-index-compare
-              strValue: manual
-              value: manual
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
         id: d9fd9329-6fab-492c-94de-6b2d4af0888d
         label: deployment-xd
         meshmodel-data:
@@ -257,27 +154,39 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-pentagon
-          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          styleOverrides:
+            background-image: none
+            background-opacity: 0.5
+            border-width: 2
+            z-index: 5
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         parent: c9a6df1f-4692-4021-9911-7d424634f2ae
         position:
-          posX: 112.40780381064367
-          posY: 8.350620136613431
+          posX: 110
+          posY: 10
         whiteboardData:
           style:
             z-index: 11
-  my-app:
-    name: my-app
-    type: Namespace
-    apiVersion: v1
+    type: Deployment
     version: v1.25.2
+  my-app:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: my-app
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: c9a6df1f-4692-4021-9911-7d424634f2ae
         label: my-app
         meshmodel-data:
@@ -306,24 +215,34 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: rectangle
-          styleOverrides: '{"background-image":"none","border-width":2,"border-style":"dashed","background-opacity":0.5}'
+          styleOverrides:
+            background-image: none
+            background-opacity: 0.5
+            border-style: dashed
+            border-width: 2
+            z-index: 3
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/namespace-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
         position:
-          posX: 113.64368792039318
-          posY: 44.762432829582885
+          posX: 110
+          posY: 48.5
         whiteboardData:
           style:
             z-index: 9
-  service-hp:
-    name: service-hp
-    type: Service
-    apiVersion: v1
-    namespace: default
+    type: Namespace
     version: v1.25.2
+  service-hp:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: service-hp
+    namespace: default
     settings:
       spec:
         ports:
@@ -341,134 +260,21 @@ services:
             subType: Network
             target: d9fd9329-6fab-492c-94de-6b2d4af0888d
           style:
-            curve-style:
-              bypass: true
-              bypassed:
-                name: curve-style
-                strValue: bezier
-                value: bezier
-              name: curve-style
-              strValue: bezier
-              value: bezier
-            font-family:
-              name: font-family
-              strValue: Qanelas Soft, sans-serif
-              value:
-              - Qanelas Soft, sans-serif
-              - Qanelas Soft, sans-serif
-            font-size:
-              name: font-size
-              pfValue: 6
-              strValue: 6px
-              units: px
-              value: 6
-            line-color:
-              bypass: true
-              bypassed:
-                mapping:
-                  mapped:
-                    fn: true
-                    mapping: true
-                  name: line-color
-                  prevFnValue: '#7aa1f0'
-                  strValue: fn
-                name: line-color
-                pfValue:
-                - 122
-                - 161
-                - 240
-                strValue: rgb(122,161,240)
-                value:
-                - 122
-                - 161
-                - 240
-              name: line-color
-              pfValue:
-              - 122
-              - 161
-              - 240
-              strValue: rgb(122,161,240)
-              value:
-              - 122
-              - 161
-              - 240
-            line-style:
-              bypass: true
-              bypassed:
-                name: line-style
-                strValue: dotted
-                value: dotted
-              name: line-style
-              strValue: dotted
-              value: dotted
-            target-arrow-shape:
-              bypass: true
-              bypassed:
-                name: target-arrow-shape
-                strValue: vee
-                value: vee
-              name: target-arrow-shape
-              strValue: vee
-              value: vee
-            target-label:
-              bypass: true
-              name: target-label
-              strValue: 8080/TCP
-              value: 8080/TCP
-            target-text-margin-y:
-              bypass: true
-              name: target-text-margin-y
-              pfValue: -6
-              strValue: -6px
-              units: px
-              value: -6
-            target-text-offset:
-              bypass: true
-              name: target-text-offset
-              pfValue: 16
-              strValue: 16px
-              units: px
-              value: 16
-            text-events:
-              name: text-events
-              strValue: "yes"
-              value: "yes"
-            text-outline-color:
-              name: text-outline-color
-              pfValue:
-              - 255
-              - 255
-              - 255
-              strValue: rgb(255,255,255)
-              value:
-              - 255
-              - 255
-              - 255
-            text-outline-width:
-              name: text-outline-width
-              pfValue: 1
-              strValue: 1px
-              units: px
-              value: 1
-            text-wrap:
-              name: text-wrap
-              strValue: wrap
-              value: wrap
-            width:
-              name: width
-              pfValue: 1.5
-              strValue: 1.5px
-              units: px
-              value: 1.5
-            z-index:
-              name: z-index
-              pfValue: 999
-              strValue: "999"
-              value: 999
-            z-index-compare:
-              name: z-index-compare
-              strValue: manual
-              value: manual
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
         id: ff9f95af-c056-489f-86be-5ebde6cd66aa
         label: service-hp
         meshmodel-data:
@@ -503,8 +309,10 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/connection-white.svg
         position:
-          posX: 214.81437568438383
-          posY: -16.810359621819753
+          posX: 210
+          posY: -10
         whiteboardData:
           style:
             z-index: 6
+    type: Service
+    version: v1.25.2

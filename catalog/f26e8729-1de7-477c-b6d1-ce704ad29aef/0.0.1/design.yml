@@ -1,12 +1,16 @@
 name: Deployment Web
+version: 0.0.8
 services:
   Backend:
-    name: Backend
-    type: ServiceEntry
+    annotations: {}
     apiVersion: networking.istio.io/v1beta1
-    namespace: default
-    version: v1.27.2
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: Backend
+    namespace: default
     settings:
       spec:
         hosts:
@@ -19,6 +23,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 04bb97a4-ba4b-4fde-89b2-c9436f62a108
         label: Backend
         meshmodel-data:
@@ -40,18 +45,23 @@ services:
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: 10
-          posY: 210
+          posX: 90
+          posY: 290
         whiteboardData:
           style:
             z-index: 4
-  backend-to-database:
-    name: backend-to-database
-    type: VirtualService
-    apiVersion: networking.istio.io/v1beta1
-    namespace: default
+    type: ServiceEntry
     version: v1.27.2
+  backend-to-database:
+    annotations: {}
+    apiVersion: networking.istio.io/v1beta1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: backend-to-database
+    namespace: default
     settings:
       spec:
         hosts:
@@ -65,6 +75,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 48d52b7d-23c1-4004-9d4e-87180180fff8
         label: backend-to-database
         meshmodel-data:
@@ -84,18 +95,23 @@ services:
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: -30
-          posY: 150
+          posX: 50
+          posY: 230
         whiteboardData:
           style:
             z-index: 5
-  database:
-    name: database
-    type: ServiceEntry
-    apiVersion: networking.istio.io/v1beta1
-    namespace: default
+    type: VirtualService
     version: v1.27.2
+  database:
+    annotations: {}
+    apiVersion: networking.istio.io/v1beta1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: database
+    namespace: default
     settings:
       spec:
         hosts:
@@ -108,6 +124,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: e158850a-5d24-4cd8-9dd7-6d7654608281
         label: database
         meshmodel-data:
@@ -129,18 +146,23 @@ services:
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: -30
-          posY: 210
+          posX: 50
+          posY: 290
         whiteboardData:
           style:
             z-index: 6
-  frontend:
-    name: frontend
     type: ServiceEntry
-    apiVersion: networking.istio.io/v1beta1
-    namespace: default
     version: v1.27.2
+  frontend:
+    annotations: {}
+    apiVersion: networking.istio.io/v1beta1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: frontend
+    namespace: default
     settings:
       spec:
         hosts:
@@ -153,6 +175,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 568a066c-e221-44f0-9f46-c20698e9e695
         label: frontend
         meshmodel-data:
@@ -174,18 +197,23 @@ services:
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: 70
-          posY: 210
+          posX: 150
+          posY: 290
         whiteboardData:
           style:
             z-index: 7
-  frontend-to-backend:
-    name: frontend-to-backend
-    type: VirtualService
-    apiVersion: networking.istio.io/v1beta1
-    namespace: default
+    type: ServiceEntry
     version: v1.27.2
+  frontend-to-backend:
+    annotations: {}
+    apiVersion: networking.istio.io/v1beta1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: frontend-to-backend
+    namespace: default
     settings:
       spec:
         hosts:
@@ -199,6 +227,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: fc8d8131-0f79-4a3a-8480-5c83228144fa
         label: frontend-to-backend
         meshmodel-data:
@@ -220,8 +249,10 @@ services:
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/apiservice-color.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/apiservice-white.svg
         position:
-          posX: 30
-          posY: 150
+          posX: 110
+          posY: 230
         whiteboardData:
           style:
             z-index: 3
+    type: VirtualService
+    version: v1.27.2

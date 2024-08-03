@@ -1,16 +1,22 @@
 name: AWS rds controller
+version: 0.0.4
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
     - ack-rds-controller
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: daa2ac4e-b3d5-448f-8294-d23c275c74eb
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -89,15 +95,17 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: 9a0efd9b-f96a-4e38-951d-d61b564c93bb
         position:
-          posX: 10
-          posY: 10
+          posX: 90
+          posY: 90
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   ack-rds-controller:
-    name: ack-rds-controller
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app.kubernetes.io/instance: ack-rds-instance
       app.kubernetes.io/managed-by: Helm
@@ -105,6 +113,9 @@ services:
       app.kubernetes.io/version: "1.0"
       helm.sh/chart: ack-rds-controller-1.0.0
       k8s-app: ack-rds-controller
+    model: kubernetes
+    name: ack-rds-controller
+    namespace: default
     settings:
       spec:
         replicas: 1
@@ -168,6 +179,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 9a0efd9b-f96a-4e38-951d-d61b564c93bb
         meshmodel-metadata:
           capabilities: |2-
@@ -201,7 +213,9 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 10
-          posY: 10
+          posX: 90
+          posY: 90
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""

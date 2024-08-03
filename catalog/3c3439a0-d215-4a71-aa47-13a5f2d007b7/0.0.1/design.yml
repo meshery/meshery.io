@@ -1,19 +1,22 @@
 name: prometheus_kubernetes
+version: 0.0.6
 services:
   Generic Node:
-    name: Generic Node
-    type: GenericNode
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    namespace: default
-    version: v1.0.0
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - de446104-d42b-482c-a7ec-369b447f0530
+    name: Generic Node
+    namespace: default
     settings:
       user Messages: []
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 0c854cd5-8837-4d0f-88f5-99093c779ea9
         label: Generic Node
         meshmodel-data:
@@ -63,27 +66,31 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/genericnode-white.svg
         parent: de446104-d42b-482c-a7ec-369b447f0530
         position:
-          posX: 310
-          posY: 250
+          posX: 430
+          posY: 370
         whiteboardData:
           style:
             backgroundOpacity: 0
             visibility: hidden
             z-index: 17
-  Node Group Inventory Wallet:
-    name: Node Group Inventory Wallet
-    type: NodeGroupInventoryWallet
-    apiVersion: core.meshery.io/v1alpha1
-    namespace: default
+    type: GenericNode
     version: v1.0.0
+  Node Group Inventory Wallet:
+    annotations: {}
+    apiVersion: core.meshery.io/v1alpha1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - de446104-d42b-482c-a7ec-369b447f0530
+    name: Node Group Inventory Wallet
+    namespace: default
     settings:
       user Messages: []
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 1941f26e-c58b-42c5-b2a2-d06ff5b9a747
         label: Node Group Inventory Wallet
         meshmodel-data:
@@ -134,50 +141,82 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/genericnode-white.svg
         parent: de446104-d42b-482c-a7ec-369b447f0530
         position:
-          posX: 190
-          posY: 130
+          posX: 310
+          posY: 250
         whiteboardData:
           style:
             z-index: 16
-  de446104-d42b-482c-a7ec-369b447f0530:
-    name: de446104-d42b-482c-a7ec-369b447f0530
+    type: NodeGroupInventoryWallet
+    version: v1.0.0
+  prometheus-jkcaz:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: prometheus
+    namespace: default
+    settings:
+      role Ref:
+        api Group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: prometheus
+      subjects:
+      - kind: ServiceAccount
+        name: default
+        namespace: monitoring
     traits:
       meshmap:
-        edges:
-        - data:
-            id: bd7000f1-3367-4189-8f00-672911dea824
-            metadata:
-              port: 8080
-              protocol: TCP
-            source: b2e2a852-201f-41c1-b4e6-1f78ded3807b
-            subType: Network
-            target: de446104-d42b-482c-a7ec-369b447f0530
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        id: de446104-d42b-482c-a7ec-369b447f0530
+        edges: []
+        fieldRefData: {}
+        id: d9b3fa77-9ad6-41ca-9d41-5b7105657d59
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          styleOverrides:
+            height: 25px
+            width: 25px
+            x: "7"
+            "y": "7"
+            z-index: 4
+          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
         position:
-          posX: 250
-          posY: 190
-        whiteboardData: {}
-  prometheus-jyqme:
-    name: prometheus
-    type: ClusterRole
+          posX: 270
+          posY: 230
+        whiteboardData:
+          style:
+            z-index: 7
+    type: ClusterRoleBinding
+    version: ""
+  prometheus-laqnu:
+    annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: prometheus
+    namespace: default
     settings:
       rules:
       - api Groups:
@@ -207,6 +246,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: fc0fa4d6-de9d-4ec8-a3c6-5c14a8c2a974
         meshmodel-metadata:
           capabilities: ""
@@ -236,17 +276,23 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
         position:
-          posX: 110
-          posY: 210
+          posX: 170
+          posY: 270
         whiteboardData:
           style:
             z-index: 9
+    type: ClusterRole
+    version: ""
   prometheus-secret:
-    name: prometheus-secret
-    type: Secret
+    annotations: {}
     apiVersion: v1
-    namespace: monitoring
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: prometheus-secret
+    namespace: monitoring
     settings:
       data:
         tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZpVENDQkhHZ0F3SUJBZ0lCQVRBTkJna3Foa2lHOXcwQkFRc0ZBRENCd0RFak1DRUdBMVVFQXhNYWFXNTAKWlhKdFpXUnBZWFJsTG5Ob1lXdGxjakkwTWk1c1lXSXhDekFKQmdOVkJBWVRBbFZUTVJFd0R3WURWUVFJRXdoVwphWEpuYVc1cFlURVFNQTRHQTFVRUJ4TUhRbkpwYzNSdmR6RXNNQ29HQTFVRUNoTWpVMGhCUzBWU01qUXlJRXhoCllpQkRaWEowYVdacFkyRjBaU0JCZFhSb2IzSnBkSGt4T1RBM0JnTlZCQXNUTUZOSVFVdEZVakkwTWlCTVlXSWcKU1c1MFpYSnRaV1JwWVhSbElFTmxjblJwWm1sallYUmxJRUYxZEdodmNtbDBlVEFlRncweE9URXdNVGN4TmpFMgpNekZhRncweU1URXdNVFl4TmpFMk16RmFNSUdBTVIwd0d3WURWUVFERkJRcUxtRndjSE11YzJoaGEyVnlNalF5CkxteGhZakVMTUFrR0ExVUVCaE1DVlZNeEVUQVBCZ05WQkFnVENGWnBjbWRwYm1saE1SQXdEZ1lEVlFRSEV3ZEMKY21semRHOTNNUll3RkFZRFZRUUtFdzFUU0VGTFJWSXlORElnVEdGaU1SVXdFd1lEVlFRTEV3eE1ZV0lnVjJWaQpjMmwwWlhNd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURsRm16QVd0U09JcXZNCkpCV3Vuc0VIUmxraXozUmpSK0p1NTV0K0hCUG95YnZwVkJJeXMxZ3prby9INlkxa2Zxa1JCUzZZYVFHM2lYRFcKaDgzNlNWc3pNVUNVS3BtNXlZQXJRNzB4YlpPTXRJcjc1VEcrejFaRGJaeFUzbnh6RXdHdDN3U3c5OVJ0bjhWbgo5dEpTVXI0MHBHUytNemMzcnZOUFZRMjJoYTlhQTdGL2NVcGxtZUpkUnZEVnJ3Q012UklEcndXVEZjZkU3bUtxCjFSUkRxVDhETnlydlJmeUlubytmSkUxTmRuVEVMY0dTYVZlajhZVVFONHY0WFRnLzJncmxIN1pFT1VXNy9oYm8KUXh6NVllejVSam1wOWVPVUpvdVdmWk5FNEJBbGRZeVYxd2NPRXhRTmswck5BOU45ZXBjNWtUVVZQR3pOTWRucgovVXQxOWMweEFnTUJBQUdqZ2dIS01JSUJ4akFKQmdOVkhSTUVBakFBTUJFR0NXQ0dTQUdHK0VJQkFRUUVBd0lHClFEQUxCZ05WSFE4RUJBTUNCYUF3TXdZSllJWklBWWI0UWdFTkJDWVdKRTl3Wlc1VFUwd2dSMlZ1WlhKaGRHVmsKSUZObGNuWmxjaUJEWlhKMGFXWnBZMkYwWlRBZEJnTlZIUTRFRmdRVWRhYy94MTR6dXl3RVZPSi9vTjdQeU82bApDZ2N3Z2RzR0ExVWRJd1NCMHpDQjBJQVVzZFM1WWxuWEpWTk5mRVpkTEQvL2RyNE5mV3FoZ2JTa2diRXdnYTR4CkdUQVhCZ05WQkFNVEVHTmhMbk5vWVd0bGNqSTBNaTVzWVdJeEN6QUpCZ05WQkFZVEFsVlRNUkV3RHdZRFZRUUkKRXdoV2FYSm5hVzVwWVRFUU1BNEdBMVVFQnhNSFFuSnBjM1J2ZHpFc01Db0dBMVVFQ2hNalUwaEJTMFZTTWpReQpJRXhoWWlCRFpYSjBhV1pwWTJGMFpTQkJkWFJvYjNKcGRIa3hNVEF2QmdOVkJBc1RLRk5JUVV0RlVqSTBNaUJNCllXSWdVbTl2ZENCRFpYSjBhV1pwWTJGMFpTQkJkWFJvYjNKcGRIbUNBUUV3SFFZRFZSMGxCQll3RkFZSUt3WUIKQlFVSEF3RUdDQ3NHQVFVRkNBSUNNRWdHQTFVZEVRUkJNRCtDRFhOb1lXdGxjakkwTWk1c1lXS0NFbUZ3Y0hNdQpjMmhoYTJWeU1qUXlMbXhoWW9JVUtpNWhjSEJ6TG5Ob1lXdGxjakkwTWk1c1lXS0hCTUNvQ3hBd0RRWUpLb1pJCmh2Y05BUUVMQlFBRGdnRUJBRzA3ZHFNdFZYdVQrckduQlN4SkVTNjNSa2pHaWd0c3ZtNTk4NSsrbjZjRW5kSDIKb2hjaGdmRUo5V0UxYUFWSDR4QlJSdVRIUFVJOFcvd3N1OFBxQ1o4NHpRQ2U2elAyeThEcmEwbjFzK2lIeHFwRAorS3BwZS91NkNLVTFEL0VWRU9MakpZd3pRYlFLSUlPL2Y1Q0JVbUpGWjBuZ1VIUEtvUDNyTXordTlBOWFvRkVrCnF3dDBadHFHcWpjMkh3Q09UOTlOVmFsZ29ISXljOElxQXJXdjNSWklraUlyaW9kSUdDMS94MVQ2dHhKcEUyRisKQzZ0Tzk0U0FVSUJwc2VORjNFbGNLNUsyTW44YVAzR3NnNFRHeElPN2Q1eUIvb3YwNGhOV2Q1S2QwWGorL1BvQgpLOU43cFQ1SVU2citLekNoeGlSdmRvZlAzV0VYN1ZkNEtLWG94K0U9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
@@ -254,6 +300,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 9466f34a-06b9-4c8d-99c3-a703597e56ea
         meshmodel-metadata:
           capabilities: ""
@@ -285,19 +332,24 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/secret-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/secret-white.svg
         position:
-          posX: 150
-          posY: 210
+          posX: 210
+          posY: 270
         whiteboardData:
           style:
             z-index: 11
+    type: Secret
+    version: ""
   prometheus-server-conf:
-    name: prometheus-server-conf
-    type: ConfigMap
+    annotations: {}
     apiVersion: v1
-    namespace: default
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       name: prometheus-server-conf
+    model: kubernetes
+    name: prometheus-server-conf
+    namespace: default
     settings:
       data:
         prometheus.rules: |-
@@ -432,6 +484,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 6442fcca-d80f-4b5f-981c-3e640756df56
         meshmodel-metadata:
           capabilities: ""
@@ -457,20 +510,25 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/configmap-white.svg
         position:
-          posX: 110
-          posY: 170
+          posX: 170
+          posY: 230
         whiteboardData:
           style:
             z-index: 3
+    type: ConfigMap
+    version: ""
   prometheus-service:
-    name: prometheus-service
-    type: Service
-    apiVersion: v1
-    namespace: monitoring
-    model: kubernetes
     annotations:
       prometheus.io/port: "9090"
       prometheus.io/scrape: "true"
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: prometheus-service
+    namespace: monitoring
     settings:
       spec:
         ports:
@@ -507,6 +565,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: b2e2a852-201f-41c1-b4e6-1f78ded3807b
         meshmodel-metadata:
           capabilities: ""
@@ -538,19 +597,24 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
         position:
-          posX: 130
-          posY: 110
+          posX: 190
+          posY: 170
         whiteboardData:
           style:
             z-index: 13
+    type: Service
+    version: ""
   prometheus-ui:
-    name: prometheus-ui
-    type: Ingress
-    apiVersion: networking.k8s.io/v1
-    namespace: default
-    model: kubernetes
     annotations:
       kubernetes.io/ingress.class: nginx
+    apiVersion: networking.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: prometheus-ui
+    namespace: default
     settings:
       spec:
         rules:
@@ -571,6 +635,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 0edaf726-745a-4278-b29b-00d49fe175c4
         meshmodel-metadata:
           capabilities: ""
@@ -596,60 +661,10 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/ingress-white.svg
         position:
-          posX: 170
-          posY: 170
+          posX: 230
+          posY: 230
         whiteboardData:
           style:
             z-index: 15
-  prometheus-xdisp:
-    name: prometheus
-    type: ClusterRoleBinding
-    apiVersion: rbac.authorization.k8s.io/v1
-    namespace: default
-    model: kubernetes
-    settings:
-      role Ref:
-        api Group: rbac.authorization.k8s.io
-        kind: ClusterRole
-        name: prometheus
-      subjects:
-      - kind: ServiceAccount
-        name: default
-        namespace: monitoring
-    traits:
-      meshmap:
-        edges: []
-        id: d9b3fa77-9ad6-41ca-9d41-5b7105657d59
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
-          logoURL: Created by Meshery Authors
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          shapePolygonPoints: ""
-          styleOverrides:
-            height: 25px
-            width: 25px
-            x: "7"
-            "y": "7"
-            z-index: 4
-          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
-        position:
-          posX: 210
-          posY: 170
-        whiteboardData:
-          style:
-            z-index: 7
+    type: Ingress
+    version: ""

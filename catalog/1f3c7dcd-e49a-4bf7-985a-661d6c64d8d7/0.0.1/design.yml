@@ -1,14 +1,21 @@
 name: doks-nginx-deployment
+version: 0.0.6
 services:
   Comment:
-    name: Comment
-    type: Comment
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: v1.0.0
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
+    name: Comment
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 8227873e-c99d-41d9-8000-74e16b34be16
         label: Comment
         meshmodel-data:
@@ -46,23 +53,29 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/meshery-core/color/comment-color.svg
         position:
-          posX: -12.494602886927611
-          posY: 1.396935964595378
+          posX: 50
+          posY: 70
         whiteboardData:
           style:
             z-index: 5
-  comment-cq:
-    name: comment-cq
     type: Comment
-    apiVersion: core.meshery.io/v1alpha1
-    namespace: default
     version: v1.0.0
+  comment-cq:
+    annotations: {}
+    apiVersion: core.meshery.io/v1alpha1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
+    name: comment-cq
+    namespace: default
     settings:
       user Messages: []
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: ce103755-d1b4-4393-bc57-63ab7c81484b
         label: Comment
         meshmodel-data:
@@ -94,23 +107,118 @@ services:
           published: true
           secondaryColor: '#FFDE00'
           shape: tag
-          styleOverrides: '{"height":"22px","width":"22px","x":"3.5px","y":"7.5px"}'
+          styleOverrides:
+            height: 22px
+            width: 22px
+            x: 3.5px
+            "y": 7.5px
+            z-index: 3
           subCategory: App Definition and Development
           svgColor: ui/public/static/img/meshmodels/meshery-core/color/comment-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/meshery-core/color/comment-color.svg
         position:
-          posX: -19.384776297332234
-          posY: 0.5356642882948001
+          posX: 50
+          posY: 70
         whiteboardData:
           style:
             z-index: 6
-  doks-example-rrrvj:
-    name: doks-example
-    type: Deployment
-    apiVersion: apps/v1
-    namespace: default
+    type: Comment
+    version: v1.0.0
+  doks-example-dcopr:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: doks-example
+    namespace: default
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 80
+          protocol: TCP
+          target Port: 80
+        selector:
+          app: doks-example
+        type: LoadBalancer
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: b10ef69b-a470-4573-8baf-01288c63631a
+            metadata:
+              port: 80
+              protocol: TCP
+            source: e3e103a1-3aec-4e6c-b2a2-0b33b2bc4af8
+            subType: Network
+            target: f06e4a4d-ae01-47ba-ada4-92c5575da61e
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: e3e103a1-3aec-4e6c-b2a2-0b33b2bc4af8
+        label: doks-example
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-triangle
+          styleOverrides:
+            background-fit: none
+            background-position-y: 4.5
+            height: 20
+            padding: 12
+            width: 20
+            x: 10px
+            "y": 12px
+            z-index: 5
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+        position:
+          posX: 30
+          posY: 70
+        whiteboardData:
+          style:
+            z-index: 3
+    type: Service
+    version: ""
+  doks-example-lweot:
+    annotations: {}
+    apiVersion: apps/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: doks-example
+    namespace: default
     settings:
       spec:
         replicas: 2
@@ -140,195 +248,21 @@ services:
             subType: Network
             target: f06e4a4d-ae01-47ba-ada4-92c5575da61e
           style:
-            curve-style:
-              bypass: true
-              bypassed:
-                name: curve-style
-                strValue: bezier
-                value: bezier
-              name: curve-style
-              strValue: bezier
-              value: bezier
-            font-family:
-              bypass: true
-              bypassed:
-                name: font-family
-                strValue: Qanelas Soft, sans-serif
-                value:
-                - Qanelas Soft, sans-serif
-                - Qanelas Soft, sans-serif
-              name: font-family
-              strValue: Qanelas Soft, sans-serif
-              value:
-              - Qanelas Soft, sans-serif
-              - Qanelas Soft, sans-serif
-            font-size:
-              bypass: true
-              bypassed:
-                name: font-size
-                pfValue: 6
-                strValue: 6px
-                units: px
-                value: 6
-              name: font-size
-              pfValue: 6
-              strValue: 6px
-              units: px
-              value: 6
-            line-color:
-              bypass: true
-              bypassed:
-                mapping:
-                  mapped:
-                    fn: true
-                    mapping: true
-                  name: line-color
-                  prevFnValue: '#7aa1f0'
-                  strValue: fn
-                name: line-color
-                pfValue:
-                - 122
-                - 161
-                - 240
-                strValue: rgb(122,161,240)
-                value:
-                - 122
-                - 161
-                - 240
-              name: line-color
-              pfValue:
-              - 122
-              - 161
-              - 240
-              strValue: rgb(122,161,240)
-              value:
-              - 122
-              - 161
-              - 240
-            line-style:
-              bypass: true
-              bypassed:
-                name: line-style
-                strValue: dotted
-                value: dotted
-              name: line-style
-              strValue: dotted
-              value: dotted
-            target-arrow-shape:
-              bypass: true
-              bypassed:
-                name: target-arrow-shape
-                strValue: vee
-                value: vee
-              name: target-arrow-shape
-              strValue: vee
-              value: vee
-            target-label:
-              bypass: true
-              name: target-label
-              strValue: 80/TCP
-              value: 80/TCP
-            target-text-margin-y:
-              bypass: true
-              name: target-text-margin-y
-              pfValue: -6
-              strValue: -6px
-              units: px
-              value: -6
-            target-text-offset:
-              bypass: true
-              name: target-text-offset
-              pfValue: 16
-              strValue: 16px
-              units: px
-              value: 16
-            text-events:
-              bypass: true
-              bypassed:
-                name: text-events
-                strValue: "yes"
-                value: "yes"
-              name: text-events
-              strValue: "yes"
-              value: "yes"
-            text-outline-color:
-              bypass: true
-              bypassed:
-                name: text-outline-color
-                pfValue:
-                - 255
-                - 255
-                - 255
-                strValue: rgb(255,255,255)
-                value:
-                - 255
-                - 255
-                - 255
-              name: text-outline-color
-              pfValue:
-              - 255
-              - 255
-              - 255
-              strValue: rgb(255,255,255)
-              value:
-              - 255
-              - 255
-              - 255
-            text-outline-width:
-              bypass: true
-              bypassed:
-                name: text-outline-width
-                pfValue: 1
-                strValue: 1px
-                units: px
-                value: 1
-              name: text-outline-width
-              pfValue: 1
-              strValue: 1px
-              units: px
-              value: 1
-            text-wrap:
-              bypass: true
-              bypassed:
-                name: text-wrap
-                strValue: wrap
-                value: wrap
-              name: text-wrap
-              strValue: wrap
-              value: wrap
-            width:
-              bypass: true
-              bypassed:
-                name: width
-                pfValue: 1.5
-                strValue: 1.5px
-                units: px
-                value: 1.5
-              name: width
-              pfValue: 1.5
-              strValue: 1.5px
-              units: px
-              value: 1.5
-            z-index:
-              bypass: true
-              bypassed:
-                name: z-index
-                pfValue: 999
-                strValue: "999"
-                value: 999
-              name: z-index
-              pfValue: 999
-              strValue: "999"
-              value: 999
-            z-index-compare:
-              bypass: true
-              bypassed:
-                name: z-index-compare
-                strValue: manual
-                value: manual
-              name: z-index-compare
-              strValue: manual
-              value: manual
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
         id: f06e4a4d-ae01-47ba-ada4-92c5575da61e
         label: doks-example
         meshmodel-metadata:
@@ -345,258 +279,20 @@ services:
           published: true
           secondaryColor: '#7aa1f0'
           shape: round-pentagon
-          styleOverrides: '{"background-image":"none","border-width":2,"background-opacity":0.5}'
+          styleOverrides:
+            background-image: none
+            background-opacity: 0.5
+            border-width: 2
+            z-index: 4
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
-          posX: 35
-          posY: -4
+          posX: 90
+          posY: 50
         whiteboardData:
           style:
             z-index: 4
-  doks-example-wvwzy:
-    name: doks-example
-    type: Service
-    apiVersion: v1
-    namespace: default
-    model: kubernetes
-    settings:
-      spec:
-        ports:
-        - name: http
-          port: 80
-          protocol: TCP
-          target Port: 80
-        selector:
-          app: doks-example
-        type: LoadBalancer
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: b10ef69b-a470-4573-8baf-01288c63631a
-            metadata:
-              port: 80
-              protocol: TCP
-            source: e3e103a1-3aec-4e6c-b2a2-0b33b2bc4af8
-            subType: Network
-            target: f06e4a4d-ae01-47ba-ada4-92c5575da61e
-          style:
-            curve-style:
-              bypass: true
-              bypassed:
-                name: curve-style
-                strValue: bezier
-                value: bezier
-              name: curve-style
-              strValue: bezier
-              value: bezier
-            font-family:
-              bypass: true
-              bypassed:
-                name: font-family
-                strValue: Qanelas Soft, sans-serif
-                value:
-                - Qanelas Soft, sans-serif
-                - Qanelas Soft, sans-serif
-              name: font-family
-              strValue: Qanelas Soft, sans-serif
-              value:
-              - Qanelas Soft, sans-serif
-              - Qanelas Soft, sans-serif
-            font-size:
-              bypass: true
-              bypassed:
-                name: font-size
-                pfValue: 6
-                strValue: 6px
-                units: px
-                value: 6
-              name: font-size
-              pfValue: 6
-              strValue: 6px
-              units: px
-              value: 6
-            line-color:
-              bypass: true
-              bypassed:
-                mapping:
-                  mapped:
-                    fn: true
-                    mapping: true
-                  name: line-color
-                  prevFnValue: '#7aa1f0'
-                  strValue: fn
-                name: line-color
-                pfValue:
-                - 122
-                - 161
-                - 240
-                strValue: rgb(122,161,240)
-                value:
-                - 122
-                - 161
-                - 240
-              name: line-color
-              pfValue:
-              - 122
-              - 161
-              - 240
-              strValue: rgb(122,161,240)
-              value:
-              - 122
-              - 161
-              - 240
-            line-style:
-              bypass: true
-              bypassed:
-                name: line-style
-                strValue: dotted
-                value: dotted
-              name: line-style
-              strValue: dotted
-              value: dotted
-            target-arrow-shape:
-              bypass: true
-              bypassed:
-                name: target-arrow-shape
-                strValue: vee
-                value: vee
-              name: target-arrow-shape
-              strValue: vee
-              value: vee
-            target-label:
-              bypass: true
-              name: target-label
-              strValue: 80/TCP
-              value: 80/TCP
-            target-text-margin-y:
-              bypass: true
-              name: target-text-margin-y
-              pfValue: -6
-              strValue: -6px
-              units: px
-              value: -6
-            target-text-offset:
-              bypass: true
-              name: target-text-offset
-              pfValue: 16
-              strValue: 16px
-              units: px
-              value: 16
-            text-events:
-              bypass: true
-              bypassed:
-                name: text-events
-                strValue: "yes"
-                value: "yes"
-              name: text-events
-              strValue: "yes"
-              value: "yes"
-            text-outline-color:
-              bypass: true
-              bypassed:
-                name: text-outline-color
-                pfValue:
-                - 255
-                - 255
-                - 255
-                strValue: rgb(255,255,255)
-                value:
-                - 255
-                - 255
-                - 255
-              name: text-outline-color
-              pfValue:
-              - 255
-              - 255
-              - 255
-              strValue: rgb(255,255,255)
-              value:
-              - 255
-              - 255
-              - 255
-            text-outline-width:
-              bypass: true
-              bypassed:
-                name: text-outline-width
-                pfValue: 1
-                strValue: 1px
-                units: px
-                value: 1
-              name: text-outline-width
-              pfValue: 1
-              strValue: 1px
-              units: px
-              value: 1
-            text-wrap:
-              bypass: true
-              bypassed:
-                name: text-wrap
-                strValue: wrap
-                value: wrap
-              name: text-wrap
-              strValue: wrap
-              value: wrap
-            width:
-              bypass: true
-              bypassed:
-                name: width
-                pfValue: 1.5
-                strValue: 1.5px
-                units: px
-                value: 1.5
-              name: width
-              pfValue: 1.5
-              strValue: 1.5px
-              units: px
-              value: 1.5
-            z-index:
-              bypass: true
-              bypassed:
-                name: z-index
-                pfValue: 999
-                strValue: "999"
-                value: 999
-              name: z-index
-              pfValue: 999
-              strValue: "999"
-              value: 999
-            z-index-compare:
-              bypass: true
-              bypassed:
-                name: z-index-compare
-                strValue: manual
-                value: manual
-              name: z-index-compare
-              strValue: manual
-              value: manual
-        id: e3e103a1-3aec-4e6c-b2a2-0b33b2bc4af8
-        label: doks-example
-        meshmodel-metadata:
-          capabilities: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: round-triangle
-          styleOverrides: '{"height":20,"width":20,"padding":12,"background-fit":"none","background-position-y":4.5,"x":"10px","y":"12px"}'
-          subCategory: Scheduling & Orchestration
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-        position:
-          posX: -35
-          posY: 1.5
-        whiteboardData:
-          style:
-            z-index: 3
+    type: Deployment
+    version: ""

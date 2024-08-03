@@ -1,16 +1,22 @@
 name: Prometheus adapter
+version: 0.0.11
 services:
   NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
-    model: meshery-core
     dependsOn:
     - prometheus-adapter
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: cd065ae5-fbd8-44d8-aabd-7c541c126f9f
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -89,20 +95,25 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: 89dd849c-fee3-483f-9bff-c8af07eb5357
         position:
-          posX: 250
-          posY: 250
+          posX: 290
+          posY: 290
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   prometheus-adapter:
-    name: prometheus-adapter
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: monitoring
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app.kubernetes.io/component: metrics-adapter
       app.kubernetes.io/name: prometheus-adapter
       app.kubernetes.io/part-of: kube-prometheus
       app.kubernetes.io/version: 0.11.2
+    model: kubernetes
+    name: prometheus-adapter
+    namespace: monitoring
     settings:
       spec:
         replicas: 2
@@ -200,6 +211,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 89dd849c-fee3-483f-9bff-c8af07eb5357
         meshmodel-metadata:
           capabilities: |2-
@@ -233,7 +245,9 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 250
-          posY: 250
+          posX: 290
+          posY: 290
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""

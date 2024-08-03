@@ -1,11 +1,16 @@
 name: Cloud native pizza store
+version: 0.0.6
 services:
   kvstore:
-    name: kvstore
-    type: Component
+    annotations: {}
     apiVersion: dapr.io/v1alpha1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: dapr
+    name: kvstore
+    namespace: default
     settings:
       spec:
         metadata:
@@ -17,6 +22,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 5ee5fca9-c558-45ae-8a79-a77cc5d3dea3
         meshmodel-metadata:
           capabilities: ""
@@ -34,23 +40,29 @@ services:
           shapePolygonPoints: ""
           status: enabled
           styleOverrides:
-            z-index: 4
+            z-index: 9
           styles: ""
           subCategory: ""
           svgColor: ui/public/static/img/meshmodels/dapr/color/component-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/dapr/white/component-white.svg
         position:
-          posX: 84
-          posY: 91
+          posX: 130
+          posY: 130
         whiteboardData:
           style: {}
+    type: Component
+    version: ""
   pizza-delivery-deployment:
-    name: pizza-delivery-deployment
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: pizza-delivery-deployment
+    namespace: default
     settings:
       spec:
         selector:
@@ -124,6 +136,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: b37fdad5-b49d-40da-a232-ec6cfac2a974
         meshmodel-metadata:
           capabilities: |-
@@ -171,22 +184,135 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: -63
-          posY: -71
+          posX: 10
+          posY: 19
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""
+  pizza-delivery-service:
+    annotations: {}
+    apiVersion: ""
+    dependsOn:
+    - pizza-delivery-deployment
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: pizza-delivery-service
+    namespace: ""
+    settings: {}
+    traits:
+      meshmap:
+        edges: []
+        elementType: FIELD_REF_NODE
+        fieldRefData:
+          elementType: FIELD_REF_NODE
+          fieldPath: spec.template.spec.containers[0]
+          jsonSchemaPath: properties.spec.allOf[0].properties.template.allOf[0].properties.spec.allOf[0].properties.containers.items.allOf[0]
+        id: 6c26471c-f430-4f52-8934-fb9527cdf9b1
+        label: spec.template.spec.containers[0]
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          components: null
+          description: ""
+          displayName: Meshery Core
+          hostID: 26e64aa8-2d86-57bd-92b3-2a73160d27b4
+          id: 71af0d59-f11b-5151-924a-f9f805edb3df
+          metadata:
+            isAnnotation: false
+            subCategory: App Definition and Development
+            svgColor: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
+            svgComplete: ""
+            svgWhite: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
+          model:
+            version: 0.7.2
+          name: meshery-core
+          registrant:
+            hostname: artifacthub
+          relationships: null
+          schemaVersion: models.meshery.io/v1beta1
+          status: enabled
+          subCategory: App Definition and Development
+          version: v1.0.0
+        meshmodel-metadata:
+          capabilities: |-
+            {
+              "designer": {
+                "capabilities": {
+                  "config": true,
+                  "label": false,
+                  "policy": false,
+                  "relationships": true,
+                  "json-schema": false,
+                  "permissions": false,
+                  "workflow": false,
+                  "gitops": false,
+                  "history": false
+                },
+                "supportsCompoundDragAndDrop": false,
+                "edit": {
+                  "config": true,
+                  "copy": false,
+                  "delete": true,
+                  "duplicate": false,
+                  "reset-styles": false,
+                  "resolve": false,
+                  "lock": false,
+                  "shape": {
+                    "convert-shape": true
+                  },
+                  "style": true
+                },
+                "label": {
+                  "edit": false,
+                  "show": true,
+                  "sync-with-config-property": "name"
+                }
+              }
+            }
+          defaultData: ""
+          genealogy: ""
+          hasInvalidSchema: true
+          isAnnotation: true
+          primaryColor: '#326CE5'
+          secondaryColor: '#00D3A9'
+          shape: circle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            z-index: 10
+          styles: ""
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/meshery-core/color/container-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/meshery-core/white/container-white.svg
+        parent: b37fdad5-b49d-40da-a232-ec6cfac2a974
+        position:
+          posX: 10
+          posY: 10
+        whiteboardData: {}
+    type: Container
+    version: ""
   pizza-init-sql:
-    name: pizza-init-sql
-    type: ConfigMap
+    annotations: {}
     apiVersion: v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: pizza-init-sql
+    namespace: default
     settings:
       data:
         init.sql: CREATE DATABASE dapr;
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 933dec4f-4d7b-4f71-96aa-b574de3d5398
         meshmodel-metadata:
           capabilities: ""
@@ -205,23 +331,29 @@ services:
           shapePolygonPoints: ""
           status: enabled
           styleOverrides:
-            z-index: 4
+            z-index: 5
           styles: ""
           subCategory: ""
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/configmap-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/configmap-white.svg
         position:
-          posX: -20.5
-          posY: 91
+          posX: 10
+          posY: 130
         whiteboardData:
           style: {}
+    type: ConfigMap
+    version: ""
   pizza-kitchen-deployment:
-    name: pizza-kitchen-deployment
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: pizza-kitchen-deployment
+    namespace: default
     settings:
       spec:
         selector:
@@ -295,6 +427,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: ba4a0d81-108e-4777-85fa-ce5dce5a07ce
         meshmodel-metadata:
           capabilities: |-
@@ -335,23 +468,135 @@ services:
           styleOverrides:
             background-opacity: 0.5
             border-width: 2
-            z-index: 4
+            z-index: 6
           styles: '{"border-width":2,"background-opacity":0.5}'
           subCategory: ""
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: 48
-          posY: -71
+          posX: 130
+          posY: 19
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""
+  pizza-kitchen-service:
+    annotations: {}
+    apiVersion: ""
+    dependsOn:
+    - pizza-kitchen-deployment
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: pizza-kitchen-service
+    namespace: ""
+    settings: {}
+    traits:
+      meshmap:
+        edges: []
+        elementType: FIELD_REF_NODE
+        fieldRefData:
+          elementType: FIELD_REF_NODE
+          fieldPath: spec.template.spec.containers[0]
+          jsonSchemaPath: properties.spec.allOf[0].properties.template.allOf[0].properties.spec.allOf[0].properties.containers.items.allOf[0]
+        id: 16782a0c-f2be-482d-81c9-561760e84632
+        label: spec.template.spec.containers[0]
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          components: null
+          description: ""
+          displayName: Meshery Core
+          hostID: 26e64aa8-2d86-57bd-92b3-2a73160d27b4
+          id: 71af0d59-f11b-5151-924a-f9f805edb3df
+          metadata:
+            isAnnotation: false
+            subCategory: App Definition and Development
+            svgColor: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
+            svgComplete: ""
+            svgWhite: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
+          model:
+            version: 0.7.2
+          name: meshery-core
+          registrant:
+            hostname: artifacthub
+          relationships: null
+          schemaVersion: models.meshery.io/v1beta1
+          status: enabled
+          subCategory: App Definition and Development
+          version: v1.0.0
+        meshmodel-metadata:
+          capabilities: |-
+            {
+              "designer": {
+                "capabilities": {
+                  "config": true,
+                  "label": false,
+                  "policy": false,
+                  "relationships": true,
+                  "json-schema": false,
+                  "permissions": false,
+                  "workflow": false,
+                  "gitops": false,
+                  "history": false
+                },
+                "supportsCompoundDragAndDrop": false,
+                "edit": {
+                  "config": true,
+                  "copy": false,
+                  "delete": true,
+                  "duplicate": false,
+                  "reset-styles": false,
+                  "resolve": false,
+                  "lock": false,
+                  "shape": {
+                    "convert-shape": true
+                  },
+                  "style": true
+                },
+                "label": {
+                  "edit": false,
+                  "show": true,
+                  "sync-with-config-property": "name"
+                }
+              }
+            }
+          defaultData: ""
+          genealogy: ""
+          hasInvalidSchema: true
+          isAnnotation: true
+          primaryColor: '#326CE5'
+          secondaryColor: '#00D3A9'
+          shape: circle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            z-index: 11
+          styles: ""
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/meshery-core/color/container-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/meshery-core/white/container-white.svg
+        parent: ba4a0d81-108e-4777-85fa-ce5dce5a07ce
+        position:
+          posX: 130
+          posY: 10
+        whiteboardData: {}
+    type: Container
+    version: ""
   pizza-store:
-    name: pizza-store
-    type: Service
+    annotations: {}
     apiVersion: v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: pizza-store
+    namespace: default
     settings:
       spec:
         ports:
@@ -362,29 +607,6 @@ services:
     traits:
       meshmap:
         edges:
-        - data:
-            id: 653d8623-2ccb-48cb-af64-98e789dc935c
-            metadata:
-              port: 80
-              protocol: TCP
-            source: 3d9b0dd5-802d-4d09-9ebc-7583f24ff682
-            subType: Network
-            target: b37fdad5-b49d-40da-a232-ec6cfac2a974
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
         - data:
             id: 7e887211-c72a-4f4e-ad79-f3af5fb754cd
             metadata:
@@ -431,6 +653,30 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        - data:
+            id: 653d8623-2ccb-48cb-af64-98e789dc935c
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 3d9b0dd5-802d-4d09-9ebc-7583f24ff682
+            subType: Network
+            target: b37fdad5-b49d-40da-a232-ec6cfac2a974
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
         id: 3d9b0dd5-802d-4d09-9ebc-7583f24ff682
         meshmodel-metadata:
           capabilities: ""
@@ -455,23 +701,29 @@ services:
             width: 20
             x: 10px
             "y": 12px
-            z-index: 4
+            z-index: 7
           styles: '{"height":20,"width":20,"padding":12,"background-position-y":4.5,"x":"10px","y":"12px"}'
           subCategory: ""
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/service-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
         position:
-          posX: -84.5
-          posY: 97
+          posX: -50
+          posY: 130
         whiteboardData:
           style: {}
+    type: Service
+    version: ""
   pizza-store-deployment:
-    name: pizza-store-deployment
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: pizza-store-deployment
+    namespace: default
     settings:
       spec:
         selector:
@@ -545,6 +797,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: e93d73d3-30c3-4ba1-95ba-68e026b91226
         meshmodel-metadata:
           capabilities: |-
@@ -589,16 +842,128 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/deployment-white.svg
         position:
-          posX: -68
-          posY: 20
+          posX: 10
+          posY: 99
         whiteboardData:
           style: {}
+    type: Deployment
+    version: ""
+  pizza-store-service:
+    annotations: {}
+    apiVersion: ""
+    dependsOn:
+    - pizza-store-deployment
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: meshery-core
+    name: pizza-store-service
+    namespace: ""
+    settings: {}
+    traits:
+      meshmap:
+        edges: []
+        elementType: FIELD_REF_NODE
+        fieldRefData:
+          elementType: FIELD_REF_NODE
+          fieldPath: spec.template.spec.containers[0]
+          jsonSchemaPath: properties.spec.allOf[0].properties.template.allOf[0].properties.spec.allOf[0].properties.containers.items.allOf[0]
+        id: 88714564-de3b-42fb-9318-7ec14dfec67c
+        label: spec.template.spec.containers[0]
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          components: null
+          description: ""
+          displayName: Meshery Core
+          hostID: 26e64aa8-2d86-57bd-92b3-2a73160d27b4
+          id: 71af0d59-f11b-5151-924a-f9f805edb3df
+          metadata:
+            isAnnotation: false
+            subCategory: App Definition and Development
+            svgColor: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
+            svgComplete: ""
+            svgWhite: ui/public/static/img/meshmodels/meshery-core/color/meshery-core-color.svg
+          model:
+            version: 0.7.2
+          name: meshery-core
+          registrant:
+            hostname: artifacthub
+          relationships: null
+          schemaVersion: models.meshery.io/v1beta1
+          status: enabled
+          subCategory: App Definition and Development
+          version: v1.0.0
+        meshmodel-metadata:
+          capabilities: |-
+            {
+              "designer": {
+                "capabilities": {
+                  "config": true,
+                  "label": false,
+                  "policy": false,
+                  "relationships": true,
+                  "json-schema": false,
+                  "permissions": false,
+                  "workflow": false,
+                  "gitops": false,
+                  "history": false
+                },
+                "supportsCompoundDragAndDrop": false,
+                "edit": {
+                  "config": true,
+                  "copy": false,
+                  "delete": true,
+                  "duplicate": false,
+                  "reset-styles": false,
+                  "resolve": false,
+                  "lock": false,
+                  "shape": {
+                    "convert-shape": true
+                  },
+                  "style": true
+                },
+                "label": {
+                  "edit": false,
+                  "show": true,
+                  "sync-with-config-property": "name"
+                }
+              }
+            }
+          defaultData: ""
+          genealogy: ""
+          hasInvalidSchema: true
+          isAnnotation: true
+          primaryColor: '#326CE5'
+          secondaryColor: '#00D3A9'
+          shape: circle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            z-index: 12
+          styles: ""
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/meshery-core/color/container-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/meshery-core/white/container-white.svg
+        parent: e93d73d3-30c3-4ba1-95ba-68e026b91226
+        position:
+          posX: 10
+          posY: 90
+        whiteboardData: {}
+    type: Container
+    version: ""
   pizza-store-subscritpion:
-    name: pizza-store-subscritpion
-    type: Subscription
+    annotations: {}
     apiVersion: dapr.io/v1alpha1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: dapr
+    name: pizza-store-subscritpion
+    namespace: default
     settings:
       scopes:
       - pizza-store
@@ -609,6 +974,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 956704f7-674f-4a69-a5a6-84f1cdbf2840
         meshmodel-metadata:
           capabilities: ""
@@ -626,23 +992,29 @@ services:
           shapePolygonPoints: ""
           status: enabled
           styleOverrides:
-            z-index: 4
+            z-index: 8
           styles: ""
           subCategory: ""
           svgColor: ui/public/static/img/meshmodels/dapr/color/component-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/dapr/white/component-white.svg
         position:
-          posX: 35.5
-          posY: 0
+          posX: 70
+          posY: 50
         whiteboardData:
           style: {}
+    type: Subscription
+    version: ""
   pubsub:
-    name: pubsub
-    type: Component
+    annotations: {}
     apiVersion: dapr.io/v1alpha1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: dapr
+    name: pubsub
+    namespace: default
     settings:
       spec:
         metadata:
@@ -655,6 +1027,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: bd3f552c-3392-4bcd-8bdd-57efd158e148
         meshmodel-metadata:
           capabilities: ""
@@ -679,7 +1052,9 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/dapr/white/component-white.svg
         position:
-          posX: 37
-          posY: 91
+          posX: 70
+          posY: 130
         whiteboardData:
           style: {}
+    type: Component
+    version: ""

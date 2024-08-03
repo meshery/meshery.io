@@ -1,49 +1,21 @@
 name: Service Internal Traffic Policy
+version: 0.0.4
 services:
-  0f366b17-9fb1-4c49-954c-074c4a16e6d3:
-    name: 0f366b17-9fb1-4c49-954c-074c4a16e6d3
-    traits:
-      meshmap:
-        edges:
-        - data:
-            id: 38ad440e-4984-401c-92cd-cfb413047aeb
-            metadata:
-              port: 80
-              protocol: TCP
-            source: ab8d0e33-d463-42ff-973f-577f74f53308
-            subType: Network
-            target: 0f366b17-9fb1-4c49-954c-074c4a16e6d3
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        id: 0f366b17-9fb1-4c49-954c-074c4a16e6d3
-        position:
-          posX: 140
-          posY: 90
-        whiteboardData: {}
   AnchorNode:
-    name: AnchorNode
-    type: AnchorNode
+    annotations: {}
     apiVersion: core.meshery.io/v1alpha1
-    version: 0.7.1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - 0f366b17-9fb1-4c49-954c-074c4a16e6d3
+    name: AnchorNode
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 4100fd7d-df88-49cb-b4e4-205fc8237deb
         label: AnchorNode
         meshmodel-data:
@@ -93,20 +65,26 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: 0f366b17-9fb1-4c49-954c-074c4a16e6d3
         position:
-          posX: 170
-          posY: 130
+          posX: 250
+          posY: 210
         whiteboardData: {}
-  NodeGroupInventoryWallet:
-    name: NodeGroupInventoryWallet
-    type: NodeGroupInventoryWallet
-    apiVersion: core.meshery.io/v1alpha1
+    type: AnchorNode
     version: 0.7.1
+  NodeGroupInventoryWallet:
+    annotations: {}
+    apiVersion: core.meshery.io/v1alpha1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: meshery-core
-    dependsOn:
-    - 0f366b17-9fb1-4c49-954c-074c4a16e6d3
+    name: NodeGroupInventoryWallet
+    namespace: ""
+    settings: {}
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: e40719bb-7784-4065-926a-a141bb9a1df7
         label: NodeGroupInventoryWallet
         meshmodel-data:
@@ -156,15 +134,21 @@ services:
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/anchornode-white.svg
         parent: 0f366b17-9fb1-4c49-954c-074c4a16e6d3
         position:
-          posX: 110
-          posY: 50
+          posX: 190
+          posY: 130
         whiteboardData: {}
+    type: NodeGroupInventoryWallet
+    version: 0.7.1
   nginx-service:
-    name: nginx-service
-    type: Service
+    annotations: {}
     apiVersion: v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: nginx-service
+    namespace: default
     settings:
       spec:
         internal Traffic Policy: Local
@@ -200,6 +184,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: ab8d0e33-d463-42ff-973f-577f74f53308
         meshmodel-metadata:
           capabilities: ""
@@ -231,7 +216,9 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
         position:
-          posX: 10
-          posY: 70
+          posX: 50
+          posY: 110
         whiteboardData:
           style: {}
+    type: Service
+    version: ""

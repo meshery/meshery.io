@@ -1,12 +1,16 @@
 name: KEDA HTTPRequestsScaler
+version: 0.0.8
 services:
   http-scaled:
-    name: http-scaled
-    type: HTTPScaledObject
+    annotations: {}
     apiVersion: http.keda.sh/v1alpha1
-    namespace: default
-    version: v0.8.0
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: keda-http-scaler
+    name: http-scaled
+    namespace: default
     settings:
       spec:
         hosts:
@@ -30,6 +34,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 771f4752-ea1d-48f1-ac8d-5327a73147f9
         label: HTTP Scaled Object
         meshmodel-data:
@@ -89,17 +94,22 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/keda/white/cloudeventsource-white.svg
         position:
-          posX: -230
-          posY: 330
+          posX: -170
+          posY: 390
         whiteboardData: {}
+    type: HTTPScaledObject
+    version: v0.8.0
   httpbin:
-    name: httpbin
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       app: httpbin
+    model: kubernetes
+    name: httpbin
+    namespace: default
     settings:
       spec:
         replicas: 1
@@ -144,6 +154,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: a84f18d6-7432-4934-84b4-321c19827554
         label: httpbin
         meshmodel-metadata:
@@ -159,18 +170,23 @@ services:
             shape: round-pentagon
             width: 20px
         position:
-          posX: 10
-          posY: 470
+          posX: 70
+          posY: 530
         whiteboardData:
           style:
             z-index: 13
+    type: Deployment
+    version: ""
   httpbin-svc:
-    name: httpbin-svc
-    type: Service
+    annotations: {}
     apiVersion: v1
-    namespace: default
-    version: v1.25.2
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: httpbin-svc
+    namespace: default
     settings:
       spec:
         ports:
@@ -206,6 +222,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: 999cc1be-dfc4-41f6-9c6b-87a45a77be4a
         label: Service
         meshmodel-data:
@@ -261,6 +278,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/service-white.svg
         position:
-          posX: -130
-          posY: 370
+          posX: -70
+          posY: 430
         whiteboardData: {}
+    type: Service
+    version: v1.25.2

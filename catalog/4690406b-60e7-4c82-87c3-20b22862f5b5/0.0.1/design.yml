@@ -1,11 +1,16 @@
 name: Argo CD w/Dex
+version: 0.0.13
 services:
   argocd-application-controller:
-    name: argocd-application-controller
-    type: StatefulSet
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: argocd-application-controller
+    namespace: default
     settings:
       spec:
         template:
@@ -17,6 +22,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 0e9fdb94-b5a7-4d91-852a-21c380fb0c90
         meshmodel-metadata:
           capabilities: ""
@@ -38,17 +44,23 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/persistentvolume-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         position:
-          posX: 110
-          posY: 70
+          posX: 210
+          posY: 170
         whiteboardData:
           style:
             z-index: 3
+    type: StatefulSet
+    version: ""
   argocd-dex-server:
-    name: argocd-dex-server
-    type: Deployment
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: argocd-dex-server
+    namespace: default
     settings:
       spec:
         template:
@@ -64,6 +76,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: acb24f23-8a51-42a9-8050-aaf682f452a3
         meshmodel-metadata:
           capabilities: ""
@@ -89,17 +102,23 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
-          posX: -30
-          posY: 10
+          posX: 70
+          posY: 110
         whiteboardData:
           style:
             z-index: 4
-  argocd-redis:
-    name: argocd-redis
     type: Deployment
+    version: ""
+  argocd-redis:
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: argocd-redis
+    namespace: default
     settings:
       spec:
         template:
@@ -108,6 +127,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 95d32121-c807-44d4-88f5-14f78fd08285
         meshmodel-metadata:
           capabilities: ""
@@ -127,23 +147,29 @@ services:
             background-image: none
             background-opacity: 0.5
             border-width: 2
-            z-index: 3
+            z-index: 4
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
-          posX: -30
-          posY: 70
+          posX: 70
+          posY: 170
         whiteboardData:
           style:
             z-index: 6
-  argocd-repo-server:
-    name: argocd-repo-server
     type: Deployment
+    version: ""
+  argocd-repo-server:
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: argocd-repo-server
+    namespace: default
     settings:
       spec:
         template:
@@ -172,6 +198,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 2fa37c53-8f4b-4512-826a-a284c5aa4390
         meshmodel-metadata:
           capabilities: ""
@@ -191,23 +218,29 @@ services:
             background-image: none
             background-opacity: 0.5
             border-width: 2
-            z-index: 3
+            z-index: 5
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
-          posX: 30
-          posY: 70
+          posX: 130
+          posY: 170
         whiteboardData:
           style:
             z-index: 8
-  argocd-server:
-    name: argocd-server
     type: Deployment
+    version: ""
+  argocd-server:
+    annotations: {}
     apiVersion: apps/v1
-    namespace: default
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
     model: kubernetes
+    name: argocd-server
+    namespace: default
     settings:
       spec:
         template:
@@ -222,6 +255,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 365c84ca-fe44-4b7d-8bda-caa235e837c6
         label: argocd-server
         meshmodel-metadata:
@@ -242,14 +276,16 @@ services:
             background-image: none
             background-opacity: 0.5
             border-width: 2
-            z-index: 3
+            z-index: 6
           subCategory: Scheduling & Orchestration
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/deployment-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/color/deployment-color.svg
         position:
-          posX: 50
-          posY: 10
+          posX: 150
+          posY: 110
         whiteboardData:
           style:
             z-index: 10
+    type: Deployment
+    version: ""

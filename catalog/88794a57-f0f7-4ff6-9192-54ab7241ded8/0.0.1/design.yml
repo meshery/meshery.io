@@ -1,15 +1,19 @@
 name: Azure-monitor-containers
+version: 0.0.14
 services:
   ama-logs:
-    name: ama-logs
-    type: ServiceAccount
+    annotations: {}
     apiVersion: v1
-    namespace: kube-system
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       chart: azuremonitor-containers-3.1.20
       heritage: Helm
       release: azuremonitor-containers
+    model: kubernetes
+    name: ama-logs
+    namespace: kube-system
     settings:
       image Pull Secrets: []
       secrets: []
@@ -38,6 +42,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: ac809b05-e8fc-474c-96d7-8b8a5a970c33
         meshmodel-metadata:
           capabilities: ""
@@ -63,19 +68,25 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/serviceaccount-white.svg
         position:
-          posX: 10
-          posY: 70
+          posX: 110
+          posY: 170
         whiteboardData:
           style: {}
+    type: ServiceAccount
+    version: ""
   ama-logs-reader:
-    name: ama-logs-reader
-    type: ClusterRole
+    annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       chart: azuremonitor-containers-3.1.20
       heritage: Helm
       release: azuremonitor-containers
+    model: kubernetes
+    name: ama-logs-reader
+    namespace: ""
     settings:
       rules:
       - api Groups:
@@ -154,6 +165,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: bc14d604-4afe-485d-8f5c-d3b5461ecc21
         meshmodel-metadata:
           capabilities: ""
@@ -178,19 +190,25 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
         position:
-          posX: 110
-          posY: 10
+          posX: 210
+          posY: 110
         whiteboardData:
           style: {}
+    type: ClusterRole
+    version: ""
   amalogsclusterrolebinding:
-    name: amalogsclusterrolebinding
-    type: ClusterRoleBinding
+    annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
-    model: kubernetes
+    dependsOn: []
+    id: null
+    isAnnotation: null
     labels:
       chart: azuremonitor-containers-3.1.20
       heritage: Helm
       release: azuremonitor-containers
+    model: kubernetes
+    name: amalogsclusterrolebinding
+    namespace: ""
     settings:
       role Ref:
         api Group: rbac.authorization.k8s.io
@@ -203,6 +221,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 75b8b189-c56e-4cfa-9f29-80788439c2e7
         meshmodel-metadata:
           capabilities: ""
@@ -232,10 +251,12 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
         position:
-          posX: 59.806971296684125
-          posY: 40.11581722198953
+          posX: 150
+          posY: 150
         whiteboardData:
           style:
             height: 10.5
             width: 10.5
             z-index: 1000
+    type: ClusterRoleBinding
+    version: ""

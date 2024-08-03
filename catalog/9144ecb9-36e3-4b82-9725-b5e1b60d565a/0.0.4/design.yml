@@ -1,7 +1,139 @@
 name: Aws Cloudwatch Agent for Cluster Metrics
-version: 0.0.4
+version: 0.0.10
 services:
-  aws-cloudwatch-metrics-atenl:
+  aws-cloudwatch-metrics-bevql:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: aws-cloudwatch-metrics
+    namespace: ""
+    settings:
+      role Ref:
+        api Group: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: aws-cloudwatch-metrics
+      subjects:
+      - kind: ServiceAccount
+        name: aws-cloudwatch-metrics
+        namespace: default
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: b1c53445-4af3-44d2-a6f5-39f896276168
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by Meshery Authors
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides:
+            height: 25px
+            width: 25px
+            x: "7"
+            "y": "7"
+            z-index: 3
+          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
+        position:
+          posX: 40.10625
+          posY: 50
+        whiteboardData:
+          style:
+            height: 10.5
+            width: 10.5
+            z-index: 1000
+    type: ClusterRoleBinding
+    version: ""
+  aws-cloudwatch-metrics-dwbda:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: aws-cloudwatch-metrics
+      app.kubernetes.io/version: 1.300032.2b361
+      helm.sh/chart: aws-cloudwatch-metrics-0.0.11
+    model: kubernetes
+    name: aws-cloudwatch-metrics
+    namespace: default
+    settings: {}
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: 028ec0bf-a68b-446f-b162-88c4a6b15dce
+            metadata:
+              binded_by: b1c53445-4af3-44d2-a6f5-39f896276168
+            source: 402dc098-acab-4daf-91e3-cb078ae9a9dc
+            subType: Permission
+            target: 8d041f49-3538-448e-9075-582a5af76072
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 8d041f49-3538-448e-9075-582a5af76072
+        meshmodel-metadata:
+          capabilities: ""
+          defaultData: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: bottom-round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides: ""
+          styles: ""
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/serviceaccount-white.svg
+        position:
+          posX: 90
+          posY: 50
+        whiteboardData:
+          style: {}
+    type: ServiceAccount
+    version: ""
+  aws-cloudwatch-metrics-gpnzi:
     annotations: {}
     apiVersion: apps/v1
     dependsOn: []
@@ -100,6 +232,7 @@ services:
     traits:
       meshmap:
         edges: []
+        fieldRefData: {}
         id: 0928cb26-6d5e-449c-af3a-09c018588ffb
         meshmodel-metadata:
           capabilities: |2-
@@ -136,13 +269,13 @@ services:
           svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/daemonset-complete.svg
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/daemonset-white.svg
         position:
-          posX: 49
-          posY: -64.5
+          posX: 90
+          posY: -30
         whiteboardData:
           style: {}
     type: DaemonSet
     version: ""
-  aws-cloudwatch-metrics-dwxen:
+  aws-cloudwatch-metrics-hqdrh:
     annotations: {}
     apiVersion: v1
     dependsOn: []
@@ -156,33 +289,26 @@ services:
     model: kubernetes
     name: aws-cloudwatch-metrics
     namespace: default
-    settings: {}
+    settings:
+      data:
+        cwagentconfig.json: |
+          {
+            "logs": {
+              "metrics_collected": {
+                "kubernetes": {
+                  "cluster_name": "cluster_name",
+                  "enhanced_container_insights": true,
+                  "metrics_collection_interval": 60
+                }
+              },
+              "force_flush_interval": 5
+            }
+          }
     traits:
       meshmap:
-        edges:
-        - data:
-            id: 028ec0bf-a68b-446f-b162-88c4a6b15dce
-            metadata:
-              binded_by: b1c53445-4af3-44d2-a6f5-39f896276168
-            source: 402dc098-acab-4daf-91e3-cb078ae9a9dc
-            subType: Permission
-            target: 8d041f49-3538-448e-9075-582a5af76072
-          style:
-            control-point-distances: null
-            control-point-weights: "0.5"
-            curve-style: bezier
-            haystack-radius: "0"
-            line-color: rgb(153,153,153)
-            line-style: dotted
-            opacity: "1"
-            segment-distances: 20px
-            segment-weights: "0.5"
-            target-arrow-shape: vee
-            taxi-direction: auto
-            taxi-turn: 50%
-            taxi-turn-min-distance: 10px
-            width: 1.5px
-        id: 8d041f49-3538-448e-9075-582a5af76072
+        edges: []
+        fieldRefData: {}
+        id: d62a5df4-b2b2-4397-b0ce-0afb0f555246
         meshmodel-metadata:
           capabilities: ""
           defaultData: ""
@@ -199,80 +325,21 @@ services:
           shape: bottom-round-rectangle
           shapePolygonPoints: ""
           status: enabled
-          styleOverrides: ""
+          styleOverrides:
+            z-index: 3
           styles: ""
           subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/serviceaccount-color.svg
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/configmap-color.svg
           svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/serviceaccount-white.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/configmap-white.svg
         position:
-          posX: 49
-          posY: 3
+          posX: -10
+          posY: 110
         whiteboardData:
           style: {}
-    type: ServiceAccount
+    type: ConfigMap
     version: ""
-  aws-cloudwatch-metrics-kvezl:
-    annotations: {}
-    apiVersion: rbac.authorization.k8s.io/v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels: {}
-    model: kubernetes
-    name: aws-cloudwatch-metrics
-    namespace: ""
-    settings:
-      role Ref:
-        api Group: rbac.authorization.k8s.io
-        kind: ClusterRole
-        name: aws-cloudwatch-metrics
-      subjects:
-      - kind: ServiceAccount
-        name: aws-cloudwatch-metrics
-        namespace: default
-    traits:
-      meshmap:
-        edges: []
-        id: b1c53445-4af3-44d2-a6f5-39f896276168
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
-          logoURL: Created by Meshery Authors
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            height: 25px
-            width: 25px
-            x: "7"
-            "y": "7"
-            z-index: 3
-          styles: '{"height":"25px","width":"25px","x":"7", "y":"7"}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrolebinding-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrolebinding-white.svg
-        position:
-          posX: 0.10627049767043673
-          posY: 3.4989156071666283
-        whiteboardData:
-          style:
-            height: 10.5
-            width: 10.5
-            z-index: 1000
-    type: ClusterRoleBinding
-    version: ""
-  aws-cloudwatch-metrics-ljmvt:
+  aws-cloudwatch-metrics-zkfue:
     annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
     dependsOn: []
@@ -358,6 +425,7 @@ services:
             taxi-turn: 50%
             taxi-turn-min-distance: 10px
             width: 1.5px
+        fieldRefData: {}
         id: 402dc098-acab-4daf-91e3-cb078ae9a9dc
         meshmodel-metadata:
           capabilities: ""
@@ -380,79 +448,16 @@ services:
             width: 22px
             x: "8.5"
             "y": "7.5"
-            z-index: 1001
+            z-index: 1002
           styles: '{"height":"22px", "width":"22px", "x":"8.5", "y":"7.5"}'
           subCategory: ""
           svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
         position:
-          posX: -49
-          posY: 4
+          posX: -10
+          posY: 50
         whiteboardData:
           style: {}
     type: ClusterRole
-    version: ""
-  aws-cloudwatch-metrics-xyzrd:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
-    labels:
-      app.kubernetes.io/managed-by: Helm
-      app.kubernetes.io/name: aws-cloudwatch-metrics
-      app.kubernetes.io/version: 1.300032.2b361
-      helm.sh/chart: aws-cloudwatch-metrics-0.0.11
-    model: kubernetes
-    name: aws-cloudwatch-metrics
-    namespace: default
-    settings:
-      data:
-        cwagentconfig.json: |
-          {
-            "logs": {
-              "metrics_collected": {
-                "kubernetes": {
-                  "cluster_name": "cluster_name",
-                  "enhanced_container_insights": true,
-                  "metrics_collection_interval": 60
-                }
-              },
-              "force_flush_interval": 5
-            }
-          }
-    traits:
-      meshmap:
-        edges: []
-        id: d62a5df4-b2b2-4397-b0ce-0afb0f555246
-        meshmodel-metadata:
-          capabilities: ""
-          defaultData: ""
-          genealogy: ""
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: true
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          secondaryColor: '#7aa1f0'
-          shape: bottom-round-rectangle
-          shapePolygonPoints: ""
-          status: enabled
-          styleOverrides:
-            z-index: 3
-          styles: ""
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/configmap-color.svg
-          svgComplete: ""
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/configmap-white.svg
-        position:
-          posX: -49
-          posY: 68
-        whiteboardData:
-          style: {}
-    type: ConfigMap
     version: ""
