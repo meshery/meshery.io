@@ -1,91 +1,62 @@
 <style>
-    .sorting-options {
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        max-width: 600px;
-    }
+    .search-container-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
 
-    #sort {
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-        appearance: none;
-        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M7 10l5 5 5-5z"/></svg>');
-        background-repeat: no-repeat;
-        background-position: right 10px top 50%;
-        margin-right: 10px;
-    }
+#search-container {
+    display: flex;
+    align-items: center;
+    position: relative; 
+    width: 100%;
+    max-width: 500px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+.search-icon {
+    right: 10px;
+    padding: 0 10px;
+    font-size: 20px;
+    color: #000; 
+    pointer-events: none; 
+}
+
+#search {
+    flex-grow: 1;
+    height: 40px;
+    padding: 10px 40px 10px 10px; 
+    border: none;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    border-radius: 5px 0 0 5px;
+    background-color: #fff; 
+}
+
+#search:focus {
+    background-color: #f0f0f0;
+}
+
+@media (max-width: 506px) {
     #search-container {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        max-width: 500px;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        margin-right: 10px;
-        overflow: hidden;
+        max-width: 100%;
     }
+}
 
-    #search {
-        flex-grow: 1;
-        height: 40px;
-        padding: 10px 40px 10px 10px;
-        border: none;
-        font-size: 16px;
-        box-sizing: border-box;
-        outline: none;
-    }
-
-    #search-btn {
-        width: 80px;
-        height: 40px;
-        background-color: green;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-transform: uppercase;
-        margin-left: 10px;
-    }
-
-    #search-btn svg {
-        fill: #fff;
-        width: 20px;
-        height: 20px;
-        margin-right: 5px;
-    }
-
-    #integContainer {
-        column-gap: max(2vh, 2vw); 
-        row-gap: 1.5rem; 
-        display: flex; 
-        flex-wrap: wrap; 
-        padding-bottom: 3.5rem;
-    }
-
-    @media (max-width: 506px) {
-        .sorting-options {
-            text-align: center;
-            flex-direction: column;
-        }
-
-        #sort, #search-container, #search-btn {
-            margin: 5px 0;
-        }
-
-        #search-container {
-            max-width: 100%;
-        }
-    }
+#integContainer {
+    column-gap: max(2vh, 2vw);
+    row-gap: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 3.5rem;
+}
 </style>
+
 
 <div class="integrations-heading">
     <div class="parallel-left"></div>
@@ -96,18 +67,11 @@
         Meshery seamlessly integrates with every CNCF project, your existing tools, multiple Clouds and Kubernetes clusters.
     </p>
 
-    <div class="sorting-options">
-        <select id="sort">
-            <option disabled selected value>Sort by</option>
-            <option value="asc">Alphabetically (A-Z)</option>
-            <option value="desc">Alphabetically (Z-A)</option>
-        </select>
-
+    <div class="search-container-wrapper">
         <div id="search-container">
             <input type="text" id="search" placeholder="Search..." />
+            <span class="search-icon"><i class="fas fa-search"></i></span>
         </div>
-
-        <button class="highlight" aria-label="Search">Next</button>
     </div>
 
     <div id="integContainer" class="integrations-container container"></div>
@@ -173,19 +137,6 @@
                 const h2Tag = document.querySelector("h2");
                 h2Tag.scrollIntoView(scrollOptions);
             }
-        });
-
-        document.getElementById("sort").addEventListener("change", function () {
-            var sortValue = this.value;
-            var sortedData = [...data];
-
-            if (sortValue === "asc") {
-                sortedData.sort((a, b) => a.name.localeCompare(b.name));
-            } else if (sortValue === "desc") {
-                sortedData.sort((a, b) => b.name.localeCompare(a.name));
-            }
-
-            integContainer.innerHTML = renderIntegrationCards(sortedData, allDataShown);
         });
 
         document.getElementById("search").addEventListener("input", function () {
