@@ -1,0 +1,127 @@
+name: Nginx Deployment
+version: 0.0.7
+services:
+  nginx-deployment:
+    annotations: {}
+    apiVersion: apps/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      app: nginx
+    model: kubernetes
+    name: nginx-deployment
+    namespace: default
+    settings:
+      spec:
+        replicas: 2
+        selector:
+          match Labels:
+            app: nginx
+        template:
+          metadata:
+            labels:
+              app: nginx
+          spec:
+            containers:
+            - image: nginx:1.14.2
+              name: nginx
+              ports:
+              - container Port: 80
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: e0111edb-0d66-4834-b05a-663bc7e944cb
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 6c1581dc-f5c6-42e9-a0cc-3a0c67610b79
+            target: 983489fc-9d25-41a2-8977-5efe9b486d71
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 983489fc-9d25-41a2-8977-5efe9b486d71
+        label: nginx-deployment
+        meshmodel-metadata:
+          styleOverrides:
+            z-index: 4
+        parent: c70581ff-43f7-4378-a0ad-54f52e8551ad
+        position:
+          posX: 390
+          posY: 210
+        whiteboardData:
+          style: {}
+    type: Deployment.K8s
+    version: v1.25.2
+  nginx-service:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels: {}
+    model: kubernetes
+    name: nginx-service
+    namespace: default
+    settings:
+      spec:
+        ports:
+        - name: http
+          port: 80
+          protocol: TCP
+        selector:
+          app: nginx
+        type: LoadBalancer
+    traits:
+      meshmap:
+        edges:
+        - data:
+            id: e0111edb-0d66-4834-b05a-663bc7e944cb
+            metadata:
+              port: 80
+              protocol: TCP
+            source: 6c1581dc-f5c6-42e9-a0cc-3a0c67610b79
+            target: 983489fc-9d25-41a2-8977-5efe9b486d71
+          style:
+            control-point-distances: null
+            control-point-weights: "0.5"
+            curve-style: bezier
+            haystack-radius: "0"
+            line-color: rgb(153,153,153)
+            line-style: dotted
+            opacity: "1"
+            segment-distances: 20px
+            segment-weights: "0.5"
+            target-arrow-shape: vee
+            taxi-direction: auto
+            taxi-turn: 50%
+            taxi-turn-min-distance: 10px
+            width: 1.5px
+        fieldRefData: {}
+        id: 6c1581dc-f5c6-42e9-a0cc-3a0c67610b79
+        label: nginx-service
+        meshmodel-metadata:
+          styleOverrides:
+            z-index: 3
+        parent: c70581ff-43f7-4378-a0ad-54f52e8551ad
+        position:
+          posX: 310
+          posY: 210
+        whiteboardData:
+          style: {}
+    type: Service.K8s
+    version: v1.25.2

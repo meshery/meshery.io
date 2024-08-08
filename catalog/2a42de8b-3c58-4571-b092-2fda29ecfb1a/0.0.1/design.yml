@@ -1,0 +1,133 @@
+name: prometheus-operator-crd-cluster-roles
+version: 0.0.15
+services:
+  prometheus-crd-edit:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      rbac.authorization.k8s.io/aggregate-to-admin: "true"
+      rbac.authorization.k8s.io/aggregate-to-edit: "true"
+    model: kubernetes
+    name: prometheus-crd-edit
+    namespace: default
+    settings:
+      rules:
+      - api Groups:
+        - monitoring.coreos.com
+        resources:
+        - alertmanagers
+        - alertmanagerconfigs
+        - prometheuses
+        - prometheusrules
+        - servicemonitors
+        - podmonitors
+        - probes
+        verbs:
+        - get
+        - list
+        - watch
+        - create
+        - update
+        - patch
+        - delete
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 6a1d4e2f-2d6e-44aa-90fd-993a1c75bc94
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by leecalcote
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides: '{"height":"22px", "width":"22px", "x":"8.5", "y":"7.5"}'
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
+        position:
+          posX: 130
+          posY: 110
+        whiteboardData:
+          style:
+            z-index: 4
+    type: ClusterRole
+    version: ""
+  prometheus-crd-view:
+    annotations: {}
+    apiVersion: rbac.authorization.k8s.io/v1
+    dependsOn: []
+    id: null
+    isAnnotation: null
+    labels:
+      rbac.authorization.k8s.io/aggregate-to-admin: "true"
+      rbac.authorization.k8s.io/aggregate-to-edit: "true"
+      rbac.authorization.k8s.io/aggregate-to-view: "true"
+    model: kubernetes
+    name: prometheus-crd-view
+    namespace: default
+    settings:
+      rules:
+      - api Groups:
+        - monitoring.coreos.com
+        resources:
+        - alertmanagers
+        - alertmanagerconfigs
+        - prometheuses
+        - prometheusrules
+        - servicemonitors
+        - podmonitors
+        - probes
+        verbs:
+        - get
+        - list
+        - watch
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: ac7be2ac-abcb-4527-88b5-3592c832684f
+        meshmodel-metadata:
+          capabilities: ""
+          genealogy: ""
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: Created by leecalcote
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          styleOverrides:
+            height: 22px
+            width: 22px
+            x: "8.5"
+            "y": "7.5"
+            z-index: 3
+          subCategory: Scheduling & Orchestration
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/clusterrole-color.svg
+          svgComplete: ""
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
+        position:
+          posX: 70
+          posY: 110
+        whiteboardData:
+          style:
+            z-index: 3
+    type: ClusterRole
+    version: ""
