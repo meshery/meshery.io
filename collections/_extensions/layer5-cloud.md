@@ -9,8 +9,8 @@ type: Collaboration
 compatibility: 
   - meshery
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
-logo: /assets/images/meshery-color.svg
-image: /assets/images/meshery-color.svg
+logo: /assets/images/company-logo/layer5-white-bg-2.svg
+image: /assets/images/company-logo/layer5-white-bg-2.svg
 extensionInfo: |
   The Meshery Remote Provider with identity and collaboration services, private catalogs, GitOps, and multi-Meshery management.
 extensionCaveats: |
