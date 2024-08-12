@@ -1,65 +1,65 @@
 <style>
     .search-container-wrapper {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-#search-container {
-    display: flex;
-    align-items: center;
-    position: relative; 
-    width: 100%;
-    max-width: 500px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.search-icon {
-    right: 10px;
-    padding: 0 10px;
-    font-size: 20px;
-    color: #000; 
-    pointer-events: none; 
-}
-
-#search {
-    flex-grow: 1;
-    height: 40px;
-    padding: 10px 40px 10px 10px; 
-    border: none;
-    font-size: 16px;
-    box-sizing: border-box;
-    outline: none;
-    border-radius: 5px 0 0 5px;
-    background-color: #fff; 
-}
-
-#search:focus {
-    background-color: #f0f0f0;
-}
-
-@media (max-width: 506px) {
-    #search-container {
-        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
     }
-}
 
-#integContainer {
-    column-gap: max(2vh, 2vw);
-    row-gap: 1.5rem;
-    display: flex;
-    flex-wrap: wrap;
-    padding-bottom: 3.5rem;
-}
+    #search-container {
+        display: flex;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-.button-wrapper {
-    padding: 5px; /* Adjust as needed */
-}
+    .search-icon {
+        right: 10px;
+        padding: 0 10px;
+        font-size: 20px;
+        color: #000;
+        pointer-events: none;
+    }
 
+    #search {
+        flex-grow: 1;
+        height: 40px;
+        padding: 10px 40px 10px 10px;
+        border: none;
+        font-size: 16px;
+        box-sizing: border-box;
+        outline: none;
+        border-radius: 5px 0 0 5px;
+        background-color: #fff;
+    }
+
+    #search:focus {
+        background-color: #f0f0f0;
+    }
+
+    @media (max-width: 506px) {
+        #search-container {
+            max-width: 100%;
+        }
+    }
+
+    #integContainer {
+        column-gap: max(2vh, 2vw);
+        row-gap: 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 3.5rem;
+    }
+
+    .button-wrapper {
+        padding: 5px;
+        /* Adjust as needed */
+    }
 </style>
 
 
@@ -69,7 +69,8 @@
     <h1 id="integration-heading"></h1>
     <h2>for your Cloud Native Infrastructure and Apps</h2>
     <p style="margin: auto 10vw;">
-        Meshery seamlessly integrates with every CNCF project, your existing tools, multiple Clouds and Kubernetes clusters.
+        Meshery seamlessly integrates with every CNCF project, your existing tools, multiple Clouds and Kubernetes
+        clusters.
     </p>
 
     <div class="search-container-wrapper">
@@ -82,19 +83,21 @@
     <div id="integContainer" class="integrations-container container"></div>
 
     <div class="integrations-3d-link">
-        <div class="button-container" style="display: flex; align-items: center; justify-content: center; row-gap: 18px; column-gap: 32px; flex-wrap: wrap; gap: 16px;">
+        <div class="button-container"
+            style="display: flex; align-items: center; justify-content: center; row-gap: 18px; column-gap: 32px; flex-wrap: wrap; gap: 16px;">
             <div class="button-wrapper">
-                <a class="highlight show-all-button toggle-text" style="display: inline-block; width: fit-content; cursor:pointer;">Show More Integrations</a>
+                <a class="highlight show-all-button toggle-text"
+                    style="display: inline-block; width: fit-content; cursor:pointer;">Show More Integrations</a>
             </div>
             <div class="button-wrapper">
-                <a class="highlight show-all-button" href="/integrations" style="display: inline-block; width: fit-content;">View Integrations in 3D</a>
+                <a class="highlight show-all-button" href="/integrations"
+                    style="display: inline-block; width: fit-content;">View Integrations in 3D</a>
             </div>
         </div>
     </div>
-    
+
 
     <script type="module">
-        // integrations.js
         import data from '../../integrations/data.js';
 
         const integHeading = document.getElementById("integration-heading");
@@ -104,10 +107,11 @@
         const integContainer = document.getElementById("integContainer");
 
         let allDataShown = false;
+        let filteredData = data; // Initialize with full data
 
-        function renderIntegrationCards(data, showAll) {
-            const cardsToShow = showAll ? data.length : 40;
-            return data.slice(0, cardsToShow).map(item => {
+        function renderIntegrationCards(dataToRender, showAll) {
+            const cardsToShow = showAll ? dataToRender.length : 40;
+            return dataToRender.slice(0, cardsToShow).map(item => {
                 const iconURL = item.color.split('/').slice(1).join('/');
 
                 return `
@@ -128,7 +132,7 @@
 
         const scrollOptions = { behavior: "smooth" };
 
-        integContainer.innerHTML = renderIntegrationCards(data, allDataShown);
+        integContainer.innerHTML = renderIntegrationCards(filteredData, allDataShown);
 
         document.querySelector(".show-all-button").addEventListener("click", () => {
             allDataShown = !allDataShown;
@@ -141,7 +145,7 @@
                 button.textContent = "Show More Integrations";
             }
 
-            integContainer.innerHTML = renderIntegrationCards(data, allDataShown);
+            integContainer.innerHTML = renderIntegrationCards(filteredData, allDataShown);
 
             if (!allDataShown) {
                 const h2Tag = document.querySelector("h2");
@@ -150,12 +154,13 @@
         });
 
         document.getElementById("search").addEventListener("input", function () {
-            var searchValue = this.value.toLowerCase();
-            var filteredData = data.filter((item) =>
+            const searchValue = this.value.toLowerCase();
+            filteredData = data.filter((item) =>
                 item.name.toLowerCase().includes(searchValue)
             );
 
             integContainer.innerHTML = renderIntegrationCards(filteredData, allDataShown);
         });
     </script>
+
 </div>
