@@ -77,9 +77,9 @@
 
 			// adds the toggle button to open and close nav
 			if ( settings.position == 'right' || settings.position == 'left' ) {
-				nav.prepend('<a href="#" class="menu-toggle"><span class="bars"><span></span><span></span><span></span></span></a>');
+				nav.prepend('<a href="#" class="menu-toggle"> aria-label="Toggle menu" <span class="bars"><span></span><span></span><span></span></span></a>');
 			} else {
-				nav.prepend('<a href="#" class="menu-toggle ' + cssClass + '"><span class="bars"><span></span><span></span><span></span></span></a>');
+				nav.prepend('<a href="#" aria-label="Toggle menu" class="menu-toggle ' + cssClass + '"><span class="bars"><span></span><span></span><span></span></span></a>');
 			}
 
 			// adds a click-to-call link
