@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spoon-app
+spec:
+  selector:
+    matchLabels:
+      app: spoon-node
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: spoon-node
+    spec:
+      volumes:
+        - name: www
+      containers:
+        - name: spooner
+          image: nginx
+          ports:
+          - containerPort: 80
+          volumeMounts:
+          - name: www
+            mountPath: /usr/share/nginx/html/
+      initContainers:
+        - name: git
+          image: alpine
+          command: [ "sh", "-c", "apk add git && sleep 5 && git clone https://github.com/octocat/Spoon-Knife /www" ]
+          volumeMounts:
+          - name: www
+            mountPath: /www/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: spoon-cip
+  name: spoon-cip
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: spoon-node
+  type: ClusterIP
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-spoon
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: test2.lab.as73.inetsix.net
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: spoon-cip
+          servicePort: 80
