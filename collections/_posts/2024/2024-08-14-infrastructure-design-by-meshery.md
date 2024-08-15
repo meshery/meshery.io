@@ -9,7 +9,7 @@ categories:
 permalink: /blog/infrastructure-design-by-meshery
 featured-image: /assets/images/posts/2024-08-14-infrastructure-design-by-meshery/deep-dive.png
 ---
-On Friday, August 20, 2024, a special enlightning session titled **Infrastructure as Design by Meshery**. This session will be a deep dive into how Meshery can transform your approach to designing, deploying, and managing cloud-native infrastructure.  Join [Whitney Lee](https://www.linkedin.com/in/whitneylee/) from VMware as she hosts [Lee Calcote](https://layer5.io/community/member/lee-calcote), the Founder of Layer5, discussing the intricacies of Meshery and its significant impact on Cloud and Cloud Native space.
+On Friday, August 20, 2024, join us for a special enlightning session titled **Infrastructure as Design by Meshery**. This session will be a deep dive into how Meshery can transform your approach to designing, deploying, and managing cloud-native infrastructure.  Join [Whitney Lee](https://www.linkedin.com/in/whitneylee/) from VMware as she hosts [Lee Calcote](https://layer5.io/community/member/lee-calcote), the Founder of Layer5, discussing the intricacies of Meshery and its significant impact on Cloud and Cloud Native space.
 
 <div style="  position: relative;width: 100%;overflow: hidden;padding-top: 56.25%;">
 <iframe style="  position: absolute;top: 0;left: 0;bottom: 0;right: 0;width: 100%;height: 100%;border: none;" src="https://www.youtube.com/embed/JqZ4UZrHdw4?si=lvVMGRqp0WCQFugc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
