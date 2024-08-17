@@ -1,12 +1,12 @@
 name: Hierarchical  Parent  Relationship
-version: 0.0.9
+version: 0.0.16
 services:
   Generic Node:
     annotations: {}
     apiVersion: core.meshery.io/v1alpha1
     dependsOn: []
     id: null
-    isAnnotation: null
+    isAnnotation: false
     labels: {}
     model: meshery-core
     name: Generic Node
@@ -56,8 +56,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/meshery-core/white/genericnode-white.svg
         position:
-          posX: 410
-          posY: 230
+          posX: 430
+          posY: 330
         whiteboardData:
           style:
             backgroundOpacity: 0
@@ -70,7 +70,7 @@ services:
     apiVersion: rbac.authorization.k8s.io/v1
     dependsOn: []
     id: null
-    isAnnotation: null
+    isAnnotation: false
     labels: {}
     model: kubernetes
     name: cluster-role-qv
@@ -143,9 +143,9 @@ services:
     annotations: {}
     apiVersion: v1
     dependsOn:
-    - default-cyhkj
+    - default-prubv
     id: null
-    isAnnotation: null
+    isAnnotation: false
     labels: {}
     model: kubernetes
     name: config-map-io
@@ -215,9 +215,9 @@ services:
     annotations: {}
     apiVersion: v1
     dependsOn:
-    - default-aomif
+    - default-zaidv
     id: null
-    isAnnotation: null
+    isAnnotation: false
     labels: {}
     model: kubernetes
     name: config-map-ng
@@ -256,6 +256,7 @@ services:
           logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
           model: kubernetes
           modelDisplayName: Kubernetes
+          parentId: a45faf23-bb79-4de1-9177-4b5eb71783a6
           primaryColor: '#326CE5'
           published: true
           secondaryColor: '#7aa1f0'
@@ -277,89 +278,12 @@ services:
             z-index: 7
     type: ConfigMap
     version: v1.25.2
-  default-aomif:
+  default-prubv:
     annotations: {}
     apiVersion: v1
     dependsOn: []
     id: null
-    isAnnotation: null
-    labels: {}
-    model: kubernetes
-    name: default
-    namespace: default
-    settings: {}
-    traits:
-      meshmap:
-        edges: []
-        fieldRefData: {}
-        id: a45faf23-bb79-4de1-9177-4b5eb71783a6
-        label: Namespace
-        meshmodel-data:
-          category:
-            metadata: null
-            name: Orchestration & Management
-          components: []
-          displayName: Kubernetes
-          hostID: 00000000-0000-0000-0000-000000000000
-          id: d247c4d8-3c7f-5e48-8158-2fba74f1c41c
-          metadata:
-            isAnnotation: false
-            svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
-            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
-          name: kubernetes
-          relationships: []
-          status: registered
-          version: v1.25.2
-        meshmodel-metadata:
-          capabilities: |2-
-             {
-              "designer": {
-                "edit": {
-                  "shape": {
-                    "convert-shape": false
-                  }
-                }
-              }
-            }
-          defaultData: ""
-          genealogy: parent
-          isAnnotation: false
-          isCustomResource: false
-          isModelAnnotation: "FALSE"
-          isNamespaced: false
-          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
-          model: kubernetes
-          modelDisplayName: Kubernetes
-          primaryColor: '#326CE5'
-          published: true
-          secondaryColor: '#7aa1f0'
-          shape: rectangle
-          shapePolygonPoints: ""
-          styleOverrides:
-            background-image: none
-            background-opacity: 0.5
-            border-style: dashed
-            border-width: 2
-            z-index: 5
-          styles: '{"background-image":"none","border-width":2,"border-style":"dashed","background-opacity":0.5}'
-          subCategory: ""
-          svgColor: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
-          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/namespace-complete.svg
-          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/namespace-white.svg
-        position:
-          posX: 646
-          posY: 399
-        whiteboardData:
-          style:
-            z-index: 5
-    type: Namespace
-    version: v1.25.2
-  default-cyhkj:
-    annotations: {}
-    apiVersion: v1
-    dependsOn: []
-    id: null
-    isAnnotation: null
+    isAnnotation: false
     labels: {}
     model: kubernetes
     name: default
@@ -436,13 +360,90 @@ services:
         whiteboardData: {}
     type: Namespace
     version: v1.25.2
+  default-zaidv:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: false
+    labels: {}
+    model: kubernetes
+    name: default
+    namespace: default
+    settings: {}
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: a45faf23-bb79-4de1-9177-4b5eb71783a6
+        label: Namespace
+        meshmodel-data:
+          category:
+            metadata: null
+            name: Orchestration & Management
+          components: []
+          displayName: Kubernetes
+          hostID: 00000000-0000-0000-0000-000000000000
+          id: d247c4d8-3c7f-5e48-8158-2fba74f1c41c
+          metadata:
+            isAnnotation: false
+            svgColor: ui/public/static/img/meshmodels/kubernetes/color/kubernetes-color.svg
+            svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
+          name: kubernetes
+          relationships: []
+          status: registered
+          version: v1.25.2
+        meshmodel-metadata:
+          capabilities: |2-
+             {
+              "designer": {
+                "edit": {
+                  "shape": {
+                    "convert-shape": false
+                  }
+                }
+              }
+            }
+          defaultData: ""
+          genealogy: parent
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: false
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          published: true
+          secondaryColor: '#7aa1f0'
+          shape: rectangle
+          shapePolygonPoints: ""
+          styleOverrides:
+            background-image: none
+            background-opacity: 0.5
+            border-style: dashed
+            border-width: 2
+            z-index: 5
+          styles: '{"background-image":"none","border-width":2,"border-style":"dashed","background-opacity":0.5}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/namespace-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/namespace-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/namespace-white.svg
+        position:
+          posX: 647.25
+          posY: 399
+        whiteboardData:
+          style:
+            z-index: 5
+    type: Namespace
+    version: v1.25.2
   role-yh:
     annotations: {}
     apiVersion: rbac.authorization.k8s.io/v1
     dependsOn:
-    - default-aomif
+    - default-zaidv
     id: null
-    isAnnotation: null
+    isAnnotation: false
     labels: {}
     model: kubernetes
     name: role-yh
