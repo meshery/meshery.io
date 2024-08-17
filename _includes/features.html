@@ -129,7 +129,7 @@
     <div class="container flex">
         <div class="text ">
             <img src="/assets/images/meshmap-icon.svg" style="max-width:20%;position:relative;float:left;
-                    margin-right:20px;margin-bottom: 10px;" loading="lazy" />
+                    margin-right:20px;margin-bottom: 10px;" loading="lazy" alt="MeshMap icon"/>
             <h2>See changes to your infra <span class="special-text">before you merge</span></h2>
             <p>Get snapshots of your infrastructure directly in your PRs. Preview your deployment, view changes pull request-to-pull request and get infrastructure snapshots within your PRs by connecting MeshMap to your GitHub repositories.</p>
             <!-- <ul style="line-height: 1.5em;height: auto;text-align: left; color: var(--color-secondary-light)">
@@ -150,8 +150,9 @@
                         <div class="gradient-box-before">Before</div>
                     </div>
                 </div>
-                <input type="range" min="1" max="100" value="50" class="slider" name='slider' id="slider">
-                <div class='slider-button'></div>
+                <label for="slider" id="slider-label" class="sr-only">Adjust slider to compare before and after images</label>
+                <input type="range" min="1" max="100" value="50" class="slider" name="slider" id="slider" aria-labelledby="slider-label" aria-valuemin="1" aria-valuemax="100" aria-valuenow="50">
+                <div class='slider-button' role="button" aria-label="Drag to adjust slider" tabindex="0"></div>
             </div>
     </div>
 </section>
@@ -192,8 +193,9 @@
         </div> -->
         <div class="image flex" style="flex-flow: column wrap;">
             <div align="center" style="margin-top: 3rem;">
-                <button id="video-modal" class="link recording-link" style="width:100%"><img
-                        src="{{ features.videoPoster }}" loading="lazy" ></button>
+                <button id="video-modal" class="link recording-link" style="width:100%" aria-label="Open video modal" role="button">
+                    <img src="{{ features.videoPoster }}" alt="Video thumbnail" loading="lazy">
+                </button>   
                 <!-- <p style="font-size: 1rem;margin:0rem;padding:0rem;color:#666;font-style: italic;">(excerpt: patterns
                     in-action)</p> -->
                 {% include video-modal.html
@@ -214,8 +216,8 @@
         </div>
         <div class="image flex">
             <a style="width: 100%;" href="{{ features.image }}" data-fancybox="images"
-                data-caption="Webassembly based Envoy Filters">
-                <img src="{{ features.image }}" class="screenshot" loading="lazy" />
+            data-caption="Webassembly based Envoy Filters" aria-label="View image of WebAssembly-based Envoy Filters" >
+            <img src="{{ features.image }}" class="screenshot" loading="lazy" alt="{{ features.imageDescription }}"/>
             </a>
         </div>
     </div>
@@ -257,8 +259,9 @@
         </div>
         <div class="image flex" style="flex-flow: column wrap;">
             <div align="center" style="margin-top: 3rem;">
-                <button id="video-modal" class="link recording-link" style="width:100%"><img
-                        src="{{ features.videoPoster }}" loading="lazy" class="screenshot"></button>
+                <button id="video-modal" class="link recording-link" style="width:100%" aria-label="Play video" role="button">
+                    <img src="{{ features.videoPoster }}" loading="lazy" class="screenshot" alt="Video poster">
+                </button>
                 <!-- <p style="font-size: 1rem;margin:0rem;padding:0rem;color:#666;font-style: italic;">(excerpt: patterns
                     in-action)</p> -->
                 {% include video-modal.html
