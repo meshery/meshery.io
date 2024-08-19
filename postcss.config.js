@@ -23,6 +23,7 @@ module.exports = {
             safelist: [], // Add any CSS selectors you want to keep
             keyframes: true,
             fontFace: true,
+
         }),
     ],
 };
