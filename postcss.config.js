@@ -24,6 +24,7 @@ module.exports = {
             keyframes: true,
             fontFace: true,
 
+            // adding this line to for commiting with sign off
         }),
     ],
 };
