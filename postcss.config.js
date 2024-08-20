@@ -12,7 +12,7 @@ module.exports = {
             ],
             // First change the below code and then add the file name you want. 
             // For e.g. i checked it using variables.scss
-            css: ['./_sass/variables.scss'],
+            css: ['./_sass/testimonials.scss'],
 
             // and run this in terminal -> 
 
