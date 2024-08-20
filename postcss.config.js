@@ -12,7 +12,6 @@ module.exports = {
             ],
             // First change the below code and then add the file name you want. 
             // For e.g. i checked it using variables.scss
-
             css: ['./_sass/variables.scss'],
 
             // and run this in terminal -> 
@@ -23,7 +22,6 @@ module.exports = {
             safelist: [], // Add any CSS selectors you want to keep
             keyframes: true,
             fontFace: true,
-
             // adding this line to for commiting with sign off
         }),
     ],
