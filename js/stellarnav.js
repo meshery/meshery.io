@@ -169,33 +169,7 @@
 			}
 
 			// opens and closes menu
-			$('.menu-toggle, .stellarnav-open').on('click', function(e) {
-				e.preventDefault();
-
-				// if nav position is left or right, uses fadeToggle instead of slideToggle
-				if (settings.position == 'left' || settings.position == 'right') {
-					nav.find('ul:first').stop(true, true).fadeToggle(settings.openingSpeed);
-					nav.toggleClass('active');
-
-					if(nav.hasClass('active') && nav.hasClass('mobile')) {
-						// closes the menu when clicked outside of it
-						$(document).on('click', function(event) {
-							// ensures menu hides only on mobile nav
-							if(nav.hasClass('mobile')) {
-							  	if (!$(event.target).closest(nav).length) {
-							  		nav.find('ul:first').stop(true, true).fadeOut(settings.openingSpeed);
-							  		nav.removeClass('active');
-								}
-							}
-						});
-					}
-
-				} else {
-					// static position - normal open and close animation
-					nav.find('ul:first').stop(true, true).slideToggle(settings.openingSpeed);
-					nav.toggleClass('active');
-				}
-			});
+			$('.menu-toggle, .stellarnav-open').on('click', toggleMenu);
 
 			// activates the close button
 			$('.close-menu, .stellarnav-close').on('click', function() {
@@ -223,6 +197,11 @@
 
 			// expands the dropdown menu on each click of nav-text
 			nav.find('li .sub-list').on('click', navbarExpand);
+
+			nav.find('li.nav-item').not('.has-sub').on('click', (e) => {
+				toggleMenu(e);
+				window.location.href = e.target.href;
+			} )
 
 			function navbarExpand(e) {
 				e.preventDefault();
@@ -267,6 +246,34 @@
 						});
 					}
 				});
+			}
+
+			function toggleMenu(e) {
+				e.preventDefault();
+
+				// if nav position is left or right, uses fadeToggle instead of slideToggle
+				if (settings.position == 'left' || settings.position == 'right') {
+					nav.find('ul:first').stop(true, true).fadeToggle(settings.openingSpeed);
+					nav.toggleClass('active');
+
+					if(nav.hasClass('active') && nav.hasClass('mobile')) {
+						// closes the menu when clicked outside of it
+						$(document).on('click', function(event) {
+							// ensures menu hides only on mobile nav
+							if(nav.hasClass('mobile')) {
+								if (!$(event.target).closest(nav).length) {
+									nav.find('ul:first').stop(true, true).fadeOut(settings.openingSpeed);
+									nav.removeClass('active');
+								}
+							}
+						});
+					}
+
+				} else {
+					// static position - normal open and close animation
+					nav.find('ul:first').stop(true, true).slideToggle(settings.openingSpeed);
+					nav.toggleClass('active');
+				}
 			}
 
 			windowCheck();
