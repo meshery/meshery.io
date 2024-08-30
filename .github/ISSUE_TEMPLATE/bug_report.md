@@ -14,7 +14,7 @@ assignees: ''
 ### Screenshots
 <!--- Add screenshots, if applicable, to help explain your problem.-->
 
-### Enviroment:
+### Environment:
  - OS: Mac Linux Windows
  - Browser: Chrome Safari Firefox
  - Version: 

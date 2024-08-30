@@ -38,7 +38,7 @@
     function renderIntegrationCards(data, showAll) {
         const cardsToShow = showAll ? data.length : 40;
         return data.slice(0, cardsToShow).map(item => {
-            const iconURL = item.color;
+            const iconURL = item.color.split('/').slice(1).join('/');
 
             return `
                 <a href="${item.permalink}" class="integrations-card">

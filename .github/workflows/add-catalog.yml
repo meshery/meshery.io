@@ -125,6 +125,10 @@ jobs:
           ---" > ./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')"/$filterId.md
           done
           rm temp.json
+
+      - name: Pull changes from remote
+        run: git pull origin master
+
       - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
