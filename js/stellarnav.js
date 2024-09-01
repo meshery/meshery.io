@@ -199,8 +199,22 @@
 			nav.find('li .sub-list').on('click', navbarExpand);
 
 			nav.find('li.nav-item').not('.has-sub').on('click', (e) => {
-				toggleMenu(e);
-				window.location.href = e.target.href;
+				if (nav.hasClass('mobile')){
+					toggleMenu(e);
+				}
+				var href = $(e.currentTarget).find('a').attr('href')
+
+				if (href.startsWith('/#') || href.startsWith('#')){
+					var targetId = href.startsWith('/#') ? href.substring(2) : href.substring(1)
+					var target = $('#' + targetId)
+
+					if (target.length){
+						$('html, body').animate({
+							scrollTop: target.offset().top
+						}, 800)
+					}
+				}
+				window.location.href = href;
 			} )
 
 			function navbarExpand(e) {
