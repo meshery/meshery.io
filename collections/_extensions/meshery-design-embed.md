@@ -18,6 +18,6 @@ extensionCaveats: |
   - Embed your MeshMap design easily by selecting the "Embed" option and downloading the embedding script.
   - Use the script for static sites or integrate it into React projects with the 'meshery-design-embed' package.
   - Customize the embedded design’s styles with CSS classes or inline styles as needed.
-URL: 'https://playground.meshery.io/extension/meshmap'
+URL: 'https://playground.meshery.io/extensions'
 docsURL: 'https://docs.layer5.io/meshmap/designer/embedding-designs/'
 ---
