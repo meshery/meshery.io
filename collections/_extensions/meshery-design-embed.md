@@ -11,11 +11,11 @@ compatibility:
   - JavaScript
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: /assets/images/meshery-logo.svg
-image: /assets/images/meshmap-icon.svg
+image: /assets/images/kanvas-icon.svg
 extensionInfo: |
   Export, embed, and share interactive designs effortlessly with Meshery Design Embedding.
 extensionCaveats: |
-  - Embed your MeshMap design easily by selecting the "Embed" option and downloading the embedding script.
+  - Embed your Kanvas design easily by selecting the "Embed" option and downloading the embedding script.
   - Use the script for static sites or integrate it into React projects with the 'meshery-design-embed' package.
   - Customize the embedded design’s styles with CSS classes or inline styles as needed.
 URL: 'https://playground.meshery.io/extensions'

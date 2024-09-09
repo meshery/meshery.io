@@ -55,7 +55,7 @@ Take full control of your clusters with Meshery and avoid any issues if any one 
 
 Deployment dry-runs for designs are here to make your Kubernetes management smoother. First validate, then dry-run, and you can safeguard your deployments, ensuring error-free operations and peace of mind.
 
-Meshery integration with MeshMap enables you to visualize your dry-run testing process and be aware of everything.
+Meshery integration with Kanvas enables you to visualize your dry-run testing process and be aware of everything.
 
 ### Meshery's Messaging Framework: Notification Center
 
