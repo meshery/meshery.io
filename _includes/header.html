@@ -5,9 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="test" content="testing" />
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
     <!-- Google Tag Manager -->
     <meta name="description" content="{{ page.patternInfo | url_decode }}" />
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    <script defer>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -21,6 +22,9 @@
     {% endif %}
     <link rel="stylesheet" href="{{ site.baseurl }}/css/screen.css" />
     <link rel="icon" type="image/png" href="{{ site.baseurl }}/favicon.ico" />
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="http://cdn-images.mailchimp.com">
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Open+Sans"
@@ -130,19 +134,19 @@
   
       <div class="project-name">
         <a href="{{ site.baseurl }}/">
-          <img src="{{ site.baseurl }}/assets/images/logos/meshery-logo.png" alt="Meshery Logo" />&nbsp;
+          <img src="{{ site.baseurl }}/assets/images/logos/meshery-logo.png" alt="Meshery Logo" loading="lazy"/>&nbsp;
           <img src="{{ site.baseurl }}/assets/images/logos/meshery-logo-text.png"
             data-logo-for-dark="{{ site.baseurl }}/assets/images/logos/meshery-logo-text.png"
             data-logo-for-light="{{ site.baseurl }}/assets/images/logos/meshery-logo-text-dark.png" alt="Meshery Logo"
-            id="logo-dark-light" />
+            id="logo-dark-light" loading="lazy"/>
         </a>
       </div>
       {% include navigation.html %}
-      <div class="nav-mode-icon" id="mode-toggle-btn" style="text-align: center;">
+      <div class="nav-mode-icon" id="mode-toggle-btn" style="text-align: center;" role="button" aria-label="Toggle dark and light mode" tabindex="0" aria-pressed="false">
         <img class="nav-text" id="logo-dark-light"
           src="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-moon.png"
           data-logo-for-dark="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-moon.png"
-          data-logo-for-light="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-sun.png" />
+          data-logo-for-light="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-sun.png" alt="Toggle dark and light mode icon" loading="lazy"/>
       </div>
     </div>
   </header>
