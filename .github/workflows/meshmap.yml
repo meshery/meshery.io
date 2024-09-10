@@ -1,4 +1,4 @@
-name: MeshMap Screenshot Service
+name: Kanvas Screenshot Service
 on: # rebuild any PRs and main branch changes
   pull_request_target:
     types: [opened, synchronize, reopened]
@@ -25,7 +25,7 @@ on: # rebuild any PRs and main branch changes
     outputs:
       resource_url:
         description: "The URL of the generated resource."
-        value: ${{ jobs.MeshMapScreenshot.outputs.resource_url }}
+        value: ${{ jobs.KanvasScreenshot.outputs.resource_url }}
 permissions: 
   actions: read
   contents: write
@@ -35,7 +35,7 @@ permissions:
   id-token: write
 
 jobs:
-  MeshMapScreenshot:
+  KanvasScreenshot:
     runs-on: ubuntu-latest
     outputs:
       resource_url: ${{ steps.test_result.outputs.resource_url }}
