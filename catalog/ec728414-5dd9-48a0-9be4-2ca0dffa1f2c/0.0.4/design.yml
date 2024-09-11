@@ -1,0 +1,94 @@
+name: iscsi
+version: 0.0.4
+services:
+  iscsipd:
+    annotations: {}
+    apiVersion: v1
+    dependsOn: []
+    id: null
+    isAnnotation: false
+    labels: {}
+    model: kubernetes
+    name: iscsipd
+    namespace: default
+    settings:
+      spec:
+        containers:
+        - image: kubernetes/pause
+          name: iscsipd-rw
+          volume Mounts:
+          - mount Path: /mnt/iscsipd
+            name: iscsipd-rw
+        volumes:
+        - iscsi:
+            fs Type: ext4
+            iqn: iqn.2001-04.com.example:storage.kube.sys1.xyz
+            lun: 0
+            portals:
+            - 10.0.2.16:3260
+            - 10.0.2.17:3260
+            read Only: true
+            target Portal: 10.0.2.15:3260
+          name: iscsipd-rw
+    traits:
+      meshmap:
+        edges: []
+        fieldRefData: {}
+        id: 7baabe41-f90e-4edb-86c7-1c79df18a5d7
+        meshmodel-metadata:
+          capabilities: |2-
+             {  "fieldRefs": [
+                {
+                  "fieldPath": "spec.template.spec.containers",
+                  "jsonSchemaPath": "properties.spec.allOf[0].properties.template.allOf[0].properties.spec.allOf[0].properties.containers.items.allOf[0]",
+                  "component": {
+                    "kind": "Container",
+                    "model": "meshery-core"
+                  },
+                  "renderChildren": true
+                },
+                {
+                  "fieldPath": "spec.template.spec.init Containers",
+                  "jsonSchemaPath": "properties.spec.allOf[0].properties.template.allOf[0].properties.spec.allOf[0].properties.init Containers.items.allOf[0]",
+                  "component": {
+                    "kind": "Container",
+                    "model": "meshery-core"
+                  },
+                  "renderChildren": true
+                }
+              ],
+              "designer": {
+                "edit": {
+                  "shape": {
+                    "convert-shape": false
+                  }
+                }
+              }
+            }
+          defaultData: ""
+          genealogy: parent
+          isAnnotation: false
+          isCustomResource: false
+          isModelAnnotation: "FALSE"
+          isNamespaced: true
+          logoURL: https://github.com/cncf/artwork/blob/master/projects/kubernetes/icon/white/kubernetes-icon-white.svg
+          model: kubernetes
+          modelDisplayName: Kubernetes
+          primaryColor: '#326CE5'
+          secondaryColor: '#7aa1f0'
+          shape: round-rectangle
+          shapePolygonPoints: ""
+          status: enabled
+          styleOverrides: '{"border-width":2,"background-opacity":0.5}'
+          styles: '{"border-width":2,"background-opacity":0.5}'
+          subCategory: ""
+          svgColor: ui/public/static/img/meshmodels/kubernetes/color/pod-color.svg
+          svgComplete: ui/public/static/img/meshmodels/kubernetes/complete/pod-complete.svg
+          svgWhite: ui/public/static/img/meshmodels/kubernetes/white/pod-white.svg
+        position:
+          posX: 0
+          posY: 1
+        whiteboardData:
+          style: {}
+    type: Pod
+    version: ""
