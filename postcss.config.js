@@ -13,7 +13,6 @@ module.exports = {
             // First change the below code and then add the file name you want. 
             // For e.g. i checked it using variables.scss
             css: ['./_sass/testimonials.scss'],
-
             // and run this in terminal -> 
 
             // npx postcss _sass/variables.scss -o ./output/variables.css --config ./postcss.config.js

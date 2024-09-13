@@ -29,5 +29,3 @@ exec(postcssCommand, (error, stdout, stderr) => {
     console.log(`The output has been saved to './output/${cssFileName}'`);
     console.log(`NOTE: ALL THE UNUSED CSS IS REMOVED FROM THE UPDATED FILE`);
 });
-
-
