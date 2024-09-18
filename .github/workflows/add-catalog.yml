@@ -139,7 +139,7 @@ jobs:
           done
           rm temp.json
 
-      - name: Copy catalog directory
+      - name: copy catalog directory to docs
         run: |
           mkdir -p meshery/docs/_catalog
           cp -R meshery.io/collections/_catalog/* meshery/docs/_catalog/
@@ -157,7 +157,7 @@ jobs:
           commit_user_email: ci@layer5.io
           commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           commit_options: "--signoff"
-          commit_message: "[Docs] Update _catalog directory"
+          commit_message: "[Docs] Update _catalog collection"
           branch: master
 
       - name: Pull latest changes from meshery.io
