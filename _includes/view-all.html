@@ -25,24 +25,26 @@
 
 
   document.addEventListener("DOMContentLoaded", () => {
-
-    prevButton.style.display = "none";
+    showCards(count);
+    updateButtonVisibility();
+    simulateClick();
   });
 
   function showCards(coun) {
     cards.forEach((card) => {
       card.style.display = "none";
     });
-    for (let i = coun; i < coun + 9 && coun + 9 <= maxCount; i++) {
+    for (let i = coun; i < coun + 9 && i < maxCount; i++) {
       cards[i].style.display = "block";
     }
 
   }
 
   function updateButtonVisibility() {
-      prevButton.style.display = count <= 0 ? "none" : "block";
-      nextButton.style.display = count + 9 >= maxCount ? "none" : "block";
-    }
+    prevButton.style.display = count <= 0 ? "none" : "block";
+    nextButton.style.display = count + 9 >= maxCount ? "none" : "block";
+  }
+
   prevButton.addEventListener("click", () => {
 
     if (count > 0) {
@@ -58,4 +60,16 @@
     }
     updateButtonVisibility();
   });
+
+  function simulateClick() {
+    if (count > 0 && count < maxCount) {
+      if (count % 9 === 0) {
+        nextButton.click();
+      } else {
+        prevButton.click();
+      }
+    }
+  }
+
+  window.onload = simulateClick;
 </script>
