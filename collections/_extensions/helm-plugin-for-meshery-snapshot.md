@@ -2,7 +2,7 @@
 layout: item
 name: Helm Plugin for Kanvas Snapshot 
 kind: Plugin
-userName: Layer5, Inc.
+userName: Meshery Authors
 userAvatarURL: https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg
 type: Collaboration
 compatibility: 
