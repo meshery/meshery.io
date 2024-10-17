@@ -4,9 +4,9 @@ heading: Meshmark Explained
 title: Meshmark Explained
 author_contributor: Lee Calcote
 categories:
-  - Meshery
-  - OpenSource
-  - Meshmark
+  - meshery
+  - open-source
+  - meshmark
 permalink: /blog/meshmark-explained
 ---
 <div class="row" style="width:220px;float:right;padding:5px;text-align:center;">

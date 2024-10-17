@@ -4,8 +4,8 @@ heading: Pipelining Service Mesh Specifications
 title: Pipelining Service Mesh Specifications
 author_contributor: The Newsroom
 categories:
-  - Meshery
-  - Service Mesh
+  - meshery
+  - service-mesh
 permalink: /blog/pipelining-service-mesh-specifications
 ---
 <div style="text-align:center;margin-bottom:0.75rem;">

@@ -4,7 +4,7 @@ heading: Getting started with Service Mesh Performance Analysis
 title: Analyzing with SMP
 author_contributor: Lee Calcote
 categories:
-  - Meshery
+  - meshery
   - SMP
 permalink: /blog/getting-started-with-service-mesh-performance-analysis
 ---

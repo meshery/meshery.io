@@ -4,7 +4,7 @@ subheading: Meshery is so much more than this
 date: 2024-10-01
 author_contributor: Lee Calcote
 categories: 
-  - Meshery
+  - meshery
 permalink: /blog/meshery-is-not-a-service-mesh-manager
 featured-image: /assets/images/logos/meshery-logo-dark-text-side.svg
 ---

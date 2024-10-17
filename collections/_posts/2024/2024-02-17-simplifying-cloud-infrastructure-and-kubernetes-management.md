@@ -4,8 +4,8 @@ title: Simplifying Cloud Infrastructure and Kubernetes Management
 subheading: with Meshery
 author_contributor: James Horton, Lee Calcote
 categories: 
-  - Meshery
-  - Open Source
+  - meshery
+  - open-source
 #layout: post
 featured-image: /assets/images/posts/2024-02-17-simplifying-cloud-infrastructure-and-kubernetes-management/meshery-catalog.png
 permalink: /blog/simplifying-cloud-infrastructure-and-kubernetes-management
