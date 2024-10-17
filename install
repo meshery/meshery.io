@@ -131,12 +131,13 @@ if [ "x${MESHERY_VERSION}" = "x" ] ; then
   exit;
 fi
 
-# For patch releases, the meshery tar ball will not be generated, so fall back to last stable release
-if [[ "$MESHERY_VERSION" ==  *"patch"* ]] ; then
-    LAST_MESHERY_VERSION=`echo $MESHERY_VERSION | awk -F '-patch' '{print $1}'`
+# For patch/alpha/beta/rc releases, the meshery tar ball will not be generated, so fall back to last stable release
+if [[ "$MESHERY_VERSION" =~ .+-(patch|alpha|beta|rc) ]] ; then
+    LAST_MESHERY_VERSION=$(git ls-remote --tags https://github.com/meshery/meshery | grep -v -E 'patch|alpha|beta|rc' | tail -1 | sed -E "s/(.+)(v.+)/\2/")
     printf "Patch release %s is not supported, falling back to last stable release: %s\n\n" "$MESHERY_VERSION" "$LAST_MESHERY_VERSION"
     MESHERY_VERSION=$LAST_MESHERY_VERSION
 fi
+
 
 NAME="mesheryctl-${MESHERY_VERSION}"
 URL="https://github.com/meshery/meshery/releases/download/${MESHERY_VERSION}/mesheryctl_${MESHERY_VERSION:1}_${OSEXT}_${OSARCHITECTURE}.tar.gz"
