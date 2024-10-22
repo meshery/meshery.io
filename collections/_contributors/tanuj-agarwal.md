@@ -8,4 +8,5 @@ github: Tanuj22
 blurb: Mesh Head
 status: Active
 MeshMate: true
+redirect_to: https://layer5.io/community/members
 ---

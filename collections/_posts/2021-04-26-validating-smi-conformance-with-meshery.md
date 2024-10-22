@@ -4,7 +4,7 @@ title: Validating SMI Conformance with Meshery
 heading: Validating SMI Conformance with Meshery
 author_contributor: Lee Calcote
 categories:
-  - SMI Conformance
+  - smi-conformance
 # layout: post
 # permalink: /blog/validating-smi-conformance-with-meshery
 ---

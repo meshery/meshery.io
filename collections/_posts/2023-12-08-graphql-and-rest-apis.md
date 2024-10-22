@@ -4,9 +4,9 @@ title: The Synergy of REST and GraphQL APIs in Meshery
 subheading: Extending Meshery as an engineering platform
 author_contributor: Lee Calcote
 categories:
-  - Meshery
-  - Open Source
-  - API
+  - meshery
+  - open-source
+  - api
 featured-image: /assets/images/posts/2023-12-08-graphql-and-rest-apis/meshery-apis.jpeg
 permalink: /blog/unleashing-power-and-flexibility-the-synergy-of-rest-and-graphql-in-meshery
 ---
