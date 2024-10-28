@@ -328,7 +328,7 @@ func fetchUserInfo(userID string) (UserInfo, error) {
 
 func invokeGitHubAction(contentID, assetLocation string, ghAccessToken string) error {
 	payload := fmt.Sprintf(`{"ref":"master","inputs":{"contentID":"%s","assetLocation":"%s"}}`, contentID, assetLocation)
-	req, err := http.NewRequest("POST", "https://api.github.com/repos/meshery/meshery.io/actions/workflows/meshmap.yml/dispatches", bytes.NewBuffer([]byte(payload)))
+	req, err := http.NewRequest("POST", "https://api.github.com/repos/meshery/meshery.io/actions/workflows/kanvas.yml/dispatches", bytes.NewBuffer([]byte(payload)))
 	if err != nil {
 		return meshkitErrors.New(ErrCreateGitHubRequestCode, meshkitErrors.Alert,
 			[]string{"Error creating GitHub Actions request"},
