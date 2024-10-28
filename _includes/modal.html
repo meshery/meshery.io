@@ -43,13 +43,12 @@
     <div class="vertical-line"></div>
     <div class="modal-info">
       <h2 class="modal-h2">
-        <a href="/catalog/{{pattern.type}}/{{pattern.name | slugify}}-{{pattern.patternId}}.html" target="_blank" style="font-size: 1.5rem"
-          >{{pattern.name | upcase }}
-          <img
-            class="internal-link"
-            src="{{site.baseurl}}/assets/images/buttons/external-link_black.svg"
-        /></a>
+        <a href="{% if pattern.filterInfo %}/catalog/{{ pattern.type }}/{{ pattern.patternId }}.html{% else %}/catalog/{{ pattern.type }}/{{ pattern.name | slugify }}-{{ pattern.patternId }}.html{% endif %}" target="_blank" style="font-size: 1.5rem">
+            <span>{{ pattern.name | upcase }}</span>
+            <img class="internal-link" src="{{ site.baseurl }}/assets/images/buttons/external-link_black.svg" />
+        </a>
       </h2>
+      
       {% if pattern.patternInfo %}
       <div class="modal-section">
         <h3 class="modal-h3">Description</h3>
