@@ -11,7 +11,7 @@ compatibility:
   - JavaScript
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: /assets/images/meshery-logo.svg
-image: /assets/images/kanvas-icon.svg
+image: /assets/images/logos/meshery-logo.png
 extensionInfo: |
   Export, embed, and share interactive designs effortlessly with Meshery Design Embedding.
 extensionCaveats: |
