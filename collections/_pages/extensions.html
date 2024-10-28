@@ -59,6 +59,7 @@ published: true
 </style>
 
 {% assign extensions = site.extensions | sort: 'type' %}
+
 <div class="section-container">
   {% include view-all.html %} {% include extensions/card-modal.html %}
 
@@ -69,6 +70,20 @@ published: true
     {% for extension in extensions %} {% if extension.extensionInfo or extension.patternInfo and extension.Status !=
     "ComingSoon" %}
     {% assign last = extension.compatibility | last %}
+     <!--
+    {% assign current_type = extension.type | upcase %}
+    {% assign next_type = extension.next.type | upcase %}
+    {%- if forloop.first %}
+      <h1>
+        {{ extension.type | upcase }}
+      </h1>
+    {% elsif current_type != next_type %}
+    </div>
+    <h1>
+      {{ extension.type | upcase }}
+    </h1>
+    <div class="row">
+    {%- endif -%} -->
     <div
       class="column column-lg extensionCard"
       filter="{{ extension.name }}"
@@ -76,7 +91,7 @@ published: true
       technology='[{% for item in extension.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
       status="{{ extension.Status }}"
       style="display: none"
-    >
+    >    
       {% include extensions/card.html %}
       <!-- modal included -->
       {% include extensions/modal.html %}
