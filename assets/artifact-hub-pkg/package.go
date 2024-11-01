@@ -69,21 +69,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	catalogPatterns, err := fetchCatalogPatterns()
+	patterns, err := fetchCatalogPatterns()
 	if err != nil {
 		log.Error(err)
 		return
 	}
 
-	var patterns struct {
-		Patterns []CatalogPattern `json:"patterns"`
-	}
-	if err := json.Unmarshal(catalogPatterns, &patterns); err != nil {
-		log.Error(utils.ErrUnmarshal(err))
-		return
-	}
-
-	for _, pattern := range patterns.Patterns {
+	for _, pattern := range patterns {
 		if err := processPattern(pattern, token); err != nil {
 			log.Error(meshkitErrors.New(ErrProcessPatternCode, meshkitErrors.Alert,
 				[]string{"unable to process catalog pattern"},
@@ -107,18 +99,46 @@ func slugify(name string) string {
 
 	return s
 }
-func fetchCatalogPatterns() ([]byte, error) {
-	resp, err := http.Get(fmt.Sprintf("%s/api/catalog/content/pattern", mesheryCloudBaseURL))
+func fetchCatalogPatterns() ([]CatalogPattern, error) {
+	// First request to get total count
+	resp, err := http.Get(fmt.Sprintf("%s/api/catalog/content/pattern?page=0&pagesize=10", mesheryCloudBaseURL))
 	if err != nil {
-		return nil, ErrHTTPGetRequest(err, fmt.Sprintf("%s/api/catalog/content/pattern", mesheryCloudBaseURL))
+		return nil, ErrHTTPGetRequest(err, fmt.Sprintf("%s/api/catalog/content/pattern?page=0&pagesize=10", mesheryCloudBaseURL))
 	}
 	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
+	var initialResponse struct {
+		TotalCount int              `json:"total_count"`
+		Patterns   []CatalogPattern `json:"patterns"`
+	}
+	if err := json.NewDecoder(resp.Body).Decode(&initialResponse); err != nil {
 		return nil, ErrReadRespBody(err)
 	}
-	return body, nil
+
+	totalPages := (initialResponse.TotalCount + 9) / 10 // Calculate number of pages (rounding up)
+
+	// Store all patterns from all pages
+	allPatterns := initialResponse.Patterns
+
+	// Fetch patterns from remaining pages
+	for page := 1; page <= totalPages; page++ {
+		resp, err := http.Get(fmt.Sprintf("%s/api/catalog/content/pattern?page=%d&pagesize=10", mesheryCloudBaseURL, page))
+		if err != nil {
+			return nil, ErrHTTPGetRequest(err, fmt.Sprintf("%s/api/catalog/content/pattern?page=%d&pagesize=10", mesheryCloudBaseURL, page))
+		}
+		defer resp.Body.Close()
+
+		var pageResponse struct {
+			Patterns []CatalogPattern `json:"patterns"`
+		}
+		if err := json.NewDecoder(resp.Body).Decode(&pageResponse); err != nil {
+			return nil, ErrReadRespBody(err)
+		}
+
+		allPatterns = append(allPatterns, pageResponse.Patterns...)
+	}
+
+	return allPatterns, nil
 }
 
 func processPattern(pattern CatalogPattern, token string) error {
@@ -209,10 +229,30 @@ func decodeURIComponent(encodedURI string) (string, error) {
 
 func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL string) error {
 	designFilePath := filepath.Join(versionDir, "design.yml")
-	if err := ioutil.WriteFile(designFilePath, []byte(pattern.PatternFile), 0644); err != nil {
-		return utils.ErrWriteFile(err, designFilePath)
+
+	var dataJson map[string]interface{}
+	if err := json.Unmarshal([]byte(pattern.PatternFile), &dataJson); err != nil {
+		// If JSON unmarshalling fails, try YAML unmarshalling
+		if yamlErr := yaml.Unmarshal([]byte(pattern.PatternFile), &dataJson); yamlErr != nil {
+			// Write faulty content to a file for debugging if both unmarshalling attempts fail
+			faultyFilePath := filepath.Join(versionDir, "faulty_pattern.yaml")
+			if writeErr := ioutil.WriteFile(faultyFilePath, []byte(pattern.PatternFile), 0644); writeErr != nil {
+				return fmt.Errorf("failed to write faulty data to file: %v", writeErr)
+			}
+			return fmt.Errorf("failed to unmarshal as JSON or YAML: %v; faulty data saved to %s", yamlErr, faultyFilePath)
+		}
 	}
 
+	// Step 2: Marshal the data into YAML format
+	yamlData, err := yaml.Marshal(dataJson)
+	if err != nil {
+		return fmt.Errorf("failed to marshal data to YAML: %v", err)
+	}
+
+	// Step 3: Write the YAML data to the file
+	if err := ioutil.WriteFile(designFilePath, yamlData, 0644); err != nil {
+		return utils.ErrWriteFile(err, designFilePath)
+	}
 	contenttemp, err := ioutil.ReadFile(designFilePath)
 	if err != nil {
 		return utils.ErrReadFile(err, designFilePath)
