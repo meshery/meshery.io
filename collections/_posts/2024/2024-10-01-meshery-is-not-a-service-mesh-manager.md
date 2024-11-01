@@ -13,9 +13,9 @@ As a self-service engineering platform, Meshery enables collaborative design and
 
 **The Evolution of Meshery**
 
-Meshery has often been referred to as a service mesh manager. While this was partially true in its early days, Meshery has evolved into something much broader and more powerful. It's now more accurately described as a **cloud native manager**.
+Meshery has been referred to as a service mesh manager, however, that is only a small component of what Meshery offers. In it's post v0.5 releases, Meshery has grown into more of its original vision as a much broader and more powerful platform. It's now more accurately described as a **cloud native manager**.
 
-**Beyond Service Meshes**
+**A Platform for Engineering Teams**
 
 Here's why the "service mesh manager" label no longer even comes close to fully encompasses Meshery's capabilities:
 
@@ -30,11 +30,11 @@ Here's why the "service mesh manager" label no longer even comes close to fully 
 
 Meshery's expanded capabilities make it a comprehensive tool for managing all aspects of your cloud native environment. It empowers you to:
 
-* **Streamline Operations:** Manage the lifecycle, configuration, and performance of service meshes and other cloud native infrastructure components from a single platform.
+* **Streamline Operations:** Manage the lifecycle, configuration, and performance of cloud and cloud native infrastructure from a single platform.
 * **Enhance Collaboration:** Facilitate collaboration among development, operations, and security teams through shared visibility and control.
 * **Optimize Performance:** Gain insights into the performance of your applications and infrastructure, identify bottlenecks, and optimize resource utilization.
 * **Enforce Best Practices:** Ensure consistent adherence to configuration best practices and security policies across your environment.
 
 **Conclusion**
 
-Meshery has grown beyond its initial focus on service mesh management. It's now a versatile and powerful cloud native manager that provides a holistic approach to managing your entire cloud native infrastructure. By embracing this broader perspective, you can unlock the full potential of Meshery and accelerate your cloud native journey.
+Meshery's vision from the start of the project has always been an extensible management platform. It's now a versatile, powerful, extensible, collaborative, cloud native manager that provides a holistic approach to the processes by which teams manage their infrastructure management. Through understanding this broader perspective, you can unlock the full potential of Meshery and accelerate your cloud native journey.
