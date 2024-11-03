@@ -1,9 +1,36 @@
+.footer-columns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); // Four equal columns for larger screens
+  gap: 20px;
+  width: 100%;
+
+  // Responsive two-column layout
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr); // Switch to two columns
+    grid-template-rows: auto;
+
+    .column:nth-child(1) {
+      grid-column: 1 / 2;
+    }
+
+    .column:nth-child(2) {
+      grid-column: 2 / 3;
+    }
+
+    .column:nth-child(3) {
+      grid-column: 1 / 2; // Aligns below column 1
+    }
+
+    .column:nth-child(4) {
+      grid-column: 2 / 3; // Aligns below column 2
+    }
+  }
+}
+
 .footer-links {
   width: 100%;
   margin: 10px 20px;
   padding: 0;
-
-
 
   @media #{$tablet} {
     -webkit-flex: 0 0 fit-content;
@@ -11,16 +38,16 @@
   }
 
   @media screen and (max-width: 450px) {
-    margin: 5px 10px; // Reduce margins for mobile
-    width: auto; // Let the grid control the width
-    
+    margin: 5px 10px;
+    width: auto;
+
     h2 {
-      font-size: 1rem; // Smaller heading for mobile
+      font-size: 1rem;
       margin: 10px 0;
     }
 
     li {
-      font-size: 0.9rem; // Slightly smaller text for mobile
+      font-size: 0.9rem;
       margin: 5px 0;
     }
   }
@@ -32,6 +59,7 @@
     @media #{$tablet} {
       max-width: 200px;
     }
+
     a {
       &:hover {
         text-decoration: none;
@@ -75,28 +103,28 @@
         fill: #0077b5;
       }
 
-      &.slack-icon:hover svg .first{
+      &.slack-icon:hover svg .first {
         fill: #e91e63;
       }
-      &.slack-icon:hover svg .second{
+      &.slack-icon:hover svg .second {
         fill: #e91e63;
       }
-      &.slack-icon:hover svg .third{
+      &.slack-icon:hover svg .third {
         fill: #00bcd4;
       }
-      &.slack-icon:hover svg .fourth{
+      &.slack-icon:hover svg .fourth {
         fill: #00bcd4;
       }
-      &.slack-icon:hover svg .fifth{
+      &.slack-icon:hover svg .fifth {
         fill: #4caf50;
       }
-      &.slack-icon:hover svg .sixth{
+      &.slack-icon:hover svg .sixth {
         fill: #4caf50;
       }
-      &.slack-icon:hover svg .seventh{
+      &.slack-icon:hover svg .seventh {
         fill: #ff9800;
       }
-      &.slack-icon:hover svg .eigth{
+      &.slack-icon:hover svg .eigth {
         fill: #ff9800;
       }
 
@@ -121,7 +149,7 @@
     flex: 0 0 fit-content;
   }
 
-  @media (min-width:820px) and (max-width: 1154px){
+  @media (min-width: 820px) and (max-width: 1154px) {
     margin-top: 25px;
     text-align: justify;
   }
@@ -137,10 +165,10 @@
 }
 
 footer {
-  padding: 50px 0 50px 0;
+  padding: 50px 0;
   font-size: 0.9rem;
   position: relative;
-  background: linear-gradient(to right top, #3d3d3d, #343434, #2b2b2b, #222222, #1a1a1a, #181818, #161616, #141414, #181818, #1c1c1c, #212121, #252525);;
+  background: linear-gradient(to right top, #3d3d3d, #343434, #2b2b2b, #222222, #1a1a1a, #181818, #161616, #141414, #181818, #1c1c1c, #212121, #252525);
   color: #fff;
 
   .copyright {
@@ -151,13 +179,12 @@ footer {
     display: flex;
     justify-content: space-evenly;
     text-align: center;
+
     @media (max-width: 1000px) {
       flex-direction: column;
       text-align: center;
       .text {
-        text-align: center;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding: 10px 0;
       }
     }
   }
@@ -186,18 +213,10 @@ footer {
 
   h2 {
     font-size: 1.2em;
-    margin: 30px 0;
     margin: 15px auto;
     color: #ccc;
     font-weight: bold;
     text-align: start !important;
-  }
-  
-
-  .footer-columns {
-    @extend %flexbox;
-    @include flex-flow(wrap);
-    justify-content: space-evenly;
   }
 
   a {
