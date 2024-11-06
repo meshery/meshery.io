@@ -106,8 +106,30 @@ components:
         metadata:
             annotations: {}
             labels: {}
+            name: elasticsearch
             namespace: elastic-system
         spec:
+            auth:
+                file Realm: []
+                roles: []
+            http:
+                service:
+                    metadata:
+                        finalizers: []
+                    spec:
+                        cluster IPs: []
+                        external IPs: []
+                        ip Families: []
+                        load Balancer Source Ranges: []
+                        ports: []
+                tls:
+                    self Signed Certificate:
+                        subject Alt Names: []
+            monitoring:
+                logs:
+                    elasticsearch Refs: []
+                metrics:
+                    elasticsearch Refs: []
             node Sets:
                 - config:
                     node.roles:
@@ -159,6 +181,7 @@ components:
                             cloud.google.com/compute-class: Balanced
                   volume Claim Templates:
                     - metadata:
+                        finalizers: []
                         name: elasticsearch-data
                       spec:
                         access Modes:
@@ -166,13 +189,35 @@ components:
                         resources:
                             requests:
                                 storage: 2Gi
+                        selector:
+                            match Expressions: []
                         storage Class Name: standard-rwo
+                      status:
+                        access Modes: []
+                        conditions: []
             pod Disruption Budget:
+                metadata:
+                    finalizers: []
                 spec:
                     min Available: 2
                     selector:
+                        match Expressions: []
                         match Labels:
                             elasticsearch.k8s.elastic.co/cluster-name: elasticsearch
+            remote Clusters: []
+            secure Settings: []
+            transport:
+                service:
+                    metadata:
+                        finalizers: []
+                    spec:
+                        cluster IPs: []
+                        external IPs: []
+                        ip Families: []
+                        load Balancer Source Ranges: []
+                        ports: []
+                tls:
+                    subject Alt Names: []
             version: 8.9.0
             volume Claim Delete Policy: DeleteOnScaledownOnly
       description: ""
@@ -535,4 +580,4 @@ relationships:
       type: parent
       version: v1.0.0
 schemaVersion: designs.meshery.io/v1beta1
-version: 0.0.26
+version: 0.0.39
