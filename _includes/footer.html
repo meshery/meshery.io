@@ -107,21 +107,102 @@
   <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
   <script src="{{ site.baseurl }}/js/vanilla-tilt.min.js"></script>
   <script>
-	function resetCopyText(element) { /* function logic */ }
+
+	function resetCopyText(element) {
+		let childElements = element.childNodes
+		if (childElements.length > 3) {
+			childElements[3].innerHTML = "Copy to clipboard";
+		} else {
+		childElements[1].innerHTML = "Copy URL";
+		childElements[1].style.color = 'white';
+		childElements[1].style.background = "#00b39fff";
+        }
+	}
+
+
 	var clipboard = new ClipboardJS('.btn');
-	clipboard.on('success', function (e) { /* clipboard success logic */ });
-	clipboard.on('error', function (e) { /* clipboard error logic */ });
-  </script>
-  <script>
-	function displayCode(id) { /* function logic */ }
-  </script>
-  <script type="text/javascript">
-	let toggleBtn = document.getElementById("mode-toggle-btn");
+	clipboard.on('success', function (e) {
+		console.info('Action:', e.action);
+		console.info('Text:', e.text);
+		console.info('Trigger:', e.trigger);
+		let childElements = e.trigger.childNodes;
+		if (childElements.length > 3) {
+		childElements[3].innerHTML = "Copied!";
+	} else {
+		childElements[1].innerHTML = "Copied";
+		childElements[1].style.color = 'white';
+		childElements[1].style.background = "#1a2421";
+	}
+		e.clearSelection();
+	});
+	clipboard.on('error', function (e) {
+		console.error('Action:', e.action);
+		console.error('Trigger:', e.trigger);
+	});
+</script>
+
+<script>
+	function displayCode(id) {
+		var divId = id + "_code";
+		var element = document.getElementById(divId);
+		element.classList.toggle("showDiv");
+		var toggleDivs = document.getElementsByClassName("toggle");
+		if (element.style.maxHeight) {
+			element.style.maxHeight = null;
+		} else {
+			element.style.maxHeight = element.scrollHeight + "px";
+			console.log(element.style.maxHeight);
+		}
+		for (let i = 0; i < toggleDivs.length; i++) {
+			if (toggleDivs[i] != element) {
+				toggleDivs[i].classList.remove("showDiv");
+				if (toggleDivs[i].style.maxHeight) {
+					toggleDivs[i].style.maxHeight = null;
+				}
+			}
+		}
+	}
+</script>
+<script type="text/javascript">
+	let toggleBtn = document.getElementById("mode-toggle-btn")
+	// console.log(document.body.classList);
+	// console.log(localStorage.getItem("mode"));
 	toggleBtn.onclick = setMode;
+	
+	if (localStorage.getItem("mode") === null) {
+    	localStorage.setItem("mode", "dark-mode");
+    }
+
+	const isDark = document.body.classList.contains("dark-mode");
 	const currentMode = localStorage.getItem("mode");
-	if (document.body.classList.contains("dark-mode") ^ (currentMode === "dark-mode")) { setMode(); }
-	function setMode() { /* function logic */ }
-  </script>
+	if (isDark ^ (currentMode === "dark-mode")) {
+		setMode();
+	}
+
+	function setMode() {
+		document.body.classList.toggle("dark-mode")
+		
+		let layer5Logos = document.querySelectorAll("#layer5-logo");
+		let allLogos = document.querySelectorAll("#logo-dark-light");
+		if (document.body.classList.contains("dark-mode")) {
+			layer5Logos.forEach(e => e.src = '../assets/images/company-logo/layer5-dark-mode-logo.svg')
+			allLogos.forEach(e => e.src = e.dataset.logoForDark)
+		} else {
+			layer5Logos.forEach(e => e.src = '../assets/images/company-logo/layer5-no-trim.svg')
+			allLogos.forEach(e => e.src = e.dataset.logoForLight)
+		}
+		if (document.body.classList.contains("dark-mode")) {
+			localStorage.setItem("mode", "dark-mode")
+		} else {
+			localStorage.setItem("mode", "light-mode")
+		}
+		document.dispatchEvent(new CustomEvent("themeChange",{
+			detail : {value : localStorage.getItem("mode")},
+			bubbles: true ,
+		}))
+	}
+	
+</script>
   <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script>
 	$(document).ready(function () {
@@ -134,7 +215,72 @@
 		slidesToScroll: 1,
 		autoplay: true,
 		autoplaySpeed: 1500,
-		responsive: [{ breakpoint: 1300, settings: { slidesToShow: 2.5 } }, /* other breakpoints */]
+		responsive: [
+        {
+          breakpoint: 1300,
+          settings: {
+            slidesToShow: 2.5,
+          }
+        },
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 2,
+          }
+        },
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 2,
+          }
+        },
+        {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 1.5,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplaySpeed: 2000,
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 400,
+          settings: {
+            slidesToShow: 1,
+            adaptiveWidth: true,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 380,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            adaptiveWidth: true,
+          }
+        },
+        {
+          breakpoint: 360,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            adaptiveWidth: true,
+          }
+        }
+      ]
 	  });
 	});
   </script>
