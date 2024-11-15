@@ -1,10 +1,10 @@
-function toggleFullScreenImage(patternId) {
+function toggleFullScreenImage(patternId, patternType) {
   var fullScreenContainer = document.getElementById(
     `fullScreenContainer${patternId}`
   );
 
   if (!fullScreenContainer) {
-    createFullScreenContainer(patternId);
+    createFullScreenContainer(patternId, patternType);
     document.body.style.overflow = "hidden";
   } else {
     document.body.removeChild(fullScreenContainer);
@@ -12,7 +12,7 @@ function toggleFullScreenImage(patternId) {
   }
 }
 
-function createFullScreenContainer(patternId) {
+function createFullScreenContainer(patternId, patternType){
   var fullScreenContainer = document.createElement("div");
   fullScreenContainer.id = `fullScreenImageContainer${patternId}`;
   fullScreenContainer.style.position = "fixed";
@@ -31,10 +31,20 @@ function createFullScreenContainer(patternId) {
   fullScreenImage.id = `fullScreenImage${patternId}`;
   fullScreenImage.className = "image-class";
   fullScreenImage.alt = "Full Screen Image";
-  fullScreenImage.src =
-    "https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/" +
-    patternId +
-    ".png";
+  switch(patternType) {
+    case 'model':
+      fullScreenImage.src = '' + patternId // patternId is the image path
+      break;
+    case 'extension':
+      fullScreenImage.src = `${patternId}`; // patternId is the image path
+      break;
+    default:
+      fullScreenImage.src =
+      "https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/" +
+      patternId +
+      ".png";
+      break;
+  }
 
   fullScreenImage.onerror = function () {
     this.src = "/assets/images/patterns/service-mesh.svg";
