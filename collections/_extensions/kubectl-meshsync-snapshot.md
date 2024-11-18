@@ -9,7 +9,8 @@ compatibility:
   - kubernetes
   - kanvas
 # extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce96
-image: /assets/images/logos/meshsync.svg
+whiteImage: /assets/images/logos/meshsync.svg
+colorImage: /assets/images/logos/meshsync-white.svg
 image-light: /assets/images/logos/meshsync-white.svg
 status: coming-soon
 extensionInfo: |

@@ -10,7 +10,8 @@ compatibility:
   - kubernetes
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: https://playground.meshery.io/static/img/meshmap-snapshot-logo.svg
-image: /images/integrations/kuma/icons/color/kuma-color.svg
+whiteImage: /images/integrations/kuma/icons/color/kuma-color.svg
+colorImage: /images/integrations/kuma/icons/white/kuma-white.svg
 extensionInfo: |
   Deploy the Meshery Adapter for Kuma in order to enable deeper lifecycle management of Kuma.
 extensionCaveats: |

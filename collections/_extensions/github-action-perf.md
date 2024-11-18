@@ -11,7 +11,8 @@ compatibility:
   - kubernetes
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: /assets/images/meshmark-dark.svg
-image: /assets/images/meshmark-dark.svg
+whiteImage: /assets/images/meshmark-dark.svg
+colorImage: /assets/images/meshmark-dark.svg
 extensionInfo: |
   Characterize the performance of your services using Meshery&apos;s performance analysis GitHub Action to benchmark and visually compare percentiles (e.g. P99) over time.
 extensionCaveats: |
