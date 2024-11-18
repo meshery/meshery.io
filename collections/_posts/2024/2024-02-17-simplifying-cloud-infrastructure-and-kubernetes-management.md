@@ -54,7 +54,7 @@ Creating a design pattern using Meshery UI is a straightforward process. Users c
 
 For those who prefer using the Meshery CLI, the process is equally convenient. After ensuring that the Meshery CLI is installed and configured to connect to the desired Meshery instance, users can open a terminal or command prompt and utilize the Meshery CLI commands to interact with the catalog. They can apply, delete, view, or list patterns using the appropriate commands provided by the Meshery CLI. Additionally, Meshery CLI allows onboarding applications and applying WASM (WebAssembly) filters for advanced functionality.
 
-Users of Layer5 Cloud have an [enhanced catalog experience](https://meshery.layer5.io/catalog) in which they can track use of their designs and receive recognition badges for milestones they achieve while using the catalog and publishing and deploying their Meshery designs.
+Users of Layer5 Cloud have an [enhanced catalog experience](https://cloud.layer5.io/catalog) in which they can track use of their designs and receive recognition badges for milestones they achieve while using the catalog and publishing and deploying their Meshery designs.
 
 Overall, Meshery Catalog plays a vital role in simplifying the management and deployment of cloud-native infrastructure. By providing a user-friendly marketplace-like experience and encouraging collaboration, it empowers organizations to efficiently build and optimize their cloud-native environments.
 

@@ -42,7 +42,7 @@ type UserInfo struct {
 }
 
 const (
-	mesheryCloudBaseURL    = "https://meshery.layer5.io"
+	mesheryCloudBaseURL    = "https://cloud.layer5.io"
 	mesheryCatalogFilesDir = "catalog"
 )
 

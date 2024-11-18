@@ -17,6 +17,6 @@ extensionCaveats: |
   - Layer5 Cloud offers a comprehensive platform for managing and deploying cloud infrastructure with ease.
   - Employ Layer5 Cloud for its extensible authorization framework, tenant entitlement services, and organizational hierarchy to streamline cloud infrastructure management.
   - Leverage its content catalog for hosting both public and private cloud-native architectures.
-URL: https://meshery.layer5.io
+URL: https://cloud.layer5.io
 docsURL: https://docs.layer5.io/cloud
 ---
