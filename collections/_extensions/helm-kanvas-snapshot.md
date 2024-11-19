@@ -11,7 +11,8 @@ compatibility:
   - kubernetes
   - helm
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce96
-image: /assets/images/helm-white.svg
+whiteImage: /assets/images/helm-white.svg
+colorImage: /assets/images/helm-dark.svg
 image-light: /assets/images/helm-dark.svg
 extensionInfo: |
   The Kanvas Snapshot Helm Plugin allows users to generate a visual snapshot of their Helm charts directly from the command line. It simplifies the process of creating Meshery Snapshots, providing a visual representation of packaged Helm charts. This plugin integrates with Meshery Cloud and GitHub Actions to automate the workflow of snapshot creation, which is especially useful for Helm users who need to quickly visualize their chart configurations.

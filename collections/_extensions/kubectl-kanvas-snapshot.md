@@ -9,7 +9,8 @@ compatibility:
   - kubernetes
   - kanvas
 # extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce96
-image: /assets/images/kubernetes-namespace.svg
+whiteImage: /assets/images/kubernetes-namespace.svg
+colorImage: /assets/images/kubernetes-namespace.svg
 image-light: /assets/images/kubernetes-namespace.svg
 status: coming-soon
 extensionInfo: |
