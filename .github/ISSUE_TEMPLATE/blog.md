@@ -1,8 +1,8 @@
 ---
-name: 📝 Mesheryio Blog Post
+name: 📝 Meshery.io Blog Post
 about: Request for a new blog post.
 title: '[Blog]'
-labels: 'area/blog, help wanted, framework/gatsby, language/markdown'
+labels: 'area/blog, help wanted, framework/Jekyll, language/markdown'
 assignees: ''
 ---
 Contributors and community members are encouraged to post on https://meshery.io/blog/. A new blog post fitting the following description is requested to be written by a community member:
