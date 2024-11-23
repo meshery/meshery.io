@@ -3,9 +3,9 @@ date: 2023-09-01 10:30:05 -0530
 title:  Layer5 Recognition Program
 subheading: Recognizing Your Contributions and Milestones
 categories: 
-  - Meshery
-  - Open Source
-  - Community
+  - meshery
+  - open-source
+  - community
 # layout: post
 permalink: /blog/Layer5-Recognition-Program
 ---

@@ -4,9 +4,9 @@ title: "Meshery the Extensible Engineering Platform"
 subheading: Context-aware design with Meshery
 author_contributor: Lee Calcote
 categories:
-  - Meshery
-  - Open Source
-  - API
+  - meshery
+  - open-source
+  - api
 featured-image: /assets/images/posts/2023-12-08-graphql-and-rest-apis/meshery-apis.jpeg
 permalink: /blog/unleashing-power-and-flexibility-the-synergy-of-rest-and-graphql-in-meshery
 published: false

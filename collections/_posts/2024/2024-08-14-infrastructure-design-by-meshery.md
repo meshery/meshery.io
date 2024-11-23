@@ -4,8 +4,8 @@ subheading: a deep dive
 date: 2024-08-13
 author_contributor: Vivek Vishal
 categories: 
-  - Meshery
-  - OpenSource
+  - meshery
+  - open-source
 permalink: /blog/infrastructure-design-by-meshery
 featured-image: /assets/images/posts/2024-08-14-infrastructure-design-by-meshery/deep-dive.png
 ---

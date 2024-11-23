@@ -4,7 +4,7 @@ heading: Meshery System Provider
 title: Meshery System Provider
 author_contributor: Lee Calcote
 categories: 
-  - Meshery
+  - meshery
   - mesheryctl
 # layout: post
 permalink: /blog/mesheryctl-system-provider

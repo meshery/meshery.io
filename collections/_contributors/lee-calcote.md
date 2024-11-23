@@ -7,4 +7,5 @@ twitter: lcalcote
 github: leecalcote
 blurb: Cloud native and its management
 status: Active
+redirect_to: https://layer5.io/community/members
 ---

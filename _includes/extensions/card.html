@@ -3,15 +3,18 @@
 <div class= "card link">  
     <div class="card-inner">
       <div class="front">
-        <div class="chip">
-          <small class="pattern-type"> {{extension.type | upcase }}</small>
+        <div class="chip {{extension.type | upcase }}">
+          <small class="pattern-type">{{extension.type | upcase }}</small>
         </div>
         <h4 class="pattern-name">{{extension.name}}</h4>
         <div class="pattern-image-container">
-          <img class= "pattern-image" 
-          data-snapshot-light="{{extension.image}}"
-          data-snapshot-dark="{{extension.image}}"
-          src="{{extension.image}}" 
+          {% if extension.status == "coming-soon" %}
+          <img class="extensions-coming-soon" height="auto" width="auto" src="{{site.baseurl}}/assets/images/coming-soon.png" />
+          {% endif %}
+          <img class= "pattern-image extension-image" 
+          data-extension-light="{{extension.whiteImage}}"
+          data-extension-dark="{{extension.colorImage}}"
+          src="{{extension.whiteImage}}" 
           onerror="this.src='/assets/images/meshery-color.svg'" 
           loading="lazy"/>
         </div>

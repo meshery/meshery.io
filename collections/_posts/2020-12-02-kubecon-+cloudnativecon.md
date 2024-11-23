@@ -4,7 +4,7 @@ heading: KubeCon+CloudNativeCon
 title: KubeCon+CloudNativeCon 
 author_contributor: The Newsroom
 categories:
-  - Meshery
+  - meshery
   - KubeCon
   - CloudNativeCon
 permalink: /blog/kubecon-cloudnativecon

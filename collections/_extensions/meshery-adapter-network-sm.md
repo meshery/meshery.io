@@ -10,7 +10,8 @@ compatibility:
   - kubernetes
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: /assets/images/meshery-logo.svg
-image: /assets/images/nsm.svg
+whiteImage: /assets/images/nsm.svg
+colorImage: /assets/images/nsm.svg
 extensionInfo: |
   Deploy the Meshery Adapter for Network Service Mesh to enable deeper lifecycle management of Network Service Mesh deployments.
 extensionCaveats: |
