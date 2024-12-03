@@ -49,12 +49,17 @@
       id="mc-embedded-subscribe-form"
       name="mc-embedded-subscribe-form"
       class="validate"
-      onsubmit="document.getElementById(mc-embedded-subscribe-form).submit();"
+      onsubmit="return validateForm(event);"
     >
       <div id="mc_embed_signup_scroll">
         <div class="subscribe-inputbox">
           <input type="text" value="" placeholder="First Name" name="FNAME" class="NAME" id="mce-FNAME" required />
           <input type="text" value="" placeholder="Last Name" name="LNAME" class="NAME" id="mce-LNAME" required />
+        </div>
+        <div class="subscribe-container" style="color: red; display: flex; text-align: start; gap: 2rem;
+              padding-top: 5px;">
+          <span id="mce-FNAME-error" class="error"></span>
+          <span id="mce-LNAME-error" class="error"></span>
         </div>
         <div id="mce-responses" class="clear subscribe-inputbox">
           <div
@@ -94,3 +99,46 @@
 
   <!--End mc_embed_signup-->
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const form = document.getElementById('mc-embedded-subscribe-form');
+  if (form) {
+    form.addEventListener('submit', validateForm);
+  }
+
+  function validateForm(event) {
+    event.preventDefault(); // Prevent form submission
+
+    // Clear previous error messages
+    document.getElementById('mce-FNAME-error').textContent = '';
+    document.getElementById('mce-LNAME-error').textContent = '';
+
+    let isValid = true;
+
+    const firstName = document.getElementById('mce-FNAME').value.trim();
+    if (!firstName) {
+      document.getElementById('mce-FNAME-error').textContent = 'First name is required.';
+      isValid = false;
+    } else if (!/^[a-zA-Z]+$/.test(firstName)) {
+      document.getElementById('mce-FNAME-error').textContent = 'First name must only contain letters.';
+      isValid = false;
+    }
+
+    const lastName = document.getElementById('mce-LNAME').value.trim();
+    if (!lastName) {
+      document.getElementById('mce-LNAME-error').textContent = 'Last name is required.';
+      isValid = false;
+    } else if (!/^[a-zA-Z]+$/.test(lastName)) {
+      document.getElementById('mce-LNAME-error').textContent = 'Last name must only contain letters.';
+      isValid = false;
+    }
+
+    if (isValid) {
+      form.submit();
+    }
+  }
+
+});
+</script>
