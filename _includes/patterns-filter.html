@@ -397,6 +397,7 @@
       // If yes then set showCardCat to true
       // If both showCardTech and showCardCat are true, then show the card otherwise hide it
       let cardsShown = false; // This variable tells if there is even a single card to show 
+      let visibleCount = 0; // to keep track of number of visible cards
       for(let i=0; i<patternCards.length; i++){
         let cc = [];
         let cardCategory;
@@ -411,7 +412,20 @@
         cardCategory = type;
         let showCardTech = globalTechnologyList.length === 0 || globalTechnologyList.some(tech => cc.includes(tech));
         let showCardCat = globalCategoryList.some(cat => cardCategory.includes(cat)) || globalCategoryList.length === 0;
-        if (showCardTech && showCardCat) {
+
+       // if both list is empty that is no tech or category is selected;
+       // show only the first 9 and hide the rest
+        if(globalTechnologyList.length === 0 && globalCategoryList.length === 0) {
+          if(visibleCount < 9) {
+            patternCards[i].style.display = "block"; // show only the first 9
+            visibleCount++;
+            cardsShown = true;
+          } else {
+            patternCards[i].style.display = "none"; 
+          }
+        }
+        // apply the regular filtering logic
+        else if (showCardTech && showCardCat) {
           patternCards[i].style.display = "block";
           cardsShown = true;
         } else {
@@ -428,10 +442,4 @@
   }
 
  
-
-  // load default all selection on page load
-  window.onload = function() {
-    showFilterCards();
-  }
-
 </script>

@@ -61,6 +61,7 @@ permalink: /catalog
     <h2 class="not-found" style="display: none;" id="not-found">
       No results found
     </h2>
+    {% assign count = 0 %}
     {% for pattern in catalog %} {% if pattern.patternInfo and pattern.Status !=
     "ComingSoon" %}
     {% assign last = pattern.compatibility | last %}
@@ -70,14 +71,13 @@ permalink: /catalog
       type="{{ pattern.type }}"
       technology='[{% for item in pattern.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
       status="{{ pattern.Status }}"
-      style="display: none"
+      style="display: {% if count < 10 %}block{% else %}none{% endif %};"
     >
       {% include card.html %}
       <!-- modal included -->
       {% include modal.html %}
     </div>
-    {% endif %} {% endfor %} {% for pattern in catalog %} {% if
-    pattern.filterInfo %}
+    {% elsif pattern.filterInfo %}
     {% assign last = pattern.compatibility | last %}
     <div
       class="column column-lg patternCard"
@@ -85,14 +85,13 @@ permalink: /catalog
       type="{{ pattern.type }}"
       technology='[{% for item in pattern.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
       status="{{ pattern.Status }}"
-      style="display: none"
+      style="display: {% if count < 10 %}block{% else %}none{% endif %};"
     >
       {% include wasm-card.html %}
       <!-- modal included -->
       {% include modal.html %} {% include card-modal.html %}
     </div>
-    {% endif %} {% endfor %} {% for pattern in catalog %} {% if
-    pattern.patternInfo and pattern.Status == "ComingSoon" %}
+    {% elsif pattern.patternInfo and pattern.Status == "ComingSoon" %}
     {% assign last = pattern.compatibility | last %}
      <div
       class="column column-lg patternCard"
@@ -100,11 +99,13 @@ permalink: /catalog
       type="{{ pattern.type }}"
       technology='[{% for item in pattern.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
       status="{{ pattern.Status }}"
-      style="display: none"
+      style="display: {% if count < 10 %}block{% else %}none{% endif %};"
     >
       {% include coming-soon.html %}
     </div>
-    {% endif %} {% endfor %}
+    {% endif %} 
+    {% assign count = count | plus: 1 %}
+    {% endfor %}
   </div>
 </div>
 
@@ -174,16 +175,16 @@ permalink: /catalog
 </script>
 
 <script>
-  const patternCards = document.querySelectorAll(".patternCard");
-  document.addEventListener("DOMContentLoaded", () => {
-    // display none for patternCards after number 12
-    patternCards.forEach((card, index) => {
-      // Hide patternCards after number 12
-      if (index < 9) {
-        card.style.display = "block";
-      }
-    });
-  });
+  // const patternCards = document.querySelectorAll(".patternCard");
+  // document.addEventListener("DOMContentLoaded", () => {
+  //   // display none for patternCards after number 12
+  //   patternCards.forEach((card, index) => {
+  //     // Hide patternCards after number 12
+  //     if (index < 9) {
+  //       card.style.display = "block";
+  //     }
+  //   });
+  // });
 
   document.addEventListener("themeChange",(e)=> {
     // load the snapshot version based on theme 
