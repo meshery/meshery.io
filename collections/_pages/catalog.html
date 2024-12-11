@@ -83,7 +83,7 @@ permalink: /catalog
       class="column column-lg patternCard"
       filter="{{ pattern.name }}"
       type="{{ pattern.type }}"
-      technology='["wasm-filter",{% for item in pattern.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
+      technology='["wasm-filter"{% for item in pattern.compatibility %}{% if forloop.first %}, {% endif %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
       status="{{ pattern.Status }}"
       style="display: {% if count < 10 %}block{% else %}none{% endif %};"
     >
