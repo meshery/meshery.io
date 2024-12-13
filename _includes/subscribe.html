@@ -23,6 +23,23 @@
     background-color: $brand-color;
     text-align: center;
   }
+
+  .subscribe-container{
+    color: red;
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 1rem;
+    padding-top: 5px;
+    text-align: start;
+  }
+
+  .subscribe-container-error{
+    display: block; 
+    font-size: 0.875rem;
+    padding-left: 2px;
+    line-height: 1.2;
+  }
+
   @media (min-width: 555px) and (max-width: 603px) {
     .subscribe-button {
       width: 100%;
@@ -53,13 +70,12 @@
     >
       <div id="mc_embed_signup_scroll">
         <div class="subscribe-inputbox">
-          <input type="text" value="" placeholder="First Name" name="FNAME" class="NAME" id="mce-FNAME" required />
-          <input type="text" value="" placeholder="Last Name" name="LNAME" class="NAME" id="mce-LNAME" required />
+          <input type="text" value="" placeholder="First Name" name="FNAME" class="NAME" id="mce-FNAME" aria-label="first name input" required/>
+          <input type="text" value="" placeholder="Last Name" name="LNAME" class="NAME" id="mce-LNAME" aria-label="last name input" required />
         </div>
-        <div class="subscribe-container" style="color: red; display: flex; text-align: start; gap: 2rem;
-              padding-top: 5px;">
-          <span id="mce-FNAME-error" class="error"></span>
-          <span id="mce-LNAME-error" class="error"></span>
+        <div class="subscribe-container">
+          <span id="mce-FNAME-error" class="subscribe-container-error"></span>
+          <span id="mce-LNAME-error" class="subscribe-container-error"></span>
         </div>
         <div id="mce-responses" class="clear subscribe-inputbox">
           <div
@@ -112,14 +128,18 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault(); 
 
     // Clear previous error messages
-    document.getElementById('mce-FNAME-error').textContent = '';
-    document.getElementById('mce-LNAME-error').textContent = '';
+    clearError('mce-FNAME-error');
+    clearError('mce-LNAME-error');
 
     let isValid = true;
 
     const firstName = document.getElementById('mce-FNAME').value.trim();
+
     if (!firstName) {
       document.getElementById('mce-FNAME-error').textContent = 'First name is required.';
+      isValid = false;
+    } else if (firstName.trim().length < 2) {
+      document.getElementById('mce-FNAME-error').textContent = 'First Name must have at least 2 characters.';
       isValid = false;
     } else if (!/^[a-zA-Z]+$/.test(firstName)) {
       document.getElementById('mce-FNAME-error').textContent = 'First name must only contain letters.';
@@ -140,5 +160,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  function clearError(errorId) {
+    const errorElement = document.getElementById(errorId);
+    if (errorElement) {
+      errorElement.textContent = '';
+    }
+  }
+
+  document.getElementById('mce-FNAME').addEventListener('input', () => clearError('mce-FNAME-error'));
+  document.getElementById('mce-LNAME').addEventListener('input', () => clearError('mce-LNAME-error'));
 });
 </script>
