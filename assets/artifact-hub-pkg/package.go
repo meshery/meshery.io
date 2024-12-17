@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"os"
@@ -114,7 +114,7 @@ func fetchCatalogPatterns() ([]byte, error) {
 	}
 	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, ErrReadRespBody(err)
 	}
@@ -209,11 +209,11 @@ func decodeURIComponent(encodedURI string) (string, error) {
 
 func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL string) error {
 	designFilePath := filepath.Join(versionDir, "design.yml")
-	if err := ioutil.WriteFile(designFilePath, []byte(pattern.PatternFile), 0644); err != nil {
+	if err := os.WriteFile(designFilePath, []byte(pattern.PatternFile), 0644); err != nil {
 		return utils.ErrWriteFile(err, designFilePath)
 	}
 
-	contenttemp, err := ioutil.ReadFile(designFilePath)
+	contenttemp, err := os.ReadFile(designFilePath)
 	if err != nil {
 		return utils.ErrReadFile(err, designFilePath)
 	}
@@ -299,7 +299,7 @@ URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/%s/%s/%s/desig
 downloadLink: %s/design.yml
 ---`, strings.TrimSpace(string(nameYAML)), version, pattern.UserID, userFullName, userInfo.AvatarURL, patternType, compatibility, pattern.ID, patternImageURL, patternInfo, patternCaveats, patternType, slugify(pattern.Name), pattern.ID, mesheryCatalogFilesDir, pattern.ID, version, pattern.ID)
 
-	if err := ioutil.WriteFile(fmt.Sprintf(filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md")), []byte(content), 0644); err != nil {
+	if err := os.WriteFile(fmt.Sprintf(filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md")), []byte(content), 0644); err != nil {
 		return utils.ErrWriteFile(err, filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md"))
 	}
 
@@ -314,7 +314,7 @@ func fetchUserInfo(userID string) (UserInfo, error) {
 	defer resp.Body.Close()
 
 	var userInfo UserInfo
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return UserInfo{}, ErrReadRespBody(err)
 	}
