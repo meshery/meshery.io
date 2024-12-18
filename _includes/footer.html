@@ -1,69 +1,112 @@
 <footer>
 	<div class="container">
-		<div class="footer-columns">
-			{% for column in site.data.footer %}
+	  <div class="footer-columns">
+		<!-- Getting Started Section -->
+		{% for column in site.data.footer %}
+		  {% if column.title == "Getting Started" %}
 			<ul class="footer-links">
-				<li>
-					<h2><a {% if column.new_window %}target="_blank" {% endif %}
-						href="{% include relative-src.html src=column.link %}" {% if column.social_icon
-						%}class="{{ column.social_icon || downcase }}-icon" {% endif %}>
-						{% if column.social_icon %}
-						{% include social-icon.html icon=column.social_icon %}
-						{% endif %}
-						{{ column.title }}</a></h2>
-				</li>
-				{% for link in column.links %}
+			  <li>
+				<h2><a {% if column.new_window %}target="_blank" {% endif %}
+					   href="{% include relative-src.html src=column.link %}">
+					   {{ column.title }}</a></h2>
+			  </li>
+			  {% for link in column.links %}
 				<li><a {% if link.new_window %}target="_blank" {% endif %}
-						href="{% include relative-src.html src=link.link %}" {% if link.social_icon
-						%}class="{{ link.social_icon || downcase }}-icon" {% endif %}>
-						{% if link.social_icon %}
-						{% include social-icon.html icon=link.social_icon %}
-						{% endif %}
-						{{ link.name }}</a></li>
-				{% endfor %}
+					   href="{% include relative-src.html src=link.link %}">
+					   {{ link.name }}</a></li>
+			  {% endfor %}
 			</ul>
-			{% endfor %}
-
-			<!-- 
-			<ul class="feed">
-				<a class="twitter-timeline" data-width="320" data-height="320" data-theme="light"
-					data-link-color="#62ACCD" href="https://twitter.com/mesheryio"
-					data-chrome="nofooter circularborders noscrollbar">Tweets by Meshery</a>
-				<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+		  {% endif %}
+		{% endfor %}
+  
+		<!-- Resources Section -->
+		{% for column in site.data.footer %}
+		  {% if column.title == "Resources" %}
+			<ul class="footer-links">
+			  <li>
+				<h2><a {% if column.new_window %}target="_blank" {% endif %}
+					   href="{% include relative-src.html src=column.link %}">
+					   {{ column.title }}</a></h2>
+			  </li>
+			  {% for link in column.links %}
+				<li><a {% if link.new_window %}target="_blank" {% endif %}
+					   href="{% include relative-src.html src=link.link %}">
+					   {{ link.name }}</a></li>
+			  {% endfor %}
 			</ul>
- 			-->
-		</div>
-
-		<div class="container flex copyright">
-			<div class="text">&copy; {{ site.time | date: '%Y' }} The Meshery Authors</div>
-			<div class="text">Confidently wrangling cloud native infrastructure</div>
-			<div class="text"><a href="https://github.com/meshery/meshery/blob/master/CODE_OF_CONDUCT.md">Code of
-					Conduct</a></div>
-			<div class="text"><a href ="https://www.linuxfoundation.org/legal/trademark-usage">The Linux Foundation. Meshery has registered trademarks and uses trademarks</a></div>
-		</div>
+		  {% endif %}
+		{% endfor %}
+  
+		<!-- Community Section -->
+		{% for column in site.data.footer %}
+		  {% if column.title == "Community" %}
+			<ul class="footer-links">
+			  <li>
+				<h2><a {% if column.new_window %}target="_blank" {% endif %}
+					   href="{% include relative-src.html src=column.link %}">
+					   {{ column.title }}</a></h2>
+			  </li>
+			  {% for link in column.links %}
+				<li><a {% if link.new_window %}target="_blank" {% endif %}
+					   href="{% include relative-src.html src=link.link %}">
+					   {{ link.name }}</a></li>
+			  {% endfor %}
+			</ul>
+		  {% endif %}
+		{% endfor %}
+  
+		<!-- Social Section -->
+		{% for column in site.data.footer %}
+		  {% if column.title == "Socials" %}
+			<ul class="footer-links">
+			  <li>
+				<h2><a {% if column.new_window %}target="_blank" {% endif %}
+					   href="{% include relative-src.html src=column.link %}" {% if column.social_icon %}
+					   class="{{ column.social_icon | downcase }}-icon" {% endif %}>
+					   {% if column.social_icon %}
+						 {% include social-icon.html icon=column.social_icon %}
+					   {% endif %}
+					   {{ column.title }}</a></h2>
+			  </li>
+			  {% for link in column.links %}
+				<li><a {% if link.new_window %}target="_blank" {% endif %}
+					   href="{% include relative-src.html src=link.link %}" {% if link.social_icon %}
+					   class="{{ link.social_icon | downcase }}-icon" {% endif %}>
+					   {% if link.social_icon %}
+						 {% include social-icon.html icon=link.social_icon %}
+					   {% endif %}
+					   {{ link.name }}</a></li>
+			  {% endfor %}
+			</ul>
+		  {% endif %}
+		{% endfor %}
+	  </div>
+  
+	  <div class="container flex copyright">
+		<div class="text">&copy; {{ site.time | date: '%Y' }} The Meshery Authors</div>
+		<div class="text">Confidently wrangling cloud native infrastructure</div>
+		<div class="text"><a href="https://github.com/meshery/meshery/blob/master/CODE_OF_CONDUCT.md">Code of Conduct</a></div>
+		<div class="text"><a href="https://www.linuxfoundation.org/legal/trademark-usage">The Linux Foundation. Meshery has registered trademarks and uses trademarks</a></div>
+	  </div>
 	</div>
-</footer>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-{% if jekyll.environment == 'production' %}
-<script src="{{ site.baseurl }}/js/stellarnav.min.js"></script>
-{% else %}
-<script src="{{ site.baseurl }}/js/stellarnav.js"></script>
-{% endif %}
-
-<script src="{{ site.baseurl }}/js/main.js"></script>
-
-<!-- Site Navigation Menu -->
-<script type="text/javascript">
+  </footer>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  {% if jekyll.environment == 'production' %}
+  <script src="{{ site.baseurl }}/js/stellarnav.min.js"></script>
+  {% else %}
+  <script src="{{ site.baseurl }}/js/stellarnav.js"></script>
+  {% endif %}
+  <script src="{{ site.baseurl }}/js/main.js"></script>
+  <script type="text/javascript">
 	jQuery(document).ready(function ($) {
-		jQuery('.stellarnav').stellarNav({ breakpoint: 1140 });
-		jQuery('.stellarnav.mobile').css('text-align', 'end');
+	  jQuery('.stellarnav').stellarNav({ breakpoint: 1140 });
+	  jQuery('.stellarnav.mobile').css('text-align', 'end');
 	});
-</script>
-<!--Script for Copy to Clipboard-->
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-<script src="{{ site.baseurl }}/js/vanilla-tilt.min.js"></script>
-
-<script>
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  <script src="{{ site.baseurl }}/js/vanilla-tilt.min.js"></script>
+  <script>
 
 	function resetCopyText(element) {
 		let childElements = element.childNodes
@@ -160,23 +203,19 @@
 	}
 	
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script>
-  $(document).ready(function () {
-    $('.slider').slick({
-
-      dots: false,
-      arrows: false,
-      infinite: true,
-      speed: 400,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      autoplay: true, // true
-      autoplaySpeed: 1500,
-      
-
-      responsive: [
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <script>
+	$(document).ready(function () {
+	  $('.slider').slick({
+		dots: false,
+		arrows: false,
+		infinite: true,
+		speed: 400,
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		autoplay: true,
+		autoplaySpeed: 1500,
+		responsive: [
         {
           breakpoint: 1300,
           settings: {
@@ -242,9 +281,7 @@
           }
         }
       ]
-    });
-  });
-</script>
-</body>
-
-</html>
+	  });
+	});
+  </script>
+  
