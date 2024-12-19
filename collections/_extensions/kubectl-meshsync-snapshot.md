@@ -1,5 +1,5 @@
 ---
-layout: item
+layout: single-page-extension
 item-type: extension
 name: Kubectl Plugin for MeshSync Snapshot 
 kind: GitOps
@@ -24,3 +24,5 @@ extensionCaveats: |
 
 docsURL: 'https://docs.meshery.io/extensions/kubectl-meshsync-snapshot'
 ---
+
+{{ page.extensionCaveats }}
