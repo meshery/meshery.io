@@ -1,5 +1,5 @@
 ---
-layout: item
+layout: single-page-extension
 item-type: extension
 name: GitHub Action Kanvas Snapshot
 kind: GitOps

@@ -1,5 +1,5 @@
 ---
-layout: item
+layout: single-page-extension
 name: Kanvas
 kind: Plugin
 userName: Layer5, Inc.

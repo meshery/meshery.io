@@ -1,5 +1,5 @@
 ---
-layout: item
+layout: single-page-extension
 name: Meshery Design Embed
 kind: extension
 userName: Meshery Authors

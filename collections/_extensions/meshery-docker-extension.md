@@ -1,5 +1,5 @@
 ---
-layout: item
+layout: single-page-extension
 name: Meshery Docker Extension
 kind: extension
 userName: Meshery Authors

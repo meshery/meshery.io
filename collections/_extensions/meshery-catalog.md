@@ -1,5 +1,5 @@
 ---
-layout: item
+layout: single-page-extension
 name: Meshery Catalog
 kind: Catalog
 userName: Meshery Authors

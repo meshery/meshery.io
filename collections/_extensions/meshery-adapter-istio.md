@@ -1,5 +1,5 @@
 ---
-layout: item
+layout: single-page-extension
 name: Meshery Adapter for Istio
 kind: Adapter
 userName: Meshery Authors
