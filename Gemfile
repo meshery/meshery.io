@@ -5,7 +5,6 @@ source 'https://rubygems.org'
 gem 'jekyll', '4.3.4'
 gem 'tzinfo-data', platforms: [:x64_mingw]
 gem 'wdm', '>= 0.1.0'
-# gem 'eventmachine', '1.2.7'
 gem 'eventmachine', '1.2.7'
 
 
