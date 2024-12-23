@@ -23,6 +23,7 @@
     background-color: $brand-color;
     text-align: center;
   }
+
   @media (min-width: 555px) and (max-width: 603px) {
     .subscribe-button {
       width: 100%;
@@ -49,12 +50,16 @@
       id="mc-embedded-subscribe-form"
       name="mc-embedded-subscribe-form"
       class="validate"
-      onsubmit="document.getElementById(mc-embedded-subscribe-form).submit();"
+      onsubmit="return validateForm(event);"
     >
       <div id="mc_embed_signup_scroll">
         <div class="subscribe-inputbox">
-          <input type="text" value="" placeholder="First Name" name="FNAME" class="NAME" id="mce-FNAME" required />
-          <input type="text" value="" placeholder="Last Name" name="LNAME" class="NAME" id="mce-LNAME" required />
+          <input type="text" value="" placeholder="First Name" name="FNAME" class="NAME" id="mce-FNAME" aria-label="first name input" required/>
+          <input type="text" value="" placeholder="Last Name" name="LNAME" class="NAME" id="mce-LNAME" aria-label="last name input" required />
+        </div>
+        <div class="subscribe-container">
+          <span id="mce-FNAME-error" class="subscribe-container-error"></span>
+          <span id="mce-LNAME-error" class="subscribe-container-error"></span>
         </div>
         <div id="mce-responses" class="clear subscribe-inputbox">
           <div
@@ -94,3 +99,59 @@
 
   <!--End mc_embed_signup-->
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const form = document.getElementById('mc-embedded-subscribe-form');
+  if (form) {
+    form.addEventListener('submit', validateForm);
+  }
+
+  function validateForm(event) {
+    event.preventDefault(); 
+
+    // Clear previous error messages
+    clearError('mce-FNAME-error');
+    clearError('mce-LNAME-error');
+
+    let isValid = true;
+
+    const firstName = document.getElementById('mce-FNAME').value.trim();
+
+    if (!firstName) {
+      document.getElementById('mce-FNAME-error').textContent = 'First name is required.';
+      isValid = false;
+    } else if (firstName.trim().length < 2) {
+      document.getElementById('mce-FNAME-error').textContent = 'First Name must have at least 2 characters.';
+      isValid = false;
+    } else if (!/^[a-zA-Z]+$/.test(firstName)) {
+      document.getElementById('mce-FNAME-error').textContent = 'First name must only contain letters.';
+      isValid = false;
+    }
+
+    const lastName = document.getElementById('mce-LNAME').value.trim();
+    if (!lastName) {
+      document.getElementById('mce-LNAME-error').textContent = 'Last name is required.';
+      isValid = false;
+    } else if (!/^[a-zA-Z]+$/.test(lastName)) {
+      document.getElementById('mce-LNAME-error').textContent = 'Last name must only contain letters.';
+      isValid = false;
+    }
+
+    if (isValid) {
+      form.submit();
+    }
+  }
+
+  function clearError(errorId) {
+    const errorElement = document.getElementById(errorId);
+    if (errorElement) {
+      errorElement.textContent = '';
+    }
+  }
+
+  document.getElementById('mce-FNAME').addEventListener('input', () => clearError('mce-FNAME-error'));
+  document.getElementById('mce-LNAME').addEventListener('input', () => clearError('mce-LNAME-error'));
+});
+</script>
