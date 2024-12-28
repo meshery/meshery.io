@@ -108,9 +108,9 @@ func slugify(name string) string {
 	return s
 }
 func fetchCatalogPatterns() ([]byte, error) {
-	resp, err := http.Get(fmt.Sprintf("%s/api/catalog/content/pattern", mesheryCloudBaseURL))
+	resp, err := http.Get(fmt.Sprintf("%s/api/catalog/content/pattern?populate=pattern_file", mesheryCloudBaseURL))
 	if err != nil {
-		return nil, ErrHTTPGetRequest(err, fmt.Sprintf("%s/api/catalog/content/pattern?trim=true", mesheryCloudBaseURL))
+		return nil, ErrHTTPGetRequest(err, fmt.Sprintf("%s/api/catalog/content/pattern", mesheryCloudBaseURL))
 	}
 	defer resp.Body.Close()
 

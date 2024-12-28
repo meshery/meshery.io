@@ -14,7 +14,7 @@ In the world of cloud computing and Kubernetes-based infrastructure, managing an
 
 ## What is Meshery?
 
-[Meshery](https://meshery.io) is an open-source cloud infrastructure and Kubernetes management platform that provides a unified interface for simplifying the deployment, management, and observability of cloud-native applications. It acts as a central control plane for managing Kubernetes clusters, containerized applications, and associated resources.
+[Meshery](https://meshery.io) is an open source cloud infrastructure and Kubernetes management platform that provides a unified interface for simplifying the deployment, management, and observability of cloud-native applications. It acts as a central control plane for managing Kubernetes clusters, containerized applications, and associated resources.
 
 ## Key Features of Meshery
 

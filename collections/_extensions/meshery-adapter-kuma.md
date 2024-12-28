@@ -1,5 +1,5 @@
 ---
-layout: item
+layout: single-page-extension
 name: Meshery Adapter for Kuma
 kind: Adapter
 userName: Meshery Authors

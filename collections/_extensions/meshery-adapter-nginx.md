@@ -1,5 +1,5 @@
 ---
-layout: item
+layout: single-page-extension
 name: Meshery Adapter for NGINX Service Mesh
 kind: Adapter
 userName: Meshery Authors
