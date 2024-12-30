@@ -35,6 +35,7 @@
       }
     }
   </style>
+  {% assign model = include.model | default: model %}
   <div id="open-modal" class="modal-window">
     <div class="modal-content modelhello">
       <div class="modal-image">
@@ -47,7 +48,7 @@
       <div class="vertical-line"></div>
       <div class="modal-info">
         <h2 class="modal-h2">
-          {{ model.title | upcase }}
+          {{ model.name | upcase }}
         </h2>
         <div class="model-metadata-container">
           <div>
@@ -76,12 +77,12 @@
           <div class="btn-class">
             <div class="vertical-center" id="{{type.name}}">
               <div class="btn-grp">
-                {% if {{model.title}} %}
-                <a href="/models/{{ model.modelFile }}" download="{{ model.title | slugify }}.tar">
+                {% if {{model.name}} %}
+                <a href="/models/{{ model.modelFile }}" download="{{ model.name | slugify }}.tar">
                   <button class="import" style="width: 7rem;">Download</button></a>
                 {% endif %}
                 <div class="btn-tooltip-grp">
-                  {% if {{model.title}} %}
+                  {% if {{model.name}} %}
                   <a href="https://docs.meshery.io/project/contributing/contributing-models-quick-start">
                     <button class="import" style="width: 9rem;">Quick Start</button></a>
                   {% endif %}
