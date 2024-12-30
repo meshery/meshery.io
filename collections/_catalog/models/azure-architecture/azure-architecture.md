@@ -1,5 +1,5 @@
 ---
-title: Azure Architecture
+name: Azure Architecture
 modelId: 6dec1c7d-e29ra-622f-ff90-6faddff2ae17
 category: Orchestration & Management
 author: Aditya Mohan
