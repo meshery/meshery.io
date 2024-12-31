@@ -65,7 +65,7 @@
   transition: transform 1s linear;
 }
 
-#compatibility-div label, #category-div label{
+#compatibility-div label, #category-div label, #cardpatterntype-div label{
   margin: 0;
   display: flex;
   align-items: center;
@@ -73,7 +73,7 @@
   text-indent: unset;
 }
 
-#compatibility-div input, #category-div input{
+#compatibility-div input, #category-div input, #cardpatterntype-div input{
   flex-shrink: 0;
   top: 0;
   cursor: pointer;
@@ -83,7 +83,7 @@
   max-width: 50px;
   height:100%;
 }
-#compatibility-div .badge, #category-div .badge{
+#compatibility-div .badge, #category-div .badge, #cardpatterntype-div .badge{
   background: var(--color-secondary-dark);
   border-radius: 50%;
   color: var(--color-primary-light);
@@ -97,7 +97,7 @@
   justify-content: center;
   font-weight: 200;
 }
-#compatibility-div .input-container .name, #category-div .input-container .name{
+#compatibility-div .input-container .name, #category-div .input-container .name,  #cardpatterntype-div .input-container .name{
   margin: 0 10px 0 10px;
   width: 100%;
   white-space: nowrap;
@@ -105,14 +105,14 @@
   text-overflow: ellipsis;
 }
 
-#compatibility-div .input-container, #category-div .input-container{
+#compatibility-div .input-container, #category-div .input-container, #cardpatterntype-div .input-container{
   display: flex;
   align-items: center; 
   margin: 20px 0; 
 }
 
 #category-div,
-#compatibility-div {
+#compatibility-div, #cardpatterntype-div {
   flex-wrap: wrap;
 }
 #compatibility-div {
@@ -140,6 +140,8 @@
       <!-- <a id="technology-li">Technology</a> -->
     </div>
   </div>
+  <p id="cardpatterntype-para" class="cardpatterntype-para"><strong>Pattern Types:</strong></p>
+  <div id="cardpatterntype-div" class="cardpatterntype-div"></div>
   <p id="compatibility-para" class="compatibility-para"><strong>Technologies:</strong></p>
   <div id="compatibility-div" class="compatibility-div"></div>
   <p id="category-para" class="category-para"> <strong>Categories:</strong></p>   
@@ -253,6 +255,7 @@
   // get all empty filter containers
   const container = document.getElementById("compatibility-div");
   const categoryContainer = document.getElementById("category-div");
+  const patternTypeContainer = document.getElementById("cardpatterntype-div");
 
   // globalTechnologyList stores all the technologies checked by user as strings
   // example: ["gcp", "keda"]
@@ -260,24 +263,39 @@
   // globalCategorySelected stores the category selected by the user, users can select multiple categories at the same time for sorting
   // initially it is empty
   let globalCategoryList = [];
+  // globalPatternTypeList stores the pattern types which currently are models, designs and wasm filters. 
+  // multiple pattern types can be selected at the same time
+  let globalPatternTypeList = [];
   // get all pattern cards
   const patternCards = document.querySelectorAll(".patternCard");
   const cardCompatibility = [];
   // cardType stores the names of all categories (unique)
   let cardType = new Set();
+  // cardPatternType stores the names of all pattern types (unique): currently three
+  // model, design and wasmfilter
+  let cardPatternType = new Set();
   // cardTechnology stores the set of all technologies (unqiue)
   let cardTechnology = new Set();
   // This variable stores the count of each category in an object which looks like a key value pair
   // example: {"deployment": 102, "security": 10, ...} and so on 
   const categoryCardCount = {}
+  const patternTypeCardCount = {}
   // Loop over all pattern cards to get there compatibility, type and technology so we can make a unique list out of it
   for(let i=0; i<patternCards.length; i++){
       const type = patternCards[i].getAttribute("type")
+      const patternType = patternCards[i].getAttribute("patternType")
       if(type && type !== "wasm filter"){
         const lowerCaseType = type.toLowerCase();
         cardType.add(lowerCaseType);
         categoryCardCount[lowerCaseType] = (categoryCardCount[lowerCaseType] || 0) + 1;   // count cards that have a certain category
       } 
+      if(patternType){
+        const lowerCasePatternType = patternType.toLowerCase();
+        cardPatternType.add(lowerCasePatternType);
+        patternTypeCardCount[lowerCasePatternType] = (patternTypeCardCount[lowerCasePatternType] || 0) + 1;
+      }
+      // console.log(patternTypeCardCount)
+      // console.log(cardPatternType)
       const technology = patternCards[i].getAttribute("technology")
       if(technology){
         let t = JSON.parse(technology)
@@ -291,6 +309,32 @@
 
   cardType = Array.from(cardType);
   cardTechnology = Array.from(cardTechnology);
+  cardPatternType = Array.from(cardPatternType);
+  // console.log(cardPatternType)
+
+  for(let i = 0; i < cardPatternType.length; i++){
+    const count = patternTypeCardCount[cardPatternType[i]]
+    const inputContainer = document.createElement("div");
+    inputContainer.className = "input-container";
+
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.name = "patterntype";
+    input.value = cardPatternType[i];
+    input.id = cardPatternType[i];
+
+    input.onclick = function () {
+      updatePatternTypeList(cardPatternType[i]);
+      showFilterCards();
+    };
+    inputContainer.appendChild(input);
+    const label = document.createElement("label");
+    label.innerHTML = `<div class="name">${cardPatternType[i].replace(/-/g, " ")}</div><div class="badge">${count}</div>`;
+    label.style.height = "20px";
+    label.setAttribute("for", cardPatternType[i]);
+    inputContainer.appendChild(label);
+    patternTypeContainer.appendChild(inputContainer);
+  }
 
   // For creating a list of checkboxes for Categories section
   for(let i = 0; i<cardType.length; i++){
@@ -388,6 +432,15 @@
     
   }
 
+  function updatePatternTypeList(value) {
+    if(globalPatternTypeList.includes(value)){
+      globalPatternTypeList = globalPatternTypeList.filter(item => item !== value);
+    } else {
+      globalPatternTypeList.push(value);
+    }
+  }
+  console.log(globalPatternTypeList)
+
   // Function called when user clicks on any of Technology checkboxes or Category Boxes
   function showFilterCards() {
      // Loop over all pattern cards and check if any of the filter in globalTechnologyList is present in pattern card's filter attribute
@@ -403,6 +456,7 @@
         let cardCategory;
         const type = patternCards[i].getAttribute("type").toLowerCase();
         const technology = patternCards[i].getAttribute("technology")
+        const patternType = patternCards[i].getAttribute("patternType").toLowerCase();
         if(technology){
           let t = JSON.parse(technology)
           for (let k = 0; k < t.length; k++) {
@@ -412,10 +466,11 @@
         cardCategory = type;
         let showCardTech = globalTechnologyList.length === 0 || globalTechnologyList.some(tech => cc.includes(tech));
         let showCardCat = globalCategoryList.some(cat => cardCategory.includes(cat)) || globalCategoryList.length === 0;
+        let showCardPatternType = globalPatternTypeList.some(pt => patternType.includes(pt)) || globalPatternTypeList.length === 0;
 
-       // if both list is empty that is no tech or category is selected;
+       // if all list are empty that is no tech, category and pattern type is selected;
        // show only the first 9 and hide the rest
-        if(globalTechnologyList.length === 0 && globalCategoryList.length === 0) {
+        if(globalTechnologyList.length === 0 && globalCategoryList.length === 0 && globalPatternTypeList.length === 0){
           if(visibleCount < 9) {
             patternCards[i].style.display = "block"; // show only the first 9
             visibleCount++;
@@ -425,7 +480,7 @@
           }
         }
         // apply the regular filtering logic
-        else if (showCardTech && showCardCat) {
+        else if (showCardTech && showCardCat && showCardPatternType) {
           patternCards[i].style.display = "block";
           cardsShown = true;
         } else {
