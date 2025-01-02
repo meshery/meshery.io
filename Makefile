@@ -30,3 +30,4 @@ artifacthub-artifacts:
 clean:
 	rm -rf _site
 	rm -rf .jekyll-metadata
+	rm -rf .jekyll-cache
