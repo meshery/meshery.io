@@ -31,3 +31,5 @@ clean:
 	rm -rf _site
 	rm -rf .jekyll-metadata
 	rm -rf .jekyll-cache
+	docker stop meshery-io || true
+	docker rm meshery-io || true
