@@ -1,5 +1,5 @@
 ---
-layout: item
+layout: single-page-extension
 name: Meshery Adapter for Cilium Service Mesh
 kind: Adapter
 userName: Meshery Authors
@@ -11,7 +11,7 @@ compatibility:
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: /assets/images/meshery-logo.svg
 whiteImage: /images/integrations/cilium/icons/color/cilium-color.svg
-colorImage: image: /images/integrations/cilium/icons/white/cilium-white.svg
+colorImage: /images/integrations/cilium/icons/white/cilium-white.svg
 extensionInfo: |
   Deploy the Meshery Adapter for Cilium Service Mesh in order to enable deeper lifecycle management of Cilium Service Mesh.
 extensionCaveats: |

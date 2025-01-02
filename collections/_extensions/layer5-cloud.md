@@ -1,5 +1,5 @@
 ---
-layout: item
+layout: single-page-extension
 item-type: extension
 name: Layer5 Cloud
 kind: Remote Provider
