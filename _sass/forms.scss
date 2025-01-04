@@ -166,19 +166,31 @@ input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, tex
 	padding-left: 0px !important;
 }
 
-.subscribe-container{
+.subscribe-container {
+	display: flex;
+	flex-direction: column; 
+	gap: 5px; 
+	width: 100%; 
+  }
+  
+  .subscribe-container-error {
 	color: red;
-	display: grid;
-	grid-template-columns: 1fr 1fr; 
-	gap: 1rem; 
-	padding-top: 5px;
-	text-align: start;
-}
-
-
-.subscribe-container-error{
-	display: block;
-    font-size: 0.875rem;
-    padding-left: 2px;
+	font-size: 0.875rem;
+	padding-left: 2px;
 	line-height: 1.2;
-}
+	text-align: start;
+	padding-bottom: 10px;
+  }
+  
+  @media (min-width: 768px) {
+	.subscribe-container-wrapper {
+	  display: grid;
+	  grid-template-columns: 1fr 1fr; 
+	  gap: 2rem; 
+	}
+  
+	.subscribe-container {
+	  width: auto; 
+	}
+  }
+  

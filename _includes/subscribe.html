@@ -53,14 +53,45 @@
       onsubmit="return validateForm(event);"
     >
       <div id="mc_embed_signup_scroll">
-        <div class="subscribe-inputbox">
-          <input type="text" value="" placeholder="First Name" name="FNAME" class="NAME" id="mce-FNAME" aria-label="first name input" required/>
-          <input type="text" value="" placeholder="Last Name" name="LNAME" class="NAME" id="mce-LNAME" aria-label="last name input" required />
-        </div>
+        <div class="subscribe-container-wrapper">
+        <!-- First Name Field -->
         <div class="subscribe-container">
-          <span id="mce-FNAME-error" class="subscribe-container-error"></span>
-          <span id="mce-LNAME-error" class="subscribe-container-error"></span>
+          <input
+            type="text"
+            value=""
+            placeholder="First Name"
+            name="FNAME"
+            class="NAME"
+            id="mce-FNAME"
+            aria-label="first name input"
+            required
+          />
+          <span
+            id="mce-FNAME-error"
+            class="subscribe-container-error"
+            aria-describedby="mce-FNAME-error"
+          ></span>
         </div>
+
+        <!-- Last Name Field -->
+        <div class="subscribe-container">
+          <input
+            type="text"
+            value=""
+            placeholder="Last Name"
+            name="LNAME"
+            class="NAME"
+            id="mce-LNAME"
+            aria-label="last name input"
+            required
+          />
+          <span
+            id="mce-LNAME-error"
+            class="subscribe-container-error"
+            aria-describedby="mce-LNAME-error"
+          ></span>
+        </div>
+      </div>
         <div id="mce-responses" class="clear subscribe-inputbox">
           <div
             class="response"
@@ -101,57 +132,76 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("mc-embedded-subscribe-form");
+    const firstNameInput = document.getElementById("mce-FNAME");
+    const lastNameInput = document.getElementById("mce-LNAME");
 
-  const form = document.getElementById('mc-embedded-subscribe-form');
-  if (form) {
-    form.addEventListener('submit', validateForm);
-  }
-
-  function validateForm(event) {
-    event.preventDefault(); 
-
-    // Clear previous error messages
-    clearError('mce-FNAME-error');
-    clearError('mce-LNAME-error');
-
-    let isValid = true;
-
-    const firstName = document.getElementById('mce-FNAME').value.trim();
-
-    if (!firstName) {
-      document.getElementById('mce-FNAME-error').textContent = 'First name is required.';
-      isValid = false;
-    } else if (firstName.trim().length < 2) {
-      document.getElementById('mce-FNAME-error').textContent = 'First Name must have at least 2 characters.';
-      isValid = false;
-    } else if (!/^[a-zA-Z]+$/.test(firstName)) {
-      document.getElementById('mce-FNAME-error').textContent = 'First name must only contain letters.';
-      isValid = false;
+    if (form) {
+      form.addEventListener("submit", validateForm);
     }
 
-    const lastName = document.getElementById('mce-LNAME').value.trim();
-    if (!lastName) {
-      document.getElementById('mce-LNAME-error').textContent = 'Last name is required.';
-      isValid = false;
-    } else if (!/^[a-zA-Z]+$/.test(lastName)) {
-      document.getElementById('mce-LNAME-error').textContent = 'Last name must only contain letters.';
-      isValid = false;
+    firstNameInput.addEventListener("input", () =>
+      validateField(firstNameInput, "mce-FNAME-error", "First Name", true, true) // Allow spaces, enforce length
+    );
+    lastNameInput.addEventListener("input", () =>
+      validateField(lastNameInput, "mce-LNAME-error", "Last Name", false, false) // No spaces, no length check
+    );
+
+    function validateForm(event) {
+      event.preventDefault(); // Prevent form submission
+
+      const isFirstNameValid = validateField(
+        firstNameInput,
+        "mce-FNAME-error",
+        "First Name",
+        true,
+        true
+      );
+      const isLastNameValid = validateField(
+        lastNameInput,
+        "mce-LNAME-error",
+        "Last Name",
+        false,
+        false
+      );
+
+      if (isFirstNameValid && isLastNameValid) {
+        form.submit(); 
+      }
     }
 
-    if (isValid) {
-      form.submit();
-    }
-  }
+    function validateField(
+      inputElement,
+      errorElementId,
+      fieldName,
+      allowSpaces,
+      enforceLength
+    ) {
+      const value = inputElement.value.trim();
+      const errorElement = document.getElementById(errorElementId);
+      errorElement.textContent = ""; 
 
-  function clearError(errorId) {
-    const errorElement = document.getElementById(errorId);
-    if (errorElement) {
-      errorElement.textContent = '';
-    }
-  }
+      if (!value) {
+        errorElement.textContent = `${fieldName} is required.`;
+        return false;
+      }
 
-  document.getElementById('mce-FNAME').addEventListener('input', () => clearError('mce-FNAME-error'));
-  document.getElementById('mce-LNAME').addEventListener('input', () => clearError('mce-LNAME-error'));
+      // Enforce minimum length if required
+      if (enforceLength && value.length < 2) {
+        errorElement.textContent = `${fieldName} must have at least 2 characters.`;
+        return false;
+      }
+
+      // Conditional regex based on whether spaces are allowed
+      const regex = allowSpaces ? /^[a-zA-Z\s]+$/ : /^[a-zA-Z]+$/;
+
+      if (!regex.test(value)) {
+        errorElement.textContent = `${fieldName} must only contain letters.`;
+        return false;
+      }
+
+      return true; 
+    }
 });
 </script>
