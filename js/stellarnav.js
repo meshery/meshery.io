@@ -212,6 +212,7 @@
 
 			// adds toggle button to li items that have children
 			nav.find('li a').each(function() {
+				$(this).attr('tabindex', '0');
 				if ($(this).next().length > 0) {
 					$(this).addClass('sub-list')
 					$(this).parent('li').addClass('has-sub').append('<a class="dd-toggle" href="#"><span class="icon-plus"></span></a>');
@@ -222,12 +223,14 @@
 			nav.find('li .dd-toggle').on('click', navbarExpand);
 
 			// expands the dropdown menu on each click of nav-text
-			nav.find('li .sub-list').on('click', navbarExpand);
+			nav.find('li .sub-list').on('click keydown', navbarExpand);
 
 			function navbarExpand(e) {
-				e.preventDefault();
-				$(this).parent('li').children('ul').stop(true, true).slideToggle(settings.openingSpeed);
-				$(this).parent('li').toggleClass('open');
+				if(e.type == 'click' || e.key == "Enter" || e.code == "Space") {
+					e.preventDefault();
+					$(this).parent('li').children('ul').stop(true, true).slideToggle(settings.openingSpeed);
+					$(this).parent('li').toggleClass('open');
+				}
 			}
 
 			var resetTriggers = function() {
