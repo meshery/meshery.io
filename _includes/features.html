@@ -1,7 +1,7 @@
 <section>
     <div class="container flex">
         <div class="text ">
-            <h2 class="feature-title">Platform Engineering with Meshery's <span class="special-text"> Extension Points</span></p>
+            <h2 class="feature-title">Platform Engineering with Meshery's <span class="special-text"> Extension Points</span></h2>
             <p>Meshery includes both REST APIs and GraphQL APIs, pluggable adapters via gRPCs, hot-loadable ReactJS and hot-loadable Golang binaries. The great number of <a style="width:auto;" href="https://docs.meshery.io/extensibility">extension points</a> in Meshery make it ideal as the foundation of your internal developer platform.
             
             <div class="button-para">
@@ -25,7 +25,7 @@
         <div class="text" style="padding: 0 20px 20px 0;">
 
             <h2 class="feature-title"><span class="special-text">Visually</span> and <span class="special-text">collaboratively</span> manage your infrastructure</h2>
-            <p>Meshery uses <a href="https://docs.meshery.io/concepts/logical/relationships">relationships</a> to define how and when components interrelate with one another. Meshery supports a variety of relationships between components. These relationships are categorized into two types: semantic and non-semantic. 
+            <p>Meshery uses context-aware <a href="https://docs.meshery.io/concepts/logical/relationships">relationships</a> to define how and when components interrelate with one another. Meshery supports a variety of relationships between components. These relationships are categorized into two types: semantic and non-semantic. 
                 <div class="button-para">
                     <a href="https://docs.meshery.io/concepts/logical/relationships#types-of-relationships" class="highlight">See more examples</a>
                 </div>
@@ -153,8 +153,7 @@
     </div>
 </section>
 
-{% for features in site.data.features %}
-{% if features.type == 2 %}
+
 <section>
     <div class="container flex">
         <div class="text ">
@@ -171,14 +170,14 @@
     </div>
 </section>
 
-{% elsif features.type == 3 %}
+
 <section>
     <div class="container flex">
         <div class="text ">
-            <img src="{{ features.logo }}" style="max-width:30%;position:relative;float:left;
+            <img src="/assets/images/webassembly_logo.svg" style="max-width:30%;position:relative;float:left;
                     margin-right:20px;margin-bottom: 10px;" alt="{{ features.imageDescription }}" loading="lazy" />
-            <h2 class="feature-title">{{ features.title }}</h2>
-            <p>{{ features.description }}</p>
+            <h2 class="feature-title">Manage data plane intelligence with <span class="special-text">WebAssembly filters</span></h2>
+            <p>Dynamically load and manage your own WebAssembly filters using Meshery.</p>
         </div>
         <!-- <div class="image flex">
             <a style="width: 100%;" href="{{ features.image }}" data-fancybox="images"
@@ -190,7 +189,7 @@
         <div class="image flex" style="flex-flow: column wrap;">
             <div align="center" style="margin-top: 3rem;">
                 <button id="video-modal" class="link recording-link" style="width:100%"><img
-                        src="{{ features.videoPoster }}" loading="lazy" ></button>
+                        src="/assets/images/features/wasm-filter-mgmt-poster.png" loading="lazy" ></button>
                 <!-- <p style="font-size: 1rem;margin:0rem;padding:0rem;color:#666;font-style: italic;">(excerpt: patterns
                     in-action)</p> -->
                 {% include video-modal.html
@@ -202,24 +201,24 @@
     </div>
 </section>
 
-{% elsif features.type == 4 %}
+
 <section>
     <div class="container flex">
         <div class="text ">
-            <h2 class="feature-title">{{ features.title }}</h2>
-            <p>{{ features.description }}</p>
+            <h2 class="feature-title">Control all of your infrastructure with <span class="special-text">mesheryctl</span></h2>
+            <p>Whether managing multiple Meshery deployments, importing designs, discoverying Kubernetes clusters, do so with ease using Meshery CLI in your terminal. <div class="button-para"><a href="https://docs.meshery.io/reference/mesheryctl/" class="highlight">View Docs</a></div></p>
         </div>
         <div class="image flex">
-            <a style="width: 100%;" href="{{ features.image }}" data-fancybox="images"
+            <a style="width: 100%;" href="/assets/images/features/ctl/mesheryctl-system-update.jpeg" data-fancybox="images"
                 data-caption="Webassembly based Envoy Filters">
-                <img src="{{ features.image }}" class="screenshot" loading="lazy" />
+                <img src="/assets/images/features/ctl/mesheryctl-system-update.jpeg" class="screenshot" loading="lazy" />
             </a>
         </div>
     </div>
 </section>
 
-{% elsif features.type == 5 %}
-<section>
+
+<!-- <section>
     <div class="container flex">
         <div class="text ">
             <img src="{{ features.logo }}" style="max-width:30%;position:relative;float:left;
@@ -234,7 +233,7 @@
             </a>
         </div>
     </div>
-</section>
+</section> -->
 
 <section>
     <div class="container flex">
@@ -267,7 +266,7 @@
     </div>
 </section>
 
-{% elsif features.type == 7 %}
+
 <section>
     <div class="container flex">
         <div class="text ">
@@ -315,7 +314,6 @@
 </section>
 
 
-{% elsif features.type == 8 %}
 <section>
     <div class="container flex">
         <div class="text ">
@@ -331,8 +329,8 @@
         </div>
     </div>
 </section>
-{% endif %}
-{% endfor %}
+
+
 <script>
     window.onload = function() {
     document.querySelector('.tab button.active').click();
