@@ -1,5 +1,7 @@
 ---
 name: Accurate
+layout: item
+permalink: catalog/models/accurate.html
 subtitle: Collaborative and visual infrastructure as design for Accurate
 colorIcon: /assets/images/integration/accurate/icons/color/accurate-color.svg
 whiteIcon: /assets/images/integration/accurate/icons/white/accurate-white.svg
