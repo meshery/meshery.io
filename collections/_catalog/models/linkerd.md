@@ -5,10 +5,10 @@ colorIcon: /assets/images/integration/linkerd/icons/color/linkerd-color.svg
 whiteIcon: /assets/images/integration/linkerd/icons/white/linkerd-white.svg
 permalink: extensibility/integrations/linkerd
 docURL: https://docs.meshery.io/extensibility/adapters/linkerd
-description: 
+description: git://github.com/meshery/meshery-linkerd/master/templates/meshmodel/components/stable-2.9.5
 category: Cloud Native Network
 subcategory: Service Mesh
-registrant: meshery
+registrant: GitHub
 components: 
 componentsCount: 0
 relationships: 
