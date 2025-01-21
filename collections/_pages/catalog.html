@@ -53,17 +53,23 @@ permalink: /catalog
   }
 </style>
 
-{% assign catalog = site.catalog | sort: 'name' %}
+{% assign catalog = site.collections | concat: site.catalog | concat: site.models | sort: 'name' %}
 <div class="section-container">
-  {% include view-all.html %} {% include card-modal.html %}
+  {% include view-all.html %}
 
   <div class="row">
     <h2 class="not-found" style="display: none;" id="not-found">
       No results found
     </h2>
     {% assign count = 0 %}
-    {% for pattern in catalog %} {% if pattern.patternInfo and pattern.Status !=
-    "ComingSoon" %}
+    {% for pattern in catalog %}
+        {% if count < 9 %}
+          {% assign should_display = 'block' %}
+        {% else %}
+          {% assign should_display = 'none' %}
+        {% endif %}
+    
+    {% if pattern.patternInfo and pattern.Status != "ComingSoon" %}
     {% assign last = pattern.compatibility | last %}
     <div
       class="column column-lg patternCard"
@@ -72,12 +78,11 @@ permalink: /catalog
       patternType="designs"
       technology='[{% for item in pattern.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
       status="{{ pattern.Status }}"
-      style="display: {% if count < 10 %}block{% else %}none{% endif %};"
+      style="display: {{ should_display }};"
     >
       {% include card.html %}
-      <!-- modal included -->
-      {% include modal.html %}
     </div>
+    {% assign count = count | plus: 1 %}
     {% elsif pattern.filterInfo %}
     {% assign last = pattern.compatibility | last %}
     <div
@@ -87,12 +92,23 @@ permalink: /catalog
       patternType="wasm filters"
       technology='["wasm-filter"{% for item in pattern.compatibility %}{% if forloop.first %}, {% endif %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
       status="{{ pattern.Status }}"
-      style="display: {% if count < 10 %}block{% else %}none{% endif %};"
+      style="display: {{ should_display }};"
     >
       {% include wasm-card.html %}
-      <!-- modal included -->
-      {% include modal.html %} {% include card-modal.html %}
     </div>
+    {% assign count = count | plus: 1 %}
+    {% elsif pattern.componentsCount %}
+    <div
+      class="column column-lg patternCard modelCard"
+      filter="{{ pattern.name }}"
+      type="model"
+      patternType="models"
+      technology=''
+      style="display: {{ should_display }};"
+    >
+      {% include models/card.html model=pattern %}
+    </div>
+    {% assign count = count | plus: 1 %}
     {% elsif pattern.patternInfo and pattern.Status == "ComingSoon" %}
     {% assign last = pattern.compatibility | last %}
      <div
@@ -101,12 +117,12 @@ permalink: /catalog
       type="{{ pattern.type }}"
       technology='[{% for item in pattern.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
       status="{{ pattern.Status }}"
-      style="display: {% if count < 10 %}block{% else %}none{% endif %};"
+      style="display: {{ should_display }};"
     >
       {% include coming-soon.html %}
     </div>
-    {% endif %} 
     {% assign count = count | plus: 1 %}
+    {% endif %} 
     {% endfor %}
   </div>
 </div>
