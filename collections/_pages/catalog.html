@@ -73,6 +73,9 @@ permalink: /catalog
     </h2>
     {% assign count = 0 %}
     {% for batch in (0..total_batches) %}
+      {% if catalog_index >= max_catalog and models_index >= max_models %}
+        {% break %}
+      {% endif %}
       {% if catalog_index < max_catalog %}
         {% assign batch_catalog = catalog | slice: catalog_index, 6 %}
         {% for pattern in batch_catalog %}
