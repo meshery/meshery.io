@@ -23,6 +23,7 @@
     background-color: $brand-color;
     text-align: center;
   }
+
   @media (min-width: 555px) and (max-width: 603px) {
     .subscribe-button {
       width: 100%;
@@ -49,13 +50,48 @@
       id="mc-embedded-subscribe-form"
       name="mc-embedded-subscribe-form"
       class="validate"
-      onsubmit="document.getElementById(mc-embedded-subscribe-form).submit();"
+      onsubmit="return validateForm(event);"
     >
       <div id="mc_embed_signup_scroll">
-        <div class="subscribe-inputbox">
-          <input type="text" value="" placeholder="First Name" name="FNAME" class="NAME" id="mce-FNAME" required />
-          <input type="text" value="" placeholder="Last Name" name="LNAME" class="NAME" id="mce-LNAME" required />
+        <div class="subscribe-container-wrapper">
+        <!-- First Name Field -->
+        <div class="subscribe-container">
+          <input
+            type="text"
+            value=""
+            placeholder="First Name"
+            name="FNAME"
+            class="NAME"
+            id="mce-FNAME"
+            aria-label="first name input"
+            required
+          />
+          <span
+            id="mce-FNAME-error"
+            class="subscribe-container-error"
+            aria-describedby="mce-FNAME-error"
+          ></span>
         </div>
+
+        <!-- Last Name Field -->
+        <div class="subscribe-container">
+          <input
+            type="text"
+            value=""
+            placeholder="Last Name"
+            name="LNAME"
+            class="NAME"
+            id="mce-LNAME"
+            aria-label="last name input"
+            required
+          />
+          <span
+            id="mce-LNAME-error"
+            class="subscribe-container-error"
+            aria-describedby="mce-LNAME-error"
+          ></span>
+        </div>
+      </div>
         <div id="mce-responses" class="clear subscribe-inputbox">
           <div
             class="response"
@@ -94,3 +130,78 @@
 
   <!--End mc_embed_signup-->
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("mc-embedded-subscribe-form");
+    const firstNameInput = document.getElementById("mce-FNAME");
+    const lastNameInput = document.getElementById("mce-LNAME");
+
+    if (form) {
+      form.addEventListener("submit", validateForm);
+    }
+
+    firstNameInput.addEventListener("input", () =>
+      validateField(firstNameInput, "mce-FNAME-error", "First Name", true, true) // Allow spaces, enforce length
+    );
+    lastNameInput.addEventListener("input", () =>
+      validateField(lastNameInput, "mce-LNAME-error", "Last Name", false, false) // No spaces, no length check
+    );
+
+    function validateForm(event) {
+      event.preventDefault(); // Prevent form submission
+
+      const isFirstNameValid = validateField(
+        firstNameInput,
+        "mce-FNAME-error",
+        "First Name",
+        true,
+        true
+      );
+      const isLastNameValid = validateField(
+        lastNameInput,
+        "mce-LNAME-error",
+        "Last Name",
+        false,
+        false
+      );
+
+      if (isFirstNameValid && isLastNameValid) {
+        form.submit(); 
+      }
+    }
+
+    function validateField(
+      inputElement,
+      errorElementId,
+      fieldName,
+      allowSpaces,
+      enforceLength
+    ) {
+      const value = inputElement.value.trim();
+      const errorElement = document.getElementById(errorElementId);
+      errorElement.textContent = ""; 
+
+      if (!value) {
+        errorElement.textContent = `${fieldName} is required.`;
+        return false;
+      }
+
+      // Enforce minimum length if required
+      if (enforceLength && value.length < 2) {
+        errorElement.textContent = `${fieldName} must have at least 2 characters.`;
+        return false;
+      }
+
+      // Conditional regex based on whether spaces are allowed
+      const regex = allowSpaces ? /^[a-zA-Z\s]+$/ : /^[a-zA-Z]+$/;
+
+      if (!regex.test(value)) {
+        errorElement.textContent = `${fieldName} must only contain letters.`;
+        return false;
+      }
+
+      return true; 
+    }
+});
+</script>
