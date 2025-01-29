@@ -63,7 +63,15 @@ components:
   colorIcon: assets/images/integration/pulsar-resources-operator/components/pulsar-ns-isolation-policy/icons/color/pulsar-ns-isolation-policy-color.svg
   whiteIcon: assets/images/integration/pulsar-resources-operator/components/pulsar-ns-isolation-policy/icons/white/pulsar-ns-isolation-policy-white.svg
   description: 
-componentsCount: 13
+- name: compute-flink-deployment
+  colorIcon: assets/images/integration/pulsar-resources-operator/components/compute-flink-deployment/icons/color/compute-flink-deployment-color.svg
+  whiteIcon: assets/images/integration/pulsar-resources-operator/components/compute-flink-deployment/icons/white/compute-flink-deployment-white.svg
+  description: 
+- name: compute-workspace
+  colorIcon: assets/images/integration/pulsar-resources-operator/components/compute-workspace/icons/color/compute-workspace-color.svg
+  whiteIcon: assets/images/integration/pulsar-resources-operator/components/compute-workspace/icons/white/compute-workspace-white.svg
+  description: 
+componentsCount: 15
 relationships: 
 relationshipsCount: 0
 featureList: [
