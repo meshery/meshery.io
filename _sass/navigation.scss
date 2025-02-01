@@ -1,5 +1,5 @@
-@import "./mixins/transitions.scss";
-
+@use "./mixins/transitions.scss" as *;
+@use "./variables.scss" as *;
 nav {
 	font-size: .8rem;
 	width: fit-content;
@@ -72,11 +72,14 @@ nav {
 		margin: 0px 3px; 
 		color: var(--color-secondary-medium) !important;
 	}
-	cursor: pointer;
+	& { cursor: pointer; }
 }
 
 .nav-mode-icon{
 
+	border: none;
+	background: transparent;      
+	
 	& > img {
 		margin-left: .5rem;
 		width: 2rem;
@@ -229,7 +232,6 @@ a.nav-text:hover {
 		translate: 0 -5px;
 		background: transparent;
 		background-color: var(--color-primary-light);
-		max-height: 400px;
 	}
 
 	& li a {

@@ -1,0 +1,102 @@
+<style>
+    .modal-image {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .modal-image>img {
+      width: 100%;
+      object-fit: contain;
+    }
+  
+    .modelhello {
+      width: 50% !important;
+      height: auto !important;
+    }
+  
+    div.model-metadata-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+  
+    p.model-metadata-field {
+      font-weight: 600;
+      font-size: 1rem;
+      margin: 0;
+    }
+  
+    @media (max-width: 700px) {
+      .modelhello {
+        width: 85% !important;
+      }
+    }
+  </style>
+  {% assign model = include.model | default: model %}
+  <div id="open-modal" class="modal-window">
+    <div class="modal-content modelhello">
+      <div class="modal-image">
+        <button class="modal-close close">&times;</button>
+        <img class="image-class model-image" data-modelicon-light="{{model.colorIcon}}"
+          data-modelicon-dark="{{model.whiteIcon}}" src="{{model.colorIcon}}"
+          onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy"
+          onclick="toggleFullScreenImage('{{ model.colorIcon }}', 'model')" />
+      </div>
+      <div class="vertical-line"></div>
+      <div class="modal-info">
+        <h2 class="modal-h2">
+          {{ model.name | upcase }}
+        </h2>
+        <div class="model-metadata-container">
+          <div>
+            <p class="model-metadata-field">API Version</p>
+            <p class="contentdata">{{ model.version }}</p>
+          </div>
+          <div>
+            <p class="model-metadata-field">Components</p>
+            <p class="contentdata">{{ model.componentsCount }}</p>
+          </div>
+  
+          <div>
+            <p class="model-metadata-field">Relationships</p>
+            <p class="contentdata">{{ model.relationshipsCount }}</p>
+          </div>
+          <div>
+            <p class="model-metadata-field">Created By</p>
+            <a href="https://cloud.layer5.io/user/{{model.authorId}}" class="contentdata">{{ model.author }}</a>
+          </div>
+          <div>
+            <p class="model-metadata-field">Category</p>
+            <p class="contentdata">{{ model.category }}</p>
+          </div>
+        </div>
+        <div id="copy-url">
+          <div class="btn-class">
+            <div class="vertical-center" id="{{type.name}}">
+              <div class="btn-grp">
+                {% if {{model.name}} %}
+                <a href="/models/{{ model.modelFile }}" download="{{ model.name | slugify }}.tar">
+                  <button class="import" style="width: 7rem;">Download</button></a>
+                {% endif %}
+                <div class="btn-tooltip-grp">
+                  {% if {{model.name}} %}
+                  <a href="https://docs.meshery.io/project/contributing/contributing-models-quick-start">
+                    <button class="import" style="width: 9rem;">Quick Start</button></a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  
+    <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
+    <script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>
+  
+  
+  </div>

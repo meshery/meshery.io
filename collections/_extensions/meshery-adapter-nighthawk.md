@@ -1,5 +1,5 @@
 ---
-layout: item
+layout: single-page-extension
 name: Meshery Adapter for Nighthawk
 kind: Adapter
 userName: Meshery Authors
@@ -10,7 +10,8 @@ compatibility:
   - kubernetes
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: /assets/images/meshery-logo.svg
-image: https://raw.githubusercontent.com/layer5io/getnighthawk/master/docs/assets/images/logos/nighthawk/icon/nighthawk-logo.svg
+whiteImage: https://raw.githubusercontent.com/layer5io/getnighthawk/master/docs/assets/images/logos/nighthawk/icon/nighthawk-logo.svg
+colorImage: https://raw.githubusercontent.com/layer5io/getnighthawk/master/docs/assets/images/logos/nighthawk/icon/nighthawk-logo.svg
 extensionId: |
   Deploy the Meshery Adapter for Nighthawk to optimize HTTP service performance testing with adaptive load control and Layer 7 testing capabilities.
 extensionCaveats: |

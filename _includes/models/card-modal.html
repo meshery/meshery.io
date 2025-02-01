@@ -1,0 +1,47 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+    var modal = document.querySelectorAll('.modal-window');
+    var btnOpen = document.querySelectorAll('.link');
+    var btnClose = document.querySelectorAll('.close');
+    var cont = document.querySelectorAll('.pattern')
+    var modal_container = document.querySelectorAll('.click-container')
+
+    for (i = 0; i < cont.length; i++) {
+
+        if (i % 2 != 0) {
+            cont[i].style.flexDirection = "row-reverse";
+        }
+    }
+
+    for (let i = 0; i < modal.length; i++){
+        btnOpen[i].addEventListener('click', function () {
+            modal[i].style.visibility = "visible";
+            modal[i].style.opacity = "1";
+            modal[i].style.pointerEvents = "auto";
+
+
+        });
+
+        btnClose[i].addEventListener('click', function () {
+            modal[i].style.visiblity = "hidden";
+            modal[i].style.opacity = "0";
+            modal[i].style.pointerEvents = "none";
+
+        });
+
+        modal[i].addEventListener('click', function (event) {
+            let clickId = event.target.id
+            if (clickId === "open-modal") {
+                modal[i].style.visiblity = "hidden";
+                modal[i].style.opacity = "0";
+                modal[i].style.pointerEvents = "none";
+            }
+        })
+
+    }
+});
+
+
+
+</script>

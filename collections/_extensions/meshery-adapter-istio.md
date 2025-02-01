@@ -1,5 +1,5 @@
 ---
-layout: item
+layout: single-page-extension
 name: Meshery Adapter for Istio
 kind: Adapter
 userName: Meshery Authors
@@ -10,7 +10,8 @@ compatibility:
   - kubernetes
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: https://playground.meshery.io/static/img/meshmap-snapshot-logo.svg
-image: /images/integrations/istio-operator/icons/color/istio-operator-color.svg
+whiteImage: /images/integrations/istio-operator/icons/color/istio-operator-color.svg
+colorImage: /images/integrations/istio-operator/icons/white/istio-operator-white.svg
 extensionInfo: |
   Deploy the Meshery Adapter for Istio in order to enable deeper lifecycle management of Istio.
 extensionCaveats: |

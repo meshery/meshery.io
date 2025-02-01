@@ -10,6 +10,9 @@
     object-fit: contain;
   }
 </style>
+
+{% assign file_path = extension.path %}
+{% assign file_name = file_path | split: '/' | last | replace: '.md', '' %}
 <div id="open-modal" class="modal-window">
   <!-- <div class="click-container"> -->
     <div class="modal-content">
@@ -19,15 +22,14 @@
         data-snapshot-light="{{extension.image}}"
         data-snapshot-dark="{{extension.image}}"
         src="{{extension.image}}"
-        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage('{{ extension.extensionId }}')" />
+        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage('{{ extension.image }}', 'extension')" />
       </div>
       <div class="vertical-line"></div>
       <div class="modal-info">
         <h2 class="modal-h2">
-          {{extension.name | upcase }}
-          <!--<a href="https://docs.meshery.io/extensions/{{extension.slug}}" target="_blank">{{extension.name | upcase }}
+          <a href="{{ site.baseurl }}/extensions/{{file_name}}" target="_blank">{{extension.name | upcase }}
              <img class="internal-link" src="{{site.baseurl}}/assets/images/buttons/external-link_black.svg"/> 
-          </a>-->
+          </a>
         </h2> 
         <h3 class="modal-h3">Description</h3>
         <p class="content-toggle contentdata pre-white-space">{{extension.extensionInfo | url_decode | replace: '\\n', '<br/>' | replace: '\n', '<br/>' }}</p>
