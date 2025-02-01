@@ -27,3 +27,12 @@ helm-repo-update:
 .PHONY: artifacthub-artifacts
 artifacthub-artifacts:
 	cd $(ARTIFACTHUB_SCRIPT_DIR); go run hub.go
+
+# Clean target to remove generated files
+.PHONY: clean
+clean:
+	rm -rf _site
+	rm -rf .jekyll-metadata
+	rm -rf .jekyll-cache
+	docker stop meshery-io || true
+	docker rm meshery-io || true
