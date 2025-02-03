@@ -1,14 +1,15 @@
 
-
-<div class= "card link">  
+{% assign model = include.model | default: model %}
+<a href="{{ model.url }}">
+<div class= "card link"> 
     <div class="card-inner">
       <div class="front">
         <div class="model-category chip">
           <small class="pattern-type" style="font-size: .5rem;">{{model.category | upcase }}</small>
         </div>
-        <h4 class="pattern-name">{{model.title}}</h4>
+        <h4 class="pattern-name">{{model.name}}</h4>
         <div class="pattern-image-container">
-          <img class= "pattern-image model-image" 
+          <img class= "model-image" 
           data-modelicon-light="{{model.colorIcon}}"
           data-modelicon-dark="{{model.whiteIcon}}"
           src="{{model.colorIcon}}" 
@@ -21,7 +22,7 @@
       </div>
     </div>
   </div>  
-
+</a>
 <style>
   .model-category{
     float: left;
@@ -34,18 +35,6 @@
     }
   }
 
-  .pattern-image-container {
-    width: 90%;
-    height: 50%;
-    position: relative;
-    margin: 0 auto;
-  }
-
-  .pattern-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
 
 </style>
 

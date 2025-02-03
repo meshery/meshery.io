@@ -20,5 +20,5 @@ extensionCaveats: |
   - Utilize Kanvas Snapshot when you need to automate your software development process using GitHub Actions.
   - Customize snapshot workflow triggers to run based on specific GitHub activities, such as creating a pull request, pushing code, or releasing a new version.
 URL: 'https://github.com/marketplace/actions/meshmap-snapshot'
-docsURL: 'https://docs.meshery.io/extensions/snapshot'
+docsURL: 'https://docs.meshery.io/extensions/kanvas-snapshot'
 ---

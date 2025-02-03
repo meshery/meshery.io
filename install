@@ -140,13 +140,14 @@ fi
 
 NAME="mesheryctl-${MESHERY_VERSION}"
 URL="https://github.com/meshery/meshery/releases/download/${MESHERY_VERSION}/mesheryctl_${MESHERY_VERSION:1}_${OSEXT}_${OSARCHITECTURE}.tar.gz"
+FILENAME="mesheryctl_${MESHERY_VERSION:1}_${OSEXT}_${OSARCHITECTURE}.tar.gz"
 
 printf "\nDownloading %s for %s...\n\n" "$NAME" "$OSEXT"
 curl -L ${URL} -o ${PWD}/meshery.tar.gz
 
 validFile=`file ${PWD}/meshery.tar.gz | grep 'gzip compressed data'`
 if [ -z "$validFile" ] ; then
-  printf "Unable to download meshery.tar.gz file from ${URL}. Set MESHERY_VERSION environment variable to a different version and re-run. For example: export MESHERY_VERSION=v0.1.6\n"
+  printf "Unable to download '%s' from ${URL}. Set MESHERY_VERSION environment variable to a different version and re-run. For example: export MESHERY_VERSION=v0.9.0\n" "$FILENAME"
   exit;
 fi
 

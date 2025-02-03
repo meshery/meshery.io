@@ -1,0 +1,106 @@
+---
+layout: page
+pagination: 
+  enabled: true
+  collection: models
+---
+<div class="blog-post text-container">
+
+	<div class="post-content">
+	
+        <style>
+			.modal-image {
+			  display: flex;
+			  flex-direction: column;
+			  align-items: center;
+			  justify-content: center;
+			}
+			.modal-image > img {
+			  width: 100%;
+			  object-fit: contain;
+			}
+            div.model-metadata-container {
+              display: flex;
+              justify-content: space-between;
+              gap: 2rem;
+              flex-wrap: wrap;
+            }
+  
+            p.model-metadata-field {
+              font-weight: 600;
+              font-size: 1rem;
+              margin: 0;
+            }
+  
+		  </style>
+			  <div class="modal-content" style="margin-top:2rem;">
+				<div class="modal-image">
+				  <img class="image-class"  
+				  data-snapshot-light="{{page.colorIcon}}"
+				  data-snapshot-dark="{{page.whiteIcon}}"
+				  src="{{page.colorIcon}}"
+				  onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage('{{ page.colorIcon }}', 'model')" />
+				</div>
+				<br />
+				<div class="vertical-line"></div>
+				<div class="modal-info">
+                  <div class="model-metadata-container">
+                    <div>
+                      <p class="model-metadata-field">Registrant</p>
+                      <p class="contentdata">{{ page.registrant }}</p>
+                    </div>
+                    <div>
+                      <p class="model-metadata-field">Components</p>
+                      <p class="contentdata">{{ page.componentsCount }}</p>
+                    </div>
+            
+                    <div>
+                      <p class="model-metadata-field">Relationships</p>
+                      <p class="contentdata">{{ page.relationshipsCount }}</p>
+                    </div>
+                    <!-- <div>
+                      <p class="model-metadata-field">Created By</p>
+                      <a href="https://cloud.layer5.io/user/{{model.authorId}}" class="contentdata">{{ model.author }}</a>
+                    </div> -->
+                    <div>
+                      <p class="model-metadata-field">Category</p>
+                      <p class="contentdata">{{ page.category }}</p>
+                    </div>
+                  </div>
+                  
+                  <div id="copy-url">
+					<div class="btn-class">
+					  <div class="vertical-center" id="{{type.name}}">
+						<div class="btn-grp">
+						  {% if page.docURL %}
+						  <a href="{{page.docURL}}">
+							<button class="import" style="width: 7rem;">Visit docs</button></a>
+						  {% endif %}
+						  <div class="btn-tooltip-grp">
+							<a href="https://docs.meshery.io/project/contributing/contributing-models-quick-start">
+							  <button class="import" style="width: 12rem;">Add new model</button></a>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				  
+				</div>
+			  </div>
+			   
+		   <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
+		   <script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>
+        
+        
+	   <div class="blog-navigation" style="margin-bottom: 2rem;">
+		<div style="justify-content:space-between; display: flex; width:100%;">
+			{% if page.previous.url %}
+				<a href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.name }}</a>
+			{% endif %}
+			{% if page.next.url %}
+				<a  href="{% include relative-src.html src=page.next.url %}">{{ page.next.name }} &raquo;</a>
+			{% endif %}
+		</div>
+		</div>
+	</div>
+</div>

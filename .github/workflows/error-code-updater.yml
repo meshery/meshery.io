@@ -1,0 +1,65 @@
+name: Error Codes Utility Runner
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "master"
+    paths:
+      - "assets/artifact-hub-pkg/**.go"
+
+jobs:
+  Update-error-codes:
+    name: Error codes utility
+    if: github.repository == 'meshery/meshery.io'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          token: ${{ secrets.GH_ACCESS_TOKEN }}
+          ref: "master"
+
+      - name: Setup Go
+        uses: actions/setup-go@master
+        with:
+          go-version: "1.23"
+
+      - name: Run utility
+        run: |
+          go run github.com/layer5io/meshkit/cmd/errorutil -d ./assets/artifact-hub-pkg update -i ./assets/artifact-hub-pkg -o ./assets/artifact-hub-pkg
+
+      - name: Pull changes from remote
+        run: git pull origin master
+
+      - name: Commit changes to meshery.io
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_user_name: l5io
+          commit_user_email: ci@layer5.io
+          commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          commit_options: "--signoff"
+          commit_message: "run error codes utility for artifact-hub-pkg"
+          file_pattern: assets/artifact-hub-pkg/**.go assets/artifact-hub-pkg/component_info.json
+
+      - name: Checkout meshery
+        uses: actions/checkout@master
+        with:
+          repository: "meshery/meshery"
+          token: ${{ secrets.GH_ACCESS_TOKEN }}
+          path: "meshery"
+          ref: "master"
+
+      - name: Update and push docs
+        run: |
+          echo '{ "errors_export": "" }' | jq --slurpfile export ./assets/artifact-hub-pkg/errorutil_errors_export.json '.errors_export = $export[0]' > ./meshery/docs/_data/errorref/artifact-hub-pkg_errors_export.json
+
+          cd ./meshery
+          git config user.name l5io
+          git config user.email ci@layer5.io
+          if git diff --exit-code --quiet
+          then
+            echo "No changes to commit"
+            exit
+          fi
+          git add ./docs/_data/errorref/artifact-hub-pkg_errors_export.json
+          git commit -m "[Docs] Error Code Reference: Updated codes for Artifact Hub Package" --signoff
+          git push origin master
