@@ -1,3 +1,89 @@
+<style>
+  .active-title {
+    color: #191970; /* Change text color to blue */
+    font-weight: bold; /* Make it bold */
+    text-decoration: underline; /* Optional: Underline it */
+    transition: all 0.3s ease-in-out;
+  }
+  .catalog-summary {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+  .catalog-summary span {
+    margin: 0 10px;
+    color: #333;
+  }
+  .icon-container {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 1rem;
+    & img {
+      width: 100%;
+    }
+  }
+  .catalog-feature {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+
+  .catalog-feature h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .catalog-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .catalog-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 180px;
+    border: 1px solid #d4f3e6;
+    transition: 0.3s ease-in-out;
+  }
+
+  .catalog-card:hover {
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #444;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin: 5px 0;
+    font-size: 28px;
+    color: #222;
+  }
+
+  .card-subtitle {
+    font-size: 12px;
+    color: #777;
+  }
+</style>
 <h2 class="catalog-heading">Cloud Native Catalog</h2>
 <h3 class="catalog-subheading">Harness Well-Architected Kubernetes Patterns</h3>
 
@@ -56,106 +142,129 @@ function showElements(elements) {
   });
     
 </script> -->
-<div class="features-container">
-  <div class="feature-container tab-button" data-target="designs-tab">
-    <div class="box">
-      <div class="title pattern" style="cursor: pointer">Designs</div>
-      <img
-        class="patterns-coming-soon hidden"
-        src="{{site.baseurl}}/assets/images/coming-soon.png"
-      />
-      <div class="circlecont" style="cursor: pointer" id="pattern">
-        <div class="circle"></div>
-        <div class="hover-circles">
-          <div class="circle">
-            <img src="/assets/images/logos/service-mesh-pattern.svg" />
-          </div>
-          <div class="circle">
-            <img src="/assets/images/logos/service-mesh-pattern.svg" />
-          </div>
-          <div class="circle">
-            <img src="/assets/images/logos/service-mesh-pattern.svg" />
-          </div>
-          <div class="circle">
-            <img src="/assets/images/logos/service-mesh-pattern.svg" />
-          </div>
-          <div class="circle">
-            <img src="/assets/images/logos/service-mesh-pattern.svg" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="description pattern">
-      Cloud native patterns enable the business function in simple language.
-    </div>
-  </div>
+{% assign filters = site.filters %} {% assign models = site.models %} {% assign
+designs = site.catalog %} {% assign total_filters = filters | size %} {% assign
+total_designs = designs | size %} {% assign total_models = models | size %}
 
-  <div class="feature-container tab-button" data-target="filters-tab">
-    <div class="box">
-      <div class="title wasm" style="cursor: pointer">Filters</div>
-      <img
-        class="patterns-coming-soon hidden"
-        src="{{site.baseurl}}/assets/images/coming-soon.png"
-      />
-      <div class="circlecont" style="cursor: pointer" id="filter">
-        <div class="circle"></div>
-        <div class="hover-circles">
-          <div class="circle">
-            <img src="/assets/images/webassembly_logo.svg" />
-          </div>
-          <div class="circle">
-            <img src="/assets/images/webassembly_logo.svg" />
-          </div>
-          <div class="circle">
-            <img src="/assets/images//webassembly_logo.svg" />
-          </div>
-          <div class="circle">
-            <img src="/assets/images/webassembly_logo.svg" />
-          </div>
-          <div class="circle">
-            <img src="/assets/images/webassembly_logo.svg" />
-          </div>
-        </div>
+<div class="icon-container">
+  <div class="catalog-feature">
+    <div class="catalog-cards">
+      <div class="catalog-card">
+        <p class="card-title">TOTAL MODELS</p>
+        <h3>{{ total_models }}</h3>
+      </div>
+      <div class="catalog-card">
+        <p class="card-title">TOTAL DESIGNS</p>
+        <h3>{{ total_designs }}</h3>
+      </div>
+      <div class="catalog-card">
+        <p class="card-title">TOTAL FILTERS</p>
+        <h3>{{ total_filters }}</h3>
       </div>
     </div>
-    <div class="description wasm">
-      Embedded in the data plane of a service mesh, WebAssembly filters offer
-      fine-grained control over service requests.
-    </div>
-  </div>
 
-  <div class="feature-container tab-button" data-target="models-tab">
-    <div class="box">
-      <div class="title ebpf" style="cursor: pointer">Models</div>
-      <img
-        class="patterns-coming-soon hidden"
-        src="{{site.baseurl}}/assets/images/coming-soon.png"
-      />
-      <div class="circlecont" style="cursor: pointer" id="filter">
-        <div class="circle"></div>
-        <div class="hover-circles">
-          <div class="circle">
-            <img src="/assets/images/logos/meshery-logo.png" />
-          </div>
-          <div class="circle">
-            <img src="/assets/images/logos/meshery-logo.png" />
-          </div>
-          <div class="circle">
-            <img src="/assets/images/logos/meshery-logo.png" />
-          </div>
-          <div class="circle">
-            <img src="/assets/images/logos/meshery-logo.png" />
-          </div>
-          <div class="circle">
-            <img src="/assets/images/logos/meshery-logo.png" />
+    <div class="feature-container" style="gap: 40px">
+      <div class="tab-button" data-target="designs-tab">
+        <div class="box">
+          <div class="title pattern" style="cursor: pointer">Designs</div>
+          <img
+            class="patterns-coming-soon hidden"
+            src="{{site.baseurl}}/assets/images/coming-soon.png"
+          />
+          <div class="circlecont" style="cursor: pointer" id="pattern">
+            <div class="circle"></div>
+            <div class="hover-circles">
+              <div class="circle">
+                <img src="/assets/images/logos/service-mesh-pattern.svg" />
+              </div>
+              <div class="circle">
+                <img src="/assets/images/logos/service-mesh-pattern.svg" />
+              </div>
+              <div class="circle">
+                <img src="/assets/images/logos/service-mesh-pattern.svg" />
+              </div>
+              <div class="circle">
+                <img src="/assets/images/logos/service-mesh-pattern.svg" />
+              </div>
+              <div class="circle">
+                <img src="/assets/images/logos/service-mesh-pattern.svg" />
+              </div>
+            </div>
           </div>
         </div>
+        <div class="description">
+          Cloud native patterns enable the business function in simple language.
+        </div>
       </div>
-    </div>
-    <div class="description ebpf">
-      Models package components, relationships, and policies, providing a
-      versioned, extensible, and OCI-exportable logical representation of
-      managed resources.
+
+      <div class="tab-button" data-target="filters-tab">
+        <div class="box">
+          <div class="title wasm" style="cursor: pointer">Filters</div>
+          <img
+            class="patterns-coming-soon hidden"
+            src="{{site.baseurl}}/assets/images/coming-soon.png"
+          />
+          <div class="circlecont" style="cursor: pointer" id="filter">
+            <div class="circle"></div>
+            <div class="hover-circles">
+              <div class="circle">
+                <img src="/assets/images/webassembly_logo.svg" />
+              </div>
+              <div class="circle">
+                <img src="/assets/images/webassembly_logo.svg" />
+              </div>
+              <div class="circle">
+                <img src="/assets/images//webassembly_logo.svg" />
+              </div>
+              <div class="circle">
+                <img src="/assets/images/webassembly_logo.svg" />
+              </div>
+              <div class="circle">
+                <img src="/assets/images/webassembly_logo.svg" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="description">
+          Embedded in the data plane of a service mesh, WebAssembly filters
+          offer fine-grained control over service requests.
+        </div>
+      </div>
+
+      <div class="tab-button" data-target="models-tab">
+        <div class="box">
+          <div class="title ebpf" style="cursor: pointer">Models</div>
+          <img
+            class="patterns-coming-soon hidden"
+            src="{{site.baseurl}}/assets/images/coming-soon.png"
+          />
+          <div class="circlecont" style="cursor: pointer" id="filter">
+            <div class="circle"></div>
+            <div class="hover-circles">
+              <div class="circle">
+                <img src="/assets/images/logos/meshery-logo.png" />
+              </div>
+              <div class="circle">
+                <img src="/assets/images/logos/meshery-logo.png" />
+              </div>
+              <div class="circle">
+                <img src="/assets/images/logos/meshery-logo.png" />
+              </div>
+              <div class="circle">
+                <img src="/assets/images/logos/meshery-logo.png" />
+              </div>
+              <div class="circle">
+                <img src="/assets/images/logos/meshery-logo.png" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="description">
+          Models package components, relationships, and policies, providing a
+          versioned, extensible, and OCI-exportable logical representation of
+          managed resources.
+        </div>
+      </div>
     </div>
   </div>
 
@@ -215,6 +324,16 @@ function showElements(elements) {
     buttons.forEach((button) => {
       button.addEventListener("click", () => {
         const target = button.getAttribute("data-target");
+        const catalogSection = document.querySelector(".section-container");
+        catalogSection.style.display = "block";
+
+        // Remove active class from all titles
+        buttons.forEach((btn) =>
+          btn.querySelector(".title").classList.remove("active-title")
+        );
+
+        // Add active class to the title inside the clicked button
+        button.querySelector(".title").classList.add("active-title");
 
         // Hide all tabs
         tabs.forEach((tab) => (tab.style.display = "none"));

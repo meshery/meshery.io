@@ -50,6 +50,7 @@ permalink: /catalog
 
   .section-container {
     width: 100%;
+    display: none;
   }
 
   .tab-container {
@@ -96,6 +97,7 @@ permalink: /catalog
 <!-- {% assign catalog = site.collections | concat: site.catalog | concat: site.models | sort: 'name' %} -->
 {% assign filters = site.filters %} {% assign models = site.models %} {% assign
 designs = site.catalog %}
+
 <div class="section-container">
   {% include view-all.html %}
 
@@ -223,60 +225,11 @@ designs = site.catalog %}
     };
   }
 
-  // function toggleTab(tab) {
-  //   document
-  //     .querySelectorAll(".tab")
-  //     .forEach((tab) => tab.classList.remove("selected"));
-  //   document
-  //     .querySelectorAll(".catalog-section")
-  //     .forEach((section) => section.classList.remove("active"));
-
-  //   document.getElementById(tab + "-tab").classList.add("selected");
-  //   document.querySelector("." + tab + "-section").classList.add("active");
-
-  //   updatePagination(tab);
-  // }
-
-  // document.getElementById("filters-tab").addEventListener("click", function () {
-  //   toggleTab("filters");
-  // });
-
-  // document.getElementById("designs-tab").addEventListener("click", function () {
-  //   toggleTab("designs");
-  // });
-
-  // document.getElementById("models-tab").addEventListener("click", function () {
-  //   toggleTab("models");
-  // });
-
   // Initialize pagination for filters by default
   updatePagination("models");
+  updatePagination("filters");
+  updatePagination("designs");
 </script>
-
-<!-- <script>
-  function toggleTab(tab) {
-    document
-      .querySelectorAll(".tab")
-      .forEach((tab) => tab.classList.remove("selected"));
-    document
-      .querySelectorAll(".catalog-section")
-      .forEach((section) => section.classList.remove("active"));
-
-    document.getElementById(tab + "-tab").classList.add("selected");
-    document.querySelector("." + tab + "-section").classList.add("active");
-  }
-  document.getElementById("filters-tab").addEventListener("click", function () {
-    toggleTab("filters");
-  });
-
-  document.getElementById("designs-tab").addEventListener("click", function () {
-    toggleTab("designs");
-  });
-
-  document.getElementById("models-tab").addEventListener("click", function () {
-    toggleTab("models");
-  });
-</script> -->
 
 <!-- <div class="row">
     <h2 class="not-found" style="display: none;" id="not-found">
