@@ -26,4 +26,4 @@ assignees: ''
 The meshery.io website uses Jekyll and GitHub Pages. Site content is found under the [`master` branch](https://github.com/meshery/meshery.io/tree/master).
 - 📚 See the [Contributing to Meshery.io Website](https://github.com/meshery/meshery.io#contributing-to-the-mesheryio-website) section of the readme.md and other [contributing instructions](https://docs.meshery.io/project/contributing), too.
 - 🎨 Wireframes and [designs for Meshery UI](https://www.figma.com/file/SMP3zxOjZztdOLtgN4dS2W/Meshery-UI) in Figma [(open invite)](https://www.figma.com/team_invite/redeem/qJy1c95qirjgWQODApilR9)
-- 🙋🏾🙋🏼 Questions: [Discussion Forum](https://discuss.layer5.io) and [Community Slack](https://slack.meshery.io)
+- 🙋🏾🙋🏼 Questions: [Discussion Forum](http://discuss.meshery.io) and [Community Slack](https://slack.meshery.io)

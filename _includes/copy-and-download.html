@@ -14,7 +14,8 @@
         </a>
         {% endif %}
 
-        <a href="/catalog/{{type.patternId}}/{{type.publishedVersion}}/design.yml" download="{{type.name}}.yml">
+       
+        <a href="/catalog/{% if pattern.filterInfo %}/{{ type.downloadLink }}{% else %}{{type.patternId}}/{{type.publishedVersion}}/design.yml {% endif %}" download="{{type.name}}.yml">
           <button id="resourceDownloadBtn" data-patternId="{{type.patternId}}" onclick="sendCloudTelemetry()"
             class="import" style="width: 7rem;">
             Download

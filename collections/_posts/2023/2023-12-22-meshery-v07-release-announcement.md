@@ -151,6 +151,6 @@ Meshery now supports multi-cluster management. This allows you to manage multipl
 
 Meshery Maintainers are dedicated to enhancing your ability to deliver engineering platforms to your teams. Let us know how we can continue serving you best by weighing in on the v0.8 Roadmap. Let your voice be heard (please).
 
-[v0.8.0 Release Planning](https://discuss.layer5.io/t/meshery-v0-8-0-roadmap/4336)
+[v0.8.0 Release Planning](http://discuss.meshery.io/t/meshery-v0-8-0-roadmap/4336)
 
 *Try the latest v0.7.0 features of Meshery at [play.meshery.io](https://play.meshery.io).*
