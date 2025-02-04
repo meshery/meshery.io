@@ -1,6 +1,6 @@
 ---
 layout: catalog
-title: Cloud Native Catalog
+title: Cloud Native Catalogs
 permalink: /catalog
 ---
 
@@ -29,7 +29,7 @@ permalink: /catalog
     background-position: right 10px top 50%;
     margin-right: 10px;
     @media (max-width: 506px) {
-     display: none;
+      display: none;
     }
   }
   #search {
@@ -51,20 +51,240 @@ permalink: /catalog
   .section-container {
     width: 100%;
   }
+
+  .tab-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+  }
+
+  .tab {
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .tab.selected {
+    background-color: #f1f1f1;
+    font-weight: bold;
+  }
+
+  .catalog-section {
+    display: none;
+  }
+
+  .catalog-section.active {
+    display: block;
+  }
+
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .pagination button {
+    padding: 10px;
+    font-size: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  .pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 </style>
 
-{% assign catalog = site.collections | concat: site.catalog | concat: site.models | sort: 'name' %}
+<!-- {% assign catalog = site.collections | concat: site.catalog | concat: site.models | sort: 'name' %} -->
+{% assign filters = site.filters %} {% assign models = site.models %} {% assign
+designs = site.catalog %}
 <div class="section-container">
-  
   {% include view-all.html %}
 
-  <div class="row">
+  <div class="catalog-section filters-section tab-content" id="filters-tab">
+    <h2>Filters</h2>
+    <div class="row">
+      <h2 class="not-found" style="display: none" id="not-found">
+        No results found
+      </h2>
+      {% assign count = 0 %} {% for pattern in filters %} {% if count < 6 %} {%
+      assign should_display = 'block' %} {% else %} {% assign should_display =
+      'none' %} {% endif %}
+      <div
+        class="column column-lg patternCard filters"
+        filter="{{ pattern.name }}"
+        style="display: {{ should_display }};"
+      >
+        {% include wasm-card.html %}
+      </div>
+      {% assign count = count | plus: 1 %} {% endfor %}
+    </div>
+    <div class="pagination">
+      <button class="prev" id="filters-prev" disabled>Prev</button>
+      <button class="next" id="filters-next">Next</button>
+    </div>
+  </div>
+
+  <div class="catalog-section designs-section tab-content" id="designs-tab">
+    <h2>Designs</h2>
+    <div class="row">
+      {% assign count = 0 %} {% for pattern in designs %} {% if count < 6 %} {%
+      assign should_display = 'block' %} {% else %} {% assign should_display =
+      'none' %} {% endif %}
+      <div
+        class="column column-lg patternCard designs"
+        filter="{{ pattern.name }}"
+        style="display: {{ should_display }};"
+      >
+        {% include card.html %}
+      </div>
+      {% assign count = count | plus: 1 %} {% endfor %}
+    </div>
+    <div class="pagination">
+      <button class="prev" id="designs-prev" disabled>Prev</button>
+      <button class="next" id="designs-next">Next</button>
+    </div>
+  </div>
+
+  <div class="catalog-section models-section tab-content" id="models-tab">
+    <h2>Models</h2>
+    <div class="row">
+      {% assign count = 0 %} {% for pattern in models %} {% if count < 6 %} {%
+      assign should_display = 'block' %} {% else %} {% assign should_display =
+      'none' %} {% endif %}
+      <div
+        class="column column-lg patternCard models"
+        filter="{{ pattern.name }}"
+        style="display: {{ should_display }};"
+      >
+        <!-- {% include models/card.html model=pattern %} -->
+        {% include models/card.html model=model %}
+      </div>
+      {% assign count = count | plus: 1 %} {% endfor %}
+    </div>
+    <div class="pagination">
+      <button class="prev" id="models-prev" disabled>Prev</button>
+      <button class="next" id="models-next">Next</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let filtersCount = 0;
+  let designsCount = 0;
+  let modelsCount = 0;
+  const itemsPerPage = 6;
+
+  function getCardsForSection(section) {
+    return document.querySelectorAll(`.${section}-section .patternCard`);
+  }
+
+  function updatePagination(section) {
+    const cards = getCardsForSection(section);
+
+    console.log(`Updating pagination for: ${section}`);
+
+    const totalPages = Math.ceil(cards.length / itemsPerPage);
+    let currentPage = 0;
+
+    function showCards() {
+      const start = currentPage * itemsPerPage;
+      const end = start + itemsPerPage;
+
+      cards.forEach((card, index) => {
+        card.style.display = index >= start && index < end ? "block" : "none";
+      });
+    }
+
+    function updateButtons() {
+      console.log(currentPage);
+      const prevButton = document.getElementById(`${section}-prev`);
+      const nextButton = document.getElementById(`${section}-next`);
+
+      prevButton.disabled = currentPage === 0;
+      nextButton.disabled = currentPage + 1 >= totalPages;
+    }
+
+    showCards();
+    updateButtons();
+
+    document.getElementById(`${section}-prev`).onclick = function () {
+      if (currentPage > 0) {
+        currentPage--;
+        showCards();
+        updateButtons();
+      }
+    };
+
+    document.getElementById(`${section}-next`).onclick = function () {
+      if (currentPage + 1 < totalPages) {
+        currentPage++;
+        showCards();
+        updateButtons();
+      }
+    };
+  }
+
+  // function toggleTab(tab) {
+  //   document
+  //     .querySelectorAll(".tab")
+  //     .forEach((tab) => tab.classList.remove("selected"));
+  //   document
+  //     .querySelectorAll(".catalog-section")
+  //     .forEach((section) => section.classList.remove("active"));
+
+  //   document.getElementById(tab + "-tab").classList.add("selected");
+  //   document.querySelector("." + tab + "-section").classList.add("active");
+
+  //   updatePagination(tab);
+  // }
+
+  // document.getElementById("filters-tab").addEventListener("click", function () {
+  //   toggleTab("filters");
+  // });
+
+  // document.getElementById("designs-tab").addEventListener("click", function () {
+  //   toggleTab("designs");
+  // });
+
+  // document.getElementById("models-tab").addEventListener("click", function () {
+  //   toggleTab("models");
+  // });
+
+  // Initialize pagination for filters by default
+  updatePagination("models");
+</script>
+
+<!-- <script>
+  function toggleTab(tab) {
+    document
+      .querySelectorAll(".tab")
+      .forEach((tab) => tab.classList.remove("selected"));
+    document
+      .querySelectorAll(".catalog-section")
+      .forEach((section) => section.classList.remove("active"));
+
+    document.getElementById(tab + "-tab").classList.add("selected");
+    document.querySelector("." + tab + "-section").classList.add("active");
+  }
+  document.getElementById("filters-tab").addEventListener("click", function () {
+    toggleTab("filters");
+  });
+
+  document.getElementById("designs-tab").addEventListener("click", function () {
+    toggleTab("designs");
+  });
+
+  document.getElementById("models-tab").addEventListener("click", function () {
+    toggleTab("models");
+  });
+</script> -->
+
+<!-- <div class="row">
     <h2 class="not-found" style="display: none;" id="not-found">
       No results found
     </h2>
     {% assign count = 0 %}
     {% for pattern in catalog %}
-        {% if count < 9 %}
+        {% if count <= 5 %}
           {% assign should_display = 'block' %}
         {% else %}
           {% assign should_display = 'none' %}
@@ -126,7 +346,7 @@ permalink: /catalog
     {% endif %} 
     {% endfor %}
   </div>
-</div>
+</div> -->
 
 <script>
   document.getElementById("sort").addEventListener("change", function () {
@@ -170,21 +390,27 @@ permalink: /catalog
   document.getElementById("search").addEventListener("input", function () {
     var searchValue = this.value.toLowerCase();
     var cardsContainer = document.querySelector(".row");
-    var cards = cardsContainer.querySelectorAll(".patternCard");
+    // var cards = cardsContainer.querySelectorAll(".patternCard");
     var notFound = document.getElementById("not-found");
 
     let found = false;
+    var sections = document.querySelectorAll(".catalog-section");
 
-    cards.forEach(function (pattern) {
-      var filterValue = pattern.getAttribute("filter").toLowerCase();
-      if (filterValue.includes(searchValue)) {
-        pattern.style.display = "block";
-        found = true;
-      } else {
-        pattern.style.display = "none";
-      }
+    sections.forEach(function (section) {
+      var cards = section.querySelectorAll(".patternCard"); // Select cards within each section
+
+      cards.forEach(function (pattern) {
+        var filterValue = pattern.getAttribute("filter").toLowerCase();
+        if (filterValue.includes(searchValue)) {
+          pattern.style.display = "block";
+          found = true;
+        } else {
+          pattern.style.display = "none";
+        }
+      });
     });
 
+    var notFound = document.getElementById("not-found");
     if (!found) {
       notFound.style.display = "block";
     } else {
@@ -193,6 +419,7 @@ permalink: /catalog
   });
 </script>
 
+//
 <script>
   // const patternCards = document.querySelectorAll(".patternCard");
   // document.addEventListener("DOMContentLoaded", () => {
@@ -203,13 +430,15 @@ permalink: /catalog
   //       card.style.display = "block";
   //     }
   //   });
-  // });
+  //});
 
-  document.addEventListener("themeChange",(e)=> {
-    // load the snapshot version based on theme 
-    document.querySelectorAll(".pattern-image").forEach(e => {
-      e.src = event.detail.value == "dark-mode" ? e.dataset.snapshotDark : e.dataset.snapshotLight;
+  document.addEventListener("themeChange", (e) => {
+    // load the snapshot version based on theme
+    document.querySelectorAll(".pattern-image").forEach((e) => {
+      e.src =
+        event.detail.value == "dark-mode"
+          ? e.dataset.snapshotDark
+          : e.dataset.snapshotLight;
     });
-  
-  }) 
+  });
 </script>

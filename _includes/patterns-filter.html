@@ -285,15 +285,16 @@
   const patternTypeCardCount = {}
   // Loop over all pattern cards to get there compatibility, type and technology so we can make a unique list out of it
   for(let i=0; i<patternCards.length; i++){
+
       const type = patternCards[i].getAttribute("type")
       const patternType = patternCards[i].getAttribute("patternType")
       if(type && type !== "wasm filter"){
-        const lowerCaseType = type.toLowerCase();
+        const lowerCaseType = type?.toLowerCase();
         cardType.add(lowerCaseType);
         categoryCardCount[lowerCaseType] = (categoryCardCount[lowerCaseType] || 0) + 1;   // count cards that have a certain category
       } 
       if(patternType){
-        const lowerCasePatternType = patternType.toLowerCase();
+        const lowerCasePatternType = patternType?.toLowerCase();
         cardPatternType.add(lowerCasePatternType);
         patternTypeCardCount[lowerCasePatternType] = (patternTypeCardCount[lowerCasePatternType] || 0) + 1;
       }
@@ -457,9 +458,10 @@
       for(let i=0; i<patternCards.length; i++){
         let cc = [];
         let cardCategory;
-        const type = patternCards[i].getAttribute("type").toLowerCase();
+        const type = patternCards[i].getAttribute("type")?.toLowerCase();
+
         const technology = patternCards[i].getAttribute("technology")
-        const patternType = patternCards[i].getAttribute("patternType").toLowerCase();
+        const patternType = patternCards[i].getAttribute("patternType")?.toLowerCase();
         if(technology){
           let t = JSON.parse(technology)
           for (let k = 0; k < t.length; k++) {
@@ -474,7 +476,7 @@
        // if all list are empty that is no tech, category and pattern type is selected;
        // show only the first 9 and hide the rest
         if(globalTechnologyList.length === 0 && globalCategoryList.length === 0 && globalPatternTypeList.length === 0){
-          if(visibleCount < 9) {
+          if(visibleCount < 6) {
             patternCards[i].style.display = "block"; // show only the first 9
             visibleCount++;
             cardsShown = true;
@@ -485,6 +487,7 @@
         // apply the regular filtering logic
         else if (showCardTech && showCardCat && showCardPatternType) {
           patternCards[i].style.display = "block";
+          console.log(patternCards[i]);
           cardsShown = true;
         } else {
           patternCards[i].style.display = "none";
