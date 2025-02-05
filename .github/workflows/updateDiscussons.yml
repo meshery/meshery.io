@@ -15,7 +15,9 @@ jobs:
         with:
           token: ${{ secrets.GH_ACCESS_TOKEN }}
       - name: Fetch data for meshery tag
-        run: curl https://discuss.layer5.io/tag/meshery.json -o _data/discuss/meshery.json
+        run: |
+          curl -L http://discuss.meshery.io/tag/meshery.json -o _data/discuss/meshery.json
+          sed -i 's|https://discuss.layer5.io|http://discuss.meshery.io|g' _data/discuss/meshery.json
 
       - name: Pull changes from remote
         run: git pull origin master
@@ -24,7 +26,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_user_name: l5io
-          commit_user_email: ci@layer5.io
+          commit_user_email: ci@meshery.io
           commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           commit_options: "--signoff"
           commit_message: "Updated meshery.json with new discussion posts"
