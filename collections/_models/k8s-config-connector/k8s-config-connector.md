@@ -1427,7 +1427,31 @@ components:
   colorIcon: assets/images/integration/k8s-config-connector/components/secure-source-manager-repository/icons/color/secure-source-manager-repository-color.svg
   whiteIcon: assets/images/integration/k8s-config-connector/components/secure-source-manager-repository/icons/white/secure-source-manager-repository-white.svg
   description: 
-componentsCount: 354
+- name: discovery-engine-data-store-target-site
+  colorIcon: assets/images/integration/k8s-config-connector/components/discovery-engine-data-store-target-site/icons/color/discovery-engine-data-store-target-site-color.svg
+  whiteIcon: assets/images/integration/k8s-config-connector/components/discovery-engine-data-store-target-site/icons/white/discovery-engine-data-store-target-site-white.svg
+  description: 
+- name: discovery-engine-engine
+  colorIcon: assets/images/integration/k8s-config-connector/components/discovery-engine-engine/icons/color/discovery-engine-engine-color.svg
+  whiteIcon: assets/images/integration/k8s-config-connector/components/discovery-engine-engine/icons/white/discovery-engine-engine-white.svg
+  description: 
+- name: iap-settings
+  colorIcon: assets/images/integration/k8s-config-connector/components/iap-settings/icons/color/iap-settings-color.svg
+  whiteIcon: assets/images/integration/k8s-config-connector/components/iap-settings/icons/white/iap-settings-white.svg
+  description: 
+- name: memorystore-instance
+  colorIcon: assets/images/integration/k8s-config-connector/components/memorystore-instance/icons/color/memorystore-instance-color.svg
+  whiteIcon: assets/images/integration/k8s-config-connector/components/memorystore-instance/icons/white/memorystore-instance-white.svg
+  description: 
+- name: workstation
+  colorIcon: assets/images/integration/k8s-config-connector/components/workstation/icons/color/workstation-color.svg
+  whiteIcon: assets/images/integration/k8s-config-connector/components/workstation/icons/white/workstation-white.svg
+  description: 
+- name: workstation-config
+  colorIcon: assets/images/integration/k8s-config-connector/components/workstation-config/icons/color/workstation-config-color.svg
+  whiteIcon: assets/images/integration/k8s-config-connector/components/workstation-config/icons/white/workstation-config-white.svg
+  description: 
+componentsCount: 360
 relationships: 
 relationshipsCount: 0
 featureList: [
