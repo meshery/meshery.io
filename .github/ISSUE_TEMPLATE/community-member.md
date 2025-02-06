@@ -14,7 +14,7 @@ assignees: ''
 
 ---
 **About adding a new Community Member**
-- Adding a new profile is an act of recognition of consistent contribution to Layer5 project(s).
+- Adding a new profile is an act of recognition of consistent contribution to project(s).
 - Profile pictures should be square in aspect ratio.
 
 **About updating a Community Member**
