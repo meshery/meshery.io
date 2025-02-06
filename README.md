@@ -1,6 +1,6 @@
 <picture>
   <p style="text-align: center;">
-<a href="https://layer5.io/meshery">
+<a href="https://meshery.io/">
 <picture align="center">
 <source media="(prefers-color-scheme: dark)" srcset="./assets/images/logos/meshery-logo-dark-text-side.svg" width="70%" align="center" style="margin-bottom:20px;">
 <source media="(prefers-color-scheme: light)" srcset="./assets/images/logos/meshery-logo-light-text-side.svg" width="70%" align="center" style="margin-bottom:20px;">
@@ -19,7 +19,7 @@
 [![Build Status](https://img.shields.io/github/actions/workflow/status/meshery/meshery/build-and-release-edge.yml?branch=master)](https://github.com/meshery/meshery.io/actions/workflows/pages/pages-build-deployment)
 [![GitHub](https://img.shields.io/github/license/layer5io/meshery.svg)](LICENSE)
 [![GitHub issues by-label](https://img.shields.io/github/issues/layer5io/meshery/help%20wanted.svg)](https://github.com/layer5io/meshery/issues?q=is%3Aopen+is%3Aissue+label%3A"help+wanted")
-[![Website](https://img.shields.io/website/https/layer5.io/meshery.svg)](https://layer5.io/meshery/)
+[![Website](https://img.shields.io/website/https/layer5.io/meshery.svg)](https://meshery.io/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/layer5.svg?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=mesheryio)
 [![Discuss Users](https://img.shields.io/discourse/users?server=https%3A%2F%2Fdiscuss.layer5.io)](http://discuss.meshery.io)
 [![Slack](https://img.shields.io/badge/Slack-@layer5.svg?logo=slack)](https://slack.meshery.io)
