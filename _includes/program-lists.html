@@ -1,110 +1,105 @@
-
 <style>
-body {  
-  background: white;
-}
-.card {
-  width: 200px;
-  height: 200px;
-  border-radius: 15px;
-  padding: 1.5rem;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  transition: 0.4s ease-out;
-  box-shadow: 2px 2px 6px 0px  #00d3a9;
-}
-.card:hover {
-  transform: translateY(10px);
-}
-.card:hover:before {
-  opacity: 1;
-}
-.card:hover .info {
-  opacity: 1;
-  transform: translateY(0px);
-}
-.card:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 2;
-  transition: 0.5s;
-  opacity: 0;
-}
-.card img {
-  width: 80%;
-  height: 80%;
-  object-fit: contain;
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin-left: 10%;
-  margin-top: 10%; 
-  border-radius: 15px;
-}
+  body {
+    background: white;
+  }
+  .card {
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    padding: 1.5rem;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    transition: 0.4s ease-out;
+    box-shadow: 2px 2px 6px 0px #00d3a9;
+  }
+  .card:hover {
+    transform: translateY(10px);
+  }
+  .card:hover:before {
+    opacity: 1;
+  }
+  .card:hover .info {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  .card:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    transition: 0.5s;
+    opacity: 0;
+  }
+  .card img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 10%;
+    margin-top: 10%;
+    border-radius: 15px;
+  }
 
-.card-img {
-  object-fit: contain;
-  user-select: none;
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-}
-.card .info {
-  position: relative;
-  z-index: 3;
-  color: white;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: 0.5s;
-}
-.card .info h1 {
-  margin: 0px;
-}
-.card .info p {
-  letter-spacing: 1px;
-  font-size: 15px;
-  margin-top: 8px;
-}
-.card .info button {
-  padding: 0.6rem;
-  outline: none;
-  border: none;
-  border-radius: 3px;
-  background: white;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.4s ease;
-}
-.card .info button:hover {
-  background: dodgerblue;
-  color: white;
-}
-
+  .card-img {
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+  }
+  .card .info {
+    position: relative;
+    z-index: 3;
+    color: white;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.5s;
+  }
+  .card .info h1 {
+    margin: 0px;
+  }
+  .card .info p {
+    letter-spacing: 1px;
+    font-size: 15px;
+    margin-top: 8px;
+  }
+  .card .info button {
+    padding: 0.6rem;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    background: white;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.4s ease;
+  }
+  .card .info button:hover {
+    background: dodgerblue;
+    color: white;
+  }
 </style>
 
-  {% for program in site.data.programs  %}
-  <a href="{{program.link}}">
+{% for program in site.data.programs %}
+<a href="{{program.link}}">
   <wrapper>
     <div class="card">
-      <img src="{{program.imagePath}}">
+      <img src="{{program.imagePath}}" />
       <div class="info">
         <h1>{{program.name}}</h1>
       </div>
-      </div>
-      </wrapper>
-    </a>
-  {% endfor %}
-  
-
-
+    </div>
+  </wrapper>
+</a>
+{% endfor %}
