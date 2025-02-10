@@ -8,15 +8,18 @@ permalink: /catalog
   .selected a {
     background-color: #222222;
   }
+
   .sorting-options {
     margin: 0 20px 0 20px;
     display: flex;
     align-items: center;
+
     @media (max-width: 506px) {
       text-align: center;
       margin: auto;
     }
   }
+
   #sort {
     padding: 10px;
     font-size: 16px;
@@ -28,10 +31,17 @@ permalink: /catalog
     background-repeat: no-repeat;
     background-position: right 10px top 50%;
     margin-right: 10px;
+
     @media (max-width: 506px) {
-     display: none;
+      display: none;
     }
   }
+
+  #sort.no-arrow {
+    background-image: none;
+    /* Removes the arrow */
+  }
+
   #search {
     width: 30%;
     flex-grow: 1;
@@ -41,9 +51,11 @@ permalink: /catalog
     box-sizing: border-box;
     top: 0;
   }
+
   .row {
     margin: 10px;
   }
+
   .column.column-lg.patternCard {
     display: block;
   }
@@ -81,6 +93,7 @@ permalink: /catalog
       status="{{ pattern.Status }}"
       style="display: {{ should_display }};"
     >
+
       {% include card.html %}
     </div>
     {% assign count = count | plus: 1 %}
@@ -135,6 +148,15 @@ permalink: /catalog
     var cards = cardsContainer.querySelectorAll(".patternCard");
 
     var catalog = Array.from(cards);
+
+    var sortElement = this;
+
+    // Check if a valid option is selected
+    if (sortElement.value) {
+      sortElement.classList.add("no-arrow"); // Add the class to hide the arrow
+    } else {
+      sortElement.classList.remove("no-arrow"); // Remove the class to show the arrow
+    }
 
     if (sortValue === "asc") {
       catalog = catalog.sort(function (a, b) {
@@ -205,11 +227,11 @@ permalink: /catalog
   //   });
   // });
 
-  document.addEventListener("themeChange",(e)=> {
+  document.addEventListener("themeChange", (e) => {
     // load the snapshot version based on theme 
     document.querySelectorAll(".pattern-image").forEach(e => {
       e.src = event.detail.value == "dark-mode" ? e.dataset.snapshotDark : e.dataset.snapshotLight;
     });
-  
+
   }) 
 </script>
