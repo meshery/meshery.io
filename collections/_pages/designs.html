@@ -102,9 +102,9 @@ designs = site.catalog %}
   var models = {{ models | jsonify }};
   var designs = {{ designs | jsonify }};
 
-  console.log(filters);
-  console.log(models);
-  console.log(designs);
+
+
+
 </script>
 <div class="section-container">
   {% include view-all.html %}
@@ -132,16 +132,22 @@ designs = site.catalog %}
       <button class="next" id="filters-next">Next</button>
     </div>
   </div> -->
-
+  
+ 
   <div class="catalog-section designs-section tab-content" id="designs-tab">
     <h2>Designs</h2>
     <div class="row">
       {% assign count = 0 %} {% for pattern in designs %} {% if count < 6 %} {%
       assign should_display = 'block' %} {% else %} {% assign should_display =
       'none' %} {% endif %}
+      {% assign last = pattern.compatibility | last %}
       <div
         class="column column-lg patternCard designs"
         filter="{{ pattern.name }}"
+        type="{{ pattern.type }}"
+        patternType="designs"
+        technology='[{% for item in pattern.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
+        status="{{ pattern.Status }}"
         style="display: {{ should_display }};"
       >
         {% include card.html %}

@@ -102,9 +102,9 @@ designs = site.catalog %}
   var models = {{ models | jsonify }};
   var designs = {{ designs | jsonify }};
 
-  console.log(filters);
-  console.log(models);
-  console.log(designs);
+
+
+
 </script>
 <div class="section-container">
   {% include view-all.html %}
@@ -121,6 +121,10 @@ designs = site.catalog %}
       <div
         class="column column-lg patternCard filters"
         filter="{{ pattern.name }}"
+        type="{{ pattern.type }}"
+        patternType="wasm filters"
+        technology='["wasm-filter"{% for item in pattern.compatibility %}{% if forloop.first %}, {% endif %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
+        status="{{ pattern.Status }}"
         style="display: {{ should_display }};"
       >
         {% include wasm-card.html %}
