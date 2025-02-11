@@ -44,8 +44,9 @@
   .catalog-cards {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 20px;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
   }
 
   .catalog-card {
@@ -83,6 +84,7 @@
 
   .card-container {
     flex: 1;
+    min-height: 285px;
     position: relative;
     overflow: hidden;
     border-radius: 1rem;
@@ -159,6 +161,12 @@
     bottom: 0;
     height: 0.25rem; /* Equivalent to h-1 */
   }
+  @media screen and (min-width: 600px) {
+  .feature-container {
+    margin-top:10rem;
+    min-height: 600px;
+  }
+}
 </style>
 <h2 class="catalog-heading">Cloud Native Catalog</h2>
 <h3 class="catalog-subheading">Harness Well-Architected Kubernetes Patterns</h3>
@@ -185,11 +193,11 @@ assign models = site.models %} {% assign designs = site.catalog %} {% assign
 total_filters = filters | size %} {% assign total_designs = designs | size %} {%
 assign total_models = models | size %}
 
-<div class="feature-container" style="gap: 40px">
+<div class="feature-container" style="gap: 40px;">
   
     <div
     class="card-container box tab-button"
-    style="cursor: pointer"
+    style="cursor: pointer;flex:1;"
     data-target="designs-tab"
   >
   <a href="/designs" target="_blank" style="text-decoration: none; color: inherit; display: block;">
@@ -248,8 +256,8 @@ assign total_models = models | size %}
   
 
   <div
-    class="card-container box tab-button"
-    style="cursor: pointer"
+    class="card-container box tab-button "
+    style="cursor: pointer;flex:1;"
     data-target="filters-tab"
   >
   <a href="/filters" target="_blank" style="text-decoration: none; color: inherit; display: block;">
@@ -307,7 +315,7 @@ assign total_models = models | size %}
 
   <div
     class="card-container box tab-button"
-    style="cursor: pointer"
+    style="cursor: pointer;flex:1;"
     data-target="models-tab"
   >
   <a href="/models" target="_blank" style="text-decoration: none; color: inherit; display: block;">

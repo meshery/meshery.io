@@ -96,143 +96,6 @@ permalink: /catalog
 
 {% assign filters = site.filters %} {% assign models = site.models %} {% assign
 designs = site.catalog %}
-<script>
-
-  var filters = {{ filters | jsonify }};
-  var models = {{ models | jsonify }};
-  var designs = {{ designs | jsonify }};
-</script>
-<!-- <div class="section-container">
-  {% include view-all.html %}
-
-  <div class="catalog-section filters-section tab-content" id="filters-tab">
-    <h2>Filters</h2>
-    <div class="row">
-      <h2 class="not-found" style="display: none" id="not-found">
-        No results found
-      </h2>
-      {% assign count = 0 %} {% for pattern in filters %} {% if count < 6 %} {%
-      assign should_display = 'block' %} {% else %} {% assign should_display =
-      'none' %} {% endif %}
-      <div
-        class="column column-lg patternCard filters"
-        filter="{{ pattern.name }}"
-        style="display: {{ should_display }};"
-      >
-        {% include wasm-card.html %}
-      </div>
-      {% assign count = count | plus: 1 %} {% endfor %}
-    </div>
-    <div class="pagination">
-      <button class="prev" id="filters-prev" disabled>Prev</button>
-      <button class="next" id="filters-next">Next</button>
-    </div>
-  </div> -->
-
-<!-- <div class="catalog-section designs-section tab-content" id="designs-tab">
-    <h2>Designs</h2>
-    <div class="row">
-      {% assign count = 0 %} {% for pattern in designs %} {% if count < 6 %} {%
-      assign should_display = 'block' %} {% else %} {% assign should_display =
-      'none' %} {% endif %}
-      <div
-        class="column column-lg patternCard designs"
-        filter="{{ pattern.name }}"
-        style="display: {{ should_display }};"
-      >
-        {% include card.html %}
-      </div>
-      {% assign count = count | plus: 1 %} {% endfor %}
-    </div>
-    <div class="pagination">
-      <button class="prev" id="designs-prev" disabled>Prev</button>
-      <button class="next" id="designs-next">Next</button>
-    </div>
-  </div> -->
-
-<!-- <div class="catalog-section models-section tab-content" id="models-tab">
-    <h2>Models</h2>
-    <div class="row">
-      {% assign count = 0 %} {% for pattern in models %} {% if count < 6 %} {%
-      assign should_display = 'block' %} {% else %} {% assign should_display =
-      'none' %} {% endif %}
-      <div
-        class="column column-lg patternCard models"
-        filter="{{ pattern.name }}"
-        style="display: {{ should_display }};"
-      >
-        {% include models/card.html model=pattern %}
-      </div>
-      {% assign count = count | plus: 1 %} {% endfor %}
-    </div>
-    <div class="pagination">
-      <button class="prev" id="models-prev" disabled>Prev</button>
-      <button class="next" id="models-next">Next</button>
-    </div>
-  </div>
-</div> -->
-
-<script>
-  let filtersCount = 0;
-  let designsCount = 0;
-  let modelsCount = 0;
-  const itemsPerPage = 6;
-
-  function getCardsForSection(section) {
-    return document.querySelectorAll(`.${section}-section .patternCard`);
-  }
-
-  function updatePagination(section) {
-    const cards = getCardsForSection(section);
-
-    console.log(`Updating pagination for: ${section}`);
-
-    const totalPages = Math.ceil(cards.length / itemsPerPage);
-    let currentPage = 0;
-
-    function showCards() {
-      const start = currentPage * itemsPerPage;
-      const end = start + itemsPerPage;
-
-      cards.forEach((card, index) => {
-        card.style.display = index >= start && index < end ? "block" : "none";
-      });
-    }
-
-    function updateButtons() {
-      console.log(currentPage);
-      const prevButton = document.getElementById(`${section}-prev`);
-      const nextButton = document.getElementById(`${section}-next`);
-
-      prevButton.disabled = currentPage === 0;
-      nextButton.disabled = currentPage + 1 >= totalPages;
-    }
-
-    showCards();
-    updateButtons();
-
-    document.getElementById(`${section}-prev`).onclick = function () {
-      if (currentPage > 0) {
-        currentPage--;
-        showCards();
-        updateButtons();
-      }
-    };
-
-    document.getElementById(`${section}-next`).onclick = function () {
-      if (currentPage + 1 < totalPages) {
-        currentPage++;
-        showCards();
-        updateButtons();
-      }
-    };
-  }
-
-  // Initialize pagination for filters by default
-  updatePagination("models");
-  updatePagination("filters");
-  updatePagination("designs");
-</script>
 
 <!-- <div class="row">
     <h2 class="not-found" style="display: none;" id="not-found">
@@ -304,7 +167,7 @@ designs = site.catalog %}
   </div>
 </div> -->
 
-<script>
+<!-- <script>
   document.getElementById("sort").addEventListener("change", function () {
     var sortValue = this.value;
     var cardsContainer = document.querySelector(".row");
@@ -373,7 +236,7 @@ designs = site.catalog %}
       notFound.style.display = "none";
     }
   });
-</script>
+</script> -->
 
 <script>
   document.addEventListener("themeChange", (e) => {

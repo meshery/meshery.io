@@ -83,9 +83,13 @@ permalink: /models
     justify-content: center;
   }
   .pagination button {
+    color: #fff;
+    border-radius: 7px;
+    background: #00b39f;
     padding: 10px;
     font-size: 16px;
     margin: 0 10px;
+    transition: all 0.4s;
     cursor: pointer;
   }
   .pagination button:disabled {
@@ -107,6 +111,9 @@ designs = site.catalog %}
 
   <div class="catalog-section models-section tab-content" id="models-tab">
     <h2>Models</h2>
+    <h2 class="not-found" style="display: none" id="not-found">
+      No results found
+    </h2>
     <div class="row">
       {% assign count = 0 %} {% for pattern in models %} {% if count < 6 %} {%
       assign should_display = 'block' %} {% else %} {% assign should_display =
@@ -143,8 +150,6 @@ designs = site.catalog %}
   function updatePagination(section) {
     const cards = getCardsForSection(section);
 
-    console.log(`Updating pagination for: ${section}`);
-
     const totalPages = Math.ceil(cards.length / itemsPerPage);
     let currentPage = 0;
 
@@ -158,7 +163,6 @@ designs = site.catalog %}
     }
 
     function updateButtons() {
-      console.log(currentPage);
       const prevButton = document.getElementById(`${section}-prev`);
       const nextButton = document.getElementById(`${section}-next`);
 
@@ -186,4 +190,74 @@ designs = site.catalog %}
     };
   }
   updatePagination("models");
+</script>
+<script>
+  document.getElementById("sort").addEventListener("change", function () {
+    var sortValue = this.value;
+    var cardsContainer = document.querySelector(".row");
+    var cards = cardsContainer.querySelectorAll(".patternCard");
+
+    var catalog = Array.from(cards);
+
+    if (sortValue === "asc") {
+      catalog = catalog.sort(function (a, b) {
+        if (a.getAttribute("status") === "ComingSoon") {
+          return 1;
+        } else if (b.getAttribute("status") === "ComingSoon") {
+          return -1;
+        } else {
+          return a
+            .getAttribute("filter")
+            .localeCompare(b.getAttribute("filter"));
+        }
+      });
+    } else if (sortValue === "desc") {
+      catalog = catalog.sort(function (a, b) {
+        if (a.getAttribute("status") === "ComingSoon") {
+          return 1;
+        } else if (b.getAttribute("status") === "ComingSoon") {
+          return -1;
+        } else {
+          return b
+            .getAttribute("filter")
+            .localeCompare(a.getAttribute("filter"));
+        }
+      });
+    }
+
+    catalog.forEach(function (pattern) {
+      cardsContainer.appendChild(pattern);
+    });
+  });
+
+  document.getElementById("search").addEventListener("input", function () {
+    var searchValue = this.value.toLowerCase();
+    var cardsContainer = document.querySelector(".row");
+    // var cards = cardsContainer.querySelectorAll(".patternCard");
+    var notFound = document.getElementById("not-found");
+
+    let found = false;
+    var sections = document.querySelectorAll(".catalog-section");
+
+    sections.forEach(function (section) {
+      var cards = section.querySelectorAll(".patternCard");
+
+      cards.forEach(function (pattern) {
+        var filterValue = pattern.getAttribute("filter").toLowerCase();
+        if (filterValue.includes(searchValue)) {
+          pattern.style.display = "block";
+          found = true;
+        } else {
+          pattern.style.display = "none";
+        }
+      });
+    });
+
+    var notFound = document.getElementById("not-found");
+    if (!found) {
+      notFound.style.display = "block";
+    } else {
+      notFound.style.display = "none";
+    }
+  });
 </script>
