@@ -1,30 +1,38 @@
+
+
 <a href="/{{ pattern.permalink }}">
-  <div class="card link">
-    <div class="card-inner">
-      <div class="front">
-        <div class="chip" style="background-color: var(--brand-color-primary)">
-          <small class="pattern-type"> {{pattern.type | upcase }}</small>
-        </div>
-        <h4 class="pattern-name">{{pattern.name}}</h4>
-        <div class="pattern-image-container">
-          <img
-            class="pattern-image"
+  <div class= "card link">  
+      <div class="card-inner">
+        <div class="front">
+          <div class="chip" style=" background-color: var(--brand-color-primary);">
+            <small class="pattern-type"> {{pattern.type | upcase }}</small>
+          </div>
+          <h4 class="pattern-name">{{pattern.name}}</h4>
+          <div class="pattern-image-container">
+            <img class= "pattern-image" 
             data-snapshot-light="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png"
             data-snapshot-dark="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png"
             src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png"
             onerror="this.src='{{site.baseurl}}/assets/images/logos/service-mesh-pattern.svg'; this.style.width = '40%'"
-            loading="lazy"
-          />
+            loading="lazy"/>
+          </div>
+          <h6 class="pattern-id">
+           
+            <span id="patId{{pattern.patternId}}" class="pat">
+              {% assign bigPatId = pattern.patternId%}
+              {% assign patId = bigPatId | split: "-" %}
+     
+              {% if patId[2] %}
+                MESHERY{{patId[2]}}
+              {%else%}
+                {{pattern.patternId}}
+              {% endif %}
+            </span>
+          </h6>
+        </div> 
+        <div class="back">
+          
         </div>
-        <h6 class="pattern-id">
-          <span id="patId{{pattern.patternId}}" class="pat">
-            {% assign bigPatId = pattern.patternId%} {% assign patId = bigPatId
-            | split: "-" %} {% if patId[2] %} MESHERY{{patId[2]}} {%else%}
-            {{pattern.patternId}} {% endif %}
-          </span>
-        </h6>
       </div>
-      <div class="back"></div>
-    </div>
-  </div>
-</a>
+    </div>  
+  </a>
