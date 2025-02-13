@@ -51,7 +51,11 @@ components:
   colorIcon: assets/images/integration/datadog-operator/components/datadog-dashboard/icons/color/datadog-dashboard-color.svg
   whiteIcon: assets/images/integration/datadog-operator/components/datadog-dashboard/icons/white/datadog-dashboard-white.svg
   description: 
-componentsCount: 10
+- name: datadog-generic-resource
+  colorIcon: assets/images/integration/datadog-operator/components/datadog-generic-resource/icons/color/datadog-generic-resource-color.svg
+  whiteIcon: assets/images/integration/datadog-operator/components/datadog-generic-resource/icons/white/datadog-generic-resource-white.svg
+  description: 
+componentsCount: 11
 relationships: 
 relationshipsCount: 0
 featureList: [
