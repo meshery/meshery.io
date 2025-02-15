@@ -1,0 +1,172 @@
+<style>
+    .selected a {
+        background-color: #222222;
+    }
+
+    .sorting-options {
+        margin: 0 20px 0 20px;
+        display: flex;
+        align-items: center;
+
+        @media (max-width: 506px) {
+            text-align: center;
+            margin: auto;
+        }
+    }
+
+    #sort {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        appearance: none;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M7 10l5 5 5-5z"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 10px top 50%;
+        margin-right: 10px;
+
+        @media (max-width: 506px) {
+            display: none;
+        }
+    }
+
+    #search {
+        width: 30%;
+        flex-grow: 1;
+        padding: 20px 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        top: 0;
+    }
+
+    .row {
+        margin: 10px;
+    }
+
+    .column.column-lg.patternCard {
+        display: block;
+    }
+
+    .section-container {
+        width: 100%;
+        display: block;
+    }
+
+    .tab-container {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+    }
+
+    .tab {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .tab.selected {
+        background-color: #f1f1f1;
+        font-weight: bold;
+    }
+
+    .catalog-section {
+        display: block;
+    }
+
+    .catalog-section.active {
+        display: block;
+    }
+
+    .pagination {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .pagination button {
+        color: #fff;
+        border-radius: 7px;
+        background: #00b39f;
+        padding: 10px;
+        font-size: 16px;
+        margin: 0 10px;
+        transition: all 0.4s;
+        cursor: pointer;
+    }
+
+    .pagination button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+</style>
+<script>
+    document.getElementById("sort").addEventListener("change", function () {
+        var sortValue = this.value;
+        var cardsContainer = document.querySelector(".row");
+        var cards = cardsContainer.querySelectorAll(".patternCard");
+
+        var catalog = Array.from(cards);
+
+        if (sortValue === "asc") {
+            catalog = catalog.sort(function (a, b) {
+                if (a.getAttribute("status") === "ComingSoon") {
+                    return 1;
+                } else if (b.getAttribute("status") === "ComingSoon") {
+                    return -1;
+                } else {
+                    return a
+                        .getAttribute("filter")
+                        .localeCompare(b.getAttribute("filter"));
+                }
+            });
+        } else if (sortValue === "desc") {
+            catalog = catalog.sort(function (a, b) {
+                if (a.getAttribute("status") === "ComingSoon") {
+                    return 1;
+                } else if (b.getAttribute("status") === "ComingSoon") {
+                    return -1;
+                } else {
+                    return b
+                        .getAttribute("filter")
+                        .localeCompare(a.getAttribute("filter"));
+                }
+            });
+        }
+
+        catalog.forEach(function (pattern) {
+            cardsContainer.appendChild(pattern);
+        });
+    });
+
+    document.getElementById("search").addEventListener("input", function () {
+        var searchValue = this.value.toLowerCase();
+        var cardsContainer = document.querySelector(".row");
+        // var cards = cardsContainer.querySelectorAll(".patternCard");
+        var notFound = document.getElementById("not-found");
+
+        let found = false;
+        var sections = document.querySelectorAll(".catalog-section");
+
+        sections.forEach(function (section) {
+            var cards = section.querySelectorAll(".patternCard");
+
+            cards.forEach(function (pattern) {
+                var filterValue = pattern.getAttribute("filter").toLowerCase();
+                if (filterValue.includes(searchValue)) {
+                    pattern.style.display = "block";
+                    found = true;
+                } else {
+                    pattern.style.display = "none";
+                }
+            });
+        });
+
+        var notFound = document.getElementById("not-found");
+        if (!found) {
+            notFound.style.display = "block";
+        } else {
+            notFound.style.display = "none";
+        }
+    });
+</script>
