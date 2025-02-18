@@ -1,0 +1,58 @@
+---
+layout: default
+---
+<div class="cover" style="z-index: 20">
+  <h3 class="cohort_title">{{ page.title }}</h3>
+
+  <div class="program">
+    {% include partials/gsoc-community.html %}
+
+    <div class="project-details">
+      <div class="card-content">
+        {{ page.video_embed }}
+      </div>
+
+      <h5 class="black-text heading">Project Ideas</h5>
+      {% if page.projects %}
+        <ul class="project-item">
+          {% for project in page.projects %}
+          <li>
+            <strong>{{ project.name }}</strong><br>
+            {{ project.description | markdownify }}
+          </li>          
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% if page.recommended_skills %}
+      <h3 class="project-list">Recommended Skills:</h3>
+      <p class="program-p">{{ page.recommended_skills }}</p>
+      {% endif %}
+
+      {% if page.mentors %}
+      <h3 class="project-list">Mentors:</h3>
+      <ul>
+        {% for mentor in page.mentors %}
+          <li>{{ mentor }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      {% if page.issues %}
+      <h3 class="project-list">Issue(s):</h3>
+      {% for issue_link in page.issues %}
+        <a class="issue" href="{{ issue_link }}">{{ issue_link }}</a><br />
+      {% endfor %}
+      {% endif %}
+
+      <br />
+      <a href="https://slack.meshery.io">
+        <input type="button" value="Participate" class="participate-btn appear" />
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="text subscribe program__subscribe">
+  {% include subscribe.html %}
+</div>
