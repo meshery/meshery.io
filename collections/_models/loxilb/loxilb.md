@@ -31,7 +31,11 @@ components:
   colorIcon: assets/images/integration/loxilb/components/egress/icons/color/egress-color.svg
   whiteIcon: assets/images/integration/loxilb/components/egress/icons/white/egress-white.svg
   description: 
-componentsCount: 5
+- name: loxi-url
+  colorIcon: assets/images/integration/loxilb/components/loxi-url/icons/color/loxi-url-color.svg
+  whiteIcon: assets/images/integration/loxilb/components/loxi-url/icons/white/loxi-url-white.svg
+  description: 
+componentsCount: 6
 relationships: 
 relationshipsCount: 0
 featureList: [
