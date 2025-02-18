@@ -1,58 +1,72 @@
 ---
 layout: default
 ---
-<div class="cover" style="z-index: 20">
-  <h3 class="cohort_title">{{ page.title }}</h3>
 
-  <div class="program">
-    {% include partials/gsoc-community.html %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ page.title }}</title>
+    <script src="/js/linkify.js" defer></script>
+  </head>
 
-    <div class="project-details">
-      <div class="card-content">
-        {{ page.video_embed }}
-      </div>
+  <body>
+    <div class="cover" style="z-index: 20">
+      <h3 class="cohort_title">{{ page.title }}</h3>
 
-      <h5 class="black-text heading">Project Ideas</h5>
-      {% if page.projects %}
-        <ul class="project-item">
+      <div class="program">
+        <div class="community-details">
+          {% include partials/gsoc-community.html %}
+        </div>
+
+        <div class="project-details">
+          <div class="card-content">
+            <div class="image-div">{{ page.video_embed }}</div>
+          </div>
+
+          {% if page.projects %}
+          <h5 class="black-text heading">Project Ideas</h5>
           {% for project in page.projects %}
-          <li>
-            <strong>{{ project.name }}</strong><br>
-            {{ project.description | markdownify }}
-          </li>          
-          {% endfor %}
-        </ul>
-      {% endif %}
+          <ul class="project-item">
+            <ol>
+              <b class="replace-links">{{ project.name }}</b>
+            </ol>
+            <ol class="replace-links">
+              {{ project.description }}
+            </ol>
+          </ul>
+          {% endfor %} {% endif %} {% if page.recommended_skills %}
+          <h3 class="project-list">Recommended Skills:</h3>
+          <p class="program-p replace-links">{{ page.recommended_skills }}</p>
+          {% endif %} {% if page.mentors %}
+          <h3 class="project-list">Mentors:</h3>
+          <ul>
+            {% for mentor in page.mentors %}
+            <li style="padding-bottom: 1rem" class="replace-links">
+              - {{ mentor }}
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %} {% if page.issues %}
+          <h3 class="project-list">Issue:</h3>
+          {% for issue_link in page.issues %}
+          <a class="issue" href="{{ issue_link }}">{{ issue_link }}</a><br />
+          {% endfor %} {% endif %}
 
-      {% if page.recommended_skills %}
-      <h3 class="project-list">Recommended Skills:</h3>
-      <p class="program-p">{{ page.recommended_skills }}</p>
-      {% endif %}
-
-      {% if page.mentors %}
-      <h3 class="project-list">Mentors:</h3>
-      <ul>
-        {% for mentor in page.mentors %}
-          <li>{{ mentor }}</li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-
-      {% if page.issues %}
-      <h3 class="project-list">Issue(s):</h3>
-      {% for issue_link in page.issues %}
-        <a class="issue" href="{{ issue_link }}">{{ issue_link }}</a><br />
-      {% endfor %}
-      {% endif %}
-
-      <br />
-      <a href="https://slack.meshery.io">
-        <input type="button" value="Participate" class="participate-btn appear" />
-      </a>
+          <br />
+          <a href="https://slack.meshery.io">
+            <input
+              type="button"
+              value="Participate"
+              class="participate-btn appear"
+            />
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<div class="text subscribe program__subscribe">
-  {% include subscribe.html %}
-</div>
+    <div class="text subscribe program__subscribe">
+      {% include subscribe.html %}
+    </div>
+  </body>
+</html>
