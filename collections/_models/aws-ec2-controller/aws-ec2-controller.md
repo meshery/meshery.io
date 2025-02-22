@@ -79,7 +79,15 @@ components:
   colorIcon: assets/images/integration/aws-ec2-controller/components/vpc-endpoint-service-configuration/icons/color/vpc-endpoint-service-configuration-color.svg
   whiteIcon: assets/images/integration/aws-ec2-controller/components/vpc-endpoint-service-configuration/icons/white/vpc-endpoint-service-configuration-white.svg
   description: 
-componentsCount: 17
+- name: capacity-reservation
+  colorIcon: assets/images/integration/aws-ec2-controller/components/capacity-reservation/icons/color/capacity-reservation-color.svg
+  whiteIcon: assets/images/integration/aws-ec2-controller/components/capacity-reservation/icons/white/capacity-reservation-white.svg
+  description: 
+- name: capacity-reservation
+  colorIcon: assets/images/integration/aws-ec2-controller/components/capacity-reservation/icons/color/capacity-reservation-color.svg
+  whiteIcon: assets/images/integration/aws-ec2-controller/components/capacity-reservation/icons/white/capacity-reservation-white.svg
+  description: 
+componentsCount: 19
 relationships: 
 relationshipsCount: 0
 featureList: [
