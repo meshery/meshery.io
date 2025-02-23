@@ -138,6 +138,23 @@
 </style>
 
 <div class="filter-wrap">
+  <div class="dropdown">
+    <button onclick="handleDropdown()" class="dropbtn">
+     <svg  style="height: 1rem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path fill="white" d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/>
+    </svg>
+      Filters
+      <svg id="arrow-icon" class="arrow-icon-down" style="height:1rem";" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+      <path  fill="white" d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/>
+      </svg>
+    </button>
+    <div id="myDropdown" class="dropdown-content">
+      <a id="category-li">Categories</a>
+      {% if show_technology=="true"%}
+      <a id="compatibility-li">Technologies</a>
+      {% endif %}
+    </div>
+  </div>
   {% if show_technology=="true"%}
   <p id="compatibility-para" class="compatibility-para">
     <strong>Technologies:</strong>
@@ -147,7 +164,70 @@
   <p id="category-para" class="category-para"><strong>Categories:</strong></p>
   <div id="category-div" class="category-div"></div>
 </div>
+<script>
 
+  var drop_button = document.getElementById("arrow-icon")
+  var open = true
+  function handleDropdown() {
+    document.getElementById("myDropdown").classList.toggle("show"); 
+    drop_button.style.transform = open ? "rotate(180deg)":"rotate(0deg)"
+    drop_button.style.transition = "transform 0.5s"
+    open = !open
+}
+  // target elements to toggle
+  var category_p = document.getElementById("category-para");
+  var category_div = document.getElementById("category-div");
+  var comp_p = document.getElementById("compatibility-para");
+  var comp_div = document.getElementById("compatibility-div");
+  var tech_p = document.getElementById("tech-para");
+  var tech_div = document.getElementById("tech-div");
+  // toggler
+  var categotyLink = document.getElementById("category-li");
+  var compatibilityLink = document.getElementById("compatibility-li");
+  var technologyLink = document.getElementById("technology-li");
+
+
+  categotyLink.addEventListener("click", showCategory);
+  compatibilityLink.addEventListener("click", showCompatibility);
+  technologyLink.addEventListener("click", showTechnology);
+
+  function showCategory() {
+    category_div.style.display = "flex";
+    category_p.style.display = "grid";
+    comp_p.style.display = "none";
+    comp_div.style.display = "none";
+    tech_p.style.display = "none";
+    tech_div.style.display = "none";
+    document.getElementById("myDropdown").classList.toggle("show");
+    drop_button.style.transform = "rotate(0deg)"
+    open = !open
+    return;
+  }
+  function showCompatibility() {
+    category_div.style.display = "none";
+    category_p.style.display = "none";
+    comp_p.style.display = "grid";
+    comp_div.style.display = "flex";
+    tech_p.style.display = "none";
+    tech_div.style.display = "none";
+    document.getElementById("myDropdown").classList.toggle("show");
+    drop_button.style.transform = "rotate(0deg)"
+    open = !open
+    return;
+  }
+  function showTechnology() { 
+    tech_p.style.display = "grid";
+    tech_div.style.display = "grid";
+    comp_p.style.display = "none";
+    comp_div.style.display = "none";
+    category_div.style.display = "none";
+    category_p.style.display = "none";
+    document.getElementById("myDropdown").classList.toggle("show");
+    drop_button.style.transform = "rotate(0deg)"
+    open = !open
+    return;
+  }
+</script>
 <script type="module">
   // import all integrations data
   import data from "{{ site.baseurl }}/integrations/data.js";
