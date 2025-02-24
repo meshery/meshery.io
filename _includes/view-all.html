@@ -1,10 +1,5 @@
-<div style="display: flex;width: 75%;margin: 0 auto;">
-  {% if include.showbuttons != "false" %}
-  <div class="viewall prev">
-    <button class="viewallbtn prevBtn">Prev</button>
-  </div>
-  {% endif %}
-  <div class="sorting-options" style="flex-grow: 1;">
+<div style="display: flex; width: 75%; margin: 0 auto">
+  <div class="sorting-options" style="flex-grow: 1">
     <select id="sort">
       <option disabled selected value>Sort by</option>
       <option value="asc">Alphabetically (A-Z)</option>
@@ -12,54 +7,4 @@
     </select>
     <input type="text" id="search" placeholder="Search..." />
   </div>
-  {% if include.showbuttons != "false" %}
-  <div class="viewall next">
-    <button class="viewallbtn nextBtn">Next</button>
-  </div>
-  {% endif %}
 </div>
-
-<script type="module">
-
-  const prevButton = document.querySelector(".prev");
-  const nextButton = document.querySelector(".next");
-  const cards = document.querySelectorAll(".patternCard");
-  let count = 0;
-  const maxCount = cards.length;
-
-
-  document.addEventListener("DOMContentLoaded", () => {
-
-    prevButton.style.display = "none";
-  });
-
-  function showCards(coun) {
-    cards.forEach((card) => {
-      card.style.display = "none";
-    });
-    for (let i = coun; i < coun + 9 && coun + 9 <= maxCount; i++) {
-      cards[i].style.display = "block";
-    }
-
-  }
-
-  function updateButtonVisibility() {
-      prevButton.style.display = count <= 0 ? "none" : "block";
-      nextButton.style.display = count + 9 >= maxCount ? "none" : "block";
-    }
-  prevButton.addEventListener("click", () => {
-
-    if (count > 0) {
-      showCards((count -= 9));
-    }
-    updateButtonVisibility();
-  });
-
-  nextButton.addEventListener("click", () => {
-
-    if (count + 9 < maxCount) {
-      showCards((count += 9));
-    }
-    updateButtonVisibility();
-  });
-</script>
