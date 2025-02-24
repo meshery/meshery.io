@@ -1,0 +1,90 @@
+---
+layout: designs
+title: Designs Native Catalogs
+permalink: /designs
+---
+
+{% assign
+designs = site.catalog %}
+<script>
+    var designs = {{ designs | jsonify }};
+</script>
+<div class="section-container">
+    {% include view-all.html %}
+
+
+    <div class="catalog-section designs-section tab-content" id="designs-tab">
+        <h2>Designs</h2>
+        <h2 class="not-found" style="display: none" id="not-found">
+            No results found
+        </h2>
+        <div class="row">
+            {% assign count = 0 %} {% for pattern in designs %} {% if count < 6 %} {% assign should_display='block' %}
+                {% else %} {% assign should_display='none' %} {% endif %} {% assign last=pattern.compatibility | last %}
+                <div class="column column-lg patternCard designs" filter="{{ pattern.name }}" type="{{ pattern.type }}"
+                patternType="designs"
+                technology='[{% for item in pattern.compatibility %}"{{ item | downcase | replace: ' ', ' -' }}"{% if
+                item !=last %},{% endif %}{% endfor %}]' status="{{ pattern.Status }}"
+                style="display: {{ should_display }};">
+                {% include card.html %}
+        </div>
+        {% assign count = count | plus: 1 %} {% endfor %}
+    </div>
+    <div class="pagination">
+        <button class="prev" id="designs-prev" disabled>Prev</button>
+        <button class="next" id="designs-next">Next</button>
+    </div>
+</div>
+
+</div>
+<script>
+    const itemsPerPage = 6;
+
+    function getCardsForSection(section) {
+        return document.querySelectorAll(`.${section}-section .patternCard`);
+    }
+
+    function updatePagination(section) {
+        const cards = getCardsForSection(section);
+
+        const totalPages = Math.ceil(cards.length / itemsPerPage);
+        let currentPage = 0;
+
+        function showCards() {
+            const start = currentPage * itemsPerPage;
+            const end = start + itemsPerPage;
+
+            cards.forEach((card, index) => {
+                card.style.display = index >= start && index < end ? "block" : "none";
+            });
+        }
+
+        function updateButtons() {
+            const prevButton = document.getElementById(`${section}-prev`);
+            const nextButton = document.getElementById(`${section}-next`);
+
+            prevButton.disabled = currentPage === 0;
+            nextButton.disabled = currentPage + 1 >= totalPages;
+        }
+
+        showCards();
+        updateButtons();
+
+        document.getElementById(`${section}-prev`).onclick = function () {
+            if (currentPage > 0) {
+                currentPage--;
+                showCards();
+                updateButtons();
+            }
+        };
+
+        document.getElementById(`${section}-next`).onclick = function () {
+            if (currentPage + 1 < totalPages) {
+                currentPage++;
+                showCards();
+                updateButtons();
+            }
+        };
+    }
+    updatePagination("designs")
+</script>
