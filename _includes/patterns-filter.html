@@ -477,81 +477,100 @@
     }
   }
 
-  // Function called when user clicks on any of Technology checkboxes or Category Boxes
-  function showFilterCards() {
-    // Loop over all pattern cards and check if any of the filter in globalTechnologyList is present in pattern card's filter attribute
-    // If yes then set showCardTech to true
-    // also check if any of the selected category(ies) match the card type (category the card belongs to)
-    // Also check if the globalCategoryList is empty, if yes, show all the cards (for all categories)
-    // If yes then set showCardCat to true
-    // If both showCardTech and showCardCat are true, then show the card otherwise hide it
-    let cardsShown = false; // This variable tells if there is even a single card to show
-    let visibleCount = 0; // to keep track of number of visible cards
-    for (let i = 0; i < patternCards.length; i++) {
-      let cc = [];
-      let cardCategory;
-      const type = patternCards[i].getAttribute("type")?.toLowerCase();
+// Function called when user clicks on any of Technology checkboxes or Category Boxes
+function showFilterCards() {
+  // Get all pattern cards once
+  const patternCards = Array.from(document.querySelectorAll('.patternCard'));
+  const itemsPerPage = 6; // Number of items per page
+  let currentPage = 0; // Current page index
+  
+  // First, filter the cards that match our criteria
+  const matchingCards = patternCards.filter(card => {
+    const type = card.getAttribute("type")?.toLowerCase();
+    const technologyAttr = card.getAttribute("technology");
+    const patternType = card.getAttribute("patternType")?.toLowerCase();
+    
+    // Parse technologies once
+    const technologies = technologyAttr ? JSON.parse(technologyAttr) : [];
+    
+    // Check if card matches all filter criteria
+    const showCardTech = globalTechnologyList.length === 0 || 
+                        globalTechnologyList.some(tech => technologies.includes(tech));
+    
+    const showCardCat = globalCategoryList.length === 0 || 
+                       globalCategoryList.some(cat => type.includes(cat));
+    
+    const showCardPatternType = globalPatternTypeList.length === 0 || 
+                               globalPatternTypeList.some(pt => patternType.includes(pt));
+    
+    // Return true if card matches all criteria
+    return showCardTech && showCardCat && showCardPatternType;
+  });
+  
+  // Hide all cards first (batch operation)
+  patternCards.forEach(card => {
+    card.style.display = "none";
+  });
+  
+  // Check if filters are active
+  const noFiltersActive = globalTechnologyList.length === 0 && 
+                         globalCategoryList.length === 0 && 
+                         globalPatternTypeList.length === 0;
+  
+  // Update "not found" message
+  const noCard = document.getElementById("not-found");
+  noCard.style.display = matchingCards.length > 0 ? "none" : "block";
+  
+  // Get pagination elements
+  const paginationButtons = document.querySelector(".pagination");
+  const prevButton = document.getElementById("designs-prev") || document.getElementById("models-prev");
+  const nextButton = document.getElementById("designs-next") || document.getElementById("models-next");
 
-      const technology = patternCards[i].getAttribute("technology");
-      const patternType = patternCards[i]
-        .getAttribute("patternType")
-        ?.toLowerCase();
-      if (technology) {
-        let t = JSON.parse(technology);
-        for (let k = 0; k < t.length; k++) {
-          cc.push(t[k]);
-        }
-      }
-      cardCategory = type;
-      let showCardTech =
-        globalTechnologyList.length === 0 ||
-        globalTechnologyList.some((tech) => cc.includes(tech));
-      let showCardCat =
-        globalCategoryList.some((cat) => cardCategory.includes(cat)) ||
-        globalCategoryList.length === 0;
-      let showCardPatternType =
-        globalPatternTypeList.some((pt) => patternType.includes(pt)) ||
-        globalPatternTypeList.length === 0;
-
-      // if all list are empty that is no tech, category and pattern type is selected;
-      // show only the first 9 and hide the rest
-      if (
-        globalTechnologyList.length === 0 &&
-        globalCategoryList.length === 0 &&
-        globalPatternTypeList.length === 0
-      ) {
-        if (visibleCount < 6) {
-          patternCards[i].style.display = "block"; // show only the first 9
-          visibleCount++;
-          cardsShown = true;
-        } else {
-          patternCards[i].style.display = "none";
-        }
-      }
-      // apply the regular filtering logic
-      else if (showCardTech && showCardCat && showCardPatternType) {
-        patternCards[i].style.display = "block";
-        console.log(patternCards[i])
-        cardsShown = true;
-      } else {
-        patternCards[i].style.display = "none";
-      }
-    }
-    // In the catalog folder, there is a file index.html, where a heading exists with Id: "not-found" for this purpose
-    const noCard = document.getElementById("not-found");
-    if (!cardsShown) {
-      // If there is no card to show then show the "not-found" heading
-      noCard.style.display = "block";
-
-    } else {
-      noCard.style.display = "none";
-    }
-    let paginationButtons = document.querySelector(".pagination");
-        if (globalTechnologyList.length > 0 || globalCategoryList.length > 0 || globalPatternTypeList.length > 0) {
-           paginationButtons.style.display="none";
-        } else {
-           paginationButtons.style.display="flex";
-        }
+  
+  // Function to update pagination display
+  function updatePagination() {
+    const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
+    prevButton.disabled = currentPage === 0;
+    nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
   }
   
+  // Function to show the current page of cards
+  function showCardsForPage() {
+    // Calculate range for current page
+    const start = currentPage * itemsPerPage;
+    const end = Math.min(start + itemsPerPage, matchingCards.length);
+    
+    // Show only cards for current page
+    for (let i = 0; i < matchingCards.length; i++) {
+      matchingCards[i].style.display = (i >= start && i < end) ? "block" : "none";
+    }
+    
+    updatePagination();
+  }
+  
+  // Set up pagination handlers
+  prevButton.onclick = function() {
+    if (currentPage > 0) {
+      currentPage--;
+      showCardsForPage();
+    }
+  };
+  
+  nextButton.onclick = function() {
+    const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
+    if (currentPage + 1 < totalPages) {
+      currentPage++;
+      showCardsForPage();
+    }
+  };
+  
+  // Initialize pagination for both filtered and unfiltered cases
+  paginationButtons.style.display = matchingCards.length > itemsPerPage ? "flex" : "none";
+  
+  // Show initial page
+  currentPage = 0;
+  showCardsForPage();
+  
+  return matchingCards.length; // Return count of matching cards
+}
 </script>
