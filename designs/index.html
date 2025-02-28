@@ -1,0 +1,23 @@
+---
+layout: null
+permalink: /designs-api
+pagination:
+  permalink: 'feed-:num'
+  collection: designs
+  enabled: true
+  extension: json
+  indexpage: 'feed-1'
+  per_page: 10
+---
+
+{
+  "pages": [{% for post in paginator.posts %}{% if forloop.first != true %},{% endif %}
+    {
+      "title": "{{ post.name }}",
+      "link": "{{ post.url }}"
+    }{% endfor %}
+  ], 
+
+  "next": "{% if paginator.next_page %}{{ paginator.next_page_path }}{% endif %}",
+  "prev": "{% if paginator.previous_page %}{{ paginator.previous_page_path }}{% endif %}"
+}
