@@ -5,7 +5,7 @@ permalink: /designs
 ---
 
 {% assign
-designs = site.catalog %}
+designs = site.designs %}
 <script>
     var designs = {{ designs | jsonify }};
 </script>
@@ -19,7 +19,7 @@ designs = site.catalog %}
             No results found
         </h2>
         <div class="row">
-            {% assign count = 0 %} {% for pattern in designs %} {% if count < 6 %} {% assign should_display='block' %}
+            {% assign count = 0 %} {% for pattern in designs limit:10 %} {% if count < 6 %} {% assign should_display='block' %}
                 {% else %} {% assign should_display='none' %} {% endif %} {% assign last=pattern.compatibility | last %}
                 <div class="column column-lg patternCard designs" filter="{{ pattern.name }}" type="{{ pattern.type }}"
                 patternType="designs"

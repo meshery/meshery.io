@@ -16,5 +16,6 @@ group :jekyll_plugins do
   gem 'jekyll-redirect-from'
   gem 'tzinfo'
   gem 'octopress-paginate'
+  gem "jekyll-paginate-v2"
 end
 
