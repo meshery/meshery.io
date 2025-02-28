@@ -3,19 +3,48 @@ layout: filters
 title: Filters Native Catalogs
 permalink: /filters
 ---
-
+<style>
+    .back-button{
+        margin-top: 1rem;
+    }
+        .back-button {
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #0275d8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .back-button:hover {
+            background-color: #015cad;
+        }
+        .not-found{
+            margin-top: 10rem;
+        }
+</style>
 {% assign filters = site.filters %}
 <script>
     var filters = {{ filters | jsonify }};
 </script>
 <div class="section-container">
+    <div style="display: flex;gap: 10px;">
+
+        <a  href="/designs" style="text-decoration: none;color: #fff;white-space: nowrap;" >
+            <button class="viewallbtn">Go to Designs</button>
+        </a>
     {% include view-all.html %}
+    <a  href="/models" style="text-decoration: none;color: #fff;white-space: nowrap;" >
+        <button class="viewallbtn">Go to Models</button>
+    </a>
+</div>
 
     <div class="catalog-section filters-section tab-content" id="filters-tab">
         <h2>Filters</h2>
         <div class="row">
             <h2 class="not-found" style="display: none" id="not-found">
-                No results found
+                No results match your filters. Try adjusting your selections or clearing some filters.
             </h2>
             {% assign count = 0 %} {% for pattern in filters %} {% if count < 6 %} {% assign should_display='block' %}
                 {% else %} {% assign should_display='none' %} {% endif %} <div
