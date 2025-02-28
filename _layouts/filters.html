@@ -1,5 +1,37 @@
 ---
-layout: plain
+layout: filter-base
+title: Cloud Native Filters
 ---
 
-<div class="catalog">{{content}}</div>
+
+<div class="section-container">
+    {% include view-all.html %}
+
+    <div class="catalog-section filters-section tab-content" id="filters-tab">
+        <h2>Filters</h2>
+        <div class="row">
+            <h2 class="not-found" style="display: none" id="not-found">
+                No results found
+            </h2>
+           {% for pattern in paginator.posts %} {% assign last=pattern.compatibility | last %}
+        <div
+                class="column column-lg patternCard filters" filter="{{ pattern.name }}" type="{{ pattern.type }}"
+                patternType="wasm filters"
+                technology='["wasm-filter"{% for item in pattern.compatibility %}{% if forloop.first %}, {% endif %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
+                status="{{ pattern.Status }}"
+                {% include wasm-card.html %}>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        {% if paginator.total_pages > 1 %}
+          {% if paginator.previous_page %}
+            <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}"> <button class="prev">Prev</button></a>
+          {% endif %}
+          {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path | prepend: site.baseurl }}"> <button class="next">Next</button></a>
+          {% endif %}
+        {% endif %}
+      </div>
+</div>
+</div>

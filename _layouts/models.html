@@ -1,6 +1,31 @@
 ---
-layout: plain
+layout: models-base
+title: Cloud Native Models
 ---
 
-{% assign show_technology = "false" %}
-<div class="catalog">{% include patterns-filter.html %} {{content}}</div>
+<div class="section-container">
+    {% include view-all.html %}
+
+    <div class="catalog-section models-section tab-content" id="models-tab">
+        <h2>Models</h2>
+        <h2 class="not-found" style="display: none" id="not-found">
+            No results found
+        </h2>
+        <div class="row">
+            {% for modelp in paginator.posts %} {% assign should_display='none' %}<div class="column column-lg patternCard models"
+                filter="{{ modelp.name }}" type="{{ modelp.category }}" patternType="models" technology="">
+                {% include models/card.html model=modelp %}
+        </div> {% endfor %}
+    </div>
+    <div class="pagination">
+        {% if paginator.total_pages > 1 %}
+          {% if paginator.previous_page %}
+            <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}"> <button class="prev">Prev</button></a>
+          {% endif %}
+          {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path | prepend: site.baseurl }}"> <button class="next">Next</button></a>
+          {% endif %}
+        {% endif %}
+      </div>
+</div>
+</div>

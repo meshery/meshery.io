@@ -1,23 +1,10 @@
 ---
-layout: null
-permalink: /designs-api
+layout: designs
+title: Designs Native Catalogs
+permalink: /designs
 pagination:
-  permalink: 'feed-:num'
-  collection: designs
   enabled: true
-  extension: json
-  indexpage: 'feed-1'
-  per_page: 10
+  collection: designs
+  per_page: 9
+  permalink: /page/:num/
 ---
-
-{
-  "pages": [{% for post in paginator.posts %}{% if forloop.first != true %},{% endif %}
-    {
-      "title": "{{ post.name }}",
-      "link": "{{ post.url }}"
-    }{% endfor %}
-  ], 
-
-  "next": "{% if paginator.next_page %}{{ paginator.next_page_path }}{% endif %}",
-  "prev": "{% if paginator.previous_page %}{{ paginator.previous_page_path }}{% endif %}"
-}

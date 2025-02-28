@@ -1,6 +1,36 @@
 ---
-layout: plain
+layout: designs-base
 ---
 
-{% assign show_technology = "true" %}
-<div class="catalog">{% include patterns-filter.html %} {{content}}</div>
+<div class="section-container">
+    {% include view-all.html %}
+
+
+    <div class="catalog-section designs-section tab-content" id="designs-tab">
+        <h2>Designs</h2>
+        <h2 class="not-found" style="display: none" id="not-found">
+            No results found
+        </h2>
+        <div class="row">
+          {% for pattern in paginator.posts %} {% assign last=pattern.compatibility | last %}
+                <div class="column column-lg patternCard designs" filter="{{ pattern.name }}" type="{{ pattern.type }}"
+                patternType="designs"
+                technology='[{% for item in pattern.compatibility %}"{{ item | downcase | replace: ' ', ' -' }}"{% if
+                item !=last %},{% endif %}{% endfor %}]' status="{{ pattern.Status }}"
+               >
+                {% include card.html %}
+        </div> {% endfor %}
+    </div>
+    <div class="pagination">
+      {% if paginator.total_pages > 1 %}
+        {% if paginator.previous_page %}
+          <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}"> <button class="prev" id="designs-prev">Prev</button></a>
+        {% endif %}
+        {% if paginator.next_page %}
+          <a href="{{ paginator.next_page_path | prepend: site.baseurl }}"> <button class="next" id="designs-next">Next</button></a>
+        {% endif %}
+      {% endif %}
+    </div>
+</div>
+
+</div>
