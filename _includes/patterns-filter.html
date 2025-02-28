@@ -155,6 +155,7 @@
       {% endif %}
     </div>
   </div>
+  
   {% if show_technology=="true"%}
   <p id="compatibility-para" class="compatibility-para">
     <strong>Technologies:</strong>
@@ -229,9 +230,22 @@
   }
 </script>
 <script type="module">
+  document.addEventListener("DOMContentLoaded", () => {
+  // Uncheck all checkboxes on page load AND reset their state in the DOM
+  const checkboxes = document.querySelectorAll("input[type='checkbox']");
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
+
+  // Reset global filter lists
+  globalTechnologyList = [];
+  globalCategoryList = [];
+  globalPatternTypeList = [];
+
+  showFilterCards(); // Refresh the displayed cards
+});
   // import all integrations data
   import data from "{{ site.baseurl }}/integrations/data.js";
-
   // add wasmFilter to data array
   const wasmFilter = {
     name: "wasm-filter",
@@ -517,7 +531,7 @@
       // apply the regular filtering logic
       else if (showCardTech && showCardCat && showCardPatternType) {
         patternCards[i].style.display = "block";
-
+        console.log(patternCards[i])
         cardsShown = true;
       } else {
         patternCards[i].style.display = "none";
@@ -528,8 +542,16 @@
     if (!cardsShown) {
       // If there is no card to show then show the "not-found" heading
       noCard.style.display = "block";
+
     } else {
       noCard.style.display = "none";
     }
+    let paginationButtons = document.querySelector(".pagination");
+        if (globalTechnologyList.length > 0 || globalCategoryList.length > 0 || globalPatternTypeList.length > 0) {
+           paginationButtons.style.display="none";
+        } else {
+           paginationButtons.style.display="flex";
+        }
   }
+  
 </script>
