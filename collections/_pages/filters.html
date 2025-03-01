@@ -29,33 +29,26 @@ permalink: /filters
     var filters = {{ filters | jsonify }};
 </script>
 <div class="section-container">
-    <div style="display: flex;gap: 10px;">
+    {% include alltype.html %}
 
-        <a  href="/designs" style="text-decoration: none;color: #fff;white-space: nowrap;" >
-            <button class="viewallbtn">Go to Designs</button>
-        </a>
-    {% include view-all.html %}
-    <a  href="/models" style="text-decoration: none;color: #fff;white-space: nowrap;" >
-        <button class="viewallbtn">Go to Models</button>
-    </a>
-</div>
 
     <div class="catalog-section filters-section tab-content" id="filters-tab">
         <h2>Filters</h2>
+        <div style="margin-top: 2rem;">{% include view-all.html %}</div>
         <div class="row">
             <h2 class="not-found" style="display: none" id="not-found">
                 No results match your filters. Try adjusting your selections or clearing some filters.
             </h2>
-            {% assign count = 0 %} {% for pattern in filters %} {% if count < 6 %} {% assign should_display='block' %}
-                {% else %} {% assign should_display='none' %} {% endif %} <div
-                class="column column-lg patternCard filters" filter="{{ pattern.name }}" type="{{ pattern.type }}"
-                patternType="wasm filters"
-                technology='["wasm-filter"{% for item in pattern.compatibility %}{% if forloop.first %}, {% endif %}"{{ item | downcase | replace: ' ', '
-                -' }}"{% if item !=last %},{% endif %}{% endfor %}]' status="{{ pattern.Status }}"
-                style="display: {{ should_display }};">
-                {% include wasm-card.html %}
-        </div>
-        {% assign count = count | plus: 1 %} {% endfor %}
+            {% for pattern in filters %}
+                <div
+                    class="column column-lg patternCard filters" filter="{{ pattern.name }}" type="{{ pattern.type }}"
+                    patternType="wasm filters"
+                    technology='["wasm-filter"{% if pattern.compatibility.size > 0 %}, {% for item in pattern.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %}]'
+                    status="{{ pattern.Status }}"
+                    >
+                    {% include wasm-card.html %}
+                </div>
+            {% endfor %}
     </div>
     <div class="pagination">
         <button class="prev" id="filters-prev" disabled>Prev</button>

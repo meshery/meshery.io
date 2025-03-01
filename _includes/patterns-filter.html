@@ -163,7 +163,7 @@
   <div id="compatibility-div" class="compatibility-div"></div>
   {% endif %}
   <p id="category-para" class="category-para"><strong>Categories:</strong></p>
-  <div id="category-div" class="category-div"></div>
+  <div id="category-div" class="category-div" style="padding-right: 1.25rem;"></div>
 </div>
 <script>
 
@@ -180,25 +180,19 @@
   var category_div = document.getElementById("category-div");
   var comp_p = document.getElementById("compatibility-para");
   var comp_div = document.getElementById("compatibility-div");
-  var tech_p = document.getElementById("tech-para");
-  var tech_div = document.getElementById("tech-div");
   // toggler
   var categotyLink = document.getElementById("category-li");
   var compatibilityLink = document.getElementById("compatibility-li");
-  var technologyLink = document.getElementById("technology-li");
 
 
   categotyLink.addEventListener("click", showCategory);
   compatibilityLink.addEventListener("click", showCompatibility);
-  technologyLink.addEventListener("click", showTechnology);
 
   function showCategory() {
     category_div.style.display = "flex";
     category_p.style.display = "grid";
     comp_p.style.display = "none";
     comp_div.style.display = "none";
-    tech_p.style.display = "none";
-    tech_div.style.display = "none";
     document.getElementById("myDropdown").classList.toggle("show");
     drop_button.style.transform = "rotate(0deg)"
     open = !open
@@ -209,16 +203,12 @@
     category_p.style.display = "none";
     comp_p.style.display = "grid";
     comp_div.style.display = "flex";
-    tech_p.style.display = "none";
-    tech_div.style.display = "none";
     document.getElementById("myDropdown").classList.toggle("show");
     drop_button.style.transform = "rotate(0deg)"
     open = !open
     return;
   }
   function showTechnology() { 
-    tech_p.style.display = "grid";
-    tech_div.style.display = "grid";
     comp_p.style.display = "none";
     comp_div.style.display = "none";
     category_div.style.display = "none";
@@ -523,8 +513,8 @@ function showFilterCards() {
   
   // Get pagination elements
   const paginationButtons = document.querySelector(".pagination");
-  const prevButton = document.getElementById("designs-prev") || document.getElementById("models-prev");
-  const nextButton = document.getElementById("designs-next") || document.getElementById("models-next");
+  const prevButton = document.getElementById("designs-prev") || document.getElementById("models-prev") || document.getElementById("filters-prev");
+  const nextButton = document.getElementById("designs-next") || document.getElementById("models-next") || document.getElementById("filters-next");
 
   
   // Function to update pagination display
