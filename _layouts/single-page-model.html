@@ -19,34 +19,62 @@ pagination:
         width: 100%;
         object-fit: contain;
       }
+      .metadata-row {
+        display: flex;
+        border-bottom: 1px solid #eee;
+        padding: 8px 0;
+      }
+
+      .metadata-key {
+        font-weight: 600;
+        width: 140px;
+        flex-shrink: 0;
+        color: var(--color-secondary-dark);
+      }
+
+      .metadata-value {
+        flex-grow: 1;
+        color: var(--color-secondary-dark);
+      }
       .model-metadata-container {
         display: flex;
-        justify-content: space-between;
-        gap: 2rem;
-        flex-wrap: wrap;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin: 1rem 0;
+      }
+      .model-details-container {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
       }
       .model-details {
         margin-top: 1.5rem;
       }
       .model-details h3 {
         font-size: 1.2rem;
-        margin-bottom: 0.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
       }
       .model-details ul {
         list-style-type: disc;
         padding-left: 20px;
       }
       .padded-box {
-        padding: 1rem;
+        padding: 1.5rem;
         /* background: #f8f8f8; */
         border-radius: 8px;
         margin-top: 1rem;
+      
+        background-color: var(--color-components-background);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        transition: box-shadow 0.3s ease;
       }
     </style>
 
     <!-- Model Image -->
     <div class="modal-content" style="margin-top:2rem;">
-      <div class="modal-image">
+      <div class="modal-image" style="padding-top:0;">
         <img class="image-class"  
           data-snapshot-light="{{ page.colorIcon }}"
           data-snapshot-dark="{{ page.whiteIcon }}"
@@ -62,25 +90,25 @@ pagination:
       <!-- Model Metadata -->
       <div class="modal-info">
         <div class="model-metadata-container">
-          <div>
-            <p class="model-metadata-field">Registrant</p>
-            <p class="contentdata">{{ page.registrant }}</p>
+          <div class="metadata-row">
+            <div class="metadata-key">Registrant:</div>
+            <div class="metadata-value">{{ page.registrant }}</div>
           </div>
-          <div>
-            <p class="model-metadata-field">Components</p>
-            <p class="contentdata">{{ page.componentsCount }}</p>
+          <div class="metadata-row">
+            <div class="metadata-key">Components:</div>
+            <div class="metadata-value">{{ page.componentsCount }}</div>
           </div>
-          <div>
-            <p class="model-metadata-field">Relationships</p>
-            <p class="contentdata">{{ page.relationshipsCount }}</p>
+          <div class="metadata-row">
+            <div class="metadata-key">Relationships:</div>
+            <div class="metadata-value">{{ page.relationshipsCount }}</div>
           </div>
-          <div>
-            <p class="model-metadata-field">Category</p>
-            <p class="contentdata">{{ page.category }}</p>
+          <div class="metadata-row">
+            <div class="metadata-key">Category:</div>
+            <div class="metadata-value">{{ page.category }}</div>
           </div>
-          <div>
-            <p class="model-metadata-field">Subcategory</p>
-            <p class="contentdata">{{ page.subcategory }}</p>
+          <div class="metadata-row">
+            <div class="metadata-key">Subcategory:</div>
+            <div class="metadata-value">{{ page.subcategory }}</div>
           </div>
         </div>
         <!-- Documentation and Contribution Buttons -->
@@ -112,10 +140,10 @@ pagination:
 		   <script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>
   
   </div> <!-- End post-content -->
-  <div>
+  <div  class="model-details-container">
 	   <!-- Features List -->
         {% if page.featureList %}
-        <div class="model-details padded-box">
+        <div class="model-details">
           <h3>Key Features</h3>
           <ul>
             {% for feature in page.featureList %}
@@ -125,22 +153,11 @@ pagination:
         </div>
         {% endif %}
 
-        <!-- How It Works Section -->
-        {% if page.howItWorks %}
-        <div class="model-details padded-box">
-          <h3>How It Works</h3>
-          <p><strong>{{ page.howItWorks }}</strong></p>
-          {% if page.howItWorksDetails %}
-            <p>{{ page.howItWorksDetails }}</p>
-          {% endif %}
-        </div>
-        {% endif %}
-
         <!-- Components List -->
         {% if page.components %}
         <div class="model-details padded-box">
           <h3>Components</h3>
-          <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem;justify-content: center;">
             {% for component in page.components %}
               <div style="text-align: center; width: 150px;">
                 <img src="{{site.baseurl}}/{{ component.colorIcon }}" 
