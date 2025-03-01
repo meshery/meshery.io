@@ -35,7 +35,11 @@ components:
   colorIcon: assets/images/integration/loxilb/components/loxi-url/icons/color/loxi-url-color.svg
   whiteIcon: assets/images/integration/loxilb/components/loxi-url/icons/white/loxi-url-white.svg
   description: 
-componentsCount: 6
+- name: loxi-url
+  colorIcon: assets/images/integration/loxilb/components/loxi-url/icons/color/loxi-url-color.svg
+  whiteIcon: assets/images/integration/loxilb/components/loxi-url/icons/white/loxi-url-white.svg
+  description: 
+componentsCount: 7
 relationships: 
 relationshipsCount: 0
 featureList: [
