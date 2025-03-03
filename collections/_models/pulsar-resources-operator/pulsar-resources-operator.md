@@ -79,7 +79,11 @@ components:
   colorIcon: assets/images/integration/pulsar-resources-operator/components/stream-native-cloud-connection/icons/color/stream-native-cloud-connection-color.svg
   whiteIcon: assets/images/integration/pulsar-resources-operator/components/stream-native-cloud-connection/icons/white/stream-native-cloud-connection-white.svg
   description: 
-componentsCount: 17
+- name: secret
+  colorIcon: assets/images/integration/pulsar-resources-operator/components/secret/icons/color/secret-color.svg
+  whiteIcon: assets/images/integration/pulsar-resources-operator/components/secret/icons/white/secret-white.svg
+  description: 
+componentsCount: 18
 relationships: 
 relationshipsCount: 0
 featureList: [
