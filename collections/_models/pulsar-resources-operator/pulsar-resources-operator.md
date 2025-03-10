@@ -83,7 +83,11 @@ components:
   colorIcon: assets/images/integration/pulsar-resources-operator/components/secret/icons/color/secret-color.svg
   whiteIcon: assets/images/integration/pulsar-resources-operator/components/secret/icons/white/secret-white.svg
   description: 
-componentsCount: 18
+- name: secret
+  colorIcon: assets/images/integration/pulsar-resources-operator/components/secret/icons/color/secret-color.svg
+  whiteIcon: assets/images/integration/pulsar-resources-operator/components/secret/icons/white/secret-white.svg
+  description: 
+componentsCount: 19
 relationships: 
 relationshipsCount: 0
 featureList: [
