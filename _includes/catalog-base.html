@@ -1,0 +1,219 @@
+<style>
+    .selected a {
+        background-color: #222222;
+    }
+
+    .sorting-options {
+        margin: 0 20px 0 20px;
+        display: flex;
+        align-items: center;
+
+        @media (max-width: 506px) {
+            text-align: center;
+            margin: auto;
+        }
+    }
+
+    #sort {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        appearance: none;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M7 10l5 5 5-5z"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 10px top 50%;
+        margin-right: 10px;
+
+        @media (max-width: 506px) {
+            display: none;
+        }
+    }
+
+    #search {
+        width: 30%;
+        flex-grow: 1;
+        padding: 20px 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        top: 0;
+    }
+
+    .row {
+        margin: 10px;
+    }
+
+    .column.column-lg.patternCard {
+        display: block;
+    }
+
+    .section-container {
+        width: 100%;
+        display: block;
+    }
+
+    .tab-container {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+    }
+
+    .tab {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .tab.selected {
+        background-color: #f1f1f1;
+        font-weight: bold;
+    }
+
+    .catalog-section {
+        display: block;
+    }
+
+    .catalog-section.active {
+        display: block;
+    }
+
+    .pagination {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .pagination button {
+        transition: all 0.4s;
+        cursor: pointer;
+  border: none;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 7px;
+  padding: 0.5rem;
+  margin: 0 10px;
+  background: #00b39f;
+    }
+    
+
+    .pagination button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+</style>
+<script>
+    document.getElementById("sort").addEventListener("change", function () {
+        var sortValue = this.value;
+        var cardsContainer = document.querySelector(".row");
+        var cards = cardsContainer.querySelectorAll(".patternCard");
+
+        var catalog = Array.from(cards);
+
+        if (sortValue === "asc") {
+            catalog = catalog.sort(function (a, b) {
+                if (a.getAttribute("status") === "ComingSoon") {
+                    return 1;
+                } else if (b.getAttribute("status") === "ComingSoon") {
+                    return -1;
+                } else {
+                    return a
+                        .getAttribute("filter")
+                        .localeCompare(b.getAttribute("filter"));
+                }
+            });
+        } else if (sortValue === "desc") {
+            catalog = catalog.sort(function (a, b) {
+                if (a.getAttribute("status") === "ComingSoon") {
+                    return 1;
+                } else if (b.getAttribute("status") === "ComingSoon") {
+                    return -1;
+                } else {
+                    return b
+                        .getAttribute("filter")
+                        .localeCompare(a.getAttribute("filter"));
+                }
+            });
+        }
+
+        catalog.forEach(function (pattern) {
+            cardsContainer.appendChild(pattern);
+        });
+    });
+// Search functionality
+function setupSearchFunction() {
+  const searchInput = document.getElementById("search");
+  
+  searchInput.addEventListener("input", function() {
+    const searchTerm = this.value.toLowerCase();
+    const allPatternCards = Array.from(document.querySelectorAll(".patternCard"));
+    const paginationButtons = document.querySelector(".pagination");
+    const prevButton = document.getElementById("designs-prev") || document.getElementById("models-prev") || document.getElementById("filters-prev");
+    const nextButton = document.getElementById("designs-next") || document.getElementById("models-next") || document.getElementById("filters-next");
+    
+    // Check each card against the search term
+    let matchingCards = allPatternCards.filter(card => {
+      const filterValue = card.getAttribute("filter").toLowerCase();
+      return filterValue.includes(searchTerm);
+    });
+
+    // Hide all cards first (batch operation)
+    allPatternCards.forEach(card => {
+    card.style.display = "none";
+  });
+
+  // Update "not found" message
+  const noCard = document.getElementById("not-found");
+  noCard.style.display = matchingCards.length > 0 ? "none" : "block";
+
+  // Function to update pagination display
+  function updatePagination() {
+    const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
+    prevButton.disabled = currentPage === 0;
+    nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
+  }
+  
+  // Function to show the current page of cards
+  function showCardsForPage() {
+    // Calculate range for current page
+    const start = currentPage * itemsPerPage;
+    const end = Math.min(start + itemsPerPage, matchingCards.length);
+    
+    // Show only cards for current page
+    for (let i = 0; i < matchingCards.length; i++) {
+      matchingCards[i].style.display = (i >= start && i < end) ? "block" : "none";
+    }
+    
+    updatePagination();
+  }
+  
+  // Set up pagination handlers
+  prevButton.onclick = function() {
+    if (currentPage > 0) {
+      currentPage--;
+      showCardsForPage();
+    }
+  };
+  
+  nextButton.onclick = function() {
+    const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
+    if (currentPage + 1 < totalPages) {
+      currentPage++;
+      showCardsForPage();
+    }
+  };
+  
+  // Initialize pagination for both filtered and unfiltered cases
+  paginationButtons.style.display = matchingCards.length > itemsPerPage ? "flex" : "none";
+  
+  // Show initial page
+  currentPage = 0;
+  showCardsForPage();
+  });
+}
+
+// Initialize search functionality
+setupSearchFunction();
+</script>

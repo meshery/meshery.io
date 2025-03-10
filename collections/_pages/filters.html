@@ -1,0 +1,110 @@
+---
+layout: filters
+title: Cloud Native Catalog - Filters
+description: Pre-configured filters for Envoy proxies, WebAssembly filters, and complete application deployments.
+permalink: /catalog/filters
+---
+<style>
+    .back-button{
+        margin-top: 1rem;
+    }
+        .back-button {
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #0275d8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .back-button:hover {
+            background-color: #015cad;
+        }
+        .not-found{
+            margin-top: 10rem;
+        }
+</style>
+{% assign filters = site.filters %}
+<script>
+    var filters = {{ filters | jsonify }};
+</script>
+<div class="section-container">
+    {% include alltype.html %}
+
+
+    <div class="catalog-section filters-section tab-content" id="filters-tab">
+        <h2>Filters</h2>
+        <div style="margin-top: 2rem;">{% include view-all.html %}</div>
+        <div class="row">
+            <h2 class="not-found" style="display: none" id="not-found">
+                No results match your filters. Try adjusting your selections or clearing some filters.
+            </h2>
+            {% for pattern in filters %}
+                <div
+                    class="column column-lg patternCard filters" filter="{{ pattern.name }}" type="{{ pattern.type }}"
+                    patternType="wasm filters"
+                    technology='["wasm-filter"{% if pattern.compatibility.size > 0 %}, {% for item in pattern.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %}]'
+                    status="{{ pattern.Status }}"
+                    >
+                    {% include wasm-card.html %}
+                </div>
+            {% endfor %}
+    </div>
+    <div class="pagination">
+        <button class="prev" id="filters-prev" disabled>Prev</button>
+        <button class="next" id="filters-next">Next</button>
+    </div>
+</div>
+</div>
+<script>
+    const itemsPerPage = 6;
+
+    function getCardsForSection(section) {
+        return document.querySelectorAll(`.${section}-section .patternCard`);
+    }
+
+    function updatePagination(section) {
+        const cards = getCardsForSection(section);
+
+        const totalPages = Math.ceil(cards.length / itemsPerPage);
+        let currentPage = 0;
+
+        function showCards() {
+            const start = currentPage * itemsPerPage;
+            const end = start + itemsPerPage;
+
+            cards.forEach((card, index) => {
+                card.style.display = index >= start && index < end ? "block" : "none";
+            });
+        }
+
+        function updateButtons() {
+            const prevButton = document.getElementById(`${section}-prev`);
+            const nextButton = document.getElementById(`${section}-next`);
+
+            prevButton.disabled = currentPage === 0;
+            nextButton.disabled = currentPage + 1 >= totalPages;
+        }
+
+        showCards();
+        updateButtons();
+
+        document.getElementById(`${section}-prev`).onclick = function () {
+            if (currentPage > 0) {
+                currentPage--;
+                showCards();
+                updateButtons();
+            }
+        };
+
+        document.getElementById(`${section}-next`).onclick = function () {
+            if (currentPage + 1 < totalPages) {
+                currentPage++;
+                showCards();
+                updateButtons();
+            }
+        };
+    }
+    updatePagination("filters")
+</script>

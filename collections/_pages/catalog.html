@@ -1,6 +1,7 @@
 ---
 layout: catalog
 title: Cloud Native Catalog
+description: A hub for sharing and discovering best practices, reusable templates, and operational patterns for Kubernetes and cloud native infrastructure.
 permalink: /catalog
 ---
 
@@ -29,7 +30,7 @@ permalink: /catalog
     background-position: right 10px top 50%;
     margin-right: 10px;
     @media (max-width: 506px) {
-     display: none;
+      display: none;
     }
   }
   #search {
@@ -50,21 +51,60 @@ permalink: /catalog
 
   .section-container {
     width: 100%;
+    display: none;
+  }
+
+  .tab-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+  }
+
+  .tab {
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .tab.selected {
+    background-color: #f1f1f1;
+    font-weight: bold;
+  }
+
+  .catalog-section {
+    display: none;
+  }
+
+  .catalog-section.active {
+    display: block;
+  }
+
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .pagination button {
+    padding: 10px;
+    font-size: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+  }
+  .pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 </style>
 
-{% assign catalog = site.collections | concat: site.catalog | concat: site.models | sort: 'name' %}
-<div class="section-container">
-  
-  {% include view-all.html %}
+{% assign filters = site.filters %} {% assign models = site.models %} {% assign
+designs = site.catalog %}
 
-  <div class="row">
+<!-- <div class="row">
     <h2 class="not-found" style="display: none;" id="not-found">
       No results found
     </h2>
     {% assign count = 0 %}
     {% for pattern in catalog %}
-        {% if count < 9 %}
+        {% if count <= 5 %}
           {% assign should_display = 'block' %}
         {% else %}
           {% assign should_display = 'none' %}
@@ -126,9 +166,9 @@ permalink: /catalog
     {% endif %} 
     {% endfor %}
   </div>
-</div>
+</div> -->
 
-<script>
+<!-- <script>
   document.getElementById("sort").addEventListener("change", function () {
     var sortValue = this.value;
     var cardsContainer = document.querySelector(".row");
@@ -170,46 +210,43 @@ permalink: /catalog
   document.getElementById("search").addEventListener("input", function () {
     var searchValue = this.value.toLowerCase();
     var cardsContainer = document.querySelector(".row");
-    var cards = cardsContainer.querySelectorAll(".patternCard");
+    // var cards = cardsContainer.querySelectorAll(".patternCard");
     var notFound = document.getElementById("not-found");
 
     let found = false;
+    var sections = document.querySelectorAll(".catalog-section");
+    
+    sections.forEach(function (section) {
+    var cards = section.querySelectorAll(".patternCard");
 
-    cards.forEach(function (pattern) {
+      cards.forEach(function (pattern) {
       var filterValue = pattern.getAttribute("filter").toLowerCase();
       if (filterValue.includes(searchValue)) {
-        pattern.style.display = "block";
-        found = true;
+      pattern.style.display = "block";
+      found = true;
       } else {
-        pattern.style.display = "none";
+      pattern.style.display = "none";
       }
+      });
     });
 
+    var notFound = document.getElementById("not-found");
     if (!found) {
       notFound.style.display = "block";
     } else {
       notFound.style.display = "none";
     }
   });
-</script>
+</script> -->
 
 <script>
-  // const patternCards = document.querySelectorAll(".patternCard");
-  // document.addEventListener("DOMContentLoaded", () => {
-  //   // display none for patternCards after number 12
-  //   patternCards.forEach((card, index) => {
-  //     // Hide patternCards after number 12
-  //     if (index < 9) {
-  //       card.style.display = "block";
-  //     }
-  //   });
-  // });
-
-  document.addEventListener("themeChange",(e)=> {
-    // load the snapshot version based on theme 
-    document.querySelectorAll(".pattern-image").forEach(e => {
-      e.src = event.detail.value == "dark-mode" ? e.dataset.snapshotDark : e.dataset.snapshotLight;
+    document.addEventListener("themeChange", (e) => {
+    // load the snapshot version based on theme
+    document.querySelectorAll(".pattern-image").forEach((e) => {
+      e.src =
+        event.detail.value == "dark-mode"
+          ? e.dataset.snapshotDark
+          : e.dataset.snapshotLight;
     });
-  
-  }) 
+  });
 </script>

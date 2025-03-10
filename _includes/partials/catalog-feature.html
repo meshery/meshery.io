@@ -1,122 +1,374 @@
+<style>
+  .active-title {}
+
+  .catalog-summary {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+
+  .catalog-summary span {
+    margin: 0 10px;
+    color: #333;
+  }
+
+  .icon-container {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 1rem;
+    & img {
+      width: 100%;
+    }
+  }
+  .catalog-feature {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+
+  .catalog-feature h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .catalog-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    /* flex-wrap: wrap; */
+  }
+
+  .catalog-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 180px;
+    border: 1px solid #d4f3e6;
+    transition: 0.3s ease-in-out;
+  }
+
+  .catalog-card:hover {
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--color-secondary-dark);
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin: 5px 0;
+    font-size: 28px;
+    color: #222;
+  }
+
+  .card-subtitle {
+    font-size: 12px;
+    color: #777;
+  }
+
+  .card-container {
+    flex: 1;
+    min-height: 285px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    background-color: var(--bg-card);
+    padding: 1.5rem;
+    color: var(--color-secondary-dark);
+    box-shadow: 2px 1px 4px 0px #00d3a9;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .card-container:hover {
+    transform: translateY(10px);
+    box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.15),
+      0 6px 8px -2px rgba(0, 0, 0, 0.08);
+  }
+  .card-container:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -20px;
+    right: -20px;
+    background: var(--background-primary);
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform 0.4s ease-out;
+  }
+
+  .card-container .info h3 {
+    color: var(--color-secondary-dark);
+    font-size: 19px;
+    font-weight: 800;
+    transition: color 0.4s;
+  }
+
+  .card-container .info p {
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--color-grey-light);
+    transition: color 0.4s;
+  }
+
+  .card-container:hover:before {
+    transform: scale(30);
+  }
+
+  .card-container:hover p {
+    color: white !important;
+  }
+
+  .dark .card-container {
+    background-color: #1f2937; /* dark:bg-gray-800 */
+  }
+  .count-text {
+    margin-top: 0.5rem; /* Equivalent to mt-2 */
+    font-size: 2.25rem; /* Equivalent to text-4xl */
+    font-weight: bold;
+    color: var(--text-color); /* Use a CSS variable for dynamic color */
+  }
+
+  .dark .count-text {
+    color: white;
+  }
+  .text-sm-medium {
+    font-size: 2rem;
+    font-weight: 700; 
+    color: var(--color-secondary-dark);
+  }
+  .bottom-bar {
+    position: absolute;
+    inset-inline: 0; /* Equivalent to inset-x-0 */
+    bottom: 0;
+    height: 0.25rem; /* Equivalent to h-1 */
+  }
+  @media screen and (min-width: 600px) {
+  .feature-container {
+    margin-top:10rem;
+    min-height: 600px;
+  }
+}
+</style>
 <h2 class="catalog-heading">Cloud Native Catalog</h2>
 <h3 class="catalog-subheading">Harness Well-Architected Kubernetes Patterns</h3>
 
 <p class="catalog-subtext">
-  Discover and use top-quality patterns and conventions as templates for your cloud native infrastructure with Meshery Catalog.</p>
+  Discover and use top-quality patterns and conventions as templates for your
+  cloud native infrastructure with Meshery Catalog.
+</p>
 <p class="catalog-subtext">
-  <span style="color: #00D3A9; cursor: pointer;" id="myBtn">Publish your own best practices</span> and <a style ="color: #00D3AF; text-decoration: none;" href="https://docs.meshery.io/concepts/catalog#to-create-a-design-pattern-using-meshery-ui" target="_blank">share with team members and the world</a>.</p>  
+  <span style="color: #00d3a9; cursor: pointer" id="myBtn">Publish your own best practices</span>
+  and
+  <a style="color: #00d3af; text-decoration: none"
+    href="https://docs.meshery.io/concepts/catalog#to-create-a-design-pattern-using-meshery-ui" target="_blank">share
+    with team members and the world</a>.
+</p>
 
+{% include catalog-help-modal.html %} {% assign filters = site.filters %} {%
+assign models = site.models %} {% assign designs = site.catalog %} {% assign
+total_filters = filters | size %} {% assign total_designs = designs | size %} {%
+assign total_models = models | size %}
 
-{% include catalog-help-modal.html %}
+<div class="feature-container" style="gap: 40px;">
 
-
-
-<!-- <script type="module">
-  import data from "{{ site.baseurl }}/integrations/data.js";
-
-const pattern = document.getElementById("pattern");
-const filter = document.getElementById("filter");
-
-const patternCards = document.querySelectorAll(".ptrn");
-const filterCards = document.querySelectorAll(".wsm");
-const ComingSoonCards = document.querySelectorAll(".cmg");
-
-
-function showElements(elements) {
-    elements.forEach((element) => {
-      element.style.display = "block";
-    });
-  }
-
-  function hideElements(elements) {
-    elements.forEach((element) => {
-      element.style.display = "none";
-    });
-  }
-
-  pattern.addEventListener("click", () => {
-    hideElements(filterCards);
-    showElements(patternCards);
-    showElements(ComingSoonCards);
-  });
-
-  filter.addEventListener("click", () => {
-    hideElements(patternCards);
-    hideElements(ComingSoonCards);
-    showElements(filterCards);
-  });
+  <div class="card-container box tab-button" style="cursor: pointer;flex:1;position: relative;" data-target="designs-tab">
+    <a href="catalog/designs" target="_blank" style="position: absolute;top:0;left: 0;right: 0;bottom: 0; text-decoration: none; color: inherit; display: block;z-index: 999;">
+      </a>
+      <div style="display: flex; align-items: center; justify-content: space-between">
+        <div style="display: flex
+        ;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;">
+          <p class="text-sm-medium title">Designs</p>
+          <p <span class="count-text" style="color: #00b39f">
+            {{ total_designs }}
+            </span>
+          </p>
+        </div>
+        <div style="height: 3rem; width: 5rem">
+          <div class="circlecont" style="cursor: pointer" id="pattern">
+            <div class="circle"></div>
+            <div class="hover-circles">
+            <div class="circle">
+              <img src="/assets/images/logos/service-mesh-pattern.svg" />
+            </div>
+            <div class="circle">
+              <img src="/assets/images/logos/service-mesh-pattern.svg" />
+            </div>
+            <div class="circle">
+              <img src="/assets/images/logos/service-mesh-pattern.svg" />
+            </div>
+            <div class="circle">
+              <img src="/assets/images/logos/service-mesh-pattern.svg" />
+            </div>
+            <div class="circle">
+              <img src="/assets/images/logos/service-mesh-pattern.svg" />
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
     
-</script> -->
-<!-- <div class="features-container">
-
-  <div class="feature-container">
-    <div class="box">
-      <div class="title pattern">Designs</div>
-      <img class="patterns-coming-soon hidden" src="{{site.baseurl}}/assets/images/coming-soon.png" />
-      <div class="circlecont" style="cursor:pointer;" id="pattern">
-        <div class="circle"></div>
-        <div class="hover-circles">
-          <div class="circle"><img src="/assets/images/logos/service-mesh-pattern.svg" /></div>
-          <div class="circle"><img src="/assets/images/logos/service-mesh-pattern.svg" /></div>
-          <div class="circle"><img src="/assets/images/logos/service-mesh-pattern.svg" /></div>
-          <div class="circle"><img src="/assets/images/logos/service-mesh-pattern.svg" /></div>
-          <div class="circle"><img src="/assets/images/logos/service-mesh-pattern.svg" /></div>
-        </div>
-      </div>
+    <p style="
+                margin-top: 1rem;
+                font-size: 0.875rem;
+                color: var(--color-secondary-dark);
+                line-height: 1.625;
+              ">
+      Cloud native patterns enable the business function in simple language.
+    </p>
+    <div class="bottom-bar" style="background-color: #00b39f"></div>
     </div>
-    <div class="description pattern">Cloud native patterns enable the business function in simple language.</div>
-   </div>
-
-   <div class="feature-container">
-    <div class="box">
-      <div class="title wasm">Filters</div>
-      <img class="patterns-coming-soon hidden" src="{{site.baseurl}}/assets/images/coming-soon.png" />
-      <div class="circlecont" style="cursor:pointer;" id="filter">
-        <div class="circle"></div>
-        <div class="hover-circles">
-          <div class="circle"><img src="/assets/images/webassembly_logo.svg" /></div>
-          <div class="circle"><img src="/assets/images/webassembly_logo.svg" /></div>
-          <div class="circle"><img src="/assets/images//webassembly_logo.svg" /></div>
-          <div class="circle"><img src="/assets/images/webassembly_logo.svg" /></div>
-          <div class="circle"><img src="/assets/images/webassembly_logo.svg" /></div>
-        </div>
-      </div>
-    </div>
-    <div class="description wasm">Embedded in the data plane of a service mesh, WebAssembly filters offer fine-grained control over service requests.</div>
-   </div>
-   <div class="feature-container">
-    <div class="box">
-      <div class="title ebpf">Programs</div>
-      <img class="patterns-coming-soon" src="{{site.baseurl}}/assets/images/coming-soon.png" />
-      <div class="circlecont">
-        <div class="circle"></div>
-        <div class="hover-circles">
-          <div class="circle"><img src="/assets/images/ebpf-logo.svg" /></div>
-          <div class="circle"><img src="/assets/images/ebpf-logo.svg" /></div>
-          <div class="circle"><img src="/assets/images/ebpf-logo.svg" /></div>
-          <div class="circle"><img src="/assets/images/ebpf-logo.svg" /></div>
-          <div class="circle"><img src="/assets/images/ebpf-logo.svg" /></div>
-        </div>
-      </div>
-    </div> 
-    <div class="description ebpf">Embedded in the data plane of a service mesh, eBPF programs performant, fine-grained control over service requests.</div>
-   </div>
   
-   <div class="feature-container">
-    <div class="box">
-      <div class="title OPA">Policies</div>
-      <img class="patterns-coming-soon" src="{{site.baseurl}}/assets/images/coming-soon.png" />
-      <div class="circlecont">
-        <div class="circle"></div>
-        <div class="hover-circles">
-          <div class="circle"><img src="/assets/images/opa-logo.svg" /></div>
-          <div class="circle"><img src="/assets/images/opa-logo.svg" /></div>
-          <div class="circle"><img src="/assets/images/opa-logo.svg" /></div>
-          <div class="circle"><img src="/assets/images/opa-logo.svg" /></div>
-          <div class="circle"><img src="/assets/images/opa-logo.svg" /></div>
+
+  <div class="card-container box tab-button " style="cursor: pointer;flex:1;" data-target="filters-tab">
+    <a href="catalog/filters" target="_blank" style="position: absolute;top:0;left: 0;right: 0;bottom: 0;text-decoration: none; color: inherit; display: block;z-index: 999;">
+      </a>
+      <div style="display: flex; align-items: center; justify-content: space-between">
+        <div style="display: flex
+          ;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;">
+          <p class="text-sm-medium title">Filters</p>
+          <p <span style="color: #654ff0" class="count-text">
+            {{ total_filters}}
+            </span>
+          </p>
         </div>
+        <div style="height: 3rem; width: 5rem">
+          <div class="circlecont" style="cursor: pointer" id="filter">
+            <div class="circle"></div>
+            <div class="hover-circles">
+            <div class="circle">
+              <img src="/assets/images/webassembly_logo.svg" />
+            </div>
+            <div class="circle">
+              <img src="/assets/images/webassembly_logo.svg" />
+            </div>
+            <div class="circle">
+              <img src="/assets/images/webassembly_logo.svg" />
+            </div>
+            <div class="circle">
+              <img src="/assets/images/webassembly_logo.svg" />
+            </div>
+            <div class="circle">
+              <img src="/assets/images/webassembly_logo.svg" />
+            </div>
+            </div>
+            </div>
       </div>
-    </div>
-    <div class="description opa">Applied across the cloud native infrastructure under management, policies may be applied broadly and specificly.</div>
-   </div>
-</div> -->
+      </div>
+      <p style="
+                  margin-top: 1rem;
+                  font-size: 0.875rem;
+                  color: var(--color-secondary-dark);
+                  line-height: 1.625;
+                ">
+        Embedded in the data plane of a service mesh, WebAssembly filters offer
+        fine-grained control over service requests.
+      </p>
+      <div class="bottom-bar" style="background-color: #654ff0"></div>
+      </div>
+
+  <div class="card-container box tab-button" style="cursor: pointer;flex:1;" data-target="models-tab">
+    <a href="catalog/models" target="_blank" style="position: absolute;top:0;left: 0;right: 0;bottom: 0;text-decoration: none; color: inherit; display: block;z-index: 999;"></a>
+      <div style="display: flex; align-items: center; justify-content: space-between">
+        <div style="display: flex
+          ;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;">
+          <p class="text-sm-medium title">Models</p>
+          <p <span class="count-text" style="color: #00b39f">
+            {{ total_models }}
+            </span>
+          </p>
+        </div>
+        <div style="height: 3rem; width: 5rem">
+          <div class="circlecont" style="cursor: pointer" id="pattern">
+            <div class="circle"></div>
+            <div class="hover-circles">
+            <div class="circle">
+              <img src="/assets/images/logos/meshery-logo.png" />
+            </div>
+            <div class="circle">
+              <img src="/assets/images/logos/meshery-logo.png" />
+            </div>
+            <div class="circle">
+              <img src="/assets/images/logos/meshery-logo.png" />
+            </div>
+            <div class="circle">
+              <img src="/assets/images/logos/meshery-logo.png" />
+            </div>
+            <div class="circle">
+              <img src="/assets/images/logos/meshery-logo.png" />
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+    <p style="
+                margin-top: 1rem;
+                font-size: 0.875rem;
+                color: var(--color-secondary-dark);
+                line-height: 1.625;
+              ">
+      Models package components and relationships providing a versioned and
+      OCI-exportable logical representation of resources.
+    </p>
+    <div class="bottom-bar" style="background-color: #00b39f"></div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll(".tab-button");
+
+    const tabs = document.querySelectorAll(".tab-content");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = button.getAttribute("data-target");
+
+        const catalogSection = document.querySelector(".section-container");
+        catalogSection.style.display = "block";
+
+        // Remove active class from all titles
+        buttons.forEach((btn) =>
+          btn.querySelector(".title").classList.remove("active-title")
+        );
+
+        // Add active class to the title inside the clicked button
+        button.querySelector(".title").classList.add("active-title");
+
+        // Hide all tabs
+        tabs.forEach((tab) => (tab.style.display = "none"));
+
+        // Show the selected tab
+
+        document.getElementById(target).style.display = "block";
+      });
+    });
+  });
+</script>

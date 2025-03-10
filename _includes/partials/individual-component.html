@@ -33,6 +33,17 @@
           <li><p>VERSION</p>
             <div>{{pattern.publishedVersion}}</div>
           </li>
+          <li>
+            <p>MODELS</p>
+            <div>
+              {% for item in pattern.compatibility %}
+              <a href="{{ site.baseurl }}/catalog/models/{{ item | slugify }}">
+                {{ item | capitalize }}
+              </a>
+              {% unless forloop.last %}, {% endunless %}
+              {% endfor %}
+            </div>
+          </li>
       </ul>
     </div>
     </p>
@@ -54,14 +65,14 @@
 
   {%if pattern.patternInfo%}
   <div>
-    <h3>What this pattern does:</h3>
+    <h3>What This Pattern Does:</h3>
     <p class="pre-white-space">{{pattern.patternInfo | url_decode | replace: '\\n', '<br/>'| replace: '\n', '<br/>' }}</p>
     <h3>Caveats and Consideration: </h3>
     <p class="pre-white-space">{{pattern.patternCaveats | url_decode}}</p>
     </p>
     {%else%}
     <div>
-      <h3>What this filter does:</h3>
+      <h3>What This Filter Does:</h3>
       <p class="pre-white-space">{{pattern.filterInfo | url_decode}}</p>
       <h3>Caveats and Consideration: </h3>
       <p class="pre-white-space">{{pattern.filterCaveats | url_decode}}</p>

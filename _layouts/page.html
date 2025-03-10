@@ -6,15 +6,19 @@ layout: default
 		<div class="container {% if page.full_width %}max-container{% endif %}">
 			{%- if page.featured-image -%}
 				<img src="{{- page.featured-image | relative_url -}}" alt="" class="featured-image">
-			{%- else -%}
-				<!-- {%- assign postImage = "/assets/images/image-default.jpg" -%}
-				<img src="{{- postImage | relative_url -}}" alt="" class="featured-image"> -->
 			{%- endif -%}
 
 			{% if page.name %}	
 			
-					  {% if page.collection == "catalog" %}
+					  {% if page.collection == "catalog" or page.collection == "models" or page.collection == "filters" %}
+					  <div class="blog-navigation" style="margin-bottom: 2rem;text-decoration: none;">
+						<a  href="/catalog/{% if page.collection == 'catalog' %}designs{% else %}{{page.collection}}{% endif %}" style="text-decoration: none;"> &larr; Back To {% if page.collection == 'catalog' %}Designs{% else %}{{ page.collection | capitalize }}{% endif %}
+						</a>
+						</div>
 					  	<h1 style="text-align: center; margin: 2.5rem 0; text-transform: capitalize;">{{ page.name }}</h1>
+						  {% if page.howItWorks %}
+							<p style="text-align: center;"><strong>{{ page.howItWorks }}: </strong>{% if page.howItWorksDetails %}{{ page.howItWorksDetails }}{% endif %}</p>
+						  {% endif %}
 					  {% else %}
 					   <h2>{{ page.title }}</h2>
 					  {% endif %} 

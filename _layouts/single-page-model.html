@@ -9,85 +9,168 @@ pagination:
 	<div class="post-content">
 	
         <style>
-			.modal-image {
-			  display: flex;
-			  flex-direction: column;
-			  align-items: center;
-			  justify-content: center;
-			}
-			.modal-image > img {
-			  width: 100%;
-			  object-fit: contain;
-			}
-            div.model-metadata-container {
-              display: flex;
-              justify-content: space-between;
-              gap: 2rem;
-              flex-wrap: wrap;
-            }
-  
-            p.model-metadata-field {
-              font-weight: 600;
-              font-size: 1rem;
-              margin: 0;
-            }
-  
-		  </style>
-			  <div class="modal-content" style="margin-top:2rem;">
-				<div class="modal-image">
-				  <img class="image-class"  
-				  data-snapshot-light="{{page.colorIcon}}"
-				  data-snapshot-dark="{{page.whiteIcon}}"
-				  src="{{page.colorIcon}}"
-				  onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage('{{ page.colorIcon }}', 'model')" />
-				</div>
-				<br />
-				<div class="vertical-line"></div>
-				<div class="modal-info">
-                  <div class="model-metadata-container">
-                    <div>
-                      <p class="model-metadata-field">Registrant</p>
-                      <p class="contentdata">{{ page.registrant }}</p>
-                    </div>
-                    <div>
-                      <p class="model-metadata-field">Components</p>
-                      <p class="contentdata">{{ page.componentsCount }}</p>
-                    </div>
-            
-                    <div>
-                      <p class="model-metadata-field">Relationships</p>
-                      <p class="contentdata">{{ page.relationshipsCount }}</p>
-                    </div>
-                    <div>
-                      <p class="model-metadata-field">Category</p>
-                      <p class="contentdata">{{ page.category }}</p>
-                    </div>
-                  </div>
-                  
-                  <div id="copy-url">
-					<div class="btn-class">
-					  <div class="vertical-center" id="{{type.name}}">
-						<div class="btn-grp">
-						  {% if page.docURL %}
-						  <a href="{{page.docURL}}">
-							<button class="import" style="width: 7rem;">Visit docs</button></a>
-						  {% endif %}
-						  <div class="btn-tooltip-grp">
-							<a href="https://docs.meshery.io/project/contributing/contributing-models-quick-start">
-							  <button class="import" style="width: 12rem;">Add new model</button></a>
-						  </div>
-						</div>
-					  </div>
-					</div>
-				  </div>
-				  
-				</div>
-			  </div>
-			   
+      .modal-image {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-image > img {
+        width: 100%;
+        object-fit: contain;
+      }
+      .metadata-row {
+        display: flex;
+        border-bottom: 1px solid #eee;
+        padding: 8px 0;
+      }
+
+      .metadata-key {
+        font-weight: 600;
+        width: 140px;
+        flex-shrink: 0;
+        color: var(--color-secondary-dark);
+      }
+
+      .metadata-value {
+        flex-grow: 1;
+        color: var(--color-secondary-dark);
+      }
+      .model-metadata-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin: 1rem 0;
+      }
+      .model-details-container {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .model-details {
+        margin-top: 1.5rem;
+      }
+      .model-details h3 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+      .model-details ul {
+        list-style-type: disc;
+        padding-left: 20px;
+      }
+      .padded-box {
+        padding: 1.5rem;
+        /* background: #f8f8f8; */
+        border-radius: 8px;
+        margin-top: 1rem;
+      
+        background-color: var(--color-components-background);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        transition: box-shadow 0.3s ease;
+      }
+    </style>
+
+    <!-- Model Image -->
+    <div class="modal-content" style="margin-top:2rem;">
+      <div class="modal-image" style="padding-top:0;">
+        <img class="image-class"  
+          data-snapshot-light="{{ page.colorIcon }}"
+          data-snapshot-dark="{{ page.whiteIcon }}"
+          src="{{ page.colorIcon }}"
+          onerror="this.src='/assets/images/meshery-color.svg'" 
+          loading="lazy" 
+          onclick="toggleFullScreenImage('{{ page.colorIcon }}', 'model')" />
+      </div>
+
+      <br />
+      <div class="vertical-line"></div>
+
+      <!-- Model Metadata -->
+      <div class="modal-info">
+        <div class="model-metadata-container">
+          <div class="metadata-row">
+            <div class="metadata-key">Registrant:</div>
+            <div class="metadata-value">{{ page.registrant }}</div>
+          </div>
+          <div class="metadata-row">
+            <div class="metadata-key">Components:</div>
+            <div class="metadata-value">{{ page.componentsCount }}</div>
+          </div>
+          <div class="metadata-row">
+            <div class="metadata-key">Relationships:</div>
+            <div class="metadata-value">{{ page.relationshipsCount }}</div>
+          </div>
+          <div class="metadata-row">
+            <div class="metadata-key">Category:</div>
+            <div class="metadata-value">{{ page.category }}</div>
+          </div>
+          <div class="metadata-row">
+            <div class="metadata-key">Subcategory:</div>
+            <div class="metadata-value">{{ page.subcategory }}</div>
+          </div>
+        </div>
+        <!-- Documentation and Contribution Buttons -->
+        <div id="copy-url">
+          <div class="btn-class">
+            <div class="vertical-center" id="{{type.name}}">
+              <div class="btn-grp">
+                {% if page.docURL %}
+                  <a href="{{page.docURL}}">
+                    <button class="import" style="width: 7rem;">Visit Docs</button>
+                  </a>
+                {% endif %}
+                <div class="btn-tooltip-grp">
+                  <a href="https://docs.meshery.io/project/contributing/contributing-models-quick-start">
+                    <button class="import" style="width: 12rem;">Add New Model</button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- End modal-info -->
+    </div> <!-- End modal-content -->
+
+    <!-- Scripts -->
 		   <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
+
 		   <script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>
-        
-        
+  
+  </div> <!-- End post-content -->
+  <div  class="model-details-container">
+	   <!-- Features List -->
+        {% if page.featureList %}
+        <div class="model-details">
+          <h3>Key Features</h3>
+          <ul>
+            {% for feature in page.featureList %}
+              <li>{{ feature }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        <!-- Components List -->
+        {% if page.components %}
+        <div class="model-details padded-box">
+          <h3>Components</h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem;justify-content: center;">
+            {% for component in page.components %}
+              <div style="text-align: center; width: 150px;">
+                <img src="{{site.baseurl}}/{{ component.colorIcon }}" 
+                     onerror="this.src='/assets/images/meshery-color.svg'"
+                     style="width: 100px; height: 100px; object-fit: contain;" 
+                     loading="lazy" />
+                <p><strong>{{ component.name }}</strong></p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+		{% endif %}
+		<!-- Blog Navigation -->
 	   <div class="blog-navigation" style="margin-bottom: 2rem;">
 		<div style="justify-content:space-between; display: flex; width:100%;">
 			{% if page.previous.url %}
