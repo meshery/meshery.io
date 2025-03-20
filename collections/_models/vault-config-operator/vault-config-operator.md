@@ -159,7 +159,11 @@ components:
   colorIcon: assets/images/integration/vault-config-operator/components/cert-auth-engine-role/icons/color/cert-auth-engine-role-color.svg
   whiteIcon: assets/images/integration/vault-config-operator/components/cert-auth-engine-role/icons/white/cert-auth-engine-role-white.svg
   description: 
-componentsCount: 37
+- name: cert-auth-engine-role
+  colorIcon: assets/images/integration/vault-config-operator/components/cert-auth-engine-role/icons/color/cert-auth-engine-role-color.svg
+  whiteIcon: assets/images/integration/vault-config-operator/components/cert-auth-engine-role/icons/white/cert-auth-engine-role-white.svg
+  description: 
+componentsCount: 38
 relationships: 
 relationshipsCount: 0
 featureList: [
