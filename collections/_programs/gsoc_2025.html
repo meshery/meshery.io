@@ -8,7 +8,107 @@ link: /programs/gsoc/2025
 permalink: /programs/gsoc/2025
 excerpt: "Meshery - Google Summer of Code 2025"
 ---
-<style>ol > li { list-style-type: decimal; display: list-item !important; visibility: visible;   } </style>
+
+<script>function generateTableOfContents(contentSelector, tocSelector) {
+  const content = document.querySelector(contentSelector);
+  const toc = document.querySelector(tocSelector);
+  const headings = content.querySelectorAll('h2, h3, h4, h5, h6'); // Select heading levels
+
+  let tocHTML = '<h2>Table of Contents</h2><ul>';
+
+  headings.forEach((heading, index) => {
+    const id = `toc-${index}`; // Generate unique ID
+    heading.id = id; // Assign ID to heading
+    const level = parseInt(heading.tagName.substring(1)); // Extract heading level
+
+    tocHTML += `<li style="margin-left: ${(level - 2) * 10}px;"><a href="#${id} " style="scroll-margin-top: 58px;">${heading.textContent}</a></li>`; // Adjust margin for nested headings
+  });
+
+  tocHTML += '</ul>';
+  toc.innerHTML = tocHTML;
+}
+
+// Example usage:
+document.addEventListener('DOMContentLoaded', () => {
+  generateTableOfContents('#content', '#toc'); // Replace with your selectors
+});</script>
+<style>ol > li { list-style-type: decimal; display: list-item !important; visibility: visible;   } 
+
+  .auto-toc {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    align-content: center;
+  }
+  
+  .auto-toc h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .auto-toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .auto-toc li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .auto-toc a {
+    text-decoration: none;
+    color: #00D3A9;
+  }
+  
+  .auto-toc a:hover {
+    text-decoration: underline;
+  }
+  
+  .auto-toc ul ul {
+    margin-left: 1rem;
+  }
+  
+  .auto-toc li {
+    border-bottom: 1px dotted #eee;
+    padding-bottom: 0.25rem;
+  }
+  
+  .auto-toc li:last-child {
+    border-bottom: none;
+  }
+  
+  .auto-toc a {
+    transition: color 0.3s ease;
+  }
+  
+  .auto-toc a:hover {
+    color: #00b39f;  
+  }
+  
+  /* .auto-toc li:before {
+    content: counter(toc-items) ". ";
+    counter-increment: toc-items;
+    color: #888;
+    margin-right: 0.5rem;
+  } */
+  
+  .auto-toc {
+    counter-reset: toc-items;
+  }
+  
+  .auto-toc a {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 85%;
+      scroll-margin-top: 158px;
+  }
+    
+  </style>
   <div class="program">
     <div class="community-details">
       
@@ -37,7 +137,9 @@ excerpt: "Meshery - Google Summer of Code 2025"
 
       <h2 class="black-text heading"><div class="sub_headings">GSOC 2025 Project Ideas</div></h2>
     
-
+      <div id="toc" class="auto-toc">
+      </div>
+      <div id="content">
       <h4 class="project-list">Project 1. Support for Azure in Meshery</h4>
     
       <p class="project-item"><b>Description:</b>
@@ -262,7 +364,7 @@ excerpt: "Meshery - Google Summer of Code 2025"
         <li><b>Issue:</b> <a href="https://github.com/meshery/meshery/issues/13514">https://github.com/meshery/meshery/issues/13514</a></li>
       </ul>    
     </div>
-
+  </div>
   </div>
   <div class="text subscribe program__subscribe" style="padding: 1rem;">
     {% include subscribe.html formstyle="padding:5.rem;" %}
