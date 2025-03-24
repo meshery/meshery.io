@@ -155,7 +155,11 @@ components:
   colorIcon: assets/images/integration/kubedb/components/cassandra-version/icons/color/cassandra-version-color.svg
   whiteIcon: assets/images/integration/kubedb/components/cassandra-version/icons/white/cassandra-version-white.svg
   description: 
-componentsCount: 36
+- name: shard-configuration
+  colorIcon: assets/images/integration/kubedb/components/shard-configuration/icons/color/shard-configuration-color.svg
+  whiteIcon: assets/images/integration/kubedb/components/shard-configuration/icons/white/shard-configuration-white.svg
+  description: 
+componentsCount: 37
 relationships: 
 relationshipsCount: 0
 featureList: [
