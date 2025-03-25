@@ -25,6 +25,10 @@ layout: default
 </script>
 
 <style>
+
+  #content h3 {
+    scroll-margin-top: 150px; /* adjust to match your navbar height */
+  }
   
   .auto-toc {
     border: 1px solid #ccc;
@@ -97,7 +101,6 @@ layout: default
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 85%;
-    scroll-margin-top: 158px;
   }
 </style>
 
@@ -110,6 +113,21 @@ layout: default
   <div class="program">
     <div class="community-details">
       {{ page.description | markdownify }}
+
+      {% if page.video_embed %}
+      <div class="video-embed">
+        {{ page.video_embed | markdownify }}
+      </div>
+      {% endif %}
+      
+      {% if page.statistics %}
+        <h3>GSoC Statistics:</h3>
+        <ul>
+          {% for stat in page.statistics %}
+          <li>{{ stat }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
 
       {% if page.timeline %}
       <h3>Program Timeline</h3>
