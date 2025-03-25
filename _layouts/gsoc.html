@@ -2,102 +2,160 @@
 layout: default
 ---
 
-<!DOCTYPE html>
-<html lang="en">
+<script>
+  function generateTableOfContents(contentSelector, tocSelector) {
+    const content = document.querySelector(contentSelector);
+    const toc = document.querySelector(tocSelector);
+    const headings = content.querySelectorAll('h2, h3');
 
-<head>
-  <meta charset="UTF-8" />
-  <title>{{ page.title }}</title>
-  <script src="/js/linkify.js" defer></script>
-</head>
+    let tocHTML = '<h2>Table of Contents</h2><ul>';
+    headings.forEach((heading, index) => {
+      const id = `toc-${index}`;
+      heading.id = id;
+      const level = parseInt(heading.tagName.substring(1));
+      tocHTML += `<li style="margin-left: ${(level - 2) * 10}px;"><a href="#${id}">${heading.textContent}</a></li>`;
+    });
+    tocHTML += '</ul>';
+    toc.innerHTML = tocHTML;
+  }
 
-<body>
-  <div class="cover" style="z-index: 20">
-    <h3 class="cohort_title">{{ page.title }}</h3>
-    <div class="program">
-      <div class="community-details">
-        {% include partials/gsoc-community.html %}
-      </div>
-      <div class="project-details">
-        <div class="card-content">
-          <div class="image-div">
-            {{ page.video_embed }}
-          </div>
-        </div>
-        {{ content }}
-        {% if page.program_timeline %}
-        <h3 class="project-list">Program Timeline:</h3>
-        <ul>
-          {% for event in page.program_timeline %}
-          <li>{{ event }}</li>
-          {% endfor %}
-        </ul>
-        {% endif %}
+  document.addEventListener('DOMContentLoaded', () => {
+    generateTableOfContents('#content', '#toc');
+  });
+</script>
 
-        {% if page.statistics %}
-        <h3 class="project-list">GSoC Statistics:</h3>
-        <ul>
-          {% for stat in page.statistics %}
-          <li>{{ stat }}</li>
-          {% endfor %}
-        </ul>
-        {% endif %}
+<style>
+  .auto-toc {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    align-content: center;
+  }
 
-        {% if page.projects %}
-        <h5 class="black-text heading">Project Ideas</h5>
+  .auto-toc h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .auto-toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .auto-toc li {
+    margin-bottom: 0.5rem;
+  }
+
+  .auto-toc a {
+    text-decoration: none;
+    color: #00D3A9;
+  }
+
+  .auto-toc a:hover {
+    text-decoration: underline;
+  }
+
+  .auto-toc ul ul {
+    margin-left: 1rem;
+  }
+
+  .auto-toc li {
+    border-bottom: 1px dotted #eee;
+    padding-bottom: 0.25rem;
+  }
+
+  .auto-toc li:last-child {
+    border-bottom: none;
+  }
+
+  .auto-toc a {
+    transition: color 0.3s ease;
+  }
+
+  .auto-toc a:hover {
+    color: #00b39f;
+  }
+
+  /* .auto-toc li:before {
+  content: counter(toc-items) ". ";
+  counter-increment: toc-items;
+  color: #888;
+  margin-right: 0.5rem;
+} */
+
+  .auto-toc {
+    counter-reset: toc-items;
+  }
+
+  .auto-toc a {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 85%;
+    scroll-margin-top: 158px;
+  }
+</style>
+
+<div class="page text-container">
+  <div class="program-heading">
+    <h1>{{ page.title }}</h1>
+    <h2>{{ page.subtitle }}</h2>
+  </div>
+
+  <div class="program">
+    <div class="community-details">
+      {{ page.description | markdownify }}
+
+      <h3>Program Timeline</h3>
+      <ul class="small-li">
+        {% for item in page.timeline %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+      <a href="{{ page.timeline_link }}" style="color:#00d3a9">See complete timeline</a>
+    </div>
+
+    <div class="project-details">
+      <h2 class="sub_headings">{{ page.projects_title }}</h2>
+
+      <div id="toc" class="auto-toc"></div>
+
+      <div id="content">
         {% for project in page.projects %}
-        <ul class="project-item">
+        <div class="project-item">
+          <h3 class="project-title">{{ project.title }}</h3>
+
+          <h4>Description:</h4>
+          <p class="program-p">{{ project.description | markdownify }}</p>
+
+          <h4>Expected outcomes:</h4>
           <ol>
-            <b class="replace-links">{{ project.name }}</b>
+            {% for outcome in project.outcomes %}
+            <li>{{ outcome }}</li>
+            {% endfor %}
           </ol>
-          <ol class="replace-links">
-            {{ project.description }}
-          </ol>
-        </ul>
+
+          <ul class="project-list">
+            <li><b>Recommended Skills:</b> {{ project.skills }}</li>
+            <li><b>Expected project size:</b> {{ project.size }}</li>
+            <li><b>Mentors:</b>
+              {% for mentor in project.mentors %}
+              <a href="{{ mentor.link }}">{{ mentor.name }}</a>{% unless forloop.last %}, {% endunless %}
+              {% endfor %}
+            </li>
+            <li class="issue"><b>Issue:</b> <a href="{{ project.issue }}">{{ project.issue }}</a></li>
+          </ul>
+        </div>
         {% endfor %}
-        {% endif %}
-
-        {% if page.recommended_skills %}
-        <h3 class="project-list">Recommended Skills:</h3>
-        <p class="program-p replace-links">{{ page.recommended_skills }}</p>
-        {% endif %}
-
-        {% if page.mentors %}
-        <h3 class="project-list">Mentors:</h3>
-        <ul>
-          {% for mentor in page.mentors %}
-          <li style="padding-bottom: 1rem" class="replace-links">
-            - {{ mentor }}
-          </li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-
-        {% if page.issues %}
-        <h3 class="project-list">Issue:</h3>
-        {% for issue_link in page.issues %}
-        <a class="issue" href="{{ issue_link }}">{{ issue_link }}</a><br />
-        {% endfor %}
-        {% endif %}
-
-        {% if page.participate_link %}
-        <br />
-        <a href="{{ page.participate_link }}">
-          <input type="button" value="Participate" class="participate-btn appear" />
-        </a>
-        {% else %}
-        <br />
-        <a href="https://slack.meshery.io">
-          <input type="button" value="Participate" class="participate-btn appear" />
-        </a>
-        {% endif %}
       </div>
     </div>
   </div>
 
   <div class="text subscribe program__subscribe">
-    {% include subscribe.html %}
+    {% include subscribe.html formstyle="padding:5rem;" %}
   </div>
-</body>
-
-</html>
+</div>
