@@ -1,22 +1,20 @@
 ---
-title: Meshery Reachs 7,000 Stars
-subheading: Five rockets into the outer space
-date: 2025-3-24
+title: Meshery Reaches 7,000 Stars
+subheading: Five rockets into Outer space
+date: 2025-3-25
 author_contributor: Meshery Authors
 categories:
   - meshery
 permalink: /blog/meshery-reaches-7000-stars
-featured-image: /assets/images/posts/2025-3-24-meshery-reaches-7000-stars/meshery-reaches-7000-stars.png
+featured-image: /assets/images/posts/2025-3-25-meshery-reaches-7000-stars/meshery-reaches-7000-stars.png
 ---
-
-## Meshery Reaches 7,000 Stars: Five Rockets into Outer Space!
 
 <p style="text-align: right; color: white; font-style: italic;">
   “Growth is never by mere chance; it is the result of forces working together.”<br>
   – James Cash Penney
 </p>
 
-In 2019, [Meshery](https://github.com/meshery/meshery) started as a bold idea: make cloud-native infrastructure easier to adopt, operate, and understand. What began as a single tool for managing service meshes has grown into a sprawling ecosystem, shaped by thousands of contributions, countless community conversations, and a relentless pursuit of better developer experiences.
+In 2019, [Meshery](https://github.com/meshery/meshery) started as a bold idea: make cloud native infrastructure easier to adopt, operate, and understand. What began as a single tool for managing cloud native infrastructure has grown into a sprawling ecosystem, shaped by thousands of contributions, countless community conversations, and a relentless pursuit of better developer experiences.
 
 We just hit 7,000 stars on GitHub, and Meshery's community is growing faster than ever. With new features and improvements launching, our mascot, [Five](https://layer5.io/five/vol1/mascot-five-adventure-github-stars.pdf), can barely hold onto his rocketship as he blasts off towards new frontiers.
 
@@ -24,15 +22,15 @@ With each star, we've celebrated not just a number but the steady, collective he
 
 ### Meet Five, Our Intergalactic Cloud Native Hero!
 
-If you haven't met Five yet, he's our adventurous mascot, representing the Meshery community as he traverses through the cloud-native universe. [Check out Five's interstellar adventures](https://layer5.io/community/adventures-of-five-and-friends) while he hangs onto his rocket for dear life as Meshery speeds towards new heights.
+If you haven't met Five yet, he's our adventurous mascot, representing the Meshery community as he traverses through the cloud native universe. [Check out Five's interstellar adventures](https://layer5.io/community/adventures-of-five-and-friends) while he hangs onto his rocket for dear life as Meshery speeds towards new heights.
 
-<img src="/assets/images/posts/2025-3-24-meshery-reaches-7000-stars/five-holding-onto-rocket.png" style="padding:.5rem;" width="100%" />
+<img src="/assets/images/posts/2025-3-25-meshery-reaches-7000-stars/five-holding-onto-rocket.png" style="padding:.5rem;" width="100%" />
 
 
 ### Rocket #1: Meshery v0.8.0, A Giant Leap Forward!
 Meshery v0.8.0 isn’t just another release, it’s packed with exciting new features and improvements. Here’s what you need to know:
 
-**Enhanced Management using [Registry](https://docs.meshery.io/concepts/logical/registry) and [Models](https://docs.meshery.io/concepts/logical/models)**: With over 320 models, advanced SelectorSets, and simplified model generation directly from GitHub, CSV files, Artifact Hub, Helm charts, and OCI images, managing cloud-native resources has never been easier
+**Enhanced Management using [Registry](https://docs.meshery.io/concepts/logical/registry) and [Models](https://docs.meshery.io/concepts/logical/models)**: With over 320 models, advanced SelectorSets, and simplified model generation directly from GitHub, CSV files, Artifact Hub, Helm charts, and OCI images, managing cloud native resources has never been easier
 
 **OCI Support**: Seamlessly publish, share, and distribute Meshery Designs across OCI-compliant registries such as Docker Hub, GitHub Registry, and AWS ECR.
 
@@ -42,9 +40,9 @@ Meshery v0.8.0 isn’t just another release, it’s packed with exciting new fea
 
 <img src="/assets/images/posts/2024-02-17-simplifying-cloud-infrastructure-and-kubernetes-management/meshery-catalog.png" width="100%" />
 
-Think of the [Meshery Catalog](https://meshery.io/catalog) as your go-to marketplace for cloud-native configurations. Discover, browse, or [share](/blog/share-your-meshery-models) over **200 ready-to-use Meshery designs**, with advanced filters and ArtifactHub integration. 
+Think of the [Meshery Catalog](https://meshery.io/catalog) as your go-to marketplace for cloud native configurations. Discover, browse, or [share](/blog/share-your-meshery-models) over **200 ready-to-use Meshery designs**, with advanced filters and ArtifactHub integration. 
 
-With community-contributed designs continually growing, the Meshery Catalog has become the definitive hub for cloud-native infrastructure management.
+With community-contributed designs continually growing, the Meshery Catalog has become the definitive hub for cloud native infrastructure management.
 
 
 
@@ -54,17 +52,21 @@ We believe teamwork should be seamless. Introducing Meshery Spaces, a feature de
 
   **[Environments](https://docs.meshery.io/concepts/logical/environments)**: Group your deployment targets (on-premises or cloud) into clearly defined, logical environments, simplifying your deployments and infrastructure management.
 
-  **[Workspaces](https://docs.meshery.io/concepts/logical/workspaces)**: Facilitate real-time collaboration among your team members with dedicated workspaces, making cloud-native management accessible, clear, and cohesive for everyone.
+  **[Workspaces](https://docs.meshery.io/concepts/logical/workspaces)**: Facilitate real-time collaboration among your team members with dedicated workspaces, making cloud native management accessible, clear, and cohesive for everyone.
 
 With Meshery Spaces, you can now collaborate intuitively, deploy effortlessly, and scale confidently.
 
 ### Rocket #4: Improved Developer Experience
-We understand that ease-of-use matters. Meshery’s enhanced documentation and interactive Playground tutorials allows for you to have hands-on, cloud-native experiences; all on a single platform.
+We understand that ease-of-use matters. Meshery’s enhanced documentation and interactive Playground tutorials allows for you to have hands-on, cloud native experiences; all on a single platform.
 
 We've also transitioned to Playwright for more robust, automated end-to-end testing, ensuring reliability at every step.
 
 ### Rocket #5: Community, Our Brightest Star
 You, the community, are the real stars here. Every GitHub issue, PR, Slack conversation, and contribution matters. Your contributions keep our rocketship soaring.
+
+With over 20,000 issues addressed, and contributions across 100+ repositories 
+
+<img src="/assets/images/posts/2025-3-25-meshery-reaches-7000-stars/meshery-community-overview.png" style="padding:.5rem;" width="45%" align="right">
 
 ### Ready for a Challenge? Try a Tutorial!
 We challenge you to dive in hands-on! How about deploying [Apache Cassandra](https://docs.meshery.io/guides/tutorials/deploy-apache-cassandra-with-statefulset) with Meshery, or exploring [Kubernetes CronJobs](https://docs.meshery.io/guides/tutorials/exploring-kubernetes-cronjobs)? 
