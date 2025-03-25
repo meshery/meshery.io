@@ -64,7 +64,7 @@ We've also transitioned to Playwright for more robust, automated end-to-end test
 ### Rocket #5: Community, Our Brightest Star
 You, the community, are the real stars here. Every GitHub issue, PR, Slack conversation, and contribution matters. Your contributions keep our rocketship soaring.
 
-With over 20,000 issues addressed, and contributions across 100+ repositories 
+With over 20,000 issues addressed and contributions across 100+ repositories, the Meshery community is thriving with activity and continuously evolving. You are our brightest stars.
 
 <img src="/assets/images/posts/2025-3-25-meshery-reaches-7000-stars/meshery-community-overview.png" style="padding:.5rem;" width="45%" align="right">
 
