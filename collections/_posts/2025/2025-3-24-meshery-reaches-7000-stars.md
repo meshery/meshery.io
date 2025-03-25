@@ -75,8 +75,8 @@ We challenge you to dive in hands-on! How about deploying [Apache Cassandra](htt
 ### Join the Journey!
 The next big thing could come from you. We warmly invite everyone, from experienced engineers to enthusiastic beginners, to contribute and become part of our story.
 
-Join our vibrant community on [Slack](https://meshery.io/community) or explore [GitHub](https://github.com/meshery/meshery).
+Join our vibrant community on [Slack](https://meshery.io/community) or explore our [GitHub](https://github.com/meshery/meshery) repositories.
 
--[] include how to join and contribute, maybe just links
+If you're a newcomer, refer to the [Newcomer's Guide](https://layer5.io/community/newcomers) and feel free to explore our [Discussion Forum](discuss.layer5.io). Join our [weekly newcomers meeting](/calendar) for a guided tour of how to get involved.
 
 Thank you for being part of this incredible journey. Here’s to the next milestone, onwards and upwards! 
