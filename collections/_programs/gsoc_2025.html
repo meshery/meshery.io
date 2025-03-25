@@ -1,6 +1,7 @@
 ---
-layout: post
-title: "Google Summer of Code 2025"
+layout: programs
+title: "Google Summer of Code"
+subtitle: "Meshery Participation for 2025"
 image:
 path: /assets/images/program/gsoc.png
 thumbnail: /assets/images/program/gsoc.svg
@@ -21,7 +22,7 @@ excerpt: "Meshery - Google Summer of Code 2025"
     heading.id = id; // Assign ID to heading
     const level = parseInt(heading.tagName.substring(1)); // Extract heading level
 
-    tocHTML += `<li style="margin-left: ${(level - 2) * 10}px;"><a href="#${id} " style="scroll-margin-top: 58px;">${heading.textContent}</a></li>`; // Adjust margin for nested headings
+    tocHTML += `<li style="margin-left: ${(level - 2) * 10}px;"><a href="#${id} " style="scroll-margin-top: 60px;align-content: center;">${heading.textContent}</a></li>`; // Adjust margin for nested headings
   });
 
   tocHTML += '</ul>';
@@ -32,7 +33,7 @@ excerpt: "Meshery - Google Summer of Code 2025"
 document.addEventListener('DOMContentLoaded', () => {
   generateTableOfContents('#content', '#toc'); // Replace with your selectors
 });</script>
-<style>ol > li { list-style-type: decimal; display: list-item !important; visibility: visible;   } 
+<style> 
 
   .auto-toc {
     border: 1px solid #ccc;
@@ -111,8 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
   </style>
   <div class="program">
     <div class="community-details">
-      
-    <h4 class="sub_headings">Google Summer of Code Participation</h4>
     <p>As a self-service engineering platform, Meshery enables collaborative design and operation of cloud native infrastructure.</p>
 
     <p>As a mentee, you will learn cloud native infrastructure management techniques, and will increase your understanding of distributed systems challenges and how to properly implement best-practice patterns of modern software design.</p>
@@ -121,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
     <p>Engage in an area in which you think you can make an impact. And if you are being impactful and consistent, eventually we will bring the internship to you. Moreover you will take away exactly the same real value that an internship offers: experience and relationships.</p>
 
-    <h4 class="project-list">2025 Program Timeline</h4>
+    <h3>2025 Program Timeline</h3>
       <ul>
         <li>January 27 - Organization applications open</li>
         <li>February 27 - Accepted GSoC Organizations announced</li>
@@ -135,21 +134,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <div class="project-details">
 
-      <h2 class="black-text heading"><div class="sub_headings">GSOC 2025 Project Ideas</div></h2>
+      <h2 class=heading"><div class="sub_headings">GSOC 2025 Project Ideas</div></h2>
     
       <div id="toc" class="auto-toc">
       </div>
       <div id="content">
-      <h4 class="project-list">Project 1. Support for Azure in Meshery</h4>
+      <h3>Project 1. Support for Azure in Meshery</h3>
     
-      <p class="project-item"><b>Description:</b>
-
-              Enhance Meshery's existing orchestration capabilities to include support for Azure.  The <a href="https://azure.github.io/azure-service-operator">Azure Service Operator</a> (ASO) provides a wide variety of Azure Resources via Kubernetes custom resources as first-class <a href="https://docs.meshery.io/concepts/logical/models">Meshery Models</a>. This involves enabling Meshery to manage and orchestrate Azure services and their resources, similar to how it handles other Kubernetes resources.  The project will also include generating support for Azure services and their resources in Meshery's Model generator.
+      <p><b>Description:</b> Enhance Meshery's existing orchestration capabilities to include support for Azure.  The <a href="https://azure.github.io/azure-service-operator">Azure Service Operator</a> (ASO) provides a wide variety of Azure Resources via Kubernetes custom resources as first-class <a href="https://docs.meshery.io/concepts/logical/models">Meshery Models</a>. This involves enabling Meshery to manage and orchestrate Azure services and their resources, similar to how it handles other Kubernetes resources.  The project will also include generating support for Azure services and their resources in Meshery's Model generator.
       </p>
     
       <p><b>Expected outcomes:</b></p>
         <ol>
-          <li style="list-style-type: decimal; display: list-item !important; visibility: visible;">Meshery will be able to orchestrate and manage all Azure services supported by ASO. This includes the ability to discover, configure, deploy, and operate the lifecycle of Azure services through Meshery.</li>
+          <li>Meshery will be able to orchestrate and manage all Azure services supported by ASO. This includes the ability to discover, configure, deploy, and operate the lifecycle of Azure services through Meshery.</li>
           <li>The Meshery Model generator will be updated to automatically generate models for Azure services, simplifying their integration and management within Meshery. This will be an officially supported feature of Meshery.</li>
         </ol>
         <ul>
@@ -160,82 +157,59 @@ document.addEventListener('DOMContentLoaded', () => {
           </ul>
 
 
-    <h4 class="project-list">Project 2. End-to-End testing of Meshery CLI using BATS</h4>
+    <h3 class="project-list">Project 2. End-to-End testing of Meshery CLI using BATS</h3>
       
-    <p class="project-item"><b>Description:</b>
+    <p><b>Description:</b>
     Meshery CLI is the command line interface for Meshery. Meshery CLI, otherwise known as `mesheryctl`, is a client of Meshery Server’s REST API. The other client is Meshery UI and just like Meshery UI, Meshery CLI is a <i>user experience</i>. It provides a way to interact with Meshery and perform various operations such as installing, configuring, and managing cloud native infrastructure.</p>
     <p>Each test case is designed to mimic the experience that a Meshery CLI user might have while interacting with `mesheryctl` in their terminal of choice. In this sense, `mesheryctl` tests run end-to-end with each pull request submitted containing changes to either the /mesheryctl or the /server directories in the meshery/meshery repository, ensuring that changes included in those pull requests do not break the existing CLI functionality.</p>
     
     <p><b>Expected outcomes:</b></p>
-    <ol class="project-item">
-      <li>A signifcant set of new test cases written for `mesheryctl`.</li>
+    <ol style="list-style-type: decimal;">
+      <li>A significant set of new test cases written for `mesheryctl`.</li>
       <li>Tests need to be implemented using <a href="https://bats-core.readthedocs.io/en/stable/">BATS framework</a></li>
       <li>Development of tests using best practices defined in the <a href="https://docs.meshery.io/project/contributing/contributing-cli-tests">end-to-end testing of Meshery CLI contributing guide</a></li>
       <li>Implementation of test cases defined within <a href="https://docs.google.com/spreadsheets/d/13Ir4gfaKoAX9r8qYjAFFl_U9ntke4X5ndREY1T7bnVs/edit?gid=838298230#gid=838298230">Meshery's Test Plan</a>.</li>
     </ol>
-    
-          <ul class="project-item">
-            <li><b>Recommended Skills:</b> Golang, Krew, Kubernetes, well-written and well-spoken English.</li>
-          </ul>
+    <ul>
+      <li><b>Recommended Skills:</b> Golang, Krew, Kubernetes, well-written and well-spoken English.</li>
+      <li><b>Expected project size: </b>medium (~175 hour projects)</li>
+      <li><b>Mentors:</b> <a href="https://layer5.io/community/members/matthieu-ervin">Matthieu Evrin</a>, <a href="https://layer5.io/community/members/lee-calcote">Lee Calcote</a></li>
+      <li><b>Issue:</b> <a href="https://github.com/meshery/meshery/issues/11869">https://github.com/meshery/meshery/issues/11869</a></li>
+    </ul>        
 
-          <ul class="project-item">
-            <li><b>Expected project size: </b>medium (~175 hour projects)</li>
-          </ul>
+    <h4 class="project-list">Project 3. Kubectl Plugin for MeshSync Snapshot</h4>
     
-    
-          <ul class="project-item">
-            <li><b>Mentors:</b><a href="https://layer5.io/community/members/lee-calcote"> Lee Calcote</a>, <a href="https://layer5.io/community/members/matthieu-ervin">Matthieu Evrin</a></li>
-          </ul>
-    
-          <ul class="project-item">
-            <li><b>Issue:</b> <a href="https://github.com/meshery/meshery/issues/11869">https://github.com/meshery/meshery/issues/11869</a></li>
-          </ul>        
-
-      <h4 class="project-list">Project 3. Kubectl Plugin for MeshSync Snapshot</h4>
-    
-      <p class="project-item"><b>Description:</b>
-              Develop a kubectl plugin via krew that allows users to temporarily deploy <a href="https://docs.meshery.io/concepts/architecture/meshsync">MeshSync</a>, capture the state of their cluster, and then import the snapshot into Meshery for offline infrastructure management. The plugin will serve as a lightweight alternative to a full Meshery deployment while still enabling Meshery Server to understand the state and configuration of Kubernetes cluster, simplyfying common networking challenges between the cluster and Meshery Server.
+      <p><b>Description:</b> Develop a kubectl plugin via krew that allows users to temporarily deploy <a href="https://docs.meshery.io/concepts/architecture/meshsync">MeshSync</a>, capture the state of their cluster, and then import the snapshot into Meshery for offline infrastructure management. The plugin will serve as a lightweight alternative to a full Meshery deployment while still enabling Meshery Server to understand the state and configuration of Kubernetes cluster, simplyfying common networking challenges between the cluster and Meshery Server.
       </p>
-    
-          <ul class="project-item">
-            <li><b>Expected outcomes:</b></li>
-            <li> - A functional kubectl plugin that facilitates capturing a MeshSync snapshot of Kubernetes cluster resources.</li>
-            <li> - Improved networking efficiency, reducing the complexity of connecting Kubernetes clusters with Meshery Server.</li>
-            <li> - Support for selective snapshot capture, including single resources, namespaces, or entire cluster visualizations.</li>
-            <li> - Read-only access mode to generate snapshots without requiring full Meshery deployment.</li>
-          </ul>
-    
-          <ul class="project-item">
-            <li><b>Recommended Skills:</b> Kubernetes, Golang, well-written and well-spoken English.</li>
-          </ul>
-
-          <ul class="project-item">
-            <li><b>Expected project size: </b>medium (~175 hour projects)</li>
-          </ul>
-    
-
-          <ul class="project-item">
-            <li><b>Mentors:</b> <a href="https://github.com/marblom007">Marcus Ringblom</a>, <a href="https://layer5.io/community/members/lee-calcote">Lee Calcote</a></li>
-          </ul>
-    
-          <ul class="project-item">
-            <li><b>Issue:</b> <a href="https://github.com/meshery/meshery/issues/14031">https://github.com/meshery/meshery/issues/14031</a></li>
-          </ul>
+        
+      <p><b>Expected outcomes:</b></p>
+      <ol style="list-style-type: decimal;counter-set:calc(2);">
+          <li> - A functional kubectl plugin that facilitates capturing a MeshSync snapshot of Kubernetes cluster resources.</li>
+          <li> - Improved networking efficiency, reducing the complexity of connecting Kubernetes clusters with Meshery Server.</li>
+          <li> - Support for selective snapshot capture, including single resources, namespaces, or entire cluster visualizations.</li>
+          <li> - Read-only access mode to generate snapshots without requiring full Meshery deployment.</li>
+      </ol>
+      <ul>
+        <li><b>Recommended Skills:</b> Kubernetes, Golang, well-written and well-spoken English.</li>
+        <li><b>Expected project size: </b>medium (~175 hour projects)</li>
+        <li><b>Mentors:</b> <a href="https://github.com/marblom007">Marcus Ringblom</a>, <a href="https://layer5.io/community/members/lee-calcote">Lee Calcote</a></li>
+        <li><b>Issue:</b> <a href="https://github.com/meshery/meshery/issues/14031">https://github.com/meshery/meshery/issues/14031</a></li>
+      </ul>
 
     <h4 class="project-list">Project 4. Distributed client-side inference (policy evaluation) with WebAssembly (WASM) and OPA in Meshery</h4>
         
-    <p class="project-item"><b>Description:</b>
+    <p><b>Description:</b>
       Meshery's highly dynamic infrastructure configuration capabilities require real-time evaluation of complex policies. Policies of various types and with a high number of parameters need to be evaluted client-side. With policies expressed in Rego, the goal of this project is to incorporate use of the <a href="https://github.com/open-policy-agent/golang-opa-wasm">https://github.com/open-policy-agent/golang-opa-wasm</a> project into Meshery UI, so that a powerful, real-time user experience is possible.
     </p>
         
-      <ul class="project-item">
+      <ul>
         <li><b>Expected outcomes:</b></li>
         <li>
         The goal of this project is to enhance Meshery's infrastructure configuration capabilities by incorporating real-time policy evaluation using the golang-opa-wasm project. This project will integrate the capabilities of golang-opa-wasm into the Meshery UI, enabling users to experience the existing, powerful, server-side policy evaluation client-side.
         </li>
       </ul>
         
-      <ul class="project-item">
+      <ul>
         <li><b>Recommended Skills:</b> WebAssembly, Golang, Open Policy Agent, well-written and well-spoken English.</li>
         <li><b>Expected project size: </b>large (~350 hour projects)</li>
         <li><b>Mentors:</b> <a href="https://github.com/codesafari10">Edward Corley</a>, <a href="https://layer5.io/community/members/lee-calcote"> Lee Calcote</a></li>
@@ -244,39 +218,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   <h4 class="project-list">Project 5. Meshery Model Support for kro ResourceGraphDefinitions (RGDs)</h4>
         
-    <p class="project-item"><b>Description:</b>
+    <p><b>Description:</b>
           Enhance Meshery's existing orchestration capabilities to include support for kro ResourceGraphDefinitions (RGDs) as first-class <a href="https://docs.meshery.io/concepts/logical/models">Meshery Models</a>.
           This involves enabling Meshery to manage and orchestrate RGDs, similar to how it handles other Kubernetes resources.
           The project will also include generating support for ResourceGraphDefinition in Meshery's Model generator.
     </p>
 
-      <ul class="project-item">
+      <ul>
         <li><b>Expected outcomes:</b></li>
         <li>
             Meshery will be able to orchestrate and manage kro RGDs. This includes the ability to deploy, configure, and manage the lifecycle of RGDs through Meshery. The Meshery Model generator will be updated to automatically generate models for kro RGDs, simplifying their integration and management within Meshery. This will be an officially supported feature of Meshery.
         </li>
       </ul>
 
-      <ul class="project-item">
+      <ul>
         <li><b>Recommended Skills:</b> Golang, Cuelang, Well-written and well-spoken English, Kubernetes, DevOps</li>
       </ul>
 
-      <ul class="project-item">
+      <ul>
         <li><b>Expected project size: </b>large (~350 hour projects)</li>
       </ul>
 
 
-      <ul class="project-item">
+      <ul>
         <li><b>Mentors:</b> <a href="https://github.com/ritzorama">Cooper Fitzgerald</a>, <a href="https://github.com/miacycle">Mia Grenell</a></li>
       </ul>
 
-      <ul class="project-item">
+      <ul>
         <li><b>Issue:</b> <a href="https://github.com/meshery/meshery/issues/13520">https://github.com/meshery/meshery/issues/13520</a></li>
       </ul>
 
   <h4 class="project-list">Project 6. Hands-on tutorials using Meshery Playground</h4>
     
-    <p class="project-item"><b>Description:</b>
+    <p><b>Description:</b>
       Learning paths with hands-on labs are a crucial resource for DevOps engineers and cloud-native practitioners. The Meshery Playground provides a live cluster environment, making it an ideal platform for learning every kind of cloud and cloud native technology. Meshery Docs is in need of comprehensive tutorials and scenarios covering common infrastructure management use cases.
       Mission is to create and publish a series of hands-on tutorials using Meshery Playground. Each tutorial will include step-by-step guides, live demonstrations, and interactive labs using the Playground allowing learners to apply their knowledge directly without the hassle of any configuration.These tutorials will be reviewed by various project maintainers and then published in <a href="https://docs.meshery.io/guides/tutorials">guides/tutorials</a>.
     </p>
@@ -292,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </li>
       </ol>
 
-      <ul class="project-item">
+      <ul>
         <li><b>Recommended Skills:</b> written English, Markdown, Kubernetes, DevOps, and hands-on experience with cloud-native tools.</li>
         <li><b>Expected project size: </b>medium (~175 hour projects)</li>
         <li><b>Mentors:</b> <a href="https://layer5.io/community/members/sangram-rath">Sangram Rath</a>, <a href="https://layer5.io/community/members/lee-calcote">Lee Calcote</a></li>    
@@ -302,12 +276,12 @@ document.addEventListener('DOMContentLoaded', () => {
   
     <h4 class="project-list">Project 7. Kanvas Snapshot Kubectl Plugin</h4>
     
-    <p class="project-item"><b>Description:</b>
+    <p><b>Description:</b>
       Kubernetes manifests, especially collections of them, can be complex. This plugin will bridge the gap between Kubernetes cluster and workflow configurations and their visual representation in Kanvas Snapshots. The plugin will allow users to generate a visual snapshot of the combination of multiple Kubernetes manifest files, each containing one or more Kubernetes resources. Users will be able to receive these snapshots either via email or as a URL displayed directly in the terminal.
         </p>          
           
       <p><b>Expected outcomes:</b></p>
-      <ol class="project-item">
+      <ol>
         <li>
             - A functional kubectl plugin that integrates with Meshery to generate Kanvas Snapshots from Kubernetes manifests.
         </li>
@@ -322,11 +296,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   <h4 class="project-list">Project 8. Expanding end-to-end test coverage in Meshery using Playwright</h4>
                 
-      <p class="project-item"><b>Description:</b>
+      <p><b>Description:</b>
         Meshery integrates with many other CNCF projects and technologies. Sustaining those integrations is only possible through automation. To automate functional integration and end-to-end testing, Meshery now uses Playwright as one of the tools for browser testing. End-to-end tests run with each pull request to ensure that changes do not break existing functionality. Expanding the coverage of E2E tests is crucial to improving the reliability of Meshery’s UI and workflows. This project focuses on writing Playwright-based tests for more Meshery components, ensuring robust test coverage across the platform.
       </p>
         
-      <ul class="project-item">
+      <ul>
         <li style="margin-bottom: 1rem;"><b>Expected outcomes:</b></li>
         <li>
         Development of comprehensive E2E test cases for additional Meshery components using Playwright.</li>
