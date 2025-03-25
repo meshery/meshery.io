@@ -111,13 +111,18 @@ layout: default
     <div class="community-details">
       {{ page.description | markdownify }}
 
+      {% if page.timeline %}
       <h3>Program Timeline</h3>
       <ul>
         {% for item in page.timeline %}
         <li>{{ item }}</li>
         {% endfor %}
       </ul>
+      {% if page.timeline_link %}
       <a href="{{ page.timeline_link }}" style="color:#00d3a9">See complete timeline</a>
+      {% endif %}
+      {% endif %}
+  
     </div>
 
     <div class="project-details">
