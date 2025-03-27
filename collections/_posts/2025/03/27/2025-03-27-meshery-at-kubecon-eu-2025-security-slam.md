@@ -67,8 +67,8 @@ As a special recognition for your contributions, participants in Meshery's Secur
 
 We encourage everyone to get involved in Meshery's Security Slam. Here's how you can participate:
 
-* **Find an issue:** Check out the [Security Slam Project Board](https://github.com/orgs/meshery/projects/6) on GitHub and find an open issue that interests you.
+* **Find an issue:** Check out the Security Slam Project Board on GitHub and find an open issue that interests you.
 * **Contribute:** Work on resolving the issue, whether you're at KubeCon EU or contributing remotely. 
-* **Earn the badge:** If you contribute to an issue on the project board, you'll receive the Security Sentinel badge! 
+* **Earn the badge:** If you contribute to an issue on the project board, you'll receive the Security Sentinel badge!
 
 We're excited to collaborate with the community at KubeCon EU 2025 to make Meshery even more secure. We look forward to seeing you at the Security Slam!
