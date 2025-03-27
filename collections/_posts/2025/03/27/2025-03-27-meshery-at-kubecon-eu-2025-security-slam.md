@@ -11,6 +11,8 @@ permalink: /blog/meshery-security-slam-kubecon-eu-2025
 featured-image: /assets/images/posts/2025-03-27-meshery-at-kubecon-eu-2025/kubecon-eu-2025.png
 ---
 
+We're thrilled to announce that Meshery has been selected as one of four CNCF projects to take part in the Security Slam at KubeCon EU 2025! This is a fantastic opportunity for the Meshery community to come together and make significant strides in enhancing the security of our project.
+
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@600&display=swap" rel="stylesheet">
 <style type="text/css">
   .highlighted-text {
@@ -31,7 +33,6 @@ featured-image: /assets/images/posts/2025-03-27-meshery-at-kubecon-eu-2025/kubec
   }
 </style>
 
-We're thrilled to announce that Meshery has been selected as one of four CNCF projects to take part in the Security Slam at KubeCon EU 2025! This is a fantastic opportunity for the Meshery community to come together and make significant strides in enhancing the security of our project.
 
 **What is Security Slam?**
 
