@@ -15,6 +15,19 @@ featured-image: /assets/images/posts/2025-03-27-meshery-at-kubecon-eu-2025/kubec
 <style type="text/css">
   .highlighted-text {
     font-family: 'Baloo Bhaina 2', cursive;
+    text-align: center;
+  }
+  ul, li { line-height: 1rem;}
+  .circular-callout {
+    height: content-fit;
+    text-align: center;
+    align-content: center;
+    block-size: fit-content;
+    background-color: var(--color-primary-super-dark);
+    > p {
+      margin: 1rem 3rem;
+      color: var(--color-primary-dark-light);
+    }
   }
 </style>
 
@@ -24,14 +37,23 @@ We're thrilled to announce that Meshery has been selected as one of four CNCF pr
 
 Security Slam is a hands-on event at KubeCon EU where contributors collaborate directly with project maintainers to tackle a curated backlog of security improvements. It's a focused effort to strengthen open-source projects, and we're excited to have Meshery (and you!) be a part of it.
 
-<div style="block-size: fit-content;clip-path: ellipse(45% 75% at 50% 50%);background-color:#3c494f;height:6rem;text-align:center;align-content:center;">
+<div class="circular-callout" style="clip-path: ellipse(45% 75% at 50% 50%);">
   <p><b>Do I have to attend in-person to particpate?</b></p>
-  <p>No! You can particpate from the comfort of your own chair.</p>
+  <p><i>No! You can particpate from the comfort of your own chair.</i></p>
 </div>
 
-**Meshery's Security Slam Session**
+**Meshery Security Slam Session**
+- 📅 Date: Wednesday, April 2, 2025
+- ⏰ Time: 11:30 - 12:15 BST
+- 🔗 Session Details: [Security Slam - Meshery](https://kccnceu2025.sched.com/event/1wRiL/security-slam-meshery?iframe=no)
+- 🚧 Project Board: [https://github.com/orgs/meshery/projects/6](https://github.com/orgs/meshery/projects/6)
 
 Meshery will have a dedicated session at KubeCon EU 2025 where contributors can work alongside maintainers to address specific security issues.  We've prepared a project board on GitHub with a list of security improvements, providing clear tasks for participants. Whether you're attending KubeCon EU in person or want to contribute remotely, everyone is welcome to participate! You can find the [Security Slam Project Board](https://github.com/orgs/meshery/projects/6).
+
+<div class="circular-callout" style="clip-path: ellipse(45% 75% at 50% 50%);">
+  <p><b>Can I work on Security Slam issues outside of the KubeCon EU session?</b></p>
+  <p><i>Yes! Outside of helping Meshery improve its security posture on an ongoing basis, your particpation in any of the issues on the Security Slam project board are considered bteween Wednesday, April 2nd and Friday, April 4th.</i></p>
+</div>
 
 <h3 class="highlighted-text">Earn your Security Sentinel Badge!</h3>
 
