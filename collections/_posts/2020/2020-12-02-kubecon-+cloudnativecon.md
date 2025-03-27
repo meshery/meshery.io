@@ -5,8 +5,8 @@ title: KubeCon+CloudNativeCon
 author_contributor: The Newsroom
 categories:
   - meshery
-  - KubeCon
-  - CloudNativeCon
+  - kubecon
+  - cloudnativecon
 permalink: /blog/kubecon-cloudnativecon
 ---
 <div style="text-align:center;padding:5px">
