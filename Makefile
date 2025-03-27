@@ -6,6 +6,9 @@ site:
 	bundle install; $(jekyll) serve --drafts --incremental --livereload --config _config_dev.yml
 
 site-no-incremental:
+# Add RVM to PATH for scripting.
+	export PATH="$PATH:$HOME/.rvm/bin"
+	[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 	rvm use 3.2.2; bundle install; $(jekyll) serve --drafts --livereload --config _config_dev.yml
 
 build:
