@@ -28,7 +28,8 @@ If you haven't met Five yet, he's our adventurous mascot, representing the Meshe
 
 
 ### Rocket #1: Meshery v0.8.0, A Giant Leap Forward!
-Meshery v0.8.0 isn’t just another release, it’s packed with exciting new features and improvements. Here’s what you need to know:
+
+Meshery v0.8.0 marked a significant moment in our journey, not just for the features introduced but also for how it improved the user experience of managing cloud native infrastructure.
 
 **[Registry](https://docs.meshery.io/concepts/logical/registry) and [Models](https://docs.meshery.io/concepts/logical/models)**: With over 320 models, advanced SelectorSets, and simplified model generation directly from GitHub, CSV files, Artifact Hub, Helm charts, and OCI images, managing cloud native resources has never been easier.
 
@@ -47,9 +48,7 @@ From simple setups to more advanced designs, Catalog helps developers skip the Y
 
 ### Rocket #3: Spaces, Collaborate Like Never Before
 
-Managing infrastructure is rarely a solo job, and with Meshery Spaces, it doesn’t have to feel like one.
-
-Spaces were built to make teamwork smoother and more intuitive, whether you're deploying or collaborating across the world.
+Managing infrastructure is rarely a solo job, and with Meshery Spaces, it doesn’t have to feel like one. Spaces helps teams operate smoothly and intuitively, whenever they're deploying or collaborating across the world.
 
   **[Environments](https://docs.meshery.io/concepts/logical/environments)** helps you group your deployment targets into clearly defined, logical environments, simplifying your deployments and infrastructure management.
 
