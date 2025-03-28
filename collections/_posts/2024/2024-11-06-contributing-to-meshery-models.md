@@ -7,7 +7,7 @@ categories:
   - meshery
   - mesheryctl
 permalink: /blog/share-your-meshery-models
-featured-image: /assets/images/posts/2024-11-06-share-your-meshery-models/meshery-catalog-blog.webp
+featured-image: /assets/images/posts/2024-11-06-share-your-meshery-models/meshery-catalog-blog.png
 ---
 
 Participating in the Meshery Catalog is an excellent opportunity to enhance and share your cloud native configurations with the community. By contributing your models and patterns, you not only showcase your work but also empower others to leverage your innovations. This guide provides a defined approach to using mesheryctl for uploading your models and patterns to the Catalog, ensuring a smooth and efficient contribution process.
