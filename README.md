@@ -99,6 +99,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
 - _The Meshery site is built using Jekyll - a simple static site generator! You can learn more about Jekyll and setting up your development environment in the [Jekyll Docs](https://jekyllrb.com/docs/)._
 
 - First [install Ruby](https://jekyllrb.com/docs/installation/), then install Jekyll and Bundler. ( **Note** : Install the same version of Ruby as mentioned in the [Gemfile](https://github.com/meshery/meshery.io/blob/master/Gemfile) )
+- If your installed Ruby version doesn't match the one in the Gemfile, then you can [install RVM](https://rvm.io/rvm/install) for your preferable os and using rvm you can install the specific verion of ruby.
 
 ### 2. Get the code
 
