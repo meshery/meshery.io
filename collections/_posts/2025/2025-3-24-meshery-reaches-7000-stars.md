@@ -30,7 +30,7 @@ If you haven't met Five yet, he's our adventurous mascot, representing the Meshe
 ### Rocket #1: Meshery v0.8.0, A Giant Leap Forward!
 Meshery v0.8.0 isn’t just another release, it’s packed with exciting new features and improvements. Here’s what you need to know:
 
-**[Registry](https://docs.meshery.io/concepts/logical/registry) and [Models](https://docs.meshery.io/concepts/logical/models)**  Over 320 models, advanced SelectorSets, and streamlined model generation directly from GitHub, CSV files, Artifact Hub, Helm charts, and OCI images make managing cloud native resources easier than ever.
+**[Registry](https://docs.meshery.io/concepts/logical/registry) and [Models](https://docs.meshery.io/concepts/logical/models)**: With over 320 models, advanced SelectorSets, and simplified model generation directly from GitHub, CSV files, Artifact Hub, Helm charts, and OCI images, managing cloud native resources has never been easier.
 
 **OCI Support**: Design sharing across teams and registries was streamlined, allowing developers to easily distribute and reuse configurations through Docker Hub, AWS ECR, GitHub Registry, and other channels.
 
