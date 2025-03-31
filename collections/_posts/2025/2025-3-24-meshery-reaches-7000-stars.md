@@ -57,7 +57,7 @@ Managing infrastructure is rarely a solo job, and with Meshery Spaces, it doesnâ
 ### Rocket #4: Improved Developer Experience
 We've always believed that great tools should empower, not overwhelm, which is why we put great efforts into refining the experience for every developer, from first-timers to experienced pros.
 
-From guided [tutorials](https://docs.meshery.io/guides/tutorials) that walk you through everything, to Playwright-powered testing that brings speed and stability, Meshery continues to make things easier and more reliable for every developer.
+From guided [tutorials](https://cloud.layer5.io/academy/overview) that walk you through everything, to Playwright-powered testing that brings speed and stability, Meshery continues to make things easier and more reliable for every developer.
 
 ### Rocket #5: Community, Our Brightest Star
 You, the community, are the real stars here. Every GitHub issue, PR, Slack conversation, and contribution matters. Your contributions keep our rocketship soaring.
