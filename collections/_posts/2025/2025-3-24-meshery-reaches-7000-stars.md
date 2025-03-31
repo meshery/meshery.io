@@ -56,7 +56,7 @@ Managing infrastructure is rarely a solo job, and with Meshery Spaces, it doesnâ
 
 We've always believed that great tools should empower, not overwhelm, which is why we put great efforts into refining the experience for every developer, from first-timers to experienced pros.
 
-From guided [tutorials](https://docs.meshery.io/guides/tutorials) that walk you through everything, to Playwright-powered testing that brings speed and stability, Meshery continues to make things easier and more reliable for every developer.
+From guided [tutorials](https://cloud.layer5.io/academy/overview) that walk you through everything, to Playwright-powered testing that brings speed and stability, Meshery continues to make things easier and more reliable for every developer.
 
 ### Rocket #5: Community, Our Brightest Star
 
@@ -84,8 +84,8 @@ We challenge you to dive in hands-on! How about deploying [Apache Cassandra](htt
 
 The next big thing could come from you. We warmly invite everyone, from experienced engineers to enthusiastic beginners, to contribute and become part of our story.
 
-Join our vibrant community on [Slack](https://meshery.io/community) or explore our [GitHub](https://github.com/meshery/meshery) repositories.
+Join our vibrant community on [Slack](https://slack.meshery.io) or explore our [GitHub](https://github.com/meshery/meshery) repositories.
 
-If you're a newcomer, refer to the [Newcomer's Guide](https://layer5.io/community/newcomers) and you are welcome to explore our [Discussion Forum](discuss.layer5.io). Join our [weekly newcomers meeting](/calendar) for a guided tour of how to get involved.
+If you're a newcomer, refer to the [Newcomer's Guide](https://layer5.io/community/newcomers) and you are welcome to explore our [Discussion Forum](https://discuss.layer5.io). Join our [weekly newcomers meeting](/calendar) for a guided tour of how to get involved.
 
 Thank you for being part of this incredible journey. Hereâ€™s to the next milestone, onwards and upwards!
