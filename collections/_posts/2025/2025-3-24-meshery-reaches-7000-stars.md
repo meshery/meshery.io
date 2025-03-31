@@ -72,7 +72,7 @@ This year, at KubeCon EU, we're one of the four CNCF projects participating in t
 
 And the best part? Anyone can get involved! Whether you're attending KubeCon or contributing from afar, your contributions will help us improve the security landscape in the cloud native ecosystem.
 
-Come [say hello]((https://layer5.io/community/events/kubecon-cloudnativecon-europe-2025)!) to our maintainers, contributors, and community friends at the event. We’d love to meet you.
+Come [say hello](https://layer5.io/community/events/kubecon-cloudnativecon-europe-2025)! to our maintainers, contributors, and community friends at the event. We’d love to meet you.
 
 ### Ready for a Challenge? Try a Tutorial
 
