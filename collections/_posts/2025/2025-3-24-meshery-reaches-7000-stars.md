@@ -4,7 +4,8 @@ subheading: Five rockets into Outer Space
 date: 2025-3-31
 author_contributor: Meshery Authors
 categories:
-  - meshery
+  - community
+  - milestones
 permalink: /blog/meshery-reaches-7000-stars
 featured-image: /assets/images/posts/2025-3-25-meshery-reaches-7000-stars/meshery-reaches-7000-stars.png
 ---
