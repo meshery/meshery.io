@@ -6,7 +6,7 @@ site:
 	bundle install; $(jekyll) serve --drafts --incremental --livereload --config _config_dev.yml
 
 site-no-incremental:
-	rvm use 3.2.2; bundle install; $(jekyll) serve --drafts --livereload --config _config_dev.yml
+	bundle install; $(jekyll) serve --drafts --livereload --config _config_dev.yml
 
 build:
 	$(jekyll) build --drafts
