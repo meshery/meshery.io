@@ -1,0 +1,19 @@
+---
+layout: page
+permalink: /blog/category
+redirect_from:
+  - /blog/categories
+published: true
+title: Blog Categories
+---
+
+<ul style="justify-content: center;">
+  {% assign sorted_categories = site.categories | sort %}
+  
+  {% for category in sorted_categories %}
+    <li>
+        <a href="{{ site.baseurl }}/category/{{ category[0] | slugify }}"> {{ category[0] | downcase }} ({{ category[1].size }})</a>
+    </li>
+  {% endfor %}
+</ul>
+
