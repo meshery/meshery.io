@@ -15,7 +15,7 @@ featured-image: /assets/images/posts/2025-3-25-meshery-reaches-7000-stars/mesher
   – James Cash Penney
 </p>
 
-In 2019, [Meshery](https://github.com/meshery/meshery) started as a bold idea: make cloud native infrastructure easier to adopt, operate, and understand. What began as a single tool for managing cloud native infrastructure has grown into a sprawling ecosystem, shaped by thousands of contributions, countless community conversations, and a relentless pursuit of better developer experiences.
+In 2019, Meshery started as a bold idea: make cloud native infrastructure easier to adopt, operate, and understand. What began as a single tool for managing cloud native infrastructure has grown into a sprawling ecosystem, shaped by thousands of contributions, countless community conversations, and a relentless pursuit of better developer experiences.
 
 We just hit 7,000 stars on GitHub, and Meshery's community is growing faster than ever. With new features and improvements launching, our mascot, [Five](https://layer5.io/five/vol1/mascot-five-adventure-github-stars.pdf), can barely hold onto his rocketship as he blasts off towards new frontiers.
 
