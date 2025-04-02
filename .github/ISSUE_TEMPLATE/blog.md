@@ -5,14 +5,17 @@ title: '[Blog]'
 labels: 'area/blog, help wanted, framework/Jekyll, language/markdown'
 assignees: ''
 ---
-Contributors and community members are encouraged to post on https://meshery.io/blog/. A new blog post fitting the following description is requested to be written by a community member:
+Contributors and community members are encouraged to post on https://meshery.io/blog. A new blog post fitting the following description is requested to be written by a community member:
 
-**Desired Title:** 
-**Topic:** 
+**Suggested Title:** 
+**Suggested Subtitle:** 
+
 **Core points to convey in the post:** 
-1.
-1.
-1.
+
+1. 
+1. 
+1. 
+
 
 ---
 <img src="https://raw.githubusercontent.com/meshery/meshery.io/master/assets/images/logos/meshery-logo.png" width="16px" align="left" /><h3>Contributor Resources</h3>

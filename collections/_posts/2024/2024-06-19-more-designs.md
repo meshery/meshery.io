@@ -5,7 +5,7 @@ date: 2024-06-25
 author_contributor: Chris Carrier
 categories: 
   - meshery
-  - OpenSource
+  - open-source
 permalink: /blog/200-meshery-designs-on-artifacthub
 featured-image: /assets/images/posts/2024-06-19-more-designs/designs-on-ah.png
 ---
