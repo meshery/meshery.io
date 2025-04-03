@@ -75,7 +75,11 @@ components:
   colorIcon: assets/images/integration/crossplane/components/image-config/icons/color/image-config-color.svg
   whiteIcon: assets/images/integration/crossplane/components/image-config/icons/white/image-config-white.svg
   description: 
-componentsCount: 16
+- name: cluster-usage
+  colorIcon: assets/images/integration/crossplane/components/cluster-usage/icons/color/cluster-usage-color.svg
+  whiteIcon: assets/images/integration/crossplane/components/cluster-usage/icons/white/cluster-usage-white.svg
+  description: 
+componentsCount: 17
 relationships: 
 relationshipsCount: 0
 featureList: [
