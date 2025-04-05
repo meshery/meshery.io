@@ -45,6 +45,9 @@ If the failure seems random or inconsistent, go ahead and retry the test. Someti
 
 Here are some handy tools and references to help you diagnose and debug test failures:
 
+- **📖 UI Test Contribution Guide**
+For an in-depth walkthrough of how to contribute UI tests using Playwright, see the [Meshery UI Test Contributing Guide](https://docs.meshery.io/project/contributing/contributing-ui-tests)
+
 - **📊 Latest Test Status Dashboard**  
   [View results from the `master` branch](https://docs.meshery.io/project/contributing/test-status)
 
@@ -60,7 +63,7 @@ Here are some handy tools and references to help you diagnose and debug test fai
 
 ## 👏 Thanks for Your Patience and Help
 
-This is a community effort, and we appreciate your support as we make our UI test infrastructure more robust and developer-friendly. If you have feedback or ideas to improve the process, drop a note in the [#meshery-ci channel](https://layer5io.slack.com) or bring it up during our community calls!
+This is a community effort, and we appreciate your support as we make our UI test infrastructure more robust and developer-friendly. If you have feedback or ideas to improve the process, drop a note in the [#meshery-ci channel](https://slack.layer5.io) or bring it up during our community calls!
 
 Together, we’re building better tooling—for everyone.
 
