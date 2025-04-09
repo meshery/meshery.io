@@ -5,7 +5,10 @@
 		{% include post-title.html post=post %}
 		<div class="post-content">
 			{%- if post.featured-image -%}
-			<img src="{{- post.featured-image | relative_url -}}" alt="" class="featured-image">
+			<img 
+			id="logo-dark-light"
+			data-logo-for-dark="{{- post.featured-image | relative_url -}}"
+			data-logo-for-light="{%- if post.featured-image-light -%}{{- post.featured-image-light | relative_url -}}{%-  else -%}{{- post.featured-image | relative_url -}}{% endif %}"  src="{{- post.featured-image | relative_url -}}" alt="" class="featured-image">
 		{%- else -%}
 			<!-- {%- assign postImage = "/assets/images/image-default.jpg" -%}
 			<img src="{{- postImage | relative_url -}}" alt="" class="featured-image"> -->
