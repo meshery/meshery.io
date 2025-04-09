@@ -180,8 +180,9 @@ jobs:
       - name: Send Email on Workflow Failure
         uses: dawidd6/action-send-mail@v4
         with:
-          server_address: smtp.gmail.com
-          server_port: 465
+          server_address: smtp-relay.gmail.com
+          server_port: 587
+          secure: false
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: GitHub Actions - Workflow Failure
