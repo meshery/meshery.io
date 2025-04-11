@@ -293,10 +293,11 @@
 		chatbotBtn.addEventListener("click", () => {
 			chatbotWin.style.display = chatbotWin.style.display === "flex" ? "none" : "flex"
 		})
+
 		async function sendMessage () {
 			const message = chatbotInput.value.trim()
 			if (!message) return
-			chatbotMessages.innerHTML += <div class='chat-user'><div class='chat-bubble user'>${message}</div></div>
+			chatbotMessages.innerHTML += `<div class='chat-user'><div class='chat-bubble user'>${message}</div></div>`
 			chatbotInput.value = ""
 			try {
 				const response = await fetch(window.CHATBOT_API, {
@@ -306,12 +307,13 @@
 				})
 				const data = await response.json()
 				const botReply = data?.choices?.[0]?.message?.content || "(No reply)"
-				chatbotMessages.innerHTML += <div class='chat-bot'><div class='chat-bubble bot'>${botReply}</div></div>
+				chatbotMessages.innerHTML += `<div class='chat-bot'><div class='chat-bubble bot'>${botReply}</div></div>`
 				chatbotMessages.scrollTop = chatbotMessages.scrollHeight
 			} catch (err) {
-				chatbotMessages.innerHTML += <div class='chat-bot error'><div class='chat-bubble bot'>Error: Could not fetch response.</div></div>
+				chatbotMessages.innerHTML += `<div class='chat-bot error'><div class='chat-bubble bot'>Error: Could not fetch response.</div></div>`
 			}
 		}
+
 		chatbotSend.addEventListener("click", sendMessage)
 		chatbotInput.addEventListener("keydown", (e) => {
 			if (e.key === "Enter") sendMessage()
