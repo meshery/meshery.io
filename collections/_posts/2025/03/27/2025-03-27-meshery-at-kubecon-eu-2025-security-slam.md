@@ -38,8 +38,8 @@ We're thrilled to announce that Meshery has been selected as one of four CNCF pr
 Security Slam is a hands-on event at KubeCon EU where contributors collaborate directly with project maintainers to tackle a curated backlog of security improvements. It's a focused effort to strengthen open-source projects, and we're [prepared](https://docs.google.com/document/d/15gFHw-A6uOchW-0U54-C6Miwv7sjvHFayynwboZwCbc/edit?usp=sharing) and excited to have Meshery (and you!) be a part of it.
 
 <div class="circular-callout" style="clip-path: ellipse(45% 75% at 50% 50%);">
-  <p><b>Do I have to attend in-person to particpate?</b></p>
-  <p><i>No! You can particpate from the comfort of your own chair.</i></p>
+  <p><b>Do I have to attend in-person to participate?</b></p>
+  <p><i>No! You can participate from the comfort of your own chair.</i></p>
 </div>
 
 **Meshery Security Slam Session**
@@ -52,7 +52,7 @@ Meshery will have a dedicated session at KubeCon EU 2025 where contributors can 
 
 <div class="circular-callout" style="clip-path: ellipse(45% 75% at 50% 50%);">
   <p><b>Can I work on Security Slam issues outside of the KubeCon EU session?</b></p>
-  <p><i>Yes! Outside of helping Meshery improve its security posture on an ongoing basis, your particpation in any of the issues on the Security Slam project board are considered between Wednesday, April 2nd and Friday, April 4th.</i></p>
+  <p><i>Yes! Outside of helping Meshery improve its security posture on an ongoing basis, your participation in any of the issues on the Security Slam project board are considered between Wednesday, April 2nd and Friday, April 4th.</i></p>
 </div>
 
 <h3 class="highlighted-text">Earn your Security Sentinel Badge!</h3>

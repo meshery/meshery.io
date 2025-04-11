@@ -1,6 +1,6 @@
 ---
 name: Documentation issue
-about: Issues related to documenation.
+about: Issues related to documentation.
 title: '[Docs]'
 labels: 'kind/docs'
 assignees: ''
