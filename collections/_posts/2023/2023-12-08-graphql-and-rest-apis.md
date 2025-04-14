@@ -15,7 +15,7 @@ As an extensible engineering platform, Meshery's focus on flexibility and adapta
 
 ## Understanding Meshery's balance between flexibility and stability
 
-Meshery is an open source, cloud native management platform that facilitates the deployment, management, and operation of Kubernetes and any resource represented on Kubernetes (e.g. GCP and AWS as cloud platforms). Since the ability for developers to understand, configure, and collaborate over the infratructure that runs their microservices-based applications, plays a crucial role in their ability to innnovate, Meshery offers self-service, engineering empowerment via its various extension points (see figure).
+Meshery is an open source, cloud native management platform that facilitates the deployment, management, and operation of Kubernetes and any resource represented on Kubernetes (e.g. GCP and AWS as cloud platforms). Since the ability for developers to understand, configure, and collaborate over the infrastructure that runs their microservices-based applications, plays a crucial role in their ability to innovate, Meshery offers self-service, engineering empowerment via its various extension points (see figure).
 
 <img alt="Meshery Extension Points" src="/assets/images/posts/2023-12-08-graphql-and-rest-apis/meshery-extension-points.webp" width="90%" />
 
@@ -26,7 +26,7 @@ Incumbent upon Meshery is the necessity to balance the freedoms of these extensi
 [Meshery's APIs](https://docs.meshery.io/extensibility/api) are just one type of extension point. Meshery's APIs are used by every Meshery component. This includes:
 
 - the two clients, [Meshery UI](https://docs.meshery.io/concepts/architecture), and [mesheryctl](https://docs.meshery.io/reference/mesheryctl) to interact with the Meshery Server.
-- [Meshery Adapters](https://docs.meshery.io/concepts/architecture/adapters) to register capabilities with with Meshery Server.
+- [Meshery Adapters](https://docs.meshery.io/concepts/architecture/adapters) to register capabilities with the Meshery Server.
 - Meshery's APIs are also used by the [Meshery Operator](https://docs.meshery.io/concepts/architecture/operator) and it runs [MeshSync](https://docs.meshery.io/concepts/architecture/broker) and [Meshery Broker](https://docs.meshery.io/concepts/architecture/broker).
 
 <div class="callout">
