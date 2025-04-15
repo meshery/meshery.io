@@ -248,53 +248,37 @@
 <script>
 	window.CHATBOT_API = "https://meshery.gc605997852.workers.dev/";
 </script>
-
 <button id="chatbot-button">Ask Chatbot</button>
 <div id="chatbot-window">
 	<div class="chatbot-header">
 		<div class="chatbot-header-left">
-			<div class="chatbot-title-row">
-				<div class="chatbot-title">Meshery</div>
-				<a href="https://github.com/meshery/meshery.io" target="_blank" class="chatbot-gh-link">GitHub ↗</a>
-			</div>
+			<div class="chatbot-title">Meshery</div>
 			<div class="chatbot-subtitle">
 				Powered by <a href="https://github.com/SkywardAI" target="_blank">SkywardAI</a>
 			</div>
 		</div>
 		<div class="chatbot-controls">
-			<button title="Expand" onclick="document.getElementById('chatbot-window').classList.toggle('expanded')">
-				<img src="/images/integrations/chatbot/maximize.svg" alt="Expand" width="16" height="16" />
-			</button>
-			<button title="Clear" onclick="renderSuggestions()">
-				<img src="/images/integrations/chatbot/rotate-cw.svg" alt="Clear" width="16" height="16" />
-			</button>
-			<button title="Close" onclick="document.getElementById('chatbot-window').style.display = 'none'">
-				<img src="/images/integrations/chatbot/x.svg" alt="Close" width="16" height="16" />
-			</button>
+			<button title="Expand"
+				onclick="document.getElementById('chatbot-window').classList.toggle('expanded')">🗖</button>
+			<button title="Clear" onclick="document.getElementById('chatbot-messages').innerHTML = ''">🔄</button>
+			<button title="Close" onclick="document.getElementById('chatbot-window').style.display = 'none'">✕</button>
 		</div>
 	</div>
-
-	<div id="chatbot-messages"></div>
-
+	<div id="chatbot-messages">
+		<div class="chatbot-hint">Suggested questions:</div>
+		<div class="chatbot-suggestions">
+			<button onclick="sendPreset('What is Meshery')">What is Meshery</button>
+			<button onclick="sendPreset('How does Meshery work')">How does Meshery work</button>
+			<button onclick="sendPreset('How can I contribute to Meshery as a developer')">How can I contribute to Meshery as
+				a developer?</button>
+		</div>
+	</div>
 	<div id="chatbot-input-area">
 		<input id="chatbot-input" placeholder="Ask me anything..." />
 		<button id="chatbot-send">Send</button>
 	</div>
 </div>
-
 <script>
-	function renderSuggestions () {
-		const suggestionsHTML = `
-      <div class="chatbot-hint">Suggested questions:</div>
-      <div class="chatbot-suggestions">
-        <button onclick="sendPreset('What is Meshery')">What is Meshery</button>
-        <button onclick="sendPreset('How does Meshery work')">How does Meshery work</button>
-        <button onclick="sendPreset('How can I contribute to Meshery as a developer')">How can I contribute to Meshery as a developer?</button>
-      </div>
-    `
-		document.getElementById("chatbot-messages").innerHTML = suggestionsHTML
-	}
-
 	async function sendPreset (text) {
 		document.getElementById("chatbot-input").value = text
 		document.getElementById("chatbot-send").click()
@@ -306,9 +290,6 @@
 		const chatbotSend = document.getElementById("chatbot-send")
 		const chatbotInput = document.getElementById("chatbot-input")
 		const chatbotMessages = document.getElementById("chatbot-messages")
-
-		renderSuggestions() // 初始显示推荐问题
-
 		chatbotBtn.addEventListener("click", () => {
 			chatbotWin.style.display = chatbotWin.style.display === "flex" ? "none" : "flex"
 		})
@@ -316,10 +297,8 @@
 		async function sendMessage () {
 			const message = chatbotInput.value.trim()
 			if (!message) return
-
 			chatbotMessages.innerHTML += `<div class='chat-user'><div class='chat-bubble user'>${message}</div></div>`
 			chatbotInput.value = ""
-
 			try {
 				const response = await fetch(window.CHATBOT_API, {
 					method: "POST",
@@ -327,13 +306,8 @@
 					body: JSON.stringify({ messages: [{ role: "user", content: message }] })
 				})
 				const data = await response.json()
-				const botReply = data?.choices?.[0]?.message?.content || "Our free search service may have reached its usage limit. Please try again later."
-
-				const linkedReply = botReply.replace(/(https?:\/\/[^\s]+)/g, url => {
-					return `<a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`
-				})
-
-				chatbotMessages.innerHTML += `<div class='chat-bot'><div class='chat-bubble bot'>${linkedReply}</div></div>`
+				const botReply = data?.choices?.[0]?.message?.content || "(No reply)"
+				chatbotMessages.innerHTML += `<div class='chat-bot'><div class='chat-bubble bot'>${botReply}</div></div>`
 				chatbotMessages.scrollTop = chatbotMessages.scrollHeight
 			} catch (err) {
 				chatbotMessages.innerHTML += `<div class='chat-bot error'><div class='chat-bubble bot'>Error: Could not fetch response.</div></div>`
@@ -347,8 +321,6 @@
 	});
 </script>
 <!-- === Chatbot Integration End === -->
-
-
 </body>
 
 </html>
