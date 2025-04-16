@@ -1,12 +1,13 @@
 ---
-title: Improving Meshery's UI E2E Tests
+title: Improving Meshery UI's E2E Tests
 author: Meshery Maintainers
 date: 2025-04-04
 categories: 
   - meshery
   - open-source
-  - Playwright
-  - E2E testing
+  - playwright
+  - e2e-testing
+  - contributors
 featured-image: /assets/images/logos/meshery-logo-light-text-side.svg
 ---
 
