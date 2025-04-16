@@ -1,6 +1,6 @@
 ---
 title: Improving Meshery UI's E2E Tests
-author: Meshery Maintainers
+author: Ian Whitney
 date: 2025-04-04
 categories: 
   - meshery
