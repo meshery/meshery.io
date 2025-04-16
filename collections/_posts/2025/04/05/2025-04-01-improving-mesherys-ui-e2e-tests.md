@@ -7,7 +7,7 @@ categories:
   - open-source
   - Playwright
   - E2E testing
-featured-image: /assets/images/logos/meshery-logo-dark-text-side.svg
+featured-image: /assets/images/logos/meshery-logo-light-text-side.svg
 ---
 
 Hey Meshery Community 👋
