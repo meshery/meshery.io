@@ -11,7 +11,7 @@ categories:
 featured-image: /assets/images/logos/meshery-logo-light-text-side.svg
 ---
 
-Hey Meshery Community 👋
+Hey Meshery Contributors 👋
 
 As we continue evolving Meshery’s end-to-end (E2E) UI test suite, we wanted to proactively communicate some updates and best practices around these tests.
 
