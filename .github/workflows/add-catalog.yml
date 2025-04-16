@@ -179,7 +179,7 @@ jobs:
 
       - name: Send Email on Workflow Failure
         if: ${{ failure() }}
-        uses: dawidd6/action-send-mail@v3.7.1
+        uses: dawidd6/action-send-mail@v4
         with:
           server_address: smtp.gmail.com
           server_port: 465
@@ -187,7 +187,7 @@ jobs:
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: GitHub Actions - Workflow Failure
           from: |
-            "Catalog Update Workflow" <no-reply@meshery.io>
+            "Catalog Update Workflow"
           to: developers@meshery.io
           body: |
             Meshery's Add Cloud Native Catalog Items <a href="https://github.com/meshery/meshery.io/actions/workflows/add-catalog.yml">workflow</a> encountered error(s). Refer to the attached error log for details or review the [results of the failed workflow](https://github.com/meshery/meshery.io/actions/runs/${{ github.run_id }}).
