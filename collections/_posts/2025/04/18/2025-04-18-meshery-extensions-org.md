@@ -37,7 +37,11 @@ Meshery, a high-velocity Cloud Native Computing Foundation (CNCF) project, serve
 
 ## Rationale for Repository Partitioning
 
-The decision to split Meshery’s repositories into two GitHub organizations is driven by several strategic considerations, each aimed at enhancing the project’s manageability, scalability, and community engagement.
+The decision to split Meshery’s repositories into two GitHub organizations is driven by several strategic considerations, each aimed at enhancing the project’s structure, manageability, scalability, and community engagement.
+
+### Project Architecture
+
+Let's first acknowledge Meshery architectural project structure being that of a highly extensible, self-service, management platform. With every feature developed grueling consideration is given to extensibility as is evident by the ubiquitiy of [extension points](https://docs.meshery.io/extensibility#extension-points)
 
 ### Modularity and Focus
 
