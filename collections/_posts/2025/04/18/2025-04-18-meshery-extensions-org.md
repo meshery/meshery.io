@@ -33,8 +33,6 @@ permalink: /blog/2025/meshery-ecosystem-expansion
   }
 </style>
 
-# Meshery Ecosystem Expansion: GitHub Organization Strategy
-
 Meshery, a high-velocity Cloud Native Computing Foundation (CNCF) project, serves as a cloud native management platform facilitating multi-player collaboration in designing and operating modern infrastructure. As part of its ecosystem expansion, Meshery maintainers have opted to partition its numerous GitHub repositories into two distinct organizations: [Meshery](https://github.com/meshery) for the core platform and [Meshery Extensions](https://github.com/meshery-extensions)  for extensions. This post outlines the rationale, suggested governance structure, support expectations, and project mechanics behind this decision, drawing parallels with similar strategies employed by the Kubernetes and Crossplane projects as two relevant examples.
 
 ## Rationale for Repository Partitioning
