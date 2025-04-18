@@ -7,7 +7,7 @@ categories:
   - meshery
   - open-source
   - meshmark
-permalink: /blog/meshmark-explained
+redirect_from: /blog/meshmark-explained
 ---
 <div class="row" style="width:220px;float:right;padding:5px;text-align:center;">
 <a href="https://smi-spec.io" rel="nofollow"></a><img src="{{site.baseurl}}/assets/images/posts/2020-05-21-meshmark-explained/container-crane.svg" alt="container-crane" width="100%">

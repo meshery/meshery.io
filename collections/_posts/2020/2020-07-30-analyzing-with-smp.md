@@ -6,7 +6,7 @@ author: Lee Calcote
 categories:
   - meshery
   - performance
-permalink: /blog/getting-started-with-service-mesh-performance-analysis
+redirect_from: /blog/getting-started-with-service-mesh-performance-analysis
 ---
 <div style="text-align:center;padding:5px">
 <img src="{{site.baseurl}}/assets/images/posts/2020-07-30-analyzing-with-smp/mesh-cubes.svg#center" style="width:70%" /></div>

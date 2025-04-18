@@ -7,7 +7,7 @@ categories:
   - meshery
   - mesheryctl
 # layout: post
-permalink: /blog/mesheryctl-system-provider
+redirect_from: /blog/mesheryctl-system-provider
 ---
 
 <div style="text-align:center;padding:20px">

@@ -6,7 +6,7 @@ author: The Newsroom
 categories:
   - meshery
   - service-mesh
-permalink: /blog/pipelining-service-mesh-specifications
+redirect_from: /blog/pipelining-service-mesh-specifications
 ---
 <div style="text-align:center;margin-bottom:0.75rem;">
   <img src="{{site.baseurl}}/assets/images/posts/2022-01-26-pipelining-service-mesh-specifications/service-mesh-specifications.png" alt="service-mesh-specifications" width="80%"  />

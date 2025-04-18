@@ -6,7 +6,7 @@ author: Chris Carrier
 categories: 
   - meshery
   - open-source
-permalink: /blog/200-meshery-designs-on-artifacthub
+redirect_from: /blog/200-meshery-designs-on-artifacthub
 featured-image: /assets/images/posts/2024-06-19-more-designs/designs-on-ah.png
 ---
 

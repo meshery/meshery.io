@@ -8,7 +8,7 @@ categories:
   - open-source
   - API
 featured-image: /assets/images/posts/2023-12-08-graphql-and-rest-apis/meshery-apis.jpeg
-permalink: /blog/unleashing-power-and-flexibility-the-synergy-of-rest-and-graphql-in-meshery
+redirect_from: /blog/unleashing-power-and-flexibility-the-synergy-of-rest-and-graphql-in-meshery
 published: false
 ---
 Question:

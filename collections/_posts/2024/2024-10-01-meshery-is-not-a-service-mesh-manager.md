@@ -5,7 +5,7 @@ date: 2024-10-01
 author: Lee Calcote
 categories: 
   - meshery
-permalink: /blog/meshery-is-not-a-service-mesh-manager
+redirect_from: /blog/meshery-is-not-a-service-mesh-manager
 featured-image: /assets/images/logos/meshery-logo-dark-text-side.svg
 ---
 

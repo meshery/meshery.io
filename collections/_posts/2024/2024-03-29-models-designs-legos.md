@@ -5,7 +5,7 @@ date: 2024-03-29
 author: Lee Calcote
 categories: 
   - meshery
-permalink: /blog/lego-bricks-and-lego-instructions
+redirect_from: /blog/lego-bricks-and-lego-instructions
 featured-image: /assets/images/posts/2024-03-29-models-designs-legos/five-legos.png
 ---
 

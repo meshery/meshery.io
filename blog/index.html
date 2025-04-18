@@ -9,6 +9,62 @@ paginate:
 ---
 
   <div class="blog-container">
+    <ul class="blog-posts">
+      {% include list-posts.html posts=paginator.posts %}
+    </ul>
+
+    <div class="blog-sidebar" style="max-width:275px;">
+
+      <div class="sidebar-section">
+        <h3 style="font-size:1.5rem;text-align: center;">Categories</h3>
+        <ul class="category-list">
+          {% assign categories = site.posts | map: 'categories' | uniq | sort %}
+          {% for category in categories %}
+            {% if category != empty %}
+              <li>
+                <a href="/blog/category/{{ category | slugify }}">
+                  {{ category }} <span class="cat-count">({{ site.posts | where: 'categories', category | size }})</span>
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="bg-grey-300" style="min-width:225px;">
+        <div class="mailing-container">
+          <div>
+            <h3 class="h3">Community Newsletter</h3>
+          </div>
+        </div>
+        <p class="p-normal">Stay up-to-date</p>
+        <div class="mailing-btn">
+          <a
+            class="button"
+            href="https://groups.google.com/a/meshery.io/g/developers"
+            >Subscribe</a
+          >
+        </div>
+      </div>
+      
+    </div>
+
+    {% if paginator.total_pages > 1 %}
+      <div class="pagination">
+        {% if paginator.previous_page %}
+          <a href="{{ paginator.previous_page_path | relative_url }}" class="previous btn">&larr; Newer posts</a>
+        {% endif %}
+        
+        <span class="page-number">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+        
+        {% if paginator.next_page %}
+          <a href="{{ paginator.next_page_path | relative_url }}" class="next btn">Older posts &rarr;</a>
+        {% endif %}
+      </div>
+    {% endif %}
+</div>
+    
+      <!-- 
     <div class="blog-posts">
       <ul class="post-list">
         {% for post in paginator.posts %}
@@ -33,59 +89,14 @@ paginate:
             </div>
           </li>
         {% endfor %}
-      </ul>
-
-      {% if paginator.total_pages > 1 %}
-        <div class="pagination">
-          {% if paginator.previous_page %}
-            <a href="{{ paginator.previous_page_path | relative_url }}" class="previous btn">&larr; Newer posts</a>
-          {% endif %}
-          
-          <span class="page-number">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
-          
-          {% if paginator.next_page %}
-            <a href="{{ paginator.next_page_path | relative_url }}" class="next btn">Older posts &rarr;</a>
-          {% endif %}
+      </ul> 
         </div>
-      {% endif %}
-    </div>
+-->
 
-    <div class="blog-sidebar" style="max-width:275px;">
-      <div class="sidebar-section">
-        <h3 style="font-size:1.5rem;text-align: center;">Categories</h3>
-        <ul class="category-list">
-          {% assign categories = site.posts | map: 'categories' | uniq | sort %}
-          {% for category in categories %}
-            {% if category != empty %}
-              <li>
-                <a href="/blog/category/{{ category | slugify }}">
-                  {{ category }} <span class="cat-count">({{ site.posts | where: 'categories', category | size }})</span>
-                </a>
-              </li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-      </div>
 
-        <div class="bg-grey-300" style="min-width:225px;">
-          <div class="mailing-container">
-            <div>
-              <h3 class="h3">Community Newsletter</h3>
-            </div>
-          </div>
-          <p class="p-normal">Stay up-to-date</p>
-          <div class="mailing-btn">
-            <a
-              class="button"
-              href="https://groups.google.com/a/meshery.io/g/developers"
-              >Subscribe</a
-            >
-          </div>
-        </div>
-      
-    </div>
-  </div>
-</div>
+
+
+
 
 <style>
 .blog-container {
@@ -108,11 +119,7 @@ paginate:
   padding: 0;
 }
 
-.blog-post {
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--color-primary-super-dark);
-}
+
 
 .post-header {
   margin-bottom: 1rem;

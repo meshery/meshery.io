@@ -6,7 +6,7 @@ author: Lee Calcote
 categories:
   - service-mesh
 # layout: post
-# permalink: /blog/validating-smi-conformance-with-meshery
+# redirect_from: /blog/validating-smi-conformance-with-meshery
 ---
 
 <div class="row" style="width:220px;float:left;padding:20px;text-align:center;">

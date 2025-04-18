@@ -8,7 +8,7 @@ categories:
   - open-source
   - mesheryctl
 # layout: post
-permalink: /blog/changing-meshery-release-channels
+redirect_from: /blog/changing-meshery-release-channels
 ---
 
 <div style="text-align:center;padding:20px">
