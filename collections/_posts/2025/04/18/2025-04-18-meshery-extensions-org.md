@@ -41,7 +41,7 @@ The decision to split Meshery’s repositories into two GitHub organizations is 
 
 ### Project Architecture
 
-Let's first acknowledge Meshery architectural project structure being that of a highly extensible, self-service, management platform. With every feature developed grueling consideration is given to extensibility as is evident by the ubiquitiy of [extension points](https://docs.meshery.io/extensibility#extension-points)
+Let's first acknowledge Meshery architectural project structure being that of a highly extensible, self-service, management platform. With every feature developed grueling consideration is given to extensibility as is evident by the ubiquitiy of [extension points](https://docs.meshery.io/extensibility#extension-points).
 
 ### Modularity and Focus
 
@@ -57,7 +57,7 @@ By providing a dedicated space for extensions, Meshery encourages community cont
 
 **Incubation and Experimentation:** The separate organization acts as an incubator for new ideas, providers, or tooling related to Meshery. Projects might start here and, if they gain significant traction and stability, could potentially be considered for migration or closer integration with the core project (though this isn't always the goal or outcome).
 
-**Ecosystem Growth:** Part of Meshery's power lies in its ability to manage *any* infrastructure via Providers, Models, Adapters, and its other extension points. Since there are countless APIs and services, `meshery-extensions` serves as the place for the community to build and share Providers for less common cloud services, specific SaaS platforms, or even internal company APIs, without needing official endorsement or maintenance from the core maintainers.
+**Ecosystem Growth:** Part of Meshery's power lies in its ability to manage *any* infrastructure via Providers, [Models](https://docs.meshery.io/concepts/logical/models), Adapters, and its other extension points. Since there are countless APIs and services, `meshery-extensions` serves as the place for the community to build and share Providers for less common cloud services, specific SaaS platforms, or even internal company APIs, without needing official endorsement or maintenance from the core maintainers.
 
 ## Suggested Governance Structure
 
@@ -114,9 +114,8 @@ The mechanics of managing two organizations involve distinct development, testin
 
 ### Development Process
 
-- **Core Platform**: Follows a structured release cycle with stable and edge channels (Meshery Release Channels). Changes undergo rigorous review to maintain stability.
+- **Platform**: Follows a structured release cycle with [stable and edge channels](https://docs.meshery.io/project/contributing/build-and-release). Changes undergo rigorous review to maintain stability. Notify platform extenders and system integrators of upcoming changes in underlying framework to ensure time is afforded to maintain compatibility.
 - **Extensions**: Operate on independent release cycles, allowing rapid iteration. Developers use Meshery’s extension points to integrate with the core platform, following contribution guidelines (Meshery Contributing).
-- **GitOps Integration**: Extensions can leverage Meshery’s GitOps capabilities for collaborative design, with snapshots integrated into pull requests (Meshery GitHub Integration).
 
 ### Integration Testing
 
@@ -130,10 +129,11 @@ The mechanics of managing two organizations involve distinct development, testin
 - **Catalog and Templates**: Meshery’s catalog of design templates includes extension configurations, promoting best practices (See Meshery Catalog).
 - **Community Resources**: Weekly meetings, Slack channels, and the community handbook provide ongoing support (See Community Handbook).
 
+## Reflections on Other Projects
 
-## Reflections on Crossplane and Kubernetes
+Meshery's expansion strategy mirrors successful models in other CNCF projects. BuildPacks and Argo https://github.com/argoproj-labs. Crossplane uses github.com/crossplane for its core platform and github.com/crossplane-contrib for community-contributed providers and functions. Similarly, Kubernetes maintains github.com/kubernetes for core components and github.com/kubernetes-sigs for Special Interest Groups (SIGs). These separations enable focused development, decentralized governance, and easier contribution, which Meshery aims to emulate.
 
-Meshery's expansion strategy mirrors successful models in other CNCF projects. Crossplane uses github.com/crossplane for its core platform and github.com/crossplane-contrib for community-contributed providers and functions. Similarly, Kubernetes maintains github.com/kubernetes for core components and github.com/kubernetes-sigs for Special Interest Groups (SIGs). These separations enable focused development, decentralized governance, and easier contribution, which Meshery aims to emulate.
+Autonomy: Extension teams have autonomy over their development processes, provided they adhere to Meshery’s code of conduct and integration guidelines, akin to Argo’s labs model where projects operate independently but align with broader project goals.
 
 ### Crossplane
 
