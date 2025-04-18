@@ -7,7 +7,7 @@ categories:
   - open-source
   - community
 # layout: post
-permalink: /blog/Layer5-Recognition-Program
+redirect_from: /blog/Layer5-Recognition-Program
 ---
 <div style="text-align:center;padding:20px">
 <img src="/assets/images/posts/2023-9-2-layer5-badge-programme/recognition-banner.png" style="width:75%" /></div>

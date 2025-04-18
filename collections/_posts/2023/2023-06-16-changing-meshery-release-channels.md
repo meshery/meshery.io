@@ -2,13 +2,13 @@
 date: 2023-06-16 10:30:05 -0530
 heading: Changing Meshery Release Channels
 title: Changing Meshery Release Channels
-author_contributor: Meshery Contributors
+author: Meshery Contributors
 categories: 
   - meshery
   - open-source
   - mesheryctl
 # layout: post
-permalink: /blog/changing-meshery-release-channels
+redirect_from: /blog/changing-meshery-release-channels
 ---
 
 <div style="text-align:center;padding:20px">

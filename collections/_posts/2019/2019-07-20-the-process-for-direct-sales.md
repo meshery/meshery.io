@@ -2,13 +2,13 @@
 date:   2019-05-21 12:15:05 +0000
 heading: A Standard Interface for Service Meshes
 title: A Standard Interface for Service Meshes
-author_contributor: Lee Calcote
+author: Lee Calcote
 categories:
   - specification
   - multi-mesh
 # layout: post
 featured-image: /assets/images/posts/2019-05-21-a-standard-interface-for-service-meshes/smi-logo.png
-# permalink: /blog/a-standard-interface-for-service-meshes
+# redirect_from: /blog/a-standard-interface-for-service-meshes
 ---
 <div class="row" style="width:220px;float:right;padding:20px;text-align:center;">
 <a href="https://smi-spec.io" rel="nofollow"></a><img src="{{site.baseurl}}/assets/images/posts/2019-05-21-a-standard-interface-for-service-meshes/smi-logo.png" alt="" width="70%">
