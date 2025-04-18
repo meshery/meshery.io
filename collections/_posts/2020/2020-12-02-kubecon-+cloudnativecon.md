@@ -2,12 +2,11 @@
 date:   2020-12-02 21:00:00 +0530
 heading: KubeCon+CloudNativeCon
 title: KubeCon+CloudNativeCon 
-author_contributor: The Newsroom
+author: The Newsroom
 categories:
   - meshery
   - kubecon
-  - cloudnativecon
-permalink: /blog/kubecon-cloudnativecon
+redirect-from: /blog/kubecon-cloudnativecon
 ---
 <div style="text-align:center;padding:5px">
 <img src="{{site.baseurl}}/assets/images/posts/2020-12-02-kubecon+cloudnativecon/service-mesh-implementations.png" style="width:100%" /></div>

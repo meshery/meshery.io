@@ -2,7 +2,7 @@
 title: "Meshery's Meteoric Rise: From Sandbox to Rocket Ship"
 subheading: 9th Fastest Velocity in the CNCF!
 date: 2025-04-01
-author_contributor: Meshery Authors
+author: Meshery Authors
 draft: true
 published: false
 categories:

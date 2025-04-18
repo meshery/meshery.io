@@ -1,19 +1,17 @@
 ---
-title: Meshery Blog
+title: Blog
 description: Explore all Meshery blog posts, tutorials, and updates.
-layout: default
+layout: page
+paginate:
+  collection: posts
+  per_page: 6
+  permalink: "/page:num"
 ---
-
-<div class="text-container">
-  <div class="section-bar">
-    <h1><a href="/blog">Blog</a></h1>
-    <p class="subtitle">latest news, tutorials, and insights</p>
-  </div>
 
   <div class="blog-container">
     <div class="blog-posts">
       <ul class="post-list">
-        {% for post in site.posts %}
+        {% for post in paginator.posts %}
           <li class="blog-post">
             <div class="post-header">
               <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
@@ -36,18 +34,32 @@ layout: default
           </li>
         {% endfor %}
       </ul>
+
+      {% if paginator.total_pages > 1 %}
+        <div class="pagination">
+          {% if paginator.previous_page %}
+            <a href="{{ paginator.previous_page_path | relative_url }}" class="previous btn">&larr; Newer posts</a>
+          {% endif %}
+          
+          <span class="page-number">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+          
+          {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path | relative_url }}" class="next btn">Older posts &rarr;</a>
+          {% endif %}
+        </div>
+      {% endif %}
     </div>
 
-    <div class="blog-sidebar">
+    <div class="blog-sidebar" style="max-width:275px;">
       <div class="sidebar-section">
-        <h3>Categories</h3>
+        <h3 style="font-size:1.5rem;text-align: center;">Categories</h3>
         <ul class="category-list">
           {% assign categories = site.posts | map: 'categories' | uniq | sort %}
           {% for category in categories %}
             {% if category != empty %}
               <li>
                 <a href="/blog/category/{{ category | slugify }}">
-                  {{ category | capitalize }} ({{ site.posts | where: 'categories', category | size }})
+                  {{ category }} <span class="cat-count">({{ site.posts | where: 'categories', category | size }})</span>
                 </a>
               </li>
             {% endif %}
@@ -55,22 +67,13 @@ layout: default
         </ul>
       </div>
 
-      <div class="mailing-row">
-
-        <div class="bg-grey-300">
+        <div class="bg-grey-300" style="min-width:225px;">
           <div class="mailing-container">
             <div>
               <h3 class="h3">Community Newsletter</h3>
             </div>
           </div>
-          <div class="mailing-container mail-link-div">
-            <a
-            class="mail-link"
-            href="https://groups.google.com/a/meshery.io/g/developers"
-              >developers@meshery.io</a
-            >
-          </div>
-          <p class="p-normal">Engage with contributors. Contribute to Meshery.</p>
+          <p class="p-normal">Stay up-to-date</p>
           <div class="mailing-btn">
             <a
               class="button"
@@ -79,8 +82,7 @@ layout: default
             >
           </div>
         </div>
-</div>
-
+      
     </div>
   </div>
 </div>
@@ -136,7 +138,7 @@ layout: default
 .read-more {
   display: inline-block;
   margin-top: 1rem;
-  color: #00D3A9;
+  color: var(--brand-color-secondary);
   text-decoration: none;
   font-weight: 500;
 }
@@ -173,19 +175,22 @@ layout: default
   background: rgba(0, 211, 169, 0.1);
 }
 
-.category-list a::after {
+.category-list a .cat-count {
   content: attr(data-count);
-  background: var(--brand-color-secondary);
-  color: var(--color-white);
-  padding: 0.2rem 0.5rem;
-  border-radius: 12px;
+  background: var(--color-primary-medium);
+  color: var(--color-primary-super-dark);
+  padding: 0.3rem 0.5rem;
+  border-radius: 1px;
   font-size: 0.8rem;
+}
+.category-list a .cat-count:hover {
+  background: rgba(0, 211, 169, 0.1);
 }
 
 .btn {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background: #00D3A9;
+  background: var(--brand-color-secondary);
   color: var(--color-white);
   border: none;
   border-radius: 4px;
@@ -194,7 +199,20 @@ layout: default
 }
 
 .btn:hover {
-  background: var(--brand-color-primary);
+  background: var(--color-black);
+  > a {
+  text-decoration: none;
+}
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--brand-color-secondary);
+  color: var(--color-white);
 }
 
 @media (max-width: 768px) {

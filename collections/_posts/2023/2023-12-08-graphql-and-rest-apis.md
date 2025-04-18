@@ -2,7 +2,7 @@
 date: 2023-12-08 13:00:00 +0000
 title: The Synergy of REST and GraphQL APIs in Meshery
 subheading: Extending Meshery as an engineering platform
-author_contributor: Lee Calcote
+author: Lee Calcote
 categories:
   - meshery
   - open-source

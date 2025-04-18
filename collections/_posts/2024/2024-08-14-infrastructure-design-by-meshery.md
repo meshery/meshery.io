@@ -2,7 +2,7 @@
 title: Infrastructure as Design by Meshery
 subheading: a deep dive
 date: 2024-08-13
-author_contributor: Vivek Vishal
+author: Vivek Vishal
 categories: 
   - meshery
   - open-source

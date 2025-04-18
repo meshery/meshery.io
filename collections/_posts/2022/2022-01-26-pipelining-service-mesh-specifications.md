@@ -2,7 +2,7 @@
 date:   2022-01-26 22:00:00 +0530
 heading: Pipelining Service Mesh Specifications
 title: Pipelining Service Mesh Specifications
-author_contributor: The Newsroom
+author: The Newsroom
 categories:
   - meshery
   - service-mesh

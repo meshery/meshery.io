@@ -2,7 +2,7 @@
 title: Meshery to Participate in Security Slam
 subheading: KubeCon EU 2025
 date: 2025-03-27
-author_contributor: Meshery Maintainers
+author: Meshery Maintainers
 categories:
   - kubecon
   - event

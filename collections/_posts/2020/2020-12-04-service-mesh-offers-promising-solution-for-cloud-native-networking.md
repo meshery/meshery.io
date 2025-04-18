@@ -2,7 +2,7 @@
 date:   2020-12-04 21:00:00 +0530
 heading: Service Mesh Offers Promising Solution for Cloud Native Networking
 title: Service Mesh Offers Promising Solution for Cloud Native Networking
-author_contributor: The Newsroom
+author: The Newsroom
 categories:
   - meshery
   - cloud-native

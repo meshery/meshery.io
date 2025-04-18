@@ -2,7 +2,7 @@
 title: Share Your Meshery Models
 subheading: A Guide to Contributing to the Meshery Catalog
 date: 2024-11-06
-author_contributor: Meshery Authors
+author: Meshery Authors
 categories:
   - meshery
   - mesheryctl

@@ -2,7 +2,7 @@
 title: Meshery Reaches 7,000 Stars
 subheading: Five rockets into Outer Space
 date: 2025-3-31
-author_contributor: Meshery Authors
+author: Meshery Authors
 categories:
   - community
   - milestones

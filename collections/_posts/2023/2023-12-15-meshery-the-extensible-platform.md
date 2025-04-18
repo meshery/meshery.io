@@ -2,7 +2,7 @@
 date: 2023-12-19 13:00:00 +0000
 title: "Meshery the Extensible Engineering Platform"
 subheading: Context-aware design with Meshery
-author_contributor: Lee Calcote
+author: Lee Calcote
 categories:
   - meshery
   - open-source

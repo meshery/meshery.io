@@ -2,7 +2,7 @@
 date:   2020-05-21 19:00:00 +0000
 heading: Meshmark Explained
 title: Meshmark Explained
-author_contributor: Lee Calcote
+author: Lee Calcote
 categories:
   - meshery
   - open-source

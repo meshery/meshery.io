@@ -2,7 +2,7 @@
 title: Meshery is not a Service Mesh Manager
 subheading: Meshery is so much more than this
 date: 2024-10-01
-author_contributor: Lee Calcote
+author: Lee Calcote
 categories: 
   - meshery
 permalink: /blog/meshery-is-not-a-service-mesh-manager
