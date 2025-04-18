@@ -1,40 +1,221 @@
 ---
-title: Blog
-description: Keep up with the latest news.
-paginate:
-  collection: posts
-  paginate: 3
-  permalink: /page/:num/
+title: Meshery Blog
+description: Explore all Meshery blog posts, tutorials, and updates.
+layout: default
 ---
 
 <div class="text-container">
-  <div class="section-bar"><a href="/blog"><h1>Blog</h1></a></div>
-  <ul class="blog-posts">
-    {% include list-posts.html posts=paginator.posts %}
-  </ul>
-
-  {% if paginator.total_pages > 1 %}
-  <!-- Pagination links -->
-  <div class="pagination">
-    {% if paginator.previous_page %}
-    <a
-      href="{% include relative-src.html src=paginator.previous_page_path %}"
-      class="previous btn"
-      >&larr; Newer posts</a
-    >
-    {% endif %}
-
-    <span class="page_number"
-      >{{ paginator.page }} of {{ paginator.total_pages }}</span
-    >
-
-    {% if paginator.next_page %}
-    <a
-      href="{% include relative-src.html src=paginator.next_page_path %}"
-      class="next btn"
-      >Older posts &rarr;</a
-    >
-    {% endif %}
+  <div class="section-bar">
+    <h1><a href="/blog">Blog</a></h1>
+    <p class="subtitle">latest news, tutorials, and insights</p>
   </div>
-  {% endif %}
+
+  <div class="blog-container">
+    <div class="blog-posts">
+      <ul class="post-list">
+        {% for post in site.posts %}
+          <li class="blog-post">
+            <div class="post-header">
+              <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+              <div class="post-meta">
+                <span class="post-date">{{ post.date | date: "%B %-d, %Y" }}</span>
+                {% if post.author %}
+                  <span class="post-author">by {{ post.author }}</span>
+                {% endif %}
+              </div>
+            </div>
+            
+            {% if post.featured-image %}
+              <img src="{{ post.featured-image | relative_url }}" alt="{{ post.title }}" class="featured-image">
+            {% endif %}
+            
+            <div class="post-excerpt">
+              {{ post.excerpt }}
+              <a href="{{ post.url | relative_url }}" class="read-more">Read More →</a>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="blog-sidebar">
+      <div class="sidebar-section">
+        <h3>Categories</h3>
+        <ul class="category-list">
+          {% assign categories = site.posts | map: 'categories' | uniq | sort %}
+          {% for category in categories %}
+            {% if category != empty %}
+              <li>
+                <a href="/blog/category/{{ category | slugify }}">
+                  {{ category | capitalize }} ({{ site.posts | where: 'categories', category | size }})
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="mailing-row">
+
+        <div class="bg-grey-300">
+          <div class="mailing-container">
+            <div>
+              <h3 class="h3">Community Newsletter</h3>
+            </div>
+          </div>
+          <div class="mailing-container mail-link-div">
+            <a
+            class="mail-link"
+            href="https://groups.google.com/a/meshery.io/g/developers"
+              >developers@meshery.io</a
+            >
+          </div>
+          <p class="p-normal">Engage with contributors. Contribute to Meshery.</p>
+          <div class="mailing-btn">
+            <a
+              class="button"
+              href="https://groups.google.com/a/meshery.io/g/developers"
+              >Subscribe</a
+            >
+          </div>
+        </div>
 </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+.blog-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.blog-posts {
+  grid-column: 1;
+}
+
+.blog-sidebar {
+  grid-column: 2;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+.blog-post {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-primary-super-dark);
+}
+
+.post-header {
+  margin-bottom: 1rem;
+}
+
+.post-meta {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+
+.featured-image {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+  border-radius: 4px;
+}
+
+.post-excerpt {
+  margin: 1rem 0;
+}
+
+.read-more {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #00D3A9;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.sidebar-section {
+  background: var(--color-primary-dark);
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.category-list {
+  list-style: none;
+  padding: 0;
+}
+
+.category-list li {
+  margin: 0.5rem 0;
+}
+
+.category-list a {
+  color: var(--color-primary-super-dark);
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.category-list a:hover {
+  color: #00D3A9;
+  background: rgba(0, 211, 169, 0.1);
+}
+
+.category-list a::after {
+  content: attr(data-count);
+  background: #00D3A9;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.subscribe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.subscribe-form input {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #00D3A9;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #00B39F;
+}
+
+@media (max-width: 768px) {
+  .blog-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .blog-sidebar {
+    grid-column: 1;
+  }
+}
+</style>
