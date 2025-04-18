@@ -19,14 +19,24 @@ paginate:
         <h3 style="font-size:1.5rem;text-align: center;">Categories</h3>
         <ul class="category-list">
           {% assign categories = site.posts | map: 'categories' | uniq | sort %}
+          {% assign category_counts = '' | split: '' %}
           {% for category in categories %}
             {% if category != empty %}
-              <li>
-                <a href="/blog/category/{{ category | slugify }}">
-                  {{ category }} <span class="cat-count">({{ site.posts | where: 'categories', category | size }})</span>
-                </a>
-              </li>
+              {% assign post_count = site.posts | where: 'categories', category | size %}
+              {% assign category_count = post_count | prepend: '0000' | slice: -4, 4 | append: '|' | append: category %}
+              {% assign category_counts = category_counts | push: category_count %}
             {% endif %}
+          {% endfor %}
+          {% assign sorted_categories = category_counts | sort | reverse %}
+          {% for category_count in sorted_categories %}
+            {% assign parts = category_count | split: '|' %}
+            {% assign category = parts[1] %}
+            {% assign count = parts[0] | plus: 0 %}
+            <li>
+              <a href="/blog/category/{{ category | slugify }}">
+                {{ category }} <span class="cat-count">({{ count }})</span>
+              </a>
+            </li>
           {% endfor %}
         </ul>
       </div>
@@ -41,7 +51,7 @@ paginate:
         <div class="mailing-btn">
           <a
             class="button"
-            href="https://groups.google.com/a/meshery.io/g/developers"
+            href="/subscribe"
             >Subscribe</a
           >
         </div>
@@ -153,7 +163,7 @@ paginate:
 .sidebar-section {
   background: var(--color-primary-dark);
   padding: 1.5rem;
-  border-radius: 4px;
+  border-radius: .5rem;
   margin-bottom: 2rem;
 }
 
@@ -167,7 +177,7 @@ paginate:
 }
 
 .category-list a {
-  color: var(--color-primary-super-dark);
+  color: var(--color-secondary-dark);
   text-decoration: none;
   display: flex;
   justify-content: space-between;
@@ -185,7 +195,7 @@ paginate:
 .category-list a .cat-count {
   content: attr(data-count);
   background: var(--color-primary-medium);
-  color: var(--color-primary-super-dark);
+  color: var(--color-secondary-dark);
   padding: 0.3rem 0.5rem;
   border-radius: 1px;
   font-size: 0.8rem;
