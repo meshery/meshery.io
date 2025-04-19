@@ -16,7 +16,7 @@ paginate:
     <div class="blog-sidebar" style="max-width:250px;">
 
       <div class="sidebar-section">
-        <h3 style="font-size:1.5rem;text-align: center;">Categories</h3>
+        <h3 style="font-size:1.5rem;text-align: center;margin:auto;">Categories</h3>
         <ul class="category-list">
           {% assign categories = site.posts | map: 'categories' | uniq | sort %}
           {% assign category_counts = '' | split: '' %}
@@ -41,20 +41,25 @@ paginate:
         </ul>
       </div>
 
-      <div class="bg-grey-300" style="min-width:225px;margin-left:0">
-        <div class="mailing-container">
-          <div>
-            <h3 class="h3">Community Newsletter</h3>
-          </div>
+      <div class="bg-grey">
+        <div>
+          <h3>Community Newsletter</h3>
         </div>
         <p class="p-normal">Stay up-to-date</p>
         <div class="mailing-btn">
           <a
             class="button"
             href="/subscribe"
-            >Subscribe</a
-          >
+            >Subscribe</a>
         </div>
+      </div>
+      
+      <div class="callout">
+        <a class="card" href="https://play.meshery.io" target="_blank">
+          <h3>Cloud Native Playground</h3>
+          <p class="small">Explore Meshery and all CNCF projects</p>
+          <div class="go-corner"></div>
+        </a>
       </div>
       
     </div>
@@ -77,6 +82,36 @@ paginate:
 
 
 <style>
+.bg-grey {
+	background: var(--background-light-cards);
+	box-shadow: var(--box-shadow-primary);
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  margin: auto;
+  text-align: center;
+  align-items: center;
+  padding: 2rem;
+  border-radius: .25rem;
+}
+.bg-grey h3 {
+  margin: 0rem;
+}
+.mailing-btn {
+  align-self: center;
+}
+.callout {
+  padding: 0rem;
+  align-items: flex-start;
+  border: 0px;
+  height: auto;
+  margin-top: 2rem;
+}
+.callout .card {
+  margin: auto;
+  border-radius: .25rem;
+}
+
 .blog-container {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -135,6 +170,9 @@ paginate:
   padding: 1rem;
   border-radius: 0.25rem;
   margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
 }
 
 .category-list {
@@ -143,7 +181,7 @@ paginate:
 }
 
 .category-list li {
-  margin: 0.5rem 0;
+  margin: auto;
 }
 
 .category-list a {
@@ -152,7 +190,7 @@ paginate:
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.25rem;
   border-radius: 4px;
   transition: all 0.2s ease;
 }
@@ -173,7 +211,7 @@ paginate:
 .category-list a .cat-count:hover {
   background: rgba(0, 211, 169, 0.1);
 }
-
+/* 
 .btn {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -190,7 +228,7 @@ paginate:
   > a {
   text-decoration: none;
 }
-}
+} */
 
 .pagination {
   display: flex;
