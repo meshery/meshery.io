@@ -5,7 +5,7 @@ date: 2025-03-27
 author: Meshery Maintainers
 categories:
   - kubecon
-  - event
+  - events
   - security
 redirect_from: /blog/meshery-security-slam-kubecon-eu-2025
 featured-image: /assets/images/posts/2025-03-27-meshery-at-kubecon-eu-2025/kubecon-eu-2025.png
