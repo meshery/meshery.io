@@ -4,8 +4,6 @@ heading: Meshmark Explained
 title: Meshmark Explained
 author: Lee Calcote
 categories:
-  - meshery
-  - open-source
   - performance
 redirect_from: /blog/meshmark-explained
 ---

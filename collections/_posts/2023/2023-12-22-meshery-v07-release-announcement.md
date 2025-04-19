@@ -4,8 +4,9 @@ subheading: Release Announcement
 title: Meshery v0.7
 author: Jeremiah Obikoya, Pranav Singh, Hauwa'u Ismail
 categories:
-  - meshery
-  - open-source
+  - announcements
+  - releases
+  - milestones
 layout: post
 featured-image: /assets/images/posts/2023-12-22-v07-release/meshery-v07-release-announcement.webp
 redirect_from: /blog/meshery-v07-release-announcement

@@ -5,8 +5,8 @@ heading: Validating SMI Conformance with Meshery
 author: Lee Calcote
 categories:
   - service-mesh
-# layout: post
-# redirect_from: /blog/validating-smi-conformance-with-meshery
+  - gitops
+redirect_from: /blog/validating-smi-conformance-with-meshery
 ---
 
 <div class="row" style="width:220px;float:left;padding:20px;text-align:center;">

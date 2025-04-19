@@ -4,8 +4,8 @@ subheading: Celebrating a Major Milestone in Cloud Native Integration
 date: 2024-06-25
 author: Chris Carrier
 categories: 
-  - meshery
-  - open-source
+  - artifact-hub
+  - designs
 redirect_from: /blog/200-meshery-designs-on-artifacthub
 featured-image: /assets/images/posts/2024-06-19-more-designs/designs-on-ah.png
 ---

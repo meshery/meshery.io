@@ -4,10 +4,9 @@ heading: Changing Meshery Release Channels
 title: Changing Meshery Release Channels
 author: Meshery Contributors
 categories: 
-  - meshery
-  - open-source
+  - continuous-integration
+  - releases
   - mesheryctl
-# layout: post
 redirect_from: /blog/changing-meshery-release-channels
 ---
 

@@ -5,7 +5,7 @@ date: 2024-08-13
 author: Vivek Vishal
 categories: 
   - meshery
-  - open-source
+  - designs
 redirect_from: /blog/infrastructure-design-by-meshery
 featured-image: /assets/images/posts/2024-08-14-infrastructure-design-by-meshery/deep-dive.png
 ---

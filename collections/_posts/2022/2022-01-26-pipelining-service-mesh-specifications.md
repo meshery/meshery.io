@@ -4,8 +4,9 @@ heading: Pipelining Service Mesh Specifications
 title: Pipelining Service Mesh Specifications
 author: The Newsroom
 categories:
-  - meshery
-  - service-mesh
+ - continuous-integration
+ - service-mesh
+ - gitops
 redirect_from: /blog/pipelining-service-mesh-specifications
 ---
 <div style="text-align:center;margin-bottom:0.75rem;">

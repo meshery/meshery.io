@@ -4,7 +4,7 @@ heading: Service Mesh Offers Promising Solution for Cloud Native Networking
 title: Service Mesh Offers Promising Solution for Cloud Native Networking
 author: The Newsroom
 categories:
-  - meshery
+  - announcements
   - cloud-native
 redirect_from: /blog/service-mesh-offers-promising-solution-for-cloud-native-networking
 ---
