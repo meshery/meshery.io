@@ -85,10 +85,7 @@ relationships:
 - type: "Binding"
   kind: "Edge"
   description: ""
-- type: "Parent"
-  kind: "Hierarchical"
-  description: ""
-relationshipsCount: 9
+relationshipsCount: 8
 featureList: [
   "Amazon RDS integrates with AWS Config to support compliance and enhance security by recording and auditing changes to the configuration of your DB instance",
   "Amazon Aurora supports quick, efficient cloning operations, where entire multi-terabyte database clusters can be cloned in minutes.",
