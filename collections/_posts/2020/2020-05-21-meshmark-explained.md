@@ -6,7 +6,7 @@ author: Lee Calcote
 categories:
   - meshery
   - open-source
-  - meshmark
+  - performance
 redirect_from: /blog/meshmark-explained
 ---
 <div class="row" style="width:220px;float:right;padding:5px;text-align:center;">

@@ -5,7 +5,7 @@ title: A Standard Interface for Service Meshes
 author: Lee Calcote
 categories:
   - specification
-  - multi-mesh
+  - service-mesh
 # layout: post
 featured-image: /assets/images/posts/2019-05-21-a-standard-interface-for-service-meshes/smi-logo.png
 # redirect_from: /blog/a-standard-interface-for-service-meshes
