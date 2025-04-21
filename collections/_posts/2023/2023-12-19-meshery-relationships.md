@@ -2,13 +2,12 @@
 date: 2023-12-17 13:00:00 +0000
 title: "Meshery Relationships: AWS RDS DBCluster and IAM Roles"
 subheading: Context-aware design with Meshery
-author_contributor: Lee Calcote
+author: Lee Calcote
 categories:
-  - meshery
-  - open-source
-  - API
+  - relationships
+  - extensibility
 featured-image: /assets/images/posts/2023-12-08-graphql-and-rest-apis/meshery-apis.jpeg
-permalink: /blog/unleashing-power-and-flexibility-the-synergy-of-rest-and-graphql-in-meshery
+redirect_from: /blog/unleashing-power-and-flexibility-the-synergy-of-rest-and-graphql-in-meshery
 published: false
 ---
 Question:
