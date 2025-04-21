@@ -2,11 +2,12 @@
 date:   2022-01-26 22:00:00 +0530
 heading: Pipelining Service Mesh Specifications
 title: Pipelining Service Mesh Specifications
-author_contributor: The Newsroom
+author: The Newsroom
 categories:
-  - meshery
-  - service-mesh
-permalink: /blog/pipelining-service-mesh-specifications
+ - continuous-integration
+ - service-mesh
+ - gitops
+redirect_from: /blog/pipelining-service-mesh-specifications
 ---
 <div style="text-align:center;margin-bottom:0.75rem;">
   <img src="{{site.baseurl}}/assets/images/posts/2022-01-26-pipelining-service-mesh-specifications/service-mesh-specifications.png" alt="service-mesh-specifications" width="80%"  />

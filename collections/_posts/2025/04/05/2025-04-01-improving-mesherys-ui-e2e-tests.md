@@ -3,12 +3,11 @@ title: Improving Meshery UI's E2E Tests
 author: Ian Whitney
 date: 2025-04-04
 categories: 
-  - meshery
-  - open-source
   - playwright
   - e2e-testing
   - contributors
-featured-image: /assets/images/logos/meshery-logo-light-text-side.svg
+featured-image: /assets/images/posts/2025-04-01-improving-mesherys-ui-e2e-tests/6-02.png
+redirect_from: /blog/improving-meshery-ui-e2e-tests
 ---
 
 Hey Meshery Contributors 👋

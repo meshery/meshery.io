@@ -2,11 +2,11 @@
 title: 📢 Meshery Designs Now Supported on Artifact Hub!
 subheading: Working with Meshery Designs is easier than ever  
 date: 2024-04-24
-author_contributor: Chris Carrier, Lee Calcote
+author: Chris Carrier, Lee Calcote
 categories: 
-  - meshery
-  - open-source
-permalink: /blog/designs-on-artifact-hub
+  - designs
+  - artifact-hub
+redirect_from: /blog/designs-on-artifact-hub
 featured-image: /assets/images/posts/2024-04-09-designs-on-artifacthub/meshery-designs-on-artifact-hub-featured.png
 ---
 

@@ -2,10 +2,12 @@
 title: Lego Bricks and Lego Instructions
 subheading: Comparing Meshery Models and Meshery Designs
 date: 2024-03-29
-author_contributor: Lee Calcote
+author: Lee Calcote
 categories: 
   - meshery
-permalink: /blog/lego-bricks-and-lego-instructions
+  - models
+  - designs
+redirect_from: /blog/lego-bricks-and-lego-instructions
 featured-image: /assets/images/posts/2024-03-29-models-designs-legos/five-legos.png
 ---
 
