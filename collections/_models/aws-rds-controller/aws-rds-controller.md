@@ -59,7 +59,11 @@ components:
   colorIcon: assets/images/integration/aws-rds-controller/components/db-cluster-snapshot/icons/color/db-cluster-snapshot-color.svg
   whiteIcon: assets/images/integration/aws-rds-controller/components/db-cluster-snapshot/icons/white/db-cluster-snapshot-white.svg
   description: 
-componentsCount: 12
+- name: db-cluster-endpoint
+  colorIcon: assets/images/integration/aws-rds-controller/components/db-cluster-endpoint/icons/color/db-cluster-endpoint-color.svg
+  whiteIcon: assets/images/integration/aws-rds-controller/components/db-cluster-endpoint/icons/white/db-cluster-endpoint-white.svg
+  description: 
+componentsCount: 13
 relationships: 
 - type: "Parent"
   kind: "Hierarchical"
