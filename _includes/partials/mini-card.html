@@ -13,15 +13,18 @@
                  loading="lazy" />
         </div>
         <div>
-            <h6 class="modal-pattern-id">
-                {% assign bigPatId = pttrn.patternId %}
-                {% assign patId = bigPatId | split: "-" %}
-                {% if patId[2] %}
-                    MESHERY{{ patId[2] }}
-                {% else %}
-                    {{ pttrn.patternId }}
-                {% endif %}
-            </h6>
+        <h6 class="modal-pattern-id">
+          <!-- <img class="modal-smp"
+        src="{{site.baseurl}}/assets/images/logos/service-mesh-pattern.svg"
+        loading="lazy" />  -->
+        {% assign bigPatId = pttrn.patternId%}
+        {% assign patId = bigPatId | split: "-" %}
+
+        {% if patId[2] %}
+          MESHERY{{patId[2]}}
+        {%else%}
+          {{pttrn.patternId}}
+        {% endif %}</h6>
         </div>
     </div>
 {% endif %}
