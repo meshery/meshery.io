@@ -13,7 +13,7 @@ window.addEventListener("click", (event)=> {
 
 for(let i=0;i<n;i++){
     btnClose[i].addEventListener('click', ()=> {
-        modal[i].style.visiblity = "hidden";
+        modal[i].style.visibility = "hidden";
         modal[i].style.opacity = "0";
         modal[i].style.pointerEvents= "none";
         let iframeTEST = modal[i].childNodes[1].childNodes[5].childNodes[1];
@@ -33,7 +33,7 @@ for(let i=0;i<n;i++){
 // nth modal (0 indexed) is not traversed in the loop because if we do that we would also have to traverse nth recording link which is not present and an error would appear on console.
 
 btnClose[n].addEventListener('click', ()=> {
-    modal[n].style.visiblity = "hidden";
+    modal[n].style.visibility = "hidden";
     modal[n].style.opacity = "0";
     modal[n].style.pointerEvents= "none";
     let iframeTEST = modal[n].childNodes[1].childNodes[5].childNodes[1];
