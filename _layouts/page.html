@@ -5,7 +5,11 @@ layout: default
 	<section class="page">
 		<div class="container {% if page.full_width %}max-container{% endif %}">
 			{%- if page.featured-image -%}
-				<img src="{{- page.featured-image | relative_url -}}" alt="" class="featured-image">
+				<img 
+				id="logo-dark-light"
+				data-logo-for-dark="{{- post.featured-image | relative_url -}}"
+				data-logo-for-light="{%- if post.featured-image-light -%}{{- post.featured-image-light | relative_url -}}{%-  else -%}{{- post.featured-image | relative_url -}}{% endif %}"
+				src="{{- page.featured-image | relative_url -}}" alt="" class="featured-image">
 			{%- endif -%}
 
 			{% if page.name %}	
