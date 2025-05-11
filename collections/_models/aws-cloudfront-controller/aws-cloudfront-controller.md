@@ -47,7 +47,11 @@ components:
   colorIcon: assets/images/integration/aws-cloudfront-controller/components/origin-access-control/icons/color/origin-access-control-color.svg
   whiteIcon: assets/images/integration/aws-cloudfront-controller/components/origin-access-control/icons/white/origin-access-control-white.svg
   description: 
-componentsCount: 9
+- name: vpc-origin
+  colorIcon: assets/images/integration/aws-cloudfront-controller/components/vpc-origin/icons/color/vpc-origin-color.svg
+  whiteIcon: assets/images/integration/aws-cloudfront-controller/components/vpc-origin/icons/white/vpc-origin-white.svg
+  description: 
+componentsCount: 10
 relationships: 
 - type: "Parent"
   kind: "Hierarchical"
