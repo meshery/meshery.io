@@ -75,7 +75,15 @@ components:
   colorIcon: assets/images/integration/cilium/components/cilium-bgp-peer-config/icons/color/cilium-bgp-peer-config-color.svg
   whiteIcon: assets/images/integration/cilium/components/cilium-bgp-peer-config/icons/white/cilium-bgp-peer-config-white.svg
   description: 
-componentsCount: 16
+- name: cilium-cidr-group
+  colorIcon: assets/images/integration/cilium/components/cilium-cidr-group/icons/color/cilium-cidr-group-color.svg
+  whiteIcon: assets/images/integration/cilium/components/cilium-cidr-group/icons/white/cilium-cidr-group-white.svg
+  description: 
+- name: cilium-load-balancer-ip-pool
+  colorIcon: assets/images/integration/cilium/components/cilium-load-balancer-ip-pool/icons/color/cilium-load-balancer-ip-pool-color.svg
+  whiteIcon: assets/images/integration/cilium/components/cilium-load-balancer-ip-pool/icons/white/cilium-load-balancer-ip-pool-white.svg
+  description: 
+componentsCount: 18
 relationships: 
 relationshipsCount: 0
 featureList: [
