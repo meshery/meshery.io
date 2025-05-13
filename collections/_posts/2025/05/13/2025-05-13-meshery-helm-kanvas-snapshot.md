@@ -15,9 +15,9 @@ date: 2025-05-13
 
 Helm Kanvas Snapshot is one of Meshery's extension that generates a snapshot of the visual representation a Helm chart. It makes it easier to understand, review and share your kubernetes deployments with peers without needing them to go through YAML files or set up a cluster. Showing a clear picture of every Kubernetes object in your chart, their component, and how they relate to each other all in a single, shareable view.
 
-At the core of this process is the Meshery Design. A Meshery Design is a declarative representation of your infrastructure. It captures each component of your deployment, its properties, how the they are connected and interact with each other.
+At the core of this process is the [Meshery Designs](https://docs.meshery.io/concepts/logical/designs). A Meshery Design is a declarative representation of your infrastructure. It captures each component of your deployment, its properties, how the they are connected and interact with each other.
 
-As the name implies, Helm kanvas snapshot plugin can only use "Helm" as the deployment source. When you use the plugin, it uses Kanvas Snapshot which takes your chart, renders the manifests, and generates a Design from it based on Meshery’s declarative syntax. That Design is then stored and rendered as an immutable snapshot you can view through a public link.
+As the name implies, Helm kanvas snapshot plugin can only use **Helm** as the deployment source. When you use the plugin, [Kanvas Snapshot](https://docs.meshery.io/extensions/kanvas-snapshot) takes your chart, renders the manifests, and generates a Design from it based on Meshery’s declarative syntax. That Design is then stored and rendered as an immutable snapshot you can view through a public link.
 
 The Helm kanvas snapshot is useful in many ways. It doesn't require you to be authenticated to use the plugin, so it's very quick to get started. Also, if you provide a valid email address, the snapshot is sent directly to your inbox after it is generated, this is most helpful as it can take a few moment to render. One thing to note is that, Once created, the snapshot is immutable. This makes it a stable reference that you can share in Slack, attach to pull requests, or store alongside your deployment documentation.
 
