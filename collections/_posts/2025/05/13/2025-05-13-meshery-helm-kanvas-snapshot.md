@@ -25,7 +25,7 @@ To get started, you’ll need to ensure Helm is installed on your machine, You c
 
 ```bash
 helm version
-````
+```
 
 The plugin supports Linux, macOS, and Windows. So, Once Helm is installed, you can install the plugin using:
 
