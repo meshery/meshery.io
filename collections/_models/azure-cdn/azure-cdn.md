@@ -1,14 +1,14 @@
 ---
 layout: single-page-model
 item-type: model
-name: Azure Cdn
-subtitle: Collaborative and visual infrastructure as design for Azure Cdn
+name: Azure CDN
+subtitle: Collaborative and visual infrastructure as design for Azure CDN
 colorIcon: /assets/images/integration/azure-cdn/icons/color/azure-cdn-color.svg
 whiteIcon: /assets/images/integration/azure-cdn/icons/white/azure-cdn-white.svg
 docURL: https://docs.meshery.io/extensibility/integrations/azure-cdn
 description: 
-category: Runtime
-subcategory: Cloud Native Storage
+category: Cloud Native Storage
+subcategory: Content Delivery Network
 registrant: GitHub
 components: 
 - name: application-gateway
@@ -211,7 +211,51 @@ components:
   colorIcon: assets/images/integration/azure-cdn/components/web-application-firewall-policy/icons/color/web-application-firewall-policy-color.svg
   whiteIcon: assets/images/integration/azure-cdn/components/web-application-firewall-policy/icons/white/web-application-firewall-policy-white.svg
   description: 
-componentsCount: 50
+- name: afd-custom-domain
+  colorIcon: assets/images/integration/azure-cdn/components/afd-custom-domain/icons/color/afd-custom-domain-color.svg
+  whiteIcon: assets/images/integration/azure-cdn/components/afd-custom-domain/icons/white/afd-custom-domain-white.svg
+  description: 
+- name: afd-endpoint
+  colorIcon: assets/images/integration/azure-cdn/components/afd-endpoint/icons/color/afd-endpoint-color.svg
+  whiteIcon: assets/images/integration/azure-cdn/components/afd-endpoint/icons/white/afd-endpoint-white.svg
+  description: 
+- name: afd-origin-group
+  colorIcon: assets/images/integration/azure-cdn/components/afd-origin-group/icons/color/afd-origin-group-color.svg
+  whiteIcon: assets/images/integration/azure-cdn/components/afd-origin-group/icons/white/afd-origin-group-white.svg
+  description: 
+- name: afd-origin
+  colorIcon: assets/images/integration/azure-cdn/components/afd-origin/icons/color/afd-origin-color.svg
+  whiteIcon: assets/images/integration/azure-cdn/components/afd-origin/icons/white/afd-origin-white.svg
+  description: 
+- name: profile
+  colorIcon: assets/images/integration/azure-cdn/components/profile/icons/color/profile-color.svg
+  whiteIcon: assets/images/integration/azure-cdn/components/profile/icons/white/profile-white.svg
+  description: 
+- name: profiles-endpoint
+  colorIcon: assets/images/integration/azure-cdn/components/profiles-endpoint/icons/color/profiles-endpoint-color.svg
+  whiteIcon: assets/images/integration/azure-cdn/components/profiles-endpoint/icons/white/profiles-endpoint-white.svg
+  description: 
+- name: route
+  colorIcon: assets/images/integration/azure-cdn/components/route/icons/color/route-color.svg
+  whiteIcon: assets/images/integration/azure-cdn/components/route/icons/white/route-white.svg
+  description: 
+- name: rule
+  colorIcon: assets/images/integration/azure-cdn/components/rule/icons/color/rule-color.svg
+  whiteIcon: assets/images/integration/azure-cdn/components/rule/icons/white/rule-white.svg
+  description: 
+- name: rule-set
+  colorIcon: assets/images/integration/azure-cdn/components/rule-set/icons/color/rule-set-color.svg
+  whiteIcon: assets/images/integration/azure-cdn/components/rule-set/icons/white/rule-set-white.svg
+  description: 
+- name: secret
+  colorIcon: assets/images/integration/azure-cdn/components/secret/icons/color/secret-color.svg
+  whiteIcon: assets/images/integration/azure-cdn/components/secret/icons/white/secret-white.svg
+  description: 
+- name: security-policy
+  colorIcon: assets/images/integration/azure-cdn/components/security-policy/icons/color/security-policy-color.svg
+  whiteIcon: assets/images/integration/azure-cdn/components/security-policy/icons/white/security-policy-white.svg
+  description: 
+componentsCount: 61
 relationships: 
 relationshipsCount: 0
 featureList: [
