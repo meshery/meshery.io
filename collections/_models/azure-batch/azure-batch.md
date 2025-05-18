@@ -5,10 +5,10 @@ name: Azure Batch
 subtitle: Collaborative and visual infrastructure as design for Azure Batch
 colorIcon: /assets/images/integration/azure-batch/icons/color/azure-batch-color.svg
 whiteIcon: /assets/images/integration/azure-batch/icons/white/azure-batch-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/azure-Batch
+docURL: https://docs.meshery.io/extensibility/integrations/azure-batch
 description: 
-category: Runtime
-subcategory: Cloud Native Storage
+category: Orchestration & Management
+subcategory: Uncategorized
 registrant: GitHub
 components: 
 - name: batch-account

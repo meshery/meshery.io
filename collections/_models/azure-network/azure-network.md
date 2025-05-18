@@ -7,8 +7,8 @@ colorIcon: /assets/images/integration/azure-network/icons/color/azure-network-co
 whiteIcon: /assets/images/integration/azure-network/icons/white/azure-network-white.svg
 docURL: https://docs.meshery.io/extensibility/integrations/azure-network
 description: 
-category: Runtime
-subcategory: Cloud Native Storage
+category: Cloud Native Network
+subcategory: Networking Content Delivery
 registrant: GitHub
 components: 
 - name: application-gateway

@@ -5,10 +5,10 @@ name: Azure Cache
 subtitle: Collaborative and visual infrastructure as design for Azure Cache
 colorIcon: /assets/images/integration/azure-cache/icons/color/azure-cache-color.svg
 whiteIcon: /assets/images/integration/azure-cache/icons/white/azure-cache-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/azure-Cache
+docURL: https://docs.meshery.io/extensibility/integrations/azure-cache
 description: 
-category: Runtime
-subcategory: Cloud Native Storage
+category: Cloud Native Storage
+subcategory: Content Delivery Network
 registrant: GitHub
 components: 
 - name: redis

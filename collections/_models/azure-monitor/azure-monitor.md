@@ -7,8 +7,8 @@ colorIcon: /assets/images/integration/azure-monitor/icons/color/azure-monitor-co
 whiteIcon: /assets/images/integration/azure-monitor/icons/white/azure-monitor-white.svg
 docURL: https://docs.meshery.io/extensibility/integrations/azure-monitor
 description: 
-category: Runtime
-subcategory: Cloud Native Storage
+category: Observability and Analysis
+subcategory: Monitoring
 registrant: GitHub
 components: 
 - name: account

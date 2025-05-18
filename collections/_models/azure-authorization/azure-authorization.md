@@ -5,10 +5,10 @@ name: Azure Authorization
 subtitle: Collaborative and visual infrastructure as design for Azure Authorization
 colorIcon: /assets/images/integration/azure-authorization/icons/color/azure-authorization-color.svg
 whiteIcon: /assets/images/integration/azure-authorization/icons/white/azure-authorization-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/azure-Authorization
+docURL: https://docs.meshery.io/extensibility/integrations/azure-authorization
 description: 
-category: Runtime
-subcategory: Cloud Native Storage
+category: Security & Compliance
+subcategory: Security Identity Compliance
 registrant: GitHub
 components: 
 - name: role-assignment
