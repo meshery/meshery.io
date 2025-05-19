@@ -14,7 +14,7 @@ date: 2025-05-13
 
 ### Introduction
 
-Helm Kanvas Snapshot is one of Meshery's extension that generates a snapshot of the visual representation a Helm chart. It makes it easier to understand, review and share your kubernetes deployments with peers without needing them to go through YAML files or set up a cluster. Showing a clear picture of every Kubernetes object in your chart, their component, and how they relate to each other all in a single, shareable view.
+Helm Kanvas Snapshot is one of Meshery's extension that generates a snapshot of the visual representation a Helm chart. It makes it easier to understand, review and share your kubernetes deployments with peers without needing them to go through YAML files or set up a cluster. It provides a clear picture of every Kubernetes object in your chart, their component, and how they relate to each other all in a single, shareable view.
 
 ### Meshery Designs
 
@@ -22,9 +22,9 @@ At the core of this process is the <a href="https://docs.meshery.io/concepts/log
 
 ### How Helm Kanvas Snapshot Works
 
-As the name implies, Helm kanvas snapshot plugin can only use **Helm Charts** as the deployment source. When you use the plugin, <a href="https://docs.meshery.io/extensions/kanvas-snapshot" target="_blank" rel="noopener noreferrer">Kanvas Snapshot</a> takes your chart, renders the manifests, and generates a Design from it based on Meshery’s declarative syntax. That Design is then stored and rendered as an immutable snapshot you can view through a public link.
+Helm kanvas snapshot plugin can only use **Helm Charts** as the deployment source. When you use the plugin, <a href="https://docs.meshery.io/extensions/kanvas-snapshot" target="_blank" rel="noopener noreferrer">Kanvas Snapshot</a> takes your chart, renders the manifests, and generates a Design from it based on Meshery’s declarative syntax. That Design is then stored and rendered as an immutable snapshot you can view through a public link.
 
-The Helm kanvas snapshot is useful in many ways. It doesn't require you to be authenticated to use the plugin, so it's very quick to get started. Also, if you provide a valid email address, the snapshot is sent directly to your inbox after it is generated, this is most helpful as it can take a few moment to render. One thing to note is that, Once created, the snapshot is immutable. This makes it a stable reference that you can share in Slack, attach to pull requests, or store alongside your deployment documentation.
+The Helm kanvas snapshot is useful in many ways. You can start using this plugin without authentication, making it easy to get started. If you provide an email address, the snapshot is delivered directly to your inbox after generation, which is particularly helpful since rendering can take a few moments. Once created, the snapshot is immutable. This makes it a stable reference that you can share in Slack, attach to pull requests, or store alongside your deployment documentation.
 
 ### Getting Started
 
