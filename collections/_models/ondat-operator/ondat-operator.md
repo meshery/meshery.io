@@ -11,7 +11,15 @@ category: Provisioning
 subcategory: Security & Compliance
 registrant: Github
 components: 
-componentsCount: 0
+- name: storage-os-cluster
+  colorIcon: assets/images/integration/ondat-operator/components/storage-os-cluster/icons/color/storage-os-cluster-color.svg
+  whiteIcon: assets/images/integration/ondat-operator/components/storage-os-cluster/icons/white/storage-os-cluster-white.svg
+  description: 
+- name: storage-os-cluster
+  colorIcon: assets/images/integration/ondat-operator/components/storage-os-cluster/icons/color/storage-os-cluster-color.svg
+  whiteIcon: assets/images/integration/ondat-operator/components/storage-os-cluster/icons/white/storage-os-cluster-white.svg
+  description: 
+componentsCount: 2
 relationships: 
 relationshipsCount: 0
 featureList: [
