@@ -8,7 +8,7 @@ whiteIcon: /assets/images/integration/azure-batch/icons/white/azure-batch-white.
 docURL: https://docs.meshery.io/extensibility/integrations/azure-batch
 description: 
 category: Orchestration & Management
-subcategory: Uncategorized
+subcategory: Compute
 registrant: GitHub
 components: 
 - name: batch-account
