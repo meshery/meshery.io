@@ -11,6 +11,18 @@ category: App Definition and Development
 subcategory: Streaming & Messaging
 registrant: Artifact Hub
 components: 
+- name: api-key
+  colorIcon: assets/images/integration/pulsar-resources-operator/components/api-key/icons/color/api-key-color.svg
+  whiteIcon: assets/images/integration/pulsar-resources-operator/components/api-key/icons/white/api-key-white.svg
+  description: App Definition and Development
+- name: service-account-binding
+  colorIcon: assets/images/integration/pulsar-resources-operator/components/service-account-binding/icons/color/service-account-binding-color.svg
+  whiteIcon: assets/images/integration/pulsar-resources-operator/components/service-account-binding/icons/white/service-account-binding-white.svg
+  description: App Definition and Development
+- name: service-account
+  colorIcon: assets/images/integration/pulsar-resources-operator/components/service-account/icons/color/service-account-color.svg
+  whiteIcon: assets/images/integration/pulsar-resources-operator/components/service-account/icons/white/service-account-white.svg
+  description: App Definition and Development
 - name: pulsar-connection
   colorIcon: assets/images/integration/pulsar-resources-operator/components/pulsar-connection/icons/color/pulsar-connection-color.svg
   whiteIcon: assets/images/integration/pulsar-resources-operator/components/pulsar-connection/icons/white/pulsar-connection-white.svg
@@ -87,7 +99,7 @@ components:
   colorIcon: assets/images/integration/pulsar-resources-operator/components/secret/icons/color/secret-color.svg
   whiteIcon: assets/images/integration/pulsar-resources-operator/components/secret/icons/white/secret-white.svg
   description: 
-componentsCount: 19
+componentsCount: 22
 relationships: 
 relationshipsCount: 0
 featureList: [
