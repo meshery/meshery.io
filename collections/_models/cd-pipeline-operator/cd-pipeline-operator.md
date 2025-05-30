@@ -1,8 +1,8 @@
 ---
 layout: single-page-model
 item-type: model
-name: CD Pipeline Operator
-subtitle: Collaborative and visual infrastructure as design for CD Pipeline Operator
+name: KubeRocketCI Pipeline Operator
+subtitle: Collaborative and visual infrastructure as design for KubeRocketCI Pipeline Operator
 colorIcon: /assets/images/integration/cd-pipeline-operator/icons/color/cd-pipeline-operator-color.svg
 whiteIcon: /assets/images/integration/cd-pipeline-operator/icons/white/cd-pipeline-operator-white.svg
 docURL: https://docs.meshery.io/extensibility/integrations/cd-pipeline-operator
