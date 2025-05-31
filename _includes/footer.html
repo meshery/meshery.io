@@ -160,19 +160,43 @@
 
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
+  // Function to equalize heights of testimonial cards
+  function equalizeTestimonialHeights() {
+    // Target all visible slides (including clones) that are currently displayed
+    var $allCards = $('.slider .slick-slide .bq-quote');
+    if ($allCards.length === 0) return;
+    
+    // Reset heights first
+    $allCards.css('height', 'auto');
+    
+    // Wait a bit for DOM to update after reset
+    setTimeout(function() {
+      // Find the tallest card among ALL cards (including clones)
+      var maxHeight = 0;
+      $allCards.each(function() {
+        var cardHeight = $(this).outerHeight();
+        if (cardHeight > maxHeight) {
+          maxHeight = cardHeight;
+        }
+      });
+      
+      // Set all cards to the same height
+      $allCards.css('height', maxHeight + 'px');
+    }, 10);
+  }
+
   $(document).ready(function () {
     $('.slider').slick({
-
       dots: false,
       arrows: false,
       infinite: true,
       speed: 400,
       slidesToShow: 3,
       slidesToScroll: 1,
-      autoplay: true, // true
+      autoplay: true,
       autoplaySpeed: 1500,
+      adaptiveHeight: false,
       
-
       responsive: [
         {
           breakpoint: 1300,
@@ -239,7 +263,21 @@
           }
         }
       ]
+    }).on('init reInit afterChange beforeChange breakpoint', function() {
+      // Equalize heights after slider events
+      setTimeout(equalizeTestimonialHeights, 150);
     });
+
+    // Initial height equalization
+    setTimeout(equalizeTestimonialHeights, 700);
+    
+    // Re-equalize on window resize
+    $(window).on('resize', function() {
+      setTimeout(equalizeTestimonialHeights, 200);
+    });
+    
+    // Additional equalization on intervals to catch any missed updates
+    setInterval(equalizeTestimonialHeights, 3000);
   });
 </script>
 </body>
