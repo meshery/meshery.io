@@ -61,10 +61,7 @@ components:
   description: 
 componentsCount: 12
 relationships: 
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent) component is patched with the configuration of other (child) component. E.g Secret->Pod, ConfigMaps->Deployment, etc..."
-relationshipsCount: 1
+relationshipsCount: 0
 featureList: [
   "Exposes Kubernetes services to the internet",
   "Routes traffic based on rules and policies",
