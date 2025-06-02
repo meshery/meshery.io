@@ -53,10 +53,7 @@ components:
   description: 
 componentsCount: 10
 relationships: 
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent) component is patched with the configuration of other (child) component. Eg: The configuration of the FieldExport (parent) component is patched with the configuration as received from Pod (child) component."
-relationshipsCount: 1
+relationshipsCount: 0
 featureList: [
   "Global content delivery",
   "Improves website and application performance",
