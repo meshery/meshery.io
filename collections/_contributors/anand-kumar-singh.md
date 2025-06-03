@@ -7,5 +7,5 @@ github: anandrkskd
 twitter: anandrkskd
 blurb: engineer, enthusiastic with technology
 status: Inactive
-redirect_to: https://layer5.io/community/members
+
 ---

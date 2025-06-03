@@ -7,5 +7,5 @@ twitter: KarenHippitaku
 github: KarenHippitaku
 blurb: Mesh Head
 status: Inactive
-redirect_to: https://layer5.io/community/members
+
 ---

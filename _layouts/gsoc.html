@@ -1,0 +1,88 @@
+---
+layout: default
+---
+
+<script src="/assets/js/toc.js" defer></script>
+
+<div class="page text-container">
+    <div class="program-heading">
+        <h1>{{ page.title }}</h1>
+        <h2 class="sub_headings">{{ page.subtitle }}</h2>
+    </div>
+
+    <div class="program">
+        <div class="community-details">
+            {{ page.description | markdownify }}
+
+            {% if page.video_embed %}
+            <div class="video-embed">
+                {{ page.video_embed | markdownify }}
+            </div>
+            {% endif %}
+
+            {% if page.statistics %}
+            <h3>GSoC Statistics:</h3>
+            <ul>
+                {% for stat in page.statistics %}
+                <li>{{ stat }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if page.timeline %}
+            <h3>Program Timeline</h3>
+            <ul>
+                {% for item in page.timeline %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+            {% if page.timeline_link %}
+            <a href="{{ page.timeline_link }}" class="issue">See complete timeline</a>
+            {% endif %}
+            {% endif %}
+
+        </div>
+
+        <div class="project-details">
+            <h2 class="sub_headings">{{ page.projects_title }}</h2>
+
+            <div id="toc" class="auto-toc"></div>
+
+            <div id="content">
+                {% for project in page.projects %}
+                <div class="project-item">
+                    <h3 class="project-title">{{ project.title }}</h3>
+
+                    <h4>Description:</h4>
+                    <p class="program-p">{{ project.description | markdownify }}</p>
+
+                    <h4>Expected outcomes:</h4>
+                    <ol>
+                        {% for outcome in project.outcomes %}
+                        <li>{{ outcome }}</li>
+                        {% endfor %}
+                    </ol>
+
+                    <ul class="project-list">
+                        <li><b>Recommended Skills:</b> {{ project.skills }}</li>
+                        <li><b>Expected project size:</b> {{ project.size }}</li>
+                        <li><b>Mentors:</b>
+                            {% for mentor in project.mentors %}
+                            <a href="{{ mentor.link }}">{{ mentor.name }}</a>{% unless forloop.last %}, {% endunless %}
+                            {% endfor %}
+                        </li>
+                        <li><b>Issue:</b> <a href="{{ project.issue }}">{{ project.issue }}</a></li>
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <a href="https://slack.meshery.io">
+        <input type="button" value="Participate" class="participate-btn disappear" />
+    </a>
+</div>
+
+<div class="subscribe program__subscribe">
+    {% include subscribe.html formstyle="padding:2.5rem;" %}
+</div>
