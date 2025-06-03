@@ -8,5 +8,5 @@ github: kushthedude
 blurb: Mesh Head
 status: Inactive
 MeshMate: false
-redirect_to: https://layer5.io/community/members
+
 ---

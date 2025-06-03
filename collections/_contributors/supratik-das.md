@@ -7,5 +7,5 @@ github: supra08
 twitter: supratik_08
 blurb: Mesh Head
 status: Inactive
-redirect_to: https://layer5.io/community/members
+
 ---

@@ -7,5 +7,5 @@ image_path: /assets/images/photos/jesus-lerma.jpeg
 github: jesuslerma
 blurb: Mesh Head
 status: Active
-redirect_to: https://layer5.io/community/members
+
 ---

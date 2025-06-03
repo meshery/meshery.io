@@ -7,5 +7,5 @@ twitter: Reddy18Vineeth
 github: vineethvanga18
 blurb: Mesh Head
 status: Active
-redirect_to: https://layer5.io/community/members
+
 ---
