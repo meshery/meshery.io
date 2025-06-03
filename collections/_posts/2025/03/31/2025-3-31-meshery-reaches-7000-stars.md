@@ -17,13 +17,13 @@ featured-image: /assets/images/posts/2025-3-25-meshery-reaches-7000-stars/mesher
 
 In 2019, Meshery started as a bold idea: make cloud native infrastructure easier to adopt, operate, and understand. What began as a single tool for managing cloud native infrastructure has grown into a sprawling ecosystem, shaped by thousands of contributions, countless community conversations, and a relentless pursuit of better developer experiences.
 
-We just hit 7,000 stars on GitHub, and Meshery's community is growing faster than ever. With new features and improvements launching, our mascot, [Five](https://layer5.io/five/vol1/mascot-five-adventure-github-stars.pdf), can barely hold onto his rocketship as he blasts off towards new frontiers.
+We just hit 7,000 stars on GitHub, and Meshery's community is growing faster than ever. With new features and improvements launching, our mascot, [Five](https://meshery.io/five/vol1/mascot-five-adventure-github-stars.pdf), can barely hold onto his rocketship as he blasts off towards new frontiers.
 
 With each star, we've celebrated not just a number but the steady, collective heartbeat of developers, contributors, and adopters around the world. Over time, we've grown not only in code but also in community, purpose, and impact. We’re not just building open source, we’re reimagining what’s possible in the cloud native world.
 
 ### Meet Five, Our Intergalactic Cloud Native Hero
 
-If you haven't met Five yet, he's our adventurous mascot, representing the Meshery community as he traverses through the cloud native universe. [Check out Five's interstellar adventures](https://layer5.io/community/adventures-of-five-and-friends) while he hangs onto his rocket for dear life as Meshery speeds towards new heights.
+If you haven't met Five yet, he's our adventurous mascot, representing the Meshery community as he traverses through the cloud native universe. [Check out Five's interstellar adventures](https://meshery.io/community/adventures-of-five-and-friends) while he hangs onto his rocket for dear life as Meshery speeds towards new heights.
 
 <img src="/assets/images/posts/2025-3-25-meshery-reaches-7000-stars/five-holding-onto-rocket.png" style="padding:.5rem;" width="100%" />
 
@@ -73,7 +73,7 @@ This year, at KubeCon EU, we're one of the four CNCF projects participating in t
 
 And the best part? Anyone can get involved! Whether you're attending KubeCon or contributing from afar, your contributions will help us improve the security landscape in the cloud native ecosystem.
 
-Come [say hello](https://layer5.io/community/events/kubecon-cloudnativecon-europe-2025)! to our maintainers, contributors, and community friends at the event. We’d love to meet you.
+Come [say hello](https://meshery.io/community/events/kubecon-cloudnativecon-europe-2025)! to our maintainers, contributors, and community friends at the event. We’d love to meet you.
 
 ### Ready for a Challenge? Try a Tutorial
 
