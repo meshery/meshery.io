@@ -8,7 +8,7 @@ whiteIcon: /assets/images/integration/azure-synapse/icons/white/azure-synapse-wh
 docURL: https://docs.meshery.io/extensibility/integrations/azure-synapse
 description: 
 category: Observability and Analysis
-subcategory: Uncategorized
+subcategory: Metrics
 registrant: GitHub
 components: 
 - name: workspace
