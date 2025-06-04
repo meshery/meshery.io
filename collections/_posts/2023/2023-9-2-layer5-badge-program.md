@@ -14,7 +14,7 @@ Ready to take your open source journey to the next level? We're thrilled to anno
 
 Our users and contributors have always been celebrated at Meshery. Each participation milestone you achieve and every uplifting community interaction contributes to our shared mission of empowering engineers.
 
-Every aspect of what we do revolves around our users and contributors. We are thrilled to unveil our latest initiative that celebrates and rewards our invaluable users and contributors – [Meshery Badges](https://badges.meshery.io)!
+Every aspect of what we do revolves around our users and contributors. We are thrilled to unveil our latest initiative that celebrates and rewards our invaluable users and contributors – [Meshery Badges](https://meshery.io/community/badges)!
 
 ### What Are Meshery Badges?
 

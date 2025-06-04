@@ -5,7 +5,7 @@ name: Github
 subtitle: Integrate GitOps into your cloud native management process
 colorIcon: /assets/images/integration/github/icons/color/github-color.svg
 whiteIcon: /assets/images/integration/github/icons/white/github-white.svg
-docURL: https://meshery.io/resources/cloud-native/what-is-gitops
+docURL: https://layer5.io/resources/cloud-native/what-is-gitops
 description: 
 category: App Definition and Development
 subcategory: Source Version Control
