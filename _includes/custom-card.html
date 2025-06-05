@@ -1,0 +1,249 @@
+<div class="card link" onclick="openCustomModal('{{ include.type }}')">
+  <div class="card-inner">
+    <div class="front">
+      <h4 class="pattern-name">Create Your Own {{ include.type }}</h4>
+      <div class="pattern-image-container">
+        <img
+          class="pattern-image"
+          style="width: 40%;"
+          src="{{site.baseurl}}/assets/images/plus.svg"
+          alt=""
+          onerror="this.src='{{site.baseurl}}/assets/images/logos/service-mesh-pattern.svg'; this.style.width = '40%'"
+          loading="lazy"
+        />
+      </div>
+    </div>
+    <div class="back"></div>
+  </div>
+</div>
+
+
+
+<div id="customModal-{{ include.type }}" class="modal custom-modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeCustomModal('{{ include.type }}')">&times;</span>
+    <div>
+      <h2>Create Your Own {{ include.type }}</h2>
+      {% if include.type == "Design" %}
+      <div class="modal-body">
+        <p>
+          Using
+          <a href="https://kanvas.new/extension/meshmap" target="_blank"
+            >Meshery's extension Kanvas</a
+          >, You can participate in creating high-quality starter templates,
+          publishing designs and models for the community to use in various
+          ways.
+        </p>
+        <h4 style="font-size: 1.2rem; margin: 1rem 0">Create a design</h4>
+        <p>
+          Begin by creating a new design from scratch, using existing design
+          patterns and templates from catalog:
+        </p>
+        <dl>
+              <dt>From Scratch:</dt>
+              <dd style="
+                margin-left: 0;
+            "><ul><li>Open the Designs panel, Select and arrange components from the Designer Dock on the Kanvas, and customize with connections, labels, and properties.<img src="https://layer5.io/static/start-from-scratch-21b5915673335277d79cd425627e8fe5.gif" style="max-width: 100%;object-fit:contain;margin-top: 1rem;" srl_elementid="0"></li></ul></dd>
+
+              <dt>From a Template:</dt>
+              <dd style="
+                margin-left: 0;
+            "><ul><li>Start from a pre-built template or clone an existing design from the Catalog. This allows you to build on established designs for a quicker start.<img src="https://layer5.io/static/catalog-d6740356d3f91ec18d50c83e0d7af6d0.gif" style="max-width: 100%;object-fit:contain;margin-top: 1rem;" srl_elementid="0"></li></ul></dd>
+            </dl>
+     
+      </div>
+      {% elsif include.type == "Model" %}
+      <div class="modal-body">
+        <p>
+          Using
+          <a href="https://playground.meshery.io/settings?settingsCategory=Registry&tab=Models" target="_blank">Meshery's Registry</a>, 
+          you can create and import models to define the infrastructure components 
+          and their relationships in your cloud-native environments.
+        </p>
+        
+        <p>
+          Meshery offers two primary ways to bring models into your system: Create and Import.
+        </p>
+        
+        <dl>
+          <dt>Create:</dt>
+          <dd style="margin-left: 0">
+            <ul>
+              <li>
+                The recommended approach if you're starting fresh — it guides you through building a model 
+                step by step using an intuitive UI wizard.
+                <a href="https://docs.meshery.io/guides/configuration-management/creating-models#create-models">Learn more about creating models</a>
+              </li>
+            </ul>
+          </dd>
+
+          <dt>Import:</dt>
+          <dd style="margin-left: 0">
+            <ul>
+              <li>
+                Ideal when you already have a model definition file (e.g., JSON, CSV) and 
+                simply want to bring it into Meshery.
+              </li>
+            </ul>
+          </dd>
+        </dl>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="https://docs.meshery.io/guides/configuration-management/creating-models#create-models" class="create-button" style="text-decoration: none; display: inline-block;">
+            View Complete Tutorial
+          </a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function openCustomModal(type) {
+    document.getElementById(`customModal-${type}`).style.display = "block";
+    document.body.classList.add("modal-open");
+  }
+  
+  function closeCustomModal(type) {
+    document.getElementById(`customModal-${type}`).style.display = "none";
+    document.body.classList.remove("modal-open");
+  }
+  
+  function createNew(type) {
+
+    window.location.href = `/catalog/create-${type.toLowerCase()}`;
+  }
+  
+  function createFromTemplate(type) {
+
+    window.location.href = `/catalog/${type.toLowerCase()}-templates`;
+  }
+  
+
+  window.onclick = function(event) {
+    const modals = document.getElementsByClassName('modal');
+    for (let i = 0; i < modals.length; i++) {
+      if (event.target === modals[i]) {
+        modals[i].style.display = "none";
+        document.body.classList.remove("modal-open");
+      }
+    }
+  }
+</script>
+
+
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+    animation: fadeIn 0.3s;
+  }
+  
+  .modal-content {
+    background-color: #1e1e1e;
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 700px;
+    box-shadow: 0 0 25px rgba(0,211,169,0.3);
+    border: 1px solid rgba(0,211,169,0.2);
+    position: relative;
+    animation: slideIn 0.4s;
+  }
+  
+  .close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .close-modal:hover {
+    color: #00d3a9;
+  }
+  
+  .modal-body {
+    margin-top: 1.5rem;
+    color: #f0f0f0;
+  }
+  
+  .modal-options {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .option-card {
+    flex: 1;
+    background-color: #2a2a2a;
+    border-radius: 6px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,211,169,0.2);
+  }
+  
+  .option-card h3 {
+    color: #00d3a9;
+    margin-bottom: 1rem;
+  }
+  
+  .create-button {
+    background-color: #00d3a9;
+    color: #1a1a1a;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .create-button:hover {
+    background-color: #00b890;
+  }
+  
+  body.modal-open {
+    overflow: hidden;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+
+  @media (max-width: 768px) {
+    .modal-options {
+      flex-direction: column;
+    }
+    
+    .modal-content {
+      width: 90%;
+      padding: 1rem;
+      margin: 20% auto;
+    }
+  }
+</style>
