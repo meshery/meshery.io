@@ -1,0 +1,270 @@
+<!-- tutorials-table.html -->
+<style>
+.tutorials-table-wrapper {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  margin: 3rem auto;
+  max-width: 1200px;
+  width: 95%;
+}
+
+.tutorials-table {
+  display: table;
+  width: 100%;
+  height: auto;
+  border-collapse: collapse;
+  margin: 0;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.tutorials-table th {
+  color: #ffffff;
+  background-color: #00b39f;
+  height: 3.75rem;
+  vertical-align: middle;
+  transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  border: none;
+  padding: 1rem;
+  font-weight: 600;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.tutorials-table tr {
+  height: 3.75rem;
+  vertical-align: middle;
+  transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.tutorials-table tbody tr {
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #333333;
+}
+
+.tutorials-table tbody tr:nth-child(odd) {
+  background-color: #1a1a1a;
+}
+
+.tutorials-table tbody tr:nth-child(even) {
+  background-color: #222222;
+}
+
+.tutorials-table tbody tr:hover {
+  background-color: #2a2a2a;
+}
+
+.tutorials-table td {
+  border-bottom: 1px solid #333333;
+  padding: 1rem;
+  vertical-align: middle;
+  color: #ffffff;
+  border-left: none;
+  border-right: none;
+}
+
+.tutorials-table td p {
+  margin: 0.5rem 0;
+}
+
+.tutorials-table td span {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.tutorials-table td span:last-child {
+  margin-bottom: 0;
+}
+
+.tutorials-table a {
+  color: #00d3a9;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 0.95rem;
+}
+
+.tutorials-table a:hover {
+  color: #00b39f;
+  text-decoration: underline;
+}
+
+.new-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.new-badge img {
+  height: 20px;
+  width: 20px;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.date-cell {
+  min-width: 120px;
+  white-space: nowrap;
+  color: #cccccc;
+  font-weight: 400;
+}
+
+.topic-cell {
+  min-width: 300px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.resources-cell {
+  min-width: 150px;
+}
+
+.presenters-cell {
+  min-width: 180px;
+}
+
+.resource-link {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.resource-link:last-child {
+  margin-bottom: 0;
+}
+
+.presenter-name {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.presenter-name:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 1200px) {
+  .tutorials-table-wrapper {
+    width: 98%;
+    margin: 2rem auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .tutorials-table-wrapper {
+    overflow-x: auto;
+    margin: 2rem auto;
+    width: 95%;
+    border-radius: 8px;
+  }
+  
+  .tutorials-table {
+    min-width: 700px;
+  }
+  
+  .tutorials-table th,
+  .tutorials-table td {
+    padding: 0.75rem 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .tutorials-table tr {
+    height: auto;
+    min-height: 3rem;
+  }
+  
+  .new-badge {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tutorials-table-wrapper {
+    width: 100%;
+    margin: 1rem auto;
+    border-radius: 0;
+  }
+  
+  .tutorials-table th,
+  .tutorials-table td {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.85rem;
+  }
+}
+</style>
+
+{% assign sorted_tutorials = site.data.tutorials | sort: 'date' | reverse %}
+{% assign current_year = 'now' | date: '%Y' | plus: 0 %}
+
+<div class="tutorials-table-wrapper">
+  <table class="tutorials-table">
+    <thead>
+      <tr>
+        <th class="date-cell">Date</th>
+        <th class="topic-cell">Topic</th>
+        <th class="resources-cell">Resources</th>
+        <th class="presenters-cell">Presenters</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tutorial in sorted_tutorials %}
+        {% assign tutorial_date = tutorial.date | date: '%Y' | plus: 0 %}
+        {% assign is_new = false %}
+        {% if tutorial_date == current_year %}
+          {% assign is_new = true %}
+        {% endif %}
+        
+        <tr>
+          <!-- Date Column -->
+          <td class="date-cell">
+            {{ tutorial.date | date: '%b %d, %Y' }}
+          </td>
+          
+          <!-- Topic Column -->
+          <td class="topic-cell">
+            <div class="new-badge">
+              {{ tutorial.topic }}
+              {% if is_new %}
+                <img src="{{ site.baseurl }}/assets/images/newcomers/new-badge.png" alt="New" />
+              {% endif %}
+            </div>
+          </td>
+          
+          <!-- Resources Column -->
+          <td class="resources-cell">
+            <div>
+              {% if tutorial.resources.slides %}
+                <span class="resource-link">
+                  <a href="{{ tutorial.resources.slides }}" target="_blank" rel="noreferrer">Slides</a>
+                </span>
+              {% endif %}
+              {% if tutorial.resources.recording %}
+                <span class="resource-link">
+                  <a href="{{ tutorial.resources.recording }}" target="_blank" rel="noreferrer">Recording</a>
+                </span>
+              {% endif %}
+            </div>
+          </td>
+          
+          <!-- Presenters Column -->
+          <td class="presenters-cell">
+            <div>
+              {% for presenter in tutorial.presenters %}
+                <span class="presenter-name">
+                  {% if presenter.link %}
+                    <a href="{{ site.baseurl }}{{ presenter.link }}">{{ presenter.name }}</a>
+                  {% else %}
+                    {{ presenter.name }}
+                  {% endif %}
+                </span>
+              {% endfor %}
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
