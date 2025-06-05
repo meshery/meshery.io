@@ -56,7 +56,7 @@ Badges are one of the many ways that we recognize the efforts of our contributor
 Meshery's recognition programs are designed to acknowledge and celebrate the contributions of our community members. These programs provide a way for users and contributors to earn badges that signify their achievements and involvement in the Meshery ecosystem.
 Badges are awarded by the following community partners:
 
-- [Layer5](https://badges.layer5.io)
+- [Layer5](https://meshery.io/community/badges)
 
 Add your recognition program to this list by [submitting a pull request](https://github.com/meshery/meshery.io/pulls).
 
