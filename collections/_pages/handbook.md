@@ -4,10 +4,6 @@ title: Community Handbook
 permalink: /community/handbook
 description: Explore the Meshery Community!
 cards:
-  - title: "Meet Five"
-    link:  "/community/meet-five"
-    icon:  "/assets/images/5.svg"
-    desc:  "Join Five as he sets off in his trusty rocketship following the trail of stars to planet Meshery."
   - title: "About"
     link:  "/about"
     icon:  "/assets/images/About.svg"
@@ -52,10 +48,6 @@ cards:
     link:  "/community/repository-overview"
     icon:  "/assets/images/Overview.svg"
     desc:  "Get a code-centric overview of collective community efforts."
-  - title: "Writing Program"
-    link:  "/community/writing-program"
-    icon:  "/assets/images/Writing.svg"
-    desc:  "Demonstrate expertise and give back through the Meshery Writing Program."
   - title: "Security Vulnerabilities"
     link:  "/community/security"
     icon:  "/assets/images/Security.svg"
