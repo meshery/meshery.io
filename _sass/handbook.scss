@@ -1,0 +1,76 @@
+.handbook {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    padding-top: 2rem;
+
+    .card {
+        position: relative;
+        width: 260px;
+        height: 175px;
+        background: var(--background-light-cards);
+        border-radius: 10px;
+        padding: 20px 16px;
+        margin: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+        box-shadow:
+            0 0 0 1px color-mix(in srgb, var(--brand-color-primary) 20%, transparent),
+            0 4px 12px color-mix(in srgb, var(--brand-color-secondary) 10%, transparent),
+            0 0 8px var(--brand-color-secondary-50);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+        cursor: pointer;
+
+        h3 {
+            position: relative;
+            font-size: 17px;
+            font-weight: 700;
+            color: white;
+            display: inline-block;
+            margin: 0 auto 12px;
+            padding: 6px 16px;
+            border-radius: 6px;
+            z-index: 2;
+            transition: color 0.3s ease;
+
+        }
+
+        p {
+            font-size: 13.5px;
+            line-height: 1.45;
+            color: var(--color-grey-light);
+            transition: color 0.3s ease;
+        }
+
+        .read-more {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--brand-color-primary);
+            opacity: 0;
+            transform: translateX(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            align-self: flex-end;
+        }
+
+        &:hover {
+            transform: scale(1.03);
+            box-shadow:
+                0 0 0 1px var(--brand-color-primary),
+                0 8px 20px color-mix(in srgb, var(--brand-color-secondary) 20%, transparent),
+                0 0 16px var(--brand-color-secondary-50);
+
+            p {
+                color: white;
+            }
+
+            .read-more {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    }
+}
