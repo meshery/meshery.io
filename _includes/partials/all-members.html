@@ -1,6 +1,6 @@
 <div class="contributor flex"> 
     <div class="container {% if page.full_width %}max-container{% endif %}">
-        <h2>In-Active Members</h2>
+        <h2>All Members</h2>
         <p style="text-align: center;">A warm and welcoming collection of open sourcers.</p>
         <a href="https://slack.meshery.io/" style="text-decoration: none !important;">
           <h4 style="text-align:center;color:aliceblue;">
@@ -12,24 +12,19 @@
 
         <ul class="contributor">  
         <!-- List all Contributors -->
-
             {% for page in site.contributors %}
                 {% if page.layout != 'archive' %}
-                {% if page.status != "Active" %}
                 <li>
                     <div class="square-image">
-                        <a href="{{page.url}}">
-                        <img class="b-inactive" src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"  onerror="this.src='/assets/images/meshery-color.svg'" />    
-                        </a>
-                    </div>
+                        <a href="{{ page.url }}">
+                        <img class="{% if page.status == 'Active' %}b-active {% else %}b-inactive{% endif %}" src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"  onerror="this.src='/assets/images/meshery-color.svg'" />    
+                        </a> 
+                    </div> 
                     <div class="names">{{ page.name }}</a></div>
                     
                 </li>
                 {% endif %}
-                {% endif %}
             {% endfor %}
-
-            <!-- List a specific contributor -->
         </ul>
     </div>	
 </div>
