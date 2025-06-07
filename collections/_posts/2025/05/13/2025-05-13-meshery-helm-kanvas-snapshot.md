@@ -34,7 +34,7 @@ Start by ensuring Helm is installed on your machine, If it’s not present, you 
 helm version
 ```
 
-The plugin supports Linux, macOS, and Windows. So, Once Helm is installed, you can install the plugin using:
+The plugin supports Linux, MacOS, and Windows. Once Helm is installed, you can install the plugin using:
 
 ```bash
 helm plugin install https://github.com/meshery-extensions/helm-kanvas-snapshot
