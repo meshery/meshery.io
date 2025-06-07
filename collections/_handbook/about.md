@@ -1,8 +1,7 @@
 ---
 layout: page
 title: About Meshery
-permalink: /community/handbook/about
-description: Meshery is the open source, cloud native manager that enables the collaborative design and operation of infrastructure and applications. It is a self-service platform that integrates lifecycle, configuration, and performance management features for Kubernetes and cloud-native environments.
+description: Meshery offers cloud native application management by harnessing the power of a developer-friendly applications management system.
 ---
 
 Meshery is not just a project — it is also a community of engineers building reusable patterns, performance benchmarks, and platform-agnostic best practices.
