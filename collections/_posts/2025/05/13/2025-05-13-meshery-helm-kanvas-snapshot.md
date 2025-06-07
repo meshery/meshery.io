@@ -43,8 +43,7 @@ helm plugin install https://github.com/meshery-extensions/helm-kanvas-snapshot
 To generate a snapshot, use the following command:
 
 ```bash
-helm helm-kanvas-snapshot -f helm helm-kanvas-snapshot \
--f https://meshery.io/charts/meshery-v0.8.12.tgz --name meshery-chart
+helm helm-kanvas-snapshot -f https://meshery.io/charts/meshery-v0.8.12.tgz --name meshery-chart
 ```
 
 This command takes your Helm chart and creates a Meshery Design snapshot from it. You’ll get a link to the snapshot in your terminal. If you provided an email, the snapshot link will also be sent to your inbox.
