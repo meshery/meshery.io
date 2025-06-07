@@ -16,14 +16,14 @@ redirect_from: /blog/service-mesh-offers-promising-solution-for-cloud-native-net
 Service mesh in the wild
 While the concept of a service mesh has applicability beyond just Kubernetes deployments, that's arguably where the vast majority of deployments are today. Among the earliest cloud-native service mesh approaches is the open source Linkerd project, which is backed by Buoyant and began to really ramp up adoption in 2017.
 
-Over the past three years there has been an explosion of open source service mesh technology. Layer5, which develops service mesh aggregation technology, currently tracks over 20 different open and closed source mesh projects. Beyond Linkerd, among the most popular is the Google-backed Istio project, which recently hit its 1.8 milestone release. Cisco has backed the Network Service Mesh (NSM) effort, which works at a lower level in the networking stack than Linkerd, Istio and most others.
+Over the past three years there has been an explosion of open source service mesh technology. Meshery, which develops service mesh aggregation technology, currently tracks over 20 different open and closed source mesh projects. Beyond Linkerd, among the most popular is the Google-backed Istio project, which recently hit its 1.8 milestone release. Cisco has backed the Network Service Mesh (NSM) effort, which works at a lower level in the networking stack than Linkerd, Istio and most others.
 
 Each mesh has its own take on configuration and capabilities, which is a good thing for users. Simply put, there is no shortage of options and there is likely to be a service mesh that already exists to meet just about any need.
 
 Service mesh abstraction
 While having lots of different service mesh technologies is good for choice, it's not necessarily a good thing for simplicity or interoperability. That's where the concept of service mesh abstraction comes into play.
 
-At the recent KubeCon NA 2020 virtual event, Lee Calcote, co-chair of the Cloud Native Computing Foundation (CNCF) Networking Special Interest Group (SIG) and founder of Layer5, outlined how the different service mesh abstraction technologies fit together.
+At the recent KubeCon NA 2020 virtual event, Lee Calcote, co-chair of the Cloud Native Computing Foundation (CNCF) Networking Special Interest Group (SIG) and founder of Meshery, outlined how the different service mesh abstraction technologies fit together.
 
 The Service Mesh Interface (SMI) is a way for any compliant service mesh to plug into Kubernetes. The Service Mesh Performance (SMP) abstraction is all about providing visibility into service mesh performance though a common interface. The third key abstraction is known as Hamlet and it provides multi-vendor service interoperation and mesh federation capabilities.
 

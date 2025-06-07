@@ -54,12 +54,12 @@ Creating a design pattern using Meshery UI is a straightforward process. Users c
 
 For those who prefer using the Meshery CLI, the process is equally convenient. After ensuring that the Meshery CLI is installed and configured to connect to the desired Meshery instance, users can open a terminal or command prompt and utilize the Meshery CLI commands to interact with the catalog. They can apply, delete, view, or list patterns using the appropriate commands provided by the Meshery CLI. Additionally, Meshery CLI allows onboarding applications and applying WASM (WebAssembly) filters for advanced functionality.
 
-Users of Layer5 Cloud have an [enhanced catalog experience](https://cloud.layer5.io/catalog) in which they can track use of their designs and receive recognition badges for milestones they achieve while using the catalog and publishing and deploying their Meshery designs.
+Users of Meshery Cloud have an [enhanced catalog experience](https://cloud.layer5.io/catalog) in which they can track use of their designs and receive recognition badges for milestones they achieve while using the catalog and publishing and deploying their Meshery designs.
 
 Overall, Meshery Catalog plays a vital role in simplifying the management and deployment of cloud-native infrastructure. By providing a user-friendly marketplace-like experience and encouraging collaboration, it empowers organizations to efficiently build and optimize their cloud-native environments.
 
 ## Project Governance
-With maintainers from Intel, VMware, Red Hat, F5, HashiCorp, and others, Meshery is the 10th fastest growing CNCF project (out of ~200 projects). Maintainers from Layer5 have ensured that Meshery partners with Docker, Intel, and HashiCorp.
+With maintainers from Intel, VMware, Red Hat, F5, HashiCorp, and others, Meshery is the 10th fastest growing CNCF project (out of ~200 projects). Maintainers from Meshery have ensured that Meshery partners with Docker, Intel, and HashiCorp.
 
 ## Conclusion
 Meshery is a powerful platform that simplifies cloud infrastructure and Kubernetes management. By providing a unified interface for managing Kubernetes clusters and cloud resources, Meshery enables organizations to streamline their operations, optimize resource utilization, and efficiently deploy and manage cloud-native applications. With its robust observability features, Meshery also provides valuable insights into the performance and health of Kubernetes environments, ensuring optimized and efficient cloud-native applications. Embracing Meshery can help organizations effectively manage their cloud infrastructure and accelerate their journey towards cloud-native excellence.
