@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Mentorship Programs
+title: "Mentorship Programs"
 permalink: /community/handbook/mentorship-programs
 description:  "Explore the mentorship programs Meshery participates in and how to join."
 programs:
