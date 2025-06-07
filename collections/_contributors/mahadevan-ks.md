@@ -3,7 +3,7 @@ layout: person
 name:  Mahadevan K.S
 position: Contributor
 location: India
-image_path: /assets/images/photos/mahadevan-ks.jpg
+image_path: /assets/images/photos/mahadevan-ks.png
 twitter: mdev_1
 github: M-DEV-1
 linkedin: ksmahadevan
