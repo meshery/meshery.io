@@ -122,7 +122,7 @@ programs:
   display: flex;
   justify-content: center;
   align-items: center;
-  height: clamp(128px, 8vw, 800px);
+  height: clamp(128px, 8vw, 164px);
   width: auto;
   max-width: 75%;
 }
