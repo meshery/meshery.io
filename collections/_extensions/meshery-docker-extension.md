@@ -17,6 +17,6 @@ extensionCaveats: |
   - Visually design your Docker-based infrastructure.
   - Import your Docker Compose apps. Configure and deploy them to Kubernetes and integrate into your GitOps pipeline.
   - Using Kanvas as a visual topology for designing Docker Compose applications, operating Kubernetes, service meshes, and their workloads.
-URL: 'https://layer5.io/docker-extension-meshery'
+URL: 'https://meshery.io/extensions/meshery-docker-extension'
 docsURL: 'https://docs.meshery.io/concepts/architecture#meshery-docker-extension'
 ---
