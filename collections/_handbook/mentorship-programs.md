@@ -71,7 +71,7 @@ programs:
                 </a>
             </div>
             <div class="program-icon-div">
-                <img src="{{ program.icon }}" alt="{{ program.name }}" class="program-icon" {% if program.dark-icon %}
+                <img src="{{ program.icon }}" alt="{{ program.name }}" class="program-icon" {% if program.darkIcon %}
                 data-dark="{{ program.darkIcon }}" {% endif %}>
             </div>
         </div>
@@ -132,7 +132,6 @@ programs:
   width: 100%;
   margin: 0px 10vw;
   object-fit: contain;
-  filter: drop-shadow(0px 0px 18px rgba(0 0 0 0.3));
 }
 
 .dark-mode .program-icon[data-dark] {
