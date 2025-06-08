@@ -153,8 +153,17 @@ programs:
     flex-direction: row-reverse;
   }
 
+  .reverse-order > .program-body {
+    align-items: flex-end;
+    text-align: right;
+  }
+
   .program-body {
     flex:2;
+  }
+
+  .learn-more-button {
+    font-size: 1.25rem;
   }
 
   .program-icon-div {
