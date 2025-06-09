@@ -2,7 +2,7 @@
 layout: person
 name: Mario Arriaga
 position: Maintainer, Meshery CI
-image_path: assets/images/photos/mario-arriaga.webp
+image_path: /assets/images/photos/mario-arriaga.webp
 github: MarioArriaga92
 linkedin: mario-arriaga-29a600b5
 location: Mexico
