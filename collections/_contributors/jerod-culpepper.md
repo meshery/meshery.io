@@ -1,4 +1,5 @@
 ---
+layout: person
 name: Jerod Culpepper
 position: Maintainer, Mesheryctl
 image_path: /assets/images/photos/jerod-culpepper.webp
