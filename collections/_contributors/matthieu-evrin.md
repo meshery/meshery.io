@@ -1,7 +1,7 @@
 ---
 layout: person
 name: Matthieu EVRIN
-position: Maintainer, Meshery CLI
+position: Maintainer, CLI
 image_path: /assets/images/photos/Matthieu-Evrin.webp
 github: lekaf974
 twitter: mevrin
