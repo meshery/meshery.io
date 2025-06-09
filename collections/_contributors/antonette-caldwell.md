@@ -1,4 +1,5 @@
 ---
+layout: person
 name: Antonette Caldwell
 position: Maintainer
 image_path: assets/images/photos/antonette-caldwell.webp
