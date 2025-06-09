@@ -8,7 +8,7 @@ whiteIcon: /assets/images/integration/azure-web/icons/white/azure-web-white.svg
 docURL: https://docs.meshery.io/extensibility/integrations/azure-web
 description: 
 category: Serverless
-subcategory: Uncategorized
+subcategory: API Gateway
 registrant: GitHub
 components: 
 - name: server-farm

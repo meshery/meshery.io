@@ -37,10 +37,7 @@ components:
   description: 
 componentsCount: 6
 relationships: 
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent) component is patched with the configuration of other (child) component. E.g Secret->Pod, ConfigMaps->Deployment, etc..."
-relationshipsCount: 1
+relationshipsCount: 0
 featureList: [
   "Automates certificate issuance and renewal",
   "Integrates with various certificate authorities",

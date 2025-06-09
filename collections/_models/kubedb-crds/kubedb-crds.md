@@ -11,6 +11,30 @@ category: App Definition and Development
 subcategory: Database
 registrant: Artifact Hub
 components: 
+- name: hazelcast-version
+  colorIcon: assets/images/integration/kubedb-crds/components/hazelcast-version/icons/color/hazelcast-version-color.svg
+  whiteIcon: assets/images/integration/kubedb-crds/components/hazelcast-version/icons/white/hazelcast-version-white.svg
+  description: App Definition and Development
+- name: oracle-version
+  colorIcon: assets/images/integration/kubedb-crds/components/oracle-version/icons/color/oracle-version-color.svg
+  whiteIcon: assets/images/integration/kubedb-crds/components/oracle-version/icons/white/oracle-version-white.svg
+  description: App Definition and Development
+- name: hazelcast
+  colorIcon: assets/images/integration/kubedb-crds/components/hazelcast/icons/color/hazelcast-color.svg
+  whiteIcon: assets/images/integration/kubedb-crds/components/hazelcast/icons/white/hazelcast-white.svg
+  description: App Definition and Development
+- name: oracle
+  colorIcon: assets/images/integration/kubedb-crds/components/oracle/icons/color/oracle-color.svg
+  whiteIcon: assets/images/integration/kubedb-crds/components/oracle/icons/white/oracle-white.svg
+  description: App Definition and Development
+- name: cassandra-ops-request
+  colorIcon: assets/images/integration/kubedb-crds/components/cassandra-ops-request/icons/color/cassandra-ops-request-color.svg
+  whiteIcon: assets/images/integration/kubedb-crds/components/cassandra-ops-request/icons/white/cassandra-ops-request-white.svg
+  description: App Definition and Development
+- name: hazelcast-ops-request
+  colorIcon: assets/images/integration/kubedb-crds/components/hazelcast-ops-request/icons/color/hazelcast-ops-request-color.svg
+  whiteIcon: assets/images/integration/kubedb-crds/components/hazelcast-ops-request/icons/white/hazelcast-ops-request-white.svg
+  description: App Definition and Development
 - name: elasticsearch-autoscaler
   colorIcon: assets/images/integration/kubedb-crds/components/elasticsearch-autoscaler/icons/color/elasticsearch-autoscaler-color.svg
   whiteIcon: assets/images/integration/kubedb-crds/components/elasticsearch-autoscaler/icons/white/elasticsearch-autoscaler-white.svg
@@ -459,7 +483,7 @@ components:
   colorIcon: assets/images/integration/kubedb-crds/components/ignite/icons/color/ignite-color.svg
   whiteIcon: assets/images/integration/kubedb-crds/components/ignite/icons/white/ignite-white.svg
   description: 
-componentsCount: 112
+componentsCount: 118
 relationships: 
 relationshipsCount: 0
 featureList: [
