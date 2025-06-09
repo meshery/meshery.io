@@ -2,7 +2,7 @@
 layout: person
 name: Adithya Krishna
 position: Maintainer, Docs
-image_path: assets/images/photos/adithya-krishna.webp
+image_path: /assets/images/photos/adithya-krishna.webp
 github: adithyaakrishna
 twitter: adii_kris
 linkedin: adiiikris
