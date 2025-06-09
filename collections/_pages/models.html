@@ -5,7 +5,7 @@ description: Models package components and relationships providing a versioned a
 permalink: /catalog/models
 ---
 
-{% assign models = site.models %}
+{% assign models = site.models | concat: site.custom-models %}
 <script>
     var models = {{ models | jsonify }};
 </script>
@@ -18,6 +18,10 @@ permalink: /catalog/models
             No results match your filters. Try adjusting your selections or clearing some filters.
         </h2>
         <div class="row">
+                <div class="column column-lg custom-design-card models" style="display: block" patterntype="models"
+                    type="custom">
+                    {% include custom-modal.html type="Model"%}
+                </div>
             {% assign count = 0 %} {% for pattern in models %} {% if count < 6 %} {% assign should_display='block' %} {%
                 else %} {% assign should_display='none' %} {% endif %} <div class="column column-lg patternCard models"
                 filter="{{ pattern.name }}" type="{{ pattern.category }}" patternType="models" technology=""
