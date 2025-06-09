@@ -1,7 +1,7 @@
 ---
 layout: person
 name: Jerod Culpepper
-position: Maintainer, Meshery CLI
+position: Maintainer, CLI
 image_path: /assets/images/photos/jerod-culpepper.webp
 github: cpepper96
 linkedin: jerod-culpepper

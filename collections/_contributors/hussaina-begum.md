@@ -1,7 +1,7 @@
 ---
 layout: person
 name: Hussaina Begum
-position: Maintainer, Meshery CLI
+position: Maintainer, CLI
 image_path: /assets/images/photos/hussaina-begum.webp
 github: hexxdump
 twitter: hexxdump
