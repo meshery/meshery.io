@@ -2,7 +2,7 @@
 layout: person
 name: Aaditya Narayan Subedy
 position: Maintainer, Docs
-image_path: assets/images/photos/aaditya-narayan-subedy.webp
+image_path: /assets/images/photos/aaditya-narayan-subedy.webp
 github: asubedy
 twitter: a_subedy
 linkedin: asubedy

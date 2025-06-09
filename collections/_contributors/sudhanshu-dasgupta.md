@@ -2,7 +2,7 @@
 layout: person
 name: Sudhanshu Dasgupta
 position: Maintainer, UI
-image_path: assets/images/photos/sudhanshu-dasgupta.webp
+image_path: /assets/images/photos/sudhanshu-dasgupta.webp
 github: sudhanshutech
 twitter: SudhanshuDasgu3
 linkedin: sudhanshu-dasgupta
