@@ -12,4 +12,5 @@ badges:
   - meshery
   - meshery-catalog
 status: Active
+MeshMate: true
 ---
