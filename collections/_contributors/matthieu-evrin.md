@@ -2,7 +2,7 @@
 layout: person
 name: Matthieu EVRIN
 position: Maintainer, Mesheryctl
-image_path: assets/images/photos/Matthieu-Evrin.webp
+image_path: /assets/images/photos/Matthieu-Evrin.webp
 github: lekaf974
 twitter: mevrin
 linkedin: matthieu-evrin
