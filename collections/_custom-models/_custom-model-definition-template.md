@@ -1,15 +1,15 @@
 ---
 layout: single-page-model
 item-type: model
-name: 
-subtitle: 
-colorIcon: /assets/images/integration/apisix/icons/color/apisix-color.svg
-whiteIcon: /assets/images/custom-integration/apisix/icons/white/apisix-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/apisix
+name: # TODO: Provide the unique name for this model
+subtitle: # TODO: Provide a brief subtitle for this model
+colorIcon: /assets/images/custom-integration/[YOUR-MODEL-NAME]/icons/color/[YOUR-MODEL-NAME]-color.svg # TODO: Replace with actual path
+whiteIcon: /assets/images/custom-integration/[YOUR-MODEL-NAME]/icons/white/[YOUR-MODEL-NAME]-white.svg # TODO: Replace with actual path
+docURL: https://docs.meshery.io/extensibility/integrations/[your-model-name] # TODO: Replace with actual documentation URL
 description: 
-category: # e.g. Provisioning
-subcategory: # e.g. Security & Compliance
-registrant: Artifact Hub
+category: # e.g. Provisioning. TODO: Specify category for this model
+subcategory: # e.g. Security & Compliance. TODO: Specify subcategory for this model
+registrant: # TODO: Specify the registrant (e.g., Artifact Hub, Community, Meshery Catalog, etc.)
 components: 
 - name: apisix-route
   colorIcon: assets/images/integration/apisix/components/apisix-route/icons/color/apisix-route-color.svg
@@ -39,9 +39,9 @@ components:
   colorIcon: assets/images/integration/apisix/components/apisix-upstream/icons/color/apisix-upstream-color.svg
   whiteIcon: assets/images/integration/apisix/components/apisix-upstream/icons/white/apisix-upstream-white.svg
   description: 
-componentsCount: 7
+# componentsCount: 7 # TODO: Manually update this count if required by the layout, or remove if calculated dynamically.
 relationships: 
-relationshipsCount: 0
+# relationshipsCount: 0 # TODO: Manually update this count if required by the layout, or remove if calculated dynamically.
 featureList: [
   "Dynamic routing and load balancing",
   "Authentication and authorization",
