@@ -1,7 +1,7 @@
 ---
 layout: person
 name: Aadhitya Amarendiran
-position: Maintainer, Mesheryctl
+position: Maintainer, Meshery CLI
 image_path: /assets/images/photos/aadhitya-amarendiran.webp
 github: alphaX86
 twitter: KryoX64

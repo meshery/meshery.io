@@ -1,7 +1,7 @@
 ---
 layout: person
 name: Antonette Caldwell
-position: Maintainer
+position: Maintainer, CLI & UI
 image_path: /assets/images/photos/antonette-caldwell.webp
 github: acald-creator
 linkedin: antonettecaldwell
