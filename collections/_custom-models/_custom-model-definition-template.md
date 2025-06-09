@@ -1,57 +1,40 @@
 ---
 layout: single-page-model
 item-type: model
-name: # TODO: Provide the unique name for this model
-subtitle: # TODO: Provide a brief subtitle for this model
-colorIcon: /assets/images/custom-integration/[YOUR-MODEL-NAME]/icons/color/[YOUR-MODEL-NAME]-color.svg # TODO: Replace with actual path
-whiteIcon: /assets/images/custom-integration/[YOUR-MODEL-NAME]/icons/white/[YOUR-MODEL-NAME]-white.svg # TODO: Replace with actual path
-docURL: https://docs.meshery.io/extensibility/integrations/[your-model-name] # TODO: Replace with actual documentation URL
-description: 
-category: # e.g. Provisioning. TODO: Specify category for this model
-subcategory: # e.g. Security & Compliance. TODO: Specify subcategory for this model
-registrant: # TODO: Specify the registrant (e.g., Artifact Hub, Community, Meshery Catalog, etc.)
+name: # TODO: Provide the unique name for this model (e.g., "apisix")
+subtitle: # TODO: Provide a brief subtitle (e.g., "Cloud-native API Gateway")
+colorIcon: /assets/images/custom-integration/[MODEL-NAME]/icons/color/[MODEL-NAME]-color.svg
+whiteIcon: /assets/images/custom-integration/[MODEL-NAME]/icons/white/[MODEL-NAME]-white.svg
+docURL: https://docs.meshery.io/extensibility/integrations/[model-name]
+description: # TODO: Add a description of what this model provides
+category: # TODO: Choose from various available categories at meshery.io/catalog/models
+subcategory: # TODO: Specify appropriate subcategory
+registrant: # TODO: Choose from: Artifact Hub, GitHub, Meshery etc.
 components: 
-- name: apisix-route
-  colorIcon: assets/images/integration/apisix/components/apisix-route/icons/color/apisix-route-color.svg
-  whiteIcon: assets/images/integration/apisix/components/apisix-route/icons/white/apisix-route-white.svg
-  description: 
-- name: apisix-cluster-config
-  colorIcon: assets/images/integration/apisix/components/apisix-cluster-config/icons/color/apisix-cluster-config-color.svg
-  whiteIcon: assets/images/integration/apisix/components/apisix-cluster-config/icons/white/apisix-cluster-config-white.svg
-  description: 
-- name: apisix-consumer
-  colorIcon: assets/images/integration/apisix/components/apisix-consumer/icons/color/apisix-consumer-color.svg
-  whiteIcon: assets/images/integration/apisix/components/apisix-consumer/icons/white/apisix-consumer-white.svg
-  description: 
-- name: apisix-global-rule
-  colorIcon: assets/images/integration/apisix/components/apisix-global-rule/icons/color/apisix-global-rule-color.svg
-  whiteIcon: assets/images/integration/apisix/components/apisix-global-rule/icons/white/apisix-global-rule-white.svg
-  description: 
-- name: apisix-plugin-config
-  colorIcon: assets/images/integration/apisix/components/apisix-plugin-config/icons/color/apisix-plugin-config-color.svg
-  whiteIcon: assets/images/integration/apisix/components/apisix-plugin-config/icons/white/apisix-plugin-config-white.svg
-  description: 
-- name: apisix-tls
-  colorIcon: assets/images/integration/apisix/components/apisix-tls/icons/color/apisix-tls-color.svg
-  whiteIcon: assets/images/integration/apisix/components/apisix-tls/icons/white/apisix-tls-white.svg
-  description: 
-- name: apisix-upstream
-  colorIcon: assets/images/integration/apisix/components/apisix-upstream/icons/color/apisix-upstream-color.svg
-  whiteIcon: assets/images/integration/apisix/components/apisix-upstream/icons/white/apisix-upstream-white.svg
-  description: 
-componentsCount: # 7
-
+  # TODO: Component icons must be placed in assets/images/custom-integration/
+  # Example structure: assets/images/custom-integration/exoscale-icons/components/2fa-icon.svg
+  - name: # TODO: Component name (e.g., "apisix-route")
+    colorIcon: assets/images/custom-integration/[MODEL-NAME]/components/[COMPONENT-NAME]/icons/color/[COMPONENT-NAME]-color.svg
+    whiteIcon: assets/images/custom-integration/[MODEL-NAME]/components/[COMPONENT-NAME]/icons/white/[COMPONENT-NAME]-white.svg
+    description: # TODO: Brief description of what this component does
+  - name: # TODO: Add additional components as needed
+    colorIcon: assets/images/custom-integration/[MODEL-NAME]/components/[COMPONENT-NAME]/icons/color/[COMPONENT-NAME]-color.svg
+    whiteIcon: assets/images/custom-integration/[MODEL-NAME]/components/[COMPONENT-NAME]/icons/white/[COMPONENT-NAME]-white.svg
+    description: # TODO: Brief description of what this component does
+componentsCount: # TODO: Update this number to match actual component count
 relationships: 
-# relationshipsCount: 0 # TODO: Manually update this count if required by the layout, or remove if calculated dynamically.
+ # TODO: Define relationships between components if any exist
+  # Example:
+  # - type: "Binding"
+  #   kind: "Edge"
+  #   description: "A relationship that represents volume mounts between components"
+relationshipsCount: 0 # TODO: Update this number to match actual relationship count
 featureList: [
-# example list of features 
-
-  "Dynamic routing and load balancing",
-  "Authentication and authorization",
-  "Observability and analytics"
+  # TODO: Replace with actual features of your model
+  "Feature 1 - Brief description",
+  "Feature 2 - Brief description", 
+  "Feature 3 - Brief description"
 ]
-howItWorks: # "Integrates APISIX configurations"
-
-howItWorksDetails: # "Streamlined API gateway management and enhanced traffic routing in Kubernetes"
-
+howItWorks: # TODO: One-line summary of how the integration works
+howItWorksDetails: # TODO: Detailed explanation of the integration's functionality
 ---
