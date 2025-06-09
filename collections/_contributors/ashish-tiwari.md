@@ -1,7 +1,7 @@
 ---
 layout: person
 name: Ashish Tiwari
-position: Maintainer, Adapters
+position: Maintainer, Adapters & CI
 image_path: /assets/images/photos/ashish-tiwari.webp
 github: revolyssup
 linkedin: at1511
