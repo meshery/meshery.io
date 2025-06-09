@@ -51,6 +51,7 @@ programs:
     The MLH Fellowship is a 12-week internship alternative for students interested in becoming software engineers. Instead of an internship at a single company, you'll contribute to the type of Open Source projects that every company depends on. The programs pair fun, educational curriculum with practical experience that you can put on your resume right away. It's collaborative, remote, and happens under the guidance of expert mentors. Meshery, as an organization, participates in the program by submitting a project idea for contributors to work on and also provides mentorship during the time phase given.
   link: "/programs/mlh"
   icon: "/assets/images/programs/mlh-icon-color.svg"
+  darkIcon: "/assets/images/programs/mlh-icon-dark.svg"
   imagePosition: "reverse"
 ---
 
@@ -71,8 +72,12 @@ programs:
                 </a>
             </div>
             <div class="program-icon-div">
-                <img src="{{ program.icon }}" alt="{{ program.name }}" class="program-icon" {% if program.darkIcon %}
-                data-dark="{{ program.darkIcon }}" {% endif %}>
+                <img src="{{ program.icon }}" alt="{{ program.name }}" class="program-icon"
+                {% if program.darkIcon %}
+                  id="logo-dark-light"
+                  data-logo-for-light="{{ program.icon }}"
+                  data-logo-for-dark="{{ program.darkIcon }}"
+                {% endif %}>
             </div>
         </div>
     {% endfor %}
