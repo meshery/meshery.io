@@ -1,6 +1,6 @@
 ---
 layout: person
-name: Nikhil Ladha, UI
+name: Nikhil Ladha
 position: Maintainer, MeshMate
 image_path: /assets/images/photos/nikhil-ladha.webp
 github: Nikhil-Ladha
