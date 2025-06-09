@@ -39,7 +39,8 @@ components:
   colorIcon: assets/images/integration/apisix/components/apisix-upstream/icons/color/apisix-upstream-color.svg
   whiteIcon: assets/images/integration/apisix/components/apisix-upstream/icons/white/apisix-upstream-white.svg
   description: 
-# componentsCount: 7 # TODO: Manually update this count if required by the layout, or remove if calculated dynamically.
+componentsCount: # 7
+
 relationships: 
 # relationshipsCount: 0 # TODO: Manually update this count if required by the layout, or remove if calculated dynamically.
 featureList: [
