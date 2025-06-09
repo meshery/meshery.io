@@ -43,10 +43,14 @@ components:
 relationships: 
 # relationshipsCount: 0 # TODO: Manually update this count if required by the layout, or remove if calculated dynamically.
 featureList: [
+# example list of features 
+
   "Dynamic routing and load balancing",
   "Authentication and authorization",
   "Observability and analytics"
 ]
-howItWorks: "Integrates APISIX configurations"
-howItWorksDetails: "Streamlined API gateway management and enhanced traffic routing in Kubernetes"
+howItWorks: # "Integrates APISIX configurations"
+
+howItWorksDetails: # "Streamlined API gateway management and enhanced traffic routing in Kubernetes"
+
 ---
