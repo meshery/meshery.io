@@ -29,7 +29,6 @@ Meshery is dedicated to empowering engineers and supporting the open source comm
 - [YouTube Channel](https://www.youtube.com/@mesheryio)
 - [GitHub Projects](https://github.com/meshery)
 - [LinkedIn](https://www.linkedin.com/showcase/meshery/)
-- [Docker Deployment](https://docs.docker.com/desktop/install/windows-install/)
 - [Slack Community](https://slack.meshery.io/)
 
 ---
