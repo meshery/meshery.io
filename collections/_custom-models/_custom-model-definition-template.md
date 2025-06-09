@@ -5,7 +5,7 @@ name: # TODO: Provide the unique name for this model (e.g., "apisix")
 subtitle: # TODO: Provide a brief subtitle (e.g., "Cloud-native API Gateway")
 colorIcon: /assets/images/custom-integration/[MODEL-NAME]/icons/color/[MODEL-NAME]-color.svg
 whiteIcon: /assets/images/custom-integration/[MODEL-NAME]/icons/white/[MODEL-NAME]-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/[model-name]
+docURL: https://docs.meshery.io/extensibility/integrations/[model-name] # Leave empty if no documentation is available
 description: # TODO: Add a description of what this model provides
 category: # TODO: Choose from various available categories at meshery.io/catalog/models
 subcategory: # TODO: Specify appropriate subcategory
