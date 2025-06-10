@@ -4,6 +4,26 @@ title: "Connect with Us"
 description: "Join our vibrant community on Slack and various social media platforms to collaborate and stay updated."
 ---
 
+
+## Subscribe to Newsletter  
+
+Don’t miss out on anything, sign up to receive updates on our newest releases, latest blog posts and any relevant information.
+
+- [#Mail List](https://meshery.io/subscribe) - For workspace-wide communication and announcements
+  
+---
+
+## Mail lists
+
+
+- [#Meshery Developers](mailto:dev-group@meshery.io)
+- [#Meshery Users](mailto:user-group@meshery.io)
+- [#Meshery Contributors](https://meshery.io/)
+- [#Meshery Maintainers](mailto:maintainers@meshery.io)
+- [#Meshery Security and Vulnerability Reports](https://meshery.io/)
+- [#Meshery Community](mailto:community@meshery.io)
+
+---
 ## Slack Community
 
 We are a community of like-minded people with thousands of members. Join our [Slack Workspace](https://slack.meshery.io/) introduce yourself and interact with the community. There are different channels in the workspace to engage within.
