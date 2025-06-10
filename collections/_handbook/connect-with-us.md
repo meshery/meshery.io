@@ -44,12 +44,47 @@ We are a community of like-minded people with thousands of members. Join our [Sl
 Meshery is dedicated to empowering engineers and supporting the open source community that create them. Learn more about Meshery and connect with the community by following and engaging with us on our social media accounts.
 
 ### Follow Us
+<a href="https://twitter.com/mesheryio" target="blank"
+    ><img
+      align="center"
+      src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg"
+      alt="Meshery_twitter"
+      height="30"
+      width="40"
+  /></a>
+<a href="https://www.youtube.com/@mesheryio" target="blank"
+    ><img
+      align="center"
+      src="https://www.svgrepo.com/show/13671/youtube.svg"
+      alt="Meshery_youtube"
+      height="30"
+      width="40"
+  /></a>
+<a href="https://github.com/meshery" target="blank"
+    ><img
+      align="center"
+      src="https://www.svgrepo.com/show/439171/github.svg"
+      alt="Meshery_github"
+      height="30"
+      width="40"
+  /></a>
+<a href="https://www.linkedin.com/showcase/meshery/" target="blank"
+    ><img
+      align="center"
+      src="https://www.svgrepo.com/show/448234/linkedin.svg"
+      alt="Meshery_linkedin"
+      height="30"
+      width="40"
+  /></a>
+<a href="https://slack.meshery.io/" target="blank"
+    ><img
+      align="center"
+      src="https://www.svgrepo.com/show/452102/slack.svg"
+      alt="Meshery_slack"
+      height="30"
+      width="40"
+  /></a>
 
-- [Twitter @mesheryio](https://twitter.com/mesheryio)
-- [YouTube Channel](https://www.youtube.com/@mesheryio)
-- [GitHub Projects](https://github.com/meshery)
-- [LinkedIn](https://www.linkedin.com/showcase/meshery/)
-- [Slack Community](https://slack.meshery.io/)
 
 ---
 
