@@ -195,11 +195,6 @@ components:
 componentsCount: 45
 relationships: 
 relationshipsCount: 0
-featureList: [
- "Annotation",
- "Exoscale',
- 
-]
 howItWorks: "These icons can be used for annotations and visual diagramming in designs."
 howItWorksDetails: ""
 ---
