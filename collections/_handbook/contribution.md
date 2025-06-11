@@ -15,7 +15,7 @@ Please note: All make commands should be run in a terminal from within the Meshe
 ### Prerequisite
 1. Go version 1.23 must be installed if you want to build and/or make changes to the existing code. The binary go1.23 should be available in your path. If you don't want to disturb your existing version of Go, then follow these instructions to keep multiple versions of Go in your system.
 2. GOPATH environment variable should be configured appropriately
-3. npm and node should be installed on your machine, `node` version 19 or higher is not supported right now.
+3. npm and node should be installed on your machine, node version 19 or higher is not supported right now.
 4. golangci-lint should be installed if you want to test Go code, for MacOS and linux users.
 
 
