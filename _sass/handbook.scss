@@ -64,3 +64,131 @@
         }
     }
 }
+
+.handbook-content-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 2rem auto;
+    gap: 3rem;
+    padding: 0 1.5rem;
+    min-height: calc(100vh - 200px);
+}
+
+.handbook-toc {
+    flex: 0 0 250px;
+    position: sticky;
+    top: 2rem;
+    align-self: flex-start;
+    height: calc(100vh - 4rem);
+    overflow-y: auto;
+    padding-right: 1.5rem;
+    border-right: 1px solid var(--brand-color-secondary-50);
+    scrollbar-width: thin;
+
+    h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+        color: var(--brand-color-primary);
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        margin-bottom: 0.75rem;
+    }
+
+    a {
+        display: block;
+        padding: 0.5rem 0;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: color 0.2s ease;
+        font-size: 0.95rem;
+        
+        &:hover {
+            color: var(--brand-color-primary);
+        }
+    }
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--brand-color-secondary-50);
+        border-radius: 4px;
+    }
+}
+
+.handbook-content {
+    flex: 1;
+    max-width: 800px;
+    padding: 0 1rem;
+
+    h2 {
+        margin-top: 0;
+        color: var(--brand-color-primary);
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    h4 {
+        color: var(--text-primary, #3c494f);
+        margin-top: 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    p, ul li {
+        color: var(--text-primary);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    a {
+        color: var(--brand-color-primary);
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: var(--brand-color-secondary);
+            text-decoration: underline;
+        }
+    }
+
+    strong {
+        color: var(--text-primary);
+    }
+
+    code {
+        background: var(--background-light-cards);
+        padding: 0.2em 0.4em;
+        border-radius: 3px;
+        font-size: 0.9em;
+        color: var(--brand-color-primary);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .handbook-content {
+        p, ul li, h4, strong {
+            color: var(--text-primary-dark, #ffffff);
+        }
+    }
+    
+    .handbook-toc a {
+        color: var(--text-primary-dark, #ffffff);
+        
+        &:hover {
+            color: var(--brand-color-primary);
+        }
+    }
+}
