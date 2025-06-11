@@ -8,7 +8,7 @@ whiteIcon: /assets/images/integration/azure-red-hat-openshift/icons/white/azure-
 docURL: https://docs.meshery.io/extensibility/integrations/azure-red-hat-openshift
 description: 
 category: Provisioning
-subcategory: Uncategorized
+subcategory: Certified Kubernetes - Distribution
 registrant: GitHub
 components: 
 - name: open-shift-cluster

@@ -7,5 +7,5 @@ twitter: Harshini-M
 github: Harshini-M
 blurb: Mesh Head
 status: Inactive
-redirect_to: https://layer5.io/community/members
+
 ---

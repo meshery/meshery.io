@@ -5,7 +5,7 @@ name: Cloud Custodian
 subtitle: Collaborative and visual infrastructure as design for Cloud Custodian
 colorIcon: /assets/images/integration/cloud-custodian/icons/color/cloud-custodian-color.svg
 whiteIcon: /assets/images/integration/cloud-custodian/icons/white/cloud-custodian-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/cloud custodian
+docURL: https://docs.meshery.io/extensibility/integrations/cloud-custodian
 description: 
 category: Provisioning
 subcategory: Automation & Configuration

@@ -14,11 +14,11 @@ components:
 - name: role-assignment
   colorIcon: assets/images/integration/azure-authorization/components/role-assignment/icons/color/role-assignment-color.svg
   whiteIcon: assets/images/integration/azure-authorization/components/role-assignment/icons/white/role-assignment-white.svg
-  description: Security & Compliance
+  description: 
 - name: role-definition
   colorIcon: assets/images/integration/azure-authorization/components/role-definition/icons/color/role-definition-color.svg
   whiteIcon: assets/images/integration/azure-authorization/components/role-definition/icons/white/role-definition-white.svg
-  description: Security & Compliance
+  description: 
 componentsCount: 2
 relationships: 
 relationshipsCount: 0
