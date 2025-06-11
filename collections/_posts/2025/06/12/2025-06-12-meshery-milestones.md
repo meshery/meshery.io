@@ -11,7 +11,7 @@ redirect_from: /blog/meshery-milestones
 
 Open source thrives on community. Every pull request, tutorial, or design you create contributes to the project's success and it doesn't go unnoticed. That's why the Meshery community built the [meshery/meshery-milestone](https://hub.docker.com/r/meshery/meshery-milestone) Docker image: a simple web app designed to recognize your milestones.
 
-With this Docker image, you can easily spin up the milestone application, visually celebrate your accomplishments, and let everyone know about your contributions to Meshery's projects.
+With this Docker image, you can easily spin up the milestone application, visually celebrate your accomplishments, and let everyone know about your contributions to Meshery's projects. 
 <!-- write a longer introduction, don't break user readibility/flow  -->
 
 ## 1. Installing the Meshery Milestones Image
@@ -43,8 +43,7 @@ You’ll land on a warm “Congratulations!” screen inviting you to claim your
 
 ## How to claim these badges?
 
-We offer badges to contributors, new and seasoned alike and each badge is awarded after fulfilling a certain criteria. You can earn the **Design Pioneer** badge, for creating your first Meshery design or the **Continuous Contributor** badge, for 
-<!-- fix this above line to sound nice -->
+We offer badges to contributors, new and seasoned alike, with each badge awarded upon meeting specific milestones. For instance, you can earn the **Design Pioneer** badge by creating your first Meshery design, or the **Continuous Contributor** badge by regularly contributing to the community over time.
 
 With the Design Pioneer badge, you can proudly say that you've embraced Meshery’s visual tools and left complex YAML behind.
 
@@ -64,7 +63,7 @@ Your hard work deserves to be celebrated publicly.
 
 Share it on Social Media and tag us [@mesheryio](https://x.com/mesheryio) on X or [Meshery](https://www.linkedin.com/showcase/meshery/posts/) on Linkedin. Wear it proudly on your GitHub or Linkedin! 
 
-<!-- It might be nice to have a line here about how we are awaiting to give them more badges in the future -->
+We genuinely look forward to celebrating many more of your contributions and awarding you new badges soon 🎉
 
 ## What's next?
 
@@ -76,5 +75,5 @@ Keep your momentum up by following these guides and tutorials, and earn some mor
 
 Now, keep celebrating your wins, one badge at a time. Your journey in open source just got a whole lot brighter!
 
-Happy building!
+Happy building! 🧑‍💻 🎉
 ---
