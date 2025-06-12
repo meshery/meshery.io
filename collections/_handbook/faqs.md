@@ -36,7 +36,7 @@ toc: true
     <p>A: Meshery <a href="">MeshMates</a> are individuals committed to helping community members be successful contributors. MeshMates guide and support community members, helping them identify projects they can contribute to based on their interests, directing them to groups to join, and helping them grow their cloud native knowledge.</p>
 
     <h4>Q: How do I join the mailing list?</h4>
-    <p>A: You can subscribe to the Meshery mailing list <a href="">here</a>.</p>
+    <p>A: You can subscribe to the Meshery mailing list <a href="https://meshery.io/subscribe">here</a>.</p>
 
     <h4>Q: How do I get an internship with Meshery?</h4>
     <p>A: To best position your candidacy for an internship with Meshery, engage in the community and its projects. Start contributing and keep contributing. Community members who consistently contribute are the first individuals to be awarded internships when new opportunities open up - particularly members who are making significantly impactful contributions.</p>
