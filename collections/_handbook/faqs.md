@@ -30,7 +30,7 @@ toc: true
     <p>A: Yes, all Meshery projects are licensed under Apache v2. Meshery is a Cloud Native Computing Foundation project that embraces open source principles and collaborative development.</p>
 
     <h4>Q: I am new to Open Source, where do I begin?</h4>
-    <p>A: You can start by going through the <a href="">Newcomers' Welcome Guide</a>. This guide will help you understand how to get started with contributing to Meshery.</p>
+    <p>A: You can start by going through the <a href="/newcomers">Newcomers' Welcome Guide</a>. This guide will help you understand how to get started with contributing to Meshery.</p>
 
     <h4>Q: What exactly is a MeshMate?</h4>
     <p>A: Meshery <a href="">MeshMates</a> are individuals committed to helping community members be successful contributors. MeshMates guide and support community members, helping them identify projects they can contribute to based on their interests, directing them to groups to join, and helping them grow their cloud native knowledge.</p>
