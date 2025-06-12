@@ -45,7 +45,7 @@ toc: true
     <p>A: To follow up on the community meetings, you can view and add the <a href="https://meshery.io/calendar">community calendar</a> to your calendar list.</p>
 
     <h4>Q: I see works of other contributors being highlighted, will my contributions be highlighted too?</h4>
-    <p>A: We try to elevate the works of all our contributors. All community members are proud of their work, and so are we! We want their work and names to be recognized across our collective technology industry. Be sure to follow and engage with our <a href="">YouTube</a>, <a href="">LinkedIn</a>, and other social accounts.</p>
+    <p>A: We try to elevate the works of all our contributors. All community members are proud of their work, and so are we! We want their work and names to be recognized across our collective technology industry. Be sure to follow and engage with our <a href="https://www.youtube.com/channel/UCgXlqWDCg-9RP1eckf0s6KA?sub_confirmation=1">YouTube</a>, <a href="https://www.linkedin.com/showcase/meshery">LinkedIn</a>, and other social accounts.</p>
 
     <h4>Q: I am not a coder, can I contribute too?</h4>
     <p>A: Absolutely! Some community members join to contribute to code, others to documentation, design, or community efforts. All members are most welcome. Be sure to introduce yourself in the <a href="https://slack.meshery.io/">Meshery Slack</a> and let other community members get acquainted with you.</p>
