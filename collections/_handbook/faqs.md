@@ -62,7 +62,7 @@ toc: true
     <p>A: Check if any assigned issues are stale (assigned some time back but with no recent activity or updates). If you find such issues, comment to ask if you can help. Alternatively, look for issues labeled with <a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Ameshery+label%3A%22help+wanted%22+">"help-wanted"</a>.</p>
 
     <h4>Q: In addition to the routinely scheduled project meetings, do project contributors ever meet separately to deep-dive on special topics?</h4>
-    <p>A: Yes, outside of the regularly scheduled meetings on the <a href="">community calendar</a>, there are other meetings that occur to facilitate deeper discussion on particular topics. These may be scheduled in advance on the community calendar or self-organized by interested contributors using Slack huddles or Zoom meetings.</p>
+    <p>A: Yes, outside of the regularly scheduled meetings on the <a href="/calendar">community calendar</a>, there are other meetings that occur to facilitate deeper discussion on particular topics. These may be scheduled in advance on the community calendar or self-organized by interested contributors using Slack huddles or Zoom meetings.</p>
 
     <h4>Q: How do I access the community docs?</h4>
     <p>A: You can access the Meshery documentation at <a href="https://docs.meshery.io/">docs.meshery.io</a>. For community-specific resources, check the <a href="https://docs.meshery.io/project/community">community section</a> of the documentation.</p>
