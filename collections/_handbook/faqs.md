@@ -1,7 +1,7 @@
 ---
 layout: page
 title: FAQs
-description: "General frequently asked questions (FAQ) about Layer5 and people who contribute through reporting issues, to submit pull requests or patches, and other activities."
+description: "General frequently asked questions (FAQ) about Meshery and people who contribute through reporting issues, to submit pull requests or patches, and other activities."
 toc: true
 ---
 
