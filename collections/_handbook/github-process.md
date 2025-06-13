@@ -1,28 +1,30 @@
 ---
 layout: page
 title: GitHub Process
-description: Layer5’s GitHub Process promotes consistency and efficiency across repositories by standardizing issue and pull request labels, templates, and workflows.
+description: Meshery’s GitHub Process promotes consistency and efficiency across repositories by standardizing issue and pull request labels, templates, and workflows.
 ---
 
-Layer5’s GitHub Process emphasizes standardization through labels, templates, bots, and workflows to streamline contributions and reduce CI overhead across its growing repository ecosystem.
+Meshery’s GitHub Process emphasizes standardization through labels, templates, bots, and workflows to streamline contributions and reduce CI overhead across its growing repository ecosystem.
 
 ---
 
 ## Overview
 
-As the number of repositories under the [Layer5 GitHub organization](https://github.com/layer5io) grows, maintaining consistency becomes essential. Labels, templates, bots, and workflows are applied organization-wide to support continuous integration and contribution management.
+As the number of repositories under the [Meshery GitHub organization](https://github.com/meshery) grows, maintaining consistency becomes essential. Labels, templates, bots, and workflows are applied organization-wide to support continuous integration and contribution management.
+
+For more about Meshery, visit [meshery](https://meshery.io).
 
 ---
 
 ## Issue and Pull Request Templates
 
-Layer5 repositories include predefined issue and pull request templates. These templates ensure contributors provide necessary context, enabling faster reviews and better collaboration.
+Meshery repositories include predefined issue and pull request templates. These templates ensure contributors provide necessary context, enabling faster reviews and better collaboration.
 
-Find them in the `.github` folder of each repository.
+Find them in the `.github` folder of each repository or explore templates on [github.com/meshery](https://github.com/meshery).
 
 ### Template Repositories
 
-- `layer5-repo-template`
+- `meshery-repo-template`
 - `meshery-adapter-template`
 
 ---
@@ -58,9 +60,9 @@ Secrets used across repositories for CI/CD workflows and integrations:
 
 ## Issue Labels
 
-Organization-wide standard labels help classify and triage issues:
+Organization-wide standard labels help classify and triage issues.
 
-**Area Labels**
+### Area Labels
 
 - `area/ci`: CI / Build & release
 - `area/docs`: Documentation
@@ -71,36 +73,65 @@ Organization-wide standard labels help classify and triage issues:
 - `area/workloads`: Workload-related
 - `area/helm`: Helm charts
 
-**Component Labels**
+### Component Labels
 
-- `component/api`, `component/mesheryctl`, `component/ui`
-- `component/filters`, `component/patterns`, `component/meshsync`
+- `component/api`
+- `component/mesheryctl`
+- `component/ui`
+- `component/filters`
+- `component/patterns`
+- `component/meshsync`
 - `component/meshery-perf`
 
-**Issue Type & Status**
+### Issue Type & Status
 
-- `good first issue`, `help wanted`
-- `issue/invite`, `issue/blocked`, `issue/design required`
-- `issue/duplicate`, `issue/invalid`, `issue/stale`
-- `issue/tweet`, `issue/remind`, `issue/willfix`
+- `good first issue`
+- `help wanted`
+- `issue/invite`
+- `issue/blocked`
+- `issue/design required`
+- `issue/duplicate`
+- `issue/invalid`
+- `issue/stale`
+- `issue/tweet`
+- `issue/remind`
+- `issue/willfix`
 
-**Kind**
+### Kind
 
-- `kind/bug`, `kind/chore`, `kind/enhancement`
-- `kind/feature`, `kind/proposal`, `kind/question`
-- `kind/child`, `kind/epic`
+- `kind/bug`
+- `kind/chore`
+- `kind/enhancement`
+- `kind/feature`
+- `kind/proposal`
+- `kind/question`
+- `kind/child`
+- `kind/epic`
 
-**Language**
+### Language
 
-- `language/go`, `language/javascript`, `language/ruby`
+- `language/go`
+- `language/javascript`
+- `language/ruby`
 
-**Priority**
+### Priority
 
-- `priority/urgent`, `priority/high`, `priority/low`
+- `priority/urgent`
+- `priority/high`
+- `priority/low`
 
-**Service Meshes**
+### Service Meshes
 
-- `service-mesh/istio`, `service-mesh/linkerd`, `service-mesh/consul`, etc.
+- `service-mesh/istio`
+- `service-mesh/linkerd`
+- `service-mesh/consul`
+- `service-mesh/app-mesh`
+- `service-mesh/kuma`
+- `service-mesh/cpx`
+- `service-mesh/maesh`
+- `service-mesh/nginx`
+- `service-mesh/nsm`
+- `service-mesh/tanzu`
 
 ---
 
@@ -108,17 +139,23 @@ Organization-wide standard labels help classify and triage issues:
 
 These labels guide workflow execution and review processes:
 
-- `Refactor`, `Fix`, `On-hold`, `Dependabot`, `release`, `Draft`
+- `Refactor`
+- `Fix`
+- `On-hold`
+- `Dependabot`
+- `release`
+- `Draft`
 - `Approved`: PR has passed required approvals
 - `help wanted`: Needs contributor assistance
-- `needs-ok-to-test`, `awaiting review`
+- `needs-ok-to-test`
+- `awaiting review`
 
-**CI Logic Labels**
+### CI Logic Labels
 
-- `docs`: Builds Meshery docs site
+- `docs`: Builds [Meshery Docs](https://docs.meshery.io) site
 - `component/mesheryctl`: Builds CLI
 - `area/ui`: Builds UI
-- `component/meshery-server`: Meshery Server (may be skipped conditionally)
+- `component/meshery-server`: Meshery Server (conditionally built)
 
 ---
 
@@ -145,4 +182,4 @@ GitHub Actions manage workflow automation:
 
 ---
 
-_Every contribution to Layer5 benefits from a streamlined, consistent GitHub process. Thank you for being part of it._
+_Meshery is an open-source, community-driven project. This GitHub process ensures scalable and welcoming collaboration. Learn more at [meshery.io](https://meshery.io)._
