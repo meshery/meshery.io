@@ -1,7 +1,7 @@
 ---
 layout: person
 name: Mario Arriaga
-position: Maintainer, Meshery CI
+position: Adopter, F5
 image_path: /assets/images/photos/mario-arriaga.webp
 github: MarioArriaga92
 linkedin: mario-arriaga-29a600b5
