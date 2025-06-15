@@ -2,29 +2,10 @@
 layout: page
 title: FAQs
 description: "General frequently asked questions (FAQ) about Meshery and people who contribute through reporting issues, to submit pull requests or patches, and other activities."
-toc: true
 ---
 
-<div class="handbook-content-container">
-  <div class="handbook-toc">
-    <h2>Table of Contents</h2>
-    <ul>
-      <li><a href="https://meshery.io/community/handbook/about">About Meshery</a></li>
-      <li><a href="https://meshery.io/community/handbook/code-of-conduct">Code of Conduct</a></li>
-      <li><a href="https://meshery.io/community/handbook/community-roles">Community Roles</a></li>
-      <li><a href="https://meshery.io/community/handbook/community">Community</a></li>
-      <li><a href="https://meshery.io/community/handbook/connect-with-us">Connect with us</a></li>
-      <li><a href="https://meshery.io/community/handbook/contribution">Contribution</a></li>
-      <li><a href="https://meshery.io/community/handbook/github-process">GitHub Process</a></li>
-      <li><a href="https://meshery.io/community/handbook/instructions">GitHub Organisation Memberhsip</a></li>
-      <li><a href="https://meshery.io/community/handbook/learning">Learning</a></li>
-      <li><a href="https://meshery.io/community/handbook/projects">Projects</a></li>
-      <li><a href="https://meshery.io/community/handbook/recognition">Recognition</a></li>
-    </ul>
-  </div>
 
   <div class="handbook-content">
-    <h2 id="general-faqs">General FAQs</h2>
 
     <h4>Q: Are Meshery's solutions open source?</h4>
     <p>A: Yes, all Meshery projects are licensed under Apache v2. Meshery is a Cloud Native Computing Foundation project that embraces open source principles and collaborative development.</p>
@@ -77,4 +58,3 @@ toc: true
     </ul>
     <p>For detailed installation instructions, visit <a href="https://docs.meshery.io/installation">docs.meshery.io/installation</a>.</p>
   </div>
-</div>
