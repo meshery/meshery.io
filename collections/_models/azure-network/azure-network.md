@@ -215,7 +215,7 @@ componentsCount: 50
 relationships: 
 - type: "Parent"
   kind: "Hierarchical"
-  description: "Reltionship child parent for network"
+  description: "A hierarchical inventory relationship in which the configuration of Virtual Network (parent component) is patched with the configuration of Subnet (child component). "
 relationshipsCount: 1
 featureList: [
   "Drag-n-drop cloud native infrastructure designer to configure, model, and deploy your workloads.",
