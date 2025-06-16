@@ -69,7 +69,34 @@ components:
   description: 
 componentsCount: 14
 relationships: 
-relationshipsCount: 0
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of APIM Service(parent component) is patched with the configuration of API(child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of APIM Service(parent component) is patched with the configuration of ApiVersionSet(child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of APIM Service(parent component) is patched with the configuration of AuthorizationProvider(child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of APIM Service(parent component) is patched with the configuration of Backend(child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of APIM Service(parent component) is patched with the configuration of NamedValue(child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of APIM Service(parent component) is patched with the configuration of Policy(child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of APIM Service(parent component) is patched with the configuration of PolicyFragment(child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of APIM Service(parent component) is patched with the configuration of Product(child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of APIM Service(parent component) is patched with the configuration of Subscription(child component). "
+relationshipsCount: 9
 featureList: [
   "Drag-n-drop cloud native infrastructure designer to configure, model, and deploy your workloads.",
   "Invite anyone to review and make changes to your private designs.",
