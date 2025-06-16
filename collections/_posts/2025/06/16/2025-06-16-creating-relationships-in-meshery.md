@@ -1,16 +1,17 @@
 ---
 title: Creating Relationships in Meshery
-author: Yogendar Singh
+subheading: A guide to create relationships
 date: 2025-06-16
+author: Yogendar Singh
 categories: 
   - relationships
   - kanvas
   - models
-featured-image: /assets/images/logos/meshery-logo-dark-text-side.svg
 redirect_from: /blog/creating-relationships-in-meshery
+featured-image: /assets/images/logos/meshery-logo-dark-text-side.svg
 ---
 
-Hey Folks 👋
+**Hey Folks** 👋
 
 Relationships in Meshery are what make it smarter by quickly connecting the necessary components to each other. This ability gives Meshery an edge in modeling and managing complex cloud native environments. Relationships aren’t just about linking things, they automate how components interact, saving time and reducing manual errors. In this post, we’ll walk through how relationships are created in Meshery and the different ways you can test them to ensure your components work together just as you expect.
 
@@ -32,20 +33,27 @@ Each relationship type is designed to reflect how components interact, inherit f
 
 You can create relationships in Meshery using the `mesheryctl registry generate command`, which takes a spreadsheet as input and generates your models and relationships automatically. To get started, either create a copy of the Meshery integration spreadsheet and add your own entries, or download three separate CSV files named Models, Components, and Relationships with strict naming conventions. This method is ideal if you prefer working from the command line and want to manage your relationships programmatically.
 
+
+**Using Google spreadsheet**
+
 ```bash
-   mesheryctl registry generate --spreadsheet-id "1DZHnzxYWOlJ69Oguz4LkRVTFM79kC2tuvdwizOJmeMw --spreadsheet-cred "[spreadsheet-credential-file]"
+   mesheryctl registry generate --spreadsheet-id "1DZHnzxYWOlJ69Oguz4LkRVTFM79kC2tuvdwizOJmeMw 
+   --spreadsheet-cred "[spreadsheet-credential-file]"
 ```
+
+**Using local csv files**
+
 ```bash
-    mesheryctl registry generate --directory &lt;path-to-directory&gt;
+    mesheryctl registry generate --directory <path-to-directory>
 ```
 
 #### Creating Relationships Using the UI
 
 Meshery’s UI offers a user-friendly way to create relationships as well. You can upload your CSV files directly through the interface in the kanvas or from the registry, or if you have OCI artifact files for your models, you can upload those too. This approach is great for users who prefer a visual workflow or want to quickly import and manage relationships without using CLI commands. 
 
-<img src="/assets/images/posts/2025-06-16-creating-relationships-in-meshery/registry-import.png" style="padding:.5rem;">
+<img alt="Registry import option" src="/assets/images/posts/2025-06-16-creating-relationships-in-meshery/registry-import.png" style="padding:.5rem;" width="100%">
 
-<img src="/assets/images/posts/2025-06-16-creating-relationships-in-meshery/kanvas-import.png" style="padding:.5rem;">
+<img alt="Kanvas Import Option" src="/assets/images/posts/2025-06-16-creating-relationships-in-meshery/kanvas-import.png" style="padding:.5rem;" width="100%">
 
 ## How to test/debug relationships
 
