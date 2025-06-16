@@ -1,7 +1,7 @@
 ---
 layout: person
 name: Xin Huang
-position: Maintainer, Adapters
+position: Adopter, Intel
 image_path: /assets/images/photos/xin-huang.webp
 github: gyohuangxin
 twitter: gyohuang
