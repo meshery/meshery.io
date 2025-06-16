@@ -49,7 +49,7 @@ You can create relationships in Meshery using the `mesheryctl registry generate`
 
 #### Creating Relationships Using the UI
 
-Meshery’s UI offers a user-friendly way to create relationships as well. You can upload your CSV files directly through the interface in the kanvas or from the registry, or if you have OCI artifact files for your models, you can upload those too. This approach is great for users who prefer a visual workflow or want to quickly import and manage relationships without using CLI commands. 
+Meshery’s UI offers a user-friendly way to create relationships as well. You can upload your CSV files directly through the interface in Kanvas or from the registry, or if you have OCI artifact files for your models, you can upload those too. This approach is great for users who prefer a visual workflow or want to quickly import and manage relationships without using CLI commands. 
 
 <img alt="Registry import option" src="/assets/images/posts/2025-06-16-creating-relationships-in-meshery/registry-import.png" style="padding:.5rem;" width="100%">
 
