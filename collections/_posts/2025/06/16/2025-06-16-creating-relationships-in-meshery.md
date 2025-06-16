@@ -15,7 +15,7 @@ featured-image: /assets/images/logos/meshery-logo-dark-text-side.svg
 
 Relationships in Meshery are what make it smarter by quickly connecting the necessary components to each other. This ability gives Meshery an edge in modeling and managing complex cloud native environments. Relationships aren’t just about linking things, they automate how components interact, saving time and reducing manual errors. In this post, we’ll walk through how relationships are created in Meshery and the different ways you can test them to ensure your components work together just as you expect.
 
-## What are the different kind of relationships?
+## What are the different kinds of relationships?
 
 Meshery supports several kinds of relationships to help you model real-world connections between your cloud native components:
 
