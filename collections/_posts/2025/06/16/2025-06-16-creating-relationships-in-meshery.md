@@ -93,7 +93,7 @@ If you’re still running into issues, review your model and relationship defini
 
 ## Need more information
 
-Refers to our docs section for more details:
+Refer to our docs section for more details:
 
 Get started with the [Contributor's Guide](https://docs.meshery.io/project/contributing/contributing-relationships)
 
