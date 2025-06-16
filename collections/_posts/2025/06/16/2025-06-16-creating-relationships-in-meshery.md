@@ -31,7 +31,7 @@ Each relationship type is designed to reflect how components interact, inherit f
 
 #### Creating Relationships Using the CLI
 
-You can create relationships in Meshery using the `mesheryctl registry generate command`, which takes a spreadsheet as input and generates your models and relationships automatically. To get started, either create a copy of the Meshery integration spreadsheet and add your own entries, or download three separate CSV files named Models, Components, and Relationships with strict naming conventions. This method is ideal if you prefer working from the command line and want to manage your relationships programmatically.
+You can create relationships in Meshery using the `mesheryctl registry generate` command, which takes a spreadsheet as input and generates your models and relationships automatically. To get started, either create a copy of the Meshery integration spreadsheet and add your own entries, or download three separate CSV files named Models, Components, and Relationships with strict naming conventions. This method is ideal if you prefer working from the command line and want to manage your relationships programmatically.
 
 
 **Using Google spreadsheet**
