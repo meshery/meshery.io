@@ -10,6 +10,5 @@ location: Gujarat, India
 bio: "I'm Amit Amrutiya, a developer who loves building reliable and easy-to-use digital solutions. I enjoy creating apps that are both user-friendly and secure. I focus on delivering fast and efficient web and software projects. I'm also passionate about cloud technologies and contributing to open-source, helping make software better for everyone."
 badges:
    - meshery
-   - kanvas
 status: Active
 ---
