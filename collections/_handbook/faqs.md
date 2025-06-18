@@ -14,7 +14,7 @@ description: "General frequently asked questions (FAQ) about Meshery and people 
     <p>A: You can start by going through the <a href="/newcomers">Newcomers' Welcome Guide</a>. This guide will help you understand how to get started with contributing to Meshery.</p>
 
     <h4>Q: What exactly is a MeshMate?</h4>
-    <p>A: Meshery <a href="">MeshMates</a> are individuals committed to helping community members be successful contributors. MeshMates guide and support community members, helping them identify projects they can contribute to based on their interests, directing them to groups to join, and helping them grow their cloud native knowledge.</p>
+    <p>A: Meshery <a href="/community">MeshMates</a> are individuals committed to helping community members be successful contributors. MeshMates guide and support community members, helping them identify projects they can contribute to based on their interests, directing them to groups to join, and helping them grow their cloud native knowledge.</p>
 
     <h4>Q: How do I join the mailing list?</h4>
     <p>A: You can subscribe to the Meshery mailing list <a href="https://meshery.io/subscribe">here</a>.</p>
