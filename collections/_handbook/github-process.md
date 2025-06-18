@@ -313,4 +313,4 @@ GitHub Actions manage workflow automation:
 
 ---
 
-_Meshery is an open-source, community-driven project. This GitHub process ensures scalable and welcoming collaboration. Learn more at **[meshery.io](https://meshery.io)**._
+_Meshery is an open source, community-driven project. This GitHub process ensures scalable and welcoming collaboration. Learn more at **[meshery.io](https://meshery.io)**._
