@@ -43,11 +43,7 @@ components:
   colorIcon: assets/images/integration/crossplane-provider-exoscale/components/provider-config-usage/icons/color/provider-config-usage-color.svg
   whiteIcon: assets/images/integration/crossplane-provider-exoscale/components/provider-config-usage/icons/white/provider-config-usage-white.svg
   description: 
-- name: redis
-  colorIcon: assets/images/integration/crossplane-provider-exoscale/components/redis/icons/color/redis-color.svg
-  whiteIcon: assets/images/integration/crossplane-provider-exoscale/components/redis/icons/white/redis-white.svg
-  description: 
-componentsCount: 9
+componentsCount: 8
 relationships: 
 relationshipsCount: 0
 featureList: [
