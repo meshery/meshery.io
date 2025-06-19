@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Mentorship Programs"
-permalink: /community/handbook/mentorship-programs
+permalink: /community/handbook/programs
 description:  "Explore the mentorship programs Meshery participates in and how to join."
 programs:
 - id: 1
@@ -135,12 +135,8 @@ programs:
 .program-icon {
   height: 100%;
   width: 100%;
-  margin: 0px 10vw;
+  margin: 0px 5vw;
   object-fit: contain;
-}
-
-.dark-mode .program-icon[data-dark] {
-  content: url(attr(data-dark));
 }
 
 @media (min-width: 768px) {
@@ -158,7 +154,7 @@ programs:
   }
 
   .program-body {
-    flex:2;
+    flex: 2;
   }
 
   .learn-more-button {
