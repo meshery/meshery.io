@@ -8,217 +8,8 @@ heading: Meshery Talks and Presentations
 redirect_from: talks-and-presentations
 ---
 
-<style>
-.modal-window {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 200;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s;
-}
-
-.modal-window > div {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width:fit-content;
-  height: fit-content;
-  transform: translate(-50%, -50%);
-  padding: 2.5em 2em 2em 2em;
-  border-radius: 1rem;
-}
-
-.modal-window header {
-  font-weight: bold;
-}
-
-.modal-window h1 {
-  font-size: 200%;
-}
-
-.modal-header {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
-  }
-
-.button-para{
-  margin-bottom: 1rem;
-  width: fit-content;
-}
-iframe{
-  margin: 0 2rem 0 2rem;
-  border-radius: 0.3rem;
-}
-
-.modal-window div div:not(:last-of-type) {
-  margin-bottom: 15px;
-}
-
-.modal-window div div:last-of-type {
-  text-align: center;
-}
-
-small {
-    font-size: 125%;
-    color: var(--color-primary-qtext);
-    font-weight: bold;
-  }
-
-.event{
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-.modal-content a{
-  font-size: 150%;
-  font-weight: bold;
-}
-
-.close {
-  color: var(--color-secondary-light);
-}
-
-.close:hover {
-    color: var(--brand-color-primary);
-    opacity: 0.8;
-    text-decoration: none;
-  }
-
-.open-modal-btn{
-  display: block;
-  margin: 0 auto; 
-}
-
-.talks-description{
-  text-align: justify; 
-  text-justify: inter-word;
-  flex-basis: 100%;
-}
- 
-table{
-  display: table;
-  width: 100%;
-  height: auto;
-  border-collapse: collapse;
-  margin: 2rem auto;
-  border: none;
-  box-shadow:0 2px 16px rgba(0,0,0,0.4);
-  padding: 2rem;
-  color: var(--color-secondary-light);
-} 
-
-th {
-  color: white;
-  text-transform: uppercase;
-  font-size: 1.1rem;
-}
-
-th, tr {
-  height: 3.75rem;
-  vertical-align: middle;
-}
-
-tr:nth-child(odd) {
-  background: var(--background-grey);
-}
-
-th {
-  background-color: #3C494F;
-}
-
-th, td {
-  text-align: center;
-  padding: 0 0.625rem; 
-  border: none;
-}
-
-th.topic{
-  width: 60%;
-}
-
-td a{
-  text-decoration: none;
-}
-
-.presenter a{
-  color: var(--color-secondary-light);
-}
-
-td a:hover{
-  text-decoration: none;
-  color: #3C484E;
-}
-
-
-
-td{
-  font-size: 1.1rem;
-}
-
-.table-cell-style{
-  padding: 0.4rem 0;
-}
-
-.presenter span {
-  display: block;
-  margin: 0.2rem 0;
-}
-
-.tutorials-heading{
-  margin-top: 8rem;
-  text-align: center;
-}
-
-.tutorials-heading p{
-  margin: 0;
-}
-
-.recording-link{
-  width: 25px;
-  cursor: pointer;
-  filter: var(--logo-filter);
-}
-
-.presentation-link{
-  width: 25px;
-  cursor: pointer;
-  filter: var(--logo-filter);
-}
-@media screen and (max-width: 700px){
-  .modal-window{
-    width: 100%;
-    height: 100%;
-    margin-top: 2rem;
-  }
-  iframe{
-    height:150px;
-    width: auto;
-    margin: 0;
-  }
-  
-}
-
-@media screen and (max-width: 450px){
-  th {
-  color: white;
-  text-transform: uppercase;
-  font-size: 1rem;
-  }
-  td{
-  font-size: 0.9rem;
-  }
-}
-
-</style>
-
-<section class="event">
+<div class = "talks-and-presentations">
+  <section class="event">
   <div class="container flex">
     <div class="text talks-description" >
       <h2>CNCF On-Demand Webinar: <strong>Meshery - The Cloud Native Manager</strong></h2>
@@ -250,7 +41,7 @@ td{
             <td class = "table-cell-style">
               {% if talk.video %}
               <img src="{{ site.baseurl }}/assets/images/social/youtube.svg"
-              alt="Service Mesh configuration Comparison" loading="lazy"
+              alt="YouTube Icon" loading="lazy"
               class="recording-link"/>
                 <div id="open-modal" class="modal-window">
                   <div class ="modal-content">
@@ -270,7 +61,7 @@ td{
               {% endif %}
               {% if talk.presentation %}
               <span><a href={{talk.presentation}} target="_blank"><img src="{{ site.baseurl }}/assets/images/social/presentation.svg"
-                alt="Service Mesh configuration Comparison" loading="lazy"
+                alt="YouTube Icon" loading="lazy"
                 class="presentation-link"/></a></span>
               {% endif %}
             </td>
@@ -295,6 +86,7 @@ td{
   <thead>
       <tr>
           <th class="topic">Topic</th>
+          <th>Date</th>
           <th>Resources</th>
           <th>Presenter</th>
       </tr>
@@ -304,6 +96,7 @@ td{
       {% if talk.type == 'tutorial' %}
         <tr >
             <td>{{talk.title}}</td>
+            <td>{{talk.date}}</td>
             <td class = "table-cell-style">
               {% if talk.video %}
               <img src="{{ site.baseurl }}/assets/images/social/youtube.svg"
@@ -343,4 +136,5 @@ td{
       
   </tbody>
 </table>
+</div>
 <script src="{{  site.baseurl }}/assets/js/talks-presentations.js"></script>
