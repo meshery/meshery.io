@@ -14,7 +14,7 @@ components:
 - name: account
   colorIcon: assets/images/integration/azure-monitor/components/account/icons/color/account-color.svg
   whiteIcon: assets/images/integration/azure-monitor/components/account/icons/white/account-white.svg
-  description: Observability and Analysis
+  description: 
 componentsCount: 1
 relationships: 
 relationshipsCount: 0

@@ -12,7 +12,7 @@ redirect-from: /blog/kubecon-cloudnativecon
 <img src="{{site.baseurl}}/assets/images/posts/2020-12-02-kubecon+cloudnativecon/service-mesh-implementations.png" style="width:100%" /></div>
 As more organizations implement service meshes, they are finding what works and what needs more work, and they are creating new management practices around this knowledge. A few tried-and-tested best practices were detailed last month during KubeCon+CloudNativeCon.
 
-“There’s a lot to say about each of these service meshes and how they work: their architecture, why they’re made, what they’re focused on, what they do when they came about and why some of them aren’t here anymore and why we’re still seeing new ones,” Lee Calcote, founder of Layer5, explained during his talk with Kush Trivedi, a Layer5 maintainer, entitled “Service Mesh Specifications and Why They Matter in Your Deployment.”
+“There’s a lot to say about each of these service meshes and how they work: their architecture, why they’re made, what they’re focused on, what they do when they came about and why some of them aren’t here anymore and why we’re still seeing new ones,” Lee Calcote, founder of Meshery, explained during his talk with Kush Trivedi, a Meshery maintainer, entitled “Service Mesh Specifications and Why They Matter in Your Deployment.”
 
 Service mesh is increasingly seen as a requirement to manage microservices in Kubernetes environments, offering a central control plane to manage microservices access, testing, metrics and other functionalities. One-third of the respondents in The New Stack survey of our readers said their organizations already use service mesh. Among the numerous service mesh options available; Envoy, Istio, Linkerd and Kuma are but a few on offer.
 
