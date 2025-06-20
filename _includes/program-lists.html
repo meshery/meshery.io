@@ -1,11 +1,26 @@
-
 <style>
-body {  
+body {
   background: white;
+  margin: 0;
+  padding: 2rem;
 }
+
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.wrapper {
+  width: fit-content;
+}
+
+
 .card {
-  width: 200px;
-  height: 200px;
+  width: 270px;
+  height: 270px;
   border-radius: 15px;
   padding: 1.5rem;
   position: relative;
@@ -13,24 +28,21 @@ body {
   align-items: flex-end;
   justify-content: center;
   transition: 0.4s ease-out;
-  box-shadow: 2px 2px 6px 0px  #00d3a9;
+  box-shadow: 2px 2px 6px 0px #00d3a9;
+  overflow: hidden;
 }
+
 .card:hover {
-  transform: translateY(10px);
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 4px 4px 12px 0px #00b493;
 }
-.card:hover:before {
-  opacity: 1;
-}
-.card:hover .info {
-  opacity: 1;
-  transform: translateY(0px);
-}
+ 
+
 .card:before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  display: block;
   width: 100%;
   height: 100%;
   border-radius: 15px;
@@ -39,6 +51,12 @@ body {
   transition: 0.5s;
   opacity: 0;
 }
+
+.card:hover:before {
+  opacity: 1;
+}
+
+
 .card img {
   width: 80%;
   height: 80%;
@@ -47,18 +65,13 @@ body {
   top: 0;
   left: 0;
   margin-left: 10%;
-  margin-top: 10%; 
+  margin-top: 10%;
   border-radius: 15px;
+  user-select: none;
+  pointer-events: none;
 }
 
-.card-img {
-  object-fit: contain;
-  user-select: none;
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-}
+
 .card .info {
   position: relative;
   z-index: 3;
@@ -66,45 +79,40 @@ body {
   opacity: 0;
   transform: translateY(30px);
   transition: 0.5s;
+  text-align: center;
+  width: 100%;
 }
+
+.card:hover .info {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+
 .card .info h1 {
-  margin: 0px;
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+  word-break: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+  text-align: center;
+  padding: 0 6px;
 }
-.card .info p {
-  letter-spacing: 1px;
-  font-size: 15px;
-  margin-top: 8px;
-}
-.card .info button {
-  padding: 0.6rem;
-  outline: none;
-  border: none;
-  border-radius: 3px;
-  background: white;
-  color: black;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.4s ease;
-}
-.card .info button:hover {
-  background: dodgerblue;
-  color: white;
-}
+</style> 
 
-</style>
 
-  {% for program in site.data.programs  %}
-  <a href="{{program.link}}">
-  <wrapper>
-    <div class="card">
-      <img src="{{program.imagePath}}">
-      <div class="info">
-        <h1>{{program.name}}</h1>
+<div class="cards-container">
+  {% for program in site.data.programs %}
+    <a href="{{ program.link }}" style="text-decoration: none;">
+      <div class="wrapper">
+        <div class="card">
+          <img src="{{ program.imagePath }}" alt="{{ program.name }}" />
+          <div class="info">
+            <h1>{{ program.name }}</h1>
+          </div>
+        </div>
       </div>
-      </div>
-      </wrapper>
     </a>
   {% endfor %}
-  
-
-
+</div>
