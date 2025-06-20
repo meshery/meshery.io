@@ -1,34 +1,69 @@
 <div class="contributor flex"> 
     <div class="container {% if page.full_width %}max-container{% endif %}">
-        <h2>MeshMate Members</h2>
-        <p style="text-align: center;">A warm and welcoming collection of open sourcers.</p>
-        <a href="https://slack.meshery.io/" style="text-decoration: none !important;">
-          <h4 style="text-align:center;color:aliceblue;">
-            <input class="join-community-btn" type="submit" value="Join the Community">
-          </h4>
-        </a>
-
-        {% include partials/filter-members.html %}
-
+    <section style="padding:20px 0;">
+        <div class="container flex meshmate-container">
+            <div class="text" style="width: auto;text-align: left;">
+                <h4 style="font-weight: 100; font-size:larger; margin:0;">A warm and welcoming collection of open sourcers</h4>
+                <h1 class="sub-header community-sub-header">MeshMates</h1>
+                <p style="text-align: justify;">
+                    MeshMates are committed to helping community members be successful contributors. MeshMates aid in identifying areas of projects to engage within, working groups to join, and in helping community members grow in their open source and cloud native knowledge.
+                    By connecting one-on-one, MeshMates will share tips on how to have the best community experience possible
+                </p>
+                <div class="button-wrapper">
+                    <a href="https://slack.meshery.io" class="text highlight" style="padding: 10px;">
+                        Join the community
+                    </a>
+                </div>
+            </div>
+            <div class="image">
+                <div class="project-name" style="display: flex;">
+                    <img src="/assets/images/logos/meshmate-dark.svg"
+                        data-logo-for-dark="/assets/images/logos/meshmate-light.svg"
+                        data-logo-for-light="/assets/images/logos/meshmate-dark.svg" alt="MeshMate Logo"
+                        id="logo-dark-light" loading="lazy" width="80%" style="margin-left: auto;background-color: var(--color-secondary-light-two);border-radius: 0 0 4.375rem 4.375rem;padding: 10px;">
+                </div>
+            </div>
+        </div>
+    </section>
+        <h1>Active Meshmates</h1>
+        <p>MeshMate is a distinction that is awarded to select members of the community that who innately align with the Meshery culture of helping others, paying it forward, and have a commitment to sharing their knowledge of the project with the community.
+            MeshMates' commitment to helping others and sharing their expertise has a huge impact on the Meshery community – don't hesitate to reach out to them!</p>
         <ul class="contributor">  
-        <!-- List all Contributors -->
             {% for page in site.contributors %}
                 {% if page.layout != 'archive' %}
-                {% if page.MeshMate %}
+                {% if page.meshmate and page.status != "Inactive" %}
+                 
                 <li>
-                    <div class="square-image">
-                        <a href="{{ page.url }}">
-                        <img {% if page.status == "Active" %} class="b-active" {% else %} class="b-inactive" {% endif %} src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"  onerror="this.src='/assets/images/meshery-color.svg'" />        
-                        </a>
+                    <a href="{{ page.url }}">
+                    <div class="square-image"> 
+                        <img {% if page.status == "Active" %} class="b-active" {% else %} class="b-inactive" {% endif %} src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"  onerror="this.src='/assets/images/meshery-color.svg'" /> 
                     </div>
-                    <div class="names">{{ page.name }}</a></div>
-                    
+                    <div class="names">{{ page.name }}</div>
+                </a>
                 </li>
                 {% endif %}
                 {% endif %}
             {% endfor %}
+        </ul>
 
-            <!-- List a specific contributor -->
+        <h1>Emeritus MeshMates</h1>
+        <p>These MeshMates have previously served the Meshery community with distinction. While they are no longer active in the MeshMate program, their contributions and impact continue to influence our community.</p>
+        <ul class="contributor">  
+            {% for page in site.contributors %}
+                {% if page.layout != 'archive' %}
+                {% if page.meshmate and page.status == "Inactive" %}
+               
+                <li>
+                     <a href="{{ page.url }}">
+                    <div class="square-image">
+                        <img {% if page.status == "Active" %} class="b-active" {% else %} class="b-inactive" {% endif %} src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"  onerror="this.src='/assets/images/meshery-color.svg'" /> 
+                    </div>
+                    <div class="names">{{ page.name }}</div>
+                </a>
+                </li>
+                {% endif %}
+                {% endif %}
+            {% endfor %}
         </ul>
     </div>	
 </div>

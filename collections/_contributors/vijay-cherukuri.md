@@ -5,7 +5,7 @@ position: MeshMate
 image_path: /assets/images/photos/vijay-cherukuri.jpg
 github: vijcheru
 blurb: Mesh Head
-status: Active
-MeshMate: true
+status: Inactive
+meshmate: true
 
 ---
