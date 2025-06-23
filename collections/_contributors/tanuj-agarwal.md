@@ -6,7 +6,7 @@ image_path: /assets/images/photos/tanuj-agarwal.jpg
 twitter: tanuj_agarwal22
 github: Tanuj22
 blurb: Mesh Head
-status: Active
-MeshMate: true
+status: Inactive
+meshmate: true
 
 ---

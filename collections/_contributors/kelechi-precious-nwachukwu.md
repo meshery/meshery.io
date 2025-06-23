@@ -6,7 +6,7 @@ image_path: /assets/images/photos/kelechi-nwachukwu.jpg
 twitter: PluckyPrecious
 github: PluckyPrecious
 blurb: Mesh Head
-status: Active
-MeshMate: true
+status: Inactive
+meshmate: true
 
 ---
