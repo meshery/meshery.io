@@ -8,6 +8,7 @@ heading: Meshery Talks and Presentations
 redirect_from: talks-and-presentations
 ---
 
+{% assign slug = talk.title | slugify %}
 <div class = "talks-and-presentations">
   <section class="event">
   <div class="container flex">
@@ -42,7 +43,7 @@ redirect_from: talks-and-presentations
               <img src="{{ site.baseurl }}/assets/images/social/youtube.svg"
               alt="YouTube Icon" loading="lazy"
               class="recording-link"/>
-                <div id="open-modal" class="modal-window">
+                <div id="modal-{{ talk.title | slugify }}" class="modal-window">
                   <div class ="modal-content">
                     <button class = "modal-close close">&times;</button>
                     <h1>{{talk.title}}</h1>
@@ -59,9 +60,9 @@ redirect_from: talks-and-presentations
                 </div>
               {% endif %}
               {% if talk.presentation %}
-              <span><a href={{talk.presentation}} target="_blank"><img src="{{ site.baseurl }}/assets/images/social/presentation.svg"
-                alt="YouTube Icon" loading="lazy"
-                class="presentation-link"/></a></span>
+              <span><a href={{talk.presentation}} target="_blank"><img src="{{ site.baseurl }}/assets/images/social/youtube.svg"
+                    alt="YouTube Icon" loading="lazy" class="recording-link" data-modal-id="modal-{{ talk.title | slugify }}" />
+                </a></span>
               {% endif %}
             </td>
             <td class="presenter">
