@@ -40,9 +40,8 @@ redirect_from: talks-and-presentations
             <td>{{talk.title}}</td>
             <td class = "table-cell-style">
               {% if talk.video %}
-              <img src="{{ site.baseurl }}/assets/images/social/youtube.svg"
-              alt="YouTube Icon" loading="lazy"
-              class="recording-link"/>
+              <img src="{{ site.baseurl }}/assets/images/social/youtube.svg" alt="YouTube Icon" loading="lazy" class="recording-link"
+                data-modal-id="modal-{{ talk.title | slugify }}" />
                 <div id="modal-{{ talk.title | slugify }}" class="modal-window">
                   <div class ="modal-content">
                     <button class = "modal-close close">&times;</button>
@@ -60,8 +59,7 @@ redirect_from: talks-and-presentations
                 </div>
               {% endif %}
               {% if talk.presentation %}
-              <span><a href={{talk.presentation}} target="_blank"><img src="{{ site.baseurl }}/assets/images/social/youtube.svg"
-                    alt="YouTube Icon" loading="lazy" class="recording-link" data-modal-id="modal-{{ talk.title | slugify }}" />
+              <span><a href={{talk.presentation}} target="_blank"><img src="{{ site.baseurl }}/assets/images/social/youtube.svg" alt="YouTube Icon" loading="lazy" class="recording-link" data-modal-id="modal-{{ talk.title | slugify }}" />
                 </a></span>
               {% endif %}
             </td>
@@ -100,9 +98,9 @@ redirect_from: talks-and-presentations
             <td class = "table-cell-style">
               {% if talk.video %}
               <img src="{{ site.baseurl }}/assets/images/social/youtube.svg"
-            alt="Service Mesh configuration Comparison" loading="lazy"
-            class="recording-link"/>
-              <div id="open-modal" class="modal-window">
+            alt="Youtube Icon" loading="lazy"
+            class="recording-link" data-modal-id="modal-{{ talk.title | slugify }}"/>
+              <div id="modal-{{ talk.title | slugify }}" class="modal-window">
                 <div class ="modal-content">
                   <button class = "modal-close close">&times;</button>
                   <h1>{{talk.title}}</h1>
