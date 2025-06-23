@@ -10,11 +10,10 @@ As a community, we have put together an excellent set of learning materials and 
 
 You can review the [complete list of learning resources](https://docs.meshery.io/) or jump straight to the type of training you prefer:
 
-- Interactive [cloud native labs](https://layer5.io/learn/service-mesh-labs).
-- Free [cloud native books](https://layer5.io/learn/service-mesh-books).
-- Self-paced [cloud native workshops.](https://layer5.io/learn/workshops/)
-- Recorded training and talks on the [Meshery YouTube Channel.](https://www.youtube.com/@mesheryio/playlists)
-- Multi-course, multi-mesh [cloud native learning paths.](https://layer5.io/learn/learning-paths)
+- Hands on [tutorials](https://docs.meshery.io/guides/tutorials).
+- Interactive labs in [playground](https://play.meshery.io).
+- Well-architected patterns for Kubernetes and all CNCF projects at [Meshery catalog](https://meshery.io/catalog)
+- Recorded training and talks on the [Meshery YouTube Channel.](https://www.youtube.com/@mesheryio/playlists).
 
 These materials were created to be interactive, easy to use, and free for all.
 
@@ -28,7 +27,7 @@ At Meshery, we participate in many different technical conferences, in internati
 
 
 
-A member of the Meshery community has presented at every KubeCon since its inception. Join us at the many events we host or participate in. Check out [Meshery events](https://meshery.io/blog/category/events/) to for a current list of events.
+A member of the Meshery community has presented at every KubeCon since its inception. Join us at the many events we host or participate in. Check out [Meshery events](https://meshery.io/talks-and-presentations) to for a current list of events.
 
 
 ---
