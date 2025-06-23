@@ -6,13 +6,15 @@ description : "Pull requests are the best way to propose changes. Learn our GitH
 ---
 ---
 ## Introduction
-
+<div style="text-align: center;">
+<p>
 Meshery is written in Go (Golang) and leverages Go Modules. UI is built on React and Next.js. To make building and packaging easier a Makefile is included in the main repository folder.
 
 Relevant coding style guidelines are the Go Code Review Comments and the Formatting and style section of Peter Bourgon’s Go: Best Practices for Production Environments.
 
 Please note: All make commands should be run in a terminal from within the Meshery’s main folder.
-
+</p>
+</div>
 --- 
 
 ## Prerequisite
@@ -26,8 +28,11 @@ Please note: All make commands should be run in a terminal from within the Meshe
 
 
 ## General contribution flow
+<div style="text-align: center">
+<p>
 Pull requests (PRs) are the best ways to propose changes to a project repository. At Meshery, we use the Github Flow:
-
+</p>
+</div>
 
 ##  1. Clone your fork to your local machine
 
@@ -150,10 +155,13 @@ Note: Please ensure that the right branch is selected for the PR.
 ---
 
 ## Handling PRs Made Without Being Assigned 
+<div style="text-align: center">
+<p>
+At <a href="https://meshery.io/">Meshery</a>, we usually suggest to contributors that they ask maintainers to assign them to the issue they want to work on. But sometimes, pull requests that aren't assigned to anyone can be found. In such cases, it's important to be flexible and ready to adapt. Here are some simple guidelines for dealing with these unassigned contributions:
+</p>
+</div>
 
-At [Meshery](https://meshery.io/), we usually suggest to contributors that they ask maintainers to assign them to the issue they want to work on. But sometimes, pull requests that aren't assigned to anyone can be found. In such cases, it's important to be flexible and ready to adapt. Here are some simple guidelines for dealing with these unassigned contributions:
-
-#### 1. We value getting things done:
+#### 1. We value getting things done:   
 
 - Evaluate the PR: First, assess the quality and significance of the PR. Is it a valuable contribution to the project? Does it fix a bug or add a meaningful feature? If the PR aligns with the project's goals and standards, it's worth considering.
 
@@ -179,15 +187,13 @@ At [Meshery](https://meshery.io/), we usually suggest to contributors that they 
 
 - How you should: As a contributor, it's important to follow the project's guidelines. Start by identifying a suitable issue or create one if necessary. Afterward, kindly request assignment or express your interest in working on the issue by commenting on it. This ensures that maintainers are aware of your intentions and can provide guidance or assign the issue appropriately. Once assigned, proceed with your work and submit a pull request.
 
-Example:[Hover animation on different integration category #3889](https://github.com/layer5io/layer5/issues/3889)
 
 - How you should not: Avoid starting work on an issue and creating a pull request without prior communication or assignment. Jumping directly into the code can lead to misunderstandings and duplicate efforts. Instead, take a moment to engage with the maintainers and community by discussing your interest in the issue and seeking assignment before submitting a pull request. This promotes transparency and effective collaboration within the project.
 
-Example: [[MeshModel] [UX]: Icon for Kubernetes Component - Endpoints #8757](https://github.com/meshery/meshery/issues/8757)
 
 - Requesting Reassignment: If you are interested in working on an issue that is already assigned to someone else, it's important to respect their efforts and contributions. First, politely reach out to the assignee and express your interest in collaborating on the issue. Discuss the possibility of working together or sharing the workload. If the assignee agrees or is open to collaboration, you can proceed. If the assignee is not responsive or there has been no progress on the issue for a long time and the issue aligns with your skills and interests, kindly request reassignment from the maintainers, providing a clear and courteous explanation for the request.
 
-Example: [[chore] update Go to 1.21, and update relevant pkgs #169](https://github.com/meshery-extensions/meshery-nsm/issues/169)
+
 
 ### Suggested Reading 
 
