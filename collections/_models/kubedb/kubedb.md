@@ -14,11 +14,11 @@ components:
 - name: hazelcast-version
   colorIcon: assets/images/integration/kubedb/components/hazelcast-version/icons/color/hazelcast-version-color.svg
   whiteIcon: assets/images/integration/kubedb/components/hazelcast-version/icons/white/hazelcast-version-white.svg
-  description: App Definition and Development
+  description: 
 - name: oracle-version
   colorIcon: assets/images/integration/kubedb/components/oracle-version/icons/color/oracle-version-color.svg
   whiteIcon: assets/images/integration/kubedb/components/oracle-version/icons/white/oracle-version-white.svg
-  description: App Definition and Development
+  description: 
 - name: node-topology
   colorIcon: assets/images/integration/kubedb/components/node-topology/icons/color/node-topology-color.svg
   whiteIcon: assets/images/integration/kubedb/components/node-topology/icons/white/node-topology-white.svg

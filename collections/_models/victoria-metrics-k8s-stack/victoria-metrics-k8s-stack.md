@@ -78,12 +78,16 @@ components:
 - name: vl-cluster
   colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-cluster/icons/color/vl-cluster-color.svg
   whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-cluster/icons/white/vl-cluster-white.svg
-  description: Observability and Analysis
+  description: 
 - name: vl-single
   colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-single/icons/color/vl-single-color.svg
   whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-single/icons/white/vl-single-white.svg
-  description: Observability and Analysis
-componentsCount: 18
+  description: 
+- name: vm-anomaly
+  colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vm-anomaly/icons/color/vm-anomaly-color.svg
+  whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vm-anomaly/icons/white/vm-anomaly-white.svg
+  description: 
+componentsCount: 19
 relationships: 
 relationshipsCount: 0
 featureList: [
