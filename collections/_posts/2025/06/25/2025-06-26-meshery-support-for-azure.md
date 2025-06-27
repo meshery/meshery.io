@@ -1,7 +1,7 @@
 ---
 title: Meshery Now Supports Azure
 subheading: Build, Design, and Deploy your Azure infrastructure with ease
-date: 2025-06-25
+date: 2025-06-26
 author: Yogendar Singh
 categories: 
   - model
