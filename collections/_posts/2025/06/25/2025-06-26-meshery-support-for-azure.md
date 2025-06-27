@@ -1,6 +1,6 @@
 ---
-title: Creating Relationships in Meshery
-subheading: A guide to create relationships
+title: Meshery Now Supports Azure
+subheading: Build, Design, and Deploy your Azure infrastructure with ease
 date: 2025-06-25
 author: Yogendar Singh
 categories: 
