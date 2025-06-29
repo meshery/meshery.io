@@ -55,7 +55,13 @@ relationships:
 - type: "Parent"
   kind: "Hierarchical"
   description: "A hierarchical inventory relationship in which the configuration of Virtual Machine(parent component) is patched with the configuration of Virtual Machine Extension(child component). "
-relationshipsCount: 2
+- type: "Non Binding"
+  kind: "Edge"
+  description: "A relationship between different type of components"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "A relationship between different type of components"
+relationshipsCount: 4
 featureList: [
   "Drag-n-drop cloud native infrastructure designer to configure, model, and deploy your workloads.",
   "Invite anyone to review and make changes to your private designs.",

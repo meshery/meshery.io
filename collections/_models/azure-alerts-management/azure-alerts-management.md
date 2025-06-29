@@ -21,7 +21,16 @@ components:
   description: 
 componentsCount: 2
 relationships: 
-relationshipsCount: 0
+- type: "Non Binding"
+  kind: "Edge"
+  description: "A relationship between different type of components"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "A relationship between different type of components"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "A relationship between different type of components"
+relationshipsCount: 3
 featureList: [
   "Drag-n-drop cloud native infrastructure designer to configure, model, and deploy your workloads.",
   "Invite anyone to review and make changes to your private designs.",
