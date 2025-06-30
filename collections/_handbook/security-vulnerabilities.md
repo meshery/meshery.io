@@ -11,7 +11,7 @@ layout: default
 
 <div class="page-content">
     <p>We are very grateful to the security researchers and users that report security vulnerabilities. We investigate each report thoroughly.</p>
-    <p>To make a report, send an email to the private <a href="mailto: security@meshery.io">security@meshery.io</a>  mailing list with the vulnerability details. For normal product bugs unrelated to latent security vulnerabilities, please head to the appropriate repository and submit a <a href="https://github.com/meshery/meshery.io/issues/new/choose">new issue</a> .</p>
+    <p>To make a report, send an email to the private <a href="mailto: security@meshery.io">security@meshery.io</a>  mailing list with the vulnerability details. For normal product bugs unrelated to latent security vulnerabilities, please head to the appropriate repository and submit a <a href="https://github.com/meshery/meshery/issues/new/choose">new issue</a> .</p>
     <p>Note that the Meshery community spans two GitHub organizations:</p>
     <ul class="project-org-list">
         <li>
