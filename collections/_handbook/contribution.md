@@ -113,7 +113,10 @@ If you add multiple file changes to the branch, you simply use:
 **To ensure all your commits are signed, you may choose to add this alias to your global .gitconfig :**
 
 <div class="highlight-code">
-<code id="git-signoff-commit-global" class ="code-box" style="white-space:pre-wrap;">[alias] amend = commit -s --amend cm = commit -s -m commit = commit -s</code>
+<code id="git-signoff-commit-global" class="code-box" style="white-space:pre-wrap;">[alias]
+  amend = commit -s --amend
+  cm = commit -s -m
+  commit = commit -s</code>
  {% include copy-to-clipboard.html clipboard_target="#git-signoff-commit-global" clipboard_text="[alias] amend = commit -s --amend cm = commit -s -m commit = commit -s" %}
  </div>
 
