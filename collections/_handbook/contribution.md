@@ -40,7 +40,7 @@ Pull requests (PRs) are the best ways to propose changes to a project repository
 - Go to your GitHub account, open the forked repository, click on the code button and then click the “copy to - clipboard” icon if you intend to use a command-line tool.
 - Open the terminal and run the following git command:
 <div class="highlight-code">
-<code id="git-clone" class ="code-box" style="white-space:pre-wrap;">git clone “URL you copied from the clipboard."</code>
+<code id="git-clone" class="code-box" style="white-space:pre-wrap;">git clone "URL you copied from the clipboard."</code>
 {% include copy-to-clipboard.html clipboard_target="#git-clone" clipboard_text="git clone 'URL you copied from the clipboard.' " %}
 </div>
 
