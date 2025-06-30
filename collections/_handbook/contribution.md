@@ -106,7 +106,7 @@ If you add multiple file changes to the branch, you simply use:
 **In most cases, you can add this signoff to your commit automatically with the -s or --signoff flag to git commit. You must use your real name and a reachable email address (sorry, no pseudonyms or anonymous contributions). An example of signing off on a commit :**
 
 <div class="highlight-code">
-<code id="git-signoff-commit" class ="code-box" style="white-space:pre-wrap;">commit -s -m “my commit message w/signoff”</code>
+<code id="git-signoff-commit" class="code-box" style="white-space:pre-wrap;">git commit -s -m "my commit message w/signoff"</code>
  {% include copy-to-clipboard.html clipboard_target="#git-signoff-commit" clipboard_text="commit -s -m 'my commit message w/signoff' " %}
  </div>
 
