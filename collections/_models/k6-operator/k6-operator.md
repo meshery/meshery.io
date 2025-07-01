@@ -11,7 +11,11 @@ category: Observability and Analysis
 subcategory: Monitoring
 registrant: GitHub
 components: 
-componentsCount: 0
+- name: private-load-zone
+  colorIcon: assets/images/integration/k6-operator/components/private-load-zone/icons/color/private-load-zone-color.svg
+  whiteIcon: assets/images/integration/k6-operator/components/private-load-zone/icons/white/private-load-zone-white.svg
+  description: 
+componentsCount: 1
 relationships: 
 relationshipsCount: 0
 featureList: [
