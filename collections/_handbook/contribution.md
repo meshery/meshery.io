@@ -6,7 +6,7 @@ description : "Pull requests are the best way to propose changes. Learn our GitH
 ---
 ---
 ## Introduction
-<div style="text-align: center;">
+<div style="text-align: left;">
 <p>
 Meshery is written in Go (Golang) and leverages Go Modules. UI is built on React and Next.js. To make building and packaging easier a Makefile is included in the main repository folder.
 
@@ -28,7 +28,7 @@ Please note: All make commands should be run in a terminal from within the Meshe
 
 
 ## General contribution flow
-<div style="text-align: center">
+<div style="text-align: left">
 <p>
 Pull requests (PRs) are the best ways to propose changes to a project repository. At Meshery, we use the Github Flow:
 </p>
@@ -158,7 +158,7 @@ Note: Please ensure that the right branch is selected for the PR.
 ---
 
 ## Handling PRs Made Without Being Assigned 
-<div style="text-align: center">
+<div style="text-align: left">
 <p>
 At <a href="https://meshery.io/">Meshery</a>, we usually suggest to contributors that they ask maintainers to assign them to the issue they want to work on. But sometimes, pull requests that aren't assigned to anyone can be found. In such cases, it's important to be flexible and ready to adapt. Here are some simple guidelines for dealing with these unassigned contributions:
 </p>
