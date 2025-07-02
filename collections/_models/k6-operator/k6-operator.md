@@ -15,7 +15,15 @@ components:
   colorIcon: assets/images/integration/k6-operator/components/private-load-zone/icons/color/private-load-zone-color.svg
   whiteIcon: assets/images/integration/k6-operator/components/private-load-zone/icons/white/private-load-zone-white.svg
   description: 
-componentsCount: 1
+- name: test-run
+  colorIcon: assets/images/integration/k6-operator/components/test-run/icons/color/test-run-color.svg
+  whiteIcon: assets/images/integration/k6-operator/components/test-run/icons/white/test-run-white.svg
+  description: 
+- name: test-run
+  colorIcon: assets/images/integration/k6-operator/components/test-run/icons/color/test-run-color.svg
+  whiteIcon: assets/images/integration/k6-operator/components/test-run/icons/white/test-run-white.svg
+  description: 
+componentsCount: 3
 relationships: 
 relationshipsCount: 0
 featureList: [
