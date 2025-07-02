@@ -18,7 +18,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/meshery/meshery)](https://goreportcard.com/report/github.com/mesheryio/meshery)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/meshery/meshery.io/jekyll.yml?branch=master)](https://github.com/meshery/meshery.io/actions)
 [![GitHub](https://img.shields.io/github/license/meshery/meshery.svg)](LICENSE)
-[![GitHub issues by-label](https://img.shields.io/github/issues/meshery/meshery/help%20wanted.svg)](https://github.com/meshery/meshery/issues?q=is%3Aopen+is%3Aissue+label%3A"help+wanted")
+[![GitHub issues by-label](https://img.shields.io/github/issues/meshery/meshery/help%20wanted.svg)](https://github.com/issues?q=is%3Aopen%20is%3Aissue%20archived%3Afalse%20(org%3Ameshery%20OR%20org%3Aservice-mesh-performance%20OR%20org%3Aservice-mesh-patterns%20OR%20org%3Ameshery-extensions)%20label%3A%22help%20wanted%22)
 [![Website](https://img.shields.io/website/https/meshery.io/meshery.svg)](https://meshery.io/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/mesheryio)](https://twitter.com/intent/follow?screen_name=mesheryio)
 [![Discuss Users](https://img.shields.io/discourse/users?server=https%3A%2F%2Fdiscuss.meshery.io)](https://meshery.io/community#discussion-forums)
@@ -86,7 +86,7 @@ Find out more about the <a href="https://meshery.io/community">Meshery community
 ✔️ <em><strong>RSVP</strong></em> to the <a href="https://community.cncf.io/meshery-community/">CNCF Meshery Community</a> meetings.<br />
 </p>
 <p align="center">
-<i>Not sure where to start?</i> Grab an open issue with the <a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Ameshery+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+org%3Ameshery-extensions+label%3A%22help+wanted%22+">help-wanted label</a>.
+<i>Not sure where to start?</i> Grab an open issue with the <a href="https://github.com/issues?q=is%3Aopen%20is%3Aissue%20archived%3Afalse%20(org%3Ameshery%20OR%20org%3Aservice-mesh-performance%20OR%20org%3Aservice-mesh-patterns%20OR%20org%3Ameshery-extensions)%20label%3A%22help%20wanted%22">help-wanted label</a>.
 </p>
 
 <div>&nbsp;</div>
