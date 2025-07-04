@@ -97,4 +97,4 @@ Where [organization name] should be:
 
 For example:
 
-`/invite-github contributor@example.com meshery.io`
+`/invite-github contributor@example.com meshery`
