@@ -46,9 +46,9 @@ Use the following Slack command in the `#community-management` channel:
 
 Where `[organization name]` should be one of:
 
-- [`meshery`](https://meshery.io) - to send the invite to the email address to join the Meshery GitHub organization under the "contributors" team
+- [`meshery`](https://meshery.io) - to send the invite to the email address to join the Meshery GitHub organization under the "contributors" team.
 
-- [`meshery-extensions`](https://meshery.io/extensions) - to send the invite to the email address to join the Meshery Extensions GitHub organization under the "plugins" team
+- [`meshery-extensions`](https://meshery.io/extensions) - to send the invite to the email address to join the Meshery Extensions GitHub organization under the "plugins" team.
 
 ```
     /invite-github contributor@example.com [organization name]
