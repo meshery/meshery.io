@@ -13,12 +13,12 @@ It’s not solely about writing code — it's about consistent engagement and al
 
 Contributors who may be invited typically:
 
-- Have been actively involved in the community for several weeks
-- Make regular updates to projects
-- Help other community members
-- Attend development meetings
-- Demonstrate a willingness to learn and share knowledge
-- Show a genuine desire to improve themselves, others, and the projects
+- Have been actively involved in the community for several weeks.
+- Make regular updates to projects.
+- Help other community members.
+- Attend development meetings.
+- Demonstrate a willingness to learn and share knowledge.
+- Show a genuine desire to improve themselves, others, and the projects.
 
 ---
 
