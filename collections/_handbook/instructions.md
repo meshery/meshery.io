@@ -12,7 +12,7 @@ Membership in Meshery's GitHub organizations reflects a contributor's commitment
 
 ## Membership Requirements
 
-Contributors who may be invited typically:
+Contributors may be invited typically:
 
 - Have been actively involved in the community for several weeks
 - Make regular updates to projects
@@ -23,7 +23,7 @@ Contributors who may be invited typically:
 
 ---
 
-## Invitation Process
+## Invitation Process (for Maintainers)
 
 Depending on the number and quality of contributions across the five Meshery GitHub organizations, contributors may receive an invitation to one or more of these organizations.
 
@@ -44,11 +44,12 @@ When identifying a worthy contributor, initiate a group DM with the contributor 
 
 Use the following Slack command in the `#community-management` channel:
 
-Where `[organization name]` should be:
+Where `[organization name]` should be one of:
 
-- [`meshery`](https://meshery.io) – to send the invite to the email address to join the Meshery GitHub organization under the "contributors" team
+- [`meshery`](https://meshery.io) - to send the invite to the email address to join the Meshery GitHub organization under the "contributors" team
 
-**Example:**
-`/invite-github contributor@example.com meshery`
+- [`meshery-extensions`](https://meshery.io/extensions) - to send the invite to the email address to join the Meshery Extensions GitHub organization under the "plugins" team
 
----
+```
+    /invite-github contributor@example.com [organization name]
+```
