@@ -4,7 +4,8 @@ title: GitHub Organization Membership
 description: Consistent contributors may receive invitations to Meshery GitHub organizations.
 ---
 
-Membership in the GitHub organizations is a significant milestone for contributors who have shown persistent commitment and dedication to Meshery projects.  
+Membership in the GitHub organizations is a significant milestone for contributors who have shown persistent commitment and dedication to Meshery projects.
+
 It’s not solely about writing code — it's about consistent engagement and alignment with the community’s values.
 
 ---
@@ -13,18 +14,18 @@ It’s not solely about writing code — it's about consistent engagement and al
 
 Contributors who may be invited typically:
 
-- Have been actively involved in the community for several weeks.
-- Make regular updates to projects.
-- Help other community members.
-- Attend development meetings.
-- Demonstrate a willingness to learn and share knowledge.
-- Show a genuine desire to improve themselves, others, and the projects.
+- Have been actively involved in the community for several weeks
+- Make regular updates to projects
+- Help other community members
+- Attend development meetings
+- Demonstrate a willingness to learn and share knowledge
+- Show a genuine desire to improve themselves, others, and the projects
 
 ---
 
 ## Invitation Process
 
-Depending on the **number and quality of contributions** across the five GitHub organizations under ,eshery, contributors may receive an invitation to one or more of these organizations.
+Depending on the **number and quality of contributions** across the five GitHub organizations under Meshery, contributors may receive an invitation to one or more of these organizations.
 
 The process includes:
 
@@ -42,7 +43,7 @@ When you identify a worthy contributor:
 
 ## Sending the GitHub Invitation
 
-Use the following Slack command in the `#community-management` channel:
+Use the following Slack command in the `#community-management` channel:  
 `/invite-github [email address] [organization name]`
 
 ---
