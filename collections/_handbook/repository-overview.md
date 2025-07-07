@@ -89,12 +89,22 @@ A brief overview of the five GitHub organizations that make up the Meshery commu
 </ul>
 
 ---
+<style>
+  .icon {
+    height: 32px;
+    width: auto;
+    max-width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+</style>
 
 # Frontend Projects
 
-<table class="handbook-table">
+<div class="talks-and-presentations">
+<table>
   <thead>
-    <tr class="handbook-row header">
+    <tr class="talks-table-row">
       <th>Site</th>
       <th>Project</th>
       <th>Framework</th>
@@ -104,8 +114,8 @@ A brief overview of the five GitHub organizations that make up the Meshery commu
   </thead>
   <tbody>
     {% for p in page.frontend_projects %}
-    <tr class="handbook-row">
-      <td><a href="{{ p.site_url }}"><img src="{{ p.site_logo }}" class="icon" alt="{{ p.alt }}"></a></td>
+    <tr class="talks-table-row">
+      <td ><a href="{{ p.site_url }}"><img src="{{ p.site_logo }}" class="icon" alt="{{ p.alt }}"></a></td>
       <td>{{ p.project }}</td>
       <td>{{ p.framework }}</td>
       <td>{{ p.maintainers }}</td>
@@ -114,12 +124,14 @@ A brief overview of the five GitHub organizations that make up the Meshery commu
     {% endfor %}
   </tbody>
 </table>
+</div>
 
 # Backend Projects
 
-<table class="handbook-table">
+<div class="talks-and-presentations">
+<table>
   <thead>
-    <tr class="handbook-row header">
+    <tr class="talks-table-row">
       <th>Project</th>
       <th>Language</th>
       <th>Description</th>
@@ -129,7 +141,7 @@ A brief overview of the five GitHub organizations that make up the Meshery commu
   </thead>
   <tbody>
     {% for r in page.backend_repos %}
-    <tr class="handbook-row">
+    <tr class="talks-table-row">
       <td><img src="{{ r.site_logo }}" class="icon" alt="{{ r.alt }}"> {{ r.project }}</td>
       <td>{{ r.language }}</td>
       <td>{{ r.description }}</td>
@@ -139,3 +151,4 @@ A brief overview of the five GitHub organizations that make up the Meshery commu
     {% endfor %}
   </tbody>
 </table>
+</div>
