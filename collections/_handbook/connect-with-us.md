@@ -23,9 +23,8 @@ Don’t miss out on anything, sign up to receive updates on our newest releases,
 
 - [#Meshery Developers](mailto:dev-group@meshery.io)
 - [#Meshery Users](mailto:user-group@meshery.io)
-- [#Meshery Contributors](https://meshery.io/)
 - [#Meshery Maintainers](mailto:maintainers@meshery.io)
-- [#Meshery Security and Vulnerability Reports](https://meshery.io/)
+- [#Meshery Security and Vulnerability Reports](https://github.com/meshery/meshery/security/policy)
 - [#Meshery Community](mailto:community@meshery.io)
 
 # Slack Community
