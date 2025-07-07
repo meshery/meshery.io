@@ -47,7 +47,7 @@ Meshery is dedicated to empowering engineers and supporting the open source comm
 
 <img class ="icon" src="/assets/images/logos/twitter-light.svg"> [@mesheryio](https://x.com/mesheryio)
 
-<img class ="" src="/assets/images/logos/youtube-light.svg"> [Subscribe on Youtube](https://www.youtube.com/@mesheryio?sub_confirmation=1)
+<img class="icon" src="/assets/images/logos/youtube-light.svg"> [Subscribe on Youtube](https://www.youtube.com/@mesheryio?sub_confirmation=1)
 
 <img class ="icon" src="/assets/images/logos/github-white.svg"> [Discover our projects on GitHub](https://github.com/meshery)
 
