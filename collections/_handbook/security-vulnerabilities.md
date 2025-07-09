@@ -18,7 +18,7 @@ layout: default
       <li>
         <a href="https://github.com/meshery">
           <img
-              src="\assets\images\logos\meshery-logo.png"
+              src="/assets/images/logos/meshery-logo.png"
               alt="Meshery organization logo"/>
           Meshery
         </a>
@@ -27,7 +27,7 @@ layout: default
       <li>
         <a href="https://github.com/meshery/meshery.io">
           <img
-            src="\assets\images\logos\meshery-logo.png"
+            src="/assets/images/logos/meshery-logo.png"
             alt="Meshery.io site logo"
           />
           Meshery.io
