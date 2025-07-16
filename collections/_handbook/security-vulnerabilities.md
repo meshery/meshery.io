@@ -66,7 +66,7 @@ layout: default
       </li>
       <li>Meshery team ensures all necessary binaries are promptly built and published.</li>
       <li>Once the binaries are available, an announcement is sent out on the following channels:
-        <ul>
+        <ul class = "public-disclosures">
           <li>The <a href="https://meshery.io/blog/">Meshery blog</a></li>
           <li>The <a href="https://x.com/mesheryio">Meshery Twitter feed</a></li>
           <li>The <a href="https://mesheryio.slack.com/archives/CSF3PSZT9">#announcements</a> channel on community <a href="https://slack.meshery.io/">Slack</a></li>
@@ -77,7 +77,7 @@ layout: default
     <!--Security Slam-->
     <div class="blog-post-section">
       <div class="blog-post-header">
-        <h2><a href="/blog/2025/03/2025-03-27-meshery-at-kubecon-eu-2025-security-slam/"> Meshery to Participate in Security Slam</a></h2>
+        <h2><a href="/blog/2025/03/2025-03-27-meshery-at-kubecon-eu-2025-security-slam/"> Meshery to Participate in Security Slam </a></h2>
       </div>
       <a href="/blog/category/kubecon/" class="btn" > kubecon </a>
       &nbsp; <a href="/blog/category/events/" class="btn" > events </a>
@@ -89,33 +89,35 @@ layout: default
       <a href="/blog/2025/03/2025-03-27-meshery-at-kubecon-eu-2025-security-slam/" class="btn" > Read More </a>
     </div>
     <h2>List of Announced Vulnerabilities:</h2>
-    <div class="table-container">
-      <table>
-        <thead>
-            <tr>
-                <th>DATE ANNOUNCED</th>
-                <th>CVE ID</th>
-                <th>DESCRIPTION</th>
-                <th>AFFECTED COMPONENT</th>
-                <th>VULNERABLE VERSION</th>
-                <th>PATCHED VERSION</th>
-                <th>FIX DETAILS</th>
-                <th>LINKS</th>
+    <div class ="table-wrapper">
+      <div class="talks-and-presentations">
+        <table>
+          <thead>
+              <tr>
+                  <th>DATE ANNOUNCED</th>
+                  <th>CVE ID</th>
+                  <th>DESCRIPTION</th>
+                  <th>AFFECTED COMPONENT</th>
+                  <th>VULNERABLE VERSION</th>
+                  <th>PATCHED VERSION</th>
+                  <th>FIX DETAILS</th>
+                  <th>LINKS</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr class="talks-table-row">
+              <td>2021-04-28</td>
+              <td>CVE-2021-31856</td>
+              <td>A SQL Injection vulnerability in the REST API in Layer5 Meshery 0.5.2 allows an attacker to execute arbitrary SQL commands via the /experimental/patternfiles endpoint (order parameter in GetMesheryPatterns in models/meshery_pattern_persister.go).</td>
+              <td>REST API</td>
+              <td>v0.5.2</td>
+              <td>v0.5.3</td>
+              <td><a href="https://github.com/meshery/meshery/pull/2745">fix pull</a></td> 
+              <td><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-31856">mitre</a>, <a href="https://github.com/ssst0n3/CVE-2021-31856">details</a></td>
             </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>2021-04-28</td>
-            <td>CVE-2021-31856</td>
-            <td>A SQL Injection vulnerability in the REST API in Layer5 Meshery 0.5.2 allows an attacker to execute arbitrary SQL commands via the /experimental/patternfiles endpoint (order parameter in GetMesheryPatterns in models/meshery_pattern_persister.go).</td>
-            <td>REST API</td>
-            <td>v0.5.2</td>
-            <td>v0.5.3</td>
-            <td><a href="https://github.com/meshery/meshery/pull/2745">fix pull</a></td> 
-            <td><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-31856">mitre</a>, <a href="https://github.com/ssst0n3/CVE-2021-31856">details</a></td>
-          </tr>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
