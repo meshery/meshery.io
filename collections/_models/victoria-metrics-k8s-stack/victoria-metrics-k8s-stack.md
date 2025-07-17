@@ -87,7 +87,11 @@ components:
   colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vm-anomaly/icons/color/vm-anomaly-color.svg
   whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vm-anomaly/icons/white/vm-anomaly-white.svg
   description: 
-componentsCount: 19
+- name: vl-agent
+  colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-agent/icons/color/vl-agent-color.svg
+  whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-agent/icons/white/vl-agent-white.svg
+  description: 
+componentsCount: 20
 relationships: 
 relationshipsCount: 0
 featureList: [

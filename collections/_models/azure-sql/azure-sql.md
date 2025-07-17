@@ -174,10 +174,7 @@ relationships:
 - type: "Non Binding"
   kind: "Edge"
   description: "An edge relationship between ServersVirtualNetworkRule and VirtualNetworksSubnet(azure-network)"
-- type: "Non Binding"
-  kind: "Edge"
-  description: "An edge relationship between ServersFailoverGroup and Server(azure-sql)"
-relationshipsCount: 24
+relationshipsCount: 23
 featureList: [
   "Drag-n-drop cloud native infrastructure designer to configure, model, and deploy your workloads.",
   "Invite anyone to review and make changes to your private designs.",
