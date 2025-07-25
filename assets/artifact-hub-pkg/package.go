@@ -59,7 +59,7 @@ var (
 )
 
 func main() {
-	token := "GH_ACCESS_TOKEN"
+	token := os.Getenv("GH_ACCESS_TOKEN")
 	log, err := logger.New("mesheryio_package", logger.Options{
 		Format:   logger.SyslogLogFormat,
 		LogLevel: 5,
