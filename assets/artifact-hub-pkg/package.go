@@ -156,9 +156,9 @@ func processPattern(pattern CatalogPattern, token string) error {
 	if err := writePatternFile(pattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL); err != nil {
 		return err
 	}
-	// if err := invokeGitHubAction(pattern.ID, patternImageURL, token); err != nil {
-	// 	return err
-	// }
+	if err := invokeGitHubAction(pattern.ID, patternImageURL, token); err != nil {
+		return err
+	}
 
 	fmt.Println("Pattern processed successfully:", pattern.Name)
 	return nil
