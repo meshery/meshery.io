@@ -16,12 +16,12 @@ import (
 	"github.com/Masterminds/semver/v3"
 	"gopkg.in/yaml.v3"
 
-	meshkitErrors "github.com/layer5io/meshkit/errors"
-	"github.com/layer5io/meshkit/logger"
-	"github.com/layer5io/meshkit/utils"
+	meshkitErrors "github.com/meshery/meshkit/errors"
+	"github.com/meshery/meshkit/logger"
+	"github.com/meshery/meshkit/utils"
 
-	"github.com/layer5io/meshkit/models/catalog/v1alpha1"
-	"github.com/layer5io/meshkit/utils/catalog"
+	"github.com/meshery/meshkit/models/catalog/v1alpha1"
+	"github.com/meshery/meshkit/utils/catalog"
 )
 
 type CatalogPattern struct {
@@ -59,7 +59,7 @@ var (
 )
 
 func main() {
-	token := os.Getenv("GH_ACCESS_TOKEN")
+	token := "GH_ACCESS_TOKEN"
 	log, err := logger.New("mesheryio_package", logger.Options{
 		Format:   logger.SyslogLogFormat,
 		LogLevel: 5,
@@ -156,10 +156,11 @@ func processPattern(pattern CatalogPattern, token string) error {
 	if err := writePatternFile(pattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL); err != nil {
 		return err
 	}
-	if err := invokeGitHubAction(pattern.ID, patternImageURL, token); err != nil {
-		return err
-	}
+	// if err := invokeGitHubAction(pattern.ID, patternImageURL, token); err != nil {
+	// 	return err
+	// }
 
+	fmt.Println("Pattern processed successfully:", pattern.Name)
 	return nil
 }
 
