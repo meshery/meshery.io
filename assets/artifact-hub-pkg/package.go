@@ -16,12 +16,12 @@ import (
 	"github.com/Masterminds/semver/v3"
 	"gopkg.in/yaml.v3"
 
-	meshkitErrors "github.com/layer5io/meshkit/errors"
-	"github.com/layer5io/meshkit/logger"
-	"github.com/layer5io/meshkit/utils"
+	meshkitErrors "github.com/meshery/meshkit/errors"
+	"github.com/meshery/meshkit/logger"
+	"github.com/meshery/meshkit/utils"
 
-	"github.com/layer5io/meshkit/models/catalog/v1alpha1"
-	"github.com/layer5io/meshkit/utils/catalog"
+	"github.com/meshery/meshkit/models/catalog/v1alpha1"
+	"github.com/meshery/meshkit/utils/catalog"
 )
 
 type CatalogPattern struct {
@@ -160,6 +160,7 @@ func processPattern(pattern CatalogPattern, token string) error {
 		return err
 	}
 
+	fmt.Println("Pattern processed successfully:", pattern.Name)
 	return nil
 }
 
@@ -232,10 +233,6 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 		return ErrParsingCreatedAt(err)
 	}
 
-	// Format the parsed time into the desired format
-	desiredFormat := "2006-01-02T15:04:05Z"
-	currentDateTime := parsedTime.Format(desiredFormat)
-
 	if pattern.CatalogData.PatternInfo == "" {
 		pattern.CatalogData.PatternInfo = pattern.Name
 	}
@@ -255,7 +252,7 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 		version = semver.New(0, 0, 1, "", "").String()
 	}
 
-	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(versionDir, "design.yml"), pattern.UserID, version, currentDateTime, &pattern.CatalogData)
+	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(versionDir, "design.yml"), pattern.UserID, version, &parsedTime, &pattern.CatalogData)
 
 	data, err := yaml.Marshal(artifactHubPkg)
 	if err != nil {
