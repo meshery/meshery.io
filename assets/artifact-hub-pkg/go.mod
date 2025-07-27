@@ -1,10 +1,12 @@
 module package.go
 
-go 1.24.5
+go 1.24.0
+
+toolchain go1.24.1
 
 require (
 	github.com/Masterminds/semver/v3 v3.3.1
-	github.com/meshery/meshkit v0.8.37
+	github.com/meshery/meshkit v0.8.35
 	gopkg.in/yaml.v3 v3.0.1
 )
 
