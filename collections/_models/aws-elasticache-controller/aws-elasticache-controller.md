@@ -47,7 +47,11 @@ components:
   colorIcon: assets/images/integration/aws-elasticache-controller/components/cache-cluster/icons/color/cache-cluster-color.svg
   whiteIcon: assets/images/integration/aws-elasticache-controller/components/cache-cluster/icons/white/cache-cluster-white.svg
   description: 
-componentsCount: 9
+- name: serverless-cache
+  colorIcon: assets/images/integration/aws-elasticache-controller/components/serverless-cache/icons/color/serverless-cache-color.svg
+  whiteIcon: assets/images/integration/aws-elasticache-controller/components/serverless-cache/icons/white/serverless-cache-white.svg
+  description: 
+componentsCount: 10
 relationships: 
 relationshipsCount: 0
 featureList: [
