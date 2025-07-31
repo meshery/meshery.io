@@ -38,12 +38,12 @@
 .testimonials-wrapper .slider .bq-section {
     padding: 20px;
     margin-bottom: 40px;
-
 }
 
 .testimonials-wrapper .slider .type-one-wrapper {
     margin: 0px 1rem;
 }
+
 
 .type-one-wrapper.type-one-wrapper-boxed {
     max-width: 576px;
@@ -56,7 +56,7 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    min-height: 250px;
+    flex: 1;
     box-shadow: var(--box-shadow-primary-quotes);
     border-radius: 10px;
 }
@@ -170,6 +170,9 @@
 /* ========== Type Two ========== */
 .type-two-quote {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     box-shadow: var(--box-shadow-primary-quotes);
     border-radius: 10px;
 }
@@ -264,7 +267,9 @@
 /* ========== Type Three ========== */
 .type-three-quote {
     position: relative;
-    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     border-radius: 10px;
     box-shadow: var(--box-shadow-primary-quotes);
 }
@@ -275,6 +280,9 @@
     font-weight: bold;
     padding: 60px;
     border-radius: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .type-three-quote .type-three-quote-meta {
@@ -341,4 +349,55 @@
         margin: 0 auto;
         margin-bottom: 10px;
     }
+}
+
+// Alternative CSS-only approach for equal heights
+.slider.slick-initialized {
+    .slick-track {
+        display: flex !important;
+        align-items: stretch;
+    }
+    
+    .slick-slide {
+        height: auto;
+        display: flex !important;
+        flex-direction: column;
+        
+        > div {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+// Ensure all testimonial wrappers stretch to full height
+.bq-section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.type-one-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.type-one-wrapper-boxed {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+// Make sure Type 2 and Type 3 quote containers stretch (preserve Type 1's row layout)
+.type-two-quote,
+.type-three-quote {
+    flex: 1;
+}
+
+// Type 1 should maintain its row layout, just stretch vertically
+.type-one-quote {
+    flex: 1;
+    // Keep existing display: flex and flex-direction: row from original CSS
 }
