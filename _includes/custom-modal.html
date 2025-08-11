@@ -1,0 +1,197 @@
+<div class="card link" onclick="openCustomModal('{{ include.type }}')">
+  <div class="card-inner">
+    <div class="front">
+      <h4 class="pattern-name">Publish Your Own {{ include.type }}</h4>
+      <div class="pattern-image-container">
+        <img
+          class="pattern-image"
+          style="width: 40%;"
+          src="{{site.baseurl}}/assets/images/plus.svg"
+          alt="Publish Your Own {{ include.type }}"
+          loading="lazy"
+        />
+      </div>
+    </div>
+    <div class="back"></div>
+  </div>
+</div>
+
+<div id="customModal-{{ include.type }}" class="modal custom-modal">
+  <div class="custom-modal-content">
+    <span class="close-modal" onclick="closeCustomModal('{{ include.type }}')">&times;</span>
+    <div>
+      <h2 class="custom-modal-header">Publish Your Own {{ include.type }}</h2>
+      {% if include.type == "Model" %}
+           <div class="custom-modal-body">
+        <p>
+          Using
+          <a href="https://playground.meshery.io/settings?settingsCategory=Registry&tab=Models" target="_blank">Meshery's Registry</a>, 
+          you can create and import models to define the infrastructure components 
+          and their relationships in your cloud-native environments.
+        </p>
+        
+        <p>
+          Meshery offers two primary ways to bring models into your system: Create and Import.
+        </p>
+        
+        <dl>
+          <dt>Create:</dt>
+          <dd>
+            The recommended approach if you're starting fresh — it guides you through building a model 
+            step by step using an intuitive UI wizard.
+            <a href="https://docs.meshery.io/guides/configuration-management/creating-models#create-models">Learn more about creating models</a>
+          </dd>
+
+          <dt>Import:</dt>
+          <dd>
+            Ideal when you already have a model definition file (e.g., JSON, CSV) and 
+            simply want to bring it into Meshery.
+          </dd>
+          <dt>Publish your model to catalog:</dt>
+          <dd>
+ <ul>
+    <li>Fork the <code>meshery/meshery.io</code> repository.</li>
+    <li>Create a new branch in your fork of the <code>meshery/meshery.io</code> repository.</li>
+    <li>
+      Add your model definition (see 
+      <a href="https://github.com/meshery/meshery.io/blob/master/collections/_custom-models/_custom-model-definition-template.md" target="_blank">template</a> 
+      for reference) to the <code>collections/_custom-models</code> directory.
+    </li>
+    <li>Add your model oci artifact file to the <code>assets/modelsFiles</code> directory.</li>
+    <li>Create a pull request to the <code>meshery/meshery.io</code> repository.</li>
+    <li>Once your pull request is merged, your model will be available in the next Meshery release.</li>
+  </ul>
+          </dd>
+        </dl>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+          <a href="https://docs.meshery.io/guides/configuration-management/creating-models#create-models" class="create-button">
+            View Complete Tutorial
+          </a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  function openCustomModal(type) {
+    document.getElementById(`customModal-${type}`).style.display = "block";
+    document.body.classList.add("modal-open");
+  }
+  
+  function closeCustomModal(type) {
+    document.getElementById(`customModal-${type}`).style.display = "none";
+    document.body.classList.remove("modal-open");
+  }
+
+  window.onclick = function(event) {
+    const modals = document.getElementsByClassName('modal');
+    for (let i = 0; i < modals.length; i++) {
+      if (event.target === modals[i]) {
+        modals[i].style.display = "none";
+        document.body.classList.remove("modal-open");
+      }
+    }
+  }
+</script>
+
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+    animation: fadeIn 0.3s;
+  }
+  
+  .custom-modal-content {
+    background-color: #1e1e1e;
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 700px;
+    box-shadow: 0 0 25px rgba(0,211,169,0.3);
+    border: 1px solid rgba(0,211,169,0.2);
+    position: relative;
+    animation: slideIn 0.4s;
+  }
+  
+  .close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .close-modal:hover {
+    color: #00d3a9;
+  }
+  
+  .custom-modal-body {
+    margin-top: 1.5rem;
+  }
+  
+  .custom-modal-body dt {
+    color: #00d3a9;
+    font-weight: bold;
+    margin-top: 1rem;
+  }
+  
+  .custom-modal-body dd {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+  
+  .create-button {
+    background-color: #00d3a9;
+    color: #1a1a1a;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .create-button:hover {
+    background-color: #00b890;
+    color: #fff;
+  }
+  
+  body.modal-open {
+    overflow: hidden;
+  }
+  
+  .custom-modal-header, .custom-modal-body, .custom-modal-body p {
+    color: #f0f0f0;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  @media (max-width: 768px) {
+    .custom-modal-content {
+      width: 90%;
+      padding: 1rem;
+      margin: 20% auto;
+    }
+  }
+</style>
