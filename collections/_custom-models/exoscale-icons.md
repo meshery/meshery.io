@@ -149,7 +149,7 @@ components:
   description: 
 - name: snapshot-icon
   colorIcon: assets/images/custom-integration/exoscale-icons/components/snapshot-icon-red.svg
-  whiteIcon: assets/images/custom-integration/exoscale-icons/components/snapshot-icon.svg
+  whiteIcon: assets/images/custom-integration/exoscale-icons/components/snapshot-icon-red.svg
   description: 
 - name: sos-icon
   colorIcon: assets/images/custom-integration/exoscale-icons/components/sos-icon-red.svg
