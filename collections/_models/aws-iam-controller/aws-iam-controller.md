@@ -46,7 +46,7 @@ components:
 - name: service-linked-role
   colorIcon: assets/images/integration/aws-iam-controller/components/service-linked-role/icons/color/service-linked-role-color.svg
   whiteIcon: assets/images/integration/aws-iam-controller/components/service-linked-role/icons/white/service-linked-role-white.svg
-  description: Security & Compliance
+  description: 
 componentsCount: 9
 relationships: 
 relationshipsCount: 0

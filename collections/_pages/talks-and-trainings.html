@@ -1,0 +1,135 @@
+---
+layout: page
+permalink: /talks-and-trainings
+redirect_from:
+  - talks-and-presentations
+title: Meshery Talks and Trainings
+heading: Meshery Talks and Trainings
+---
+
+{% assign slug = talk.title | slugify %}
+<div class = "talks-and-presentations">
+  <section class="event">
+  <div class="container flex">
+    <div class="text talks-description" >
+      <p> A showcase of talks and trainings delivered by Meshery’s maintainers and contributors, community insights, shared learning, and our collective journey in the cloud native ecosystem. </p>
+        <br>     
+    </div>
+    <div class="image" >
+      <img src="{{ site.baseurl }}/assets/images/logos/meshery-gradient.png"
+        alt="Meshery" loading="lazy" width="100%"/>
+    </div>
+    
+  </div>
+  
+</section>
+ 
+<table>
+  <thead>
+      <tr class="talks-table-row">
+          <th class="topic">Topic</th>
+          <th>Resources</th>
+          <th >Presenter</th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for talk in site.data.talks %}
+      {% if talk.type != 'tutorial' %}
+        <tr class="talks-table-row">
+            <td>{{talk.title}}</td>
+            <td class = "table-cell-style">
+              {% if talk.video %}
+              <img src="{{ site.baseurl }}/assets/images/social/youtube.svg" alt="YouTube Icon" loading="lazy" class="recording-link"
+                data-modal-id="modal-{{ talk.title | slugify }}" />
+                <div id="modal-{{ talk.title | slugify }}" class="modal-window">
+                  <div class ="modal-content">
+                    <button class = "modal-close close">&times;</button>
+                    <h1>{{talk.title}}</h1>
+                    <div>
+                        <iframe width="560" height="315" src={{talk.embeded_video}} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    {% if talk.presentation %}
+                      <div>
+                        <div><small>Slides</small></div>
+                        <a href={{talk.presentation}} target="_blank">{{talk.title}}</a>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+              {% if talk.presentation %}
+              <span><a href={{talk.presentation}} target="_blank"><img src="{{ site.baseurl }}/assets/images/social/youtube.svg" alt="YouTube Icon" loading="lazy" class="recording-link" data-modal-id="modal-{{ talk.title | slugify }}" />
+                </a></span>
+              {% endif %}
+            </td>
+            <td class="presenter">
+              <span><a href={{talk.presenter1_profile}} target="_blank">{{talk.presenter1}}</a></span>
+              {% if talk.presenter2 %}
+                <span><a href={{talk.presenter2_profile}} target="_blank">{{talk.presenter2}}</a></span>
+              {% endif %}
+            </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+      
+  </tbody>
+</table>
+<div class = "tutorials-heading" id="trainings">
+  <h1>Contributor Trainings</h1>
+  <p>Checkout some of the resources to start contributing to Meshery</p>
+</div>
+
+<table>
+  <thead>
+      <tr class="talks-table-row">
+          <th class="topic">Topic</th>
+          <th>Resources</th>
+          <th>Presenter</th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for talk in site.data.talks %}
+      {% if talk.type == 'tutorial' %}
+        <tr class="talks-table-row">
+            <td>{{talk.title}}</td>
+            <td class = "table-cell-style">
+              {% if talk.video %}
+              <img src="{{ site.baseurl }}/assets/images/social/youtube.svg"
+            alt="Youtube Icon" loading="lazy"
+            class="recording-link" data-modal-id="modal-{{ talk.title | slugify }}"/>
+              <div id="modal-{{ talk.title | slugify }}" class="modal-window">
+                <div class ="modal-content">
+                  <button class = "modal-close close">&times;</button>
+                  <h1>{{talk.title}}</h1>
+                  <div>
+                      <iframe width="560" height="315" src={{talk.embeded_video}} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  </div>
+                  {% if talk.presentation %}
+                    <div>
+                      <div><small>Slides</small></div>
+                      <a href={{talk.presentation}} target="_blank">{{talk.title}}</a>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+            {% if talk.presentation %}
+            <span><a href={{talk.presentation}} target="_blank"><img src="{{ site.baseurl }}/assets/images/social/presentation.svg"
+              alt="Service Mesh configuration Comparison" loading="lazy"
+              class="presentation-link"/></a></span>
+            {% endif %}
+            </td>
+            <td class="presenter">
+              <span><a href={{talk.presenter1_profile}} target="_blank">{{talk.presenter1}}</a></span>
+              {% if talk.presenter2 %}
+                <span><a href={{talk.presenter2_profile}} target="_blank">{{talk.presenter2}}</a></span>
+              {% endif %}
+            </td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+      
+  </tbody>
+</table>
+</div>
+<script src="{{  site.baseurl }}/assets/js/talks-presentations.js"></script>
