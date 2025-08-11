@@ -7,5 +7,9 @@ twitter: howdevelop
 github: shivaylamba
 blurb: Mesh Head
 status: Active
-redirect_to: https://layer5.io/community/members
+meshmate: true
+bio: "Shiavy Lamba is a Web Developer, Machine Learning Enthusiast and Open Source Developer 🚀 from India."
+badges: 
+  - meshery
+  - community
 ---

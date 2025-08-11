@@ -60,7 +60,21 @@ published: true
   }
 </style>
 
-{% assign extensions = site.extensions | sort: 'type' %}
+{% assign ordered_types = "GitOps,Configuration,Collaboration,Lifecycle" | split: "," %}
+{% assign extensions_by_type = "" | split: "" %}
+{% for type in ordered_types %}
+  {% assign filtered = site.extensions | where: "type", type %}
+  {% assign extensions_by_type = extensions_by_type | concat: filtered %}
+{% endfor %}
+{% assign remaining_extensions = "" | split: "" %}
+{% for ext in site.extensions %}
+  {% unless ordered_types contains ext.type %}
+    {% assign remaining_extensions = remaining_extensions | push: ext %}
+  {% endunless %}
+{% endfor %}
+
+{% assign extensions = extensions_by_type | concat: remaining_extensions %}
+
 
 <div class="section-container">
   {% include view-all.html %} {% include extensions/card-modal.html %}

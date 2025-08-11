@@ -43,7 +43,11 @@ components:
   colorIcon: assets/images/integration/aws-iam-controller/components/open-id-connect-provider/icons/color/open-id-connect-provider-color.svg
   whiteIcon: assets/images/integration/aws-iam-controller/components/open-id-connect-provider/icons/white/open-id-connect-provider-white.svg
   description: 
-componentsCount: 8
+- name: service-linked-role
+  colorIcon: assets/images/integration/aws-iam-controller/components/service-linked-role/icons/color/service-linked-role-color.svg
+  whiteIcon: assets/images/integration/aws-iam-controller/components/service-linked-role/icons/white/service-linked-role-white.svg
+  description: 
+componentsCount: 9
 relationships: 
 relationshipsCount: 0
 featureList: [

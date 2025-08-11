@@ -15,7 +15,11 @@ components:
   colorIcon: assets/images/integration/accurate/components/sub-namespace/icons/color/sub-namespace-color.svg
   whiteIcon: assets/images/integration/accurate/components/sub-namespace/icons/white/sub-namespace-white.svg
   description: 
-componentsCount: 1
+- name: sub-namespace
+  colorIcon: assets/images/integration/accurate/components/sub-namespace/icons/color/sub-namespace-color.svg
+  whiteIcon: assets/images/integration/accurate/components/sub-namespace/icons/white/sub-namespace-white.svg
+  description: 
+componentsCount: 2
 relationships: 
 relationshipsCount: 0
 featureList: [

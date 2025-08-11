@@ -1,82 +1,72 @@
-<div class="contributor flex"> 
+<div class="contributor-section"> 
     <div class="container {% if page.full_width %}max-container{% endif %}">
-        <h2>Community Members</h2>
-        <p>A warm and welcoming collection of open sourcers.</p>
-          <a href="https://slack.meshery.io/" style="text-decoration: none !important;">
-            <h4 style="text-align:center;color:aliceblue;">
-              <input style="padding:1px;width:250px; margin-left: auto; margin-right: auto; height:35px ;" type="submit" value="Join the Community">
-            </h4>
-          </a>
-
-        {% include partials/filter-members.html %}
-
-        <ul class="contributor">  
-        <!-- List all Contributors -->
-        {% if "community.html" == page.name %}
-        {% for page in site.contributors %}
-        {% if page.layout != 'archive' %}
-        <li>
-          <div class="square-image">
-            <a href="{{page.url}}">
-              <img {% if page.status == "Active" %} class="b-active" {% else %} class="b-inactive" {% endif %} src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/>    
+          <div class="profile-header">
+            <a href="/community/active/members" class="back-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+              Go Back
             </a>
+            <span class="profile-type">Meshery Community Member</span>
           </div>
-          <div class="names">{{ page.name }}</a></div>
 
-          {% if page.twitter %}
-              <div class="twitter">
-                <img src="{% include relative-src.html src='../assets/images/social/twitter.png'%}"> 
-                  <a target="_blank" href="https://twitter.com/{{ page.twitter }}">{{ page.twitter }}</a>
+          <div class="individual-profile">
+            <div class="profile-image">
+              <img {% if page.status == "Active" %} class="b-active" {% else %} class="b-inactive" {% endif %} src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/>
+            </div>
+            
+            <div class="profile-content">
+              <div class="profile-basic-info">
+                <h1 class="profile-name">{{ page.name }}</h1>
+                {% if page.position %}
+                  <h2 class="profile-position">{{ page.position }}</h2>
+                {% endif %}
+                {% if page.location %}
+                  <p class="profile-location">{{ page.location }}</p>
+                {% endif %}
               </div>
-          {% endif %}
-
-          {% if page.github %}
               
-              <div class="github">
-                <img src="{% include relative-src.html src='../assets/images/social/github.png'%}"> 
-                  <a target="_blank" href="https://github.com/{{ page.github }}">{{ page.github }}</a>
+              {% if page.badges %}
+                <div class="profile-badges">
+                  {% for badge in page.badges %}
+                    <span class="profile-badge">
+                        <img src="/assets/images/badges/{{badge}}.svg" alt="{{ badge.name }}" class="badge-icon" />
+                    </span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              {% if page.bio %}
+                <div class="profile-bio">
+                  <p>{{ page.bio }}</p>
+                </div>
+              {% endif %}
+              
+              <div class="profile-social">
+                {% if page.github %}
+                  <a target="_blank" href="https://github.com/{{ page.github }}" class="social-link github">
+                    <img src="/assets/images/github-white.svg" data-logo-for-dark="/assets/images/github-white.svg" data-logo-for-light="/assets/images/github-color.svg" id="logo-dark-light" alt="GitHub">
+                  </a>
+                {% endif %}
+
+                {% if page.twitter %}
+                  <a target="_blank" href="https://twitter.com/{{ page.twitter }}" class="social-link twitter">
+                    <img src="/assets/images/logos/twitter-light.svg" data-logo-for-dark="/assets/images/logos/twitter-light.svg" data-logo-for-light="/assets/images/logos/twitter-dark.svg" alt="Twitter" id="logo-dark-light">
+                  </a>
+                {% endif %}
+
+                {% if page.linkedin %}
+                  <a target="_blank" href="https://linkedin.com/in/{{ page.linkedin }}" class="social-link linkedin">
+                    <img src="/assets/images/logos/linkedin-light.svg" data-logo-for-dark="/assets/images/logos/linkedin-light.svg" data-logo-for-light="/assets/images/logos/linkedin-dark.svg" alt="LinkedIn logo" id="logo-dark-light">
+                  </a>
+                {% endif %}
               </div>
-          {% endif %}
+            </div>
+          </div>
 
-        </li>
-        {% endif %}
-        {% endfor %}
-
-        <!-- List a specific contributor -->
-        {% else %}
-        {% if page.twitter %}
-        <li>
-            <div class="solo-image">
-              <img src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/>
-            </div>
-            <div class="name">
-              <a target="_blank" href="https://twitter.com/{{ page.twitter }}">{{ page.name }}</a>
-            </div>
-            <div class="position">{{ page.position }}</div>
-        </li>
-        {% else %}
-        {% if page.github %}
-        <li>
-            <div class="solo-image">
-              <img style="max-width: 300px;" src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/>
-            </div>
-            <div class="name">
-              <a target="_blank" href="https://github.com/{{ page.github }}">{{ page.name }}</a>
-            </div>
-            <div class="position">{{ page.position }}</div>
-        </li>
-        {% else %}
-        <li>
-            <div class="solo-image">
-              <img style="max-width: 300px;" src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/>
-            </div>
-            <div class="name">{{ page.name }}</div>
-            <div class="position">{{ page.position }}</div>
-        </li>
-        {% endif %}
-        {% endif %}
-        {% endif %}
-
-        </ul>
+          <div class="profile-cta">
+            <p>Would you like a Member Profile?</p>
+            <a href="https://docs.meshery.io/project/contributing" class="text highlight">Start Contributing Today</a>
+          </div>
     </div>	
 </div>

@@ -6,5 +6,5 @@ image_path: https://pbs.twimg.com/profile_images/1189880475118133249/2dGcVjJp_40
 github: RaulEsMas
 blurb: Mesh Head
 status: Inactive
-redirect_to: https://layer5.io/community/members
+
 ---

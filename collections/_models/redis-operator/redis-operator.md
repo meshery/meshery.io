@@ -11,6 +11,18 @@ category: Database
 subcategory: App Definition and Development
 registrant: Github
 components: 
+- name: redis-failover
+  colorIcon: assets/images/integration/redis-operator/components/redis-failover/icons/color/redis-failover-color.svg
+  whiteIcon: assets/images/integration/redis-operator/components/redis-failover/icons/white/redis-failover-white.svg
+  description: 
+- name: redis-cluster
+  colorIcon: assets/images/integration/redis-operator/components/redis-cluster/icons/color/redis-cluster-color.svg
+  whiteIcon: assets/images/integration/redis-operator/components/redis-cluster/icons/white/redis-cluster-white.svg
+  description: 
+- name: redis
+  colorIcon: assets/images/integration/redis-operator/components/redis/icons/color/redis-color.svg
+  whiteIcon: assets/images/integration/redis-operator/components/redis/icons/white/redis-white.svg
+  description: 
 - name: redis-cluster
   colorIcon: assets/images/integration/redis-operator/components/redis-cluster/icons/color/redis-cluster-color.svg
   whiteIcon: assets/images/integration/redis-operator/components/redis-cluster/icons/white/redis-cluster-white.svg
@@ -27,7 +39,7 @@ components:
   colorIcon: assets/images/integration/redis-operator/components/redis/icons/color/redis-color.svg
   whiteIcon: assets/images/integration/redis-operator/components/redis/icons/white/redis-white.svg
   description: 
-componentsCount: 4
+componentsCount: 7
 relationships: 
 relationshipsCount: 0
 featureList: [

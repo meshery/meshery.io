@@ -7,6 +7,9 @@ on:
     paths:
       - "assets/artifact-hub-pkg/**.go"
 
+permissions:
+  contents: write
+
 jobs:
   Update-error-codes:
     name: Error codes utility
@@ -25,7 +28,7 @@ jobs:
 
       - name: Run utility
         run: |
-          go run github.com/layer5io/meshkit/cmd/errorutil -d ./assets/artifact-hub-pkg update -i ./assets/artifact-hub-pkg -o ./assets/artifact-hub-pkg
+          go run github.com/meshery/meshkit/cmd/errorutil -d ./assets/artifact-hub-pkg update -i ./assets/artifact-hub-pkg -o ./assets/artifact-hub-pkg
 
       - name: Pull changes from remote
         run: git pull origin master

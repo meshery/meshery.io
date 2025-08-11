@@ -5,6 +5,11 @@ on:
   workflow_dispatch:
   repository_dispatch:
     types: [add_catalog]
+
+permissions:
+  contents: write
+  actions: read
+
 jobs:
   UpdateCloudNativeCatalog:
     runs-on: ubuntu-22.04
@@ -139,13 +144,10 @@ jobs:
           done
           rm temp.json
 
-      - name: copy catalog directory to docs
+      - name: sync catalog directories to docs
         run: |
-          mkdir -p meshery/docs/_catalog
-          cp -R meshery.io/collections/_catalog/* meshery/docs/_catalog/
-
-          mkdir -p meshery/docs/catalog
-          cp -R meshery.io/catalog/* meshery/docs/catalog/
+          rsync -av --delete meshery.io/collections/_catalog/ meshery/docs/_catalog/
+          rsync -av --delete meshery.io/catalog/ meshery/docs/catalog/
 
       - name: Pull latest changes from meshery/meshery
         run: |

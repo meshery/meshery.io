@@ -11,6 +11,14 @@ category: Observability and Analysis
 subcategory: Monitoring
 registrant: GitHub
 components: 
+- name: datadog-agent
+  colorIcon: assets/images/integration/datadog-operator/components/datadog-agent/icons/color/datadog-agent-color.svg
+  whiteIcon: assets/images/integration/datadog-operator/components/datadog-agent/icons/white/datadog-agent-white.svg
+  description: 
+- name: datadog-metric
+  colorIcon: assets/images/integration/datadog-operator/components/datadog-metric/icons/color/datadog-metric-color.svg
+  whiteIcon: assets/images/integration/datadog-operator/components/datadog-metric/icons/white/datadog-metric-white.svg
+  description: 
 - name: datadog-agent-profile
   colorIcon: assets/images/integration/datadog-operator/components/datadog-agent-profile/icons/color/datadog-agent-profile-color.svg
   whiteIcon: assets/images/integration/datadog-operator/components/datadog-agent-profile/icons/white/datadog-agent-profile-white.svg
@@ -55,7 +63,11 @@ components:
   colorIcon: assets/images/integration/datadog-operator/components/datadog-generic-resource/icons/color/datadog-generic-resource-color.svg
   whiteIcon: assets/images/integration/datadog-operator/components/datadog-generic-resource/icons/white/datadog-generic-resource-white.svg
   description: 
-componentsCount: 11
+- name: datadog-agent-internal
+  colorIcon: assets/images/integration/datadog-operator/components/datadog-agent-internal/icons/color/datadog-agent-internal-color.svg
+  whiteIcon: assets/images/integration/datadog-operator/components/datadog-agent-internal/icons/white/datadog-agent-internal-white.svg
+  description: 
+componentsCount: 14
 relationships: 
 relationshipsCount: 0
 featureList: [

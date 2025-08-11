@@ -75,7 +75,27 @@ components:
   colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/v-logs/icons/color/v-logs-color.svg
   whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/v-logs/icons/white/v-logs-white.svg
   description: 
-componentsCount: 16
+- name: vl-cluster
+  colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-cluster/icons/color/vl-cluster-color.svg
+  whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-cluster/icons/white/vl-cluster-white.svg
+  description: 
+- name: vl-single
+  colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-single/icons/color/vl-single-color.svg
+  whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-single/icons/white/vl-single-white.svg
+  description: 
+- name: vm-anomaly
+  colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vm-anomaly/icons/color/vm-anomaly-color.svg
+  whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vm-anomaly/icons/white/vm-anomaly-white.svg
+  description: 
+- name: vl-agent
+  colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-agent/icons/color/vl-agent-color.svg
+  whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-agent/icons/white/vl-agent-white.svg
+  description: 
+- name: vl-agent
+  colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-agent/icons/color/vl-agent-color.svg
+  whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-agent/icons/white/vl-agent-white.svg
+  description: 
+componentsCount: 21
 relationships: 
 relationshipsCount: 0
 featureList: [
