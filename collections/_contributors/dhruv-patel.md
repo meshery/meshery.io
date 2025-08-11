@@ -7,5 +7,5 @@ twitter: DhruvPatel0008
 github: dhruv0000
 blurb: Mesh Head
 status: Active
-redirect_to: https://layer5.io/community/members
+
 ---

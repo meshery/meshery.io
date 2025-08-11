@@ -7,5 +7,5 @@ twitter: JubayerJoy_
 github: JubayerJoy
 blurb: Mesh Head
 status: Active
-redirect_to: https://layer5.io/community/members
+
 ---

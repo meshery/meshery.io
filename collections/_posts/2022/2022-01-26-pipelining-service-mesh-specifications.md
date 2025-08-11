@@ -20,7 +20,7 @@ Service Mesh Interface provides a standard interface for service meshes on Kuber
 
 As a service mesh agnostic tool that provides lifecycle and performance management of a large number of (10+) service meshes, Kubernetes applications, service mesh patterns and WebAssembly filters, Meshery is the ideal tool for the job when it comes to implementing these specifications.
 
-Meshery also comes with two new GitHub Actions that do exactly this. The <a href="https://github.com/layer5io/meshery-smi-conformance-action">Meshery SMI Conformance Action</a> which validates <a href="https://meshery.io/blog/validating-smi-conformance-with-meshery">SMI conformance in your pipeline</a> and the <a href="https://github.com/layer5io/meshery-smp-action">Meshery SMP Action</a> which runs <a href="SMP compatible performance benchmarks">SMP compatible performance benchmarks</a>.
+Meshery also comes with two new GitHub Actions that do exactly this. The <a href="https://github.com/meshery/meshery-smi-conformance-action">Meshery SMI Conformance Action</a> which validates <a href="https://meshery.io/blog/validating-smi-conformance-with-meshery">SMI conformance in your pipeline</a> and the <a href="https://github.com/meshery/meshery-smp-action">Meshery SMP Action</a> which runs <a href="SMP compatible performance benchmarks">SMP compatible performance benchmarks</a>.
 
 But how do we use these actions? What do they offer? Let’s find out!
 

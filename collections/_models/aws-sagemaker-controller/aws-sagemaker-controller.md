@@ -111,7 +111,11 @@ components:
   colorIcon: assets/images/integration/aws-sagemaker-controller/components/inference-component/icons/color/inference-component-color.svg
   whiteIcon: assets/images/integration/aws-sagemaker-controller/components/inference-component/icons/white/inference-component-white.svg
   description: 
-componentsCount: 25
+- name: labeling-job
+  colorIcon: assets/images/integration/aws-sagemaker-controller/components/labeling-job/icons/color/labeling-job-color.svg
+  whiteIcon: assets/images/integration/aws-sagemaker-controller/components/labeling-job/icons/white/labeling-job-white.svg
+  description: 
+componentsCount: 26
 relationships: 
 relationshipsCount: 0
 featureList: [

@@ -7,5 +7,9 @@ twitter: lcalcote
 github: leecalcote
 blurb: Cloud native and its management
 status: Active
-redirect_to: https://layer5.io/community/members
+location: Austin, Texas, USA
+bio: "Lee Calcote is an innovative product and technology leader, passionate about empowering engineers and enabling organizations. As Founder of Layer5, he is at the forefront of the cloud native movement. Open source, advanced and emerging technologies have been a consistent focus through Calcote’s time at SolarWinds, Seagate, Cisco and Schneider Electric. An advisor, author, and speaker, Calcote is active in the community as a Docker Captain, Cloud Native Ambassador and GSoC, GSoD, and LFX Mentor."
+badges:
+  - meshery
+  - community
 ---

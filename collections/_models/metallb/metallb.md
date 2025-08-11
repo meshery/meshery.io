@@ -39,7 +39,15 @@ components:
   colorIcon: assets/images/integration/metallb/components/service-l2status/icons/color/service-l2status-color.svg
   whiteIcon: assets/images/integration/metallb/components/service-l2status/icons/white/service-l2status-white.svg
   description: 
-componentsCount: 7
+- name: service-bgp-status
+  colorIcon: assets/images/integration/metallb/components/service-bgp-status/icons/color/service-bgp-status-color.svg
+  whiteIcon: assets/images/integration/metallb/components/service-bgp-status/icons/white/service-bgp-status-white.svg
+  description: 
+- name: service-bgp-status
+  colorIcon: assets/images/integration/metallb/components/service-bgp-status/icons/color/service-bgp-status-color.svg
+  whiteIcon: assets/images/integration/metallb/components/service-bgp-status/icons/white/service-bgp-status-white.svg
+  description: 
+componentsCount: 9
 relationships: 
 relationshipsCount: 0
 featureList: [

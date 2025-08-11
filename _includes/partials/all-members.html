@@ -1,0 +1,29 @@
+<div class="contributor flex"> 
+    <div class="container {% if page.full_width %}max-container{% endif %}">
+        <h2>All Members</h2>
+        <p style="text-align: center;">A warm and welcoming collection of open sourcers.</p>
+        <a href="https://slack.meshery.io/" style="text-decoration: none !important;">
+          <h4 style="text-align:center;color:aliceblue;">
+            <input class="join-community-btn" type="submit" value="Join the Community">
+          </h4>
+        </a>
+
+        {% include partials/filter-members.html %}
+
+        <ul class="contributor">  
+        <!-- List all Contributors -->
+            {% for page in site.contributors %}
+                {% if page.layout != 'archive' %}
+                <li>
+                     <a href="{{ page.url }}">
+                    <div class="square-image">
+                       
+                        <img class="{% if page.status == 'Active' %}b-active {% else %}b-inactive{% endif %}" src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"  onerror="this.src='/assets/images/meshery-color.svg'" />    
+                    </div> 
+                    <div class="names">{{ page.name }}</div></a>
+                </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>	
+</div>

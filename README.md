@@ -14,15 +14,15 @@
 
 <div align="center">
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/layer5/meshery.svg)](https://hub.docker.com/r/layer5/meshery-io)
-[![Go Report Card](https://goreportcard.com/badge/github.com/meshery/meshery)](https://goreportcard.com/report/github.com/layer5io/meshery)
+[![Docker Pulls](https://img.shields.io/docker/pulls/meshery/meshery.svg)](https://hub.docker.com/r/meshery/meshery-io)
+[![Go Report Card](https://goreportcard.com/badge/github.com/meshery/meshery)](https://goreportcard.com/report/github.com/mesheryio/meshery)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/meshery/meshery.io/jekyll.yml?branch=master)](https://github.com/meshery/meshery.io/actions)
-[![GitHub](https://img.shields.io/github/license/layer5io/meshery.svg)](LICENSE)
-[![GitHub issues by-label](https://img.shields.io/github/issues/layer5io/meshery/help%20wanted.svg)](https://github.com/layer5io/meshery/issues?q=is%3Aopen+is%3Aissue+label%3A"help+wanted")
-[![Website](https://img.shields.io/website/https/layer5.io/meshery.svg)](https://meshery.io/)
+[![GitHub](https://img.shields.io/github/license/meshery/meshery.svg)](LICENSE)
+[![GitHub issues by-label](https://img.shields.io/github/issues/meshery/meshery/help%20wanted.svg)](https://github.com/issues?q=is%3Aopen%20is%3Aissue%20archived%3Afalse%20(org%3Ameshery%20OR%20org%3Aservice-mesh-performance%20OR%20org%3Aservice-mesh-patterns%20OR%20org%3Ameshery-extensions)%20label%3A%22help%20wanted%22)
+[![Website](https://img.shields.io/website/https/meshery.io/meshery.svg)](https://meshery.io/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/mesheryio)](https://twitter.com/intent/follow?screen_name=mesheryio)
-[![Discuss Users](https://img.shields.io/discourse/users?server=https%3A%2F%2Fdiscuss.layer5.io)](https://meshery.io/community#discussion-forums)
-[![Slack](https://img.shields.io/badge/Slack-@layer5.svg?logo=slack)](https://slack.meshery.io)
+[![Discuss Users](https://img.shields.io/discourse/users?server=https%3A%2F%2Fdiscuss.meshery.io)](https://meshery.io/community#discussion-forums)
+[![Slack](https://img.shields.io/badge/Slack-@meshery.svg?logo=slack)](https://slack.meshery.io)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3564/badge)](https://bestpractices.coreinfrastructure.org/projects/3564)
 
 
@@ -50,10 +50,12 @@ For further information, refer to the [Meshery Docs](https://docs.meshery.io).
 ## Join the Meshery community!
 
 <a name="contributing"></a><a name="community"></a>
-Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://layer5.io/community/newcomers/">Newcomers' Guide</a> for a tour of resources available to you and jump into our <a href="https://slack.meshery.io">Slack</a> to engage!
+Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://meshery.io/community/newcomers/">Newcomers' Guide</a> for a tour of resources available to you and jump into our <a href="https://slack.meshery.io">Slack</a> to engage!
 
 <p style="clear:both;">
-<a href ="https://meshery.io/community"><img alt="MeshMates" src="assets/images/logos/Meshery-MeshMentors.png" style="margin-right:10px; margin-bottom:7px;" width="28%" align="left" /></a>
+<a href ="https://meshery.io/community"><img src="/assets/images/logos/meshmate-dark.svg" data-logo-for-dark="/assets/images/logos/meshmate-light.svg"
+          data-logo-for-light="/assets/images/logos/meshmate-dark.svg" alt="MeshMate Logo" id="logo-dark-light"
+          loading="lazy" width="25%" align="left" /></a>
 <h3>Find your MeshMate</h3>
 
 <p>MeshMates are experienced community members, who will help you learn your way around, discover live projects and expand your community network. 
@@ -79,12 +81,12 @@ Find out more about the <a href="https://meshery.io/community">Meshery community
 <p>
 ✔️ <em><strong>Join</strong></em> any or all of the weekly meetings on the <a href="https://meshery.io/calendar">community calendar</a>.<br />
 ✔️ <em><strong>Watch</strong></em> community <a href="https://www.youtube.com/@mesheryio?sub_confirmation=1">meeting recordings</a>.<br />
-✔️ <em><strong>Access</strong></em> the <b>Community Drive</b>-by completing a community <a href="https://layer5.io/newcomer">Member Form</a>.<br />
+✔️ <em><strong>Access</strong></em> the <b>Community Drive</b>-by completing a community <a href="https://meshery.io/newcomer">Member Form</a>.<br />
 ✔️ <em><strong>Discuss</strong></em> in the <a href="https://meshery.io/community#discussion-forums">Community Forum</a>.<br />
 ✔️ <em><strong>RSVP</strong></em> to the <a href="https://community.cncf.io/meshery-community/">CNCF Meshery Community</a> meetings.<br />
 </p>
 <p align="center">
-<i>Not sure where to start?</i> Grab an open issue with the <a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Alayer5io+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+org%3Ameshery-extensions+label%3A%22help+wanted%22+">help-wanted label</a>.
+<i>Not sure where to start?</i> Grab an open issue with the <a href="https://github.com/issues?q=is%3Aopen%20is%3Aissue%20archived%3Afalse%20(org%3Ameshery%20OR%20org%3Aservice-mesh-performance%20OR%20org%3Aservice-mesh-patterns%20OR%20org%3Ameshery-extensions)%20label%3A%22help%20wanted%22">help-wanted label</a>.
 </p>
 
 <div>&nbsp;</div>

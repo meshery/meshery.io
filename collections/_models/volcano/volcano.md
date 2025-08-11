@@ -11,6 +11,10 @@ category: Orchestration & Management
 subcategory: Scheduling & Orchestration
 registrant: GitHub
 components: 
+- name: hyper-node
+  colorIcon: assets/images/integration/volcano/components/hyper-node/icons/color/hyper-node-color.svg
+  whiteIcon: assets/images/integration/volcano/components/hyper-node/icons/white/hyper-node-white.svg
+  description: 
 - name: job
   colorIcon: assets/images/integration/volcano/components/job/icons/color/job-color.svg
   whiteIcon: assets/images/integration/volcano/components/job/icons/white/job-white.svg
@@ -31,7 +35,7 @@ components:
   colorIcon: assets/images/integration/volcano/components/queue/icons/color/queue-color.svg
   whiteIcon: assets/images/integration/volcano/components/queue/icons/white/queue-white.svg
   description: 
-componentsCount: 5
+componentsCount: 6
 relationships: 
 relationshipsCount: 0
 featureList: [

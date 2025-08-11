@@ -7,5 +7,5 @@ twitter: Tajinde65733396
 github: tsingh2k15
 blurb: Mesh Head
 status: Inactive
-redirect_to: https://layer5.io/community/members
+
 ---
