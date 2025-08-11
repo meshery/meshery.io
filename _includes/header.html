@@ -39,9 +39,8 @@
     />
     <link rel="stylesheet" href="{{ site.baseurl }}/css/subscribe.css" />
 
-    {% if page.title == 'Programs' or page.title == 'CNCF' or page.title | downcase contains
-    'lfx' or page.title | downcase contains 'google summer of code' or page.title == 'GSOD2020' or
-    page.title == 'MLH' %}
+	{% assign page_title_lc = page.title | strip | downcase %}
+    {% page_title_lc == 'programs' or page_title_lc == 'cncf' or (page_title_lc contains 'lfx') or (page_title_lc contains 'google summer of code') or page_title_lc == 'gsod2020' or page_title_lc == 'mlh' %}
     <link rel="stylesheet" href="{{ site.baseurl }}/css/program.css" />
     {% endif %}
 
