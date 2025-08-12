@@ -4,7 +4,7 @@ name: Kanvas
 kind: Plugin
 userName: Meshery, Inc.
 userAvatarURL: /assets/images/avatar/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg
-type: Collaboration
+type: Collaboration 
 compatibility: 
   - aws
   - kubernetes
