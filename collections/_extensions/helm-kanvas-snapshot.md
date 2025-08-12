@@ -4,7 +4,7 @@ item-type: extension
 name: Helm Plugin for Kanvas Snapshot 
 kind: GitOps
 userName: Meshery Authors
-userAvatarURL: https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg
+userAvatarURL: /assets/images/avatar/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg
 type: Configuration
 compatibility: 
   - aws

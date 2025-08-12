@@ -3,7 +3,7 @@ layout: single-page-extension
 name: Meshery Adapter for Nighthawk
 kind: Adapter
 userName: Meshery Authors
-userAvatarURL: https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg
+userAvatarURL: /assets/images/avatar/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg
 type: Performance
 compatibility: 
   - aws
