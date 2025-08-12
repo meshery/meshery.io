@@ -3,7 +3,7 @@ layout: single-page-extension
 name: Meshery Adapter for Cilium Service Mesh
 kind: Adapter
 userName: Meshery Authors
-userAvatarURL: /assets/images/avatar/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg
+userAvatarURL: /assets/images/avatar/default-user-avatar.jpg
 type: Lifecycle
 compatibility: 
   - cilium
