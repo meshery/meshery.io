@@ -23,7 +23,11 @@ components:
   colorIcon: assets/images/integration/aws-cloudwatch-controller/components/metric-alarm/icons/color/metric-alarm-color.svg
   whiteIcon: assets/images/integration/aws-cloudwatch-controller/components/metric-alarm/icons/white/metric-alarm-white.svg
   description: 
-componentsCount: 3
+- name: metric-stream
+  colorIcon: assets/images/integration/aws-cloudwatch-controller/components/metric-stream/icons/color/metric-stream-color.svg
+  whiteIcon: assets/images/integration/aws-cloudwatch-controller/components/metric-stream/icons/white/metric-stream-white.svg
+  description: 
+componentsCount: 4
 relationships: 
 relationshipsCount: 0
 featureList: [
