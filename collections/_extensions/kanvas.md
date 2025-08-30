@@ -3,8 +3,8 @@ layout: single-page-extension
 name: Kanvas
 kind: Plugin
 userName: Meshery, Inc.
-userAvatarURL: https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg
-type: Collaboration
+userAvatarURL: /assets/images/avatar/default-user-avatar.jpg
+type: Collaboration 
 compatibility: 
   - aws
   - kubernetes
