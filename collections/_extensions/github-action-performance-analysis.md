@@ -7,7 +7,6 @@ redirect_from:
   - /extensions/github-action-perf
 kind: Performance
 userName: Meshery Authors
-userAvatarURL: /assets/images/avatar/default-user-avatar.jpg
 type: GitOps
 compatibility: 
   - github

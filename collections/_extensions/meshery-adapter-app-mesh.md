@@ -4,7 +4,6 @@ item-type: extension
 name: Meshery Adapter for App Mesh
 kind: Adapter
 userName: Meshery Authors
-userAvatarURL: /assets/images/avatar/default-user-avatar.jpg
 type: Lifecycle
 compatibility: 
   - github

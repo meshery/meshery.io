@@ -3,7 +3,6 @@ layout: single-page-extension
 name: Meshery Catalog
 kind: Catalog
 userName: Meshery Authors
-userAvatarURL: /assets/images/avatar/default-user-avatar.jpg
 type: Configuration
 compatibility: 
   - aws

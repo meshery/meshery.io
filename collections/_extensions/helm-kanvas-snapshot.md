@@ -4,7 +4,6 @@ item-type: extension
 name: Helm Plugin for Kanvas Snapshot 
 kind: GitOps
 userName: Meshery Authors
-userAvatarURL: /assets/images/avatar/default-user-avatar.jpg
 type: Configuration
 compatibility: 
   - aws

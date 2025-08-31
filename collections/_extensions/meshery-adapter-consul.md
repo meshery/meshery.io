@@ -3,7 +3,6 @@ layout: single-page-extension
 name: Meshery Adapter for Consul
 kind: Adapter
 userName: Meshery Authors
-userAvatarURL: /assets/images/avatar/default-user-avatar.jpg
 type: Lifecycle
 compatibility: 
   - github

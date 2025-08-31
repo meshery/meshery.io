@@ -3,7 +3,6 @@ layout: single-page-extension
 name: Meshery Design Embed
 kind: extension
 userName: Meshery Authors
-userAvatarURL: /assets/images/avatar/default-user-avatar.jpg
 type: Collaboration
 compatibility: 
   - HTML

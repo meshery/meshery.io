@@ -4,7 +4,6 @@ item-type: extension
 name: GitHub Action Kanvas Snapshot
 kind: GitOps
 userName: Meshery, Inc.
-userAvatarURL: /assets/images/avatar/default-user-avatar.jpg
 type: GitOps
 compatibility: 
   - github

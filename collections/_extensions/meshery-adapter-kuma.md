@@ -3,7 +3,6 @@ layout: single-page-extension
 name: Meshery Adapter for Kuma
 kind: Adapter
 userName: Meshery Authors
-userAvatarURL: /assets/images/avatar/default-user-avatar.jpg
 type: Lifecycle
 compatibility: 
   - kuma

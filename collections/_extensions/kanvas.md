@@ -3,7 +3,6 @@ layout: single-page-extension
 name: Kanvas
 kind: Plugin
 userName: Meshery, Inc.
-userAvatarURL: /assets/images/avatar/default-user-avatar.jpg
 type: Collaboration 
 compatibility: 
   - aws

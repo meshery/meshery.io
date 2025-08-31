@@ -3,7 +3,6 @@ layout: single-page-extension
 name: Meshery Adapter for Nighthawk
 kind: Adapter
 userName: Meshery Authors
-userAvatarURL: /assets/images/avatar/default-user-avatar.jpg
 type: Performance
 compatibility: 
   - aws
