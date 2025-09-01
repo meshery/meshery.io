@@ -1779,7 +1779,11 @@ components:
   colorIcon: assets/images/integration/k8s-config-connector/components/workflows-execution/icons/color/workflows-execution-color.svg
   whiteIcon: assets/images/integration/k8s-config-connector/components/workflows-execution/icons/white/workflows-execution-white.svg
   description: 
-componentsCount: 442
+- name: bigtable-logical-view
+  colorIcon: assets/images/integration/k8s-config-connector/components/bigtable-logical-view/icons/color/bigtable-logical-view-color.svg
+  whiteIcon: assets/images/integration/k8s-config-connector/components/bigtable-logical-view/icons/white/bigtable-logical-view-white.svg
+  description: 
+componentsCount: 443
 relationships: 
 relationshipsCount: 0
 featureList: [
