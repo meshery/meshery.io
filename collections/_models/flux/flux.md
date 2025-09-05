@@ -31,7 +31,11 @@ components:
   colorIcon: assets/images/integration/flux/components/oci-repository/icons/color/oci-repository-color.svg
   whiteIcon: assets/images/integration/flux/components/oci-repository/icons/white/oci-repository-white.svg
   description: 
-componentsCount: 5
+- name: external-artifact
+  colorIcon: assets/images/integration/flux/components/external-artifact/icons/color/external-artifact-color.svg
+  whiteIcon: assets/images/integration/flux/components/external-artifact/icons/white/external-artifact-white.svg
+  description: 
+componentsCount: 6
 relationships: 
 relationshipsCount: 0
 featureList: [
