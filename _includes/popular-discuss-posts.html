@@ -1,29 +1,32 @@
-
-  <h3>Most popular Discussions with "{{ include.tag }}" Tag</h3></h3>
-  <ul id="posts">
+<h3>Most popular Discussions with "{{ include.tag }}" Tag</h3>
+<ul id="posts">
+   <!-- -->
+   {% assign item = site.data.discuss.meshery -%}
+   <!-- -->
+   {% if item and item.topic_list and item.topic_list.topics %}
+     {% assign users = item.users %}
      <!-- -->
-    {% assign item = site.data.discuss.meshery -%}
-    <!-- -->
-    {% assign users = item.users %}
-    <!-- -->
-    {% assign topics = item.topic_list.topics %}
-    <!-- -->
+     {% assign topics = item.topic_list.topics %}
+     <!-- -->
      {% assign sortedTopics = item.topic_list.topics | sort: "views" | reverse %}
      <!-- -->
-    {% for post in sortedTopics limit:10 %}
-    <!-- -->
-    <li class="post">
-      <span class="post-date"> {{ post.created_at | date: " %Y %b %d " }}| </span>
-      <a href="/community#discussion-forums/t/{{ post.topics[0].slug }}/{{ post.id }}"> {{ post.title }}</a>
-      <span id="author" class="poost-author"> 
-        {%for user in users%}
-        {% if(post.posters[0].user_id == user.id)%}
-          {%assign author = user.name%}
-          {%break%}
-        {%endif%}
-      {%endfor%}
-      {{author}}
-      </span>
-    </li>
-    {% endfor %}
-  </ul>
+     {% for post in sortedTopics limit:10 %}
+     <!-- -->
+     <li class="post">
+       <span class="post-date"> {{ post.created_at | date: " %Y %b %d " }}| {{ post.views }} views</span>
+       <a href="/community#discussion-forums/t/{{ post.slug }}/{{ post.id }}">{{ post.title }}</a>
+       <span id="author" class="post-author">
+         {%for user in users%}
+         {% if post.posters[0].user_id == user.id %}
+           {% assign author = user.name %}
+           {% break %}
+         {% endif %}
+         {% endfor %}
+         {{author}}
+       </span>
+     </li>
+     {% endfor %}
+   {% else %}
+     <li>No discussions available.</li>
+   {% endif %}
+</ul>
