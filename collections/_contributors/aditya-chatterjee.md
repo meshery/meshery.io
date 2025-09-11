@@ -8,6 +8,4 @@ linkedin: aditya-chatterjee-737729159
 blurb: Mesh Head
 status: Inactive 
 meshmate: yes
- 
-   
 ---
