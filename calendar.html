@@ -24,7 +24,7 @@ permalink: /calendar
 </div>
 
 <!-- Fullcalendar CDN's -->
-<link rel="stylesheet" href="/css/fullcalender.css">
+<link rel="stylesheet" href="/css/fullcalendar.css">
 <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/core@4.4.0/main.min.css">
 <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/daygrid@4.4.0/main.min.css">
 <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/list@4.4.0/main.min.css">
@@ -33,13 +33,13 @@ permalink: /calendar
 <script src="https://unpkg.com/@fullcalendar/daygrid@4.4.0/main.min.js"></script>
 <script src="https://unpkg.com/@fullcalendar/list@4.4.0/main.min.js"></script>
 <script src="https://unpkg.com/@fullcalendar/google-calendar@4.4.0/main.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <script>
   // Disable spinner
   $(document).ready(function () {
-    $('.preloader').fadeOut('slow');
+    $('.preloader').show();
+    $('#calendar').hide();
   });
 
   // Calendar
@@ -73,6 +73,15 @@ permalink: /calendar
         window.open(arg.event.url, '_blank', 'width=700,height=600');
         // prevents current tab from navigating
         arg.jsEvent.preventDefault();
+      },
+      loading: function(isLoading) {
+        if (isLoading) {
+          $('.preloader').show();
+          $('#calendar').hide();
+        } else {
+          $('.preloader').hide();
+          $('#calendar').fadeIn('slow');
+        }
       }
     });
     calendar.render();
@@ -127,6 +136,9 @@ permalink: /calendar
     .fc-day-grid-event:hover .fc-content {
       font-size: 0.4rem;
     }
+  }
+  .calendar {
+    display: none;
   }
   .preloader {
     color: #00b39f;
