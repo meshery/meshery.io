@@ -119,7 +119,10 @@ relationships:
 - type: "Non Binding"
   kind: "Edge"
   description: "An edge relationship between SecurityGroup and Instance"
-relationshipsCount: 6
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between RouteTable and Subnet"
+relationshipsCount: 7
 featureList: [
   "Optimized CPU Configurations",
   "High Packet-Per-Second Performance and Low Latency with Enhanced Networking",
