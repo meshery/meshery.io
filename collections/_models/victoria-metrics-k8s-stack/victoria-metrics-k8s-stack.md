@@ -103,11 +103,7 @@ components:
   colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vt-single/icons/color/vt-single-color.svg
   whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vt-single/icons/white/vt-single-white.svg
   description: 
-- name: vt-single
-  colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vt-single/icons/color/vt-single-color.svg
-  whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vt-single/icons/white/vt-single-white.svg
-  description: 
-componentsCount: 24
+componentsCount: 23
 relationships: 
 relationshipsCount: 0
 featureList: [
