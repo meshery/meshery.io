@@ -1,23 +1,23 @@
 <style>
-    .help-modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 200; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.75); /* Black w/ opacity */
-}
+  .help-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 200; /* Sit on top */
+    inset: 0; /* top:0; right:0; bottom:0; left:0 */
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+    padding: 2rem; /* Breathing room around content */
+    box-sizing: border-box;
+    /* Center modal content when shown */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Contain scroll within content */
+    background-color: rgba(0,0,0,0.75); /* Backdrop */
+  }
 
-::-webkit-scrollbar {
-    display: "none";
-  }
-  .help-modal::-webkit-scrollbar {
-    display: none;
-  }
+  /* Hide scrollbars for WebKit if any appear */
+  ::-webkit-scrollbar { display: none; }
+  .help-modal::-webkit-scrollbar { display: none; }
 
 /* Style the tab */
 .tab {
@@ -57,13 +57,24 @@
 /* Modal Content/Box */
 .help-modal-content {
   background-color: #fefefe;
-  margin: 5% auto; /* 5% from the top and centered */
   border: 1px solid #888;
-  width: 60%; /* Could be more or less, depending on screen size */
-  @media (max-width: 768px) {
-    margin: 25% auto;
+  width: min(960px, 90vw);
+  max-height: 90vh;            /* Keep content within viewport */
+  overflow-y: auto;            /* Scroll inside content if needed */
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .help-modal-content {
     width: 85%; /* Change width to 85% */
   }
+}
+
+/* Video element inside help modal */
+.help-modal__video {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
 }
 
 /* The Close Button */
@@ -102,7 +113,7 @@
             <!-- <a href="{{ site.baseurl }}/assets/images/screens/pattern-import.mp4"
 				data-fancybox="images" data-caption="Import your patterns"> -->
         <div style="text-align: center;">
-          <video width="100%" preload="metadata" controls>
+          <video class="help-modal__video" preload="metadata" controls>
             <source src="{{ site.baseurl }}/assets/images/screens/pattern-import.mp4#t=0.01" type="video/mp4">
           </video>
 				<!-- <iframe width="98%" height="540" preload="metadata" src="{{ site.baseurl }}/assets/images/screens/pattern-import.mp4#t=0.01" alt="Import your patterns" 
