@@ -55,7 +55,11 @@ components:
   colorIcon: assets/images/integration/vault-secrets/components/csi-secrets/icons/color/csi-secrets-color.svg
   whiteIcon: assets/images/integration/vault-secrets/components/csi-secrets/icons/white/csi-secrets-white.svg
   description: 
-componentsCount: 11
+- name: csi-secrets
+  colorIcon: assets/images/integration/vault-secrets/components/csi-secrets/icons/color/csi-secrets-color.svg
+  whiteIcon: assets/images/integration/vault-secrets/components/csi-secrets/icons/white/csi-secrets-white.svg
+  description: 
+componentsCount: 12
 relationships: 
 relationshipsCount: 0
 featureList: [
