@@ -26,7 +26,7 @@ Thank you for your interest in contributing to Meshery!
 
 ### Contributor's Journey
 
-Start with the [Newcomers' Guide](/newcomers) and the [Repository Overview](https://github.com/meshery/meshery).   
+Start with the [Newcomers' Guide](/newcomers) and the [Repository Overview](https://github.com/meshery/meshery){:target="_blank" rel="noreferrer"}.
 Attend a [Newcomers’ Meeting](/calendar), explore the [Community Guide](/community/handbook/community), and find your first issue.
 
 ---
