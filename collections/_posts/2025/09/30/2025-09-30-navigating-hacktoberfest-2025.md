@@ -1,13 +1,13 @@
 ---
-title: Navigating Hacktoberfest
+title: Navigating Hacktoberfest 2025
 subheading: A Guide to Meaningful Contributions and Maintainer Appreciation
-author: Lee Calcote
-date: 2025-09-30
+author: Ritesh Karankal and Lee Calcote
+date: 2025-09-30 08:00:00 -0500
 categories: 
   - community
   - open-source
-featured-image: /assets/images/posts/2025-09-30-navigating-hacktoberfest/hacktoberfest-layer5-first-pr.png
-redirect_from: /blog/navigating-hacktoberfest
+featured-image: /assets/images/posts/2025/navigating-hacktoberfest-2025/hacktoberfest-layer5-first-pr.png
+redirect_from: /blog/navigating-hacktoberfest-2025
 ---
 As the leaves begin to turn and the air grows crisp, it can only mean one thing: [Hacktoberfest](https://hacktoberfest.com) is here! This annual celebration of open source, hosted by Digital Ocean, invites contributors from all over the world to participate in a month-long extravaganza of code contributions. While the allure of limited-edition swag may be enticing, it's essential to approach Hacktoberfest with a mindset focused on quality, respect for maintainers, and a commitment to long-term community engagement.
 
