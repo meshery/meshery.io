@@ -12,7 +12,7 @@ redirect_from: /blog/hacktoberfest-2025-kickoff
 
 As the leaves begin to turn and the air grows crisp, it can only mean one thing: [Hacktoberfest](https://hacktoberfest.com) is here! This annual celebration of open source, hosted by Digital Ocean, invites contributors from all over the world to participate in a month-long extravaganza of code contributions. While the allure of limited-edition swag may be enticing, it's essential to approach Hacktoberfest with a mindset focused on quality, respect for maintainers, and a commitment to long-term community engagement.
 
-Layer5 has a long history of participating in Hacktoberfest. 2025 is no different. Our annual [Hacktoberfest kickoff and prep event](https://layer5.io/community/events/hacktoberfest-prep-2025-designing-with-meshery) (be sure to join) is tomorrow.
+Meshery has a long history of participating in Hacktoberfest. 2025 is no different. Our annual Hacktoberfest kickoff and prep event. Be sure to join us on Friday.
 
 ### 1. Purposeful Participation: Beyond Swag Chasing and Profile Building
 
@@ -45,7 +45,7 @@ That CONTRIBUTING.md file? It's not there for decoration. Treat it as your playb
 
 ### 4. Upholding a Safe Environment: The Code of Conduct
 
-Respect, collaboration, and kindness are the bedrock of Open Source. The Code of Conduct is non-negotiable, ensuring a secure and inclusive space for all contributors. Reporting mechanisms are in place to uphold these principles. As contributors, it is our duty to champion a culture of respect and security, nurturing an environment where creativity and innovation flourish. The [Layer5 Community Handbook](/community/handbook) offers an excellent reference for our community's culture norms and practices.
+Respect, collaboration, and kindness are the bedrock of Open Source. The Code of Conduct is non-negotiable, ensuring a secure and inclusive space for all contributors. Reporting mechanisms are in place to uphold these principles. As contributors, it is our duty to champion a culture of respect and security, nurturing an environment where creativity and innovation flourish. 
 
 ### 5. Engaging Beyond Code: Fostering Holistic Development
 
@@ -61,18 +61,18 @@ Open source is a marathon, not a sprint. Feedback may take time, and collaborati
 
 ### 8. Humility and Gratitude: The Essence of Meaningful Contributions
 
-Remember, a meaningful contribution is its own reward. Swag and a profile boost is a delightful bonus, not the end goal. Celebrate your progress, no matter how small, and learn from your experiences. As you recognize that you are part of a much larger movement, we <a href="/blog/community/layer5-recognition-program">recognize our contributors and users milestones</a> each step of the way. Earn any number of <a href="https://badges.layer5.io">Layer5 badges</a> as you grow with the community.
+Remember, a meaningful contribution is its own reward. Swag and a profile boost is a delightful bonus, not the end goal. Celebrate your progress, no matter how small, and learn from your experiences. As you recognize that you are part of a much larger movement, we <a href="/blog/community/layer5-recognition-program">recognize our contributors and users milestones</a> each step of the way. Earn any number of <a href="https://badges.layer5.io">recognition badges</a> as you grow with the community.
 
 ### 9. Earn a Badge
 
 Earn a Hacktoberfest Contributor badge by contributing to Layer5 projects during this Hacktoberfest.
 
-![Hacktoberfest Contributor Badge](/assets/images/posts/2025-09-30-navigating-hacktoberfest/layer5-hacktoberfest25-badge.png)
+![Hacktoberfest Contributor Badge](/assets/images/posts/hacktoberfest-2025-kickoff/layer5-hacktoberfest25-badge.png)
 
-## Join Layer5's Hacktoberfest Event
+## Join our Hacktoberfest Event
 
 <figure class="imgWithCaption" style="width: 80%;">
-  <a href="https://layer5.io/community/events/hacktoberfest-prep-2025-designing-with-meshery"><img src="/assets/images/posts/2025-09-30-navigating-hacktoberfest/hacktoberfest-layer5-open-arms.png" /></a>
+  <a href="https://layer5.io/community/events/hacktoberfest-prep-2025-designing-with-meshery"><img src="/assets/images/posts/2025/hacktoberfest-2025-kickoff/hacktoberfest-layer5-open-arms.png" /></a>
   <figcaption style="display:flex;gap:2rem;">
     <div>
       <strong><a href="https://layer5.io/community/events/hacktoberfest-prep-2025-designing-with-meshery">Hacktoberfest Prep 2025: Designing with Meshery</a></strong>
@@ -94,5 +94,3 @@ Earn a Hacktoberfest Contributor badge by contributing to Layer5 projects during
   </figure>
 
 Hacktoberfest is an opportunity for transformation, a time when contributors and maintainers can connect on a deeper level. Let's be the contributors that maintainers celebrate, rather than dread. Whether maintainers actively seek contributions or focus on internal tasks, respect their choices. Remember, we're all weaving the rich tapestry of the open-source community, and together, we're contributing to something far greater than a month-long treasure hunt. So, dive in, make a splash, and keep coming back for more than just the loot. Happy Hacking!
-
-
