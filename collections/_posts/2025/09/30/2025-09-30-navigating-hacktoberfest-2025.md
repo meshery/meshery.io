@@ -1,14 +1,15 @@
 ---
-title: Navigating Hacktoberfest 2025
-subheading: A Guide to Meaningful Contributions and Maintainer Appreciation
+title: Hacktoberfest 2025 Kickoff
+subheading: Designing with Meshery
 author: Ritesh Karankal and Lee Calcote
 date: 2025-09-30 08:00:00 -0500
 categories: 
   - community
   - open-source
-featured-image: /assets/images/posts/2025/navigating-hacktoberfest-2025/hacktoberfest-layer5-first-pr.png
-redirect_from: /blog/navigating-hacktoberfest-2025
+featured-image: /assets/images/posts/2025/hacktoberfest-2025-kickoff/hacktoberfest-meshery-theme.png
+redirect_from: /blog/hacktoberfest-2025-kickoff
 ---
+
 As the leaves begin to turn and the air grows crisp, it can only mean one thing: [Hacktoberfest](https://hacktoberfest.com) is here! This annual celebration of open source, hosted by Digital Ocean, invites contributors from all over the world to participate in a month-long extravaganza of code contributions. While the allure of limited-edition swag may be enticing, it's essential to approach Hacktoberfest with a mindset focused on quality, respect for maintainers, and a commitment to long-term community engagement.
 
 Layer5 has a long history of participating in Hacktoberfest. 2025 is no different. Our annual [Hacktoberfest kickoff and prep event](https://layer5.io/community/events/hacktoberfest-prep-2025-designing-with-meshery) (be sure to join) is tomorrow.
