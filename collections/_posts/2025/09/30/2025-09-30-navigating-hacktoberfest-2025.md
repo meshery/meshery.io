@@ -53,37 +53,37 @@ Don't confine yourself to a GitHub profile. Engage in meaningful discussions, pa
 
 ### 6. Compassion Over Code: Recognizing Maintainer Burnout
 
-<p><a href="/community/handbook/repository-overview">Maintainers</a> are the unsung heroes of the open-source world, often overwhelmed by the Hacktoberfest influx. Your seemingly "simple" pull request may be the tipping point. Recognize their efforts and respect their capacity. Some projects may not actively seek new contributions, and that's perfectly valid. Begin by identifying projects explicitly welcoming newcomers, tagged with <a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Alayer5io+org%3Alayer5labs+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+label%3A%22help+wanted%22+">"good first issue"</a> or <a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Alayer5io+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+label%3A%22help+wanted%22+">"help wanted"</a>.</p>
+<p><a href="/community/handbook/repository-overview">Maintainers</a> are the unsung heroes of the open-source world, often overwhelmed by the Hacktoberfest influx. Your seemingly "simple" pull request may be the tipping point. Recognize their efforts and respect their capacity. Some projects may not actively seek new contributions, and that's perfectly valid. Begin by identifying projects explicitly welcoming newcomers, tagged with "good first issue" or "help wanted".</p>
 
 ### 7. The Virtue of Patience: Embracing the Long Game
 
-Open source is a marathon, not a sprint. Feedback may take time, and collaboration may be challenging. Patience is the glue that holds this ecosystem together. Cultivate it as a fundamental habit in your contributor journey. The Layer5 <a href="/community/members">community members</a> invest time, patience, understanding and offer endless hours of support to our contributors. Stick around and benefit. In turn, offer to help others. There's little better way to learn, than through teaching.
+Open source is a marathon, not a sprint. Feedback may take time, and collaboration may be challenging. Patience is the glue that holds this ecosystem together. Cultivate it as a fundamental habit in your contributor journey. The Meshery <a href="/community/members">community members</a> invest time, patience, understanding and offer endless hours of support to our contributors. Stick around and benefit. In turn, offer to help others. There's little better way to learn, than through teaching.
 
 ### 8. Humility and Gratitude: The Essence of Meaningful Contributions
 
-Remember, a meaningful contribution is its own reward. Swag and a profile boost is a delightful bonus, not the end goal. Celebrate your progress, no matter how small, and learn from your experiences. As you recognize that you are part of a much larger movement, we <a href="/blog/community/layer5-recognition-program">recognize our contributors and users milestones</a> each step of the way. Earn any number of <a href="https://badges.layer5.io">recognition badges</a> as you grow with the community.
+Remember, a meaningful contribution is its own reward. Swag and a profile boost is a delightful bonus, not the end goal. Celebrate your progress, no matter how small, and learn from your experiences. As you recognize that you are part of a much larger movement, we <a href="/blog/community/recognition-program">recognize our contributors and users milestones</a> each step of the way. Earn any number of <a href="https://badges.layer5.io">recognition badges</a> as you grow with the community.
 
 ### 9. Earn a Badge
 
-Earn a Hacktoberfest Contributor badge by contributing to Layer5 projects during this Hacktoberfest.
+Earn a Hacktoberfest Contributor badge by contributing to our projects during this Hacktoberfest.
 
-![Hacktoberfest Contributor Badge](/assets/images/posts/hacktoberfest-2025-kickoff/layer5-hacktoberfest25-badge.png)
+<img alt="Hacktoberfest Contributor Badge" src="/assets/images/posts/2025/hacktoberfest-2025-kickoff/hacktoberfest25-badge.png" style="max-width:200px" />
 
 ## Join our Hacktoberfest Event
 
 <figure class="imgWithCaption" style="width: 80%;">
-  <a href="https://layer5.io/community/events/hacktoberfest-prep-2025-designing-with-meshery"><img src="/assets/images/posts/2025/hacktoberfest-2025-kickoff/hacktoberfest-layer5-open-arms.png" /></a>
   <figcaption style="display:flex;gap:2rem;">
     <div>
-      <strong><a href="https://layer5.io/community/events/hacktoberfest-prep-2025-designing-with-meshery">Hacktoberfest Prep 2025: Designing with Meshery</a></strong>
+      <h3>Event Details</h3>
       <ul>
-        <li>DATE: October 3rd, 2025</li>
-        <li>TIME: 14:00 UTC (9AM CDT | 4PM CEST | 3PM WAT | 7:30PM IST)</li>
-        <li>EVENT: <a href="https://youtube.com/live/1-oaEy0Pm5I?feature=share">Livestream</a></li>
+      <li><strong><a href="https://layer5.io/community/events/hacktoberfest-prep-2025-designing-with-meshery">Hacktoberfest Prep 2025: Designing with Meshery</a></strong></li>
+        <li><strong>DATE: October 3rd, 2025</strong></li>
+        <li><strong>TIME: 14:00 UTC (9AM CDT | 4PM CEST | 3PM WAT | 7:30PM IST)</strong></li>
+        <li><strong>EVENT:</strong> <a href="https://youtube.com/live/1-oaEy0Pm5I?feature=share">Livestream</a></li>
       </ul>
     </div>
     <div>
-      <strong>Open GitHub Issues by Label:</strong>
+      <h3>Open GitHub Issues by Label:</h3>
       <ul>
         <li><a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Alayer5io+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+label%3A%22hacktoberfest%22+">"hacktoberfest" issues</a></li>
         <li><a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Alayer5io+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+label%3A%22help+wanted%22+">"help wanted" issues</a></li>
