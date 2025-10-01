@@ -44,41 +44,28 @@ paginate:
       <div class="sidebar-section">
         <h3 style="font-size:1.5rem;text-align: center;margin:auto;">Browse by date</h3>
         <ul class="archive-index">
-          {% assign prev_year = '' %}
-          {% assign prev_month = '' %}
-          {% for post in site.posts %}
-            {% assign year = post.date | date: '%Y' %}
-            {% assign month = post.date | date: '%B' %}
-
-            {% if year != prev_year %}
-              {% if prev_year != '' %}
-                    </ul></details>
-                  </ul></details>
-              {% endif %}
+          {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" | sort: 'name' | reverse %}
+          {% for year_group in posts_by_year %}
+            <li>
               <details class="archive-year" {% if forloop.first %}open{% endif %}>
-                <summary>{{ year }}</summary>
+                <summary>{{ year_group.name }}</summary>
                 <ul class="archive-months">
-                  {% assign prev_month = '' %}
-            {% endif %}
-
-            {% if month != prev_month %}
-              {% if prev_month != '' %}
-                    </ul></details>
-              {% endif %}
-              <details class="archive-month">
-                <summary>{{ month }}</summary>
-                <ul class="archive-posts">
-            {% endif %}
-
-                  <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
-
-            {% assign prev_year = year %}
-            {% assign prev_month = month %}
-
-            {% if forloop.last %}
-                  </ul></details>
-                </ul></details>
-            {% endif %}
+                  {% assign posts_by_month = year_group.items | group_by_exp: "post", "post.date | date: '%m'" | sort: 'name' | reverse %}
+                  {% for month_group in posts_by_month %}
+                    <li>
+                      <details class="archive-month">
+                        <summary>{{ month_group.items.first.date | date: '%B' }}</summary>
+                        <ul class="archive-posts">
+                          {% for post in month_group.items %}
+                            <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+                          {% endfor %}
+                        </ul>
+                      </details>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </details>
+            </li>
           {% endfor %}
         </ul>
       </div>
