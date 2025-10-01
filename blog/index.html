@@ -41,6 +41,48 @@ paginate:
         </ul>
       </div>
 
+      <div class="sidebar-section">
+        <h3 style="font-size:1.5rem;text-align: center;margin:auto;">Browse by date</h3>
+        <ul class="archive-index">
+          {% assign prev_year = '' %}
+          {% assign prev_month = '' %}
+          {% for post in site.posts %}
+            {% assign year = post.date | date: '%Y' %}
+            {% assign month = post.date | date: '%B' %}
+
+            {% if year != prev_year %}
+              {% if prev_year != '' %}
+                    </ul></details>
+                  </ul></details>
+              {% endif %}
+              <details class="archive-year" {% if forloop.first %}open{% endif %}>
+                <summary>{{ year }}</summary>
+                <ul class="archive-months">
+                  {% assign prev_month = '' %}
+            {% endif %}
+
+            {% if month != prev_month %}
+              {% if prev_month != '' %}
+                    </ul></details>
+              {% endif %}
+              <details class="archive-month">
+                <summary>{{ month }}</summary>
+                <ul class="archive-posts">
+            {% endif %}
+
+                  <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+
+            {% assign prev_year = year %}
+            {% assign prev_month = month %}
+
+            {% if forloop.last %}
+                  </ul></details>
+                </ul></details>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
       <div class="bg-grey">
         <div>
           <h3>Community Newsletter</h3>
@@ -209,6 +251,41 @@ paginate:
   font-size: 0.8rem;
 }
 .category-list a .cat-count:hover {
+  background: rgba(0, 211, 169, 0.1);
+}
+/* Archive index styles */
+.archive-index {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.archive-year > summary,
+.archive-month > summary {
+  cursor: pointer;
+  padding: 0.25rem 0.25rem;
+  border-radius: 4px;
+  color: var(--color-secondary-dark);
+}
+.archive-year > summary:hover,
+.archive-month > summary:hover {
+  color: var(--brand-color-secondary);
+  background: rgba(0, 211, 169, 0.1);
+}
+.archive-months,
+.archive-posts {
+  list-style: none;
+  padding-left: 0.75rem;
+  margin: 0.25rem 0 0.5rem 0.25rem;
+}
+.archive-posts li a {
+  color: var(--color-secondary-dark);
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.15rem 0.25rem;
+  border-radius: 4px;
+}
+.archive-posts li a:hover {
+  color: var(--brand-color-secondary);
   background: rgba(0, 211, 169, 0.1);
 }
 /* 
