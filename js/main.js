@@ -6,7 +6,7 @@
     var scrollBuffer = 50;
 
     if (
-      window.location.pathname == "/" &&
+      window.location.pathname === "/" ||
       window.location.pathname.includes("/programs")
     ) {
       scrollBuffer = 0;
