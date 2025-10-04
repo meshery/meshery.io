@@ -1,7 +1,7 @@
 ---
-title: Introducing the Shape Builder Extension for Meshery  
-subheading: Creating Custom Polygon Shapes for Cloud Native Infrastructure Visualization  
-author: Lee Calcote  
+title: Introducing the Shape Builder Extension for Meshery
+subheading: Creating Custom Polygon Shapes for Cloud Native Infrastructure Visualization
+author: Lee Calcote
 date: 2025-10-04 12:00:00 -0500  
 categories:  
   - community  
