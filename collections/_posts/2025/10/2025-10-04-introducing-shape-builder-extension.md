@@ -41,6 +41,6 @@ Shape Builder is a community-driven effort. Contributions to code, documentation
 
 ### 6. Learn More
 
-For detailed installation instructions, feature guides, and community resources, check out the official documentation at the Shape Builder repo and the Meshery website.
+For detailed installation instructions, feature guides, and community resources, check out the official documentation at the [Shape Builder repo](https://github.com/meshery-extensions/shape-builder/) and the Meshery website.
 
 ---
