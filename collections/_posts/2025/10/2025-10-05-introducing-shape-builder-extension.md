@@ -1,13 +1,13 @@
 ---
-title: Introducing the Shape Builder Extension for Meshery  
-subheading: Creating Custom Polygon Shapes for Cloud Native Infrastructure Visualization  
-author: Lee Calcote  
-date: 2025-10-04 12:00:00 -0500  
-categories:  
-  - community  
-  - extension  
-featured-image: /assets/images/posts/2025/shape-builder/shape-builder-banner.png  
-redirect_from: /blog/shape-builder-extension  
+title: Introducing the Shape Builder Extension for Meshery
+subheading: Creating Custom Polygon Shapes for Cloud Native Infrastructure Visualization
+author: Lee Calcote
+date: 2025-10-05 12:00:00 -0500
+categories:
+  - community
+  - extension
+featured-image: /assets/images/posts/2025/shape-builder/shape-builder-banner.png
+redirect_from: /blog/shape-builder-extension
 ---
 
 Meshery is proud to announce the release of the Shape Builder extension—a powerful tool that allows you to create custom polygon shapes to visually design and manage your cloud native infrastructure. This extension further enriches the Meshery platform, empowering users to craft detailed architecture diagrams that are tailored to their unique deployments.
