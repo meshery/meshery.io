@@ -14,7 +14,7 @@ Meshery is proud to announce the release of the Shape Builder extension—a powe
 
 ### 1. What is Shape Builder?
 
-Shape Builder is a Meshery extension developed to offer users an intuitive interface to build complex polygon shapes that represent components and relationships within your service mesh environment. Visualizing infrastructures is key to understanding and managing distributed systems, and Shape Builder delivers this capability directly in Meshery’s UI.
+Shape Builder is a Meshery extension developed to offer users an intuitive interface to build complex polygon shapes that represent components and relationships within your service mesh environment. Visualizing infrastructure is key to understanding and managing distributed systems, and Shape Builder delivers this capability directly in Meshery’s UI.
 
 ### 2. Features Overview
 
