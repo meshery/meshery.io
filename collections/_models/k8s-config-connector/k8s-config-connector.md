@@ -1787,7 +1787,11 @@ components:
   colorIcon: assets/images/integration/k8s-config-connector/components/service-networking-peered-dns-domain/icons/color/service-networking-peered-dns-domain-color.svg
   whiteIcon: assets/images/integration/k8s-config-connector/components/service-networking-peered-dns-domain/icons/white/service-networking-peered-dns-domain-white.svg
   description: 
-componentsCount: 444
+- name: billing-account
+  colorIcon: assets/images/integration/k8s-config-connector/components/billing-account/icons/color/billing-account-color.svg
+  whiteIcon: assets/images/integration/k8s-config-connector/components/billing-account/icons/white/billing-account-white.svg
+  description: 
+componentsCount: 445
 relationships: 
 relationshipsCount: 0
 featureList: [

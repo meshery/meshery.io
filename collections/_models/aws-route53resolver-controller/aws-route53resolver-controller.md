@@ -29,7 +29,22 @@ components:
   description: 
 componentsCount: 4
 relationships: 
-relationshipsCount: 0
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between ResolverEndpoint and SecurityGroup"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between ResolverEndpoint and Subnet"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between ResolverRule and ResolverEndpoint"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between adoptedresource and ResolverEndpoint"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between adoptedresource and ResolverRule"
+relationshipsCount: 5
 featureList: [
   "Local VPC domain names for EC2 instances (for example, ec2-192-0-2-44.compute-1.amazonaws.com).
 ",

@@ -51,7 +51,15 @@ components:
   colorIcon: assets/images/integration/vault-secrets/components/vault-auth-global/icons/color/vault-auth-global-color.svg
   whiteIcon: assets/images/integration/vault-secrets/components/vault-auth-global/icons/white/vault-auth-global-white.svg
   description: 
-componentsCount: 10
+- name: csi-secrets
+  colorIcon: assets/images/integration/vault-secrets/components/csi-secrets/icons/color/csi-secrets-color.svg
+  whiteIcon: assets/images/integration/vault-secrets/components/csi-secrets/icons/white/csi-secrets-white.svg
+  description: 
+- name: csi-secrets
+  colorIcon: assets/images/integration/vault-secrets/components/csi-secrets/icons/color/csi-secrets-color.svg
+  whiteIcon: assets/images/integration/vault-secrets/components/csi-secrets/icons/white/csi-secrets-white.svg
+  description: 
+componentsCount: 12
 relationships: 
 relationshipsCount: 0
 featureList: [
