@@ -7,35 +7,50 @@ permalink: /calendar
 <div class="calendar-meetings">
   <h1>Community Calendar</h1>
   <p style="margin-bottom: 2rem;">Join any or all of the weekly meetings</p>
-  <a href="https://zoom-lfx.platform.linuxfoundation.org/meetings/meshery?view=week" target="_blank" rel="noopener noreferrer" class="text highlight">
-  View Meshery Calendar
-</a>
+  <!-- Spinner Loader -->
+  <div class="preloader"></div>
+  <div id="calendar"></div>
 </div>
-    <div class="calendar-row">
-      <div style="width: 50%;">
-        {% include newcomers-map.html %}
-      </div>
-      <div style="width: 70%; text-align: center;">
-        <h2 class="subheading">Newcomers Welcome!</h2>
-        <h3>Are you new to the community?</h3>      
-        <p>Begin your journey by joining the community Slack. Then, use the resources linked in our Contributor's Journey Map and engage in the community and projects.</p>
-        <a class="highlight" href="https://slack.meshery.io" style="display: block; margin:3rem auto;  width: fit-content;">Join Community</a>
-      </div>
+<div class="calendar-row">
+  <div style="width: 50%;">
+    {% include newcomers-map.html %}
   </div>
+  <div style="width: 70%; text-align: center;">
+    <h2 class="subheading">Newcomers Welcome!</h2>
+    <h3>Are you new to the community?</h3>      
+    <p>Begin your journey by joining the community Slack. Then, use the resources linked in our Contributor's Journey Map and engage in the community and projects.</p>
+    <a class="highlight" href="https://slack.meshery.io" style="display: block; margin:3rem auto;  width: fit-content;">Join Community</a>
+  </div>
+</div>
+
+<!-- Fullcalendar CDN's -->
+<link rel="stylesheet" href="/css/fullcalendar.css">
+<link rel="stylesheet" href="https://unpkg.com/@fullcalendar/core@4.4.0/main.min.css">
+<link rel="stylesheet" href="https://unpkg.com/@fullcalendar/daygrid@4.4.0/main.min.css">
+<link rel="stylesheet" href="https://unpkg.com/@fullcalendar/list@4.4.0/main.min.css">
+
+<script src="https://unpkg.com/@fullcalendar/core@4.4.0/main.min.js"></script>
+<script src="https://unpkg.com/@fullcalendar/daygrid@4.4.0/main.min.js"></script>
+<script src="https://unpkg.com/@fullcalendar/list@4.4.0/main.min.js"></script>
+<script src="https://unpkg.com/@fullcalendar/google-calendar@4.4.0/main.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="js/calendar.js"></script>
 
 <style>
- .calendar-row{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 3rem;
+  .preloader {
+    color: #00b39f;
+    font-size: 90px;
+    text-indent: -9999em;
+    overflow: hidden;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    margin: 72px auto;
+    position: relative;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+    animation: load6 1.7s infinite ease, round 1.7s infinite ease;
   }
-  @media screen and (min-width: 900px) {
-    .calendar-row {
-      /* change the flex direction */
-      flex-direction: row;
-    }
-  }
-  
 </style>

@@ -43,7 +43,15 @@ components:
   colorIcon: assets/images/integration/mimir-distributed/components/pod-logs/icons/color/pod-logs-color.svg
   whiteIcon: assets/images/integration/mimir-distributed/components/pod-logs/icons/white/pod-logs-white.svg
   description: 
-componentsCount: 8
+- name: replica-template
+  colorIcon: assets/images/integration/mimir-distributed/components/replica-template/icons/color/replica-template-color.svg
+  whiteIcon: assets/images/integration/mimir-distributed/components/replica-template/icons/white/replica-template-white.svg
+  description: 
+- name: zone-aware-pod-disruption-budget
+  colorIcon: assets/images/integration/mimir-distributed/components/zone-aware-pod-disruption-budget/icons/color/zone-aware-pod-disruption-budget-color.svg
+  whiteIcon: assets/images/integration/mimir-distributed/components/zone-aware-pod-disruption-budget/icons/white/zone-aware-pod-disruption-budget-white.svg
+  description: 
+componentsCount: 10
 relationships: 
 relationshipsCount: 0
 featureList: [
