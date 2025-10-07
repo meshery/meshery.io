@@ -207,7 +207,19 @@ components:
   colorIcon: assets/images/integration/kuma/components/mesh-tls/icons/color/mesh-tls-color.svg
   whiteIcon: assets/images/integration/kuma/components/mesh-tls/icons/white/mesh-tls-white.svg
   description: 
-componentsCount: 49
+- name: mesh-identity
+  colorIcon: assets/images/integration/kuma/components/mesh-identity/icons/color/mesh-identity-color.svg
+  whiteIcon: assets/images/integration/kuma/components/mesh-identity/icons/white/mesh-identity-white.svg
+  description: 
+- name: mesh-trust
+  colorIcon: assets/images/integration/kuma/components/mesh-trust/icons/color/mesh-trust-color.svg
+  whiteIcon: assets/images/integration/kuma/components/mesh-trust/icons/white/mesh-trust-white.svg
+  description: 
+- name: mesh-trust
+  colorIcon: assets/images/integration/kuma/components/mesh-trust/icons/color/mesh-trust-color.svg
+  whiteIcon: assets/images/integration/kuma/components/mesh-trust/icons/white/mesh-trust-white.svg
+  description: 
+componentsCount: 52
 relationships: 
 relationshipsCount: 0
 featureList: [

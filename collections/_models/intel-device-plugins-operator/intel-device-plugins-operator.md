@@ -47,7 +47,11 @@ components:
   colorIcon: assets/images/integration/intel-device-plugins-operator/components/fpga-region/icons/color/fpga-region-color.svg
   whiteIcon: assets/images/integration/intel-device-plugins-operator/components/fpga-region/icons/white/fpga-region-white.svg
   description: 
-componentsCount: 9
+- name: npu-device-plugin
+  colorIcon: assets/images/integration/intel-device-plugins-operator/components/npu-device-plugin/icons/color/npu-device-plugin-color.svg
+  whiteIcon: assets/images/integration/intel-device-plugins-operator/components/npu-device-plugin/icons/white/npu-device-plugin-white.svg
+  description: 
+componentsCount: 10
 relationships: 
 relationshipsCount: 0
 featureList: [

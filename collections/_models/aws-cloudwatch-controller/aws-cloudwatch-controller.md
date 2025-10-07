@@ -23,9 +23,32 @@ components:
   colorIcon: assets/images/integration/aws-cloudwatch-controller/components/metric-alarm/icons/color/metric-alarm-color.svg
   whiteIcon: assets/images/integration/aws-cloudwatch-controller/components/metric-alarm/icons/white/metric-alarm-white.svg
   description: 
-componentsCount: 3
+- name: metric-stream
+  colorIcon: assets/images/integration/aws-cloudwatch-controller/components/metric-stream/icons/color/metric-stream-color.svg
+  whiteIcon: assets/images/integration/aws-cloudwatch-controller/components/metric-stream/icons/white/metric-stream-white.svg
+  description: 
+- name: dashboard
+  colorIcon: assets/images/integration/aws-cloudwatch-controller/components/dashboard/icons/color/dashboard-color.svg
+  whiteIcon: assets/images/integration/aws-cloudwatch-controller/components/dashboard/icons/white/dashboard-white.svg
+  description: 
+componentsCount: 5
 relationships: 
-relationshipsCount: 0
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between MetricAlarm and Function"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between AdoptedResource and MetricAlarm"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between MetricStream and Instance"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between AdoptedResource and MetricStream"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between MetricAlarm and Instance"
+relationshipsCount: 5
 featureList: [
   "Provides you with data and actionable insights to monitor your applications, respond to system-wide performance changes, and optimize resource utilization.",
   "Collects monitoring and operational data in the form of logs, metrics, and traces.",

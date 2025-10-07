@@ -37,7 +37,16 @@ components:
   description: 
 componentsCount: 6
 relationships: 
-relationshipsCount: 0
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between Topic and Subscription "
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between PlatformEndpoint and Subscription "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+relationshipsCount: 3
 featureList: [
   "Message fanout: Each account can support 100,000 Standard topics and each topic supports up to 12.5M subscriptions.",
   "Amazon SNS supports VPC Endpoints (VPCE) via AWS PrivateLink.",
