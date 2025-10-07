@@ -6,10 +6,10 @@ categories:
   - open-source
   - community
   - contributors
-redirect_from: /blog/Meshery-Recognition-Program
+redirect_from: /blog/mshery-recognition-program
 ---
 <div style="text-align:center;padding:20px">
-<img src="/assets/images/posts/2023-9-2-layer5-badge-programme/recognition-banner.png" style="width:75%" /></div>
+<img src="/assets/images/posts/2023-9-2-badge-program/recognition-banner.png" style="width:75%" /></div>
 Ready to take your open source journey to the next level? We're thrilled to announce an exciting update for all Meshery users and contributors:  the launch of our improved recognition program! 🎉🎈
 
 Our users and contributors have always been celebrated at Meshery. Each participation milestone you achieve and every uplifting community interaction contributes to our shared mission of empowering engineers.
@@ -55,4 +55,4 @@ Earning Meshery Badges is both exciting and achievable. As you continue to contr
 <p>To share your badges on other social profiles, utilize the provided embedded code and direct share functionality. Access your badges from the Meshery Cloud profile badges section, and then use it to post your achievements on social media platforms seamlessly. This enables you to showcase your Meshery contributions and milestones to a wider audience.</p>
 
 
-<p>For complete information about Meshery Recognition Programme and badges , refer to Meshery blog <a href="https://meshery.io/blog/community/meshery-recognition-program">here .</a></p>
+<p>For complete information about Meshery Recognition Programme and badges , refer to Meshery blog <a href="https://meshery.io/blog/community/meshery-recognition-program">here</a>.</p>

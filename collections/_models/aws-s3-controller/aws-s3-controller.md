@@ -25,7 +25,10 @@ components:
   description: 
 componentsCount: 3
 relationships: 
-relationshipsCount: 0
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between adoptedresource and Bucket"
+relationshipsCount: 1
 featureList: [
   "Stores and retrieves any amount of data",
   "Highly scalable and durable",
