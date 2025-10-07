@@ -107,7 +107,7 @@ relationships:
 - type: "Non Binding"
   kind: "Edge"
   description: "An edge relationship between Instance and SecurityGroup"
-- type: "Non Binding"
+- type: "Binding"
   kind: "Edge"
   description: "An edge relationship between VPC and TransitGatewayVPCAttachment"
 - type: "Non Binding"
@@ -146,7 +146,19 @@ relationships:
 - type: "Parent"
   kind: "Hierarchical"
   description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-relationshipsCount: 15
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+relationshipsCount: 19
 featureList: [
   "Optimized CPU Configurations",
   "High Packet-Per-Second Performance and Low Latency with Enhanced Networking",
