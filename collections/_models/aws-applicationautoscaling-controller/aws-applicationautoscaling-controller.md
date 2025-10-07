@@ -33,7 +33,19 @@ components:
   description: 
 componentsCount: 5
 relationships: 
-relationshipsCount: 0
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between ScalableTarget and SpotFleetRequest"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between AdoptedResource and ScalableTarget"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between AdoptedResource and ScalingPolicy"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between ScalingPolicy and ScalableTarget"
+relationshipsCount: 4
 featureList: [
   "Dynamically scales EC2 instances and other AWS resources",
   "Provides target tracking scaling policies",

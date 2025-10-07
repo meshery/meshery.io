@@ -57,7 +57,16 @@ components:
   description: 
 componentsCount: 11
 relationships: 
-relationshipsCount: 0
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between ReplicationGroup and UserGroup"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between cachecluster and CacheParameterGroup"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between cachecluster and CacheSubnetGroup"
+relationshipsCount: 3
 featureList: [
   "Fully managed Redis and Memcached",
   "Add a cache to your relational database",

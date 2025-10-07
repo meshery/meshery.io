@@ -33,7 +33,13 @@ components:
   description: 
 componentsCount: 5
 relationships: 
-relationshipsCount: 0
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between accesspoint and filesystem"
+relationshipsCount: 2
 featureList: [
   "Scalable and elastic file storage",
   "Supports NFS and SMB protocols",

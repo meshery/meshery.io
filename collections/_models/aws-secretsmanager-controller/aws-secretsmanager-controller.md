@@ -25,7 +25,10 @@ components:
   description: 
 componentsCount: 3
 relationships: 
-relationshipsCount: 0
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between adoptedresourcex and Secret "
+relationshipsCount: 1
 featureList: [
   "Centrally store and manage credentials, API keys, and other secrets.",
   "Use AWS Identity and Access Management (IAM) permissions policies to manage access to your secrets.",
