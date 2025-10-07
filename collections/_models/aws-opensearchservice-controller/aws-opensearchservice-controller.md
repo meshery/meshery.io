@@ -25,7 +25,16 @@ components:
   description: 
 componentsCount: 3
 relationships: 
-relationshipsCount: 0
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between domain and secuirtygroup "
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between domain and subnet "
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between AdoptedResource and domain "
+relationshipsCount: 3
 featureList: [
   "Scalable search and analytics",
   "Easy to deploy and manage",

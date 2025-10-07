@@ -6,7 +6,7 @@ description:  "Access curated resources to learn cloud-native infrastructure."
 
 
 ---
-As a community, we have put together an excellent set of learning materials and training resources to guide you through learning about cloud native infrastucture.
+As a community, we have put together an excellent set of learning materials and training resources to guide you through learning about cloud native infrastructure.
 
 You can review the [complete list of learning resources](https://docs.meshery.io/) or jump straight to the type of training you prefer:
 

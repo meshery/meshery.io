@@ -37,7 +37,19 @@ components:
   description: 
 componentsCount: 6
 relationships: 
-relationshipsCount: 0
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between AlertManagerDefinition and Workspace "
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between LoggingConfiguration and Workspace "
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between adpotedresource and Workspace "
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between RuleGroupsNamespace and Workspace "
+relationshipsCount: 4
 featureList: [
   "No collection agents required",
   "Amazon Managed Service for Prometheus includes a remote write-compatible API that can ingest metrics from OpenTelemetry, Prometheus libraries, and existing Prometheus servers.",
