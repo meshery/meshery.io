@@ -43,9 +43,22 @@ components:
   colorIcon: assets/images/integration/aws-iam-controller/components/open-id-connect-provider/icons/color/open-id-connect-provider-color.svg
   whiteIcon: assets/images/integration/aws-iam-controller/components/open-id-connect-provider/icons/white/open-id-connect-provider-white.svg
   description: 
-componentsCount: 8
+- name: service-linked-role
+  colorIcon: assets/images/integration/aws-iam-controller/components/service-linked-role/icons/color/service-linked-role-color.svg
+  whiteIcon: assets/images/integration/aws-iam-controller/components/service-linked-role/icons/white/service-linked-role-white.svg
+  description: 
+componentsCount: 9
 relationships: 
-relationshipsCount: 0
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between Policy and role"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between InstanceProfile and role"
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+relationshipsCount: 3
 featureList: [
   "Manage per-account access or scale access across AWS accounts and applications",
   "Set, verify, and right-size permissions toward least privilege",

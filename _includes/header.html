@@ -13,7 +13,6 @@
    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-KL6SSW5');</script>
     <!-- End Google Tag Manager -->
-    <link rel="canonical" href="https://layer5.io/" />
     {% seo %} {% feed_meta %} {% if jekyll.environment == 'production' %}
     <link rel="stylesheet" href="{{ site.baseurl }}/css/stellarnav.css" />
     {% else %}
@@ -40,10 +39,8 @@
     />
     <link rel="stylesheet" href="{{ site.baseurl }}/css/subscribe.css" />
 
-    {% if page.title == 'Programs' or page.title == 'CNCF' or page.title ==
-    'LFX' or page.title == 'Google Summer of Code 2019' or
-    page.title == 'Google Summer of Code' or page.title == 'GSOD2020' or
-    page.title == 'MLH' %}
+	{% assign page_title_lc = page.title | strip | downcase %}
+    {% if page_title_lc == 'programs' or page_title_lc == 'cncf' or (page_title_lc contains 'lfx') or (page_title_lc contains 'google summer of code') or page_title_lc == 'gsod2020' or page_title_lc == 'mlh' %}
     <link rel="stylesheet" href="{{ site.baseurl }}/css/program.css" />
     {% endif %}
 
@@ -101,10 +98,11 @@
         document.addEventListener("DOMContentLoaded", function() {
           // $('.sitewide-banner').animate({top: 0});
           const banner = document.querySelector(".sitewide-banner");
-          setTimeout(function() {
-            banner.classList.remove("hidden");
-            
-          }, 0); // Add a delay of 1 second before showing the banner
+          if (banner) {
+            setTimeout(function() {
+              banner.classList.remove("hidden");
+            }, 0); // Add a delay of 1 second before showing the banner
+          }
         });
       </script>
 

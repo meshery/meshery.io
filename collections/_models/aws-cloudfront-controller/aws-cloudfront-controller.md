@@ -47,12 +47,46 @@ components:
   colorIcon: assets/images/integration/aws-cloudfront-controller/components/origin-access-control/icons/color/origin-access-control-color.svg
   whiteIcon: assets/images/integration/aws-cloudfront-controller/components/origin-access-control/icons/white/origin-access-control-white.svg
   description: 
-componentsCount: 9
+- name: vpc-origin
+  colorIcon: assets/images/integration/aws-cloudfront-controller/components/vpc-origin/icons/color/vpc-origin-color.svg
+  whiteIcon: assets/images/integration/aws-cloudfront-controller/components/vpc-origin/icons/white/vpc-origin-white.svg
+  description: 
+componentsCount: 10
 relationships: 
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent) component is patched with the configuration of other (child) component. Eg: The configuration of the FieldExport (parent) component is patched with the configuration as received from Pod (child) component."
-relationshipsCount: 1
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between Distribution and VPCOrigin"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between AdoptedResource and CachePolicy"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between AdoptedResource and Distribution"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between AdoptedResource and Function"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between AdoptedResource and OriginAccessControl"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between AdoptedResource and OriginRequestPolicy"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between Distribution and CachePolicy"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between Distribution and Function"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between Distribution and OriginAccessControl"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between Distribution and OriginRequestPolicy"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between Distribution and ResponseHeadersPolicy"
+relationshipsCount: 11
 featureList: [
   "Global content delivery",
   "Improves website and application performance",

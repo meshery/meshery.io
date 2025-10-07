@@ -1,10 +1,10 @@
 <div class="contributor flex"> 
     <div class="container {% if page.full_width %}max-container{% endif %}">
         <h2>Active Members</h2>
-        <p>A warm and welcoming collection of open sourcers.</p>
+        <p style="text-align: center;">A warm and welcoming collection of open sourcers.</p>
         <a href="https://slack.meshery.io/" style="text-decoration: none !important;">
           <h4 style="text-align:center;color:aliceblue;">
-            <input style="padding-bottom:10px;padding-top:10px;width:300px; margin-left: auto; margin-right: auto;" type="submit" value="Join the Community">
+            <input class="join-community-btn" type="submit" value="Join the Community">
           </h4>
         </a>
 
@@ -15,26 +15,14 @@
             {% for page in site.contributors %}
                 {% if page.layout != 'archive' %}
                 {% if page.status == "Active" %}
-                <li>
+                <li> 
+                    <a href="{{ page.url }}">
                     <div class="square-image">
-                        <a href="{{ page.url }}">
-                        <img class="b-active" src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"/>    
+                       
+                        <img class="b-active" src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"  onerror="this.src='/assets/images/meshery-color.svg'" />    
                         </a> 
                     </div> 
-                    <div class="names">{{ page.name }}</a></div>
-
-                    {% if page.twitter %}
-
-                        <div class="twitter"><img src="{% include relative-src.html src='../assets/images/social/twitter.png'%}"> 
-                            <a target="_blank" href="https://twitter.com/{{ page.twitter }}">{{ page.twitter }}</a></div>
-
-                    {% endif %}
-                    {% if page.github %}
-                        
-                        <div class="github"><img src="{% include relative-src.html src='../assets/images/social/github.png'%}"> 
-                            <a target="_blank" href="https://github.com/{{ page.github }}">{{ page.github }}</a></div>
-
-                    {% endif %}
+                    <div class="names">{{ page.name }}</div></a>
                     
                 </li>
                 {% endif %}

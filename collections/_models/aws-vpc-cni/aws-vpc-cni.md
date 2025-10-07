@@ -21,10 +21,19 @@ components:
   description: 
 componentsCount: 2
 relationships: 
-relationshipsCount: 0
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between policyendpoint and securitygroup"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between ENIConfig and Subnet"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between VPCLink and Integration"
+relationshipsCount: 3
 featureList: [
   "Keep revision history and audit trail of all configuration changes",
-  "Use MeshMap&lsquo;s visual designer to explore your App Mesh configuration",
+  "Use Kanvas&lsquo;s visual designer to explore your App Mesh configuration",
   "Deploy Meshery on your EKS clusters for App Mesh management"
 ]
 howItWorks: "Collaborative Infrastructure as Design"

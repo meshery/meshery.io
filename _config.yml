@@ -44,7 +44,8 @@ collections:
   charts:
     output: false
   contributors:
-    output: false
+    output: true
+    permalink: /community/members/:name
   extensions:
     output: true
     permalink: /:collection/:name
@@ -64,6 +65,15 @@ collections:
     output: true
     permalink: /catalog/:collection/:name
     sort_by: name
+  handbook:
+    output: false
+    permalink: /community/:collection/:name
+  custom-models:
+    output: true
+    permalink: /catalog/models/:name
+
+# Post URL format
+permalink: /blog/:year/:month/:name/
 
 # paginate: 5
 # paginate_path: "/blog/:num/"
@@ -191,6 +201,8 @@ defaults:
 jekyll-archives:
   enabled:
     - categories
+  permalinks:
+    category: '/blog/category/:name/'
 
 markdown: kramdown
 
@@ -199,6 +211,7 @@ exclude:
   - Gemfile.lock
   - README.md
   - LICENSE
+  - collections/_handbook/
 
 # -----------
 # Hydra

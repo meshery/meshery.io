@@ -2,13 +2,14 @@
 date: 2023-12-22 10:30:05 -0530
 subheading: Release Announcement
 title: Meshery v0.7
-author_contributor: Jeremiah Obikoya, Pranav Singh, Hauwa'u Ismail
+author: Jeremiah Obikoya, Pranav Singh, Hauwa'u Ismail
 categories:
-  - meshery
-  - open-source
+  - announcements
+  - releases
+  - milestones
 layout: post
 featured-image: /assets/images/posts/2023-12-22-v07-release/meshery-v07-release-announcement.webp
-permalink: /blog/meshery-v07-release-announcement
+redirect_from: /blog/meshery-v07-release-announcement
 ---
 v0.7.0 is the latest and most significant release of Meshery, the CNCF’s cloud native manager. Included in this release is GitOps-enablement, a complete GraphQL API (in addition to the REST API), completely new CLI commands, a number of new resources with an internal capabilities registry, 200+ new integrations, and much more is now generally available.
 

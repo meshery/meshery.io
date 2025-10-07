@@ -1,40 +1,253 @@
 ---
 title: Blog
-description: Keep up with the latest news.
+description: Explore all Meshery blog posts, tutorials, and updates.
+layout: page
 paginate:
   collection: posts
-  paginate: 3
-  permalink: /page/:num/
+  per_page: 6
+  permalink: "/page:num"
 ---
 
-<div class="text-container">
-  <div class="section-bar"><a href="/blog"><h1>Blog</h1></a></div>
-  <ul class="blog-posts">
-    {% include list-posts.html posts=paginator.posts %}
-  </ul>
+<div class="blog-container">
+    <ul class="blog-posts">
+      {% include list-posts.html posts=paginator.posts %}
+    </ul>
 
-  {% if paginator.total_pages > 1 %}
-  <!-- Pagination links -->
-  <div class="pagination">
-    {% if paginator.previous_page %}
-    <a
-      href="{% include relative-src.html src=paginator.previous_page_path %}"
-      class="previous btn"
-      >&larr; Newer posts</a
-    >
+    <div class="blog-sidebar" style="max-width:250px;">
+
+      <div class="sidebar-section">
+        <h3 style="font-size:1.5rem;text-align: center;margin:auto;">Categories</h3>
+        <ul class="category-list">
+          {% assign categories = site.posts | map: 'categories' | uniq | sort %}
+          {% assign category_counts = '' | split: '' %}
+          {% for category in categories %}
+            {% if category != empty %}
+              {% assign post_count = site.posts | where: 'categories', category | size %}
+              {% assign category_count = post_count | prepend: '0000' | slice: -4, 4 | append: '|' | append: category %}
+              {% assign category_counts = category_counts | push: category_count %}
+            {% endif %}
+          {% endfor %}
+          {% assign sorted_categories = category_counts | sort | reverse %}
+          {% for category_count in sorted_categories %}
+            {% assign parts = category_count | split: '|' %}
+            {% assign category = parts[1] %}
+            {% assign count = parts[0] | plus: 0 %}
+            <li>
+              <a href="/blog/category/{{ category | slugify }}">
+                {{ category }} <span class="cat-count">({{ count }})</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="bg-grey">
+        <div>
+          <h3>Community Newsletter</h3>
+        </div>
+        <p class="p-normal">Stay up-to-date</p>
+        <div class="mailing-btn">
+          <a
+            class="button"
+            href="/subscribe"
+            >Subscribe</a>
+        </div>
+      </div>
+      
+      <div class="callout">
+        <a class="card" href="https://play.meshery.io" target="_blank">
+          <h3>Cloud Native Playground</h3>
+          <p class="small">Explore Meshery and all CNCF projects</p>
+          <div class="go-corner"></div>
+        </a>
+      </div>
+      
+    </div>
+
+    {% if paginator.total_pages > 1 %}
+      <div class="pagination">
+        {% if paginator.previous_page %}
+          <a href="{{ paginator.previous_page_path | relative_url }}" class="previous btn">&larr; Newer posts</a>
+        {% endif %}
+        
+        <span class="page-number">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+        
+        {% if paginator.next_page %}
+          <a href="{{ paginator.next_page_path | relative_url }}" class="next btn">Older posts &rarr;</a>
+        {% endif %}
+      </div>
     {% endif %}
-
-    <span class="page_number"
-      >{{ paginator.page }} of {{ paginator.total_pages }}</span
-    >
-
-    {% if paginator.next_page %}
-    <a
-      href="{% include relative-src.html src=paginator.next_page_path %}"
-      class="next btn"
-      >Older posts &rarr;</a
-    >
-    {% endif %}
-  </div>
-  {% endif %}
 </div>
+    
+
+
+<style>
+.bg-grey {
+	background: var(--background-light-cards);
+	box-shadow: var(--box-shadow-primary);
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  margin: auto;
+  text-align: center;
+  align-items: center;
+  padding: 2rem;
+  border-radius: .25rem;
+}
+.bg-grey h3 {
+  margin: 0rem;
+}
+.mailing-btn {
+  align-self: center;
+}
+.callout {
+  padding: 0rem;
+  align-items: flex-start;
+  border: 0px;
+  height: auto;
+  margin-top: 2rem;
+}
+.callout .card {
+  margin: auto;
+  border-radius: .25rem;
+}
+
+.blog-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.blog-posts {
+  grid-column: 1;
+}
+
+.blog-sidebar {
+  grid-column: 2;
+  margin-left: auto;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+
+
+.post-header {
+  margin-bottom: 1rem;
+}
+
+.post-meta {
+  color: var(--color-primary-super-dark);
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
+
+.featured-image {
+  max-width: 100%;
+  height: auto;
+  margin: 1rem 0;
+  border-radius: 4px;
+}
+
+.post-excerpt {
+  margin: 1rem 0;
+}
+
+.read-more {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--brand-color-secondary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.sidebar-section {
+  background: var(--color-primary-dark);
+  box-shadow: var(--box-shadow-primary);
+  padding: 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.category-list {
+  list-style: none;
+  padding: 0;
+}
+
+.category-list li {
+  margin: auto;
+}
+
+.category-list a {
+  color: var(--color-secondary-dark);
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.category-list a:hover {
+  color: var(--brand-color-secondary);
+  background: rgba(0, 211, 169, 0.1);
+}
+
+.category-list a .cat-count {
+  content: attr(data-count);
+  background: var(--color-primary-medium);
+  color: var(--color-secondary-dark);
+  padding: 0.3rem 0.5rem;
+  border-radius: 1px;
+  font-size: 0.8rem;
+}
+.category-list a .cat-count:hover {
+  background: rgba(0, 211, 169, 0.1);
+}
+/* 
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--brand-color-secondary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: var(--color-black);
+  > a {
+  text-decoration: none;
+}
+} */
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--brand-color-secondary);
+  color: var(--color-white);
+}
+
+@media (max-width: 768px) {
+  .blog-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .blog-sidebar {
+    grid-column: 1;
+    margin-right: auto;
+  }
+}
+</style>

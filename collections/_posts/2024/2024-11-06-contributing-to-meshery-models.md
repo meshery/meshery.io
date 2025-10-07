@@ -2,11 +2,12 @@
 title: Share Your Meshery Models
 subheading: A Guide to Contributing to the Meshery Catalog
 date: 2024-11-06
-author_contributor: Meshery Authors
+author: Meshery Authors
 categories:
   - meshery
   - mesheryctl
-permalink: /blog/share-your-meshery-models
+  - models
+redirect_from: /blog/share-your-meshery-models
 featured-image: /assets/images/posts/2024-11-06-share-your-meshery-models/meshery-catalog-blog.webp
 ---
 

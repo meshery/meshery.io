@@ -8,6 +8,41 @@ layout: page
   <div class="post-content">
     {{ content }}
 
+    <div class="social-share">
+      <p>Share</p>
+      <div class="social-share-wrapper">
+        <div class="links">
+
+          {% capture linkedin_url %}https://www.linkedin.com/shareArticle?mini=true&url={{ site.url | append: page.url | url_encode }}&summary={{ page.title | url_encode }}{% endcapture %}
+          <a href="{{ linkedin_url }}" target="_blank" rel="noopener" title="Share on LinkedIn">
+            <img src="/assets/images/logos/linkedin-dark.svg"
+                data-logo-for-dark="/assets/images/logos/linkedin-light.svg"
+                data-logo-for-light="/assets/images/logos/linkedin-dark.svg"
+                alt="LinkedIn logo" id="logo-dark-light" />
+          </a>
+          
+          
+          {% capture twitter_url %}https://x.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.url | append: page.url | url_encode }}&hashtags=meshery&via=mesheryio{% endcapture %}
+          <a href="{{ twitter_url }}" target="_blank" rel="noopener" title="Share on Twitter/X">
+            <img src="/assets/images/logos/twitter-dark.svg"
+                data-logo-for-dark="/assets/images/logos/twitter-light.svg"
+                data-logo-for-light="/assets/images/logos/twitter-dark.svg"
+                alt="Twitter logo" id="logo-dark-light" />
+          </a>
+          
+          {% capture bluesky_text %}{{ page.title }} by @mesheryio.bsky.social {{ site.url | append: page.url }}{% if page.tags %} {% for tag in page.tags %}#{{ tag | replace: ' ', '' }} {% endfor %}{% endif %}{% endcapture %}
+          {% capture bluesky_url %}https://bsky.app/intent/compose?text={{ bluesky_text | url_encode }}{% endcapture %}
+          <a href="{{ bluesky_url }}" target="_blank" rel="noopener" title="Share on Bluesky">
+            <img src="/assets/images/logos/bluesky-dark.svg"
+                data-logo-for-dark="/assets/images/logos/bluesky-dark.svg"
+                data-logo-for-light="/assets/images/logos/bluesky-light.svg" 
+                alt="Bluesky Logo" id="logo-dark-light" />
+          </a>
+          
+        </div>
+      </div>
+    </div>
+
     <div class="blog-navigation">
       {% if page.previous.url %}
       <a
@@ -23,3 +58,22 @@ layout: page
     </div>
   </div>
 </div>
+
+
+<style>
+
+.social-share p{
+  letter-spacing: .15rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+
+}
+.social-share-wrapper .links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: .8rem;
+}
+
+</style>

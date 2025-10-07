@@ -79,7 +79,27 @@ components:
   colorIcon: assets/images/integration/crossplane/components/cluster-usage/icons/color/cluster-usage-color.svg
   whiteIcon: assets/images/integration/crossplane/components/cluster-usage/icons/white/cluster-usage-white.svg
   description: 
-componentsCount: 17
+- name: managed-resource-activation-policy
+  colorIcon: assets/images/integration/crossplane/components/managed-resource-activation-policy/icons/color/managed-resource-activation-policy-color.svg
+  whiteIcon: assets/images/integration/crossplane/components/managed-resource-activation-policy/icons/white/managed-resource-activation-policy-white.svg
+  description: 
+- name: managed-resource-definition
+  colorIcon: assets/images/integration/crossplane/components/managed-resource-definition/icons/color/managed-resource-definition-color.svg
+  whiteIcon: assets/images/integration/crossplane/components/managed-resource-definition/icons/white/managed-resource-definition-white.svg
+  description: 
+- name: cron-operation
+  colorIcon: assets/images/integration/crossplane/components/cron-operation/icons/color/cron-operation-color.svg
+  whiteIcon: assets/images/integration/crossplane/components/cron-operation/icons/white/cron-operation-white.svg
+  description: 
+- name: operation
+  colorIcon: assets/images/integration/crossplane/components/operation/icons/color/operation-color.svg
+  whiteIcon: assets/images/integration/crossplane/components/operation/icons/white/operation-white.svg
+  description: 
+- name: watch-operation
+  colorIcon: assets/images/integration/crossplane/components/watch-operation/icons/color/watch-operation-color.svg
+  whiteIcon: assets/images/integration/crossplane/components/watch-operation/icons/white/watch-operation-white.svg
+  description: 
+componentsCount: 22
 relationships: 
 relationshipsCount: 0
 featureList: [

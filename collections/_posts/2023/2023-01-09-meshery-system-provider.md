@@ -2,12 +2,10 @@
 date: 2023-01-26 10:30:05 -0530
 heading: Meshery System Provider
 title: Meshery System Provider
-author_contributor: Lee Calcote
+author: Lee Calcote
 categories: 
-  - meshery
-  - mesheryctl
-# layout: post
-permalink: /blog/mesheryctl-system-provider
+  - extensibility
+redirect_from: /blog/mesheryctl-system-provider
 ---
 
 <div style="text-align:center;padding:20px">

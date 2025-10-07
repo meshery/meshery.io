@@ -2,11 +2,11 @@
 title: Meshery Reaches 7,000 Stars
 subheading: Five rockets into Outer Space
 date: 2025-3-31
-author_contributor: Meshery Authors
+author: Meshery Authors
 categories:
   - community
   - milestones
-permalink: /blog/meshery-reaches-7000-stars
+redirect_from: /blog/meshery-reaches-7000-stars
 featured-image: /assets/images/posts/2025-3-25-meshery-reaches-7000-stars/meshery-reaches-7000-stars.png
 ---
 
@@ -87,6 +87,6 @@ The next big thing could come from you. We warmly invite everyone, from experien
 
 Join our vibrant community on [Slack](https://slack.meshery.io) or explore our [GitHub](https://github.com/meshery/meshery) repositories.
 
-If you're a newcomer, refer to the [Newcomer's Guide](https://layer5.io/community/newcomers) and you are welcome to explore our [Discussion Forum](https://discuss.layer5.io). Join our [weekly newcomers meeting](/calendar) for a guided tour of how to get involved.
+If you're a newcomer, refer to the [Newcomer's Guide](/community) and you are welcome to explore our [Discussion Forum](https://meshery.io/community/#discussion-forums). Join our [weekly newcomers meeting](/calendar) for a guided tour of how to get involved.
 
 Thank you for being part of this incredible journey. Here’s to the next milestone, onwards and upwards!

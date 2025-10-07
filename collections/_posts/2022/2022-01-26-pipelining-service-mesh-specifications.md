@@ -2,11 +2,12 @@
 date:   2022-01-26 22:00:00 +0530
 heading: Pipelining Service Mesh Specifications
 title: Pipelining Service Mesh Specifications
-author_contributor: The Newsroom
+author: The Newsroom
 categories:
-  - meshery
-  - service-mesh
-permalink: /blog/pipelining-service-mesh-specifications
+ - continuous-integration
+ - service-mesh
+ - gitops
+redirect_from: /blog/pipelining-service-mesh-specifications
 ---
 <div style="text-align:center;margin-bottom:0.75rem;">
   <img src="{{site.baseurl}}/assets/images/posts/2022-01-26-pipelining-service-mesh-specifications/service-mesh-specifications.png" alt="service-mesh-specifications" width="80%"  />
@@ -19,7 +20,7 @@ Service Mesh Interface provides a standard interface for service meshes on Kuber
 
 As a service mesh agnostic tool that provides lifecycle and performance management of a large number of (10+) service meshes, Kubernetes applications, service mesh patterns and WebAssembly filters, Meshery is the ideal tool for the job when it comes to implementing these specifications.
 
-Meshery also comes with two new GitHub Actions that do exactly this. The <a href="https://github.com/layer5io/meshery-smi-conformance-action">Meshery SMI Conformance Action</a> which validates <a href="https://meshery.io/blog/validating-smi-conformance-with-meshery">SMI conformance in your pipeline</a> and the <a href="https://github.com/layer5io/meshery-smp-action">Meshery SMP Action</a> which runs <a href="SMP compatible performance benchmarks">SMP compatible performance benchmarks</a>.
+Meshery also comes with two new GitHub Actions that do exactly this. The <a href="https://github.com/meshery/meshery-smi-conformance-action">Meshery SMI Conformance Action</a> which validates <a href="https://meshery.io/blog/validating-smi-conformance-with-meshery">SMI conformance in your pipeline</a> and the <a href="https://github.com/meshery/meshery-smp-action">Meshery SMP Action</a> which runs <a href="SMP compatible performance benchmarks">SMP compatible performance benchmarks</a>.
 
 But how do we use these actions? What do they offer? Let’s find out!
 

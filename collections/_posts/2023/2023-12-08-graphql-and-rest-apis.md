@@ -2,13 +2,11 @@
 date: 2023-12-08 13:00:00 +0000
 title: The Synergy of REST and GraphQL APIs in Meshery
 subheading: Extending Meshery as an engineering platform
-author_contributor: Lee Calcote
+author: Lee Calcote
 categories:
-  - meshery
-  - open-source
-  - api
+  - extensibility
 featured-image: /assets/images/posts/2023-12-08-graphql-and-rest-apis/meshery-apis.jpeg
-permalink: /blog/unleashing-power-and-flexibility-the-synergy-of-rest-and-graphql-in-meshery
+redirect_from: /blog/unleashing-power-and-flexibility-the-synergy-of-rest-and-graphql-in-meshery
 ---
 
 As an extensible engineering platform, Meshery's focus on flexibility and adaptability are key. Meshery has embraced this philosophy wholeheartedly as evident by the myriad ways in which it is [extensible](https://docs.meshery.io/extensibility). By incorporating both REST and GraphQL APIs into its architecture, this dual approach allows Meshery to cater to a diverse range of use cases and developer preferences, ensuring that the platform remains a powerful and versatile tool for managing infrastructure and applications.

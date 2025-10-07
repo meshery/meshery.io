@@ -53,7 +53,16 @@ components:
   description: 
 componentsCount: 10
 relationships: 
-relationshipsCount: 0
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between Cluster and Role"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between Addon and cluster"
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+relationshipsCount: 3
 featureList: [
   "Simplifies Kubernetes cluster creation and management",
   "Integrates with other AWS services",

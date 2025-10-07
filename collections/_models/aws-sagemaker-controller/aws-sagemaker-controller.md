@@ -111,9 +111,61 @@ components:
   colorIcon: assets/images/integration/aws-sagemaker-controller/components/inference-component/icons/color/inference-component-color.svg
   whiteIcon: assets/images/integration/aws-sagemaker-controller/components/inference-component/icons/white/inference-component-white.svg
   description: 
-componentsCount: 25
+- name: labeling-job
+  colorIcon: assets/images/integration/aws-sagemaker-controller/components/labeling-job/icons/color/labeling-job-color.svg
+  whiteIcon: assets/images/integration/aws-sagemaker-controller/components/labeling-job/icons/white/labeling-job-white.svg
+  description: 
+componentsCount: 26
 relationships: 
-relationshipsCount: 0
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between Domain and SecurityGroup"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between domain and subnet "
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between endpoint and endpointconfig "
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between endpointconfig and Model"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between MonitoringSchedule and Model"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between pipeline and ProcessingJob"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between pipeline and TrainingJob"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between pipeline and TransformJob"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between trainingjob and model"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between Model and ModelPackage"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between Transformjob and Model "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+relationshipsCount: 16
 featureList: [
   "Choice of ML tools",
   "Repeatable and responsible ML workflows",

@@ -2,12 +2,12 @@
 title: Meshery to Participate in Security Slam
 subheading: KubeCon EU 2025
 date: 2025-03-27
-author_contributor: Meshery Maintainers
+author: Meshery Maintainers
 categories:
   - kubecon
-  - event
+  - events
   - security
-permalink: /blog/meshery-security-slam-kubecon-eu-2025
+redirect_from: /blog/meshery-security-slam-kubecon-eu-2025
 featured-image: /assets/images/posts/2025-03-27-meshery-at-kubecon-eu-2025/kubecon-eu-2025.png
 ---
 
@@ -61,7 +61,7 @@ Meshery will have a dedicated session at KubeCon EU 2025 where contributors can 
 
 As a special recognition for your contributions, participants in Meshery's Security Slam at KubeCon EU 2025 will receive the coveted Security Sentinel badge! This badge will be awarded to anyone who creates, completes, or works on an issue listed on the project board. It's a great way to showcase your commitment to security and your involvement in the Meshery community.
 
-[Badges](https://badges.layer5.io) are one of the many ways that we recognize the efforts of our contributors and uplift our users. Badges represent milestones that you achieve both in using and in contributing to our open source projects. As a contributor, this is how you demonstrate your ownership, dedication, skills and commitment. As a user, this is how you demonstrate your prowess, milestones, and meaningful engagement.
+[Meshery Badges](https://meshery.io/community/badges) are one of the many ways that we recognize the efforts of our contributors and uplift our users. Badges represent milestones that you achieve both in using and in contributing to our open source projects. As a contributor, this is how you demonstrate your ownership, dedication, skills and commitment. As a user, this is how you demonstrate your prowess, milestones, and meaningful engagement.
 
 **Get Involved**
 

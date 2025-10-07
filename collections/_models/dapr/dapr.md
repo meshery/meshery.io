@@ -33,10 +33,7 @@ components:
   description: 
 componentsCount: 5
 relationships: 
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "This relationship defines how various Dapr components (HTTPEndpoint, Resiliency, Configuration, and Subscription) are applied to a sidecar container running daprd. It represents a hierarchical inventory relationship where the child components (Dapr resources) patch the configuration of the parent component (sidecar container)."
-relationshipsCount: 1
+relationshipsCount: 0
 featureList: [
   "Helps you write resilient and secured microservices.",
   "Provides you with APIs that abstract away the complexity of common challenges developers encounter regularly when building distributed applications.",

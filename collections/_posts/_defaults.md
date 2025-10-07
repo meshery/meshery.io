@@ -3,7 +3,7 @@ title:
 subheading:
 permalink:
 categories:
-author_contributor:
+author:
 date:
 featured-image:
 ---

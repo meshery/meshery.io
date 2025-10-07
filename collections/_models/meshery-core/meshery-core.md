@@ -8,7 +8,7 @@ whiteIcon: /assets/images/integration/meshery-core/icons/white/meshery-core-whit
 docURL: https://docs.meshery.io/extensibility/integrations/meshery-core
 description: 
 category: Orchestration & Management
-subcategory: App Definition and Development
+subcategory: Application Definition & Image Build
 registrant: meshery
 components: 
 - name: wasm-filter

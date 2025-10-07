@@ -3,8 +3,7 @@ layout: single-page-extension
 item-type: extension
 name: GitHub Action Kanvas Snapshot
 kind: GitOps
-userName: Layer5, Inc.
-userAvatarURL: https://png.pngtree.com/png-vector/20191104/ourmid/pngtree-businessman-avatar-cartoon-style-png-image_1953664.jpg
+userName: Meshery, Inc.
 type: GitOps
 compatibility: 
   - github
@@ -19,6 +18,6 @@ extensionCaveats: |
   - See your deployment before you merge.
   - Utilize Kanvas Snapshot when you need to automate your software development process using GitHub Actions.
   - Customize snapshot workflow triggers to run based on specific GitHub activities, such as creating a pull request, pushing code, or releasing a new version.
-URL: 'https://github.com/marketplace/actions/meshmap-snapshot'
+URL: 'https://github.com/marketplace/actions/kanvas-snapshot'
 docsURL: 'https://docs.meshery.io/extensions/kanvas-snapshot'
 ---

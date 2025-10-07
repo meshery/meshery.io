@@ -59,36 +59,55 @@ components:
   colorIcon: assets/images/integration/aws-rds-controller/components/db-cluster-snapshot/icons/color/db-cluster-snapshot-color.svg
   whiteIcon: assets/images/integration/aws-rds-controller/components/db-cluster-snapshot/icons/white/db-cluster-snapshot-white.svg
   description: 
-componentsCount: 12
+- name: db-cluster-endpoint
+  colorIcon: assets/images/integration/aws-rds-controller/components/db-cluster-endpoint/icons/color/db-cluster-endpoint-color.svg
+  whiteIcon: assets/images/integration/aws-rds-controller/components/db-cluster-endpoint/icons/white/db-cluster-endpoint-white.svg
+  description: 
+componentsCount: 13
 relationships: 
-- type: "Parent"
-  kind: "Hierarchical"
-  description: ""
-- type: "Non Binding"
-  kind: "Edge"
-  description: ""
-- type: "Parent"
-  kind: "Hierarchical"
-  description: ""
 - type: "Binding"
   kind: "Edge"
-  description: ""
-- type: "Non Binding"
-  kind: "Edge"
-  description: ""
-- type: "Non Binding"
-  kind: "Edge"
-  description: ""
-- type: "Non Binding"
-  kind: "Edge"
-  description: ""
+  description: "An edge relationship between DBcluster and securitygroup "
 - type: "Binding"
   kind: "Edge"
-  description: ""
+  description: "An edge relationship between DBInstance and securitygroup "
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between DBcluster and DBSubnetGroup "
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between DBinstanceand DBsubnetgroup"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between DBproxy and DBcluster"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between DBproxy and DBinstance"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between DBsubnetgroup and subnet"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between DBClusterParameterGroup and DBCluster"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between DBClusterSnapshot andDBcluster"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between DBInstance and DBParameterGroup"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between DBsnapshot and DBinstance"
 - type: "Parent"
   kind: "Hierarchical"
-  description: ""
-relationshipsCount: 9
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+relationshipsCount: 14
 featureList: [
   "Amazon RDS integrates with AWS Config to support compliance and enhance security by recording and auditing changes to the configuration of your DB instance",
   "Amazon Aurora supports quick, efficient cloning operations, where entire multi-terabyte database clusters can be cloned in minutes.",

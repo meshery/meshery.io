@@ -2,11 +2,10 @@
 date:   2020-07-30 20:00:00 +0530
 heading: Getting started with Service Mesh Performance Analysis
 title: Analyzing with SMP
-author_contributor: Lee Calcote
+author: Lee Calcote
 categories:
-  - meshery
-  - SMP
-permalink: /blog/getting-started-with-service-mesh-performance-analysis
+  - performance
+redirect_from: /blog/getting-started-with-service-mesh-performance-analysis
 ---
 <div style="text-align:center;padding:5px">
 <img src="{{site.baseurl}}/assets/images/posts/2020-07-30-analyzing-with-smp/mesh-cubes.svg#center" style="width:70%" /></div>
