@@ -59,4 +59,4 @@ Shape Builder is a community-driven effort. Contributions to code, documentation
 
 ### 6. Learn More
 
-For detailed installation instructions, feature guides, and community resources, check out the official documentation at the [Shape Builder repository](https://github.com/meshery-extensions/shape-builder) and visit [shapes.meshery.io](https://shapes.meshery.io) for interactive examples. You can also explore the main [Meshery website](https://meshery.io/) for comprehensive platform documentation.
+For detailed installation instructions, feature guides, and community resources, check out the official documentation at the [Shape Builder repository](https://github.com/meshery-extensions/shape-builder) and visit [shapes.meshery.io](https://shapes.meshery.io) for interactive examples.
