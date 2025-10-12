@@ -39,10 +39,7 @@ relationships:
 - type: "Non Binding"
   kind: "Edge"
   description: "An edge relationship between accesspoint and filesystem"
-- type: "Binding"
-  kind: "Edge"
-  description: "An edge relationship between Cluster and Role"
-relationshipsCount: 3
+relationshipsCount: 2
 featureList: [
   "Scalable and elastic file storage",
   "Supports NFS and SMB protocols",
