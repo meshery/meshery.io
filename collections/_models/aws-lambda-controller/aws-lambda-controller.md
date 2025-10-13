@@ -49,31 +49,7 @@ components:
   description: 
 componentsCount: 9
 relationships: 
-- type: "Binding"
-  kind: "Edge"
-  description: "An edge relationship between function and CodeSigningConfig"
-- type: "Binding"
-  kind: "Edge"
-  description: "An edge relationship between EventSourceMapping and function"
-- type: "Binding"
-  kind: "Edge"
-  description: "An edge relationship between FunctionURLConfig and function"
-- type: "Binding"
-  kind: "Edge"
-  description: "An edge relationship between Function and SecurityGroup"
-- type: "Binding"
-  kind: "Edge"
-  description: "An edge relationship between function and subnet"
-- type: "Non Binding"
-  kind: "Edge"
-  description: "An edge relationship between alias and version"
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-relationshipsCount: 8
+relationshipsCount: 0
 featureList: [
   "Run code for virtually any type of application or backend service. ",
   "Write Lambda functions in your favorite language ",
