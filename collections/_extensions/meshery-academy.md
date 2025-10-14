@@ -12,7 +12,7 @@ logo: /assets/images/meshery-logo.svg
 whiteImage: /assets/images/academy.svg
 colorImage: /assets/images/academy.svg
 extensionInfo: |
-  Meshery Academy is a platform that provides a comprehensive learning experience for anyone beginning their journey into Meshery and cloud native infrastructure. 
+  Meshery Academy is a platform that provides a comprehensive learning experience for anyone beginning their journey into Meshery and cloud native infrastructure.
 extensionCaveats: |
   - Provides self-paced learning accessible through Meshery Cloud.
   - Includes interactive labs and guided exercises within live Meshery environments.
