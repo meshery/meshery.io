@@ -14,10 +14,10 @@ colorImage: /assets/images/academy.svg
 extensionInfo: |
   Meshery Academy is a platform that provides a comprehensive learning experience for anyone beginning their journey into Meshery and cloud native infrastructure. 
 extensionCaveats: |
-- Provides self-paced learning accessible through Meshery Cloud.
-- Includes interactive labs and guided exercises within live Meshery environments.
-- Monitors learner progress and issues certifications upon course completion.
-- Regularly updated to include new topics on Meshery and emerging cloud native technologies.
+  - Provides self-paced learning accessible through Meshery Cloud.
+  - Includes interactive labs and guided exercises within live Meshery environments.
+  - Monitors learner progress and issues certifications upon course completion.
+  - Regularly updated to include new topics on Meshery and emerging cloud native technologies.
 URL: https://cloud.layer5.io/academy
 docsURL: https://docs.layer5.io/cloud/academy/
 ---
