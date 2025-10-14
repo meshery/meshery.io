@@ -28,7 +28,19 @@ relationships:
 - type: "Non Binding"
   kind: "Edge"
   description: "An edge relationship between adoptedresourcex and Secret "
-relationshipsCount: 1
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship Lambda retrieves secrets from Secrets Manager"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship RDS stores master credentials in Secrets Manager"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship ECS tasks fetch secrets at runtime"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship EKS uses Secrets Store CSI driver to mount secrets"
+relationshipsCount: 5
 featureList: [
   "Centrally store and manage credentials, API keys, and other secrets.",
   "Use AWS Identity and Access Management (IAM) permissions policies to manage access to your secrets.",
