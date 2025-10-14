@@ -18,5 +18,3 @@ extensionCaveats: |
 URL: https://shapes.meshery.io/
 docsURL: https://docs.layer5.io/kanvas/designer/
 ---
-
-
