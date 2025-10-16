@@ -24,7 +24,7 @@ paginate:
     <ul class="blog-posts" id="blog-posts-list">
       {% include list-posts.html posts=paginator.posts %}
     </ul>
-    <div id="no-results" class="no-results" style="display: none;">
+    <div id="no-results" class="no-results hidden">
       <h3>No posts found</h3>
       <p>Try different keywords or browse by categories on the right.</p>
     </div>
@@ -140,11 +140,6 @@ paginate:
   align-items: center;
   width: 100%;
   position: relative;
-
-  @media (max-width: 768px) {
-    text-align: center;
-    margin: 0 auto 1.5rem auto;
-  }
 }
 
 .sorting-options::before {
@@ -155,11 +150,12 @@ paginate:
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>');
   background-size: contain;
   background-repeat: no-repeat;
   pointer-events: none;
   z-index: 1;
+  color: #888;
 }
 
 #blog-search-input {
@@ -218,7 +214,7 @@ paginate:
   color: var(--color-secondary-medium);
 }
 
-.blog-post.hidden {
+.hidden {
   display: none;
 }
 
@@ -451,6 +447,11 @@ paginate:
     grid-column: 1;
     margin-right: auto;
   }
+
+  .sorting-options {
+    text-align: center;
+    margin: 0 auto 1.5rem auto;
+  }
 }
 </style>
 
@@ -465,7 +466,19 @@ paginate:
   if (!searchInput || !blogPostsList) return;
 
   const blogPosts = Array.from(blogPostsList.querySelectorAll('.blog-post'));
-  const totalPosts = blogPosts.length;
+
+  // Pre-process blog post data for better performance
+  const postsData = blogPosts.map(post => {
+    const title = post.querySelector('h2 a')?.textContent.toLowerCase() || '';
+    const excerpt = post.querySelector('.post-content')?.textContent.toLowerCase() || '';
+    const categories = Array.from(post.querySelectorAll('.post-categories a, .blog-filter a'))
+      .map(cat => cat.textContent.toLowerCase())
+      .join(' ');
+    return {
+      element: post,
+      searchableText: `${title} ${excerpt} ${categories}`
+    };
+  });
 
   // Debounce function to limit search execution
   function debounce(func, wait) {
@@ -485,8 +498,8 @@ paginate:
 
     if (searchTerm === '') {
       // Show all posts if search is empty
-      blogPosts.forEach(post => post.classList.remove('hidden'));
-      noResults.style.display = 'none';
+      postsData.forEach(({ element }) => element.classList.remove('hidden'));
+      noResults.classList.add('hidden');
       resultsCount.textContent = '';
       if (pagination) pagination.style.display = 'flex';
       return;
@@ -497,32 +510,23 @@ paginate:
 
     let visibleCount = 0;
 
-    blogPosts.forEach(post => {
-      const title = post.querySelector('h2 a')?.textContent.toLowerCase() || '';
-      const excerpt = post.querySelector('.post-content')?.textContent.toLowerCase() || '';
-      const categories = Array.from(post.querySelectorAll('.post-categories a, .blog-filter a'))
-        .map(cat => cat.textContent.toLowerCase())
-        .join(' ');
-
-      // Check if search term matches title, excerpt, or categories
-      const matches = title.includes(searchTerm) ||
-                     excerpt.includes(searchTerm) ||
-                     categories.includes(searchTerm);
+    postsData.forEach(({ element, searchableText }) => {
+      const matches = searchableText.includes(searchTerm);
 
       if (matches) {
-        post.classList.remove('hidden');
+        element.classList.remove('hidden');
         visibleCount++;
       } else {
-        post.classList.add('hidden');
+        element.classList.add('hidden');
       }
     });
 
     // Show/hide no results message
     if (visibleCount === 0) {
-      noResults.style.display = 'block';
+      noResults.classList.remove('hidden');
       resultsCount.textContent = '';
     } else {
-      noResults.style.display = 'none';
+      noResults.classList.add('hidden');
       resultsCount.textContent = `Found ${visibleCount} post${visibleCount !== 1 ? 's' : ''} matching "${query}"`;
     }
   }
