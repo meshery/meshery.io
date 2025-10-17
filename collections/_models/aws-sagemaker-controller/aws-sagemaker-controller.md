@@ -115,7 +115,11 @@ components:
   colorIcon: assets/images/integration/aws-sagemaker-controller/components/labeling-job/icons/color/labeling-job-color.svg
   whiteIcon: assets/images/integration/aws-sagemaker-controller/components/labeling-job/icons/white/labeling-job-white.svg
   description: 
-componentsCount: 26
+- name: space
+  colorIcon: assets/images/integration/aws-sagemaker-controller/components/space/icons/color/space-color.svg
+  whiteIcon: assets/images/integration/aws-sagemaker-controller/components/space/icons/white/space-white.svg
+  description: 
+componentsCount: 27
 relationships: 
 - type: "Binding"
   kind: "Edge"
