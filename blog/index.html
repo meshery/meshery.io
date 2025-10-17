@@ -42,7 +42,7 @@ paginate:
       </div>
 
       <div class="sidebar-section">
-        <h3 style="font-size:1.5rem;text-align: center;margin:auto;">Browse by date</h3>
+        <h3 style="font-size:1.5rem;text-align:center; margin:auto;">Browse by date</h3>
         <ul class="archive-index">
           {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" | sort: 'name' | reverse %}
           {% for year_group in posts_by_year %}
@@ -255,7 +255,6 @@ paginate:
 .archive-month > summary {
     cursor: pointer;
     box-sizing: border-box;
-    min-width: 200px;
     justify-content: center;
     border-radius: 0.5rem;
     color: var(--color-secondary-dark);
@@ -266,12 +265,17 @@ paginate:
   color: var(--brand-color-secondary);
   background: rgba(0, 211, 169, 0.1);
 }
-.archive-months,
+.archive-months{
+  list-style: none;
+  max-width: 500px;
+  padding-left: 0rem;
+  padding-right: 3rem;
+}
 .archive-posts {
   list-style: none;
+  min-width: 100px;
   padding-left: 0rem;
-  padding-right: 0rem;
-  margin: 0.25rem 2rem 0.5rem 0.25rem;
+  margin-left: -15px;
 }
 .archive-posts li a {
   color: var(--color-secondary-dark);
