@@ -1,6 +1,6 @@
 ---
 title: Announcing the Certified Meshery Contributor
-subheading: Meshery Certification Program
+subheading: A CNCF-first of it's kind
 author: Meshery Maintainers
 date: 2025-10-17 08:00:00 -0500
 categories: 
