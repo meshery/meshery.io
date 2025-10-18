@@ -34,13 +34,9 @@ The Certified Meshery Contributor program is part of the broader [Meshery Certif
 | Developers     | Certified Meshery Contributor (CMC)  | Open source contributors, developers, technical writers, and community members.                                   | Proficient in Git and GitHub, familiar with Meshery's architecture, and a strong understanding of open source collaboration. | 150 minutes | 70%          | 2 years   | Open Source Contribution: Successfully submitting code (Go, JavaScript), documentation, or other project enhancements that are merged into the main codebase. |
 | Developers     | Certified Meshery Developer (CMD)    | Professional software engineers and systems integrators                                                           | CMA certification +1 year professional experience                                                                            | 180 minutes | 70%          | 2 years   | This certification validates the skills required for developing and integrating all types of extensions supported by Meshery as a platform.                   | -->
 
-# Certification Tracks, Tiers and Exam Structure
+## Certification Tracks, Tiers and Exam Structure
 
-The Meshery certification program is structured into three tracks each with progressive tiers, designed for a specific level of expertise.
-
-## Tracks
-
-The Meshery Certification program offers three specialized tracks designed for distinct audiences: Administrators, Developers, and Community members.
+The Meshery Certification program offers three specialized tracks designed for distinct audiences: Administrators, Developers, and Community members. Each track is structured with progressive tiers, designed to identify for a specific level of expertise.
 
 ### Administrators Track
 
@@ -79,7 +75,15 @@ Currently, the Badges program includes:
 * **Project Badges**: Contribution-focused (e.g., "Meshery Catalog").  
 * **Community Badges**: Soft skills (e.g., "MeshMate" for mentoring).  
 * **Certification Badges**: Advanced, like the existing MeshMaster badge, which recognizes a "clear and holistic understanding of cloud-native infrastructure management."
-* **New Certified Meshery Contributor Badge**: Recognizes developers who have successfully passed the Certified Meshery Contributor exam, validating their skills in contributing to the Meshery open source project.
 
-<a href="/assets/images/posts/2025/certified-meshery-contributor/certified-meshery-contributor-badge.png">
+<figure style="text-align: center;">
+  <a href="/assets/images/posts/2025/certified-meshery-contributor/certified-meshery-contributor-badge.png">
 <img alt="Certified Meshery Contributor Badge" src="/assets/images/posts/2025/certified-meshery-contributor/certified-meshery-contributor-badge.png" style="max-width:200px"  /></a>
+  <figcaption ><b>New Certified Meshery Contributor Badge</b>: Recognizes developers who have successfully passed the Certified Meshery Contributor exam, validating their skills in contributing to the Meshery open source project.
+</figcaption>
+</figure>
+  
+
+  There's no time to waste. Start your journey to becoming a Certified Meshery Contributor today! Visit the [Certified Meshery Contributor exam page](https://cloud.meshery.io/academy/certifications/c5ada327-8a58-4c8a-b9fa-51b95696488c/certified-meshery-contributor) to learn more and register for the exam. Embrace this opportunity to validate your skills and contribute meaningfully to the Meshery ecosystem.
+
+  _- Meshnery Maintainers_
