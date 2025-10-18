@@ -12,7 +12,7 @@ var span = document.getElementsByClassName("close-video")[0];
 
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
-  modal.style.display = "flex"; // flex to center content via CSS
+  modal.style.display = "flex"; 
   video.play();
 }
 
