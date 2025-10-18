@@ -21,13 +21,13 @@ Meshery is licensed under the [Apache v2 License](https://www.apache.org/license
 ---
 
 
-## Newcomer’s Path
+## Newcomer's Path
 
 Thank you for your interest in contributing to Meshery!
 
 ### Contributor's Journey
 
-Start with the [Newcomers’ Guide](/newcomers) and the [Repository Overview](/community/handbook/repository-overview).  
+Start with the [Newcomer's Guide](/newcomers) and the [Repository Overview](https://meshery.io/community/).  
 Attend a [Newcomers’ Meeting](/calendar), explore the [Community Guide](/community/handbook/community), and find your first issue.
 
 ---
