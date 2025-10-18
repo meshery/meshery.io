@@ -51,7 +51,16 @@ relationships:
 - type: "Parent"
   kind: "Hierarchical"
   description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-relationshipsCount: 6
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship EC2 instances use DynamoDB SDK for NoSQL operations"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship Lambda triggered by DynamoDB Streams for real-time processing"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship ECS services use DynamoDB for scalable NoSQL storage"
+relationshipsCount: 9
 featureList: [
   "Handle more than 10 trillion requests per day and can support peaks of more than 20 million requests per second.
 ",

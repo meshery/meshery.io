@@ -49,7 +49,43 @@ components:
   description: 
 componentsCount: 9
 relationships: 
-relationshipsCount: 0
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between function and CodeSigningConfig"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between EventSourceMapping and function"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between FunctionURLConfig and function"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between Function and SecurityGroup"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between function and subnet"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between alias and version"
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship Lambda polls SQS queues as event source for message processing"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship SNS topics trigger Lambda functions for pub/sub patterns"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship EventBridge rules invoke Lambda for event-driven architectures"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship Lambda processes messages from Amazon MQ brokers"
+relationshipsCount: 12
 featureList: [
   "Run code for virtually any type of application or backend service. ",
   "Write Lambda functions in your favorite language ",
