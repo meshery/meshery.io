@@ -7,7 +7,7 @@
       var Closespan = document.getElementsByClassName("closed")[0];
       
       button.onclick = function() {
-        Helpmodal.style.display = "block";
+        Helpmodal.style.display = "flex";
       }
       
       // When the user clicks on <span> (x), close the modal
