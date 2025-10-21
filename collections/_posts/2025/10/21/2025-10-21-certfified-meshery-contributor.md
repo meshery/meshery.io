@@ -18,6 +18,19 @@ The [Certified Meshery Contributor (CMC) certification](https://cloud.meshery.io
 
 Tailored for developers possessing intermediate skills in Go, React, and OpenAPI schemas, and with hands-on experience in Meshery’s codebase, this certification affirms an individual’s capability to make substantial contributions to project development. This includes adept code implementation, thorough testing, seamless integration, and strategic optimization.
 
+- **Track:** Developers
+- **Target Audience:** Developers, technical writers, and community members.
+- **Prerequisites:** Proficiency in Git and GitHub, familiar with Meshery’s architecture, and healthy understanding of open source collaboration.
+- **Key Focus:** Ability to competently participate as an open source contributor across the core collection of Meshery’s architectural domains, demonstrating understanding of code (Go, JavaScript), documentation, and CI-based project enhancements.
+- **Exam Format:** Multiple-choice/online assessment
+- **Project Contributions:** There is no minimum number of project contributions, like accepted pull requests (PRs) that are required for certification. However, successful candidates of the
+- **Duration:** 2 hours
+- **Passing Rate:** 70%
+- **Cost:** Free
+- **Validity:** 2 years
+
+The Certified Meshery Contributor exams have been created and reviewed by maintainers from each of Meshery's major architectural domains. This first Meshery certification is part of a larger initiative to establish a comprehensive certification program for the Meshery ecosystem.
+
 ## Introducing the Meshery Certification Program
 
 The Certified Meshery Contributor program is part of the broader Meshery Certification Program, which offers a structured pathway for professionals to validate their skills in managing and contributing to Meshery. The program includes certifications for administrators, developers, and open source contributors, each tailored to different levels of expertise and roles within the Meshery ecosystem.
