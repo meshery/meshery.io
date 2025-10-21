@@ -67,7 +67,7 @@ The Developers track targets contributors and engineers focused on building and 
 
 <img align="center" src="/assets/images/posts/2025/certified-meshery-contributor/administrators-track.png" alt="Meshery Certification Program - Developers Track" style="max-width:800px" />
 
-## Certifications
+## Certification Exams
 
 Each Meshery certification is meticulously designed to validate specific levels of expertise within the cloud-native ecosystem, with a keen focus on the Meshery platform. Spanning from entry-level foundational knowledge to advanced technical and leadership roles, these certifications feature hands-on, performance-based exams that mirror real-world scenarios in cloud-native environments. The program is organized into tracks for Administrators, Developers, and Community members, featuring progressive tiers to support ongoing professional development.
 
