@@ -1,8 +1,8 @@
 ---
-title: Announcing the Certified Meshery Contributor
-subheading: A CNCF-first of it's kind
+title: Announcing the Certified Meshery Contributor (CMC)
+subheading: A CNCF-first of its kind
 author: Meshery Maintainers
-date: 2025-10-17 08:00:00 -0500
+date: 2025-10-22 08:00:00 -0500
 categories: 
   - community
   - open-source
