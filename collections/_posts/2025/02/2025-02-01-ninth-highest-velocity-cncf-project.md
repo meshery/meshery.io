@@ -1,7 +1,7 @@
 ---
-title: "Meshery's Meteoric Rise: From Sandbox to Rocket Ship"
-subheading: 9th Fastest Velocity in the CNCF!
-date: 2025-04-01
+title: "Meshery's Momentum"
+subheading: 9th Highest Velocity in the CNCF!
+date: 2025-02-01
 author: Meshery Authors
 draft: false
 published: true
