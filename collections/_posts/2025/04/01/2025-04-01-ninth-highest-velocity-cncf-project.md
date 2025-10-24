@@ -3,8 +3,8 @@ title: "Meshery's Meteoric Rise: From Sandbox to Rocket Ship"
 subheading: 9th Fastest Velocity in the CNCF!
 date: 2025-04-01
 author: Meshery Authors
-draft: true
-published: false
+draft: false
+published: true
 categories:
   - community
   - milestones
@@ -22,13 +22,14 @@ It's truly impressive that Meshery, still in its Sandbox stage, has achieved suc
 * 1/1/2021 - 1/1/2022: 31st position
 * 1/1/2022 - 1/1/2023: 19th position
 * 1/1/2023 - 1/1/2024: 10th position
-* 1/1/2024 - 1/1/2025: 9th position -->
+* 1/1/2024 - 1/1/2025: 9th position 
+* * **2025-mid-2025:** 6th highest velocity! -->
   
 * **2020-2021:** 33rd highest velocity
 * **2021-2022:** 31st highest velocity
 * **2022-2023:** 19th highest velocity
 * **2023-2024:** 10th highest velocity
-* **Current:** 9th highest velocity!
+* **2024-2025:** 9th highest velocity!
 
 This trajectory demonstrates Meshery's increasing momentum and the growing recognition of its importance within the cloud-native space. This achievement is particularly remarkable considering Meshery is still in the CNCF Sandbox. Ranking so highly against established graduated and incubating projects is a testament to the sheer momentum and dedication behind Meshery.
 
@@ -73,7 +74,7 @@ Thank you to every contributor, user, and community member for making Meshery th
 Meshery's success is a collective effort, driven by the passion and dedication of its community members. We encourage everyone to get involved and contribute to this exciting project. Whether you're a seasoned developer or just starting your cloud-native journey, there's a place for you in the Meshery community.
 
 * Contribute to the [project on GitHub](https://github.com/meshery)
-* Join the community discussions: [Slack](https://slack.meshery.io), [Forum](http://discuss.meshery.io)
+* Join the community discussions: [Slack](https://slack.meshery.io), [Forum](https://meshery.io/community#discussion-forums)
 * Share your insights and experiences on the [Meshery blog](https://meshery.io/blog)
 
 Let's continue to propel Meshery forward and shape the future of cloud-native infrastructure management!
