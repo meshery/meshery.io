@@ -10,7 +10,7 @@ categories:
 redirect_from: /blog/pipelining-service-mesh-specifications
 ---
 <div style="text-align:center;margin-bottom:0.75rem;">
-  <img src="{{site.baseurl}}/assets/images/posts/2022-01-26-pipelining-service-mesh-specifications/service-mesh-specifications.png" alt="service-mesh-specifications" width="80%"  />
+  <img src="{{site.baseurl}}/assets/images/posts/2022/2022-01-26-pipelining-service-mesh-specifications/service-mesh-specifications.png" alt="service-mesh-specifications" width="80%"  />
 </div>
 With growing adoption of service meshes in cloud native environments, service mesh abstractions - service mesh-neutral specifications - have emerged. Service Mesh Performance and <a href="https://layer5.io/projects/service-mesh-interface-conformance">Service Mesh Interface</a> are two open specifications that address the need for universal interfaces for interacting with and managing any type of service mesh. Let’s examine what each specification provides.
 
@@ -162,7 +162,7 @@ jobs:
 You can download a token from Meshery and add it as a GitHub secret (in the example above, the secret is MESHERY_PROVIDER_TOKEN). After the test is run, you can view the results from the Service Mesh Interface dashboard in Meshery UI.
 
 <div style="text-align:center;margin-bottom:2rem;width:100%">
-<img width="100%" src="../../assets/images/posts/2022-01-26-pipelining-service-mesh-specifications/smi-conformance-result.png" alt="smi conformance dashboard">
+<img width="100%" src="../../assets/images/posts/2022/2022-01-26-pipelining-service-mesh-specifications/smi-conformance-result.png" alt="smi conformance dashboard">
 </div>
 
 Participating service mesh projects can also <a href="https://docs.meshery.io/tasks/service-mesh-interface#reporting-conformance">automatically report their conformance test results</a> to the <a href="https://meshery.io/service-mesh-interface">SMI Conformance dashboard</a>
@@ -291,7 +291,7 @@ duration: '30m'" onmouseout="resetCopyText(this)">
 See this sample GitHub workflow (<a href="https://github.com/layer5io/meshery-smp-action/blob/master/action.yml">action.yml</a>) for more configuration details.
 
 <div style="text-align:center;margin-bottom:2rem;width:100%">
-<img width="90%" src="../../assets/images/posts/2022-01-26-pipelining-service-mesh-specifications/service-mesh-performance-profile-test-results.png" alt="performance management dashboard">
+<img width="90%" src="../../assets/images/posts/2022/2022-01-26-pipelining-service-mesh-specifications/service-mesh-performance-profile-test-results.png" alt="performance management dashboard">
 </div>
 
 The results from the tests are updated on the Performance Management dashboard in Meshery. To learn more about interpreting the test results, check out <a href="https://docs.meshery.io/guides/interpreting-performance-test-results">this guide</a>. You can always checkout the <a href="https://docs.meshery.io/guides">Meshery User Guides</a> to dive deep into these features.
