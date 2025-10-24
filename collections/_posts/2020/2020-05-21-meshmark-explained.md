@@ -8,7 +8,9 @@ categories:
 redirect_from: /blog/meshmark-explained
 ---
 <div class="row" style="width:220px;float:right;padding:5px;text-align:center;">
-<a href="https://smi-spec.io" rel="nofollow"></a><img src="{{site.baseurl}}/assets/images/posts/2020-05-21-meshmark-explained/container-crane.svg" alt="container-crane" width="100%">
+---
+<a href="https://smi-spec.io" rel="nofollow"></a><img src="{{site.baseurl}}/assets/images/posts/2020/2020-05-21-meshmark-explained/container-crane.svg" alt="container-crane" width="100%">
+---
 </div>
 An introduction to MeshMark might be best explained through a simple story that we can all relate to. As a consumer, when you make a purchase, there are generically two methods by which we determine our happiness about making any given purchase.
 
@@ -37,6 +39,6 @@ The scoring system ranges from 0 to 100.
         </p>
     </div>
     <div>
-        <img src="../../assets/images/posts/2020-05-21-meshmark-explained/distributed-performance_green.svg" style="width: 200%">
+        <img src="../../assets/images/posts/2020/2020-05-21-meshmark-explained/distributed-performance_green.svg" style="width: 200%">
     </div>
 </div>

@@ -11,7 +11,7 @@ redirect_from:
   - /blog/2023/09/2023-9-2-layer5-badge-program
 ---
 <div style="text-align:center;padding:20px">
-<img src="/assets/images/posts/2023-9-2-badge-program/recognition-banner.png" style="width:75%" /></div>
+<img src="/assets/images/posts/2023/2023-9-2-badge-program/recognition-banner.png" style="width:75%" /></div>
 Ready to take your open source journey to the next level? We're thrilled to announce an exciting update for all Meshery users and contributors:  the launch of our improved recognition program! 🎉🎈
 
 Our users and contributors have always been celebrated at Meshery. Each participation milestone you achieve and every uplifting community interaction contributes to our shared mission of empowering engineers.
