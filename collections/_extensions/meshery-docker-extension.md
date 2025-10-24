@@ -8,8 +8,8 @@ compatibility:
   - kubernetes
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: /assets/images/meshery-logo.svg
-whiteImage: /assets/images/docker-color.svg
-colorImage: /assets/images/docker-white.svg
+whiteImage: /assets/images/logos/docker-color.svg
+colorImage: /assets/images/logos/docker-white.svg
 extensionInfo: |
   Wrangle cloud native apps using Docker Desktop and Meshery.
 extensionCaveats: |

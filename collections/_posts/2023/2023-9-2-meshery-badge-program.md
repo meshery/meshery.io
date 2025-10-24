@@ -6,7 +6,9 @@ categories:
   - open-source
   - community
   - contributors
-redirect_from: /blog/mshery-recognition-program
+redirect_from: 
+  - /blog/mshery-recognition-program
+  - /blog/2023/09/2023-9-2-layer5-badge-program
 ---
 <div style="text-align:center;padding:20px">
 <img src="/assets/images/posts/2023-9-2-badge-program/recognition-banner.png" style="width:75%" /></div>
@@ -14,7 +16,7 @@ Ready to take your open source journey to the next level? We're thrilled to anno
 
 Our users and contributors have always been celebrated at Meshery. Each participation milestone you achieve and every uplifting community interaction contributes to our shared mission of empowering engineers.
 
-Every aspect of what we do revolves around our users and contributors. We are thrilled to unveil our latest initiative that celebrates and rewards our invaluable users and contributors – [Meshery Badges](https://meshery.io/community/badges)!
+Every aspect of what we do revolves around our users and contributors. We are thrilled to unveil our latest initiative that celebrates and rewards our invaluable users and contributors – [Meshery Badges](/community/recognition)!
 
 ### What Are Meshery Badges?
 
@@ -39,6 +41,7 @@ Whether you're a power user, an experienced developer, a meticulous documenter, 
  - **Social Media Showcase**: These badges can be shared on several social media platforms! Let your friends, family, colleagues, and your bosses know about your contributions, your journey, and your passion for cloud-native technology.
 
 ### How Can I Earn Badges?
+
 Earning Meshery badges is both rewarding and straightforward. Each badge is tied to specific activities. For users, badges for activities such as using our projects, talking about the projects, sharing your successes and what you like about them. For contributors, badges include activities such as submitting code, assisting with documentation, participating in community events, and more. As you accumulate contributions in various areas, you'll begin to unlock badges that showcase your multifaceted involvement.
 
 These badges will be prominently displayed on your Meshery community profile, visually representing your journey as a contributor. Not only does this serve as a source of personal pride, but it also helps others in the community recognize your expertise and dedication.
@@ -54,5 +57,4 @@ Earning Meshery Badges is both exciting and achievable. As you continue to contr
 
 <p>To share your badges on other social profiles, utilize the provided embedded code and direct share functionality. Access your badges from the Meshery Cloud profile badges section, and then use it to post your achievements on social media platforms seamlessly. This enables you to showcase your Meshery contributions and milestones to a wider audience.</p>
 
-
-<p>For complete information about Meshery Recognition Programme and badges , refer to Meshery blog <a href="https://meshery.io/blog/community/meshery-recognition-program">here</a>.</p>
+<p>Earn your badge today and collect the whole set!</p>
