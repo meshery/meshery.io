@@ -10,7 +10,9 @@ featured-image: /assets/images/posts/2025/certified-meshery-contributor/certifie
 redirect_from: /blog/certified-meshery-contributor
 ---
 
-In the dynamic world of open source software, where innovation thrives on collaboration, opportunities for contributors to showcase and validate their expertise are continually expanding. Meshery maintainers are thrilled to announce the launch of the Certified Meshery Contributor (CMC) certification — the project's first certification and a first of its kind for the CNCF — crafted to acknowledge and authenticate the proficiency of developers actively shaping the Meshery ecosystem.
+Open source projects thrive or die based in large part on their community of contributors. It behooves maintainers to make opportunities for recognition and support of their contributors abundant. As a tool to allow contributors to showcase and validate their expertise, Meshery maintainers are thrilled to announce the launch of the Certified Meshery Contributor (CMC) certification — the project’s first certification and a first of its kind for the CNCF — crafted to acknowledge and authenticate the proficiency of developers actively shaping the Meshery ecosystem.
+
+Meshery, recognized as the CNCF's sixth highest-velocity project, offers a thoughtfully designed contributor onboarding experience. This includes weekly newcomer meetings, self-paced training, and now a new certification program to validate contributors' expertise.
 
 ## About the Certification
 
