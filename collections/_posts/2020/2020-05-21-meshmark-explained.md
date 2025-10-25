@@ -39,6 +39,6 @@ The scoring system ranges from 0 to 100.
         </p>
     </div>
     <div>
-        <img src="../../assets/images/posts/2020/2020-05-21-meshmark-explained/distributed-performance_green.svg" style="width: 200%">
+        <img src="/assets/images/posts/2020/2020-05-21-meshmark-explained/distributed-performance_green.svg" style="width: 200%">
     </div>
 </div>

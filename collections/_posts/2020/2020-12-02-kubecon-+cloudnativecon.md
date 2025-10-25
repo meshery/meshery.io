@@ -26,7 +26,7 @@ Organizations will likely look to use at least more than one API service layer a
 
 A service mesh can be used for testing router performance, service latency and other variables. However, determining service mesh performance in an apples-to-apples way can be challenging. When studying “published results from some of the service meshes [from providers] that do publish results about performance… what you’ll find is that they’re probably using an environment that isn’t necessarily like yours,” Calcote said. “They’re also using different statistics and metrics to measure [their service meshes] … and it doesn’t help.”
 
-<img src="../../assets/images/posts/2020/2020-12-02-kubecon+cloudnativecon/service-mesh-performance.png" alt="service-mesh-performance" width="100%" />
+<img src="/assets/images/posts/2020/2020-12-02-kubecon+cloudnativecon/service-mesh-performance.png" alt="service-mesh-performance" width="100%" />
 
 Service mesh performance (SMP) was created in an attempt to establish a way of comparing the performance of different services. “The SMP was born in combination with engaging with a few of those different service mesh maintainers and creating a standard way of articulating a performance of a mesh,” Calcote said.
 

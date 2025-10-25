@@ -115,7 +115,7 @@ Example: <br/> <code class="code-block">mesheryctl system context create new-con
 
 
 <div style="text-align:center">
-<img src="../../assets/images/posts/2023/2023-06-16-changing-meshery-release-channels/meshery-version.png" className="image-center"  style="width:50%;" />
+<img src="/assets/images/posts/2023/2023-06-16-changing-meshery-release-channels/meshery-version.png" className="image-center"  style="width:50%;" />
 </div>
 <p>This will show you the currently channels ,<b>stable</b> or <b>edge</b>, along with the version number and other information.</p>
 <li> Run the following command to switch to a different release channel:
