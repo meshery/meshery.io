@@ -9,7 +9,7 @@ categories:
 redirect_from: /blog/service-mesh-offers-promising-solution-for-cloud-native-networking
 ---
 <div style="text-align:center;margin-bottom:0.75rem;">
-  <img src="{{site.baseurl}}/assets/images/posts/2020-12-04-service-mesh-offers-promising-solution-for-cloud-native-networking/service-mesh.png" alt="service-mesh" width="100%"  />
+  <img src="{{site.baseurl}}/assets/images/posts/2020/2020-12-04-service-mesh-offers-promising-solution-for-cloud-native-networking/service-mesh.png" alt="service-mesh" width="100%"  />
 </div>
 "Cloud native" doesn't just mean "running in the cloud." It's a specific deployment paradigm and uses containers and an orchestration system (usually Kubernetes) to help provision, schedule, run and control a production workload in the cloud, or even across multiple clouds. Within cloud native deployments, an increasingly common approach to networking is the service mesh concept. With a service mesh, instead of each individual container requiring a full networking stack, a grouping of containers all benefit from a mesh that provides connectivity and networking with other containers as well as the outside world.
 

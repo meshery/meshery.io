@@ -8,7 +8,7 @@ categories:
   - mesheryctl
   - models
 redirect_from: /blog/share-your-meshery-models
-featured-image: /assets/images/posts/2024-11-06-share-your-meshery-models/meshery-catalog-blog.webp
+featured-image: /assets/images/posts/2024/2024-11-06-share-your-meshery-models/meshery-catalog-blog.webp
 ---
 
 Participating in the Meshery Catalog is an excellent opportunity to enhance and share your cloud native configurations with the community. By contributing your models and patterns, you not only showcase your work but also empower others to leverage your innovations. This guide provides a defined approach to using mesheryctl for uploading your models and patterns to the Catalog, ensuring a smooth and efficient contribution process.
@@ -33,7 +33,7 @@ Components represent entities in the Meshery ecosystem, exposing capabilities of
 - Defined through definitions, instances, and associated metadata
 - Identified by their kind, apiVersion, and model.name attributes (components sharing these are considered duplicates)
 
-<img src="/assets/images/posts/2024-11-06-share-your-meshery-models/meshery-models-breakdown.png" alt="Meshery Models and Components" style="max-width: 100%; height: auto;" />
+<img src="/assets/images/posts/2024/2024-11-06-share-your-meshery-models/meshery-models-breakdown.png" alt="Meshery Models and Components" style="max-width: 100%; height: auto;" />
 
 ## Contributing with mesheryctl
 
