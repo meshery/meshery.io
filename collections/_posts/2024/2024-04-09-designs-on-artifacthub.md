@@ -7,12 +7,12 @@ categories:
   - designs
   - artifact-hub
 redirect_from: /blog/designs-on-artifact-hub
-featured-image: /assets/images/posts/2024-04-09-designs-on-artifacthub/meshery-designs-on-artifact-hub-featured.png
+featured-image: /assets/images/posts/2024/2024-04-09-designs-on-artifacthub/meshery-designs-on-artifact-hub-featured.png
 ---
 
 As a proud contributor to the Meshery project, I’m thrilled to announce that Artifact Hub has officially recognized Meshery Designs as a native artifact kind. 🎉 Meshery Designs allow you to create, manage, and deploy complex architectures seamlessly, which make them a great addition to the growing collection of Artifact Hub artifacts such as Helm charts, Argo templates, and <a href="https://artifacthub.io/docs/topics/repositories/" target="_blank">many more</a>.
 
-<a href="https://artifacthub.io" target="_blank"><img alt="Artifact Hub Kinds" src="/assets/images/posts/2024-04-09-designs-on-artifacthub/meshery-designs-on-artifact-hub.png" width="50%" align="right" /></a>
+<a href="https://artifacthub.io" target="_blank"><img alt="Artifact Hub Kinds" src="/assets/images/posts/2024/2024-04-09-designs-on-artifacthub/meshery-designs-on-artifact-hub.png" width="50%" align="right" /></a>
 
 ## Artifact Hub's first Meshery Designs
 
