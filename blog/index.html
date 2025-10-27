@@ -9,9 +9,13 @@ paginate:
 ---
 
 <div class="blog-container">
+  <div class="blog-left">
+    <div style="margin-top: 2rem; min-width:200px; background-color: transparent;">{% include view-all.html %}</div>
+    <h3 class="not-found" style="display: none;margin-top: 1rem; text-align:left;" id="not-found">No results match your filters. Try adjusting your selections or clearing the search.</h3>
     <ul class="blog-posts">
       {% include list-posts.html posts=paginator.posts %}
     </ul>
+  </div>
 
     <div class="blog-sidebar" style="max-width:250px;">
 
@@ -147,6 +151,64 @@ paginate:
   gap: 2rem;
   margin-top: 2rem;
 }
+
+.blog-left {
+  grid-column: 1;
+}
+
+/* Search / sorting styles copied from _includes/catalog-base.html to match models page */
+.sorting-options {
+  margin: 0 20px 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+#sort {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  margin-right: 10px;
+}
+
+@media (max-width: 506px) {
+  .sorting-options {
+    text-align: center;
+    margin: auto;
+  }
+  #sort {
+    display: none;
+  }
+}
+
+#search {
+  width: 30%;
+  flex-grow: 1;
+  padding: 20px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  top: 0;
+}
+
+.pagination button {
+    transition: all 0.4s;
+    cursor: pointer;
+  border: none;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 7px;
+  padding: 0.5rem;
+  margin: 0 10px;
+  background: #00b39f;
+  }
 
 .blog-posts {
   grid-column: 1;
@@ -339,3 +401,53 @@ ul.archive-months {
   }
 }
 </style>
+
+<script>
+  (function() {
+    const searchInput = document.getElementById('search');
+    const postsList = document.querySelectorAll('.blog-post');
+    const noResults = document.getElementById('not-found');
+
+    if (!searchInput) return;
+
+    searchInput.addEventListener('input', function() {
+      const term = this.value.trim().toLowerCase();
+      let anyVisible = false;
+
+      postsList.forEach(li => {
+        const title = (li.querySelector('h2')?.innerText || '').toLowerCase();
+        const excerpt = (li.querySelector('.post-content')?.innerText || '').toLowerCase();
+        const matches = title.includes(term) || excerpt.includes(term) || term === '';
+        li.style.display = matches ? 'block' : 'none';
+        if (matches) anyVisible = true;
+      });
+
+      noResults.style.display = anyVisible ? 'none' : 'block';
+    });
+  })();
+</script>
+
+<script>
+  
+  (function() {
+    const sortSelect = document.getElementById('sort');
+    const postsContainer = document.querySelector('.blog-posts');
+    if (!sortSelect || !postsContainer) return;
+
+    sortSelect.addEventListener('change', function() {
+      const value = this.value;
+      const items = Array.from(postsContainer.querySelectorAll('.blog-post'));
+
+      const sorted = items.sort((a, b) => {
+        const aText = (a.querySelector('h2')?.innerText || '').trim().toLowerCase();
+        const bText = (b.querySelector('h2')?.innerText || '').trim().toLowerCase();
+
+        if (value === 'asc') return aText.localeCompare(bText);
+        if (value === 'desc') return bText.localeCompare(aText);
+        return 0;
+      });
+
+      sorted.forEach(node => postsContainer.appendChild(node));
+    });
+  })();
+</script>
