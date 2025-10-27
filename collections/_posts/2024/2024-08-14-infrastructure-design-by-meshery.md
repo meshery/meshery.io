@@ -7,7 +7,7 @@ categories:
   - meshery
   - designs
 redirect_from: /blog/infrastructure-design-by-meshery
-featured-image: /assets/images/posts/2024-08-14-infrastructure-design-by-meshery/deep-dive.png
+featured-image: /assets/images/posts/2024/2024-08-14-infrastructure-design-by-meshery/deep-dive.png
 ---
 On Friday, August 20, 2024, join us for a special enlightning session titled **Infrastructure as Design by Meshery**. This session will be a deep dive into how Meshery can transform your approach to designing, deploying, and managing cloud-native infrastructure.  Join [Whitney Lee](https://www.linkedin.com/in/whitneylee/) from VMware as she hosts [Lee Calcote](https://meshery.io/community/members/lee-calcote), the Founder of Meshery, discussing the intricacies of Meshery and its significant impact on Cloud and Cloud Native space.
 

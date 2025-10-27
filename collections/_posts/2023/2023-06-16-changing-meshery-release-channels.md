@@ -11,7 +11,7 @@ redirect_from: /blog/changing-meshery-release-channels
 ---
 
 <div style="text-align:center;padding:20px">
-<img src="{{site.baseurl}}/assets/images/posts/2023-06-16-changing-meshery-release-channels/change-meshery-release-channels.png" style="width:75%" /></div>
+<img src="{{site.baseurl}}/assets/images/posts/2023/2023-06-16-changing-meshery-release-channels/change-meshery-release-channels.png" style="width:75%" /></div>
 
 Meshery is constantly evolving and improving, with new features and bug fixes being added regularly. To stay up to date with the latest Meshery features and updates, you can switch between different release channels.
 <p>
@@ -115,7 +115,7 @@ Example: <br/> <code class="code-block">mesheryctl system context create new-con
 
 
 <div style="text-align:center">
-<img src="../../assets/images/posts/2023-06-16-changing-meshery-release-channels/meshery-version.png" className="image-center"  style="width:50%;" />
+<img src="/assets/images/posts/2023/2023-06-16-changing-meshery-release-channels/meshery-version.png" className="image-center"  style="width:50%;" />
 </div>
 <p>This will show you the currently channels ,<b>stable</b> or <b>edge</b>, along with the version number and other information.</p>
 <li> Run the following command to switch to a different release channel:
