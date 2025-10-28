@@ -82,7 +82,7 @@ layout: default
       <a href="/blog/category/kubecon/" class="btn" > kubecon </a>
       &nbsp; <a href="/blog/category/events/" class="btn" > events </a>
       &nbsp; <a href="/blog/category/security/" class="btn" > security </a>
-      <img class="featured-image" src="/assets/images/posts/2025-03-27-meshery-at-kubecon-eu-2025/kubecon-eu-2025.png" alt="Meshery at KubeCon EU 2025 Security Slam announcement banner">
+      <img class="featured-image" src="/assets/images/posts/2025/2025-03-27-meshery-at-kubecon-eu-2025/kubecon-eu-2025.png" alt="Meshery at KubeCon EU 2025 Security Slam announcement banner">
       <div class="blog-post-excerpt">
         <p>We're thrilled to announce that Meshery has been selected as one of four CNCF projects to take part in the Security Slam at KubeCon EU 2025! This is a fantastic opportunity for the Meshery community to come together and make significant strides in enhancing the security of our project.</p>
       </div>
