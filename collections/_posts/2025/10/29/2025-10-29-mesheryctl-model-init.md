@@ -27,7 +27,7 @@ Treat this as a skeleton: commands, expected behavior and places to expand. Fill
 
 ### Step 1 — scaffold: `mesheryctl model init`
 
-**Purpose:** Generates a folder structure and guides user on model creation.
+**Purpose:** Generates a folder structure and guides the user on model creation.
 
 **Documentation:** https://docs.meshery.io/reference/mesheryctl/model/init
 
@@ -35,6 +35,8 @@ In our example we will create a new model in a dedicated path in a specific form
 - **name:** my-awesome-model
 - **path:** my-awesome-models
 - **format:** json
+
+#### Create
 
 **Example:**
 
@@ -82,7 +84,7 @@ What this does (high level):
 - Detailed each steps
 - gives you the next actions to take
 
-let's see what we have in the `my-awesome-models` folder
+Let's see what we have in the `my-awesome-models` folder
 
 ```
 .
@@ -101,9 +103,9 @@ let's see what we have in the `my-awesome-models` folder
 
 You can see that the required folders/files have been created.
 
-### Step 3 - customize
+#### Customize
 
-Now you only need to customize the generated files to represent your own model. If it needs more than one component or relationship, you have to copy/paste the existing one adjust properly and it is done.
+Now you only need to customize the generated files to represent your own model. If it needs more than one component or relationship, you can copy and paste the existing one and adjust it properly.
 
 See below the content of the generated files which is only there to give you an idea of what is needed.
 
@@ -509,7 +511,7 @@ relationship.json
 </details>
 
 
-### Step 3 — build: `mesheryctl model build`
+### Step 2 — build: `mesheryctl model build`
 
 **Purpose:** Create an OCI-compliant package from the model files.
 
@@ -517,13 +519,13 @@ relationship.json
 
 **Example:**
 
-Now you have already customize your model and want to create an artifact.
+Now you have already customized your model and want to create an artifact.
 
 - **name:** my-awesome-model
 - **path:** my-awesome-models
 - **version:** v0.1.0
 
-Be sure to move in the folder the model was created (here: `my-awesome-models`)
+Be sure to move into the folder the model was created (here: `my-awesome-models`)
 ```
 # move in the root folder where you store your models
 user@linux:~/$ cd ~/my-awesome-models
@@ -537,7 +539,7 @@ What this does (high level):
 - build the model from the path provided
 - save it as a OCI artifact
 
-let's see what we have in `my-awesome-models` folder
+Let's see what we have in `my-awesome-models` folder
 
 ```
 .
@@ -561,5 +563,5 @@ You can see that an artifact has been generated properly
 
 Now you would like to use that model, we will have another dedicated tutorial post to achieve this.
 
-I hope this quick introduction gives you a starting point to be able to create your own model and enjoy the tools provided in the Meshery's ecosystem
+I hope this quick introduction gives you a starting point to be able to create your own model and enjoy the tools provided in the Meshery ecosystem
 
