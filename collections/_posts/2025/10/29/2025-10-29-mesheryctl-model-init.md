@@ -525,7 +525,7 @@ Now you have already customized your model and want to create an artifact.
 - **path:** my-awesome-models
 - **version:** v0.1.0
 
-Be sure to move into the folder the model was created (here: `my-awesome-models`)
+Be sure to move into the folder where the model was created (here: `my-awesome-models`)
 ```
 # move in the root folder where you store your models
 user@linux:~/$ cd ~/my-awesome-models
@@ -537,7 +537,7 @@ Saving OCI artifact as my-awesome-model-v0-1-0.tar
 
 What this does (high level):
 - build the model from the path provided
-- save it as a OCI artifact
+- save it as an OCI artifact
 
 Let's see what we have in `my-awesome-models` folder
 
