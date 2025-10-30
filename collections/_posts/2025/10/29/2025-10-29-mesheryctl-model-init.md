@@ -40,13 +40,13 @@ In our example we will create a new model in a dedicated path in a specific form
 
 In my destination path nothing is present
 
-```bash
+```
 user@linux:~/my-awesome-models$ ls -l
 total 0
 ```
 Now you can create you scaffold by running the following command
 
-```bash
+```
 user@linux:~/$ mesheryctl model init my-awesome-model --path ./my-awesome-models --format json
 Creating new Meshery model: my-awesome-model
 Creating directory structure...
@@ -84,7 +84,7 @@ What this does (high level):
 
 let's see what we have in the `my-awesome-models` folder
 
-```bash
+```
 .
 └── my-awesome-model
     └── v0.1.0
@@ -107,13 +107,9 @@ Now you only need to customize the generated files to represent your own model. 
 
 See below the content of the generated files which is only there to give you an idea of what is needed.
 
-<details>
+#### model.json
 
-<summary>
-model.json
-</summary>
-
-```json
+```
 {
   "id": "00000000-0000-0000-0000-000000000000",
   "schemaVersion": "models.meshery.io/v1beta1",
@@ -173,15 +169,10 @@ model.json
   "relationshipsCount": 0
 }
 ```
-</details>
 
-<details>
-
-<summary>
 component.json
-</summary>
 
-```json
+```
 {
   "id": "00000000-0000-0000-0000-000000000000",
   "schemaVersion": "components.meshery.io/v1beta1",
@@ -439,15 +430,10 @@ component.json
   }
 }
 ```
-</details>
 
-<details>
-
-<summary>
 relationship.json
-</summary>
 
-```json
+```
 {
   "id": "00000000-0000-0000-0000-000000000000",
   "schemaVersion": "relationships.meshery.io/v1alpha3",
@@ -538,7 +524,7 @@ Now you have already customize your model and want to create an artifact.
 - **version:** v0.1.0
 
 Be sure to move in the folder the model was created (here: `my-awesome-models`)
-```bash
+```
 # move in the root folder where you store your models
 user@linux:~/$ cd ~/my-awesome-models
 
@@ -553,7 +539,7 @@ What this does (high level):
 
 let's see what we have in `my-awesome-models` folder
 
-```bash
+```
 .
 ├── my-awesome-model
 │   └── v0.1.0
