@@ -49,7 +49,7 @@ Since the latest release, many contributors have improved Meshery's CLI experien
 
 - Repository renames from layer5/* to meshery/*.
 - Continued meshkit migration.
-- Improved documentation CLI documentation.
+- Improved CLI documentation.
 
 ## Upgrade notes
 
