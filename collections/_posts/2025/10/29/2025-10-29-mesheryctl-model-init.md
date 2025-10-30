@@ -10,7 +10,7 @@ redirect_from: /blog/mesheryctl-model-init-explained
 published: true
 ---
 
-You are new to Meshery ecosystem and want to create your own models, this post will introduce you how you can achieve this using our CLI (mesheryctl).
+You are new to Meshery ecosystem and want to create your own models, this post will show you how you can achieve this using our CLI (mesheryctl).
 
 > **What is a Meshery Model?**  
 > Meshery models are reusable definitions of cloud-native infrastructure and workloads. They help you describe, package, and share your architecture.  
@@ -44,7 +44,7 @@ In my destination path nothing is present
 user@linux:~/my-awesome-models$ ls -l
 total 0
 ```
-Now you can create you scaffold by running the following command
+Now you can create your scaffold by running the following command
 
 ```
 user@linux:~/$ mesheryctl model init my-awesome-model --path ./my-awesome-models --format json
@@ -78,9 +78,9 @@ Detailed guide: https://docs.meshery.io/guides/creating-new-model-with-mesheryct
 
 What this does (high level):
 - creates a directory with the model name and a sub directory with the version of the model
-- generate the files needed to have a valid model
-- Detailed each steps 
-- give you the next actions to take
+- generates the files needed to have a valid model
+- Detailed each steps
+- gives you the next actions to take
 
 let's see what we have in the `my-awesome-models` folder
 
@@ -534,7 +534,7 @@ Saving OCI artifact as my-awesome-model-v0-1-0.tar
 ```
 
 What this does (high level):
-- build the model from the path of the model provide
+- build the model from the path provided
 - save it as a OCI artifact
 
 let's see what we have in `my-awesome-models` folder
