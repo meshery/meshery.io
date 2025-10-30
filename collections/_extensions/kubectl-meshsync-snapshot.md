@@ -8,11 +8,11 @@ type: Configuration
 compatibility: 
   - kubernetes
   - kanvas
-# extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce96
+extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce96
+logo: /assets/images/logos/meshsync.svg
 whiteImage: /assets/images/logos/meshsync.svg
 colorImage: /assets/images/logos/meshsync-white.svg
 image-light: /assets/images/logos/meshsync-white.svg
-status: coming-soon
 extensionInfo: |
   The MeshSync Snapshot kubectl plugin allows you to capture the state of your clusters directly from the command line. This plugin simplifies the process of deploying <a href="https://docs.meshery.io/concepts/architecture/meshsync">MeshSync</a> to your clusters, but instead starts and stops an instance of MeshSync long enough to capture a list and details of your cluster's resources.
 
