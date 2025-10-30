@@ -49,7 +49,8 @@ total 0
 Now you can create your scaffold by running the following command
 
 ```
-user@linux:~/$ mesheryctl model init my-awesome-model --path ./my-awesome-models --format json
+user@linux:~/$ mesheryctl model init my-awesome-model --path ./my-awesome-models --output-format json
+```
 Creating new Meshery model: my-awesome-model
 Creating directory structure...
 Generating model definition...
