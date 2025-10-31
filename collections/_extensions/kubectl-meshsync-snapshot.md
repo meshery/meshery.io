@@ -8,7 +8,7 @@ type: Configuration
 compatibility: 
   - kubernetes
   - kanvas
-extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce96
+#extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce96
 logo: /assets/images/logos/meshsync.svg
 whiteImage: /assets/images/logos/meshsync.svg
 colorImage: /assets/images/logos/meshsync-white.svg
