@@ -13,7 +13,7 @@ Introducing mesheryctl End-To-End testing using **B**ash **A**utomating **T**est
 
 ## Context
 
-You wanted to create a test for a new or existing command, this tutorial will explain you how to achieve it.
+You wanted to create a test for a new or existing command, this tutorial will explain how to achieve it.
 
 ## Understand Meshery ecosystem
 
