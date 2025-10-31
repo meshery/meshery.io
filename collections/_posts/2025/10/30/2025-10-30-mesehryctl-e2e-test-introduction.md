@@ -44,7 +44,7 @@ We will use a fictitious command named `awesome` through this tutorial that has 
   ```
   # Create `test`
   ~$ mesheryctl awesome create test
-  test has been created successfuly
+  test has been created successfully
 
   # Create missing argument
   ~$ mesheryctl awesome create
