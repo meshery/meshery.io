@@ -37,7 +37,7 @@ Subtypes:
 <img src="assets/images/posts/2025-10-31-meshery-relationships/Edge-Permission.png" />
 
 - Reference
-<img src="assets/images/posts/2025-10-31-meshery-relationships/Edge-reference.png" />
+<img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-reference.png" />
 
 3. Sibling Relationships: These describe interactions between components at the same level, like two services in the same namespace that interact or share resources.
 <img src="assets/images/posts/2025-10-31-meshery-relationships/Siblings.png" />
