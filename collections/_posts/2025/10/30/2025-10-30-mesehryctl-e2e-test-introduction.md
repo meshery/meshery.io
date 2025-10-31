@@ -9,11 +9,9 @@ categories:
 redirect_from: /blog/2025-10-30-mesheryctl-e2e-introduction
 ---
 
+You want to create a test for a new or existing Meshery command? Good. This tutorial explains how to do so.
+
 Introducing mesheryctl End-To-End testing using **B**ash **A**utomating **T**esting **S**ystem (**BATS**).
-
-## Context
-
-You want to create a test for a new or existing command. This tutorial explains how to do so.
 
 ## Understand Meshery ecosystem
 
@@ -31,7 +29,6 @@ Before starting, be sure you read the contributing guide that will provide you t
 
 - **Guide:** https://docs.meshery.io/project/contributing/contributing-cli-tests
 
-
 ### Scenario
 
 We will use a fictitious command named `awesome` through this tutorial that has 3 subcommands `create`, `list` and `view` that need to be tested. Now, let's define how they should behave to implement the test.
@@ -39,7 +36,8 @@ We will use a fictitious command named `awesome` through this tutorial that has 
 **Subcommands behavior expected:**
 
 - **create:**
-  ```
+
+  ```shell
   # Create `test`
   ~$ mesheryctl awesome create test
   test has been created successfully
@@ -51,7 +49,8 @@ We will use a fictitious command named `awesome` through this tutorial that has 
   ```
 
 - **list:**
-  ```
+
+  ```shell
   ~$ mesheryctl awesome list
   Total number of elements: 3
   Page: 1
@@ -62,7 +61,8 @@ We will use a fictitious command named `awesome` through this tutorial that has 
   ```
 
 - **view:**
-  ```
+
+  ```shell
   # View `test`
   ~$ mesheryctl awesome view test
   Name: test
@@ -85,7 +85,7 @@ All is set now to create required tests.
 All End-To-End tests are stored in `mesheryctl/tests/e2e`
 
 
-```
+  ```shell
 tests/
 └── e2e
     ├── 000-prerequisites
@@ -105,7 +105,7 @@ You need to create a new folder that will contain all the tests for this command
 
 Following the implementation standard, the folder will be `tests/e2e/006-awesome`, then we will create a file for each subcommand, this is the expected result
 
-```
+```shell
 tests/
 └── e2e
     ├── 000-prerequisites
@@ -126,38 +126,38 @@ tests/
 
 Content of 01-awesome-create.bats
 
-```
-#!/usr/bin/env bats
+```shell
+  #!/usr/bin/env bats
 
-# Add helpers functions to not reinvent the wheel
-setup() {
-   load "$E2E_HELPERS_PATH/bats_libraries"
-	_load_bats_libraries
-}
+  # Add helpers functions to not reinvent the wheel
+  setup() {
+    load "$E2E_HELPERS_PATH/bats_libraries"
+    _load_bats_libraries
+  }
 
-@test "create command without arguments fails" {
-  run $MESHERYCTL_BIN awesome create
-   
-  
-  assert_failure
-  assert_output --partial "Error: no name was provided."
-  assert_output --partial "Please provide the name that you want to create"
-}
+  @test "create command without arguments fails" {
+    run $MESHERYCTL_BIN awesome create
+    
+    
+    assert_failure
+    assert_output --partial "Error: no name was provided."
+    assert_output --partial "Please provide the name that you want to create"
+  }
 
-@test "create command with argument succeeds" {
-  run $MESHERYCTL_BIN awesome create test
-   
-  assert_success
-  
-  assert_output "Name: test"
-}
+  @test "create command with argument succeeds" {
+    run $MESHERYCTL_BIN awesome create test
+    
+    assert_success
+    
+    assert_output "Name: test"
+  }
 ```
 
 #### List
 
 Content of 02-awesome-list.bats
 
-```
+```shell
 #!/usr/bin/env bats
 
 # Add helpers functions to not reinvent the wheel
@@ -184,7 +184,7 @@ setup() {
 
 Content of 03-awesome-view.bats
 
-```
+```shell
 #!/usr/bin/env bats
 
 # Add helpers functions to not reinvent the wheel
@@ -224,7 +224,7 @@ setup() {
 
 Now you have created a new suite of tests, you can confirm it is working as expected by running the following command and see an example of output
 
-```
+```shell
 ~/mesheryctl/ $ make e2e-no-build BATS_FOLDER_PATTERN=006-awesome
 
 
@@ -250,6 +250,7 @@ Now you have created a new suite of tests, you can confirm it is working as expe
 ## Conclusion
 
 You now have a small, repeatable e2e test suite for your imaginary `awesome` command. Practice:
+
 - keep tests small and independent,
 - use the helpers to avoid duplication,
 - prefer deterministic assertions (exact when possible, partial when needed),
@@ -258,5 +259,3 @@ You now have a small, repeatable e2e test suite for your imaginary `awesome` com
 If a test fails: write a better assertion, fix the bug, or add a regression test. Rinse and repeat.
 
 Happy testing — may your CI logs be short and your green checks plentiful.
-
-
