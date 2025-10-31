@@ -1,7 +1,7 @@
 ---
 title: Registry support in Meshery UI
 author: Ijeoma Eti
-date: 2025-10-30
+date: 2025-10-31
 categories: 
   - models
   - registry
@@ -19,13 +19,11 @@ Meshery’s UI brings the Registry to life in a visual, intuitive way. Instead o
 
 To access the Registry, open [https://kanvas.new/extension/meshmap](https://kanvas.new/extension/meshmap). Once the workspace loads, look toward the top-right corner of the screen and click the hamburger menu icon. From the dropdown, select Registry. This opens the Registry modal, a dedicated interface that exposes Meshery’s internal catalog of models, components, relationships, and registrants.
 
-<img alt="Certified Meshery Contributor Badge" src="/assets/images/posts/2025/certified-meshery-contributor/meshery-certification-program.png" style="max-width:800px"  />
-
-<img src="/assets/images/posts/2025/10/2025-10-31-registry-support-in-meshery-ui/registry-selection.png" alt="Registry Selection" />
+![Registry Selection](/assets/images/posts/2025/10/2025-10-31-registry-support-in-meshery-ui/registry-selection.png)
 
 Inside this modal, you’re effectively stepping into Meshery’s knowledge base. The Registry view is divided into sections that mirror its internal structure, giving you a clear picture of what Meshery currently understands. The interface is interactive and allows you to browse through each section, inspect metadata, and understand the hierarchy between models and their components.
 
-<img src="/assets/images/posts/2025/10/2025-10-31-registry-support-in-meshery-ui/registrant.png" alt="Registrant" />
+![Registrant](/assets/images/posts/2025/10/2025-10-31-registry-support-in-meshery-ui/registrant.png)
 
 This visual entry point is particularly useful when working with teams that prefer collaborative exploration. You don’t need terminal access or configuration files, everything is accessible through a few clicks. Whether you’re exploring Meshery for the first time or managing a complex environment, the Registry UI gives you direct access to the same information that powers Meshery’s command-line experience, just presented in a more visual, approachable way.
 
