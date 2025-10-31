@@ -8,9 +8,6 @@ categories:
 featured-image: /assets/images/posts/2025/2025-10-31-registry-support-in-meshery-ui/meshery.png
 ---
 
- /assets/images/posts/2025/certified-meshery-contributor/certified-meshery-contributor-hero.png
-
-
 ## Introduction
 The Meshery Registry serves as the backbone of Meshery’s knowledge system. It is the internal repository that stores structured information about cloud and cloud-native technologies, what systems exist, what components they contain, how those components relate, and the policies that define their behavior. This registry makes it possible for Meshery to visualize, manage, and interact intelligently with different platforms. Traditionally, much of this capability was accessed through the command-line interface using `mesheryctl registry`. However, Meshery now extends that same functionality to its UI, allowing users to explore, register, and manage models directly from a visual interface. This makes the Registry more approachable for teams that prefer graphical workflows, enabling them to understand and extend Meshery’s knowledge base without writing commands or YAML.
 
@@ -20,11 +17,11 @@ Meshery’s UI brings the Registry to life in a visual, intuitive way. Instead o
 
 To access the Registry, open [https://kanvas.new/extension/meshmap](https://kanvas.new/extension/meshmap). Once the workspace loads, look toward the top-right corner of the screen and click the hamburger menu icon. From the dropdown, select Registry. This opens the Registry modal, a dedicated interface that exposes Meshery’s internal catalog of models, components, relationships, and registrants.
 
-![Registry Selection](/assets/images/posts/2025/2025-10-31-registry-support-in-meshery-ui/registry-selection.png)
+<img src="/assets/images/posts/2025/2025-10-31-registry-support-in-meshery-ui/registry-selection.png" alt="Registry Selection" width="100%" align="center" />
 
 Inside this modal, you’re effectively stepping into Meshery’s knowledge base. The Registry view is divided into sections that mirror its internal structure, giving you a clear picture of what Meshery currently understands. The interface is interactive and allows you to browse through each section, inspect metadata, and understand the hierarchy between models and their components.
 
-![Registrant](/assets/images/posts/2025/2025-10-31-registry-support-in-meshery-ui/registrant.png)
+<img src="/assets/images/posts/2025/2025-10-31-registry-support-in-meshery-ui/registrant.png" alt="Registrant" width="100%" align="center" />
 
 This visual entry point is particularly useful when working with teams that prefer collaborative exploration. You don’t need terminal access or configuration files, everything is accessible through a few clicks. Whether you’re exploring Meshery for the first time or managing a complex environment, the Registry UI gives you direct access to the same information that powers Meshery’s command-line experience, just presented in a more visual, approachable way.
 
@@ -40,7 +37,7 @@ Beyond individual components, the Registry also stores relationships. Relationsh
 
 ### Registering a New Model in the Registry
 
-![Create Model](/assets/images/posts/2025/2025-10-31-registry-support-in-meshery-ui/create-model.png)
+<img src="/assets/images/posts/2025/2025-10-31-registry-support-in-meshery-ui/create-model.png" alt="Create Model" width="100%" align="center" />
 
 When you click on the hamburger icon at the top-right corner of the Meshery UI and select **Registry**, a modal opens that gives you access to all models currently stored in Meshery’s internal registry. Within this modal, under the **Models** section, you can either create a new model or import an existing one. Clicking **Create Model** allows you to define a new system by including its source, such as a GitHub repository or an Artifact Hub package, where Meshery can learn the model’s structure and behavior. Alternatively, the **Import Model** option lets you bring in models that already exist elsewhere. Once the model source is specified, Meshery interprets its definitions, identifies components and relationships, and stores them in the Registry. This process makes the model immediately available for visualization, validation, and management in the UI, ensuring Meshery remains synchronized with the systems it represents.
 
