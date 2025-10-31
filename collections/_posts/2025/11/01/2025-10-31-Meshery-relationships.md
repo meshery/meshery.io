@@ -19,7 +19,7 @@ Relationships aren’t just about linking things, they automate how components i
 Meshery supports several kinds of relationships to help you model real-world connections between your cloud native components:
 
 1. Hierarchical Relationships: These are parent-child relationships, where one component depends on another.
-<img src="assets/images/posts/2025-10-31-meshery-relationships/Hierarchical-relationship.png" />
+<img src="/assets/images/posts/2025-10-31-meshery-relationships/Hierarchical-relationship.png" />
 
 2. Edge Relationships: These capture connections such as network links, storage mounts, or firewall rules between components.
 Subtypes:
