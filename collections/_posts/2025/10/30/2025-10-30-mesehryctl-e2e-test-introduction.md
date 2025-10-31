@@ -39,7 +39,7 @@ Before starting be sure you read the contributing guide that will provide you th
 
 ### Scenario
 
-We will use a fictive comannd named `awesome` through this tutorial that have 3 subcommands `create`, `list` and `view` that need to be tested. Now, let's define how they should behave to implement the test.
+We will use a fictitious command named `awesome` through this tutorial that has 3 subcommands `create`, `list` and `view` that need to be tested. Now, let's define how they should behave to implement the test.
 
 **Subcommands behavior excepted:**
 
