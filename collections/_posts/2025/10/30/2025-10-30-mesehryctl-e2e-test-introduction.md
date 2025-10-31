@@ -1,6 +1,6 @@
 ---
-title: Mesheryctl End-To-End Testing introduction
-subheading: Validate Meshery's CLI behavior
+title: Mesheryctl End-To-End Testing Introduction
+subheading: Validating Meshery's CLI behavior
 author: Matthieu EVRIN
 date: 2025-10-30 08:00:00 -0500
 categories: 
