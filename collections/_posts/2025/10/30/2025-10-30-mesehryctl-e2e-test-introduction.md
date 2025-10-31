@@ -63,7 +63,7 @@ We will use a fictitious command named `awesome` through this tutorial that has 
 
 - **view:**
   ```
-  # View `test-creation`
+  # View `test`
   ~$ mesheryctl awesome view test
   Name: test
 
