@@ -31,7 +31,7 @@ Subtypes:
 <img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-firewall.png" />
 
 - Mount
-<img src="assets/images/posts/2025-10-31-meshery-relationships/Edge-Mount.png" />
+<img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-Mount.png" />
 
 - Permission
 <img src="assets/images/posts/2025-10-31-meshery-relationships/Edge-Permission.png" />
