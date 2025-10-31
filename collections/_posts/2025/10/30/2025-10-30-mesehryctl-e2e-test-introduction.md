@@ -149,7 +149,7 @@ setup() {
   assert_output --partial "Please provide the name that you want to create"
 }
 
-@test "create command with argument succeed" {
+@test "create command with argument succeeds" {
   run $MESHERYCTL_BIN awesome create test
    
   assert_success
