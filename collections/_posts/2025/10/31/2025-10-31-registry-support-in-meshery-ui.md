@@ -48,3 +48,13 @@ Every piece of information in the Registry has an origin, and that origin is cal
 
 Meshery also gives you control over which entities in the Registry are active and available for use. If a particular model should not be used within a Meshery Server deployment, you can disable it directly in the UI. In the model’s detail view, toggle the **Enabled** switch to set the model as ignored. When a model is ignored, it remains stored in the Registry but becomes unavailable for deployment or interaction within that Meshery instance. This feature helps teams manage which technologies or platforms are active in their environment while keeping the full record of registered systems intact.
 
+### References
+
+For a deeper understanding of Meshery Registry and its related concepts, you can explore the following official documentation resources:
+
+* [Meshery Registry Concepts](https://docs.meshery.io/concepts/logical/registry)
+* [Meshery Models Documentation](https://docs.meshery.io/concepts/logical/models)
+* [Meshery Registry CLI Reference](https://docs.meshery.io/reference/mesheryctl/registry)
+
+
+
