@@ -41,7 +41,7 @@ Before starting be sure you read the contributing guide that will provide you th
 
 We will use a fictitious command named `awesome` through this tutorial that has 3 subcommands `create`, `list` and `view` that need to be tested. Now, let's define how they should behave to implement the test.
 
-**Subcommands behavior excepted:**
+**Subcommands behavior expected:**
 
 - **create:**
   ```
