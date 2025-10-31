@@ -183,7 +183,7 @@ Select a relationship:
     kind: edge, EvaluationPolicy: , SubType: network
 ```
 
-Detailed schema for AWS VPC CNI (firewall subtype):
+Detailed schema for an AWS VPC CNI relationship (firewall subtype):
 
 ```
 kind: edge
