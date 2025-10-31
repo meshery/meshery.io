@@ -149,7 +149,7 @@ setup() {
    
   assert_success
   
-  assert_output "Name: test-creation"
+  assert_output "Name: test"
 }
 ```
 
