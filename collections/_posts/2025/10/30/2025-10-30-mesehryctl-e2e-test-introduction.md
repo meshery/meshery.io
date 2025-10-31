@@ -13,13 +13,13 @@ Introducing mesheryctl End-To-End testing using **B**ash **A**utomating **T**est
 
 ## Context
 
-You wanted to create a test for a new or existing command, this tutorial will explain how to achieve it.
+You want to create a test for a new or existing command. This tutorial explains how to do so.
 
 ## Understand Meshery ecosystem
 
 The best advice that we can share is first of all, **be familiarized with Meshery ecosystem**, this is the key to be able to implement tests.
 
-Be familiar with the different components and concepts in Meshery's world, this can be done by reading the official documentation where you will find detailed explanations of the both [architectural](https://docs.meshery.io/concepts/architecture) and [logical](https://docs.meshery.io/concepts/logical) concepts. 
+Be familiar with the different components and concepts in Meshery's world, this can be done by reading the official documentation where you will find detailed explanations of the both [architectural](https://docs.meshery.io/concepts/architecture) and [logical](https://docs.meshery.io/concepts/logical) concepts.
 
 `mesheryctl` is Meshery's CLI
 
@@ -27,7 +27,7 @@ Meshery CLI is written in Golang built on the Cobra framework and interacts with
 
 ## How to create a test
 
-Before starting be sure you read the contributing guide that will provide you the requirements and the implementation standards.
+Before starting, be sure you read the contributing guide that will provide you the requirements and the implementation standards.
 
 - **Guide:** https://docs.meshery.io/project/contributing/contributing-cli-tests
 
