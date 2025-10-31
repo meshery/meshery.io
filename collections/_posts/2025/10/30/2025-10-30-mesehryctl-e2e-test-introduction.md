@@ -241,7 +241,7 @@ Now you have created a new suite of tests, you can confirm it is working as expe
  ✓ create command with argument succeed
 02-awesome-list.bats
  ✓ list command succeed
-02-awesome-view.bats
+03-awesome-view.bats
  ✓ view command without arguments fails
  ✓ view command with existing awesome name is displaying name
  ✓ view command with non-existing awesome name is displaying non existing message
