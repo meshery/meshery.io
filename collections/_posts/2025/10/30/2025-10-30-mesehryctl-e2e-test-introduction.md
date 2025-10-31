@@ -227,7 +227,7 @@ setup() {
 
 ### Run added End-To-End tests
 
-Now you have create a new suite of tests, you can confirm it is working as expected running the following command and see an example of output
+Now you have created a new suite of tests, you can confirm it is working as expected by running the following command and see an example of output
 
 ```
 ~/mesheryctl/ $ make e2e-no-build BATS_FOLDER_PATTERN=006-awesome
