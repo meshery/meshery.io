@@ -7,7 +7,7 @@ categories:
   - kanvas
   - models
 featured-image: /assets/images/posts/2025-04-01-improving-mesherys-ui-e2e-tests/6-02.png
-redirect_from: /blog/Meshery Relationships: The Backbone of Intelligent Cloud-Native Designs
+redirect_from: /blog/meshery-relationships-the-backbone-of-intelligent-cloud-native-designs
 ---
 
 In the dynamic world of cloud-native infrastructure, understanding how components interact is as crucial as deploying them. Enter Meshery Relationships – the game-changing feature within Meshery that defines, visualizes, and automates connections between components of each model.
