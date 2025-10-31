@@ -21,7 +21,7 @@ The best advice that we can share is first of all, **be familiarized with Mesher
 
 Be familiar with the different components and concept in Meshery's world, this can be done by reading the official documentation.
 
-You will find detailed explnation of the architecture and logical concepts there:
+You will find detailed explanation of the architecture and logical concepts there:
 
 - **Architecture:** https://docs.meshery.io/concepts/architecture
 - **Logical:**: https://docs.meshery.io/concepts/logical
