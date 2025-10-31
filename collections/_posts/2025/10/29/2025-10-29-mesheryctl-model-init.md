@@ -1,5 +1,5 @@
 ---
-title: mesheryctl model init and build explained
+title: `mesheryctl model init` and `build` explained
 subheading: How to start a new model from scratch using mesheryctl
 date: 2025-10-29
 author: Matthieu Evrin
@@ -11,7 +11,7 @@ redirect_from: /blog/mesheryctl-model-init-explained
 published: true
 ---
 
-You are new to the Meshery ecosystem and want to create your own models, this post will show you how to achieve this using our CLI (mesheryctl).
+If you are new to the Meshery ecosystem and want to create your own models, this post will show you how to do so using Meshery CLI (mesheryctl).
 
 > **What is a Meshery Model?**  
 > Meshery models are reusable definitions of cloud-native infrastructure and workloads. They help you describe, package, and share your architecture.  
