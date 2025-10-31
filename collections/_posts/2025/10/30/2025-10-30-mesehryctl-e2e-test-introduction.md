@@ -28,7 +28,7 @@ You will find detailed explanation of the architecture and logical concepts ther
 
 **mesheryctl** is the Meshery's CLI
 
-It is a CLI built in Golang that interact with Meshery server API. By creating End-To-End tests during the development lifecycle, it's ensure that changes or new features are behaving as expected.
+It is a CLI built in Golang that interacts with Meshery server API. By creating End-To-End tests during the development lifecycle, it ensures that changes or new features are behaving as expected.
 
 ## How to create a test
 
