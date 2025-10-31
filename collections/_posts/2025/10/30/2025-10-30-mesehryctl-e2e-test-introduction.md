@@ -166,7 +166,7 @@ setup() {
 	_load_bats_libraries
 }
 
-@test "list command succeed" {
+@test "list command succeeds" {
   run $MESHERYCTL_BIN awesome list   
   
   assert_success
