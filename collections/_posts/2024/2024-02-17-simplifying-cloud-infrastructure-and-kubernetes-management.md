@@ -7,7 +7,7 @@ categories:
   - cloud
   - kubernetes
 #layout: post
-featured-image: /assets/images/posts/2024-02-17-simplifying-cloud-infrastructure-and-kubernetes-management/meshery-catalog.png
+featured-image: /assets/images/posts/2024/2024-02-17-simplifying-cloud-infrastructure-and-kubernetes-management/meshery-catalog.png
 redirect_from: /blog/simplifying-cloud-infrastructure-and-kubernetes-management
 ---
 In the world of cloud computing and Kubernetes-based infrastructure, managing and optimizing resources can be complex and time-consuming. Meshery emerges as a powerful platform that simplifies cloud infrastructure and Kubernetes management, enabling organizations to streamline their operations. In this article, we will explore the features and benefits of Meshery and how it empowers organizations to efficiently manage their cloud infrastructure.
@@ -40,7 +40,7 @@ In the world of cloud computing and Kubernetes-based infrastructure, managing an
 
 ## Meshery Catalog
 
-<img alt="Meshery Catalog" src="/assets/images/posts/2024-02-17-simplifying-cloud-infrastructure-and-kubernetes-management/meshery-catalog.png" width="100%" />
+<img alt="Meshery Catalog" src="/assets/images/posts/2024/2024-02-17-simplifying-cloud-infrastructure-and-kubernetes-management/meshery-catalog.png" width="100%" />
 
 [Meshery Catalog](https://meshery.io/catalog) is a valuable component of the Meshery platform, functioning as a cloud marketplace that simplifies the deployment and management of cloud-native infrastructure. It provides a user-friendly interface for browsing, discovering, and sharing configurations and patterns for Kubernetes-based infrastructure and tools. With Meshery Catalog, organizations can streamline their cloud-native development and operations processes.
 
@@ -50,7 +50,7 @@ One of the key benefits of Meshery Catalog is its collaborative environment. Dev
 
 Creating a design pattern using Meshery UI is a straightforward process. Users can open the Meshery UI in their web browser, navigate to the configuration section, and access the Designs feature. From there, they can import or create a design, select the desired category and model, and configure the application accordingly. Once the design pattern is ready, it can be published or deployed.
 
-<img alt="Meshery Designs" src = "/assets/images/posts/2024-02-17-simplifying-cloud-infrastructure-and-kubernetes-management/meshery-design.png" width="100%" />
+<img alt="Meshery Designs" src = "/assets/images/posts/2024/2024-02-17-simplifying-cloud-infrastructure-and-kubernetes-management/meshery-design.png" width="100%" />
 
 For those who prefer using the Meshery CLI, the process is equally convenient. After ensuring that the Meshery CLI is installed and configured to connect to the desired Meshery instance, users can open a terminal or command prompt and utilize the Meshery CLI commands to interact with the catalog. They can apply, delete, view, or list patterns using the appropriate commands provided by the Meshery CLI. Additionally, Meshery CLI allows onboarding applications and applying WASM (WebAssembly) filters for advanced functionality.
 
