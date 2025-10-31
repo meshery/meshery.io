@@ -34,7 +34,7 @@ Subtypes:
 <img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-Mount.png" />
 
 - Permission
-<img src="assets/images/posts/2025-10-31-meshery-relationships/Edge-Permission.png" />
+<img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-Permission.png" />
 
 - Reference
 <img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-reference.png" />
