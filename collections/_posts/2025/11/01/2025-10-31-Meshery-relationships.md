@@ -55,7 +55,7 @@ Well, there are two simple way in which one can start creating.
 
 Meshery’s UI offers a user-friendly way to create relationships. Toggle the menu button right next to your user profile in Kanvas. Head to registry and then relationships. Select the relationship button to start defining your relationship definition as shown below.
 
-<img src="assets/images/posts/2025-10-31-meshery-relationships/relationship-ui.png" style="width:100%; max-width:750px;" />
+<img src="/assets/images/posts/2025-10-31-meshery-relationships/relationship-ui.png" style="width:100%; max-width:750px;" />
 
 for more precise information on defining your relationship, head to [Creating Relationship definition](https://docs.meshery.io/project/contributing/contributing-relationships).
 
