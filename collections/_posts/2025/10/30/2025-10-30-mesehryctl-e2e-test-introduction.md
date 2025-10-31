@@ -19,9 +19,7 @@ You wanted to create a test for a new or existing command, this tutorial will ex
 
 The best advice that we can share is first of all, **be familiarized with Meshery ecosystem**, this is the key to be able to implement tests.
 
-Be familiar with the different components and concept in Meshery's world, this can be done by reading the official documentation.
-
-You will find detailed explanation of the architecture and logical concepts there:
+Be familiar with the different components and concept in Meshery's world, this can be done by reading the official documentation where you will find detailed explanations of the both [architectural](https://docs.meshery.io/concepts/architecture) and [logical](https://docs.meshery.io/concepts/logical) concepts. 
 
 `mesheryctl` is Meshery's CLI
 
