@@ -6,6 +6,7 @@ date: 2025-10-30 08:00:00 -0500
 categories: 
   - mesheryctl
   - test
+featured-image: /assets/images/posts/2025/mesheryctl-e2e-introduction/downhill.png
 redirect_from: /blog/2025-10-30-mesheryctl-e2e-introduction
 ---
 

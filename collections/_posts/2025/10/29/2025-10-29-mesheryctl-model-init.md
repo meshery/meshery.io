@@ -6,7 +6,7 @@ author: Matthieu Evrin
 categories:
   - releases
   - mesheryctl
-featured-image: /assets/images/posts/2025/mesheryctl-e2e-introduction/mesheryctl-model-cmds.png
+featured-image: /assets/images/posts/2025/mesheryctl-model-init/mesheryctl-model-cmds.png
 redirect_from: /blog/mesheryctl-model-init-explained
 published: true
 ---
