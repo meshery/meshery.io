@@ -23,7 +23,7 @@ Be familiar with the different components and concept in Meshery's world, this c
 
 `mesheryctl` is Meshery's CLI
 
-Meshery CLI is written in Golang built on the Cobra framework and interacts with Meshery Server's [REST API]()https://docs.meshery.io/reference/rest-apis). By creating end-to-end tests during the development lifecycle, it ensures that changes or new features are behaving as expected.
+Meshery CLI is written in Golang built on the Cobra framework and interacts with Meshery Server's [REST API](https://docs.meshery.io/reference/rest-apis). By creating end-to-end tests during the development lifecycle, it ensures that changes or new features are behaving as expected.
 
 ## How to create a test
 
