@@ -2,7 +2,7 @@
 title: Announcing the Certified Meshery Contributor (CMC)
 subheading: A CNCF-first of its kind
 author: Meshery Maintainers
-date: 2025-10-21 08:00:00 -0500
+date: 2025-10-27 08:00:00 -0500
 categories: 
   - community
   - open-source
@@ -94,9 +94,7 @@ Recognition badges come in different flavors and now include a new category for 
   <figcaption ><b>New Certified Meshery Contributor Badge</b>: Recognizes developers who have successfully passed the Certified Meshery Contributor exam, validating their skills in contributing to the Meshery open source project.
 </figcaption>
 </figure>
+  
+There's no time to waste. Start your journey to becoming a Certified Meshery Contributor today! Visit the [Certified Meshery Contributor exam page](https://cloud.meshery.io/academy/certifications/c5ada327-8a58-4c8a-b9fa-51b95696488c/certified-meshery-contributor) to learn more and register for the exam. Embrace this opportunity to validate your skills and contribute meaningfully to the Meshery ecosystem.
 
-The new Certified Meshery Contributor Badge recognizes developers who have successfully passed the Certified Meshery Contributor exam, validating their skills in contributing to the Meshery open source project.
-
-There’s no time to waste. Start your journey to becoming a Certified Meshery Contributor today! Visit the [Meshery Academy](https://cloud.meshery.io/academy) and [Certified Meshery Contributor exam page](https://cloud.meshery.io/academy/certifications/c5ada327-8a58-4c8a-b9fa-51b95696488c/certified-meshery-contributor) to learn more and register for this free certification. Embrace this opportunity to validate your skills and contribute meaningfully to the Meshery ecosystem.
-
-- Meshery Maintainers
+_- Meshery Maintainers_
