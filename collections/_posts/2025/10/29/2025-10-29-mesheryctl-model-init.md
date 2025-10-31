@@ -42,7 +42,7 @@ In our example we will create a new model in a dedicated path in a specific form
 
 **Example:**
 
-In my destination path, nothing is present
+In my destination path, nothing is present.
 
 ```shell
 $ ~/my-awesome-models$ ls -l
@@ -63,9 +63,11 @@ Adding sample connections...
 Creating sample credentials...
 Created my-awesome-model model at my-awesome-models/my-awesome-model
 ```
+
 This command creates a new model named `my-awesome-model` in the `my-awesome-models` directory with the following structure:
 
-```my-awesome-models/
+```shell
+$ my-awesome-models/
 └── my-awesome-model
     └── v0.1.0
         ├── components
