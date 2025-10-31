@@ -61,7 +61,7 @@ for more precise information on defining your relationship, head to [Creating Re
 
 2. Creating Relationships in CLI
 
-Meshery’s command line interface, `mesheryctl`,  manages both the lifecyle of Meshery itself and to access and invoke any of Meshery’s application and cloud native management functions. For more information on mesheryctl checkout [Using Meshery's CLI](https://docs.meshery.io/guides/mesheryctl/working-with-mesheryctl).
+Meshery’s command line interface, `mesheryctl`, manages both the lifecycle of Meshery itself and is used to access and invoke any of Meshery’s application and cloud-native management functions. For more information on mesheryctl, check out [Using Meshery's CLI](https://docs.meshery.io/guides/mesheryctl/working-with-mesheryctl).
 
 Now, for the sake of defining a relationship, we'll focus on two CLI commands: `mesheryctl model init` and `mesheryctl model build`.
 `mesheryctl model init`: Generates a folder structure and guides the user on model creation.
