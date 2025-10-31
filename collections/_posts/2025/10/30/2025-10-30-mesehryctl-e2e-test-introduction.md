@@ -221,7 +221,7 @@ setup() {
   assert_success
   
   assert_output  --partial "No element with name "non-existing" has been found."
-  assert_output  --partial "Ensure to provided an existing name. `mesheryctl awesome list` to list existing elenent."
+  assert_output  --partial "Ensure to provided an existing name. `mesheryctl awesome list` to list existing element."
 }
 ```
 
