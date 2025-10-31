@@ -33,7 +33,34 @@ components:
   description: 
 componentsCount: 5
 relationships: 
-relationshipsCount: 0
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between DBInstance and SecurityGroup"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between DBCluster and SecurityGroup"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between DBCluster and DBSubnetGroup"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between DBInstance and DBSubnetGroup"
+- type: "Binding"
+  kind: "Edge"
+  description: "An edge relationship between DBSubnetGroup and Subnet"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between AdoptedResource and DBCluster"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between AdoptedResource and DBInstance"
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship Lambda functions query MongoDB-compatible DocumentDB"
+relationshipsCount: 9
 featureList: [
   "Scalable NoSQL database",
   "Supports MongoDB workloads",

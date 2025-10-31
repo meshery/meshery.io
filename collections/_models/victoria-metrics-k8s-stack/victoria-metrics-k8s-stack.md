@@ -95,7 +95,19 @@ components:
   colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-agent/icons/color/vl-agent-color.svg
   whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-agent/icons/white/vl-agent-white.svg
   description: 
-componentsCount: 21
+- name: vt-cluster
+  colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vt-cluster/icons/color/vt-cluster-color.svg
+  whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vt-cluster/icons/white/vt-cluster-white.svg
+  description: 
+- name: vt-single
+  colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vt-single/icons/color/vt-single-color.svg
+  whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vt-single/icons/white/vt-single-white.svg
+  description: 
+- name: vt-single
+  colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vt-single/icons/color/vt-single-color.svg
+  whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vt-single/icons/white/vt-single-white.svg
+  description: 
+componentsCount: 24
 relationships: 
 relationshipsCount: 0
 featureList: [
