@@ -23,9 +23,6 @@ Be familiar with the different components and concept in Meshery's world, this c
 
 You will find detailed explanation of the architecture and logical concepts there:
 
-- **Architecture:** https://docs.meshery.io/concepts/architecture
-- **Logical:**: https://docs.meshery.io/concepts/logical
-
 `mesheryctl` is Meshery's CLI
 
 It is a CLI built in Golang that interacts with Meshery server API. By creating End-To-End tests during the development lifecycle, it ensures that changes or new features are behaving as expected.
