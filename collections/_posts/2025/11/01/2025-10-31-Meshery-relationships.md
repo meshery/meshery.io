@@ -70,6 +70,6 @@ In the generated folder structure, head to the generated relationship.json file,
 Now import this generated OCI file into Kanvas, and use your defined relationship.
 
 ## Contribute and Collaborate with Meshery
-Meshery thrives because of its active, welcoming community, and everyone is encouraged to get involved. Check out our existing models, pick one that interests you, and showcase your skills by creating new relationships, every contribution helps Meshery grow and evolve. Whether you’re just exploring or ready to dive in, your participation makes a real difference, so jump in and let’s build something great together.
+Meshery thrives because of its active, welcoming community, and everyone is encouraged to get involved. Check out our existing models, pick one that interests you, and showcase your skills by creating new relationships. Every contribution helps Meshery grow and evolve. Whether you’re just exploring or ready to dive in, your participation makes a real difference, so jump in and let’s build something great together.
 
 Explore, create, and contribute together, let’s make Meshery more effective!
