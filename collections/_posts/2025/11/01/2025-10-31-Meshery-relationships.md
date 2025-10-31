@@ -25,7 +25,7 @@ Meshery supports several kinds of relationships to help you model real-world con
 Subtypes:
 
 - Network
-<img src="assets/images/posts/2025-10-31-meshery-relationships/Edge-network.png" />
+<img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-network.png" />
 
 - Firewall
 <img src="aassets/images/posts/2025-10-31-meshery-relationships/Edge-firewall.png" />
