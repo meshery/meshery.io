@@ -19,31 +19,37 @@ Relationships aren’t just about linking things, they automate how components i
 Meshery supports several kinds of relationships to help you model real-world connections between your cloud native components:
 
 1. Hierarchical Relationships: These are parent-child relationships, where one component depends on another.
+
 <img src="/assets/images/posts/2025-10-31-meshery-relationships/Hierarchical-relationship.png" />
 
 2. Edge Relationships: These capture connections such as network links, storage mounts, or firewall rules between components.
 Subtypes:
 
 - Network
-<img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-network.png" />
+
+<img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-network.png" style="width:100%; max-width:750px;" />
 
 - Firewall
-<img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-firewall.png" />
+
+<img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-firewall.png" style="width:100%; max-width:750px;" />
 
 - Mount
-<img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-Mount.png" />
+
+<img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-Mount.png" style="width:100%; max-width:750px;" />
 
 - Permission
-<img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-Permission.png" />
+
+<img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-Permission.png" style="width:100%; max-width:750px;" />
 
 - Reference
-<img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-reference.png" />
+
+<img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-reference.png" style="width:100%; max-width:750px;" />
 
 3. Sibling Relationships: These describe interactions between components at the same level, like two services in the same namespace that interact or share resources.
-<img src="/assets/images/posts/2025-10-31-meshery-relationships/siblings.png" />
+<img src="/assets/images/posts/2025-10-31-meshery-relationships/siblings.png" style="width:100%; max-width:750px;" />
 
 4. TagSets Relationships: These represent relationships between components of same Labels or Annotations key/value pairs. 
-<img src="/assets/images/posts/2025-10-31-meshery-relationships/TagSet-relationship.png" />
+<img src="/assets/images/posts/2025-10-31-meshery-relationships/TagSet-relationship.png" style="width:100%; max-width:750px;" />
 
 Each relationship type is designed to reflect how components interact, inherit features, or communicate, making it easier to visualize and automate the flow of data and control within your environment. This approach improves visibility, enhances design decisions, and enables more flexible and automated configuration management in Meshery
 
