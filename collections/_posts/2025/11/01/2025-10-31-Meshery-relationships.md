@@ -40,7 +40,7 @@ Subtypes:
 <img src="/assets/images/posts/2025-10-31-meshery-relationships/Edge-reference.png" />
 
 3. Sibling Relationships: These describe interactions between components at the same level, like two services in the same namespace that interact or share resources.
-<img src="assets/images/posts/2025-10-31-meshery-relationships/Siblings.png" />
+<img src="/assets/images/posts/2025-10-31-meshery-relationships/siblings.png" />
 
 4. TagSets Relationships: These represent relationships between components of same Labels or Annotations key/value pairs. 
 <img src="/assets/images/posts/2025-10-31-meshery-relationships/TagSet-relationship.png" />
