@@ -67,7 +67,7 @@ Now, for the sake of defining a relationship, we'll focus on two CLI commands: `
 `mesheryctl model init`: Generates a folder structure and guides the user on model creation.
 In the generated folder structure, head to the generated relationship.json file, and fill the required fields. Use this relationship file in your model folder. Once the required fields are filled use the build command.
 `mesheryctl model build`: Create an OCI-compliant package from the model files.
-Now import this generated OCI file into kanvas, and use your defined Relationship.
+Now import this generated OCI file into Kanvas, and use your defined relationship.
 
 ## Contribute and Collaborate with Meshery
 Meshery thrives because of its active, welcoming community, and everyone is encouraged to get involved. Check out our existing models, pick one that interests you, and showcase your skills by creating new relationships, every contribution helps Meshery grow and evolve. Whether you’re just exploring or ready to dive in, your participation makes a real difference, so jump in and let’s build something great together.
