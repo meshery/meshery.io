@@ -43,7 +43,7 @@ Subtypes:
 <img src="assets/images/posts/2025-10-31-meshery-relationships/Siblings.png" />
 
 4. TagSets Relationships: These represent relationships between components of same Labels or Annotations key/value pairs. 
-<img src="assets/images/posts/2025-10-31-meshery-relationships/TagSet-relationship.png" />
+<img src="/assets/images/posts/2025-10-31-meshery-relationships/TagSet-relationship.png" />
 
 Each relationship type is designed to reflect how components interact, inherit features, or communicate, making it easier to visualize and automate the flow of data and control within your environment. This approach improves visibility, enhances design decisions, and enables more flexible and automated configuration management in Meshery
 
