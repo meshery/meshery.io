@@ -80,7 +80,7 @@ We will use a fictitious command named `awesome` through this tutorial that has 
   # View no existing elements
   ~$ mesheryctl awesome view non-existing
   No element with name "non-existing" has been found. 
-  Ensure to provided an existing name. `mesheryctl awesome list` to list existing elenent.
+  Ensure to provided an existing name. `mesheryctl awesome list` to list existing element.
   ```
 
 All is set now to create required tests.
