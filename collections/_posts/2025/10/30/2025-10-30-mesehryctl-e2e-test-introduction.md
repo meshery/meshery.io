@@ -108,7 +108,7 @@ tests/
 
 You need to create a new folder that will contains all the tests for this command.
 
-Following the implementation standard, the folder will be `tests/e2e/006-awesome`, then we will create a file for each subcommands, this is the expected result
+Following the implementation standard, the folder will be `tests/e2e/006-awesome`, then we will create a file for each subcommand, this is the expected result
 
 ```
 tests/
