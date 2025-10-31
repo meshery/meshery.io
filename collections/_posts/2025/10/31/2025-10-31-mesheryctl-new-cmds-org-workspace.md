@@ -117,8 +117,8 @@ mesheryctl exp workspace
 ```
 
 Available subcommands:
-create - Create a workspace within an organisation in Meshery
-list - List all available workspaces present within an organisation in Meshery
+create - Create a workspace within an organization in Meshery
+list - List all available workspaces present within an organization in Meshery
 
 Example:
 To list workspaces in an organization:
