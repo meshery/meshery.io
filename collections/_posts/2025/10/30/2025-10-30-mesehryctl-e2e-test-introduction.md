@@ -17,7 +17,7 @@ You wanted to create a test for a new or existing command, this tutorial will ex
 
 ## Understand Meshery ecosystem
 
-The best advice that we can share is first of all, **wbe familiarized with Meshery ecosystem**, this is the key to be able to implement tests.
+The best advice that we can share is first of all, **be familiarized with Meshery ecosystem**, this is the key to be able to implement tests.
 
 Be familiar with the differents components and concept in Meshery's world, this can be done by reading the offical documentation.
 
