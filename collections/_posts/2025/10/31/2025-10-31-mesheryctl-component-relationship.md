@@ -14,7 +14,6 @@ published: true
 
 ## Component
 
-[Component Reference](https://docs.meshery.io/reference/mesheryctl/component)
 
 The `component` command manages components registered in Meshery. Components are **fundamental building blocks** representing and defining the infrastructure under management. This command lets users:
 
@@ -127,8 +126,6 @@ model:
 ***
 
 ## Relationship
-
-[Relationship Reference](https://docs.meshery.io/reference/mesheryctl/exp/relationship)
 
 The `relationship` command describes **how Meshery-managed components are connected and interact**. It reveals relationships among registered entities, adapters, and core components.
 
