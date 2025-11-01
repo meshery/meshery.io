@@ -25,7 +25,7 @@ Built with the CUE schema language, Models ensure type safety and extensibility 
 - Import from CRDs, Helm, JSON, CSV
 - Design visually in Meshery UI → Export as OCI image
 - Publish to public or private registries
-Here's more on [publishing your custom  model](https://meshery.io/catalog/models#:~:text=%C3%97-,Publish%20Your%20Own%20Model,-Using%20Meshery%27s%20Registry) 
+Here's more on [publishing your custom model](https://meshery.io/catalog/models#:~:text=%C3%97-,Publish%20Your%20Own%20Model,-Using%20Meshery%27s%20Registry) 
 
 Check out [Catalog Models](https://meshery.io/catalog/models)
 
