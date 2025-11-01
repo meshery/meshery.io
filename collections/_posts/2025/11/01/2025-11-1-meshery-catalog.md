@@ -1,7 +1,7 @@
 ---
 title: Revolutionizing Cloud Native Infrastructure, The Meshery Catalog – Your All-in-One Design & Extensibility Hub
 subheading: A walkthrough on Meshery Catalog
-date: 2025-10-31
+date: 2025-11-01
 author: Darshan Narasimha
 categories: 
   - catalog
