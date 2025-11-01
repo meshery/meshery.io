@@ -7,7 +7,7 @@ categories:
   - catalog
   - models
   - design
-redirect_from: /blog/revolutionizing-clou-native-infrastructure-the-meshery-catalog–your-ll-in-one-design-&-extensibility-hub
+redirect_from: /blog/revolutionizing-cloud-native-infrastructure-the-meshery-catalog-your-all-in-one-design-and-extensibility-hub
 featured-image: 
 ---
 
