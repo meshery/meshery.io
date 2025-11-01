@@ -13,7 +13,7 @@ featured-image:
 
 In the fast-paced world of Kubernetes, service meshes, and multi-cloud chaos, managing infrastructure shouldn’t feel like herding cats. That’s where the Meshery Catalog steps in — a living, community-powered marketplace of reusable, versioned, and instantly deployable cloud native designs.
 
-Let’s explore its three killer features — Models, Desgins, and WASM Filters — and why this combination is uniquely powerful.
+Let’s explore its three killer features — Models, Designs, and WASM Filters — and why this combination is uniquely powerful.
 
 ## Models: The DNA of Cloud Native Infrastructure
 
