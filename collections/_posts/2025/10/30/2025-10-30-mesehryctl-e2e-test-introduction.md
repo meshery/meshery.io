@@ -24,9 +24,7 @@ Meshery CLI is written in Golang built on the Cobra framework and interacts with
 
 ## How to create a test
 
-Before starting, be sure you read the contributing guide that will provide you the requirements and the implementation standards.
-
-- **Guide:** https://docs.meshery.io/project/contributing/contributing-cli-tests
+Before starting, be sure you read the contributing guide that will provide you the requirements and the implementation standards [here](https://docs.meshery.io/project/contributing/contributing-cli-tests).
 
 ### Scenario
 
