@@ -37,7 +37,7 @@ Check out [Catalog Filters](https://meshery.io/catalog/filters)
 
 ## Designs: Production-Ready Apps, Ready to Deploy
 
-Designs tie it all together into complete, production-ready applications. A Design is a fully wired, executable blueprint — a real-world app built by combining multiple Models, WASM Filters, and relationships. With 337+ Designs in the Catalog, you can deploy anything from the classic Istio Bookinfo app (complete with traffic rules and WASM auth) to a Prometheus + Grafana observability stack or a GitOps pipeline with ArgoCD. Each Design is saved as a OCI artifact, versioned, tagged, published and shareable via Meshery catalog. Best of all, you can save your own custom design — your secure e-commerce backend, your internal microservices platform — and publish it for your team or the world.
+Designs tie it all together into complete, production-ready applications. A Design is a fully wired, executable blueprint — a real-world app built by combining multiple Models, WASM Filters, and relationships. With 337+ Designs in the Catalog, you can deploy anything from the classic Istio Bookinfo app (complete with traffic rules and WASM auth) to a Prometheus + Grafana observability stack or a GitOps pipeline with ArgoCD. Each Design is saved as an OCI artifact, versioned, tagged, published and shareable via Meshery catalog. Best of all, you can save your own custom design — your secure e-commerce backend, your internal microservices platform — and publish it for your team or the world.
 
 Check out the [preexisting Design built by the community](https://meshery.io/catalog/designs), create your own Meshery Design by [referring this documentation](https://docs.meshery.io/guides/configuration-management/creating-a-meshery-design).
 
