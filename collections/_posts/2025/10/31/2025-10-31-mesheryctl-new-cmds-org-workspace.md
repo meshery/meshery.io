@@ -50,7 +50,7 @@ Flags available:
 Examples:
 For listing connections:
 ```
-> mesheryctl exp connections list --count
+> mesheryctl exp connections list
 Total number of connections: 5
 Page: 1
 ID                                    NAME                     TYPE      KIND        STATUS
