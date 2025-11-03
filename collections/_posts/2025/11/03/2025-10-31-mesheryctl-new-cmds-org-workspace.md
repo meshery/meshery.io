@@ -2,7 +2,7 @@
 title: Meshery v1.0 - Commands for Organization, Workspaces, and Connections
 subheading: Managing organizations, workspaces and connections via mesheryctl
 author: Aadhitya Amarendiran
-date: 2025-11-03 08:00:00 -0500
+date: 2025-11-03 00:00:00 -0500
 categories:
     - mesheryctl
 featured-image: /assets/images/posts/2025/11/meshery-cli-orgs-workspaces/meshery-cli-sign.png
