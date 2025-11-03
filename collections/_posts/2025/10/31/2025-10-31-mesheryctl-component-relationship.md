@@ -58,6 +58,11 @@ AP Dos Log Conf     nginx-ingress                    APDosLogConf              a
 ...
 ```
 
+```
+mesheryctl component list --count
+
+Total number of components: 3727
+```
 
 #### Example: Search Components
 
