@@ -17,7 +17,7 @@ Relationships aren’t just about linking things, they automate how components i
 
 ## Types of Relationships
 
-Meshery supports several kinds of relationships to help you model real-world connections between your cloud native components:
+Meshery supports several kinds of relationships to help you model real-world connections between your cloud-native components:
 
 1. **Hierarchical Relationships**: These are parent-child relationships, where one component depends on another.
 
@@ -52,7 +52,7 @@ Subtypes:
 4. **TagSets Relationships**: These represent relationships between components of same Labels or Annotations key/value pairs. 
 <img src="/assets/images/posts/2025-10-31-meshery-relationships/TagSet-relationship.png" style="width:100%; max-width:750px;" />
 
-Each relationship type is designed to reflect how components interact, inherit features, or communicate, making it easier to visualize and automate the flow of data and control within your environment. This approach improves visibility, enhances design decisions, and enables more flexible and automated configuration management in Meshery
+Each relationship type is designed to reflect how components interact, inherit features, or communicate, making it easier to visualize and automate the flow of data and control within your environment. This approach improves visibility, enhances design decisions, and enables more flexible and automated configuration management in Meshery.
 
 ## How can one create a Relationship between Components in a Model?
 
@@ -64,7 +64,7 @@ Meshery’s UI offers a user-friendly way to create relationships. Toggle the me
 
 <img src="/assets/images/posts/2025-10-31-meshery-relationships/relationship-ui.png" style="width:100%; max-width:750px;" />
 
-for more precise information on defining your relationship, head to [Creating Relationship definition](https://docs.meshery.io/project/contributing/contributing-relationships).
+For more precise information on defining your relationship, head to [Creating Relationship definition](https://docs.meshery.io/project/contributing/contributing-relationships).
 
 2. **Creating Relationships in CLI**
 
