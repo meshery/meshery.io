@@ -145,6 +145,6 @@ Kubernetes’ use of github.com/kubernetes for core components and github.com/ku
 
 ## Meshery Umbrella Expands
 
-See the curent list of repositories under each organization: [meshery org repos](https://github.com/orgs/meshery/repositories) and [meshery-extensions org repos](https://github.com/orgs/meshery-extensions/repositories).
+See the current list of repositories under each organization: [meshery org repos](https://github.com/orgs/meshery/repositories) and [meshery-extensions org repos](https://github.com/orgs/meshery-extensions/repositories).
 
 Meshery’s partitioning of repositories into github.com/meshery and github.com/meshery-extensions is a strategic move to enhance modularity, scalability, and community engagement. By adopting a governance structure that balances control and flexibility, delineating clear support expectations, and implementing robust project mechanics, Meshery can effectively manage its growing ecosystem. Drawing inspiration from Crossplane and Kubernetes, this approach positions Meshery to remain a leading CNCF project, empowering collaborative cloud native management.
