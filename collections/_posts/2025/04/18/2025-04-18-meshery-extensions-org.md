@@ -1,5 +1,5 @@
 ---
-title: Meshery Ecosystem Expansion
+title: The Meshery Umbrella Expands
 subheading: Partitioning Platform From Extensions
 author: Meshery Authors
 date: 2025-04-17
