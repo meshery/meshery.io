@@ -8,8 +8,8 @@ published: true
 categories:
   - community
   - milestones
-redirect_from: /blog/sixth-highest-velocity-cncf-project
-featured-image: /assets/images/posts/2025/sixth-highest-velocity-cncf-project/6th-highest-velocity-project-out-of-234-cncf-projects.png
+permalink: /blog/sixth-highest-velocity-cncf-project
+featured-image: /assets/images/posts/2025/sixth-highest-velocity-cncf-project/6th-highest-velocity-project-out-of-237-cncf-projects.pn
 ---
 
 Meshery, the extensible cloud native management platform, has achieved a remarkable milestone: recognition as the sixth highest-velocity project within the Cloud Native Computing Foundation (CNCF). This accomplishment is especially noteworthy given Meshery's Sandbox maturity level and its position among 237 CNCF projects. Just six months ago, we celebrated reaching the ninth spot in our [April 2025 announcement](https://meshery.io/blog/ninth-highest-velocity-cncf-project/). Climbing three ranks in such a short time underscores the project's accelerating momentum and the unwavering dedication of our global community.
