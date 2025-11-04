@@ -11,7 +11,7 @@ categories:
 featured-image: /assets/images/posts/2025/meshery-extensions-org/meshery-extensions-github-dark.png
 permalink: /blog/2025/meshery-ecosystem-expansion
 ---
-Meshery's [high project velocity](/blog/sixth-highest-velocity-cncf-project) necessitates a revision in its governance and organizational structure to align with the scale of its growing complexity and community contributions. To best serve its expansive ecosystem, Meshery maintainers have opted to partition its numerous GitHub repositories into two distinct organizations: [Meshery](https://github.com/meshery) for the core platform and [Meshery Extensions](https://github.com/meshery-extensions) for extensions.
+Meshery's [high project velocity](/blog/sixth-highest-velocity-cncf-project) necessitates a revision in its governance and organizational structure to align with the scale of its growing complexity and community contributions. To best serve its expansive ecosystem, Meshery maintainers have opted to partition its numerous GitHub repositories into two distinct organizations: [Meshery](https://github.com/meshery) for the core platform and [Meshery Extensions](https://github.com/meshery-extensions) for [extensions](https://meshery.io/extensions).
 
 This strategic move aims to enhance the project's structure, manageability, scalability, and community engagement. This post outlines the rationale, suggested governance structure, support expectations, and project mechanics behind this decision, drawing parallels with similar strategies employed by other graduated projects.
 
@@ -21,7 +21,7 @@ The decision to split Meshery’s repositories into two GitHub organizations is 
 
 ### Project Architecture
 
-Meshery's architectural project structure is that of a highly extensible, self-service, management platform. With every feature developed, rigorous consideration is given to extensibility, as is evident by the ubiquity of [extension points](https://docs.meshery.io/extensibility#extension-points).
+Meshery's architectural project structure is that of a highly extensible, self-service, management platform. With every feature developed, rigorous consideration is given to extensibility as is evident by the ubiquity of [extension points](https://docs.meshery.io/extensibility#extension-points) throughout Meshery's architecture.
 
 ### Modularity and Focus
 
@@ -59,8 +59,8 @@ This expansion allows for different governance models or maintainer structures f
 
 ### Oversight and Coordination
 
-* **Steering Committee**: A steering committee, comprising core maintainers and representatives from active extension teams, could oversee cross-organization alignment, resolve conflicts, and approve new extensions.  
-* **Transparency**: Both organizations should maintain open communication, with public meeting notes, discussion forums, and regular updates to the community.
+* **Steering Committee**: A steering committee, comprising core maintainers and representatives from active extension teams, oversee cross-organization alignment, resolve conflicts, and approve new extensions.
+* **Transparency**: Both organizations maintain open communication with public meeting minutes, discussion forums, and regular updates to the community.
 
 | Aspect | Core Platform | Extensions |
 | ----- | ----- | ----- |
@@ -88,7 +88,7 @@ Support expectations differ between the core platform and extensions to reflect 
 ### User Guidance
 
 * **Documentation**: Both core and extension documentation should be accessible, with clear instructions on installation, usage, and troubleshooting.  
-* **Community Channels**: Users can seek help via Slack, GitHub issues, or the [discussion forum](https://layer5.io/community).
+* **Community Channels**: Users can seek help via [Slack](https://slack.meshery.io), GitHub issues, or the [discussion forum](https://meshery.io/community#discussion-forums).
 
 ## Project Mechanics
 
@@ -100,7 +100,7 @@ The mechanics of managing two organizations involve distinct development, testin
 ### Integration Testing
 
 * **Compatibility Testing**: Extensions are tested against multiple core platform versions to ensure compatibility, using tools like MeshSync for resource discovery.  
-* **Automated Pipelines**: GitHub Actions automate testing and snapshot generation, as seen in extensions like [Helm Kanvas Snapshot](https://meshery.io/blog/2024/meshery-v0.8.0-release).  
+* **Automated Pipelines**: GitHub Actions automate testing and snapshot generation, as seen in extensions like [Helm Kanvas Snapshot](https://meshery.io/extensions/helm-kanvas-snapshot).  
 * **Performance Testing**: Meshery’s performance management features can be used to benchmark extensions, ensuring they meet efficiency standards.
 
 ### Documentation and Onboarding
