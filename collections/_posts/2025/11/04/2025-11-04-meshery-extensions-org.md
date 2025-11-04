@@ -1,4 +1,4 @@
----
+ ---
 title: The Meshery Umbrella Expands
 subheading: Partitioning Platform From Extensions
 author: Lee Calcote, Sangram Rath, Matthieu Evrin, Mia Grenell
@@ -11,28 +11,9 @@ categories:
 featured-image: /assets/images/posts/2025/meshery-extensions-org/meshery-extensions-github-dark.png
 permalink: /blog/2025/meshery-ecosystem-expansion
 ---
-<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@600&display=swap" rel="stylesheet">
+Meshery's [high project velocity](/blog/sixth-highest-velocity-cncf-project) necessitates a revision in its governance and organizational structure to align with the scale of its growing complexity and community contributions. To best serve its expansive ecosystem, Meshery maintainers have opted to partition its numerous GitHub repositories into two distinct organizations: [Meshery](https://github.com/meshery) for the core platform and [Meshery Extensions](https://github.com/meshery-extensions) for extensions.
 
-<style type="text/css">
-  .highlighted-text {
-    font-family: 'Baloo Bhaina 2', cursive;
-    text-align: center;
-  }
-  ul, li { line-height: 1rem;}
-  ol li { line-height: 1rem;}
-  .circular-callout {
-    height: content-fit;
-    text-align: center;
-    align-content: center;
-    block-size: fit-content;
-    background-color: var(--color-primary-super-dark);
-    > p {
-      margin: 1rem 3rem;
-      color: var(--color-primary-dark-light);
-    }
-  }
-</style>
-Meshery, [a high-velocity Cloud Native Computing Foundation (CNCF) project](/blog/sixth-highest-velocity-cncf-project), serves as a cloud native management platform facilitating multi-player collaboration in designing and operating modern infrastructure. As part of its ecosystem expansion, Meshery maintainers have opted to partition its numerous GitHub repositories into two distinct organizations: [Meshery](https://github.com/meshery) for the core platform and [Meshery Extensions](https://github.com/meshery-extensions) for extensions. This strategic move aims to enhance the project's structure, manageability, scalability, and community engagement. This post outlines the rationale, suggested governance structure, support expectations, and project mechanics behind this decision, drawing parallels with similar strategies employed by other graduated projects.
+This strategic move aims to enhance the project's structure, manageability, scalability, and community engagement. This post outlines the rationale, suggested governance structure, support expectations, and project mechanics behind this decision, drawing parallels with similar strategies employed by other graduated projects.
 
 ## Rationale for Repository Partitioning
 
@@ -145,3 +126,25 @@ Kubernetes’ use of [github.com/kubernetes](https://github.com/kubernetes) for 
 See the current list of repositories under each organization: [meshery org repos](https://github.com/orgs/meshery/repositories) and [meshery-extensions org repos](https://github.com/orgs/meshery-extensions/repositories).
 
 Meshery’s partitioning of repositories into [github.com/meshery](https://github.com/meshery) and [github.com/meshery-extensions](https://github.com/meshery-extensions) is a strategic move to enhance modularity, scalability, and community engagement. By adopting a governance structure that balances control and flexibility, delineating clear support expectations, and implementing robust project mechanics, Meshery can effectively manage its growing ecosystem. Drawing inspiration from graduated projects, this approach positions Meshery to remain a leading CNCF project, empowering collaborative cloud native management.  
+
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@600&display=swap" rel="stylesheet">
+
+<style type="text/css">
+  .highlighted-text {
+    font-family: 'Baloo Bhaina 2', cursive;
+    text-align: center;
+  }
+  ul, li { line-height: 1rem;}
+  ol li { line-height: 1rem;}
+  .circular-callout {
+    height: content-fit;
+    text-align: center;
+    align-content: center;
+    block-size: fit-content;
+    background-color: var(--color-primary-super-dark);
+    > p {
+      margin: 1rem 3rem;
+      color: var(--color-primary-dark-light);
+    }
+  }
+</style>
