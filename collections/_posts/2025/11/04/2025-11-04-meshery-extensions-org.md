@@ -1,4 +1,4 @@
- ---
+---
 title: The Meshery Umbrella Expands
 subheading: Partitioning Platform From Extensions
 author: Lee Calcote, Sangram Rath, Matthieu Evrin, Mia Grenell
