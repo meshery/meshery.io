@@ -41,7 +41,7 @@ The decision to split Meshery’s repositories into two GitHub organizations is 
 
 ### Project Architecture
 
-Let's first acknowledge Meshery architectural project structure being that of a highly extensible, self-service, management platform. With every feature developed grueling consideration is given to extensibility as is evident by the ubiquitiy of [extension points](https://docs.meshery.io/extensibility#extension-points).
+Let's first acknowledge Meshery architectural project structure being that of a highly extensible, self-service, management platform. With every feature developed grueling consideration is given to extensibility as is evident by the ubiquity of [extension points](https://docs.meshery.io/extensibility#extension-points).
 
 ### Modularity and Focus
 
