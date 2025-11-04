@@ -7,12 +7,12 @@ categories:
   - artifact-hub
   - designs
 redirect_from: /blog/200-meshery-designs-on-artifacthub
-featured-image: /assets/images/posts/2024-06-19-more-designs/designs-on-ah.png
+featured-image: /assets/images/posts/2024/2024-06-19-more-designs/designs-on-ah.png
 ---
 
 We are excited to announce a huge milestone for the Meshery community: over 200 new Meshery Designs have just been published on ArtifactHub! 🎉
 
-<img src="/assets/images/posts/2024-06-19-more-designs/designs-on-ah.png" alt="Celebration image of baloons and fireworks" width="50%" align="right"/>
+<img src="/assets/images/posts/2024/2024-06-19-more-designs/designs-on-ah.png" alt="Celebration image of baloons and fireworks" width="50%" align="right"/>
 
 ## Easier Than Ever
 

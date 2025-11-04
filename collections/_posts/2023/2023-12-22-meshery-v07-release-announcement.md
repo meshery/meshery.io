@@ -8,7 +8,7 @@ categories:
   - releases
   - milestones
 layout: post
-featured-image: /assets/images/posts/2023-12-22-v07-release/meshery-v07-release-announcement.webp
+featured-image: /assets/images/posts/2023/2023-12-22-v07-release/meshery-v07-release-announcement.webp
 redirect_from: /blog/meshery-v07-release-announcement
 ---
 v0.7.0 is the latest and most significant release of Meshery, the CNCF’s cloud native manager. Included in this release is GitOps-enablement, a complete GraphQL API (in addition to the REST API), completely new CLI commands, a number of new resources with an internal capabilities registry, 200+ new integrations, and much more is now generally available.
@@ -40,7 +40,7 @@ No component of Meshery was left untouched in this release. Major architectural 
 
 [Meshery Catalog](/catalog) is your marketplace for configurations, filters, and patterns for cloud native infrastructure, simplifying deployment, observation, traffic management, and more.
 
-<img alt="Meshery Extension Points" src="/assets/images/posts/2023-12-22-v07-release/meshery-catalog-cards.png" width="100%" />
+<img alt="Meshery Extension Points" src="/assets/images/posts/2023/2023-12-22-v07-release/meshery-catalog-cards.png" width="100%" />
 
 Now, you can streamline your development and operation process by using any services or designs in our catalog and selecting your desired technology without building from scratch.
 
@@ -61,7 +61,7 @@ Meshery integration with Kanvas enables you to visualize your dry-run testing pr
 ### Meshery's Messaging Framework: Notification Center
 
 <a href="https://docs.meshery.io/guides/events-management">
-  <img alt="Meshery Extension Points" src="/assets/images/posts/2023-12-22-v07-release/notification-center-overview.png" width="100%" />
+  <img alt="Meshery Extension Points" src="/assets/images/posts/2023/2023-12-22-v07-release/notification-center-overview.png" width="100%" />
 </a>
 
 Meshery ensures you're equipped with the insights you need right in the notification tab, using advanced filters to address deployment issues or errors efficiently.
@@ -112,7 +112,7 @@ The new dashboard comes with enhanced fine-tuned summaries of your Kubernetes wo
 MeshSync is now capable of discovering all types of Kubernetes API resources. This is further enhanced by the ability to fingerprint the discovered resources with the help of knowledge of different cloud native technologies through Meshery's new capabilities registry.
 
 <a href="https://docs.meshery.io/concepts/architecture/operator">
-  <img alt="Meshery Extension Points" src="/assets/images/posts/2023-12-22-v07-release/meshery-operator-v07.png" width="100%" />
+  <img alt="Meshery Extension Points" src="/assets/images/posts/2023/2023-12-22-v07-release/meshery-operator-v07.png" width="100%" />
 </a>
 
 Meshery also captures the discovered CRDs in the available Kubernetes clusters through MeshSync enhanced discovery capabilities. This allows Meshery to register these CRDs as Meshery Models and capture them inside the capabilities registry. This is known as **Dynamic Registration** of Meshery Models.
