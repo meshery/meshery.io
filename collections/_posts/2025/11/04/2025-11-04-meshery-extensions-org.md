@@ -2,7 +2,7 @@
 title: The Meshery Umbrella Expands
 subheading: Partitioning Platform From Extensions
 author: Lee Calcote, Sangram Rath, Matthieu Evrin, Mia Grenell
-date: 2025-04-17
+date: 2025-11-04 13:00:00 -0500
 categories: 
   - meshery
   - open-source
