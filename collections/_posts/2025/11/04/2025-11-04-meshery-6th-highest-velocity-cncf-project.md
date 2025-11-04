@@ -1,7 +1,7 @@
 ---
-title: "Meshery the Rocket Ship"
-subheading: 6th Highest Velocity in the CNCF!
-date: 2025-11-04
+title: "Meshery, the Rocket Ship"
+subheading: 6th Highest Velocity Project in the CNCF!
+date: 2025-11-04 01:00:00 -0500
 author: Meshery Authors
 draft: false
 published: true
@@ -25,7 +25,7 @@ Meshery's journey reflects a consistent trajectory of growth and innovation in t
 - 2024-2025 (Apr): 9th highest velocity
 - 2025-2025 (Jul): 6th highest velocity
 
-This progression is fueled by a 350% increase in code commits over the past year, surpassing 10,000 GitHub stars, and contributions from over 3,000 dedicated individuals. Our community now boasts more than 8,000 members, all united by a shared passion for simplifying cloud native infrastructure management.
+This progression is fueled by a 350% increase in code commits over the past year, surpassing 10,000 GitHub stars, and contributions from over 3,000 open sourc contributors. Our community now boasts more than 10,000 members, all united by a shared passion for simplifying cloud native infrastructure management.
 
 As an extensible engineering platform, Meshery has blossomed far beyond its initial scope. Originally housed in a single GitHub organization, its expansive ecosystem of extensions now spans two primary organizations: [meshery](https://github.com/meshery) for foundational projects and community initiatives, and [meshery-extensions](https://github.com/meshery-extensions) for core components and integrations. This structure supports over 300 out-of-the-box integrations with CNCF projects, enabling seamless lifecycle, configuration, and performance management across multi-cluster and multi-cloud environments.
 
