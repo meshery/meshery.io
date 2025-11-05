@@ -99,7 +99,7 @@ The mechanics of managing two organizations involve distinct development, testin
 
 ### Integration Testing
 
-* **Compatibility Testing**: Extensions are tested against multiple core platform versions to ensure compatibility, using tools like MeshSync for resource discovery.  
+* **Compatibility Testing**: Extensions are tested against multiple core platform versions to ensure compatibility, using guidance for [verifying compatibility](https://docs.meshery.io/extensibility/verify-compatibility) between core platform and extensions.
 * **Automated Pipelines**: GitHub Actions automate testing and snapshot generation, as seen in extensions like [Helm Kanvas Snapshot](https://meshery.io/extensions/helm-kanvas-snapshot).  
 * **Performance Testing**: Meshery’s performance management features can be used to benchmark extensions, ensuring they meet efficiency standards.
 
@@ -111,15 +111,13 @@ The mechanics of managing two organizations involve distinct development, testin
 
 ## Reflections on Other Projects
 
-Meshery's expansion strategy mirrors successful models in other CNCF projects. BuildPacks and Argo ([https://github.com/argoproj-labs](https://github.com/argoproj-labs)). Crossplane uses [github.com/crossplane](https://github.com/crossplane) for its core platform and [github.com/crossplane-contrib](https://github.com/crossplane-contrib) for community-contributed providers and functions. Similarly, Kubernetes maintains [github.com/kubernetes](https://github.com/kubernetes) for core components and [github.com/kubernetes-sigs](https://github.com/kubernetes-sigs) for Special Interest Groups (SIGs). These separations enable focused development, decentralized governance, and easier contribution, which Meshery aims to emulate.
+Meshery's expansion strategy draws inspiration from successful models within the Cloud Native Computing Foundation (CNCF), like Argo, Crossplane, and Kubernetes. These projects demonstrate effective approaches to decentralized governance and focused development through the separation of core and community-contributed components.
 
-### Argo and Crossplane
+Meshery aims to emulate Crossplane's model of maintaining a clear distinction between its core platform ([github.com/crossplane](https://github.com/crossplane)) and community contributions ([github.com/crossplane-contrib](https://github.com/crossplane-contrib)). This separation allows third-party developers to extend Crossplane's capabilities without affecting the core's stability, a model that supports Meshery’s approach to fostering innovation while maintaining a reliable core.
 
-Extension teams have autonomy over their development processes, provided they adhere to Meshery’s code of conduct and integration guidelines, akin to Argo’s labs model where projects operate independently but align with broader project goals. Crossplane’s separation of [github.com/crossplane](https://github.com/crossplane) and [github.com/crossplane-contrib](https://github.com/crossplane-contrib) facilitates a clear distinction between the core platform and community contributions. Providers and functions in the contrib organization allow third-party developers to extend Crossplane’s capabilities without impacting core stability. This model supports Meshery’s approach by demonstrating how a separate organization can foster innovation while maintaining a reliable core.
+Similarly, Meshery Extension teams operate with autonomy over their development processes, provided they adhere to Meshery's core component frameworks and integration guidelines. This mirrors Argo's model ([github.com/argoproj-labs](https://github.com/argoproj-labs)), where projects function independently but align with broader project goals.
 
-### Kubernetes
-
-Kubernetes’ use of [github.com/kubernetes](https://github.com/kubernetes) for core components and [github.com/kubernetes-sigs](https://github.com/kubernetes-sigs) for SIGs provides a robust model for decentralized governance. Each SIG operates as a mini-community with its own charter, leadership, and processes, yet aligns with overarching project goals ([Kubernetes Governance](https://github.com/kubernetes/community/blob/master/governance.md)). Meshery’s extension organization can adopt a similar approach, allowing extension teams to function autonomously within defined guidelines.
+Kubernetes provides a robust model for decentralized governance through its use of [github.com/kubernetes](https://github.com/kubernetes) for core components and [github.com/kubernetes-sigs](https://github.com/kubernetes-sigs) for Special Interest Groups (SIGs). Each SIG acts as a mini-community with its own charter, leadership, and processes, all while aligning with overarching project goals, as outlined in the [Kubernetes Governance](https://github.com/kubernetes/community/blob/master/governance.md). Meshery's extension organization can adopt a similar structure, enabling extension teams to operate autonomously within defined guidelines.
 
 ## Meshery Umbrella Expands
 
