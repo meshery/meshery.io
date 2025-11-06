@@ -8,7 +8,7 @@ permalink: /integrations
 <!DOCTYPE html>
 <html>
   <head>
-    <title>three.js css3d - periodic table</title>
+    <title>Meshery's Integrations</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -22,7 +22,8 @@ permalink: /integrations
     <!-- <script src="/integrations/jsm/renderers/IntegrationBtn.js"></script> -->
     <style>
       a {
-        color: black;
+        color: var(--brand-color-primary);
+        text-decoration: none;
       }
 
       #container {
@@ -36,7 +37,8 @@ permalink: /integrations
 
       #menu {
         position: relative;
-        margin-bottom: 40px;
+        margin-top: 16px;
+        margin-bottom: 8px;
         width: 100%;
         text-align: center;
       }
@@ -46,7 +48,8 @@ permalink: /integrations
         height: 160px;
         /* box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5); */
         filter: drop-shadow(var(--brand-color-secondary-50) 0px 0px 10px);
-        border: 2px solid var(--brand-color-secondary-50);
+        border: 2px solid var(--color-grey-light);
+        background-color: var(--background-grey-secondary);
         border-radius: .5rem 2rem;
         text-align: center;
         line-height: normal;
@@ -56,7 +59,7 @@ permalink: /integrations
       .element:hover {
         box-shadow: 0px 0px 12px var(--brand-color-secondary);
         /* filter: drop-shadow(rgba(0, 0, 0, 0.9) 0px 4px 20px); */
-        border: 1px solid white;
+        border: 1px solid var(--brand-color-primary);
       }
 
       .element .number {
@@ -84,7 +87,7 @@ permalink: /integrations
         left: 0px;
         right: 0px;
         font-size: 12px;
-        color: black;
+        color: var(--color-secondary-dark)
       }
       #menu button{
         border-radius: 3px;
@@ -143,11 +146,6 @@ permalink: /integrations
         to { transform: rotate(1turn)}
       }
 
-
-      
-
-
-   
     </style>
     <!-- loading animation script -->
     <script>
@@ -173,19 +171,20 @@ permalink: /integrations
       <p style="margin:auto 10vw;">
       Meshery seamlessly integrates with all CNCF projects, your existing tools, Kubernetes clusters, and multiple Clouds, allowing you to enhance use your preferred monitoring, CI/CD, and security solutions. 
     </p><p style="margin:2vw 10vw 0vw 10vw;">
-      Experience collaborative infrastructure management. Try the <a href="play.meshery.io"></a>Meshery Playground</a>.
+      Experience collaborative infrastructure management. Try any of these integrations in Meshery's <a href="play.meshery.io">playground</a>.
       </p>
     </div>
 
     <!-- loading animation -->
-
-    <div id="container"><div class="loader"></div></div>
     <div id="menu">
       <button id="table">TABLE</button>
       <button id="sphere">SPHERE</button>
       <button id="helix">HELIX</button>
       <button id="grid">GRID</button>
+      <button id="list" onclick="window.open('https://docs.meshery.io/extensions/integrations', '_blank')">LIST</button>
     </div>
+    <div id="container"><div class="loader"></div></div>
+
 
     <!-- Import maps polyfill -->
     <!-- Remove this when import maps will be widely supported -->
@@ -256,7 +255,7 @@ permalink: /integrations
           const element = document.createElement("div");
           element.className = "element";
           element.style.cursor = "pointer";
-          element.style.backgroundColor = "rgba(255, 255, 255," + "1" + ")";
+          
           element.onpointerdown = () => window.open(table[i].permalink, "_self");
 
           const symbol = document.createElement("div");
