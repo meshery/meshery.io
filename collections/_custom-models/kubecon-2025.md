@@ -12,12 +12,12 @@ subcategory: Cloud Provider
 registrant: Meshery
 components: 
 - name: speaker
-  colorIcon: /assets/images/custom-integration/kubecon-2025/kccnc-na-2025-color.svg
-  whiteIcon: /assets/images/custom-integration/kubecon-2025/kccnc-na-2025-white.svg
+  colorIcon: assets/images/custom-integration/kubecon-2025/kccnc-na-2025-color.svg
+  whiteIcon: assets/images/custom-integration/kubecon-2025/kccnc-na-2025-white.svg
   description: 
 - name: sponsor
-  colorIcon: /assets/images/custom-integration/kubecon-2025/kccnc-na-2025-color.svg
-  whiteIcon: /assets/images/custom-integration/kubecon-2025/kccnc-na-2025-white.svg
+  colorIcon: assets/images/custom-integration/kubecon-2025/kccnc-na-2025-color.svg
+  whiteIcon: assets/images/custom-integration/kubecon-2025/kccnc-na-2025-white.svg
   description: 
 
 componentsCount: 2
