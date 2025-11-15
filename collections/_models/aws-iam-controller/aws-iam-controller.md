@@ -55,9 +55,6 @@ relationships:
 - type: "Binding"
   kind: "Edge"
   description: "An edge relationship between InstanceProfile and role"
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
 - type: "Non Binding"
   kind: "Edge"
   description: "An edge relationship IAM roles attached to EC2 instances for AWS API permissions"
@@ -79,7 +76,7 @@ relationships:
 - type: "Binding"
   kind: "Edge"
   description: "An edge relationship IAM database authentication for RDS"
-relationshipsCount: 10
+relationshipsCount: 9
 featureList: [
   "Manage per-account access or scale access across AWS accounts and applications",
   "Set, verify, and right-size permissions toward least privilege",
