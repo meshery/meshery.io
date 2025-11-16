@@ -31,7 +31,11 @@ components:
   colorIcon: assets/images/integration/aws-dynamodb-controller/components/global-table/icons/color/global-table-color.svg
   whiteIcon: assets/images/integration/aws-dynamodb-controller/components/global-table/icons/white/global-table-white.svg
   description: 
-componentsCount: 5
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-dynamodb-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-dynamodb-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 6
 relationships: 
 - type: "Binding"
   kind: "Edge"

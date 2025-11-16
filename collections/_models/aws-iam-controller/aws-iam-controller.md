@@ -47,7 +47,11 @@ components:
   colorIcon: assets/images/integration/aws-iam-controller/components/service-linked-role/icons/color/service-linked-role-color.svg
   whiteIcon: assets/images/integration/aws-iam-controller/components/service-linked-role/icons/white/service-linked-role-white.svg
   description: 
-componentsCount: 9
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-iam-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-iam-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 10
 relationships: 
 - type: "Binding"
   kind: "Edge"

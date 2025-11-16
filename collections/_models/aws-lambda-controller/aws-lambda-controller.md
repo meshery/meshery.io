@@ -47,7 +47,11 @@ components:
   colorIcon: assets/images/integration/aws-lambda-controller/components/version/icons/color/version-color.svg
   whiteIcon: assets/images/integration/aws-lambda-controller/components/version/icons/white/version-white.svg
   description: 
-componentsCount: 9
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-lambda-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-lambda-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 10
 relationships: 
 - type: "Binding"
   kind: "Edge"
