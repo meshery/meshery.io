@@ -6,9 +6,9 @@ pagination:
 ---
 <div class="blog-post text-container">
 
-	<div class="post-content">
-	
-        <style>
+  <div class="post-content">
+  
+    <style>
       .modal-image {
         display: flex;
         flex-direction: column;
@@ -62,14 +62,47 @@ pagination:
       }
       .padded-box {
         padding: 1.5rem;
-        /* background: #f8f8f8; */
         border-radius: 8px;
         margin-top: 1rem;
-      
         background-color: var(--color-components-background);
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         transition: box-shadow 0.3s ease;
       }
+
+      /* Import instructions section */
+	  .import-instructions {
+		background-color: var(--color-components-background);
+		border-left: 4px solid var(--color-brand, #00b39f);
+		padding: 1rem 1.25rem;
+		margin: 1.5rem 0;
+		border-radius: 4px;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+	  }
+
+	  .import-instructions h3 {
+		margin: 0 0 0.5rem 0;
+		font-size: 1.1rem;
+		color: var(--color-text-primary);
+	  }
+
+	  .import-instructions p {
+		margin: 0 0 0.75rem 0;
+		color: var(--color-secondary-dark);
+		line-height: 1.5;
+	  }
+
+	  .import-instructions a {
+		color: var(--color-brand, #00b39f);
+		font-weight: 600;
+		text-decoration: none;
+		transition: color 0.2s ease;
+	  }
+
+	  .import-instructions a:hover {
+		text-decoration: underline;
+		opacity: 0.85;
+	  }
     </style>
 
     <!-- Model Image -->
@@ -111,6 +144,14 @@ pagination:
             <div class="metadata-value">{{ page.subcategory }}</div>
           </div>
         </div>
+
+        <!-- Import Instructions Section -->
+        <div class="import-instructions">
+          <h3>How to Import This Model</h3>
+          <p>Want to use this model in your Meshery instance? Learn how to import it using either the Meshery CLI or UI.</p>
+          <a href="https://docs.meshery.io/guides/configuration-management/importing-models" target="_blank" rel="noopener noreferrer">View Import Instructions →</a>
+        </div>
+
         <!-- Documentation and Contribution Buttons -->
         <div id="copy-url">
           <div class="btn-class">
@@ -122,9 +163,9 @@ pagination:
                   </a>
                 {% endif %}
                 {% assign modelName = page.path | split: '/' | last | replace: '.md', '' %}
-<a href="/assets/modelsFiles/{{ modelName }}.tar" download>
-  <button class="import" style="width: 10rem;">Download Model</button>
-</a>
+                <a href="/assets/modelsFiles/{{ modelName }}.tar" download>
+                  <button class="import" style="width: 10rem;">Download Model</button>
+                </a>
 
                 <div class="btn-tooltip-grp">
                   <a href="https://docs.meshery.io/project/contributing/contributing-models-quick-start">
@@ -140,51 +181,52 @@ pagination:
     </div> <!-- End modal-content -->
 
     <!-- Scripts -->
-		   <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
-
-		   <script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>
+    <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
+    <script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>
   
   </div> <!-- End post-content -->
-  <div  class="model-details-container">
-	   <!-- Features List -->
-        {% if page.featureList and page.featureList.size > 0 %}
-        <div class="model-details">
-          <h3>Key Features</h3>
-          <ul>
-            {% for feature in page.featureList %}
-              <li>{{ feature }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-        {% endif %}
+  
+  <div class="model-details-container">
+    <!-- Features List -->
+    {% if page.featureList and page.featureList.size > 0 %}
+    <div class="model-details">
+      <h3>Key Features</h3>
+      <ul>
+        {% for feature in page.featureList %}
+          <li>{{ feature }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
 
-        <!-- Components List -->
-        {% if page.components %}
-        <div class="model-details padded-box">
-          <h3>Components</h3>
-          <div style="display: flex; flex-wrap: wrap; gap: 1rem;justify-content: center;">
-            {% for component in page.components %}
-              <div style="text-align: center; width: 150px;">
-                <img src="{{site.baseurl}}/{{ component.colorIcon }}" 
-                     onerror="this.src='/assets/images/meshery-color.svg'"
-                     style="width: 100px; height: 100px; object-fit: contain;" 
-                     loading="lazy" />
-                <p><strong>{{ component.name }}</strong></p>
-              </div>
-            {% endfor %}
+    <!-- Components List -->
+    {% if page.components %}
+    <div class="model-details padded-box">
+      <h3>Components</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 1rem;justify-content: center;">
+        {% for component in page.components %}
+          <div style="text-align: center; width: 150px;">
+            <img src="{{site.baseurl}}/{{ component.colorIcon }}" 
+                 onerror="this.src='/assets/images/meshery-color.svg'"
+                 style="width: 100px; height: 100px; object-fit: contain;" 
+                 loading="lazy" />
+            <p><strong>{{ component.name }}</strong></p>
           </div>
-        </div>
-		{% endif %}
-		<!-- Blog Navigation -->
-	   <div class="blog-navigation" style="margin-bottom: 2rem;">
-		<div style="justify-content:space-between; display: flex; width:100%;">
-			{% if page.previous.url %}
-				<a href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.name }}</a>
-			{% endif %}
-			{% if page.next.url %}
-				<a  href="{% include relative-src.html src=page.next.url %}">{{ page.next.name }} &raquo;</a>
-			{% endif %}
-		</div>
-		</div>
-	</div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Blog Navigation -->
+    <div class="blog-navigation" style="margin-bottom: 2rem;">
+      <div style="justify-content:space-between; display: flex; width:100%;">
+        {% if page.previous.url %}
+          <a href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.name }}</a>
+        {% endif %}
+        {% if page.next.url %}
+          <a href="{% include relative-src.html src=page.next.url %}">{{ page.next.name }} &raquo;</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 </div>
