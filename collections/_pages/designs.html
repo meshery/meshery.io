@@ -20,6 +20,10 @@ designs = site.catalog %}
             No results match your filters. Try adjusting your selections or clearing some filters.
         </h2>
         <div class="row">
+             <div class="column column-lg custom-design-card models" style="display: block" patterntype="models"
+                    type="custom">
+                    {% include custom-modal.html type="Design"%}
+                </div>
             {% assign count = 0 %} {% for pattern in designs %} {% if count < 6 %} {% assign should_display='block' %}
                 {% else %} {% assign should_display='none' %} {% endif %} {% assign last=pattern.compatibility | last %}
                 <div class="column column-lg patternCard designs" filter="{{ pattern.name }}" type="{{ pattern.type }}"
@@ -39,7 +43,7 @@ designs = site.catalog %}
 
 </div>
 <script>
-    const itemsPerPage = 6;
+    const itemsPerPage = 11;
 
     function getCardsForSection(section) {
         return document.querySelectorAll(`.${section}-section .patternCard`);

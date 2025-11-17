@@ -51,7 +51,11 @@ components:
   colorIcon: assets/images/integration/aws-cloudfront-controller/components/vpc-origin/icons/color/vpc-origin-color.svg
   whiteIcon: assets/images/integration/aws-cloudfront-controller/components/vpc-origin/icons/white/vpc-origin-white.svg
   description: 
-componentsCount: 10
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-cloudfront-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-cloudfront-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 11
 relationships: 
 - type: "Binding"
   kind: "Edge"

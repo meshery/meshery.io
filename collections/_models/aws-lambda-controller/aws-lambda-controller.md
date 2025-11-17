@@ -47,7 +47,11 @@ components:
   colorIcon: assets/images/integration/aws-lambda-controller/components/version/icons/color/version-color.svg
   whiteIcon: assets/images/integration/aws-lambda-controller/components/version/icons/white/version-white.svg
   description: 
-componentsCount: 9
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-lambda-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-lambda-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 10
 relationships: 
 - type: "Binding"
   kind: "Edge"
@@ -66,12 +70,12 @@ relationships:
   description: "An edge relationship between function and subnet"
 - type: "Non Binding"
   kind: "Edge"
-  description: "An edge relationship between alias and version"
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Parent"
-  kind: "Hierarchical"
+  description: "An edge relationship between Version and Function. Versions reference Functions through functionName"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between LayerVersion and Function."
+- type: "Non Binding"
+  kind: "Edge"
   description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
 - type: "Binding"
   kind: "Edge"

@@ -99,7 +99,11 @@ components:
   colorIcon: assets/images/integration/aws-ec2-controller/components/transit-gateway-vpc-attachment/icons/color/transit-gateway-vpc-attachment-color.svg
   whiteIcon: assets/images/integration/aws-ec2-controller/components/transit-gateway-vpc-attachment/icons/white/transit-gateway-vpc-attachment-white.svg
   description: 
-componentsCount: 22
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-ec2-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-ec2-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 23
 relationships: 
 - type: "Non Binding"
   kind: "Edge"
@@ -116,6 +120,9 @@ relationships:
 - type: "Non Binding"
   kind: "Edge"
   description: "An edge relationship between Routetable and Subnet"
+- type: "Parent"
+  kind: "Hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
 - type: "Non Binding"
   kind: "Edge"
   description: "An edge relationship between InternetGateway and VPC"
@@ -128,37 +135,25 @@ relationships:
 - type: "Non Binding"
   kind: "Edge"
   description: "An edge relationship between VPC and DHCPOptions"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between SecurityGroup and VPC. SecurityGroups reference VPCs through vpcID."
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between FlowLog and Subnet. FlowLogs reference Subnets through resourceIDs"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between TransitGatewayVpcAttachment and TransitGateway. TransitGatewayVpcAttachments reference TransitGateways through transitGatewayID."
 - type: "Parent"
   kind: "Hierarchical"
   description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-relationshipsCount: 19
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between NetworkACL and VPC. NetworkACLs reference VPCs through vpcID"
+- type: "Non Binding"
+  kind: "Edge"
+  description: "An edge relationship between VPCEndpoint and VPC. VPCEndpoints reference VPCs through vpcID"
+relationshipsCount: 16
 featureList: [
   "Optimized CPU Configurations",
   "High Packet-Per-Second Performance and Low Latency with Enhanced Networking",

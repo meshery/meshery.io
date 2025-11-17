@@ -63,7 +63,11 @@ components:
   colorIcon: assets/images/integration/aws-rds-controller/components/db-cluster-endpoint/icons/color/db-cluster-endpoint-color.svg
   whiteIcon: assets/images/integration/aws-rds-controller/components/db-cluster-endpoint/icons/white/db-cluster-endpoint-white.svg
   description: 
-componentsCount: 13
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-rds-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-rds-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 14
 relationships: 
 - type: "Binding"
   kind: "Edge"
@@ -98,11 +102,11 @@ relationships:
 - type: "Binding"
   kind: "Edge"
   description: "An edge relationship between DBsnapshot and DBinstance"
-- type: "Parent"
-  kind: "Hierarchical"
+- type: "Non Binding"
+  kind: "Edge"
   description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Parent"
-  kind: "Hierarchical"
+- type: "Non Binding"
+  kind: "Edge"
   description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
 - type: "Parent"
   kind: "Hierarchical"
