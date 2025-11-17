@@ -23,7 +23,11 @@ components:
   colorIcon: assets/images/integration/aws-sqs-controller/components/queue/icons/color/queue-color.svg
   whiteIcon: assets/images/integration/aws-sqs-controller/components/queue/icons/white/queue-white.svg
   description: 
-componentsCount: 3
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-sqs-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-sqs-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 4
 relationships: 
 - type: "Non Binding"
   kind: "Edge"

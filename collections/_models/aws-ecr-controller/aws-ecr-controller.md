@@ -27,7 +27,11 @@ components:
   colorIcon: assets/images/integration/aws-ecr-controller/components/repository/icons/color/repository-color.svg
   whiteIcon: assets/images/integration/aws-ecr-controller/components/repository/icons/white/repository-white.svg
   description: 
-componentsCount: 4
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-ecr-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-ecr-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 5
 relationships: 
 relationshipsCount: 0
 featureList: [
