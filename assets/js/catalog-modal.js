@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
   const contentElements = document.querySelectorAll(".contentdata");
-  const readMoreElements = document.querySelectorAll(".read-more");
+  contentElements.forEach(content => {
+    const readMore = content.parentElement.querySelector(".read-more");
 
-  for (let i = 0; i < contentElements.length; i++) {
-    const content = contentElements[i];
-    const readMore = readMoreElements[i];
+    if (!readMore) return;
 
     const numberOfLines = getNumberOfLines(content);
 
@@ -13,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       readMore.style.display = 'none';
     }
-  }
+  });
 });
 
 function getNumberOfLines(element) {
