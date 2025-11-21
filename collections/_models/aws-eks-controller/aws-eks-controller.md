@@ -57,14 +57,14 @@ components:
   description: 
 componentsCount: 11
 relationships: 
-- type: "Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between Cluster and Role"
-- type: "Non Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between Addon and cluster"
-- type: "Parent"
-  kind: "Hierarchical"
+- type: "parent"
+  kind: "hierarchical"
   description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
 relationshipsCount: 3
 featureList: [
