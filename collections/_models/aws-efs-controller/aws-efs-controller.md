@@ -37,16 +37,16 @@ components:
   description: 
 componentsCount: 6
 relationships: 
-- type: "non-binding"
+- type: "binding"
   kind: "edge"
   description: "An edge relationship EC2 instances mount EFS file systems for shared storage across instances"
-- type: "non-binding"
+- type: "binding"
   kind: "edge"
   description: "An edge relationship Lambda can mount EFS for persistent storage and shared data"
-- type: "non-binding"
+- type: "binding"
   kind: "edge"
   description: "An edge relationship ECS tasks mount EFS volumes for persistent container storage"
-- type: "non-binding"
+- type: "binding"
   kind: "edge"
   description: "An edge relationship EKS pods use EFS as PersistentVolumes via CSI driver"
 - type: "non-binding"

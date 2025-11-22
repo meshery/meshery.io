@@ -57,7 +57,7 @@ components:
   description: 
 componentsCount: 11
 relationships: 
-- type: "non-binding"
+- type: "binding"
   kind: "edge"
   description: "An edge relationship between Cluster and Role"
 - type: "non-binding"
