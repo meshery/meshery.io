@@ -9,7 +9,7 @@ docURL: https://docs.meshery.io/extensibility/integrations/superedge
 description: 
 category: Provisioning
 subcategory: Automation & Configuration
-registrant: Artifact Hub
+registrant: GitHub
 components: 
 componentsCount: 0
 relationships: 

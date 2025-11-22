@@ -41,17 +41,17 @@ components:
   description: 
 componentsCount: 7
 relationships: 
-- type: "Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between AlertManagerDefinition and Workspace "
-- type: "Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between LoggingConfiguration and Workspace "
-- type: "Non Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between adpotedresource and Workspace "
-- type: "Non Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between RuleGroupsNamespace and Workspace "
 relationshipsCount: 4
 featureList: [
