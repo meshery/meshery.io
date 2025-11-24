@@ -119,7 +119,11 @@ components:
   colorIcon: assets/images/integration/kubevault/components/bundle/icons/color/bundle-color.svg
   whiteIcon: assets/images/integration/kubevault/components/bundle/icons/white/bundle-white.svg
   description: 
-componentsCount: 27
+- name: order
+  colorIcon: assets/images/integration/kubevault/components/order/icons/color/order-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/order/icons/white/order-white.svg
+  description: 
+componentsCount: 28
 relationships: 
 relationshipsCount: 0
 featureList: [
