@@ -23,16 +23,20 @@ components:
   colorIcon: assets/images/integration/aws-opensearchservice-controller/components/adopted-resource/icons/color/adopted-resource-color.svg
   whiteIcon: assets/images/integration/aws-opensearchservice-controller/components/adopted-resource/icons/white/adopted-resource-white.svg
   description: 
-componentsCount: 3
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-opensearchservice-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-opensearchservice-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 4
 relationships: 
-- type: "Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between domain and secuirtygroup "
-- type: "Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between domain and subnet "
-- type: "Non Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between AdoptedResource and domain "
 relationshipsCount: 3
 featureList: [

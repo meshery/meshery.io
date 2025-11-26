@@ -17,8 +17,8 @@ components:
   description: 
 componentsCount: 1
 relationships: 
-- type: "Parent"
-  kind: "Hierarchical"
+- type: "parent"
+  kind: "hierarchical"
   description: "A hierarchical inventory relationship in which the configuration of Resource Group (parent component) is patched with the configuration of all other azure resources(child component). "
 relationshipsCount: 1
 featureList: [
