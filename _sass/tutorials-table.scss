@@ -1,0 +1,187 @@
+@use "./variables.scss" as *;
+
+// Tutorials Table Styles
+.tutorials-table-wrapper {
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  margin: 3.75rem auto;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.tutorials-table {
+  display: table;
+  width: 100%;
+  height: auto;
+  border-spacing: 0;
+  margin: 0;
+  font-family: inherit;
+  border: none;
+  border-bottom: 1px solid white;
+  background-color: var(--background-light);
+
+table, th, td {
+  border: none;
+  padding: 8px;
+  color: var(--color-secondary-dark);
+  border-bottom: 1px solid white;
+}
+
+  th {
+    color: white;
+    background-color: var(--brand-color-secondary);
+    height: 3rem;
+    vertical-align: middle;
+    padding: 0 1rem;
+    font-weight: 600;
+    text-align: center;
+    font-size: 1.2rem; 
+    border-bottom: 1px solid white !important;
+  }
+
+  tr {
+    height: 3rem; 
+    vertical-align: middle;
+  }
+
+  tbody tr {
+    &:nth-child(odd) {
+        background-color: var(--color-primary-light-tbase);
+    }
+  }
+
+  th,
+  td {
+    border-bottom: 1px solid #ffffff; 
+    padding: 0 1rem;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none; 
+  }
+
+  td {
+    vertical-align: middle;
+    color: #ffffff; 
+    font-size: 1.1rem; 
+
+    p {
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    span {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 1.1rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  a {
+    color: var(--brand-color-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+}
+
+.newBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  img {
+    height: 28px;
+    width: auto;
+  }
+}
+
+/* Column specific styles */
+.date-column {
+  width: 15%;
+  white-space: nowrap;
+  font-weight: 500;
+  text-align: center;
+}
+
+.topic-column {
+  width: 40%;
+  font-weight: 500;
+  text-align: center !important;
+}
+
+.resources-column {
+  width: 20%;
+  text-align: center;
+}
+
+.presenters-column {
+  width: 25%;
+  text-align: center;
+}
+
+@media (max-width: 1200px) {
+  .tutorials-table-wrapper {
+    width: 98%;
+    margin: 2rem auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .tutorials-table-wrapper {
+    overflow-x: auto;
+    margin: 2rem auto;
+    width: 100%;
+  }
+
+  .tutorials-table {
+    min-width: 700px;
+
+    th {
+      padding: 0.75rem 0.5rem;
+      font-size: 1rem;
+      height: 3.5rem;
+    }
+
+    td {
+      padding: 0.75rem 0.5rem;
+      font-size: 1rem;
+    }
+
+    tr {
+      height: 3.5rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .tutorials-table {
+    th {
+      padding: 0.5rem 0.25rem;
+      font-size: 0.9rem;
+      height: 3rem;
+    }
+
+    td {
+      padding: 0.5rem 0.25rem;
+      font-size: 0.9rem;
+    }
+
+    tr {
+      height: 3rem;
+    }
+  }
+
+  .newBadge img {
+    height: 22px;
+  }
+}
