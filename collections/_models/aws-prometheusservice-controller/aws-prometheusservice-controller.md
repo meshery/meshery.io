@@ -35,19 +35,23 @@ components:
   colorIcon: assets/images/integration/aws-prometheusservice-controller/components/rule-groups-namespace/icons/color/rule-groups-namespace-color.svg
   whiteIcon: assets/images/integration/aws-prometheusservice-controller/components/rule-groups-namespace/icons/white/rule-groups-namespace-white.svg
   description: 
-componentsCount: 6
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-prometheusservice-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-prometheusservice-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 7
 relationships: 
-- type: "Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between AlertManagerDefinition and Workspace "
-- type: "Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between LoggingConfiguration and Workspace "
-- type: "Non Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between adpotedresource and Workspace "
-- type: "Non Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between RuleGroupsNamespace and Workspace "
 relationshipsCount: 4
 featureList: [

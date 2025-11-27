@@ -31,22 +31,26 @@ components:
   colorIcon: assets/images/integration/aws-cloudwatch-controller/components/dashboard/icons/color/dashboard-color.svg
   whiteIcon: assets/images/integration/aws-cloudwatch-controller/components/dashboard/icons/white/dashboard-white.svg
   description: 
-componentsCount: 5
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-cloudwatch-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-cloudwatch-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 6
 relationships: 
-- type: "Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between MetricAlarm and Function"
-- type: "Non Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between AdoptedResource and MetricAlarm"
-- type: "Non Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between MetricStream and Instance"
-- type: "Non Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between AdoptedResource and MetricStream"
-- type: "Non Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between MetricAlarm and Instance"
 relationshipsCount: 5
 featureList: [

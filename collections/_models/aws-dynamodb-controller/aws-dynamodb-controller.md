@@ -31,35 +31,39 @@ components:
   colorIcon: assets/images/integration/aws-dynamodb-controller/components/global-table/icons/color/global-table-color.svg
   whiteIcon: assets/images/integration/aws-dynamodb-controller/components/global-table/icons/white/global-table-white.svg
   description: 
-componentsCount: 5
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-dynamodb-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-dynamodb-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 6
 relationships: 
-- type: "Binding"
-  kind: "Edge"
-  description: "An edge relationship between table and VPCEndpoint"
-- type: "Non Binding"
-  kind: "Edge"
-  description: "An edge relationship between AdoptedResource and GlobalTable"
-- type: "Non Binding"
-  kind: "Edge"
-  description: "An edge relationship between AdoptedResource and GlobalTable"
-- type: "Non Binding"
-  kind: "Edge"
-  description: "An edge relationship between AdoptedResource and Table"
-- type: "Non Binding"
-  kind: "Edge"
-  description: "An edge relationship between Backup and Table"
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Non Binding"
-  kind: "Edge"
-  description: "An edge relationship EC2 instances use DynamoDB SDK for NoSQL operations"
-- type: "Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship Lambda triggered by DynamoDB Streams for real-time processing"
-- type: "Non Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between table and VPCEndpoint"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship EC2 instances use DynamoDB SDK for NoSQL operations"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship ECS services use DynamoDB for scalable NoSQL storage"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between AdoptedResource and GlobalTable"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between AdoptedResource and GlobalTable"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between AdoptedResource and Table"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between Backup and Table"
+- type: "parent"
+  kind: "hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
 relationshipsCount: 9
 featureList: [
   "Handle more than 10 trillion requests per day and can support peaks of more than 20 million requests per second.

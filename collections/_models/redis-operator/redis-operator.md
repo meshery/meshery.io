@@ -8,7 +8,7 @@ whiteIcon: /assets/images/integration/redis-operator/icons/white/redis-operator-
 docURL: https://docs.meshery.io/extensibility/integrations/redis-operator
 description: 
 category: Database
-subcategory: App Definition and Development
+subcategory: Database
 registrant: Github
 components: 
 - name: redis-failover

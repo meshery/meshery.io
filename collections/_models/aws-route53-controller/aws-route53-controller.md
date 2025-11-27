@@ -31,22 +31,26 @@ components:
   colorIcon: assets/images/integration/aws-route53-controller/components/health-check/icons/color/health-check-color.svg
   whiteIcon: assets/images/integration/aws-route53-controller/components/health-check/icons/white/health-check-white.svg
   description: 
-componentsCount: 5
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-route53-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-route53-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 6
 relationships: 
-- type: "Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between HostedZone and VPC"
-- type: "Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between recordset and hostedzone"
-- type: "Non Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between adoptedresources and hostedzone"
-- type: "Non Binding"
-  kind: "Edge"
+- type: "non-binding"
+  kind: "edge"
   description: "An edge relationship between adoptedresource and recordset"
-- type: "Parent"
-  kind: "Hierarchical"
+- type: "parent"
+  kind: "hierarchical"
   description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
 relationshipsCount: 5
 featureList: [
