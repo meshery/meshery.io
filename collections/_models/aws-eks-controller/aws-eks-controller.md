@@ -55,7 +55,11 @@ components:
   colorIcon: assets/images/integration/aws-eks-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
   whiteIcon: assets/images/integration/aws-eks-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
   description: 
-componentsCount: 11
+- name: capability
+  colorIcon: assets/images/integration/aws-eks-controller/components/capability/icons/color/capability-color.svg
+  whiteIcon: assets/images/integration/aws-eks-controller/components/capability/icons/white/capability-white.svg
+  description: 
+componentsCount: 12
 relationships: 
 - type: "binding"
   kind: "edge"
