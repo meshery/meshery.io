@@ -83,7 +83,43 @@ components:
   colorIcon: assets/images/integration/kubevault-crds/components/vault-server/icons/color/vault-server-color.svg
   whiteIcon: assets/images/integration/kubevault-crds/components/vault-server/icons/white/vault-server-white.svg
   description: 
-componentsCount: 18
+- name: app-binding
+  colorIcon: assets/images/integration/kubevault-crds/components/app-binding/icons/color/app-binding-color.svg
+  whiteIcon: assets/images/integration/kubevault-crds/components/app-binding/icons/white/app-binding-white.svg
+  description: 
+- name: chart-preset
+  colorIcon: assets/images/integration/kubevault-crds/components/chart-preset/icons/color/chart-preset-color.svg
+  whiteIcon: assets/images/integration/kubevault-crds/components/chart-preset/icons/white/chart-preset-white.svg
+  description: 
+- name: cluster-chart-preset
+  colorIcon: assets/images/integration/kubevault-crds/components/cluster-chart-preset/icons/color/cluster-chart-preset-color.svg
+  whiteIcon: assets/images/integration/kubevault-crds/components/cluster-chart-preset/icons/white/cluster-chart-preset-white.svg
+  description: 
+- name: app-release
+  colorIcon: assets/images/integration/kubevault-crds/components/app-release/icons/color/app-release-color.svg
+  whiteIcon: assets/images/integration/kubevault-crds/components/app-release/icons/white/app-release-white.svg
+  description: 
+- name: metrics-configuration
+  colorIcon: assets/images/integration/kubevault-crds/components/metrics-configuration/icons/color/metrics-configuration-color.svg
+  whiteIcon: assets/images/integration/kubevault-crds/components/metrics-configuration/icons/white/metrics-configuration-white.svg
+  description: 
+- name: plan
+  colorIcon: assets/images/integration/kubevault-crds/components/plan/icons/color/plan-color.svg
+  whiteIcon: assets/images/integration/kubevault-crds/components/plan/icons/white/plan-white.svg
+  description: 
+- name: product
+  colorIcon: assets/images/integration/kubevault-crds/components/product/icons/color/product-color.svg
+  whiteIcon: assets/images/integration/kubevault-crds/components/product/icons/white/product-white.svg
+  description: 
+- name: bundle
+  colorIcon: assets/images/integration/kubevault-crds/components/bundle/icons/color/bundle-color.svg
+  whiteIcon: assets/images/integration/kubevault-crds/components/bundle/icons/white/bundle-white.svg
+  description: 
+- name: order
+  colorIcon: assets/images/integration/kubevault-crds/components/order/icons/color/order-color.svg
+  whiteIcon: assets/images/integration/kubevault-crds/components/order/icons/white/order-white.svg
+  description: 
+componentsCount: 27
 relationships: 
 relationshipsCount: 0
 featureList: [
