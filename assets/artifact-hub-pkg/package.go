@@ -231,7 +231,7 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 	if err != nil {
 		return ErrParsingCreatedAt(err)
 	}
-	createdAt := parsedTime.Format(time.RFC3339)
+	createdAt := parsedTime.UTC().Format(time.RFC3339)
 
 	if pattern.CatalogData.PatternInfo == "" {
 		pattern.CatalogData.PatternInfo = pattern.Name
