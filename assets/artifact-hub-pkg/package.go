@@ -231,6 +231,7 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 	if err != nil {
 		return ErrParsingCreatedAt(err)
 	}
+	createdAt := parsedTime.Format(time.RFC3339)
 
 	if pattern.CatalogData.PatternInfo == "" {
 		pattern.CatalogData.PatternInfo = pattern.Name
@@ -282,6 +283,7 @@ userId: %s
 userName: %s
 userAvatarURL: %s
 type: %s
+date: %s
 compatibility: 
 %s
 patternId: %s
@@ -293,7 +295,7 @@ patternCaveats: |
 permalink: catalog/%s/%s-%s.html
 URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/%s/%s/%s/design.yml'
 downloadLink: %s/design.yml
----`, strings.TrimSpace(string(nameYAML)), version, pattern.UserID, userFullName, userInfo.AvatarURL, patternType, compatibility, pattern.ID, patternImageURL, patternInfo, patternCaveats, patternType, slugify(pattern.Name), pattern.ID, mesheryCatalogFilesDir, pattern.ID, version, pattern.ID)
+---`, strings.TrimSpace(string(nameYAML)), version, pattern.UserID, userFullName, userInfo.AvatarURL, patternType, createdAt, compatibility, pattern.ID, patternImageURL, patternInfo, patternCaveats, patternType, slugify(pattern.Name), pattern.ID, mesheryCatalogFilesDir, pattern.ID, version, pattern.ID)
 
 	if err := os.WriteFile(filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md"), []byte(content), 0644); err != nil {
 		return utils.ErrWriteFile(err, filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md"))
