@@ -168,6 +168,7 @@ jobs:
         run: |
           cd meshery.io
           git pull origin master
+          git pull --rebase origin master
 
       - name: Commit changes to meshery.io repo
         uses: stefanzweifel/git-auto-commit-action@v5
@@ -181,7 +182,7 @@ jobs:
 
       - name: Send Email on Workflow Failure
         if: ${{ failure() }}
-        uses: dawidd6/action-send-mail@v4
+        uses: dawidd6/action-send-mail@v6
         with:
           server_address: smtp.gmail.com
           server_port: 465
