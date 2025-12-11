@@ -33,17 +33,17 @@ components:
   description: 
 componentsCount: 5
 relationships: 
-- type: "Parent"
-  kind: "Hierarchical"
+- type: "parent"
+  kind: "hierarchical"
   description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Parent"
-  kind: "Hierarchical"
+- type: "parent"
+  kind: "hierarchical"
   description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Parent"
-  kind: "Hierarchical"
+- type: "parent"
+  kind: "hierarchical"
   description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
-- type: "Parent"
-  kind: "Hierarchical"
+- type: "parent"
+  kind: "hierarchical"
   description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
 relationshipsCount: 4
 featureList: [

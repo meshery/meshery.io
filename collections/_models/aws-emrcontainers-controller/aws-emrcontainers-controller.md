@@ -27,9 +27,19 @@ components:
   colorIcon: assets/images/integration/aws-emrcontainers-controller/components/field-export/icons/color/field-export-color.svg
   whiteIcon: assets/images/integration/aws-emrcontainers-controller/components/field-export/icons/white/field-export-white.svg
   description: 
-componentsCount: 4
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-emrcontainers-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-emrcontainers-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 5
 relationships: 
-relationshipsCount: 0
+- type: "binding"
+  kind: "edge"
+  description: "An edge relationship between JobRun and role"
+- type: "parent"
+  kind: "hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+relationshipsCount: 2
 featureList: [
   "Runs Spark, Hive, and Presto on Kubernetes",
   "Integrates with other AWS services",

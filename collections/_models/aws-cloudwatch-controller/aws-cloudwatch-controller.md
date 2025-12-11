@@ -23,9 +23,36 @@ components:
   colorIcon: assets/images/integration/aws-cloudwatch-controller/components/metric-alarm/icons/color/metric-alarm-color.svg
   whiteIcon: assets/images/integration/aws-cloudwatch-controller/components/metric-alarm/icons/white/metric-alarm-white.svg
   description: 
-componentsCount: 3
+- name: metric-stream
+  colorIcon: assets/images/integration/aws-cloudwatch-controller/components/metric-stream/icons/color/metric-stream-color.svg
+  whiteIcon: assets/images/integration/aws-cloudwatch-controller/components/metric-stream/icons/white/metric-stream-white.svg
+  description: 
+- name: dashboard
+  colorIcon: assets/images/integration/aws-cloudwatch-controller/components/dashboard/icons/color/dashboard-color.svg
+  whiteIcon: assets/images/integration/aws-cloudwatch-controller/components/dashboard/icons/white/dashboard-white.svg
+  description: 
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-cloudwatch-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-cloudwatch-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 6
 relationships: 
-relationshipsCount: 0
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between MetricAlarm and Function"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between AdoptedResource and MetricAlarm"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between MetricStream and Instance"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between AdoptedResource and MetricStream"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between MetricAlarm and Instance"
+relationshipsCount: 5
 featureList: [
   "Provides you with data and actionable insights to monitor your applications, respond to system-wide performance changes, and optimize resource utilization.",
   "Collects monitoring and operational data in the form of logs, metrics, and traces.",

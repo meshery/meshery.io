@@ -115,9 +115,65 @@ components:
   colorIcon: assets/images/integration/aws-sagemaker-controller/components/labeling-job/icons/color/labeling-job-color.svg
   whiteIcon: assets/images/integration/aws-sagemaker-controller/components/labeling-job/icons/white/labeling-job-white.svg
   description: 
-componentsCount: 26
+- name: space
+  colorIcon: assets/images/integration/aws-sagemaker-controller/components/space/icons/color/space-color.svg
+  whiteIcon: assets/images/integration/aws-sagemaker-controller/components/space/icons/white/space-white.svg
+  description: 
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-sagemaker-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-sagemaker-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 28
 relationships: 
-relationshipsCount: 0
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between Domain and SecurityGroup"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between domain and subnet "
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between endpoint and endpointconfig "
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between endpointconfig and Model"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between MonitoringSchedule and Model"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between pipeline and ProcessingJob"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between pipeline and TrainingJob"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between pipeline and TransformJob"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between trainingjob and model"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between Model and ModelPackage"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between Transformjob and Model "
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between UserProfile and App "
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between HyperParameterTuningJob and TrainingJob "
+- type: "parent"
+  kind: "hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+- type: "parent"
+  kind: "hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+- type: "parent"
+  kind: "hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+relationshipsCount: 16
 featureList: [
   "Choice of ML tools",
   "Repeatable and responsible ML workflows",

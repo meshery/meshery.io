@@ -31,9 +31,25 @@ components:
   colorIcon: assets/images/integration/aws-applicationautoscaling-controller/components/scaling-policy/icons/color/scaling-policy-color.svg
   whiteIcon: assets/images/integration/aws-applicationautoscaling-controller/components/scaling-policy/icons/white/scaling-policy-white.svg
   description: 
-componentsCount: 5
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-applicationautoscaling-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-applicationautoscaling-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 6
 relationships: 
-relationshipsCount: 0
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between ScalableTarget and SpotFleetRequest"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between AdoptedResource and ScalableTarget"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between AdoptedResource and ScalingPolicy"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between ScalingPolicy and ScalableTarget"
+relationshipsCount: 4
 featureList: [
   "Dynamically scales EC2 instances and other AWS resources",
   "Provides target tracking scaling policies",

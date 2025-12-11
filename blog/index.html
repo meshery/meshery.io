@@ -2,6 +2,7 @@
 title: Blog
 description: Explore all Meshery blog posts, tutorials, and updates.
 layout: page
+permalink: /blog
 paginate:
   collection: posts
   per_page: 6
@@ -36,6 +37,35 @@ paginate:
               <a href="/blog/category/{{ category | slugify }}">
                 {{ category }} <span class="cat-count">({{ count }})</span>
               </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 style="font-size:1.5rem;text-align:center; margin:auto;">Browse by date</h3>
+        <ul class="archive-index">
+          {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" | sort: 'name' | reverse %}
+          {% for year_group in posts_by_year %}
+            <li>
+              <details class="archive-year" {% if forloop.first %}open{% endif %}>
+                <summary>{{ year_group.name }}</summary>
+                <ul class="archive-months">
+                  {% assign posts_by_month = year_group.items | group_by_exp: "post", "post.date | date: '%m'" | sort: 'name' | reverse %}
+                  {% for month_group in posts_by_month %}
+                    <li>
+                      <details class="archive-month">
+                        <summary>{{ month_group.items.first.date | date: '%B' }}</summary>
+                        <ul class="archive-posts">
+                          {% for post in month_group.items %}
+                            <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+                          {% endfor %}
+                        </ul>
+                      </details>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </details>
             </li>
           {% endfor %}
         </ul>
@@ -209,6 +239,67 @@ paginate:
   font-size: 0.8rem;
 }
 .category-list a .cat-count:hover {
+  background: rgba(0, 211, 169, 0.1);
+}
+/* Archive index styles */
+.archive-index {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.archive-year > li > details {
+  padding: 0rem .95rem
+}
+.archive-year{
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+}
+details.archive-month {
+  padding: 0rem .95rem;
+}
+.archive-year > summary,
+.archive-month > summary {
+    cursor: pointer;
+    box-sizing: border-box;
+    justify-content: center;
+    border-radius: 0.5rem;
+    color: var(--color-secondary-dark);
+    line-height: 1.2;
+}
+.archive-year > summary:hover,
+.archive-month > summary:hover {
+  color: var(--brand-color-secondary);
+  background: rgba(0, 211, 169, 0.1);
+}
+.archive-months{
+  list-style: none;
+  max-width: 500px;
+}
+ul.archive-months {
+ padding-inline-start: 0;
+ margin-left: -.5rem;
+ width: 200px;
+}
+.archive-posts {
+  list-style: none;
+  min-width: 100px;
+  padding-left: 0rem;
+  margin-left: -15px;
+}
+.archive-posts li a {
+  color: var(--color-secondary-dark);
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.75rem 0rem;
+  line-height: 1.2;
+  width: 200px;
+  text-overflow: ellipsis;
+  border-radius: 0.5px;
+  border-bottom: 2px solid var(--brand-color-secondary);
+
+} 
+.archive-posts li a:hover {
+  color: var(--brand-color-secondary);
   background: rgba(0, 211, 169, 0.1);
 }
 /* 

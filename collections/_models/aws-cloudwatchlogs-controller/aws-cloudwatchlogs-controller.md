@@ -23,9 +23,22 @@ components:
   colorIcon: assets/images/integration/aws-cloudwatchlogs-controller/components/log-group/icons/color/log-group-color.svg
   whiteIcon: assets/images/integration/aws-cloudwatchlogs-controller/components/log-group/icons/white/log-group-white.svg
   description: 
-componentsCount: 3
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-cloudwatchlogs-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-cloudwatchlogs-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 4
 relationships: 
-relationshipsCount: 0
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between AdoptedResource and LogGroup"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between AdoptedResource and LogGroup"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between LogGroup and Instance"
+relationshipsCount: 3
 featureList: [
   "Two classes of log groups for flexibility – CloudWatch Logs offers two classes of log groups so that you can have a cost-effective option for logs that you access infrequently. ",
   "Query your log data – You can use CloudWatch Logs Insights to interactively search and analyze your log data. ",

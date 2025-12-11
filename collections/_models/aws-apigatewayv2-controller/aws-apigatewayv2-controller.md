@@ -55,9 +55,34 @@ components:
   colorIcon: assets/images/integration/aws-apigatewayv2-controller/components/domain-name/icons/color/domain-name-color.svg
   whiteIcon: assets/images/integration/aws-apigatewayv2-controller/components/domain-name/icons/white/domain-name-white.svg
   description: 
-componentsCount: 11
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-apigatewayv2-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-apigatewayv2-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 12
 relationships: 
-relationshipsCount: 0
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between VPCLink and Integration"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between Authorizer and Api"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between ApiMapping and DomainName"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between Deployment and Api"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between Route and Integration"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between API and Route"
+- type: "parent"
+  kind: "hierarchical"
+  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+relationshipsCount: 7
 featureList: [
   "Handles API requests and responses",
   "Supports RESTful and WebSocket APIs",

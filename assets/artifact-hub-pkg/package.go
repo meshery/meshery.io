@@ -16,12 +16,12 @@ import (
 	"github.com/Masterminds/semver/v3"
 	"gopkg.in/yaml.v3"
 
-	meshkitErrors "github.com/layer5io/meshkit/errors"
-	"github.com/layer5io/meshkit/logger"
-	"github.com/layer5io/meshkit/utils"
+	meshkitErrors "github.com/meshery/meshkit/errors"
+	"github.com/meshery/meshkit/logger"
+	"github.com/meshery/meshkit/utils"
 
-	"github.com/layer5io/meshkit/models/catalog/v1alpha1"
-	"github.com/layer5io/meshkit/utils/catalog"
+	"github.com/meshery/meshkit/models/catalog/v1alpha1"
+	"github.com/meshery/meshkit/utils/catalog"
 )
 
 type CatalogPattern struct {
@@ -232,10 +232,6 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 		return ErrParsingCreatedAt(err)
 	}
 
-	// Format the parsed time into the desired format
-	desiredFormat := "2006-01-02T15:04:05Z"
-	currentDateTime := parsedTime.Format(desiredFormat)
-
 	if pattern.CatalogData.PatternInfo == "" {
 		pattern.CatalogData.PatternInfo = pattern.Name
 	}
@@ -255,7 +251,7 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 		version = semver.New(0, 0, 1, "", "").String()
 	}
 
-	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(versionDir, "design.yml"), pattern.UserID, version, currentDateTime, &pattern.CatalogData)
+	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(versionDir, "design.yml"), pattern.UserID, version, &parsedTime, &pattern.CatalogData)
 
 	data, err := yaml.Marshal(artifactHubPkg)
 	if err != nil {
@@ -299,7 +295,7 @@ URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/%s/%s/%s/desig
 downloadLink: %s/design.yml
 ---`, strings.TrimSpace(string(nameYAML)), version, pattern.UserID, userFullName, userInfo.AvatarURL, patternType, compatibility, pattern.ID, patternImageURL, patternInfo, patternCaveats, patternType, slugify(pattern.Name), pattern.ID, mesheryCatalogFilesDir, pattern.ID, version, pattern.ID)
 
-	if err := os.WriteFile(fmt.Sprintf(filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md")), []byte(content), 0644); err != nil {
+	if err := os.WriteFile(filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md"), []byte(content), 0644); err != nil {
 		return utils.ErrWriteFile(err, filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md"))
 	}
 

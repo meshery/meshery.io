@@ -23,9 +23,22 @@ components:
   colorIcon: assets/images/integration/aws-mq-controller/components/broker/icons/color/broker-color.svg
   whiteIcon: assets/images/integration/aws-mq-controller/components/broker/icons/white/broker-white.svg
   description: 
-componentsCount: 3
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-mq-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-mq-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 4
 relationships: 
-relationshipsCount: 0
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between broker and subnet"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between broker and SecurityGroup"
+- type: "non-binding"
+  kind: "edge"
+  description: "An edge relationship between AdoptedResource and  broker "
+relationshipsCount: 3
 featureList: [
   "Reliable and scalable message brokering",
   "Supports various messaging protocols",
