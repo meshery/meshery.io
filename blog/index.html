@@ -9,10 +9,26 @@ paginate:
   permalink: "/page:num"
 ---
 
+<div class="blog-search-container">
+  <div class="sorting-options">
+    <input
+      type="text"
+      id="blog-search-input"
+      placeholder="Search blog posts..."
+      aria-label="Search blog posts"
+    />
+  </div>
+  <div id="search-results-count" class="search-results-count"></div>
+</div>
+
 <div class="blog-container">
-    <ul class="blog-posts">
+    <ul class="blog-posts" id="blog-posts-list">
       {% include list-posts.html posts=paginator.posts %}
     </ul>
+    <div id="no-results" class="no-results hidden">
+      <h3>No posts found</h3>
+      <p>Try different keywords or browse by categories on the right.</p>
+    </div>
 
     <div class="blog-sidebar" style="max-width:250px;">
 
@@ -112,6 +128,58 @@ paginate:
 
 
 <style>
+/* Search Container - Consistent with Catalog and Extensions */
+.blog-search-container {
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+.sorting-options {
+  margin: 0 20px 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+#blog-search-input {
+  width: 30%;
+  flex-grow: 1;
+  padding: 20px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  top: 0;
+}
+
+.search-results-count {
+  font-size: 1rem;
+  color: var(--brand-color-secondary);
+  margin: 0 20px 1rem 20px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.no-results {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--color-primary-dark);
+  border-radius: 0.5rem;
+  grid-column: 1;
+}
+
+.no-results h3 {
+  color: var(--color-secondary-dark);
+  margin-bottom: 0.5rem;
+}
+
+.no-results p {
+  color: var(--color-secondary-medium);
+}
+
+.hidden {
+  display: none !important;
+}
+
 .bg-grey {
 	background: var(--background-light-cards);
 	box-shadow: var(--box-shadow-primary);
@@ -340,5 +408,109 @@ ul.archive-months {
     grid-column: 1;
     margin-right: auto;
   }
+
+  .sorting-options {
+    text-align: center;
+    margin: 0 auto 1.5rem auto;
+  }
+}
+
+@media (max-width: 506px) {
+  .sorting-options {
+    text-align: center;
+    margin: auto;
+  }
 }
 </style>
+
+<script>
+(function() {
+  const searchInput = document.getElementById('blog-search-input');
+  const blogPostsList = document.getElementById('blog-posts-list');
+  const noResults = document.getElementById('no-results');
+  const resultsCount = document.getElementById('search-results-count');
+  const pagination = document.querySelector('.pagination');
+
+  if (!searchInput || !blogPostsList) return;
+
+  const blogPosts = Array.from(blogPostsList.querySelectorAll('.blog-post'));
+
+  // Pre-process blog post data for better performance
+  const postsData = blogPosts.map(post => {
+    const title = post.querySelector('h2 a')?.textContent.toLowerCase() || '';
+    const excerpt = post.querySelector('.post-content')?.textContent.toLowerCase() || '';
+    const categories = Array.from(post.querySelectorAll('.post-categories a, .blog-filter a'))
+      .map(cat => cat.textContent.toLowerCase())
+      .join(' ');
+    return {
+      element: post,
+      searchableText: `${title} ${excerpt} ${categories}`
+    };
+  });
+
+  // Debounce function to limit search execution
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
+  function searchPosts(query) {
+    const searchTerm = query.toLowerCase().trim();
+
+    if (searchTerm === '') {
+      // Show all posts if search is empty
+      postsData.forEach(({ element }) => element.classList.remove('hidden'));
+      noResults.classList.add('hidden');
+      resultsCount.textContent = '';
+      if (pagination) pagination.style.display = 'flex';
+      return;
+    }
+
+    // Hide pagination during search
+    if (pagination) pagination.style.display = 'none';
+
+    let visibleCount = 0;
+
+    // Simplified search loop using pre-processed data
+    postsData.forEach(({ element, searchableText }) => {
+      const matches = searchableText.includes(searchTerm);
+
+      if (matches) {
+        element.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        element.classList.add('hidden');
+      }
+    });
+
+    // Show/hide no results message
+    if (visibleCount === 0) {
+      noResults.classList.remove('hidden');
+      resultsCount.textContent = '';
+    } else {
+      noResults.classList.add('hidden');
+      resultsCount.textContent = `Found ${visibleCount} post${visibleCount !== 1 ? 's' : ''} matching "${query}"`;
+    }
+  }
+
+  // Add event listener with debounce
+  searchInput.addEventListener('input', debounce(function(e) {
+    searchPosts(e.target.value);
+  }, 300));
+
+  // Clear search on Escape key
+  searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      searchInput.value = '';
+      searchPosts('');
+    }
+  });
+})();
+</script>
