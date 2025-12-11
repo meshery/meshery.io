@@ -399,6 +399,10 @@ ul.archive-months {
   color: var(--color-white);
 }
 
+.pagination.hidden {
+  display: none !important;
+}
+
 @media (max-width: 768px) {
   .blog-container {
     grid-template-columns: 1fr;
@@ -439,7 +443,7 @@ ul.archive-months {
   const postsData = blogPosts.map(post => {
     const title = post.querySelector('h2 a')?.textContent.toLowerCase() || '';
     const excerpt = post.querySelector('.post-content')?.textContent.toLowerCase() || '';
-    const categories = Array.from(post.querySelectorAll('.post-categories a, .blog-filter a'))
+    const categories = Array.from(post.querySelectorAll('.blog-filter a'))
       .map(cat => cat.textContent.toLowerCase())
       .join(' ');
     return {
@@ -469,12 +473,12 @@ ul.archive-months {
       postsData.forEach(({ element }) => element.classList.remove('hidden'));
       noResults.classList.add('hidden');
       resultsCount.textContent = '';
-      if (pagination) pagination.style.display = 'flex';
+      if (pagination) pagination.classList.remove('hidden');
       return;
     }
 
     // Hide pagination during search
-    if (pagination) pagination.style.display = 'none';
+    if (pagination) pagination.classList.add('hidden');
 
     let visibleCount = 0;
 
