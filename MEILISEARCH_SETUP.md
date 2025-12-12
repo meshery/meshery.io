@@ -1,6 +1,15 @@
 # Meshery Blog Search with Meilisearch
 
-This implementation adds search functionality to the Meshery blog using Meilisearch.
+This implementation adds search functionality to the Meshery blog using Meilisearch, with a client-side fallback for when Meilisearch is unavailable.
+
+## Overview
+
+The search implementation supports two modes:
+
+1. **Meilisearch Mode** (Recommended): Fast, scalable server-side search with advanced features
+2. **Fallback Mode**: Client-side search using the JSON feed when Meilisearch is not available
+
+The system automatically detects if Meilisearch is available and gracefully falls back to client-side search if needed. This ensures the search functionality works immediately, even before Meilisearch is fully configured.
 
 ## Components
 
@@ -184,6 +193,8 @@ Add these secrets to your GitHub repository:
 - **Responsive design**: Works on mobile and desktop
 - **Clear functionality**: Easy to clear search and return to normal view
 - **Pagination preserved**: Original pagination works when not searching
+- **Fallback search**: If Meilisearch is unavailable, uses client-side search with the JSON feed
+- **Graceful degradation**: Search works even without Meilisearch server
 
 ## Browser Support
 

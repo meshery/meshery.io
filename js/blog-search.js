@@ -11,12 +11,65 @@
 
   let searchClient = null;
   let searchIndex = null;
+  let fallbackData = null;
+  let useFallback = false;
+
+  // Load fallback data for client-side search if Meilisearch is unavailable
+  async function loadFallbackData() {
+    try {
+      const response = await fetch('/blog/search.json');
+      if (!response.ok) throw new Error('Failed to load search data');
+      fallbackData = await response.json();
+      return true;
+    } catch (error) {
+      console.error('Error loading fallback search data:', error);
+      return false;
+    }
+  }
+
+  // Simple client-side search for fallback
+  function fallbackSearch(query) {
+    if (!fallbackData) return [];
+    
+    const lowerQuery = query.toLowerCase();
+    const results = fallbackData
+      .filter(post => {
+        const titleMatch = post.title?.toLowerCase().includes(lowerQuery);
+        const excerptMatch = post.excerpt?.toLowerCase().includes(lowerQuery);
+        const contentMatch = post.content?.toLowerCase().includes(lowerQuery);
+        const categoryMatch = post.categories?.some(cat => cat.toLowerCase().includes(lowerQuery));
+        const authorMatch = post.author?.toLowerCase().includes(lowerQuery);
+        
+        return titleMatch || excerptMatch || contentMatch || categoryMatch || authorMatch;
+      })
+      .slice(0, 20);
+
+    // Simple highlighting for fallback
+    results.forEach(result => {
+      if (!result._formatted) {
+        result._formatted = {
+          title: highlightText(result.title, query),
+          excerpt: highlightText(result.excerpt, query)
+        };
+      }
+    });
+
+    return results;
+  }
+
+  // Simple text highlighting function
+  function highlightText(text, query) {
+    if (!text) return '';
+    const regex = new RegExp(`(${query})`, 'gi');
+    return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+  }
 
   // Initialize Meilisearch client
   function initMeilisearch() {
     if (typeof MeiliSearch === 'undefined') {
-      console.error('MeiliSearch library not loaded');
-      return false;
+      console.warn('MeiliSearch library not loaded, using fallback search');
+      useFallback = true;
+      return loadFallbackData();
     }
 
     try {
@@ -27,13 +80,19 @@
       searchIndex = searchClient.index(MEILISEARCH_INDEX);
       return true;
     } catch (error) {
-      console.error('Error initializing MeiliSearch:', error);
-      return false;
+      console.warn('Error initializing MeiliSearch, using fallback:', error);
+      useFallback = true;
+      return loadFallbackData();
     }
   }
 
   // Perform search
   async function performSearch(query) {
+    // Use fallback if Meilisearch is not available
+    if (useFallback) {
+      return fallbackSearch(query);
+    }
+
     if (!searchIndex) {
       console.error('Search index not initialized');
       return [];
@@ -51,7 +110,13 @@
 
       return searchResults.hits;
     } catch (error) {
-      console.error('Search error:', error);
+      console.error('Search error, trying fallback:', error);
+      // Try fallback on error
+      if (!useFallback) {
+        useFallback = true;
+        await loadFallbackData();
+        return fallbackSearch(query);
+      }
       return [];
     }
   }
@@ -75,7 +140,8 @@
       return;
     }
 
-    searchSummary.textContent = `Found ${results.length} result${results.length !== 1 ? 's' : ''} for "${query}"`;
+    const fallbackNotice = useFallback ? ' (using client-side search)' : '';
+    searchSummary.textContent = `Found ${results.length} result${results.length !== 1 ? 's' : ''} for "${query}"${fallbackNotice}`;
     searchSummary.style.display = 'block';
     blogPosts.style.display = 'none';
     resultsContainer.style.display = 'block';
@@ -172,7 +238,7 @@
   }, 300);
 
   // Initialize search when DOM is ready
-  function initSearch() {
+  async function initSearch() {
     const searchInput = document.getElementById('blog-search-input');
     const clearButton = document.getElementById('clear-search-btn');
 
@@ -181,9 +247,10 @@
       return;
     }
 
-    // Initialize Meilisearch
-    if (!initMeilisearch()) {
-      console.warn('Meilisearch not available, search functionality disabled');
+    // Initialize Meilisearch or fallback
+    const initialized = await initMeilisearch();
+    if (!initialized && !useFallback) {
+      console.warn('Search functionality not available');
       // Optionally hide the search box or show a message
       return;
     }
