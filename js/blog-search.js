@@ -10,13 +10,28 @@
   async function loadSearchData() {
     try {
       const response = await fetch('/blog/search.json');
-      if (!response.ok) throw new Error('Failed to load search data');
+      if (!response.ok) {
+        throw new Error(`Failed to fetch search data: ${response.status} ${response.statusText}`);
+      }
       
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch (jsonError) {
+        throw new Error('Invalid JSON format in search data');
+      }
       
-      // Pre-process data for faster searching
+      // Pre-process data for faster searching (store only search fields + original post)
       searchData = data.map(post => ({
-        ...post,
+        // Original data for display
+        id: post.id,
+        title: post.title,
+        url: post.url,
+        date: post.date,
+        author: post.author,
+        categories: post.categories,
+        excerpt: post.excerpt,
+        // Pre-computed lowercase fields for fast searching
         _searchTitle: post.title?.toLowerCase() || '',
         _searchExcerpt: post.excerpt?.toLowerCase() || '',
         _searchContent: post.content?.toLowerCase() || '',
@@ -26,7 +41,7 @@
       
       return true;
     } catch (error) {
-      console.error('Error loading search data:', error);
+      console.error('Error loading search data:', error.message);
       return false;
     }
   }
@@ -50,12 +65,10 @@
 
     // Highlighting for search results
     results.forEach(result => {
-      if (!result._formatted) {
-        result._formatted = {
-          title: highlightText(result.title, query),
-          excerpt: highlightText(result.excerpt, query)
-        };
-      }
+      result._formatted = {
+        title: highlightText(result.title, query),
+        excerpt: highlightText(result.excerpt, query)
+      };
     });
 
     return results;
