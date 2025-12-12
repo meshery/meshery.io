@@ -161,13 +161,27 @@
       const date = result.date || '';
       const author = result.author || '';
 
+      // Build category links
+      let categoryHtml = '';
+      if (categories.length > 0) {
+        categoryHtml = '<span class="blog-filters">';
+        categories.forEach(cat => {
+          const slug = cat.toLowerCase().replace(/\s+/g, '-');
+          categoryHtml += `<span class="blog-filter"><a href="/blog/category/${slug}/">${cat.toLowerCase()}</a></span>`;
+        });
+        categoryHtml += '</span>';
+      }
+
+      // Format date
+      const formattedDate = date ? new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+
       li.innerHTML = `
         <h2><a href="${result.url}">${title}</a></h2>
-        <div class="post-meta">
-          ${author ? `<span class="author">By ${author}</span>` : ''}
-          ${date ? `<span class="date">${new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>` : ''}
-          ${categories.length > 0 ? `<span class="categories">${categories.map(cat => `<span class="category-tag">${cat}</span>`).join(' ')}</span>` : ''}
-        </div>
+        <p class="post-details">
+          ${categoryHtml}
+          ${author ? `<span class="post-author">${author}</span>` : ''}
+          ${formattedDate ? `<span class="post-date"> ${formattedDate}</span>` : ''}
+        </p>
         <div class="post-content">
           <p>${excerpt}</p>
           <div class="button-para">
