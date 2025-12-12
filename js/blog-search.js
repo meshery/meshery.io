@@ -1,38 +1,30 @@
-// Meilisearch blog search integration
-// This script provides search functionality for the Meshery blog using Meilisearch
+// Client-side blog search
+// This script provides client-side search functionality for the Meshery blog
 
 (function() {
   'use strict';
 
-  // Configuration - these should be set via environment variables or site config
-  const MEILISEARCH_HOST = window.MEILISEARCH_CONFIG?.host || 'https://search.meshery.io';
-  const MEILISEARCH_API_KEY = window.MEILISEARCH_CONFIG?.apiKey || '';
-  const MEILISEARCH_INDEX = window.MEILISEARCH_CONFIG?.index || 'blog_posts';
+  let searchData = null;
 
-  let searchClient = null;
-  let searchIndex = null;
-  let fallbackData = null;
-  let useFallback = false;
-
-  // Load fallback data for client-side search if Meilisearch is unavailable
-  async function loadFallbackData() {
+  // Load search data for client-side search
+  async function loadSearchData() {
     try {
       const response = await fetch('/blog/search.json');
       if (!response.ok) throw new Error('Failed to load search data');
-      fallbackData = await response.json();
+      searchData = await response.json();
       return true;
     } catch (error) {
-      console.error('Error loading fallback search data:', error);
+      console.error('Error loading search data:', error);
       return false;
     }
   }
 
-  // Simple client-side search for fallback
-  function fallbackSearch(query) {
-    if (!fallbackData) return [];
+  // Client-side search
+  function performClientSearch(query) {
+    if (!searchData) return [];
     
     const lowerQuery = query.toLowerCase();
-    const results = fallbackData
+    const results = searchData
       .filter(post => {
         const titleMatch = post.title?.toLowerCase().includes(lowerQuery);
         const excerptMatch = post.excerpt?.toLowerCase().includes(lowerQuery);
@@ -44,7 +36,7 @@
       })
       .slice(0, 20);
 
-    // Simple highlighting for fallback
+    // Highlighting for search results
     results.forEach(result => {
       if (!result._formatted) {
         result._formatted = {
@@ -70,61 +62,9 @@
     return text.replace(regex, '<mark class="search-highlight">$1</mark>');
   }
 
-  // Initialize Meilisearch client
-  function initMeilisearch() {
-    if (typeof MeiliSearch === 'undefined') {
-      console.warn('MeiliSearch library not loaded, using fallback search');
-      useFallback = true;
-      return loadFallbackData();
-    }
-
-    try {
-      searchClient = new MeiliSearch({
-        host: MEILISEARCH_HOST,
-        apiKey: MEILISEARCH_API_KEY
-      });
-      searchIndex = searchClient.index(MEILISEARCH_INDEX);
-      return true;
-    } catch (error) {
-      console.warn('Error initializing MeiliSearch, using fallback:', error);
-      useFallback = true;
-      return loadFallbackData();
-    }
-  }
-
   // Perform search
   async function performSearch(query) {
-    // Use fallback if Meilisearch is not available
-    if (useFallback) {
-      return fallbackSearch(query);
-    }
-
-    if (!searchIndex) {
-      console.error('Search index not initialized');
-      return [];
-    }
-
-    try {
-      const searchResults = await searchIndex.search(query, {
-        limit: 20,
-        attributesToHighlight: ['title', 'excerpt', 'content'],
-        attributesToCrop: ['excerpt', 'content'],
-        cropLength: 200,
-        highlightPreTag: '<mark class="search-highlight">',
-        highlightPostTag: '</mark>'
-      });
-
-      return searchResults.hits;
-    } catch (error) {
-      console.error('Search error, trying fallback:', error);
-      // Try fallback on error
-      if (!useFallback) {
-        useFallback = true;
-        await loadFallbackData();
-        return fallbackSearch(query);
-      }
-      return [];
-    }
+    return performClientSearch(query);
   }
 
   // Convert text to URL-friendly slug
@@ -159,8 +99,7 @@
       return;
     }
 
-    const fallbackNotice = useFallback ? ' (using client-side search)' : '';
-    searchSummary.textContent = `Found ${results.length} result${results.length !== 1 ? 's' : ''} for "${query}"${fallbackNotice}`;
+    searchSummary.textContent = `Found ${results.length} result${results.length !== 1 ? 's' : ''} for "${query}"`;
     searchSummary.style.display = 'block';
     blogPosts.style.display = 'none';
     resultsContainer.style.display = 'block';
@@ -280,9 +219,9 @@
       return;
     }
 
-    // Initialize Meilisearch or fallback
-    const initialized = await initMeilisearch();
-    if (!initialized && !useFallback) {
+    // Load search data
+    const initialized = await loadSearchData();
+    if (!initialized) {
       console.warn('Search functionality not available');
       // Optionally hide the search box or show a message
       return;
