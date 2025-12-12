@@ -11,7 +11,19 @@
     try {
       const response = await fetch('/blog/search.json');
       if (!response.ok) throw new Error('Failed to load search data');
-      searchData = await response.json();
+      
+      const data = await response.json();
+      
+      // Pre-process data for faster searching
+      searchData = data.map(post => ({
+        ...post,
+        _searchTitle: post.title?.toLowerCase() || '',
+        _searchExcerpt: post.excerpt?.toLowerCase() || '',
+        _searchContent: post.content?.toLowerCase() || '',
+        _searchCategories: post.categories?.map(cat => cat.toLowerCase()) || [],
+        _searchAuthor: post.author?.toLowerCase() || ''
+      }));
+      
       return true;
     } catch (error) {
       console.error('Error loading search data:', error);
@@ -26,11 +38,11 @@
     const lowerQuery = query.toLowerCase();
     const results = searchData
       .filter(post => {
-        const titleMatch = post.title?.toLowerCase().includes(lowerQuery);
-        const excerptMatch = post.excerpt?.toLowerCase().includes(lowerQuery);
-        const contentMatch = post.content?.toLowerCase().includes(lowerQuery);
-        const categoryMatch = post.categories?.some(cat => cat.toLowerCase().includes(lowerQuery));
-        const authorMatch = post.author?.toLowerCase().includes(lowerQuery);
+        const titleMatch = post._searchTitle.includes(lowerQuery);
+        const excerptMatch = post._searchExcerpt.includes(lowerQuery);
+        const contentMatch = post._searchContent.includes(lowerQuery);
+        const categoryMatch = post._searchCategories.some(cat => cat.includes(lowerQuery));
+        const authorMatch = post._searchAuthor.includes(lowerQuery);
         
         return titleMatch || excerptMatch || contentMatch || categoryMatch || authorMatch;
       })
