@@ -57,10 +57,16 @@
     return results;
   }
 
+  // Escape special regex characters
+  function escapeRegex(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
   // Simple text highlighting function
   function highlightText(text, query) {
     if (!text) return '';
-    const regex = new RegExp(`(${query})`, 'gi');
+    const escapedQuery = escapeRegex(query);
+    const regex = new RegExp(`(${escapedQuery})`, 'gi');
     return text.replace(regex, '<mark class="search-highlight">$1</mark>');
   }
 
@@ -121,6 +127,19 @@
     }
   }
 
+  // Convert text to URL-friendly slug
+  function slugify(text) {
+    return text
+      .toString()
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, '-')        // Replace spaces with -
+      .replace(/[^\w\-]+/g, '')    // Remove non-word chars
+      .replace(/\-\-+/g, '-')      // Replace multiple - with single -
+      .replace(/^-+/, '')          // Trim - from start
+      .replace(/-+$/, '');         // Trim - from end
+  }
+
   // Render search results
   function renderResults(results, query) {
     const resultsContainer = document.getElementById('search-results');
@@ -166,7 +185,7 @@
       if (categories.length > 0) {
         categoryHtml = '<span class="blog-filters">';
         categories.forEach(cat => {
-          const slug = cat.toLowerCase().replace(/\s+/g, '-');
+          const slug = slugify(cat);
           categoryHtml += `<span class="blog-filter"><a href="/blog/category/${slug}/">${cat.toLowerCase()}</a></span>`;
         });
         categoryHtml += '</span>';
