@@ -77,6 +77,7 @@ jobs:
             filterType="$(jq -r .[$idx].catalog_data.type temp.json)"
             filterName="$(jq -r .[$idx].name temp.json)"
             filterImageURL="$(jq -r .[$idx].catalog_data.imageURL temp.json)"
+            createdAt="$(jq -r .[$idx].created_at temp.json)"
 
             compatibility=""
             echo "contentID=$designId" >> $GITHUB_OUTPUT
@@ -97,6 +98,10 @@ jobs:
 
             if [[ $filterType == "null" ]]; then
               patternType="wasm filter"
+            fi
+
+            if [[ $createdAt == "null" ]]; then
+              createdAt=""
             fi
 
             compatLength=$(jq -r ".[$idx].catalog_data.compatibility | length" temp.json)
@@ -131,6 +136,7 @@ jobs:
           userName: $userFullName
           userAvatarURL: $userAvatarURL
           type: $filterType
+          date: $createdAt
           compatibility: $compatibility
           patternId: $filterId
           image: /assets/images/webassembly_logo.svg
