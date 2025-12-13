@@ -23,7 +23,75 @@
     </div>
 </div>
 
-<script type="module">
+<script src="../../integrations/data.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    if (!window.integrationsData || !window.integrationsData.length) {
+        console.error('Integrations data not loaded');
+        return;
+    }
+
+    const data = window.integrationsData;
+
+    const integHeading = document.getElementById("integration-heading");
+    const integContainer = document.getElementById("integContainer");
+    const toggleButton = document.querySelector('.toggle-text');
+
+    let allDataShown = false;
+
+    const roundedIntegNumber = Math.floor(data.length / 10) * 10;
+    integHeading.textContent = `${roundedIntegNumber}+ Built-In Integrations`;
+
+    function renderIntegrationCards(showAll) {
+    const cardsToShow = showAll ? data.length : 40;
+
+    integContainer.innerHTML = data.slice(0, cardsToShow).map(item => {
+        const iconURL = item.color
+            ? `/${item.color.replace(/^meshery\.io\//, '')}`
+            : '';
+
+        return `
+            <a href="${item.permalink}" class="integrations-card">
+                <div class="integrations-card-inner">
+                    <div class="card-front">
+                        <img src="${iconURL}" loading="lazy"
+                             alt="${item.name}-card-image"/>
+                    </div>
+                    <div class="card-back">
+                        <p>${item.name}</p>
+                    </div>
+                </div>
+            </a>
+        `;
+    }).join('');
+}
+
+
+    renderIntegrationCards(false);
+
+    toggleButton.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        allDataShown = !allDataShown;
+        renderIntegrationCards(allDataShown);
+
+        toggleButton.textContent = allDataShown
+            ? 'See Less Integrations'
+            : 'Show More Integrations';
+
+        if (!allDataShown) {
+            document.querySelector('h2')
+                .scrollIntoView({ behavior: "smooth" });
+        }
+    });
+
+});
+</script>
+
+
+<!-- <script type="module">
     // integrations.js
     import data from '../../integrations/data.js';
 
@@ -81,4 +149,4 @@
             h2Tag.scrollIntoView(scrollOptions);
         }
     });
-</script>
+</script> -->
