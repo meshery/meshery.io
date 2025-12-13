@@ -39,6 +39,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const integContainer = document.getElementById("integContainer");
     const toggleButton = document.querySelector('.toggle-text');
 
+     if (!integHeading || !integContainer || !toggleButton) {
+        console.error("One or more required integration elements are missing from the DOM.");
+        return;
+    }
     let allDataShown = false;
 
     const roundedIntegNumber = Math.floor(data.length / 10) * 10;
