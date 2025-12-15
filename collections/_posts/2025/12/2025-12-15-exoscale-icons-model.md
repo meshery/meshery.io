@@ -3,6 +3,8 @@ title: Solution architecture diagramming with Exoscale
 subheading: Announcing a new "Exoscale Icons" model
 author: Meshery Community
 date: 2025-12-15 12:00:00 -0500
+draft: false
+published: true
 categories:
   - meshery
   - models
