@@ -23,7 +23,8 @@
     </div>
 </div>
 
-<script src="{{ '/integrations/data.js' | relative_url }}"></script>
+<script src="/integrations/data.js"></script>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -39,39 +40,43 @@ document.addEventListener('DOMContentLoaded', function () {
     const integContainer = document.getElementById("integContainer");
     const toggleButton = document.querySelector('.toggle-text');
 
-     if (!integHeading || !integContainer || !toggleButton) {
-        console.error("One or more required integration elements are missing from the DOM.");
-        return;
-    }
     let allDataShown = false;
 
     const roundedIntegNumber = Math.floor(data.length / 10) * 10;
     integHeading.textContent = `${roundedIntegNumber}+ Built-In Integrations`;
-    const INITIAL_CARDS_TO_SHOW = 40;
+
+    function resolveIconPath(colorPath) {
+        if (!colorPath) return '';
+
+        // remove leading meshery.io/ if present
+        const cleanPath = colorPath.replace(/^meshery\.io\//, '');
+
+        // always resolve from site root (works in preview + prod)
+        return `${window.location.origin}/${cleanPath}`;
+    }
+
     function renderIntegrationCards(showAll) {
-    const cardsToShow = showAll ? data.length : INITIAL_CARDS_TO_SHOW;
+        const cardsToShow = showAll ? data.length : 40;
 
-    integContainer.innerHTML = data.slice(0, cardsToShow).map(item => {
-        const iconURL = item.color
-            ? `/${item.color.replace(/^meshery\.io\//, '')}`
-            : '';
+        integContainer.innerHTML = data.slice(0, cardsToShow).map(item => {
+            const iconURL = resolveIconPath(item.color);
 
-        return `
-            <a href="${item.permalink}" class="integrations-card">
-                <div class="integrations-card-inner">
-                    <div class="card-front">
-                        <img src="${iconURL}" loading="lazy"
-                             alt="${item.name}-card-image"/>
+            return `
+                <a href="${item.permalink}" class="integrations-card">
+                    <div class="integrations-card-inner">
+                        <div class="card-front">
+                            <img src="${iconURL}"
+                                 loading="lazy"
+                                 alt="${item.name}-card-image"/>
+                        </div>
+                        <div class="card-back">
+                            <p>${item.name}</p>
+                        </div>
                     </div>
-                    <div class="card-back">
-                        <p>${item.name}</p>
-                    </div>
-                </div>
-            </a>
-        `;
-    }).join('');
-}
-
+                </a>
+            `;
+        }).join('');
+    }
 
     renderIntegrationCards(false);
 
@@ -86,13 +91,13 @@ document.addEventListener('DOMContentLoaded', function () {
             : 'Show More Integrations';
 
         if (!allDataShown) {
-            integHeading.scrollIntoView({ behavior: "smooth" });
+            document.querySelector('h2')
+                .scrollIntoView({ behavior: "smooth" });
         }
     });
 
 });
 </script>
-
 
 <!-- <script type="module">
     // integrations.js
