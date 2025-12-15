@@ -8,7 +8,7 @@ whiteIcon: /assets/images/integration/aws-vpc-cni/icons/white/aws-vpc-cni-white.
 docURL: https://docs.meshery.io/extensibility/integrations/aws-vpc-cni
 description: 
 category: Cloud Native Network
-subcategory: Cloud Native Network
+subcategory: Networking Content Delivery
 registrant: Artifact Hub
 components: 
 - name: eni-config
