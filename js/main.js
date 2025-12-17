@@ -31,7 +31,7 @@
 
 var btnscroll = $('#button-scroll-to-up');
 
-$(window).scroll(function () {
+$(window).scroll(function() {
   if ($(window).scrollTop() > 0) {
     btnscroll.addClass('show');
   } else {
@@ -39,14 +39,14 @@ $(window).scroll(function () {
   }
 });
 
-btnscroll.on('click', function (e) {
+btnscroll.on('click', function(e) {
   e.preventDefault();
-  $('html, body').animate({ scrollTop: 0 }, '0');
+  $('html, body').animate({scrollTop:0}, '0');
 });
 
 
 
-$("#slider").on("input change", (e) => {
+$("#slider").on("input change", (e)=>{
   const sliderPos = e.target.value;
   $('.foreground-img').css('width', `${sliderPos}%`)
   $('.slider-button').css('left', `calc(${sliderPos}% - 18px)`)
