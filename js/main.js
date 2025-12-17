@@ -20,8 +20,11 @@
     if (!didScroll) {
       didScroll = true;
       requestAnimationFrame(function () {
-        changeHeader();
-        didScroll = false;
+        try {
+          changeHeader();
+        } finally {
+          didScroll = false;
+        }
       });
     }
   });
