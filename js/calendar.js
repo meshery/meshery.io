@@ -25,7 +25,7 @@ const calendar = new FullCalendar.Calendar(calendarEl, {
     right: 'addToCalendar'
     },
     displayEventTime: false, // don't show the time column in list view
-  googleCalendarApiKey: "{{ site.google_calendar_api_key }}",
+  googleCalendarApiKey: "{{ ENV.GOOGLE_CALENDAR_API_KEY }}",
     events: {
     googleCalendarId: 'layer5.io_eh2aa9dpf1g40elvoc762jnphs@group.calendar.google.com'
     },
