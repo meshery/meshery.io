@@ -27,6 +27,7 @@ const calendar = new FullCalendar.Calendar(calendarEl, {
     displayEventTime: false, // don't show the time column in list view
     events: {
     googleCalendarId: 'layer5.io_eh2aa9dpf1g40elvoc762jnphs@group.calendar.google.com'
+            googleCalendarApiKey: 'AIzaSyDcmx-nLYfqvrfpEmVJuclwt9akayYfUgg',
     },
     eventClick: function (arg) {
     // opens events in a popup window
