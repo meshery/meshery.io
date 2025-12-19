@@ -25,50 +25,57 @@
 
 <script src="/integrations/data.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const data = window.integrationsData || [];
-  if (!data.length) return console.error("No integrations data");
+	document.addEventListener("DOMContentLoaded", function () {
+	const data = window.integrationsData || [];
+	if (!data.length) return console.error("No integrations data");
 
-  const heading = document.getElementById("integration-heading");
-  const container = document.getElementById("integContainer");
-  const toggleBtn = document.querySelector(".toggle-text");
+		const integHeading = document.getElementById("integration-heading");
+		const integContainer = document.getElementById("integContainer");
+		const toggleButton = document.querySelector(".toggle-text");
 
-  let showAll = false;
+		let allDataShown = false;
 
-  heading.textContent = `${Math.floor(data.length / 10) * 10}+ Built-In Integrations`;
+		integHeading.textContent = `${
+			Math.floor(data.length / 10) * 10
+		}+ Built-In Integrations`;
 
-  const getIcon = (path = "") =>
-    path ? `${location.origin}/${path.replace(/^meshery\.io\//, "")}` : "";
+		function resolveIconPath(colorPath) {
+			if (!colorPath) return "";
+			const cleanPath = colorPath.replace(/^meshery\.io\//, "");
+			return `${window.location.origin}/${cleanPath}`;
+		}
 
-  const render = () => {
-    const count = showAll ? data.length : 40;
+		function renderIntegrationCards(showAll) {
+			const cardsToShow = showAll ? data.length : 40;
+			integContainer.innerHTML = data
+				.slice(0, cardsToShow)
+				.map(
+					(item) => `
+            <a href="${item.permalink}" class="integrations-card">
+                <div class="integrations-card-inner">
+                    <div class="card-front">
+                        <img src="${resolveIconPath(item.color)}" loading="lazy" alt="${item.name}" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div class="card-back">
+                        <p>${item.name}</p>
+                    </div>
+                </div>
+            </a>
+        `).join("");
 
-    container.innerHTML = data.slice(0, count).map(item => `
-      <a href="${item.permalink}" class="integrations-card">
-        <div class="integrations-card-inner">
-          <div class="card-front">
-            <img src="${getIcon(item.color)}" loading="lazy" alt="${item.name}">
-          </div>
-          <div class="card-back">
-            <p>${item.name}</p>
-          </div>
-        </div>
-      </a>
-    `).join("");
+			toggleButton.textContent = showAll ? "See Less Integrations" : "Show All Integrations";
+		}
 
-    toggleBtn.textContent = showAll ? "See Less Integrations" : "Show More Integrations";
-  };
+		renderIntegrationCards(false);
 
-  render();
+		toggleButton.addEventListener("click", function (e) {
+			e.preventDefault();
+			allDataShown = !allDataShown;
+			renderIntegrationCards(allDataShown);
 
-  toggleBtn.addEventListener("click", e => {
-    e.preventDefault();
-    showAll = !showAll;
-    render();
-
-    if (!showAll) {
-      heading.scrollIntoView({ behavior: "smooth" });
-    }
-  });
-});
+			if (!allDataShown) {
+				integHeading.scrollIntoView({ behavior: "smooth" });
+			}
+		});
+	});
 </script>
