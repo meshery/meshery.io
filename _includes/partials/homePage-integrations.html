@@ -23,62 +23,52 @@
     </div>
 </div>
 
-<script type="module">
-    // integrations.js
-    import data from '../../integrations/data.js';
+<script src="/integrations/data.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const data = window.integrationsData || [];
+  if (!data.length) return console.error("No integrations data");
 
-    const integHeading = document.getElementById("integration-heading");
-    const roundedIntegNumber = Math.floor(data.length / 10) * 10;
-    integHeading.textContent = `${roundedIntegNumber}+ Built-In Integrations`;
+  const heading = document.getElementById("integration-heading");
+  const container = document.getElementById("integContainer");
+  const toggleBtn = document.querySelector(".toggle-text");
 
-    const integContainer = document.getElementById("integContainer");
+  let showAll = false;
 
-    let allDataShown = false;
+  heading.textContent = `${Math.floor(data.length / 10) * 10}+ Built-In Integrations`;
 
-    function renderIntegrationCards(data, showAll) {
-        const cardsToShow = showAll ? data.length : 40;
-        return data.slice(0, cardsToShow).map(item => {
-            const iconURL = item.color.split('/').slice(1).join('/');
+  const getIcon = (path = "") =>
+    path ? `${location.origin}/${path.replace(/^meshery\.io\//, "")}` : "";
 
-            return `
-                <a href="${item.permalink}" class="integrations-card">
-                <div class="integrations-card-inner">
-                <div class="card-front">
-                <img src="${iconURL}" loading="lazy" id="logo-dark-light"
-                data-logo-for-dark="${iconURL}"
-                data-logo-for-light="${iconURL}" 
-                alt="${item.name}-card-image"/>
-                </div>
-                <div class="card-back">
-                <p> ${item.name} </p>
-                </div>
-                </div>
-                </a>`;
-        }).join('');
+  const render = () => {
+    const count = showAll ? data.length : 40;
+
+    container.innerHTML = data.slice(0, count).map(item => `
+      <a href="${item.permalink}" class="integrations-card">
+        <div class="integrations-card-inner">
+          <div class="card-front">
+            <img src="${getIcon(item.color)}" loading="lazy" alt="${item.name}">
+          </div>
+          <div class="card-back">
+            <p>${item.name}</p>
+          </div>
+        </div>
+      </a>
+    `).join("");
+
+    toggleBtn.textContent = showAll ? "See Less Integrations" : "Show More Integrations";
+  };
+
+  render();
+
+  toggleBtn.addEventListener("click", e => {
+    e.preventDefault();
+    showAll = !showAll;
+    render();
+
+    if (!showAll) {
+      heading.scrollIntoView({ behavior: "smooth" });
     }
-
-    const scrollOptions = { behavior: "smooth" };
-
-    integContainer.innerHTML = renderIntegrationCards(data, allDataShown);
-
-    document.querySelector('.show-all-button').addEventListener('click', () => {
-        allDataShown = !allDataShown;
-
-        const button = document.querySelector('.toggle-text');  
-    
-        if (allDataShown) {
-            button.textContent = 'See Less Integrations'; // Change button text when allDataShown is true
-        } else {
-            button.textContent = 'See All Integrations'; // Change button text when allDataShown is false
-        }
-
-
-        integContainer.innerHTML = renderIntegrationCards(data, allDataShown);
-
-        // Scroll to the <h2> tag
-        if (!allDataShown) {
-            const h2Tag = document.querySelector('h2');
-            h2Tag.scrollIntoView(scrollOptions);
-        }
-    });
+  });
+});
 </script>
