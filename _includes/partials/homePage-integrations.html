@@ -23,34 +23,34 @@
     </div>
 </div>
 
-<script src="/integrations/data.js"></script>
-<script>
-	document.addEventListener("DOMContentLoaded", function () {
-	const data = window.integrationsData || [];
-	if (!data.length) return console.error("No integrations data");
+<script type="module">
+	import data from "/integrations/data.js";
+	if (!data || !data.length) {
+		console.error("No integrations data");
+	}
 
-		const integHeading = document.getElementById("integration-heading");
-		const integContainer = document.getElementById("integContainer");
-		const toggleButton = document.querySelector(".toggle-text");
+	const integHeading = document.getElementById("integration-heading");
+	const integContainer = document.getElementById("integContainer");
+	const toggleButton = document.querySelector(".toggle-text");
 
-		let allDataShown = false;
+	let allDataShown = false;
 
-		integHeading.textContent = `${
-			Math.floor(data.length / 10) * 10
-		}+ Built-In Integrations`;
+	integHeading.textContent = `${
+		Math.floor(data.length / 10) * 10
+	}+ Built-In Integrations`;
 
-		function resolveIconPath(colorPath) {
-			if (!colorPath) return "";
-			const cleanPath = colorPath.replace(/^meshery\.io\//, "");
-			return `${window.location.origin}/${cleanPath}`;
-		}
+	function resolveIconPath(colorPath) {
+		if (!colorPath) return "";
+		const cleanPath = colorPath.replace(/^meshery\.io\//, "");
+		return `${window.location.origin}/${cleanPath}`;
+	}
 
-		function renderIntegrationCards(showAll) {
-			const cardsToShow = showAll ? data.length : 40;
-			integContainer.innerHTML = data
-				.slice(0, cardsToShow)
-				.map(
-					(item) => `
+	function renderIntegrationCards(showAll) {
+		const cardsToShow = showAll ? data.length : 40;
+		integContainer.innerHTML = data
+			.slice(0, cardsToShow)
+			.map(
+				(item) => `
             <a href="${item.permalink}" class="integrations-card">
                 <div class="integrations-card-inner">
                     <div class="card-front">
@@ -66,16 +66,15 @@
 			toggleButton.textContent = showAll ? "See Less Integrations" : "Show All Integrations";
 		}
 
-		renderIntegrationCards(false);
+	renderIntegrationCards(false);
 
-		toggleButton.addEventListener("click", function (e) {
-			e.preventDefault();
-			allDataShown = !allDataShown;
-			renderIntegrationCards(allDataShown);
+	toggleButton.addEventListener("click", function (e) {
+		e.preventDefault();
+		allDataShown = !allDataShown;
+		renderIntegrationCards(allDataShown);
 
-			if (!allDataShown) {
-				integHeading.scrollIntoView({ behavior: "smooth" });
-			}
-		});
+		if (!allDataShown) {
+			integHeading.scrollIntoView({ behavior: "smooth" });
+		}
 	});
 </script>
