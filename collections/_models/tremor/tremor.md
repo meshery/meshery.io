@@ -9,7 +9,7 @@ docURL: https://docs.meshery.io/extensibility/integrations/tremor
 description: 
 category: App Definition and Development
 subcategory: Streaming & Messaging
-registrant: Artifact Hub
+registrant: GitHub
 components: 
 componentsCount: 0
 relationships: 
