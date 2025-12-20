@@ -219,7 +219,11 @@ components:
   colorIcon: assets/images/integration/kuma/components/mesh-trust/icons/color/mesh-trust-color.svg
   whiteIcon: assets/images/integration/kuma/components/mesh-trust/icons/white/mesh-trust-white.svg
   description: 
-componentsCount: 52
+- name: workload
+  colorIcon: assets/images/integration/kuma/components/workload/icons/color/workload-color.svg
+  whiteIcon: assets/images/integration/kuma/components/workload/icons/white/workload-white.svg
+  description: 
+componentsCount: 53
 relationships: 
 relationshipsCount: 0
 featureList: [
