@@ -83,7 +83,11 @@ components:
   colorIcon: assets/images/integration/antrea/components/packet-capture/icons/color/packet-capture-color.svg
   whiteIcon: assets/images/integration/antrea/components/packet-capture/icons/white/packet-capture-white.svg
   description: 
-componentsCount: 18
+- name: flow-exporter-destination
+  colorIcon: assets/images/integration/antrea/components/flow-exporter-destination/icons/color/flow-exporter-destination-color.svg
+  whiteIcon: assets/images/integration/antrea/components/flow-exporter-destination/icons/white/flow-exporter-destination-white.svg
+  description: 
+componentsCount: 19
 relationships: 
 relationshipsCount: 0
 featureList: [
