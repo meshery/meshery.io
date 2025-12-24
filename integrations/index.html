@@ -155,7 +155,9 @@ permalink: /integrations
         loader.classList.add("loader--hidden");
 
         loader.addEventListener("transitionend", () => {
-          document.body.removeChild(loader);
+          if (loader.parentNode) {
+            loader.parentNode.removeChild(loader);
+          }
         });
       });
     </script>
@@ -210,7 +212,8 @@ permalink: /integrations
         CSS3DRenderer,
         CSS3DObject,
       } from "three/addons/renderers/CSS3DRenderer.js";
-      import data from '../integrations/data.js'
+      import data from "/integrations/data.js";
+      if (!data.length) { console.error('No integrations data'); }
       let integHeading = document.querySelector(".integration-heading")
       let roundedIntegNumber = Math.floor(data.length/ 10) * 10;
       integHeading.innerHTML = `${roundedIntegNumber}+ Built-In Integrations`
@@ -233,7 +236,7 @@ permalink: /integrations
       let controls;
 
       const objects = [];
-      const targets = { table: [], sphere: [], helix: [], grid: [] };
+      const targets = { table: [], sphere: [], helix: [], grid: [], };
 
       init();
       animate();
@@ -260,11 +263,10 @@ permalink: /integrations
 
           const symbol = document.createElement("div");
           symbol.className = "symbol";
-          let urlFromJSON = table[i].color;
+          let iconPath = table[i].color || '';
 
           symbol.innerHTML =
-            '<img src="/' +
-            urlFromJSON.split('/').slice(1).join('/') +
+            '<img src="' + iconPath +
             `" style="height: 100%; width: 100%;" />`;
           symbol.style.height = "70px";
           element.appendChild(symbol);

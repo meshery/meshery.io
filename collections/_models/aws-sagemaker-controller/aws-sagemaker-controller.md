@@ -123,7 +123,11 @@ components:
   colorIcon: assets/images/integration/aws-sagemaker-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
   whiteIcon: assets/images/integration/aws-sagemaker-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
   description: 
-componentsCount: 28
+- name: project
+  colorIcon: assets/images/integration/aws-sagemaker-controller/components/project/icons/color/project-color.svg
+  whiteIcon: assets/images/integration/aws-sagemaker-controller/components/project/icons/white/project-white.svg
+  description: 
+componentsCount: 29
 relationships: 
 - type: "non-binding"
   kind: "edge"
