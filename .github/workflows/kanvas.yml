@@ -37,6 +37,12 @@ permissions:
 jobs:
   KanvasScreenshot:
     runs-on: ubuntu-24.04
+    env:
+      NODE_VERSION: "20.19.5"
+      CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
+      CYPRESS_BROWSER: chrome
+      CYPRESS_RUN_BINARY: google-chrome-stable
+      CHROME_EXTRA_ARGS: "--no-sandbox --disable-dev-shm-usage --disable-gpu --headless=new"
     outputs:
       resource_url: ${{ steps.test_result.outputs.resource_url }}
     steps:
@@ -57,16 +63,23 @@ jobs:
             echo "❌ Action checkout failed - package.json not found"
             exit 1
           fi
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          check-latest: true
+          cache: npm
+          cache-dependency-path: action/package-lock.json
       - run: |
          echo ${{ inputs.contentID }}
          echo ${{ inputs.assetLocation }}
         shell: bash
       - name: Wait for Meshery Playground
         run: |
-          max_attempts=30
+          max_attempts=24
           attempt=0
           while [ $attempt -lt $max_attempts ]; do
-            if curl -s -o /dev/null -w "%{http_code}" https://playground.meshery.io | grep -q "200\|301\|302"; then
+            if curl -ILs --fail --connect-timeout 4 --max-time 8 https://playground.meshery.io | head -n 1 | grep -q "HTTP/"; then
               echo "Meshery Playground is ready"
               exit 0
             fi
@@ -113,7 +126,6 @@ jobs:
           CYPRESS_requestTimeout: 45000
           CYPRESS_responseTimeout: 60000
           CYPRESS_pageLoadTimeout: 60000
-          DEBUG: "cypress:*"
       - name: Check Test Result
         if: always()
         run: |

@@ -19,16 +19,29 @@ module.exports = defineConfig({
     trashAssetsBeforeRuns: false,
     numTestsKeptInMemory: 0,
     setupNodeEvents(on, config) {
-      // GPU acceleration disabled for headless Chrome
       on('before:browser:launch', (browser = {}, launchOptions) => {
         if (browser.name === 'chrome') {
-          launchOptions.args.push('--disable-gpu');
-          launchOptions.args.push('--no-sandbox');
-          launchOptions.args.push('--disable-dev-shm-usage');
-          launchOptions.args.push('--disable-software-rasterizer');
-          launchOptions.args.push('--disable-extensions');
-          launchOptions.args.push('--disable-background-networking');
-          launchOptions.args.push('--disable-sync');
+          const extraArgs = (process.env.CHROME_EXTRA_ARGS || '')
+            .split(' ')
+            .filter(Boolean);
+
+          const chromeArgs = [
+            '--disable-gpu',
+            '--no-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-software-rasterizer',
+            '--disable-extensions',
+            '--disable-background-networking',
+            '--disable-sync',
+            '--headless=new',
+            ...extraArgs,
+          ];
+
+          chromeArgs.forEach((arg) => {
+            if (!launchOptions.args.includes(arg)) {
+              launchOptions.args.push(arg);
+            }
+          });
         }
         return launchOptions;
       });
