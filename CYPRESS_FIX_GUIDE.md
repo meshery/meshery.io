@@ -80,9 +80,57 @@ Created `cypress.config.js` with:
      run: echo "DEBUG=cypress:*" >> $GITHUB_ENV
    ```
 
-## Design Load Mechanism
+## Debugging Failed Tests
 
-The `loadDesign.js` test typically:
+The most recent test run shows the exact error still occurring. Here's how to debug it:
+
+### Step 1: Check the Artifacts
+- Download `cypress-video.zip` and `cypress-screenshots.zip` from the workflow artifacts
+- View the screenshots to see what state the page was in when it failed
+- Check the video to see exactly what happened during the test
+
+### Step 2: Analyze the Error Message
+The error `TypeError: Cannot read properties of undefined (reading 'fit')` means:
+- The design canvas object is `undefined`
+- This happens when the Kanvas design renderer hasn't loaded yet
+- Or the Meshery API didn't return the design data
+
+### Step 3: Verify Secrets
+Ensure these secrets are configured in your GitHub repository:
+1. `GITHUB_TOKEN` - Should be auto-provided by GitHub
+2. `MESHERY_TOKEN` - Must be a valid Meshery Cloud token from https://cloud.meshery.io
+
+Check your repository settings:
+- Go to Settings → Secrets and variables → Actions
+- Verify both tokens are present and not expired
+
+### Step 4: Check Design ID Validity
+The `inputs.contentID` must be:
+- A valid UUID format
+- An existing design ID in Meshery
+- Accessible to the Meshery account associated with `MESHERY_TOKEN`
+
+Test the design ID manually by:
+1. Login to https://playground.meshery.io
+2. Navigate to the Designs section
+3. Search for or open the design by ID
+4. Verify it loads properly
+
+### Step 5: Local Test Reproduction
+If the design loads manually but not in tests:
+
+```bash
+# Set environment variables
+export MESHERY_TOKEN="your-token"
+export CYPRESS_baseUrl="https://playground.meshery.io"
+export CYPRESS_chromeWebSecurity=false
+
+# Install and run Cypress
+npm install cypress --save-dev
+npx cypress run --browser chrome --spec "cypress/e2e/**/*.js" --headless
+```
+
+## Enhanced Workflow Features (Latest Update)
 1. Navigates to Meshery playground
 2. Loads a design by ID using the Meshery API
 3. Waits for the canvas to render the design
@@ -101,9 +149,32 @@ The following secrets should be configured:
 - `.github/workflows/kanvas.yml` - Added playground health check and Cypress env vars
 - `cypress.config.js` - New configuration file for local testing
 
-## Monitoring
+## Related Files Modified
+- `.github/workflows/kanvas.yml` - Added playground health check, extended timeouts, error handling
+- `cypress.config.js` - New configuration file for local testing
+- `CYPRESS_FIX_GUIDE.md` - This comprehensive troubleshooting guide
 
-After deploying these changes:
+## Latest Changes (December 24, 2025)
+
+### Workflow Enhancements
+1. **Token Verification Step** - Warns if MESHERY_TOKEN is not configured
+2. **Configuration Display** - Shows test setup before running
+3. **Continue on Error** - Allows workflow to generate artifacts even on test failure
+4. **Extended Timeouts** - Increased to 20-45 seconds for slow-loading designs
+5. **Test Result Reporting** - Indicates whether tests passed or if debugging is needed
+
+### Environment Variables Added
+```yaml
+CYPRESS_viewportWidth: 1920
+CYPRESS_viewportHeight: 1080
+CYPRESS_defaultCommandTimeout: 20000
+CYPRESS_requestTimeout: 30000
+CYPRESS_responseTimeout: 45000
+```
+
+These ensure the browser viewport matches the test expectations and gives plenty of time for design canvas to render.
+
+## Monitoring
 1. Trigger a new workflow run
 2. Check the "Wait for Meshery Playground" step output
 3. Monitor Cypress test output for progress
