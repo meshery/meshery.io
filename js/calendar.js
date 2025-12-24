@@ -2,8 +2,6 @@
  * Calendar entry point - refactored with separation of concerns
  */
 
-import { initCalendar } from '../src/hooks/useCalendar.js';
-
 if (typeof $ !== 'undefined') {
   $(document).ready(function() {
     $('.preloader').show();
@@ -11,6 +9,11 @@ if (typeof $ !== 'undefined') {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  initCalendar();
+document.addEventListener('DOMContentLoaded', async function() {
+  try {
+    const { initCalendar } = await import('../src/hooks/useCalendar.js');
+    initCalendar();
+  } catch (error) {
+    console.warn('Failed to load calendar module:', error);
+  }
 });
