@@ -48,6 +48,15 @@ jobs:
         with:
           path: action
           repository: layer5labs/kanvas-snapshot
+      - name: Verify Action Checkout
+        run: |
+          if [ -f "action/package.json" ]; then
+            echo "✓ Kanvas action checked out successfully"
+            ls -la action/
+          else
+            echo "❌ Action checkout failed - package.json not found"
+            exit 1
+          fi
       - run: |
          echo ${{ inputs.contentID }}
          echo ${{ inputs.assetLocation }}
@@ -100,9 +109,11 @@ jobs:
           CYPRESS_baseUrl: "https://playground.meshery.io"
           CYPRESS_viewportWidth: 1920
           CYPRESS_viewportHeight: 1080
-          CYPRESS_defaultCommandTimeout: 20000
-          CYPRESS_requestTimeout: 30000
-          CYPRESS_responseTimeout: 45000
+          CYPRESS_defaultCommandTimeout: 30000
+          CYPRESS_requestTimeout: 45000
+          CYPRESS_responseTimeout: 60000
+          CYPRESS_pageLoadTimeout: 60000
+          DEBUG: "cypress:*"
       - name: Check Test Result
         if: always()
         run: |
