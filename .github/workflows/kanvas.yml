@@ -52,6 +52,20 @@ jobs:
          echo ${{ inputs.contentID }}
          echo ${{ inputs.assetLocation }}
         shell: bash
+      - name: Wait for Meshery Playground
+        run: |
+          max_attempts=30
+          attempt=0
+          while [ $attempt -lt $max_attempts ]; do
+            if curl -s -o /dev/null -w "%{http_code}" https://playground.meshery.io | grep -q "200\|301\|302"; then
+              echo "Meshery Playground is ready"
+              exit 0
+            fi
+            echo "Waiting for Meshery Playground... (attempt $((attempt+1))/$max_attempts)"
+            sleep 5
+            ((attempt++))
+          done
+          echo "Warning: Meshery Playground may not be ready, but proceeding with test"
       - id: test_result
         uses: layer5labs/Kanvas-Snapshot@v0.2.41
         with:
@@ -62,3 +76,7 @@ jobs:
           skipComment: true
           designID: ${{ inputs.contentID }} # relative file-path from the root directory in the github-runner env, you might require to checkout the repository as described in step 2
           assetLocation: ${{ inputs.assetLocation }}
+        env:
+          CYPRESS_chromeWebSecurity: false
+          CYPRESS_RECORD_DISABLED: true
+          CYPRESS_baseUrl: "https://playground.meshery.io"
