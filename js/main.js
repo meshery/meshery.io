@@ -1,55 +1,19 @@
-(function () {
-  var header = document.getElementById("mainHeader");
-  function changeHeader() {
-    var scrollTop =
-      document.documentElement.scrollTop || document.body.scrollTop;
-    var scrollBuffer = 50;
+/**
+ * Main entry point - refactored with separation of concerns
+ */
 
-    if (
-      window.location.pathname === "/" ||
-      window.location.pathname.includes("/programs")
-    ) {
-      scrollBuffer = 0;
-    }
-    header.classList.toggle("header-shadow", scrollTop >= scrollBuffer);
-  }
+import { initHeaderScroll } from '../src/hooks/useHeaderScroll.js';
+import { initScrollToTop } from '../src/hooks/useScrollToTop.js';
+import { initSlider } from '../src/components/sliderHandler.js';
 
-  var didScroll = false;
+function initialize() {
+  initHeaderScroll();
+  initScrollToTop();
+  initSlider();
+}
 
-  window.addEventListener("scroll", function () {
-    didScroll = true;
-  });
-
-  setInterval(function () {
-    if (didScroll) {
-      didScroll = false;
-      changeHeader();
-    }
-  }, 100);
-
-  changeHeader();
-})();
-
-var btnscroll = $('#button-scroll-to-up');
-
-$(window).scroll(function() {
-  if ($(window).scrollTop() > 0) {
-    btnscroll.addClass('show');
-  } else {
-    btnscroll.removeClass('show');
-  }
-});
-
-btnscroll.on('click', function(e) {
-  e.preventDefault();
-  $('html, body').animate({scrollTop:0}, '0');
-});
-
-
-
-$("#slider").on("input change", (e)=>{
-  const sliderPos = e.target.value;
-  $('.foreground-img').css('width', `${sliderPos}%`)
-  $('.slider-button').css('left', `calc(${sliderPos}% - 18px)`)
-});
-
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initialize);
+} else {
+  initialize();
+}

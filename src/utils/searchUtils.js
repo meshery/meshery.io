@@ -46,4 +46,3 @@ export function preprocessSearchData(data) {
     _searchAuthor: post.author?.toLowerCase() || ''
   }));
 }
-
