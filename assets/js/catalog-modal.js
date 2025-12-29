@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   for (let i = 0; i < contentElements.length; i++) {
     const content = contentElements[i];
     const readMore = readMoreElements[i];
-
+    if (!readMore) continue;
     const numberOfLines = getNumberOfLines(content);
 
     if (numberOfLines > 3) {
