@@ -9,7 +9,7 @@ redirect_from: /blog/meshery-is-not-a-service-mesh-manager
 featured-image: /assets/images/logos/meshery-logo-dark-text-side.svg
 ---
 
-As a self-service engineering platform, Meshery enables collaborative design and operation of cloud and cloud native infrastructure. Meshery is not service mesh-centric. Meshery is not service mesh-focused. Meshery is for modern and collaborative DevOps engineering teams, infrastructure teams, Site Reliability Engineer, Platform Engineers, Application Development and Service delivery teams to use an internal engineering platform for the Day 0 design, Day 1 deployment, and Day 2 opeeration of cloud and cloud native infrastructure and services.
+As a self-service engineering platform, Meshery enables collaborative design and operation of cloud and cloud native infrastructure. Meshery is not service mesh-centric. Meshery is not service mesh-focused. Meshery is for modern and collaborative DevOps engineering teams, infrastructure teams, Site Reliability Engineer, Platform Engineers, Application Development and Service delivery teams to use an internal engineering platform for the Day 0 design, Day 1 deployment, and Day 2 operation of cloud and cloud native infrastructure and services.
 
 **The Evolution of Meshery**
 

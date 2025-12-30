@@ -1,0 +1,212 @@
+---
+layout: default
+permalink: /community/newcomers
+title: A dedicated page for the newcomers
+---
+
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/community.css" />
+
+<style>
+    .tutorials-heading-section {
+        text-align: center;
+    }
+
+    .tutorials-sub-heading {
+        font-size: 2.125rem;
+        font-weight: 600;
+        margin: 0px;
+        margin-top: -6.5rem;
+        margin-bottom: 2rem;
+    }
+
+    h5 {
+        font-size: 1.25rem;
+        font-weight: 300;
+        margin: 0px;
+        margin-bottom: 2.5rem;
+    }
+
+    .heading-start h4 {
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin: 0px;
+        margin-right: 0.75rem;
+        margin-top: -1.5rem;
+    }
+
+    .feature-title {
+        font-size: 3.125rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+    }
+
+    .page-header {
+        text-align: center;
+        padding: 0 2rem;
+    }
+
+    .welcome-text {
+        margin: 0px 0px 1rem;
+        font-size: 1.125rem;
+        font-weight: 400;
+    }
+
+    .newcomers-journey {
+        display: flex;
+        align-items: flex-start;
+        margin: 4rem 0;
+        gap: 6rem;
+    }
+
+    .heading {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+        flex: 1;
+        min-width: 300px;
+        margin-right: 2rem;
+    }
+
+    .heading h2 {
+        font-size: 2rem;
+        margin: 0;
+        font-weight: 700;
+        color: var(--color-secondary-dark);
+    }
+
+    .heading-start {
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: -0.7rem;
+    }
+
+    .heading-start h4 {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: var(--color-secondary-dark);
+        margin: 0;
+    }
+
+    .heading-start__arrow {
+        position: absolute;
+        height: 3rem;
+        width: 4rem;
+        right: -4.5rem;
+        transition: 0.5s;
+    }
+
+    .heading-start__arrow:hover {
+        transform: translateX(1rem);
+        transition: 0.5s;
+    }
+
+    .journey-map {
+        flex: 1;
+        max-width: 50%;
+    }
+
+    @media (max-width: 991px) {
+        .heading {
+            align-items: center;
+            margin-right: 0;
+        }
+
+        .newcomers-journey {
+            flex-direction: column !important;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .heading-start__arrow {
+            display: block;
+            transform: rotate(90deg);
+            transform-origin: center;
+            transition: transform 0.5s;
+        }
+
+        .heading-start__arrow:hover {
+            transform: rotate(90deg) translateX(1rem);
+            transition: transform 0.5s;
+        }
+        .journey-map{
+            flex: 1;
+        }
+        
+    }
+
+    @media (max-width: 768px) {
+
+        .page-title {
+            font-size: 2.5rem;
+        }
+
+        .newcomers-welcome {
+            padding: 2rem 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+
+        .button {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+        }
+    }
+</style>
+
+<section class="container">
+    <div class="page-header">
+        <h1 class="feature-title">Welcome Newcomers!</h1>
+        <p class="welcome-text">Whether you are a first time contributor or an open source veteran, you are welcome to
+            contribute to and
+            actively engage in the development of projects at Layer5. Here are some instructions to get you started and
+            if you haven’t joined yet, join the
+            <a href="https://slack.layer5.io/" target="_blank" rel="noopener noreferrer">Slack workspace</a>
+            to collaborate with the community and the <a href="https://discuss.layer5.io" target="">discussion forum</a>
+            for questions. Also, you can check the
+            quick-links below for jumping straight into things.
+        </p>
+        <div class="newcomers-journey">
+            <div class="heading">
+                <h2 class="sub-heading">Contributor's Journey</h2>
+                <div class="heading-start">
+                    <h4>Start Here</h4>
+                    <img class="heading-start__arrow" src="{{ site.baseurl }}/assets/images/newcomers/long-arrow.svg"
+                        alt="Arrow pointing to journey map" />
+                </div>
+            </div>
+            <div class="journey-map">
+                {% include newcomers-map.html %}
+            </div>
+        </div>
+    </div>
+
+    <!-- contributor guide section -->
+    <div>
+        {% include newcomers-contribute-guide.html %}
+    </div>
+
+    <!-- tutorial section -->
+    <div>
+        <div class="tutorials-heading-section">
+            <h2 class="tutorials-sub-heading">Tutorials</h2>
+            <h5 style="text-align: center;">Checkout some of the resources to get going</h5>
+        </div>
+        {% include tutorials-table.html %}
+    </div>
+
+    <!-- join community section -->
+    <div>
+        {% include join-community.html %}
+    </div>
+
+</section>
