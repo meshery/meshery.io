@@ -239,7 +239,11 @@ components:
   colorIcon: assets/images/integration/kong-mesh/components/mesh-trust/icons/color/mesh-trust-color.svg
   whiteIcon: assets/images/integration/kong-mesh/components/mesh-trust/icons/white/mesh-trust-white.svg
   description: 
-componentsCount: 57
+- name: workload
+  colorIcon: assets/images/integration/kong-mesh/components/workload/icons/color/workload-color.svg
+  whiteIcon: assets/images/integration/kong-mesh/components/workload/icons/white/workload-white.svg
+  description: 
+componentsCount: 58
 relationships: 
 relationshipsCount: 0
 featureList: [
