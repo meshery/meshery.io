@@ -3,27 +3,24 @@
 		<div class="footer-columns">
 			{% for column in site.data.footer %}
 			<ul class="footer-links">
-				   <li>
-					   <h2>
-					   {% if column.title == 'Resources' or column.title == 'Socials' %}
-						   <span>
-							   {% if column.social_icon %}
-							   {% include social-icon.html icon=column.social_icon %}
-							   {% endif %}
-							   {{ column.title }}
-						   </span>
-					   {% else %}
-						   <a {% if column.new_window %}target="_blank" {% endif %}
-							   href="{% include relative-src.html src=column.link %}" {% if column.social_icon
-							   %}class="{{ column.social_icon || downcase }}-icon" {% endif %}>
-							   {% if column.social_icon %}
-							   {% include social-icon.html icon=column.social_icon %}
-							   {% endif %}
-							   {{ column.title }}
-						   </a>
-					   {% endif %}
-					   </h2>
-				   </li>
+				<li>
+					<h2>
+						{% if column.title == 'Resources' or column.title == 'Socials' %}
+							{% if column.social_icon %}
+							{% include social-icon.html icon=column.social_icon %}
+							{% endif %}
+							{{ column.title }}
+						{% else %}
+						<a {% if column.new_window %}target="_blank" {% endif %}
+							href="{% include relative-src.html src=column.link %}" {% if column.social_icon
+							%}class="{{ column.social_icon || downcase }}-icon" {% endif %}>
+							{% if column.social_icon %}
+							{% include social-icon.html icon=column.social_icon %}
+							{% endif %}
+							{{ column.title }}</a>
+						{% endif %}
+					</h2>
+				</li>
 				{% for link in column.links %}
 				<li><a {% if link.new_window %}target="_blank" {% endif %}
 						href="{% include relative-src.html src=link.link %}" {% if link.social_icon
