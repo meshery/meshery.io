@@ -9,7 +9,7 @@ docURL: https://docs.meshery.io/extensibility/integrations/spiffe
 description: 
 category: Security & Compliance
 subcategory: Key Management
-registrant: Artifact Hub
+registrant: GitHub
 components: 
 componentsCount: 0
 relationships: 

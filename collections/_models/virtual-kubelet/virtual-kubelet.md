@@ -9,7 +9,7 @@ docURL: https://docs.meshery.io/extensibility/integrations/virtual kubelet
 description: 
 category: Serverless
 subcategory: Installable Platform
-registrant: Artifact Hub
+registrant: GitHub
 components: 
 componentsCount: 0
 relationships: 
