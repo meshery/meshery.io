@@ -70,44 +70,6 @@
  
     <body style="overflow-x: hidden" class="dark-mode">
 
-      <script>
-        const body = document.body;
-    
-        if (localStorage.getItem("mode") === "light-mode") {
-          body.classList.remove("dark-mode");
-    
-          let allLogos = document.querySelectorAll("#logo-dark-light");
-          allLogos.forEach(e => e.src = e.dataset.logoForLight);
-        }
-    
-        // Automatically set logos based on initial theme
-        window.addEventListener('load', () => {
-          let allLogos = document.querySelectorAll("#logo-dark-light");
-          allLogos.forEach(e => {
-            e.src = body.classList.contains("dark-mode") ? e.dataset.logoForDark : e.dataset.logoForLight;
-          });
-          
-          // emit the theme event 
-          document.dispatchEvent(new CustomEvent("themeChange",{
-			      detail : {value : localStorage.getItem("mode")},
-			      bubbles: true ,
-		      }))
-        });
-
-
-        document.addEventListener("DOMContentLoaded", function() {
-          // $('.sitewide-banner').animate({top: 0});
-          const banner = document.querySelector(".sitewide-banner");
-          if (!banner) {
-            return;
-          }
-          setTimeout(function() {
-            banner.classList.remove("hidden");
-            
-          }, 0); // Add a delay of 1 second before showing the banner
-        });
-      </script>
-
     {% if page.title != "Meshery | The Kubernetes and Cloud Native Manager" and page.title != "Programs" %}
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KL6SSW5" height="0" width="0"
@@ -132,20 +94,63 @@
       <div class="project-name">
         <a href="{{ site.baseurl }}/">
           <img src="{{ site.baseurl }}/assets/images/logos/meshery-logo.png" alt="Meshery Logo" />&nbsp;
-          <img src="{{ site.baseurl }}/assets/images/logos/meshery-logo-text.png"
-            data-logo-for-dark="{{ site.baseurl }}/assets/images/logos/meshery-logo-text.png"
-            data-logo-for-light="{{ site.baseurl }}/assets/images/logos/meshery-logo-text-dark.png" alt="Meshery Logo"
-            id="logo-dark-light" />
+          <img id="logo-dark-light" 
+            data-logo-for-dark="{{ site.baseurl }}/assets/images/logos/meshery-logo-text.png" 
+            data-logo-for-light="{{ site.baseurl }}/assets/images/logos/meshery-logo-text-dark.png" 
+            alt="Meshery Logo"/>
         </a>
       </div>
       {% include navigation.html %}
       <button class="nav-mode-icon" id="mode-toggle-btn" style="text-align: center; background: transparent;">
         <img class="nav-text" id="logo-dark-light"
-          src="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-moon.png"
           data-logo-for-dark="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-moon.png"
           data-logo-for-light="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-sun.png" alt="theme-logo" />
       </button>
     </div>
   </header>
+  <script>
+    const body = document.body;
+    const isLightMode = localStorage.getItem("mode") === "light-mode";
+
+    // 1. Set the body class immediately to prevent flickering
+    if (isLightMode) {
+      body.classList.remove("dark-mode");
+    } else {
+      body.classList.add("dark-mode");
+    }
+
+    // 2. Set the image sources ONCE
+    // This function prevents duplicate downloads by checking the theme before assigning src
+    const setLogos = () => {
+      const allLogos = document.querySelectorAll("#logo-dark-light");
+      allLogos.forEach(e => {
+        const targetSrc = body.classList.contains("dark-mode") 
+                          ? e.dataset.logoForDark 
+                          : e.dataset.logoForLight;
+        
+        if (e.src !== targetSrc) {
+          e.src = targetSrc;
+        }
+      });
+    };
+
+    setLogos();
+
+    window.addEventListener('load', () => {
+      setLogos();
+      
+      document.dispatchEvent(new CustomEvent("themeChange", {
+        detail: { value: localStorage.getItem("mode") },
+        bubbles: true,
+      }));
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const banner = document.querySelector(".sitewide-banner");
+      if (banner) {
+        setTimeout(() => banner.classList.remove("hidden"), 0);
+      }
+    });
+  </script>
   </body>
 </html>
