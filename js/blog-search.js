@@ -182,10 +182,9 @@
   // Clear search and show original posts
   function clearSearch() {
     const currentPath = window.location.pathname;
-    const isCategoryPage = currentPath.includes('/blog/category/');
 
-    if (isCategoryPage || currentPath.includes('/blog')) {
-      window.location.href = '/blog';
+    if (currentPath.includes('/blog')) {
+      window.location.href = (window.siteBaseUrl || '') + '/blog';
       return;
     }
   }
