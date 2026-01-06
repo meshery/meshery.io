@@ -25,7 +25,7 @@ Tailored for developers possessing intermediate skills in Go, React, and OpenAPI
 - **Prerequisites:** Proficiency in Git and GitHub, familiar with Meshery’s architecture, and healthy understanding of open source collaboration.
 - **Key Focus:** Ability to competently participate as an open source contributor across the core collection of Meshery’s architectural domains, demonstrating understanding of code (Go, JavaScript), documentation, and CI-based project enhancements.
 - **Exam Format:** Multiple-choice/online assessment
-- **Project Contributions:** There is no minimum number of project contributions, like accepted pull requests (PRs) that are required for certification. However, successful candidates of the
+- **Project Contributions:** There is no minimum number of project contributions, like accepted pull requests (PRs) that are required for certification. However, successful candidates of this program typically demonstrate a sustained history of meaningful contributions to Meshery projects such as well-reviewed pull requests, documentation and tutorial improvements, issue triage and resolutions, and active participation in community discussions which collectively demonstrates the skills, judgement, and commitment required for certification.
 - **Duration:** 2 hours
 - **Passing Rate:** 70%
 - **Cost:** Free
