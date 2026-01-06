@@ -181,20 +181,12 @@
 
   // Clear search and show original posts
   function clearSearch() {
-    const resultsContainer = document.getElementById('search-results');
-    const blogPosts = document.querySelector('.blog-posts');
-    const searchSummary = document.getElementById('search-summary');
-    const searchInput = document.getElementById('blog-search-input');
-    const clearButton = document.getElementById('clear-search-btn');
+    const currentPath = window.location.pathname;
 
-    if (resultsContainer) resultsContainer.style.display = 'none';
-    if (blogPosts) blogPosts.style.display = 'block';
-    if (searchSummary) {
-      searchSummary.textContent = '';
-      searchSummary.style.display = 'none';
+    if (currentPath.includes('/blog')) {
+      window.location.href = (window.siteBaseUrl || '') + '/blog';
+      return;
     }
-    if (searchInput) searchInput.value = '';
-    if (clearButton) clearButton.style.display = 'none';
   }
 
   // Debounce function to limit search requests
