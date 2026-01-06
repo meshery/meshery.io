@@ -12,16 +12,16 @@ Meshery's recognition programs are designed to acknowledge and celebrate the mil
 <img src="/assets/images/community/recognition-program.png" style="width:75%" />
 </div>
 
-<h3 style="text-align:left">Badges</h3>
+<h3>Badges</h3>
 
 Meshery offers a variety of badges that users and contributors can earn by participating in the community, contributing to the project, or achieving specific milestones. These badges serve as a testament to your skills, dedication, and involvement in the Meshery ecosystem. Badges can be displayed on your profile, shared on social media, or included in your professional portfolio to showcase your accomplishments. User accomplishments and level of expertise are recognized with a collection of badges dedicated to offering credence to their skills and milestones.
 
-<h3 style="text-align:left">Certifications</h3>
+<h3>Certifications</h3>
 
 The Meshery Certification Program offers a structured pathway for professionals to validate their skills in managing and contributing to Meshery. The program includes certifications for administrators, developers, and open source contributors, each tailored to different levels of expertise and roles within the Meshery ecosystem.
 
 <div style="text-align: center;">
-<a href="https://kanvas.new/extension/meshmap?catalog-design=c2141477-379b-432e-b47e-1c89600235a5"><img alt="Certified Meshery Contributor Badge" src="/assets/images/posts/2025/certified-meshery-contributor/meshery-certification-program.png" style="max-width:400px"  /></a><br />
+<a href="https://kanvas.new/extension/meshmap?catalog-design=c2141477-379b-432e-b47e-1c89600235a5"><img alt="Certified Meshery Contributor Badge" src="/assets/images/posts/2025/certified-meshery-contributor/meshery-certification-program.png" style="width:100%;max-width:400px;"  /></a><br />
 <a href="https://kanvas.new/extension/meshmap?catalog-design=c2141477-379b-432e-b47e-1c89600235a5">Explore the Meshery Certification Program design</a>
 </div>
 
@@ -32,5 +32,4 @@ The first certification, [Certified Meshery Contributor (CMC)](/blog/certified-m
 The following community partners offer recognition programs in conjunction with Meshery. These programs are designed to recognize and reward contributions to the Meshery project and your participation in the Meshery ecosystem:
 
 - *[Layer5](https://badges.layer5.io)* - Badges are one of the many ways that we recognize the efforts of our contributors and uplift our users. Badges represent milestones that you achieve both in using and in contributing to Meshery. As a contributor, this is how you demonstrate your ownership, dedication, skills and commitment. As a user, this is how you demonstrate your prowess, milestones, and meaningful engagement.
-
 - *[Add your program here](https://github.com/meshery/meshery.io/pulls)* - Add your recognition program to this list by [submitting a pull request](https://github.com/meshery/meshery.io/pulls).
