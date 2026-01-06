@@ -17,22 +17,22 @@ jobs:
       contentID: ${{ steps.update_catalog_patterns.outputs.contentID }}
     steps:
       - name: Checkout meshery.io repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: meshery.io
           token: ${{ secrets.GH_ACCESS_TOKEN }}
 
       - name: Checkout meshery/meshery repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: meshery/meshery
           path: meshery
           token: ${{ secrets.GH_ACCESS_TOKEN }}
 
       - name: Set up Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6
         with:
-          go-version: '1.23'
+          go-version: '1.25.5'
 
       - name: Set env
         run: |
@@ -155,10 +155,10 @@ jobs:
           git pull origin master
         
       - name: Commit changes to meshery/meshery repo
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           repository: ./meshery
-          commit_user_name: l5io
+          commit_user_name: meshery-ci
           commit_user_email: ci@meshery.io
           commit_options: "--signoff"
           commit_message: "[Docs] Update _catalog collection"
@@ -170,28 +170,37 @@ jobs:
           git pull origin master
 
       - name: Commit changes to meshery.io repo
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           repository: ./meshery.io
-          commit_user_name: l5io
+          commit_user_name: meshery-ci
           commit_user_email: ci@meshery.io
           commit_options: '--signoff'
-          commit_message: '[Catalog] Update Catalog content'
+          commit_message: '[Catalog] Content Update'
           branch: master
 
       - name: Send Email on Workflow Failure
         if: ${{ failure() }}
-        uses: dawidd6/action-send-mail@v6
+        uses: dawidd6/action-send-mail@v7
         with:
           server_address: smtp.gmail.com
           server_port: 465
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: GitHub Actions - Workflow Failure
-          from: |
-            "Catalog Update Workflow"
+          from: "Catalog Workflow"
           to: developers@meshery.io
           body: |
-            Meshery's Add Cloud Native Catalog Items <a href="https://github.com/meshery/meshery.io/actions/workflows/add-catalog.yml">workflow</a> encountered error(s). Refer to the attached error log for details or review the [results of the failed workflow](https://github.com/meshery/meshery.io/actions/runs/${{ github.run_id }}).
+            Meshery's Add Cloud Native Catalog Items workflow failed.
+
+            Repository : ${{ github.repository }}
+            Branch     : ${{ github.ref_name }}
+            Commit     : ${{ github.sha }}
+            Event      : ${{ github.event_name }}
+            Run        : ${{ github.workflow }} / job ${{ github.job }} (run #${{ github.run_number }})
+            Actor      : ${{ github.actor }}
+
+            Review the run logs: https://github.com/meshery/meshery.io/actions/runs/${{ github.run_id }}
+            The attached err.txt contains the captured error output.
 
           attachments: err.txt
