@@ -50,7 +50,7 @@ For further information, refer to the [Meshery Docs](https://docs.meshery.io).
 ## Join the Meshery community!
 
 <a name="contributing"></a><a name="community"></a>
-Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://meshery.io/community/newcomers/">Newcomers' Guide</a> for a tour of resources available to you and jump into our <a href="https://slack.meshery.io">Slack</a> to engage!
+Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://layer5.io/community/newcomers">Newcomers' Guide</a> for a tour of resources available to you and jump into our <a href="https://slack.meshery.io">Slack</a> to engage!
 
 <p style="clear:both;">
 <a href ="https://meshery.io/community"><img src="/assets/images/logos/meshmate-dark.svg" data-logo-for-dark="/assets/images/logos/meshmate-light.svg"
