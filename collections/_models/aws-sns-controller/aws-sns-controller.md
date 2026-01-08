@@ -43,16 +43,16 @@ componentsCount: 7
 relationships: 
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between Topic and Subscription "
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between PlatformEndpoint and Subscription "
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship ECS services publish notifications to SNS topics"
+  description: ""
 - type: "parent"
   kind: "hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+  description: ""
 relationshipsCount: 4
 featureList: [
   "Message fanout: Each account can support 100,000 Standard topics and each topic supports up to 12.5M subscriptions.",
