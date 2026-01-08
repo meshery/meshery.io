@@ -23,13 +23,13 @@ componentsCount: 2
 relationships: 
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between PrometheusRuleGroup and Account(azure-monitor)"
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between SmartDetectorAlertRule and ActionGroup(azure-insights)"
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between SmartDetectorAlertRule and Components(azure-insights)"
+  description: ""
 relationshipsCount: 3
 featureList: [
   "Drag-n-drop cloud native infrastructure designer to configure, model, and deploy your workloads.",

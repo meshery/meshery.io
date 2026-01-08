@@ -63,19 +63,19 @@ componentsCount: 12
 relationships: 
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between ReplicationGroup and UserGroup"
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship EC2 instances use ElastiCache (Redis/Memcached) for caching"
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship Lambda functions cache data in ElastiCache to reduce latency"
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between cachecluster and CacheParameterGroup"
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between cachecluster and CacheSubnetGroup"
+  description: ""
 relationshipsCount: 5
 featureList: [
   "Fully managed Redis and Memcached",
