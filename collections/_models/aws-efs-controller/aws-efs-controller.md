@@ -39,22 +39,22 @@ componentsCount: 6
 relationships: 
 - type: "binding"
   kind: "edge"
-  description: "An edge relationship EC2 instances mount EFS file systems for shared storage across instances"
+  description: ""
 - type: "binding"
   kind: "edge"
-  description: "An edge relationship Lambda can mount EFS for persistent storage and shared data"
+  description: ""
 - type: "binding"
   kind: "edge"
-  description: "An edge relationship ECS tasks mount EFS volumes for persistent container storage"
+  description: ""
 - type: "binding"
   kind: "edge"
-  description: "An edge relationship EKS pods use EFS as PersistentVolumes via CSI driver"
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between accesspoint and filesystem"
+  description: ""
 - type: "parent"
   kind: "hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of (parent component) is patched with the configuration of (child component). "
+  description: ""
 relationshipsCount: 6
 featureList: [
   "Scalable and elastic file storage",
