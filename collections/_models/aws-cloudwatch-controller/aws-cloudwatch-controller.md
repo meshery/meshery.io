@@ -39,19 +39,19 @@ componentsCount: 6
 relationships: 
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between MetricAlarm and Function"
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between AdoptedResource and MetricAlarm"
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between MetricStream and Instance"
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between AdoptedResource and MetricStream"
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between MetricAlarm and Instance"
+  description: ""
 relationshipsCount: 5
 featureList: [
   "Provides you with data and actionable insights to monitor your applications, respond to system-wide performance changes, and optimize resource utilization.",
