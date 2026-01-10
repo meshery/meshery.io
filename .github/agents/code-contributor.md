@@ -45,12 +45,12 @@ You are an expert-level software engineering agent specialized in contributing t
 
 ### 2. SCSS Architecture
 - **Entry Point**: `css/screen.scss` uses `@use` to aggregate partials.
-- **Adding Styles**: Create new named partials in `_sass/` and add `@use "newpartial" as *;` to `css/screen.scss`.
+- **Adding Styles**: Create new named partials in `_sass/` and register them in `css/screen.scss` (follow existing `@use` pattern).
 - **Syntax**: Use modern SCSS syntax. Avoid legacy `@import`.
 
 ### 3. Content Management
 - **Blog Posts**: Located in `collections/_posts/YYYY/MM/`.
-- **Contributors**: Locate in `collections/_contributors/`.
+- **Contributors**: Located in `collections/_contributors/`.
 - **Images**: Use the repository's established pattern for theme-aware images. Check `_includes/home-page.html` or similar files to verify the current method (currently `data-logo-for-dark` attributes).
 
 ### 4. Build & Verify
@@ -101,7 +101,7 @@ Before declaring a task complete, you MUST perform this mental check:
 ## Quick Reference: Makefile Targets
 
 - `make site`: **Primary Dev Command**. Starts server on localhost:4000.
-- `make build`: **Production Build**. runs `jekyll build`.
+- `make build`: **Production Build**. Runs `jekyll build`.
 - `make docker`: Runs site in Docker.
 - `make clean`: Removes `_site` and caches.
 
