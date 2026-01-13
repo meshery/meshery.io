@@ -4,7 +4,7 @@ on: # rebuild any PRs and main branch changes
     types: [opened, synchronize, reopened]
   workflow_dispatch:
     inputs:
-      contentID: 
+      contentID:
         description: ID of the design to render.
         required: true
         type: string
@@ -14,7 +14,7 @@ on: # rebuild any PRs and main branch changes
         description: Remote location where the generated asset (screenshot) for the design will be stored.
   workflow_call:
     inputs:
-      contentID: 
+      contentID:
         description: ID of the design to render.
         required: true
         type: string
@@ -26,7 +26,7 @@ on: # rebuild any PRs and main branch changes
       resource_url:
         description: "The URL of the generated resource."
         value: ${{ jobs.KanvasScreenshot.outputs.resource_url }}
-permissions: 
+permissions:
   actions: read
   contents: write
   security-events: write
@@ -49,8 +49,8 @@ jobs:
           path: action
           repository: layer5labs/kanvas-snapshot
       - run: |
-         echo ${{ inputs.contentID }}
-         echo ${{ inputs.assetLocation }}
+          echo ${{ inputs.contentID }}
+          echo ${{ inputs.assetLocation }}
         shell: bash
       - id: test_result
         uses: layer5labs/Kanvas-Snapshot@v0.2.41

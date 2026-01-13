@@ -1,4 +1,4 @@
-@use 'mixins/flexbox' as *;
+@use "mixins/flexbox" as *;
 @use "./variables.scss" as *;
 .features {
 	@extend %flexbox;
@@ -16,7 +16,7 @@
 		box-shadow: rgba(0, 0, 0, 0.5) 2px 4px 2.5rem 0.5rem;
 		width: 100%;
 
-		&_li{
+		&_li {
 			margin: 0 25px;
 			margin-left: 35px;
 			text-align: left;
@@ -38,8 +38,7 @@
 				border-radius: 0.25em;
 			}
 		}
-		
-		
+
 		.highlighted {
 			text-align: center;
 			height: 5rem;
@@ -49,9 +48,9 @@
 			padding: 30px 15px;
 			// set text color to white
 			color: var(--color-secondary-light);
-			border-top-right-radius:0;
+			border-top-right-radius: 0;
 			border-top-left-radius: 0;
-			box-shadow: inset 0 2px 12.5px rgba(0,0,0,0.01);
+			box-shadow: inset 0 2px 12.5px rgba(0, 0, 0, 0.01);
 			text-transform: capitalize;
 		}
 
@@ -64,23 +63,21 @@
 				border-radius: 0 0 2px 2px;
 				border: 0;
 				color: var(--color-primary-light-tbase);
-
 			}
-			.start { 
+			.start {
 				text-align: center;
 				margin: auto;
 				position: relative;
-				background-color: var(  --brand-color-primary);
+				background-color: var(--brand-color-primary);
 				border-radius: 0 0 1.25rem 1.25rem;
 				&:hover {
-					background-color: var(--brand-color-secondary);	
+					background-color: var(--brand-color-secondary);
 					a:hover {
 						color: var(--color-secondary-light);
 						text-decoration: none;
 					}
 				}
 			}
-
 		}
 
 		@media #{$desktop} {
@@ -97,38 +94,38 @@
 }
 
 .container-slider {
-    position: relative;
-    width: 100%;
-    height: 45vh;
-    margin-right: 20px;
-    margin-top: 3rem;
-    -webkit-flex: 1;
-        flex: 1;
-    
-    .img {
-      position: absolute;
-	  display: flex;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-    }
-    .background-img {
-		background-image: url('../assets/images/gitops-snapshot.png');
-    }
-    .foreground-img {
-      background-image: url('../assets/images/gitops-yaml-content.png');
-      width: 50%;
+	position: relative;
+	width: 100%;
+	height: 45vh;
+	margin-right: 20px;
+	margin-top: 3rem;
+	-webkit-flex: 1;
+	flex: 1;
 
-      @media (min-width: 576px) { 
-        width: 50%;
-      }
+	.img {
+		position: absolute;
+		display: flex;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+	}
+	.background-img {
+		background-image: url("../assets/images/gitops-snapshot.png");
+	}
+	.foreground-img {
+		background-image: url("../assets/images/gitops-yaml-content.png");
+		width: 50%;
 
-      @media (min-width: 992px) {
-        width: 50%;
-      }
-    }
+		@media (min-width: 576px) {
+			width: 50%;
+		}
+
+		@media (min-width: 992px) {
+			width: 50%;
+		}
+	}
 	&:hover .overlay,
 	&:hover .gradient-box-before,
 	&:hover .gradient-box-after {
@@ -143,8 +140,8 @@
 	width: 100%;
 	height: 50%;
 	background: rgba(0, 0, 0, 0.3); // adjust the color and opacity as needed
-  }
-  
+}
+
 .gradient-box-before {
 	position: absolute;
 	top: 50%;
@@ -152,7 +149,7 @@
 	padding: 10px;
 	background-color: #00d3a9;
 	color: rgb(255, 255, 255);
-	font-size: 15px; 
+	font-size: 15px;
 	border-radius: 4px;
 }
 .gradient-box-after {
@@ -163,17 +160,15 @@
 	background-color: #00d3a9;
 	color: rgb(255, 255, 255);
 	border-radius: 4px;
-	font-size: 15px; 
+	font-size: 15px;
 }
-
-
 
 @mixin center() {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-  }
-  
+}
+
 .slider {
 	position: absolute;
 	border-radius: 5px;
@@ -181,12 +176,12 @@
 	appearance: none;
 	width: 100%;
 	height: 100%;
-	background: rgba(#f2f2f2, .10) !important;
+	background: rgba(#f2f2f2, 0.1) !important;
 	outline: none;
 	margin: 0;
-	transition: all .2s;
+	transition: all 0.2s;
 	@include center;
-	
+
 	&::-webkit-slider-thumb {
 		-webkit-appearance: none;
 		appearance: none;
@@ -201,7 +196,6 @@
 			height: 45vh;
 		}
 	}
-	
 
 	@media (max-width: 992px) {
 		&::-webkit-slider-thumb {
@@ -210,33 +204,31 @@
 	}
 }
 
-
-
 .slider-button {
-    $size: 30px;
-    pointer-events: none;
-    position: absolute;
-    width: $size;
-    height: $size;
-    border-radius: 50%;
-    background-color: white;
-    left: calc(50% - 18px);
-    top: 50%;
-    @include center;
-    
-    @mixin arrow-helper() {
-      content: '';
-      padding: 3px;
-      display: inline-block;
-      border: solid #5D5D5D;
-      border-width: 0 2px 2px 0;
-    }
-    &:after {
-      @include arrow-helper();
-      transform: rotate(-45deg);
-    }
-    &:before {
-      @include arrow-helper();
-      transform: rotate(135deg);
-    }
-  }
+	$size: 30px;
+	pointer-events: none;
+	position: absolute;
+	width: $size;
+	height: $size;
+	border-radius: 50%;
+	background-color: white;
+	left: calc(50% - 18px);
+	top: 50%;
+	@include center;
+
+	@mixin arrow-helper() {
+		content: "";
+		padding: 3px;
+		display: inline-block;
+		border: solid #5d5d5d;
+		border-width: 0 2px 2px 0;
+	}
+	&:after {
+		@include arrow-helper();
+		transform: rotate(-45deg);
+	}
+	&:before {
+		@include arrow-helper();
+		transform: rotate(135deg);
+	}
+}

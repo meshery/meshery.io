@@ -1,112 +1,104 @@
 [
-    {
-        "name" : "HTTP Auth",
-        "filters": 
-          {
-              "type": "wasm filter",
-              "compatibility": [""],
-              "technology": "WebAssembly",
-              "version": "v0.2.3"
-          },
-          "filterId" : "FILTER001",
-          "image" : "/assets/images/webassembly_logo.svg",
-          "filterInfo" : "Simulates handling authentication of requests at proxy level. Requests with a header token with value hello are accepted as authorized while the rest unauthorized. The actual authentication is handled by the Upstream server. Whenever the proxy receives a request it extracts the token header and makes a request to the Upstream server which validates the token and returns a response.",
-          "filterCaveats" : "Test:<br /> <code>curl  -H \"token\":\"hello\" 0.0.0.0:18000 -v # Authorized</code> <br /> <code>curl  -H \"token\":\"world\" 0.0.0.0:18000 -v # Unauthorized</code>",
-          "URL" : "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/http_auth_bg.wasm",
-          "downloadLink":"https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/http_auth_bg.wasm"
-    },
-    {
-        "name" : "TCP Metrics",
-        "filters": 
-          {
-              "type": "wasm filter",
-              "compatibility": [""],
-              "technology": "WebAssembly",
-              "version": "v0.2.3"
-          },
-          "filterId" : "FILTER002",
-          "image" : "/assets/images/webassembly_logo.svg",
-          "filterInfo" : "Collects simple metrics for every TCP packet and logs it.",
-          "filterCaveats" : "Test:<code>curl 0.0.0.0:18000 -v -d \"request body\"</code><p>Check the logs for the metrics.</p>",
-          "URL" : "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/tcp_metrics_bg.wasm",
-          "downloadLink":"https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/tcp_metrics_bg.wasm"
-    },
-    {
-        "name" : "TCP Packet Parse",
-        "filters": 
-          {
-              "type": "wasm filter",
-              "compatibility": [""],
-              "technology": "WebAssembly" 
-          },
-          "filterId" : "FILTER003",
-          "image" : "/assets/images/webassembly_logo.svg",
-          "filterInfo" : "Parses the contents of every TCP packet the proxy receives and logs it.",
-          "filterCaveats" : "Test:<br/><code>curl 0.0.0.0:18000 -v -d \"request body\"</code><p>Check the logs for the packet contents.</p>",
-          "URL" : "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/tcp_packet_parse_bg.wasm",
-          "downloadLink": "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/tcp_packet_parse_bg.wasm"
-    },
-    {
-        "name" : "Singleton HTTP Call",
-        "filters": 
-          {
-              "type": "wasm filter",
-              "compatibility": [""],
-              "technology": "WebAssembly" 
-          },
-          "filterId" : "FILTER004",
-          "image" : "/assets/images/webassembly_logo.svg",
-          "filterInfo" : "The filter is responsible for intercepting HTTP requests, authorizing them based on the stored cache, and performing rate limiting. In the context of the envoy, this component is an HTTP filter and gets executed in the worker threads. For each request, a context object gets created.",
-          "filterCaveats" : "llam tristique tristique condimentum. Maecenas sollicitudin scelerisque egestas. Suspendisse aliquet elit quis dolor gravida, et auctor ligula ornare. Nullam et sodales ante, quis varius elit. Nullam cursus, orci eleifend tristique semper, neque nisl tincidunt purus, sed ultricies felis arcu vel metus. ",
-          "URL" : "",
-          "downloadLink":"https://raw.githubusercontent.com/layer5io/wasm-filters/master/singleton_http_call_bg.wasm"
-    },
-    {
-        "name" : "Metrics Store",
-        "filters": 
-          {
-              "type": "wasm filter",
-              "compatibility": [""],
-              "technology": "WebAssembly",
-              "version": "v0.2.3"
-          },
-          "filterId" : "FILTER005",
-          "image" : "/assets/images/webassembly_logo.svg",
-          "filterInfo" : "This example showcases communication between a WASM filter and a service via shared queue. It combines the `Singleton-HTTP-Call` and `TCP-Metrics` examples. The filter collects metrics and enqueues it onto the queue while the service dequeues it and sends it to upstream server where it is stored.",
-          "filterCaveats" : "Test:<code>curl 0.0.0.0:18000 -v -d \"request body\" # make a few of these calls</code><br /><code>curl 0.0.0.0:8080/retrieve -v # Retrieves the stored stats <br /> # x | y | z  === x : downstream bytes, y : upstream bytes, z: the latency for application server to respond</code>",
-          "URL" : "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/metrics_collector_bg.wasm",
-          "downloadLink":"https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/metrics_collector_bg.wasm"
-    },
-    {
-        "name" : "Singleton Queue",
-        "filters": 
-          {
-              "type": "wasm filter",
-              "compatibility": [""],
-              "technology": "WebAssembly" 
-          },
-          "filterId" : "FILTER006",
-          "image" : "/assets/images/webassembly_logo.svg",
-          "filterInfo" : "An example which depicts an singleton HTTP WASM service which does an HTTP call once every 2 seconds.",
-          "filterCaveats" : "Check the logs for the response of the request.",
-          "URL" : "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/singleton_http_call_bg.wasm",
-          "downloadLink":"https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/singleton_http_call_bg.wasm"
-    },
-    {
-        "name" : "JWT Filter",
-        "filters": 
-          {
-              "type": "wasm filter",
-              "compatibility": [""],
-              "technology": ["WebAssembly", "JWT"],
-              "version": "v0.2.3"
-          },
-          "filterId" : "FILTER007",
-          "image" : "/assets/images/webassembly_logo.svg",
-          "filterInfo" : "Sample configuration to be passed:<code>{<br />\"add_header\": [<br />    [\"header1\",\"value1\"],<br /> [\"header2\",\"value2\"]<br />  ],<br /> \"del_header\":[ <br />\"header1\"<br />            ],<br />\"add_payload\": [<br />  [\"payload1\",\"value1\"],<br /> [\"payload2\",\"value2\"],<br />],<br /> \"del_payload\":[<br /> \"payload1\"<br />],<br />\"payload_to_header\": [<br />\"payload2\"<br />],<br />\"header_to_payload\": [<br />\"header2\"<br />]<br />}</code>",
-          "filterCaveats" : "DISCLAIMER: This filter doesn't regenerate the signature of the modified JWT, and provides no protections. Proceed with caution.",
-          "URL" : "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/jwt_filter_bg.wasm",
-          "downloadLink":"https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/jwt_filter_bg.wasm"
-    }
-
+	{
+		"name": "HTTP Auth",
+		"filters": {
+			"type": "wasm filter",
+			"compatibility": [""],
+			"technology": "WebAssembly",
+			"version": "v0.2.3"
+		},
+		"filterId": "FILTER001",
+		"image": "/assets/images/webassembly_logo.svg",
+		"filterInfo": "Simulates handling authentication of requests at proxy level. Requests with a header token with value hello are accepted as authorized while the rest unauthorized. The actual authentication is handled by the Upstream server. Whenever the proxy receives a request it extracts the token header and makes a request to the Upstream server which validates the token and returns a response.",
+		"filterCaveats": "Test:<br /> <code>curl  -H \"token\":\"hello\" 0.0.0.0:18000 -v # Authorized</code> <br /> <code>curl  -H \"token\":\"world\" 0.0.0.0:18000 -v # Unauthorized</code>",
+		"URL": "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/http_auth_bg.wasm",
+		"downloadLink": "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/http_auth_bg.wasm"
+	},
+	{
+		"name": "TCP Metrics",
+		"filters": {
+			"type": "wasm filter",
+			"compatibility": [""],
+			"technology": "WebAssembly",
+			"version": "v0.2.3"
+		},
+		"filterId": "FILTER002",
+		"image": "/assets/images/webassembly_logo.svg",
+		"filterInfo": "Collects simple metrics for every TCP packet and logs it.",
+		"filterCaveats": "Test:<code>curl 0.0.0.0:18000 -v -d \"request body\"</code><p>Check the logs for the metrics.</p>",
+		"URL": "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/tcp_metrics_bg.wasm",
+		"downloadLink": "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/tcp_metrics_bg.wasm"
+	},
+	{
+		"name": "TCP Packet Parse",
+		"filters": {
+			"type": "wasm filter",
+			"compatibility": [""],
+			"technology": "WebAssembly"
+		},
+		"filterId": "FILTER003",
+		"image": "/assets/images/webassembly_logo.svg",
+		"filterInfo": "Parses the contents of every TCP packet the proxy receives and logs it.",
+		"filterCaveats": "Test:<br/><code>curl 0.0.0.0:18000 -v -d \"request body\"</code><p>Check the logs for the packet contents.</p>",
+		"URL": "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/tcp_packet_parse_bg.wasm",
+		"downloadLink": "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/tcp_packet_parse_bg.wasm"
+	},
+	{
+		"name": "Singleton HTTP Call",
+		"filters": {
+			"type": "wasm filter",
+			"compatibility": [""],
+			"technology": "WebAssembly"
+		},
+		"filterId": "FILTER004",
+		"image": "/assets/images/webassembly_logo.svg",
+		"filterInfo": "The filter is responsible for intercepting HTTP requests, authorizing them based on the stored cache, and performing rate limiting. In the context of the envoy, this component is an HTTP filter and gets executed in the worker threads. For each request, a context object gets created.",
+		"filterCaveats": "llam tristique tristique condimentum. Maecenas sollicitudin scelerisque egestas. Suspendisse aliquet elit quis dolor gravida, et auctor ligula ornare. Nullam et sodales ante, quis varius elit. Nullam cursus, orci eleifend tristique semper, neque nisl tincidunt purus, sed ultricies felis arcu vel metus. ",
+		"URL": "",
+		"downloadLink": "https://raw.githubusercontent.com/layer5io/wasm-filters/master/singleton_http_call_bg.wasm"
+	},
+	{
+		"name": "Metrics Store",
+		"filters": {
+			"type": "wasm filter",
+			"compatibility": [""],
+			"technology": "WebAssembly",
+			"version": "v0.2.3"
+		},
+		"filterId": "FILTER005",
+		"image": "/assets/images/webassembly_logo.svg",
+		"filterInfo": "This example showcases communication between a WASM filter and a service via shared queue. It combines the `Singleton-HTTP-Call` and `TCP-Metrics` examples. The filter collects metrics and enqueues it onto the queue while the service dequeues it and sends it to upstream server where it is stored.",
+		"filterCaveats": "Test:<code>curl 0.0.0.0:18000 -v -d \"request body\" # make a few of these calls</code><br /><code>curl 0.0.0.0:8080/retrieve -v # Retrieves the stored stats <br /> # x | y | z  === x : downstream bytes, y : upstream bytes, z: the latency for application server to respond</code>",
+		"URL": "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/metrics_collector_bg.wasm",
+		"downloadLink": "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/metrics_collector_bg.wasm"
+	},
+	{
+		"name": "Singleton Queue",
+		"filters": {
+			"type": "wasm filter",
+			"compatibility": [""],
+			"technology": "WebAssembly"
+		},
+		"filterId": "FILTER006",
+		"image": "/assets/images/webassembly_logo.svg",
+		"filterInfo": "An example which depicts an singleton HTTP WASM service which does an HTTP call once every 2 seconds.",
+		"filterCaveats": "Check the logs for the response of the request.",
+		"URL": "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/singleton_http_call_bg.wasm",
+		"downloadLink": "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/singleton_http_call_bg.wasm"
+	},
+	{
+		"name": "JWT Filter",
+		"filters": {
+			"type": "wasm filter",
+			"compatibility": [""],
+			"technology": ["WebAssembly", "JWT"],
+			"version": "v0.2.3"
+		},
+		"filterId": "FILTER007",
+		"image": "/assets/images/webassembly_logo.svg",
+		"filterInfo": "Sample configuration to be passed:<code>{<br />\"add_header\": [<br />    [\"header1\",\"value1\"],<br /> [\"header2\",\"value2\"]<br />  ],<br /> \"del_header\":[ <br />\"header1\"<br />            ],<br />\"add_payload\": [<br />  [\"payload1\",\"value1\"],<br /> [\"payload2\",\"value2\"],<br />],<br /> \"del_payload\":[<br /> \"payload1\"<br />],<br />\"payload_to_header\": [<br />\"payload2\"<br />],<br />\"header_to_payload\": [<br />\"header2\"<br />]<br />}</code>",
+		"filterCaveats": "DISCLAIMER: This filter doesn't regenerate the signature of the modified JWT, and provides no protections. Proceed with caution.",
+		"URL": "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/jwt_filter_bg.wasm",
+		"downloadLink": "https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/jwt_filter_bg.wasm"
+	}
 ]

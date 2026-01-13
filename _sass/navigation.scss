@@ -1,12 +1,11 @@
 @use "./mixins/transitions.scss" as *;
 @use "./variables.scss" as *;
 nav {
-	font-size: .8rem;
+	font-size: 0.8rem;
 	width: fit-content;
 	padding-left: 0rem;
+	margin-left: 0.25rem;
 	margin-left: auto;
-	position: relative;
-	z-index: $z-index-nav;
 
 	@media #{$mid-point} {
 		padding-right: 1rem;
@@ -25,13 +24,13 @@ nav {
 	justify-content: space-between;
 	align-items: center;
 }
-.stellarnav.desktop{
+.stellarnav.desktop {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
 }
-.stellarnav.mobile{
-	text-align: end!important;
+.stellarnav.mobile {
+	text-align: end !important;
 }
 
 .nav-list {
@@ -43,16 +42,15 @@ nav {
 	border-radius: 3px;
 }
 
-.nav-item:not(.has-sub) > a:not(.highlight).nav-text{
+.nav-item:not(.has-sub) > a:not(.highlight).nav-text {
 	position: relative;
-	&:hover{
-
-		&::after{
-		  width: 100%;
+	&:hover {
+		&::after {
+			width: 100%;
 		}
-	  }
+	}
 
-	  &::after{
+	&::after {
 		content: "";
 		width: 0px;
 		height: 2px;
@@ -61,52 +59,52 @@ nav {
 		transform: translateX(-50%);
 		position: absolute;
 		background: var(--background-primary);
-		transition: width .3s;
-	  }
+		transition: width 0.3s;
+	}
 }
 
 .nav-text {
-	font-size: .9rem !important;
+	font-size: 0.9rem !important;
 	@media (min-width: 840px) {
 		padding: 0.5rem !important;
-		
-		margin: 0px 3px; 
+
+		margin: 0px 3px;
 		color: var(--color-secondary-medium) !important;
 	}
-	& { cursor: pointer; }
+	& {
+		cursor: pointer;
+	}
 }
 
-.nav-mode-icon{
-
+.nav-mode-icon {
 	border: none;
-	background: transparent;      
+	background: transparent;
 	margin-top: 0;
-	
+
 	& > img {
-		margin-left: .5rem;
+		margin-left: 0.5rem;
 		width: 2rem;
 		height: 2rem;
 		filter: var(--image-color);
-		transition: filter .3s;
+		transition: filter 0.3s;
 	}
 }
 
 a.nav-text:hover {
 	color: var(--color-secondary-dark) !important;
-
 }
 
 .nav-img {
 	width: 2rem;
 	height: 1.5rem;
-	filter:var(--image-filter-light);
+	filter: var(--image-filter-light);
 	padding-left: 0.5rem;
 }
 
 .menu-toggle {
 	color: var(--color-secondary-medium) !important;
-	& .bars span{
-		background-color:var(--color-secondary-dark) !important ;
+	& .bars span {
+		background-color: var(--color-secondary-dark) !important ;
 	}
 }
 
@@ -116,39 +114,38 @@ a.nav-text:hover {
 }
 
 .stellarnav.desktop li.has-sub a {
-    padding-right: 1rem;
-	&::after{
+	padding-right: 1rem;
+	&::after {
 		transform: translateY(-1.5px);
 	}
 
-	&.sublink-active{
-		&::after{
+	&.sublink-active {
+		&::after {
 			border-top: 6px solid;
 		}
 	}
-	&:hover{
+	&:hover {
 	}
 }
 
-
 .stellarnav ul {
-	width:fit-content;
-	// margin-top: 0.5rem;
-	& ul{
-  	border-radius: 5px;
-	background-color: var(--color-secondary-light);
-	background-color: #dee2e6;
-	background-image: var(--background-grey);
-	overflow: hidden;
 	width: fit-content;
-	box-shadow: var(--box-shadow-primary);
+	// margin-top: 0.5rem;
+	& ul {
+		border-radius: 5px;
+		background-color: var(--color-secondary-light);
+		background-color: #dee2e6;
+		background-image: var(--background-grey);
+		overflow: hidden;
+		width: fit-content;
+		box-shadow: var(--box-shadow-primary);
 	}
 }
 
 .stellarnav li.has-sub > a:after {
-	border-top: 6px solid var(--color-secondary-medium); display: inline-block;
+	border-top: 6px solid var(--color-secondary-medium);
+	display: inline-block;
 }
-
 
 .sub-nav-li {
 	@include btn-hover-secondary;
@@ -156,34 +153,33 @@ a.nav-text:hover {
 	display: flex;
 	align-items: center;
 
-	&--active{
-		&::after{
-			width: 100%  !important;
+	&--active {
+		&::after {
+			width: 100% !important;
 		}
-		&  a{
+		& a {
 			color: #fff !important;
 			border-color: white;
 		}
-		& img{
-			filter:brightness(0) invert(1);
+		& img {
+			filter: brightness(0) invert(1);
 		}
 	}
 
-	&:hover{
-		& img{
-			filter:brightness(0) invert(1);
+	&:hover {
+		& img {
+			filter: brightness(0) invert(1);
 		}
 	}
-  
 }
 
-.nav-item a{
+.nav-item a {
 	white-space: nowrap;
 }
 
 .subnav-item {
 	white-space: nowrap;
-	width:100%;
+	width: 100%;
 	background-size: cover;
 	display: flex !important;
 	justify-content: space-between;
@@ -193,7 +189,7 @@ a.nav-text:hover {
 .nav-sublink-logo {
 	max-width: 10px;
 	vertical-align: top;
-	filter:var(--logo-filter);
+	filter: var(--logo-filter);
 }
 
 .active {
@@ -202,35 +198,33 @@ a.nav-text:hover {
 }
 
 .highlight.nav-text {
-	border:1px solid var(--color-grey-light);
-	&:hover{
+	border: 1px solid var(--color-grey-light);
+	&:hover {
 		color: white !important;
 	}
 }
 
-.highlight { 
-	color: #fff ;
+.highlight {
+	color: #fff;
 	border-radius: 7px;
-	padding: .5rem 1rem;
-	transition: all .4s;
-	background: #00B39F;
-	&:active{
-		transform: scale(.95);
+	padding: 0.5rem 1rem;
+	transition: all 0.4s;
+	background: #00b39f;
+	&:active {
+		transform: scale(0.95);
 	}
-	&:hover{
+	&:hover {
 		text-decoration: none;
 		background-color: #00d3a9;
 		color: white !important;
 	}
 }
 
-
 .stellarnav.mobile {
-	
-	& .nav-list{
-        position: absolute;
+	& .nav-list {
+		position: absolute;
 		width: 100%;
-		left:0;
+		left: 0;
 		translate: 0 -5px;
 		background: transparent;
 		background-color: var(--color-primary-light);
@@ -246,28 +240,26 @@ a.nav-text:hover {
 
 	& > ul > li > a {
 		padding: 15px !important;
-		
 	}
 
-	&  li a {
+	& li a {
 		color: var(--color-secondary-dark);
 	}
 
-	& .subnav-item{
+	& .subnav-item {
 		display: flex;
 		gap: 5px;
 	}
-	
 }
 
-@media screen and (max-width: 1140px)  {
+@media screen and (max-width: 1140px) {
 	.project-name {
 		padding-top: 10px;
 	}
 }
 
 @media screen and (max-width: 839px) {
-    .nav-mode-icon {
-        // padding-top: 10px;
-    }
+	.nav-mode-icon {
+		// padding-top: 10px;
+	}
 }

@@ -18,13 +18,12 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/meshery/meshery)](https://goreportcard.com/report/github.com/mesheryio/meshery)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/meshery/meshery.io/jekyll.yml?branch=master)](https://github.com/meshery/meshery.io/actions)
 [![GitHub](https://img.shields.io/github/license/meshery/meshery.svg)](LICENSE)
-[![GitHub issues by-label](https://img.shields.io/github/issues/meshery/meshery/help%20wanted.svg)](https://github.com/issues?q=is%3Aopen%20is%3Aissue%20archived%3Afalse%20(org%3Ameshery%20OR%20org%3Aservice-mesh-performance%20OR%20org%3Aservice-mesh-patterns%20OR%20org%3Ameshery-extensions)%20label%3A%22help%20wanted%22)
+[![GitHub issues by-label](https://img.shields.io/github/issues/meshery/meshery/help%20wanted.svg)](<https://github.com/issues?q=is%3Aopen%20is%3Aissue%20archived%3Afalse%20(org%3Ameshery%20OR%20org%3Aservice-mesh-performance%20OR%20org%3Aservice-mesh-patterns%20OR%20org%3Ameshery-extensions)%20label%3A%22help%20wanted%22>)
 [![Website](https://img.shields.io/website/https/meshery.io/meshery.svg)](https://meshery.io/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/mesheryio)](https://twitter.com/intent/follow?screen_name=mesheryio)
 [![Discuss Users](https://img.shields.io/discourse/users?server=https%3A%2F%2Fdiscuss.meshery.io)](https://meshery.io/community#discussion-forums)
 [![Slack](https://img.shields.io/badge/Slack-@meshery.svg?logo=slack)](https://slack.meshery.io)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3564/badge)](https://bestpractices.coreinfrastructure.org/projects/3564)
-
 
 </div>
 

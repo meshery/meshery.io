@@ -5,443 +5,437 @@ description: Built-In Integrations Support for your Cloud Native Infrastructure 
 permalink: /integrations
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <title>Meshery's Integrations</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-    />
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="{{ site.baseurl }}/integrations/main.css"
-    />
-    <!-- <script src="/integrations/jsm/renderers/IntegrationBtn.js"></script> -->
-    <style>
-      a {
-        color: var(--brand-color-primary);
-        text-decoration: none;
-      }
-
-      #container {
-        background-color: var(--integrations-3d-bg);
-        margin: 20px 40px;
-        overflow: hidden;
-        position: relative;
-        border: 1px dashed var(--color-secondary-light);
-        cursor: grab;
-      }
-
-      #menu {
-        position: relative;
-        margin-top: 16px;
-        margin-bottom: 8px;
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-      }
-
-      .element {
-        width: 120px;
-        height: 160px;
-        /* box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5); */
-        filter: drop-shadow(var(--brand-color-secondary-50) 0px 0px 10px);
-        border: 2px solid var(--color-primary-super-dark);
-        background-color: var(--background-grey-secondary);
-        border-radius: .5rem 2rem;
-        text-align: center;
-        line-height: normal;
-        cursor: default;
-      }
-
-      .element:hover {
-        box-shadow: 0px 0px 12px var(--brand-color-secondary);
-        /* filter: drop-shadow(rgba(0, 0, 0, 0.9) 0px 4px 20px); */
-        border: 1px solid var(--brand-color-primary);
-      }
-
-      .element .number {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font-size: 12px;
-        color: black;
-      }
-
-      .element .symbol {
-        position: absolute;
-        top: 40px;
-        left: 0px;
-        right: 0px;
-        font-size: 60px;
-        font-weight: bold;
-        color: rgba(255, 255, 255, 0.75);
-        text-shadow: 0 0 10px var(--brand-color-secondary);
-      }
-
-      .element .details {
-        position: absolute;
-        bottom: 15px;
-        left: 0px;
-        right: 0px;
-        font-size: 12px;
-        color: var(--color-secondary-dark)
-      }
-      #menu button{
-        border-radius: 3px;
-        background-color: var(--color-primary-dark);
-        border:none;
-        outline: none;
-        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-        padding: 8px 18px;
-        cursor: pointer;
-        color: var(--color-primary-qtext);
-      }
-
-
-      #menu button:hover {
-        background-color:var(--color-primary-extra-dark) ;
-      }
-
-      #menu button.highlight_button {
-        background-color: var(--brand-color-secondary);
-        color: #000000;
-      }
-
-
-      .loader{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.75s, visibility 0.75s;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1;
-      }
-
-      .loader--hidden{
-        opacity: 0;
-        visibility: hidden;
-      }
-
-      .loader::after{
-        content: "";
-        width: 55px;
-        height: 55px;
-        border: 12px solid #dddddd;
-        border-top-color: #00B39F;
-        border-radius: 50%;
-        animation: loading 0.75s ease infinite;
-      }
-
-      @keyframes loading {
-        from { transform: rotate(0turn)}
-        to { transform: rotate(1turn)}
-      }
-
-    </style>
-    <!-- loading animation script -->
-    <script>
-      window.addEventListener("load", () => {
-        const loader = document.querySelector(".loader");
-
-        loader.classList.add("loader--hidden");
-
-        loader.addEventListener("transitionend", () => {
-          if (loader.parentNode) {
-            loader.parentNode.removeChild(loader);
-          }
-        });
-      });
-    </script>
-
-  </head>
-
-  <body class="integration-page integration-page--opacity">
-    <div class="heading">
-      <h1 class="integration-heading"/>
-      <h2 class="integration-subhead">
-        Support for your Cloud Native Infrastructure and Apps
-      </h2>
-      <p style="margin:auto 10vw;">
-      Meshery seamlessly integrates with all CNCF projects, your existing tools, Kubernetes clusters, and multiple Clouds, allowing you to enhance use your preferred monitoring, CI/CD, and security solutions. 
-    </p><p style="margin:2vw 10vw 0vw 10vw;">
-      Experience collaborative infrastructure management. Try any of these integrations in Meshery's <a href="play.meshery.io">playground</a>.
-      </p>
-    </div>
-
-    <!-- loading animation -->
-    <div id="menu">
-      <button id="table">TABLE</button>
-      <button id="sphere">SPHERE</button>
-      <button id="helix">HELIX</button>
-      <button id="grid">GRID</button>
-      <button id="list" onclick="window.open('https://docs.meshery.io/extensions/integrations', '_blank')">LIST</button>
-    </div>
-    <div id="container"><div class="loader"></div></div>
-
-
-    <!-- Import maps polyfill -->
-    <!-- Remove this when import maps will be widely supported -->
-    <script
-      async
-      src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
-
-    <script type="importmap">
-      {
-        "imports": {
-          "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.146.0/three.module.js",
-          "three/addons/": "{{ site.baseurl }}/integrations/jsm/"
-        }
-      }
-    </script>
-
-    <script type="module">
-      import * as THREE from "three";
-
-      import { TWEEN } from "three/addons/libs/tween.module.min.js";
-      import { TrackballControls } from "three/addons/controls/TrackballControls.js";
-      import {
-        CSS3DRenderer,
-        CSS3DObject,
-      } from "three/addons/renderers/CSS3DRenderer.js";
-      import data from "/integrations/data.js";
-      if (!data.length) { console.error('No integrations data'); }
-      let integHeading = document.querySelector(".integration-heading")
-      let roundedIntegNumber = Math.floor(data.length/ 10) * 10;
-      integHeading.innerHTML = `${roundedIntegNumber}+ Built-In Integrations`
-
-      const rows = 9;
-      const cols = Math.ceil(data.length / rows);
-      let i = 1,
-        j = 1;
-      const table = data.map((data) => {
-        if (j > cols) {
-          j = 1;
-          i++;
-        }
-        return { ...data, row: i, col: j++ };
-      });
-
-
-
-      let camera, scene, renderer;
-      let controls;
-
-      const objects = [];
-      const targets = { table: [], sphere: [], helix: [], grid: [], };
-
-      init();
-      animate();
-
-      function init() {
-        camera = new THREE.PerspectiveCamera(
-          28,
-          window.innerWidth / window.innerHeight,
-          1,
-          10000
-        );
-        camera.position.z = 3600;
-
-        scene = new THREE.Scene();
-
-        // table
-
-        for (let i = 0; i < table.length; i++) {
-          const element = document.createElement("div");
-          element.className = "element";
-          element.style.cursor = "pointer";
-          
-          element.onpointerdown = () => window.open(table[i].permalink, "_self");
-
-          const symbol = document.createElement("div");
-          symbol.className = "symbol";
-          let iconPath = table[i].color || '';
-
-          symbol.innerHTML =
-            '<img src="' + iconPath +
-            `" style="height: 100%; width: 100%;" />`;
-          symbol.style.height = "70px";
-          element.appendChild(symbol);
-
-          const details = document.createElement("div");
-          details.className = "details";
-          details.innerHTML = table[i].name;
-
-          element.appendChild(details);
-
-          const objectCSS = new CSS3DObject(element);
-          objectCSS.position.x = Math.random() * 4000 - 2000;
-          objectCSS.position.y = Math.random() * 4000 - 2000;
-          objectCSS.position.z = Math.random() * 4000 - 2000;
-          scene.add(objectCSS);
-
-          objects.push(objectCSS);
-
-          //
-
-          const object = new THREE.Object3D();
-          object.position.x = table[i].col * 140 - 1850;
-          object.position.y = -(table[i].row * 180) + 900;
-
-          targets.table.push(object);
-        }
-
-        // sphere
-
-        const vector = new THREE.Vector3();
-
-        for (let i = 0, l = objects.length; i < l; i++) {
-          const phi = Math.acos(-1 + (2 * i) / l);
-          const theta = Math.sqrt(l * Math.PI) * phi;
-
-          const object = new THREE.Object3D();
-
-          object.position.setFromSphericalCoords(800, phi, theta);
-
-          vector.copy(object.position).multiplyScalar(2);
-
-          object.lookAt(vector);
-
-          targets.sphere.push(object);
-        }
-
-        // helix
-
-        for (let i = 0, l = objects.length; i < l; i++) {
-          const theta = i * 0.185 + Math.PI;
-          const y = -(i * 6.5) + 650;
-
-          const object = new THREE.Object3D();
-
-          object.position.setFromCylindricalCoords(900, theta, y);
-
-          vector.x = object.position.x * 2;
-          vector.y = object.position.y;
-          vector.z = object.position.z * 2;
-
-          object.lookAt(vector);
-
-          targets.helix.push(object);
-        }
-
-        // grid
-
-        for (let i = 0; i < objects.length; i++) {
-          const object = new THREE.Object3D();
-
-          object.position.x = (i % 5) * 400 - 800;
-          object.position.y = -(Math.floor(i / 5) % 5) * 400 + 800;
-          object.position.z = Math.floor(i / 25) * 1000 - 2000;
-
-          targets.grid.push(object);
-        }
-
-        //
-
-        renderer = new CSS3DRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight - 100);
-        document.getElementById("container").appendChild(renderer.domElement);
-
-        //
-
-        controls = new TrackballControls(camera, renderer.domElement);
-        controls.minDistance = 500;
-        controls.maxDistance = 6000;
-        controls.addEventListener("change", render);
-
-        const menuElement = document.getElementById("menu");
-        menuElement.addEventListener("click", function(e){
-          const element = e.target;
-          element.classList.add("highlight_button");
-          removeClassFromElement(element.id);
-          transform(targets[element.id], 2000);
-        })
-
-        transform(targets.table, 2000);
-        menuElement.children[0].classList.add("highlight_button");
-
-        function removeClassFromElement(elementName) {
-          const menuElements = menuElement.children;
-          const totalChildElements = menuElement.childElementCount;
-
-          for(let i = 0; i < totalChildElements; i++) {
-            const element = menuElements[i];
-            if(element.id === elementName) continue;
-            element.classList.remove("highlight_button");
-          }
-        }
-
-        window.addEventListener("resize", onWindowResize);
-      }
-
-      function transform(targets, duration) {
-        TWEEN.removeAll();
-
-        for (let i = 0; i < objects.length; i++) {
-          const object = objects[i];
-          const target = targets[i];
-
-          new TWEEN.Tween(object.position)
-            .to(
-              {
-                x: target.position.x,
-                y: target.position.y,
-                z: target.position.z,
-              },
-              Math.random() * duration + duration
-            )
-            .easing(TWEEN.Easing.Exponential.InOut)
-            .start();
-
-          new TWEEN.Tween(object.rotation)
-            .to(
-              {
-                x: target.rotation.x,
-                y: target.rotation.y,
-                z: target.rotation.z,
-              },
-              Math.random() * duration + duration
-            )
-            .easing(TWEEN.Easing.Exponential.InOut)
-            .start();
-        }
-
-        new TWEEN.Tween(this)
-          .to({}, duration * 2)
-          .onUpdate(render)
-          .start();
-      }
-
-      function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-
-        renderer.setSize(window.innerWidth, window.innerHeight - 100);
-
-        render();
-      }
-
-      function animate() {
-        requestAnimationFrame(animate);
-
-        TWEEN.update();
-
-        controls.update();
-      }
-
-      function render() {
-        renderer.render(scene, camera);
-      }
-    </script>
-  </body>
+	<head>
+		<title>Meshery's Integrations</title>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+		/>
+		<link type="text/css" rel="stylesheet" href="{{ site.baseurl }}/integrations/main.css" />
+		<!-- <script src="/integrations/jsm/renderers/IntegrationBtn.js"></script> -->
+		<style>
+			a {
+				color: var(--brand-color-primary);
+				text-decoration: none;
+			}
+
+			#container {
+				background-color: var(--integrations-3d-bg);
+				margin: 20px 40px;
+				overflow: hidden;
+				position: relative;
+				border: 1px dashed var(--color-secondary-light);
+				cursor: grab;
+			}
+
+			#menu {
+				position: relative;
+				margin-top: 16px;
+				margin-bottom: 8px;
+				width: 100%;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				gap: 10px;
+			}
+
+			.element {
+				width: 120px;
+				height: 160px;
+				/* box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5); */
+				filter: drop-shadow(var(--brand-color-secondary-50) 0px 0px 10px);
+				border: 2px solid var(--color-primary-super-dark);
+				background-color: var(--background-grey-secondary);
+				border-radius: 0.5rem 2rem;
+				text-align: center;
+				line-height: normal;
+				cursor: default;
+			}
+
+			.element:hover {
+				box-shadow: 0px 0px 12px var(--brand-color-secondary);
+				/* filter: drop-shadow(rgba(0, 0, 0, 0.9) 0px 4px 20px); */
+				border: 1px solid var(--brand-color-primary);
+			}
+
+			.element .number {
+				position: absolute;
+				top: 20px;
+				right: 20px;
+				font-size: 12px;
+				color: black;
+			}
+
+			.element .symbol {
+				position: absolute;
+				top: 40px;
+				left: 0px;
+				right: 0px;
+				font-size: 60px;
+				font-weight: bold;
+				color: rgba(255, 255, 255, 0.75);
+				text-shadow: 0 0 10px var(--brand-color-secondary);
+			}
+
+			.element .details {
+				position: absolute;
+				bottom: 15px;
+				left: 0px;
+				right: 0px;
+				font-size: 12px;
+				color: var(--color-secondary-dark);
+			}
+			#menu button {
+				border-radius: 3px;
+				background-color: var(--color-primary-dark);
+				border: none;
+				outline: none;
+				box-shadow:
+					rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+					rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+				padding: 8px 18px;
+				cursor: pointer;
+				color: var(--color-primary-qtext);
+			}
+
+			#menu button:hover {
+				background-color: var(--color-primary-extra-dark);
+			}
+
+			#menu button.highlight_button {
+				background-color: var(--brand-color-secondary);
+				color: #000000;
+			}
+
+			.loader {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				transition:
+					opacity 0.75s,
+					visibility 0.75s;
+				background-color: rgba(0, 0, 0, 0.5);
+				z-index: 1;
+			}
+
+			.loader--hidden {
+				opacity: 0;
+				visibility: hidden;
+			}
+
+			.loader::after {
+				content: "";
+				width: 55px;
+				height: 55px;
+				border: 12px solid #dddddd;
+				border-top-color: #00b39f;
+				border-radius: 50%;
+				animation: loading 0.75s ease infinite;
+			}
+
+			@keyframes loading {
+				from {
+					transform: rotate(0turn);
+				}
+				to {
+					transform: rotate(1turn);
+				}
+			}
+		</style>
+		<!-- loading animation script -->
+		<script>
+			window.addEventListener("load", () => {
+				const loader = document.querySelector(".loader");
+
+				loader.classList.add("loader--hidden");
+
+				loader.addEventListener("transitionend", () => {
+					if (loader.parentNode) {
+						loader.parentNode.removeChild(loader);
+					}
+				});
+			});
+		</script>
+	</head>
+
+	<body class="integration-page integration-page--opacity">
+		<div class="heading">
+			<h1 class="integration-heading" />
+			<h2 class="integration-subhead">Support for your Cloud Native Infrastructure and Apps</h2>
+			<p style="margin: auto 10vw">
+				Meshery seamlessly integrates with all CNCF projects, your existing tools, Kubernetes
+				clusters, and multiple Clouds, allowing you to enhance use your preferred monitoring, CI/CD,
+				and security solutions.
+			</p>
+			<p style="margin: 2vw 10vw 0vw 10vw">
+				Experience collaborative infrastructure management. Try any of these integrations in
+				Meshery's <a href="play.meshery.io">playground</a>.
+			</p>
+		</div>
+
+		<!-- loading animation -->
+		<div id="menu">
+			<button id="table">TABLE</button>
+			<button id="sphere">SPHERE</button>
+			<button id="helix">HELIX</button>
+			<button id="grid">GRID</button>
+			<button
+				id="list"
+				onclick="window.open('https://docs.meshery.io/extensions/integrations', '_blank')"
+			>
+				LIST
+			</button>
+		</div>
+		<div id="container"><div class="loader"></div></div>
+
+		<!-- Import maps polyfill -->
+		<!-- Remove this when import maps will be widely supported -->
+		<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.146.0/three.module.js",
+					"three/addons/": "{{ site.baseurl }}/integrations/jsm/"
+				}
+			}
+		</script>
+
+		<script type="module">
+			import * as THREE from "three";
+
+			import { TWEEN } from "three/addons/libs/tween.module.min.js";
+			import { TrackballControls } from "three/addons/controls/TrackballControls.js";
+			import { CSS3DRenderer, CSS3DObject } from "three/addons/renderers/CSS3DRenderer.js";
+			import data from "/integrations/data.js";
+			if (!data.length) {
+				console.error("No integrations data");
+			}
+			let integHeading = document.querySelector(".integration-heading");
+			let roundedIntegNumber = Math.floor(data.length / 10) * 10;
+			integHeading.innerHTML = `${roundedIntegNumber}+ Built-In Integrations`;
+
+			const rows = 9;
+			const cols = Math.ceil(data.length / rows);
+			let i = 1,
+				j = 1;
+			const table = data.map((data) => {
+				if (j > cols) {
+					j = 1;
+					i++;
+				}
+				return { ...data, row: i, col: j++ };
+			});
+
+			let camera, scene, renderer;
+			let controls;
+
+			const objects = [];
+			const targets = { table: [], sphere: [], helix: [], grid: [] };
+
+			init();
+			animate();
+
+			function init() {
+				camera = new THREE.PerspectiveCamera(28, window.innerWidth / window.innerHeight, 1, 10000);
+				camera.position.z = 3600;
+
+				scene = new THREE.Scene();
+
+				// table
+
+				for (let i = 0; i < table.length; i++) {
+					const element = document.createElement("div");
+					element.className = "element";
+					element.style.cursor = "pointer";
+
+					element.onpointerdown = () => window.open(table[i].permalink, "_self");
+
+					const symbol = document.createElement("div");
+					symbol.className = "symbol";
+					let iconPath = table[i].color || "";
+
+					symbol.innerHTML = '<img src="' + iconPath + `" style="height: 100%; width: 100%;" />`;
+					symbol.style.height = "70px";
+					element.appendChild(symbol);
+
+					const details = document.createElement("div");
+					details.className = "details";
+					details.innerHTML = table[i].name;
+
+					element.appendChild(details);
+
+					const objectCSS = new CSS3DObject(element);
+					objectCSS.position.x = Math.random() * 4000 - 2000;
+					objectCSS.position.y = Math.random() * 4000 - 2000;
+					objectCSS.position.z = Math.random() * 4000 - 2000;
+					scene.add(objectCSS);
+
+					objects.push(objectCSS);
+
+					//
+
+					const object = new THREE.Object3D();
+					object.position.x = table[i].col * 140 - 1850;
+					object.position.y = -(table[i].row * 180) + 900;
+
+					targets.table.push(object);
+				}
+
+				// sphere
+
+				const vector = new THREE.Vector3();
+
+				for (let i = 0, l = objects.length; i < l; i++) {
+					const phi = Math.acos(-1 + (2 * i) / l);
+					const theta = Math.sqrt(l * Math.PI) * phi;
+
+					const object = new THREE.Object3D();
+
+					object.position.setFromSphericalCoords(800, phi, theta);
+
+					vector.copy(object.position).multiplyScalar(2);
+
+					object.lookAt(vector);
+
+					targets.sphere.push(object);
+				}
+
+				// helix
+
+				for (let i = 0, l = objects.length; i < l; i++) {
+					const theta = i * 0.185 + Math.PI;
+					const y = -(i * 6.5) + 650;
+
+					const object = new THREE.Object3D();
+
+					object.position.setFromCylindricalCoords(900, theta, y);
+
+					vector.x = object.position.x * 2;
+					vector.y = object.position.y;
+					vector.z = object.position.z * 2;
+
+					object.lookAt(vector);
+
+					targets.helix.push(object);
+				}
+
+				// grid
+
+				for (let i = 0; i < objects.length; i++) {
+					const object = new THREE.Object3D();
+
+					object.position.x = (i % 5) * 400 - 800;
+					object.position.y = -(Math.floor(i / 5) % 5) * 400 + 800;
+					object.position.z = Math.floor(i / 25) * 1000 - 2000;
+
+					targets.grid.push(object);
+				}
+
+				//
+
+				renderer = new CSS3DRenderer();
+				renderer.setSize(window.innerWidth, window.innerHeight - 100);
+				document.getElementById("container").appendChild(renderer.domElement);
+
+				//
+
+				controls = new TrackballControls(camera, renderer.domElement);
+				controls.minDistance = 500;
+				controls.maxDistance = 6000;
+				controls.addEventListener("change", render);
+
+				const menuElement = document.getElementById("menu");
+				menuElement.addEventListener("click", function (e) {
+					const element = e.target;
+					element.classList.add("highlight_button");
+					removeClassFromElement(element.id);
+					transform(targets[element.id], 2000);
+				});
+
+				transform(targets.table, 2000);
+				menuElement.children[0].classList.add("highlight_button");
+
+				function removeClassFromElement(elementName) {
+					const menuElements = menuElement.children;
+					const totalChildElements = menuElement.childElementCount;
+
+					for (let i = 0; i < totalChildElements; i++) {
+						const element = menuElements[i];
+						if (element.id === elementName) continue;
+						element.classList.remove("highlight_button");
+					}
+				}
+
+				window.addEventListener("resize", onWindowResize);
+			}
+
+			function transform(targets, duration) {
+				TWEEN.removeAll();
+
+				for (let i = 0; i < objects.length; i++) {
+					const object = objects[i];
+					const target = targets[i];
+
+					new TWEEN.Tween(object.position)
+						.to(
+							{
+								x: target.position.x,
+								y: target.position.y,
+								z: target.position.z,
+							},
+							Math.random() * duration + duration
+						)
+						.easing(TWEEN.Easing.Exponential.InOut)
+						.start();
+
+					new TWEEN.Tween(object.rotation)
+						.to(
+							{
+								x: target.rotation.x,
+								y: target.rotation.y,
+								z: target.rotation.z,
+							},
+							Math.random() * duration + duration
+						)
+						.easing(TWEEN.Easing.Exponential.InOut)
+						.start();
+				}
+
+				new TWEEN.Tween(this)
+					.to({}, duration * 2)
+					.onUpdate(render)
+					.start();
+			}
+
+			function onWindowResize() {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize(window.innerWidth, window.innerHeight - 100);
+
+				render();
+			}
+
+			function animate() {
+				requestAnimationFrame(animate);
+
+				TWEEN.update();
+
+				controls.update();
+			}
+
+			function render() {
+				renderer.render(scene, camera);
+			}
+		</script>
+	</body>
 </html>
