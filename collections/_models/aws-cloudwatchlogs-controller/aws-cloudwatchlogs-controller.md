@@ -31,13 +31,13 @@ componentsCount: 4
 relationships: 
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between AdoptedResource and LogGroup"
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between AdoptedResource and LogGroup"
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between LogGroup and Instance"
+  description: ""
 relationshipsCount: 3
 featureList: [
   "Two classes of log groups for flexibility – CloudWatch Logs offers two classes of log groups so that you can have a cost-effective option for logs that you access infrequently. ",
