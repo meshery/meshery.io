@@ -1,7 +1,7 @@
 // Client-side blog search
 // This script provides client-side search functionality for the Meshery blog
 
-(function() {
+(function () {
   'use strict';
 
   let searchData = null;
@@ -11,18 +11,20 @@
     try {
       const response = await fetch('/blog/search.json');
       if (!response.ok) {
-        throw new Error(`Failed to fetch search data: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `Failed to fetch search data: ${response.status} ${response.statusText}`,
+        );
       }
-      
+
       let data;
       try {
         data = await response.json();
       } catch (jsonError) {
         throw new Error('Invalid JSON format in search data');
       }
-      
+
       // Pre-process data for faster searching (store only search fields + original post)
-      searchData = data.map(post => ({
+      searchData = data.map((post) => ({
         // Original data for display
         id: post.id,
         title: post.title,
@@ -35,10 +37,10 @@
         _searchTitle: post.title?.toLowerCase() || '',
         _searchExcerpt: post.excerpt?.toLowerCase() || '',
         _searchContent: post.content?.toLowerCase() || '',
-        _searchCategories: post.categories?.map(cat => cat.toLowerCase()) || [],
-        _searchAuthor: post.author?.toLowerCase() || ''
+        _searchCategories: post.categories?.map((cat) => cat.toLowerCase()) || [],
+        _searchAuthor: post.author?.toLowerCase() || '',
       }));
-      
+
       return true;
     } catch (error) {
       console.error('Error loading search data:', error.message);
@@ -49,25 +51,27 @@
   // Client-side search
   function performClientSearch(query) {
     if (!searchData) return [];
-    
+
     const lowerQuery = query.toLowerCase();
     const results = searchData
-      .filter(post => {
+      .filter((post) => {
         const titleMatch = post._searchTitle.includes(lowerQuery);
         const excerptMatch = post._searchExcerpt.includes(lowerQuery);
         const contentMatch = post._searchContent.includes(lowerQuery);
-        const categoryMatch = post._searchCategories.some(cat => cat.includes(lowerQuery));
+        const categoryMatch = post._searchCategories.some((cat) =>
+          cat.includes(lowerQuery),
+        );
         const authorMatch = post._searchAuthor.includes(lowerQuery);
-        
+
         return titleMatch || excerptMatch || contentMatch || categoryMatch || authorMatch;
       })
       .slice(0, 20);
 
     // Highlighting for search results
-    results.forEach(result => {
+    results.forEach((result) => {
       result._formatted = {
         title: highlightText(result.title, query),
-        excerpt: highlightText(result.excerpt, query)
+        excerpt: highlightText(result.excerpt, query),
       };
     });
 
@@ -98,11 +102,11 @@
       .toString()
       .toLowerCase()
       .trim()
-      .replace(/\s+/g, '-')        // Replace spaces with -
-      .replace(/[^\w\-]+/g, '')    // Remove non-word chars
-      .replace(/\-\-+/g, '-')      // Replace multiple - with single -
-      .replace(/^-+/, '')          // Trim - from start
-      .replace(/-+$/, '');         // Trim - from end
+      .replace(/\s+/g, '-') // Replace spaces with -
+      .replace(/[^\w-]+/g, '') // Remove non-word chars
+      .replace(/--+/g, '-') // Replace multiple - with single -
+      .replace(/^-+/, '') // Trim - from start
+      .replace(/-+$/, ''); // Trim - from end
   }
 
   // Render search results
@@ -133,7 +137,7 @@
     const resultsList = document.createElement('ul');
     resultsList.className = 'blog-posts search-results-list';
 
-    results.forEach(result => {
+    results.forEach((result) => {
       const li = document.createElement('li');
       li.className = 'blog-post search-result-item';
 
@@ -148,7 +152,7 @@
       let categoryHtml = '';
       if (categories.length > 0) {
         categoryHtml = '<span class="blog-filters">';
-        categories.forEach(cat => {
+        categories.forEach((cat) => {
           const slug = slugify(cat);
           categoryHtml += `<span class="blog-filter"><a href="/blog/category/${slug}/">${cat.toLowerCase()}</a></span>`;
         });
@@ -156,7 +160,13 @@
       }
 
       // Format date
-      const formattedDate = date ? new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+      const formattedDate = date
+        ? new Date(date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })
+        : '';
 
       li.innerHTML = `
         <h2><a href="${result.url}">${title}</a></h2>
@@ -203,7 +213,7 @@
   }
 
   // Handle search input
-  const handleSearchInput = debounce(async function(event) {
+  const handleSearchInput = debounce(async function (event) {
     const query = event.target.value.trim();
     const clearButton = document.getElementById('clear-search-btn');
 
@@ -252,7 +262,7 @@
     }
 
     // Handle enter key
-    searchInput.addEventListener('keypress', function(e) {
+    searchInput.addEventListener('keypress', function (e) {
       if (e.key === 'Enter') {
         e.preventDefault();
       }
