@@ -31,13 +31,13 @@ componentsCount: 4
 relationships: 
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between domain and secuirtygroup "
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between domain and subnet "
+  description: ""
 - type: "non-binding"
   kind: "edge"
-  description: "An edge relationship between AdoptedResource and domain "
+  description: ""
 relationshipsCount: 3
 featureList: [
   "Scalable search and analytics",
