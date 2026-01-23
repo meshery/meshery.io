@@ -2,34 +2,79 @@
     "env": {
         "browser": true,
         "es2021": true,
-        "node": true,
         "jquery": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
     },
     "globals": {
         "FullCalendar": "readonly",
         "url": "writable",
         "page": "writable"
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:prettier/recommended"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 12,
-        "sourceType": "module"
-    },
     "rules": {
-        "prettier/prettier": [
+        "valid-typeof": "warn",
+        "array-bracket-spacing": [
+            "error",
+            "never"
+        ],
+        "comma-style": [
+            "error"
+        ],
+        "block-scoped-var": "error",
+        "keyword-spacing": "error",
+        "no-trailing-spaces": "error",
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+        "arrow-spacing": [
             "error",
             {
-                "semi": true,
-                "trailingComma": "all",
-                "singleQuote": true,
-                "printWidth": 90,
-                "tabWidth": 2
+                "before": true,
+                "after": true
             }
         ],
-        "no-unused-vars": "warn",
-        "no-console": "off"
+        "key-spacing": [
+            "error",
+            {
+                "beforeColon": false,
+                "afterColon": true
+            }
+        ],
+        "block-spacing": "error",
+        "brace-style": [
+            "error",
+            "1tbs"
+        ],
+        "indent": [
+            "error",
+            2,
+            {
+                "FunctionExpression": {
+                    "parameters": "first"
+                },
+                "FunctionDeclaration": {
+                    "parameters": "first"
+                },
+                "MemberExpression": 1,
+                "SwitchCase": 1,
+                "outerIIFEBody": 0,
+                "VariableDeclarator": {
+                    "var": 2,
+                    "let": 2,
+                    "const": 3
+                },
+                "ignoredNodes": [
+                    "TemplateLiteral"
+                ]
+            }
+        ],
+        "no-undef": "error",
+        "no-console": "off",
+        "no-unused-vars": "error",
+        "no-dupe-keys": "error"
     }
 }
