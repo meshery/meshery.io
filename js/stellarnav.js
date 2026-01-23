@@ -228,8 +228,34 @@
 			function navbarExpand(e) {
 				if(e.type == 'click' || e.key == "Enter" || e.code == "Space") {
 					e.preventDefault();
-					$(this).parent('li').children('ul').stop(true, true).slideToggle(settings.openingSpeed);
-					$(this).parent('li').toggleClass('open');
+					var $currentLi = $(this).parent('li');
+					var $currentUl = $currentLi.children('ul');
+					var isCurrentlyOpen = $currentLi.hasClass('open');
+
+					// Close all other open dropdowns at the same level (accordion behavior)
+					$currentLi.siblings('li.open').each(function() {
+						$(this).children('ul').stop(true, true).slideUp(settings.openingSpeed);
+						$(this).removeClass('open');
+						// Also close any nested open dropdowns
+						$(this).find('li.open').each(function() {
+							$(this).children('ul').stop(true, true).slideUp(settings.openingSpeed);
+							$(this).removeClass('open');
+						});
+					});
+
+					// Toggle the current dropdown
+					if (isCurrentlyOpen) {
+						$currentUl.stop(true, true).slideUp(settings.openingSpeed);
+						$currentLi.removeClass('open');
+						// Close any nested open dropdowns
+						$currentLi.find('li.open').each(function() {
+							$(this).children('ul').stop(true, true).slideUp(settings.openingSpeed);
+							$(this).removeClass('open');
+						});
+					} else {
+						$currentUl.stop(true, true).slideDown(settings.openingSpeed);
+						$currentLi.addClass('open');
+					}
 				}
 			}
 
