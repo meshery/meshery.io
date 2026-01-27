@@ -92,12 +92,17 @@ body {
   color: white;
 }
 
+.card.archived-program {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+}
+
 </style>
 
   {% for program in site.data.programs  %}
   <a href="{{program.link}}">
   <wrapper>
-    <div class="card">
+    <div class="card{% if program.archived %} archived-program{% endif %}">
       <img src="{{program.imagePath}}">
       <div class="info">
         <h1>{{program.name}}</h1>
