@@ -14,7 +14,7 @@ colorImage: /assets/images/kanvas-icon-color.svg
 extensionInfo: |
   Collaboratively design and manage your Kubernetes clusters and Cloud services. 
 extensionCaveats: |
-  Kanvas is a visual interface for managing your infrastructure. It allows you to create, edit, and share your infrastructure as code. Kanvas is a visual interface for managing your infrastructure. It allows you to create, edit, and share your infrastructure as code.  
+  Kanvas is a visual interface for managing your infrastructure. It allows you to create, edit, and share your infrastructure as code.
 docsURL: 'https://docs.layer5.io/kanvas'
 URL: 'https://kanvas.new'
 ---
