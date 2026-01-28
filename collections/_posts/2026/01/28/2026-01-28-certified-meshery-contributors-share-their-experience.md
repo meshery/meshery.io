@@ -2,7 +2,7 @@
 title: Certified Meshery Contributors Share Their Experiences
 subheading: Meet the contributors who earned the Certified Meshery Contributor (CMC) badge
 author: Meshery Maintainers
-date: 2026-01-27 08:00:00 -0500
+date: 2026-01-28 08:00:00 -0500
 categories: 
   - community
   - open-source
@@ -19,7 +19,7 @@ The Certified Meshery Contributor certification validates technical proficiency 
 
 For most contributors, preparing for the CMC was a natural extension of their existing work in the project.
 
-> "CMC was a really good learning experience for me. During the process, I explored Meshery more deeply — the documentation, concepts, and workflows — and understood better how the community works and how contributions are reviewed." — Bhumika Garg
+> "CMC was a really good learning experience for me. During the process, I explored Meshery more deeply — the documentation, concepts, and workflows, and understood better how the community works and how contributions are reviewed." — Bhumika Garg
 
 ## The Exam Experience
 
@@ -35,6 +35,8 @@ Through the CMC journey, contributors deepened their understanding of Meshery as
 
 > "CMC helped me understand Meshery in a clear and structured way, with all the concepts and tools explained together in one place. It helped me understand schema-driven development and how Meshery maintains a single source of truth across the Server, UI, and CLI. The documentation quality is really good and well-maintained, which makes learning much smoother." — Suhani
 
+> "CMC has been a very good learning journey for me. Before this, I knew a little about Meshery, but through this certification I understood it in a much better and more practical way. While preparing, I explored the documentation, tried things on my own, and learned how the community works and supports new contributors." — Anmol Sah
+
 #### What Earning the CMC Means to Contributors
 
 Earning the Certified Meshery Contributor badge represents recognition of consistent, meaningful contributions to the project.
@@ -43,13 +45,13 @@ Earning the Certified Meshery Contributor badge represents recognition of consis
 
 <br/>
 
-<img align="center" src="/assets/images/posts/2026/2026-01-28-certified-meshery-contributors-share-their-experience/cmc.png" alt="Certified Meshery Contributors" style="max-width:800px" />
+<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/cmc.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
 
 ### Advice for Future CMC Candidates
 
 Certified contributors also shared advice for those considering the CMC certification.
 
-> "Don’t just read — try things hands-on, go through the documentation properly, and ask questions in the community whenever you’re stuck." — Bhumika Garg
+> "Don’t just read, try things hands-on, go through the documentation properly, and ask questions in the community whenever you’re stuck." — Bhumika Garg
 
 > "Don’t rush through the certification. Take time to understand each concept, try things hands-on while going through the units, and don’t hesitate to ask questions in the community whenever you feel stuck." — Suhani
 
