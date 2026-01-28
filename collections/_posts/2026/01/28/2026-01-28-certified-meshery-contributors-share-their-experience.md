@@ -36,15 +36,14 @@ The CMC exam is a time-bound, online assessment designed to reflect real contrib
 
 <img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-2.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
 
-### What Contributors Learned Through the CMC Journey
+### What Contributors Learned Through the Certification Journey
 
-Through the CMC journey, contributors deepened their understanding of Meshery as a platform and as a community-driven open source project.
+Through the certification journey, contributors deepened their understanding of Meshery as a platform and as a community-driven open source project.
 
-> "CMC helped me understand Meshery in a clear and structured way, with all the concepts and tools explained together in one place. It helped me understand schema-driven development and how Meshery maintains a single source of truth across the Server, UI, and CLI. The documentation quality is really good and well-maintained, which makes learning much smoother." — Suhani
+> "Certification helped me understand Meshery in a clear and structured way, with all the concepts and tools explained together in one place. It helped me understand schema-driven development and how Meshery maintains a single source of truth across the Server, UI, and CLI. The documentation quality is really good and well-maintained, which makes learning much smoother." — Suhani
+> "The CMC has been a very good learning journey for me. Before this, I knew a little about Meshery, but through this certification I understood it in a much better and more practical way. While preparing, I explored the documentation, tried things on my own, and learned how the community works and supports new contributors." — Anmol Sah
 
-> "CMC has been a very good learning journey for me. Before this, I knew a little about Meshery, but through this certification I understood it in a much better and more practical way. While preparing, I explored the documentation, tried things on my own, and learned how the community works and supports new contributors." — Anmol Sah
-
-#### What Earning the CMC Means to Contributors
+#### What Earning the Certification Means to Contributors
 
 Earning the Certified Meshery Contributor badge represents recognition of consistent, meaningful contributions to the project.
 
@@ -54,7 +53,7 @@ Earning the Certified Meshery Contributor badge represents recognition of consis
 
 <img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-3.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
 
-### Advice for Future CMC Candidates
+### Advice for Future Certified Meshery Contributor Candidates
 
 Certified contributors also shared advice for those considering the CMC certification.
 
