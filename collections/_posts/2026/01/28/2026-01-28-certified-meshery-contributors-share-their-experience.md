@@ -1,6 +1,6 @@
 ---
 title: Certified Meshery Contributors Share Their Experiences
-subheading: Meet the contributors who earned the Certified Meshery Contributor (CMC) badge
+subheading: Meet the first wave of Certified Meshery Contributors
 author: Meshery Maintainers
 date: 2026-01-28 08:00:00 -0500
 categories: 
@@ -10,8 +10,7 @@ featured-image: /assets/images/posts/2025/certified-meshery-contributor/certifie
 redirect_from: /blog/certified-meshery-contributors-share-their-experience
 ---
 
-The launch of the [Certified Meshery Contributor (CMC)](https://cloud.meshery.io/academy/certifications/c5ada327-8a58-4c8a-b9fa-51b95696488c/certified-meshery-contributor) certification marked an important milestone for the Meshery project — a CNCF-first certification designed to recognize contributors who are actively shaping the Meshery ecosystem through real, hands-on open source work.
-Following the [announcement](/blog/2025/10/27/2025-10-27-certified-meshery-contributor/), contributors from across the community stepped forward to take the CMC and share their journey. In this post, Certified Meshery Contributors talk about what the certification was really like, what they learned along the way, and why they believe the CMC is worth pursuing.
+The launch of the [Certified Meshery Contributor (CMC)](https://cloud.meshery.io/academy/certifications/c5ada327-8a58-4c8a-b9fa-51b95696488c/certified-meshery-contributor) certification marked an important milestone for the Meshery project — the first CNCF certification of its kind - designed to uplevel and validate the skills of contributors, who are actively shaping the Meshery ecosystem through real, hands-on open source work. Following the [announcement](/blog/2025/10/27/2025-10-27-certified-meshery-contributor/), contributors from across the community stepped forward to take the CMC and share their journey. In this post, Certified Meshery Contributors talk about what the certification was really like, what they learned along the way, and why they believe the CMC is worth pursuing.
 
 ## What Preparing for the CMC Looked Like
 
@@ -21,6 +20,10 @@ For most contributors, preparing for the CMC was a natural extension of their ex
 
 > "CMC was a really good learning experience for me. During the process, I explored Meshery more deeply — the documentation, concepts, and workflows, and understood better how the community works and how contributions are reviewed." — Bhumika Garg
 
+<br/>
+
+<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-1.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
+
 ## The Exam Experience
 
 The CMC exam is a time-bound, online assessment designed to reflect real contribution scenarios rather than theoretical knowledge.
@@ -28,6 +31,10 @@ The CMC exam is a time-bound, online assessment designed to reflect real contrib
 > "Calling it ‘just a certification’ would be an understatement. Before going through it, I didn’t know how to approach such a large codebase. The self-paced lectures and resources in the academy made contributing significantly easier. The exam felt closely aligned with the kind of understanding you build while working hands-on in the project." — Pragalva Sapkota
 
 > "CMC feels less like a conventional certification and more like a structured way to deepen understanding of Meshery. Even though the assessment is MCQ-based, preparing for it naturally pushes you to explore the documentation thoroughly, connect different parts of the system, and reason from real contribution experience. It encourages learning by understanding how things fit together rather than memorizing facts, which makes the certification both meaningful and practical for contributors." — Kaivalaya Dua
+
+<br/>
+
+<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-2.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
 
 ### What Contributors Learned Through the CMC Journey
 
@@ -45,7 +52,7 @@ Earning the Certified Meshery Contributor badge represents recognition of consis
 
 <br/>
 
-<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/cmc.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
+<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-3.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
 
 ### Advice for Future CMC Candidates
 
