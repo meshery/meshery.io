@@ -21,7 +21,7 @@ For most contributors, preparing for the CMC was a natural extension of their ex
 > "CMC was a really good learning experience for me. During the process, I explored Meshery more deeply — the documentation, concepts, and workflows, and understood better how the community works and how contributions are reviewed." — [Bhumika Garg](https://cloud.meshery.io/user/f457b1bd-cc89-4709-9127-0afbcfbdd972)
 
 <div style="text-align: center;">
-<a href="https://cloud.meshery.io/academy/certificates/9c6c8d01-28ee-449e-a73c-09003ae984ac"><img alt="Certified Meshery Contributor Credential" src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/example-certified-meshery-contributor-credential.png" style="max-width:800px"  /></a><br />
+<a href="https://cloud.meshery.io/academy/certificates/9c6c8d01-28ee-449e-a73c-09003ae984ac"><img alt="Certified Meshery Contributor Credential" src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/example-certified-meshery-contributor-credential.png" style="max-width:100%; height:auto;"  /></a><br />
 <a href="https://cloud.meshery.io/academy/certificates/9c6c8d01-28ee-449e-a73c-09003ae984ac">View Certified Meshery Contributor credential</a>
 </div>
 
@@ -35,7 +35,7 @@ The CMC exam is a time-bound, online assessment designed to reflect real contrib
 
 <br/>
 
-<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-2.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
+<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-2.png" alt="Certified Meshery Contributors" style="max-width:100%; display: block; margin: auto;" />
 
 ### What Contributors Learned Through the Certification Journey
 
@@ -46,7 +46,7 @@ Through the certification journey, contributors deepened their understanding of 
 
 <br/>
 
-<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-4.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
+<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-4.png" alt="Certified Meshery Contributors" style="max-width:100%; display: block; margin: auto;" />
 
 #### What Earning the Certification Means to Contributors
 
@@ -56,7 +56,7 @@ Earning the Certified Meshery Contributor badge represents recognition of consis
 
 <br/>
 
-<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-3.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
+<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-3.png" alt="Certified Meshery Contributors" style="max-width:100%; display: block; margin: auto;" />
 
 ### Advice for Future Certified Meshery Contributor Candidates
 
@@ -68,7 +68,7 @@ Certified contributors also shared advice for those considering the CMC certific
 
 <br/>
 
-<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-1.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
+<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-1.png" alt="Certified Meshery Contributors" style="max-width:100%; display: block; margin: auto;" />
 
 ## Final Thoughts
 
