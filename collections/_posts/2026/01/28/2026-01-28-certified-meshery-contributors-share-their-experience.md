@@ -24,10 +24,6 @@ For most contributors, preparing for the CMC was a natural extension of their ex
 
 <img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-1.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
 
-## An Example Certified Meshery Contributor Credential
-
-This is an example of a verified Certified Meshery Contributor credential, demonstrating successful completion of the CMC certification.
-
 <div style="text-align: center;">
 <a href="https://cloud.meshery.io/academy/certificates/9c6c8d01-28ee-449e-a73c-09003ae984ac"><img alt="Certified Meshery Contributor Credential" src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/example-certified-meshery-contributor-credential.png" style="max-width:800px"  /></a><br />
 <a href="https://cloud.meshery.io/academy/certificates/9c6c8d01-28ee-449e-a73c-09003ae984ac">View Certified Meshery Contributor credential</a>
@@ -73,10 +69,6 @@ Certified contributors also shared advice for those considering the CMC certific
 > "Don’t just read, try things hands-on, go through the documentation properly, and ask questions in the community whenever you’re stuck." — Bhumika Garg
 
 > "Don’t rush through the certification. Take time to understand each concept, try things hands-on while going through the units, and don’t hesitate to ask questions in the community whenever you feel stuck." — Suhani
-
-<br/>
-
-<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-5.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
 
 ## Final Thoughts
 
