@@ -10,7 +10,7 @@ featured-image: /assets/images/posts/2025/certified-meshery-contributor/certifie
 redirect_from: /blog/certified-meshery-contributors-share-their-experience
 ---
 
-The launch of the [Certified Meshery Contributor (CMC)](https://cloud.meshery.io/academy/certifications/c5ada327-8a58-4c8a-b9fa-51b95696488c/certified-meshery-contributor) certification marked an important milestone for the Meshery project — the first CNCF certification of its kind - designed to uplevel and validate the skills of contributors, who are actively shaping the Meshery ecosystem through real, hands-on open source work. Following the [announcement](/blog/2025/10/27/2025-10-27-certified-meshery-contributor/), contributors from across the community stepped forward to take the CMC and share their journey. In this post, Certified Meshery Contributors talk about what the certification was really like, what they learned along the way, and why they believe the CMC is worth pursuing.
+The launch of the [Certified Meshery Contributor (CMC)](https://cloud.meshery.io/academy/certifications/c5ada327-8a58-4c8a-b9fa-51b95696488c/certified-meshery-contributor) certification marked an important milestone for the Meshery project — the first CNCF certification of its kind - designed to uplevel and validate the skills of contributors, who are actively shaping the Meshery ecosystem through real, hands-on open source work. Following the [announcement](/blog/2025/10/2025-10-27-certified-meshery-contributor/), contributors from across the community stepped forward to take the CMC and share their journey. In this post, Certified Meshery Contributors talk about what the certification was really like, what they learned along the way, and why they believe the CMC is worth pursuing.
 
 ## What Preparing for the CMC Looked Like
 
@@ -20,9 +20,10 @@ For most contributors, preparing for the CMC was a natural extension of their ex
 
 > "CMC was a really good learning experience for me. During the process, I explored Meshery more deeply — the documentation, concepts, and workflows, and understood better how the community works and how contributions are reviewed." — [Bhumika Garg](https://cloud.meshery.io/user/f457b1bd-cc89-4709-9127-0afbcfbdd972)
 
-<br/>
-
-<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-1.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
+<div style="text-align: center;">
+<a href="https://cloud.meshery.io/academy/certificates/9c6c8d01-28ee-449e-a73c-09003ae984ac"><img alt="Certified Meshery Contributor Credential" src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/example-certified-meshery-contributor-credential.png" style="max-width:100%; height:auto;"  /></a><br />
+<a href="https://cloud.meshery.io/academy/certificates/9c6c8d01-28ee-449e-a73c-09003ae984ac">View Certified Meshery Contributor credential</a>
+</div>
 
 ## The Exam Experience
 
@@ -34,7 +35,7 @@ The CMC exam is a time-bound, online assessment designed to reflect real contrib
 
 <br/>
 
-<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-2.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
+<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-2.png" alt="Certified Meshery Contributors" style="max-width:100%; display: block; margin: auto;" />
 
 ### What Contributors Learned Through the Certification Journey
 
@@ -42,6 +43,10 @@ Through the certification journey, contributors deepened their understanding of 
 
 > "Certification helped me understand Meshery in a clear and structured way, with all the concepts and tools explained together in one place. It helped me understand schema-driven development and how Meshery maintains a single source of truth across the Server, UI, and CLI. The documentation quality is really good and well-maintained, which makes learning much smoother." — Suhani
 > "The CMC has been a very good learning journey for me. Before this, I knew a little about Meshery, but through this certification I understood it in a much better and more practical way. While preparing, I explored the documentation, tried things on my own, and learned how the community works and supports new contributors." — Anmol Sah
+
+<br/>
+
+<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-4.png" alt="Certified Meshery Contributors" style="max-width:100%; display: block; margin: auto;" />
 
 #### What Earning the Certification Means to Contributors
 
@@ -51,7 +56,7 @@ Earning the Certified Meshery Contributor badge represents recognition of consis
 
 <br/>
 
-<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-3.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
+<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-3.png" alt="Certified Meshery Contributors" style="max-width:100%; display: block; margin: auto;" />
 
 ### Advice for Future Certified Meshery Contributor Candidates
 
@@ -60,6 +65,10 @@ Certified contributors also shared advice for those considering the CMC certific
 > "Don’t just read, try things hands-on, go through the documentation properly, and ask questions in the community whenever you’re stuck." — Bhumika Garg
 
 > "Don’t rush through the certification. Take time to understand each concept, try things hands-on while going through the units, and don’t hesitate to ask questions in the community whenever you feel stuck." — Suhani
+
+<br/>
+
+<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-1.png" alt="Certified Meshery Contributors" style="max-width:100%; display: block; margin: auto;" />
 
 ## Final Thoughts
 
