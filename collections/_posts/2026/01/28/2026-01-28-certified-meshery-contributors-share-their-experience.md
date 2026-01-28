@@ -18,7 +18,7 @@ The Certified Meshery Contributor certification validates technical proficiency 
 
 For most contributors, preparing for the CMC was a natural extension of their existing work in the project.
 
-> "CMC was a really good learning experience for me. During the process, I explored Meshery more deeply — the documentation, concepts, and workflows, and understood better how the community works and how contributions are reviewed." — Bhumika Garg
+> "CMC was a really good learning experience for me. During the process, I explored Meshery more deeply — the documentation, concepts, and workflows, and understood better how the community works and how contributions are reviewed." — [Bhumika Garg](https://cloud.meshery.io/user/f457b1bd-cc89-4709-9127-0afbcfbdd972)
 
 <br/>
 
