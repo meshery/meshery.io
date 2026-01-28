@@ -20,10 +20,6 @@ For most contributors, preparing for the CMC was a natural extension of their ex
 
 > "CMC was a really good learning experience for me. During the process, I explored Meshery more deeply — the documentation, concepts, and workflows, and understood better how the community works and how contributions are reviewed." — [Bhumika Garg](https://cloud.meshery.io/user/f457b1bd-cc89-4709-9127-0afbcfbdd972)
 
-<br/>
-
-<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-1.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
-
 <div style="text-align: center;">
 <a href="https://cloud.meshery.io/academy/certificates/9c6c8d01-28ee-449e-a73c-09003ae984ac"><img alt="Certified Meshery Contributor Credential" src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/example-certified-meshery-contributor-credential.png" style="max-width:800px"  /></a><br />
 <a href="https://cloud.meshery.io/academy/certificates/9c6c8d01-28ee-449e-a73c-09003ae984ac">View Certified Meshery Contributor credential</a>
@@ -69,6 +65,10 @@ Certified contributors also shared advice for those considering the CMC certific
 > "Don’t just read, try things hands-on, go through the documentation properly, and ask questions in the community whenever you’re stuck." — Bhumika Garg
 
 > "Don’t rush through the certification. Take time to understand each concept, try things hands-on while going through the units, and don’t hesitate to ask questions in the community whenever you feel stuck." — Suhani
+
+<br/>
+
+<img src="/assets/images/posts/2026/certified-meshery-contributors-share-their-experience/celebrated-certified-meshery-contributors-1.png" alt="Certified Meshery Contributors" style="max-width:800px; display: block; margin: auto;" />
 
 ## Final Thoughts
 
