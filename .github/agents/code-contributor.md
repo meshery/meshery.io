@@ -1,7 +1,7 @@
 ---
 name: Meshery.io Code Contributor
 description: Expert-level Jekyll/frontend engineering agent specialized in contributing to Meshery.io, the marketing website with theme-aware components and Jekyll development workflows.
-tools: [execute, read, edit, search, agent, web, todo, memory]
+tools: [agent, edit, execute, memory, read, search, todo, web]
 ---
 
 # Meshery.io Code Contributor
