@@ -1,0 +1,64 @@
+---
+layout: default
+title: "LFX Mentorship Programs"
+permalink: /programs/lfx
+excerpt: "Meshery's participation in LFX Mentorship internship programs"
+---
+
+<div class="page text-container">
+  <div class="program-heading">
+    <h1>{{ page.title }}</h1>
+    <h2 class="sub_headings">Empowering Open Source Contributors</h2>
+  </div>
+
+  <div class="program">
+    <div class="community-details">
+      <p>
+        Meshery participates in the Linux Foundation Mentorship (LFX) program, offering internship opportunities across
+        multiple terms each year. The LFX Mentorship program connects aspiring developers with experienced open source
+        communities to build real-world skills and make meaningful contributions to cloud native infrastructure.
+      </p>
+      <p>
+        Browse our programs by year to see available projects, learn about program timelines, and discover how you can
+        participate in shaping the future of cloud native technology.
+      </p>
+    </div>
+  </div>
+
+  <div class="project-details">
+    <h2 class="sub_headings">LFX Mentorship Programs by Year</h2>
+
+    {% for program in site.data.lfx_programs %}
+    <div class="project-item">
+      <h3>LFX Mentorship {{ program.year }}</h3>
+      <p class="program-p">{{ program.description }}</p>
+
+      <h4>Program Terms:</h4>
+      <ul>
+        {% for term in program.terms %}
+        <li>{{ term }}</li>
+        {% endfor %}
+      </ul>
+
+      <h4>Featured Projects:</h4>
+      <ul class="project-list">
+        {% for project in program.projects %}
+        <li>{{ project }}</li>
+        {% endfor %}
+      </ul>
+
+      <a href="{{ program.link }}">
+        <input type="button" value="View {{ program.year }} Projects →" class="participate-button" />
+      </a>
+    </div>
+    {% endfor %}
+
+    <a href="https://slack.meshery.io">
+      <input type="button" value="Join Slack" class="participate-button" />
+    </a>
+  </div>
+</div>
+
+<div class="subscribe program__subscribe">
+  {% include subscribe.html formstyle="padding:2.5rem;" %}
+</div>
