@@ -228,6 +228,9 @@
 			function navbarExpand(e) {
 				if(e.type == 'click' || e.key == "Enter" || e.code == "Space") {
 					e.preventDefault();
+					
+					$(this).parent('li').siblings('.open').removeClass('open').children('ul').stop(true, true).slideUp(settings.openingSpeed);
+
 					$(this).parent('li').children('ul').stop(true, true).slideToggle(settings.openingSpeed);
 					$(this).parent('li').toggleClass('open');
 				}
