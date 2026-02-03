@@ -290,10 +290,11 @@ patternInfo: |
   %s
 patternCaveats: |
   %s
+createdAt: %s
 permalink: catalog/%s/%s-%s.html
 URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/%s/%s/%s/design.yml'
 downloadLink: %s/design.yml
----`, strings.TrimSpace(string(nameYAML)), version, pattern.UserID, userFullName, userInfo.AvatarURL, patternType, compatibility, pattern.ID, patternImageURL, patternInfo, patternCaveats, patternType, slugify(pattern.Name), pattern.ID, mesheryCatalogFilesDir, pattern.ID, version, pattern.ID)
+---`, strings.TrimSpace(string(nameYAML)), version, pattern.UserID, userFullName, userInfo.AvatarURL, patternType, compatibility, pattern.ID, patternImageURL, patternInfo, patternCaveats, parsedTime.Format(time.RFC3339), patternType, slugify(pattern.Name), pattern.ID, mesheryCatalogFilesDir, pattern.ID, version, pattern.ID)
 
 	if err := os.WriteFile(filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md"), []byte(content), 0644); err != nil {
 		return utils.ErrWriteFile(err, filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md"))
