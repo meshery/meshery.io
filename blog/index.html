@@ -3,10 +3,13 @@ title: Blog
 description: Explore all Meshery blog posts, tutorials, and updates.
 layout: page
 permalink: /blog
-paginate:
+redirect_from:
+  - /blog/page/
+pagination:
+  enabled: true
   collection: posts
   per_page: 6
-  permalink: "/page:num"
+  permalink: "/page/:num/"
 ---
 
 <div class="blog-container">
@@ -52,7 +55,7 @@ paginate:
             {% assign category = parts[1] %}
             {% assign count = parts[0] | plus: 0 %}
             <li>
-              <a href="/blog/category/{{ category | slugify }}">
+              <a href="/blog/category/{{ category | slugify }}/">
                 {{ category }} <span class="cat-count">({{ count }})</span>
               </a>
             </li>
