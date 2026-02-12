@@ -95,6 +95,7 @@ layout: default
             </ul>
             {% endfor %}
 
+            {% if page.community_description %}
             <div class="community-description">
                 <p><span class="sub_headings">About the Community</span></p>
                 <p>
@@ -104,6 +105,24 @@ layout: default
                     <input type="button" value="Join Slack" class="participate-button" />
                 </a>
             </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if page.part_time_note %}
+    <div class="program">
+        <div class="community-details">
+            <h4>{{ page.part_time_note }}</h4>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if page.additional_info %}
+    <div class="program">
+        <div class="community-details">
+            <p class="sub_headings">{{ page.additional_info_title | default: "Additional information" }}</p>
+            <p>{{ page.additional_info }}</p>
         </div>
     </div>
     {% endif %}
