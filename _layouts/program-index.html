@@ -1,35 +1,28 @@
 ---
 layout: default
-title: "LFX Mentorship"
-permalink: /programs/lfx
-excerpt: "Meshery - LFX Mentorship Program"
 ---
 
 <div class="page text-container">
     <div class="program-heading">
-        <h1>LFX Mentorship</h1>
-        <h2 style="text-align: center;">Linux Foundation Mentorship with Meshery</h2>
+        <h1>{{ page.title }}</h1>
+        <h2 style="text-align: center;">{{ page.subtitle }}</h2>
     </div>
 
     <div class="cover" style="z-index: 20">
         <div class="project-details" style="max-width: 800px; margin: 0 auto;">
-            <div class="card-content" style="margin-bottom: 2rem;">
-                <div class="image-div"
-                    style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px;">
-                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                        src="https://www.youtube.com/embed/xJ9RH0AE7zE" frameborder="0"
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                </div>
+            <div class="card-content" style="margin-bottom: 2rem; display: flex; justify-content: center;">
+                <img src="{{ page.image }}" alt="{{ page.title }}"
+                    style="max-width: 300px; width: 100%; height: auto;" />
             </div>
         </div>
 
         <h3 class="cohort_title">Programs by Year</h3>
 
         <div class="project-details" style="max-width: 800px; margin: 0 auto;">
-            {% assign lfx_pages = site.programs | where_exp: "item", "item.url contains '/programs/lfx/'" | where_exp:
-            "item", "item.url != '/programs/lfx'" | sort: "url" | reverse %}
-            {% for program in lfx_pages %}
+            {% assign program_pages = site.programs | where_exp: "item", "item.url contains page.program_slug" |
+            where_exp:
+            "item", "item.url != page.link " | sort: "url" | reverse %}
+            {% for program in program_pages %}
             <div class="project-item" style="margin-bottom: 1.5rem;">
                 <a href="{{ program.url }}"
                     style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; border: 1px solid rgba(0, 211, 169, 0.3); border-radius: 8px; text-decoration: none; transition: all 0.3s ease;">
