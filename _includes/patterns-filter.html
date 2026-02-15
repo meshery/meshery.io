@@ -529,15 +529,17 @@ function showFilterCards() {
     prevButton.disabled = currentPage === 0;
     nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
 
-    const pageInfo = document.querySelector(".page-info");
-    if (pageInfo) {
-      if (totalPages > 0) {
-        pageInfo.innerText = `Page ${currentPage + 1} of ${totalPages}`;
-        pageInfo.style.display = "inline";
-      } else {
-        pageInfo.style.display = "none";
-      }
+  const pageInfo = prevButton.parentElement.querySelector(".page-info");
+    
+  if (pageInfo) {
+    if (totalPages > 0) {
+      pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+      pageInfo.style.display = "inline";
+    } else {
+      pageInfo.style.display = "none";
     }
+  }
+
   }
   
   // Function to show the current page of cards
