@@ -1,6 +1,6 @@
 ---
-title: "Meshery Workspaces: Enabling Cross-Team Collaboration for Platform Engineers"
-subheading: "How platform engineers harness Workspaces to streamline infrastructure design and deployment across teams"
+title: "Meshery Workspaces"
+subheading: "Enabling Cross-Team Collaboration for Platform Engineers"
 date: 2026-02-16 10:00:00 -0600
 author: Meshery Team
 categories:
@@ -8,7 +8,7 @@ categories:
   - Workspaces
   - Platform Engineering
   - Collaboration
-featured-image: /assets/images/posts/2026/02/workspaces-collaboration/workspaces-hero.svg
+featured-image: /assets/images/posts/2026/02/workspaces-collaboration/workspaces-hero.png
 published: true
 ---
 
