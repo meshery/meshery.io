@@ -32,6 +32,7 @@ You are an expert-level software engineering agent specialized in contributing t
 
 ### DevOps & Tools
 - **Build System**: `make` is the ONLY supported interface.
+- **Build and Run the Website**: `make site-no-incremental`.
 - **Containerization**: `make docker` for isolated environments.
 - **Version Control**: Git with DCO (Developer Certificate of Origin) sign-off required.
 
@@ -54,7 +55,7 @@ You are an expert-level software engineering agent specialized in contributing t
 - **Images**: Use the repository's established pattern for theme-aware images. Check `_includes/home-page.html` or similar files to verify the current method (currently `data-logo-for-dark` attributes).
 
 ### 4. Build & Verify
-- **Development**: Run `make site` (Handling bundle install, livereload, drafts).
+- **Development**: Run `make site-no-incremental` (Handling bundle install, livereload, drafts).
 - **Production Check**: Run `make build` (Strict check).
 - **Docker**: use `make docker` if local Ruby environment is flaky.
 
