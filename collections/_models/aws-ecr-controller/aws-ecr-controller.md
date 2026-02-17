@@ -35,7 +35,11 @@ components:
   colorIcon: assets/images/integration/aws-ecr-controller/components/repository-creation-template/icons/color/repository-creation-template-color.svg
   whiteIcon: assets/images/integration/aws-ecr-controller/components/repository-creation-template/icons/white/repository-creation-template-white.svg
   description: 
-componentsCount: 6
+- name: repository-creation-template
+  colorIcon: assets/images/integration/aws-ecr-controller/components/repository-creation-template/icons/color/repository-creation-template-color.svg
+  whiteIcon: assets/images/integration/aws-ecr-controller/components/repository-creation-template/icons/white/repository-creation-template-white.svg
+  description: 
+componentsCount: 7
 relationships: 
 relationshipsCount: 0
 featureList: [

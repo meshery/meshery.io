@@ -1,0 +1,45 @@
+---
+layout: default
+---
+
+<div class="page text-container">
+    <div class="program-heading">
+        <h1>{{ page.title }}</h1>
+        <h2 style="text-align: center;">{{ page.subtitle }}</h2>
+    </div>
+
+    <div class="cover" style="z-index: 20">
+        <div class="project-details" style="max-width: 800px; margin: 0 auto;">
+            <div class="card-content" style="margin-bottom: 2rem; display: flex; justify-content: center;">
+                <img src="{{ page.image }}" alt="{{ page.title }}"
+                    style="max-width: 300px; width: 100%; height: auto;" />
+            </div>
+        </div>
+
+        <h3 class="cohort_title">Programs by Year</h3>
+
+        <div class="project-details" style="max-width: 800px; margin: 0 auto;">
+            {% assign program_pages = site.programs | where_exp: "item", "item.url contains page.program_slug" |
+            where_exp:
+            "item", "item.url != page.link " | sort: "url" | reverse %}
+            {% for program in program_pages %}
+            <div class="project-item" style="margin-bottom: 1.5rem;">
+                <a href="{{ program.url }}"
+                    style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; border: 1px solid rgba(0, 211, 169, 0.3); border-radius: 8px; text-decoration: none; transition: all 0.3s ease;">
+                    <span>
+                        <h3 style="margin: 0; font-size: 1.25rem;">{{ program.title }}</h3>
+                        {% if program.excerpt %}
+                        <p style="margin: 0.25rem 0 0 0; font-size: 0.9rem; opacity: 0.7;">{{ program.excerpt }}</p>
+                        {% endif %}
+                    </span>
+                    <span style="font-size: 1.5rem; color: #00D3A9;">→</span>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="text subscribe program__subscribe">
+    {% include subscribe.html %}
+</div>
