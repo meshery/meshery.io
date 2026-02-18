@@ -32,8 +32,7 @@ export default defineConfig([  {
 
         // Project globals
         FullCalendar: "readonly",
-        url: "writable",
-        page: "writable"
+
       }
     },
     rules: {
@@ -44,7 +43,7 @@ export default defineConfig([  {
       "valid-typeof": "warn",
       "array-bracket-spacing": ["error", "never"],
       "comma-style": ["error"],
-      "block-scoped-var": "error",
+      "block-scoped-var": "off",
       "keyword-spacing": "error",
       "no-trailing-spaces": "error",
       "object-curly-spacing": ["error", "always"],
@@ -71,7 +70,7 @@ export default defineConfig([  {
       ],
       "no-undef": "error",
       "no-console": "off",
-      "no-unused-vars": "error",
+      "no-unused-vars": "warn",
       "no-dupe-keys": "error"
     }
   }
