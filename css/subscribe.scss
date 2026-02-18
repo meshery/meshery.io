@@ -8,7 +8,7 @@
 .subscribe-button {
   width: 100%;
   padding: 1rem 2rem;
-  background: #3acec4;
+  background: var(--brand-color-primary, #3acec4);
   color: #fff;
   display: flex;
   justify-content: center;
@@ -23,10 +23,10 @@
   cursor: pointer;
   margin-top: 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  transition: all 300ms ease;
+  transition: background-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
 
   &:hover {
-    background: #00e5bb;
+    background: var(--brand-color-secondary, #00e5bb);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 211, 169, 0.4);
   }
@@ -39,17 +39,25 @@
 .NAME, .EMAIL {
   width: 100%;
   height: 3.5rem;
-  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   border-radius: 0.5rem;
   padding: 1rem 1.25rem;
   background-color: #fff;
   font-size: 1rem;
-  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--brand-color-primary, #3acec4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    border-color: var(--brand-color-primary, #3acec4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
   &::placeholder {
@@ -127,7 +135,7 @@
 
   @media (min-width: 768px) {
     > p {
-      margin: 0 25px;
+      margin: 0 25px 2rem 25px;
     }
 
     .NAME {
