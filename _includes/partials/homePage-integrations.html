@@ -1,24 +1,22 @@
-<div class="integrations-heading" style="padding-top: 2rem;">
+<div class="integrations-heading home-integrations-heading">
     <div class="parallel-left"></div>
     <div class="parallel-right"></div>
     <h1 id="integration-heading"></h1>
     <h2>
         for your Cloud Native Infrastructure and Apps
     </h2>
-    <p style="margin: auto 10vw;">
+    <p class="home-integrations-subtext">
         Meshery seamlessly integrates with every CNCF project, your existing tools, multiple Clouds and Kubernetes clusters.
     </p>
 </div>
-<div id="integContainer" class="integrations-container container"
-    style="column-gap: max(2vh, 2vw); row-gap: 1.5rem; display: flex; flex-wrap: wrap; padding-bottom: 3.5rem;">
+<div id="integContainer" class="integrations-container container home-integrations-grid">
 </div>
 <div class="integrations-3d-link">
-    <div class="button-container" style="display: flex; align-items: center; justify-content: center; row-gap: 18px; column-gap: 32px; flex-wrap: wrap;">
+    <div class="button-container home-integrations-actions">
         <a class="highlight show-all-button toggle-text"
-            style="display: inline-block; width: fit-content; cursor:pointer;">Show More
-            Integrations</a>
-        <a class="highlight show-all-button" href="/integrations"
-            style="display: inline-block; width: fit-content;">View
+            href="#integrations" aria-controls="integContainer" aria-expanded="false">Show All Integrations</a>
+        <a class="highlight show-all-button" href="/integrations">
+            View
             Integrations in 3D</a>
     </div>
 </div>
@@ -58,6 +56,7 @@
         `).join("");
 
 			toggleButton.textContent = showAll ? "See Less Integrations" : "Show All Integrations";
+			toggleButton.setAttribute("aria-expanded", `${showAll}`);
 		}
 
 	renderIntegrationCards(false);
