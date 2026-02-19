@@ -43,7 +43,7 @@ export default defineConfig([  {
       "valid-typeof": "warn",
       "array-bracket-spacing": ["error", "never"],
       "comma-style": ["error"],
-      "block-scoped-var": "off",
+      "block-scoped-var": "error",
       "keyword-spacing": "error",
       "no-trailing-spaces": "error",
       "object-curly-spacing": ["error", "always"],
@@ -70,7 +70,7 @@ export default defineConfig([  {
       ],
       "no-undef": "error",
       "no-console": "off",
-      "no-unused-vars": "warn",
+      "no-unused-vars": "error",
       "no-dupe-keys": "error"
     }
   }

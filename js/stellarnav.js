@@ -82,13 +82,13 @@ $.fn.stellarNav = function(options, width, breakpoint) {
 
     // adds a click-to-call link
     if (settings.phoneBtn && !(settings.position == 'right' || settings.position == 'left')) {
-      var btn = '<a href="tel:'+ settings.phoneBtn +'" class="call-btn-mobile ' + cssClass + '"><svg id="icon-phone"></svg> <span>' + phoneLabel + '</span></a>';
+      const btn = '<a href="tel:'+ settings.phoneBtn +'" class="call-btn-mobile ' + cssClass + '"><svg id="icon-phone"></svg> <span>' + phoneLabel + '</span></a>';
       nav.find('a.menu-toggle').after(btn);
     }
 
     // adds a location page link to the beginning of nav
     if (settings.locationBtn && !(settings.position == 'right' || settings.position == 'left')) {
-      btn = '<a href="'+ settings.locationBtn +'" class="location-btn-mobile ' + cssClass + '" target="_blank"><svg id="icon-location"></svg> <span>' + locationLabel + '</span></a>';
+      const btn = '<a href="'+ settings.locationBtn +'" class="location-btn-mobile ' + cssClass + '" target="_blank"><svg id="icon-location"></svg> <span>' + locationLabel + '</span></a>';
       nav.find('a.menu-toggle').after(btn);
     }
 
