@@ -17,15 +17,17 @@
   var didScroll = false;
 
   window.addEventListener("scroll", function () {
-    didScroll = true;
-  });
-
-  setInterval(function () {
-    if (didScroll) {
-      didScroll = false;
-      changeHeader();
+    if (!didScroll) {
+      didScroll = true;
+      requestAnimationFrame(function () {
+        try {
+          changeHeader();
+        } finally {
+          didScroll = false;
+        }
+      });
     }
-  }, 100);
+  });
 
   changeHeader();
 })();
