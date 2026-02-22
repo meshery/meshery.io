@@ -6,5 +6,9 @@ image: /assets/images/programs/gsoc.svg
 program_slug: /programs/gsoc/
 link: /programs/gsoc
 permalink: /programs/gsoc
+redirect_from:
+- gsoc
+- gsoc/
+- programs/gsoc/
 excerpt: "Meshery - Google Summer of Code Program"
 ---

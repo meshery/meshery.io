@@ -6,5 +6,9 @@ image: /assets/images/programs/lfx-logo.svg
 program_slug: /programs/lfx/
 link: /programs/lfx
 permalink: /programs/lfx
+redirect_from:
+- lfx
+- lfx/
+- programs/lfx/
 excerpt: "Meshery - LFX Mentorship Program"
 ---
