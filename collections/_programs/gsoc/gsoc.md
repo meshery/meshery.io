@@ -10,5 +10,7 @@ redirect_from:
 - gsoc
 - gsoc/
 - programs/gsoc/
+- gsoc.html
+- programs/gsoc.html
 excerpt: "Meshery - Google Summer of Code Program"
 ---

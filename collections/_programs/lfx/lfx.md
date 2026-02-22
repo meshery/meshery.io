@@ -10,5 +10,7 @@ redirect_from:
 - lfx
 - lfx/
 - programs/lfx/
+- lfx.html
+- programs/lfx.html
 excerpt: "Meshery - LFX Mentorship Program"
 ---
