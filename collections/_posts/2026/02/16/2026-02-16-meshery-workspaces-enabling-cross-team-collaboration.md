@@ -132,25 +132,18 @@ Workspaces integrate seamlessly with GitOps workflows:
 Ready to experience the power of Workspaces? Here's a hands-on challenge:
 
 1. **Sign up for Meshery Cloud** (free tier available) or [install Meshery locally](https://docs.meshery.io/installation)
-
 2. **Navigate to the Catalog** at [meshery.io/catalog](https://meshery.io/catalog)
-
 3. **Find a design that interests you**, such as:
    - [Kubernetes Observability Stack](https://meshery.io/catalog?search=observability)
    - [Istio Service Mesh Deployment](https://meshery.io/catalog?search=istio)
    - [NGINX Ingress with Rate Limiting](https://meshery.io/catalog?search=nginx)
-
 4. **Click "Clone to Workspace"** - this imports the design into your personal Workspace
-
 5. **Open the Visual Designer** and explore the topology:
    - See how components are connected
    - Adjust configurations to match your environment
    - Add or remove resources as needed
-
 6. **Connect your Kubernetes cluster** (if you haven't already)
-
 7. **Deploy the design** to your environment with a single click
-
 8. **Monitor the deployment** through Meshery's built-in observability features
 
 Within minutes, you'll have a production-ready infrastructure pattern running in your cluster, customized to your needs. That's the power of Workspaces and the Catalog working together.
