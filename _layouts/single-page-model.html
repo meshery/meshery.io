@@ -108,13 +108,9 @@ pagination:
     <!-- Model Image -->
     <div class="modal-content" style="margin-top:2rem;">
       <div class="modal-image" style="padding-top:0;">
-        <img class="image-class"  
-          data-snapshot-light="{{ page.colorIcon }}"
-          data-snapshot-dark="{{ page.whiteIcon }}"
-          src="{{ page.colorIcon }}"
-          onerror="this.src='{{ '/assets/images/meshery-color.svg' | relative_url }}'" 
-          loading="lazy" 
-          onclick="toggleFullScreenImage('{{ page.colorIcon | relative_url }}', 'model')" />
+        <img class="image-class" data-snapshot-light="{{ page.colorIcon }}" data-snapshot-dark="{{ page.whiteIcon }}"
+          src="{{ page.colorIcon }}" onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy"
+          onclick="toggleFullScreenImage('{{ page.colorIcon }}', 'model')" alt="{{ page.title }}" />
       </div>
 
       <br />
@@ -205,13 +201,11 @@ pagination:
       <h3>Components</h3>
       <div style="display: flex; flex-wrap: wrap; gap: 1rem;justify-content: center;">
         {% for component in page.components %}
-          <div style="text-align: center; width: 150px;">
-            <img src="{{ component.colorIcon | relative_url }}" 
-                 onerror="this.src='{{ '/assets/images/meshery-color.svg' | relative_url }}'"
-                 style="width: 100px; height: 100px; object-fit: contain;" 
-                 loading="lazy" />
-            <p><strong>{{ component.name }}</strong></p>
-          </div>
+        <div style="text-align: center; width: 150px;">
+          <img src="{{site.baseurl}}/{{ component.colorIcon }}" onerror="this.src='/assets/images/meshery-color.svg'"
+            style="width: 100px; height: 100px; object-fit: contain;" loading="lazy" alt="{{ component.name }}" />
+          <p><strong>{{ component.name }}</strong></p>
+        </div>
         {% endfor %}
       </div>
     </div>

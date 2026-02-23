@@ -9,7 +9,7 @@ categories:
 redirect-from: /blog/kubecon-cloudnativecon
 ---
 <div style="text-align:center;padding:5px">
-<img src="{{site.baseurl}}/assets/images/posts/2020/2020-12-02-kubecon+cloudnativecon/service-mesh-implementations.png" style="width:100%" /></div>
+<img src="{{site.baseurl}}/assets/images/posts/2020/2020-12-02-kubecon+cloudnativecon/service-mesh-implementations.png" style="width:100%"  alt="Service Mesh Implementations" /></div>
 As more organizations implement service meshes, they are finding what works and what needs more work, and they are creating new management practices around this knowledge. A few tried-and-tested best practices were detailed last month during KubeCon+CloudNativeCon.
 
 “There’s a lot to say about each of these service meshes and how they work: their architecture, why they’re made, what they’re focused on, what they do when they came about and why some of them aren’t here anymore and why we’re still seeing new ones,” Lee Calcote, founder of Meshery, explained during his talk with Kush Trivedi, a Meshery maintainer, entitled “Service Mesh Specifications and Why They Matter in Your Deployment.”
