@@ -25,7 +25,7 @@ With each star, we've celebrated not just a number but the steady, collective he
 
 If you haven't met Five yet, he's our adventurous mascot, representing the Meshery community as he traverses through the cloud native universe. [Check out Five's interstellar adventures](https://layer5.io/community/adventures-of-five-and-friends) while he hangs onto his rocket for dear life as Meshery speeds towards new heights.
 
-<img src="/assets/images/posts/2025/2025-3-25-meshery-reaches-7000-stars/five-holding-onto-rocket.png" style="padding:.5rem;" width="100%" />
+<img src="/assets/images/posts/2025/2025-3-25-meshery-reaches-7000-stars/five-holding-onto-rocket.png" style="padding:.5rem;" width="100%"  alt="Five Holding Onto Rocket" />
 
 ### Rocket #1: Meshery v0.8.0, A Giant Leap Forward
 
@@ -39,7 +39,7 @@ Meshery v0.8.0 marked a significant moment in our journey, not just for the feat
 
 ### Rocket #2: Meshery Catalog: your Cloud Native Marketplace
 
-<img src="/assets/images/posts/2024/2024-02-17-simplifying-cloud-infrastructure-and-kubernetes-management/meshery-catalog.png" width="100%" />
+<img src="/assets/images/posts/2024/2024-02-17-simplifying-cloud-infrastructure-and-kubernetes-management/meshery-catalog.png" width="100%"  alt="Meshery Catalog" />
 
 [Meshery Catalog](https://meshery.io/catalog) is your go-to marketplace for cloud native configurations. With **over 200 ready-to-use designs** and growing, it’s a showcase of real-world configurations, contributed and curated by Meshery users.
 
@@ -65,7 +65,7 @@ You, the community, are the real stars here. Every GitHub issue, PR, Slack conve
 
 With over 20,000 issues addressed and contributions across 100+ repositories, the Meshery community is thriving with activity and continuously evolving. You are our brightest stars.
 
-<img src="/assets/images/posts/2025/2025-3-25-meshery-reaches-7000-stars/meshery-community-overview.png" style="padding:.5rem;" width="45%" align="right">
+<img src="/assets/images/posts/2025/2025-3-25-meshery-reaches-7000-stars/meshery-community-overview.png" style="padding:.5rem;" width="45%" align="right" alt="Meshery Community Overview">
 
 ### Meshery at KubeCon EU 2025
 
