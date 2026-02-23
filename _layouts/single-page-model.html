@@ -1,13 +1,13 @@
 ---
 layout: page
-pagination: 
-  enabled: true
-  collection: models
+pagination:
+enabled: true
+collection: models
 ---
 <div class="blog-post text-container">
 
   <div class="post-content">
-  
+
     <style>
       .modal-image {
         display: flex;
@@ -15,10 +15,12 @@ pagination:
         align-items: center;
         justify-content: center;
       }
-      .modal-image > img {
+
+      .modal-image>img {
         width: 100%;
         object-fit: contain;
       }
+
       .metadata-row {
         display: flex;
         border-bottom: 1px solid #eee;
@@ -36,91 +38,87 @@ pagination:
         flex-grow: 1;
         color: var(--color-secondary-dark);
       }
+
       .model-metadata-container {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
         margin: 1rem 0;
       }
+
       .model-details-container {
         margin-top: 3rem;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
       }
+
       .model-details {
         margin-top: 1.5rem;
       }
+
       .model-details h3 {
         font-size: 1.2rem;
         font-weight: 600;
         margin-bottom: 1rem;
       }
+
       .model-details ul {
         list-style-type: disc;
         padding-left: 20px;
       }
+
       .padded-box {
         padding: 1.5rem;
         border-radius: 8px;
         margin-top: 1rem;
         background-color: var(--color-components-background);
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         transition: box-shadow 0.3s ease;
       }
 
       /* Import instructions section */
-	  .import-instructions {
-		background-color: var(--color-components-background);
-		border-left: 4px solid var(--color-brand, #00b39f);
-		padding: 1rem 1.25rem;
-		margin: 1.5rem 0;
-		border-radius: 4px;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-		transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-	  }
+      .import-instructions {
+        background-color: var(--color-components-background);
+        border-left: 4px solid var(--color-brand, #00b39f);
+        padding: 1rem 1.25rem;
+        margin: 1.5rem 0;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      }
 
-	  .import-instructions h3 {
-		margin: 0 0 0.5rem 0;
-		font-size: 1.1rem;
-		color: var(--color-secondary-dark);
-	  }
+      .import-instructions h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.1rem;
+        color: var(--color-secondary-dark);
+      }
 
-	  .import-instructions p {
-		margin: 0 0 0.75rem 0;
-		color: var(--color-secondary-dark);
-		line-height: 1.5;
-	  }
+      .import-instructions p {
+        margin: 0 0 0.75rem 0;
+        color: var(--color-secondary-dark);
+        line-height: 1.5;
+      }
 
-	  .import-instructions a {
-		color: var(--color-brand, #00b39f);
-		font-weight: 600;
-		text-decoration: none;
-		transition: color 0.2s ease;
-	  }
+      .import-instructions a {
+        color: var(--color-brand, #00b39f);
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
 
-	  .import-instructions a:hover {
-		text-decoration: underline;
-		opacity: 0.85;
-	  }
+      .import-instructions a:hover {
+        text-decoration: underline;
+        opacity: 0.85;
+      }
     </style>
 
     <!-- Model Image -->
     <div class="modal-content" style="margin-top:2rem;">
       <div class="modal-image" style="padding-top:0;">
-<<<<<<< Updated upstream
-        <img class="image-class"  
-          data-snapshot-light="{{ page.colorIcon }}"
-          data-snapshot-dark="{{ page.whiteIcon }}"
-          src="{{ page.colorIcon }}"
-          onerror="this.src='/assets/images/meshery-color.svg'" 
-          loading="lazy" 
-          onclick="toggleFullScreenImage('{{ page.colorIcon }}', 'model')" />
-=======
         <img class="image-class" data-snapshot-light="{{ page.colorIcon }}" data-snapshot-dark="{{ page.whiteIcon }}"
           src="{{ page.colorIcon }}" onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy"
-          onclick="toggleFullScreenImage('{{ page.colorIcon }}', 'model')"  alt="{{ Page" />
->>>>>>> Stashed changes
+          onclick="toggleFullScreenImage('{{ page.colorIcon }}', 'model')" alt="{{ page.title }}" />
       </div>
 
       <br />
@@ -154,8 +152,10 @@ pagination:
         <!-- Import Instructions Section -->
         <div class="import-instructions">
           <h3>How to Import This Model</h3>
-          <p>Want to use this model in your Meshery instance? Learn how to import it using either the Meshery CLI or UI.</p>
-          <a href="https://docs.meshery.io/guides/configuration-management/importing-models" target="_blank" rel="noopener noreferrer">View Import Instructions →</a>
+          <p>Want to use this model in your Meshery instance? Learn how to import it using either the Meshery CLI or UI.
+          </p>
+          <a href="https://docs.meshery.io/guides/configuration-management/importing-models" target="_blank"
+            rel="noopener noreferrer">View Import Instructions →</a>
         </div>
 
         <!-- Documentation and Contribution Buttons -->
@@ -164,9 +164,9 @@ pagination:
             <div class="vertical-center" id="{{type.name}}">
               <div class="btn-grp">
                 {% if page.docURL %}
-                  <a href="{{page.docURL}}">
-                    <button class="import" style="width: 7rem;">Visit Docs</button>
-                  </a>
+                <a href="{{page.docURL}}">
+                  <button class="import" style="width: 7rem;">Visit Docs</button>
+                </a>
                 {% endif %}
                 {% assign modelName = page.path | split: '/' | last | replace: '.md', '' %}
                 <a href="/assets/modelsFiles/{{ modelName }}.tar" download>
@@ -189,9 +189,9 @@ pagination:
     <!-- Scripts -->
     <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
     <script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>
-  
+
   </div> <!-- End post-content -->
-  
+
   <div class="model-details-container">
     <!-- Features List -->
     {% if page.featureList and page.featureList.size > 0 %}
@@ -199,7 +199,7 @@ pagination:
       <h3>Key Features</h3>
       <ul>
         {% for feature in page.featureList %}
-          <li>{{ feature }}</li>
+        <li>{{ feature }}</li>
         {% endfor %}
       </ul>
     </div>
@@ -211,21 +211,11 @@ pagination:
       <h3>Components</h3>
       <div style="display: flex; flex-wrap: wrap; gap: 1rem;justify-content: center;">
         {% for component in page.components %}
-<<<<<<< Updated upstream
-          <div style="text-align: center; width: 150px;">
-            <img src="{{site.baseurl}}/{{ component.colorIcon }}" 
-                 onerror="this.src='/assets/images/meshery-color.svg'"
-                 style="width: 100px; height: 100px; object-fit: contain;" 
-                 loading="lazy" />
-            <p><strong>{{ component.name }}</strong></p>
-          </div>
-=======
         <div style="text-align: center; width: 150px;">
           <img src="{{site.baseurl}}/{{ component.colorIcon }}" onerror="this.src='/assets/images/meshery-color.svg'"
-            style="width: 100px; height: 100px; object-fit: contain;" loading="lazy"  alt="{{ Component" />
+            style="width: 100px; height: 100px; object-fit: contain;" loading="lazy" alt="{{ component.name }}" />
           <p><strong>{{ component.name }}</strong></p>
         </div>
->>>>>>> Stashed changes
         {% endfor %}
       </div>
     </div>
@@ -235,10 +225,10 @@ pagination:
     <div class="blog-navigation" style="margin-bottom: 2rem;">
       <div style="justify-content:space-between; display: flex; width:100%;">
         {% if page.previous.url %}
-          <a href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.name }}</a>
+        <a href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.name }}</a>
         {% endif %}
         {% if page.next.url %}
-          <a href="{% include relative-src.html src=page.next.url %}">{{ page.next.name }} &raquo;</a>
+        <a href="{% include relative-src.html src=page.next.url %}">{{ page.next.name }} &raquo;</a>
         {% endif %}
       </div>
     </div>
