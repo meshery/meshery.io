@@ -1,79 +1,81 @@
 ---
 layout: page
-pagination: 
-  enabled: true
-  collection: extensions
+pagination:
+enabled: true
+collection: extensions
 ---
 <div class="blog-post text-container">
 
 	<div class="post-content">
-	
-        <style>
-			.modal-image {
-			  display: flex;
-			  flex-direction: column;
-			  align-items: center;
-			  justify-content: flex-start;
-			}
-			.modal-image > img {
-			  width: 100%;
-			  object-fit: contain;
-			}
-		  </style>
-			  <div class="modal-content" style="margin-top:2rem;">
-				<div class="modal-image">
-				  <img class="image-class"  
-				  data-snapshot-light="{{page.colorImage}}"
-				  data-snapshot-dark="{{page.whiteImage}}"
-				  src="{{page.colorImage}}"
-				  onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage('{{ page.colorImage }}', 'extension')" />
-				</div>
-				<br />
-				<div class="vertical-line"></div>
-				<div class="modal-info">
 
-				  <h3 class="modal-h3">Description</h3>
-				  <p class="content-toggle contentdata pre-white-space">{{page.extensionInfo | url_decode | replace: '\\n', '<br/>' | replace: '\n', '<br/>' }}</p>
-				  <!-- <span class="read-more" href="read-more.html">{% include expand.html %}</span> -->
-		  
-				  <h3 class="modal-h3">Features</h3>
-				  <p class="content-toggle contentdata pre-white-space">{{page.extensionCaveats | url_decode | replace: '\\n', '<br/>' | replace: '\n', '<br/>' }}</p>
-				  <!-- <span class="read-more" href="read-more.html">{% include expand.html %}</span> -->
-				  <div id="copy-url">
+		<style>
+			.modal-image {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: flex-start;
+			}
+
+			.modal-image>img {
+				width: 100%;
+				object-fit: contain;
+			}
+		</style>
+		<div class="modal-content" style="margin-top:2rem;">
+			<div class="modal-image">
+				<img class="image-class" data-snapshot-light="{{page.colorImage}}"
+					data-snapshot-dark="{{page.whiteImage}}" src="{{page.colorImage}}"
+					onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy"
+					onclick="toggleFullScreenImage('{{ page.colorImage }}', 'extension')" alt="{{ page.title }}" />
+			</div>
+			<br />
+			<div class="vertical-line"></div>
+			<div class="modal-info">
+
+				<h3 class="modal-h3">Description</h3>
+				<p class="content-toggle contentdata pre-white-space">{{page.extensionInfo | url_decode | replace:
+					'\\n', '<br />' | replace: '\n', '<br />' }}</p>
+				<!-- <span class="read-more" href="read-more.html">{% include expand.html %}</span> -->
+
+				<h3 class="modal-h3">Features</h3>
+				<p class="content-toggle contentdata pre-white-space">{{page.extensionCaveats | url_decode | replace:
+					'\\n', '<br />' | replace: '\n', '<br />' }}</p>
+				<!-- <span class="read-more" href="read-more.html">{% include expand.html %}</span> -->
+				<div id="copy-url">
 					<div class="btn-class">
-					  <div class="vertical-center" id="{{type.name}}">
-						<div class="btn-grp">
-						  {% if page.docsURL %}
-						  <a href="{{page.docsURL}}">
-							<button class="import-secondary" style="width: 7rem;">Learn More</button></a>
-						  {% endif %}
-						  <div class="btn-tooltip-grp">
-						  {% if page.URL %}
-							<a href="{{page.URL}}">
-							  <button class="import" style="width: 7rem;">Visit</button></a>
-						  {% endif %}
-						  </div>
+						<div class="vertical-center" id="{{type.name}}">
+							<div class="btn-grp">
+								{% if page.docsURL %}
+								<a href="{{page.docsURL}}">
+									<button class="import-secondary" style="width: 7rem;">Learn More</button></a>
+								{% endif %}
+								<div class="btn-tooltip-grp">
+									{% if page.URL %}
+									<a href="{{page.URL}}">
+										<button class="import" style="width: 7rem;">Visit</button></a>
+									{% endif %}
+								</div>
+							</div>
 						</div>
-					  </div>
 					</div>
-				  </div>
-				  
 				</div>
-			  </div>
-			   
-		   <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
-		   <script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>
-        
-        
-	   <div class="blog-navigation" style="margin-bottom: 2rem;">
-		<div style="justify-content:space-between; display: flex; width:100%;">
-			{% if page.previous.url %}
-				<a href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.name }}</a>
-			{% endif %}
-			{% if page.next.url %}
-				<a  href="{% include relative-src.html src=page.next.url %}">{{ page.next.name }} &raquo;</a>
-			{% endif %}
+
+			</div>
 		</div>
+
+		<script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
+		<script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>
+
+
+		<div class="blog-navigation" style="margin-bottom: 2rem;">
+			<div style="justify-content:space-between; display: flex; width:100%;">
+				{% if page.previous.url %}
+				<a href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.name }}</a>
+				{% endif %}
+				{% if page.next.url %}
+				<a href="{% include relative-src.html src=page.next.url %}">{{ page.next.name }} &raquo;</a>
+				{% endif %}
+			</div>
 		</div>
 	</div>
 </div>

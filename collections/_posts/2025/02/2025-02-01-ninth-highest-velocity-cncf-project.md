@@ -37,7 +37,7 @@ This isn't an overnight success story. Meshery's velocity has been on a consiste
 
 This sustained growth underscores the project's vitality and increasing relevance in the cloud-native ecosystem.
 
-<img src="/assets/images/posts/2025/ninth-highest-velocity-cncf-project/maintainers-and-contributors.png" style="width:100%; max-width:750px;" />
+<img src="/assets/images/posts/2025/ninth-highest-velocity-cncf-project/maintainers-and-contributors.png" style="width:100%; max-width:750px;"  alt="Maintainers And Contributors" />
 
 ### What Drives Meshery's Velocity?
 

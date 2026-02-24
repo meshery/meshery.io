@@ -9,7 +9,7 @@ redirect_from: /community/badges
 Meshery's recognition programs are designed to acknowledge and celebrate the milestones of our community members. These programs provide a way for users and contributors to earn badges that signify their achievements and involvement in the Meshery ecosystem and for users to obtain certifications that validate their skills and expertise.
 
 <div style="text-align:center;padding:20px">
-<img src="/assets/images/community/recognition-program.png" style="width:75%" />
+<img src="/assets/images/community/recognition-program.png" style="width:75%"  alt="Recognition Program" />
 </div>
 
 <h3>Badges</h3>

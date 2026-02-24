@@ -57,7 +57,7 @@ Meshery will have a dedicated session at KubeCon EU 2025 where contributors can 
 
 <h3 class="highlighted-text">Earn your Security Sentinel Badge!</h3>
 
-<img src="https://badges.layer5.io/assets/badges/security-sentinel/security-sentinel.png" width="50%" align="right" />
+<img src="https://badges.layer5.io/assets/badges/security-sentinel/security-sentinel.png" width="50%" align="right"  alt="Security Sentinel" />
 
 As a special recognition for your contributions, participants in Meshery's Security Slam at KubeCon EU 2025 will receive the coveted Security Sentinel badge! This badge will be awarded to anyone who creates, completes, or works on an issue listed on the project board. It's a great way to showcase your commitment to security and your involvement in the Meshery community.
 
