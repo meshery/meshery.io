@@ -9,17 +9,16 @@
     var el = document.createElement("div");
     el.className = "community-corner-popup";
 
-    el.innerHTML =
-      '<div class="popup">' +
-      '<button class="close-btn" aria-label="Close popup">' + CLOSE_SVG +'</button>' +
+    el.innerHTML =`<div class="popup">
+      <button class="close-btn" aria-label="Close popup">${CLOSE_SVG}</button>
 
-      '<div class="popup-text">' +
-      '<h3>New Here?</h3>' +
-      '<p>Welcome! Fill in the community member form to receive updates about meetings and resources.</p>' +
-      '</div>' +
+      <div class="popup-text">
+      <h3>New Here?</h3>
+      <p>Welcome! Fill in the community member form to receive updates about meetings and resources.</p>
+      </div>
 
-      '<a class="popup-button" href="https://meshery.io/newcomers" target="_blank"><p class="popup-button-text">Community Forum</p></a>' +
-      '</div>';
+      <a class="popup-button" href="https://meshery.io/newcomers" target="_blank"><p class="popup-button-text">Community Forum</p></a>
+      </div>`;
 
     el.querySelector(".close-btn").addEventListener("click", function () {
       el.remove();
