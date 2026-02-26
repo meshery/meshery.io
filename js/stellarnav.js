@@ -224,8 +224,8 @@ $.fn.stellarNav = function(options, width, breakpoint) {
 
     function navbarExpand(e) {
       if (e.type == 'click' || e.key == "Enter" || e.code == "Space") {
-        if (nav.hasClass('desktop') && $(this).hasClass('sub-list')) {
-          return; 
+        if (nav[0].classList.contains('desktop') && this.classList.contains('sub-list')) {
+          return;
         }
         e.preventDefault();
 
