@@ -135,6 +135,12 @@
     padding-right: 1.25rem;
     height: min-content;
   }
+  .page-info {
+    margin: 0 1rem;
+    align-self: center;
+    font-weight: bold;
+    color: var(--color-secondary-dark);
+  }
 </style>
 
 <div class="filter-wrap">
@@ -522,6 +528,18 @@ function showFilterCards() {
     const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
     prevButton.disabled = currentPage === 0;
     nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
+
+  const pageInfo = prevButton.parentElement.querySelector(".page-info");
+    
+  if (pageInfo) {
+    if (totalPages > 0) {
+      pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+      pageInfo.style.display = "inline";
+    } else {
+      pageInfo.style.display = "none";
+    }
+  }
+
   }
   
   // Function to show the current page of cards
