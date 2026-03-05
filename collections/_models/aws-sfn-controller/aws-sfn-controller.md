@@ -27,17 +27,21 @@ components:
   colorIcon: assets/images/integration/aws-sfn-controller/components/state-machine/icons/color/state-machine-color.svg
   whiteIcon: assets/images/integration/aws-sfn-controller/components/state-machine/icons/white/state-machine-white.svg
   description: 
-componentsCount: 4
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-sfn-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-sfn-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+componentsCount: 5
 relationships: 
-- type: "Binding"
-  kind: "Edge"
-  description: "An edge relationship between StateMachine and Activity "
-- type: "Non Binding"
-  kind: "Edge"
-  description: "An edge relationship between adoptedresource and Activity "
-- type: "Non Binding"
-  kind: "Edge"
-  description: "An edge relationship between adoptedresource and StateMachine "
+- type: "non-binding"
+  kind: "edge"
+  description: ""
+- type: "non-binding"
+  kind: "edge"
+  description: ""
+- type: "non-binding"
+  kind: "edge"
+  description: ""
 relationshipsCount: 3
 featureList: [
   "Step Functions is based on state machines and tasks.",

@@ -8,7 +8,7 @@ whiteIcon: /assets/images/integration/aws-vpc-cni/icons/white/aws-vpc-cni-white.
 docURL: https://docs.meshery.io/extensibility/integrations/aws-vpc-cni
 description: 
 category: Cloud Native Network
-subcategory: Cloud Native Network
+subcategory: Networking Content Delivery
 registrant: Artifact Hub
 components: 
 - name: eni-config
@@ -21,15 +21,15 @@ components:
   description: 
 componentsCount: 2
 relationships: 
-- type: "Binding"
-  kind: "Edge"
-  description: "An edge relationship between policyendpoint and securitygroup"
-- type: "Binding"
-  kind: "Edge"
-  description: "An edge relationship between ENIConfig and Subnet"
-- type: "Binding"
-  kind: "Edge"
-  description: "An edge relationship between VPCLink and Integration"
+- type: "non-binding"
+  kind: "edge"
+  description: ""
+- type: "non-binding"
+  kind: "edge"
+  description: ""
+- type: "non-binding"
+  kind: "edge"
+  description: ""
 relationshipsCount: 3
 featureList: [
   "Keep revision history and audit trail of all configuration changes",

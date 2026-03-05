@@ -43,7 +43,11 @@ components:
   colorIcon: assets/images/integration/camel-k/components/pipe/icons/color/pipe-color.svg
   whiteIcon: assets/images/integration/camel-k/components/pipe/icons/white/pipe-white.svg
   description: 
-componentsCount: 8
+- name: integration-profile
+  colorIcon: assets/images/integration/camel-k/components/integration-profile/icons/color/integration-profile-color.svg
+  whiteIcon: assets/images/integration/camel-k/components/integration-profile/icons/white/integration-profile-white.svg
+  description: 
+componentsCount: 9
 relationships: 
 relationshipsCount: 0
 featureList: [

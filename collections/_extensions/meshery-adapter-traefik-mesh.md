@@ -9,8 +9,8 @@ compatibility:
   - kubernetes
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: https://playground.meshery.io/static/img/meshmap-snapshot-logo.svg
-whiteImage: /assets/images/traefik-mesh.svg
-colorImage: /assets/images/traefik-mesh.svg
+whiteImage: /assets/images/adapters/traefik-mesh.svg
+colorImage: /assets/images/adapters/traefik-mesh.svg
 extensionInfo: |
   Deploy the Meshery Adapter for Traefik Mesh in order to enable deeper lifecycle management of Traefik service meshes.
 extensionCaveats: |

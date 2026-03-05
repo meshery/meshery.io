@@ -9,7 +9,7 @@ docURL: https://docs.meshery.io/extensibility/integrations/prometheus
 description: 
 category: Observability and Analysis
 subcategory: Monitoring
-registrant: Artifact Hub
+registrant: Github
 components: 
 componentsCount: 0
 relationships: 

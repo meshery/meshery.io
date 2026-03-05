@@ -8,7 +8,7 @@ whiteIcon: /assets/images/integration/rook-ceph-cluster/icons/white/rook-ceph-cl
 docURL: https://docs.meshery.io/extensibility/integrations/rook-ceph-cluster
 description: 
 category: Provisioning
-subcategory: Database
+subcategory: Storage
 registrant: GitHub
 components: 
 componentsCount: 0

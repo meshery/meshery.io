@@ -5,6 +5,8 @@ on:
   # Runs on pushes targeting the master branch
   push:
     branches: ["master"]
+    paths-ignore:
+     - .github/**/**
 
 
   workflow_dispatch:
@@ -27,7 +29,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1.162.0
         with:
@@ -57,3 +59,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+

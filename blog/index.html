@@ -10,6 +10,24 @@ paginate:
 ---
 
 <div class="blog-container">
+    <!-- Search Section -->
+    <div class="blog-search-container">
+      <div class="search-box">
+        <input 
+          type="text" 
+          id="blog-search-input" 
+          placeholder="Search blog posts..." 
+          aria-label="Search blog posts"
+        />
+        <button id="clear-search-btn" class="clear-search" title="Clear search" style="display:none;">×</button>
+      </div>
+      <div id="search-summary" class="search-summary" style="display:none;"></div>
+    </div>
+
+    <!-- Search Results (hidden by default) -->
+    <div id="search-results" style="display:none;"></div>
+
+    <!-- Original Blog Posts -->
     <ul class="blog-posts">
       {% include list-posts.html posts=paginator.posts %}
     </ul>
@@ -147,6 +165,89 @@ paginate:
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
   margin-top: 2rem;
+}
+
+/* Blog Search Styles */
+.blog-search-container {
+  grid-column: 1 / -1;
+  margin-bottom: 2rem;
+}
+
+.search-box {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto 1rem;
+}
+
+#blog-search-input {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--color-primary-medium);
+  border-radius: 0.5rem;
+  background: var(--color-primary-dark);
+  color: var(--color-secondary-dark);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+#blog-search-input:focus {
+  outline: none;
+  border-color: var(--brand-color-secondary);
+  box-shadow: 0 0 0 3px rgba(0, 211, 169, 0.1);
+}
+
+#blog-search-input::placeholder {
+  color: var(--color-primary-super-dark);
+}
+
+.clear-search {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-primary-super-dark);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.clear-search:hover {
+  color: var(--brand-color-secondary);
+}
+
+.search-summary {
+  text-align: center;
+  color: var(--color-secondary-dark);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+#search-results {
+  grid-column: 1;
+  margin-bottom: 2rem;
+}
+
+.search-results-list {
+  list-style: none;
+  padding: 0;
+}
+
+.search-result-item {
+  margin-bottom: 2rem;
+}
+
+.search-highlight {
+  background-color: rgba(0, 211, 169, 0.3);
+  color: var(--brand-color-secondary);
+  font-weight: 600;
+  padding: 0.1rem 0.2rem;
+  border-radius: 2px;
 }
 
 .blog-posts {
@@ -340,5 +441,20 @@ ul.archive-months {
     grid-column: 1;
     margin-right: auto;
   }
+
+  .blog-search-container {
+    grid-column: 1;
+  }
+
+  #search-results {
+    grid-column: 1;
+  }
+
+  .blog-posts {
+    grid-column: 1;
+  }
 }
 </style>
+
+<!-- Blog Search Script -->
+<script src="{{ '/js/blog-search.js' | relative_url }}"></script>

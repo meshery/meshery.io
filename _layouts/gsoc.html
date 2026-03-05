@@ -42,45 +42,44 @@ layout: default
             {% endif %}
 
         </div>
-
-        <div class="project-details">
-            <h2 class="sub_headings">{{ page.projects_title }}</h2>
-
-            <div id="toc" class="auto-toc"></div>
-
-            <div id="content">
-                {% for project in page.projects %}
-                <div class="project-item">
-                    <h3 class="project-title">{{ project.title }}</h3>
-
-                    <h4>Description:</h4>
-                    <p class="program-p">{{ project.description | markdownify }}</p>
-
-                    <h4>Expected outcomes:</h4>
-                    <ol>
-                        {% for outcome in project.outcomes %}
-                        <li>{{ outcome }}</li>
-                        {% endfor %}
-                    </ol>
-
-                    <ul class="project-list">
-                        <li><b>Recommended Skills:</b> {{ project.skills }}</li>
-                        <li><b>Expected project size:</b> {{ project.size }}</li>
-                        <li><b>Mentors:</b>
-                            {% for mentor in project.mentors %}
-                            <a href="{{ mentor.link }}">{{ mentor.name }}</a>{% unless forloop.last %}, {% endunless %}
-                            {% endfor %}
-                        </li>
-                        <li><b>Issue:</b> <a href="{{ project.issue }}">{{ project.issue }}</a></li>
-                    </ul>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
     </div>
-    <a href="https://slack.meshery.io">
-        <input type="button" value="Participate" class="participate-button disappear" />
-    </a>
+    <div class="project-details">
+        <h2 class="sub_headings">{{ page.projects_title }}</h2>
+
+        <div id="toc" class="auto-toc"></div>
+
+        <div id="content">
+            {% for project in page.projects %}
+            <div class="project-item">
+                <h3 class="project-title">{{ project.title }}</h3>
+
+                <h4>Description:</h4>
+                <p class="program-p">{{ project.description | markdownify }}</p>
+
+                <h4>Expected outcomes:</h4>
+                <ol>
+                    {% for outcome in project.outcomes %}
+                    <li>{{ outcome }}</li>
+                    {% endfor %}
+                </ol>
+
+                <ul class="project-list">
+                    <li><b>Recommended Skills:</b> {{ project.skills }}</li>
+                    <li><b>Expected project size:</b> {{ project.size }}</li>
+                    <li><b>Mentors:</b>
+                        {% for mentor in project.mentors %}
+                        <a href="{{ mentor.link }}">{{ mentor.name }}</a>{% unless forloop.last %}, {% endunless %}
+                        {% endfor %}
+                    </li>
+                    <li><b>Issue:</b> <a href="{{ project.issue }}">{{ project.issue }}</a></li>
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+        <a href="https://slack.meshery.io">
+            <input type="button" value="Join Slack" class="participate-button" />
+        </a>
+    </div>
 </div>
 
 <div class="subscribe program__subscribe">

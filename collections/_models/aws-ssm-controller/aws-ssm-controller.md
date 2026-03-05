@@ -35,20 +35,28 @@ components:
   colorIcon: assets/images/integration/aws-ssm-controller/components/resource-data-sync/icons/color/resource-data-sync-color.svg
   whiteIcon: assets/images/integration/aws-ssm-controller/components/resource-data-sync/icons/white/resource-data-sync-white.svg
   description: 
-componentsCount: 6
+- name: iam-role-selector
+  colorIcon: assets/images/integration/aws-ssm-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
+  whiteIcon: assets/images/integration/aws-ssm-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
+  description: 
+- name: parameter
+  colorIcon: assets/images/integration/aws-ssm-controller/components/parameter/icons/color/parameter-color.svg
+  whiteIcon: assets/images/integration/aws-ssm-controller/components/parameter/icons/white/parameter-white.svg
+  description: 
+componentsCount: 8
 relationships: 
-- type: "Binding"
-  kind: "Edge"
-  description: "An edge relationship between ResourceDataSync and Bucket"
-- type: "Non Binding"
-  kind: "Edge"
-  description: "An edge relationship between adoptedresource and document"
-- type: "Non Binding"
-  kind: "Edge"
-  description: "An edge relationship between adoptedresource and PatchBaseline"
-- type: "Non Binding"
-  kind: "Edge"
-  description: "An edge relationship between adoptedresource and ResourceDataSync"
+- type: "non-binding"
+  kind: "edge"
+  description: ""
+- type: "non-binding"
+  kind: "edge"
+  description: ""
+- type: "non-binding"
+  kind: "edge"
+  description: ""
+- type: "non-binding"
+  kind: "edge"
+  description: ""
 relationshipsCount: 4
 featureList: [
   "Centralized management of AWS resources",

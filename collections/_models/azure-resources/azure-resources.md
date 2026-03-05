@@ -17,9 +17,9 @@ components:
   description: 
 componentsCount: 1
 relationships: 
-- type: "Parent"
-  kind: "Hierarchical"
-  description: "A hierarchical inventory relationship in which the configuration of Resource Group (parent component) is patched with the configuration of all other azure resources(child component). "
+- type: "parent"
+  kind: "hierarchical"
+  description: ""
 relationshipsCount: 1
 featureList: [
   "Drag-n-drop cloud native infrastructure designer to configure, model, and deploy your workloads.",

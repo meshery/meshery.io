@@ -4,8 +4,9 @@ nav {
 	font-size: .8rem;
 	width: fit-content;
 	padding-left: 0rem;
-	margin-left: .25rem;
-	margin-left:auto ;
+	margin-left: auto;
+	position: relative;
+	z-index: $z-index-nav;
 
 	@media #{$mid-point} {
 		padding-right: 1rem;
@@ -228,7 +229,6 @@ a.nav-text:hover {
 	
 	& .nav-list{
         position: absolute;
-		width: 100%;
 		left:0;
 		translate: 0 -5px;
 		background: transparent;
@@ -255,6 +255,14 @@ a.nav-text:hover {
 	& .subnav-item{
 		display: flex;
 		gap: 5px;
+	}
+
+	& > ul > li > a,
+	& .subnav-item {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 100%;
 	}
 	
 }
