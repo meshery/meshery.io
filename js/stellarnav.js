@@ -224,6 +224,9 @@ $.fn.stellarNav = function(options, width, breakpoint) {
 
     function navbarExpand(e) {
       if (e.type == 'click' || e.key == "Enter" || e.code == "Space") {
+        if (nav[0].classList.contains('desktop') && this.classList.contains('sub-list')) {
+          return;
+        }
         e.preventDefault();
 
         $(this).parent('li').siblings('.open').removeClass('open').children('ul').stop(true, true).slideUp(settings.openingSpeed);
