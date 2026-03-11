@@ -1,5 +1,5 @@
 ---
-title: "mesheryctl relationship commands promoted from experimental"
+title: "Mesheryctl Relationship Commands Promoted From Experimental"
 subheading: "The relationship commands graduate from experimental mode — here is everything you need to know"
 date: 2026-03-10
 author: Matthieu Evrin
@@ -309,7 +309,7 @@ mesheryctl relationship view kubernetes --output-format json --save
 
 ```shell
 ~$ mesheryctl relationship generate \
-    --spreadsheet-id <your-spreadsheet-id> \
+    --spreadsheet-id spreadsheet-id \
     --spreadsheet-cred $CRED
 Relationships data generated in docs/_data/RelationshipsData.json
 ---
