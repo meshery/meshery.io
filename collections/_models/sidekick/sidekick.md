@@ -15,7 +15,15 @@ components:
   colorIcon: assets/images/integration/sidekick/components/sidekick/icons/color/sidekick-color.svg
   whiteIcon: assets/images/integration/sidekick/components/sidekick/icons/white/sidekick-white.svg
   description: 
-componentsCount: 1
+- name: certificate
+  colorIcon: assets/images/integration/sidekick/components/certificate/icons/color/certificate-color.svg
+  whiteIcon: assets/images/integration/sidekick/components/certificate/icons/white/certificate-white.svg
+  description: 
+- name: issuer
+  colorIcon: assets/images/integration/sidekick/components/issuer/icons/color/issuer-color.svg
+  whiteIcon: assets/images/integration/sidekick/components/issuer/icons/white/issuer-white.svg
+  description: 
+componentsCount: 3
 relationships: 
 relationshipsCount: 0
 featureList: [
