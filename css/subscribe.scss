@@ -7,25 +7,58 @@
 
 .subscribe-button {
   width: 100%;
-  padding: 0.8rem 0.5rem;
-  background: rgba(100, 120, 129, 1);
+  padding: 1rem 2rem;
+  background: var(--brand-color-primary, #3acec4);
+  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 3.5rem;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1.125rem;
   letter-spacing: 0.5px;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  margin-top: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: background-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+
+  &:hover {
+    background: var(--brand-color-secondary, #00e5bb);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 211, 169, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 }
 
 .NAME, .EMAIL {
   width: 100%;
-  height: 3rem;
-  border: 1px solid #000000;
+  height: 3.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  border-radius: 5px;
-  padding: 15px;
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  background-color: #fff;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--brand-color-primary, #3acec4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--brand-color-primary, #3acec4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
 
   &::placeholder {
     font-style: normal;
@@ -37,17 +70,17 @@
 }
 
 .NAME {
-  flex: 0 0 calc(50% - 1rem);
+  flex: 0 0 calc(50% - 0.5rem);
 }
 
 .EMAIL {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .subscribe-inputbox {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1rem;
   justify-content: center;
   white-space: nowrap;
   align-items: center;
@@ -76,14 +109,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #3c494f;
+  background: linear-gradient(180deg, #2dd4bf 0%, #14b8a6 40%, #0a4940 100%);
+  border-radius: 1.25rem;
+  padding: 3rem 2rem;
+  box-shadow: 0 8px 24px rgba(0, 179, 159, 0.25);
 
   > p {
     font-style: normal;
     font-weight: 600;
-    font-size: 2.7rem;
-    line-height: 2.25rem;
+    font-size: 2.5rem;
+    line-height: 3rem;
     color: #fff;
+    margin-bottom: 2rem;
   }
 
   @media (max-width: 840px) {
@@ -98,7 +135,7 @@
 
   @media (min-width: 768px) {
     > p {
-      margin: 0 25px;
+      margin: 0 25px 2rem 25px;
     }
 
     .NAME {
@@ -107,6 +144,7 @@
 
     .EMAIL {
       width: 100%;
+      height: 3rem;
       margin-top: 2rem;
     }
   }
