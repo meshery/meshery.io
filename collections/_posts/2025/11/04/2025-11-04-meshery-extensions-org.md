@@ -9,7 +9,7 @@ categories:
   - governance
   - extensions
 featured-image: /assets/images/posts/2025/meshery-extensions-org/meshery-extensions-github-dark.png
-permalink: /blog/2025/meshery-ecosystem-expansion
+permalink: /blog/2025/meshery-ecosystem-expansion/
 ---
 Meshery's [high project velocity](/blog/sixth-highest-velocity-cncf-project) necessitates a revision in its governance and organizational structure to align with the scale of its growing complexity and community contributions. To best serve its expansive ecosystem, Meshery maintainers have opted to partition its numerous GitHub repositories into two distinct organizations: [Meshery](https://github.com/meshery) for the core platform and [Meshery Extensions](https://github.com/meshery-extensions) for [extensions](https://meshery.io/extensions).
 
