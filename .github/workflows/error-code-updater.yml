@@ -53,7 +53,7 @@ jobs:
 
       - name: Update and push docs
         run: |
-          echo '{ "errors_export": "" }' | jq --slurpfile export ./assets/artifact-hub-pkg/errorutil_errors_export.json '.errors_export = $export[0]' > ./meshery/docs/_data/errorref/artifact-hub-pkg_errors_export.json
+          echo '{ "errors_export": "" }' | jq --slurpfile export ./assets/artifact-hub-pkg/errorutil_errors_export.json '.errors_export = $export[0]' > ./meshery/docs/data/errorref/artifact-hub-pkg_errors_export.json
 
           cd ./meshery
           git config user.name l5io
@@ -63,6 +63,6 @@ jobs:
             echo "No changes to commit"
             exit
           fi
-          git add ./docs/_data/errorref/artifact-hub-pkg_errors_export.json
+          git add ./docs/data/errorref/artifact-hub-pkg_errors_export.json
           git commit -m "[Docs] Error Code Reference: Updated codes for Artifact Hub Package" --signoff
           git push origin master
