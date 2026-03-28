@@ -10,7 +10,7 @@ redirect_from: /blog/mesheryctl-relationship-commands-promoted
 published: true
 ---
 
-If you are managing cloud-native infrastructure with Meshery, understanding how your components interact is critical. This post walks you through the `mesheryctl relationship` commands — and celebrates an important milestone **officially graduated from experimental mode**.
+If you are managing cloud-native infrastructure with Meshery, understanding how your components interact is critical. This post walks you through the `mesheryctl relationship` commands and celebrates an important milestone: their **officially graduated from experimental mode**.
 
 ### From `mesheryctl exp relationship` to `mesheryctl relationship`
 
@@ -18,10 +18,10 @@ After a period of stabilization, community feedback, and real-world usage, **the
 
 | Before (experimental)                  | After (stable)                     |
 | -------------------------------------- | ---------------------------------- |
+| `mesheryctl exp relationship generate` | `mesheryctl relationship generate` |
 | `mesheryctl exp relationship list`     | `mesheryctl relationship list`     |
 | `mesheryctl exp relationship search`   | `mesheryctl relationship search`   |
 | `mesheryctl exp relationship view`     | `mesheryctl relationship view`     |
-| `mesheryctl exp relationship generate` | `mesheryctl relationship generate` |
 
 
 > **What is a Meshery Relationship?**  
