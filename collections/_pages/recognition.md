@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Recognition Programs
-permalink: /community/recognition
+permalink: /community/recognition/
 description: "Meshery publicly recognizes and appreciates its users and contributors."
 redirect_from: /community/badges
 ---

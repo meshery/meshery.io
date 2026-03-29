@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Mentorship Programs"
-permalink: /community/handbook/programs
+permalink: /community/handbook/programs/
 description:  "Explore the mentorship programs Meshery participates in and how to join."
 programs:
 - id: 1
