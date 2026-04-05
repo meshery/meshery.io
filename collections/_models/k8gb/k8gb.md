@@ -23,11 +23,7 @@ components:
   colorIcon: assets/images/integration/k8gb/components/zone-delegation/icons/color/zone-delegation-color.svg
   whiteIcon: assets/images/integration/k8gb/components/zone-delegation/icons/white/zone-delegation-white.svg
   description: 
-- name: zone-delegation
-  colorIcon: assets/images/integration/k8gb/components/zone-delegation/icons/color/zone-delegation-color.svg
-  whiteIcon: assets/images/integration/k8gb/components/zone-delegation/icons/white/zone-delegation-white.svg
-  description: 
-componentsCount: 4
+componentsCount: 3
 relationships: 
 relationshipsCount: 0
 featureList: [
