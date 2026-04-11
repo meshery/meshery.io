@@ -20,8 +20,7 @@ tags:
 permalink: /blog/spotlight-shape-builder-extension/
 ---
 
-This post is based on the community discussion:
-https://discuss.layer5.io/t/shape-builder-extension-seeking-contributors-to-become-maintainers/7737
+This post is based on the [community discussion](https://discuss.layer5.io/t/shape-builder-extension-seeking-contributors-to-become-maintainers/7737).
 
 ## Overview
 
@@ -55,7 +54,7 @@ There is currently no complete end-to-end documentation explaining:
 - How to use generated shapes in Meshery components
 - How to integrate outputs into real workflows
 
-### Workflow improvements
+### Workflow Improvements
 
 Shape Builder output is not yet part of a fully automated pipeline for Meshery components.
 
@@ -71,5 +70,6 @@ Steps to get started:
 - Explore issues: https://github.com/meshery-extensions/shape-builder/issues
 - Join Meshery Slack: https://slack.meshery.io
 - Read contribution guide: https://docs.meshery.io/project/contributing
+- Visit the [Newcomer's Guide] (https://meshery.io/community/newcomers) to get started. 
 
 This is a focused opportunity to contribute meaningfully to the Meshery ecosystem and help shape its visual design tooling.
