@@ -7,9 +7,9 @@ type: Configuration
 compatibility:
   - kubernetes
 extensionId: 8c60e4d5-a123-4567-8901-234567890abc
-logo: /assets/images/shape-builder-logo.svg
-whiteImage: /assets/images/shape-builder-logo.svg
-colorImage: /assets/images/shape-builder-logo.svg
+logo: /assets/images/shape-builder-color.svg
+whiteImage: /assets/images/shape-builder-white.svg
+colorImage: /assets/images/shape-builder-color.svg
 extensionInfo: |
   Shape Builder is a Meshery extension that provides an interactive, visual canvas for designing custom polygon shapes used to represent Meshery Components in Kanvas. Users can draw polygons on a snap-to-grid canvas and export normalized SVG coordinate notation ready for use in Meshery Component definitions.
 extensionCaveats: |
