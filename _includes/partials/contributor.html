@@ -1,7 +1,7 @@
 <div class="contributor-section"> 
     <div class="container {% if page.full_width %}max-container{% endif %}">
           <div class="profile-header">
-            <a href="/community/active/members" class="back-link">
+            <a href="{{ '/community/active/members' | relative_url }}" class="back-link">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
               </svg>
@@ -30,7 +30,7 @@
                 <div class="profile-badges">
                   {% for badge in page.badges %}
                     <span class="profile-badge">
-                        <img src="/assets/images/badges/{{badge}}.svg" alt="{{ badge.name }}" class="badge-icon" />
+                        <img src="{{ '/assets/images/badges/' | append: badge | append: '.svg' | relative_url }}" alt="{{ badge.name }}" class="badge-icon" />
                     </span>
                   {% endfor %}
                 </div>
@@ -45,19 +45,19 @@
               <div class="profile-social">
                 {% if page.github %}
                   <a target="_blank" href="https://github.com/{{ page.github }}" class="social-link github">
-                    <img src="/assets/images/github-white.svg" data-logo-for-dark="/assets/images/github-white.svg" data-logo-for-light="/assets/images/github-color.svg" id="logo-dark-light" alt="GitHub">
+                    <img src="{{ '/assets/images/github-white.svg' | relative_url }}" data-logo-for-dark="{{ '/assets/images/github-white.svg' | relative_url }}" data-logo-for-light="{{ '/assets/images/github-color.svg' | relative_url }}" id="logo-dark-light" alt="GitHub">
                   </a>
                 {% endif %}
 
                 {% if page.twitter %}
                   <a target="_blank" href="https://twitter.com/{{ page.twitter }}" class="social-link twitter">
-                    <img src="/assets/images/logos/twitter-light.svg" data-logo-for-dark="/assets/images/logos/twitter-light.svg" data-logo-for-light="/assets/images/logos/twitter-dark.svg" alt="Twitter" id="logo-dark-light">
+                    <img src="{{ '/assets/images/logos/twitter-light.svg' | relative_url }}" data-logo-for-dark="{{ '/assets/images/logos/twitter-light.svg' | relative_url }}" data-logo-for-light="{{ '/assets/images/logos/twitter-dark.svg' | relative_url }}" alt="Twitter" id="logo-dark-light">
                   </a>
                 {% endif %}
 
                 {% if page.linkedin %}
                   <a target="_blank" href="https://linkedin.com/in/{{ page.linkedin }}" class="social-link linkedin">
-                    <img src="/assets/images/logos/linkedin-light.svg" data-logo-for-dark="/assets/images/logos/linkedin-light.svg" data-logo-for-light="/assets/images/logos/linkedin-dark.svg" alt="LinkedIn logo" id="logo-dark-light">
+                    <img src="{{ '/assets/images/logos/linkedin-light.svg' | relative_url }}" data-logo-for-dark="{{ '/assets/images/logos/linkedin-light.svg' | relative_url }}" data-logo-for-light="{{ '/assets/images/logos/linkedin-dark.svg' | relative_url }}" alt="LinkedIn logo" id="logo-dark-light">
                   </a>
                 {% endif %}
               </div>

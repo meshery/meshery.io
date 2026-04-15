@@ -9,7 +9,7 @@ redirect_from: /community/badges
 Meshery's recognition programs are designed to acknowledge and celebrate the milestones of our community members. These programs provide a way for users and contributors to earn badges that signify their achievements and involvement in the Meshery ecosystem and for users to obtain certifications that validate their skills and expertise.
 
 <div style="text-align:center;padding:20px">
-<img src="/assets/images/community/recognition-program.png" style="width:75%" />
+<img src="{{ '/assets/images/community/recognition-program.png' | relative_url }}" style="width:75%" />
 </div>
 
 <h3>Badges</h3>
@@ -21,7 +21,7 @@ Meshery offers a variety of badges that users and contributors can earn by parti
 The Meshery Certification Program offers a structured pathway for professionals to validate their skills in managing and contributing to Meshery. The program includes certifications for administrators, developers, and open source contributors, each tailored to different levels of expertise and roles within the Meshery ecosystem.
 
 <div style="text-align: center;">
-<a href="https://kanvas.new/extension/meshmap?catalog-design=c2141477-379b-432e-b47e-1c89600235a5"><img alt="Certified Meshery Contributor Badge" src="/assets/images/posts/2025/certified-meshery-contributor/meshery-certification-program.png" style="width:100%;max-width:400px;"  /></a><br />
+<a href="https://kanvas.new/extension/meshmap?catalog-design=c2141477-379b-432e-b47e-1c89600235a5"><img alt="Certified Meshery Contributor Badge" src="{{ '/assets/images/posts/2025/certified-meshery-contributor/meshery-certification-program.png' | relative_url }}" style="width:100%;max-width:400px;"  /></a><br />
 <a href="https://kanvas.new/extension/meshmap?catalog-design=c2141477-379b-432e-b47e-1c89600235a5">Explore the Meshery Certification Program design</a>
 </div>
 

@@ -15,7 +15,12 @@
         {% endif %}
 
        
-        <a href="/catalog/{% if pattern.filterInfo %}/{{ type.downloadLink }}{% else %}{{type.patternId}}/{{type.publishedVersion}}/design.yml {% endif %}" download="{{type.name}}.yml">
+        {% if pattern.filterInfo %}
+        {% assign download_path = '/catalog/' | append: type.downloadLink %}
+        {% else %}
+        {% assign download_path = '/catalog/' | append: type.patternId | append: '/' | append: type.publishedVersion | append: '/design.yml' %}
+        {% endif %}
+        <a href="{{ download_path | relative_url }}" download="{{type.name}}.yml">
           <button id="resourceDownloadBtn" data-patternId="{{type.patternId}}" onclick="sendCloudTelemetry()"
             class="import" style="width: 7rem;">
             Download

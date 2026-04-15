@@ -37,7 +37,7 @@
             <p>MODELS</p>
             <div>
               {% for item in pattern.compatibility %}
-              <a href="{{ site.baseurl }}/catalog/models/{{ item | slugify }}">
+              <a href="{{ '/catalog/models/' | append: (item | slugify) | relative_url }}">
                 {{ item | capitalize }}
               </a>
               {% unless forloop.last %}, {% endunless %}
@@ -52,7 +52,7 @@
       <h4>Design Snapshot</h4>
       <img class="pattern-snapshot"
       src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png" 
-      onerror="this.src='/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('{{ pattern.patternId }}-light')"/>
+      onerror="this.src='{{ '/assets/images/logos/service-mesh-pattern.svg' | relative_url }}'" loading="lazy" onclick="toggleFullScreenImage('{{ pattern.patternId }}-light')"/>
 
       <h4 class="related-patterns">Related Designs</h4>
       <!-- MINICARD-START -->

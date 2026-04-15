@@ -15,10 +15,10 @@
             {% for page in site.contributors %}
                 {% if page.layout != 'archive' %}
                 <li>
-                     <a href="{{ page.url }}">
+                     <a href="{{ page.url | relative_url }}">
                     <div class="square-image">
                        
-                        <img class="{% if page.status == 'Active' %}b-active {% else %}b-inactive{% endif %}" src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"  onerror="this.src='/assets/images/meshery-color.svg'" />    
+                        <img class="{% if page.status == 'Active' %}b-active {% else %}b-inactive{% endif %}" src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"  onerror="this.src='{{ '/assets/images/meshery-color.svg' | relative_url }}'" />    
                     </div> 
                     <div class="names">{{ page.name }}</div></a>
                 </li>

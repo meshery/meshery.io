@@ -17,9 +17,9 @@
             </div>
             <div class="image">
                 <div class="project-name" style="display: flex;">
-                    <img src="/assets/images/logos/meshmate-dark.svg"
-                        data-logo-for-dark="/assets/images/logos/meshmate-light.svg"
-                        data-logo-for-light="/assets/images/logos/meshmate-dark.svg" alt="MeshMate Logo"
+                    <img src="{{ '/assets/images/logos/meshmate-dark.svg' | relative_url }}"
+                        data-logo-for-dark="{{ '/assets/images/logos/meshmate-light.svg' | relative_url }}"
+                        data-logo-for-light="{{ '/assets/images/logos/meshmate-dark.svg' | relative_url }}" alt="MeshMate Logo"
                         id="logo-dark-light" loading="lazy" width="80%" style="margin-left: auto;background-color: var(--color-secondary-light-two);border-radius: 0 0 4.375rem 4.375rem;padding: 10px;">
                 </div>
             </div>
@@ -34,9 +34,9 @@
                 {% if page.meshmate and page.status != "Inactive" %}
                  
                 <li>
-                    <a href="{{ page.url }}">
+                    <a href="{{ page.url | relative_url }}">
                     <div class="square-image"> 
-                        <img {% if page.status == "Active" %} class="b-active" {% else %} class="b-inactive" {% endif %} src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"  onerror="this.src='/assets/images/meshery-color.svg'" /> 
+                        <img {% if page.status == "Active" %} class="b-active" {% else %} class="b-inactive" {% endif %} src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"  onerror="this.src='{{ '/assets/images/meshery-color.svg' | relative_url }}'" /> 
                     </div>
                     <div class="names">{{ page.name }}</div>
                 </a>
@@ -54,9 +54,9 @@
                 {% if page.meshmate and page.status == "Inactive" %}
                
                 <li>
-                     <a href="{{ page.url }}">
+                     <a href="{{ page.url | relative_url }}">
                     <div class="square-image">
-                        <img {% if page.status == "Active" %} class="b-active" {% else %} class="b-inactive" {% endif %} src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"  onerror="this.src='/assets/images/meshery-color.svg'" /> 
+                        <img {% if page.status == "Active" %} class="b-active" {% else %} class="b-inactive" {% endif %} src="{% include relative-src.html src=page.image_path %}" alt="{{ page.name }}"  onerror="this.src='{{ '/assets/images/meshery-color.svg' | relative_url }}'" /> 
                     </div>
                     <div class="names">{{ page.name }}</div>
                 </a>
