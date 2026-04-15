@@ -8,7 +8,7 @@
 </a>
 
 <br/><br/></p>
-</picture>
+</picture>  
 
 ## Meshery.io
 
