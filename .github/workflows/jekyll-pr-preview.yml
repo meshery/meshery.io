@@ -21,14 +21,14 @@ jobs:
       # 🔹 Checkout PR (build case)
       - name: Checkout PR
         if: github.event.action != 'closed'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
       # 🔹 Checkout gh-pages (cleanup case)
       - name: Checkout gh-pages for cleanup
         if: github.event.action == 'closed'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: gh-pages
 
