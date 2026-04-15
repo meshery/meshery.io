@@ -20,7 +20,7 @@
       <img
         class="image-class"
         src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png"
-        onerror="this.src='/assets/images/webassembly_logo.svg'"
+        onerror="this.src='{{ '/assets/images/webassembly_logo.svg' | relative_url }}'"
         loading="lazy"
         onclick="toggleFullScreenImage('{{ pattern.patternId }}')"
       />
@@ -43,7 +43,12 @@
     <div class="vertical-line"></div>
     <div class="modal-info">
       <h2 class="modal-h2">
-        <a href="{% if pattern.filterInfo %}/catalog/{{ pattern.type }}/{{ pattern.patternId }}.html{% else %}/catalog/{{ pattern.type }}/{{ pattern.name | slugify }}-{{ pattern.patternId }}.html{% endif %}" target="_blank" style="font-size: 1.5rem">
+        {% if pattern.filterInfo %}
+        {% assign pattern_href = '/catalog/' | append: pattern.type | append: '/' | append: pattern.patternId | append: '.html' %}
+        {% else %}
+        {% assign pattern_href = '/catalog/' | append: pattern.type | append: '/' | append: pattern.name | slugify | append: '-' | append: pattern.patternId | append: '.html' %}
+        {% endif %}
+        <a href="{{ pattern_href | relative_url }}" target="_blank" style="font-size: 1.5rem">
            {{ pattern.name | upcase }}
             <img class="internal-link" src="{{ site.baseurl }}/assets/images/buttons/external-link_black.svg" />
         </a>
