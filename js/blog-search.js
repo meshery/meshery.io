@@ -5,11 +5,19 @@
 'use strict';
 
 let searchData = null;
+const siteBaseUrl = window.siteBaseUrl || '';
+
+function withBaseUrl(path) {
+  if (!path || typeof path !== 'string') return path;
+  if (/^(?:[a-z]+:)?\/\//i.test(path)) return path;
+  if (!path.startsWith('/')) return path;
+  return `${siteBaseUrl}${path}`;
+}
 
 // Load search data for client-side search
 async function loadSearchData() {
   try {
-    const response = await fetch('/blog/search.json');
+    const response = await fetch(withBaseUrl('/blog/search.json'));
     if (!response.ok) {
       throw new Error(`Failed to fetch search data: ${response.status} ${response.statusText}`);
     }
@@ -150,7 +158,7 @@ function renderResults(results, query) {
       categoryHtml = '<span class="blog-filters">';
       categories.forEach(cat => {
         const slug = slugify(cat);
-        categoryHtml += `<span class="blog-filter"><a href="/blog/category/${slug}/">${cat.toLowerCase()}</a></span>`;
+        categoryHtml += `<span class="blog-filter"><a href="${withBaseUrl(`/blog/category/${slug}/`)}">${cat.toLowerCase()}</a></span>`;
       });
       categoryHtml += '</span>';
     }
@@ -159,7 +167,7 @@ function renderResults(results, query) {
     const formattedDate = date ? new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
 
     li.innerHTML = `
-        <h2><a href="${result.url}">${title}</a></h2>
+        <h2><a href="${withBaseUrl(result.url)}">${title}</a></h2>
         <p class="post-details">
           ${categoryHtml}
           ${author ? `<span class="post-author">${author}</span>` : ''}
@@ -168,7 +176,7 @@ function renderResults(results, query) {
         <div class="post-content">
           <p>${excerpt}</p>
           <div class="button-para">
-            <a class="link" href="${result.url}">Read More</a>
+            <a class="link" href="${withBaseUrl(result.url)}">Read More</a>
           </div>
         </div>
       `;
