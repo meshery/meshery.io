@@ -11,7 +11,7 @@ layout: default
     <div class="cover" style="z-index: 20">
         <div class="project-details" style="max-width: 800px; margin: 0 auto;">
             <div class="card-content" style="margin-bottom: 2rem; display: flex; justify-content: center;">
-                <img src="{{ page.image }}" alt="{{ page.title }}"
+                <img src="{{ page.image | relative_url }}" alt="{{ page.title }}"
                     style="max-width: 300px; width: 100%; height: auto;" />
             </div>
         </div>
@@ -24,7 +24,7 @@ layout: default
             "item", "item.url != page.link " | sort: "url" | reverse %}
             {% for program in program_pages %}
             <div class="project-item" style="margin-bottom: 1.5rem;">
-                <a href="{{ program.url }}"
+                <a href="{{ program.url | relative_url }}"
                     style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; border: 1px solid rgba(0, 211, 169, 0.3); border-radius: 8px; text-decoration: none; transition: all 0.3s ease;">
                     <span>
                         <h3 style="margin: 0; font-size: 1.25rem;">{{ program.title }}</h3>
