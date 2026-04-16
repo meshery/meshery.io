@@ -1,0 +1,89 @@
+name: PR Preview Deployment (Jekyll + GitHub Pages)
+
+on:
+  pull_request_target:
+    branches: [master]
+    types: [opened, synchronize, reopened, closed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: preview-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-22.04
+
+    steps:
+      # 🔹 Checkout PR (build case)
+      - name: Checkout PR
+        if: github.event.action != 'closed'
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      # 🔹 Checkout gh-pages (cleanup case)
+      - name: Checkout gh-pages for cleanup
+        if: github.event.action == 'closed'
+        uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+
+      # 🔹 Setup Ruby
+      - name: Setup Ruby
+        if: github.event.action != 'closed'
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2.2'
+          bundler-cache: true
+
+      # 🔥 Build preview (dynamic baseurl)
+      - name: Build PR preview
+        if: github.event.action != 'closed'
+        env:
+          JEKYLL_ENV: production
+          JEKYLL_SITE_URL: https://meshery.io
+          JEKYLL_BASEURL: /pr-preview/pr-${{ github.event.pull_request.number }}
+        run: |
+          cat > _config.ci.yml <<EOF
+          url: "${JEKYLL_SITE_URL}"
+          baseurl: "${JEKYLL_BASEURL}"
+          EOF
+
+          bundle exec jekyll build --config _config.yml,_config.ci.yml
+
+          echo -e "User-agent: *\nDisallow: /" > _site/robots.txt
+
+      # 🔹 Deploy preview
+      - name: Deploy preview
+        if: github.event.action != 'closed'
+        uses: rossjrw/pr-preview-action@v1.6.3
+        with:
+          source-dir: ./_site
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: auto
+          comment: false
+
+      # 🔹 Comment preview URL
+      - name: Comment preview URL
+        if: github.event.action != 'closed'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: pr-preview
+          message: |
+            🚀 **Preview for PR #${{ github.event.pull_request.number }}**
+
+            🌐 https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-preview/pr-${{ github.event.pull_request.number }}/
+
+      # 🔹 Cleanup on PR close
+      - name: Cleanup preview
+        if: github.event.action == 'closed'
+        uses: rossjrw/pr-preview-action@v1.6.3
+        with:
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: remove
