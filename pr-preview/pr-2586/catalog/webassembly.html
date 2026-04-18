@@ -25,11 +25,11 @@
 <meta property="og:url" content="https://meshery.io/pr-preview/pr-2586/catalog/webassembly" />
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-04-17T16:59:12+00:00" />
+<meta property="article:published_time" content="2026-04-18T02:47:57+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Cloud Native Catalog" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-04-17T16:59:12+00:00","datePublished":"2026-04-17T16:59:12+00:00","description":"WASM FILTER HTTP Auth FILTER001 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS HTTP AUTH What this filter does Simulates handling authentication of requests at proxy level. Requests with a header token with value hello are accepted as authorized while the rest unauthorized. The actual authentication is handled by the Upstream server. Whenever the proxy receives a request it extracts the token header and makes a request to the Upstream server which validates the token and returns a response. ...read more Caveats and Considerations Test: curl -H &quot;token&quot;:&quot;hello&quot; 0.0.0.0:18000 -v # Authorized curl -H &quot;token&quot;:&quot;world&quot; 0.0.0.0:18000 -v # Unauthorized Technologies Related Design Download Copy URL WASM FILTER TCP Metrics FILTER002 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS TCP METRICS What this filter does Collects simple metrics for every TCP packet and logs it. ...read more Caveats and Considerations Test:curl 0.0.0.0:18000 -v -d &quot;request body&quot;Check the logs for the metrics. Technologies Related Design Download Copy URL WASM FILTER TCP Packet Parse FILTER003 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS TCP PACKET PARSE What this filter does Parses the contents of every TCP packet the proxy receives and logs it. ...read more Caveats and Considerations Test:curl 0.0.0.0:18000 -v -d &quot;request body&quot;Check the logs for the packet contents. Technologies Related Design Download Copy URL WASM FILTER Singleton HTTP Call FILTER004 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS SINGLETON HTTP CALL What this filter does The filter is responsible for intercepting HTTP requests, authorizing them based on the stored cache, and performing rate limiting. In the context of the envoy, this component is an HTTP filter and gets executed in the worker threads. For each request, a context object gets created. ...read more Caveats and Considerations llam tristique tristique condimentum. Maecenas sollicitudin scelerisque egestas. Suspendisse aliquet elit quis dolor gravida, et auctor ligula ornare. Nullam et sodales ante, quis varius elit. Nullam cursus, orci eleifend tristique semper, neque nisl tincidunt purus, sed ultricies felis arcu vel metus. Technologies Related Design Download Copy URL WASM FILTER Metrics Store FILTER005 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS METRICS STORE What this filter does This example showcases communication between a WASM filter and a service via shared queue. It combines the `Singleton-HTTP-Call` and `TCP-Metrics` examples. The filter collects metrics and enqueues it onto the queue while the service dequeues it and sends it to upstream server where it is stored. ...read more Caveats and Considerations Test:curl 0.0.0.0:18000 -v -d &quot;request body&quot; # make a few of these callscurl 0.0.0.0:8080/retrieve -v # Retrieves the stored stats # x | y | z === x : downstream bytes, y : upstream bytes, z: the latency for application server to respond Technologies Related Design Download Copy URL WASM FILTER Singleton Queue FILTER006 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS SINGLETON QUEUE What this filter does An example which depicts an singleton HTTP WASM service which does an HTTP call once every 2 seconds. ...read more Caveats and Considerations Check the logs for the response of the request. Technologies Related Design Download Copy URL WASM FILTER JWT Filter FILTER007 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS JWT FILTER What this filter does Sample configuration to be passed:{&quot;add_header&quot;: [ [&quot;header1&quot;,&quot;value1&quot;], [&quot;header2&quot;,&quot;value2&quot;] ], &quot;del_header&quot;:[ &quot;header1&quot; ],&quot;add_payload&quot;: [ [&quot;payload1&quot;,&quot;value1&quot;], [&quot;payload2&quot;,&quot;value2&quot;],], &quot;del_payload&quot;:[ &quot;payload1&quot;],&quot;payload_to_header&quot;: [&quot;payload2&quot;],&quot;header_to_payload&quot;: [&quot;header2&quot;]} ...read more Caveats and Considerations DISCLAIMER: This filter doesn&#39;t regenerate the signature of the modified JWT, and provides no protections. Proceed with caution. Technologies Related Design Download Copy URL","headline":"Cloud Native Catalog","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2586/catalog/webassembly"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2586/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2586/catalog/webassembly"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-04-18T02:47:57+00:00","datePublished":"2026-04-18T02:47:57+00:00","description":"WASM FILTER HTTP Auth FILTER001 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS HTTP AUTH What this filter does Simulates handling authentication of requests at proxy level. Requests with a header token with value hello are accepted as authorized while the rest unauthorized. The actual authentication is handled by the Upstream server. Whenever the proxy receives a request it extracts the token header and makes a request to the Upstream server which validates the token and returns a response. ...read more Caveats and Considerations Test: curl -H &quot;token&quot;:&quot;hello&quot; 0.0.0.0:18000 -v # Authorized curl -H &quot;token&quot;:&quot;world&quot; 0.0.0.0:18000 -v # Unauthorized Technologies Related Design Download Copy URL WASM FILTER TCP Metrics FILTER002 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS TCP METRICS What this filter does Collects simple metrics for every TCP packet and logs it. ...read more Caveats and Considerations Test:curl 0.0.0.0:18000 -v -d &quot;request body&quot;Check the logs for the metrics. Technologies Related Design Download Copy URL WASM FILTER TCP Packet Parse FILTER003 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS TCP PACKET PARSE What this filter does Parses the contents of every TCP packet the proxy receives and logs it. ...read more Caveats and Considerations Test:curl 0.0.0.0:18000 -v -d &quot;request body&quot;Check the logs for the packet contents. Technologies Related Design Download Copy URL WASM FILTER Singleton HTTP Call FILTER004 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS SINGLETON HTTP CALL What this filter does The filter is responsible for intercepting HTTP requests, authorizing them based on the stored cache, and performing rate limiting. In the context of the envoy, this component is an HTTP filter and gets executed in the worker threads. For each request, a context object gets created. ...read more Caveats and Considerations llam tristique tristique condimentum. Maecenas sollicitudin scelerisque egestas. Suspendisse aliquet elit quis dolor gravida, et auctor ligula ornare. Nullam et sodales ante, quis varius elit. Nullam cursus, orci eleifend tristique semper, neque nisl tincidunt purus, sed ultricies felis arcu vel metus. Technologies Related Design Download Copy URL WASM FILTER Metrics Store FILTER005 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS METRICS STORE What this filter does This example showcases communication between a WASM filter and a service via shared queue. It combines the `Singleton-HTTP-Call` and `TCP-Metrics` examples. The filter collects metrics and enqueues it onto the queue while the service dequeues it and sends it to upstream server where it is stored. ...read more Caveats and Considerations Test:curl 0.0.0.0:18000 -v -d &quot;request body&quot; # make a few of these callscurl 0.0.0.0:8080/retrieve -v # Retrieves the stored stats # x | y | z === x : downstream bytes, y : upstream bytes, z: the latency for application server to respond Technologies Related Design Download Copy URL WASM FILTER Singleton Queue FILTER006 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS SINGLETON QUEUE What this filter does An example which depicts an singleton HTTP WASM service which does an HTTP call once every 2 seconds. ...read more Caveats and Considerations Check the logs for the response of the request. Technologies Related Design Download Copy URL WASM FILTER JWT Filter FILTER007 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS JWT FILTER What this filter does Sample configuration to be passed:{&quot;add_header&quot;: [ [&quot;header1&quot;,&quot;value1&quot;], [&quot;header2&quot;,&quot;value2&quot;] ], &quot;del_header&quot;:[ &quot;header1&quot; ],&quot;add_payload&quot;: [ [&quot;payload1&quot;,&quot;value1&quot;], [&quot;payload2&quot;,&quot;value2&quot;],], &quot;del_payload&quot;:[ &quot;payload1&quot;],&quot;payload_to_header&quot;: [&quot;payload2&quot;],&quot;header_to_payload&quot;: [&quot;header2&quot;]} ...read more Caveats and Considerations DISCLAIMER: This filter doesn&#39;t regenerate the signature of the modified JWT, and provides no protections. Proceed with caution. Technologies Related Design Download Copy URL","headline":"Cloud Native Catalog","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2586/catalog/webassembly"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2586/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2586/catalog/webassembly"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/pr-preview/pr-2586/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/pr-preview/pr-2586/css/stellarnav.css" />
@@ -225,10 +225,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/community.svg
-">
-							<a href="/pr-preview/pr-2586/community
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/community.svg">
+							<a href="/community" 
 							class="subnav-item">Participate
 							
 							</a>
@@ -237,10 +235,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Calendar.svg
-">
-							<a href="/pr-preview/pr-2586/calendar
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/Calendar.svg">
+							<a href="/calendar" 
 							class="subnav-item">Calendar
 							
 							</a>
@@ -249,10 +245,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/community.svg
-">
-							<a href="/pr-preview/pr-2586/community/newcomers
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/community.svg">
+							<a href="/community/newcomers" 
 							class="subnav-item">Newcomers
 							
 							</a>
@@ -261,10 +255,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Programs.svg
-">
-							<a href="/pr-preview/pr-2586/programs
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/Programs.svg">
+							<a href="/programs" 
 							class="subnav-item">Programs
 							
 							</a>
@@ -273,10 +265,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Mail.svg
-">
-							<a href="/pr-preview/pr-2586/subscribe
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/Mail.svg">
+							<a href="/subscribe" 
 							class="subnav-item">Mailing Lists
 							
 							</a>
@@ -285,10 +275,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Recognition.svg
-">
-							<a href="/pr-preview/pr-2586/community/badges
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/Recognition.svg">
+							<a href="/community/badges" 
 							class="subnav-item">Recognition
 							
 							</a>
@@ -297,10 +285,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Discuss.svg
-">
-							<a href="/pr-preview/pr-2586/community#discussion-forums
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/Discuss.svg">
+							<a href="/community#discussion-forums" 
 							class="subnav-item">Discussion forums
 							
 							</a>
@@ -309,13 +295,11 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Github.svg
-">
-							<a href="https://github.com/meshery
-" target="_blank" 
+								<img class="nav-img" src="/assets/images/nav-icons/Github.svg">
+							<a href="https://github.com/meshery" target="_blank" 
 							class="subnav-item">GitHub
 							
-							<img src="/pr-preview/pr-2586/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
+							<img src="/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
 							
 							</a>
 						</div>
@@ -323,13 +307,11 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Slack.svg
-">
-							<a href="https://slack.meshery.io
-" target="_blank" 
+								<img class="nav-img" src="/assets/images/nav-icons/Slack.svg">
+							<a href="https://slack.meshery.io" target="_blank" 
 							class="subnav-item">Slack
 							
-							<img src="/pr-preview/pr-2586/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
+							<img src="/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
 							
 							</a>
 						</div>
@@ -337,13 +319,11 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Youtube.svg
-">
-							<a href="https://www.youtube.com/channel/UCgXlqWDCg-9RP1eckf0s6KA?sub_confirmation=1
-" target="_blank" 
+								<img class="nav-img" src="/assets/images/nav-icons/Youtube.svg">
+							<a href="https://www.youtube.com/channel/UCgXlqWDCg-9RP1eckf0s6KA?sub_confirmation=1" target="_blank" 
 							class="subnav-item">Youtube
 							
-							<img src="/pr-preview/pr-2586/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
+							<img src="/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
 							
 							</a>
 						</div>
@@ -379,10 +359,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Presentation.svg
-">
-							<a href="/pr-preview/pr-2586/talks-and-trainings
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/Presentation.svg">
+							<a href="/talks-and-trainings" 
 							class="subnav-item">Talks and Trainings
 							
 							</a>
@@ -391,10 +369,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Blog.svg
-">
-							<a href="/pr-preview/pr-2586/blog
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/Blog.svg">
+							<a href="/blog" 
 							class="subnav-item">Blog
 							
 							</a>
@@ -403,10 +379,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/meshery-extensions.svg
-">
-							<a href="/pr-preview/pr-2586/extensions
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/meshery-extensions.svg">
+							<a href="/extensions" 
 							class="subnav-item">Extensions
 							
 							</a>
@@ -415,13 +389,11 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Contribute.svg
-">
-							<a href="https://docs.meshery.io/project/contributing
-" target="_blank" 
+								<img class="nav-img" src="/assets/images/nav-icons/Contribute.svg">
+							<a href="https://docs.meshery.io/project/contributing" target="_blank" 
 							class="subnav-item">Contributing
 							
-							<img src="/pr-preview/pr-2586/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
+							<img src="/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
 							
 							</a>
 						</div>
@@ -429,10 +401,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/meshery.svg
-">
-							<a href="/pr-preview/pr-2586/brand
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/meshery.svg">
+							<a href="/brand" 
 							class="subnav-item">Branding
 							
 							</a>
@@ -889,7 +859,7 @@ function openTab(evt, tabName) {
       data-target="designs-tab"
     >
       <a
-        href="/pr-preview/pr-2586/catalog/designs"
+        href="/catalog/designs"
         target="_blank"
         style="
           position: absolute;
@@ -921,7 +891,7 @@ function openTab(evt, tabName) {
         >
           <p class="text-sm-medium title">Designs</p>
           <span class="count-text" style="color: #00b39f">
-            345
+            351
           </span>
         </div>
         <div style="height: 3rem; width: 5rem">
@@ -929,19 +899,19 @@ function openTab(evt, tabName) {
             <div class="circle"></div>
             <div class="hover-circles">
               <div class="circle">
-                <img src="/pr-preview/pr-2586/assets/images/logos/service-mesh-pattern.svg" />
+                <img src="/assets/images/logos/service-mesh-pattern.svg" />
               </div>
               <div class="circle">
-                <img src="/pr-preview/pr-2586/assets/images/logos/service-mesh-pattern.svg" />
+                <img src="/assets/images/logos/service-mesh-pattern.svg" />
               </div>
               <div class="circle">
-                <img src="/pr-preview/pr-2586/assets/images/logos/service-mesh-pattern.svg" />
+                <img src="/assets/images/logos/service-mesh-pattern.svg" />
               </div>
               <div class="circle">
-                <img src="/pr-preview/pr-2586/assets/images/logos/service-mesh-pattern.svg" />
+                <img src="/assets/images/logos/service-mesh-pattern.svg" />
               </div>
               <div class="circle">
-                <img src="/pr-preview/pr-2586/assets/images/logos/service-mesh-pattern.svg" />
+                <img src="/assets/images/logos/service-mesh-pattern.svg" />
               </div>
             </div>
           </div>
@@ -966,7 +936,7 @@ function openTab(evt, tabName) {
     </div>
   </div>
   <!-- <div class="card-container box tab-button " style="cursor: pointer;flex:1;" data-target="filters-tab">
-    <a href="/pr-preview/pr-2586/catalog/filters" target="_blank" style="position: absolute;top:0;left: 0;right: 0;bottom: 0;text-decoration: none; color: inherit; display: block;z-index: 999;">
+    <a href="/catalog/filters" target="_blank" style="position: absolute;top:0;left: 0;right: 0;bottom: 0;text-decoration: none; color: inherit; display: block;z-index: 999;">
       </a>
       <div style="display: flex; align-items: center; justify-content: space-between">
         <div style="display: flex
@@ -985,19 +955,19 @@ function openTab(evt, tabName) {
             <div class="circle"></div>
             <div class="hover-circles">
             <div class="circle">
-              <img src="/pr-preview/pr-2586/assets/images/webassembly_logo.svg" />
+              <img src="/assets/images/webassembly_logo.svg" />
             </div>
             <div class="circle">
-              <img src="/pr-preview/pr-2586/assets/images/webassembly_logo.svg" />
+              <img src="/assets/images/webassembly_logo.svg" />
             </div>
             <div class="circle">
-              <img src="/pr-preview/pr-2586/assets/images/webassembly_logo.svg" />
+              <img src="/assets/images/webassembly_logo.svg" />
             </div>
             <div class="circle">
-              <img src="/pr-preview/pr-2586/assets/images/webassembly_logo.svg" />
+              <img src="/assets/images/webassembly_logo.svg" />
             </div>
             <div class="circle">
-              <img src="/pr-preview/pr-2586/assets/images/webassembly_logo.svg" />
+              <img src="/assets/images/webassembly_logo.svg" />
             </div>
             </div>
             </div>
@@ -1022,7 +992,7 @@ function openTab(evt, tabName) {
       data-target="models-tab"
     >
       <a
-        href="/pr-preview/pr-2586/catalog/models"
+        href="/catalog/models"
         target="_blank"
         style="
           position: absolute;
@@ -1061,19 +1031,19 @@ function openTab(evt, tabName) {
             <div class="circle"></div>
             <div class="hover-circles">
               <div class="circle">
-                <img src="/pr-preview/pr-2586/assets/images/logos/meshery-logo.png" />
+                <img src="/assets/images/logos/meshery-logo.png" />
               </div>
               <div class="circle">
-                <img src="/pr-preview/pr-2586/assets/images/logos/meshery-logo.png" />
+                <img src="/assets/images/logos/meshery-logo.png" />
               </div>
               <div class="circle">
-                <img src="/pr-preview/pr-2586/assets/images/logos/meshery-logo.png" />
+                <img src="/assets/images/logos/meshery-logo.png" />
               </div>
               <div class="circle">
-                <img src="/pr-preview/pr-2586/assets/images/logos/meshery-logo.png" />
+                <img src="/assets/images/logos/meshery-logo.png" />
               </div>
               <div class="circle">
-                <img src="/pr-preview/pr-2586/assets/images/logos/meshery-logo.png" />
+                <img src="/assets/images/logos/meshery-logo.png" />
               </div>
             </div>
           </div>
@@ -1148,7 +1118,7 @@ function openTab(evt, tabName) {
            <small class="pattern-type"> WASM FILTER</small>
        </div>
        <h4 class="pattern-name">HTTP Auth</h4>
-       <img class= "pattern-filter-image" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png" onerror="this.src='/pr-preview/pr-2586/assets/images/webassembly_logo.svg'" loading="lazy"/>
+       <img class= "pattern-filter-image" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png" onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy"/>
        <div>
     
     <h6 class="pattern-id">
@@ -1189,7 +1159,7 @@ function openTab(evt, tabName) {
       <img
         class="image-class"
         src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png"
-        onerror="this.src='/pr-preview/pr-2586/assets/images/webassembly_logo.svg'"
+        onerror="this.src='/assets/images/webassembly_logo.svg'"
         loading="lazy"
         onclick="toggleFullScreenImage('')"
       />
@@ -1888,14 +1858,25 @@ function openTab(evt, tabName) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
       </div>
     </div>
     <div class="vertical-line"></div>
     <div class="modal-info">
       <h2 class="modal-h2">
-        
-        <a href="/pr-preview/pr-2586/catalog//.html" target="_blank" style="font-size: 1.5rem">
+        <a href="/catalog//.html" target="_blank" style="font-size: 1.5rem">
            HTTP AUTH
             <img class="internal-link" src="/pr-preview/pr-2586/assets/images/buttons/external-link_black.svg" />
         </a>
@@ -2624,6 +2605,18 @@ function openTab(evt, tabName) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
       </div>
    
@@ -2639,8 +2632,7 @@ function openTab(evt, tabName) {
         
 
        
-        
-        <a href="/pr-preview/pr-2586/catalog/https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/http_auth_bg.wasm" download="HTTP Auth.yml">
+        <a href="/catalog//https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/http_auth_bg.wasm" download="HTTP Auth.yml">
           <button id="resourceDownloadBtn" data-patternId="" onclick="sendCloudTelemetry()"
             class="import" style="width: 7rem;">
             Download
@@ -2766,7 +2758,7 @@ function openTab(evt, tabName) {
            <small class="pattern-type"> WASM FILTER</small>
        </div>
        <h4 class="pattern-name">TCP Metrics</h4>
-       <img class= "pattern-filter-image" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png" onerror="this.src='/pr-preview/pr-2586/assets/images/webassembly_logo.svg'" loading="lazy"/>
+       <img class= "pattern-filter-image" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png" onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy"/>
        <div>
     
     <h6 class="pattern-id">
@@ -2807,7 +2799,7 @@ function openTab(evt, tabName) {
       <img
         class="image-class"
         src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png"
-        onerror="this.src='/pr-preview/pr-2586/assets/images/webassembly_logo.svg'"
+        onerror="this.src='/assets/images/webassembly_logo.svg'"
         loading="lazy"
         onclick="toggleFullScreenImage('')"
       />
@@ -3506,14 +3498,25 @@ function openTab(evt, tabName) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
       </div>
     </div>
     <div class="vertical-line"></div>
     <div class="modal-info">
       <h2 class="modal-h2">
-        
-        <a href="/pr-preview/pr-2586/catalog//.html" target="_blank" style="font-size: 1.5rem">
+        <a href="/catalog//.html" target="_blank" style="font-size: 1.5rem">
            TCP METRICS
             <img class="internal-link" src="/pr-preview/pr-2586/assets/images/buttons/external-link_black.svg" />
         </a>
@@ -4242,6 +4245,18 @@ function openTab(evt, tabName) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
       </div>
    
@@ -4257,8 +4272,7 @@ function openTab(evt, tabName) {
         
 
        
-        
-        <a href="/pr-preview/pr-2586/catalog/https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/tcp_metrics_bg.wasm" download="TCP Metrics.yml">
+        <a href="/catalog//https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/tcp_metrics_bg.wasm" download="TCP Metrics.yml">
           <button id="resourceDownloadBtn" data-patternId="" onclick="sendCloudTelemetry()"
             class="import" style="width: 7rem;">
             Download
@@ -4384,7 +4398,7 @@ function openTab(evt, tabName) {
            <small class="pattern-type"> WASM FILTER</small>
        </div>
        <h4 class="pattern-name">TCP Packet Parse</h4>
-       <img class= "pattern-filter-image" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png" onerror="this.src='/pr-preview/pr-2586/assets/images/webassembly_logo.svg'" loading="lazy"/>
+       <img class= "pattern-filter-image" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png" onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy"/>
        <div>
     
     <h6 class="pattern-id">
@@ -4425,7 +4439,7 @@ function openTab(evt, tabName) {
       <img
         class="image-class"
         src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png"
-        onerror="this.src='/pr-preview/pr-2586/assets/images/webassembly_logo.svg'"
+        onerror="this.src='/assets/images/webassembly_logo.svg'"
         loading="lazy"
         onclick="toggleFullScreenImage('')"
       />
@@ -5124,14 +5138,25 @@ function openTab(evt, tabName) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
       </div>
     </div>
     <div class="vertical-line"></div>
     <div class="modal-info">
       <h2 class="modal-h2">
-        
-        <a href="/pr-preview/pr-2586/catalog//.html" target="_blank" style="font-size: 1.5rem">
+        <a href="/catalog//.html" target="_blank" style="font-size: 1.5rem">
            TCP PACKET PARSE
             <img class="internal-link" src="/pr-preview/pr-2586/assets/images/buttons/external-link_black.svg" />
         </a>
@@ -5860,6 +5885,18 @@ function openTab(evt, tabName) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
       </div>
    
@@ -5875,8 +5912,7 @@ function openTab(evt, tabName) {
         
 
        
-        
-        <a href="/pr-preview/pr-2586/catalog/https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/tcp_packet_parse_bg.wasm" download="TCP Packet Parse.yml">
+        <a href="/catalog//https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/tcp_packet_parse_bg.wasm" download="TCP Packet Parse.yml">
           <button id="resourceDownloadBtn" data-patternId="" onclick="sendCloudTelemetry()"
             class="import" style="width: 7rem;">
             Download
@@ -6002,7 +6038,7 @@ function openTab(evt, tabName) {
            <small class="pattern-type"> WASM FILTER</small>
        </div>
        <h4 class="pattern-name">Singleton HTTP Call</h4>
-       <img class= "pattern-filter-image" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png" onerror="this.src='/pr-preview/pr-2586/assets/images/webassembly_logo.svg'" loading="lazy"/>
+       <img class= "pattern-filter-image" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png" onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy"/>
        <div>
     
     <h6 class="pattern-id">
@@ -6043,7 +6079,7 @@ function openTab(evt, tabName) {
       <img
         class="image-class"
         src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png"
-        onerror="this.src='/pr-preview/pr-2586/assets/images/webassembly_logo.svg'"
+        onerror="this.src='/assets/images/webassembly_logo.svg'"
         loading="lazy"
         onclick="toggleFullScreenImage('')"
       />
@@ -6742,14 +6778,25 @@ function openTab(evt, tabName) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
       </div>
     </div>
     <div class="vertical-line"></div>
     <div class="modal-info">
       <h2 class="modal-h2">
-        
-        <a href="/pr-preview/pr-2586/catalog//.html" target="_blank" style="font-size: 1.5rem">
+        <a href="/catalog//.html" target="_blank" style="font-size: 1.5rem">
            SINGLETON HTTP CALL
             <img class="internal-link" src="/pr-preview/pr-2586/assets/images/buttons/external-link_black.svg" />
         </a>
@@ -7478,6 +7525,18 @@ function openTab(evt, tabName) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
       </div>
    
@@ -7493,8 +7552,7 @@ function openTab(evt, tabName) {
         
 
        
-        
-        <a href="/pr-preview/pr-2586/catalog/https://raw.githubusercontent.com/layer5io/wasm-filters/master/singleton_http_call_bg.wasm" download="Singleton HTTP Call.yml">
+        <a href="/catalog//https://raw.githubusercontent.com/layer5io/wasm-filters/master/singleton_http_call_bg.wasm" download="Singleton HTTP Call.yml">
           <button id="resourceDownloadBtn" data-patternId="" onclick="sendCloudTelemetry()"
             class="import" style="width: 7rem;">
             Download
@@ -7620,7 +7678,7 @@ function openTab(evt, tabName) {
            <small class="pattern-type"> WASM FILTER</small>
        </div>
        <h4 class="pattern-name">Metrics Store</h4>
-       <img class= "pattern-filter-image" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png" onerror="this.src='/pr-preview/pr-2586/assets/images/webassembly_logo.svg'" loading="lazy"/>
+       <img class= "pattern-filter-image" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png" onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy"/>
        <div>
     
     <h6 class="pattern-id">
@@ -7661,7 +7719,7 @@ function openTab(evt, tabName) {
       <img
         class="image-class"
         src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png"
-        onerror="this.src='/pr-preview/pr-2586/assets/images/webassembly_logo.svg'"
+        onerror="this.src='/assets/images/webassembly_logo.svg'"
         loading="lazy"
         onclick="toggleFullScreenImage('')"
       />
@@ -8360,14 +8418,25 @@ function openTab(evt, tabName) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
       </div>
     </div>
     <div class="vertical-line"></div>
     <div class="modal-info">
       <h2 class="modal-h2">
-        
-        <a href="/pr-preview/pr-2586/catalog//.html" target="_blank" style="font-size: 1.5rem">
+        <a href="/catalog//.html" target="_blank" style="font-size: 1.5rem">
            METRICS STORE
             <img class="internal-link" src="/pr-preview/pr-2586/assets/images/buttons/external-link_black.svg" />
         </a>
@@ -9096,6 +9165,18 @@ function openTab(evt, tabName) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
       </div>
    
@@ -9111,8 +9192,7 @@ function openTab(evt, tabName) {
         
 
        
-        
-        <a href="/pr-preview/pr-2586/catalog/https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/metrics_collector_bg.wasm" download="Metrics Store.yml">
+        <a href="/catalog//https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/metrics_collector_bg.wasm" download="Metrics Store.yml">
           <button id="resourceDownloadBtn" data-patternId="" onclick="sendCloudTelemetry()"
             class="import" style="width: 7rem;">
             Download
@@ -9238,7 +9318,7 @@ function openTab(evt, tabName) {
            <small class="pattern-type"> WASM FILTER</small>
        </div>
        <h4 class="pattern-name">Singleton Queue</h4>
-       <img class= "pattern-filter-image" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png" onerror="this.src='/pr-preview/pr-2586/assets/images/webassembly_logo.svg'" loading="lazy"/>
+       <img class= "pattern-filter-image" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png" onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy"/>
        <div>
     
     <h6 class="pattern-id">
@@ -9279,7 +9359,7 @@ function openTab(evt, tabName) {
       <img
         class="image-class"
         src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png"
-        onerror="this.src='/pr-preview/pr-2586/assets/images/webassembly_logo.svg'"
+        onerror="this.src='/assets/images/webassembly_logo.svg'"
         loading="lazy"
         onclick="toggleFullScreenImage('')"
       />
@@ -9978,14 +10058,25 @@ function openTab(evt, tabName) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
       </div>
     </div>
     <div class="vertical-line"></div>
     <div class="modal-info">
       <h2 class="modal-h2">
-        
-        <a href="/pr-preview/pr-2586/catalog//.html" target="_blank" style="font-size: 1.5rem">
+        <a href="/catalog//.html" target="_blank" style="font-size: 1.5rem">
            SINGLETON QUEUE
             <img class="internal-link" src="/pr-preview/pr-2586/assets/images/buttons/external-link_black.svg" />
         </a>
@@ -10714,6 +10805,18 @@ function openTab(evt, tabName) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
       </div>
    
@@ -10729,8 +10832,7 @@ function openTab(evt, tabName) {
         
 
        
-        
-        <a href="/pr-preview/pr-2586/catalog/https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/singleton_http_call_bg.wasm" download="Singleton Queue.yml">
+        <a href="/catalog//https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/singleton_http_call_bg.wasm" download="Singleton Queue.yml">
           <button id="resourceDownloadBtn" data-patternId="" onclick="sendCloudTelemetry()"
             class="import" style="width: 7rem;">
             Download
@@ -10856,7 +10958,7 @@ function openTab(evt, tabName) {
            <small class="pattern-type"> WASM FILTER</small>
        </div>
        <h4 class="pattern-name">JWT Filter</h4>
-       <img class= "pattern-filter-image" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png" onerror="this.src='/pr-preview/pr-2586/assets/images/webassembly_logo.svg'" loading="lazy"/>
+       <img class= "pattern-filter-image" src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png" onerror="this.src='/assets/images/webassembly_logo.svg'" loading="lazy"/>
        <div>
     
     <h6 class="pattern-id">
@@ -10897,7 +10999,7 @@ function openTab(evt, tabName) {
       <img
         class="image-class"
         src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/.png"
-        onerror="this.src='/pr-preview/pr-2586/assets/images/webassembly_logo.svg'"
+        onerror="this.src='/assets/images/webassembly_logo.svg'"
         loading="lazy"
         onclick="toggleFullScreenImage('')"
       />
@@ -11596,14 +11698,25 @@ function openTab(evt, tabName) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
       </div>
     </div>
     <div class="vertical-line"></div>
     <div class="modal-info">
       <h2 class="modal-h2">
-        
-        <a href="/pr-preview/pr-2586/catalog//.html" target="_blank" style="font-size: 1.5rem">
+        <a href="/catalog//.html" target="_blank" style="font-size: 1.5rem">
            JWT FILTER
             <img class="internal-link" src="/pr-preview/pr-2586/assets/images/buttons/external-link_black.svg" />
         </a>
@@ -12332,6 +12445,18 @@ function openTab(evt, tabName) {
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
 
       </div>
    
@@ -12347,8 +12472,7 @@ function openTab(evt, tabName) {
         
 
        
-        
-        <a href="/pr-preview/pr-2586/catalog/https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/jwt_filter_bg.wasm" download="JWT Filter.yml">
+        <a href="/catalog//https://github.com/layer5io/wasm-filters/releases/download/v0.2.3/jwt_filter_bg.wasm" download="JWT Filter.yml">
           <button id="resourceDownloadBtn" data-patternId="" onclick="sendCloudTelemetry()"
             class="import" style="width: 7rem;">
             Download
@@ -12476,10 +12600,11 @@ function openTab(evt, tabName) {
     }
 
     #sort {
-        padding: 10px 35px 10px 10px;
+        padding: 10px;
         font-size: 16px;
         border: 1px solid #ddd;
         border-radius: 5px;
+        background-color: #f9f9f9;
         appearance: none;
         background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M7 10l5 5 5-5z"/></svg>');
         background-repeat: no-repeat;

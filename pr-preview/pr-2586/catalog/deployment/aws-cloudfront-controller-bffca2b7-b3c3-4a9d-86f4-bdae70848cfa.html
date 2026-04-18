@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="test" content="testing" />
     <!-- Google Tag Manager -->
-    <meta name="description" content="""
+    <meta name="description" content="This YAML file defines a Kubernetes Deployment for the ack-cloudfront-controller, a component responsible for managing AWS CloudFront resources in a Kubernetes environment. The Deployment specifies that one replica of the pod should be maintained (replicas: 1). Metadata labels are provided for identification and management purposes, such as app.kubernetes.io/name, app.kubernetes.io/instance, and others, to ensure proper categorization and management by Helm. The pod template section within the Deployment spec outlines the desired state of the pods, including the container's configuration.
+
+The container, named controller, uses the ack-cloudfront-controller:latest image and will run a binary (./bin/controller) with specific arguments to configure its operation, such as AWS region, endpoint URL, logging level, and resource tags. Environment variables are defined to provide necessary configuration values to the container. The container exposes an HTTP port (8080) and includes liveness and readiness probes to monitor and manage its health, ensuring the application is running properly and is ready to serve traffic.
 " />
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -27,12 +29,12 @@
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:image" content="https://meshery.io/pr-preview/pr-2586/assets/images/logos/service-mesh-pattern.svg" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-04-17T16:59:12+00:00" />
+<meta property="article:published_time" content="2026-04-18T02:47:57+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="twitter:image" content="https://meshery.io/pr-preview/pr-2586/assets/images/logos/service-mesh-pattern.svg" />
 <meta property="twitter:title" content="Bffca2b7 B3c3 4a9d 86f4 Bdae70848cfa" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-04-17T16:59:12+00:00","datePublished":"2026-04-17T16:59:12+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Bffca2b7 B3c3 4a9d 86f4 Bdae70848cfa","image":"https://meshery.io/pr-preview/pr-2586/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2586/catalog/deployment/aws-cloudfront-controller-bffca2b7-b3c3-4a9d-86f4-bdae70848cfa.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2586/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2586/catalog/deployment/aws-cloudfront-controller-bffca2b7-b3c3-4a9d-86f4-bdae70848cfa.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-04-18T02:47:57+00:00","datePublished":"2026-04-18T02:47:57+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Bffca2b7 B3c3 4a9d 86f4 Bdae70848cfa","image":"https://meshery.io/pr-preview/pr-2586/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2586/catalog/deployment/aws-cloudfront-controller-bffca2b7-b3c3-4a9d-86f4-bdae70848cfa.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2586/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2586/catalog/deployment/aws-cloudfront-controller-bffca2b7-b3c3-4a9d-86f4-bdae70848cfa.html"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/pr-preview/pr-2586/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/pr-preview/pr-2586/css/stellarnav.css" />
@@ -228,10 +230,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/community.svg
-">
-							<a href="/pr-preview/pr-2586/community
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/community.svg">
+							<a href="/community" 
 							class="subnav-item">Participate
 							
 							</a>
@@ -240,10 +240,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Calendar.svg
-">
-							<a href="/pr-preview/pr-2586/calendar
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/Calendar.svg">
+							<a href="/calendar" 
 							class="subnav-item">Calendar
 							
 							</a>
@@ -252,10 +250,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/community.svg
-">
-							<a href="/pr-preview/pr-2586/community/newcomers
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/community.svg">
+							<a href="/community/newcomers" 
 							class="subnav-item">Newcomers
 							
 							</a>
@@ -264,10 +260,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Programs.svg
-">
-							<a href="/pr-preview/pr-2586/programs
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/Programs.svg">
+							<a href="/programs" 
 							class="subnav-item">Programs
 							
 							</a>
@@ -276,10 +270,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Mail.svg
-">
-							<a href="/pr-preview/pr-2586/subscribe
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/Mail.svg">
+							<a href="/subscribe" 
 							class="subnav-item">Mailing Lists
 							
 							</a>
@@ -288,10 +280,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Recognition.svg
-">
-							<a href="/pr-preview/pr-2586/community/badges
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/Recognition.svg">
+							<a href="/community/badges" 
 							class="subnav-item">Recognition
 							
 							</a>
@@ -300,10 +290,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Discuss.svg
-">
-							<a href="/pr-preview/pr-2586/community#discussion-forums
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/Discuss.svg">
+							<a href="/community#discussion-forums" 
 							class="subnav-item">Discussion forums
 							
 							</a>
@@ -312,13 +300,11 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Github.svg
-">
-							<a href="https://github.com/meshery
-" target="_blank" 
+								<img class="nav-img" src="/assets/images/nav-icons/Github.svg">
+							<a href="https://github.com/meshery" target="_blank" 
 							class="subnav-item">GitHub
 							
-							<img src="/pr-preview/pr-2586/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
+							<img src="/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
 							
 							</a>
 						</div>
@@ -326,13 +312,11 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Slack.svg
-">
-							<a href="https://slack.meshery.io
-" target="_blank" 
+								<img class="nav-img" src="/assets/images/nav-icons/Slack.svg">
+							<a href="https://slack.meshery.io" target="_blank" 
 							class="subnav-item">Slack
 							
-							<img src="/pr-preview/pr-2586/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
+							<img src="/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
 							
 							</a>
 						</div>
@@ -340,13 +324,11 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Youtube.svg
-">
-							<a href="https://www.youtube.com/channel/UCgXlqWDCg-9RP1eckf0s6KA?sub_confirmation=1
-" target="_blank" 
+								<img class="nav-img" src="/assets/images/nav-icons/Youtube.svg">
+							<a href="https://www.youtube.com/channel/UCgXlqWDCg-9RP1eckf0s6KA?sub_confirmation=1" target="_blank" 
 							class="subnav-item">Youtube
 							
-							<img src="/pr-preview/pr-2586/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
+							<img src="/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
 							
 							</a>
 						</div>
@@ -382,10 +364,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Presentation.svg
-">
-							<a href="/pr-preview/pr-2586/talks-and-trainings
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/Presentation.svg">
+							<a href="/talks-and-trainings" 
 							class="subnav-item">Talks and Trainings
 							
 							</a>
@@ -394,10 +374,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Blog.svg
-">
-							<a href="/pr-preview/pr-2586/blog
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/Blog.svg">
+							<a href="/blog" 
 							class="subnav-item">Blog
 							
 							</a>
@@ -406,10 +384,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/meshery-extensions.svg
-">
-							<a href="/pr-preview/pr-2586/extensions
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/meshery-extensions.svg">
+							<a href="/extensions" 
 							class="subnav-item">Extensions
 							
 							</a>
@@ -418,13 +394,11 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/Contribute.svg
-">
-							<a href="https://docs.meshery.io/project/contributing
-" target="_blank" 
+								<img class="nav-img" src="/assets/images/nav-icons/Contribute.svg">
+							<a href="https://docs.meshery.io/project/contributing" target="_blank" 
 							class="subnav-item">Contributing
 							
-							<img src="/pr-preview/pr-2586/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
+							<img src="/assets/images/buttons/external-link_gray.svg" alt="Link Icon" class="nav-sublink-logo">
 							
 							</a>
 						</div>
@@ -432,10 +406,8 @@
 					
 					<li >
 						<div  class="sub-nav-li" >
-								<img class="nav-img" src="/pr-preview/pr-2586/assets/images/nav-icons/meshery.svg
-">
-							<a href="/pr-preview/pr-2586/brand
-" 
+								<img class="nav-img" src="/assets/images/nav-icons/meshery.svg">
+							<a href="/brand" 
 							class="subnav-item">Branding
 							
 							</a>
@@ -481,8 +453,7 @@
 			
 					  
 					  <div class="blog-navigation" style="margin-bottom: 2rem;text-decoration: none;">
-						
-						<a  href="/pr-preview/pr-2586/catalog/designs" style="text-decoration: none;"> &larr; Back To Designs
+						<a  href="/catalog/designs" style="text-decoration: none;"> &larr; Back To Designs
 						</a>
 						</div>
 					  	<h1 style="text-align: center; margin: 2.5rem 0; text-transform: capitalize;">AWS cloudfront controller</h1>
@@ -526,15 +497,35 @@
           </li>
       
           <li><p>UPDATED AT</p>
-            <div>April 17, 2026</div>
+            <div>April 18, 2026</div>
           </li>
     
           <li><p>VERSION</p>
-            <div>0.0.1</div>
+            <div>0.0.2</div>
           </li>
           <li>
             <p>MODELS</p>
             <div>
+              
+              <a href="/pr-preview/pr-2586/catalog/models/amd-gpu">
+                Amd-gpu
+              </a>
+              , 
+              
+              <a href="/pr-preview/pr-2586/catalog/models/apisix">
+                Apisix
+              </a>
+              , 
+              
+              <a href="/pr-preview/pr-2586/catalog/models/aws-apigatewayv2-controller">
+                Aws-apigatewayv2-controller
+              </a>
+              , 
+              
+              <a href="/pr-preview/pr-2586/catalog/models/aws-cloudfront-controller">
+                Aws-cloudfront-controller
+              </a>
+              
               
             </div>
           </li>
@@ -546,7 +537,7 @@
       <h4>Design Snapshot</h4>
       <img class="pattern-snapshot"
       src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/bffca2b7-b3c3-4a9d-86f4-bdae70848cfa-light.png" 
-      onerror="this.src='/pr-preview/pr-2586/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('bffca2b7-b3c3-4a9d-86f4-bdae70848cfa-light')"/>
+      onerror="this.src='/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('bffca2b7-b3c3-4a9d-86f4-bdae70848cfa-light')"/>
 
       <h4 class="related-patterns">Related Designs</h4>
       <!-- MINICARD-START -->
@@ -562,7 +553,7 @@
         <div class="pattern-image-container">
             <img class="modal-pattern-image" 
                  src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/00fadfee-3655-40c7-8a38-6c5cd72ea4da-light.png"
-                 onerror="this.src='/pr-preview/pr-2586/assets/images/logos/service-mesh-pattern.svg'"
+                 onerror="this.src='/assets/images/logos/service-mesh-pattern.svg'"
                  loading="lazy" />
         </div>
         <div>
@@ -590,10 +581,22 @@
   
   <div>
     <h3>What This Design Does:</h3>
-    <p class="pre-white-space">""
+    <p class="pre-white-space">This YAML file defines a Kubernetes Deployment for the ack-cloudfront-controller, a component responsible for managing AWS CloudFront resources in a Kubernetes environment. The Deployment specifies that one replica of the pod should be maintained (replicas: 1). Metadata labels are provided for identification and management purposes, such as app.kubernetes.io/name, app.kubernetes.io/instance, and others, to ensure proper categorization and management by Helm. The pod template section within the Deployment spec outlines the desired state of the pods, including the container's configuration.
+
+The container, named controller, uses the ack-cloudfront-controller:latest image and will run a binary (./bin/controller) with specific arguments to configure its operation, such as AWS region, endpoint URL, logging level, and resource tags. Environment variables are defined to provide necessary configuration values to the container. The container exposes an HTTP port (8080) and includes liveness and readiness probes to monitor and manage its health, ensuring the application is running properly and is ready to serve traffic.
 </p>
     <h3>Caveats and Consideration: </h3>
-    <p class="pre-white-space">""
+    <p class="pre-white-space">1. Environment Variables:
+Verify that the environment variables such as AWS_REGION, AWS_ENDPOINT_URL, and ACK_LOG_LEVEL are correctly set according to your AWS environment and logging preferences. Incorrect values could lead to improper functioning or failure of the controller.
+
+2. Secrets Management:
+If AWS credentials are required, make sure the AWS_SHARED_CREDENTIALS_FILE and AWS_PROFILE environment variables are correctly configured and the referenced Kubernetes secret exists. Missing or misconfigured secrets can prevent the controller from authenticating with AWS.
+
+3. Resource Requests and Limits:
+Review and adjust the resource requests and limits to match the expected workload and available cluster resources. Insufficient resources can lead to performance issues, while overly generous requests can waste cluster resources.
+
+4. Probes Configuration:
+The liveness and readiness probes are configured with specific paths and ports. Ensure that these endpoints are correctly implemented in the application. Misconfigured probes can result in the pod being killed or marked as unready.
 </p>
     </p>
     
@@ -605,6 +608,30 @@
         }
     </style>
     <div class="comatibility-grid">
+    
+    <!-- Please remove these hardcoding -->
+    <!-- This would require updating the already published content with correct compatibility -->
+    
+        <img class="service-mesh-image" src="/pr-preview/pr-2586/images/integrations/amd-gpu/icons/color/amd-gpu-color.svg" />
+    
+    
+    <!-- Please remove these hardcoding -->
+    <!-- This would require updating the already published content with correct compatibility -->
+    
+        <img class="service-mesh-image" src="/pr-preview/pr-2586/images/integrations/apisix/icons/color/apisix-color.svg" />
+    
+    
+    <!-- Please remove these hardcoding -->
+    <!-- This would require updating the already published content with correct compatibility -->
+    
+        <img class="service-mesh-image" src="/pr-preview/pr-2586/images/integrations/aws-apigatewayv2-controller/icons/color/aws-apigatewayv2-controller-color.svg" />
+    
+    
+    <!-- Please remove these hardcoding -->
+    <!-- This would require updating the already published content with correct compatibility -->
+    
+        <img class="service-mesh-image" src="/pr-preview/pr-2586/images/integrations/aws-cloudfront-controller/icons/color/aws-cloudfront-controller-color.svg" />
+    
     
 </div>
 
@@ -626,8 +653,7 @@
         
 
        
-        
-        <a href="/pr-preview/pr-2586/catalog/bffca2b7-b3c3-4a9d-86f4-bdae70848cfa/0.0.1/design.yml" download="AWS cloudfront controller.yml">
+        <a href="/catalog/bffca2b7-b3c3-4a9d-86f4-bdae70848cfa/0.0.2/design.yml " download="AWS cloudfront controller.yml">
           <button id="resourceDownloadBtn" data-patternId="bffca2b7-b3c3-4a9d-86f4-bdae70848cfa" onclick="sendCloudTelemetry()"
             class="import" style="width: 7rem;">
             Download
@@ -635,7 +661,7 @@
         </a>
 
         <div class="btn-tooltip-grp">
-          <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/bffca2b7-b3c3-4a9d-86f4-bdae70848cfa/0.0.1/design.yml"
+          <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/bffca2b7-b3c3-4a9d-86f4-bdae70848cfa/0.0.2/design.yml"
             onmouseout="resetCopyText(this)">
             <button class="import" style="width: 7rem;">Copy URL
             </button>
@@ -686,116 +712,10 @@
     
     <!-- -->
     <li class="post">
-      <span class="post-date"> Apr 15 | </span>
-      <a href="https://discuss.layer5.io/t//7738"> Meshery Development Meeting | April 15th, 2026</a>
+      <span class="post-date"> Feb 11 | </span>
+      <a href="https://discuss.layer5.io/t//7653"> Meshery Development Meeting | February 11th, 2026</a>
       <span id="author" class="post-author"> 
         
-        
-          
-          
-      Yash Mahakal
-      </span>
-    </li>
-    
-    <!-- -->
-    <li class="post">
-      <span class="post-date"> Apr 10 | </span>
-      <a href="https://discuss.layer5.io/t//7737"> Shape Builder Extension - Seeking Contributors to become Maintainers</a>
-      <span id="author" class="post-author"> 
-        
-        
-      
-        
-          
-          
-      Lee Calcote
-      </span>
-    </li>
-    
-    <!-- -->
-    <li class="post">
-      <span class="post-date"> Apr 06 | </span>
-      <a href="https://discuss.layer5.io/t//7731"> How to run Meshery with the alternative Go evaluation engine</a>
-      <span id="author" class="post-author"> 
-        
-        
-      
-        
-      
-        
-          
-          
-      Guan-Ming Chiu
-      </span>
-    </li>
-    
-    <!-- -->
-    <li class="post">
-      <span class="post-date"> Apr 01 | </span>
-      <a href="https://discuss.layer5.io/t//7704"> Meshery Development Meeting | April 1st, 2026</a>
-      <span id="author" class="post-author"> 
-        
-        
-          
-          
-      Yash Mahakal
-      </span>
-    </li>
-    
-    <!-- -->
-    <li class="post">
-      <span class="post-date"> Mar 29 | </span>
-      <a href="https://discuss.layer5.io/t//7702"> CMC Study Group - Meshery Models practice quiz questions</a>
-      <span id="author" class="post-author"> 
-        
-        
-      
-        
-      
-        
-      
-        
-          
-          
-      Kavitha Karunakaran
-      </span>
-    </li>
-    
-    <!-- -->
-    <li class="post">
-      <span class="post-date"> Mar 03 | </span>
-      <a href="https://discuss.layer5.io/t//7659"> CMC Study Group - Meshery CLI mock quiz questions</a>
-      <span id="author" class="post-author"> 
-        
-        
-      
-        
-      
-        
-      
-        
-          
-          
-      Kavitha Karunakaran
-      </span>
-    </li>
-    
-    <!-- -->
-    <li class="post">
-      <span class="post-date"> Mar 26 | </span>
-      <a href="https://discuss.layer5.io/t//7701"> Meshery v1.0 Launches at KubeCon EU with Governance-First Cloud Native Management</a>
-      <span id="author" class="post-author"> 
-        
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
         
           
           
@@ -805,21 +725,21 @@
     
     <!-- -->
     <li class="post">
-      <span class="post-date"> Mar 25 | </span>
-      <a href="https://discuss.layer5.io/t//7697"> Meshery Development Meeting | March 25th, 2026</a>
+      <span class="post-date"> Feb 11 | </span>
+      <a href="https://discuss.layer5.io/t//7652"> Your Path to Becoming a Certified Meshery Contributor Starts Here</a>
       <span id="author" class="post-author"> 
         
         
           
           
-      Yash Mahakal
+      RaunaK Madan
       </span>
     </li>
     
     <!-- -->
     <li class="post">
-      <span class="post-date"> Mar 20 | </span>
-      <a href="https://discuss.layer5.io/t//7683"> Meshery adapter deployment fails with Docker socket error in WSL + Docker Desktop Kubernetes setup</a>
+      <span class="post-date"> Jan 22 | </span>
+      <a href="https://discuss.layer5.io/t//7605"> Provider=None - redirects to a blank login screen?</a>
       <span id="author" class="post-author"> 
         
         
@@ -827,30 +747,152 @@
         
       
         
-      
-        
-      
-        
-      
-        
-      
-        
           
           
-      Omkar ugalmugle
+      
       </span>
     </li>
     
     <!-- -->
     <li class="post">
-      <span class="post-date"> Mar 18 | </span>
-      <a href="https://discuss.layer5.io/t//7678"> Meshery Development Meeting | March 18th, 2026</a>
+      <span class="post-date"> Feb 06 | </span>
+      <a href="https://discuss.layer5.io/t//7650"> Schedule for CMC Weekly Study Group Meetings</a>
       <span id="author" class="post-author"> 
         
         
           
           
-      Yash Mahakal
+      RaunaK Madan
+      </span>
+    </li>
+    
+    <!-- -->
+    <li class="post">
+      <span class="post-date"> Feb 04 | </span>
+      <a href="https://discuss.layer5.io/t//7649"> CMC Weekly Study Group Meeting Minutes</a>
+      <span id="author" class="post-author"> 
+        
+        
+          
+          
+      RaunaK Madan
+      </span>
+    </li>
+    
+    <!-- -->
+    <li class="post">
+      <span class="post-date"> Feb 04 | </span>
+      <a href="https://discuss.layer5.io/t//7648"> Meshery Development Meeting | February 4th, 2026</a>
+      <span id="author" class="post-author"> 
+        
+        
+          
+          
+      RaunaK Madan
+      </span>
+    </li>
+    
+    <!-- -->
+    <li class="post">
+      <span class="post-date"> Feb 04 | </span>
+      <a href="https://discuss.layer5.io/t//7644"> Self-paced training by Meshery component</a>
+      <span id="author" class="post-author"> 
+        
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+          
+      Rian Cteulp
+      </span>
+    </li>
+    
+    <!-- -->
+    <li class="post">
+      <span class="post-date"> Feb 04 | </span>
+      <a href="https://discuss.layer5.io/t//7643"> Meshery Architecture Deck - an awesome resource</a>
+      <span id="author" class="post-author"> 
+        
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+          
+      Mia Grenell
+      </span>
+    </li>
+    
+    <!-- -->
+    <li class="post">
+      <span class="post-date"> Jan 22 | </span>
+      <a href="https://discuss.layer5.io/t//7608"> Looking for Meshmate for guidance</a>
+      <span id="author" class="post-author"> 
+        
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          
+          
+      Madhur Chandran
+      </span>
+    </li>
+    
+    <!-- -->
+    <li class="post">
+      <span class="post-date"> Jan 28 | </span>
+      <a href="https://discuss.layer5.io/t//7624"> Meshery Development Meeting | January 28th, 2026</a>
+      <span id="author" class="post-author"> 
+        
+        
+          
+          
+      RaunaK Madan
       </span>
     </li>
     
@@ -2248,6 +2290,30 @@
            
         </p> -->
        
+        <!-- <p  style= "font-size:20px;"> 
+           
+        </p> -->
+       
+        <!-- <p  style= "font-size:20px;"> 
+           
+        </p> -->
+       
+        <!-- <p  style= "font-size:20px;"> 
+           
+        </p> -->
+       
+        <!-- <p  style= "font-size:20px;"> 
+           
+        </p> -->
+       
+        <!-- <p  style= "font-size:20px;"> 
+           
+        </p> -->
+       
+        <!-- <p  style= "font-size:20px;"> 
+           
+        </p> -->
+       
         
         
 	   <div class="blog-navigation">
@@ -2257,8 +2323,8 @@
 ">&laquo; Expose NGINX app with Ingress</a>
 			
 			
-				<a  href="/pr-preview/pr-2586/catalog/deployment/gke-online-serving-single-gpu-c0db1f13-46e8-481f-b5b5-27b6d2e0b74d.html
-">gke-online-serving-single-gpu &raquo;</a>
+				<a  href="/pr-preview/pr-2586/catalog/deployment/vald-architecture-c183b615-deb3-460e-b56f-55a1f87b1497.html
+">Vald architecture &raquo;</a>
 			
 		</div>
 		</div>

@@ -32,7 +32,8 @@ export default defineConfig([  {
 
         // Project globals
         FullCalendar: "readonly",
-
+        url: "writable",
+        page: "writable"
       }
     },
     rules: {
