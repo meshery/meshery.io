@@ -276,4 +276,14 @@ if (document.readyState === 'loading') {
 
 // Expose clear function globally for use in templates
 window.clearBlogSearch = clearSearch;
+// Exporting the functions for testing
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    slugify,
+    escapeRegex,
+    highlightText,
+    debounce,
+    performClientSearch
+  };
+}
 })();
