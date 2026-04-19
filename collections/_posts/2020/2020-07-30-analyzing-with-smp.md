@@ -8,7 +8,7 @@ categories:
 redirect_from: /blog/getting-started-with-service-mesh-performance-analysis
 ---
 <div style="text-align:center;padding:5px">
-<img src="{{site.baseurl}}/assets/images/posts/2020/2020-07-30-analyzing-with-smp/mesh-cubes.svg#center" style="width:70%" /></div>
+<img src="{{site.baseurl}}/assets/images/posts/2020/2020-07-30-analyzing-with-smp/mesh-cubes.svg#center" style="width:70%"  alt="Mesh Cubes" /></div>
 Anytime performance questions are to be answered, they are subjective to the specific workload and infrastructure used for measurement. Given the variety of this measurement challenge, the Envoy project, for example, refuses to publish performance data because such tests can be
 
 1. Time consuming and Redundant
