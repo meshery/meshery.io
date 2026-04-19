@@ -2,7 +2,7 @@
 layout: single-page-extension
 item-type: extension
 name: GitHub Action Performance Analysis
-permalink: /extensions/github-action-performance-analysis
+permalink: /extensions/github-action-performance-analysis/
 redirect_from:
   - /extensions/github-action-perf
 kind: Performance
