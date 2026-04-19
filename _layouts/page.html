@@ -12,15 +12,21 @@ layout: default
 			
 					  {% if page.collection == "catalog" or page.collection == "models" or page.collection == "filters" %}
 					  <div class="blog-navigation" style="margin-bottom: 2rem;text-decoration: none;">
-						<a  href="/catalog/{% if page.collection == 'catalog' %}designs{% else %}{{page.collection}}{% endif %}" style="text-decoration: none;"> &larr; Back To {% if page.collection == 'catalog' %}Designs{% else %}{{ page.collection | capitalize }}{% endif %}
+						{% if page.collection == 'catalog' %}
+						{% assign back_collection = 'designs' %}
+						{% else %}
+						{% assign back_collection = page.collection %}
+						{% endif %}
+						<a  href="{{ '/catalog/' | append: back_collection | relative_url }}" style="text-decoration: none;"> &larr; Back To {% if page.collection == 'catalog' %}Designs{% else %}{{ page.collection | capitalize }}{% endif %}
 						</a>
 						</div>
 					  	<h1 style="text-align: center; margin: 2.5rem 0; text-transform: capitalize;">{{ page.name }}</h1>
 						  {% if page.howItWorks %}
 							<p style="text-align: center;"><strong>{{ page.howItWorks }}: </strong>{% if page.howItWorksDetails %}{{ page.howItWorksDetails }}{% endif %}</p>
 						  {% endif %}
-					  {% else %}
+					  	{% if page.title %}
 					   <h2>{{ page.title }}</h2>
+					   {% endif %} 
 					  {% endif %} 
 					
 				{% if page.subheading %}

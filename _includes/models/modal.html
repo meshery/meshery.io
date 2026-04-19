@@ -40,10 +40,10 @@
     <div class="modal-content modelhello">
       <div class="modal-image">
         <button class="modal-close close">&times;</button>
-        <img class="image-class model-image" data-modelicon-light="{{model.colorIcon}}"
-          data-modelicon-dark="{{model.whiteIcon}}" src="{{model.colorIcon}}"
-          onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy"
-          onclick="toggleFullScreenImage('{{ model.colorIcon }}', 'model')" />
+        <img class="image-class model-image" data-modelicon-light="{{ model.colorIcon | relative_url }}"
+          data-modelicon-dark="{{ model.whiteIcon | relative_url }}" src="{{ model.colorIcon | relative_url }}"
+          onerror="this.src='{{ site.baseurl }}/assets/images/meshery-color.svg'" loading="lazy"
+          onclick="toggleFullScreenImage('{{ model.colorIcon | relative_url }}', 'model')" />
       </div>
       <div class="vertical-line"></div>
       <div class="modal-info">
@@ -77,12 +77,12 @@
           <div class="btn-class">
             <div class="vertical-center" id="{{type.name}}">
               <div class="btn-grp">
-                {% if {{model.name}} %}
-                <a href="/models/{{ model.modelFile }}" download="{{ model.name | slugify }}.tar">
+                {% if model.name %}
+                <a href="{{ '/models/' | append: model.modelFile | relative_url }}" download="{{ model.name | slugify }}.tar">
                   <button class="import" style="width: 7rem;">Download</button></a>
                 {% endif %}
                 <div class="btn-tooltip-grp">
-                  {% if {{model.name}} %}
+                  {% if model.name %}
                   <a href="https://docs.meshery.io/project/contributing/contributing-models-quick-start">
                     <button class="import-tertiary" style="width: 9rem;">Quick Start</button></a>
                   {% endif %}
