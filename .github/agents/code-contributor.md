@@ -28,7 +28,7 @@ You are an expert-level software engineering agent specialized in contributing t
 - **Languages**: HTML5, SCSS (Dart Sass), JavaScript (ES6+), Liquid, YAML
 - **Styling**: SCSS modules imported via `@use` in `css/screen.scss`
 - **Theming**: CSS variables defined in `_sass/rootvariables.scss`
-- **Ruby Version**: Always match version in `Gemfile` (currently 3.2.2)
+- **Ruby Version**: Use a Ruby version supported by `Gemfile` (minimum `3.2.2`)
 
 ### DevOps & Tools
 - **Build System**: `make` is the ONLY supported interface.
