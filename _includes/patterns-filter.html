@@ -513,9 +513,9 @@ function showFilterCards() {
                          globalCategoryList.length === 0 && 
                          globalPatternTypeList.length === 0;
   
-  // Update "not found" message
+  //  Only show "not found" if the catalog actually has items AND filters hid all of them
   const noCard = document.getElementById("not-found");
-  noCard.style.display = matchingCards.length > 0 ? "none" : "block";
+  noCard.style.display =(patternCards.length > 0 && matchingCards.length === 0) ? "block" : "none";
   
   // Get pagination elements
   const paginationButtons = document.querySelector(".pagination");
