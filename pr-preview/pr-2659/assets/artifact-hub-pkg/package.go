@@ -189,17 +189,16 @@ func processPattern(pattern CatalogPattern, token string) error {
 }
 
 func getPatternImageURL(pattern CatalogPattern) string {
-	var imageURL string
-	if pattern.CatalogData.SnapshotURL == nil {
-		imageURL = fmt.Sprintf("https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/%s-light.png,https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/%s-dark.png", pattern.ID, pattern.ID)
-	} else {
-		if len(pattern.CatalogData.SnapshotURL) == 1 {
-			imageURL = pattern.CatalogData.SnapshotURL[0]
-		} else if len(pattern.CatalogData.SnapshotURL) > 1 {
-			imageURL = strings.Join(pattern.CatalogData.SnapshotURL, ",")
-		}
+	// Treat both nil and empty slice as "no snapshot supplied" — the API can
+	// return either shape — and fall back to the default light/dark assets.
+	switch n := len(pattern.CatalogData.SnapshotURL); {
+	case n == 0:
+		return fmt.Sprintf("https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/%s-light.png,https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/%s-dark.png", pattern.ID, pattern.ID)
+	case n == 1:
+		return pattern.CatalogData.SnapshotURL[0]
+	default:
+		return strings.Join(pattern.CatalogData.SnapshotURL, ",")
 	}
-	return imageURL
 }
 
 func getPatternType(patternType string) string {
@@ -252,7 +251,10 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 		patternImageURL = "/assets/images/logos/service-mesh-pattern.svg"
 	}
 
-	parsedTime := time.Now().UTC()
+	// Use a stable Unix-epoch sentinel when the API omits createdAt so the
+	// generated artifacthub-pkg.yml stays byte-identical across runs and
+	// doesn't churn the catalog with no-op commits.
+	parsedTime := time.Unix(0, 0).UTC()
 	if pattern.CreatedAt != "" {
 		t, err := time.Parse(time.RFC3339Nano, pattern.CreatedAt)
 		if err != nil {
