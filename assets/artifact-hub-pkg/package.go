@@ -25,20 +25,45 @@ import (
 )
 
 type CatalogPattern struct {
-	ID          string               `json:"id"`
-	Name        string               `json:"name"`
-	Version     string               `json:"version"`
-	PatternFile string               `json:"pattern_file"`
-	CatalogData v1alpha1.CatalogData `json:"catalog_data"`
-	UserID      string               `json:"user_id"`
-	CreatedAt   string               `json:"created_at"`
+	ID          string      `json:"id"`
+	Name        string      `json:"name"`
+	Version     string      `json:"version"`
+	PatternFile string      `json:"patternFile"`
+	CatalogData CatalogData `json:"catalogData"`
+	UserID      string      `json:"userId"`
+	CreatedAt   string      `json:"createdAt"`
+}
+
+// CatalogData mirrors the Meshery Cloud catalog API response shape (camelCase),
+// which differs from meshkit's v1alpha1.CatalogData JSON tags (snake_case).
+// Convert to v1alpha1.CatalogData via toV1Alpha1 before handing to meshkit helpers.
+type CatalogData struct {
+	ContentClass     v1alpha1.ContentClass               `json:"contentClass,omitempty"`
+	PublishedVersion string                              `json:"publishedVersion"`
+	Compatibility    []v1alpha1.CatalogDataCompatibility `json:"compatibility"`
+	PatternCaveats   string                              `json:"patternCaveats"`
+	PatternInfo      string                              `json:"patternInfo"`
+	SnapshotURL      []string                            `json:"imageURL,omitempty"`
+	Type             v1alpha1.CatalogDataType            `json:"type"`
+}
+
+func (c *CatalogData) toV1Alpha1() *v1alpha1.CatalogData {
+	return &v1alpha1.CatalogData{
+		ContentClass:     c.ContentClass,
+		PublishedVersion: c.PublishedVersion,
+		Compatibility:    c.Compatibility,
+		PatternCaveats:   c.PatternCaveats,
+		PatternInfo:      c.PatternInfo,
+		SnapshotURL:      c.SnapshotURL,
+		Type:             c.Type,
+	}
 }
 
 type UserInfo struct {
-	UserID    string `json:"user_id"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	AvatarURL string `json:"avatar_url"`
+	UserID    string `json:"userId"`
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	AvatarURL string `json:"avatarUrl"`
 }
 
 const (
@@ -227,9 +252,13 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 		patternImageURL = "/assets/images/logos/service-mesh-pattern.svg"
 	}
 
-	parsedTime, err := time.Parse(time.RFC3339Nano, pattern.CreatedAt)
-	if err != nil {
-		return ErrParsingCreatedAt(err)
+	parsedTime := time.Now().UTC()
+	if pattern.CreatedAt != "" {
+		t, err := time.Parse(time.RFC3339Nano, pattern.CreatedAt)
+		if err != nil {
+			return ErrParsingCreatedAt(err)
+		}
+		parsedTime = t
 	}
 
 	if pattern.CatalogData.PatternInfo == "" {
@@ -251,7 +280,7 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 		version = semver.New(0, 0, 1, "", "").String()
 	}
 
-	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(versionDir, "design.yml"), pattern.UserID, version, &parsedTime, &pattern.CatalogData)
+	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(versionDir, "design.yml"), pattern.UserID, version, &parsedTime, pattern.CatalogData.toV1Alpha1())
 
 	data, err := yaml.Marshal(artifactHubPkg)
 	if err != nil {
