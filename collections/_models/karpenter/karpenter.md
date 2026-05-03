@@ -27,7 +27,11 @@ components:
   colorIcon: assets/images/integration/karpenter/components/node-pool/icons/color/node-pool-color.svg
   whiteIcon: assets/images/integration/karpenter/components/node-pool/icons/white/node-pool-white.svg
   description: 
-componentsCount: 4
+- name: oci-node-class
+  colorIcon: assets/images/integration/karpenter/components/oci-node-class/icons/color/oci-node-class-color.svg
+  whiteIcon: assets/images/integration/karpenter/components/oci-node-class/icons/white/oci-node-class-white.svg
+  description: 
+componentsCount: 5
 relationships: 
 relationshipsCount: 0
 featureList: [
