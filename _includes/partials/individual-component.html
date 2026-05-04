@@ -37,7 +37,8 @@
             <p>MODELS</p>
             <div>
               {% for item in pattern.compatibility %}
-              <a href="{{ '/catalog/models/' | append: (item | slugify) | relative_url }}">
+              {% assign item_slug = item | slugify %}
+              <a href="{{ '/catalog/models/' | append: item_slug | relative_url }}">
                 {{ item | capitalize }}
               </a>
               {% unless forloop.last %}, {% endunless %}
