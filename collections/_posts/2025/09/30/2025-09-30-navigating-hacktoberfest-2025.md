@@ -61,7 +61,7 @@ Open source is a marathon, not a sprint. Feedback may take time, and collaborati
 
 ### 8. Humility and Gratitude: The Essence of Meaningful Contributions
 
-Remember, a meaningful contribution is its own reward. Swag and a profile boost is a delightful bonus, not the end goal. Celebrate your progress, no matter how small, and learn from your experiences. As you recognize that you are part of a much larger movement, we <a href="/blog/community/recognition-program">recognize our contributors and users milestones</a> each step of the way. Earn any number of <a href="https://badges.layer5.io">recognition badges</a> as you grow with the community.
+Remember, a meaningful contribution is its own reward. Swag and a profile boost is a delightful bonus, not the end goal. Celebrate your progress, no matter how small, and learn from your experiences. As you recognize that you are part of a much larger movement, we <a href="/blog/community/recognition-program">recognize our contributors and users milestones</a> each step of the way. Earn any number of <a href="https://meshery.io/community/badges">recognition badges</a> as you grow with the community.
 
 ### 9. Earn a Badge
 
