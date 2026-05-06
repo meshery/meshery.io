@@ -1,6 +1,6 @@
 ---
 name: meshery-blog-writer
-description: Creates complete, publication-ready blog posts for meshery.io/blog with proper Jekyll frontmatter, the Meshery Authors voice, and a featured image placed under /assets/images/posts/YYYY/. Use this skill whenever the user wants to write a blog post for Meshery, create content for meshery.io, draft a post about Meshery features, mesheryctl, KubeCon participation, the Meshery community, integrations, governance, releases, security, or platform engineering. Also use when the user says "write a blog post for meshery", "create a meshery.io blog post", "add a post to meshery.io", "draft a meshery article", or mentions blog post + Meshery / Kanvas / cloud native management.
+description: Creates complete, publication-ready blog posts for meshery.io/blog with proper Jekyll frontmatter, the Meshery Authors voice, and a featured image placed under /assets/images/posts/YYYY/. Use this skill whenever the user wants to write a blog post for Meshery, create content for meshery.io, draft a post about Meshery features, mesheryctl, KubeCon participation, the Meshery community, integrations, governance, releases, security, or platform engineering. Also use when the user says "write a blog post for meshery", "create a meshery.io blog post", "add a post to meshery.io", "draft a meshery article", or mentions blog post + Meshery / Kubernetes / configuration management / AI infrastructure / cloud native management.
 ---
 
 # Meshery Blog Writer
@@ -24,7 +24,7 @@ Meshery is the extensible cloud-native manager.  Posts are written by "Meshery A
 - **American English.**  color, behavior, recognize.
 - **Hyphens only, never em dashes.**  Use `-` everywhere — in titles, prose, callouts, code comments.
 
-**Brand names are case-sensitive.**  Meshery, Meshery Server, Meshery Operator, Kanvas, mesheryctl (lowercase), MeshMates, Meshery Catalog, KubeCon, GitOps, DevOps, OpenTelemetry, CNCF.  Get these right.
+**Brand names are case-sensitive.**  Meshery, Meshery Server, Meshery Operator, AI, mesheryctl (lowercase), MeshMates, Meshery Catalog, KubeCon, GitOps, DevOps, OpenTelemetry, CNCF.  Get these right.
 
 **Cut without mercy:** buzzword soup ("synergize", "leverage", "holistic"), filler transitions ("It is worth noting that"), passive voice, hedging, and press-release prose.
 
