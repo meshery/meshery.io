@@ -28,7 +28,7 @@ import (
 )
 
 const (
-	mesheryCloudBaseURL    = "https://cloud.layer5.io"
+	mesheryCloudBaseURL    = "https://cloud.meshery.io"
 	mesheryCatalogFilesDir = "catalog"
 )
 
