@@ -26,12 +26,3 @@ The Meshery Certification Program offers a structured pathway for professionals 
 </div>
 
 The first certification, [Certified Meshery Contributor (CMC)](/blog/certified-meshery-contributor), in this program was launched in October 2025. This certification validates the skills of developers contributing to the Meshery open source project.
-
-## Partner Programs
-
-The following community partners offer recognition programs in conjunction with Meshery. These programs are designed to recognize and reward contributions to the Meshery project and your participation in the Meshery ecosystem:
-
-<ul class="recognition-list">
-<li class="recognition-item-spaced"><em><a href="https://badges.layer5.io">Layer5</a></em> - Badges are one of the many ways that we recognize the efforts of our contributors and uplift our users. Badges represent milestones that you achieve both in using and in contributing to Meshery. As a contributor, this is how you demonstrate your ownership, dedication, skills and commitment. As a user, this is how you demonstrate your prowess, milestones, and meaningful engagement.</li>
-<li><em><a href="https://github.com/meshery/meshery.io/pulls">Add your program here</a></em> - Add your recognition program to this list by <a href="https://github.com/meshery/meshery.io/pulls">submitting a pull request</a>.</li>
-</ul>
