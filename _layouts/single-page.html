@@ -1,0 +1,32 @@
+---
+layout: page
+pagination: 
+  enabled: true
+  collection: catalog
+---
+<div class="blog-post text-container">
+
+	<div class="post-content">
+		{{ content }}
+
+		
+        {% assign catalog = site.catalog | sort: 'patternId' %}
+        {% for author in catalog  %}
+        <!-- <p  style= "font-size:20px;"> 
+          {{ author.by }} 
+        </p> -->
+       {% endfor %}
+        
+        
+	   <div class="blog-navigation">
+		<div style="justify-content:space-between; display: flex; width:100%;">
+			{% if page.previous.url %}
+				<a href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.name }}</a>
+			{% endif %}
+			{% if page.next.url %}
+				<a  href="{% include relative-src.html src=page.next.url %}">{{ page.next.name }} &raquo;</a>
+			{% endif %}
+		</div>
+		</div>
+	</div>
+</div>

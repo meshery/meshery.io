@@ -1,0 +1,237 @@
+@use "./variables.scss" as *;
+html {
+	background: $coolgray;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	min-width: 360px;
+}
+::-webkit-scrollbar {
+    width: 0.5rem; 
+}
+::-webkit-scrollbar-track {
+    background: var(--background-light); 
+}
+::-webkit-scrollbar-thumb {
+    background:var(--scrollbar-color); 
+    border-radius: 0.3rem; 
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+body {
+	font-family: "Qanelas Soft", "Open Sans", sans-serif;
+		-webkit-font-smoothing: antialiased;
+	background:var(--background-light) !important;
+	transition: all .5s;
+}
+
+a {
+	transition: color .2s;
+	color: var(--brand-color-primary);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: var(--brand-color-secondary);
+}
+
+/* Targets all elements with an id attribute */
+/* ensure that hyperlinks using #trainings accounts for the height of the navbar (site menu) and adjusts the browser's scroll position accordingly, so that the <h1> heading can be seen and is not hidden from view by the navbar. */
+[id] {
+  scroll-margin-top: 100px;
+}
+
+.chip-modal-link:hover{
+	text-decoration: none;
+}
+
+h1 strong, h2 strong {
+	font-weight: 700;
+}
+
+h1 {
+	font-weight: 300;
+	font-size: 2.3em;
+	margin: 0;
+	color: var(--color-secondary-dark);
+	font-family: "Qanelas Soft", "Open Sans", sans-serif;
+		-webkit-font-smoothing: antialiased;
+}
+
+span.special-text{
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+	background: var(--background-primary-2);
+	color: white;
+	padding: 0 .5rem;
+	border-radius: 3px;
+	animation: reveal 1s forwards;
+	font-weight: 500;
+	opacity: 0;
+}
+.div-skew{
+	// width: fit-content;
+	display: inline-block;
+}
+
+h2 {
+	font-weight: 300;
+	font-size: 2.2em;
+	margin: 0 0 30px 0;
+	color: var(--color-secondary-medium);
+	font-family: "Qanelas Soft", "Open Sans", sans-serif;
+		-webkit-font-smoothing: antialiased;
+}
+
+h2.sub-text{
+	color: var(--color-secondary-light);
+}
+
+h3 {
+	font-size: 2rem;
+	margin: 20px 0 10px 0;
+	color: var(--color-secondary-dark);
+	font-family: "Qanelas Soft", "Open Sans", sans-serif;
+		-webkit-font-smoothing: antialiased;
+}
+
+h4, h5, h6{
+	color: var(--color-secondary-dark);
+	font-family: "Qanelas Soft", "Open Sans", sans-serif;
+		-webkit-font-smoothing: antialiased;
+}
+
+p, address {
+	font-size: 1.38em;
+	color: var(--color-secondary-dark);
+	margin-bottom: 20px;
+	line-height: 1.4em;
+	font-weight: 400;
+}
+
+ol {
+	color: var(--color-grey-light);
+	font-size: 1.1rem;
+	list-style-position: inside;
+}
+ul ol {
+	color: var(--color-grey-light);
+	font-size: 1.1rem;
+	list-style-position: inside;
+}
+
+li { list-style-position: inside; }
+
+p.grey-bg-text{
+	color: var(--color-secondary-dark);
+}
+
+ul {
+	color: var(--color-grey-light);
+}
+
+li.heading{
+	background: var(--background-primary);
+	padding: .2rem 1rem;
+	text-align: center;
+}
+
+.bg-grey-300{
+	background: var(--background-light-cards);
+	box-shadow: var(--box-shadow-primary);
+}
+
+@keyframes glow {
+    from {
+      text-shadow: 0 0 20px #2d9da9;
+    }
+    to {
+      text-shadow: 0 0 30px #34b3c1, 0 0 10px #4dbbc7;
+    }
+  }
+
+  @keyframes reveal {
+	  from{
+		  opacity: 0;
+		  transform: skewX(20deg);
+
+	  }
+	  to{
+		opacity: 1;
+		transform: skewX(0deg);
+	}
+  }
+
+  // SUMMARY AND DETAILS //////////////////////////////////////////
+details {
+  width: 100%;
+  margin: 0 auto ;
+  background-color: var( --color-details-background);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 .1rem 1rem -.5rem rgba(0,0,0,.4);
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 1rem;
+  padding: 0rem 1.5rem 0rem 1.5rem;
+  & > h6 { color: var(--color-primary-blonde)};
+  & > p { color: var(--color-secondary-dark)};
+}
+
+summary {
+  padding: .25rem 0rem;
+  margin-right: -1.5rem;
+  margin-left: -1.5rem;
+  display: block;
+  background-color: var(--color-summary-background);
+  color: var(--color-secondary-medium);
+  padding-left: 2.2rem;
+  position: relative;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: normal;
+}
+
+summary:before {
+  content: '';
+  border-width: .4rem;
+  border-style: solid;
+  border-color: transparent transparent transparent var( --color-secondary-dark);
+  position: absolute;
+  left: 1rem;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: .02rem;
+  margin: auto;
+  transform: rotate(0);
+  transform-origin: .2rem 50%;
+  transition: .25s transform ease;
+}
+
+/* THE MAGIC 🧙‍♀️ */
+details[open] > summary:before {
+  transform: rotate(90deg);
+
+}
+
+details summary::-webkit-details-marker {
+  display:none;
+}
+
+details > ul {
+  line-height: .75rem;
+  padding: 1rem auto;
+  margin-bottom: 0;
+}
+
+details > ol {
+  line-height: .75rem;
+  padding: 1rem auto;
+  margin-bottom: 0;
+}

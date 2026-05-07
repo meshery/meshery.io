@@ -1,0 +1,41 @@
+---
+layout: default
+---
+<div class="content">
+	<section class="page">
+		<div class="container {% if page.full_width %}max-container{% endif %}">
+			{%- if page.featured-image -%}
+				<img src="{{- page.featured-image | relative_url -}}" alt="" class="featured-image">
+			{%- endif -%}
+
+			{% if page.name %}	
+			
+					  {% if page.collection == "catalog" or page.collection == "models" or page.collection == "filters" %}
+					  <div class="blog-navigation" style="margin-bottom: 2rem;text-decoration: none;">
+						<a  href="/catalog/{% if page.collection == 'catalog' %}designs{% else %}{{page.collection}}{% endif %}" style="text-decoration: none;"> &larr; Back To {% if page.collection == 'catalog' %}Designs{% else %}{{ page.collection | capitalize }}{% endif %}
+						</a>
+						</div>
+					  	<h1 style="text-align: center; margin: 2.5rem 0; text-transform: capitalize;">{{ page.name }}</h1>
+						  {% if page.howItWorks %}
+							<p style="text-align: center;"><strong>{{ page.howItWorks }}: </strong>{% if page.howItWorksDetails %}{{ page.howItWorksDetails }}{% endif %}</p>
+						  {% endif %}
+					  	{% if page.title %}
+					   <h2>{{ page.title }}</h2>
+					   {% endif %} 
+					  {% endif %} 
+					
+				{% if page.subheading %}
+				<h3 class="subheading">{{ page.subheading }}</h3>
+				{% endif %}
+			{% elsif page.title and page.layout != 'archive' %}
+				<h1 style="text-align: center; margin: 2.5rem 0; text-transform: capitalize;">{{ page.title}}</h1>
+			
+			{% endif %}	
+
+			{% if page.description %}
+				<p class="subtext">{{ page.description }}</p>
+			{% endif %}
+			{{ content }}
+		</div>
+	</section>
+</div>

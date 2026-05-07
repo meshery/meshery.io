@@ -1,0 +1,12 @@
+---
+layout: person
+name: Mia Grenell
+position: Meshery Maintainer, Docs
+image_path: /assets/images/photos/mia-grenell.webp
+github: miacycle
+location: Sydney, Australia
+bio: Mia Grenell is a dedicated engineer by day and an avid bicyclist by night. Her wealth of knowledge and love for the open source community has led her to become the newest Maintainer of Meshery Docs, where she brings her meticulous attention to detail and commitment to clear, accessible documentation. A graduate of the University of Sydney, Mia possesses an ongoing thirst for new technology and DevOps automation. Her meticulous attention to detail and commitment to clear, accessible documentation make her a valuable asset to the Meshery project and Layer5 community.
+badges:
+   - meshery
+status: Active
+---

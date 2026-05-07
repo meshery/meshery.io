@@ -1,0 +1,47 @@
+  <!-- CARD-START -->
+  <div class="row">
+{% for pattern in site.catalog %}
+    {% if page.compatibility == true %}
+      {% for entry in pattern.compatibility %}
+      <div class="column">
+          {% if entry == {{page.filter}} and pattern.Status != "ComingSoon" and pattern.patternInfo%}
+            {% include card.html %}
+          {% elsif pattern.type == {{page.filter}} and pattern.filterInfo %}
+              {% include wasm-card.html %}
+          {% endif %}
+          {% if entry == {{page.filter}} and pattern.Status == "ComingSoon" %}
+            {% include coming-soon.html %}
+          {% endif %}
+        </div>
+        <!-- MODAL-START -->
+          {% if entry == {{page.filter}} and pattern.Status != "ComingSoon" %}
+          {% include modal.html %}
+            {% endif %}{% endfor %}
+         <!-- MODAL-END -->
+      {% else %}
+        <!-- <div class="row"> -->
+          <div class="column">
+            {% if pattern.type == {{page.filter}} and pattern.Status != "ComingSoon" and pattern.patternInfo%}
+              {% include card.html %}
+            {% elsif pattern.type == {{page.filter}} and pattern.filterInfo %}
+                {% include wasm-card.html %}
+            {% endif %}
+            {% if pattern.type == {{page.filter}} and pattern.Status == "ComingSoon" %}
+              {% include coming-soon.html %}
+            {% endif %}
+          </div>
+          <!-- MODAL-START -->
+          {% if pattern.type == {{page.filter}} and pattern.Status != "ComingSoon" %}
+          {% include modal.html %}
+            {% endif %}
+            <!-- MODAL-END -->
+        {% endif %}
+      {% endfor %} 
+  <!-- CARD-END -->
+  </div>
+  
+
+  <script>
+    document.getElementById("{{page.filter}}".toLocaleLowerCase().split(" ").join("-")).checked = true;
+  </script>
+  

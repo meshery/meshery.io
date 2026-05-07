@@ -1,0 +1,70 @@
+{% assign sorted_tutorials = site.data.tutorials | sort: 'date' | reverse %}
+{% assign current_year = 'now' | date: '%Y' | plus: 0 %}
+
+<div class="tutorials-table-wrapper">
+  <table class="tutorials-table">
+    <thead>
+      <tr>
+        <th class="date-column">Date</th>
+        <th class="topic-column">Topic</th>
+        <th class="resources-column">Resources</th>
+        <th class="presenters-column">Presenters</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tutorial in sorted_tutorials %}
+        {% assign tutorial_date = tutorial.date | date: '%Y' | plus: 0 %}
+        {% assign is_new = false %}
+        {% if tutorial_date == current_year %}
+          {% assign is_new = true %}
+        {% endif %}
+
+        <tr>
+          <!-- Date Column -->
+          <td class="date-column">
+            {{ tutorial.date | date: '%b %d, %Y' }}
+          </td>
+
+          <!-- Topic Column -->
+          <td class="topic-column">
+            <p class="newBadge">
+              {{ tutorial.topic }}
+              {% if is_new %}
+                <img src="{{ site.baseurl }}/assets/images/newcomers/new-badge.png" alt="New" />
+              {% endif %}
+            </p>
+          </td>
+
+          <!-- Resources Column -->
+          <td class="resources-column">
+            <p>
+              {% if tutorial.resources.slides %}
+                <span>
+                  <a href="{{ tutorial.resources.slides }}" target="_blank" rel="noreferrer">Slides</a>
+                </span>
+              {% endif %}
+              {% if tutorial.resources.recording %}
+                <span>
+                  <a href="{{ tutorial.resources.recording }}" target="_blank" rel="noreferrer">Recording</a>
+                </span>
+              {% endif %}
+            </p>
+          </td>
+
+          <!-- Presenters Column -->
+          <td class="presenters-column">
+            {% for presenter in tutorial.presenters %}
+              <span>
+                {% if presenter.link %}
+                  <a href="{{ site.baseurl }}{{ presenter.link }}">{{ presenter.name }}</a>
+                {% else %}
+                  {{ presenter.name }}
+                {% endif %}
+              </span>
+            {% endfor %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

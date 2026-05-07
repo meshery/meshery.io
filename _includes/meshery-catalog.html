@@ -1,0 +1,103 @@
+    <style>
+        .catalog-container {
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1e1e1e 100%);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .catalog-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .responsive-card {
+            transition: all 0.3s ease;
+            margin: auto;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 211, 169, 0.1);
+            border: 1px solid rgba(0, 211, 169, 0.2);
+            border-radius: 8px;
+            padding: 4px 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            color: #00d3a9;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .stat-label {
+            color: #ccc;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .logo-img {
+            display: block;
+            width: auto;
+            height: 2.3rem;
+        }
+    </style>
+    {% assign
+designs = site.catalog %}
+    <div class="catalog-container">
+        <!-- This header is redundant of the section description -->
+        <!-- <div class="header">
+           <img src="{{ site.baseurl }}/assets/images/logos/meshery-logo.png" alt="Meshery Logo" class="logo-img"/>&nbsp;
+            <h2 class="catalog-subheading">Cloud Native Infrastructure Patterns</h2>
+        </div> -->
+
+        <div class="catalog-grid">
+            
+            {% assign count = 0 %} {% for pattern in designs %} {% if count < 4 %} {% assign should_display='block' %}
+                {% else %} {% assign should_display='none' %} {% endif %} {% assign last=pattern.compatibility | last %}
+                <div class="column column-lg patternCard designs responsive-card" filter="{{ pattern.name }}" type="{{ pattern.type }}"
+                patternType="designs"
+                technology='[{% for item in pattern.compatibility %}"{{ item | downcase | replace: ' ', ' -' }}"{% if
+                item !=last %},{% endif %}{% endfor %}]' status="{{ pattern.Status }}"
+                style="display: {{ should_display }};">
+                {% include card.html %}
+        </div>
+        {% assign count = count | plus: 1 %} {% endfor %}
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <p class="stat-number">220+</p>
+                <p class="stat-label">Designs</p>
+            </div>
+            <div class="stat-item">
+                <p class="stat-number">380+</p>
+                <p class="stat-label">Integrations</p>
+            </div>
+        </div>
+    </div>

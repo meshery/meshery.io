@@ -1,0 +1,40 @@
+
+{% assign model = include.model | default: model %}
+<a href="{{ model.url }}">
+<div class= "card link"> 
+    <div class="card-inner">
+      <div class="front">
+        <div class="model-category chip">
+          <small class="pattern-type" style="font-size: .5rem;">{{model.category | upcase }}</small>
+        </div>
+        <h4 class="pattern-name">{{model.name}}</h4>
+        <div class="pattern-image-container">
+          <img class= "model-image" 
+          data-modelicon-light="{{model.colorIcon}}"
+          data-modelicon-dark="{{model.whiteIcon}}"
+          src="{{model.colorIcon}}" 
+          onerror="this.src='/assets/images/meshery-color.svg'" 
+          loading="lazy"/>
+        </div>
+      </div> 
+      <div class="back">
+        
+      </div>
+    </div>
+  </div>  
+</a>
+<style>
+  .model-category{
+    float: left;
+    background-color: var(--integrations-bg);
+    box-shadow: 0px 1px 2px var(--integrations-bg);
+    .pattern-type {
+      box-shadow: none;
+      background-color: none;
+      color: var(--color-secondary-medium);
+    }
+  }
+
+
+</style>
+

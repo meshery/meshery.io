@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="test" content="testing" />
+    <!-- Google Tag Manager -->
+    <meta name="description" content="{{ page.patternInfo | url_decode }}" />
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KL6SSW5');</script>
+    <!-- End Google Tag Manager -->
+    {% seo %} {% feed_meta %} {% if jekyll.environment == 'production' %}
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/stellarnav.css" />
+    {% else %}
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/stellarnav.css" />
+    {% endif %}
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/screen.css" />
+    <link rel="icon" type="image/png" href="{{ site.baseurl }}/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Open+Sans"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "{{ site.url }}",
+        "name": "{{ site.title }}",
+        "description": "{{ site.description }}"
+      }
+      </script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+    />
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/subscribe.css" />
+
+	{% assign page_title_lc = page.title | strip | downcase %}
+    {% if page_title_lc == 'programs' or page_title_lc == 'cncf' or (page_title_lc contains 'lfx') or (page_title_lc contains 'google summer of code') or page_title_lc == 'gsod2020' or page_title_lc == 'mlh' %}
+    <link rel="stylesheet" href="{{ site.baseurl }}/css/program.css" />
+    {% endif %}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Meshery" />
+    <meta name="twitter:site" content="@mesheryio" />
+    <meta name="twitter:creator" content="@mesheryio" />
+    <meta name="author" content="Meshery Authors">
+    {% if page.featured-image %}
+    <meta
+      name="twitter:image"
+      content="https://raw.githubusercontent.com/meshery/meshery.io/master/{{ page.featured-image }}"
+    />
+    <meta name="image" property="og:image" content="https://raw.githubusercontent.com/meshery/meshery.io/master/{{page.featured-image}}" />
+    <meta property="og:type" content="website">
+    <meta name="og:image" content="https://raw.githubusercontent.com/meshery/meshery.io/master/{{page.featured-image}}" />
+    {% else %}
+    <meta
+      name="twitter:image"
+      content="https://raw.githubusercontent.com/meshery/meshery.io/master/assets/images/logos/meshery-gradient.png"
+    />
+    <meta name="image" property="og:image" content="https://raw.githubusercontent.com/meshery/meshery.io/master/assets/images/logos/meshery-gradient.png" />
+    <meta property="og:type" content="website">
+    <meta name="og:image" content="https://raw.githubusercontent.com/meshery/meshery.io/master/assets/images/logos/meshery-gradient.png" />
+    {% endif %}
+  </head>
+ 
+    <body style="overflow-x: hidden" class="dark-mode">
+
+      <script>
+        
+        window.siteBaseUrl = "{{ site.baseurl }}";
+
+        const body = document.body;
+    
+        if (localStorage.getItem("mode") === "light-mode") {
+          body.classList.remove("dark-mode");
+    
+          let allLogos = document.querySelectorAll("#logo-dark-light");
+          allLogos.forEach(e => e.src = e.dataset.logoForLight);
+        }
+    
+        // Automatically set logos based on initial theme
+        window.addEventListener('load', () => {
+          let allLogos = document.querySelectorAll("#logo-dark-light");
+          allLogos.forEach(e => {
+            e.src = body.classList.contains("dark-mode") ? e.dataset.logoForDark : e.dataset.logoForLight;
+          });
+          
+          // emit the theme event 
+          document.dispatchEvent(new CustomEvent("themeChange",{
+			      detail : {value : localStorage.getItem("mode")},
+			      bubbles: true ,
+		      }))
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+          // $('.sitewide-banner').animate({top: 0});
+          const banner = document.querySelector(".sitewide-banner");
+          if (!banner) {
+            return;
+          }
+          setTimeout(function() {
+            banner.classList.remove("hidden");
+            
+          }, 0); // Add a delay of 1 second before showing the banner
+        });
+      </script>
+
+    {% if page.title != "Meshery | The Kubernetes and Cloud Native Manager" and page.title != "Programs" %}
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KL6SSW5" height="0" width="0"
+    style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<!-- Sitewide Banner
+ <div class="sitewide-banner hidden">
+  <p>Meshery's CNCF incubation proposal is here. Are you a fan of Meshery?</p>
+  <p>
+    <a href="https://github.com/cncf/toc/pull/1264">Show your support by adding a reaction!</a>
+  </p>
+</div> -->
+<header id="mainHeader" class="filledHeader">
+  {% else %}
+  <header id="mainHeader">
+    {% endif %}
+
+    <div class="container nav-container">
+  
+      <div class="project-name">
+        <a href="{{ site.baseurl }}/">
+          <img src="{{ site.baseurl }}/assets/images/logos/meshery-logo.png" alt="Meshery Logo" />&nbsp;
+          <img src="{{ site.baseurl }}/assets/images/logos/meshery-logo-text.png"
+            data-logo-for-dark="{{ site.baseurl }}/assets/images/logos/meshery-logo-text.png"
+            data-logo-for-light="{{ site.baseurl }}/assets/images/logos/meshery-logo-text-dark.png" alt="Meshery Logo"
+            id="logo-dark-light" />
+        </a>
+      </div>
+      {% include navigation.html %}
+      <button class="nav-mode-icon" id="mode-toggle-btn" style="text-align: center; background: transparent;">
+        <img class="nav-text" id="logo-dark-light"
+          src="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-moon.png"
+          data-logo-for-dark="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-moon.png"
+          data-logo-for-light="{{ site.baseurl }}/assets/images/nav-icons/mode-toggle-icon-sun.png" alt="theme-logo" />
+      </button>
+    </div>
+  </header>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+---
+layout: default
+---
+
+<div class="page text-container">
+
+    <div class="cover" style="z-index: 20">
+
+        <div class="project-details">
+            {% for term in page.terms %}
+            <h2><span class="sub_headings">{{ term.name }}</span></h2>
+
+            {% for project in term.projects %}
+            <div class="project-item">
+                <h3>{{ project.title }}</h3>
+
+                {% if project.lfx_link %}
+                <a class="issue" href="{{ project.lfx_link }}">Open on LFX Mentorship</a>
+                {% endif %}
+
+                {% if project.description %}
+                <p><span class="sub_headings">Description:</span></p>
+                <p class="program-p">{{ project.description }}</p>
+                {% endif %}
+
+                {% if project.skills or project.skills_list %}
+                <h4 class="project-list"><span class="sub_headings">Recommended Skills:</span></h4>
+                {% if project.skills_list %}
+                <ul>
+                    {% for skill in project.skills_list %}
+                    <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="program-p">{{ project.skills }}</p>
+                {% endif %}
+                {% endif %}
+
+                {% if project.responsibilities %}
+                <h4 class="project-list"><span class="sub_headings">Responsibilities:</span></h4>
+                <ul>
+                    {% for resp in project.responsibilities %}
+                    <li>{{ resp }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                {% if project.outcomes %}
+                <h4 class="project-list"><span class="sub_headings">Expected Outcome:</span></h4>
+                <ul>
+                    {% for outcome in project.outcomes %}
+                    <li>{{ outcome }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                {% if project.mentors %}
+                <h4 class="project-list"><span class="sub_headings">Mentors:</span></h4>
+                <ul>
+                    {% for mentor in project.mentors %}
+                    <li style="padding-bottom: 1rem">
+                        {% if mentor.link %}
+                        <a href="{{ mentor.link }}">{{ mentor.name }}</a>
+                        {% else %}
+                        {{ mentor.name }}
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                {% if project.issue %}
+                <h4 class="project-list">Issue:</h4>
+                <a class="issue" href="{{ project.issue }}">
+                    {{ project.issue }}</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if page.timeline %}
+    <h3 class="cohort_title">{{ page.timeline_title }}</h3>
+    <div class="program">
+        <div class="community-details">
+            <p><span class="sub_headings">Full-Time Terms:</span></p>
+
+            {% for term in page.timeline %}
+            <h4>{{ term.name }}</h4>
+            <ul class="gsoc">
+                {% for item in term.dates %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+
+            {% if page.community_description %}
+            <div class="community-description">
+                <p><span class="sub_headings">About the Community</span></p>
+                <p>
+                    {{ page.community_description }}
+                </p>
+                <a href="https://slack.meshery.io">
+                    <input type="button" value="Join Slack" class="participate-button" />
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if page.part_time_note %}
+    <div class="program">
+        <div class="community-details">
+            <h4>{{ page.part_time_note }}</h4>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if page.additional_info %}
+    <div class="program">
+        <div class="community-details">
+            <p class="sub_headings">{{ page.additional_info_title | default: "Additional information" }}</p>
+            <p>{{ page.additional_info }}</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<div class="text subscribe program__subscribe">
+    {% include subscribe.html %}
+</div>
