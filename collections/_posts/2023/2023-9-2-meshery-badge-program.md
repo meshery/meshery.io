@@ -8,7 +8,7 @@ categories:
   - contributors
 redirect_from: 
   - /blog/mshery-recognition-program
-  - /blog/2023/09/2023-9-2-layer5-badge-program
+  - /blog/2023/09/2023-9-2-meshery-badge-program
 ---
 <div style="text-align:center;padding:20px">
 <img src="/assets/images/posts/2023/2023-9-2-badge-program/recognition-banner.png" style="width:75%"  alt="Recognition Banner" /></div>
@@ -25,7 +25,6 @@ These badges are a representation of your participation and milestones that you 
 Meshery Badges are a tangible way for us to recognize and honor the exceptional efforts put forth by our contributors and the milestones achieved by our users. These badges are a symbol of your dedication, commitment, and passion for making a positive impact within the Meshery community and projects. They serve as a testament to the hours spent using, coding, testing, documenting, and collaborating.
 
 Meshery Badges are more than just virtual tokens; they represent the values we hold dear – openness, collaboration, and continuous improvement. Each badge is a unique recognition of the different roles and responsibilities you take on, reflecting your growth as a contributor and your journey within the Meshery ecosystem.
-
 
 
 ### Why Are Badges Important?

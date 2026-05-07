@@ -19,7 +19,19 @@ components:
   colorIcon: assets/images/integration/karpenter/components/provisioner/icons/color/provisioner-color.svg
   whiteIcon: assets/images/integration/karpenter/components/provisioner/icons/white/provisioner-white.svg
   description: 
-componentsCount: 2
+- name: node-claim
+  colorIcon: assets/images/integration/karpenter/components/node-claim/icons/color/node-claim-color.svg
+  whiteIcon: assets/images/integration/karpenter/components/node-claim/icons/white/node-claim-white.svg
+  description: 
+- name: node-pool
+  colorIcon: assets/images/integration/karpenter/components/node-pool/icons/color/node-pool-color.svg
+  whiteIcon: assets/images/integration/karpenter/components/node-pool/icons/white/node-pool-white.svg
+  description: 
+- name: oci-node-class
+  colorIcon: assets/images/integration/karpenter/components/oci-node-class/icons/color/oci-node-class-color.svg
+  whiteIcon: assets/images/integration/karpenter/components/oci-node-class/icons/white/oci-node-class-white.svg
+  description: 
+componentsCount: 5
 relationships: 
 relationshipsCount: 0
 featureList: [

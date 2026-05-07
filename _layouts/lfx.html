@@ -69,10 +69,18 @@ layout: default
                 </ul>
                 {% endif %}
 
-                {% if project.issue %}
+                {% if project.issues %}
+                <h4 class="project-list">Issues:</h4>
+                <ul>
+                    {% for issue in project.issues %}
+                    <li>
+                        <a class="issue" href="{{ issue }}">{{ issue }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% elsif project.issue %}
                 <h4 class="project-list">Issue:</h4>
-                <a class="issue" href="{{ project.issue }}">
-                    {{ project.issue }}</a>
+                <a class="issue" href="{{ project.issue }}">{{ project.issue }}</a>
                 {% endif %}
             </div>
             {% endfor %}

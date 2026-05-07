@@ -108,7 +108,7 @@ layout: default
             <tr class="talks-table-row">
               <td>2021-04-28</td>
               <td>CVE-2021-31856</td>
-              <td>A SQL Injection vulnerability in the REST API in Layer5 Meshery 0.5.2 allows an attacker to execute arbitrary SQL commands via the /experimental/patternfiles endpoint (order parameter in GetMesheryPatterns in models/meshery_pattern_persister.go).</td>
+              <td>A SQL Injection vulnerability in the REST API in Meshery 0.5.2 allows an attacker to execute arbitrary SQL commands via the /experimental/patternfiles endpoint (order parameter in GetMesheryPatterns in models/meshery_pattern_persister.go).</td>
               <td>REST API</td>
               <td>v0.5.2</td>
               <td>v0.5.3</td>
