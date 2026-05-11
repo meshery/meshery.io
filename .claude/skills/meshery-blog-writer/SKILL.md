@@ -1,6 +1,6 @@
 ---
 name: meshery-blog-writer
-description: Creates complete, publication-ready blog posts for meshery.io/blog with proper Jekyll frontmatter, the Meshery Authors voice, and a featured image placed under /assets/images/posts/YYYY/. Use this skill whenever the user wants to write a blog post for Meshery, create content for meshery.io, draft a post about Meshery features, mesheryctl, KubeCon participation, the Meshery community, integrations, governance, releases, security, or platform engineering. Also use when the user says "write a blog post for meshery", "create a meshery.io blog post", "add a post to meshery.io", "draft a meshery article", or mentions blog post + Meshery / Kanvas / cloud native management.
+description: Creates complete, publication-ready blog posts for meshery.io/blog with proper Jekyll frontmatter, the Meshery Authors voice, and a featured image placed under /assets/images/posts/YYYY/. Use this skill whenever the user wants to write a blog post for Meshery, create content for meshery.io, draft a post about Meshery features, mesheryctl, KubeCon participation, the Meshery community, integrations, governance, releases, security, or platform engineering. Also use when the user says "write a blog post for meshery", "create a meshery.io blog post", "add a post to meshery.io", "draft a meshery article", or mentions blog post + Meshery / Kubernetes / configuration management / AI infrastructure / cloud native management.
 ---
 
 # Meshery Blog Writer
@@ -17,14 +17,14 @@ You create complete, publication-ready blog posts for [meshery.io/blog](https://
 
 Meshery is the extensible cloud-native manager.  Posts are written by "Meshery Authors" (or "The Meshery Maintainers" for milestone announcements) and address platform engineers, SREs, DevOps engineers, and Kubernetes operators.
 
-- **Confident, community-forward.**  Speak from inside the project ("we", "our community"), not as an outside reviewer.  Celebrate contributors and milestones explicitly.
+- **Confident, community-forward.**  Speak from inside the project ("we", "our community"), not as an outside reviewer.  Celebrate contributors and milestones explicitly.`
 - **Concrete and operational.**  Real `mesheryctl` commands, real cluster scenarios, real numbers.  Avoid abstract marketing language.
 - **Active voice, second person.**  "You install Meshery in under five minutes."
 - **Short paragraphs.**  3-5 sentences.  Engineers scan first, read second.
 - **American English.**  color, behavior, recognize.
 - **Hyphens only, never em dashes.**  Use `-` everywhere — in titles, prose, callouts, code comments.
 
-**Brand names are case-sensitive.**  Meshery, Meshery Server, Meshery Operator, Kanvas, mesheryctl (lowercase), MeshMates, Meshery Catalog, KubeCon, GitOps, DevOps, OpenTelemetry, CNCF.  Get these right.
+**Brand names are case-sensitive.**  Meshery, Meshery Server, Meshery Operator, AI, mesheryctl (lowercase), MeshMates, Meshery Catalog, KubeCon, GitOps, DevOps, OpenTelemetry, CNCF.  Get these right.
 
 **Cut without mercy:** buzzword soup ("synergize", "leverage", "holistic"), filler transitions ("It is worth noting that"), passive voice, hedging, and press-release prose.
 

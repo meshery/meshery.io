@@ -36,16 +36,17 @@ jobs:
 
       - name: Set env
         run: |
-          echo "MESHERY_CLOUD_BASE_URL=https://cloud.layer5.io" >> $GITHUB_ENV
+          echo "MESHERY_CLOUD_BASE_URL=https://cloud.meshery.io" >> $GITHUB_ENV
           echo "MESHERY_CATALOG_FILES_DIR=catalog" >> $GITHUB_ENV
 
       - name: Cleanup
         working-directory: ./meshery.io
         run: |
           find $MESHERY_CATALOG_FILES_DIR ! -name 'index.html' ! -name 'artifacthub-repo.yml' -maxdepth 1 -type f -delete
-          cd ./collections/_catalog
-          for dir in */; do find $dir -maxdepth 1 -type f -delete; done
-          cd ../../
+          shopt -s nullglob
+          for dir in ./collections/_catalog/*/; do
+            find "$dir" -maxdepth 1 -type f -delete
+          done
 
       - id: update_catalog_patterns
         name: Update Catalog Patterns in Go
