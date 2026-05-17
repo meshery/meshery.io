@@ -75,7 +75,11 @@ components:
   colorIcon: assets/images/integration/datadog-operator/components/datadog-pod-autoscaler-cluster-profile/icons/color/datadog-pod-autoscaler-cluster-profile-color.svg
   whiteIcon: assets/images/integration/datadog-operator/components/datadog-pod-autoscaler-cluster-profile/icons/white/datadog-pod-autoscaler-cluster-profile-white.svg
   description: 
-componentsCount: 16
+- name: datadog-instrumentation
+  colorIcon: assets/images/integration/datadog-operator/components/datadog-instrumentation/icons/color/datadog-instrumentation-color.svg
+  whiteIcon: assets/images/integration/datadog-operator/components/datadog-instrumentation/icons/white/datadog-instrumentation-white.svg
+  description: 
+componentsCount: 17
 relationships: 
 relationshipsCount: 0
 featureList: [
