@@ -40,6 +40,8 @@ jobs:
     outputs:
       resource_url: ${{ steps.test_result.outputs.resource_url }}
     steps:
+      - name: Debug Workflow File
+        run: cat .github/workflows/kanvas.yml
       - name: Set PR number # To comment the final status on the Pull-request opened in any repository
         run: |
           export pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
