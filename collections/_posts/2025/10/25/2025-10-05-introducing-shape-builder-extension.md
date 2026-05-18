@@ -13,7 +13,7 @@ published: false
 
 Meshery is proud to announce the release of the Shape Builder extension—a powerful tool that allows you to create custom polygon shapes to visually design and manage your cloud native infrastructure. This extension further enriches the Meshery platform, empowering users to craft detailed architecture diagrams that are tailored to their unique deployments.
 
-<img src="https://raw.githubusercontent.com/meshery-extensions/shape-builder/98531eecdd2c5b01895f1d818f824bf186bf6077/.github/assets/images/site.png" width="100%" align="center" />
+<img src="https://raw.githubusercontent.com/meshery-extensions/shape-builder/98531eecdd2c5b01895f1d818f824bf186bf6077/.github/assets/images/site.png" width="100%" align="center"  alt="Site" />
 
 ### 1. What is Shape Builder?
 
