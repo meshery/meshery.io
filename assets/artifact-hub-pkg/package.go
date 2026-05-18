@@ -129,7 +129,7 @@ func processPattern(pattern designv1beta3.MesheryPattern, token string) error {
 
 func getPatternImageURL(pattern designv1beta3.MesheryPattern) string {
 	patternID := pattern.ID.String()
-	defaultURL := fmt.Sprintf("https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/%s-light.png,https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/%s-dark.png", patternID, patternID)
+	defaultURL := fmt.Sprintf("https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/%s-light.png,https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/%s-dark.png", patternID, patternID)
 
 	if pattern.CatalogData == nil || pattern.CatalogData.SnapshotURL == nil {
 		return defaultURL
