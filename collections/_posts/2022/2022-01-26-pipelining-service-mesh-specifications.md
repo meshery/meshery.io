@@ -69,7 +69,7 @@ jobs:
      runs-on: ubuntu-latest
      steps:&#xa;
        - name: SMI conformance tests
-         uses: layer5io/mesheryctl-smi-conformance-action@master
+         uses: meshery-extensions/mesheryctl-smi-conformance-action@master
          with:
            provider_token: $
            service_mesh: open_service_mesh
