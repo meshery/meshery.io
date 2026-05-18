@@ -17,7 +17,7 @@
       <p>Welcome! Fill in the community member form to receive updates about meetings and resources.</p>
       </div>
 
-      <a class="popup-button" href="https://meshery.io/newcomers" target="_blank"><p class="popup-button-text">Community Forum</p></a>
+      <a class="popup-button" href="https://meshery.io/newcomers" target="_blank"><p class="popup-button-text">Community Form</p></a>
       </div>`;
 
     el.querySelector(".close-btn").addEventListener("click", function () {
