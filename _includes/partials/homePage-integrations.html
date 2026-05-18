@@ -15,14 +15,14 @@
     <div class="button-container home-integrations-actions">
         <a class="highlight show-all-button toggle-text"
             href="#integrations" aria-controls="integContainer" aria-expanded="false">Show All Integrations</a>
-        <a class="highlight show-all-button" href="/integrations">
+        <a class="highlight show-all-button" href="{{ '/integrations' | relative_url }}">
             View
             Integrations in 3D</a>
     </div>
 </div>
 
 <script type="module">
-	import data from "/integrations/data.js";
+	import data from "{{ '/integrations/data.js' | relative_url }}";
 	if (!data || !data.length) {
 		console.error("No integrations data");
 	}
@@ -43,7 +43,7 @@
 			.slice(0, cardsToShow)
 			.map(
 				(item) => `
-            <a href="${item.permalink}" class="integrations-card">
+            <a href="${window.siteBaseUrl || ''}${item.permalink}" class="integrations-card">
                 <div class="integrations-card-inner">
                     <div class="card-front">
                         <img src="${item.color || ''}" loading="lazy" alt="${item.name}" style="width: 100%; height: 100%; object-fit: contain;">

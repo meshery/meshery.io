@@ -20,7 +20,7 @@ From my time spent creating the v1.0 versions of other specifications like Redfi
 <div style="text-align:center;padding:10px">
 <img src="{{site.baseurl}}/assets/images/posts/2021/2021-04-26-validating-smi-conformance-with-meshery/smi-comformance-initiative-overview.png" style="width:100%" alt="SMI Conformance Program Overview"/></div>
 
-The scope of the [SMI Conformance](https://layer5.io/projects/service-mesh-interface-conformance) initiative includes all service mesh projects participating in the Service Mesh Interface specification. The goal of this initiative is to provide open tooling for validation of SMI specifications, instilling user confidence in the SMI implementation of their chosen service mesh. This validation initiative is not a full-blown certification program, yet, but has all of the makings to become one:
+The scope of the [SMI Conformance](https://smi-spec.io/blog/pipelining-service-mesh-specifications/) initiative includes all service mesh projects participating in the Service Mesh Interface specification. The goal of this initiative is to provide open tooling for validation of SMI specifications, instilling user confidence in the SMI implementation of their chosen service mesh. This validation initiative is not a full-blown certification program, yet, but has all of the makings to become one:
 
 - Versioned suite of conformance tests.
 - Self-reporting with guaranteed provenance and integrity of conformance test results.
@@ -43,7 +43,7 @@ Meshery is ideal tooling in that it provides lifecycle management of a large num
 
 ## Defining Conformance
 
-Conformance of SMI specifications is defined as a series of test assertions. A test assertion is a condition that must be positively verified in order for an implementation to be considered conformant. A test assertion may involve any number of conditions. Sets of test assertions are categorized by SMI specification. Collectively, these test sets comprise the complete suite of SMI conformance tests. Just like SMI itself, the suite of [SMI Conformance tests](https://layer5.io/projects/service-mesh-interface-conformance) is versioned, and with each new version of SMI, as interfaces are added and specifications changed, the Conformance requirements will change as appropriate. The SMI community is the change controller and oversees what it means to conform to SMI. Work on the mechanics of the conformance tests occurs in the [CNCF Service Mesh WG](https://github.com/cncf/sig-network/tree/master/service-mesh-wg), which develops the process and policy around the conformance program.
+Conformance of SMI specifications is defined as a series of test assertions. A test assertion is a condition that must be positively verified in order for an implementation to be considered conformant. A test assertion may involve any number of conditions. Sets of test assertions are categorized by SMI specification. Collectively, these test sets comprise the complete suite of SMI conformance tests. Just like SMI itself, the suite of [SMI Conformance tests](https://smi-spec.io/blog/pipelining-service-mesh-specifications/) is versioned, and with each new version of SMI, as interfaces are added and specifications changed, the Conformance requirements will change as appropriate. The SMI community is the change controller and oversees what it means to conform to SMI. Work on the mechanics of the conformance tests occurs in the [CNCF Service Mesh WG](https://github.com/cncf/sig-network/tree/master/service-mesh-wg), which develops the process and policy around the conformance program.
 
 ## Validating Conformance
 
@@ -72,7 +72,7 @@ The following list highlights the sequence of steps taken to perform conformance
 
 All SMI implementers are invited to submit conformance testing results for review and publication by the SMI project. Use Meshery's diagnostic tool to verify that your service mesh's behavior in an accessible and non-destructive manner.
 
-See current [conformance test results](https://meshery.io/service-mesh-interface) and the [full list of conformance tests](https://layer5.io/projects/service-mesh-interface-conformance).
+See current [conformance test results](https://meshery.io/service-mesh-interface) and the [full list of conformance tests](https://smp-spec.io).
 
 The SMI Conformance program gives end users the confidence that when they use a validated SMI project or product that they can rely on common functionality and high level behavior. The program gives Independent Software Vendors (ISVs) confidence that if their customer is using a service mesh with validated SMI implementation that their software will behave as expected.
 

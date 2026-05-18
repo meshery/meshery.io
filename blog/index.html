@@ -51,8 +51,9 @@ paginate:
             {% assign parts = category_count | split: '|' %}
             {% assign category = parts[1] %}
             {% assign count = parts[0] | plus: 0 %}
+            {% assign category_slug = category | slugify %}
             <li>
-              <a href="/blog/category/{{ category | slugify }}">
+              <a href="{{ '/blog/category/' | append: category_slug | relative_url }}">
                 {{ category }} <span class="cat-count">({{ count }})</span>
               </a>
             </li>
@@ -97,7 +98,7 @@ paginate:
         <div class="mailing-btn">
           <a
             class="button"
-            href="/subscribe"
+            href="{{ '/subscribe' | relative_url }}"
             >Subscribe</a>
         </div>
       </div>

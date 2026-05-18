@@ -2,17 +2,18 @@
 layout: default
 ---
 
-<div class="page text-container">
+<div class="flex-container">
+    <div id="top" class="page text-container lfx-page">
 
-    <div class="cover" style="z-index: 20">
+        <div class="cover" style="z-index: 20">
 
-        <div class="project-details">
-            {% for term in page.terms %}
-            <h2><span class="sub_headings">{{ term.name }}</span></h2>
+            <div class="project-details">
+                {% for term in page.terms %}
+                <h2 id="{{ term.name | slugify }}"><span class="sub_headings">{{ term.name }}</span></h2>
 
-            {% for project in term.projects %}
-            <div class="project-item">
-                <h3>{{ project.title }}</h3>
+                {% for project in term.projects %}
+                <div class="project-item">
+                    <h3>{{ project.title }}</h3>
 
                 {% if project.lfx_link %}
                 <a class="issue" href="{{ project.lfx_link }}">Open on LFX Mentorship</a>
@@ -69,22 +70,30 @@ layout: default
                 </ul>
                 {% endif %}
 
-                {% if project.issue %}
+                {% if project.issues %}
+                <h4 class="project-list">Issues:</h4>
+                <ul>
+                    {% for issue in project.issues %}
+                    <li>
+                        <a class="issue" href="{{ issue }}">{{ issue }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% elsif project.issue %}
                 <h4 class="project-list">Issue:</h4>
-                <a class="issue" href="{{ project.issue }}">
-                    {{ project.issue }}</a>
+                <a class="issue" href="{{ project.issue }}">{{ project.issue }}</a>
                 {% endif %}
+                </div>
+                {% endfor %}
+                {% endfor %}
             </div>
-            {% endfor %}
-            {% endfor %}
         </div>
-    </div>
 
-    {% if page.timeline %}
-    <h3 class="cohort_title">{{ page.timeline_title }}</h3>
-    <div class="program">
-        <div class="community-details">
-            <p><span class="sub_headings">Full-Time Terms:</span></p>
+        {% if page.timeline %}
+        <h3 class="cohort_title" id="timeline">{{ page.timeline_title }}</h3>
+        <div class="program">
+            <div class="community-details">
+                <p><span class="sub_headings">Full-Time Terms:</span></p>
 
             {% for term in page.timeline %}
             <h4>{{ term.name }}</h4>
@@ -106,27 +115,41 @@ layout: default
                 </a>
             </div>
             {% endif %}
+            </div>
         </div>
-    </div>
-    {% endif %}
+        {% endif %}
 
-    {% if page.part_time_note %}
-    <div class="program">
-        <div class="community-details">
-            <h4>{{ page.part_time_note }}</h4>
+        {% if page.part_time_note %}
+        <div class="program">
+            <div class="community-details">
+                <h4>{{ page.part_time_note }}</h4>
+            </div>
         </div>
-    </div>
-    {% endif %}
+        {% endif %}
 
-    {% if page.additional_info %}
-    <div class="program">
-        <div class="community-details">
-            <p class="sub_headings">{{ page.additional_info_title | default: "Additional information" }}</p>
-            <p>{{ page.additional_info }}</p>
+        {% if page.additional_info %}
+        <div class="program">
+            <div class="community-details">
+                <p class="sub_headings">{{ page.additional_info_title | default: "Additional information" }}</p>
+                <p>{{ page.additional_info }}</p>
+            </div>
         </div>
+        {% endif %}
     </div>
-    {% endif %}
+
+    <div class="toc">
+        <h3 class="toc-title">On this page</h3>
+        <ul class="toc-list">
+            {% for term in page.terms %}
+            <li><a class="tocListBtn" href="#{{ term.name | slugify }}">{{ term.name }}</a></li>
+            {% endfor %}
+            {% if page.timeline %}
+            <li><a class="tocListBtn" href="#timeline">Timeline</a></li>
+            {% endif %}
+        </ul>
+    </div>
 </div>
+<a id="button-scroll-to-up" style="text-decoration: none; color: var(--color-white);"></a>
 
 <div class="text subscribe program__subscribe">
     {% include subscribe.html %}

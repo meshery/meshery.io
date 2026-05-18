@@ -21,7 +21,7 @@ extensionInfo: |
 extensionCaveats: |
   - Snapshot Generation: Create visual snapshots of Kubernetes manifests, complete with associated resources.
   - Synchronous/Asynchronous Delivery: Choose between receiving snapshots via email or directly in the terminal.
-  - Seamless Integration: Leverages Layer5 Cloud and GitHub Actions to handle snapshot rendering.
+  - Seamless Integration: Leverages GitHub Actions to handle snapshot rendering.
   - Support for Kubernetes manifests: Works with a single manifest of a single resource, for entire namespaces, or single cluster visualizations.
 
 docsURL: 'https://docs.meshery.io/extensions/kubectl-kanvas-snapshot'

@@ -49,7 +49,7 @@ Respect, collaboration, and kindness are the bedrock of Open Source. The Code of
 
 ### 5. Engaging Beyond Code: Fostering Holistic Development
 
-Don't confine yourself to a GitHub profile. Engage in meaningful discussions, participate in webinars, and [open discussions](https://discuss.layer5.io). Be a mentor and seek mentorship. Open Source offers a wealth of opportunities for comprehensive growth. While coding skills undoubtedly benefit, the real lessons often lie in understanding people and their diverse perspectives.
+Don't confine yourself to a GitHub profile. Engage in meaningful discussions, participate in webinars, and [open discussions](https://meshery.io/community#discussion-forums). Be a mentor and seek mentorship. Open Source offers a wealth of opportunities for comprehensive growth. While coding skills undoubtedly benefit, the real lessons often lie in understanding people and their diverse perspectives.
 
 ### 6. Compassion Over Code: Recognizing Maintainer Burnout
 
@@ -61,7 +61,7 @@ Open source is a marathon, not a sprint. Feedback may take time, and collaborati
 
 ### 8. Humility and Gratitude: The Essence of Meaningful Contributions
 
-Remember, a meaningful contribution is its own reward. Swag and a profile boost is a delightful bonus, not the end goal. Celebrate your progress, no matter how small, and learn from your experiences. As you recognize that you are part of a much larger movement, we <a href="/blog/community/recognition-program">recognize our contributors and users milestones</a> each step of the way. Earn any number of <a href="https://badges.layer5.io">recognition badges</a> as you grow with the community.
+Remember, a meaningful contribution is its own reward. Swag and a profile boost is a delightful bonus, not the end goal. Celebrate your progress, no matter how small, and learn from your experiences. As you recognize that you are part of a much larger movement, we <a href="/blog/community/recognition-program">recognize our contributors and users milestones</a> each step of the way. Earn any number of <a href="https://meshery.io/community/badges">recognition badges</a> as you grow with the community.
 
 ### 9. Earn a Badge
 
@@ -76,7 +76,7 @@ Earn a Hacktoberfest Contributor badge by contributing to our projects during th
     <div>
       <h3>Event Details</h3>
       <ul>
-      <li><strong><a href="https://layer5.io/community/events/hacktoberfest-prep-2025-designing-with-meshery">Hacktoberfest Prep 2025: Designing with Meshery</a></strong></li>
+      <li><strong><a href="https://meshery.io/blog/2025/09/2025-09-30-navigating-hacktoberfest-2025/">Hacktoberfest Prep 2025: Designing with Meshery</a></strong></li>
         <li><strong>DATE: October 3rd, 2025</strong></li>
         <li><strong>TIME: 14:00 UTC (9AM CDT | 4PM CEST | 3PM WAT | 7:30PM IST)</strong></li>
         <li><strong>EVENT:</strong> <a href="https://youtube.com/live/1-oaEy0Pm5I?feature=share">Livestream</a></li>
@@ -85,9 +85,9 @@ Earn a Hacktoberfest Contributor badge by contributing to our projects during th
     <div>
       <h3>Open GitHub Issues by Label:</h3>
       <ul>
-        <li><a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Alayer5io+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+label%3A%22hacktoberfest%22+">"hacktoberfest" issues</a></li>
-        <li><a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Alayer5io+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+label%3A%22help+wanted%22+">"help wanted" issues</a></li>
-        <li><a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Alayer5io+org%3Alayer5labs+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+label%3A%22help+wanted%22+">"good first issue" issues</a></li>
+        <li><a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Ameshery-extensions+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+label%3A%22hacktoberfest%22+">"hacktoberfest" issues</a></li>
+        <li><a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Ameshery-extensions+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+label%3A%22help+wanted%22+">"help wanted" issues</a></li>
+        <li><a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Ameshery-extensions+org%3Alabs+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+label%3A%22help+wanted%22+">"good first issue" issues</a></li>
       </ul>
     </div>
   </figcaption>

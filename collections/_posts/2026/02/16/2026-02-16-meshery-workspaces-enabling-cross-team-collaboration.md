@@ -4,10 +4,10 @@ subheading: "Enabling Cross-Team Collaboration for Platform Engineers"
 date: 2026-02-16 10:00:00 -0600
 author: Meshery Team
 categories:
-  - Meshery
-  - Workspaces
-  - Platform Engineering
-  - Collaboration
+  - meshery
+  - workspaces
+  - platform-engineering
+  - collaboration
 featured-image: /assets/images/posts/2026/02/workspaces-collaboration/workspaces-hero.png
 published: true
 ---
