@@ -12,7 +12,7 @@ gem 'eventmachine', '1.2.7'
 group :jekyll_plugins do
   gem 'jekyll-archives', '2.3.0'
   gem 'jekyll-feed'
-  gem 'jekyll-seo-tag', '2.8.0'
+  gem 'jekyll-seo-tag', '2.9.0'
   gem 'jekyll-sitemap', '1.4.0'
   gem 'jekyll-redirect-from'
   gem 'tzinfo'
