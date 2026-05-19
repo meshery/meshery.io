@@ -24,7 +24,7 @@ This post is based on the [community discussion](https://discuss.layer5.io/t/sha
 
 ## Overview
 
-The Shape Builder extension (https://github.com/meshery-extensions/shape-builder) is part of the Meshery ecosystem that enables users to visually design custom polygon shapes for Kanvas components.
+The Shape Builder extension ([GitHub Repository](https://github.com/meshery-extensions/shape-builder)) is part of the Meshery ecosystem that enables users to visually design custom polygon shapes for Kanvas components.
 
 Instead of manually defining coordinate-based shapes, users can draw shapes visually and generate Meshery-compatible output.
 
@@ -38,7 +38,7 @@ This makes shape creation more accessible and removes the need for manual coordi
 
 ## Current State
 
-The Shape Builder extension is live at https://shapes.meshery.io and has contributions from around 30 contributors.
+The Shape Builder extension is live at [shapes.meshery.io](https://shapes.meshery.io) and has contributions from around 30 contributors.
 
 However, it currently lacks active maintainers responsible for:
 - Reviewing pull requests
@@ -66,10 +66,10 @@ If you're interested in frontend tooling, visualization systems, or developer ex
 
 Steps to get started:
 
-- Try the tool: https://shapes.meshery.io
-- Explore issues: https://github.com/meshery-extensions/shape-builder/issues
-- Join Meshery Slack: https://slack.meshery.io
-- Read contribution guide: https://docs.meshery.io/project/contributing
-- Visit the [Newcomer's Guide] (https://meshery.io/community/newcomers) to get started. 
+- Try the tool: [shapes.meshery.io](https://shapes.meshery.io)
+- Explore issues: [Shape Builder Issues](https://github.com/meshery-extensions/shape-builder/issues)
+- Join Meshery Slack: [slack.meshery.io](https://slack.meshery.io)
+- Read contribution guide: [Contribution Guide](https://docs.meshery.io/project/contributing)
+- Visit the [Newcomers' Guide](https://meshery.io/community/newcomers) to get started.
 
 This is a focused opportunity to contribute meaningfully to the Meshery ecosystem and help shape its visual design tooling.
