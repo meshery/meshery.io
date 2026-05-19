@@ -8,9 +8,9 @@ compatibility:
   - aws
   - kubernetes
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
-logo: /assets/images/meshery-logo.svg
-whiteImage: https://raw.githubusercontent.com/layer5io/getnighthawk/master/docs/assets/images/logos/nighthawk/icon/nighthawk-logo.svg
-colorImage: https://raw.githubusercontent.com/layer5io/getnighthawk/master/docs/assets/images/logos/nighthawk/icon/nighthawk-logo.svg
+logo: /assets/images/logos/nighthawk-logo.svg
+whiteImage: /assets/images/logos/nighthawk-logo.svg
+colorImage: /assets/images/logos/nighthawk-logo.svg
 extensionId: |
   Deploy the Meshery Adapter for Nighthawk to optimize HTTP service performance testing with adaptive load control and Layer 7 testing capabilities.
 extensionCaveats: |

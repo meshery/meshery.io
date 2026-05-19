@@ -49,7 +49,7 @@ jobs:
     steps:
 
       - name: SMI conformance tests
-        uses: layer5io/mesheryctl-smi-conformance-action@master
+        uses: meshery-extensions/mesheryctl-smi-conformance-action@master
         with:
           provider_token: $
           service_mesh: open_service_mesh
@@ -114,7 +114,7 @@ jobs:
            osm-bin install --osm-namespace default
 
       - name: SMI conformance tests
-        uses: layer5io/mesheryctl-smi-conformance-action@master
+        uses: meshery-extensions/mesheryctl-smi-conformance-action@master
         with:
           provider_token: $
           service_mesh: open_service_mesh
@@ -149,7 +149,7 @@ jobs:
            PATH='$PATH:$HOME/osm/bin/'
            osm-bin install --osm-namespace default&#xa;
       - name: SMI conformance tests
-        uses: layer5io/mesheryctl-smi-conformance-action@master
+        uses: meshery-extensions/mesheryctl-smi-conformance-action@master
         with:
           provider_token: $
           service_mesh: open_service_mesh
@@ -201,7 +201,7 @@ jobs:
           driver: docker
 
       - name: Run Performance Test
-        uses: layer5io/meshery-smp-action@master
+        uses: meshery-extensions/meshery-smp-action@master
         with:
           provider_token: $
           platform: docker
@@ -231,7 +231,7 @@ jobs:
           kubernetes version: 'v1.20.7'
           driver: docker&#xa;
       - name: Run Performance Test
-        uses: layer5io/meshery-smp-action@master
+        uses: meshery-extensions/meshery-smp-action@master
         with:
           provider_token: $
           platform: docker
@@ -288,7 +288,7 @@ duration: '30m'" onmouseout="resetCopyText(this)">
     </a>
 </div>
 
-See this sample GitHub workflow (<a href="https://github.com/layer5io/meshery-smp-action/blob/master/action.yml">action.yml</a>) for more configuration details.
+See this sample GitHub workflow (<a href="https://github.com/meshery-extensions/meshery-smp-action/blob/master/action.yml">action.yml</a>) for more configuration details.
 
 <div style="text-align:center;margin-bottom:2rem;width:100%">
 <img width="90%" src="/assets/images/posts/2022/2022-01-26-pipelining-service-mesh-specifications/service-mesh-performance-profile-test-results.png" alt="performance management dashboard">

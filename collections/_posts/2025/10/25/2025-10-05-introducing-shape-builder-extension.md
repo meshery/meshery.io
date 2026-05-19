@@ -17,9 +17,9 @@ Meshery is proud to announce the release of the Shape Builder extension—a powe
 
 ### 1. What is Shape Builder?
 
-This Meshery extension offers an easy way to visually create polygons, outputting the format necessary for Kanvas to recognize and render your custom polygon shape. As a best practice, users are encouraged to select an existing or create a custom shape for their components to best visually signify the function of their component. See the [Components Shape Guide](https://docs.meshery.io/extensions/component-shape-guide) for a list of the built-in component shapes in Meshery.
+This Meshery extension offers an easy way to visually create polygons, outputting the format necessary for Meshery to recognize and render your custom polygon shape. As a best practice, users are encouraged to select an existing or create a custom shape for their components to best visually signify the function of their component. See the [Components Shape Guide](https://docs.meshery.io/extensions/component-shape-guide) for a list of the built-in component shapes in Meshery.
 
-Interactively, explore existing component shapes easily by looking in [Meshery Playground](https://play.meshery.io) in the Kanvas extension's on the dock at the bottom of the screen. You will see the different types of component shapes in the "Shapes" model as examples.
+Interactively, explore existing component shapes easily by using [Meshery Playground](https://play.meshery.io). You will see the different types of component shapes in the "Shapes" model as examples.
 
 ### 2. Features Overview
 

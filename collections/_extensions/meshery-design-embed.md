@@ -15,7 +15,7 @@ colorImage: /assets/images/logos/meshery-logo-light.svg
 extensionInfo: |
   Export, embed, and share interactive designs effortlessly with Meshery Design Embedding.
 extensionCaveats: |
-  - Embed your Kanvas design easily by selecting the "Embed" option and downloading the embedding script.
+  - Embed your Meshery design easily by selecting the "Embed" option and downloading the embedding script.
   - Use the script for static sites or integrate it into React projects with the 'meshery-design-embed' package.
   - Customize the embedded design’s styles with CSS classes or inline styles as needed.
 URL: 'https://playground.meshery.io/extensions'
