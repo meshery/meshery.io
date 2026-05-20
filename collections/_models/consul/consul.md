@@ -139,11 +139,7 @@ components:
   colorIcon: assets/images/integration/consul/components/rate-limit/icons/color/rate-limit-color.svg
   whiteIcon: assets/images/integration/consul/components/rate-limit/icons/white/rate-limit-white.svg
   description: 
-- name: route-tlssds-filter
-  colorIcon: assets/images/integration/consul/components/route-tlssds-filter/icons/color/route-tlssds-filter-color.svg
-  whiteIcon: assets/images/integration/consul/components/route-tlssds-filter/icons/white/route-tlssds-filter-white.svg
-  description: 
-componentsCount: 33
+componentsCount: 32
 relationships: 
 relationshipsCount: 0
 featureList: [
