@@ -107,7 +107,11 @@ components:
   colorIcon: assets/images/integration/kubedb-opscenter/components/metrics-configuration/icons/color/metrics-configuration-color.svg
   whiteIcon: assets/images/integration/kubedb-opscenter/components/metrics-configuration/icons/white/metrics-configuration-white.svg
   description: 
-componentsCount: 24
+- name: perses-dashboard
+  colorIcon: assets/images/integration/kubedb-opscenter/components/perses-dashboard/icons/color/perses-dashboard-color.svg
+  whiteIcon: assets/images/integration/kubedb-opscenter/components/perses-dashboard/icons/white/perses-dashboard-white.svg
+  description: 
+componentsCount: 25
 relationships: 
 relationshipsCount: 0
 featureList: [
