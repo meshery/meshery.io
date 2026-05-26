@@ -8,9 +8,9 @@ type: Collaboration
 compatibility: 
   - meshery
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
-logo: /assets/images/meshery-logo.svg
-whiteImage: /assets/images/academy.svg
-colorImage: /assets/images/academy.svg
+logo: /assets/images/extensions/meshery-academy.svg
+whiteImage: /assets/images/extensions/meshery-academy.svg
+colorImage: /assets/images/extensions/meshery-academy.svg
 extensionInfo: |
   Meshery Academy is a platform that provides a comprehensive learning experience for anyone beginning their journey into Meshery and cloud native infrastructure.
 extensionCaveats: |
