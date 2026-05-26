@@ -15,6 +15,6 @@ extensionInfo: |
   Collaboratively design and manage your Kubernetes clusters and Cloud services. 
 extensionCaveats: |
   Kanvas is a visual interface for managing your infrastructure. It allows you to create, edit, and share your infrastructure as code.
-docsURL: 'https://docs.kanvas.new
-URL: 'https://kanvas.new'
+docsURL: 'https://docs.kanvas.new'
+URL: 'https://www.kanvas.new'
 ---
