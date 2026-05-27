@@ -74,7 +74,7 @@ Find out more about the <a href="https://meshery.io/community">Meshery community
 </picture>
 </a>
 
-<a href="https://meshery.io/community"><img alt="Meshery Community" src="https://docs.meshery.io/assets/img/readme/community.png" style="margin-right:8px;padding-top:5px;" width="140px" align="left" /></a>
+<a href="https://meshery.io/community"><img alt="Meshery Community" src="https://raw.githubusercontent.com/meshery/meshery/master/.github/assets/images/meshery/meshery-logo.svg" style="margin-right:8px;padding-top:5px;" width="140px" align="left" /></a>
 
 <p>
 

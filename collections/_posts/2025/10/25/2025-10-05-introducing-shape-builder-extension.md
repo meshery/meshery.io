@@ -13,13 +13,13 @@ published: false
 
 Meshery is proud to announce the release of the Shape Builder extension—a powerful tool that allows you to create custom polygon shapes to visually design and manage your cloud native infrastructure. This extension further enriches the Meshery platform, empowering users to craft detailed architecture diagrams that are tailored to their unique deployments.
 
-<img src="https://raw.githubusercontent.com/meshery-extensions/shape-builder/98531eecdd2c5b01895f1d818f824bf186bf6077/.github/assets/images/site.png" width="100%" align="center" />
+<img src="https://raw.githubusercontent.com/meshery-extensions/shape-builder/98531eecdd2c5b01895f1d818f824bf186bf6077/.github/assets/images/site.png" width="100%" align="center"  alt="Site" />
 
 ### 1. What is Shape Builder?
 
-This Meshery extension offers an easy way to visually create polygons, outputting the format necessary for Kanvas to recognize and render your custom polygon shape. As a best practice, users are encouraged to select an existing or create a custom shape for their components to best visually signify the function of their component. See the [Components Shape Guide](https://docs.meshery.io/extensions/component-shape-guide) for a list of the built-in component shapes in Meshery.
+This Meshery extension offers an easy way to visually create polygons, outputting the format necessary for Meshery to recognize and render your custom polygon shape. As a best practice, users are encouraged to select an existing or create a custom shape for their components to best visually signify the function of their component. See the [Components Shape Guide](https://docs.meshery.io/extensions/component-shape-guide) for a list of the built-in component shapes in Meshery.
 
-Interactively, explore existing component shapes easily by looking in [Meshery Playground](https://play.meshery.io) in the Kanvas extension's on the dock at the bottom of the screen. You will see the different types of component shapes in the "Shapes" model as examples.
+Interactively, explore existing component shapes easily by using [Meshery Playground](https://play.meshery.io). You will see the different types of component shapes in the "Shapes" model as examples.
 
 ### 2. Features Overview
 
