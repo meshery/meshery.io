@@ -32,8 +32,10 @@ The Developers track targets contributors and engineers focused on building and 
 
 **Certifications:**
 
-4. Certified Meshery Contributor
-5. Certified Meshery Developer
+<ol start="4">
+<li>Certified Meshery Contributor</li>
+<li>Certified Meshery Developer</li>
+</ol>
 
 ### Certified Meshery Contributor (CMC)
 
@@ -56,7 +58,7 @@ The [Certified Meshery Contributor (CMC)](https://cloud.meshery.io/academy/certi
 | **Validity** | 2 years |
 
 <div style="text-align:center;padding:20px">
-<a href="https://cloud.meshery.io/academy/certifications/c5ada327-8a58-4c8a-b9fa-51b95696488c/certified-meshery-contributor" class="btn btn-primary">Register for the CMC Exam</a>
+<a href="https://cloud.meshery.io/academy/certifications/c5ada327-8a58-4c8a-b9fa-51b95696488c/certified-meshery-contributor" class="highlight">Register for the CMC Exam</a>
 </div>
 
 Certification badges are part of Meshery's broader [Recognition Program](/community/recognition), which also includes Achievement, Project, and Community badges. Learn more about the certification launch in the [announcement blog post](/blog/certified-meshery-contributor).
