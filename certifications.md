@@ -12,11 +12,11 @@ The Meshery Certification Program offers a structured pathway for professionals 
 <a href="https://playground.meshery.io/extension/meshmap?catalog-design=c2141477-379b-432e-b47e-1c89600235a5">Explore the Meshery Certification Program design</a>
 </div>
 
-<h3>Certification Tracks</h3>
+### Certification Tracks
 
 The Meshery Certification program offers specialized tracks designed for distinct audiences. Each track is structured with progressive tiers, catering to specific levels of expertise and fostering growth within the community.
 
-<h4>Administrators Track</h4>
+#### Administrators Track
 
 Tailored for operators and advanced users of Meshery, the Administrators track validates foundational knowledge through deep expertise in extending and troubleshooting Meshery as a platform.
 
@@ -26,7 +26,7 @@ Tailored for operators and advanced users of Meshery, the Administrators track v
 2. Certified Meshery Professional
 3. Certified Meshery Expert
 
-<h4>Developers Track</h4>
+#### Developers Track
 
 The Developers track targets contributors and engineers focused on building and extending Meshery. Certifications validate skills from open source contributions to advanced development and integration.
 
@@ -35,7 +35,7 @@ The Developers track targets contributors and engineers focused on building and 
 4. Certified Meshery Contributor
 5. Certified Meshery Developer
 
-<h3>Certified Meshery Contributor (CMC)</h3>
+### Certified Meshery Contributor (CMC)
 
 The [Certified Meshery Contributor (CMC)](https://cloud.meshery.io/academy/certifications/c5ada327-8a58-4c8a-b9fa-51b95696488c/certified-meshery-contributor) was launched in October 2025 as the program's first certification — and a first of its kind for the CNCF. It validates technical proficiency in contributing to the Meshery open source project through written assessments across five of Meshery's major [architectural domains](https://docs.meshery.io/architecture): Meshery Server, Meshery CLI, Meshery UI, Meshery Models, and Meshery Extensibility.
 
