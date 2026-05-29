@@ -15,7 +15,7 @@ Meshery's recognition programs are designed to acknowledge and celebrate the mil
 <h3>Badges</h3>
 
 Meshery offers a variety of badges that users and contributors can earn by participating in the community, contributing to the project, or achieving specific milestones. These badges serve as a testament to your skills, dedication, and involvement in the Meshery ecosystem. Badges can be displayed on your profile, shared on social media, or included in your professional portfolio to showcase your accomplishments. User accomplishments and level of expertise are recognized with a collection of badges dedicated to offering credence to their skills and milestones.
-Learn more about Meshery badges in the [Meshery Recognition Program](/blog/2023/09/2023-9-2-meshery-badge-program/) blog post.
+Learn more about Meshery badges in the [Meshery Recognition Program](/blog/2023-9-2-meshery-badge-program/) blog post.
 
 <h3>Certifications</h3>
 
