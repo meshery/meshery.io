@@ -5,7 +5,11 @@ const API_KEY = process.env.DISCOURSE_API_KEY;
 const API_URL = 'https://discuss.layer5.io/directory_items.json?period=all&order=solutions&limit=50';
 
 async function fetchUsers() {
-    const response = await fetch(API_URL);
+    const headers = {};
+    if (API_KEY) {
+        headers['Api-Key'] = API_KEY;
+    }
+    const response = await fetch(API_URL, { headers });
 
     if (!response.ok) {
         throw new Error(`Discourse API error: ${response.status}`);
@@ -16,23 +20,23 @@ async function fetchUsers() {
 }
 
 function computeScore(item) {
-    return (item.post_count * 1) +
-        (item.likes_received * 2) +
-        (item.solutions * 3);
+    return ((item.post_count || 0) * 1) +
+        ((item.likes_received || 0) * 2) +
+        ((item.solutions || 0) * 3);
 }
 
 function buildLeaderboard(items) {
-    return items
-        .filter(item => !item.user.username.startsWith('anon'))
+    return (items || [])
+        .filter(item => item && item.user && item.user.username && !item.user.username.startsWith('anon'))
         .map(item => ({
             rank: 0,
             username: item.user.username,
-            name: item.user.name,
-            avatar: `https://discuss.layer5.io${item.user.avatar_template.replace('{size}', '50')}`,
+            name: item.user.name || '',
+            avatar: item.user.avatar_template ? `https://discuss.layer5.io${item.user.avatar_template.replace('{size}', '50')}` : '',
             profile_url: `https://discuss.layer5.io/u/${item.user.username}`,
-            posts: item.post_count,
-            likes: item.likes_received,
-            solutions: item.solutions,
+            posts: item.post_count || 0,
+            likes: item.likes_received || 0,
+            solutions: item.solutions || 0,
             score: computeScore(item)
         }))
         .sort((a, b) => b.score - a.score)
