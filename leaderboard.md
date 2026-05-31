@@ -1,0 +1,10 @@
+---
+layout: page
+title: Community Leaderboard
+permalink: /community/leaderboard
+description: "Recognizing the most active members of the Layer5 discussion forum."
+---
+
+Celebrating the top contributors on the [Layer5 discussion forum](https://discuss.layer5.io). Rankings are based on posts created, likes received, and solutions accepted.
+
+{% include leaderboard.html %}

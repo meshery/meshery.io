@@ -1,0 +1,216 @@
+<section class="leaderboard-section">
+
+    <div class="leaderboard-controls">
+        <input type="text" id="leaderboard-filter" class="leaderboard-filter" placeholder="Filter by username"
+            onkeyup="filterLeaderboard()" />
+    </div>
+
+    <div class="leaderboard-wrapper">
+        <table class="leaderboard-table" id="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Member</th>
+                    <th>Likes Received</th>
+                    <th>Posts</th>
+                    <th>Solutions Accepted</th>
+                    <th>Total Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in site.data.leaderboard.users %}
+                <tr class="leaderboard-row {% cycle 'row-white', 'row-teal' %}">
+
+                    <td class="leaderboard-rank">
+                        {% if user.rank == 1 %}
+                        <span class="medal medal-gold">1</span>
+                        {% elsif user.rank == 2 %}
+                        <span class="medal medal-silver">2</span>
+                        {% elsif user.rank == 3 %}
+                        <span class="medal medal-bronze">3</span>
+                        {% else %}
+                        {{ user.rank }}
+                        {% endif %}
+                    </td>
+
+                    <td class="leaderboard-member">
+                        <a href="{{ user.profile_url }}" target="_blank" rel="noopener">
+                            <img class="leaderboard-avatar" src="{{ user.avatar }}" alt="{{ user.username }}"
+                                onerror="this.src='/images/community.svg'" />
+                            <span class="leaderboard-username">{{ user.username }}</span>
+                        </a>
+                    </td>
+
+                    <td>{{ user.likes }}</td>
+                    <td>{{ user.posts }}</td>
+                    <td>{{ user.solutions }}</td>
+                    <td class="leaderboard-score">{{ user.score }}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <p class="leaderboard-updated">Last updated: {{ site.data.leaderboard.last_updated }}</p>
+
+</section>
+
+<style>
+    .leaderboard-section {
+        max-width: 900px;
+        margin: 2rem auto;
+        font-family: inherit;
+    }
+
+    .leaderboard-controls {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 0.75rem;
+    }
+
+    .leaderboard-filter {
+        padding: 0.4rem 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        width: 200px;
+        outline: none;
+    }
+
+    .leaderboard-filter:focus {
+        border-color: #00B39F;
+    }
+
+    .leaderboard-wrapper {
+        overflow-x: auto;
+    }
+
+    .leaderboard-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+    }
+
+    .leaderboard-table thead tr {
+        background-color: #00B39F;
+        color: #ffffff;
+        text-align: left;
+    }
+
+    .leaderboard-table th {
+        padding: 0.75rem 1rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .leaderboard-table td {
+        padding: 0.65rem 1rem;
+        vertical-align: middle;
+        color: #333333;
+    }
+
+    .leaderboard-rank {
+        color: #333333;
+    }
+
+    .row-white {
+        background-color: #ffffff;
+        color: #333333;
+    }
+
+    .row-teal {
+        background-color: #e6f7f5;
+        color: #333333;
+    }
+
+    /* Rank medals for top 3 */
+    .medal {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        font-weight: 700;
+        font-size: 0.85rem;
+        color: #fff;
+    }
+
+    .medal-gold {
+        background-color: #f5a623;
+    }
+
+    .medal-silver {
+        background-color: #9b9b9b;
+    }
+
+    .medal-bronze {
+        background-color: #c47a3a;
+    }
+
+    /* Member cell */
+    .leaderboard-member a {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .leaderboard-member a:hover .leaderboard-username {
+        color: #00B39F;
+        text-decoration: underline;
+    }
+
+    .leaderboard-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    .leaderboard-score {
+        font-weight: 600;
+        color: #00B39F;
+    }
+
+    .leaderboard-updated {
+        text-align: right;
+        font-size: 0.78rem;
+        color: #999;
+        margin-top: 0.5rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+
+        .leaderboard-table th,
+        .leaderboard-table td {
+            padding: 0.5rem 0.6rem;
+            font-size: 0.85rem;
+        }
+
+        .leaderboard-filter {
+            width: 100%;
+        }
+
+        .leaderboard-controls {
+            justify-content: flex-start;
+        }
+    }
+</style>
+
+<script>
+    function filterLeaderboard() {
+        var input = document.getElementById('leaderboard-filter').value.toLowerCase();
+        var rows = document.querySelectorAll('#leaderboard-table tbody tr');
+        rows.forEach(function (row) {
+            var username = row.querySelector('.leaderboard-username');
+            if (username) {
+                row.style.display = username.textContent.toLowerCase().includes(input) ? '' : 'none';
+            }
+        });
+    }
+</script>

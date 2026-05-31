@@ -1,0 +1,27 @@
+name: Update Leaderboard
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Run scoring script
+        run: node .github/scripts/fetch-leaderboard.js
+        env:
+          DISCOURSE_API_KEY: ${{ secrets.DISCOURSE_API_KEY }}
+
+      - name: Commit and push JSON
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add _data/leaderboard.json
+          git commit -m "chore: update leaderboard data"
+          git push
