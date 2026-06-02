@@ -135,7 +135,11 @@ components:
   colorIcon: assets/images/integration/gitlab/components/security-policy/icons/color/security-policy-color.svg
   whiteIcon: assets/images/integration/gitlab/components/security-policy/icons/white/security-policy-white.svg
   description: 
-componentsCount: 31
+- name: listener-set
+  colorIcon: assets/images/integration/gitlab/components/listener-set/icons/color/listener-set-color.svg
+  whiteIcon: assets/images/integration/gitlab/components/listener-set/icons/white/listener-set-white.svg
+  description: 
+componentsCount: 32
 relationships: 
 relationshipsCount: 0
 featureList: [
