@@ -31,7 +31,11 @@ components:
   colorIcon: assets/images/integration/aws-route53resolver-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
   whiteIcon: assets/images/integration/aws-route53resolver-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
   description: 
-componentsCount: 5
+- name: resolver-rule-association
+  colorIcon: assets/images/integration/aws-route53resolver-controller/components/resolver-rule-association/icons/color/resolver-rule-association-color.svg
+  whiteIcon: assets/images/integration/aws-route53resolver-controller/components/resolver-rule-association/icons/white/resolver-rule-association-white.svg
+  description: 
+componentsCount: 6
 relationships: 
 - type: "non-binding"
   kind: "edge"
