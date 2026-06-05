@@ -1621,6 +1621,7 @@
         font-size: 0.9rem;
         width: 200px;
         outline: none;
+        box-sizing: border-box;
     }
 
     .leaderboard-filter:focus {
@@ -1629,12 +1630,13 @@
 
     .leaderboard-wrapper {
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
     }
 
     .leaderboard-table {
+        min-width: 600px;
         width: 100%;
-        border-collapse: collapse;
-        font-size: 0.95rem;
     }
 
     .leaderboard-table thead tr {
@@ -1669,7 +1671,6 @@
         color: #333333;
     }
 
-    /* Rank medals for top 3 */
     .medal {
         display: inline-flex;
         align-items: center;
@@ -1694,7 +1695,6 @@
         background-color: #c47a3a;
     }
 
-    /* Member cell */
     .leaderboard-member a {
         display: flex;
         align-items: center;
@@ -1716,11 +1716,6 @@
         flex-shrink: 0;
     }
 
-    .leaderboard-score {
-        font-weight: 600;
-        color: #00B39F;
-    }
-
     .leaderboard-updated {
         text-align: right;
         font-size: 0.78rem;
@@ -1728,23 +1723,43 @@
         margin-top: 0.5rem;
     }
 
-    /* Responsive */
+    /* ── Mobile ── */
     @media (max-width: 600px) {
-
-        .leaderboard-table th,
-        .leaderboard-table td {
-            padding: 0.5rem 0.6rem;
-            font-size: 0.85rem;
+        .leaderboard-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 16px;
+            justify-content: flex-start;
         }
 
         .leaderboard-filter {
             width: 100%;
+            max-width: 100%;
         }
 
-        .leaderboard-controls {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 1.5rem;
+        .leaderboard-table th,
+        .leaderboard-table td {
+            font-size: 0.78rem;
+            padding: 8px 6px;
+        }
+
+        .leaderboard-rank {
+            font-size: 0.85rem;
+        }
+
+        .leaderboard-score {
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .leaderboard-avatar {
+            width: 28px;
+            height: 28px;
+        }
+
+        .leaderboard-username {
+            font-size: 0.85rem;
         }
     }
 </style>
