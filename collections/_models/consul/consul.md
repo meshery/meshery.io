@@ -135,7 +135,19 @@ components:
   colorIcon: assets/images/integration/consul/components/tcp-route/icons/color/tcp-route-color.svg
   whiteIcon: assets/images/integration/consul/components/tcp-route/icons/white/tcp-route-white.svg
   description: 
-componentsCount: 31
+- name: rate-limit
+  colorIcon: assets/images/integration/consul/components/rate-limit/icons/color/rate-limit-color.svg
+  whiteIcon: assets/images/integration/consul/components/rate-limit/icons/white/rate-limit-white.svg
+  description: 
+- name: route-tlssds-filter
+  colorIcon: assets/images/integration/consul/components/route-tlssds-filter/icons/color/route-tlssds-filter-color.svg
+  whiteIcon: assets/images/integration/consul/components/route-tlssds-filter/icons/white/route-tlssds-filter-white.svg
+  description: 
+- name: route-tlssds-filter
+  colorIcon: assets/images/integration/consul/components/route-tlssds-filter/icons/color/route-tlssds-filter-color.svg
+  whiteIcon: assets/images/integration/consul/components/route-tlssds-filter/icons/white/route-tlssds-filter-white.svg
+  description: 
+componentsCount: 34
 relationships: 
 relationshipsCount: 0
 featureList: [

@@ -107,7 +107,15 @@ components:
   colorIcon: assets/images/integration/aws-ec2-controller/components/managed-prefix-list/icons/color/managed-prefix-list-color.svg
   whiteIcon: assets/images/integration/aws-ec2-controller/components/managed-prefix-list/icons/white/managed-prefix-list-white.svg
   description: 
-componentsCount: 24
+- name: egress-only-internet-gateway
+  colorIcon: assets/images/integration/aws-ec2-controller/components/egress-only-internet-gateway/icons/color/egress-only-internet-gateway-color.svg
+  whiteIcon: assets/images/integration/aws-ec2-controller/components/egress-only-internet-gateway/icons/white/egress-only-internet-gateway-white.svg
+  description: 
+- name: egress-only-internet-gateway
+  colorIcon: assets/images/integration/aws-ec2-controller/components/egress-only-internet-gateway/icons/color/egress-only-internet-gateway-color.svg
+  whiteIcon: assets/images/integration/aws-ec2-controller/components/egress-only-internet-gateway/icons/white/egress-only-internet-gateway-white.svg
+  description: 
+componentsCount: 26
 relationships: 
 - type: "non-binding"
   kind: "edge"

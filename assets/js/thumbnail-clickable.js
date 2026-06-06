@@ -40,7 +40,7 @@ function createFullScreenContainer(patternId, patternType){
       break;
     default:
       fullScreenImage.src =
-      "https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/" +
+      "https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/" +
       patternId +
       ".png";
       break;

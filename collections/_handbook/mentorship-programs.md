@@ -17,7 +17,7 @@ programs:
   description: >
     Google Season of Docs provides support for open source projects to improve their documentation and allows professional technical writers to gain experience in open source. This is to raise awareness of open source, docs, and technical writing. Google season of docs started in 2019. Each year, Meshery submits a new project idea for technical writers to contribute to for a particular period. Also, stipends are awarded to the contributors.
   link: "/programs/gsod/2021"
-  icon: "https://layer5.io/static/gsod-bdae86e80935b6dc17caa4239c795ecc.webp"
+  icon: "/assets/images/programs/gsod-bdae86e80935b6dc17caa4239c795ecc.webp"
   imagePosition: "reverse"
 
 - id: 3

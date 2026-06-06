@@ -48,7 +48,13 @@
 			<div class="text"><a href="https://github.com/meshery/meshery/blob/master/CODE_OF_CONDUCT.md">Code of
 					Conduct</a></div>
 			<div class="text"><a href ="https://www.linuxfoundation.org/legal/trademark-usage">The Linux Foundation. Meshery has registered trademarks and uses trademarks</a></div>
+			{% if page.collection == "pages" or page.collection == "programs" %}
+			<div class="text">
+				<a href="https://github.com/meshery/meshery.io/edit/master/collections/{{ page.path }}">Edit this Page</a>
+			</div>
+			{% endif %}
 		</div>
+
 	</div>
 </footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -144,13 +150,13 @@
 	function setMode() {
 		document.body.classList.toggle("dark-mode")
 		
-		let layer5Logos = document.querySelectorAll("#layer5-logo");
+		let l5Logos = document.querySelectorAll("#l5-logo");
 		let allLogos = document.querySelectorAll("#logo-dark-light");
 		if (document.body.classList.contains("dark-mode")) {
-			layer5Logos.forEach(e => e.src = '../assets/images/company-logo/layer5-dark-mode-logo.svg')
+			l5Logos.forEach(e => e.src = '../assets/images/company-logo/dark-mode-logo.svg')
 			allLogos.forEach(e => e.src = e.dataset.logoForDark)
 		} else {
-			layer5Logos.forEach(e => e.src = '../assets/images/company-logo/layer5-no-trim.svg')
+			l5Logos.forEach(e => e.src = '../assets/images/company-logo/no-trim.svg')
 			allLogos.forEach(e => e.src = e.dataset.logoForLight)
 		}
 		if (document.body.classList.contains("dark-mode")) {

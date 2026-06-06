@@ -23,7 +23,7 @@
           </li>
 
           <li><p>CREATED BY</p>
-            <div><a href="https://cloud.layer5.io/user/{{include.pattern.userId}}">{{include.pattern.userName}}</a></div>
+            <div><a href="https://cloud.meshery.io/user/{{include.pattern.userId}}">{{include.pattern.userName}}</a></div>
           </li>
       
           <li><p>UPDATED AT</p>
@@ -37,7 +37,8 @@
             <p>MODELS</p>
             <div>
               {% for item in pattern.compatibility %}
-              <a href="{{ '/catalog/models/' | append: (item | slugify) | relative_url }}">
+              {% assign item_slug = item | slugify %}
+              <a href="{{ '/catalog/models/' | append: item_slug | relative_url }}">
                 {{ item | capitalize }}
               </a>
               {% unless forloop.last %}, {% endunless %}
@@ -51,7 +52,7 @@
     <div class="modal-image-single">
       <h4>Design Snapshot</h4>
       <img class="pattern-snapshot"
-      src="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png" 
+      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png" 
       onerror="this.src='{{ '/assets/images/logos/service-mesh-pattern.svg' | relative_url }}'" loading="lazy" onclick="toggleFullScreenImage('{{ pattern.patternId }}-light')"/>
 
       <h4 class="related-patterns">Related Designs</h4>
@@ -85,11 +86,13 @@
     </div>
     
   </div>
-  
+  {%if false %}
   {% include related-discussion.html tag="meshery" %}
+  {% endif %}
 </div>
 
 <script>
   document.title = "{{pattern.name}} | Meshery Catalog";
 </script>
 <script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>
+`

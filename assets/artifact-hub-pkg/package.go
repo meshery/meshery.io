@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
 	"net/url"
 	"os"
@@ -20,42 +19,26 @@ import (
 	"github.com/meshery/meshkit/logger"
 	"github.com/meshery/meshkit/utils"
 
-	"github.com/meshery/meshkit/models/catalog/v1alpha1"
+	catalogv1alpha1 "github.com/meshery/meshkit/models/catalog/v1alpha1"
 	"github.com/meshery/meshkit/utils/catalog"
+
+	catalogv1alpha2 "github.com/meshery/schemas/models/v1alpha2/catalog"
+	userv1beta2 "github.com/meshery/schemas/models/v1beta2/user"
+	designv1beta3 "github.com/meshery/schemas/models/v1beta3/design"
 )
 
-type CatalogPattern struct {
-	ID          string               `json:"id"`
-	Name        string               `json:"name"`
-	Version     string               `json:"version"`
-	PatternFile string               `json:"pattern_file"`
-	CatalogData v1alpha1.CatalogData `json:"catalog_data"`
-	UserID      string               `json:"user_id"`
-	CreatedAt   string               `json:"created_at"`
-}
-
-type UserInfo struct {
-	UserID    string `json:"user_id"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	AvatarURL string `json:"avatar_url"`
-}
-
 const (
-	mesheryCloudBaseURL    = "https://cloud.layer5.io"
+	mesheryCloudBaseURL    = "https://cloud.meshery.io"
 	mesheryCatalogFilesDir = "catalog"
 )
 
 var (
-	ErrUnmarshalCatalogPatternCode = "test_code"
-	ErrProcessPatternCode          = "test_code"
-	ErrHTTPGetRequestCode          = "test_code"
-	ErrReadRespBodyCode            = "test_code"
-	ErrCreateGitHubRequestCode     = "test_code"
-	ErrInvokeGitHubActionsCode     = "test_code"
-	ErrInvalidVersionCode          = "test_code"
-	ErrCreateVersionDirCode        = "test_code"
-	ErrParseCreatedAtCode          = "test_code"
+	ErrProcessPatternCode      = "test_code"
+	ErrHTTPGetRequestCode      = "test_code"
+	ErrCreateGitHubRequestCode = "test_code"
+	ErrInvokeGitHubActionsCode = "test_code"
+	ErrCreateVersionDirCode    = "test_code"
+	ErrDecodingContentCode     = "test_code"
 )
 
 func main() {
@@ -69,21 +52,16 @@ func main() {
 		os.Exit(1)
 	}
 
-	catalogPatterns, err := fetchCatalogPatterns()
+	page, err := fetchCatalogPatterns()
 	if err != nil {
 		log.Error(err)
 		return
 	}
-
-	var patterns struct {
-		Patterns []CatalogPattern `json:"patterns"`
-	}
-	if err := json.Unmarshal(catalogPatterns, &patterns); err != nil {
-		log.Error(utils.ErrUnmarshal(err))
+	if page.Patterns == nil {
 		return
 	}
 
-	for _, pattern := range patterns.Patterns {
+	for _, pattern := range *page.Patterns {
 		if err := processPattern(pattern, token); err != nil {
 			log.Error(meshkitErrors.New(ErrProcessPatternCode, meshkitErrors.Alert,
 				[]string{"unable to process catalog pattern"},
@@ -94,61 +72,51 @@ func main() {
 		}
 	}
 }
+
 func slugify(name string) string {
-	// Convert to lowercase
 	s := strings.ToLower(name)
-
-	// Remove invalid characters
-	reg := regexp.MustCompile("[^a-z0-9]+")
-	s = reg.ReplaceAllString(s, "-")
-
-	// Remove leading and trailing hyphens
-	s = strings.Trim(s, "-")
-
-	return s
+	s = regexp.MustCompile("[^a-z0-9]+").ReplaceAllString(s, "-")
+	return strings.Trim(s, "-")
 }
-func fetchCatalogPatterns() ([]byte, error) {
-	resp, err := http.Get(fmt.Sprintf("%s/api/catalog/content/pattern?populate=pattern_file", mesheryCloudBaseURL))
+
+func fetchCatalogPatterns() (*designv1beta3.CatalogContentPage, error) {
+	endpoint := fmt.Sprintf("%s/api/catalog/content/pattern?populate=pattern_file", mesheryCloudBaseURL)
+	resp, err := http.Get(endpoint)
 	if err != nil {
-		return nil, ErrHTTPGetRequest(err, fmt.Sprintf("%s/api/catalog/content/pattern", mesheryCloudBaseURL))
+		return nil, ErrHTTPGetRequest(err, endpoint)
 	}
 	defer resp.Body.Close()
 
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, ErrReadRespBody(err)
+	var page designv1beta3.CatalogContentPage
+	if err := json.NewDecoder(resp.Body).Decode(&page); err != nil {
+		return nil, utils.ErrUnmarshal(err)
 	}
-	return body, nil
+	return &page, nil
 }
 
-func processPattern(pattern CatalogPattern, token string) error {
+func processPattern(pattern designv1beta3.MesheryPattern, token string) error {
+	patternID := pattern.ID.String()
 	patternImageURL := getPatternImageURL(pattern)
-	patternType := getPatternType(string(pattern.CatalogData.Type))
-	patternInfo := getStringOrEmpty(pattern.CatalogData.PatternInfo)
-	patternCaveats := getStringOrEmpty(pattern.CatalogData.PatternCaveats)
-
-	compatibilityStrings := make([]string, len(pattern.CatalogData.Compatibility))
-	for i, v := range pattern.CatalogData.Compatibility {
-		compatibilityStrings[i] = string(v)
-	}
-	compatibility := getCompatibility(compatibilityStrings)
+	patternType := getPatternType(catalogTypeOf(pattern.CatalogData))
+	patternInfo := getStringOrEmpty(catalogPatternInfo(pattern.CatalogData))
+	patternCaveats := getStringOrEmpty(catalogPatternCaveats(pattern.CatalogData))
+	compatibility := getCompatibility(catalogCompatibility(pattern.CatalogData))
 
 	dir := filepath.Join("..", "..", "collections", "_catalog", patternType)
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
-		os.MkdirAll(dir, 0755)
+		if err := os.MkdirAll(dir, 0755); err != nil {
+			return ErrCreatingVersionDir(err)
+		}
 	}
 
-	version := pattern.CatalogData.PublishedVersion
+	version := catalogPublishedVersion(pattern.CatalogData)
 	if version == "" {
 		version = semver.New(0, 0, 1, "", "").String()
 	}
 
-	// Ensure the version directory exists within the catalog file path, creating it if necessary
-	catalogFilePath := filepath.Join("..", "..", mesheryCatalogFilesDir, pattern.ID)
-	versionDir := filepath.Join(catalogFilePath, version)
+	versionDir := filepath.Join("..", "..", mesheryCatalogFilesDir, patternID, version)
 	if _, err := os.Stat(versionDir); os.IsNotExist(err) {
-		err = os.MkdirAll(versionDir, 0755)
-		if err != nil {
+		if err := os.MkdirAll(versionDir, 0755); err != nil {
 			return ErrCreatingVersionDir(err)
 		}
 	}
@@ -156,25 +124,25 @@ func processPattern(pattern CatalogPattern, token string) error {
 	if err := writePatternFile(pattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL); err != nil {
 		return err
 	}
-	if err := invokeGitHubAction(pattern.ID, patternImageURL, token); err != nil {
-		return err
-	}
-
-	return nil
+	return invokeGitHubAction(patternID, patternImageURL, token)
 }
 
-func getPatternImageURL(pattern CatalogPattern) string {
-	var imageURL string
-	if pattern.CatalogData.SnapshotURL == nil {
-		imageURL = fmt.Sprintf("https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/%s-light.png,https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/%s-dark.png", pattern.ID, pattern.ID)
-	} else {
-		if len(pattern.CatalogData.SnapshotURL) == 1 {
-			imageURL = pattern.CatalogData.SnapshotURL[0]
-		} else if len(pattern.CatalogData.SnapshotURL) > 1 {
-			imageURL = strings.Join(pattern.CatalogData.SnapshotURL, ",")
-		}
+func getPatternImageURL(pattern designv1beta3.MesheryPattern) string {
+	patternID := pattern.ID.String()
+	defaultURL := fmt.Sprintf("https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/%s-light.png,https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/%s-dark.png", patternID, patternID)
+
+	if pattern.CatalogData == nil || pattern.CatalogData.SnapshotURL == nil {
+		return defaultURL
 	}
-	return imageURL
+	urls := *pattern.CatalogData.SnapshotURL
+	switch len(urls) {
+	case 0:
+		return defaultURL
+	case 1:
+		return urls[0]
+	default:
+		return strings.Join(urls, ",")
+	}
 }
 
 func getPatternType(patternType string) string {
@@ -192,24 +160,27 @@ func getStringOrEmpty(value string) string {
 }
 
 func getCompatibility(compatibility []string) string {
-	var compatLines []string
-	for _, compat := range compatibility {
-		compatLines = append(compatLines, fmt.Sprintf("    - %s", compat))
+	lines := make([]string, 0, len(compatibility))
+	for _, c := range compatibility {
+		lines = append(lines, fmt.Sprintf("    - %s", c))
 	}
-	return strings.Join(compatLines, "\n")
+	return strings.Join(lines, "\n")
 }
 
 func decodeURIComponent(encodedURI string) (string, error) {
-	decoded, err := url.QueryUnescape(encodedURI)
-	if err != nil {
-		return "", err
-	}
-	return decoded, nil
+	return url.QueryUnescape(encodedURI)
 }
 
-func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL string) error {
+func writePatternFile(pattern designv1beta3.MesheryPattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL string) error {
+	patternID := pattern.ID.String()
+	patternName := string(pattern.Name)
+
 	designFilePath := filepath.Join(versionDir, "design.yml")
-	if err := os.WriteFile(designFilePath, []byte(pattern.PatternFile), 0644); err != nil {
+	patternFileBody := ""
+	if pattern.PatternFile != nil {
+		patternFileBody = *pattern.PatternFile
+	}
+	if err := os.WriteFile(designFilePath, []byte(patternFileBody), 0644); err != nil {
 		return utils.ErrWriteFile(err, designFilePath)
 	}
 
@@ -227,49 +198,46 @@ func writePatternFile(pattern CatalogPattern, versionDir, patternType, patternIn
 		patternImageURL = "/assets/images/logos/service-mesh-pattern.svg"
 	}
 
-	parsedTime, err := time.Parse(time.RFC3339Nano, pattern.CreatedAt)
+	// Stable Unix-epoch sentinel when the API omits createdAt so the generated
+	// artifacthub-pkg.yml stays byte-identical across runs and doesn't churn
+	// the catalog with no-op commits.
+	createdAt := time.Unix(0, 0).UTC()
+	if !pattern.CreatedAt.IsZero() {
+		createdAt = pattern.CreatedAt
+	}
+
+	infoForPkg := catalogPatternInfo(pattern.CatalogData)
+	if infoForPkg == "" {
+		infoForPkg = patternName
+	}
+	infoForPkg, err = decodeURIComponent(infoForPkg)
 	if err != nil {
-		return ErrParsingCreatedAt(err)
+		return ErrDecodingContent(err)
 	}
-
-	if pattern.CatalogData.PatternInfo == "" {
-		pattern.CatalogData.PatternInfo = pattern.Name
-	}
-
-	pattern.CatalogData.PatternInfo, err = decodeURIComponent(pattern.CatalogData.PatternInfo)
+	caveatsForPkg, err := decodeURIComponent(catalogPatternCaveats(pattern.CatalogData))
 	if err != nil {
 		return ErrDecodingContent(err)
 	}
 
-	pattern.CatalogData.PatternCaveats, err = decodeURIComponent(pattern.CatalogData.PatternCaveats)
-	if err != nil {
-		return ErrDecodingContent(err)
-	}
-
-	version := pattern.CatalogData.PublishedVersion
+	version := catalogPublishedVersion(pattern.CatalogData)
 	if version == "" {
 		version = semver.New(0, 0, 1, "", "").String()
 	}
 
-	artifactHubPkg := catalog.BuildArtifactHubPkg(pattern.Name, filepath.Join(versionDir, "design.yml"), pattern.UserID, version, &parsedTime, &pattern.CatalogData)
+	mkCatalogData := toMeshkitCatalogData(pattern.CatalogData, infoForPkg, caveatsForPkg, version)
+	artifactHubPkg := catalog.BuildArtifactHubPkg(patternName, filepath.Join(versionDir, "design.yml"), pattern.UserId.String(), version, &createdAt, mkCatalogData)
 
 	data, err := yaml.Marshal(artifactHubPkg)
 	if err != nil {
 		return utils.ErrMarshal(err)
 	}
-
 	if err := os.WriteFile(filepath.Join(versionDir, "artifacthub-pkg.yml"), data, 0644); err != nil {
 		return utils.ErrWriteFile(err, filepath.Join(versionDir, "artifacthub-pkg.yml"))
 	}
 
-	userInfo, err := fetchUserInfo(pattern.UserID)
-	if err != nil {
-		return err
-	}
-	userFullName := fmt.Sprintf("%s %s", userInfo.FirstName, userInfo.LastName)
+	userFullName, userAvatarURL := userDisplay(pattern.User)
 
-	// Use yaml.Marshal for pattern.Name to ensure proper escaping
-	nameYAML, err := yaml.Marshal(pattern.Name)
+	nameYAML, err := yaml.Marshal(patternName)
 	if err != nil {
 		return err
 	}
@@ -282,7 +250,7 @@ userId: %s
 userName: %s
 userAvatarURL: %s
 type: %s
-compatibility: 
+compatibility:
 %s
 patternId: %s
 image: %s
@@ -293,33 +261,28 @@ patternCaveats: |
 permalink: catalog/%s/%s-%s.html
 URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/%s/%s/%s/design.yml'
 downloadLink: %s/design.yml
----`, strings.TrimSpace(string(nameYAML)), version, pattern.UserID, userFullName, userInfo.AvatarURL, patternType, compatibility, pattern.ID, patternImageURL, patternInfo, patternCaveats, patternType, slugify(pattern.Name), pattern.ID, mesheryCatalogFilesDir, pattern.ID, version, pattern.ID)
+---`, strings.TrimSpace(string(nameYAML)), version, pattern.UserId.String(), userFullName, userAvatarURL, patternType, compatibility, patternID, patternImageURL, patternInfo, patternCaveats, patternType, slugify(patternName), patternID, mesheryCatalogFilesDir, patternID, version, patternID)
 
-	if err := os.WriteFile(filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md"), []byte(content), 0644); err != nil {
-		return utils.ErrWriteFile(err, filepath.Join("..", "..", "collections", "_catalog", patternType, pattern.ID+".md"))
+	mdPath := filepath.Join("..", "..", "collections", "_catalog", patternType, patternID+".md")
+	if err := os.WriteFile(mdPath, []byte(content), 0644); err != nil {
+		return utils.ErrWriteFile(err, mdPath)
 	}
-
 	return nil
 }
 
-func fetchUserInfo(userID string) (UserInfo, error) {
-	resp, err := http.Get(fmt.Sprintf("%s/api/identity/users/profile/%s", mesheryCloudBaseURL, userID))
-	if err != nil {
-		return UserInfo{}, ErrHTTPGetRequest(err, fmt.Sprintf("%s/api/identity/users/profile/%s", mesheryCloudBaseURL, userID))
+// userDisplay returns the full name and avatar URL of the embedded user, or
+// empty strings if the API response didn't include a user object. The catalog
+// list endpoint embeds the full user record, so this avoids the legacy
+// per-pattern /api/identity/users/profile fan-out.
+func userDisplay(user *userv1beta2.User) (string, string) {
+	if user == nil {
+		return "", ""
 	}
-	defer resp.Body.Close()
-
-	var userInfo UserInfo
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return UserInfo{}, ErrReadRespBody(err)
+	avatar := ""
+	if user.AvatarUrl != nil {
+		avatar = *user.AvatarUrl
 	}
-
-	if err := json.Unmarshal(body, &userInfo); err != nil {
-		return UserInfo{}, utils.ErrUnmarshal(err)
-	}
-
-	return userInfo, nil
+	return strings.TrimSpace(user.FirstName + " " + user.LastName), avatar
 }
 
 func invokeGitHubAction(contentID, assetLocation string, ghAccessToken string) error {
@@ -336,8 +299,7 @@ func invokeGitHubAction(contentID, assetLocation string, ghAccessToken string) e
 	req.Header.Set("Authorization", "Bearer "+ghAccessToken)
 	req.Header.Set("X-GitHub-Api-Version", "2022-11-28")
 
-	client := &http.Client{}
-	resp, err := client.Do(req)
+	resp, err := (&http.Client{}).Do(req)
 	if err != nil {
 		return meshkitErrors.New(ErrInvokeGitHubActionsCode, meshkitErrors.Alert,
 			[]string{"Error invoking GitHub Actions"},
@@ -346,8 +308,73 @@ func invokeGitHubAction(contentID, assetLocation string, ghAccessToken string) e
 			[]string{"Check network connectivity", "Ensure the GitHub token is correct"})
 	}
 	defer resp.Body.Close()
-
 	return nil
+}
+
+// --- catalogData adapters --------------------------------------------------
+// Read fields off the optional pointer struct from schemas without scattering
+// nil-checks across call sites, and translate to meshkit's catalog type at the
+// BuildArtifactHubPkg boundary (which still expects *catalogv1alpha1.CatalogData).
+
+func catalogTypeOf(c *catalogv1alpha2.CatalogData) string {
+	if c == nil {
+		return ""
+	}
+	return string(c.Type)
+}
+
+func catalogPatternInfo(c *catalogv1alpha2.CatalogData) string {
+	if c == nil {
+		return ""
+	}
+	return c.PatternInfo
+}
+
+func catalogPatternCaveats(c *catalogv1alpha2.CatalogData) string {
+	if c == nil {
+		return ""
+	}
+	return c.PatternCaveats
+}
+
+func catalogPublishedVersion(c *catalogv1alpha2.CatalogData) string {
+	if c == nil || c.PublishedVersion == nil {
+		return ""
+	}
+	return *c.PublishedVersion
+}
+
+func catalogCompatibility(c *catalogv1alpha2.CatalogData) []string {
+	if c == nil {
+		return nil
+	}
+	out := make([]string, len(c.Compatibility))
+	for i, v := range c.Compatibility {
+		out[i] = string(v)
+	}
+	return out
+}
+
+func toMeshkitCatalogData(c *catalogv1alpha2.CatalogData, info, caveats, version string) *catalogv1alpha1.CatalogData {
+	out := &catalogv1alpha1.CatalogData{
+		PublishedVersion: version,
+		PatternInfo:      info,
+		PatternCaveats:   caveats,
+	}
+	if c == nil {
+		return out
+	}
+	out.Type = catalogv1alpha1.CatalogDataType(c.Type)
+	if len(c.Compatibility) > 0 {
+		out.Compatibility = make([]catalogv1alpha1.CatalogDataCompatibility, len(c.Compatibility))
+		for i, v := range c.Compatibility {
+			out.Compatibility[i] = catalogv1alpha1.CatalogDataCompatibility(v)
+		}
+	}
+	if c.SnapshotURL != nil {
+		out.SnapshotURL = *c.SnapshotURL
+	}
+	return out
 }
 
 func ErrHTTPGetRequest(err error, ep string) error {
@@ -358,16 +385,8 @@ func ErrHTTPGetRequest(err error, ep string) error {
 		[]string{"Check the endpoint URL", "Ensure the server is running"})
 }
 
-func ErrReadRespBody(err error) error {
-	return meshkitErrors.New(ErrReadRespBodyCode, meshkitErrors.Alert,
-		[]string{"Failed to read response body"},
-		[]string{fmt.Sprintf("Unable to read the response body from the server.\nError: %v", err)},
-		[]string{"The response body might be too large", "There could be a network issue"},
-		[]string{"Ensure the server returns a valid and readable response body."})
-}
-
 func ErrDecodingContent(err error) error {
-	return meshkitErrors.New(ErrReadRespBodyCode, meshkitErrors.Alert,
+	return meshkitErrors.New(ErrDecodingContentCode, meshkitErrors.Alert,
 		[]string{"Error decoding content"},
 		[]string{fmt.Sprintf("Unable to decode design caveats and info.\nError: %v", err)},
 		[]string{
@@ -391,19 +410,5 @@ func ErrCreatingVersionDir(err error) error {
 		[]string{
 			"Ensure the path is correct and you have the necessary permissions.",
 			"Check the file system for errors or space issues.",
-		})
-}
-
-func ErrParsingCreatedAt(err error) error {
-	return meshkitErrors.New(ErrParseCreatedAtCode, meshkitErrors.Alert,
-		[]string{"Error parsing CreatedAt timestamp"},
-		[]string{fmt.Sprintf("Unable to parse CreatedAt timestamp.\nError: %v", err)},
-		[]string{
-			"The timestamp format might be incorrect.",
-			"The provided CreatedAt value could be malformed.",
-		},
-		[]string{
-			"Ensure the timestamp format follows the RFC3339Nano standard.",
-			"Verify the CreatedAt value is properly formatted.",
 		})
 }
