@@ -13,47 +13,47 @@ layout: page
       <div class="social-share-wrapper">
         <div class="links">
 
-          {% capture linkedin_url %}https://www.linkedin.com/shareArticle?mini=true&url={{ site.url | append: page.url | url_encode }}&summary={{ page.title | url_encode }}{% endcapture %}
-          <a href="{{ linkedin_url }}" target="_blank" rel="noopener" title="Share on LinkedIn">
+          {% capture linkedin_url %}https://www.linkedin.com/shareArticle?mini=true&url={{ site.url | append: page.url |
+          url_encode }}&summary={{ page.title | url_encode }}{% endcapture %}
+          <a href="{{ linkedin_url }}" target="_blank" rel="noopener" title="Share on LinkedIn"
+            data-tooltip="Share on LinkedIn">
             <img src="{{ '/assets/images/logos/linkedin-dark.svg' | relative_url }}"
-                data-logo-for-dark="{{ '/assets/images/logos/linkedin-light.svg' | relative_url }}"
-                data-logo-for-light="{{ '/assets/images/logos/linkedin-dark.svg' | relative_url }}"
-                alt="LinkedIn logo" id="logo-dark-light" />
+              data-logo-for-dark="{{ '/assets/images/logos/linkedin-light.svg' | relative_url }}"
+              data-logo-for-light="{{ '/assets/images/logos/linkedin-dark.svg' | relative_url }}" alt="LinkedIn logo"
+              id="logo-dark-light" />
           </a>
-          
-          
-          {% capture twitter_url %}https://x.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.url | append: page.url | url_encode }}&hashtags=meshery&via=mesheryio{% endcapture %}
-          <a href="{{ twitter_url }}" target="_blank" rel="noopener" title="Share on Twitter/X">
+
+
+          {% capture twitter_url %}https://x.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.url |
+          append: page.url | url_encode }}&hashtags=meshery&via=mesheryio{% endcapture %}
+          <a href="{{ twitter_url }}" target="_blank" rel="noopener" title="Share on Twitter/X"
+            data-tooltip="Share on Twitter/X">
             <img src="{{ '/assets/images/logos/twitter-dark.svg' | relative_url }}"
-                data-logo-for-dark="{{ '/assets/images/logos/twitter-light.svg' | relative_url }}"
-                data-logo-for-light="{{ '/assets/images/logos/twitter-dark.svg' | relative_url }}"
-                alt="Twitter logo" id="logo-dark-light" />
+              data-logo-for-dark="{{ '/assets/images/logos/twitter-light.svg' | relative_url }}"
+              data-logo-for-light="{{ '/assets/images/logos/twitter-dark.svg' | relative_url }}" alt="Twitter logo"
+              id="logo-dark-light" />
           </a>
-          
-          {% capture bluesky_text %}{{ page.title }} by @mesheryio.bsky.social {{ site.url | append: page.url }}{% if page.tags %} {% for tag in page.tags %}#{{ tag | replace: ' ', '' }} {% endfor %}{% endif %}{% endcapture %}
+
+          {% capture bluesky_text %}{{ page.title }} by @mesheryio.bsky.social {{ site.url | append: page.url }}{% if
+          page.tags %} {% for tag in page.tags %}#{{ tag | replace: ' ', '' }} {% endfor %}{% endif %}{% endcapture %}
           {% capture bluesky_url %}https://bsky.app/intent/compose?text={{ bluesky_text | url_encode }}{% endcapture %}
-          <a href="{{ bluesky_url }}" target="_blank" rel="noopener" title="Share on Bluesky">
+          <a href="{{ bluesky_url }}" target="_blank" rel="noopener" title="Share on Bluesky"
+            data-tooltip="Share on Bluesky">
             <img src="{{ '/assets/images/logos/bluesky-dark.svg' | relative_url }}"
-                data-logo-for-dark="{{ '/assets/images/logos/bluesky-dark.svg' | relative_url }}"
-                data-logo-for-light="{{ '/assets/images/logos/bluesky-light.svg' | relative_url }}" 
-                alt="Bluesky Logo" id="logo-dark-light" />
+              data-logo-for-dark="{{ '/assets/images/logos/bluesky-dark.svg' | relative_url }}"
+              data-logo-for-light="{{ '/assets/images/logos/bluesky-light.svg' | relative_url }}" alt="Bluesky Logo"
+              id="logo-dark-light" />
           </a>
-          
+
         </div>
       </div>
     </div>
 
     <div class="blog-navigation">
       {% if page.previous.url %}
-      <a
-        class="prev"
-        href="{% include relative-src.html src=page.previous.url %}"
-        >&laquo; {{ page.previous.title }}</a
-      >
+      <a class="prev" href="{% include relative-src.html src=page.previous.url %}">&laquo; {{ page.previous.title }}</a>
       {% endif %} {% if page.next.url %}
-      <a class="next" href="{% include relative-src.html src=page.next.url %}"
-        >{{ page.next.title }} &raquo;</a
-      >
+      <a class="next" href="{% include relative-src.html src=page.next.url %}">{{ page.next.title }} &raquo;</a>
       {% endif %}
     </div>
   </div>
@@ -61,19 +61,63 @@ layout: page
 
 
 <style>
+  .social-share p {
+    letter-spacing: .15rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
 
-.social-share p{
-  letter-spacing: .15rem;
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-transform: uppercase;
+  .social-share-wrapper .links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: .8rem;
+  }
 
-}
-.social-share-wrapper .links {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  margin-top: .8rem;
-}
+  .social-share-wrapper .links a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 0.4rem;
+    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0.75;
+  }
 
+  .social-share-wrapper .links a:hover {
+    transform: translateY(-3px) scale(1.15);
+    opacity: 1;
+    box-shadow: 0 4px 12px rgba(0, 179, 159, 0.35);
+  }
+
+  .social-share-wrapper .links a img {
+    width: 28px;
+    height: 28px;
+    display: block;
+    transition: filter 0.3s ease;
+  }
+
+  .social-share-wrapper .links a::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    background-color: #495057;
+    color: #fff;
+    padding: 0.3rem 0.7rem;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateX(-50%) translateY(4px);
+  }
+
+  .social-share-wrapper .links a:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
 </style>
