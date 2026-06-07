@@ -619,23 +619,29 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    padding: 0.4rem;
-    transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
-    opacity: 0.75;
-  }
-
-  .social-share-wrapper .links a:hover {
-    transform: translateY(-3px) scale(1.15);
-    opacity: 1;
-    box-shadow: 0 4px 12px rgba(0, 179, 159, 0.35);
   }
 
   .social-share-wrapper .links a img {
     width: 28px;
     height: 28px;
     display: block;
-    transition: filter 0.3s ease;
+    transition: filter 0.2s ease, transform 0.2s ease;
+  }
+
+  .social-share-wrapper .links a:hover img {
+    transform: none;
+  }
+
+  .social-share-wrapper .links a[aria-label="Share on LinkedIn"]:hover img {
+    filter: invert(27%) sepia(90%) saturate(600%) hue-rotate(190deg) brightness(85%);
+  }
+
+  .social-share-wrapper .links a[aria-label="Share on Twitter/X"]:hover img {
+    filter: invert(1);
+  }
+
+  .social-share-wrapper .links a[aria-label="Share on Bluesky"]:hover img {
+    filter: invert(27%) sepia(90%) saturate(600%) hue-rotate(190deg) brightness(85%);
   }
 
   .social-share-wrapper .links a::after {
