@@ -57,7 +57,7 @@ Don't confine yourself to a GitHub profile. Engage in meaningful discussions, pa
 
 ### 7. The Virtue of Patience: Embracing the Long Game
 
-Open source is a marathon, not a sprint. Feedback may take time, and collaboration may be challenging. Patience is the glue that holds this ecosystem together. Cultivate it as a fundamental habit in your contributor journey. The Meshery <a href="/community/members">community members</a> invest time, patience, understanding and offer endless hours of support to our contributors. Stick around and benefit. In turn, offer to help others. There's little better way to learn, than through teaching.
+Open source is a marathon, not a sprint. Feedback may take time, and collaboration may be challenging. Patience is the glue that holds this ecosystem together. Cultivate it as a fundamental habit in your contributor journey. The Meshery community members invest time, patience, understanding and offer endless hours of support to our contributors. Stick around and benefit. In turn, offer to help others. There's little better way to learn, than through teaching.
 
 ### 8. Humility and Gratitude: The Essence of Meaningful Contributions
 

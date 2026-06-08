@@ -19,11 +19,6 @@ Learn more about Meshery badges in the [Meshery Recognition Program](/blog/2023/
 
 <h3>Certifications</h3>
 
-The Meshery Certification Program offers a structured pathway for professionals to validate their skills in managing and contributing to Meshery. The program includes certifications for administrators, developers, and open source contributors, each tailored to different levels of expertise and roles within the Meshery ecosystem.
+The Meshery Certification Program validates your skills in managing and contributing to Meshery. Certifications are available for administrators, developers, and open source contributors. The first certification, [Certified Meshery Contributor (CMC)](/blog/certified-meshery-contributor), was launched in October 2025.
 
-<div style="text-align: center;">
-<a href="https://playground.meshery.io/extension/meshmap?catalog-design=c2141477-379b-432e-b47e-1c89600235a5"><img alt="Certified Meshery Contributor Badge" src="{{ '/assets/images/posts/2025/certified-meshery-contributor/meshery-certification-program.png' | relative_url }}" style="width:100%;max-width:400px;"  /></a><br />
-<a href="https://playground.meshery.io/extension/meshmap?catalog-design=c2141477-379b-432e-b47e-1c89600235a5">Explore the Meshery Certification Program design</a>
-</div>
-
-The first certification, [Certified Meshery Contributor (CMC)](/blog/certified-meshery-contributor), in this program was launched in October 2025. This certification validates the skills of developers contributing to the Meshery open source project.
+[View the full Certifications Program &rarr;](/community/certifications)
