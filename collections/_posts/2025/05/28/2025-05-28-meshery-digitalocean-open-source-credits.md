@@ -15,9 +15,9 @@ featured-image: /assets/images/posts/2025/meshery-digitalocean-open-source-credi
 
 Meshery has been accepted into the [DigitalOcean Open Source Credits Program](https://www.digitalocean.com/open-source/credits-for-projects), and the collaboration grew into something much larger than a credits grant. Together with DigitalOcean, we built the **DigitalOcean Academy**: a complete AI engineering curriculum with a professional certification, seven learning paths, and hands-on challenges that run on real DigitalOcean infrastructure managed by Meshery. You can explore it now at [digitalocean.layer5.io/academy](https://digitalocean.layer5.io/academy).
 
-<img src="/assets/images/posts/2025/meshery-digitalocean-open-source-credits/meshery-digitalocean-open-source-credits.png" style="width:100%; max-width:750px;" alt="Meshery and DigitalOcean logos with the heading Open Source Credits Program and the line Cloud credits, and a new AI engineering academy" />
+<img src="/assets/images/posts/2025/meshery-digitalocean-open-source-credits/meshery-digitalocean-open-source-credits.png" style="width:100%; max-width:750px;" alt="Meshery and DigitalOcean logos with the heading Ecosystem Partner and the line Supporting open source together" />
 
-This is what a healthy open source partnership looks like. A company invests in the infrastructure a project runs on, and the project turns that support into learning resources the whole community can use.
+This is what a healthy open source partnership looks like. DigitalOcean is more than a sponsor here - it is an ecosystem partner. It invests in the infrastructure Meshery runs on, it co-built an academy with us, and it publishes its own designs and models to the Meshery Catalog. Support flows both ways.
 
 > The credits are DigitalOcean's. What we built with them - an entire AI academy - belongs to the whole community.
 
@@ -74,6 +74,14 @@ The same credits back Meshery's own community infrastructure:
 - **Artifacts and design snapshots.** Spaces object storage for build artifacts, exported [designs](https://meshery.io/catalog), and the snapshots that power our visual diffs.
 
 Each of these reduces toil for maintainers and shortens the loop for contributors - exactly the outcomes the credits are meant to enable.
+
+## A publisher in the Meshery Catalog
+
+DigitalOcean does not only run on Meshery, it builds on it. DigitalOcean is an active publisher in the [Meshery Catalog](https://meshery.io/catalog), sharing both Meshery designs and Meshery models that capture how to stand up and operate real workloads on DigitalOcean. Anyone can browse them, import them into their own clusters, and adapt them - turning a vendor's hard-won setup into a starting point for the rest of us.
+
+Those contributions travel even further than the Catalog. Because [Meshery Designs are a first-class artifact kind on Artifact Hub](https://meshery.io/blog/2024/04/2024-04-09-designs-on-artifacthub/) - the Meshery Catalog was the first repository listed there - DigitalOcean's published designs are discoverable by anyone searching [Artifact Hub](https://artifacthub.io), not only by people already inside Meshery.
+
+This is the part of the partnership that the "ecosystem partner" label is really about. Sponsorship keeps the lights on, but publishing designs and models is how a company puts its expertise back into the commons where every operator can reuse it.
 
 ## Saying thank you, out loud
 
