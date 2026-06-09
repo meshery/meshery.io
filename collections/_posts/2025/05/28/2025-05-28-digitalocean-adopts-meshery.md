@@ -15,8 +15,6 @@ featured-image: /assets/images/posts/2025/digitalocean-adopts-meshery/digitaloce
 
 DigitalOcean has adopted Meshery, and not in just one way. DigitalOcean publishes its own designs and models to the Meshery Catalog, it co-built an AI engineering academy that teaches operators to manage DigitalOcean infrastructure with Meshery, and it backs the project through the [DigitalOcean Open Source Credits Program](https://www.digitalocean.com/open-source/credits-for-projects). Put together, that makes DigitalOcean a genuine ecosystem partner: a user of Meshery, not only a sponsor of it.
 
-<img src="/assets/images/posts/2025/digitalocean-adopts-meshery/digitalocean-adopts-meshery.png" style="width:100%; max-width:750px;" alt="Meshery and DigitalOcean logos with the heading Ecosystem Partner and the line Supporting open source together" />
-
 This is what a healthy open source partnership looks like. Support flows both ways - DigitalOcean invests in the infrastructure Meshery runs on, and it gives back to the community with reusable designs, models, and learning resources that any operator can pick up.
 
 > The strongest endorsement of a project is not a logo on a sponsors page. It is a company choosing to build on it.
@@ -53,7 +51,7 @@ The learning paths carry you from your first model to MLOps in production, with 
 | DO-CAIE Certification Prep | Advanced | 3 | 3 | 10 |
 | Getting Started | Beginner | 2 | 1 | 10 |
 
-The **Cloud Native AI Infrastructure with Meshery & DOKS** path is where DigitalOcean's adoption of Meshery becomes a lesson plan. It teaches you to stand up GPU-backed DigitalOcean Kubernetes clusters and operate them visually with Meshery - the same workflow DigitalOcean captures in its published designs and labs.
+The **Cloud Native AI Infrastructure with Meshery & DOKS** path is where DigitalOcean's adoption of Meshery becomes a lesson plan. It teaches you to stand up GPU-backed DigitalOcean Kubernetes clusters and operate them visually with Meshery - the same workflow DigitalOcean captures in its published designs and labs. You can [install Meshery on DigitalOcean](https://docs.meshery.io/installation/kubernetes/digitalocean/) and follow along on your own DOKS cluster.
 
 ### Five challenges that prove you can ship
 
@@ -89,7 +87,7 @@ Meshery's momentum is a community achievement - the same momentum that recently 
 
 - Open the [DigitalOcean Academy](https://digitalocean.layer5.io/academy) and start with AI Foundations, or aim straight for the DO-CAIE certification.
 - Browse DigitalOcean's designs in the [Meshery Catalog](https://meshery.io/catalog) and import one into your own cluster.
-- [Install Meshery](https://docs.meshery.io/installation) and connect your first cluster in minutes.
+- [Install Meshery](https://docs.meshery.io/installation) and connect your first cluster in minutes - or go straight to the [DigitalOcean Kubernetes guide](https://docs.meshery.io/installation/kubernetes/digitalocean/).
 - Join the conversation on [Slack](https://slack.meshery.io) and meet the maintainers at our [weekly community calls](/community).
 
 Thank you, DigitalOcean, for adopting Meshery and investing in open source - and thank you, Meshery community, for making the project worth adopting. Onwards.
