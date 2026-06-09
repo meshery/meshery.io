@@ -47,7 +47,6 @@
           </li>
       </ul>
     </div>
-    </p>
 
     <div class="modal-image-single">
       <h4>Design Snapshot</h4>
@@ -63,22 +62,24 @@
   </div>
   <!-- MINICARD-END -->
 
-  {%if pattern.patternInfo%}
+  {% assign info = pattern.patternInfo | default: pattern.filterInfo %}
+  {% assign caveats = pattern.patternCaveats | default: pattern.filterCaveats %}
+  {% assign info_blank = info == '""' or info | strip == '' %}
+  {% assign caveats_blank = caveats == '""' or caveats | strip == '' %}
   <div>
-    <h3>What This Design Does:</h3>
-    <p class="pre-white-space">{{pattern.patternInfo | url_decode | replace: '\\n', '<br/>'| replace: '\n', '<br/>' }}</p>
-    <h3>Caveats and Consideration: </h3>
-    <p class="pre-white-space">{{pattern.patternCaveats | url_decode}}</p>
-    </p>
-    {%else%}
-    <div>
-      <h3>What This Filter Does:</h3>
-      <p class="pre-white-space">{{pattern.filterInfo | url_decode}}</p>
-      <h3>Caveats and Consideration: </h3>
-      <p class="pre-white-space">{{pattern.filterCaveats | url_decode}}</p>
-      </p>
-      {%endif%}
-      <h3>Compatibility:</h3>
+    <h3>{% if pattern.filterInfo %}What This Filter Does:{% else %}What This Design Does:{% endif %}</h3>
+    {% unless info_blank %}
+      <p class="pre-white-space">{{info | url_decode | replace: '\n', '<br/>'| replace: '\n', '<br/>' }}</p>
+    {% else %}
+      <p class="pre-white-space"><em>No description available.</em></p>
+    {% endunless %}
+    <h3>Caveats and Consideration:</h3>
+    {% unless caveats_blank %}
+      <p class="pre-white-space">{{caveats | url_decode}}</p>
+    {% else %}
+      <p class="pre-white-space"><em>No description available.</em></p>
+    {% endunless %}
+    <h3>Compatibility:</h3>
       <br />
       {% include partials/compatibility.html%}
       <br />
