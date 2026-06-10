@@ -6,7 +6,13 @@
     <div class="comatibility-grid">
     {% for item in pattern.compatibility %}
     {% assign item_slug = item | slugify %}
+    {% assign is_model = true %}
+    {% if item == "meshery-arrows" or item == "meshery-flowchart" or item == "meshery-shapes" or item == "Service Mesh" %}
+    {% assign is_model = false %}
+    {% endif %}
+    {% if is_model %}
     <a href="{{ '/catalog/models/' | append: item_slug | relative_url }}">
+    {% endif %}
     <!-- Please remove these hardcoding -->
     <!-- This would require updating the already published content with correct compatibility -->
     {% if item == "Istio" %}
@@ -50,6 +56,8 @@
     {% else %}
         <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/integration/{{ item_slug }}/icons/color/{{ item_slug }}-color.svg" onerror="this.onerror=null; this.src='{{site.baseurl}}/assets/images/logos/service-mesh-pattern.svg';" />
     {% endif %}
+    {% if is_model %}
     </a>
+    {% endif %}
     {% endfor %}
 </div>
