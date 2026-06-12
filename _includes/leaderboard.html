@@ -5,6 +5,45 @@
             onkeyup="filterLeaderboard()" />
     </div>
 
+    <!-- Top 3 Cards -->
+    <div class="leaderboard-podium">
+        {% for user in site.data.leaderboard.users %}
+        {% if user.rank <= 3 %} <div class="podium-card podium-rank-{{ user.rank }}">
+            <div class="podium-card-body">
+                <div class="podium-avatar-wrapper">
+                    <span
+                        class="medal {% if user.rank == 1 %}medal-gold{% elsif user.rank == 2 %}medal-silver{% else %}medal-bronze{% endif %}">{{
+                        user.rank }}</span>
+                    <a href="{{ user.profile_url }}" target="_blank" rel="noopener">
+                        <img class="podium-avatar" src="{{ user.avatar }}" alt="{{ user.username }}"
+                            onerror="this.onerror=null; this.src='/images/community.svg';" />
+                    </a>
+                </div>
+                <a href="{{ user.profile_url }}" target="_blank" rel="noopener" class="podium-username-link">
+                    <span class="podium-username">{{ user.username }}</span>
+                </a>
+                <div class="podium-stats">
+                    <div class="podium-stat">
+                        <span class="podium-stat-label">Likes</span>
+                        <span class="podium-stat-value">{{ user.likes }}</span>
+                    </div>
+                    <div class="podium-stat">
+                        <span class="podium-stat-label">Posts</span>
+                        <span class="podium-stat-value">{{ user.posts }}</span>
+                    </div>
+                    <div class="podium-stat">
+                        <span class="podium-stat-label">Solutions</span>
+                        <span class="podium-stat-value">{{ user.solutions }}</span>
+                    </div>
+                </div>
+                <div class="podium-score">{{ user.score }} pts</div>
+            </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+
+    <!-- Rank 4+ Table -->
     <div class="leaderboard-wrapper">
         <table class="leaderboard-table" id="leaderboard-table">
             <thead>
@@ -19,20 +58,9 @@
             </thead>
             <tbody>
                 {% for user in site.data.leaderboard.users %}
+                {% if user.rank > 3 %}
                 <tr class="leaderboard-row {% cycle 'row-white', 'row-teal' %}">
-
-                    <td class="leaderboard-rank">
-                        {% if user.rank == 1 %}
-                        <span class="medal medal-gold">1</span>
-                        {% elsif user.rank == 2 %}
-                        <span class="medal medal-silver">2</span>
-                        {% elsif user.rank == 3 %}
-                        <span class="medal medal-bronze">3</span>
-                        {% else %}
-                        {{ user.rank }}
-                        {% endif %}
-                    </td>
-
+                    <td class="leaderboard-rank">{{ user.rank }}</td>
                     <td class="leaderboard-member">
                         <a href="{{ user.profile_url }}" target="_blank" rel="noopener">
                             <img class="leaderboard-avatar" src="{{ user.avatar }}" alt="{{ user.username }}"
@@ -40,13 +68,12 @@
                             <span class="leaderboard-username">{{ user.username }}</span>
                         </a>
                     </td>
-
                     <td>{{ user.likes }}</td>
                     <td>{{ user.posts }}</td>
                     <td>{{ user.solutions }}</td>
                     <td class="leaderboard-score">{{ user.score }}</td>
-
                 </tr>
+                {% endif %}
                 {% endfor %}
             </tbody>
         </table>
@@ -77,6 +104,217 @@
         border-color: #00B39F;
     }
 
+    /* ─────────────────────────────
+   PODIUM SECTION
+───────────────────────────── */
+
+    .leaderboard-podium {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 2rem;
+        margin: 4rem 0;
+        flex-wrap: wrap;
+    }
+
+    /* Remove white card look */
+    .podium-card {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        min-width: unset;
+        max-width: unset;
+        flex: unset;
+    }
+
+    /* Different sizing like reference */
+    .podium-rank-1 {
+        order: 2;
+        transform: translateY(-20px);
+    }
+
+    .podium-rank-2 {
+        order: 1;
+    }
+
+    .podium-rank-3 {
+        order: 3;
+    }
+
+    .podium-card-body {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    /* Avatar wrapper */
+    .podium-avatar-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Main circular avatar */
+    /* Main circular avatar */
+    .podium-avatar {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 50%;
+
+        /* FIX BLUR */
+        image-rendering: auto;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+
+        /* makes images sharper */
+        filter: contrast(1.03) saturate(1.02);
+    }
+
+    /* Sizes */
+    /* Wrapper controls size instead of image itself */
+    .podium-rank-1 .podium-avatar-wrapper {
+        width: 180px;
+        height: 180px;
+    }
+
+    .podium-rank-2 .podium-avatar-wrapper,
+    .podium-rank-3 .podium-avatar-wrapper {
+        width: 130px;
+        height: 130px;
+    }
+
+    /* Borders */
+    .podium-rank-1 .podium-avatar {
+        border: 5px solid #FFD54A;
+    }
+
+    .podium-rank-2 .podium-avatar {
+        border: 4px solid #c0c0c0;
+    }
+
+    .podium-rank-3 .podium-avatar {
+        border: 4px solid #c47a3a;
+    }
+
+    .podium-avatar-wrapper a {
+        width: 100%;
+        height: 100%;
+        display: block;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    /* Medal badge */
+    .medal {
+        position: absolute;
+        bottom: -8px;
+        z-index: 3;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        border: 4px solid #111;
+    }
+
+    .medal-gold {
+        background: #FFD54A;
+        color: #111;
+    }
+
+    .medal-silver {
+        background: #c0c0c0;
+        color: #111;
+    }
+
+    .medal-bronze {
+        background: #c47a3a;
+    }
+
+    /* Crown for #1 */
+    .podium-rank-1 .podium-avatar-wrapper::before {
+        content: "👑";
+        position: absolute;
+        top: -42px;
+        font-size: 2rem;
+    }
+
+    /* Username */
+    .podium-username {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    /* Stats */
+    .podium-stats {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.2rem;
+    }
+
+    .podium-stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .podium-stat-label {
+        font-size: 0.72rem;
+        color: #8f8f8f;
+    }
+
+    .podium-stat-value {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    /* Score */
+    .podium-score {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #00B39F;
+        line-height: 1;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+        .leaderboard-podium {
+            gap: 1rem;
+        }
+
+        .podium-rank-1 .podium-avatar-wrapper {
+            width: 130px;
+            height: 130px;
+        }
+
+        .podium-rank-2 .podium-avatar-wrapper,
+        .podium-rank-3 .podium-avatar-wrapper {
+            width: 95px;
+            height: 95px;
+        }
+
+        .podium-username {
+            font-size: 1.1rem;
+        }
+
+        .podium-score {
+            font-size: 1.4rem;
+        }
+    }
+
+    /* ── Table ── */
     .leaderboard-wrapper {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -112,36 +350,10 @@
 
     .row-white {
         background-color: #ffffff;
-        color: #333333;
     }
 
     .row-teal {
         background-color: #e6f7f5;
-        color: #333333;
-    }
-
-    .medal {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        font-weight: 700;
-        font-size: 0.85rem;
-        color: #fff;
-    }
-
-    .medal-gold {
-        background-color: #f5a623;
-    }
-
-    .medal-silver {
-        background-color: #9b9b9b;
-    }
-
-    .medal-bronze {
-        background-color: #c47a3a;
     }
 
     .leaderboard-member a {
@@ -175,14 +387,20 @@
     /* ── Mobile ── */
     @media (max-width: 600px) {
         .leaderboard-controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 16px;
             justify-content: flex-start;
+            margin-bottom: 16px;
         }
 
         .leaderboard-filter {
+            width: 100%;
+        }
+
+        .leaderboard-podium {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .podium-card {
             width: 100%;
             max-width: 100%;
         }
@@ -193,21 +411,14 @@
             padding: 8px 6px;
         }
 
-        .leaderboard-rank {
-            font-size: 0.85rem;
-        }
-
-        .leaderboard-score {
-            font-weight: bold;
-            font-size: 0.85rem;
-        }
-
         .leaderboard-avatar {
             width: 28px;
             height: 28px;
         }
 
-        .leaderboard-username {
+        .leaderboard-username,
+        .leaderboard-score,
+        .leaderboard-rank {
             font-size: 0.85rem;
         }
     }
@@ -216,11 +427,22 @@
 <script>
     function filterLeaderboard() {
         var input = document.getElementById('leaderboard-filter').value.toLowerCase();
+
+        // Filter table rows (rank 4+)
         var rows = document.querySelectorAll('#leaderboard-table tbody tr');
         rows.forEach(function (row) {
             var username = row.querySelector('.leaderboard-username');
             if (username) {
                 row.style.display = username.textContent.toLowerCase().includes(input) ? '' : 'none';
+            }
+        });
+
+        // Filter podium cards (top 3)
+        var cards = document.querySelectorAll('.podium-card');
+        cards.forEach(function (card) {
+            var username = card.querySelector('.podium-username');
+            if (username) {
+                card.style.display = username.textContent.toLowerCase().includes(input) ? '' : 'none';
             }
         });
     }

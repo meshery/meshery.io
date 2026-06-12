@@ -32,7 +32,7 @@ function buildLeaderboard(items) {
             rank: 0,
             username: item.user.username,
             name: item.user.name || '',
-            avatar: item.user.avatar_template ? `https://discuss.layer5.io${item.user.avatar_template.replace('{size}', '50')}` : '',
+            avatar: item.user.avatar_template ? `https://discuss.layer5.io${item.user.avatar_template.replace('{size}', '200')}` : '',
             profile_url: `https://discuss.layer5.io/u/${item.user.username}`,
             posts: item.post_count || 0,
             likes: item.likes_received || 0,
