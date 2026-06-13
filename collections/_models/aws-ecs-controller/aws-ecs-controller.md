@@ -35,7 +35,11 @@ components:
   colorIcon: assets/images/integration/aws-ecs-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
   whiteIcon: assets/images/integration/aws-ecs-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
   description: 
-componentsCount: 6
+- name: capacity-provider
+  colorIcon: assets/images/integration/aws-ecs-controller/components/capacity-provider/icons/color/capacity-provider-color.svg
+  whiteIcon: assets/images/integration/aws-ecs-controller/components/capacity-provider/icons/white/capacity-provider-white.svg
+  description: 
+componentsCount: 7
 relationships: 
 - type: "non-binding"
   kind: "edge"
