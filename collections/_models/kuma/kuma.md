@@ -231,7 +231,11 @@ components:
   colorIcon: assets/images/integration/kuma/components/mesh-zone-address/icons/color/mesh-zone-address-color.svg
   whiteIcon: assets/images/integration/kuma/components/mesh-zone-address/icons/white/mesh-zone-address-white.svg
   description: 
-componentsCount: 55
+- name: mesh-zone-address
+  colorIcon: assets/images/integration/kuma/components/mesh-zone-address/icons/color/mesh-zone-address-color.svg
+  whiteIcon: assets/images/integration/kuma/components/mesh-zone-address/icons/white/mesh-zone-address-white.svg
+  description: 
+componentsCount: 56
 relationships: 
 relationshipsCount: 0
 featureList: [
