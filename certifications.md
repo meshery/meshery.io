@@ -8,7 +8,7 @@ description: "Validate your Meshery skills and expertise with the Meshery Certif
 The Meshery Certification Program offers a structured pathway for professionals to validate their skills in managing and contributing to Meshery. The program includes certifications for administrators, developers, and open source contributors, each tailored to different levels of expertise and roles within the Meshery ecosystem.
 
 <div style="text-align: center;padding:20px">
-<a href="https://playground.meshery.io/extension/meshmap?catalog-design=c2141477-379b-432e-b47e-1c89600235a5"><img alt="Meshery Certification Program" src="{{ '/assets/images/posts/2025/certified-meshery-contributor/meshery-certification-program.png' | relative_url }}" style="width:100%;max-width:800px;" /></a><br />
+<a href="/assets/images/posts/2025/certified-meshery-contributor/meshery-certification-program.png"><img alt="Meshery Certification Program" src="{{ '/assets/images/posts/2025/certified-meshery-contributor/meshery-certification-program.png' | relative_url }}" style="width:100%;max-width:800px;" /></a><br />
 <a href="https://playground.meshery.io/extension/meshmap?catalog-design=c2141477-379b-432e-b47e-1c89600235a5">Explore the Meshery Certification Program design</a>
 </div>
 
@@ -39,7 +39,7 @@ The Developers track targets contributors and engineers focused on building and 
 
 ### Certified Meshery Contributor (CMC)
 
-The [Certified Meshery Contributor (CMC)](https://cloud.meshery.io/academy/certifications/c5ada327-8a58-4c8a-b9fa-51b95696488c/certified-meshery-contributor) was launched in October 2025 as the program's first certification — and a first of its kind for the CNCF. It validates technical proficiency in contributing to the Meshery open source project through written assessments across five of Meshery's major [architectural domains](https://docs.meshery.io/architecture): Meshery Server, Meshery CLI, Meshery UI, Meshery Models, and Meshery Extensibility.
+The [Certified Meshery Contributor (CMC)](https://cloud.meshery.io/academy/certifications/c5ada327-8a58-4c8a-b9fa-51b95696488c/certified-meshery-contributor) was launched in October 2025 as the program's first certification — [and a first of its kind for the CNCF](https://www.cncf.io/blog/2025/10/27/announcing-the-certified-meshery-contributor-cmc/). It validates technical proficiency in contributing to the Meshery open source project through written assessments across five of Meshery's major [architectural domains](https://docs.meshery.io/architecture): Meshery Server, Meshery CLI, Meshery UI, Meshery Models, and Meshery Extensibility.
 
 <div style="text-align:center;padding:20px">
 <a href="https://cloud.meshery.io/academy/certifications/c5ada327-8a58-4c8a-b9fa-51b95696488c/certified-meshery-contributor">
