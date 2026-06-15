@@ -120,7 +120,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   ```bash
   $ make site
   ```
-  _Note: From the Makefile, this command is actually running `$ bundle install; bundle exec jekyll serve --drafts --livereload`_
+  _Note: The Makefile prefers Docker (if available and the daemon is running) and will run Jekyll inside the official jekyll container. If Docker isn't running, the Makefile will only serve locally if required gems are already installed; otherwise it will prompt to start Docker or run `bundle install --path vendor/bundle`._
 
 ### 4. Create a Pull Request
 
