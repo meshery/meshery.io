@@ -1,0 +1,36 @@
+name: Discussion data files update
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' #runs every day at midnight
+
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    if: github.repository == 'meshery/meshery.io'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GH_ACCESS_TOKEN }}
+      - name: Fetch data for meshery tag
+        run: |
+          mkdir -p _data/discuss
+          curl -L https://discuss.meshery.io/tag/meshery.json -o _data/discuss/meshery.json
+
+      - name: Pull changes from remote
+        run: git pull origin master
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          file_pattern: _data/discuss/*.json
+          commit_user_name: Discussions bot
+          commit_user_email: discussions@meshery.io
+          commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          commit_options: "--signoff"
+          commit_message: "latest discussion data files added"
+          branch: master
