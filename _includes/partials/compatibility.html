@@ -5,6 +5,8 @@
     </style>
     <div class="comatibility-grid">
     {% for item in pattern.compatibility %}
+    {% assign item_slug = item | slugify %}
+    <a href="{{ '/catalog/models/' | append: item_slug | relative_url }}">
     <!-- Please remove these hardcoding -->
     <!-- This would require updating the already published content with correct compatibility -->
     {% if item == "Istio" %}
@@ -42,5 +44,6 @@
     {% else %}
         <img class="service-mesh-image" src="{{site.baseurl}}/images/integrations/{{ item | downcase | replace: ' ', '-'  }}/icons/color/{{ item | downcase | replace: ' ', '-'  }}-color.svg" />
     {% endif %}
+    </a>
     {% endfor %}
 </div>
