@@ -226,20 +226,10 @@
   }
 </script>
 <script type="module">
+  const pageKey = window.location.pathname;
   document.addEventListener("DOMContentLoaded", () => {
-  // Uncheck all checkboxes on page load AND reset their state in the DOM
-  const checkboxes = document.querySelectorAll("input[type='checkbox']");
-  checkboxes.forEach((checkbox) => {
-    checkbox.checked = false;
+    showFilterCards();
   });
-
-  // Reset global filter lists
-  globalTechnologyList = [];
-  globalCategoryList = [];
-  globalPatternTypeList = [];
-
-  showFilterCards(); // Refresh the displayed cards
-});
   // import all integrations data
   import data from "{{ site.baseurl }}/integrations/data.js";
   // add wasmFilter to data array
@@ -277,13 +267,13 @@
 
   // globalTechnologyList stores all the technologies checked by user as strings
   // example: ["gcp", "keda"]
-  let globalTechnologyList = [];
+  let globalTechnologyList = JSON.parse(sessionStorage.getItem('selected_technologies_' + pageKey) || '[]');
   // globalCategorySelected stores the category selected by the user, users can select multiple categories at the same time for sorting
   // initially it is empty
-  let globalCategoryList = [];
+  let globalCategoryList = JSON.parse(sessionStorage.getItem('selected_categories_' + pageKey) || '[]');
     // globalPatternTypeList stores the pattern types which currently are models, designs and wasm filters.
   // multiple pattern types can be selected at the same time
-  let globalPatternTypeList = [];
+  let globalPatternTypeList = JSON.parse(sessionStorage.getItem('selected_patterntypes_' + pageKey) || '[]');
   // get all pattern cards
   const patternCards = document.querySelectorAll(".patternCard");
 
@@ -373,6 +363,9 @@
     input.name = "type";
     input.value = cardType[i];
     input.id = cardType[i];
+    if (globalCategoryList.includes(cardType[i])) {
+      input.checked = true;
+    }
     // When it is checked or unchecked, updateCategoryList function is called followed by showFilterCards function
     input.onclick = function () {
       updateCategoryList(cardType[i]);
@@ -416,6 +409,9 @@
     input.name = data[i].name;
     input.value = data[i].name;
     input.id = data[i].name;
+    if (globalTechnologyList.includes(data[i].name)) {
+      input.checked = true;
+    }
     // When technology checkbox is checked or unchecked, updateTechnologyList function is called, followed by showFilterCards function
     input.onclick = function () {
       updateTechnologyList(data[i].name);
@@ -446,13 +442,16 @@
     } else {
       globalTechnologyList.push(value);
     }
+    sessionStorage.setItem('selected_technologies_' + pageKey, JSON.stringify(globalTechnologyList));
   }
 
   // This function updates the category list
   function updateCategoryList(value) {
     // When user checks a category, that category category is pushed in globalCategoryList array which holds the categories selected
     if (document.getElementById(value).checked) {
-      globalCategoryList.push(value);
+      if (!globalCategoryList.includes(value)) {
+        globalCategoryList.push(value);
+      }
     } else {
       // When user unchecks a category, it is removed from the array globalCategoryList
       globalCategoryList = globalCategoryList.filter((item) => item !== value);
@@ -461,6 +460,7 @@
         globalCategoryList = [];
       }
     }
+    sessionStorage.setItem('selected_categories_' + pageKey, JSON.stringify(globalCategoryList));
   }
 
   function updatePatternTypeList(value) {
@@ -471,6 +471,7 @@
     } else {
       globalPatternTypeList.push(value);
     }
+    sessionStorage.setItem('selected_patterntypes_' + pageKey, JSON.stringify(globalPatternTypeList));
   }
 
 // Function called when user clicks on any of Technology checkboxes or Category Boxes
