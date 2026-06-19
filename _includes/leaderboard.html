@@ -1,10 +1,5 @@
 <section class="leaderboard-section">
 
-    <div class="leaderboard-controls">
-        <input type="text" id="leaderboard-filter" class="leaderboard-filter" placeholder="Filter by username"
-            onkeyup="filterLeaderboard()" />
-    </div>
-
     <!-- Top 3 Cards -->
     <div class="leaderboard-podium">
         {% for user in site.data.leaderboard.users %}
@@ -41,6 +36,11 @@
     </div>
     {% endif %}
     {% endfor %}
+    </div>
+
+    <div class="leaderboard-controls">
+        <input type="text" id="leaderboard-filter" class="leaderboard-filter" placeholder="Filter by username"
+            onkeyup="filterLeaderboard()" />
     </div>
 
     <!-- Rank 4+ Table -->
@@ -91,7 +91,9 @@
     .leaderboard-section .leaderboard-controls {
         display: flex;
         justify-content: flex-end;
-        margin: 2rem 0 2.5rem;
+        /* was flex-end */
+        margin: 0 0 1rem;
+        /* tighten top margin since podium is above now */
     }
 
     .leaderboard-filter {
