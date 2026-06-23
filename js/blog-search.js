@@ -147,7 +147,9 @@ function renderResults(results, query) {
       searchSummary.style.display = 'flex';
     }
     resultsContainer.style.display = 'none';
-    blogPosts.style.display = 'none';
+    if (blogPosts) {
+      blogPosts.style.display = 'none';
+    }
     return;
   }
 
@@ -164,7 +166,9 @@ function renderResults(results, query) {
     searchSummary.appendChild(mainMessage);
     searchSummary.style.display = 'flex';
   }
-  blogPosts.style.display = 'none';
+  if (blogPosts) {
+    blogPosts.style.display = 'none';
+  }
   resultsContainer.style.display = 'block';
 
   // Create result items
