@@ -3,7 +3,7 @@ layout: single-page-extension
 item-type: extension
 name: Meshery Academy
 kind: Remote Provider
-userName: Meshery Author
+userName: Meshery Authors
 type: Academy
 compatibility: 
   - meshery
