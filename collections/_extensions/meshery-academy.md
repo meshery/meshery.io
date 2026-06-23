@@ -4,7 +4,7 @@ item-type: extension
 name: Meshery Academy
 kind: Remote Provider
 userName: Meshery Authors
-type: Collaboration
+type: Academy
 compatibility: 
   - meshery
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
