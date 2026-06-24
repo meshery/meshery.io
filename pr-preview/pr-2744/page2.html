@@ -485,8 +485,6 @@
       </button>
     </div>
   </header>
-  </body>
-</html>
 
 
 <div class="content">
@@ -1594,12 +1592,45 @@
   color: var(--brand-color-secondary);
 }
 
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .search-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  max-width: 800px;
+  margin: 1.5rem auto 2rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
   text-align: center;
+  font-size: 1.15rem;
+  font-weight: 600;
   color: var(--color-secondary-dark);
+  letter-spacing: 0.01em;
+  animation: fadeInSlideUp 0.25s ease-out forwards;
+  overflow-wrap: break-word;
+}
+
+.search-summary-query {
+  color: var(--brand-color-secondary);
+}
+
+.search-helper-text {
   font-size: 0.95rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
+  font-weight: 400;
+  color: var(--color-primary-super-dark);
 }
 
 #search-results {
@@ -1833,6 +1864,14 @@ ul.archive-months {
     padding: 0.875rem 2.75rem 0.875rem 1rem;
     font-size: 1rem;
   }
+
+  .search-summary {
+    font-size: 1.05rem;
+    margin: 1.25rem auto 1.75rem;
+  }
+  .search-helper-text {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1848,6 +1887,14 @@ ul.archive-months {
 
   #blog-search-input::placeholder {
     font-size: 0.95rem;
+  }
+
+  .search-summary {
+    font-size: 1rem;
+    margin: 1rem auto 1.5rem;
+  }
+  .search-helper-text {
+    font-size: 0.85rem;
   }
 }
 </style>
@@ -2251,7 +2298,8 @@ ul.archive-months {
 <script>
   $(document).ready(function () {
     $('.slider').slick({
-
+      centerMode: true,
+      centerPadding: '0px',
       dots: false,
       arrows: false,
       infinite: true,
@@ -2266,25 +2314,25 @@ ul.archive-months {
         {
           breakpoint: 1300,
           settings: {
-            slidesToShow: 2.5,
+            slidesToShow: 3,
           }
         },
         {
           breakpoint: 1200,
           settings: {
-            slidesToShow: 2,
+            slidesToShow: 3,
           }
         },
         {
           breakpoint: 1024,
           settings: {
-            slidesToShow: 2,
+            slidesToShow: 3,
           }
         },
         {
           breakpoint: 800,
           settings: {
-            slidesToShow: 1.5,
+            slidesToShow: 2,
             slidesToScroll: 1,
           }
         },
@@ -2300,7 +2348,8 @@ ul.archive-months {
           breakpoint: 480,
           settings: {
             slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            centerMode: false
           }
         },
         {
@@ -2308,7 +2357,8 @@ ul.archive-months {
           settings: {
             slidesToShow: 1,
             adaptiveWidth: true,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            centerMode: false
           }
         },
         {
@@ -2317,6 +2367,7 @@ ul.archive-months {
             slidesToShow: 1,
             slidesToScroll: 1,
             adaptiveWidth: true,
+            centerMode: false
           }
         },
         {
@@ -2325,6 +2376,7 @@ ul.archive-months {
             slidesToShow: 1,
             slidesToScroll: 1,
             adaptiveWidth: true,
+            centerMode: false
           }
         }
       ]
