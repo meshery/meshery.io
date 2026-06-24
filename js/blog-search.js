@@ -121,20 +121,54 @@ function renderResults(results, query) {
 
   if (!resultsContainer) return;
 
-  // Clear previous results
+  // Clear previous results and summary
   resultsContainer.innerHTML = '';
+  if (searchSummary) {
+    searchSummary.innerHTML = '';
+  }
 
   if (results.length === 0) {
-    searchSummary.textContent = `No results found for "${query}"`;
-    searchSummary.style.display = 'block';
+    if (searchSummary) {
+      const mainMessage = document.createElement('div');
+      mainMessage.className = 'search-main-message';
+      mainMessage.appendChild(document.createTextNode('No results found for "'));
+      const querySpan = document.createElement('span');
+      querySpan.className = 'search-summary-query';
+      querySpan.textContent = query;
+      mainMessage.appendChild(querySpan);
+      mainMessage.appendChild(document.createTextNode('"'));
+
+      const helperText = document.createElement('div');
+      helperText.className = 'search-helper-text';
+      helperText.textContent = 'Try another keyword or browse categories below.';
+
+      searchSummary.appendChild(mainMessage);
+      searchSummary.appendChild(helperText);
+      searchSummary.style.display = 'flex';
+    }
     resultsContainer.style.display = 'none';
-    blogPosts.style.display = 'none';
+    if (blogPosts) {
+      blogPosts.style.display = 'none';
+    }
     return;
   }
 
-  searchSummary.textContent = `Found ${results.length} result${results.length !== 1 ? 's' : ''} for "${query}"`;
-  searchSummary.style.display = 'block';
-  blogPosts.style.display = 'none';
+  if (searchSummary) {
+    const mainMessage = document.createElement('div');
+    mainMessage.className = 'search-main-message';
+    mainMessage.appendChild(document.createTextNode(`Found ${results.length} result${results.length !== 1 ? 's' : ''} for "`));
+    const querySpan = document.createElement('span');
+    querySpan.className = 'search-summary-query';
+    querySpan.textContent = query;
+    mainMessage.appendChild(querySpan);
+    mainMessage.appendChild(document.createTextNode('"'));
+
+    searchSummary.appendChild(mainMessage);
+    searchSummary.style.display = 'flex';
+  }
+  if (blogPosts) {
+    blogPosts.style.display = 'none';
+  }
   resultsContainer.style.display = 'block';
 
   // Create result items
