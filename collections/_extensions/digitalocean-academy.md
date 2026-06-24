@@ -4,7 +4,7 @@ item-type: extension
 name: DigitalOcean Academy
 kind: Remote Provider
 userName: DigitalOcean
-type: Collaboration
+type: Academy
 compatibility: 
   - meshery
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68dd98
