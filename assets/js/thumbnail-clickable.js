@@ -1,6 +1,6 @@
 function toggleFullScreenImage(patternId, patternType) {
   var fullScreenContainer = document.getElementById(
-    `fullScreenContainer${patternId}`
+    `fullScreenImageContainer${patternId}`
   );
 
   if (!fullScreenContainer) {
