@@ -3,7 +3,7 @@ function initializeReadMore() {
 
   contentElements.forEach(content => {
     const readMore =
-      content.parentElement.querySelector(".read-more");
+      content.parentElement?.querySelector(".read-more");
 
     if (!readMore) return;
 
