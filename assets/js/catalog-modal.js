@@ -1,20 +1,30 @@
-document.addEventListener("DOMContentLoaded", function () {
+function initializeReadMore() {
   const contentElements = document.querySelectorAll(".contentdata");
+
   contentElements.forEach(content => {
-    const readMore = content.parentElement.querySelector(".read-more");
+    const readMore =
+      content.parentElement.querySelector(".read-more");
 
     if (!readMore) return;
 
     const numberOfLines = getNumberOfLines(content);
 
     if (numberOfLines > 3) {
-      readMore.style.display = 'inline';
+      readMore.style.display = "inline";
     } else {
-      readMore.style.display = 'none';
+      readMore.style.display = "none";
     }
   });
-});
+}
 
+if (document.readyState === "loading") {
+  document.addEventListener(
+    "DOMContentLoaded",
+    initializeReadMore
+  );
+} else {
+  initializeReadMore();
+}
 function getNumberOfLines(element) {
   const clone = element.cloneNode(true);
   clone.style.visibility = 'hidden';
