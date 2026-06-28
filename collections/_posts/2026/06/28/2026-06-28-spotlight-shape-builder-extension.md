@@ -7,7 +7,7 @@ categories:
   - community
   - extensibility
   - open-source
-featured-image: assets\images\posts\2026\06\meshery-extensions-color.png
+featured-image: /assets/images/posts/2026/06/meshery-extensions-color.png
 redirect_from: /blog/spotlight-shape-builder-extension
 published: true
 ---
