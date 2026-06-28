@@ -55,6 +55,6 @@ Ready to jump in? Start here Now:
 
 - Browse the [open issues](https://github.com/meshery-extensions/shape-builder/issues) and [open pull requests](https://github.com/meshery-extensions/shape-builder/pulls).
 - Try the live tool at [shapes.meshery.io](https://shapes.meshery.io).
-- Introduce yourself in the [Meshery community](https://meshery.io/community) and join the weekly community calls.
+- Introduce yourself in the [Meshery community](/community) and join the weekly community calls.
 
 The maintainers and the wider community are ready to help you get up to speed. If Shape Builder sounds like the kind of project you would like to champion, leave a comment on the repo or in the community forum, and away you go.
