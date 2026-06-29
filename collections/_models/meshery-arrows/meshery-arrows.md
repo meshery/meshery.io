@@ -3,8 +3,8 @@ layout: single-page-model
 item-type: model
 name: Meshery Arrows
 subtitle: Icons that are used for pointing out infrastructure and designs
-colorIcon: /images/integrations/meshery-arrows/icons/color/meshery-arrows-color.svg
-whiteIcon: /images/integrations/meshery-arrows/icons/white/meshery-arrows-white.svg
+colorIcon: /assets/images/newcomers/long-arrow.svg
+whiteIcon: /assets/images/newcomers/long-arrow.svg
 docURL: https://docs.meshery.io/concepts/logical/models
 description: Meshery Arrows allows you to use pointing icons to design and map your cloud native configurations collaboratively.
 category: Orchestration & Management
