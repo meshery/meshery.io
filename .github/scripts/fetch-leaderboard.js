@@ -58,9 +58,14 @@ function saveJSON(leaderboard) {
 }
 
 async function main() {
-    const items = await fetchUsers();
-    const leaderboard = buildLeaderboard(items);
-    saveJSON(leaderboard);
+    try {
+        const items = await fetchUsers();
+        const leaderboard = buildLeaderboard(items);
+        saveJSON(leaderboard);
+    } catch (err) {
+        console.error('Leaderboard build failed:', err.message);
+        process.exit(1);  
+    }
 }
 
 main();
