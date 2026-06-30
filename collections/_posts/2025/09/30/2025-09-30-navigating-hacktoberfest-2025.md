@@ -49,7 +49,7 @@ Respect, collaboration, and kindness are the bedrock of Open Source. The Code of
 
 ### 5. Engaging Beyond Code: Fostering Holistic Development
 
-Don't confine yourself to a GitHub profile. Engage in meaningful discussions, participate in webinars, and [open discussions](https://meshery.io/community#discussion-forums). Be a mentor and seek mentorship. Open Source offers a wealth of opportunities for comprehensive growth. While coding skills undoubtedly benefit, the real lessons often lie in understanding people and their diverse perspectives.
+Don't confine yourself to a GitHub profile. Engage in meaningful discussions, participate in webinars, and [open discussions](https://discuss.meshery.io). Be a mentor and seek mentorship. Open Source offers a wealth of opportunities for comprehensive growth. While coding skills undoubtedly benefit, the real lessons often lie in understanding people and their diverse perspectives.
 
 ### 6. Compassion Over Code: Recognizing Maintainer Burnout
 
