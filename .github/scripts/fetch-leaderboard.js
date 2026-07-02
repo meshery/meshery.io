@@ -2,12 +2,14 @@ const fs = require('fs');
 const path = require('path');
 
 const API_KEY = process.env.DISCOURSE_API_KEY;
+const API_USERNAME = process.env.DISCOURSE_API_USERNAME || 'system';
 const API_URL = 'https://discuss.layer5.io/directory_items.json?period=all&order=solutions&limit=50';
 
 async function fetchUsers() {
     const headers = {};
     if (API_KEY) {
         headers['Api-Key'] = API_KEY;
+        headers['Api-Username'] = API_USERNAME;
     }
     const response = await fetch(API_URL, { headers });
 
