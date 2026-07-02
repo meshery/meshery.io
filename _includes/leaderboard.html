@@ -1,0 +1,108 @@
+<section class="leaderboard-section">
+
+    <!-- Top 3 Cards -->
+    <div class="leaderboard-podium">
+        {% for user in site.data.leaderboard.users %}
+        {% if user.rank <= 3 %} <div class="podium-card podium-rank-{{ user.rank }}">
+            <div class="podium-card-body">
+                <div class="podium-avatar-wrapper">
+                    <span
+                        class="medal {% if user.rank == 1 %}medal-gold{% elsif user.rank == 2 %}medal-silver{% else %}medal-bronze{% endif %}">{{
+                        user.rank }}</span>
+                    <a href="{{ user.profile_url }}" target="_blank" rel="noopener">
+                        <img class="podium-avatar" src="{{ user.avatar }}" alt="{{ user.username }}"
+                            onerror="this.onerror=null; this.src='assets/images/nav-icons/community.svg';" />
+                    </a>
+                </div>
+                <a href="{{ user.profile_url }}" target="_blank" rel="noopener" class="podium-username-link">
+                    <span class="podium-username">{{ user.username }}</span>
+                </a>
+                <div class="podium-stats">
+                    <div class="podium-stat">
+                        <span class="podium-stat-label">Likes</span>
+                        <span class="podium-stat-value">{{ user.likes }}</span>
+                    </div>
+                    <div class="podium-stat">
+                        <span class="podium-stat-label">Posts</span>
+                        <span class="podium-stat-value">{{ user.posts }}</span>
+                    </div>
+                    <div class="podium-stat">
+                        <span class="podium-stat-label">Solutions</span>
+                        <span class="podium-stat-value">{{ user.solutions }}</span>
+                    </div>
+                </div>
+                <div class="podium-score">{{ user.score }} pts</div>
+            </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+
+    <div class="leaderboard-controls">
+        <input type="text" id="leaderboard-filter" class="leaderboard-filter" placeholder="Filter by username"
+            onkeyup="filterLeaderboard()" />
+    </div>
+
+    <!-- Rank 4+ Table -->
+    <div class="leaderboard-wrapper">
+        <table class="leaderboard-table" id="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Member</th>
+                    <th>Likes Received</th>
+                    <th>Posts</th>
+                    <th>Solutions Accepted</th>
+                    <th>Total Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in site.data.leaderboard.users %}
+                {% if user.rank > 3 %}
+                <tr class="leaderboard-row {% cycle 'row-white', 'row-teal' %}">
+                    <td class="leaderboard-rank">{{ user.rank }}</td>
+                    <td class="leaderboard-member">
+                        <a href="{{ user.profile_url }}" target="_blank" rel="noopener">
+                            <img class="leaderboard-avatar" src="{{ user.avatar }}" alt="{{ user.username }}"
+                                onerror="this.onerror=null; this.src='assets/images/nav-icons/community.svg';" />
+                            <span class="leaderboard-username">{{ user.username }}</span>
+                        </a>
+                    </td>
+                    <td>{{ user.likes }}</td>
+                    <td>{{ user.posts }}</td>
+                    <td>{{ user.solutions }}</td>
+                    <td class="leaderboard-score">{{ user.score }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <p class="leaderboard-updated">Last updated: {{ site.data.leaderboard.last_updated }}</p>
+
+</section>
+
+<script>
+    function filterLeaderboard() {
+        var input = document.getElementById('leaderboard-filter').value.toLowerCase();
+
+        // Filter table rows (rank 4+)
+        var rows = document.querySelectorAll('#leaderboard-table tbody tr');
+        rows.forEach(function (row) {
+            var username = row.querySelector('.leaderboard-username');
+            if (username) {
+                row.style.display = username.textContent.toLowerCase().includes(input) ? '' : 'none';
+            }
+        });
+
+        // Filter podium cards (top 3)
+        var cards = document.querySelectorAll('.podium-card');
+        cards.forEach(function (card) {
+            var username = card.querySelector('.podium-username');
+            if (username) {
+                card.style.display = username.textContent.toLowerCase().includes(input) ? '' : 'none';
+            }
+        });
+    }
+</script>
