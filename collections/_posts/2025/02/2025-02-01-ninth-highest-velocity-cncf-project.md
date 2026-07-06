@@ -74,7 +74,7 @@ Thank you to every contributor, user, and community member for making Meshery th
 Meshery's success is a collective effort, driven by the passion and dedication of its community members. We encourage everyone to get involved and contribute to this exciting project. Whether you're a seasoned developer or just starting your cloud-native journey, there's a place for you in the Meshery community.
 
 * Contribute to the [project on GitHub](https://github.com/meshery)
-* Join the community discussions: [Slack](https://slack.meshery.io), [Forum](https://meshery.io/community#discussion-forums)
+* Join the community discussions: [Slack](https://slack.meshery.io), [Forum](https://discuss.meshery.io)
 * Share your insights and experiences on the [Meshery blog](https://meshery.io/blog)
 
 Let's continue to propel Meshery forward and shape the future of cloud-native infrastructure management!

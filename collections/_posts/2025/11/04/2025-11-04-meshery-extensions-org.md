@@ -88,7 +88,7 @@ Support expectations differ between the core platform and extensions to reflect 
 ### User Guidance
 
 * **Documentation**: Both core and extension documentation should be accessible, with clear instructions on installation, usage, and troubleshooting.  
-* **Community Channels**: Users can seek help via [Slack](https://slack.meshery.io), GitHub issues, or the [discussion forum](https://meshery.io/community#discussion-forums).
+* **Community Channels**: Users can seek help via [Slack](https://slack.meshery.io), GitHub issues, or the [discussion forum](https://discuss.meshery.io).
 
 ## Project Mechanics
 
