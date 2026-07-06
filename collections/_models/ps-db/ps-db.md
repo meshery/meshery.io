@@ -23,7 +23,11 @@ components:
   colorIcon: assets/images/integration/ps-db/components/percona-server-my-sql/icons/color/percona-server-my-sql-color.svg
   whiteIcon: assets/images/integration/ps-db/components/percona-server-my-sql/icons/white/percona-server-my-sql-white.svg
   description: 
-componentsCount: 3
+- name: percona-server-my-sql-cluster-set
+  colorIcon: assets/images/integration/ps-db/components/percona-server-my-sql-cluster-set/icons/color/percona-server-my-sql-cluster-set-color.svg
+  whiteIcon: assets/images/integration/ps-db/components/percona-server-my-sql-cluster-set/icons/white/percona-server-my-sql-cluster-set-white.svg
+  description: 
+componentsCount: 4
 relationships: 
 relationshipsCount: 0
 featureList: [
