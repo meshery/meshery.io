@@ -2,7 +2,8 @@
 layout: program-index
 title: "LFX Mentorship"
 subtitle: "Linux Foundation Mentorship with Meshery"
-image: /assets/images/programs/lfx-logo.svg
+image: /assets/images/programs/lfx-logo-light.svg
+imageDark: /assets/images/programs/lfx-logo.svg
 program_slug: /programs/lfx/
 link: /programs/lfx
 permalink: /programs/lfx
