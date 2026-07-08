@@ -3,7 +3,9 @@ layout: page
 title: Recognition Programs
 permalink: /community/recognition
 description: "Meshery publicly recognizes and appreciates its users and contributors."
-redirect_from: /community/badges
+redirect_from:
+  - /community/badges
+  - /community/recognition/
 ---
 
 Meshery's recognition programs are designed to acknowledge and celebrate the milestones of our community members. These programs provide a way for users and contributors to earn badges that signify their achievements and involvement in the Meshery ecosystem and for users to obtain certifications that validate their skills and expertise.
