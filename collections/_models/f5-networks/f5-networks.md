@@ -1,0 +1,44 @@
+---
+layout: single-page-model
+item-type: model
+name: F5 Networks
+subtitle: Collaborative and visual infrastructure as design for F5 Networks
+colorIcon: /assets/images/integration/f5-networks/icons/color/f5-networks-color.svg
+whiteIcon: /assets/images/integration/f5-networks/icons/white/f5-networks-white.svg
+docURL: https://docs.meshery.io/extensibility/integrations/f5-networks
+description: 
+category: Security & Compliance
+subcategory: Security & Compliance
+registrant: GitHub
+components: 
+- name: virtual-server
+  colorIcon: assets/images/integration/f5-networks/components/virtual-server/icons/color/virtual-server-color.svg
+  whiteIcon: assets/images/integration/f5-networks/components/virtual-server/icons/white/virtual-server-white.svg
+  description: 
+- name: transport-server
+  colorIcon: assets/images/integration/f5-networks/components/transport-server/icons/color/transport-server-color.svg
+  whiteIcon: assets/images/integration/f5-networks/components/transport-server/icons/white/transport-server-white.svg
+  description: 
+- name: ingress-link
+  colorIcon: assets/images/integration/f5-networks/components/ingress-link/icons/color/ingress-link-color.svg
+  whiteIcon: assets/images/integration/f5-networks/components/ingress-link/icons/white/ingress-link-white.svg
+  description: 
+- name: tls-profile
+  colorIcon: assets/images/integration/f5-networks/components/tls-profile/icons/color/tls-profile-color.svg
+  whiteIcon: assets/images/integration/f5-networks/components/tls-profile/icons/white/tls-profile-white.svg
+  description: 
+- name: external-dns
+  colorIcon: assets/images/integration/f5-networks/components/external-dns/icons/color/external-dns-color.svg
+  whiteIcon: assets/images/integration/f5-networks/components/external-dns/icons/white/external-dns-white.svg
+  description: 
+componentsCount: 5
+relationships: 
+relationshipsCount: 0
+featureList: [
+  "Deploy and manage F5 BIG-IP resources directly from Kubernetes using CRDs",
+  "Invite anyone to review and make changes to your private designs.",
+  "Ongoing synchronization of Kubernetes configuration and changes across any number of clusters."
+]
+howItWorks: "Collaborative Infrastructure as Design"
+howItWorksDetails: "Collaboratively manage infrastructure with your coworkers synchronously sharing the same designs."
+---
