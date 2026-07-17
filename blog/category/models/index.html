@@ -86,13 +86,13 @@
         if (localStorage.getItem("mode") === "light-mode") {
           body.classList.remove("dark-mode");
     
-          let allLogos = document.querySelectorAll("#logo-dark-light");
+          let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
           allLogos.forEach(e => e.src = e.dataset.logoForLight);
         }
     
         // Automatically set logos based on initial theme
-        window.addEventListener('load', () => {
-          let allLogos = document.querySelectorAll("#logo-dark-light");
+        document.addEventListener('DOMContentLoaded', () => {
+          let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
           allLogos.forEach(e => {
             e.src = body.classList.contains("dark-mode") ? e.dataset.logoForDark : e.dataset.logoForLight;
           });
@@ -947,7 +947,7 @@
 		document.body.classList.toggle("dark-mode")
 		
 		let l5Logos = document.querySelectorAll("#l5-logo");
-		let allLogos = document.querySelectorAll("#logo-dark-light");
+		let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
 		if (document.body.classList.contains("dark-mode")) {
 			l5Logos.forEach(e => e.src = '../assets/images/company-logo/dark-mode-logo.svg')
 			allLogos.forEach(e => e.src = e.dataset.logoForDark)
