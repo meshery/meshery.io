@@ -2,7 +2,7 @@
 name: Site Update
 about: Suggest an update to the Meshery.io website
 title: '[Website] '
-labels: 'area/website'
+labels: 'area/website, help wanted, language/css, language/markdown, framework/jekyll'
 assignees: ''
 ---
 #### Current State of the Meshery.io site
