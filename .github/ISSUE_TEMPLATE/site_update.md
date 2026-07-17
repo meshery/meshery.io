@@ -1,15 +1,17 @@
 ---
-name: Site Update
+name: Website Update
 about: Suggest an update to the Meshery.io website
 title: '[Website] '
-labels: 'area/website, help wanted, language/css, language/markdown, framework/jekyll'
+labels: 'area/website, help wanted, language/css, language/markdown, framework/jekyll, language/javascript'
 assignees: ''
 ---
-#### Current State of the Meshery.io site
+### Current State of the Meshery.io site
 <!-- A brief description of what the problem is. -->
 
-#### Desired State of the Meshery.io site
+
+### Desired State of the Meshery.io site
 <!-- A brief description of the change you are requesting. -->
+
 
 ---
 ### Contributor [Guides](https://docs.meshery.io/project/contributing)
