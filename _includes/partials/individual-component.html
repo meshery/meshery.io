@@ -42,7 +42,14 @@
             <div>
               {% for item in pattern.compatibility %}
               {% assign item_slug = item | slugify %}
-              <a href="{{ '/catalog/models/' | append: item_slug | relative_url }}">
+              {% if item_slug == "istio" %}
+                {% assign model_slug = "istio-base" %}
+              {% elsif item_slug == "istio-rate-limit-operator" %}
+                {% assign model_slug = "istio-ratelimit-operator" %}
+              {% else %}
+                {% assign model_slug = item_slug %}
+              {% endif %}
+              <a href="{{ '/catalog/models/' | append: model_slug | relative_url }}">
                 {{ item | capitalize }}
               </a>
               {% unless forloop.last %}, {% endunless %}
