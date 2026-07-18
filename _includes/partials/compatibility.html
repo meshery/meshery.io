@@ -6,19 +6,26 @@
     <div class="comatibility-grid">
     {% for item in pattern.compatibility %}
     {% assign item_slug = item | slugify %}
-    <a href="{{ '/catalog/models/' | append: item_slug | relative_url }}">
+    {% if item_slug == "istio" %}
+      {% assign model_slug = "istio-base" %}
+    {% elsif item_slug == "istio-rate-limit-operator" %}
+      {% assign model_slug = "istio-ratelimit-operator" %}
+    {% else %}
+      {% assign model_slug = item_slug %}
+    {% endif %}
+    <a href="{{ '/catalog/models/' | append: model_slug | relative_url }}">
     <!-- Please remove these hardcoding -->
     <!-- This would require updating the already published content with correct compatibility -->
     {% if item == "Istio" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/istio.svg" />
+    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/integration/istio-base/icons/color/istio-base-color.svg" />
     {% elsif item == "Linkerd" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/linkerd.svg" />
     {% elsif item == "Consul" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/consul.svg" />
     {% elsif item == "ISTIO" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/istio.svg" />
+    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/integration/istio-base/icons/color/istio-base-color.svg" />
     {% elsif item == "ISTIO RATE LIMIT OPERATOR" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/istio-color.svg" />
+    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/integration/istio-ratelimit-operator/icons/color/istio-ratelimit-operator-color.svg" />
     {% elsif item == "Traefik" %}
     <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/traefik-mesh.svg" />
     {% elsif item == "OSM" %}
