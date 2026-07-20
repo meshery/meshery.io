@@ -12,7 +12,9 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GH_ACCESS_TOKEN }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -24,10 +26,16 @@ jobs:
         env:
           DISCOURSE_API_KEY: ${{ secrets.DISCOURSE_API_KEY }}
 
-      - name: Commit and push JSON
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add _data/leaderboard.json
-          git commit -m "chore: update leaderboard data" -s || echo "No changes to commit"
-          git push
+      - name: Pull changes from remote
+        run: git pull origin master
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          file_pattern: _data/leaderboard.json
+          commit_user_name: Leaderboard bot
+          commit_user_email: leaderboard@meshery.io
+          commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          commit_options: "--signoff"
+          commit_message: "chore: update leaderboard data"
+          branch: master

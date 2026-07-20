@@ -1,47 +1,19 @@
 <section class="leaderboard-section">
 
-    <!-- Top 3 Cards -->
-    <div class="leaderboard-podium">
-        {% for user in site.data.leaderboard.users %}
-        {% if user.rank <= 3 %} <div class="podium-card podium-rank-{{ user.rank }}">
-            <div class="podium-card-body">
-                <div class="podium-avatar-wrapper">
-                    <span
-                        class="medal {% if user.rank == 1 %}medal-gold{% elsif user.rank == 2 %}medal-silver{% else %}medal-bronze{% endif %}">{{
-                        user.rank }}</span>
-                    <a href="{{ user.profile_url }}" target="_blank" rel="noopener">
-                        <img class="podium-avatar" src="{{ user.avatar }}" alt="{{ user.username }}"
-                            onerror="this.onerror=null; this.src='/assets/images/nav-icons/community.svg';" />
-                    </a>
-                </div>
-                <a href="{{ user.profile_url }}" target="_blank" rel="noopener" class="podium-username-link">
-                    <span class="podium-username">{{ user.username }}</span>
-                </a>
-                <div class="podium-stats">
-                    <div class="podium-stat">
-                        <span class="podium-stat-label">Likes</span>
-                        <span class="podium-stat-value">{{ user.likes }}</span>
-                    </div>
-                    <div class="podium-stat">
-                        <span class="podium-stat-label">Posts</span>
-                        <span class="podium-stat-value">{{ user.posts }}</span>
-                    </div>
-                    <div class="podium-stat">
-                        <span class="podium-stat-label">Solutions</span>
-                        <span class="podium-stat-value">{{ user.solutions }}</span>
-                    </div>
-                </div>
-                <div class="podium-score">{{ user.score }} pts</div>
-            </div>
-    </div>
-    {% endif %}
-    {% endfor %}
-    </div>
-
     <div class="leaderboard-controls">
+        <div class="period-toggle" role="tablist" aria-label="Leaderboard time period">
+            <select id="period-select" class="period-select" aria-label="Leaderboard time period">
+                <option value="weekly">This Week</option>
+                <option value="monthly">This Month</option>
+                <option value="all">All Time</option>
+            </select>
+        </div>
         <input type="text" id="leaderboard-filter" class="leaderboard-filter" placeholder="Filter by username"
             onkeyup="filterLeaderboard()" />
     </div>
+
+    <!-- Top 3 Cards -->
+    <div class="leaderboard-podium" id="leaderboard-podium"></div>
 
     <!-- Rank 4+ Table -->
     <div class="leaderboard-wrapper">
@@ -56,38 +28,129 @@
                     <th>Total Points</th>
                 </tr>
             </thead>
-            <tbody>
-                {% for user in site.data.leaderboard.users %}
-                {% if user.rank > 3 %}
-                <tr class="leaderboard-row {% cycle 'row-white', 'row-teal' %}">
-                    <td class="leaderboard-rank">{{ user.rank }}</td>
-                    <td class="leaderboard-member">
-                        <a href="{{ user.profile_url }}" target="_blank" rel="noopener">
-                            <img class="leaderboard-avatar" src="{{ user.avatar }}" alt="{{ user.username }}"
-                                onerror="this.onerror=null; this.src='/assets/images/nav-icons/community.svg';" />
-                            <span class="leaderboard-username">{{ user.username }}</span>
-                        </a>
-                    </td>
-                    <td>{{ user.likes }}</td>
-                    <td>{{ user.posts }}</td>
-                    <td>{{ user.solutions }}</td>
-                    <td class="leaderboard-score">{{ user.score }}</td>
-                </tr>
-                {% endif %}
-                {% endfor %}
-            </tbody>
+            <tbody id="leaderboard-tbody"></tbody>
         </table>
     </div>
+
+    <p class="leaderboard-empty-state" id="leaderboard-empty-state" style="display:none;">
+        No activity for this period yet.
+    </p>
 
     <p class="leaderboard-updated">Last updated: {{ site.data.leaderboard.last_updated }}</p>
 
 </section>
 
+<script type="application/json" id="leaderboard-data">
+    {{ site.data.leaderboard.periods | jsonify }}
+</script>
+
 <script>
-    function filterLeaderboard() {
+    (function () {
+        var leaderboardData = JSON.parse(document.getElementById('leaderboard-data').textContent);
+        var defaultPeriod = {{ site.data.leaderboard.default_period | jsonify
+    }};
+    var currentPeriod = defaultPeriod || 'weekly';
+    var fallbackAvatar = '/assets/images/nav-icons/community.svg';
+
+    function escapeHtml(str) {
+        var div = document.createElement('div');
+        div.textContent = str == null ? '' : String(str);
+        return div.innerHTML;
+    }
+
+    function medalClass(rank) {
+        if (rank === 1) return 'medal-gold';
+        if (rank === 2) return 'medal-silver';
+        return 'medal-bronze';
+    }
+
+    function renderPodium(users) {
+        var podium = document.getElementById('leaderboard-podium');
+        var top3 = users.filter(function (u) { return u.rank <= 3; });
+
+        podium.innerHTML = top3.map(function (user) {
+            return (
+                '<div class="podium-card podium-rank-' + user.rank + '">' +
+                '<div class="podium-card-body">' +
+                '<div class="podium-avatar-wrapper">' +
+                '<span class="medal ' + medalClass(user.rank) + '">' + user.rank + '</span>' +
+                '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
+                '<img class="podium-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
+                '</a>' +
+                '</div>' +
+                '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener" class="podium-username-link">' +
+                '<span class="podium-username">' + escapeHtml(user.username) + '</span>' +
+                '</a>' +
+                '<div class="podium-stats">' +
+                '<div class="podium-stat"><span class="podium-stat-label">Likes</span><span class="podium-stat-value">' + user.likes + '</span></div>' +
+                '<div class="podium-stat"><span class="podium-stat-label">Posts</span><span class="podium-stat-value">' + user.posts + '</span></div>' +
+                '<div class="podium-stat"><span class="podium-stat-label">Solutions</span><span class="podium-stat-value">' + user.solutions + '</span></div>' +
+                '</div>' +
+                '<div class="podium-score">' + user.score + ' pts</div>' +
+                '</div>' +
+                '</div>'
+            );
+        }).join('');
+    }
+
+    function renderTable(users) {
+        var tbody = document.getElementById('leaderboard-tbody');
+        var rest = users.filter(function (u) { return u.rank > 3; });
+
+        tbody.innerHTML = rest.map(function (user, i) {
+            var rowClass = i % 2 === 0 ? 'row-white' : 'row-teal';
+            return (
+                '<tr class="leaderboard-row ' + rowClass + '">' +
+                '<td class="leaderboard-rank">' + user.rank + '</td>' +
+                '<td class="leaderboard-member">' +
+                '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
+                '<img class="leaderboard-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
+                '<span class="leaderboard-username">' + escapeHtml(user.username) + '</span>' +
+                '</a>' +
+                '</td>' +
+                '<td>' + user.likes + '</td>' +
+                '<td>' + user.posts + '</td>' +
+                '<td>' + user.solutions + '</td>' +
+                '<td class="leaderboard-score">' + user.score + '</td>' +
+                '</tr>'
+            );
+        }).join('');
+    }
+
+    function renderLeaderboard(period) {
+        var users = leaderboardData[period] || [];
+        var hasActivity = users.some(function (u) { return u.score > 0; });
+        var emptyState = document.getElementById('leaderboard-empty-state');
+        var podium = document.getElementById('leaderboard-podium');
+        var wrapper = document.querySelector('.leaderboard-wrapper');
+
+        if (!hasActivity) {
+            emptyState.style.display = '';
+            podium.style.display = 'none';
+            wrapper.style.display = 'none';
+            return;
+        }
+
+        emptyState.style.display = 'none';
+        podium.style.display = '';
+        wrapper.style.display = '';
+        renderPodium(users);
+        renderTable(users);
+        filterLeaderboard();
+    }
+
+    var periodSelect = document.getElementById('period-select');
+
+    periodSelect.value = currentPeriod;
+
+    periodSelect.addEventListener('change', function () {
+        currentPeriod = this.value;
+        renderLeaderboard(currentPeriod);
+    });
+
+    window.filterLeaderboard = function () {
         var input = document.getElementById('leaderboard-filter').value.toLowerCase();
 
-        // Filter table rows (rank 4+)
         var rows = document.querySelectorAll('#leaderboard-table tbody tr');
         rows.forEach(function (row) {
             var username = row.querySelector('.leaderboard-username');
@@ -96,7 +159,6 @@
             }
         });
 
-        // Filter podium cards (top 3)
         var cards = document.querySelectorAll('.podium-card');
         cards.forEach(function (card) {
             var username = card.querySelector('.podium-username');
@@ -104,5 +166,8 @@
                 card.style.display = username.textContent.toLowerCase().includes(input) ? '' : 'none';
             }
         });
-    }
+    };
+
+    renderLeaderboard(currentPeriod);
+    }) ();
 </script>
