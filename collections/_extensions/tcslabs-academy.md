@@ -8,9 +8,9 @@ type: Collaboration
 compatibility:
   - meshery
 extensionId: deea6061-b6be-49a9-ad1c-f1a5c32e1fa9
-logo: /assets/images/extensions/tcslabs-academy.svg
-whiteImage: /assets/images/extensions/tcslabs-academy.svg
-colorImage: /assets/images/extensions/tcslabs-academy.svg
+logo: /assets/images/extensions/tcslabs-academy-color.svg
+whiteImage: /assets/images/extensions/tcslabs-academy-color.svg
+colorImage: /assets/images/extensions/tcslabs-academy-white.svg
 
 extensionInfo: |
   TCS Labs Academy is the official learning-content repository for TCS Labs on the Meshery Academy platform. It hosts structured learning paths, challenges, certifications, and Meshery infrastructure designs.
