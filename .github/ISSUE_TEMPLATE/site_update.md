@@ -20,3 +20,4 @@ The meshery.io website uses Jekyll and GitHub Pages. Site content is found under
 - 📚 See the [Contributing to Meshery.io Website](https://github.com/meshery/meshery.io#contributing-to-the-mesheryio-website) section of the readme.md and other [contributing instructions](https://docs.meshery.io/project/contributing), too.
 - 🎨 Wireframes and [designs for Meshery UI](https://www.figma.com/file/SMP3zxOjZztdOLtgN4dS2W/Meshery-UI) in Figma [(open invite)](https://www.figma.com/team_invite/redeem/GvB8SudhEOoq3JOvoLaoMs)
 - 🙋🏾🙋🏼 Questions: [Discussion Forum](https://discuss.meshery.io) and [Community Slack](https://slack.meshery.io)
+- 📺 [Self-paced Contributor Trainings](https://meshery.io/talks-and-trainings#trainings)
