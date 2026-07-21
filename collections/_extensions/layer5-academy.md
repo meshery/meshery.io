@@ -9,8 +9,8 @@ compatibility:
   - meshery
 extensionId: d011fd20-a3f5-4480-883b-dfb34321d168
 logo: /assets/images/extensions/layer5-academy.svg
-whiteImage: /assets/images/extensions/layer5-academy.svg
-colorImage: /assets/images/extensions/layer5-academy.svg
+whiteImage: /assets/images/extensions/dual-layer5-academy-color.svg
+colorImage: /assets/images/extensions/dual-layer5-academy-white.svg
 extensionInfo: |
   Layer5 Academy is a platform that provides a comprehensive learning experience for anyone beginning their journey into Layer5 and cloud native infrastructure.
 extensionCaveats: |
