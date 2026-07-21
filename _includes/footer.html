@@ -145,6 +145,14 @@
 	const currentMode = localStorage.getItem("mode");
 	if (isDark ^ (currentMode === "dark-mode")) {
 		setMode();
+	} else {
+		// Body already matches the stored theme, so setMode() is not called here.
+		// Sync every theme-aware logo to the current theme so logos that render
+		// after the header script (such as #l5-logo) show the correct image on
+		// load instead of waiting for a manual toggle.
+		document.querySelectorAll("#logo-dark-light, .logo-dark-light").forEach(e => {
+			e.src = document.body.classList.contains("dark-mode") ? e.dataset.logoForDark : e.dataset.logoForLight;
+		});
 	}
 
 	function setMode() {
