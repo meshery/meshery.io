@@ -28,17 +28,17 @@ type CatalogPattern struct {
 	ID          string               `json:"id"`
 	Name        string               `json:"name"`
 	Version     string               `json:"version"`
-	PatternFile string               `json:"pattern_file"`
-	CatalogData v1alpha1.CatalogData `json:"catalog_data"`
-	UserID      string               `json:"user_id"`
-	CreatedAt   string               `json:"created_at"`
+	PatternFile string               `json:"patternFile"`
+	CatalogData v1alpha1.CatalogData `json:"catalogData"`
+	UserID      string               `json:"userId"`
+	CreatedAt   string               `json:"createdAt"`
 }
 
 type UserInfo struct {
-	UserID    string `json:"user_id"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	AvatarURL string `json:"avatar_url"`
+	UserID    string `json:"id"`
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	AvatarURL string `json:"avatarUrl"`
 }
 
 const (
@@ -282,7 +282,7 @@ userId: %s
 userName: %s
 userAvatarURL: %s
 type: %s
-compatibility: 
+compatibility:
 %s
 patternId: %s
 image: %s
