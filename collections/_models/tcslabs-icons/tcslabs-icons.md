@@ -17,8 +17,12 @@ subcategory: Branding
 registrant: GitHub
 
 components:
+  - name: TCS Logo
+    colorIcon: /assets/images/integration/tcslabs-icons/icons/color/TCS-logo-black.svg
+    whiteIcon: /assets/images/integration/tcslabs-icons/icons/white/TCS-logo-white.svg
+    description: TCS Labs logo.
 
-componentsCount: 2
+componentsCount: 1
 
 relationships:
 
