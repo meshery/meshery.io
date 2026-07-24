@@ -35,7 +35,7 @@
           </li>
 
           <li><p>VERSION</p>
-            <div>{{publishedVersion}}</div>
+            <div>{{ pattern.publishedVersion }}</div>
           </li>
           <li>
             <p>MODELS</p>
@@ -75,21 +75,23 @@
 
   {% assign info = pattern.patternInfo | default: pattern.filterInfo %}
   {% assign caveats = pattern.patternCaveats | default: pattern.filterCaveats %}
-  {% assign info_blank = info == '""' or info | strip == '' %}
-  {% assign caveats_blank = caveats == '""' or caveats | strip == '' %}
+  {% assign info_clean = info | strip %}
+  {% assign caveats_clean = caveats | strip %}
   <div>
     <h3>{% if pattern.filterInfo %}What This Filter Does:{% else %}What This Design Does:{% endif %}</h3>
-    {% unless info_blank %}
-      <p class="pre-white-space">{{info | url_decode}}</p>
-    {% else %}
+    {% if info_clean == '' or info_clean == '""' %}
       <p class="pre-white-space"><em>No description available.</em></p>
-    {% endunless %}
+    {% else %}
+      <p class="pre-white-space">{{ info | url_decode }}</p>
+    {% endif %}
+
     <h3>Caveats and Consideration:</h3>
-    {% unless caveats_blank %}
-      <p class="pre-white-space">{{caveats | url_decode}}</p>
-    {% else %}
+    {% if caveats_clean == '' or caveats_clean == '""' %}
       <p class="pre-white-space"><em>No description available.</em></p>
-    {% endunless %}
+    {% else %}
+      <p class="pre-white-space">{{ caveats | url_decode }}</p>
+    {% endif %}
+
     <h3>Compatibility:</h3>
       <br />
       {% include partials/compatibility.html%}
