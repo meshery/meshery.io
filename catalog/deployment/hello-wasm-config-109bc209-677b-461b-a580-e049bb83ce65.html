@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="test" content="testing" />
     <!-- Google Tag Manager -->
-    <meta name="description" content="""
+    <meta name="description" content="Hello Wasm — a Dapr sample that serves HTTP responses directly from the Dapr
+sidecar using WebAssembly (WASM) middleware, with no separate application
+required. The design contains two Dapr resources: a Configuration (appconfig)
+that enables a WASM handler in the HTTP pipeline, and a Component (wasm) of type
+middleware.http.wasm that loads the WASM binary. Useful as a starting point for
+building custom, embedded HTTP middleware in Dapr.
+
 " />
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -27,13 +33,13 @@
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:image" content="https://meshery.io/assets/images/logos/service-mesh-pattern.svg" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-07-24T17:43:11+00:00" />
-<meta property="article:modified_time" content="2026-07-24T17:43:11+00:00" />
+<meta property="article:published_time" content="2026-07-24T17:52:35+00:00" />
+<meta property="article:modified_time" content="2026-07-24T17:52:35+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://meshery.io/assets/images/logos/service-mesh-pattern.svg" />
 <meta name="twitter:title" content="109bc209 677b 461b A580 E049bb83ce65" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-07-24T17:43:11+00:00","datePublished":"2026-07-24T17:43:11+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"109bc209 677b 461b A580 E049bb83ce65","image":"https://meshery.io/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/catalog/deployment/hello-wasm-config-109bc209-677b-461b-a580-e049bb83ce65.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/catalog/deployment/hello-wasm-config-109bc209-677b-461b-a580-e049bb83ce65.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-07-24T17:52:35+00:00","datePublished":"2026-07-24T17:52:35+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"109bc209 677b 461b A580 E049bb83ce65","image":"https://meshery.io/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/catalog/deployment/hello-wasm-config-109bc209-677b-461b-a580-e049bb83ce65.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/catalog/deployment/hello-wasm-config-109bc209-677b-461b-a580-e049bb83ce65.html"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/css/stellarnav.css" />
@@ -543,7 +549,7 @@
           </li>
 
           <li><p>CREATED AT</p>
-            <div></div>
+            <div>July 20, 2026</div>
           </li>
 
           <li><p>VERSION</p>
@@ -617,12 +623,26 @@
   <div>
     <h3>What This Design Does:</h3>
     
-      <p class="pre-white-space"><em>No description available.</em></p>
+      <p class="pre-white-space">Hello Wasm — a Dapr sample that serves HTTP responses directly from the Dapr
+sidecar using WebAssembly (WASM) middleware, with no separate application
+required. The design contains two Dapr resources: a Configuration (appconfig)
+that enables a WASM handler in the HTTP pipeline, and a Component (wasm) of type
+middleware.http.wasm that loads the WASM binary. Useful as a starting point for
+building custom, embedded HTTP middleware in Dapr.
+
+</p>
     
 
     <h3>Caveats and Consideration:</h3>
     
-      <p class="pre-white-space"><em>No description available.</em></p>
+      <p class="pre-white-space">- Targets Dapr runtime v1.10; the WASM binary must be http-wasm compatible.
+- The Component references the binary via a local path (file://wasm/main.wasm),
+  so the .wasm file must be available to the sidecar at that location.
+- The original sample runs in self-hosted (local) Dapr; deploying to Kubernetes
+  requires adjusting the binary source and resource paths.
+- This design does not include the compiled main.wasm binary itself.
+
+</p>
     
 
     <h3>Compatibility:</h3>

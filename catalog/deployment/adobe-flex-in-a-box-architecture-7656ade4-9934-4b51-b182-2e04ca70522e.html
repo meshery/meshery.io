@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="test" content="testing" />
     <!-- Google Tag Manager -->
-    <meta name="description" content="""
+    <meta name="description" content="Adobe's architecture diagram illustrates their sophisticated GitOps-based service delivery foundation called Flex, which orchestrates the journey of code from development to deployment. The system begins with Git Corp, where developers store their code templates, and uses a GitHub app to forward events through a redirect service. This redirect service then intelligently distributes these events between two Flexbox instances - redundant processing units that contain essential components like Argo CD for continuous delivery, a provisioner for resource management, and various Argo tools for handling events, workflows, and observability.
+The architecture demonstrates Adobe's focus on scalability and reliability through its dual-Flexbox approach, where each Flexbox can communicate with target clusters and remote namespaces. The system includes a two-way "Relocation" capability between Flexboxes, allowing for workload redistribution when needed. The right side of the diagram shows how everything connects to their developer portal through a Flex backend, creating a comprehensive CI/CD system that manages deployments across their infrastructure while maintaining a clear developer experience through their CI/CD interface plugin.
 " />
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -27,13 +28,13 @@
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:image" content="https://meshery.io/assets/images/logos/service-mesh-pattern.svg" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-07-24T17:43:11+00:00" />
-<meta property="article:modified_time" content="2026-07-24T17:43:11+00:00" />
+<meta property="article:published_time" content="2026-07-24T17:52:35+00:00" />
+<meta property="article:modified_time" content="2026-07-24T17:52:35+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://meshery.io/assets/images/logos/service-mesh-pattern.svg" />
 <meta name="twitter:title" content="7656ade4 9934 4b51 B182 2e04ca70522e" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-07-24T17:43:11+00:00","datePublished":"2026-07-24T17:43:11+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"7656ade4 9934 4b51 B182 2e04ca70522e","image":"https://meshery.io/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/catalog/deployment/adobe-flex-in-a-box-architecture-7656ade4-9934-4b51-b182-2e04ca70522e.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/catalog/deployment/adobe-flex-in-a-box-architecture-7656ade4-9934-4b51-b182-2e04ca70522e.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-07-24T17:52:35+00:00","datePublished":"2026-07-24T17:52:35+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"7656ade4 9934 4b51 B182 2e04ca70522e","image":"https://meshery.io/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/catalog/deployment/adobe-flex-in-a-box-architecture-7656ade4-9934-4b51-b182-2e04ca70522e.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/catalog/deployment/adobe-flex-in-a-box-architecture-7656ade4-9934-4b51-b182-2e04ca70522e.html"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/css/stellarnav.css" />
@@ -543,7 +544,7 @@
           </li>
 
           <li><p>CREATED AT</p>
-            <div></div>
+            <div>December 16, 2024</div>
           </li>
 
           <li><p>VERSION</p>
@@ -631,12 +632,19 @@
   <div>
     <h3>What This Design Does:</h3>
     
-      <p class="pre-white-space"><em>No description available.</em></p>
+      <p class="pre-white-space">Adobe's architecture diagram illustrates their sophisticated GitOps-based service delivery foundation called Flex, which orchestrates the journey of code from development to deployment. The system begins with Git Corp, where developers store their code templates, and uses a GitHub app to forward events through a redirect service. This redirect service then intelligently distributes these events between two Flexbox instances - redundant processing units that contain essential components like Argo CD for continuous delivery, a provisioner for resource management, and various Argo tools for handling events, workflows, and observability.
+The architecture demonstrates Adobe's focus on scalability and reliability through its dual-Flexbox approach, where each Flexbox can communicate with target clusters and remote namespaces. The system includes a two-way "Relocation" capability between Flexboxes, allowing for workload redistribution when needed. The right side of the diagram shows how everything connects to their developer portal through a Flex backend, creating a comprehensive CI/CD system that manages deployments across their infrastructure while maintaining a clear developer experience through their CI/CD interface plugin.
+</p>
     
 
     <h3>Caveats and Consideration:</h3>
     
-      <p class="pre-white-space"><em>No description available.</em></p>
+      <p class="pre-white-space">1. Substantial infrastructure investment is required, including multiple Kubernetes clusters, robust cloud resources, and high-availability components for critical services like the Redirect Service.
+2. Custom development is necessary for several components (Provisioner, observability tools, and developer portal integrations), requiring significant engineering resources and expertise in GitOps, Kubernetes, and the Argo project suite.
+3. Operational complexity increases dramatically with multiple Flexboxes, demanding sophisticated monitoring systems and clear procedures for service migration and disaster recovery.
+4. Cost implications are significant due to multiple control planes, cross-cluster communication, storage requirements, and the need for dedicated platform engineering teams.
+5. Security and maintenance overhead must be carefully considered, including multi-tenant isolation, secrets management across clusters, regular upgrades, and comprehensive disaster recovery procedures.
+</p>
     
 
     <h3>Compatibility:</h3>
