@@ -150,6 +150,46 @@
     font-weight: bold;
     color: var(--color-secondary-dark);
   }
+
+  .filter-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+  }
+  .sort-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--color-secondary-light);
+    background: var(--color-primary-dark);
+    border: 1px solid var(--color-primary-extra-dark);
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .sort-btn:hover {
+    border-color: var(--brand-color-secondary);
+    color: var(--brand-color-secondary);
+  }
+  .sort-btn:focus-visible {
+    outline: 2px solid var(--brand-color-secondary);
+    outline-offset: 1px;
+  }
+  .sort-btn.active {
+    color: var(--brand-color-secondary);
+    border-color: var(--brand-color-secondary);
+  }
+  .sort-btn .sort-arrow {
+    font-size: 10px;
+    line-height: 1;
+  }
 </style>
 
 <div class="filter-wrap">
@@ -173,11 +213,37 @@
   
   {% if show_technology=="true"%}
   <p id="compatibility-para" class="compatibility-para">
-    <strong>Technologies:</strong>
+    <span class="filter-heading">
+      <strong>Technologies:</strong>
+      <button
+        type="button"
+        class="sort-btn"
+        id="compatibility-sort"
+        data-order="none"
+        title="Sort by count"
+        aria-label="Sort technologies by count"
+      >
+        Count <span class="sort-arrow" aria-hidden="true">⇅</span>
+      </button>
+    </span>
   </p>
   <div id="compatibility-div" class="compatibility-div"></div>
   {% endif %}
-  <p id="category-para" class="category-para"><strong>Categories:</strong></p>
+  <p id="category-para" class="category-para">
+    <span class="filter-heading">
+      <strong>Categories:</strong>
+      <button
+        type="button"
+        class="sort-btn"
+        id="category-sort"
+        data-order="none"
+        title="Sort by count"
+        aria-label="Sort categories by count"
+      >
+        Count <span class="sort-arrow" aria-hidden="true">⇅</span>
+      </button>
+    </span>
+  </p>
   <div id="category-div" class="category-div" style="padding-right: 1.25rem;"></div>
 </div>
 <script>
@@ -376,6 +442,7 @@
     const count = categoryCardCount[cardType[i]];
     const inputContainer = document.createElement("div");
     inputContainer.className = "input-container";
+    inputContainer.dataset.count = count;
 
     const input = document.createElement("input");
     input.type = "checkbox";
@@ -419,6 +486,7 @@
     // Create nodes
     const inputContainer = document.createElement("div");
     inputContainer.className = "input-container";
+    inputContainer.dataset.count = count;
     // Here the categories are generated with a "checkbox" input type
     const input = document.createElement("input");
     input.type = "checkbox";
@@ -590,4 +658,76 @@ function showFilterCards() {
   
   return matchingCards.length; // Return count of matching cards
 }
+</script>
+<script>
+  // Sort-by-count controls for the Technologies and Categories filter sections.
+  // Each control cycles through three states: unsorted -> descending -> ascending.
+  // The checkbox list is built asynchronously by the module script above, so the
+  // original order and counts are read lazily on the first interaction.
+  (function () {
+    var sortSections = [
+      { key: "compatibility", container: "compatibility-div", button: "compatibility-sort" },
+      { key: "category", container: "category-div", button: "category-sort" },
+    ];
+
+    sortSections.forEach(function (section) {
+      var button = document.getElementById(section.button);
+      var container = document.getElementById(section.container);
+      // Technologies section is absent on pages that opt out (e.g. Models).
+      if (!button || !container) return;
+
+      var order = "none"; // none -> desc -> asc -> none
+      var originalOrder = null;
+
+      button.addEventListener("click", function () {
+        // Capture the as-built order once so the "none" state can restore it.
+        if (!originalOrder) {
+          originalOrder = Array.prototype.slice.call(container.children);
+        }
+        order = order === "none" ? "desc" : order === "desc" ? "asc" : "none";
+        applyOrder(container, order, originalOrder);
+        updateButton(button, order);
+      });
+    });
+
+    function applyOrder(container, order, originalOrder) {
+      if (order === "none") {
+        originalOrder.forEach(function (el) {
+          container.appendChild(el);
+        });
+        return;
+      }
+      var items = Array.prototype.slice.call(
+        container.querySelectorAll(".input-container")
+      );
+      items.sort(function (a, b) {
+        var countA = Number(a.dataset.count) || 0;
+        var countB = Number(b.dataset.count) || 0;
+        return order === "asc" ? countA - countB : countB - countA;
+      });
+      items.forEach(function (el) {
+        container.appendChild(el);
+      });
+    }
+
+    function updateButton(button, order) {
+      var arrow = button.querySelector(".sort-arrow");
+      var labelText = button.getAttribute("aria-label") || "Sort by count";
+      var baseLabel = labelText.split(" (")[0];
+      if (order === "desc") {
+        if (arrow) arrow.textContent = "▼"; // ▼
+        button.classList.add("active");
+        button.setAttribute("aria-label", baseLabel + " (high to low)");
+      } else if (order === "asc") {
+        if (arrow) arrow.textContent = "▲"; // ▲
+        button.classList.add("active");
+        button.setAttribute("aria-label", baseLabel + " (low to high)");
+      } else {
+        if (arrow) arrow.textContent = "⇅"; // ⇅
+        button.classList.remove("active");
+        button.setAttribute("aria-label", baseLabel);
+      }
+      button.setAttribute("data-order", order);
+    }
+  })();
 </script>
