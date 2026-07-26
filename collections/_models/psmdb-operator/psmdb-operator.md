@@ -23,7 +23,11 @@ components:
   colorIcon: assets/images/integration/psmdb-operator/components/percona-server-mongo-db/icons/color/percona-server-mongo-db-color.svg
   whiteIcon: assets/images/integration/psmdb-operator/components/percona-server-mongo-db/icons/white/percona-server-mongo-db-white.svg
   description: 
-componentsCount: 3
+- name: percona-server-mongo-db-cluster-sync
+  colorIcon: assets/images/integration/psmdb-operator/components/percona-server-mongo-db-cluster-sync/icons/color/percona-server-mongo-db-cluster-sync-color.svg
+  whiteIcon: assets/images/integration/psmdb-operator/components/percona-server-mongo-db-cluster-sync/icons/white/percona-server-mongo-db-cluster-sync-white.svg
+  description: 
+componentsCount: 4
 relationships: 
 relationshipsCount: 0
 featureList: [

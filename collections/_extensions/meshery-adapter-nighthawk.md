@@ -11,7 +11,7 @@ extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: /assets/images/logos/nighthawk-logo.svg
 whiteImage: /assets/images/logos/nighthawk-logo.svg
 colorImage: /assets/images/logos/nighthawk-logo.svg
-extensionId: |
+extensionInfo: |
   Deploy the Meshery Adapter for Nighthawk to optimize HTTP service performance testing with adaptive load control and Layer 7 testing capabilities.
 extensionCaveats: |
   - Use Meshery Adapter for Nighthawk for performance characterization and load testing of HTTP services.

@@ -3,10 +3,10 @@
   <div class="modal-image-container">
 
     <h4>{{page.collection | slice: 0, 9 | capitalize }} Details</h4>
-      <!-- {% for category in include.pattern.type %}
+      <!-- {% for category in pattern.type %}
         <div>
         <span class="pattern-type">
-          
+
           {% if category == "wasm filter" %}
           <a style="text-decoration: none; color: #333;" href="{{ site.baseurl }}/catalog/webassembly">{{ category }}</a>
           {% else %}
@@ -27,15 +27,15 @@
           </li>
 
           <li><p>CREATED BY</p>
-            <div><a href="https://cloud.meshery.io/user/{{include.pattern.userId}}">{{include.pattern.userName}}</a></div>
+            <div><a href="https://cloud.meshery.io/user/{{pattern.userId}}">{{pattern.userName}}</a></div>
           </li>
-      
-          <li><p>UPDATED AT</p>
-            <div>{{ include.pattern.date | date: "%B %d, %Y" }}</div>
+
+          <li><p>CREATED AT</p>
+            <div>{{ pattern.createdAt | date: "%B %d, %Y" }}</div>
           </li>
-    
+
           <li><p>VERSION</p>
-            <div>{{pattern.publishedVersion}}</div>
+            <div>{{ pattern.publishedVersion }}</div>
           </li>
           <li>
             <p>MODELS</p>
@@ -62,7 +62,7 @@
     <div class="modal-image-single">
       <h4>Design Snapshot</h4>
       <img class="pattern-snapshot"
-      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png" 
+      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png"
       onerror="this.src='{{ '/assets/images/logos/service-mesh-pattern.svg' | relative_url }}'" loading="lazy" onclick="toggleFullScreenImage('{{ pattern.patternId }}-light')"/>
 
       <h4 class="related-patterns">Related Designs</h4>
@@ -75,28 +75,30 @@
 
   {% assign info = pattern.patternInfo | default: pattern.filterInfo %}
   {% assign caveats = pattern.patternCaveats | default: pattern.filterCaveats %}
-  {% assign info_blank = info == '""' or info | strip == '' %}
-  {% assign caveats_blank = caveats == '""' or caveats | strip == '' %}
+  {% assign info_clean = info | strip %}
+  {% assign caveats_clean = caveats | strip %}
   <div>
     <h3>{% if pattern.filterInfo %}What This Filter Does:{% else %}What This Design Does:{% endif %}</h3>
-    {% unless info_blank %}
-      <p class="pre-white-space">{{info | url_decode}}</p>
-    {% else %}
+    {% if info_clean == '' or info_clean == '""' %}
       <p class="pre-white-space"><em>No description available.</em></p>
-    {% endunless %}
+    {% else %}
+      <p class="pre-white-space">{{ info | url_decode }}</p>
+    {% endif %}
+
     <h3>Caveats and Consideration:</h3>
-    {% unless caveats_blank %}
-      <p class="pre-white-space">{{caveats | url_decode}}</p>
-    {% else %}
+    {% if caveats_clean == '' or caveats_clean == '""' %}
       <p class="pre-white-space"><em>No description available.</em></p>
-    {% endunless %}
+    {% else %}
+      <p class="pre-white-space">{{ caveats | url_decode }}</p>
+    {% endif %}
+
     <h3>Compatibility:</h3>
       <br />
       {% include partials/compatibility.html%}
       <br />
       {% include copy-and-download.html %}
     </div>
-    
+
   </div>
   {%if false %}
   {% include related-discussion.html tag="meshery" %}
