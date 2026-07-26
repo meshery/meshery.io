@@ -24,4 +24,5 @@ extensionCaveats: |
   - Support for Kubernetes manifests: Works with a single manifest of a single resource, for entire namespaces, or single cluster visualizations.
 
 docsURL: 'https://docs.meshery.io/extensions/kubectl-kanvas-snapshot'
+
 ---
