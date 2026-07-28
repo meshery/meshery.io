@@ -119,7 +119,15 @@ components:
   colorIcon: assets/images/integration/kubevault-crds/components/order/icons/color/order-color.svg
   whiteIcon: assets/images/integration/kubevault-crds/components/order/icons/white/order-white.svg
   description: 
-componentsCount: 27
+- name: namespace-slice
+  colorIcon: assets/images/integration/kubevault-crds/components/namespace-slice/icons/color/namespace-slice-color.svg
+  whiteIcon: assets/images/integration/kubevault-crds/components/namespace-slice/icons/white/namespace-slice-white.svg
+  description: 
+- name: vault-relay
+  colorIcon: assets/images/integration/kubevault-crds/components/vault-relay/icons/color/vault-relay-color.svg
+  whiteIcon: assets/images/integration/kubevault-crds/components/vault-relay/icons/white/vault-relay-white.svg
+  description: 
+componentsCount: 29
 relationships: 
 relationshipsCount: 0
 featureList: [

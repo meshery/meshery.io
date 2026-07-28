@@ -1,10 +1,7 @@
 ---
 layout: page
-permalink: /extensions
-# redirect_from:
-#  - /extensions/
+permalink: /extensions/
 published: true
-#redirect_to: https://docs.meshery.io/extensions/
 ---
 
 <style>
@@ -60,7 +57,7 @@ published: true
   }
 </style>
 
-{% assign ordered_types = "GitOps,Configuration,Collaboration,Academy,Lifecycle" | split: "," %}
+{% assign ordered_types = "GitOps,Configuration,Collaboration,Academy,Lifecycle,Performance" | split: "," %}
 {% assign extensions_by_type = "" | split: "" %}
 {% for type in ordered_types %}
   {% assign filtered = site.extensions | where: "type", type %}
@@ -183,12 +180,8 @@ published: true
 <script>
   const extensionCards = document.querySelectorAll(".extensionCard");
   document.addEventListener("DOMContentLoaded", () => {
-    // display none for extensionCards after number 10
-    extensionCards.forEach((card, index) => {
-      // Hide extensionCards after number 10
-      if (index < 20) {
-        card.style.display = "block";
-      }
+    extensionCards.forEach((card) => {
+      card.style.display = "block";
     });
   });
 
