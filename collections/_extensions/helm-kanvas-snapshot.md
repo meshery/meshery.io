@@ -24,5 +24,5 @@ extensionCaveats: |
   - Seamless Integration: Leverages Meshery Cloud and GitHub Actions to handle snapshot rendering.
   - Support for Packaged Charts: Works with both packaged .tar.gz charts and unpackaged Helm charts.
 
-docsURL: 'https://docs.meshery.io/extensions/helm-kanvas-snapshot'
+docsURL: https://docs.meshery.io/extensions/extensions/helm-snapshot/
 ---
