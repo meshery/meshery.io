@@ -25,15 +25,23 @@ import (
 	catalogv1alpha2 "github.com/meshery/schemas/models/v1alpha2/catalog"
 	userv1beta2 "github.com/meshery/schemas/models/v1beta2/user"
 	designv1beta3 "github.com/meshery/schemas/models/v1beta3/design"
+	filterv1beta3 "github.com/meshery/schemas/models/v1beta3/filter"
 )
 
 const (
 	mesheryCloudBaseURL    = "https://cloud.meshery.io"
 	mesheryCatalogFilesDir = "catalog"
+	mesheryFilterFilesDir  = "filter"
+	//currently neither filter nor models are being populated in catalog. catalog is only designs, not really catalog as a whole
+	//this means that there's no update in the .md and there's no downloadable files for models and filters within the repo
+	//the assets/modelsFiles do carry the models but they don't get updated in sequence like the ones over at _catalog
+	//does this behavior really affect the population of the .tar causing items such as https://meshery.io/catalog/models/aigisuk
+	//to not properly resolve (outside of the scope of this pr but worth mentioning)
 )
 
 var (
 	ErrProcessPatternCode      = "test_code"
+	ErrProccessFilterCode      = "test_code"
 	ErrHTTPGetRequestCode      = "test_code"
 	ErrCreateGitHubRequestCode = "test_code"
 	ErrInvokeGitHubActionsCode = "test_code"
@@ -71,6 +79,26 @@ func main() {
 			))
 		}
 	}
+
+	pageFilters, err := fetchFilters()
+	if err != nil {
+		log.Error(err)
+		return
+	}
+	if pageFilters.Filters == nil {
+		return
+	}
+
+	for _, filter := range *pageFilters.Filters {
+		if err := processFilter(filter, token); err != nil {
+			log.Error(meshkitErrors.New(ErrProcessPatternCode, meshkitErrors.Alert,
+				[]string{"unable to process catalog pattern"},
+				[]string{err.Error()},
+				[]string{"fail to read/write file", "error regarding user info"},
+				[]string{"check the catalog pattern file", "check for updated files"},
+			))
+		}
+	}
 }
 
 func slugify(name string) string {
@@ -80,7 +108,7 @@ func slugify(name string) string {
 }
 
 func fetchCatalogPatterns() (*designv1beta3.CatalogContentPage, error) {
-	endpoint := fmt.Sprintf("%s/api/catalog/content/pattern?populate=pattern_file", mesheryCloudBaseURL)
+	endpoint := fmt.Sprintf("%s/api/catalog/content/pattern?populate=patternFile", mesheryCloudBaseURL)
 	resp, err := http.Get(endpoint)
 	if err != nil {
 		return nil, ErrHTTPGetRequest(err, endpoint)
@@ -88,6 +116,26 @@ func fetchCatalogPatterns() (*designv1beta3.CatalogContentPage, error) {
 	defer resp.Body.Close()
 
 	var page designv1beta3.CatalogContentPage
+	if err := json.NewDecoder(resp.Body).Decode(&page); err != nil {
+		return nil, utils.ErrUnmarshal(err)
+	}
+	return &page, nil
+}
+
+/*
+the endpoint over at `schemas/constructs/v1beta3/design/api.yml` for `/api/content/patterns` differs from this endpoint,
+so it must be a wrapper around, the difference is that this endpoint doesn't return Filters which is expected for the CatalogContentPage
+so a request must be done to `/api/catalog/content/filter` instead
+*/
+func fetchFilters() (*filterv1beta3.MesheryFilterPage, error) {
+	endpoint := fmt.Sprintf("%s/api/catalog/content/filter", mesheryCloudBaseURL)
+	resp, err := http.Get(endpoint)
+	if err != nil {
+		return nil, ErrHTTPGetRequest(err, endpoint)
+	}
+	defer resp.Body.Close()
+
+	var page filterv1beta3.MesheryFilterPage
 	if err := json.NewDecoder(resp.Body).Decode(&page); err != nil {
 		return nil, utils.ErrUnmarshal(err)
 	}
@@ -127,6 +175,42 @@ func processPattern(pattern designv1beta3.MesheryPattern, token string) error {
 	return invokeGitHubAction(patternID, patternImageURL, token)
 }
 
+func processFilter(filter filterv1beta3.MesheryFilter, token string) error {
+	filterID := filter.ID.String()
+	filterImageURL := getFilterImageURL(filter)
+
+	//getPatternType, catalogPatternInfo and catalogPatternCaveats calling function should change in name since it's not isolated to only pattern anymore
+	filterType := getPatternType(catalogTypeOf(filter.CatalogData))
+	filterInfo := getStringOrEmpty(catalogPatternInfo(filter.CatalogData))
+	filterCaveats := getStringOrEmpty(catalogPatternCaveats(filter.CatalogData))
+
+	compatibility := getCompatibility(catalogCompatibility(filter.CatalogData))
+
+	dir := filepath.Join("..", "..", "collections", "_filters", filterType)
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		if err := os.MkdirAll(dir, 0755); err != nil {
+			return ErrCreatingVersionDir(err)
+		}
+	}
+
+	version := catalogPublishedVersion(filter.CatalogData)
+	if version == "" {
+		version = semver.New(0, 0, 1, "", "").String()
+	}
+
+	versionDir := filepath.Join("..", "..", mesheryCatalogFilesDir, filterID, version)
+	if _, err := os.Stat(versionDir); os.IsNotExist(err) {
+		if err := os.MkdirAll(versionDir, 0755); err != nil {
+			return ErrCreatingVersionDir(err)
+		}
+	}
+
+	if err := writeFilterFile(filter, versionDir, filterType, filterInfo, filterCaveats, compatibility, filterImageURL); err != nil {
+		return err
+	}
+	return invokeGitHubAction(filterID, filterImageURL, token)
+}
+
 func getPatternImageURL(pattern designv1beta3.MesheryPattern) string {
 	patternID := pattern.ID.String()
 	defaultURL := fmt.Sprintf("https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/%s-light.png,https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/%s-dark.png", patternID, patternID)
@@ -135,6 +219,24 @@ func getPatternImageURL(pattern designv1beta3.MesheryPattern) string {
 		return defaultURL
 	}
 	urls := *pattern.CatalogData.SnapshotURL
+	switch len(urls) {
+	case 0:
+		return defaultURL
+	case 1:
+		return urls[0]
+	default:
+		return strings.Join(urls, ",")
+	}
+}
+
+func getFilterImageURL(filter filterv1beta3.MesheryFilter) string {
+	filterID := filter.ID.String()
+	defaultURL := fmt.Sprintf("https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/%s-light.png,https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/%s-dark.png", filterID, filterID)
+
+	if filter.CatalogData == nil || filter.CatalogData.SnapshotURL == nil {
+		return defaultURL
+	}
+	urls := *filter.CatalogData.SnapshotURL
 	switch len(urls) {
 	case 0:
 		return defaultURL
@@ -265,6 +367,149 @@ downloadLink: %s/design.yml
 ---`, strings.TrimSpace(string(nameYAML)), version, pattern.UserId.String(), userFullName, userAvatarURL, patternType, compatibility, patternID, patternImageURL, patternInfo, patternCaveats, createdAt.Format(time.RFC3339), patternType, slugify(patternName), patternID, mesheryCatalogFilesDir, patternID, version, patternID)
 
 	mdPath := filepath.Join("..", "..", "collections", "_catalog", patternType, patternID+".md")
+	if err := os.WriteFile(mdPath, []byte(content), 0644); err != nil {
+		return utils.ErrWriteFile(err, mdPath)
+	}
+	return nil
+}
+
+/*
+	MesheryFilter struct dependant
+
+	---
+	layout: item -> default
+
+	name: APIClarity Trace Exporter
+		Name
+
+	userId: b26fc444-c246-4be8-9863-dfffeb70c41f
+		Owner
+			code.Uuid
+
+	userName: Miles Albertson
+		missing User
+			- endpoint
+			- schema
+
+	userAvatarURL: https://cdn-icons-png.flaticon.com/512/5556/5556499.png
+		missing User
+			- endpoint
+			-schema
+
+	type: Observability
+		CatalogData.CatalogDataType
+
+	compatibility:
+			- ISTIO OPERATOR
+			- ISTIO RATE LIMIT OPERATOR
+			- ISTIO
+		CatalogData.Compatibility
+
+	filterId: 7d962c10-80ce-4370-b484-bd552f96ddd0
+		filter.ID
+
+	image: /assets/images/webassembly_logo.svg
+		CatalogData.SnapshotURL
+
+	filterInfo: |
+	""
+		CatalogData.PatternInfo
+
+	filterCaveats: |
+	""
+		CatalogData.PatternCaveats
+
+	URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/7d962c10-80ce-4370-b484-bd552f96ddd0.yaml'
+		mesheryFilterFilesDir, filterID, version
+
+	downloadLink: 7d962c10-80ce-4370-b484-bd552f96ddd0.yaml
+		filter.ID/design.yml
+			pkg writes into design.yml
+
+	createdAt:
+		CreatedAt
+	---
+*/
+
+/* writeFilterFilter should get abstracted into one generic function which receives a `pattern` or `filter` type  */
+func writeFilterFile(filter filterv1beta3.MesheryFilter, versionDir, filterType, filterInfo, filterCaveats, compatibility, filterImageURL string) error {
+	filterID := filter.ID.String()
+	filterName := filter.Name
+
+	filterFilePath := filepath.Join(versionDir, "filter.yml")
+	filterFileBody := []byte{}
+	if filter.FilterFile != nil {
+		filterFileBody = *filter.FilterFile
+	}
+	if err := os.WriteFile(filterFilePath, filterFileBody, 0644); err != nil {
+		return utils.ErrWriteFile(err, filterFilePath)
+	}
+
+	// Stable Unix-epoch sentinel when the API omits createdAt so the generated
+	// artifacthub-pkg.yml stays byte-identical across runs and doesn't churn
+	// the catalog with no-op commits.
+	createdAt := time.Unix(0, 0).UTC()
+	if !filter.CreatedAt.IsZero() {
+		createdAt = filter.CreatedAt
+	}
+
+	infoForPkg := catalogPatternInfo(filter.CatalogData)
+	if infoForPkg == "" {
+		infoForPkg = filterName
+	}
+	infoForPkg, err := decodeURIComponent(infoForPkg)
+	if err != nil {
+		return ErrDecodingContent(err)
+	}
+	caveatsForPkg, err := decodeURIComponent(catalogPatternCaveats(filter.CatalogData))
+	if err != nil {
+		return ErrDecodingContent(err)
+	}
+
+	version := catalogPublishedVersion(filter.CatalogData)
+	if version == "" {
+		version = semver.New(0, 0, 1, "", "").String()
+	}
+
+	mkCatalogData := toMeshkitCatalogData(filter.CatalogData, infoForPkg, caveatsForPkg, version)
+	artifactHubPkg := catalog.BuildArtifactHubPkg(filterName, filepath.Join(versionDir, "filter.yml"), filter.Owner.String(), version, &createdAt, mkCatalogData)
+
+	data, err := yaml.Marshal(artifactHubPkg)
+	if err != nil {
+		return utils.ErrMarshal(err)
+	}
+	if err := os.WriteFile(filepath.Join(versionDir, "artifacthub-pkg.yml"), data, 0644); err != nil {
+		return utils.ErrWriteFile(err, filepath.Join(versionDir, "artifacthub-pkg.yml"))
+	}
+
+	nameYAML, err := yaml.Marshal(filterName)
+	if err != nil {
+		return err
+	}
+
+	content := fmt.Sprintf(`---
+layout: item
+name: %s
+publishedVersion: %s
+userId: %s
+userName: %s
+userAvatarURL: %s
+type: %s
+compatibility:
+%s
+filterId: %s
+image: %s
+filterInfo: |
+  %s
+filterCaveats: |
+  %s
+createdAt: %s
+permalink: catalog/%s/%s-%s.html
+URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/%s/%s/%s/filter.yml'
+downloadLink: %s/filter.yml
+---`, strings.TrimSpace(string(nameYAML)), version, filter.Owner.String(), "", "", filterType, compatibility, filterID, filterImageURL, filterInfo, filterCaveats, createdAt.Format(time.RFC3339), filterType, slugify(filterName), filterID, mesheryFilterFilesDir, filterID, version, filterID)
+
+	mdPath := filepath.Join("..", "..", "collections", "_catalog", filterType, filterID+".md")
 	if err := os.WriteFile(mdPath, []byte(content), 0644); err != nil {
 		return utils.ErrWriteFile(err, mdPath)
 	}

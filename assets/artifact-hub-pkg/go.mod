@@ -5,7 +5,7 @@ go 1.26.4
 require (
 	github.com/Masterminds/semver/v3 v3.4.0
 	github.com/meshery/meshkit v1.0.22
-	github.com/meshery/schemas v1.3.37
+	github.com/meshery/schemas v1.4.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
