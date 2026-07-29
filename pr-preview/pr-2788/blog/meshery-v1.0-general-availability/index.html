@@ -88,13 +88,13 @@
         if (localStorage.getItem("mode") === "light-mode") {
           body.classList.remove("dark-mode");
     
-          let allLogos = document.querySelectorAll("#logo-dark-light");
+          let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
           allLogos.forEach(e => e.src = e.dataset.logoForLight);
         }
     
         // Automatically set logos based on initial theme
-        window.addEventListener('load', () => {
-          let allLogos = document.querySelectorAll("#logo-dark-light");
+        document.addEventListener('DOMContentLoaded', () => {
+          let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
           allLogos.forEach(e => {
             e.src = body.classList.contains("dark-mode") ? e.dataset.logoForDark : e.dataset.logoForLight;
           });
@@ -316,7 +316,7 @@
 						<div  class="sub-nav-li" >
 								<img class="nav-img" src="/pr-preview/pr-2788/assets/images/nav-icons/Discuss.svg
 ">
-							<a href="/pr-preview/pr-2788/community#discussion-forums
+							<a href="https://discuss.meshery.io
 " 
 							class="subnav-item">Discussion forums
 							
@@ -674,6 +674,9 @@
       <a class="prev" href="/pr-preview/pr-2788/blog/2026/03/2026-03-10-mesheryctl-relationship-cmds/
 ">&laquo; Mesheryctl Relationship Commands Promoted From Experimental</a>
        
+      <a class="next" href="/pr-preview/pr-2788/blog/2026/06/2026-06-28-spotlight-shape-builder-extension/
+">Spotlight: Shape Builder Extension &raquo;</a>
+      
     </div>
   </div>
 </div>
@@ -848,7 +851,7 @@
 						Internships</a></li>
 				
 				<li><a target="_blank" 
-						href="/pr-preview/pr-2788/community#discussion-forums
+						href="https://discuss.meshery.io
 " class="forum-icon" >
 						
 						
@@ -1150,7 +1153,7 @@
 		document.body.classList.toggle("dark-mode")
 		
 		let l5Logos = document.querySelectorAll("#l5-logo");
-		let allLogos = document.querySelectorAll("#logo-dark-light");
+		let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
 		if (document.body.classList.contains("dark-mode")) {
 			l5Logos.forEach(e => e.src = '../assets/images/company-logo/dark-mode-logo.svg')
 			allLogos.forEach(e => e.src = e.dataset.logoForDark)

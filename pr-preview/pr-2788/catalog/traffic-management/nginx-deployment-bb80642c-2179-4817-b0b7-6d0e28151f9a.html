@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="test" content="testing" />
     <!-- Google Tag Manager -->
-    <meta name="description" content="""
+    <meta name="description" content="Simple application deployment with nginx
 " />
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -27,13 +27,13 @@
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:image" content="https://meshery.io/pr-preview/pr-2788/assets/images/logos/service-mesh-pattern.svg" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-07-29T18:26:19+00:00" />
-<meta property="article:modified_time" content="2026-07-29T18:26:19+00:00" />
+<meta property="article:published_time" content="2026-07-29T18:35:13+00:00" />
+<meta property="article:modified_time" content="2026-07-29T18:35:13+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://meshery.io/pr-preview/pr-2788/assets/images/logos/service-mesh-pattern.svg" />
 <meta name="twitter:title" content="Bb80642c 2179 4817 B0b7 6d0e28151f9a" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-07-29T18:26:19+00:00","datePublished":"2026-07-29T18:26:19+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Bb80642c 2179 4817 B0b7 6d0e28151f9a","image":"https://meshery.io/pr-preview/pr-2788/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2788/catalog/traffic-management/nginx-deployment-bb80642c-2179-4817-b0b7-6d0e28151f9a.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2788/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2788/catalog/traffic-management/nginx-deployment-bb80642c-2179-4817-b0b7-6d0e28151f9a.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-07-29T18:35:13+00:00","datePublished":"2026-07-29T18:35:13+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Bb80642c 2179 4817 B0b7 6d0e28151f9a","image":"https://meshery.io/pr-preview/pr-2788/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2788/catalog/traffic-management/nginx-deployment-bb80642c-2179-4817-b0b7-6d0e28151f9a.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2788/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2788/catalog/traffic-management/nginx-deployment-bb80642c-2179-4817-b0b7-6d0e28151f9a.html"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/pr-preview/pr-2788/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/pr-preview/pr-2788/css/stellarnav.css" />
@@ -91,13 +91,13 @@
         if (localStorage.getItem("mode") === "light-mode") {
           body.classList.remove("dark-mode");
     
-          let allLogos = document.querySelectorAll("#logo-dark-light");
+          let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
           allLogos.forEach(e => e.src = e.dataset.logoForLight);
         }
     
         // Automatically set logos based on initial theme
-        window.addEventListener('load', () => {
-          let allLogos = document.querySelectorAll("#logo-dark-light");
+        document.addEventListener('DOMContentLoaded', () => {
+          let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
           allLogos.forEach(e => {
             e.src = body.classList.contains("dark-mode") ? e.dataset.logoForDark : e.dataset.logoForLight;
           });
@@ -319,7 +319,7 @@
 						<div  class="sub-nav-li" >
 								<img class="nav-img" src="/pr-preview/pr-2788/assets/images/nav-icons/Discuss.svg
 ">
-							<a href="/pr-preview/pr-2788/community#discussion-forums
+							<a href="https://discuss.meshery.io
 " 
 							class="subnav-item">Discussion forums
 							
@@ -520,7 +520,7 @@
       <!-- 
         <div>
         <span class="pattern-type">
-          
+
           
           <a style="text-decoration: none; color: #333;" href="/pr-preview/pr-2788/catalog/traffic-management">traffic-management</a>
           
@@ -541,11 +541,11 @@
           <li><p>CREATED BY</p>
             <div><a href="https://cloud.meshery.io/user/9ce6dc53-ed27-4d1e-b739-656a5c79732b">Gulcan Topcu</a></div>
           </li>
-      
-          <li><p>UPDATED AT</p>
-            <div>July 29, 2026</div>
+
+          <li><p>CREATED AT</p>
+            <div>August 03, 2023</div>
           </li>
-    
+
           <li><p>VERSION</p>
             <div>0.0.1</div>
           </li>
@@ -554,10 +554,12 @@
             <div>
               
               
+              
               <a href="/pr-preview/pr-2788/catalog/models/kubernetes">
                 Kubernetes
               </a>
               , 
+              
               
               
               <a href="/pr-preview/pr-2788/catalog/models/nginx-ingress">
@@ -573,12 +575,20 @@
     <div class="modal-image-single">
       <h4>Design Snapshot</h4>
       <img class="pattern-snapshot"
-      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/bb80642c-2179-4817-b0b7-6d0e28151f9a-light.png" 
+      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/bb80642c-2179-4817-b0b7-6d0e28151f9a-light.png"
       onerror="this.src='/pr-preview/pr-2788/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('bb80642c-2179-4817-b0b7-6d0e28151f9a-light')"/>
 
       <h4 class="related-patterns">Related Designs</h4>
       <!-- MINICARD-START -->
       <!-- more conditions will be needed to be added when more patterns are introduced.  -->
+
+    
+
+    
+
+    
+
+    
 
     
 
@@ -1248,12 +1258,16 @@
   <div>
     <h3>What This Design Does:</h3>
     
-      <p class="pre-white-space"><em>No description available.</em></p>
+      <p class="pre-white-space">Simple application deployment with nginx
+</p>
     
+
     <h3>Caveats and Consideration:</h3>
     
-      <p class="pre-white-space"><em>No description available.</em></p>
+      <p class="pre-white-space">No caveats
+</p>
     
+
     <h3>Compatibility:</h3>
       <br />
           <style>
@@ -1264,6 +1278,7 @@
     <div class="comatibility-grid">
     
     
+    
     <a href="/pr-preview/pr-2788/catalog/models/kubernetes">
     <!-- Please remove these hardcoding -->
     <!-- This would require updating the already published content with correct compatibility -->
@@ -1271,6 +1286,7 @@
         <img class="service-mesh-image" src="/pr-preview/pr-2788/images/integrations/kubernetes/icons/color/kubernetes-color.svg" />
     
     </a>
+    
     
     
     <a href="/pr-preview/pr-2788/catalog/models/nginx-ingress">
@@ -1296,7 +1312,7 @@
         
         <a href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id=bb80642c-2179-4817-b0b7-6d0e28151f9a&name=nginx-deployment"
           target="_blank">
-          <button class="import" style="width: 15rem;">Open in Playground </button>
+          <button class="import import-brand-primary" style="width: 15rem;">Open in Playground </button>
         </a>
         
 
@@ -1304,7 +1320,7 @@
         
         <a href="/pr-preview/pr-2788/catalog/bb80642c-2179-4817-b0b7-6d0e28151f9a/0.0.1/design.yml" download="nginx-deployment.yml">
           <button id="resourceDownloadBtn" data-patternId="bb80642c-2179-4817-b0b7-6d0e28151f9a" onclick="sendCloudTelemetry()"
-            class="import" style="width: 7rem;">
+            class="import import-brand-secondary" style="width: 7rem;">
             Download
           </button>
         </a>
@@ -1312,7 +1328,7 @@
         <div class="btn-tooltip-grp">
           <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/bb80642c-2179-4817-b0b7-6d0e28151f9a/0.0.1/design.yml"
             onmouseout="resetCopyText(this)">
-            <button class="import" style="width: 7rem;">Copy URL
+            <button class="import import-brand-tertiary" style="width: 7rem;">Copy URL
             </button>
           </a>
         </div>
@@ -1336,7 +1352,7 @@
 
 </script>
     </div>
-    
+
   </div>
   
 </div>
@@ -1352,6 +1368,22 @@
 		
         
         
+        <!-- <p  style= "font-size:20px;"> 
+           
+        </p> -->
+       
+        <!-- <p  style= "font-size:20px;"> 
+           
+        </p> -->
+       
+        <!-- <p  style= "font-size:20px;"> 
+           
+        </p> -->
+       
+        <!-- <p  style= "font-size:20px;"> 
+           
+        </p> -->
+       
         <!-- <p  style= "font-size:20px;"> 
            
         </p> -->
@@ -2838,7 +2870,7 @@
 						Internships</a></li>
 				
 				<li><a target="_blank" 
-						href="/pr-preview/pr-2788/community#discussion-forums
+						href="https://discuss.meshery.io
 " class="forum-icon" >
 						
 						
@@ -3140,7 +3172,7 @@
 		document.body.classList.toggle("dark-mode")
 		
 		let l5Logos = document.querySelectorAll("#l5-logo");
-		let allLogos = document.querySelectorAll("#logo-dark-light");
+		let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
 		if (document.body.classList.contains("dark-mode")) {
 			l5Logos.forEach(e => e.src = '../assets/images/company-logo/dark-mode-logo.svg')
 			allLogos.forEach(e => e.src = e.dataset.logoForDark)

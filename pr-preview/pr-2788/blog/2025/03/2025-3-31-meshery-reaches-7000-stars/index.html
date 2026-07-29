@@ -88,13 +88,13 @@
         if (localStorage.getItem("mode") === "light-mode") {
           body.classList.remove("dark-mode");
     
-          let allLogos = document.querySelectorAll("#logo-dark-light");
+          let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
           allLogos.forEach(e => e.src = e.dataset.logoForLight);
         }
     
         // Automatically set logos based on initial theme
-        window.addEventListener('load', () => {
-          let allLogos = document.querySelectorAll("#logo-dark-light");
+        document.addEventListener('DOMContentLoaded', () => {
+          let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
           allLogos.forEach(e => {
             e.src = body.classList.contains("dark-mode") ? e.dataset.logoForDark : e.dataset.logoForLight;
           });
@@ -316,7 +316,7 @@
 						<div  class="sub-nav-li" >
 								<img class="nav-img" src="/pr-preview/pr-2788/assets/images/nav-icons/Discuss.svg
 ">
-							<a href="/pr-preview/pr-2788/community#discussion-forums
+							<a href="https://discuss.meshery.io
 " 
 							class="subnav-item">Discussion forums
 							
@@ -596,7 +596,7 @@
 
 <p>Join our vibrant community on <a href="https://slack.meshery.io">Slack</a> or explore our <a href="https://github.com/meshery/meshery">GitHub</a> repositories.</p>
 
-<p>If you’re a newcomer, refer to the <a href="/community">Newcomer’s Guide</a> and you are welcome to explore our <a href="https://meshery.io/community/#discussion-forums">Discussion Forum</a>. Join our <a href="/calendar">weekly newcomers meeting</a> for a guided tour of how to get involved.</p>
+<p>If you’re a newcomer, refer to the <a href="/community">Newcomer’s Guide</a> and you are welcome to explore our <a href="https://discuss.meshery.io">Discussion Forum</a>. Join our <a href="/calendar">weekly newcomers meeting</a> for a guided tour of how to get involved.</p>
 
 <p>Thank you for being part of this incredible journey. Here’s to the next milestone, onwards and upwards!</p>
 
@@ -825,7 +825,7 @@
 						Internships</a></li>
 				
 				<li><a target="_blank" 
-						href="/pr-preview/pr-2788/community#discussion-forums
+						href="https://discuss.meshery.io
 " class="forum-icon" >
 						
 						
@@ -1127,7 +1127,7 @@
 		document.body.classList.toggle("dark-mode")
 		
 		let l5Logos = document.querySelectorAll("#l5-logo");
-		let allLogos = document.querySelectorAll("#logo-dark-light");
+		let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
 		if (document.body.classList.contains("dark-mode")) {
 			l5Logos.forEach(e => e.src = '../assets/images/company-logo/dark-mode-logo.svg')
 			allLogos.forEach(e => e.src = e.dataset.logoForDark)

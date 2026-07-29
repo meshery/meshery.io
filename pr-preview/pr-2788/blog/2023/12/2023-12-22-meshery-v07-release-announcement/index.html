@@ -88,13 +88,13 @@
         if (localStorage.getItem("mode") === "light-mode") {
           body.classList.remove("dark-mode");
     
-          let allLogos = document.querySelectorAll("#logo-dark-light");
+          let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
           allLogos.forEach(e => e.src = e.dataset.logoForLight);
         }
     
         // Automatically set logos based on initial theme
-        window.addEventListener('load', () => {
-          let allLogos = document.querySelectorAll("#logo-dark-light");
+        document.addEventListener('DOMContentLoaded', () => {
+          let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
           allLogos.forEach(e => {
             e.src = body.classList.contains("dark-mode") ? e.dataset.logoForDark : e.dataset.logoForLight;
           });
@@ -316,7 +316,7 @@
 						<div  class="sub-nav-li" >
 								<img class="nav-img" src="/pr-preview/pr-2788/assets/images/nav-icons/Discuss.svg
 ">
-							<a href="/pr-preview/pr-2788/community#discussion-forums
+							<a href="https://discuss.meshery.io
 " 
 							class="subnav-item">Discussion forums
 							
@@ -673,7 +673,7 @@
 
 <p>Meshery Maintainers are dedicated to enhancing your ability to deliver engineering platforms to your teams. Let us know how we can continue serving you best by weighing in on the v0.8 Roadmap. Let your voice be heard (please).</p>
 
-<p><a href="/community#discussion-forums/t/meshery-v0-8-0-roadmap/4336">v0.8.0 Release Planning</a></p>
+<p><a href="https://discuss.meshery.io/t/meshery-v0-8-0-roadmap/4336">v0.8.0 Release Planning</a></p>
 
 <p><em>Try the latest v0.7.0 features of Meshery at <a href="https://play.meshery.io">play.meshery.io</a>.</em></p>
 
@@ -902,7 +902,7 @@
 						Internships</a></li>
 				
 				<li><a target="_blank" 
-						href="/pr-preview/pr-2788/community#discussion-forums
+						href="https://discuss.meshery.io
 " class="forum-icon" >
 						
 						
@@ -1204,7 +1204,7 @@
 		document.body.classList.toggle("dark-mode")
 		
 		let l5Logos = document.querySelectorAll("#l5-logo");
-		let allLogos = document.querySelectorAll("#logo-dark-light");
+		let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
 		if (document.body.classList.contains("dark-mode")) {
 			l5Logos.forEach(e => e.src = '../assets/images/company-logo/dark-mode-logo.svg')
 			allLogos.forEach(e => e.src = e.dataset.logoForDark)
