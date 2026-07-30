@@ -107,7 +107,7 @@ Change the value in `debounce(handleSearchInput, 300)`
 ```javascript
 function performClientSearch(query) {
   if (!searchData) return [];
-  
+
   const lowerQuery = query.toLowerCase();
   const results = searchData
     .filter(post => {
@@ -116,7 +116,7 @@ function performClientSearch(query) {
       const contentMatch = post.content?.toLowerCase().includes(lowerQuery);
       const categoryMatch = post.categories?.some(cat => cat.toLowerCase().includes(lowerQuery));
       const authorMatch = post.author?.toLowerCase().includes(lowerQuery);
-      
+
       return titleMatch || excerptMatch || contentMatch || categoryMatch || authorMatch;
     })
     .slice(0, 20);
@@ -128,7 +128,7 @@ function performClientSearch(query) {
       excerpt: highlightText(result.excerpt, query)
     };
   });
-  
+
   return results;
 }
 ```
@@ -191,7 +191,6 @@ function highlightText(text, query) {
 ## Future Enhancements (Optional)
 
 - Search suggestions/autocomplete
-- Search filters (by category, date, author)
 - Sort by relevance
 - Fuzzy matching
 - Search analytics
