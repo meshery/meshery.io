@@ -191,6 +191,7 @@ function highlightText(text, query) {
 ## Future Enhancements (Optional)
 
 - Search suggestions/autocomplete
+- Search filters (by category, date, author)
 - Sort by relevance
 - Fuzzy matching
 - Search analytics

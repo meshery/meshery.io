@@ -71,7 +71,7 @@ components:
   colorIcon: assets/images/integration/meshery-core/components/pencil/icons/color/pencil-color.svg
   whiteIcon: assets/images/integration/meshery-core/components/pencil/icons/white/pencil-white.svg
   description:
-componentsCount: 16
+componentsCount: 15
 relationships:
 relationshipsCount: 0
 featureList: [
