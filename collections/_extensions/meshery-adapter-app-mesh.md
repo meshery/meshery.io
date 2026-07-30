@@ -18,5 +18,8 @@ extensionCaveats: |
   - Use the Meshery Adapter for App Mesh for lifecycle management of App Mesh and sample applications.
   - Performance testing to identify overhead involved in running App Mesh and various configurations.
   - Utilize Prometheus and Grafana integration for monitoring App Mesh's performance.
-docsURL: 'https://docs.meshery.io/extensibility/adapters/app-mesh'
+
+URL: https://github.com/meshery-extensions/meshery-app-mesh
+docsURL: https://docs.meshery.io/extensibility/adapters/app-mesh
+---
 ---

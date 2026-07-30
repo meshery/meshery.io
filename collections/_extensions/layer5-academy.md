@@ -19,5 +19,5 @@ extensionCaveats: |
   - Monitors learner progress and issues certifications upon course completion.
   - Regularly updated to include new topics on Layer5 and emerging cloud native technologies.
 URL: https://github.com/layer5io/layer5-academy
-docsURL: https://docs.meshery.io/extensions/academies/
+docsURL: https://docs.layer5.io/cloud/academy/
 ---

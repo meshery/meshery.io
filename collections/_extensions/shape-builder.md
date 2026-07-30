@@ -17,6 +17,8 @@ extensionCaveats: |
   - Visually create polygon-based component shapes for use in Kanvas.
   - Export the format Meshery needs to recognize and render custom shapes.
   - Help teams choose or create shapes that better communicate component purpose in designs.
-URL: https://shapes.meshery.io/
+
+
+URL: https://github.com/meshery-extensions/shape-builder
 docsURL: https://docs.meshery.io/extensions/component-shape-guide
 ---
