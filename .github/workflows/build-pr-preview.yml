@@ -1,0 +1,68 @@
+name: Build PR Preview
+
+on:
+    pull_request:
+        branches: [master]
+        types: [opened, synchronize, reopened, closed]
+
+permissions:
+    contents: read
+
+concurrency:
+    group: preview-${{github.event.pull_request.number || github.run_id }}
+    cancel-in-progress: true
+
+jobs:
+    build-docs-preview:
+        runs-on: ubuntu-24.04
+        if: github.event.action != 'closed'
+
+        steps:
+          - name: Harden Runner
+            uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+            with:
+                egress-policy: audit
+
+          - name: Checkout PR
+            uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+            with:
+                persist-credentials: false
+
+          - name: Setup Ruby
+            if: github.event.action != 'closed'
+            uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1.321.0
+            with:
+                ruby-version: '3.2.2'
+                bundler-cache: true
+
+          - name: Build PR preview
+            if: github.event.action != 'closed'
+            env:
+                JEKYLL_ENV: production
+                JEKYLL_SITE_URL: https://meshery.io
+                JEKYLL_BASEURL: /pr-preview/pr-${{ github.event.pull_request.number }}
+            run: |
+                cat > _config.ci.yml <<EOF
+                url: "${JEKYLL_SITE_URL}"
+                baseurl: "${JEKYLL_BASEURL}"
+                EOF
+
+                bundle exec jekyll build --config _config.yml,_config.ci.yml
+
+                echo -e "User-agent: *\nDisallow: /" > _site/robots.txt
+
+          - name: Save PR Metadata
+            run: |
+                mkdir -p ./pr
+                echo "${{ github.event.number }}" > ./pr/number
+                echo "${{ github.event.pull_request.head.sha }}" > ./pr/sha
+                echo "${{ github.event.action }}" > ./pr/action
+
+          - name: Upload build artifact
+            uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+            with:
+                name: docs-preview-build
+                path: |
+                    ${{ github.event.action != 'closed' && '_site' || '' }}
+                    pr/
+                if-no-files-found: error
