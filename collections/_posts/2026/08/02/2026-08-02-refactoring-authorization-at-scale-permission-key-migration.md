@@ -7,7 +7,7 @@ categories:
   - security
   - architecture
   - extensibility
-featured-image: /assets/images/posts/2026/permission-key-migration.png
+featured-image: /assets/images/posts/2026/08/permission-key-migration/permission-key-migration.png
 redirect_from: /blog/permission-key-migration
 published: true
 ---
