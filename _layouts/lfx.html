@@ -15,10 +15,6 @@ layout: default
                 <div class="project-item">
                     <h3>{{ project.title }}</h3>
 
-                {% if project.lfx_link %}
-                <a class="issue" href="{{ project.lfx_link }}">Open on LFX Mentorship</a>
-                {% endif %}
-
                 {% if project.description %}
                 <h4 class="project-list"><span class="sub_headings">Description:</span></h4>
                 <div class="program-p">
@@ -61,7 +57,7 @@ layout: default
                 <h4 class="project-list"><span class="sub_headings">Mentors:</span></h4>
                 <ul>
                     {% for mentor in project.mentors %}
-                    <li style="padding-bottom: 1rem">
+                    <li>
                         {% if mentor.link %}
                         <a href="{{ mentor.link }}">{{ mentor.name }}</a>
                         {% else %}
@@ -73,7 +69,7 @@ layout: default
                 {% endif %}
 
                 {% if project.issues %}
-                <h4 class="project-list">Issues:</h4>
+                <h4 class="project-list"><span class="sub_headings">Issues:</span></h4>
                 <ul>
                     {% for issue in project.issues %}
                     <li>
@@ -82,8 +78,8 @@ layout: default
                     {% endfor %}
                 </ul>
                 {% elsif project.issue %}
-                <h4 class="project-list">Issue:</h4>
-                <a class="issue" href="{{ project.issue }}">{{ project.issue }}</a>
+                <h4 class="project-list"><span class="sub_headings">Issue:</span></h4>
+                <a class="issue program-p" href="{{ project.issue }}">{{ project.issue }}</a>
                 {% endif %}
                 </div>
                 {% endfor %}
@@ -92,12 +88,11 @@ layout: default
         </div>
 
         {% if page.timeline %}
-        <h3 class="cohort_title" id="timeline">{{ page.timeline_title }}</h3>
+        <h3 class="cohort_title" id="timeline"><span class="sub_headings">{{ page.timeline_title }}</span></h3>
         <div class="program">
             <div class="community-details">
-                <h4 class="section-title">
-                    <span class="sub_headings">Full-Time Terms</span>
-                </h4>
+                <h4 class="section-title"><span class="sub_headings">Full-Time Terms:</span></h4>
+
             {% for term in page.timeline %}
             <div class="timeline-section">
                 <h4>{{ term.name }}</h4>
@@ -106,16 +101,14 @@ layout: default
                     <li>{{ item }}</li>
                     {% endfor %}
                 </ul>
-            </div>     
+            </div>
             {% endfor %}
 
             {% if page.community_description %}
             <div class="community-description">
-                <h4 class="section-title">
-                    <span class="sub_headings">About the Community</span>
-                </h4>
+                <h4 class="section-title"><span class="sub_headings">About the Community</span></h4>
                 <div class="program-p">
-                     {{ page.community_description | markdownify }}
+                    {{ page.community_description | markdownify }}
                 </div>
                 <a href="https://slack.meshery.io">
                     <input type="button" value="Join Slack" class="participate-button" />
@@ -158,6 +151,6 @@ layout: default
 </div>
 <a id="button-scroll-to-up" style="text-decoration: none; color: var(--color-white);"></a>
 
-<div class="text subscribe program__subscribe">
+<div class="text subscribe program__subscribe lfx-subscribe">
      {% include mailing-lists.html %}
 </div>

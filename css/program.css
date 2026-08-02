@@ -56,19 +56,47 @@ h1,h2,h3,h4,h5,h6{
 .program {
   display: flex;
 }
-
-.project-details {
+.project-details, .community-details {
   width: 50%;
 }
-.community-details {
+
+.lfx-page .project-details,
+.lfx-page .community-details {
   width: 100%;
 }
+
 .community-details ul {
-  margin: 0;
+  padding: 0px;
+  margin: 0px;
 }
+
+.project-item ul {
+  padding-left: 2rem;
+  margin-top: 0;
+  margin-bottom: 1.1rem;
+}
+
+.project-details ul li,
+.community-details ul li {
+  font-size: 1.1rem;
+  color: var(--color-secondary-dark);
+  margin-bottom: 0.5rem;
+}
+
+.project-details ul li:last-child,
+.community-details ul li:last-child {
+  margin-bottom: 0;
+}
+
+.project-details ul li::marker,
+.community-details ul li::marker {
+  color: var(--color-secondary-dark);
+}
+
 .program ol {
   /* padding-inline-start: 3rem; */
   font-size: inherit;
+  padding: 0px;
 }
 
 .sub_headings {
@@ -82,9 +110,7 @@ h1,h2,h3,h4,h5,h6{
 .lfx-page {
   flex: 1 1 auto;
 }
-.lfx-page .project-details {
-  width: 100%;
-}
+
 .toc {
   position: sticky;
   top: 10rem;
@@ -159,12 +185,44 @@ h1,h2,h3,h4,h5,h6{
   text-decoration-color: #00d4ab;
 }
 
+.lfx-subscribe {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+}
+
+.lfx-subscribe .heading {
+  text-align: center;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 1.7em;
+  text-decoration: none;
+  text-transform: none;
+  color: var(--color-secondary-dark);
+  border-bottom: 2px dashed #00d4ab;
+  padding-bottom: 2px;
+  width: fit-content;
+  margin: 0 auto 0.5rem auto;
+}
+
+.lfx-page .cohort_title {
+  text-align: center;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 1.7em;
+  width: fit-content;
+  margin: 0 auto;
+  border-bottom: 2px dashed #00d4ab;
+  padding-bottom: 2px;
+  text-decoration: none;
+}
+
 .project-item {
   margin-bottom: 1.5rem;
 }
 
 .project-list {
-  font-size: medium;
   padding-left: 0;
   padding-inline-start: 0;
   margin-top: 1rem;
@@ -175,21 +233,33 @@ h1,h2,h3,h4,h5,h6{
   margin-top: 0;
   margin-bottom: 0;
   padding-left: 2rem;
+  line-height: 1.6;
 }
 
-
-.timeline-section {
-  margin-left: 2rem;
-  margin-bottom: 2rem;
+.program-p p {
+  margin: 0 0 1rem 0;
 }
 
-.timeline-section h4 {
-  padding-inline-start: 0;
-  text-transform: none;
+.program-p p:last-child {
+  margin-bottom: 0;
 }
 
-.community-description .program-p {
-    padding-left: 2rem;
+.program-p a,
+.project-item ul a,
+.community-details a {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.issue.program-p {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.project-item,
+.community-details,
+.project-details {
+  line-height: 1.6;
 }
 
 a {
@@ -209,21 +279,34 @@ a:active {
 }
 
 .participate-button {
+  display: inline-block;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
   background-color: #00B39F;
-  width: auto;
-  border-radius: 0.5rem;
-
-  padding-top: 0.7rem;
-  padding-bottom: 2rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-
   color: #fff;
-  cursor: pointer;
+
+  padding: 0.75rem 1.25rem;
+  margin-top: 1rem;
 
   border: none;
-  outline: none;
-  text-decoration: none;
+  border-radius: 0.5rem;
+
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1;
+
+  width: fit-content;
+  height: auto;
+
+  white-space: nowrap;
+  overflow: visible;
+
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .participate-button:active {
@@ -233,6 +316,14 @@ a:active {
 
 .participate-button:hover {
   background-color: #00d3a9;
+}
+
+.community-description {
+  margin-top: 1.5rem;
+}
+
+.community-description a {
+  display: inline-block;
 }
 
 #button-scroll-to-up {
@@ -397,14 +488,31 @@ img {
 .issue {
   display: block;
   width :90%;
-  padding-left: 2rem;
-  padding-right: 2rem;
   font-size: small;
   word-break: break-all;
 }
 
 .text-container {
     max-width: 1200px;
+}
+
+.timeline-section {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+}
+
+.timeline-section:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-section h4 {
+  margin-bottom: 0.4rem;
+}
+
+.timeline-section ul.gsoc {
+  padding-inline-start: 2.5rem;
+  margin: 0 0 1rem 0;
+  list-style: disc;
 }
 
 @media screen and (max-width: 767px) {
@@ -448,11 +556,6 @@ img {
 
   .project-list {
     padding-left: 0;
-    padding-inline-start: 0;
-  }
-
-  .issue {
-    padding-left: 0.4rem;
   }
 
   .title {
@@ -556,9 +659,10 @@ img {
 
 @media screen and (max-width: 640px) {
   .card-img {
-    width:7.5rem;
+    width: 7.5rem;
   }
-  .card-div{
+
+  .card-div {
     gap: 2rem 0rem;
   }
 
@@ -568,19 +672,24 @@ img {
     margin-left: 1rem;
     margin-right: 1rem;
   }
-  .cover{
+
+  .cover {
     padding: 25px 25px;
   }
-  .program ol, .program ul{
-    margin: 0;
-   }
+
+  .program ol,
+  .program ul {
+    padding: 0px;
+  }
+
   .program__subscribe {
     padding: 25px;
     margin: 0;
-   }
+  }
+
   .community-details {
     width: 100%;
-   }
+  }
 }
 
 @media screen and (max-width: 480px) {
