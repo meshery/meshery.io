@@ -25,4 +25,4 @@ extensionCaveats: |
 
 URL: https://github.com/meshery-extensions/kubectl-meshsync-snapshot
 ---
----
+
