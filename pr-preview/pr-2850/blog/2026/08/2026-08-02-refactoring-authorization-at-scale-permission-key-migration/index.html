@@ -564,7 +564,7 @@
 
 <p>You add a new permission - say, “Evaluate Relationships.” Someone has to find the UUID, copy-paste it into <code class="language-plaintext highlighter-rouge">permission_constants.js</code>, make sure the <code class="language-plaintext highlighter-rouge">subject</code> string matches exactly, open a PR, get it reviewed, merge it. Miss one step and the UI can’t gate on that permission at all.</p>
 
-<p>A typo in a UUID (<code class="language-plaintext highlighter-rouge">...c972</code> instead of <code class="language-plaintext highlighter-rouge">...c971</code>) compiles fine, passes linting, and breaks silently at runtime. In a platform that manages <a href="https://kubernetes.io/">Kubernetes</a> infrastructure across multiple clusters, a broken permission check is a security gap.</p>
+<p>A typo in a UUID (<code class="language-plaintext highlighter-rouge">...c972</code> instead of <code class="language-plaintext highlighter-rouge">...c971</code>) compiles fine, passes linting, and fails silently at runtime. While the backend server always enforces authorization independently on every API endpoint, a mismatched client-side key degrades the user experience — either unnecessarily blocking valid features or letting users click buttons only to have the backend reject the request.</p>
 
 <hr />
 
@@ -622,16 +622,16 @@
 
 <p>The UUIDs in schemas are generated, not hand-written. When the spreadsheet updates and the schema package rebuilds, the keys update automatically.</p>
 
-<p>I mapped all 110 legacy <code class="language-plaintext highlighter-rouge">SCREAMING_SNAKE_CASE</code> monikers to their schema <code class="language-plaintext highlighter-rouge">PascalCase</code> equivalents, migrated every consumer file-by-file, validated each mapping at compile time, and deleted the 449-line file.</p>
+<p>I mapped all 110 legacy <code class="language-plaintext highlighter-rouge">SCREAMING_SNAKE_CASE</code> monikers to their schema <code class="language-plaintext highlighter-rouge">PascalCase</code> equivalents, migrated every consumer file-by-file, verified the mapping accuracy with unit tests against generated schema metadata, and deleted the 449-line file.</p>
 
-<p>If someone references a permission key that doesn’t exist in the schema, TypeScript catches it at build time. No more silent runtime failures.</p>
+<p>If someone references a key name that doesn’t exist on <code class="language-plaintext highlighter-rouge">Keys</code>, TypeScript catches the missing property at build time. No more silent runtime failures.</p>
 
 <h3 id="wiring-up-permissionshield">Wiring up PermissionShield</h3>
 
 <p><a href="https://github.com/meshery/sistent">Sistent</a> - Meshery’s shared design system - provides <code class="language-plaintext highlighter-rouge">PermissionProvider</code> and <code class="language-plaintext highlighter-rouge">PermissionShield</code>. I integrated them at the app root in <code class="language-plaintext highlighter-rouge">_app.tsx</code>:</p>
 
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">permissionUserContext</span> <span class="o">=</span> <span class="nf">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">({</span>
-  <span class="na">userName</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">firstName</span><span class="p">}</span><span class="s2"> </span><span class="p">${</span><span class="nx">lastName</span><span class="p">}</span><span class="s2">`</span><span class="p">.</span><span class="nf">trim</span><span class="p">()</span> <span class="o">||</span> <span class="nx">loggedInUser</span><span class="p">?.</span><span class="nx">email</span><span class="p">,</span>
+  <span class="na">userName</span><span class="p">:</span> <span class="p">[</span><span class="nx">firstName</span><span class="p">,</span> <span class="nx">lastName</span><span class="p">].</span><span class="nf">filter</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">).</span><span class="nf">join</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">)</span> <span class="o">||</span> <span class="nx">loggedInUser</span><span class="p">?.</span><span class="nx">email</span><span class="p">,</span>
   <span class="na">orgName</span><span class="p">:</span> <span class="nx">providerCapabilities</span><span class="p">?.</span><span class="nx">providerName</span> <span class="o">||</span> <span class="dl">''</span><span class="p">,</span>
   <span class="na">roleNames</span><span class="p">:</span> <span class="nx">loggedInUser</span><span class="p">?.</span><span class="nx">roleNames</span> <span class="o">||</span> <span class="p">[],</span>
 <span class="p">}),</span> <span class="p">[</span><span class="nx">loggedInUser</span><span class="p">,</span> <span class="nx">providerCapabilities</span><span class="p">?.</span><span class="nx">providerName</span><span class="p">]);</span>
@@ -659,7 +659,7 @@
 <span class="p">&lt;/</span><span class="nc">IconButton</span><span class="p">&gt;</span>
 
 <span class="c1">// After - user sees why it's disabled and what to do:</span>
-<span class="p">&lt;</span><span class="nc">IconButton</span> <span class="na">permissionKey</span><span class="p">=</span><span class="si">{</span><span class="nx">Keys</span><span class="p">.</span><span class="nx">WorkspaceManagementEditEnvironment</span><span class="si">}</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nc">IconButton</span> <span class="na">permissionKey</span><span class="p">=</span><span class="si">{</span><span class="nx">Keys</span><span class="p">.</span><span class="nx">WorkspaceManagementEditWorkspace</span><span class="si">}</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nc">EditIcon</span> <span class="p">/&gt;</span>
 <span class="p">&lt;/</span><span class="nc">IconButton</span><span class="p">&gt;</span>
 </code></pre></div></div>
@@ -676,10 +676,10 @@
     <span class="p">&lt;</span><span class="nc">CustomTooltip</span>
       <span class="na">title</span><span class="p">=</span><span class="si">{</span>
         <span class="p">&lt;</span><span class="nc">Box</span><span class="p">&gt;</span>
-          <span class="p">&lt;</span><span class="nc">Typography</span> <span class="na">variant</span><span class="p">=</span><span class="s">"subtitle2"</span> <span class="na">sx</span><span class="p">=&gt;</span>
+          <span class="p">&lt;</span><span class="nc">Typography</span> <span class="na">variant</span><span class="p">=</span><span class="s">"subtitle2"</span> <span class="na">sx</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">fontWeight</span><span class="p">:</span> <span class="mi">600</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
             <span class="si">{</span><span class="nx">metadata</span><span class="p">?.</span><span class="kd">function</span> <span class="o">||</span> <span class="dl">'</span><span class="s1">Action</span><span class="dl">'</span><span class="si">}</span>
           <span class="p">&lt;/</span><span class="nc">Typography</span><span class="p">&gt;</span>
-          <span class="p">&lt;</span><span class="nc">Typography</span> <span class="na">variant</span><span class="p">=</span><span class="s">"caption"</span> <span class="na">sx</span><span class="p">=&gt;</span>
+          <span class="p">&lt;</span><span class="nc">Typography</span> <span class="na">variant</span><span class="p">=</span><span class="s">"caption"</span> <span class="na">sx</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">warning.main</span><span class="dl">'</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
             Access is unavailable because the required permission is not assigned.
           <span class="p">&lt;/</span><span class="nc">Typography</span><span class="p">&gt;</span>
         <span class="p">&lt;/</span><span class="nc">Box</span><span class="p">&gt;</span>
@@ -698,7 +698,7 @@
 <div class="language-tsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nx">isCredentialDisabled</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">isDrawerCollapsed</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
   <span class="p">&lt;</span><span class="nc">PermissionInfo</span>
     <span class="na">permissionId</span><span class="p">=</span><span class="si">{</span><span class="nx">keys</span><span class="p">.</span><span class="nx">VIEW_CREDENTIALS</span><span class="p">.</span><span class="nx">action</span><span class="si">}</span>
-    <span class="na">style</span><span class="p">=</span>
+    <span class="na">style</span><span class="p">=</span><span class="si">{</span><span class="p">{</span> <span class="na">position</span><span class="p">:</span> <span class="dl">'</span><span class="s1">absolute</span><span class="dl">'</span><span class="p">,</span> <span class="na">right</span><span class="p">:</span> <span class="dl">'</span><span class="s1">12px</span><span class="dl">'</span><span class="p">,</span> <span class="na">zIndex</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span><span class="si">}</span>
   <span class="p">/&gt;</span>
 <span class="p">)}</span>
 </code></pre></div></div>
@@ -781,27 +781,27 @@
 
 <p>Zero manual work from spreadsheet to rendered UI:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Google Spreadsheet (107+ permission entries)
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Google Spreadsheet (107+ permission entries)
         │
         │  Daily cron - generate_keys.yml
         ▼
 server/permissions/keys.csv  (auto-committed)
         │
-        │  Schema generation
+        │  Schema build &amp; release workflow
         ▼
-@meshery/schemas/permissions  (typed Keys object)
+@meshery/schemas/permissions  (published NPM package with typed Keys object)
         │
-        │  import { Keys }
+        │  npm / go dependency update
         ▼
-Meshery UI
+Meshery UI &amp; Server
   ├─ PermissionProvider  (user context: name, org, roles)
   ├─ permissionKey={Keys.Xxx}  (auto-disable + rich tooltip)
   └─ useHasPermission(Keys.Xxx)  (imperative checks)
 </code></pre></div></div>
 
-<p>Add a permission in the spreadsheet. The nightly workflow picks it up. Schemas rebuild. The UI can import and use the new key immediately.</p>
+<p>Add a permission in the spreadsheet. The nightly workflow picks it up and commits the updated CSV. When <code class="language-plaintext highlighter-rouge">@meshery/schemas</code> is published and updated in <code class="language-plaintext highlighter-rouge">package.json</code>, the UI gains access to the new key immediately.</p>
 
-<p>Remove a permission from the spreadsheet. The schema drops the key. The UI gets a TypeScript compile error. No silent failures.</p>
+<p>Remove a permission from the spreadsheet. The schema package drops the property on <code class="language-plaintext highlighter-rouge">Keys</code>. Rebuilding the UI flags any leftover references with a TypeScript compile error. No silent failures.</p>
 
 <hr />
 
@@ -823,7 +823,8 @@ Meshery UI
     <span class="p">&lt;</span><span class="nc">TransferButton</span> <span class="na">title</span><span class="p">=</span><span class="s">"Connections"</span> <span class="na">count</span><span class="p">=</span><span class="si">{</span><span class="mi">1</span><span class="si">}</span>
       <span class="na">onAssign</span><span class="p">=</span><span class="si">{</span><span class="nx">onAssign</span><span class="si">}</span> <span class="na">permissionKey</span><span class="p">=</span><span class="si">{</span><span class="nx">mockKey</span><span class="si">}</span> <span class="p">/&gt;,</span>
   <span class="p">);</span>
-  <span class="nf">expect</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nf">getByTestId</span><span class="p">(</span><span class="dl">'</span><span class="s1">popup-button</span><span class="dl">'</span><span class="p">)).</span><span class="nf">toBeDisabled</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nx">screen</span><span class="p">.</span><span class="nf">getByTestId</span><span class="p">(</span><span class="dl">'</span><span class="s1">popup-button</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nf">expect</span><span class="p">(</span><span class="nx">btn</span><span class="p">).</span><span class="nf">toBeDisabled</span><span class="p">();</span>
   <span class="k">await</span> <span class="nx">user</span><span class="p">.</span><span class="nf">click</span><span class="p">(</span><span class="nx">btn</span><span class="p">);</span>
   <span class="nf">expect</span><span class="p">(</span><span class="nx">onAssign</span><span class="p">).</span><span class="nx">not</span><span class="p">.</span><span class="nf">toHaveBeenCalled</span><span class="p">();</span>
 <span class="p">});</span>
@@ -857,7 +858,7 @@ Meshery UI
     <tr>
       <td>UUID update process</td>
       <td>Find UUID, edit file, PR, review, merge</td>
-      <td>Automatic</td>
+      <td>Automatic via <code class="language-plaintext highlighter-rouge">@meshery/schemas</code> releases</td>
     </tr>
     <tr>
       <td>Compile-time validation</td>
@@ -906,7 +907,7 @@ Meshery UI
 
 <hr />
 
-<p><em>Rishi Raj is an <a href="https://lfx.linuxfoundation.org/tools/mentorship/">LFX Mentorship</a> intern and open source contributor to <a href="https://github.com/meshery/meshery">Meshery</a>, a <a href="https://www.cncf.io/">CNCF</a> project. If you’re interested in contributing, check out the <a href="https://docs.meshery.io/project/contributing">Meshery Contributing Guide</a> or join the <a href="https://slack.meshery.io">community Slack</a>.</em></p>
+<p><em>Rishi Raj is an <a href="https://lfx.linuxfoundation.org/tools/mentorship/">LFX Mentorship</a> intern and open-source contributor to <a href="https://github.com/meshery/meshery">Meshery</a>, a <a href="https://www.cncf.io/">CNCF</a> project. If you’re interested in contributing, check out the <a href="https://docs.meshery.io/project/contributing">Meshery Contributing Guide</a> or join the <a href="https://slack.meshery.io">community Slack</a>.</em></p>
 
 
     <div class="social-share">
