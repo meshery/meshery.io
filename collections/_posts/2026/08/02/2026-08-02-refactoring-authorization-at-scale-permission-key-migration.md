@@ -54,7 +54,7 @@ You rotate a UUID on the server side. The spreadsheet updates. The nightly workf
 
 You add a new permission - say, "Evaluate Relationships." Someone has to find the UUID, copy-paste it into `permission_constants.js`, make sure the `subject` string matches exactly, open a PR, get it reviewed, merge it. Miss one step and the UI can't gate on that permission at all.
 
-A typo in a UUID (`...c972` instead of `...c971`) compiles fine, passes linting, and breaks silently at runtime. In a platform that manages [Kubernetes](https://kubernetes.io/) infrastructure across multiple clusters, a broken permission check is a security gap.
+A typo in a UUID (`...c972` instead of `...c971`) compiles fine, passes linting, and fails silently at runtime. While the backend server always enforces authorization independently on every API endpoint, a mismatched client-side key degrades the user experience — either unnecessarily blocking valid features or letting users click buttons only to have the backend reject the request.
 
 ---
 
@@ -110,9 +110,9 @@ import { Keys } from '@meshery/schemas/permissions';
 
 The UUIDs in schemas are generated, not hand-written. When the spreadsheet updates and the schema package rebuilds, the keys update automatically.
 
-I mapped all 110 legacy `SCREAMING_SNAKE_CASE` monikers to their schema `PascalCase` equivalents, migrated every consumer file-by-file, validated each mapping at compile time, and deleted the 449-line file.
+I mapped all 110 legacy `SCREAMING_SNAKE_CASE` monikers to their schema `PascalCase` equivalents, migrated every consumer file-by-file, verified the mapping accuracy with unit tests against generated schema metadata, and deleted the 449-line file.
 
-If someone references a permission key that doesn't exist in the schema, TypeScript catches it at build time. No more silent runtime failures.
+If someone references a key name that doesn't exist on `Keys`, TypeScript catches the missing property at build time. No more silent runtime failures.
 
 ### Wiring up PermissionShield
 
@@ -120,7 +120,7 @@ If someone references a permission key that doesn't exist in the schema, TypeScr
 
 ```tsx
 const permissionUserContext = useMemo(() => ({
-  userName: `${firstName} ${lastName}`.trim() || loggedInUser?.email,
+  userName: [firstName, lastName].filter(Boolean).join(' ') || loggedInUser?.email,
   orgName: providerCapabilities?.providerName || '',
   roleNames: loggedInUser?.roleNames || [],
 }), [loggedInUser, providerCapabilities?.providerName]);
@@ -147,7 +147,7 @@ With this in place, Sistent's enhanced components (`Button`, `IconButton`, etc.)
 </IconButton>
 
 // After - user sees why it's disabled and what to do:
-<IconButton permissionKey={Keys.WorkspaceManagementEditEnvironment}>
+<IconButton permissionKey={Keys.WorkspaceManagementEditWorkspace}>
   <EditIcon />
 </IconButton>
 ```
@@ -158,6 +158,7 @@ That single change transforms a confusing dead-end into an actionable path.
 
 Before the full PermissionShield integration, I built a standalone `PermissionInfo` component to test the concept:
 
+{% raw %}
 ```tsx
 export const PermissionInfo = ({ permissionId }) => {
   const metadata = getPermissionMetadata(permissionId);
@@ -181,9 +182,11 @@ export const PermissionInfo = ({ permissionId }) => {
   );
 };
 ```
+{% endraw %}
 
 I deployed this in the sidebar Navigator. When a user couldn't access Credentials, a small info icon appeared next to the greyed-out menu item explaining the restriction:
 
+{% raw %}
 ```tsx
 {isCredentialDisabled && !isDrawerCollapsed && (
   <PermissionInfo
@@ -192,6 +195,7 @@ I deployed this in the sidebar Navigator. When a user couldn't access Credential
   />
 )}
 ```
+{% endraw %}
 
 This validated the approach. The full `permissionKey` prop integration then made it universal across 50+ components without requiring a separate info icon for each one.
 
@@ -247,28 +251,28 @@ Every navigator item now carries a `permissionKey`:
 
 Zero manual work from spreadsheet to rendered UI:
 
-```
+```text
 Google Spreadsheet (107+ permission entries)
         │
         │  Daily cron - generate_keys.yml
         ▼
 server/permissions/keys.csv  (auto-committed)
         │
-        │  Schema generation
+        │  Schema build & release workflow
         ▼
-@meshery/schemas/permissions  (typed Keys object)
+@meshery/schemas/permissions  (published NPM package with typed Keys object)
         │
-        │  import { Keys }
+        │  npm / go dependency update
         ▼
-Meshery UI
+Meshery UI & Server
   ├─ PermissionProvider  (user context: name, org, roles)
   ├─ permissionKey={Keys.Xxx}  (auto-disable + rich tooltip)
   └─ useHasPermission(Keys.Xxx)  (imperative checks)
 ```
 
-Add a permission in the spreadsheet. The nightly workflow picks it up. Schemas rebuild. The UI can import and use the new key immediately.
+Add a permission in the spreadsheet. The nightly workflow picks it up and commits the updated CSV. When `@meshery/schemas` is published and updated in `package.json`, the UI gains access to the new key immediately.
 
-Remove a permission from the spreadsheet. The schema drops the key. The UI gets a TypeScript compile error. No silent failures.
+Remove a permission from the spreadsheet. The schema package drops the property on `Keys`. Rebuilding the UI flags any leftover references with a TypeScript compile error. No silent failures.
 
 ---
 
@@ -291,7 +295,8 @@ it('respects the permissionKey prop', async () => {
     <TransferButton title="Connections" count={1}
       onAssign={onAssign} permissionKey={mockKey} />,
   );
-  expect(screen.getByTestId('popup-button')).toBeDisabled();
+  const btn = screen.getByTestId('popup-button');
+  expect(btn).toBeDisabled();
   await user.click(btn);
   expect(onAssign).not.toHaveBeenCalled();
 });
@@ -307,7 +312,7 @@ it('respects the permissionKey prop', async () => {
 |--------|--------|-------|
 | Permission constants file | 449 lines, 110 hardcoded UUIDs | Deleted |
 | Source of truth | Manual copy-paste from spreadsheet | Automated pipeline |
-| UUID update process | Find UUID, edit file, PR, review, merge | Automatic |
+| UUID update process | Find UUID, edit file, PR, review, merge | Automatic via `@meshery/schemas` releases |
 | Compile-time validation | None | TypeScript errors on missing keys |
 | User feedback on disabled features | Greyed-out button, no explanation | Rich tooltip with permission name, user context, and guidance |
 | Components using schema keys | 0 | 50+ |
@@ -329,4 +334,4 @@ it('respects the permissionKey prop', async () => {
 
 ---
 
-*Rishi Raj is an [LFX Mentorship](https://lfx.linuxfoundation.org/tools/mentorship/) intern and open source contributor to [Meshery](https://github.com/meshery/meshery), a [CNCF](https://www.cncf.io/) project. If you're interested in contributing, check out the [Meshery Contributing Guide](https://docs.meshery.io/project/contributing) or join the [community Slack](https://slack.meshery.io).*
+*Rishi Raj is an [LFX Mentorship](https://lfx.linuxfoundation.org/tools/mentorship/) intern and open-source contributor to [Meshery](https://github.com/meshery/meshery), a [CNCF](https://www.cncf.io/) project. If you're interested in contributing, check out the [Meshery Contributing Guide](https://docs.meshery.io/project/contributing) or join the [community Slack](https://slack.meshery.io).*
