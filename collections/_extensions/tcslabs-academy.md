@@ -9,7 +9,7 @@ compatibility:
   - meshery
 extensionId: deea6061-b6be-49a9-ad1c-f1a5c32e1fa9
 logo: /assets/images/extensions/tcslabs-academy-color.svg
-whiteImage: /assets/images/extensions/tcslabs-academy-color.svg
+whiteImage: /assets/images/extensions/tcslabs-academy-white.svg
 colorImage: /assets/images/extensions/tcslabs-academy-white.svg
 
 extensionInfo: |
