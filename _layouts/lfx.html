@@ -15,6 +15,10 @@ layout: default
                 <div class="project-item">
                     <h3>{{ project.title }}</h3>
 
+                {% if project.lfx_link %}
+                <a class="issue" href="{{ project.lfx_link }}">Open on LFX Mentorship</a>
+                {% endif %}
+
                 {% if project.description %}
                 <h4 class="project-list"><span class="sub_headings">Description:</span></h4>
                 <div class="program-p">
@@ -73,7 +77,7 @@ layout: default
                 <ul>
                     {% for issue in project.issues %}
                     <li>
-                        <a class="issue" href="{{ issue }}">{{ issue }}</a>
+                        <a class="issue program-p" href="{{ issue }}">{{ issue }}</a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -110,9 +114,7 @@ layout: default
                 <div class="program-p">
                     {{ page.community_description | markdownify }}
                 </div>
-                <a href="https://slack.meshery.io">
-                    <input type="button" value="Join Slack" class="participate-button" />
-                </a>
+                <a href="https://slack.meshery.io" class="participate-button">Join Slack</a>
             </div>
             {% endif %}
             </div>
