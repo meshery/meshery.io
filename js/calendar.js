@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
       addToCalendar: {
         text: 'Add To Your Calendar',
         click: function () {
-          window.open('https://bit.ly/2SbrRhe', '_blank');
+          window.open('https://calendar.google.com/calendar/u/0?cid=bGF5ZXI1LmlvX2VoMmFhOWRwZjFnNDBlbHZvYzc2MmpucGhzQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20', '_blank');
         }
       }
     },
