@@ -23,5 +23,6 @@ extensionCaveats: |
   - Seamless Integration: Leverages GitHub Actions to handle snapshot rendering.
   - Support for Kubernetes manifests: Works with a single manifest of a single resource, for entire namespaces, or single cluster visualizations.
 
-docsURL: 'https://docs.meshery.io/extensions/kubectl-kanvas-snapshot'
+URL: https://github.com/meshery-extensions/kubectl-meshsync-snapshot
 ---
+
