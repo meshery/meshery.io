@@ -1,4 +1,5 @@
 ---
+
 name: Bug/issue report
 about: Report an issue to help us improve
 title: ''
@@ -7,6 +8,10 @@ labels:
   - 'help wanted'
 assignees: ''
 ---
+
+> **Note**
+> Before opening a new issue, please make sure to check out the Meshery Contributor Training Guide (https://layer5.io).
+
 ### Description
 <!-- A brief description of the issue.-->
 
