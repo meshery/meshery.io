@@ -21,7 +21,7 @@ extensionCaveats: |
   - Simplify Networking: Overcome common networking challenges between your infrastructure (e.g Kuberentes cluster) and your Meshery Server deployment. - Simplify Access Level Requirements: Overcome the need privileged, write access required by a full Meshery deployment, using read-only access to generate a MeshSync snapshot.
   - Snapshot Capture: Works with a single manifest of a single resource, for entire namespaces, or single cluster visualizations.
 
-docsURL: 'https://docs.meshery.io/extensions/kubectl-meshsync-snapshot'
+URL: https://github.com/meshery-extensions/kubectl-meshsync-snapshot
 ---
 
 {{ page.extensionCaveats }}

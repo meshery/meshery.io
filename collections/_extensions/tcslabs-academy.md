@@ -21,5 +21,5 @@ extensionCaveats: |
   - Uses Meshery as the management plane for cloud native infrastructure learning.
 
 URL: https://github.com/meshery-extensions/tcslabs-academy
-docsURL: https://github.com/meshery-extensions/tcslabs-academy
+docsURL: https://docs.meshery.io/extensions/academies/
 ---
