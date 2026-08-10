@@ -8,10 +8,8 @@ labels:
   - 'help wanted'
 assignees: ''
 ---
-
 > **Note**
-> Before opening a new issue, please make sure to check out the Meshery Contributor Training Guide (https://layer5.io).
-
+> Before opening a new issue, please review the [Meshery Contributor Training Guide](https://meshery.io/talks-and-trainings#trainings).
 ### Description
 <!-- A brief description of the issue.-->
 
