@@ -95,7 +95,7 @@ jobs:
           number: ${{ needs.read-metadata.outputs.pr-number }}
           message: |
             ${{ needs.read-metadata.outputs.action == 'closed' && 'Preview removed because the pull request was closed.' || format('🚀 Preview deployment: {0}', steps.preview.outputs.preview-url) }}
-            ${{ needs.read-metadata.outputs.action != 'closed' && format('> *Note: Preview may take a moment (GitHub Pages deployment in progress). Please wait and refresh. Track deployment [here](https://github.com/{0}/actions/workflows/pages-build-deployment)*', github.repository) || '' }}
+            ${{ needs.read-metadata.outputs.action != 'closed' && format('> *Note: Preview may take a moment (GitHub Pages deployment in progress). Please wait and refresh. Track deployment [here](https://github.com/{0}/deployments)*', github.repository) || '' }}
 
   prune:
     needs: read-metadata
@@ -199,7 +199,7 @@ jobs:
             } >> "$GITHUB_OUTPUT"
           fi
       - name: Comment on pruned previews
-        uses: actions/github-script@d746ffe35508b1917358783b479e04febd2b8f71 # v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           REMOVED_PRS_JSON: ${{ steps.prune-previews.outputs.removed_prs_json }}
           PREVIEW_RETENTION_LIMIT: ${{ env.PREVIEW_RETENTION_LIMIT }}
