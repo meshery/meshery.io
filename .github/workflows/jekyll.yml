@@ -46,19 +46,17 @@ jobs:
 
           touch _site/.nojekyll
 
-      # PR previews live on the same gh-pages branch under pr-preview/.
-      # keep_files: true preserved them, but also left deleted production
-      # routes (e.g. /community/members) online forever. Carry previews into
-      # _site, then publish cleanly so removed pages are dropped.
       - name: Preserve PR previews
         run: |
           git fetch origin gh-pages:gh-pages || true
-          if git checkout gh-pages -- pr-preview 2>/dev/null; then
-            mv pr-preview _site/pr-preview
-            echo "Preserved pr-preview/ into _site"
-          else
-            echo "No pr-preview/ on gh-pages; continuing"
-          fi
+          for item in pr-preview .well-known redirects.json; do
+            if git checkout gh-pages -- "$item" 2>/dev/null; then
+              mv "$item" "_site/$item"
+              echo "Preserved $item into _site"
+            else
+              echo "No $item on gh-pages; continuing"
+            fi
+          done
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
