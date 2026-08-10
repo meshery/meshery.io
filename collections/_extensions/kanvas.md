@@ -3,7 +3,7 @@ layout: single-page-extension
 name: Kanvas
 kind: Plugin
 userName: Meshery Authors
-type: Collaboration 
+type: Collaboration
 compatibility: 
   - aws
   - kubernetes
