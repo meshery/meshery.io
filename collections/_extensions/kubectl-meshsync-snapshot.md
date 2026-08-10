@@ -10,7 +10,7 @@ compatibility:
 #extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce96
 logo: /assets/images/logos/meshsync.svg
 whiteImage: /assets/images/logos/meshsync.svg
-colorImage: /assets/images/logos/meshsync-white.svg
+colorImage: /assets/images/logos/meshsync.svg
 image-light: /assets/images/logos/meshsync-white.svg
 extensionInfo: |
   The MeshSync Snapshot kubectl plugin allows you to capture the state of your clusters directly from the command line. This plugin simplifies the process of deploying <a href="https://docs.meshery.io/concepts/architecture/meshsync">MeshSync</a> to your clusters, but instead starts and stops an instance of MeshSync long enough to capture a list and details of your cluster's resources.
@@ -21,7 +21,7 @@ extensionCaveats: |
   - Simplify Networking: Overcome common networking challenges between your infrastructure (e.g Kuberentes cluster) and your Meshery Server deployment. - Simplify Access Level Requirements: Overcome the need privileged, write access required by a full Meshery deployment, using read-only access to generate a MeshSync snapshot.
   - Snapshot Capture: Works with a single manifest of a single resource, for entire namespaces, or single cluster visualizations.
 
-docsURL: 'https://docs.meshery.io/extensions/kubectl-meshsync-snapshot'
+URL: https://github.com/meshery-extensions/kubectl-meshsync-snapshot
 ---
 
 {{ page.extensionCaveats }}
