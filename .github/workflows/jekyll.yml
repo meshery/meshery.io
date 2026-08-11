@@ -21,12 +21,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
 
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1.162.0
+        uses: ruby/setup-ruby@af848b40be8bb463a751551a1180d74782ba8a72 #v1.162.0
         with:
           ruby-version: '3.2.2'
           bundler-cache: true
@@ -46,22 +44,13 @@ jobs:
 
           touch _site/.nojekyll
 
-      - name: Preserve PR previews
-        run: |
-          git fetch origin gh-pages:gh-pages || true
-          for item in pr-preview .well-known redirects.json; do
-            if git checkout gh-pages -- "$item" 2>/dev/null; then
-              mv "$item" "_site/$item"
-              echo "Preserved $item into _site"
-            else
-              echo "No $item on gh-pages; continuing"
-            fi
-          done
-
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f #v4.8.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
-          publish_branch: gh-pages
-          keep_files: false
+          folder: ./_site
+          branch: gh-pages
+          clean: true
+          clean-exclude: |
+            pr-preview
+            .well-known
+          force: false
