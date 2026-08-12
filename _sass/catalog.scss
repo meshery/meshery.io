@@ -481,6 +481,17 @@ $category-nav-tick: 1.25rem;
   }
 }
 
+// While the rail is visible it is fixed, so it takes no space in the flow;
+// reserve the gutter on the page it belongs to or it overlays the last card
+// column at the wider card-grid breakpoints.
+@media (min-width: 1281px) {
+  .section-container:has(.category-nav) {
+    box-sizing: border-box;
+    // Rail (label + tick) plus its `right` offset, plus a gutter of the same size.
+    padding-right: $category-nav-width + $category-nav-tick + 3rem;
+  }
+}
+
 // The rail needs its own gutter; below this it would sit over the card grid.
 @media (max-width: 1280px) {
   .category-nav {
