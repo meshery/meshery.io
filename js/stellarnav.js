@@ -206,6 +206,18 @@ $.fn.stellarNav = function(options, width, breakpoint) {
       }
     });
 
+    // closes mobile menu when a navigation item link (e.g. Getting Started) is clicked
+    $(document).on('click', '.stellarnav.mobile a', function() {
+      if ($(this).hasClass('menu-toggle') || $(this).hasClass('close-menu') || $(this).hasClass('dd-toggle') || $(this).hasClass('sub-list') || $(this).hasClass('call-btn-mobile') || $(this).hasClass('location-btn-mobile')) {
+        return;
+      }
+      var mobileNav = $(this).closest('.stellarnav');
+      if (mobileNav.hasClass('mobile') && mobileNav.hasClass('active')) {
+        mobileNav.removeClass('active');
+        mobileNav.find('ul:first').stop(true, true).hide();
+      }
+    });
+
 
     // adds toggle button to li items that have children
     nav.find('li a').each(function() {
