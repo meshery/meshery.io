@@ -10,7 +10,7 @@ compatibility:
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: https://playground.meshery.io/static/img/meshmap-snapshot-logo.svg
 whiteImage: /images/integrations/linkerd/icons/color/linkerd-color.svg
-colorImage: /images/integrations/linkerd/icons/white/linkerd-white.svg
+colorImage: /images/integrations/linkerd/icons/color/linkerd-color.svg
 extensionInfo: |
   Deploy the Meshery Adapter for Linkerd in order to enable deeper lifecycle management of Linkerd service meshes.
 extensionCaveats: |
