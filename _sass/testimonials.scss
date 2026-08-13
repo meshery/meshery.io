@@ -165,6 +165,37 @@
     font-size: 9pt;
 }
 
+// Tablet breakpoint – covers 769px–1024px (e.g. ASUS Zenbook Fold at 853px)
+// With slidesToShow: 2, each card is ~400px wide at 853px viewport.
+// Reducing the pattern bar and padding prevents the left chrome from
+// consuming too much of the card's readable area.
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .type-one-quote .type-one-quote-pattern {
+        flex-basis: 50px;
+    }
+
+    .type-one-quote .type-one-quote-base {
+        flex-basis: calc(100% - 50px);
+        padding: 90px 20px 20px 20px; // top clears avatar (top:15 + height:65 + gap:10)
+    }
+
+    .type-one-quote .type-one-quote-userpic {
+        width: 65px;
+        height: 65px;
+        left: 10px;   // centre on the 50px bar
+        top: 15px;    // anchor avatar to top of card (was inheriting desktop top: 80px)
+    }
+
+    .type-one-quote .type-one-quote-qmark {
+        left: 82px;   // clears avatar right edge (left:10 + width:65 = 75px) with a 7px gap
+        top: 15px;    // aligned with avatar top
+    }
+
+    .type-one-quote {
+        min-height: 220px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .type-one-quote .type-one-quote-pattern {
         flex-basis: 20px;
