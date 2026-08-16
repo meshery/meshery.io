@@ -122,15 +122,108 @@ Here is a complete, valid JSON relationship document illustrating a non-binding 
 
 **Hierarchical Example:**
 
+Here is a complete, valid JSON relationship document illustrating a hierarchical parent-inventory relationship where a parent `VPC` patches its child `Subnet`:
+
 ```json
 {
+  "id": "00000000-0000-0000-0000-000000000000",
   "kind": "hierarchical",
-  "selectors": [{
-    "allow": {
-      "from": [{"kind": "Child"}],
-      "to": [{"kind": "Parent"}]
+  "metadata": {
+    "description": "Defines the hierarchical parent-inventory relationship between a VPC and a Subnet.",
+    "isAnnotation": false,
+    "styles": {
+      "primaryColor": "",
+      "svgColor": "",
+      "svgWhite": ""
     }
-  }]
+  },
+  "model": {
+    "displayName": "",
+    "id": "00000000-0000-0000-0000-000000000000",
+    "model": {
+      "version": "v1.0.0"
+    },
+    "name": "kubernetes",
+    "registrant": {
+      "kind": ""
+    },
+    "version": ""
+  },
+  "schemaVersion": "relationships.meshery.io/v1beta2",
+  "selectors": [
+    {
+      "allow": {
+        "from": [
+          {
+            "id": null,
+            "kind": "Subnet",
+            "match": {},
+            "match_strategy_matrix": null,
+            "model": {
+              "displayName": "",
+              "id": "00000000-0000-0000-0000-000000000000",
+              "model": {
+                "version": ""
+              },
+              "name": "kubernetes",
+              "registrant": {
+                "kind": "github"
+              },
+              "version": ""
+            },
+            "patch": {
+              "mutatedRef": [
+                [
+                  "configuration",
+                  "spec",
+                  "vpcRef",
+                  "from",
+                  "name"
+                ]
+              ],
+              "patchStrategy": "replace"
+            }
+          }
+        ],
+        "to": [
+          {
+            "id": null,
+            "kind": "VPC",
+            "match": {},
+            "match_strategy_matrix": null,
+            "model": {
+              "displayName": "",
+              "id": "00000000-0000-0000-0000-000000000000",
+              "model": {
+                "version": ""
+              },
+              "name": "kubernetes",
+              "registrant": {
+                "kind": "github"
+              },
+              "version": ""
+            },
+            "patch": {
+              "mutatorRef": [
+                [
+                  "displayName"
+                ]
+              ],
+              "patchStrategy": "replace"
+            }
+          }
+        ]
+      },
+      "deny": {
+        "from": [],
+        "to": []
+      }
+    }
+  ],
+  "subType": "inventory",
+  "status": "enabled",
+  "type": "parent",
+  "version": "v1.0.0"
 }
 ```
 
@@ -226,7 +319,7 @@ Drag and drop the respective components (defined in your relationship) onto the 
 ### 3. Verify Manifest Generation
 * Export the design as a manifest to ensure the `mutatedRef` patch was applied to the consumer's configuration.
 * Inspect the exported YAML/JSON to verify that the data was successfully injected.
-* Deploy the generated manifest to your cluster to confirm it works as expected, or attempt to deploy it directly to a test cluster if your Kubernetes cluster is connected.
+* Deploy the generated manifest to an isolated namespace or a disposable test cluster (such as Minikube or Kind) to confirm it works as expected. Always verify your active Kubernetes context (`kubectl config current-context`) before deploying to prevent accidental changes to production, and ensure all resources created during validation are deleted afterward.
 * Watch this export demo: [Screencast from 02-07-26 03:56:52 PM IST](https://drive.google.com/file/d/1QQMU0EF7VG5J0h9NdYL9SToOhgeMJ52X/view?usp=sharing).
 
 ### 4. Vice-Versa Generation (Import Verification)
