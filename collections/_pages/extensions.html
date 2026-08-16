@@ -261,15 +261,53 @@ published: true
     const header = document.getElementById("mainHeader");
     const headerHeight = header ? header.getBoundingClientRect().height : 0;
 
+    // On the narrow layout the navigator sticks directly under the site header,
+    // so it is offset by the header alone.
+    documentRoot.style.setProperty(
+      "--extensions-header-offset",
+      headerHeight + "px"
+    );
+
     // The site header is sticky, so a section has to clear it before it counts
-    // as being at the top of the viewport.
+    // as being at the top of the viewport -- and the navigator too, on the
+    // layout where it sticks below the header rather than sitting in the gutter.
+    const navHeight =
+      getComputedStyle(categoryNav).position === "sticky"
+        ? categoryNav.getBoundingClientRect().height
+        : 0;
+
     documentRoot.style.setProperty(
       "--extensions-scroll-offset",
-      headerHeight + 16 + "px"
+      headerHeight + navHeight + 16 + "px"
     );
   }
 
+  // Only the horizontal strip scrolls; the rail shows every category at once.
+  function revealActiveCategory(link) {
+    if (!link || categoryNav.scrollWidth <= categoryNav.clientWidth) return;
+
+    const navBox = categoryNav.getBoundingClientRect();
+    const linkBox = link.getBoundingClientRect();
+
+    // Instant: clicking a chip already animates the page, and a second smooth
+    // scroll started in the same tick fights it and lands the page off-target.
+    categoryNav.scrollTo({
+      left:
+        categoryNav.scrollLeft +
+        (linkBox.left - navBox.left) -
+        (navBox.width - linkBox.width) / 2,
+      behavior: "auto",
+    });
+  }
+
+  let activeCategoryLink = null;
+
   function setActiveCategory(link) {
+    // Scroll tracking re-asserts the same link on every frame, so the strip is
+    // only nudged when the category actually changes.
+    const changed = link !== activeCategoryLink;
+    activeCategoryLink = link;
+
     categoryNavLinks.forEach((candidate) => {
       candidate.classList.toggle("is-active", candidate === link);
       if (candidate === link) {
@@ -278,6 +316,8 @@ published: true
         candidate.removeAttribute("aria-current");
       }
     });
+
+    if (changed) revealActiveCategory(link);
   }
 
   function updateActiveCategory() {

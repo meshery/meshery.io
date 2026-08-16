@@ -356,6 +356,12 @@ p {
 .extension-category {
   width: 100%;
 
+  // Being a <section>, this picks up `section { padding: 50px 25px }` from the
+  // site layout. The container already provides the gutter, and with no global
+  // border-box the extra 50px made every section wider than the page, which
+  // scrolled sideways as soon as a navigator link brought one into view.
+  padding: 0;
+
   // Clears the sticky site header.
 
   scroll-margin-top: var(--extensions-scroll-offset, 7rem);
@@ -367,10 +373,13 @@ p {
   }
 }
 
+$category-divider-chip-height: 1.75rem;
+
 .category-divider {
   position: relative;
   width: 100%;
-  padding-top: 1.5rem;
+  // Leaves room above the rule for the label tab that sits on it.
+  padding-top: 1.5rem + $category-divider-chip-height;
 }
 
 .category-divider-line {
@@ -381,14 +390,18 @@ p {
   background-color: var(--color-primary-extra-dark);
 }
 
+// Seated on top of the rule rather than hanging below it, where it shared a
+// band with the type chip on the first row of cards and read as a repeat of it.
+// The rounded corner mirrors the card chips, so the tab points up to the rule
+// while theirs point down into the card.
 .category-divider .category-divider-chip {
   position: absolute;
-  top: calc(2.5rem + 2px);
+  bottom: 2px; // the height of the rule
   left: 0;
   float: none;
-  height: 1.75rem;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  height: $category-divider-chip-height;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 0;
 }
 
 /* EXTENSION CATEGORY NAVIGATOR */
@@ -492,10 +505,54 @@ $category-nav-tick: 1.25rem;
   }
 }
 
-// The rail needs its own gutter; below this it would sit over the card grid.
+// The rail needs a gutter it cannot have here, so the same navigator is laid
+// out instead as a strip that sticks under the site header. Swiping it sideways
+// reaches the categories that do not fit across the screen.
 @media (max-width: 1280px) {
   .category-nav {
-    display: none;
+    position: sticky;
+    top: var(--extensions-header-offset, 0px);
+    right: auto;
+    transform: none;
+    // The bare `nav` rules in navigation.scss size and centre the site menu;
+    // the strip spans the card grid instead.
+    width: 100%;
+    margin: 0 0 0.5rem;
+    padding: 0.75rem 0;
+    background-color: var(--color-primary-light);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+
+    // The strip is driven by the chips, so its own scrollbar is just noise.
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    // The spine and its connectors only describe the vertical rail.
+    &::before {
+      display: none;
+    }
+  }
+
+  .category-nav-list {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    // Keeps the last chip clear of the edge once the strip is scrolled.
+    width: max-content;
+
+    li::after {
+      display: none;
+    }
+  }
+
+  .category-nav-link {
+    width: auto;
+    // Taller than the card chips so the strip stays comfortable to tap.
+    height: 2rem;
   }
 }
 
