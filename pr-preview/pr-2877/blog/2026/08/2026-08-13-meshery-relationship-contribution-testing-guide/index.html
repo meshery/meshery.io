@@ -532,17 +532,17 @@
 </blockquote>
 
 <h4 id="crucial-standard-non-binding-edges---strict">Crucial Standard (Non-Binding Edges - STRICT)</h4>
-<p>For non-binding edges, the OPA engine is completely rigid. Your <code class="language-plaintext highlighter-rouge">from</code> selector <strong>MUST</strong> act as the Provider/Source (containing the <code class="language-plaintext highlighter-rouge">mutatorRef</code>) and the <code class="language-plaintext highlighter-rouge">to</code> selector <strong>MUST</strong> act as the Consumer/Destination (containing the <code class="language-plaintext highlighter-rouge">mutatedRef</code>). If you invert this, the engine’s patching logic will silently crash (arrows won’t be rendered automatically and evaluation won’t happen).</p>
+<p>For non-binding edges, the OPA engine is rigid regarding the patch direction: the <code class="language-plaintext highlighter-rouge">mutatorRef</code> (the provider/source of the value) <strong>MUST</strong> be placed in the <code class="language-plaintext highlighter-rouge">from</code> selector, and the <code class="language-plaintext highlighter-rouge">mutatedRef</code> (the consumer/destination of the value) <strong>MUST</strong> be placed in the <code class="language-plaintext highlighter-rouge">to</code> selector. Consequently, the visual connection arrow will always point from the provider (<code class="language-plaintext highlighter-rouge">from</code> selector) to the consumer (<code class="language-plaintext highlighter-rouge">to</code> selector). If you invert these fields, the engine’s patching logic will fail to evaluate.</p>
 
 <h4 id="crucial-standard-binding-edges---flexible">Crucial Standard (Binding Edges - FLEXIBLE)</h4>
-<p>For binding edges, the OPA engine is flexible. You can place the <code class="language-plaintext highlighter-rouge">mutatorRef</code> on either the <code class="language-plaintext highlighter-rouge">from</code> or <code class="language-plaintext highlighter-rouge">to</code> node.</p>
+<p>For binding edges, the OPA engine is flexible. You can place the <code class="language-plaintext highlighter-rouge">mutatorRef</code> on either the <code class="language-plaintext highlighter-rouge">from</code> or <code class="language-plaintext highlighter-rouge">to</code> node depending on the direction of your connection.</p>
 
 <blockquote>
-  <p><strong>Note:</strong> The <code class="language-plaintext highlighter-rouge">binding</code> type is different from others as it needs an intermediary to bind two other components. It is specifically designed for relationships like binding a User/ServiceAccount to a Role/ClusterRole using a RoleBinding/ClusterRoleBinding.</p>
+  <p><strong>Note:</strong> The <code class="language-plaintext highlighter-rouge">binding</code> type is different from others as it needs an intermediary component to bind two other components. It is specifically designed for relationships like binding a User/ServiceAccount to a Role/ClusterRole using a RoleBinding/ClusterRoleBinding.</p>
 </blockquote>
 
 <h4 id="crucial-standard-hierarchical-relationships---flexible">Crucial Standard (Hierarchical Relationships - FLEXIBLE)</h4>
-<p>For Hierarchical relationships, the OPA engine is completely flexible. You can place the <code class="language-plaintext highlighter-rouge">mutatorRef</code>/<code class="language-plaintext highlighter-rouge">mutatedRef</code> on either the <code class="language-plaintext highlighter-rouge">from</code> or <code class="language-plaintext highlighter-rouge">to</code> node depending on the logic of your specific relationship (for example, in a <code class="language-plaintext highlighter-rouge">hierarchical-wallet</code>, <code class="language-plaintext highlighter-rouge">mutatorRef</code> is on <code class="language-plaintext highlighter-rouge">from</code>, whereas in <code class="language-plaintext highlighter-rouge">hierarchical-parent-inventory</code>, it is inverted with <code class="language-plaintext highlighter-rouge">mutatorRef</code> on <code class="language-plaintext highlighter-rouge">to</code>).</p>
+<p>For Hierarchical relationships, the OPA engine is completely flexible. You can place the <code class="language-plaintext highlighter-rouge">mutatorRef</code>/<code class="language-plaintext highlighter-rouge">mutatedRef</code> on either the <code class="language-plaintext highlighter-rouge">from</code> or <code class="language-plaintext highlighter-rouge">to</code> node depending on the logic of your specific relationship (for example, in a <code class="language-plaintext highlighter-rouge">hierarchical-parent-wallet</code>, <code class="language-plaintext highlighter-rouge">mutatorRef</code> is placed on the child in <code class="language-plaintext highlighter-rouge">from</code>, whereas in <code class="language-plaintext highlighter-rouge">hierarchical-parent-inventory</code>, the <code class="language-plaintext highlighter-rouge">mutatorRef</code> is placed on the parent in <code class="language-plaintext highlighter-rouge">to</code>).</p>
 
 <h4 id="important-rules">Important Rules</h4>
 <ul>
@@ -552,60 +552,91 @@
     <p>Never assign anything other than this since the Meshery Server assigns a unique ID to relationships at runtime during import.</p>
   </li>
   <li><strong>Unified Go-based evaluation engine</strong>: The <code class="language-plaintext highlighter-rouge">evaluationQuery</code> field is a legacy property that was used to specify which exact Rego policy file/query should be executed to evaluate this relationship. You should leave it completely blank (<code class="language-plaintext highlighter-rouge">""</code>). Meshery has transitioned to a unified Go-based evaluation engine.</li>
-  <li><strong>Mutator and Mutated Refs</strong>: Remember that <code class="language-plaintext highlighter-rouge">mutatorRef</code> defines the source (provider) and <code class="language-plaintext highlighter-rouge">mutatedRef</code> defines the receiver (consumer).</li>
-  <li><strong>Directives vs. Sources</strong>: <code class="language-plaintext highlighter-rouge">from</code> and <code class="language-plaintext highlighter-rouge">to</code> blocks define the Directive only, not the source and receiver.</li>
+  <li><strong>Mutator and Mutated Refs</strong>: Remember that <code class="language-plaintext highlighter-rouge">mutatorRef</code> defines the source (provider) path that is read, and <code class="language-plaintext highlighter-rouge">mutatedRef</code> defines the target (consumer) path that is modified.</li>
+  <li><strong>Directives vs. Sources</strong>: <code class="language-plaintext highlighter-rouge">from</code> and <code class="language-plaintext highlighter-rouge">to</code> blocks define the visual endpoints of the relationship line, while <code class="language-plaintext highlighter-rouge">mutatorRef</code> and <code class="language-plaintext highlighter-rouge">mutatedRef</code> define the data mutation flow.</li>
   <li><strong>Allow vs. Deny Selectors</strong>: Your <code class="language-plaintext highlighter-rouge">allow</code> and <code class="language-plaintext highlighter-rouge">deny</code> selectors use separate selector objects.
     <ul>
-      <li><strong>Allow selectors</strong> enforce evaluation of defined relationships when conditions are met. In the example below, the relationship between <code class="language-plaintext highlighter-rouge">Service</code> and <code class="language-plaintext highlighter-rouge">Deployment</code> will be approved and evaluated when the described conditions are met.</li>
-      <li><strong>Deny selectors</strong> are used to restrict relationships between defined components when specific conditions are met. In the example below, the relationship between a <code class="language-plaintext highlighter-rouge">Service</code> and another <code class="language-plaintext highlighter-rouge">Service</code> has been restricted as it is not a valid relationship in the real world.</li>
+      <li><strong>Allow selectors</strong> enforce evaluation of defined relationships when conditions are met. In the example below, the relationship from <code class="language-plaintext highlighter-rouge">Deployment</code> to <code class="language-plaintext highlighter-rouge">Service</code> will be evaluated and patched when the described conditions are met.</li>
+      <li><strong>Deny selectors</strong> are used to restrict relationships between defined components when specific conditions are met. In the example below, relationships between two <code class="language-plaintext highlighter-rouge">Service</code> components are denied as they are semantically invalid.</li>
     </ul>
   </li>
 </ul>
 
 <p><strong>Example Configuration:</strong></p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Service"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"patch"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"mutatorRef"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">[</span><span class="s2">"configuration"</span><span class="p">,</span><span class="w"> </span><span class="s2">"spec"</span><span class="p">,</span><span class="w"> </span><span class="s2">"selector"</span><span class="p">],</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"to"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deployment"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"patch"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"mutatedRef"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">[</span><span class="s2">"configuration"</span><span class="p">,</span><span class="w"> </span><span class="s2">"spec"</span><span class="p">,</span><span class="w"> </span><span class="s2">"selector"</span><span class="p">,</span><span class="w"> </span><span class="s2">"matchLabels"</span><span class="p">],</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<p>Here is a complete, valid JSON relationship document illustrating a non-binding reference where a <code class="language-plaintext highlighter-rouge">Deployment</code>’s labels patch a <code class="language-plaintext highlighter-rouge">Service</code>’s selector:</p>
 
-</span><span class="nl">"deny"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000000-0000-0000-0000-000000000000"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"edge"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"non-binding"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"subType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"reference"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"selectors"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Service"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"patch"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="nl">"allow"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Deployment"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kubernetes"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"patch"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"mutatorRef"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">[</span><span class="s2">"configuration"</span><span class="p">,</span><span class="w"> </span><span class="s2">"spec"</span><span class="p">,</span><span class="w"> </span><span class="s2">"template"</span><span class="p">,</span><span class="w"> </span><span class="s2">"metadata"</span><span class="p">,</span><span class="w"> </span><span class="s2">"labels"</span><span class="p">]</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="nl">"patchStrategy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"replace"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"to"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Service"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kubernetes"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"patch"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"mutatedRef"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">[</span><span class="s2">"configuration"</span><span class="p">,</span><span class="w"> </span><span class="s2">"spec"</span><span class="p">,</span><span class="w"> </span><span class="s2">"selector"</span><span class="p">]</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="nl">"patchStrategy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"replace"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"deny"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Service"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kubernetes"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"patch"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"to"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Service"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kubernetes"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"patch"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"to"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Service"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"patch"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"enabled"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v1.0.0"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
 <ul>
   <li><strong>Hierarchical From/To Mapping</strong>:
     <ul>
-      <li>The <code class="language-plaintext highlighter-rouge">from</code> array always contains the <strong>CHILD</strong>.</li>
-      <li>The <code class="language-plaintext highlighter-rouge">to</code> array always contains the <strong>PARENT</strong>.</li>
-      <li>In a <strong>Hierarchical Parent-Inventory</strong> relationship, the <code class="language-plaintext highlighter-rouge">from</code> block holds <code class="language-plaintext highlighter-rouge">mutatedRef</code> and the <code class="language-plaintext highlighter-rouge">to</code> block holds <code class="language-plaintext highlighter-rouge">mutatorRef</code> since the parent patches the child by giving its value.</li>
-      <li>In a <strong>Hierarchical Parent-Wallet</strong> relationship, the <code class="language-plaintext highlighter-rouge">from</code> block holds <code class="language-plaintext highlighter-rouge">mutatorRef</code> and the <code class="language-plaintext highlighter-rouge">to</code> block holds <code class="language-plaintext highlighter-rouge">mutatedRef</code> since the child patches the parent by its own value.</li>
+      <li>The <code class="language-plaintext highlighter-rouge">from</code> array always contains the <strong>CHILD</strong> selector.</li>
+      <li>The <code class="language-plaintext highlighter-rouge">to</code> array always contains the <strong>PARENT</strong> selector.</li>
+      <li>In a <strong>Hierarchical Parent-Inventory</strong> relationship, the <code class="language-plaintext highlighter-rouge">from</code> block (child) holds <code class="language-plaintext highlighter-rouge">mutatedRef</code> and the <code class="language-plaintext highlighter-rouge">to</code> block (parent) holds <code class="language-plaintext highlighter-rouge">mutatorRef</code> because the parent patches the child by providing its value.</li>
+      <li>In a <strong>Hierarchical Parent-Wallet</strong> relationship, the <code class="language-plaintext highlighter-rouge">from</code> block (child) holds <code class="language-plaintext highlighter-rouge">mutatorRef</code> and the <code class="language-plaintext highlighter-rouge">to</code> block (parent) holds <code class="language-plaintext highlighter-rouge">mutatedRef</code> because the child patches the parent with its own value.</li>
     </ul>
   </li>
 </ul>
@@ -697,8 +728,8 @@
 <ul>
   <li><strong>For Non-Binding-Edge Relationships</strong>:
     <ul>
-      <li>Drag a Pod and then a Service on Kanvas. Notice that the gear icon on the left will spin (this is Meshery’s evaluation engine). Once the evaluation is completed, you’ll see the evaluation results in the evaluation panel, and an edge arrow will render automatically.</li>
-      <li>The arrow should initiate from <code class="language-plaintext highlighter-rouge">allow.from</code> and extend towards <code class="language-plaintext highlighter-rouge">allow.to</code>.</li>
+      <li>Drag a Deployment and then a Service on Kanvas. Notice that the gear icon on the left will spin (this is Meshery’s evaluation engine). Once the evaluation is completed, you’ll see the evaluation results in the evaluation panel, and an edge arrow will render automatically.</li>
+      <li>The arrow should initiate from the provider component (<code class="language-plaintext highlighter-rouge">allow.from</code>, e.g., Deployment) and extend towards the consumer component (<code class="language-plaintext highlighter-rouge">allow.to</code>, e.g., Service).</li>
       <li>If it doesn’t render automatically, try to draw it manually.</li>
       <li>Watch this demo: <a href="https://drive.google.com/file/d/11rB9TUm1uB1XD4Ym05zN-aFoMivzCqmX/view?usp=drive_link">Screencast from 02-07-26 12:22:25 AM IST</a>.</li>
       <li>Watch this manual drawing demo: <a href="https://drive.google.com/file/d/1qOAzMoib_ZQfcyKzJnDx2zGLxpHRxjWw/view?usp=sharing">Screencast from 02-07-26 04:51:37 AM IST</a>.</li>
@@ -761,7 +792,7 @@
 <ul>
   <li>Meshery also renders relationships through imported YAMLs.</li>
   <li>You can import a YAML file in the Meshery UI and see the infrastructure rendered as a design.</li>
-  <li>Try exporting your relationship as a Kubernetes manifest and then import it again to ensure it gets rendered correctly.</li>
+  <li>Try exporting your test design that exercises the relationship as a Kubernetes manifest, and then import it again to ensure it gets rendered correctly.</li>
   <li>Watch this import rendering demo: <a href="https://drive.google.com/file/d/1pjVToxIqm4NKIx-0sDMAzp1032cBVt7E/view?usp=sharing">Screencast from 02-07-26 03:35:58 PM IST</a>.</li>
 </ul>
 
