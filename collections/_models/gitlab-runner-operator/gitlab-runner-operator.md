@@ -15,7 +15,11 @@ components:
   colorIcon: assets/images/integration/gitlab-runner-operator/components/runner/icons/color/runner-color.svg
   whiteIcon: assets/images/integration/gitlab-runner-operator/components/runner/icons/white/runner-white.svg
   description: 
-componentsCount: 1
+- name: multi-runner
+  colorIcon: assets/images/integration/gitlab-runner-operator/components/multi-runner/icons/color/multi-runner-color.svg
+  whiteIcon: assets/images/integration/gitlab-runner-operator/components/multi-runner/icons/white/multi-runner-white.svg
+  description: 
+componentsCount: 2
 relationships: 
 relationshipsCount: 0
 featureList: [
