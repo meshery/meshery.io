@@ -38,7 +38,7 @@ The Certified Meshery Contributor exams have been created and reviewed by mainta
 The Certified Meshery Contributor program is part of the broader Meshery Certification Program, which offers a structured pathway for professionals to validate their skills in managing and contributing to Meshery. The program includes certifications for administrators, developers, and open source contributors, each tailored to different levels of expertise and roles within the Meshery ecosystem.
 
 <div style="text-align: center;">
-<a href="/assets/images/posts/2025/certified-meshery-contributor/meshery-certification-program.png"><img alt="Meshery Certification Program" src="/assets/images/posts/2025/certified-meshery-contributor/meshery-certification-program.png" style="max-width:800px;display:block;margin:0 auto;"  /></a><br />
+<a href="/assets/images/posts/2025/certified-meshery-contributor/meshery-certification-program.png"><img alt="Meshery Certification Program" src="/assets/images/posts/2025/certified-meshery-contributor/meshery-certification-program.png" style="width:100%;max-width:800px;display:block;margin:0 auto;"  /></a><br />
 <a href="https://playground.meshery.io/extension/meshmap?catalog-design=c2141477-379b-432e-b47e-1c89600235a5">Explore the Meshery Certification Program design</a>
 </div>
 
@@ -56,7 +56,7 @@ The Administrators track is tailored for operators and advanced users of Meshery
 2. Certified Meshery Professional  
 3. Certified Meshery Expert
 
-<img src="/assets/images/posts/2025/certified-meshery-contributor/administrators-track.png" alt="Meshery Certification Program - Administrators Track" style="max-width:800px;display:block;margin:0 auto;" />
+<img src="/assets/images/posts/2025/certified-meshery-contributor/administrators-track.png" alt="Meshery Certification Program - Administrators Track" style="width:100%;max-width:800px;display:block;margin:0 auto;" />
 
 ### Developers Track
 
@@ -67,7 +67,7 @@ The Developers track targets contributors and engineers focused on building and 
 4. Certified Meshery Contributor  
 5. Certified Meshery Developer
 
-<img src="/assets/images/posts/2025/certified-meshery-contributor/developers-track.png" alt="Meshery Certification Program - Developers Track" style="max-width:800px;display:block;margin:0 auto;" />
+<img src="/assets/images/posts/2025/certified-meshery-contributor/developers-track.png" alt="Meshery Certification Program - Developers Track" style="width:100%;max-width:800px;display:block;margin:0 auto;" />
 
 ## Certification Exams
 
@@ -90,7 +90,7 @@ Recognition badges come in different flavors and now include a new category for 
 
 <figure style="text-align: center;">
   <a href="/assets/images/posts/2025/certified-meshery-contributor/certified-meshery-contributor-badge.png">
-<img alt="Certified Meshery Contributor Badge" src="/assets/images/posts/2025/certified-meshery-contributor/certified-meshery-contributor-badge.png" style="max-width:200px;display:block;margin:0 auto;"  /></a>
+<img alt="Certified Meshery Contributor Badge" src="/assets/images/posts/2025/certified-meshery-contributor/certified-meshery-contributor-badge.png" style="width:100%;max-width:200px;display:block;margin:0 auto;"  /></a>
   <figcaption ><b>New Certified Meshery Contributor Badge</b>: Recognizes developers who have successfully passed the Certified Meshery Contributor exam, validating their skills in contributing to the Meshery open source project.
 </figcaption>
 </figure>
