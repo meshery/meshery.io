@@ -6,12 +6,7 @@
       <!-- {% for category in pattern.type %}
         <div>
         <span class="pattern-type">
-
-          {% if category == "wasm filter" %}
-          <a style="text-decoration: none; color: #333;" href="{{ site.baseurl }}/catalog/webassembly">{{ category }}</a>
-          {% else %}
           <a style="text-decoration: none; color: #333;" href="{{ site.baseurl }}/catalog/{{ category | slugify }}">{{ category }}</a>
-          {% endif %}
         </span>
         </div>
       {% endfor %} -->
@@ -73,12 +68,12 @@
   </div>
   <!-- MINICARD-END -->
 
-  {% assign info = pattern.patternInfo | default: pattern.filterInfo %}
-  {% assign caveats = pattern.patternCaveats | default: pattern.filterCaveats %}
+  {% assign info = pattern.patternInfo %}
+  {% assign caveats = pattern.patternCaveats %}
   {% assign info_clean = info | strip %}
   {% assign caveats_clean = caveats | strip %}
   <div>
-    <h3>{% if pattern.filterInfo %}What This Filter Does:{% else %}What This Design Does:{% endif %}</h3>
+    <h3>What This Design Does:</h3>
     {% if info_clean == '' or info_clean == '""' %}
       <p class="pre-white-space"><em>No description available.</em></p>
     {% else %}

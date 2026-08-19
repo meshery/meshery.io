@@ -210,7 +210,7 @@
       {% endif %}
     </div>
   </div>
-  
+
   {% if show_technology=="true"%}
   <p id="compatibility-para" class="compatibility-para">
     <span class="filter-heading">
@@ -251,7 +251,7 @@
   var drop_button = document.getElementById("arrow-icon")
   var open = true
   function handleDropdown() {
-    document.getElementById("myDropdown").classList.toggle("show"); 
+    document.getElementById("myDropdown").classList.toggle("show");
     drop_button.style.transform = open ? "rotate(180deg)":"rotate(0deg)"
     drop_button.style.transition = "transform 0.5s"
     open = !open
@@ -289,7 +289,7 @@
     open = !open
     return;
   }
-  function showTechnology() { 
+  function showTechnology() {
     comp_p.style.display = "none";
     comp_div.style.display = "none";
     category_div.style.display = "none";
@@ -317,14 +317,6 @@
 });
   // import all integrations data
   import data from "{{ site.baseurl }}/integrations/data.js";
-  // add wasmFilter to data array
-  const wasmFilter = {
-    name: "wasm-filter",
-    color: "../assets/images/webassembly_logo.svg",
-    white: "../assets/images/webassembly_logo.svg",
-  };
-
-  data.push(wasmFilter);
 
   // Function to compare the names of all catalog entries by technology
   // TODO: Improve so that catalog entries can be sorted by pattern name, too.
@@ -356,7 +348,7 @@
   // globalCategorySelected stores the category selected by the user, users can select multiple categories at the same time for sorting
   // initially it is empty
   let globalCategoryList = [];
-    // globalPatternTypeList stores the pattern types which currently are models, designs and wasm filters.
+    // globalPatternTypeList stores the pattern types which currently are models and designs.
   // multiple pattern types can be selected at the same time
   let globalPatternTypeList = [];
   // get all pattern cards
@@ -556,50 +548,50 @@ function showFilterCards() {
   const patternCards = Array.from(document.querySelectorAll('.patternCard'));
   const itemsPerPage = 11; // Number of items per page
   let currentPage = 0; // Current page index
-  
+
   // First, filter the cards that match our criteria
   const matchingCards = patternCards.filter(card => {
     const type = card.getAttribute("type")?.toLowerCase();
     const technologyAttr = card.getAttribute("technology");
     const patternType = card.getAttribute("patternType")?.toLowerCase();
-    
+
     // Parse technologies once
     const technologies = technologyAttr ? JSON.parse(technologyAttr) : [];
-    
+
     // Check if card matches all filter criteria
-    const showCardTech = globalTechnologyList.length === 0 || 
+    const showCardTech = globalTechnologyList.length === 0 ||
                         globalTechnologyList.some(tech => technologies.includes(tech));
-    
-    const showCardCat = globalCategoryList.length === 0 || 
+
+    const showCardCat = globalCategoryList.length === 0 ||
                        globalCategoryList.some(cat => type.includes(cat));
-    
-    const showCardPatternType = globalPatternTypeList.length === 0 || 
+
+    const showCardPatternType = globalPatternTypeList.length === 0 ||
                                globalPatternTypeList.some(pt => patternType.includes(pt));
-    
+
     // Return true if card matches all criteria
     return showCardTech && showCardCat && showCardPatternType;
   });
-  
+
   // Hide all cards first (batch operation)
   patternCards.forEach(card => {
     card.style.display = "none";
   });
-  
+
   // Check if filters are active
-  const noFiltersActive = globalTechnologyList.length === 0 && 
-                         globalCategoryList.length === 0 && 
+  const noFiltersActive = globalTechnologyList.length === 0 &&
+                         globalCategoryList.length === 0 &&
                          globalPatternTypeList.length === 0;
-  
+
   // Update "not found" message
   const noCard = document.getElementById("not-found");
   noCard.style.display = matchingCards.length > 0 ? "none" : "block";
-  
+
   // Get pagination elements
   const paginationButtons = document.querySelector(".pagination");
-  const prevButton = document.getElementById("designs-prev") || document.getElementById("models-prev") || document.getElementById("filters-prev");
-  const nextButton = document.getElementById("designs-next") || document.getElementById("models-next") || document.getElementById("filters-next");
+  const prevButton = document.getElementById("designs-prev") || document.getElementById("models-prev");
+  const nextButton = document.getElementById("designs-next") || document.getElementById("models-next");
 
-  
+
   // Function to update pagination display
   function updatePagination() {
     const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
@@ -607,7 +599,7 @@ function showFilterCards() {
     nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
 
   const pageInfo = prevButton.parentElement.querySelector(".page-info");
-    
+
   if (pageInfo) {
     if (totalPages > 0) {
       pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
@@ -618,21 +610,21 @@ function showFilterCards() {
   }
 
   }
-  
+
   // Function to show the current page of cards
   function showCardsForPage() {
     // Calculate range for current page
     const start = currentPage * itemsPerPage;
     const end = Math.min(start + itemsPerPage, matchingCards.length);
-    
+
     // Show only cards for current page
     for (let i = 0; i < matchingCards.length; i++) {
       matchingCards[i].style.display = (i >= start && i < end) ? "block" : "none";
     }
-    
+
     updatePagination();
   }
-  
+
   // Set up pagination handlers
   prevButton.onclick = function() {
     if (currentPage > 0) {
@@ -640,7 +632,7 @@ function showFilterCards() {
       showCardsForPage();
     }
   };
-  
+
   nextButton.onclick = function() {
     const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
     if (currentPage + 1 < totalPages) {
@@ -648,14 +640,14 @@ function showFilterCards() {
       showCardsForPage();
     }
   };
-  
+
   // Initialize pagination for both filtered and unfiltered cases
   paginationButtons.style.display = matchingCards.length > itemsPerPage ? "flex" : "none";
-  
+
   // Show initial page
   currentPage = 0;
   showCardsForPage();
-  
+
   return matchingCards.length; // Return count of matching cards
 }
 </script>

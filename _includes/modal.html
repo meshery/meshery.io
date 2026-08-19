@@ -3,28 +3,13 @@
   <div class="modal-content">
     <div class="modal-header">
       <div class="chip chip-modal">
-        {% if pattern.filters.type == "wasm filter" %}
-        <a href="{{ site.baseurl }}/catalog/webassembly">
-          <h6 class="pattern-type">{{pattern.filters.type | upcase }}</h6>
-        </a>
-        {% else %}
         <a class="chip-modal-link" href="{{ site.baseurl }}/catalog/{{ pattern.type | slugify }}">
-          {% endif %}
           <h6 class="pattern-type">{{pattern.type | upcase }}</h6>
         </a>
       </div>
       <button class="modal-close close">&times;</button>
     </div>
     <div class="modal-image">
-      {%if pattern.filters.type == "wasm filter" %}
-      <img
-        class="image-class"
-        src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png"
-        onerror="this.src='{{ '/assets/images/webassembly_logo.svg' | relative_url }}'"
-        loading="lazy"
-        onclick="toggleFullScreenImage('{{ pattern.patternId }}')"
-      />
-      {%else%}
       <img
         class="image-class"
         data-snapshot-light="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png"
@@ -34,7 +19,6 @@
         loading="lazy"
         onclick="toggleFullScreenImage('{{ pattern.patternId }}')"
       />
-      {%endif%}
       <div class="related-patterns-img">
         <h4 class="related-patterns">RELATED DESIGNS</h4>
         {% include related-patterns.html %}
@@ -43,17 +27,13 @@
     <div class="vertical-line"></div>
     <div class="modal-info">
       <h2 class="modal-h2">
-        {% if pattern.filterInfo %}
-        {% assign pattern_href = '/catalog/' | append: pattern.type | append: '/' | append: pattern.patternId | append: '.html' %}
-        {% else %}
         {% assign pattern_href = '/catalog/' | append: pattern.type | append: '/' | append: pattern.name | slugify | append: '-' | append: pattern.patternId | append: '.html' %}
-        {% endif %}
         <a href="{{ pattern_href | relative_url }}" target="_blank" style="font-size: 1.5rem">
            {{ pattern.name | upcase }}
             <img class="internal-link" src="{{ site.baseurl }}/assets/images/buttons/external-link_black.svg" />
         </a>
       </h2>
-      
+
       {% if pattern.patternInfo %}
       <div class="modal-section">
         <h3 class="modal-h3">Description</h3>
@@ -81,28 +61,6 @@
         >
         {% endif %}
       </div>
-      {% else %}
-      <div class="modal-section">
-        <h3 class="modal-h3">What this filter does</h3>
-        <p class="content-toggle contentdata">
-          {{pattern.filterInfo | url_decode | replace: '\\n', '<br />' |
-          replace: '\n', '<br />'}}
-        </p>
-        <span class="read-more">...read more</span>
-      </div>
-      <div class="modal-section">
-        <h3 class="modal-h3">Caveats and Considerations</h3>
-        {% assign filterCaveatsLength = pattern.patternCaveats | size %}
-        <p class="contentdata">
-          {{pattern.filterCaveats | url_decode | replace: '\\n', '<br />' |
-          replace: '\n', '<br />'}}
-        </p>
-        {% if filterCaveatsLength > 320 %}
-        <span class="read-more" href="read-more.html"
-          >{% include expand.html %}</span
-        >
-        {% endif %}
-      </div>
       {% endif %}
       <div class="modal-section">
         <h3 class="modal-h3">Technologies</h3>
@@ -112,7 +70,7 @@
         <h3 class="modal-h3">Related Design</h3>
         {% include related-patterns.html %}
       </div>
-   
+
       {% include copy-and-download.html %}
     </div>
   </div>
