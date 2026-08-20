@@ -399,8 +399,12 @@ published: true
       var margin = 8;
       var rect = toggle.getBoundingClientRect();
       var maxLeft = window.innerWidth - panel.offsetWidth - margin;
-
-      panel.style.top = rect.bottom + margin + "px";
+      var maxTop =Math.max(
+        margin,
+        window.innerHeight - panel.offsetHeight - margin
+      );
+      panel.style.top = 
+        Math.max(margin, Math.min(rect.bottom + margin, maxTop)) + 'px';
       panel.style.left = Math.max(margin, Math.min(rect.left, maxLeft)) + "px";
     }
 
