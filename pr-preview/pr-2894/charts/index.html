@@ -25,12 +25,12 @@
 <meta property="og:url" content="https://meshery.io/pr-preview/pr-2894/charts/" />
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-08-20T17:41:24+00:00" />
-<meta property="article:modified_time" content="2026-08-20T17:41:24+00:00" />
+<meta property="article:published_time" content="2026-08-20T17:49:06+00:00" />
+<meta property="article:modified_time" content="2026-08-20T17:49:06+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Helm Charts Meshery" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-08-20T17:41:24+00:00","datePublished":"2026-08-20T17:41:24+00:00","description":"Meshery Helm Charts Repo","headline":"Helm Charts Meshery","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2894/charts/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2894/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2894/charts/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-08-20T17:49:06+00:00","datePublished":"2026-08-20T17:49:06+00:00","description":"Meshery Helm Charts Repo","headline":"Helm Charts Meshery","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2894/charts/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2894/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2894/charts/"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/pr-preview/pr-2894/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/pr-preview/pr-2894/css/stellarnav.css" />
@@ -644,29 +644,27 @@
 
                 var catalog = Array.from(cards);
 
-                if (sortValue === "asc") {
-                    catalog = catalog.sort(function (a, b) {
-                        if (a.getAttribute("status") === "ComingSoon") {
-                            return 1;
-                        } else if (b.getAttribute("status") === "ComingSoon") {
-                            return -1;
-                        } else {
-                            return (a.getAttribute("filter") || "")
-                                .localeCompare(b.getAttribute("filter") || "", undefined, { sensitivity: 'base' });
-                        }
-                    });
-                } else if (sortValue === "desc") {
-                    catalog = catalog.sort(function (a, b) {
-                        if (a.getAttribute("status") === "ComingSoon") {
-                            return 1;
-                        } else if (b.getAttribute("status") === "ComingSoon") {
-                            return -1;
-                        } else {
-                            return (b.getAttribute("filter") || "")
-                                .localeCompare(a.getAttribute("filter") || "", undefined, { sensitivity: 'base' });
-                        }
-                    });
-                }
+                catalog = catalog.sort(function (a, b) {
+                    var aComingSoon = a.getAttribute("status") === "ComingSoon";
+                    var bComingSoon = b.getAttribute("status") === "ComingSoon";
+
+                    if (aComingSoon && !bComingSoon) {
+                        return 1;
+                    }
+                    if (!aComingSoon && bComingSoon) {
+                        return -1;
+                    }
+
+                    var aFilter = a.getAttribute("filter") || "";
+                    var bFilter = b.getAttribute("filter") || "";
+
+                    if (sortValue === "asc") {
+                        return aFilter.localeCompare(bFilter, undefined, { sensitivity: 'base' });
+                    } else if (sortValue === "desc") {
+                        return bFilter.localeCompare(aFilter, undefined, { sensitivity: 'base' });
+                    }
+                    return 0;
+                });
 
                 catalog.forEach(function (pattern) {
                     cardsContainer.appendChild(pattern);
