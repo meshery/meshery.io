@@ -29,7 +29,22 @@ published: true
     background-position: right 10px top 50%;
     margin-right: 10px;
     @media (max-width: 506px) {
-     display: none;
+      width: 44px;
+      padding: 10px;
+      margin-right: 8px;
+      color: transparent;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/></svg>');
+      background-position: center;
+    }
+  }
+  #sort option {
+    color: var(--color-primary-qtext);
+  }
+  /* Matches the `body.dark-mode #sort` chevron swap in catalog.scss, which is
+     specific enough to outrank the icon set above. */
+  @media (max-width: 506px) {
+    body.dark-mode #sort {
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px"><path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/></svg>');
     }
   }
   #search {
@@ -55,134 +70,408 @@ published: true
   .section-container {
     width: 100%;
   }
+  /* No longer a flex item of .row, so it needs centering of its own. */
+  .not-found {
+    text-align: center;
+    margin: 3rem 0;
+  }
 </style>
 
+{% comment %}
+  Curated display order of the extension categories. Any category present in the
+  collection but missing from this list is appended in discovery order, so a new
+  extension type still renders without a change here.
+{% endcomment %}
 {% assign ordered_types = "GitOps,Configuration,Collaboration,Academy,Lifecycle,Performance" | split: "," %}
-{% assign extensions_by_type = "" | split: "" %}
-{% for type in ordered_types %}
-  {% assign filtered = site.extensions | where: "type", type %}
-  {% assign extensions_by_type = extensions_by_type | concat: filtered %}
-{% endfor %}
-{% assign remaining_extensions = "" | split: "" %}
+{% assign extra_types = "" | split: "" %}
 {% for ext in site.extensions %}
-  {% unless ordered_types contains ext.type %}
-    {% assign remaining_extensions = remaining_extensions | push: ext %}
-  {% endunless %}
+  {% if ext.type %}
+    {% unless ordered_types contains ext.type or extra_types contains ext.type %}
+      {% assign extra_types = extra_types | push: ext.type %}
+    {% endunless %}
+  {% endif %}
 {% endfor %}
+{% assign all_types = ordered_types | concat: extra_types %}
 
-{% assign extensions = extensions_by_type | concat: remaining_extensions %}
+{% comment %}
+  Keep only the categories that have something to list, so the navigator never
+  links to an empty section.
+{% endcomment %}
+{% assign categories = "" | split: "" %}
+{% for type in all_types %}
+  {% assign type_count = 0 %}
+  {% for extension in site.extensions %}
+    {% if extension.type == type %}{% if extension.extensionInfo or extension.patternInfo and extension.status !=
+    "coming-soon" %}
+    {% assign type_count = type_count | plus: 1 %}
+    {% endif %}{% endif %}
+  {% endfor %}
+  {% if type_count > 0 %}
+    {% assign categories = categories | push: type %}
+  {% endif %}
+{% endfor %}
 
 
 <div class="section-container">
-  {% include view-all.html %} {% include extensions/card-modal.html %}
+  <div class="extensions-toolbar">
+    {% include view-all.html %}
+    <button
+      type="button"
+      class="extensions-filter-toggle"
+      id="extensions-filter-toggle"
+      aria-expanded="false"
+      aria-controls="extensions-filter-panel"
+      title="Filters"
+      aria-label="Filters"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
+        <path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/>
+      </svg>
+    </button>
+  </div>
 
-  <div class="row">
-    <h2 class="not-found" style="display: none;" id="not-found">
-      No results found
-    </h2>
-    {% for extension in extensions %}{% if extension.extensionInfo or extension.patternInfo and extension.Status !=
-    "ComingSoon" %}
-    {% assign last = extension.compatibility | last %}
-     <!--
-    {% assign current_type = extension.type | upcase %}
-    {% assign next_type = extension.next.type | upcase %}
-    {%- if forloop.first %}
-      <h1>
-        {{ extension.type | upcase }}
-      </h1>
-    {% elsif current_type != next_type %}
+  {% include extensions/card-modal.html %}
+
+  <div class="extensions-catalog">
+    <div class="extensions-filter-wrap">
+      <aside
+        class="extensions-filter"
+        id="extensions-filter-panel"
+        aria-label="Filter extensions by category"
+      >
+        <div class="extensions-filter-head">
+          <strong>Filters</strong>
+          <button
+            type="button"
+            class="extensions-filter-close"
+            id="extensions-filter-close"
+            aria-label="Close filters"
+          >
+            &times;
+          </button>
+        </div>
+
+        <p class="extensions-category-heading">
+          <span class="filter-heading">
+            <strong>Categories:</strong>
+            <button
+              type="button"
+              class="sort-btn"
+              id="extensions-category-sort"
+              data-order="none"
+              title="Sort by count"
+              aria-label="Sort categories by count"
+            >
+
+              <span class="sort-arrow" aria-hidden="true">
+                <svg class="sort-icon sort-icon-none" viewBox="0 0 10 10">
+                  <path d="M5 0 8 4H2z" /><path d="M5 10 2 6h6z" />
+                </svg>
+                <svg class="sort-icon sort-icon-desc" viewBox="0 0 10 10">
+                  <path d="M5 8 1 3h8z" />
+                </svg>
+                <svg class="sort-icon sort-icon-asc" viewBox="0 0 10 10">
+                  <path d="M5 2 9 7H1z" />
+                </svg>
+              </span>
+            </button>
+          </span>
+        </p>
+
+        <div id="extensions-category-div">
+          {% for type in categories %}
+          {% assign type_count = 0 %}
+          {% for extension in site.extensions %}
+            {% if extension.type == type %}{% if extension.extensionInfo or extension.patternInfo and extension.status
+            != "coming-soon" %}
+            {% assign type_count = type_count | plus: 1 %}
+            {% endif %}{% endif %}
+          {% endfor %}
+          <div class="input-container" data-count="{{ type_count }}">
+            <input
+              type="checkbox"
+              name="extension-category"
+              value="{{ type }}"
+              id="category-{{ type | slugify }}"
+            />
+            <label for="category-{{ type | slugify }}">
+              <div class="name">{{ type }}</div>
+              <div class="badge">{{ type_count }}</div>
+            </label>
+          </div>
+          {% endfor %}
+        </div>
+      </aside>
     </div>
-    <h1>
-      {{ extension.type | upcase }}
-    </h1>
-    <div class="row">
-    {%- endif -%} -->
-    <div
-      class="column column-lg extensionCard"
-      filter="{{ extension.name }}"
-      type="{{ extension.type }}"
-      technology='[{% for item in extension.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
-      status="{{ extension.Status }}"
-      style="display: none"
-    >    
-      {% include extensions/card.html %}
-      <!-- modal included -->
-      {% include extensions/modal.html %}
+
+    <div class="extensions-results">
+      <h2 class="not-found" style="display: none;" id="not-found">
+        No results found
+      </h2>
+
+      {% for type in categories %}
+      <section class="extension-category" id="{{ type | slugify }}" data-category="{{ type }}">
+        <div class="category-divider">
+          <hr class="category-divider-line" />
+          <span class="chip category-divider-chip {{ type | upcase }}">
+            <small class="pattern-type">{{ type | upcase }}</small>
+          </span>
+        </div>
+
+        <div class="row">
+          {% for extension in site.extensions %}{% if extension.type == type %}{% if extension.extensionInfo or
+          extension.patternInfo and extension.status != "coming-soon" %}
+          {% assign last = extension.compatibility | last %}
+          <div
+            class="column column-lg extensionCard"
+            filter="{{ extension.name }}"
+            type="{{ extension.type }}"
+            technology='[{% for item in extension.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
+            status="{{ extension.status }}"
+            style="display: none"
+          >
+            {% include extensions/card.html %}
+            <!-- modal included -->
+            {% include extensions/modal.html %}
+          </div>
+          {% endif %}{% endif %}{% endfor %}
+        </div>
+      </section>
+      {% endfor %}
     </div>
-    {% endif %} {% endfor %} 
   </div>
 </div>
 
 <script>
+  const categorySections = document.querySelectorAll(".extension-category");
+  const categoryCheckboxes = document.querySelectorAll(
+    "#extensions-category-div input[type='checkbox']"
+  );
+  const searchInput = document.getElementById("search");
+  const notFound = document.getElementById("not-found");
+
+  // Sorting is applied within each category so that the section dividers keep
+  // describing the cards underneath them.
   document.getElementById("sort").addEventListener("change", function () {
     var sortValue = this.value;
-    var cardsContainer = document.querySelector(".row");
-    var cards = cardsContainer.querySelectorAll(".extensionCard");
 
-    var catalog = Array.from(cards);
+    categorySections.forEach(function (section) {
+      var cardsContainer = section.querySelector(".row");
+      var cards = cardsContainer.querySelectorAll(".extensionCard");
 
-    if (sortValue === "asc") {
-      catalog = catalog.sort(function (a, b) {
-        if (a.getAttribute("status") === "ComingSoon") {
-          return 1;
-        } else if (b.getAttribute("status") === "ComingSoon") {
-          return -1;
-        } else {
-          return a
-            .getAttribute("filter")
-            .localeCompare(b.getAttribute("filter"));
-        }
+      var catalog = Array.from(cards);
+
+      if (sortValue === "asc") {
+        catalog = catalog.sort(function (a, b) {
+          var aComingSoon = a.getAttribute("status") === "coming-soon";
+          var bComingSoon = b.getAttribute("status") === "coming-soon";
+          if (aComingSoon !== bComingSoon) {
+            return aComingSoon ? 1 : -1;
+          }
+          return a.getAttribute("filter").localeCompare(b.getAttribute("filter"));
+        });
+      } else if (sortValue === "desc") {
+        catalog = catalog.sort(function (a, b) {
+          var aComingSoon = a.getAttribute("status") === "coming-soon";
+          var bComingSoon = b.getAttribute("status") === "coming-soon";
+          if (aComingSoon !== bComingSoon) {
+            return aComingSoon ? 1 : -1;
+          }
+          return b.getAttribute("filter").localeCompare(a.getAttribute("filter"));
+        });
+      }
+
+      catalog.forEach(function (extension) {
+        cardsContainer.appendChild(extension);
       });
-    } else if (sortValue === "desc") {
-      catalog = catalog.sort(function (a, b) {
-        if (a.getAttribute("status") === "ComingSoon") {
-          return 1;
-        } else if (b.getAttribute("status") === "ComingSoon") {
-          return -1;
-        } else {
-          return b
-            .getAttribute("filter")
-            .localeCompare(a.getAttribute("filter"));
-        }
-      });
-    }
-
-    catalog.forEach(function (extension) {
-      cardsContainer.appendChild(extension);
     });
   });
 
-  document.getElementById("search").addEventListener("input", function () {
-    var searchValue = this.value.toLowerCase();
-    var cardsContainer = document.querySelector(".row");
-    var cards = cardsContainer.querySelectorAll(".extensionCard");
-    var notFound = document.getElementById("not-found");
+  function applyExtensionFilters() {
+    var searchValue = searchInput.value.toLowerCase();
+    var selected = [];
 
-    let found = false;
-
-    cards.forEach(function (extension) {
-      var filterValue = extension.getAttribute("filter").toLowerCase();
-      if (filterValue.includes(searchValue)) {
-        extension.style.display = "block";
-        found = true;
-      } else {
-        extension.style.display = "none";
+    categoryCheckboxes.forEach(function (box) {
+      if (box.checked) {
+        selected.push(box.value);
       }
     });
 
-    if (!found) {
-      notFound.style.display = "block";
-    } else {
-      notFound.style.display = "none";
-    }
+    var found = false;
+
+    categorySections.forEach(function (section) {
+      var inSelected =
+        selected.length === 0 ||
+        selected.indexOf(section.getAttribute("data-category")) !== -1;
+      var matches = 0;
+
+      section.querySelectorAll(".extensionCard").forEach(function (extension) {
+        var filterValue = extension.getAttribute("filter").toLowerCase();
+        var visible = inSelected && filterValue.includes(searchValue);
+
+        extension.style.display = visible ? "block" : "none";
+        if (visible) {
+          matches++;
+        }
+      });
+
+      section.style.display = matches ? "" : "none";
+
+      if (matches) {
+        found = true;
+      }
+    });
+
+    notFound.style.display = found ? "none" : "block";
+  }
+
+  searchInput.addEventListener("input", applyExtensionFilters);
+
+  categoryCheckboxes.forEach(function (box) {
+    box.addEventListener("change", applyExtensionFilters);
   });
 </script>
 <script>
+  (function () {
+    var button = document.getElementById("extensions-category-sort");
+    var container = document.getElementById("extensions-category-div");
+    if (!button || !container) return;
+
+    var order = "none";
+    var originalOrder = null;
+
+    button.addEventListener("click", function () {
+      if (!originalOrder) {
+        originalOrder = Array.prototype.slice.call(container.children);
+      }
+      order = order === "none" ? "desc" : order === "desc" ? "asc" : "none";
+      applyOrder(order);
+      updateButton(order);
+    });
+
+    function applyOrder(order) {
+      if (order === "none") {
+        originalOrder.forEach(function (el) {
+          container.appendChild(el);
+        });
+        return;
+      }
+
+      var items = Array.prototype.slice.call(
+        container.querySelectorAll(".input-container")
+      );
+      items.sort(function (a, b) {
+        var countA = Number(a.dataset.count) || 0;
+        var countB = Number(b.dataset.count) || 0;
+        return order === "asc" ? countA - countB : countB - countA;
+      });
+      items.forEach(function (el) {
+        container.appendChild(el);
+      });
+    }
+    function updateButton(order) {
+      var baseLabel = "Sort categories by count";
+      var suffix = "";
+
+      if (order === "desc") {
+        suffix = " (high to low)";
+      } else if (order === "asc") {
+        suffix = " (low to high)";
+      }
+
+      button.classList.toggle("active", order !== "none");
+      button.setAttribute("aria-label", baseLabel + suffix);
+      button.setAttribute("data-order", order);
+    }
+  })();
+
+  (function () {
+    var toggle = document.getElementById("extensions-filter-toggle");
+    var panel = document.getElementById("extensions-filter-panel");
+    var closeButton = document.getElementById("extensions-filter-close");
+    if (!toggle || !panel) return;
+
+    var STACK_BREAKPOINT = 770;
+
+    function positionPanel() {
+      if (window.innerWidth > STACK_BREAKPOINT) return;
+
+      var margin = 8;
+      var rect = toggle.getBoundingClientRect();
+      var maxLeft = window.innerWidth - panel.offsetWidth - margin;
+      var maxTop =Math.max(
+        margin,
+        window.innerHeight - panel.offsetHeight - margin
+      );
+      panel.style.top = 
+        Math.max(margin, Math.min(rect.bottom + margin, maxTop)) + 'px';
+      panel.style.left = Math.max(margin, Math.min(rect.left, maxLeft)) + "px";
+    }
+
+    function setOpen(open) {
+      panel.classList.toggle("show", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+
+      if (open) positionPanel();
+    }
+
+    toggle.addEventListener("click", function () {
+      setOpen(!panel.classList.contains("show"));
+    });
+
+    if (closeButton) {
+      closeButton.addEventListener("click", function () {
+        setOpen(false);
+        toggle.focus();
+      });
+    }
+    document.addEventListener("click", function (event) {
+      if (!panel.classList.contains("show")) return;
+      if (panel.contains(event.target) || toggle.contains(event.target)) return;
+      setOpen(false);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && panel.classList.contains("show")) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > STACK_BREAKPOINT) {
+        setOpen(false);
+      } else if (panel.classList.contains("show")) {
+        positionPanel();
+      }
+    });
+
+    var repositionQueued = false;
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (!panel.classList.contains("show") || repositionQueued) return;
+        repositionQueued = true;
+        window.requestAnimationFrame(function () {
+          positionPanel();
+          repositionQueued = false;
+        });
+      },
+      { passive: true }
+    );
+  })();
+
   const extensionCards = document.querySelectorAll(".extensionCard");
   document.addEventListener("DOMContentLoaded", () => {
     extensionCards.forEach((card) => {
       card.style.display = "block";
     });
+
+    categoryCheckboxes.forEach((box) => {
+      box.checked = false;
+    });
+
+    applyExtensionFilters();
   });
 </script>
 <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
