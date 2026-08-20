@@ -16,7 +16,7 @@ The Meshery ecosystem is full of focused tools that make designing and visualizi
 
 ## What is Shape Builder?
 
-[Shape Builder](https://shapes.meshery.io) is a Meshery extension that lets you visually design custom polygon shapes for use with [Kanvas](https://docs.meshery.io/extensions/kanvas/) components. Instead of hand-coding coordinate matrices, you draw a shape interactively and the tool generates the polygon notation that Meshery components understand.
+[Shape Builder](https://shapes.meshery.io) is a Meshery extension that lets you visually design custom polygon shapes for use with [Kanvas](https://docs.meshery.io/extensions/extensions/kanvas/) components. Instead of hand-coding coordinate matrices, you draw a shape interactively and the tool generates the polygon notation that Meshery components understand.
 
 That makes it a natural entry point for anyone who wants to influence how infrastructure is represented in Kanvas, the visual layer where users design and operate their cloud native deployments. Shapes carry meaning in Kanvas, as described in the [Component Shape Guide](https://docs.meshery.io/extensions/component-shape-guide/), so a better shape-authoring experience directly improves how readable a design is. The source lives at [meshery-extensions/shape-builder](https://github.com/meshery-extensions/shape-builder).
 
