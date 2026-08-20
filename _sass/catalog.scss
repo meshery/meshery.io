@@ -343,8 +343,8 @@ p {
   }
 
   .chip.PERFORMANCE {
-    background-color: var(--brand-color-primary);
-    box-shadow: 0px 1px 2px var(--brand-color-primary);
+    background-color: var(--brand-color-quaternary);
+    box-shadow: 0px 1px 2px var(--brand-color-quaternary);
     .pattern-type {
       box-shadow: none;
       background-color: transparent;
@@ -355,19 +355,9 @@ p {
 /* EXTENSION CATEGORY SECTIONS */
 .extension-category {
   width: 100%;
-
-  // Being a <section>, this picks up `section { padding: 50px 25px }` from the
-  // site layout. The container already provides the gutter, and with no global
-  // border-box the extra 50px made every section wider than the page, which
-  // scrolled sideways as soon as a navigator link brought one into view.
   padding: 0;
+  scroll-margin-top: 7rem;
 
-  // Clears the sticky site header.
-
-  scroll-margin-top: var(--extensions-scroll-offset, 7rem);
-
-  // Cards already carry a 20px bottom margin, so the section only adds the
-  // breathing room above the grid; the next divider supplies the space below.
   .row {
     margin: 1.25rem 0 0 0;
   }
@@ -378,7 +368,6 @@ $category-divider-chip-height: 1.75rem;
 .category-divider {
   position: relative;
   width: 100%;
-  // Leaves room above the rule for the label tab that sits on it.
   padding-top: 1.5rem + $category-divider-chip-height;
 }
 
@@ -390,10 +379,6 @@ $category-divider-chip-height: 1.75rem;
   background-color: var(--color-primary-extra-dark);
 }
 
-// Seated on top of the rule rather than hanging below it, where it shared a
-// band with the type chip on the first row of cards and read as a repeat of it.
-// The rounded corner mirrors the card chips, so the tab points up to the rule
-// while theirs point down into the card.
 .category-divider .category-divider-chip {
   position: absolute;
   bottom: 2px; // the height of the rule
@@ -404,155 +389,253 @@ $category-divider-chip-height: 1.75rem;
   border-bottom-right-radius: 0;
 }
 
-/* EXTENSION CATEGORY NAVIGATOR */
-// Equally spaced labels hanging off a faded vertical spine in the right gutter,
-// clear of the centred card grid.
+$extensions-filter-width: 15rem;
+$extensions-filter-stack: 770px;
+$extensions-filter-pill-height: 20px;
 
-$category-nav-width: 7.5rem;
-$category-nav-tick: 1.25rem;
-
-.category-nav {
-  position: fixed;
-  right: 1.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  // Below the site header ($z-index-header) and the card modals.
-  z-index: 5;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 1px;
-    background: linear-gradient(
-      to bottom,
-      transparent,
-      var(--color-primary-extra-dark) 12%,
-      var(--color-primary-extra-dark) 88%,
-      transparent
-    );
-  }
-}
-
-.category-nav-list {
+.extensions-catalog {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 1.1rem;
-  margin: 0;
-  padding: 0 $category-nav-tick 0 0;
-  list-style: none;
+  gap: 2rem;
+  align-items: flex-start;
 
-  li {
-    position: relative;
-    display: flex;
-    margin: 0;
-
-    // Connector from the label to the spine.
-    &::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 100%;
-      width: $category-nav-tick;
-      height: 1px;
-      background-color: var(--color-primary-extra-dark);
-      opacity: 0.6;
-      transition: background-color 0.2s ease, opacity 0.2s ease;
-    }
-
-    &:has(.is-active)::after {
-      background-color: var(--brand-color-secondary);
-      opacity: 1;
-    }
+  @media (max-width: $extensions-filter-stack) {
+    flex-direction: column;
+    gap: 0;
   }
 }
 
-.category-nav-link {
-  float: none;
-  width: $category-nav-width;
-  height: auto;
-  padding: 0;
-  cursor: pointer;
-  text-decoration: none;
-  opacity: 0.5;
-  transition: opacity 0.2s ease;
+.extensions-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 75%;
+  margin: 0 auto;
 
-  .pattern-type {
-    cursor: pointer;
-    padding: 0.2rem 0.5rem;
-    font-size: 10px;
-    letter-spacing: 0.04em;
+  > div:first-child {
+    flex: 1 1 auto;
+    width: auto !important;
+    margin: 0 !important;
   }
+}
+
+.extensions-filter-wrap {
+  flex: 0 0 $extensions-filter-width;
+  padding-top: 1rem;
+
+  @media (max-width: $extensions-filter-stack) {
+    flex: none;
+    width: 100%;
+    padding-top: 0;
+  }
+}
+
+.extensions-filter-toggle,
+.extensions-filter-head {
+  display: none;
+}
+
+.extensions-filter-toggle {
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  box-sizing: border-box;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  margin-top: 25px;
+  color: var(--color-white);
+  background-color: var(--brand-color-secondary);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+}
+
+.extensions-filter-head {
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-secondary-dark);
+}
+
+.extensions-filter-close {
+  padding: 0 0.35rem;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-secondary-light);
+  background: none;
+  border: none;
+  cursor: pointer;
 
   &:hover,
-  &:focus-visible,
-  &.is-active {
-    opacity: 1;
+  &:focus-visible {
+    color: var(--brand-color-secondary);
   }
 }
 
-// While the rail is visible it is fixed, so it takes no space in the flow;
-// reserve the gutter on the page it belongs to or it overlays the last card
-// column at the wider card-grid breakpoints.
-@media (min-width: 1281px) {
-  .section-container:has(.category-nav) {
-    box-sizing: border-box;
-    // Rail (label + tick) plus its `right` offset, plus a gutter of the same size.
-    padding-right: $category-nav-width + $category-nav-tick + 3rem;
-  }
-}
-
-// The rail needs a gutter it cannot have here, so the same navigator is laid
-// out instead as a strip that sticks under the site header. Swiping it sideways
-// reaches the categories that do not fit across the screen.
-@media (max-width: 1280px) {
-  .category-nav {
-    position: sticky;
-    top: var(--extensions-header-offset, 0px);
-    right: auto;
-    transform: none;
-    // The bare `nav` rules in navigation.scss size and centre the site menu;
-    // the strip spans the card grid instead.
-    width: 100%;
-    margin: 0 0 0.5rem;
-    padding: 0.75rem 0;
-    background-color: var(--color-primary-light);
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-
-    // The strip is driven by the chips, so its own scrollbar is just noise.
-    scrollbar-width: none;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    // The spine and its connectors only describe the vertical rail.
-    &::before {
-      display: none;
-    }
+.extensions-filter {
+  .extensions-category-heading {
+    margin-bottom: 0;
   }
 
-  .category-nav-list {
-    flex-direction: row;
+  .filter-heading {
+    display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0 1rem;
-    // Keeps the last chip clear of the edge once the strip is scrolled.
-    width: max-content;
-
-    li::after {
-      display: none;
-    }
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
   }
 
-  .category-nav-link {
-    width: auto;
-    // Taller than the card chips so the strip stays comfortable to tap.
-    height: 2rem;
+  .input-container {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+  }
+
+  label {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 20px;
+    text-indent: unset;
+  }
+
+  input {
+    flex-shrink: 0;
+    top: 0;
+    cursor: pointer;
+  }
+
+  input[type="checkbox"] {
+    accent-color: var(--brand-color-secondary);
+  }
+
+  .name {
+    margin: 0 10px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .badge {
+    background: var(--color-primary-dark);
+    border: 1px solid var(--color-primary-extra-dark);
+    border-radius: 999px;
+    color: var(--color-secondary-dark);
+    height: $extensions-filter-pill-height;
+    min-width: $extensions-filter-pill-height;
+    padding: 0 6px;
+    box-sizing: border-box;
+    text-align: center;
+    flex-shrink: 0;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+  }
+
+  .sort-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    box-sizing: border-box;
+    height: $extensions-filter-pill-height;
+    padding: 0 10px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--color-secondary-light);
+    background: var(--color-primary-dark);
+    border: 1px solid var(--color-primary-extra-dark);
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+      border-color: var(--brand-color-secondary);
+      color: var(--brand-color-secondary);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand-color-secondary);
+      outline-offset: 1px;
+    }
+
+    &.active {
+      color: var(--brand-color-secondary);
+      border-color: var(--brand-color-secondary);
+    }
+
+    .sort-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      width: 8px;
+      height: 8px;
+    }
+
+    .sort-icon {
+      display: none;
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+    }
+
+    &[data-order="none"] .sort-icon-none,
+    &[data-order="desc"] .sort-icon-desc,
+    &[data-order="asc"] .sort-icon-asc {
+      display: block;
+    }
+  }
+}
+
+.extensions-results {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+@media (max-width: $extensions-filter-stack) {
+  .extensions-filter-toggle {
+    display: inline-flex;
+  }
+
+  .extensions-filter-head {
+    display: flex;
+  }
+
+  .extensions-filter {
+    display: none;
+    position: fixed;
+    z-index: 6;
+    box-sizing: border-box;
+    width: min(20rem, calc(100vw - 2rem));
+    max-height: 70vh;
+    overflow-y: auto;
+    padding: 1rem 1.25rem;
+    background-color: var(--color-primary-light);
+    border: 1px solid var(--color-primary-extra-dark);
+    border-radius: 0.5rem;
+    box-shadow: var(--box-shadow-primary);
+
+    &.show {
+      display: block;
+    }
+
+    .input-container {
+      margin: 14px 0;
+    }
   }
 }
 
