@@ -1,17 +1,19 @@
-name: Update Leaderboard
+name: Leaderboard data update
+
 on:
-  schedule:
-    - cron: '0 0 * * *'
   workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # runs every day at midnight
+
+permissions:
+  contents: write
 
 jobs:
   update:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
+    runs-on: ubuntu-24.04
+    if: github.repository == 'meshery/meshery.io'
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v6
         with:
           token: ${{ secrets.GH_ACCESS_TOKEN }}
@@ -21,11 +23,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Run scoring script
+      - name: Install dependencies
+        run: npm install undici
+
+      - name: Fetch leaderboard data
         run: node .github/scripts/fetch-leaderboard.js
-        env:
-          DISCOURSE_API_KEY: ${{ secrets.DISCOURSE_API_KEY }}
-          DISCOURSE_API_USERNAME: ${{ secrets.DISCOURSE_API_USERNAME }}
 
       - name: Pull changes from remote
         run: git pull origin master
@@ -34,9 +36,9 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
           file_pattern: _data/leaderboard.json
-          commit_user_name: Leaderboard bot
-          commit_user_email: leaderboard@meshery.io
+          commit_user_name: Discussions bot
+          commit_user_email: discussions@meshery.io
           commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           commit_options: "--signoff"
-          commit_message: "chore: update leaderboard data"
+          commit_message: "latest leaderboard data added"
           branch: master

@@ -1,27 +1,23 @@
 const fs = require('fs');
 const path = require('path');
 
-const { fetch, Agent } = require('undici');
-const dispatcher = new Agent({ connect: { family: 4 } });
+const { fetch } = require('undici');
 
-const API_KEY = process.env.DISCOURSE_API_KEY;
-const API_USERNAME = process.env.DISCOURSE_API_USERNAME || 'system';
 const BASE_URL = 'https://discuss.meshery.io/directory_items.json';
-
 const PERIODS = ['weekly', 'monthly', 'all'];
 
 async function fetchUsers(period) {
-    const headers = {};
-    if (API_KEY) {
-        headers['Api-Key'] = API_KEY;
-        headers['Api-Username'] = API_USERNAME;
-    }
+    const headers = {
+        'User-Agent': 'meshery-leaderboard-bot/1.0',
+        'Accept': 'application/json'
+    };
 
-    const url = `${BASE_URL}?period=${period}&order=solutions&limit=50`;
-    const response = await fetch(url, { headers, dispatcher });
+    const url = `${BASE_URL}?period=${period}&order=likes_received&limit=50`;
+    const response = await fetch(url, { headers });
 
     if (!response.ok) {
-        throw new Error(`Discourse API error (period=${period}): ${response.status}`);
+        const body = await response.text();
+        throw new Error(`Discourse API error (period=${period}): ${response.status} - ${body.slice(0, 200)}`);
     }
 
     const data = await response.json();
