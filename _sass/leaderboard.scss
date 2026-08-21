@@ -35,8 +35,9 @@
     color: #7A848E;
 }
 
-.leaderboard-filter:focus {
+.leaderboard-filter:focus-visible {
     border-color: #00B39F;
+    box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.15);
 }
 
 /* Dark mode */
@@ -60,15 +61,18 @@ body.dark-mode .leaderboard-filter::placeholder {
     gap: 2rem;
     margin: 4rem 0;
     flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .podium-card {
     background: transparent;
     border: none;
     box-shadow: none;
-    min-width: unset;
-    max-width: unset;
-    flex: unset;
+    flex: 0 0 220px;
+    max-width: 220px;
+    display: flex;
+    justify-content: center;
 }
 
 .podium-rank-1 {
@@ -152,7 +156,7 @@ body.dark-mode .leaderboard-filter::placeholder {
 
 .medal {
     position: absolute;
-    bottom: -8px;
+    bottom: -16px;
     z-index: 3;
 
     width: 42px;
@@ -213,10 +217,10 @@ body.dark-mode .leaderboard-filter::placeholder {
     font-weight: 700;
     line-height: 1.1;
     text-align: center;
-
     color: #00B39F;
-
     transition: color 0.2s ease;
+    width: 100%;
+    overflow-wrap: break-word;
 }
 
 /* Stats */
@@ -384,6 +388,47 @@ body.dark-mode .leaderboard-updated {
     }
 }
 
+.period-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.period-select {
+    width: 200px;
+    height: 35px;
+    padding: 0 1rem;
+
+    border: 2px solid #00B39F;
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: #00B39F;
+
+    font-size: 0.80rem;
+    font-weight: 600;
+
+    cursor: pointer;
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.period-select:focus-visible {
+    border-color: #00B39F;
+    box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.15);
+}
+
+body.dark-mode .period-select {
+    background: #111111;
+    color: #ffffff;
+    border-color: #00B39F;
+}
+
 /* ─────────────────────────────
        MOBILE
     ───────────────────────────── */
@@ -391,14 +436,24 @@ body.dark-mode .leaderboard-updated {
 @media (max-width: 600px) {
 
     .leaderboard-section .leaderboard-controls {
+        flex-wrap: nowrap;
         justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
         margin-bottom: 16px;
     }
 
+    .period-toggle,
     .leaderboard-filter {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+
+    .period-select {
         width: 100%;
-        max-width: 100%;
-        margin: 1rem 0;
+        margin: 0;
+        padding: 0.5rem 0.4rem;
+        font-size: 0.74rem;
     }
 
     .leaderboard-podium {
@@ -432,6 +487,13 @@ body.dark-mode .leaderboard-updated {
         height: 100px;
     }
 
+    .medal {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+        bottom: -12px;
+    }
+
     .podium-username {
         font-size: 1.3rem;
     }
@@ -456,45 +518,19 @@ body.dark-mode .leaderboard-updated {
     .leaderboard-rank {
         font-size: 0.85rem;
     }
-}
 
-.period-toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
+    .podium-card {
+        flex: 0 0 auto;
+        max-width: 100%;
+        width: 100%;
+    }
 
-.period-select {
-    width: 200px;
-    height: 35px;
-    padding: 0 1rem;
+    .leaderboard-podium {
+        width: 100%;
+        align-items: center;
+    }
 
-    border: 2px solid #00B39F;
-    border-radius: 8px;
-
-    background: #ffffff;
-    color: #00B39F;
-
-    font-size: 0.80rem;
-    font-weight: 600;
-
-    cursor: pointer;
-    outline: none;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        background-color 0.2s ease,
-        color 0.2s ease;
-}
-
-.period-select:focus {
-    border-color: #00B39F;
-    box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.15);
-}
-
-body.dark-mode .period-select {
-    background: #111111;
-    color: #ffffff;
-    border-color: #00B39F;
+    .podium-avatar-wrapper {
+        margin: 0 auto;
+    }
 }

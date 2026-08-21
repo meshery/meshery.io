@@ -1,5 +1,9 @@
 name: Leaderboard data update
 
+concurrency:
+  group: leaderboard-update
+  cancel-in-progress: false
+
 on:
   workflow_dispatch:
   schedule:
@@ -26,11 +30,11 @@ jobs:
       - name: Install dependencies
         run: npm install undici
 
+      - name: Pull latest changes
+        run: git pull origin master
+
       - name: Fetch leaderboard data
         run: node .github/scripts/fetch-leaderboard.js
-
-      - name: Pull changes from remote
-        run: git pull origin master
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v7
