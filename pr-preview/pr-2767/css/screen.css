@@ -2487,8 +2487,9 @@ footer .legal-line a {
   color: #7A848E;
 }
 
-.leaderboard-filter:focus {
+.leaderboard-filter:focus-visible {
   border-color: #00B39F;
+  box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.15);
 }
 
 /* Dark mode */
@@ -2659,7 +2660,6 @@ body.dark-mode .leaderboard-filter::placeholder {
   transition: color 0.2s ease;
   width: 100%;
   overflow-wrap: break-word;
-  word-break: break-word;
 }
 
 /* Stats */
@@ -2813,6 +2813,38 @@ body.dark-mode .leaderboard-updated {
     font-size: 1.4rem;
   }
 }
+.period-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.period-select {
+  width: 200px;
+  height: 35px;
+  padding: 0 1rem;
+  border: 2px solid #00B39F;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #00B39F;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.period-select:focus-visible {
+  border-color: #00B39F;
+  box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.15);
+}
+
+body.dark-mode .period-select {
+  background: #111111;
+  color: #ffffff;
+  border-color: #00B39F;
+}
+
 /* ─────────────────────────────
        MOBILE
     ───────────────────────────── */
@@ -2824,21 +2856,15 @@ body.dark-mode .leaderboard-updated {
     gap: 0.5rem;
     margin-bottom: 16px;
   }
-  .period-select {
-    flex: 1 1 0;
-    width: auto;
-    min-width: 0;
-    margin: 0;
-    padding: 0.5rem 0.4rem;
-    font-size: 0.74rem;
-  }
+  .period-toggle,
   .leaderboard-filter {
     flex: 1 1 0;
-    width: auto;
-    max-width: none;
     min-width: 0;
+  }
+  .period-select {
+    width: 100%;
     margin: 0;
-    padding: 0.5rem 0.6rem;
+    padding: 0.5rem 0.4rem;
     font-size: 0.74rem;
   }
   .leaderboard-podium {
@@ -2905,38 +2931,6 @@ body.dark-mode .leaderboard-updated {
     margin: 0 auto;
   }
 }
-.period-toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.period-select {
-  width: 200px;
-  height: 35px;
-  padding: 0 1rem;
-  border: 2px solid #00B39F;
-  border-radius: 8px;
-  background: #ffffff;
-  color: #00B39F;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
-}
-
-.period-select:focus {
-  border-color: #00B39F;
-  box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.15);
-}
-
-body.dark-mode .period-select {
-  background: #111111;
-  color: #ffffff;
-  border-color: #00B39F;
-}
-
 .calendar-meetings {
   max-width: 1140px;
   margin: auto;
