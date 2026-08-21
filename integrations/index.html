@@ -371,6 +371,7 @@ permalink: /integrations
             -((event.clientY - rect.top) / rect.height) * 2 + 1
           );
 
+          if (event.deltaY === 0) return;
           const zoomFactor = event.deltaY > 0 ? 1.1 : 0.9;
           const currentDistance = camera.position.distanceTo(controls.target);
           const newDistance = currentDistance * zoomFactor;
