@@ -139,7 +139,11 @@ components:
   colorIcon: assets/images/integration/gitlab/components/listener-set/icons/color/listener-set-color.svg
   whiteIcon: assets/images/integration/gitlab/components/listener-set/icons/white/listener-set-white.svg
   description: 
-componentsCount: 32
+- name: x-backend
+  colorIcon: assets/images/integration/gitlab/components/x-backend/icons/color/x-backend-color.svg
+  whiteIcon: assets/images/integration/gitlab/components/x-backend/icons/white/x-backend-white.svg
+  description: 
+componentsCount: 33
 relationships: 
 relationshipsCount: 0
 featureList: [
