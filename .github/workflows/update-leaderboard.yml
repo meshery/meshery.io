@@ -1,0 +1,48 @@
+name: Leaderboard data update
+
+concurrency:
+  group: leaderboard-update
+  cancel-in-progress: false
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # runs every day at midnight
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04
+    if: github.repository == 'meshery/meshery.io'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GH_ACCESS_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install undici
+
+      - name: Pull latest changes
+        run: git pull origin master
+
+      - name: Fetch leaderboard data
+        run: node .github/scripts/fetch-leaderboard.js
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          file_pattern: _data/leaderboard.json
+          commit_user_name: Discussions bot
+          commit_user_email: discussions@meshery.io
+          commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          commit_options: "--signoff"
+          commit_message: "latest leaderboard data added"
+          branch: master
