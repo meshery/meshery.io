@@ -105,123 +105,152 @@
 </style>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        var sortSelect = document.getElementById("sort")
-        if (!sortSelect) {
-            return;
-        }
-        sortSelect.addEventListener("change", function () {
-            var sortValue = this.value;
-            var cardsContainer = document.querySelector(".row");
-            var cards = cardsContainer.querySelectorAll(".patternCard");
+        var sortSelect = document.getElementById("sort");
+        if (sortSelect) {
+            sortSelect.addEventListener("change", function () {
+                var sortValue = this.value;
+                var cardsContainer = document.querySelector(".row");
+                if (!cardsContainer) return;
+                var cards = cardsContainer.querySelectorAll(".patternCard");
 
-            var catalog = Array.from(cards);
+                var catalog = Array.from(cards);
 
-            if (sortValue === "asc") {
                 catalog = catalog.sort(function (a, b) {
-                    if (a.getAttribute("status") === "ComingSoon") {
-                        return 1;
-                    } else if (b.getAttribute("status") === "ComingSoon") {
-                        return -1;
-                    } else {
-                        return a
-                            .getAttribute("filter")
-                            .localeCompare(b.getAttribute("filter"));
-                    }
-                });
-            } else if (sortValue === "desc") {
-                catalog = catalog.sort(function (a, b) {
-                    if (a.getAttribute("status") === "ComingSoon") {
-                        return 1;
-                    } else if (b.getAttribute("status") === "ComingSoon") {
-                        return -1;
-                    } else {
-                        return b
-                            .getAttribute("filter")
-                            .localeCompare(a.getAttribute("filter"));
-                    }
-                });
-            }
+                    var aComingSoon = a.getAttribute("status") === "ComingSoon";
+                    var bComingSoon = b.getAttribute("status") === "ComingSoon";
 
-            catalog.forEach(function (pattern) {
-                cardsContainer.appendChild(pattern);
+                    if (aComingSoon && !bComingSoon) {
+                        return 1;
+                    }
+                    if (!aComingSoon && bComingSoon) {
+                        return -1;
+                    }
+
+                    var aFilter = a.getAttribute("filter") || "";
+                    var bFilter = b.getAttribute("filter") || "";
+
+                    if (sortValue === "asc") {
+                        return aFilter.localeCompare(bFilter, undefined, { sensitivity: 'base' });
+                    } else if (sortValue === "desc") {
+                        return bFilter.localeCompare(aFilter, undefined, { sensitivity: 'base' });
+                    }
+                    return 0;
+                });
+
+                catalog.forEach(function (pattern) {
+                    cardsContainer.appendChild(pattern);
+                });
+
+                if (typeof window.showFilterCards === "function") {
+                    window.showFilterCards();
+                } else {
+                    var searchInput = document.getElementById("search");
+                    if (searchInput) {
+                        searchInput.dispatchEvent(new Event("input"));
+                    }
+                }
             });
-        });
-    // Search functionality
-    function setupSearchFunction() {
-    const searchInput = document.getElementById("search");
-    if (!searchInput) {
-        return;
-    }
-    
-    searchInput.addEventListener("input", function() {
-        const searchTerm = this.value.toLowerCase();
-        const allPatternCards = Array.from(document.querySelectorAll(".patternCard"));
-        const paginationButtons = document.querySelector(".pagination");
-        const prevButton = document.getElementById("designs-prev") || document.getElementById("models-prev") || document.getElementById("filters-prev");
-        const nextButton = document.getElementById("designs-next") || document.getElementById("models-next") || document.getElementById("filters-next");
-        
-        // Check each card against the search term
-        let matchingCards = allPatternCards.filter(card => {
-        const filterValue = card.getAttribute("filter")?.toLowerCase();
-        return filterValue?.includes(searchTerm);
-        });
+        }
 
-        // Hide all cards first (batch operation)
-        allPatternCards.forEach(card => {
-        card.style.display = "none";
+        // Search functionality
+        function setupSearchFunction() {
+            const searchInput = document.getElementById("search");
+            if (!searchInput) {
+                return;
+            }
+            
+            searchInput.addEventListener("input", function() {
+                if (typeof window.showFilterCards === "function") {
+                    window.showFilterCards();
+                    return;
+                }
+
+                const searchTerm = this.value.toLowerCase().trim();
+                const allPatternCards = Array.from(document.querySelectorAll(".patternCard"));
+                const paginationButtons = document.querySelector(".pagination");
+                const prevButton = document.getElementById("designs-prev") || document.getElementById("models-prev") || document.getElementById("filters-prev");
+                const nextButton = document.getElementById("designs-next") || document.getElementById("models-next") || document.getElementById("filters-next");
+                const itemsPerPage = 11;
+                let currentPage = 0;
+                
+                // Check each card against the search term
+                let matchingCards = allPatternCards.filter(card => {
+                    const filterValue = card.getAttribute("filter")?.toLowerCase();
+                    return !searchTerm || filterValue?.includes(searchTerm);
+                });
+
+                // Hide all cards first (batch operation)
+                allPatternCards.forEach(card => {
+                    card.style.display = "none";
+                });
+
+                // Update "not found" message
+                const noCard = document.getElementById("not-found");
+                if (noCard) {
+                    noCard.style.display = matchingCards.length > 0 ? "none" : "block";
+                }
+
+                if (!prevButton || !nextButton) {
+                    matchingCards.forEach(card => {
+                        card.style.display = "block";
+                    });
+                    return;
+                }
+
+                // Function to update pagination display
+                function updatePagination() {
+                    const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
+                    prevButton.disabled = currentPage === 0;
+                    nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
+
+                    const pageInfo = prevButton.parentElement?.querySelector(".page-info");
+                    if (pageInfo) {
+                        if (totalPages > 0) {
+                            pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+                            pageInfo.style.display = "inline";
+                        } else {
+                            pageInfo.style.display = "none";
+                        }
+                    }
+                }
+                
+                // Function to show the current page of cards
+                function showCardsForPage() {
+                    const start = currentPage * itemsPerPage;
+                    const end = Math.min(start + itemsPerPage, matchingCards.length);
+                    
+                    for (let i = 0; i < matchingCards.length; i++) {
+                        matchingCards[i].style.display = (i >= start && i < end) ? "block" : "none";
+                    }
+                    
+                    updatePagination();
+                }
+                
+                // Set up pagination handlers
+                prevButton.onclick = function() {
+                    if (currentPage > 0) {
+                        currentPage--;
+                        showCardsForPage();
+                    }
+                };
+                
+                nextButton.onclick = function() {
+                    const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
+                    if (currentPage + 1 < totalPages) {
+                        currentPage++;
+                        showCardsForPage();
+                    }
+                };
+                
+                if (paginationButtons) {
+                    paginationButtons.style.display = matchingCards.length > itemsPerPage ? "flex" : "none";
+                }
+                
+                currentPage = 0;
+                showCardsForPage();
+            });
+        }
+
+        setupSearchFunction();
     });
-
-    // Update "not found" message
-    const noCard = document.getElementById("not-found");
-    noCard.style.display = matchingCards.length > 0 ? "none" : "block";
-
-    // Function to update pagination display
-    function updatePagination() {
-        const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
-        prevButton.disabled = currentPage === 0;
-        nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
-    }
-    
-    // Function to show the current page of cards
-    function showCardsForPage() {
-        // Calculate range for current page
-        const start = currentPage * itemsPerPage;
-        const end = Math.min(start + itemsPerPage, matchingCards.length);
-        
-        // Show only cards for current page
-        for (let i = 0; i < matchingCards.length; i++) {
-        matchingCards[i].style.display = (i >= start && i < end) ? "block" : "none";
-        }
-        
-        updatePagination();
-    }
-    
-    // Set up pagination handlers
-    prevButton.onclick = function() {
-        if (currentPage > 0) {
-        currentPage--;
-        showCardsForPage();
-        }
-    };
-    
-    nextButton.onclick = function() {
-        const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
-        if (currentPage + 1 < totalPages) {
-        currentPage++;
-        showCardsForPage();
-        }
-    };
-    
-    // Initialize pagination for both filtered and unfiltered cases
-    paginationButtons.style.display = matchingCards.length > itemsPerPage ? "flex" : "none";
-    
-    // Show initial page
-    currentPage = 0;
-    showCardsForPage();
-    });
-    }
-
-    // Initialize search functionality
-    setupSearchFunction();
-});
 </script>
