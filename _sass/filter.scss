@@ -192,12 +192,23 @@
     height: calc(100dvh - 9rem);
     border-radius: 15px 15px 0 0;
     overflow: hidden;
-    display: none;
+        display: flex;
     flex-direction: column;
     gap: 1rem;
     background-color: var(--color-primary-super-dark);
     box-sizing: border-box;
     padding-bottom: 4rem;
+        transform: translateY(100%);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .filter-wrap.is-open {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
   }
   
   .mobile-header{
