@@ -1,4 +1,34 @@
-<div style="display: flex; width: 75%; margin: 0 auto">
+<style>
+  .search-container{
+    display: flex;
+    width: 75%;
+    margin: 0 auto;
+  }
+  .filter-btn {
+    display: none;
+    background-color: #00b39f;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  } 
+  @media screen and (max-width: 770px) { 
+    .search-container {
+      display: flex;
+      gap: 0.25rem;
+      width: 100%;
+    }
+    .filter-btn{
+      display: block;
+    }
+
+    
+  }
+
+</style>
+
+<div class="search-container">
   <div class="sorting-options" style="flex-grow: 1">
     <select id="sort">
       <option disabled selected value>Sort by</option>
@@ -26,33 +56,39 @@
   const categoryFilterSection = document.querySelector(".category-div")
 
   function hideCategoryOrTechnology() {
-    {% if show_technology=="true"%}
-    if (technologieHeaderFilterSection) {
-      technologieHeaderFilterSection.style.display = "block";
-    }
-    if (technologiFilterSection) {
-      technologiFilterSection.style.display = "flex";
-    }
-    if (categoryHeaderFilterSection) {
-      categoryHeaderFilterSection.style.display = "none";
-    }
-    if (categoryFilterSection) {
-      categoryFilterSection.style.display = "none";
-    }
-    {% else %}
-    if (technologieHeaderFilterSection) {
-      technologieHeaderFilterSection.style.display = "none";
-    }
-    if (technologiFilterSection) {
-      technologiFilterSection.style.display = "none"
-    }
-    if (categoryHeaderFilterSection) {
-      categoryHeaderFilterSection.style.display = "block";
-    }
-    if (categoryFilterSection) {
-      categoryFilterSection.style.display = "flex";
-    }
+    {% if show_technology == "true" %}
+      if (technologieHeaderFilterSection) {
+        technologieHeaderFilterSection.style.display = "block";
+      }
 
+      if (technologiFilterSection) {
+        technologiFilterSection.style.display = "flex";
+      }
+
+      if (categoryHeaderFilterSection) {
+        categoryHeaderFilterSection.style.display = "none";
+      }
+
+      if (categoryFilterSection) {
+        categoryFilterSection.style.display = "none";
+      }
+
+    {% else %}
+      if (technologieHeaderFilterSection) {
+        technologieHeaderFilterSection.style.display = "none";
+      }
+
+      if (technologiFilterSection) {
+        technologiFilterSection.style.display = "none";
+      }
+
+      if (categoryHeaderFilterSection) {
+        categoryHeaderFilterSection.style.display = "block";
+      }
+
+      if (categoryFilterSection) {
+        categoryFilterSection.style.display = "flex";
+      }
     {% endif %}
   }
   function handleDropdown() {
