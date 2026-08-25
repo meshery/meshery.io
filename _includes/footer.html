@@ -79,6 +79,21 @@
 
 <script>
 
+	function showCopyFeedback(element, message) {
+		let wrapper = element.closest('.catalog-design-id-copy-wrapper');
+		if (!wrapper) {
+			return false;
+		}
+
+		let feedback = wrapper.querySelector('.copy-feedback');
+		feedback.textContent = message;
+		window.clearTimeout(element.copyFeedbackTimeout);
+		element.copyFeedbackTimeout = window.setTimeout(function () {
+			feedback.textContent = '';
+		}, 1500);
+		return true;
+	}
+
 	function resetCopyText(element) {
 		let childElements = element.childNodes
 		if (childElements.length > 3) {
@@ -97,18 +112,21 @@
 		console.info('Text:', e.text);
 		console.info('Trigger:', e.trigger);
 		let childElements = e.trigger.childNodes;
-		if (childElements.length > 3) {
-		childElements[3].innerHTML = "Copied!";
-	} else {
-		childElements[1].innerHTML = "Copied";
-		childElements[1].style.color = 'white';
-		childElements[1].style.background = "#1a2421";
-	}
+		if (!showCopyFeedback(e.trigger, "Copied!")) {
+			if (childElements.length > 3) {
+				childElements[3].innerHTML = "Copied!";
+			} else {
+				childElements[1].innerHTML = "Copied";
+				childElements[1].style.color = 'white';
+				childElements[1].style.background = "#1a2421";
+			}
+		}
 		e.clearSelection();
 	});
 	clipboard.on('error', function (e) {
 		console.error('Action:', e.action);
 		console.error('Trigger:', e.trigger);
+		showCopyFeedback(e.trigger, "Copy failed");
 	});
 </script>
 
