@@ -2473,7 +2473,7 @@ footer .legal-line a {
   width: 320px;
   max-width: 90%;
   padding: 0.9rem 1.4rem;
-  border: 2px solid #00B39F;
+  border: 2px solid var(--brand-color-secondary);
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 500;
@@ -2488,7 +2488,6 @@ footer .legal-line a {
 }
 
 .leaderboard-filter:focus-visible {
-  border-color: #00B39F;
   box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.15);
 }
 
@@ -2517,9 +2516,6 @@ body.dark-mode .leaderboard-filter::placeholder {
 }
 
 .podium-card {
-  background: transparent;
-  border: none;
-  box-shadow: none;
   flex: 0 0 220px;
   max-width: 220px;
   display: flex;
@@ -2560,7 +2556,6 @@ body.dark-mode .leaderboard-filter::placeholder {
   object-fit: cover;
   display: block;
   border-radius: 50%;
-  image-rendering: auto;
   backface-visibility: hidden;
   transform: translateZ(0);
   filter: contrast(1.03) saturate(1.02);
@@ -2613,7 +2608,7 @@ body.dark-mode .leaderboard-filter::placeholder {
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  border: 4px solid;
+  border: 4px solid #ffffff;
 }
 
 .medal-gold {
@@ -2648,7 +2643,7 @@ body.dark-mode .leaderboard-filter::placeholder {
 }
 
 .podium-username-link:hover .podium-username {
-  color: #00B39F;
+  color: var(--brand-color-secondary);
 }
 
 .podium-username {
@@ -2656,7 +2651,7 @@ body.dark-mode .leaderboard-filter::placeholder {
   font-weight: 700;
   line-height: 1.1;
   text-align: center;
-  color: #00B39F;
+  color: var(--brand-color-secondary);
   transition: color 0.2s ease;
   width: 100%;
   overflow-wrap: break-word;
@@ -2698,7 +2693,7 @@ body.dark-mode .podium-stat-value {
 .podium-score {
   font-size: 2rem;
   font-weight: 800;
-  color: #00B39F;
+  color: var(--brand-color-secondary);
   line-height: 1;
 }
 
@@ -2717,7 +2712,7 @@ body.dark-mode .podium-stat-value {
 }
 
 .leaderboard-table thead tr {
-  background-color: #00B39F;
+  background-color: var(--brand-color-secondary);
   color: #000000;
   text-align: left;
 }
@@ -2735,10 +2730,6 @@ body.dark-mode .podium-stat-value {
   color: #000000;
 }
 
-.leaderboard-rank {
-  color: #000000;
-}
-
 .row-white {
   background-color: #ffffff;
 }
@@ -2747,9 +2738,9 @@ body.dark-mode .podium-stat-value {
   background-color: #00B39F;
 }
 
-.dark-mode .leaderboard-table,
-.dark-mode .leaderboard-table th,
-.dark-mode .leaderboard-table td {
+body.dark-mode .leaderboard-table,
+body.dark-mode .leaderboard-table th,
+body.dark-mode .leaderboard-table td {
   border-color: #000000;
 }
 
@@ -2762,11 +2753,6 @@ body.dark-mode .podium-stat-value {
 }
 
 .leaderboard-member a:hover .leaderboard-username {
-  color: #000000;
-  text-decoration: underline;
-}
-
-.row-teal .leaderboard-member a:hover .leaderboard-username {
   color: #000000;
   text-decoration: underline;
 }
@@ -2787,6 +2773,36 @@ body.dark-mode .podium-stat-value {
 }
 
 body.dark-mode .leaderboard-updated {
+  color: #ffffff;
+}
+
+.period-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.period-select {
+  width: 200px;
+  height: 35px;
+  padding: 0 1rem;
+  border: 2px solid var(--brand-color-secondary);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--brand-color-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.period-select:focus-visible {
+  box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.15);
+}
+
+body.dark-mode .period-select {
+  background: #000000;
   color: #ffffff;
 }
 
@@ -2813,38 +2829,6 @@ body.dark-mode .leaderboard-updated {
     font-size: 1.4rem;
   }
 }
-.period-toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.period-select {
-  width: 200px;
-  height: 35px;
-  padding: 0 1rem;
-  border: 2px solid #00B39F;
-  border-radius: 8px;
-  background: #ffffff;
-  color: #00B39F;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
-}
-
-.period-select:focus-visible {
-  border-color: #00B39F;
-  box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.15);
-}
-
-body.dark-mode .period-select {
-  background: #000000;
-  color: #ffffff;
-  border-color: #00B39F;
-}
-
 /* ─────────────────────────────
        MOBILE
     ───────────────────────────── */
@@ -2880,6 +2864,7 @@ body.dark-mode .period-select {
     align-items: center;
     gap: 2rem;
     margin: 3.5rem 0 2rem;
+    width: 100%;
   }
   .podium-rank-1 {
     order: 1;
@@ -2887,9 +2872,6 @@ body.dark-mode .period-select {
   }
   .podium-rank-2 {
     order: 2;
-  }
-  .podium-rank-3 {
-    order: 3;
   }
   .podium-rank-1 .podium-avatar-wrapper {
     width: 120px;
@@ -2930,10 +2912,6 @@ body.dark-mode .period-select {
     flex: 0 0 auto;
     max-width: 100%;
     width: 100%;
-  }
-  .leaderboard-podium {
-    width: 100%;
-    align-items: center;
   }
   .podium-avatar-wrapper {
     margin: 0 auto;
