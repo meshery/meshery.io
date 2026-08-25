@@ -59,6 +59,10 @@ async function buildAllPeriods() {
         periods[period] = buildLeaderboard(items);
     }
 
+    if (!periods.all.length) {
+        throw new Error('all-time period empty — refusing to overwrite');
+    }
+
     return periods;
 }
 

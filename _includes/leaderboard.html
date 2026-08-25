@@ -46,7 +46,12 @@
 
 <script>
     (function () {
-        var leaderboardData = JSON.parse(document.getElementById('leaderboard-data').textContent);
+        var leaderboardData;
+        try {
+            leaderboardData = JSON.parse(document.getElementById('leaderboard-data').textContent) || {};
+        } catch (e) {
+            leaderboardData = {};
+        }
         var defaultPeriod = {{ site.data.leaderboard.default_period | jsonify
     }};
     var currentPeriod = defaultPeriod || 'weekly';
@@ -125,6 +130,7 @@
         var wrapper = document.querySelector('.leaderboard-wrapper');
 
         if (!hasActivity) {
+            emptyState.textContent = 'No activity for this period yet.';
             emptyState.style.display = '';
             podium.style.display = 'none';
             wrapper.style.display = 'none';
@@ -150,12 +156,15 @@
 
     window.filterLeaderboard = function () {
         var input = document.getElementById('leaderboard-filter').value.toLowerCase();
+        var visibleCount = 0;
 
         var rows = document.querySelectorAll('#leaderboard-table tbody tr');
         rows.forEach(function (row) {
             var username = row.querySelector('.leaderboard-username');
             if (username) {
-                row.style.display = username.textContent.toLowerCase().includes(input) ? '' : 'none';
+                var matches = username.textContent.toLowerCase().includes(input);
+                row.style.display = matches ? '' : 'none';
+                if (matches) visibleCount++;
             }
         });
 
@@ -163,9 +172,20 @@
         cards.forEach(function (card) {
             var username = card.querySelector('.podium-username');
             if (username) {
-                card.style.display = username.textContent.toLowerCase().includes(input) ? '' : 'none';
+                var matches = username.textContent.toLowerCase().includes(input);
+                card.style.display = matches ? '' : 'none';
+                if (matches) visibleCount++;
             }
         });
+
+        var emptyState = document.getElementById('leaderboard-empty-state');
+        if (input && visibleCount === 0) {
+            emptyState.textContent = 'No members match that search.';
+            emptyState.style.display = '';
+        } else {
+            emptyState.textContent = 'No activity for this period yet.';
+            emptyState.style.display = rows.length === 0 && cards.length === 0 ? '' : 'none';
+        }
     };
 
     renderLeaderboard(currentPeriod);
