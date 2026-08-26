@@ -7,7 +7,7 @@ concurrency:
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *' # runs every day at midnight
+    - cron: '30 1 * * *' # runs every day at 1:30 AM, staggered from discussions-data-files-update.yml
 
 permissions:
   contents: write
@@ -26,9 +26,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Install dependencies
-        run: npm install undici
 
       - name: Pull latest changes
         run: git pull origin master

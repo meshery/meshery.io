@@ -1,8 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-const { fetch } = require('undici');
-
 const BASE_URL = 'https://discuss.meshery.io/directory_items.json';
 const PERIODS = ['weekly', 'monthly', 'all'];
 
