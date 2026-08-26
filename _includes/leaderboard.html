@@ -36,7 +36,7 @@
         No activity for this period yet.
     </p>
 
-    <p class="leaderboard-updated">Last updated: {{ site.data.leaderboard.last_updated }}</p>
+    <p class="leaderboard-updated">Last updated: {{ site.data.leaderboard.last_updated | date: "%B %-d, %Y" }}</p>
 
 </section>
 
@@ -52,7 +52,8 @@
         } catch (e) {
             leaderboardData = {};
         }
-        var defaultPeriod = {{ site.data.leaderboard.default_period | jsonify }};
+        var defaultPeriod = {{ site.data.leaderboard.default_period | jsonify
+    }};
     var currentPeriod = defaultPeriod || 'weekly';
     var fallbackAvatar = '/assets/images/nav-icons/community.svg';
 
@@ -131,6 +132,8 @@
             emptyState.textContent = 'No activity for this period yet.';
             emptyState.style.display = '';
             podium.style.display = 'none';
+            podium.innerHTML = '';
+            document.getElementById('leaderboard-tbody').innerHTML = '';
             wrapper.style.display = 'none';
             return;
         }

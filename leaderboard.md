@@ -7,6 +7,6 @@ redirect_from:
   - /community/leaderboard
 ---
 
-Celebrating the top contributors on the [Meshery discussion forum](https://discuss.meshery.io) this week. Rankings are based on posts created, likes received, and solutions accepted — switch periods above to see monthly or all-time standings.
+Celebrating the top contributors on the [Meshery discussion forum](https://discuss.meshery.io) this week. Rankings are based on posts created, likes received, and solutions accepted — switch periods below to see monthly or all-time standings.
 
 {% include leaderboard.html %}
