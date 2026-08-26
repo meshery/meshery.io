@@ -1,15 +1,15 @@
 <section class="leaderboard-section">
 
     <div class="leaderboard-controls">
-        <div class="period-toggle" aria-label="Leaderboard time period">
+        <div class="period-toggle">
             <select id="period-select" class="period-select" aria-label="Leaderboard time period">
                 <option value="weekly">This Week</option>
                 <option value="monthly">This Month</option>
                 <option value="all">All Time</option>
             </select>
         </div>
-        <input type="text" id="leaderboard-filter" class="leaderboard-filter" placeholder="Search username"
-            onkeyup="filterLeaderboard()" />
+        <label for="leaderboard-filter" class="visually-hidden">Search leaderboard by username</label>
+        <input type="text" id="leaderboard-filter" class="leaderboard-filter" placeholder="Search username" />
     </div>
 
     <!-- Top 3 Cards -->
@@ -20,12 +20,12 @@
         <table class="leaderboard-table" id="leaderboard-table">
             <thead>
                 <tr>
-                    <th>Rank</th>
-                    <th>Member</th>
-                    <th>Likes Received</th>
-                    <th>Posts</th>
-                    <th>Solutions Accepted</th>
-                    <th>Total Points</th>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Member</th>
+                    <th scope="col">Likes Received</th>
+                    <th scope="col">Posts</th>
+                    <th scope="col">Solutions Accepted</th>
+                    <th scope="col">Total Points</th>
                 </tr>
             </thead>
             <tbody id="leaderboard-tbody"></tbody>
@@ -52,15 +52,14 @@
         } catch (e) {
             leaderboardData = {};
         }
-        var defaultPeriod = {{ site.data.leaderboard.default_period | jsonify
-    }};
+        var defaultPeriod = {{ site.data.leaderboard.default_period | jsonify }};
     var currentPeriod = defaultPeriod || 'weekly';
     var fallbackAvatar = '/assets/images/nav-icons/community.svg';
 
     function escapeHtml(str) {
         var div = document.createElement('div');
         div.textContent = str == null ? '' : String(str);
-        return div.innerHTML;
+        return div.innerHTML.replace(/"/g, '&quot;');
     }
 
     function medalClass(rank) {
@@ -87,11 +86,11 @@
                 '<span class="podium-username">' + escapeHtml(user.username) + '</span>' +
                 '</a>' +
                 '<div class="podium-stats">' +
-                '<div class="podium-stat"><span class="podium-stat-label">Likes</span><span class="podium-stat-value">' + user.likes + '</span></div>' +
-                '<div class="podium-stat"><span class="podium-stat-label">Posts</span><span class="podium-stat-value">' + user.posts + '</span></div>' +
-                '<div class="podium-stat"><span class="podium-stat-label">Solutions</span><span class="podium-stat-value">' + user.solutions + '</span></div>' +
+                '<div class="podium-stat"><span class="podium-stat-label">Likes</span><span class="podium-stat-value">' + (Number(user.likes) || 0) + '</span></div>' +
+                '<div class="podium-stat"><span class="podium-stat-label">Posts</span><span class="podium-stat-value">' + (Number(user.posts) || 0) + '</span></div>' +
+                '<div class="podium-stat"><span class="podium-stat-label">Solutions</span><span class="podium-stat-value">' + (Number(user.solutions) || 0) + '</span></div>' +
                 '</div>' +
-                '<div class="podium-score">' + user.score + ' pts</div>' +
+                '<div class="podium-score">' + (Number(user.score) || 0) + ' pts</div>' +
                 '</div>' +
                 '</div>'
             );
@@ -102,10 +101,9 @@
         var tbody = document.getElementById('leaderboard-tbody');
         var rest = users.filter(function (u) { return u.rank > 3; });
 
-        tbody.innerHTML = rest.map(function (user, i) {
-            var rowClass = i % 2 === 0 ? 'row-white' : 'row-teal';
+        tbody.innerHTML = rest.map(function (user) {
             return (
-                '<tr class="leaderboard-row ' + rowClass + '">' +
+                '<tr class="leaderboard-row">' +
                 '<td class="leaderboard-rank">' + user.rank + '</td>' +
                 '<td class="leaderboard-member">' +
                 '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
@@ -113,10 +111,10 @@
                 '<span class="leaderboard-username">' + escapeHtml(user.username) + '</span>' +
                 '</a>' +
                 '</td>' +
-                '<td>' + user.likes + '</td>' +
-                '<td>' + user.posts + '</td>' +
-                '<td>' + user.solutions + '</td>' +
-                '<td class="leaderboard-score">' + user.score + '</td>' +
+                '<td>' + (Number(user.likes) || 0) + '</td>' +
+                '<td>' + (Number(user.posts) || 0) + '</td>' +
+                '<td>' + (Number(user.solutions) || 0) + '</td>' +
+                '<td class="leaderboard-score">' + (Number(user.score) || 0) + '</td>' +
                 '</tr>'
             );
         }).join('');
@@ -154,7 +152,7 @@
         renderLeaderboard(currentPeriod);
     });
 
-    window.filterLeaderboard = function () {
+    function filterLeaderboard() {
         var input = document.getElementById('leaderboard-filter').value.toLowerCase();
         var visibleCount = 0;
 
@@ -188,6 +186,8 @@
         }
     };
 
+    document.getElementById('leaderboard-filter').addEventListener('input', filterLeaderboard);
+
     renderLeaderboard(currentPeriod);
-    }) ();
+}) ();
 </script>
