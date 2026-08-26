@@ -17,20 +17,8 @@ export default defineConfig([{
   ],
 },
 {
-  files: [".github/scripts/**/*.js"],
-  languageOptions: {
-    ecmaVersion: "latest",
-    sourceType: "commonjs",
-    globals: {
-      ...globals.node,
-      ...globals.es2021,
-    },
-  },
-},
-{
 
   files: ["**/*.js"],
-  ignores: [".github/scripts/**/*.js"],
   languageOptions: {
     ecmaVersion: "latest",
     sourceType: "script", // IMPORTANT for browser scripts
@@ -85,5 +73,14 @@ export default defineConfig([{
     "no-unused-vars": "error",
     "no-dupe-keys": "error"
   }
+},
+{
+  files: [".github/scripts/**/*.js"],
+  languageOptions: {
+    sourceType: "commonjs",
+    globals: {
+      ...globals.node,
+    },
+  },
 }
 ]);
