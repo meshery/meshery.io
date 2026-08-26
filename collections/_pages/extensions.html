@@ -392,20 +392,37 @@ published: true
     if (!toggle || !panel) return;
 
     var STACK_BREAKPOINT = 770;
+    var PANEL_MARGIN = 8;
+    var PANEL_VIEWPORT_FILL = 0.7;
 
     function positionPanel() {
       if (window.innerWidth > STACK_BREAKPOINT) return;
 
-      var margin = 8;
+      var viewportHeight = window.innerHeight;
       var rect = toggle.getBoundingClientRect();
-      var maxLeft = window.innerWidth - panel.offsetWidth - margin;
-      var maxTop =Math.max(
-        margin,
-        window.innerHeight - panel.offsetHeight - margin
-      );
-      panel.style.top = 
-        Math.max(margin, Math.min(rect.bottom + margin, maxTop)) + 'px';
-      panel.style.left = Math.max(margin, Math.min(rect.left, maxLeft)) + "px";
+
+      // Cap the height against window.innerHeight instead of leaving it to the
+      // CSS `vh` unit, which mobile browsers resolve against the viewport with
+      // the URL bar hidden. Sizing and placement then share one measure of the
+      // viewport, so the clamp below always leaves the panel fully on screen.
+      panel.style.maxHeight =
+        Math.floor(viewportHeight * PANEL_VIEWPORT_FILL) + "px";
+
+      var maxTop = viewportHeight - panel.offsetHeight - PANEL_MARGIN;
+      var maxLeft = window.innerWidth - panel.offsetWidth - PANEL_MARGIN;
+      panel.style.top =
+        Math.max(PANEL_MARGIN, Math.min(rect.bottom + PANEL_MARGIN, maxTop)) +
+        "px";
+      panel.style.left =
+        Math.max(PANEL_MARGIN, Math.min(rect.left, maxLeft)) + "px";
+    }
+
+    // The inline sizing above belongs to the floating mobile panel only; clear
+    // it so it cannot clip the static sidebar once the layout goes wide again.
+    function resetPanel() {
+      panel.style.top = "";
+      panel.style.left = "";
+      panel.style.maxHeight = "";
     }
 
     function setOpen(open) {
@@ -441,6 +458,7 @@ published: true
     window.addEventListener("resize", function () {
       if (window.innerWidth > STACK_BREAKPOINT) {
         setOpen(false);
+        resetPanel();
       } else if (panel.classList.contains("show")) {
         positionPanel();
       }
@@ -463,9 +481,6 @@ published: true
 
   const extensionCards = document.querySelectorAll(".extensionCard");
   document.addEventListener("DOMContentLoaded", () => {
-    extensionCards.forEach((card) => {
-      card.style.display = "block";
-    });
 
     categoryCheckboxes.forEach((box) => {
       box.checked = false;
