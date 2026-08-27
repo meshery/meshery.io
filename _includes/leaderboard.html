@@ -1,0 +1,196 @@
+<section class="leaderboard-section">
+
+    <div class="leaderboard-controls">
+        <div class="period-toggle">
+            <select id="period-select" class="period-select" aria-label="Leaderboard time period">
+                <option value="weekly">This Week</option>
+                <option value="monthly">This Month</option>
+                <option value="all">All Time</option>
+            </select>
+        </div>
+        <label for="leaderboard-filter" class="visually-hidden">Search leaderboard by username</label>
+        <input type="text" id="leaderboard-filter" class="leaderboard-filter" placeholder="Search username" />
+    </div>
+
+    <!-- Top 3 Cards -->
+    <div class="leaderboard-podium" id="leaderboard-podium"></div>
+
+    <!-- Rank 4+ Table -->
+    <div class="leaderboard-wrapper">
+        <table class="leaderboard-table" id="leaderboard-table">
+            <thead>
+                <tr>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Member</th>
+                    <th scope="col">Likes Received</th>
+                    <th scope="col">Posts</th>
+                    <th scope="col">Solutions Accepted</th>
+                    <th scope="col">Total Points</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard-tbody"></tbody>
+        </table>
+    </div>
+
+    <p class="leaderboard-empty-state" id="leaderboard-empty-state" style="display:none;">
+        No activity for this period yet.
+    </p>
+
+    <p class="leaderboard-updated">Last updated: {{ site.data.leaderboard.last_updated | date: "%B %-d, %Y" }}</p>
+
+</section>
+
+<script type="application/json" id="leaderboard-data">
+    {{ site.data.leaderboard.periods | jsonify }}
+</script>
+
+<script>
+    (function () {
+        var leaderboardData;
+        try {
+            leaderboardData = JSON.parse(document.getElementById('leaderboard-data').textContent) || {};
+        } catch (e) {
+            leaderboardData = {};
+        }
+        var defaultPeriod = {{ site.data.leaderboard.default_period | jsonify
+    }};
+    var currentPeriod = defaultPeriod || 'weekly';
+    var fallbackAvatar = '/assets/images/nav-icons/community.svg';
+
+    function escapeHtml(str) {
+        var div = document.createElement('div');
+        div.textContent = str == null ? '' : String(str);
+        return div.innerHTML.replace(/"/g, '&quot;');
+    }
+
+    function medalClass(rank) {
+        if (rank === 1) return 'medal-gold';
+        if (rank === 2) return 'medal-silver';
+        return 'medal-bronze';
+    }
+
+    function renderPodium(users) {
+        var podium = document.getElementById('leaderboard-podium');
+        var top3 = users.filter(function (u) { return u.rank <= 3; });
+
+        podium.innerHTML = top3.map(function (user) {
+            return (
+                '<div class="podium-card podium-rank-' + user.rank + '">' +
+                '<div class="podium-card-body">' +
+                '<div class="podium-avatar-wrapper">' +
+                '<span class="medal ' + medalClass(user.rank) + '">' + user.rank + '</span>' +
+                '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
+                '<img class="podium-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
+                '</a>' +
+                '</div>' +
+                '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener" class="podium-username-link">' +
+                '<span class="podium-username">' + escapeHtml(user.username) + '</span>' +
+                '</a>' +
+                '<div class="podium-stats">' +
+                '<div class="podium-stat"><span class="podium-stat-label">Likes</span><span class="podium-stat-value">' + (Number(user.likes) || 0) + '</span></div>' +
+                '<div class="podium-stat"><span class="podium-stat-label">Posts</span><span class="podium-stat-value">' + (Number(user.posts) || 0) + '</span></div>' +
+                '<div class="podium-stat"><span class="podium-stat-label">Solutions</span><span class="podium-stat-value">' + (Number(user.solutions) || 0) + '</span></div>' +
+                '</div>' +
+                '<div class="podium-score">' + (Number(user.score) || 0) + ' pts</div>' +
+                '</div>' +
+                '</div>'
+            );
+        }).join('');
+    }
+
+    function renderTable(users) {
+        var tbody = document.getElementById('leaderboard-tbody');
+        var rest = users.filter(function (u) { return u.rank > 3; });
+
+        tbody.innerHTML = rest.map(function (user) {
+            return (
+                '<tr class="leaderboard-row">' +
+                '<td class="leaderboard-rank">' + user.rank + '</td>' +
+                '<td class="leaderboard-member">' +
+                '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
+                '<img class="leaderboard-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
+                '<span class="leaderboard-username">' + escapeHtml(user.username) + '</span>' +
+                '</a>' +
+                '</td>' +
+                '<td>' + (Number(user.likes) || 0) + '</td>' +
+                '<td>' + (Number(user.posts) || 0) + '</td>' +
+                '<td>' + (Number(user.solutions) || 0) + '</td>' +
+                '<td class="leaderboard-score">' + (Number(user.score) || 0) + '</td>' +
+                '</tr>'
+            );
+        }).join('');
+    }
+
+    function renderLeaderboard(period) {
+        var users = leaderboardData[period] || [];
+        var hasActivity = users.some(function (u) { return u.score > 0; });
+        var emptyState = document.getElementById('leaderboard-empty-state');
+        var podium = document.getElementById('leaderboard-podium');
+        var wrapper = document.querySelector('.leaderboard-wrapper');
+
+        if (!hasActivity) {
+            emptyState.textContent = 'No activity for this period yet.';
+            emptyState.style.display = '';
+            podium.style.display = 'none';
+            podium.innerHTML = '';
+            document.getElementById('leaderboard-tbody').innerHTML = '';
+            wrapper.style.display = 'none';
+            return;
+        }
+
+        emptyState.style.display = 'none';
+        podium.style.display = '';
+        wrapper.style.display = '';
+        renderPodium(users);
+        renderTable(users);
+        filterLeaderboard();
+    }
+
+    var periodSelect = document.getElementById('period-select');
+
+    periodSelect.value = currentPeriod;
+
+    periodSelect.addEventListener('change', function () {
+        currentPeriod = this.value;
+        renderLeaderboard(currentPeriod);
+    });
+
+    function filterLeaderboard() {
+        var input = document.getElementById('leaderboard-filter').value.toLowerCase();
+        var visibleCount = 0;
+
+        var rows = document.querySelectorAll('#leaderboard-table tbody tr');
+        rows.forEach(function (row) {
+            var username = row.querySelector('.leaderboard-username');
+            if (username) {
+                var matches = username.textContent.toLowerCase().includes(input);
+                row.style.display = matches ? '' : 'none';
+                if (matches) visibleCount++;
+            }
+        });
+
+        var cards = document.querySelectorAll('.podium-card');
+        cards.forEach(function (card) {
+            var username = card.querySelector('.podium-username');
+            if (username) {
+                var matches = username.textContent.toLowerCase().includes(input);
+                card.style.display = matches ? '' : 'none';
+                if (matches) visibleCount++;
+            }
+        });
+
+        var emptyState = document.getElementById('leaderboard-empty-state');
+        if (input && visibleCount === 0) {
+            emptyState.textContent = 'No members match that search.';
+            emptyState.style.display = '';
+        } else {
+            emptyState.textContent = 'No activity for this period yet.';
+            emptyState.style.display = rows.length === 0 && cards.length === 0 ? '' : 'none';
+        }
+    };
+
+    document.getElementById('leaderboard-filter').addEventListener('input', filterLeaderboard);
+
+    renderLeaderboard(currentPeriod);
+}) ();
+</script>
