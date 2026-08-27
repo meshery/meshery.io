@@ -12,6 +12,19 @@
         <input type="text" id="leaderboard-filter" class="leaderboard-filter" placeholder="Search username" />
     </div>
 
+    <!-- NEW: Scoring info chip -->
+    <div class="scoring-info">
+        <button type="button" class="scoring-info-toggle" id="scoring-info-toggle" aria-expanded="false"
+            aria-controls="scoring-info-popover">
+            <span aria-hidden="true">ⓘ</span> How scores are calculated
+        </button>
+        <div class="scoring-info-popover" id="scoring-info-popover" role="dialog" aria-hidden="true">
+            <p class="scoring-info-formula">
+                Total Points = (Posts × 1) + (Likes × 2) + (Solutions × 3)
+            </p>
+        </div>
+    </div>
+
     <!-- Top 3 Cards -->
     <div class="leaderboard-podium" id="leaderboard-podium"></div>
 
@@ -154,6 +167,34 @@
         currentPeriod = this.value;
         renderLeaderboard(currentPeriod);
     });
+
+    var scoringToggle = document.getElementById('scoring-info-toggle');
+    var scoringPopover = document.getElementById('scoring-info-popover');
+
+    if (scoringToggle && scoringPopover) {
+        scoringToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var isOpen = scoringPopover.classList.toggle('is-open');
+            scoringToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            scoringPopover.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!scoringPopover.contains(e.target) && e.target !== scoringToggle) {
+                scoringPopover.classList.remove('is-open');
+                scoringToggle.setAttribute('aria-expanded', 'false');
+                scoringPopover.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                scoringPopover.classList.remove('is-open');
+                scoringToggle.setAttribute('aria-expanded', 'false');
+                scoringPopover.setAttribute('aria-hidden', 'true');
+            }
+        });
+    }
 
     function filterLeaderboard() {
         var input = document.getElementById('leaderboard-filter').value.toLowerCase();
