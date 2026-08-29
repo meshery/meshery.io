@@ -25,6 +25,9 @@
                     <th scope="col">Likes Received</th>
                     <th scope="col">Posts</th>
                     <th scope="col">Solutions Accepted</th>
+                    <th scope="col">Issues Opened</th>
+                    <th scope="col">PRs Opened</th>
+                    <th scope="col">PR Reviews</th>
                     <th scope="col">Total Points</th>
                 </tr>
             </thead>
@@ -91,7 +94,12 @@
                 '<div class="podium-stat"><span class="podium-stat-label">Posts</span><span class="podium-stat-value">' + (Number(user.posts) || 0) + '</span></div>' +
                 '<div class="podium-stat"><span class="podium-stat-label">Solutions</span><span class="podium-stat-value">' + (Number(user.solutions) || 0) + '</span></div>' +
                 '</div>' +
-                '<div class="podium-score">' + (Number(user.score) || 0) + ' pts</div>' +
+                '<div class="podium-stats podium-github-stats">' +
+                '<div class="podium-stat"><span class="podium-stat-label">Issues</span><span class="podium-stat-value">' + (Number(user.github_issues) || 0) + '</span></div>' +
+                '<div class="podium-stat"><span class="podium-stat-label">PRs</span><span class="podium-stat-value">' + (Number(user.github_prs) || 0) + '</span></div>' +
+                '<div class="podium-stat"><span class="podium-stat-label">Reviews</span><span class="podium-stat-value">' + (Number(user.github_reviews) || 0) + '</span></div>' +
+                '</div>' +
+                '<div class="podium-score">' + (Number(user.total_score) || Number(user.score) || 0) + ' pts</div>' +
                 '</div>' +
                 '</div>'
             );
@@ -111,11 +119,15 @@
                 '<img class="leaderboard-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
                 '<span class="leaderboard-username">' + escapeHtml(user.username) + '</span>' +
                 '</a>' +
+                (user.github_profile_url ? '<a href="' + escapeHtml(user.github_profile_url) + '" target="_blank" rel="noopener" class="github-link" aria-label="GitHub profile of ' + escapeHtml(user.username) + '">GH</a>' : '') +
                 '</td>' +
                 '<td>' + (Number(user.likes) || 0) + '</td>' +
                 '<td>' + (Number(user.posts) || 0) + '</td>' +
                 '<td>' + (Number(user.solutions) || 0) + '</td>' +
-                '<td class="leaderboard-score">' + (Number(user.score) || 0) + '</td>' +
+                '<td>' + (Number(user.github_issues) || 0) + '</td>' +
+                '<td>' + (Number(user.github_prs) || 0) + '</td>' +
+                '<td>' + (Number(user.github_reviews) || 0) + '</td>' +
+                '<td class="leaderboard-score">' + (Number(user.total_score) || Number(user.score) || 0) + '</td>' +
                 '</tr>'
             );
         }).join('');
@@ -123,7 +135,7 @@
 
     function renderLeaderboard(period) {
         var users = leaderboardData[period] || [];
-        var hasActivity = users.some(function (u) { return u.score > 0; });
+        var hasActivity = users.some(function (u) { return (u.total_score || u.score || 0) > 0; });
         var emptyState = document.getElementById('leaderboard-empty-state');
         var podium = document.getElementById('leaderboard-podium');
         var wrapper = document.querySelector('.leaderboard-wrapper');
