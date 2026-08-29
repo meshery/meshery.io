@@ -78,38 +78,22 @@ published: true
 </style>
 
 {% comment %}
-  Curated display order of the extension categories. Any category present in the
-  collection but missing from this list is appended in discovery order, so a new
-  extension type still renders without a change here.
-{% endcomment %}
-{% assign ordered_types = "GitOps,Configuration,Collaboration,Academy,Lifecycle,Performance" | split: "," %}
-{% assign extra_types = "" | split: "" %}
-{% for ext in site.extensions %}
-  {% if ext.type %}
-    {% unless ordered_types contains ext.type or extra_types contains ext.type %}
-      {% assign extra_types = extra_types | push: ext.type %}
-    {% endunless %}
-  {% endif %}
-{% endfor %}
-{% assign all_types = ordered_types | concat: extra_types %}
-
-{% comment %}
   Keep only the categories that have something to list, so the navigator never
-  links to an empty section.
+  links to an empty section, and order them alphabetically to match the A-Z sort
+  the page loads with. A new extension type therefore renders without a change
+  here.
 {% endcomment %}
 {% assign categories = "" | split: "" %}
-{% for type in all_types %}
-  {% assign type_count = 0 %}
-  {% for extension in site.extensions %}
-    {% if extension.type == type %}{% if extension.extensionInfo or extension.patternInfo and extension.status !=
-    "coming-soon" %}
-    {% assign type_count = type_count | plus: 1 %}
-    {% endif %}{% endif %}
-  {% endfor %}
-  {% if type_count > 0 %}
-    {% assign categories = categories | push: type %}
+{% for extension in site.extensions %}
+  {% if extension.extensionInfo or extension.patternInfo and extension.status != "coming-soon" %}
+    {% if extension.type %}
+      {% unless categories contains extension.type %}
+        {% assign categories = categories | push: extension.type %}
+      {% endunless %}
+    {% endif %}
   {% endif %}
 {% endfor %}
+{% assign categories = categories | sort_natural %}
 
 
 <div class="section-container">
@@ -249,42 +233,56 @@ published: true
   );
   const searchInput = document.getElementById("search");
   const notFound = document.getElementById("not-found");
+  const sortSelect = document.getElementById("sort");
+  const resultsContainer = document.querySelector(".extensions-results");
 
   // Sorting is applied within each category so that the section dividers keep
-  // describing the cards underneath them.
-  document.getElementById("sort").addEventListener("change", function () {
-    var sortValue = this.value;
+  // describing the cards underneath them, and to the sections themselves so the
+  // categories follow the same order as the cards.
+  function applySort(sortValue) {
+    if (sortValue !== "asc" && sortValue !== "desc") return;
+
+    var direction = sortValue === "asc" ? 1 : -1;
 
     categorySections.forEach(function (section) {
       var cardsContainer = section.querySelector(".row");
-      var cards = cardsContainer.querySelectorAll(".extensionCard");
+      var catalog = Array.from(
+        cardsContainer.querySelectorAll(".extensionCard")
+      );
 
-      var catalog = Array.from(cards);
-
-      if (sortValue === "asc") {
-        catalog = catalog.sort(function (a, b) {
-          var aComingSoon = a.getAttribute("status") === "coming-soon";
-          var bComingSoon = b.getAttribute("status") === "coming-soon";
-          if (aComingSoon !== bComingSoon) {
-            return aComingSoon ? 1 : -1;
-          }
-          return a.getAttribute("filter").localeCompare(b.getAttribute("filter"));
-        });
-      } else if (sortValue === "desc") {
-        catalog = catalog.sort(function (a, b) {
-          var aComingSoon = a.getAttribute("status") === "coming-soon";
-          var bComingSoon = b.getAttribute("status") === "coming-soon";
-          if (aComingSoon !== bComingSoon) {
-            return aComingSoon ? 1 : -1;
-          }
-          return b.getAttribute("filter").localeCompare(a.getAttribute("filter"));
-        });
-      }
+      catalog.sort(function (a, b) {
+        var aComingSoon = a.getAttribute("status") === "coming-soon";
+        var bComingSoon = b.getAttribute("status") === "coming-soon";
+        if (aComingSoon !== bComingSoon) {
+          return aComingSoon ? 1 : -1;
+        }
+        return (
+          direction *
+          a.getAttribute("filter").localeCompare(b.getAttribute("filter"))
+        );
+      });
 
       catalog.forEach(function (extension) {
         cardsContainer.appendChild(extension);
       });
     });
+
+    Array.from(categorySections)
+      .sort(function (a, b) {
+        return (
+          direction *
+          a
+            .getAttribute("data-category")
+            .localeCompare(b.getAttribute("data-category"))
+        );
+      })
+      .forEach(function (section) {
+        resultsContainer.appendChild(section);
+      });
+  }
+
+  sortSelect.addEventListener("change", function () {
+    applySort(this.value);
   });
 
   function applyExtensionFilters() {
@@ -479,13 +477,14 @@ published: true
     );
   })();
 
-  const extensionCards = document.querySelectorAll(".extensionCard");
   document.addEventListener("DOMContentLoaded", () => {
 
     categoryCheckboxes.forEach((box) => {
       box.checked = false;
     });
 
+    sortSelect.value = "asc";
+    applySort(sortSelect.value);
     applyExtensionFilters();
   });
 </script>
