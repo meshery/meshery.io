@@ -10,9 +10,9 @@ const GITHUB_API = 'https://api.github.com';
 const GITHUB_ORG = 'meshery';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_ACCESS_TOKEN || '';
 const PERIOD_SINCE = {
-  weekly:  new Date(Date.now() - 7  * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
+  weekly: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
   monthly: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
-  all:     null
+  all: null
 };
 
 async function fetchUsers(period) {
