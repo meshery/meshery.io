@@ -6,14 +6,20 @@ redirect_from:
 published: true
 title: Blog Categories
 ---
-<div style="display: flex; justify-content: center;"><div style="max-width: 50%">
-<ul>Category: 
-  {% assign sorted_categories = site.categories | sort %}
-  
+
+{% assign sorted_categories = site.categories | sort %}
+
+<h1 class="category-page-heading">Blog Categories</h1>
+<p class="category-page-subtext">Browse {{ site.posts.size }} Meshery blog posts by topic.</p>
+
+<ul class="category-grid">
   {% for category in sorted_categories %}
-    <li>
-        <a href="{{ site.baseurl }}/category/{{ category[0] | slugify }}"> {{ category[0] | downcase }} ({{ category[1].size }})</a>
+    {% assign category_slug = category[0] | slugify %}
+    <li class="category-card">
+      <a href="{{ '/blog/category/' | append: category_slug | append: '/' | relative_url }}">
+        <span class="category-card-name">{{ category[0] | replace: '-', ' ' }}</span>
+        <span class="category-card-count">{{ category[1].size }} {% if category[1].size == 1 %}post{% else %}posts{% endif %}</span>
+      </a>
     </li>
   {% endfor %}
 </ul>
-</div></div>
