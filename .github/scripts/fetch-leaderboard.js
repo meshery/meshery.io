@@ -54,11 +54,100 @@ function buildLeaderboard(items) {
       solutions: item.solutions || 0,
       score: computeScore(item)
     }))
-    .sort((a, b) => b.score - a.score)
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return a.username.localeCompare(b.username);
+    })
     .map((user, index) => ({
       ...user,
       rank: index + 1
     }));
+}
+
+function sleep(ms) {
+  return new Promise(r => setTimeout(r, ms));
+}
+
+async function githubFetch(url, attempt) {
+  if (attempt === undefined) attempt = 0;
+  const headers = {
+    'User-Agent': 'meshery-leaderboard-bot/1.0',
+    'Accept': 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28'
+  };
+  if (GITHUB_TOKEN) {
+    headers['Authorization'] = `Bearer ${GITHUB_TOKEN}`;
+  }
+  const res = await fetch(url, { headers });
+
+  if (res.status === 404) return null;
+
+  // Handle rate limiting
+  const isRateLimited =
+    res.status === 429 ||
+    (res.status === 403 && res.headers.get('x-ratelimit-remaining') === '0');
+
+  if (isRateLimited && attempt < 2) {
+    const retryAfter = res.headers.get('retry-after');
+    const resetAt = res.headers.get('x-ratelimit-reset');
+    let waitMs;
+    if (retryAfter) {
+      waitMs = (parseInt(retryAfter, 10) + 2) * 1000;
+    } else if (resetAt) {
+      waitMs = Math.max(0, (parseInt(resetAt, 10) * 1000) - Date.now()) + 2000;
+    } else {
+      waitMs = 60000; // default: wait 60 seconds
+    }
+    console.warn(`Rate limited by GitHub. Waiting ${Math.round(waitMs / 1000)}s before retry...`);
+    await sleep(waitMs);
+    return githubFetch(url, attempt + 1);
+  }
+
+  if (!res.ok) throw new Error(`GitHub API error: ${res.status} ${url}`);
+  return res.json();
+}
+
+async function fetchGitHubStats(username, since) {
+  const user = await githubFetch(`${GITHUB_API}/users/${encodeURIComponent(username)}`);
+  if (!user) return null;
+
+  await sleep(120);
+
+  const sinceFilterForIssues = since ? `+created:>=${since}` : '';
+  const sinceFilterForReviews = since ? `+merged:>=${since}` : '';
+
+  const issuesData = await githubFetch(
+    `${GITHUB_API}/search/issues?q=author:${encodeURIComponent(username)}+org:${GITHUB_ORG}+type:issue${sinceFilterForIssues}&per_page=1`
+  );
+  const issues = issuesData ? (issuesData.total_count || 0) : 0;
+  await sleep(120);
+
+  const prsData = await githubFetch(
+    `${GITHUB_API}/search/issues?q=author:${encodeURIComponent(username)}+org:${GITHUB_ORG}+is:pr${sinceFilterForIssues}&per_page=1`
+  );
+  const prs = prsData ? (prsData.total_count || 0) : 0;
+  await sleep(120);
+
+  const reviewsData = await githubFetch(
+    `${GITHUB_API}/search/issues?q=reviewed-by:${encodeURIComponent(username)}+org:${GITHUB_ORG}+is:pr${sinceFilterForReviews}&per_page=1`
+  );
+  const prsReviewedCount = reviewsData ? (reviewsData.total_count || 0) : 0;
+  await sleep(120);
+
+  const commentReviewsData = await githubFetch(
+    `${GITHUB_API}/search/issues?q=commenter:${encodeURIComponent(username)}+org:${GITHUB_ORG}+is:pr${sinceFilterForReviews}&per_page=1`
+  );
+  const reviewCommentsCount = commentReviewsData ? (commentReviewsData.total_count || 0) : 0;
+  const reviews = prsReviewedCount + reviewCommentsCount;
+
+  return {
+    github_username: user.login,
+    github_profile_url: user.html_url,
+    github_issues: issues,
+    github_prs: prs,
+    github_reviews: reviews,
+    github_score: (issues * 2) + (prs * 3) + (reviews * 2)
+  };
 }
 
 async function buildAllPeriods() {
@@ -80,17 +169,32 @@ async function buildAllPeriods() {
       ...periods.all.map(u => u.username)
     ])
   ];
-  const githubCache = {};
 
   console.log(`Fetching GitHub stats for ${allUsernames.length} users...`);
 
+  const userCache = {}; // keyed by username -> { login, html_url } or null
+  for (const username of allUsernames) {
+    try {
+      const user = await githubFetch(`${GITHUB_API}/users/${encodeURIComponent(username)}`);
+      userCache[username] = user;
+      await sleep(100);
+    } catch (err) {
+      console.warn(`GitHub user lookup failed for ${username}: ${err.message}`);
+      userCache[username] = null;
+    }
+  }
+
+  const githubCache = {}; // keyed by "username:period"
   for (const period of PERIODS) {
     const since = PERIOD_SINCE[period];
     for (const username of allUsernames) {
+      if (!userCache[username]) {
+        githubCache[`${username}:${period}`] = null;
+        continue;
+      }
       const cacheKey = `${username}:${period}`;
-      if (githubCache[cacheKey] !== undefined) continue;
       try {
-        const stats = await fetchGitHubStats(username, since);
+        const stats = await fetchPeriodStats(username, since, userCache[username]);
         githubCache[cacheKey] = stats;
         console.log(
           `GitHub stats for ${username} (${period}):`,
@@ -99,7 +203,7 @@ async function buildAllPeriods() {
             : 'not found on GitHub'
         );
       } catch (err) {
-        console.warn(`Failed GitHub stats for ${username} (${period}): ${err.message}`);
+        console.warn(`Failed period stats for ${username} (${period}): ${err.message}`);
         githubCache[cacheKey] = null;
       }
       await sleep(200);
