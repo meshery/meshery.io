@@ -85,7 +85,8 @@ async function githubFetch(url, attempt) {
   // Handle rate limiting
   const isRateLimited =
     res.status === 429 ||
-    (res.status === 403 && res.headers.get('x-ratelimit-remaining') === '0');
+    (res.status === 403 && res.headers.get('x-ratelimit-remaining') === '0') ||
+    (res.status === 403 && res.headers.get('retry-after') !== null);
 
   if (isRateLimited && attempt < 2) {
     const retryAfter = res.headers.get('retry-after');
