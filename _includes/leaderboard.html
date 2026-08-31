@@ -155,34 +155,6 @@
         renderLeaderboard(currentPeriod);
     });
 
-    var scoringToggle = document.getElementById('scoring-info-toggle');
-    var scoringPopover = document.getElementById('scoring-info-popover');
-
-    if (scoringToggle && scoringPopover) {
-        scoringToggle.addEventListener('click', function (e) {
-            e.stopPropagation();
-            var isOpen = scoringPopover.classList.toggle('is-open');
-            scoringToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            scoringPopover.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-        });
-
-        document.addEventListener('click', function (e) {
-            if (!scoringPopover.contains(e.target) && e.target !== scoringToggle) {
-                scoringPopover.classList.remove('is-open');
-                scoringToggle.setAttribute('aria-expanded', 'false');
-                scoringPopover.setAttribute('aria-hidden', 'true');
-            }
-        });
-
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') {
-                scoringPopover.classList.remove('is-open');
-                scoringToggle.setAttribute('aria-expanded', 'false');
-                scoringPopover.setAttribute('aria-hidden', 'true');
-            }
-        });
-    }
-
     function filterLeaderboard() {
         var input = document.getElementById('leaderboard-filter').value.toLowerCase();
         var visibleCount = 0;
