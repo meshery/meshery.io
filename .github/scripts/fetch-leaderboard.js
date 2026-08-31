@@ -24,8 +24,8 @@ async function fetchUsers(period) {
 
 function computeScore(item) {
   return (item.post_count || 0) +
-        ((item.likes_received || 0) * 2) +
-        ((item.solutions || 0) * 3);
+    ((item.likes_received || 0) * 2) +
+    ((item.solutions || 0) * 3);
 }
 
 function buildLeaderboard(items) {
@@ -41,7 +41,26 @@ function buildLeaderboard(items) {
       solutions: item.solutions || 0,
       score: computeScore(item)
     }))
-    .sort((a, b) => b.score - a.score)
+    .sort((a, b) => {
+      // Primary: score, descending
+      if (b.score !== a.score) return b.score - a.score;
+
+      // Tied on score. If everyone here has zero score, there's no
+      // activity signal to break the tie with — go alphabetical.
+      if (a.score === 0 && b.score === 0) {
+        return a.username.localeCompare(b.username);
+      }
+
+      // Otherwise break the tie using the same priority the scoring
+      // formula itself uses: solutions (x3) > likes (x2) > posts (x1).
+      if (b.solutions !== a.solutions) return b.solutions - a.solutions;
+      if (b.likes !== a.likes) return b.likes - a.likes;
+      if (b.posts !== a.posts) return b.posts - a.posts;
+
+      // Still fully tied — fall back to alphabetical so the order is
+      // deterministic no matter what order Discourse returned rows in.
+      return a.username.localeCompare(b.username);
+    })
     .map((user, index) => ({
       ...user,
       rank: index + 1
