@@ -59,10 +59,9 @@
         <h3 class="modal-h3">Description</h3>
         {% assign patternInfoLength = pattern.patternInfo | size %} {% assign
         patternCaveatsLength = pattern.patternCaveats | size %}
-        <p class="content-toggle contentdata">
-          {{pattern.patternInfo | url_decode | replace: '\\n', '<br />' |
-          replace: '\n', '<br />' }}
-        </p>
+        <div class="content-toggle contentdata">
+          {{pattern.patternInfo | url_decode | markdownify }}
+        </div>
         {% if patternInfoLength > 320 %}
         <span class="read-more" href="read-more.html"
           >{% include expand.html %}</span
@@ -71,10 +70,9 @@
       </div>
       <div class="modal-section">
         <h3 class="modal-h3">Caveats and Considerations</h3>
-        <p class="contentdata">
-          {{pattern.patternCaveats | url_decode | replace: '\\n', '<br />' |
-          replace: '\n', '<br />'}}
-        </p>
+        <div class="contentdata">
+          {{pattern.patternCaveats | url_decode | markdownify }}
+        </div>
         {% if patternCaveatsLength > 320 %}
         <span class="read-more" href="read-more.html"
           >{% include expand.html %}</span
@@ -84,19 +82,17 @@
       {% else %}
       <div class="modal-section">
         <h3 class="modal-h3">What this filter does</h3>
-        <p class="content-toggle contentdata">
-          {{pattern.filterInfo | url_decode | replace: '\\n', '<br />' |
-          replace: '\n', '<br />'}}
-        </p>
+        <div class="content-toggle contentdata">
+          {{pattern.filterInfo | url_decode | markdownify }}
+        </div>
         <span class="read-more">...read more</span>
       </div>
       <div class="modal-section">
         <h3 class="modal-h3">Caveats and Considerations</h3>
         {% assign filterCaveatsLength = pattern.patternCaveats | size %}
-        <p class="contentdata">
-          {{pattern.filterCaveats | url_decode | replace: '\\n', '<br />' |
-          replace: '\n', '<br />'}}
-        </p>
+        <div class="contentdata">
+          {{pattern.filterCaveats | url_decode | markdownify }}
+        </div>
         {% if filterCaveatsLength > 320 %}
         <span class="read-more" href="read-more.html"
           >{% include expand.html %}</span
