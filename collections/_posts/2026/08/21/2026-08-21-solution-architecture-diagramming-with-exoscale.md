@@ -1,6 +1,6 @@
 ---
 title: "Solution architecture diagramming with Exoscale"
-subheading: "Announcing a new 'Exoscale Icons' model"
+subheading: "Announcing the new Exoscale (Crossplane) model"
 date: 2026-08-21 09:00:00 -0500
 author: Meshery Authors
 categories:
@@ -48,7 +48,7 @@ The newly registered model contains **9 components** representing Exoscale’s m
 * **`iam-key`**: Configure Identity and Access Management credentials to secure resource operations.
 
 ### Configuration
-* **`provider-config`**: Configure connection credentials to link Meshery with your Exoscale account via Crossplane.
+* **`provider-config`**: Configure connection credentials for the Crossplane provider to authenticate and manage resources on Exoscale.
 * **`provider-config-usage`**: Track provider configuration utilization across different resources.
 
 These components are generated and registered in the Meshery Registry, making them available as design elements on the Meshery Canvas.
@@ -71,15 +71,15 @@ In this architecture:
 
 ## Why Model Extensibility Matters
 
-By bringing Exoscale components into Meshery Canvas, teams can collaborate visually to plan their infrastructure changes while maintaining structural integrity. Behind the scenes, Meshery validates these visual configurations against the schemas defined by the Exoscale Crossplane Provider. This ensures that configuration errors are caught during the design phase before any deployment pipeline runs.
+By bringing Exoscale components into Meshery Canvas, teams can collaborate visually to plan their infrastructure changes while maintaining structural integrity. Behind the scenes, Meshery validates these visual configurations against the schemas defined by the Exoscale Crossplane Provider. This helps identify schema and structural configuration errors during the design phase before any deployment pipeline runs.
 
 ## Explore Exoscale Further
 
 To learn more about the integration and start designing:
 * Check out the [Meshery Exoscale Integration Documentation](https://docs.meshery.io/extensibility/integrations/crossplane-provider-exoscale).
 * Explore the official [Exoscale Homepage](https://exoscale.com/) to learn about their European cloud infrastructure services.
-* Visit the [Exoscale Academy](https://exoscale.layer5.io/academy) to dive deeper into managed services, Kubernetes orchestration, and cloud certifications.
+* Visit the [Exoscale Academy](https://www.exoscale.com/academy/) to dive deeper into managed services, Kubernetes orchestration, and cloud certifications.
 
 ---
-*Open Meshery Canvas today to start modeling your Exoscale cloud native architectures!*
+*Open Meshery Canvas today to start modeling your Exoscale cloud-native architectures!*
 
