@@ -4,13 +4,6 @@ const path = require('path');
 const BASE_URL = 'https://discuss.meshery.io/directory_items.json';
 const PERIODS = ['weekly', 'monthly', 'yearly', 'all'];
 
-/**
- * Fetches user directory items for a given leaderboard period from Discourse API.
- * Uses Discourse's pre-aggregated directory items endpoint.
- *
- * @param {string} period - The timeframe period ('weekly', 'monthly', 'yearly', 'all').
- * @returns {Promise<Array>} Array of user directory items.
- */
 async function fetchUsers(period) {
   const headers = {
     'User-Agent': 'meshery-leaderboard-bot/1.0',
@@ -29,25 +22,12 @@ async function fetchUsers(period) {
   return data.directory_items;
 }
 
-/**
- * Computes the total weighted leaderboard score for a user item.
- * Formula: posts + (likes * 2) + (solutions * 3)
- *
- * @param {Object} item - User directory item.
- * @returns {number} Weighted score.
- */
 function computeScore(item) {
   return (item.post_count || 0) +
         ((item.likes_received || 0) * 2) +
         ((item.solutions || 0) * 3);
 }
 
-/**
- * Transforms raw Discourse directory items into ranked leaderboard entries.
- *
- * @param {Array} items - Raw directory items.
- * @returns {Array} Ranked user objects.
- */
 function buildLeaderboard(items) {
   return (items || [])
     .filter(item => item && item.user && item.user.username && !item.user.username.startsWith('anon'))
@@ -68,11 +48,6 @@ function buildLeaderboard(items) {
     }));
 }
 
-/**
- * Fetches and builds leaderboard entries for all configured periods.
- *
- * @returns {Promise<Object>} Map of period keys to arrays of ranked user objects.
- */
 async function buildAllPeriods() {
   const periods = {};
 
@@ -88,11 +63,6 @@ async function buildAllPeriods() {
   return periods;
 }
 
-/**
- * Saves generated leaderboard data to _data/leaderboard.json.
- *
- * @param {Object} periods - Compiled periods leaderboard map.
- */
 function saveJSON(periods) {
   const output = {
     last_updated: new Date().toISOString(),
@@ -109,9 +79,6 @@ function saveJSON(periods) {
   }
 }
 
-/**
- * Main execution entry point for updating leaderboard data.
- */
 async function main() {
   try {
     const periods = await buildAllPeriods();
