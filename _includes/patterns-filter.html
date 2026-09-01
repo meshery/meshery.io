@@ -471,22 +471,19 @@
   // to remove duplicates, a set is used
   cardTechnology = Array.from(new Set(cardTechnology));
   // For creating a list of checkboxes for Technologies section
+  const normalizeKey = s => String(s || '').toLowerCase().replace(/[\s_-]+/g, '');
+
   for (let i = 0; i < data.length; i++) {
     const count = cardCompatibility.filter(
-      (item) => item === data[i].name
+      (item) => normalizeKey(item) === normalizeKey(data[i].name)
     ).length;
-    // Skip adding the filter to list if it is not used in any of the pattern cards
-    // Skip adding the filter to list if it is already added to the list
     if (count === 0 || filterEntries.includes(data[i].name)) continue;
 
-    // Add the filter to list
     filterEntries.push(data[i].name);
 
-    // Create nodes
     const inputContainer = document.createElement("div");
     inputContainer.className = "input-container";
     inputContainer.dataset.count = count;
-    // Here the categories are generated with a "checkbox" input type
     const input = document.createElement("input");
     input.type = "checkbox";
     input.name = data[i].name;
@@ -495,7 +492,6 @@
     if (globalTechnologyList.includes(data[i].name)) {
       input.checked = true;
     }
-    // When technology checkbox is checked or unchecked, updateTechnologyList function is called, followed by showFilterCards function
     input.onclick = function () {
       updateTechnologyList(data[i].name);
       showFilterCards();
@@ -514,9 +510,6 @@
     container.appendChild(inputContainer);
   }
 
-  // This function checks if the gloabalTechnologyList contains the value, and updates the list accordingly..
-  // When the user selects a technology, it is not present in the globalTechnologyList, so the else part is called and the technology is pushed in the globalTechnologyList
-  // When the user deselcts the technology, the list is filtered to the cards that don't contain that technology, that is, the value that is unchecked is removed from the list.
   function updateTechnologyList(value) {
     if (globalTechnologyList.includes(value)) {
       globalTechnologyList = globalTechnologyList.filter(
@@ -528,15 +521,11 @@
     saveFilter('technologies', globalTechnologyList);
   }
 
-  // This function updates the category list
   function updateCategoryList(value) {
-    // When user checks a category, that category category is pushed in globalCategoryList array which holds the categories selected
     if (document.getElementById(value).checked) {
       globalCategoryList.push(value);
     } else {
-      // When user unchecks a category, it is removed from the array globalCategoryList
       globalCategoryList = globalCategoryList.filter((item) => item !== value);
-      // if after removing a category, no category remains then we empty the globalCategoryList (just a safety step)
       if (globalCategoryList.length === 0) {
         globalCategoryList = [];
       }
@@ -544,109 +533,134 @@
     saveFilter('categories', globalCategoryList);
   }
 
-// Function called when user clicks on any of Technology checkboxes or Category Boxes
 function showFilterCards() {
-  // Get all pattern cards once
   const patternCards = Array.from(document.querySelectorAll('.patternCard'));
-  const itemsPerPage = 11; // Number of items per page
-  let currentPage = 0; // Current page index
-  
-  // First, filter the cards that match our criteria
+  const customCard = document.querySelector('.custom-design-card');
+  const itemsPerPage = 11;
+  let currentPage = 0;
+
+  const searchInput = document.getElementById("search");
+  const searchTerm = (searchInput ? searchInput.value : "").trim().toLowerCase();
+  const searchNormalized = normalizeKey(searchTerm);
+
+  const normalizedSelectedTechs = globalTechnologyList.map(normalizeKey);
+  const normalizedSelectedCats = globalCategoryList.map(normalizeKey);
+
   const matchingCards = patternCards.filter(card => {
-    const type = card.getAttribute("type")?.toLowerCase();
+    const type = card.getAttribute("type") || "";
+    const filterName = card.getAttribute("filter") || "";
     const technologyAttr = card.getAttribute("technology");
-    
-    // Parse technologies once
-    const technologies = technologyAttr ? JSON.parse(technologyAttr) : [];
-    
-    // Check if card matches all filter criteria
-    const showCardTech = globalTechnologyList.length === 0 || 
-                        globalTechnologyList.some(tech => technologies.includes(tech));
-    
-    const showCardCat = globalCategoryList.length === 0 || 
-                       globalCategoryList.some(cat => type.includes(cat));
-    
-    // Return true if card matches all criteria
-    return showCardTech && showCardCat;
+
+    let technologies = [];
+    if (technologyAttr) {
+      try {
+        technologies = JSON.parse(technologyAttr);
+      } catch (e) {
+        technologies = [];
+      }
+    }
+
+    const normalizedCardType = normalizeKey(type);
+    const normalizedCardTechs = technologies.map(normalizeKey);
+
+    const showCardCat = normalizedSelectedCats.length === 0 || 
+                        normalizedSelectedCats.some(cat => normalizedCardType.includes(cat));
+
+    const showCardTech = normalizedSelectedTechs.length === 0 || 
+                         normalizedSelectedTechs.some(tech => normalizedCardTechs.includes(tech));
+
+    const matchesSearch = !searchTerm || 
+                          normalizeKey(filterName).includes(searchNormalized) || 
+                          normalizedCardType.includes(searchNormalized) || 
+                          normalizedCardTechs.some(t => t.includes(searchNormalized));
+
+    return showCardCat && showCardTech && matchesSearch;
   });
-  
-  // Hide all cards first (batch operation)
+
   patternCards.forEach(card => {
     card.style.display = "none";
   });
-  
-  // Check if filters are active
-  const noFiltersActive = globalTechnologyList.length === 0 && 
-                         globalCategoryList.length === 0;
-  
-  // Update "not found" message
+
   const noCard = document.getElementById("not-found");
-  noCard.style.display = matchingCards.length > 0 ? "none" : "block";
-  
-  // Get pagination elements
+  if (noCard) {
+    noCard.style.display = matchingCards.length > 0 ? "none" : "block";
+  }
+
   const paginationButtons = document.querySelector(".pagination");
   const prevButton = document.getElementById("designs-prev") || document.getElementById("models-prev") || document.getElementById("filters-prev");
   const nextButton = document.getElementById("designs-next") || document.getElementById("models-next") || document.getElementById("filters-next");
+  const pageInfo = prevButton ? prevButton.parentElement.querySelector(".page-info") : null;
 
-  
-  // Function to update pagination display
   function updatePagination() {
     const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
-    prevButton.disabled = currentPage === 0;
-    nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
+    if (prevButton) {
+      prevButton.disabled = currentPage === 0;
+    }
+    if (nextButton) {
+      nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
+    }
 
-  const pageInfo = prevButton.parentElement.querySelector(".page-info");
-    
-  if (pageInfo) {
-    if (totalPages > 0) {
-      pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
-      pageInfo.style.display = "inline";
-    } else {
-      pageInfo.style.display = "none";
+    if (pageInfo) {
+      if (totalPages > 0) {
+        pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+        pageInfo.style.display = "inline";
+      } else {
+        pageInfo.style.display = "none";
+      }
     }
   }
 
-  }
-  
-  // Function to show the current page of cards
   function showCardsForPage() {
-    // Calculate range for current page
     const start = currentPage * itemsPerPage;
     const end = Math.min(start + itemsPerPage, matchingCards.length);
-    
-    // Show only cards for current page
-    for (let i = 0; i < matchingCards.length; i++) {
-      matchingCards[i].style.display = (i >= start && i < end) ? "block" : "none";
+
+    patternCards.forEach(card => {
+      card.style.display = "none";
+    });
+
+    for (let i = start; i < end; i++) {
+      if (matchingCards[i]) {
+        matchingCards[i].style.display = "block";
+      }
     }
-    
+
+    if (customCard) {
+      customCard.style.display = (matchingCards.length > 0 && currentPage === 0) ? "block" : "none";
+    }
+
     updatePagination();
   }
-  
-  // Set up pagination handlers
-  prevButton.onclick = function() {
-    if (currentPage > 0) {
-      currentPage--;
-      showCardsForPage();
-    }
-  };
-  
-  nextButton.onclick = function() {
-    const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
-    if (currentPage + 1 < totalPages) {
-      currentPage++;
-      showCardsForPage();
-    }
-  };
-  
-  // Initialize pagination for both filtered and unfiltered cases
-  paginationButtons.style.display = matchingCards.length > itemsPerPage ? "flex" : "none";
-  
-  // Show initial page
+
+  if (prevButton) {
+    prevButton.onclick = function() {
+      if (currentPage > 0) {
+        currentPage--;
+        showCardsForPage();
+      }
+    };
+  }
+
+  if (nextButton) {
+    nextButton.onclick = function() {
+      const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
+      if (currentPage + 1 < totalPages) {
+        currentPage++;
+        showCardsForPage();
+      }
+    };
+  }
+
+  if (paginationButtons) {
+    paginationButtons.style.display = matchingCards.length > itemsPerPage ? "flex" : "none";
+  }
+
   currentPage = 0;
   showCardsForPage();
-  
-  return matchingCards.length; // Return count of matching cards
+
+  return matchingCards.length;
 }
+
+window.applyCatalogFilters = showFilterCards;
 
 showFilterCards();
 </script>
