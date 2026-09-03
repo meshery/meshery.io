@@ -358,33 +358,21 @@
   const cardCompatibility = [];
   // cardType stores the names of all categories (unique)
   let cardType = new Set();
-  // cardPatternType stores the names of all pattern types (unique): currently three
-  // model, design and wasmfilter
-  let cardPatternType = new Set();
   // cardTechnology stores the set of all technologies (unqiue)
   let cardTechnology = new Set();
   // This variable stores the count of each category in an object which looks like a key value pair
-    // example: {"deployment": 102, "security": 10, ...} and so on
-    const categoryCardCount = {};
-    const patternTypeCardCount = {};
+  // example: {"deployment": 102, "security": 10, ...} and so on
+  const categoryCardCount = {};
 
-  // Loop over all pattern cards to get there compatibility, type and technology so we can make a unique list out of it
-    for (let i = 0; i < patternCards.length; i++) {
-      const type = patternCards[i].getAttribute("type");
+  // Loop over all pattern cards to get their compatibility, type and technology so we can make a unique list out of it
+  for (let i = 0; i < patternCards.length; i++) {
+    const type = patternCards[i].getAttribute("type");
 
-      const patternType = patternCards[i].getAttribute("patternType");
-
-      if (type && type !== "wasm filter") {
-        const lowerCaseType = type?.toLowerCase();
-        cardType.add(lowerCaseType);
+    if (type && type !== "wasm filter") {
+      const lowerCaseType = type?.toLowerCase();
+      cardType.add(lowerCaseType);
       categoryCardCount[lowerCaseType] =
         (categoryCardCount[lowerCaseType] || 0) + 1; // count cards that have a certain category
-    }
-    if (patternType) {
-      const lowerCasePatternType = patternType?.toLowerCase();
-      cardPatternType.add(lowerCasePatternType);
-      patternTypeCardCount[lowerCasePatternType] =
-        (patternTypeCardCount[lowerCasePatternType] || 0) + 1;
     }
 
     const technology = patternCards[i].getAttribute("technology");
@@ -400,37 +388,6 @@
 
   cardType = Array.from(cardType);
   cardTechnology = Array.from(cardTechnology);
-    cardPatternType = Array.from(cardPatternType);
-
-    // for (let i = 0; i < cardPatternType.length; i++) {
-    //   const count = patternTypeCardCount[cardPatternType[i]];
-    //   const inputContainer = document.createElement("div");
-    //   inputContainer.className = "input-container";
-
-    //   const input = document.createElement("input");
-    //   input.type = "checkbox";
-    //   input.name = "patterntype";
-    //   input.value = cardPatternType[i];
-    //   input.id = cardPatternType[i];
-
-    //   input.onclick = function () {
-    //     updatePatternTypeList(cardPatternType[i]);
-    //     showFilterCards();
-    //   };
-    //   if (globalPatternTypeList.includes(cardPatternType[i])) {
-    //     input.checked = true;
-    //   }
-    //   inputContainer.appendChild(input);
-    //   const label = document.createElement("label");
-    //   label.innerHTML = `<div class="name">${cardPatternType[i].replace(
-    //     /-/g,
-    //     " "
-    //   )}</div><div class="badge">${count}</div>`;
-    //   label.style.height = "fit-content";
-    //   label.setAttribute("for", cardPatternType[i]);
-    //   inputContainer.appendChild(label);
-    //   patternTypeContainer.appendChild(inputContainer);
-    // }
 
   // For creating a list of checkboxes for Categories section
     for (let i = 0; i < cardType.length; i++) {
@@ -577,10 +534,6 @@ function showFilterCards() {
     return showCardCat && showCardTech && matchesSearch;
   });
 
-  patternCards.forEach(card => {
-    card.style.display = "none";
-  });
-
   const noCard = document.getElementById("not-found");
   if (noCard) {
     noCard.style.display = matchingCards.length > 0 ? "none" : "block";
@@ -662,7 +615,11 @@ function showFilterCards() {
 
 window.applyCatalogFilters = showFilterCards;
 
-showFilterCards();
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", showFilterCards, { once: true });
+} else {
+  showFilterCards();
+}
 </script>
 <script>
   // Sort-by-count controls for the Technologies and Categories filter sections.
