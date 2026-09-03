@@ -56,11 +56,24 @@
     }};
     var currentPeriod = defaultPeriod || 'weekly';
     var fallbackAvatar = '/assets/images/nav-icons/community.svg';
+    var periodDescriptions = {
+        weekly: { phrase: 'from the past 7 days', switchText: '30-day or all-time' },
+        monthly: { phrase: 'from the past 30 days', switchText: '7-day or all-time' },
+        all: { phrase: 'from all time', switchText: '7-day or 30-day' }
+    };
 
     function escapeHtml(str) {
         var div = document.createElement('div');
         div.textContent = str == null ? '' : String(str);
         return div.innerHTML.replace(/"/g, '&quot;');
+    }
+
+    function updatePeriodDescription(period) {
+        var phraseEl = document.getElementById('leaderboard-period-phrase');
+        var switchEl = document.getElementById('leaderboard-switch-phrase');
+        var config = periodDescriptions[period] || periodDescriptions.weekly;
+        if (phraseEl) phraseEl.textContent = config.phrase;
+        if (switchEl) switchEl.textContent = config.switchText;
     }
 
     function medalClass(rank) {
@@ -123,6 +136,7 @@
 
     function renderLeaderboard(period) {
         var users = leaderboardData[period] || [];
+        updatePeriodDescription(period);
         var hasActivity = users.some(function (u) { return u.score > 0; });
         var emptyState = document.getElementById('leaderboard-empty-state');
         var podium = document.getElementById('leaderboard-podium');
