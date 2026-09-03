@@ -57,9 +57,9 @@
     var currentPeriod = defaultPeriod || 'weekly';
     var fallbackAvatar = '/assets/images/nav-icons/community.svg';
     var periodDescriptions = {
-        weekly: 'from the past 7 days',
-        monthly: 'from the past 30 days',
-        all: 'of all time'
+        weekly: { phrase: 'from the past 7 days', switchText: '30-day or all-time' },
+        monthly: { phrase: 'from the past 30 days', switchText: '7-day or all-time' },
+        all: { phrase: 'from all time', switchText: '7-day or 30-day' }
     };
 
     function escapeHtml(str) {
@@ -69,10 +69,11 @@
     }
 
     function updatePeriodDescription(period) {
-        var descEl = document.getElementById('leaderboard-description');
-        if (!descEl) return;
-        var phrase = periodDescriptions[period] || periodDescriptions.weekly;
-        descEl.innerHTML = 'Celebrating the top contributors on the <a href="https://discuss.meshery.io">Meshery discussion forum</a> ' + phrase + '. Members earn their spot by staying active in the community — starting helpful discussions, sharing replies others find valuable, and solving problems for fellow members. Solved answers count for the most, followed by likes, then posts. Switch periods below to see 30-day or all-time standings.';
+        var phraseEl = document.getElementById('leaderboard-period-phrase');
+        var switchEl = document.getElementById('leaderboard-switch-phrase');
+        var config = periodDescriptions[period] || periodDescriptions.weekly;
+        if (phraseEl) phraseEl.textContent = config.phrase;
+        if (switchEl) switchEl.textContent = config.switchText;
     }
 
     function medalClass(rank) {
