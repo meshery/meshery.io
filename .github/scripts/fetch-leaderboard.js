@@ -108,42 +108,29 @@ async function githubFetch(url, attempt) {
   return res.json();
 }
 
-async function fetchGitHubStats(username, since) {
-  const user = await githubFetch(`${GITHUB_API}/users/${encodeURIComponent(username)}`);
-  if (!user) return null;
-
-  await sleep(120);
-
-  const sinceFilterForIssues = since ? `+created:>=${since}` : '';
-  const sinceFilterForReviews = since ? `+merged:>=${since}` : '';
+async function fetchPeriodStats(username, since, githubUser) {
+  const sinceFilter = since ? `+created:>=${since}` : '';
 
   const issuesData = await githubFetch(
-    `${GITHUB_API}/search/issues?q=author:${encodeURIComponent(username)}+org:${GITHUB_ORG}+type:issue${sinceFilterForIssues}&per_page=1`
+    `${GITHUB_API}/search/issues?q=author:${encodeURIComponent(username)}+org:${GITHUB_ORG}+type:issue${sinceFilter}&per_page=1`
   );
   const issues = issuesData ? (issuesData.total_count || 0) : 0;
   await sleep(120);
 
   const prsData = await githubFetch(
-    `${GITHUB_API}/search/issues?q=author:${encodeURIComponent(username)}+org:${GITHUB_ORG}+is:pr${sinceFilterForIssues}&per_page=1`
+    `${GITHUB_API}/search/issues?q=author:${encodeURIComponent(username)}+org:${GITHUB_ORG}+is:pr${sinceFilter}&per_page=1`
   );
   const prs = prsData ? (prsData.total_count || 0) : 0;
   await sleep(120);
 
   const reviewsData = await githubFetch(
-    `${GITHUB_API}/search/issues?q=reviewed-by:${encodeURIComponent(username)}+org:${GITHUB_ORG}+is:pr${sinceFilterForReviews}&per_page=1`
+    `${GITHUB_API}/search/issues?q=reviewed-by:${encodeURIComponent(username)}+org:${GITHUB_ORG}+is:pr${sinceFilter}&per_page=1`
   );
-  const prsReviewedCount = reviewsData ? (reviewsData.total_count || 0) : 0;
-  await sleep(120);
-
-  const commentReviewsData = await githubFetch(
-    `${GITHUB_API}/search/issues?q=commenter:${encodeURIComponent(username)}+org:${GITHUB_ORG}+is:pr${sinceFilterForReviews}&per_page=1`
-  );
-  const reviewCommentsCount = commentReviewsData ? (commentReviewsData.total_count || 0) : 0;
-  const reviews = prsReviewedCount + reviewCommentsCount;
+  const reviews = reviewsData ? (reviewsData.total_count || 0) : 0;
 
   return {
-    github_username: user.login,
-    github_profile_url: user.html_url,
+    github_username: githubUser.login || '',
+    github_profile_url: githubUser.html_url || '',
     github_issues: issues,
     github_prs: prs,
     github_reviews: reviews,
