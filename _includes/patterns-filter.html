@@ -247,62 +247,70 @@
   <div id="category-div" class="category-div" style="padding-right: 1.25rem;"></div>
 </div>
 <script>
+(function () {
+  var dropButton = document.getElementById("arrow-icon");
+  var isDropdownOpen = true;
 
-  var drop_button = document.getElementById("arrow-icon")
-  var open = true
-  function handleDropdown() {
-    document.getElementById("myDropdown").classList.toggle("show"); 
-    drop_button.style.transform = open ? "rotate(180deg)":"rotate(0deg)"
-    drop_button.style.transition = "transform 0.5s"
-    open = !open
-}
+  // Expose handleDropdown globally since it is called via an onclick attribute
+  window.handleDropdown = function () {
+    document.getElementById("myDropdown").classList.toggle("show");
+    dropButton.style.transform = isDropdownOpen ? "rotate(180deg)" : "rotate(0deg)";
+    dropButton.style.transition = "transform 0.5s";
+    isDropdownOpen = !isDropdownOpen;
+  };
+
   // target elements to toggle
-  var category_p = document.getElementById("category-para");
-  var category_div = document.getElementById("category-div");
-  var comp_p = document.getElementById("compatibility-para");
-  var comp_div = document.getElementById("compatibility-div");
+  var categoryP = document.getElementById("category-para");
+  var categoryDiv = document.getElementById("category-div");
+  var compP = document.getElementById("compatibility-para");
+  var compDiv = document.getElementById("compatibility-div");
+
   // toggler
-  var categotyLink = document.getElementById("category-li");
+  var categoryLink = document.getElementById("category-li");
   var compatibilityLink = document.getElementById("compatibility-li");
 
-
-  if (categotyLink) {
-    categotyLink.addEventListener("click", showCategory);
+  if (categoryLink) {
+    categoryLink.addEventListener("click", showCategory);
   }
   if (compatibilityLink) {
     compatibilityLink.addEventListener("click", showCompatibility);
   }
 
   function showCategory() {
-    category_div.style.display = "flex";
-    category_p.style.display = "grid";
-    comp_p.style.display = "none";
-    comp_div.style.display = "none";
+    if (categoryDiv) categoryDiv.style.display = "flex";
+    if (categoryP) categoryP.style.display = "grid";
+    // compP / compDiv are absent when show_technology="false" (models layout)
+    if (compP) compP.style.display = "none";
+    if (compDiv) compDiv.style.display = "none";
     document.getElementById("myDropdown").classList.toggle("show");
-    drop_button.style.transform = "rotate(0deg)"
-    open = !open
+    dropButton.style.transform = "rotate(0deg)";
+    isDropdownOpen = !isDropdownOpen;
     return;
   }
+
   function showCompatibility() {
-    category_div.style.display = "none";
-    category_p.style.display = "none";
-    comp_p.style.display = "grid";
-    comp_div.style.display = "flex";
+    if (categoryDiv) categoryDiv.style.display = "none";
+    if (categoryP) categoryP.style.display = "none";
+    // compP / compDiv are absent when show_technology="false" (models layout)
+    if (compP) compP.style.display = "grid";
+    if (compDiv) compDiv.style.display = "flex";
     document.getElementById("myDropdown").classList.toggle("show");
-    drop_button.style.transform = "rotate(0deg)"
-    open = !open
+    dropButton.style.transform = "rotate(0deg)";
+    isDropdownOpen = !isDropdownOpen;
     return;
   }
-  function showTechnology() { 
-    comp_p.style.display = "none";
-    comp_div.style.display = "none";
-    category_div.style.display = "none";
-    category_p.style.display = "none";
+
+  function showTechnology() {
+    if (compP) compP.style.display = "none";
+    if (compDiv) compDiv.style.display = "none";
+    if (categoryDiv) categoryDiv.style.display = "none";
+    if (categoryP) categoryP.style.display = "none";
     document.getElementById("myDropdown").classList.toggle("show");
-    drop_button.style.transform = "rotate(0deg)"
-    open = !open
+    dropButton.style.transform = "rotate(0deg)";
+    isDropdownOpen = !isDropdownOpen;
     return;
   }
+})();
 </script>
 <script type="module">
   const pageKey = window.location.pathname;
@@ -475,16 +483,18 @@
   // to remove duplicates, a set is used
   cardTechnology = Array.from(new Set(cardTechnology));
   // For creating a list of checkboxes for Technologies section
-  for (let i = 0; i < data.length; i++) {
-    const count = cardCompatibility.filter(
-      (item) => item === data[i].name
-    ).length;
-    // Skip adding the filter to list if it is not used in any of the pattern cards
-    // Skip adding the filter to list if it is already added to the list
-    if (count === 0 || filterEntries.includes(data[i].name)) continue;
+  // container is absent when show_technology="false" (models layout) — skip the loop entirely
+  if (container) {
+    for (let i = 0; i < data.length; i++) {
+      const count = cardCompatibility.filter(
+        (item) => item === data[i].name
+      ).length;
+      // Skip adding the filter to list if it is not used in any of the pattern cards
+      // Skip adding the filter to list if it is already added to the list
+      if (count === 0 || filterEntries.includes(data[i].name)) continue;
 
-    // Add the filter to list
-    filterEntries.push(data[i].name);
+      // Add the filter to list
+      filterEntries.push(data[i].name);
 
     // Create nodes
     const inputContainer = document.createElement("div");
@@ -585,70 +595,76 @@ function showFilterCards() {
   
   // Update "not found" message
   const noCard = document.getElementById("not-found");
-  noCard.style.display = matchingCards.length > 0 ? "none" : "block";
-  
+  if (noCard) noCard.style.display = matchingCards.length > 0 ? "none" : "block";
+
   // Get pagination elements
   const paginationButtons = document.querySelector(".pagination");
   const prevButton = document.getElementById("designs-prev") || document.getElementById("models-prev") || document.getElementById("filters-prev");
   const nextButton = document.getElementById("designs-next") || document.getElementById("models-next") || document.getElementById("filters-next");
 
-  
   // Function to update pagination display
   function updatePagination() {
     const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
-    prevButton.disabled = currentPage === 0;
-    nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
-
-  const pageInfo = prevButton.parentElement.querySelector(".page-info");
-    
-  if (pageInfo) {
-    if (totalPages > 0) {
-      pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
-      pageInfo.style.display = "inline";
-    } else {
-      pageInfo.style.display = "none";
+    if (prevButton) {
+      prevButton.disabled = currentPage === 0;
+      const pageInfo = prevButton.parentElement.querySelector(".page-info");
+      if (pageInfo) {
+        if (totalPages > 0) {
+          pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+          pageInfo.style.display = "inline";
+        } else {
+          pageInfo.style.display = "none";
+        }
+      }
+    }
+    if (nextButton) {
+      nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
     }
   }
 
-  }
-  
   // Function to show the current page of cards
   function showCardsForPage() {
     // Calculate range for current page
     const start = currentPage * itemsPerPage;
     const end = Math.min(start + itemsPerPage, matchingCards.length);
-    
+
     // Show only cards for current page
     for (let i = 0; i < matchingCards.length; i++) {
       matchingCards[i].style.display = (i >= start && i < end) ? "block" : "none";
     }
-    
+
     updatePagination();
   }
-  
+
   // Set up pagination handlers
-  prevButton.onclick = function() {
-    if (currentPage > 0) {
-      currentPage--;
-      showCardsForPage();
-    }
-  };
-  
-  nextButton.onclick = function() {
-    const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
-    if (currentPage + 1 < totalPages) {
-      currentPage++;
-      showCardsForPage();
-    }
-  };
-  
+  if (prevButton) {
+    prevButton.onclick = function() {
+      if (currentPage > 0) {
+        currentPage--;
+        showCardsForPage();
+      }
+    };
+  }
+
+  if (nextButton) {
+    nextButton.onclick = function() {
+      const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
+      if (currentPage + 1 < totalPages) {
+        currentPage++;
+        showCardsForPage();
+      }
+    };
+  }
+
   // Initialize pagination for both filtered and unfiltered cases
-  paginationButtons.style.display = matchingCards.length > itemsPerPage ? "flex" : "none";
-  
+  if (paginationButtons) {
+    paginationButtons.style.display = matchingCards.length > itemsPerPage ? "flex" : "none";
+  }
+
   // Show initial page
   currentPage = 0;
   showCardsForPage();
-  
+
   return matchingCards.length; // Return count of matching cards
 }
 
