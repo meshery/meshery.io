@@ -32,6 +32,8 @@ jobs:
 
       - name: Fetch leaderboard data
         run: node .github/scripts/fetch-leaderboard.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v7
