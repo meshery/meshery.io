@@ -15,6 +15,12 @@ const PERIOD_SINCE = {
   all: null
 };
 
+// Explicit mapping of verified Discourse username to GitHub username.
+// Users not in this list will not have GitHub stats pulled.
+const GITHUB_USERNAME_MAPPING = {
+  "theBeginner86": "theBeginner86"
+};
+
 async function fetchUsers(period) {
   const headers = {
     'User-Agent': 'meshery-leaderboard-bot/1.0',
@@ -110,21 +116,22 @@ async function githubFetch(url, attempt) {
 
 async function fetchPeriodStats(username, since, githubUser) {
   const sinceFilter = since ? `+created:>=${since}` : '';
+  const ghUsername = githubUser.login;
 
   const issuesData = await githubFetch(
-    `${GITHUB_API}/search/issues?q=author:${encodeURIComponent(username)}+org:${GITHUB_ORG}+type:issue${sinceFilter}&per_page=1`
+    `${GITHUB_API}/search/issues?q=author:${encodeURIComponent(ghUsername)}+org:${GITHUB_ORG}+type:issue${sinceFilter}&per_page=1`
   );
   const issues = issuesData ? (issuesData.total_count || 0) : 0;
   await sleep(120);
 
   const prsData = await githubFetch(
-    `${GITHUB_API}/search/issues?q=author:${encodeURIComponent(username)}+org:${GITHUB_ORG}+is:pr${sinceFilter}&per_page=1`
+    `${GITHUB_API}/search/issues?q=author:${encodeURIComponent(ghUsername)}+org:${GITHUB_ORG}+is:pr${sinceFilter}&per_page=1`
   );
   const prs = prsData ? (prsData.total_count || 0) : 0;
   await sleep(120);
 
   const reviewsData = await githubFetch(
-    `${GITHUB_API}/search/issues?q=reviewed-by:${encodeURIComponent(username)}+org:${GITHUB_ORG}+is:pr${sinceFilter}&per_page=1`
+    `${GITHUB_API}/search/issues?q=reviewed-by:${encodeURIComponent(ghUsername)}+org:${GITHUB_ORG}+is:pr${sinceFilter}&per_page=1`
   );
   const reviews = reviewsData ? (reviewsData.total_count || 0) : 0;
 
@@ -162,8 +169,13 @@ async function buildAllPeriods() {
 
   const userCache = {}; // keyed by username -> { login, html_url } or null
   for (const username of allUsernames) {
+    const mappedGithubUser = GITHUB_USERNAME_MAPPING[username];
+    if (!mappedGithubUser) {
+      userCache[username] = null;
+      continue;
+    }
     try {
-      const user = await githubFetch(`${GITHUB_API}/users/${encodeURIComponent(username)}`);
+      const user = await githubFetch(`${GITHUB_API}/users/${encodeURIComponent(mappedGithubUser)}`);
       userCache[username] = user;
       await sleep(100);
     } catch (err) {
