@@ -3,8 +3,9 @@
     <div class="leaderboard-controls">
         <div class="period-toggle">
             <select id="period-select" class="period-select" aria-label="Leaderboard time period">
-                <option value="weekly">This Week</option>
-                <option value="monthly">This Month</option>
+                <option value="weekly">Week</option>
+                <option value="monthly">Month</option>
+                <option value="yearly">Year</option>
                 <option value="all">All Time</option>
             </select>
         </div>
@@ -45,6 +46,40 @@
 </script>
 
 <script>
+    (function () {
+        var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        function fmt(d, includeYear) {
+            var str = MONTHS[d.getMonth()] + ' ' + d.getDate();
+            if (includeYear) {
+                str += ', ' + d.getFullYear();
+            }
+            return str;
+        }
+
+        var now   = new Date();
+        var today = fmt(now);
+
+        var week  = new Date(now); week.setDate(week.getDate() - 7);
+        var month = new Date(now); month.setDate(month.getDate() - 30);
+        var year  = new Date(now); year.setFullYear(year.getFullYear() - 1);
+
+        var labels = {
+            weekly:  'Week '  + fmt(week) + ' \u2013 ' + today,
+            monthly: 'Month ' + fmt(month) + ' \u2013 ' + today,
+            yearly:  'Year '  + fmt(year, true) + ' \u2013 ' + today
+        };
+
+        Object.keys(labels).forEach(function (val) {
+            var opt = document.querySelector('#period-select option[value="' + val + '"]');
+            if (opt) opt.textContent = labels[val];
+        });
+    })();
+</script>
+
+<script>
+
     (function () {
         var leaderboardData;
         try {

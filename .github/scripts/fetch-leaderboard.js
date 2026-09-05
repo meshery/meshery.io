@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const BASE_URL = 'https://discuss.meshery.io/directory_items.json';
-const PERIODS = ['weekly', 'monthly', 'all'];
+const PERIODS = ['weekly', 'monthly', 'yearly', 'all'];
 
 async function fetchUsers(period) {
   const headers = {
