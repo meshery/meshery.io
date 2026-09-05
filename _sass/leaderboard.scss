@@ -26,10 +26,8 @@
     width: 320px;
     max-width: 90%;
     padding: 0.9rem 1.4rem;
-
-    border: 2px solid var(--brand-color-secondary);
+    border: 2px solid var(--brand-color-primary);
     border-radius: 8px;
-
     font-size: 1rem;
     font-weight: 500;
 
@@ -48,17 +46,22 @@
 }
 
 .leaderboard-filter:focus-visible {
-    box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.15);
+    box-shadow: 0 0 0 3px var(--color-secondary-dark);
 }
 
 /* Dark mode */
 body.dark-mode .leaderboard-filter {
     background: #000000;
     color: #ffffff;
+    border-color: var(--color-secondary-dark);
 }
 
 body.dark-mode .leaderboard-filter::placeholder {
     color: #ffffff;
+}
+
+body.dark-mode .leaderboard-filter:focus-visible {
+    box-shadow: 0 0 0 3px var(--brand-color-primary);
 }
 
 /* ─────────────────────────────
@@ -216,7 +219,7 @@ body.dark-mode .leaderboard-filter::placeholder {
 }
 
 .podium-username-link:hover .podium-username {
-    color: var(--brand-color-secondary);
+    color: var(--color-secondary-dark);
 }
 
 .podium-username {
@@ -224,10 +227,18 @@ body.dark-mode .leaderboard-filter::placeholder {
     font-weight: 700;
     line-height: 1.1;
     text-align: center;
-    color: var(--brand-color-secondary);
+    color: var(--color-secondary-dark);
     transition: color 0.2s ease;
     width: 100%;
     overflow-wrap: break-word;
+}
+
+body.dark-mode .podium-username-link:hover .podium-username {
+    color: var(--brand-color-primary);
+}
+
+body.dark-mode .podium-username {
+    color: var(--brand-color-primary);
 }
 
 /* Stats */
@@ -268,8 +279,12 @@ body.dark-mode .podium-stat-value {
 .podium-score {
     font-size: 2rem;
     font-weight: 800;
-    color: var(--brand-color-secondary);
+    color: var(--color-secondary-dark);
     line-height: 1;
+}
+
+body.dark-mode .podium-score {
+    color: var(--brand-color-primary);
 }
 
 /* ─────────────────────────────
@@ -288,7 +303,7 @@ body.dark-mode .podium-stat-value {
 }
 
 .leaderboard-table thead tr {
-    background-color: var(--brand-color-secondary);
+    background-color: var(--brand-color-primary);
     color: #000000;
     text-align: left;
 }
@@ -311,7 +326,7 @@ body.dark-mode .podium-stat-value {
 }
 
 .leaderboard-table tbody tr:nth-child(even) {
-    background-color: #00B39F;
+    background-color: var(--brand-color-primary);
 }
 
 body.dark-mode {
@@ -330,7 +345,6 @@ body.dark-mode {
     text-decoration: none;
     color: inherit;
 }
-
 
 .leaderboard-member a:hover .leaderboard-username {
     color: #000000;
@@ -366,13 +380,10 @@ body.dark-mode .leaderboard-updated {
     width: 200px;
     height: 35px;
     padding: 0 1rem;
-
-    border: 2px solid var(--brand-color-secondary);
+    border: 2px solid var(--brand-color-primary);
     border-radius: 8px;
-
     background: #ffffff;
-    color: var(--brand-color-secondary);
-
+    color: var(--color-secondary-dark);
     font-size: 0.80rem;
     font-weight: 600;
 
@@ -387,12 +398,17 @@ body.dark-mode .leaderboard-updated {
 }
 
 .period-select:focus-visible {
-    box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.15);
+    box-shadow: 0 0 0 3px var(--color-secondary-dark);
 }
 
 body.dark-mode .period-select {
     background: #000000;
     color: #ffffff;
+    border-color: var(--color-secondary-dark);
+}
+
+body.dark-mode .period-select:focus-visible {
+    box-shadow: 0 0 0 3px var(--brand-color-primary);
 }
 
 /* ─────────────────────────────
@@ -400,7 +416,6 @@ body.dark-mode .period-select {
     ───────────────────────────── */
 
 @media (max-width: 768px) {
-
     .leaderboard-podium {
         gap: 1rem;
     }
@@ -430,7 +445,6 @@ body.dark-mode .period-select {
     ───────────────────────────── */
 
 @media (max-width: 600px) {
-
     .leaderboard-section .leaderboard-controls {
         flex-wrap: nowrap;
         justify-content: center;
