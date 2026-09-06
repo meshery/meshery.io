@@ -1,6 +1,3 @@
-/* eslint-env node */
-'use strict';
-
 const fs = require('fs');
 const path = require('path');
 
@@ -17,9 +14,9 @@ const PERIOD_SINCE = {
 
 // Explicit mapping of verified Discourse username to GitHub username.
 // Users not in this list will not have GitHub stats pulled.
-const GITHUB_USERNAME_MAPPING = {
-  "theBeginner86": "theBeginner86"
-};
+const GITHUB_USERNAME_MAPPING = JSON.parse(
+  fs.readFileSync(path.join(__dirname, '../../_data/github_mappings.json'), 'utf8')
+);
 
 async function fetchUsers(period) {
   const headers = {
@@ -81,7 +78,7 @@ async function githubFetch(url, attempt) {
     'Accept': 'application/vnd.github+json',
     'X-GitHub-Api-Version': '2022-11-28'
   };
-  if (GITHUB_TOKEN) {
+  if (GITHUB_TOKEN && url.startsWith(GITHUB_API)) {
     headers['Authorization'] = `Bearer ${GITHUB_TOKEN}`;
   }
   const res = await fetch(url, { headers });
@@ -114,34 +111,70 @@ async function githubFetch(url, attempt) {
   return res.json();
 }
 
-async function fetchPeriodStats(username, since, githubUser) {
-  const sinceFilter = since ? `+created:>=${since}` : '';
+async function fetchPeriodStats(since, githubUser, prReviewsCache) {
   const ghUsername = githubUser.login;
 
+  // Issues opened
+  const issuesSinceFilter = since ? `+created:>=${since}` : '';
   const issuesData = await githubFetch(
-    `${GITHUB_API}/search/issues?q=author:${encodeURIComponent(ghUsername)}+org:${GITHUB_ORG}+type:issue${sinceFilter}&per_page=1`
+    `${GITHUB_API}/search/issues?q=author:${encodeURIComponent(ghUsername)}+org:${GITHUB_ORG}+type:issue${issuesSinceFilter}&per_page=1&advanced_search=true`
   );
   const issues = issuesData ? (issuesData.total_count || 0) : 0;
-  await sleep(120);
+  await sleep(2000);
 
+  // PRs opened
   const prsData = await githubFetch(
-    `${GITHUB_API}/search/issues?q=author:${encodeURIComponent(ghUsername)}+org:${GITHUB_ORG}+is:pr${sinceFilter}&per_page=1`
+    `${GITHUB_API}/search/issues?q=author:${encodeURIComponent(ghUsername)}+org:${GITHUB_ORG}+is:pr${issuesSinceFilter}&per_page=1&advanced_search=true`
   );
   const prs = prsData ? (prsData.total_count || 0) : 0;
-  await sleep(120);
+  await sleep(2000);
 
-  const reviewsData = await githubFetch(
-    `${GITHUB_API}/search/issues?q=reviewed-by:${encodeURIComponent(ghUsername)}+org:${GITHUB_ORG}+is:pr${sinceFilter}&per_page=1`
-  );
-  const reviews = reviewsData ? (reviewsData.total_count || 0) : 0;
+  // PRs reviewed
+  let verifiedReviewsCount = 0;
+  if (since) {
+    // For bounded periods, find candidate PRs the user reviewed that were updated in the period
+    const reviewsData = await githubFetch(
+      `${GITHUB_API}/search/issues?q=reviewed-by:${encodeURIComponent(ghUsername)}+org:${GITHUB_ORG}+is:pr+updated:>=${since}&per_page=100&advanced_search=true`
+    );
+    await sleep(2000);
+    const candidatePrs = reviewsData && reviewsData.items ? reviewsData.items : [];
+
+    for (const pr of candidatePrs) {
+      if (!pr.pull_request || !pr.pull_request.url) continue;
+      const prUrl = pr.pull_request.url;
+
+      if (!prReviewsCache[prUrl]) {
+        prReviewsCache[prUrl] = await githubFetch(`${prUrl}/reviews`);
+        await sleep(1000); // 1000ms pacing for normal API (max 3600/hr)
+      }
+
+      const reviews = prReviewsCache[prUrl] || [];
+      const hasValidReview = reviews.some(r =>
+        r.user &&
+        r.user.login === ghUsername &&
+        r.submitted_at &&
+        new Date(r.submitted_at) >= new Date(since)
+      );
+
+      if (hasValidReview) {
+        verifiedReviewsCount++;
+      }
+    }
+  } else {
+    // For all-time, we can safely use the total count without fetching individual review timestamps
+    const reviewsData = await githubFetch(
+      `${GITHUB_API}/search/issues?q=reviewed-by:${encodeURIComponent(ghUsername)}+org:${GITHUB_ORG}+is:pr&per_page=1&advanced_search=true`
+    );
+    verifiedReviewsCount = reviewsData ? (reviewsData.total_count || 0) : 0;
+    await sleep(2000);
+  }
 
   return {
     github_username: githubUser.login || '',
     github_profile_url: githubUser.html_url || '',
     github_issues: issues,
     github_prs: prs,
-    github_reviews: reviews,
-    github_score: (issues * 2) + (prs * 3) + (reviews * 2)
+    github_prs_reviewed: verifiedReviewsCount
   };
 }
 
@@ -157,6 +190,8 @@ async function buildAllPeriods() {
     throw new Error('all-time period empty — refusing to overwrite');
   }
 
+  // Pre-fetch GitHub User objects to get verified profile URLs
+  const userCache = {}; // keyed by username -> { login, html_url } or null
   const allUsernames = [
     ...new Set([
       ...periods.weekly.map(u => u.username),
@@ -165,73 +200,48 @@ async function buildAllPeriods() {
     ])
   ];
 
-  console.log(`Fetching GitHub stats for ${allUsernames.length} users...`);
-
-  const userCache = {}; // keyed by username -> { login, html_url } or null
+  console.log(`Verifying GitHub users...`);
   for (const username of allUsernames) {
     const mappedGithubUser = GITHUB_USERNAME_MAPPING[username];
     if (!mappedGithubUser) {
       userCache[username] = null;
       continue;
     }
-    try {
-      const user = await githubFetch(`${GITHUB_API}/users/${encodeURIComponent(mappedGithubUser)}`);
-      userCache[username] = user;
-      await sleep(100);
-    } catch (err) {
-      console.warn(`GitHub user lookup failed for ${username}: ${err.message}`);
-      userCache[username] = null;
-    }
+    const user = await githubFetch(`${GITHUB_API}/users/${encodeURIComponent(mappedGithubUser)}`);
+    userCache[username] = user;
+    await sleep(1000); // 1000ms pacing for normal API
   }
 
   const githubCache = {}; // keyed by "username:period"
+  const prReviewsCache = {}; // keyed by PR url to avoid redundant /reviews requests
+
   for (const period of PERIODS) {
     const since = PERIOD_SINCE[period];
-    for (const username of allUsernames) {
+    const usersInPeriod = periods[period].map(u => u.username);
+
+    for (const username of usersInPeriod) {
       if (!userCache[username]) {
         githubCache[`${username}:${period}`] = null;
         continue;
       }
       const cacheKey = `${username}:${period}`;
-      try {
-        const stats = await fetchPeriodStats(username, since, userCache[username]);
-        githubCache[cacheKey] = stats;
-        console.log(
-          `GitHub stats for ${username} (${period}):`,
-          stats
-            ? `issues=${stats.github_issues} prs=${stats.github_prs} reviews=${stats.github_reviews}`
-            : 'not found on GitHub'
-        );
-      } catch (err) {
-        console.warn(`Failed period stats for ${username} (${period}): ${err.message}`);
-        githubCache[cacheKey] = null;
-      }
-      await sleep(200);
+      const stats = await fetchPeriodStats(since, userCache[username], prReviewsCache);
+      githubCache[cacheKey] = stats;
     }
   }
 
   for (const period of PERIODS) {
-    periods[period] = periods[period]
-      .map(user => {
-        const gh = githubCache[`${user.username}:${period}`];
-        const github_issues = gh ? (gh.github_issues || 0) : 0;
-        const github_prs = gh ? (gh.github_prs || 0) : 0;
-        const github_reviews = gh ? (gh.github_reviews || 0) : 0;
-        const github_score = gh ? (gh.github_score || 0) : 0;
-        const total_score = (user.score || 0) + github_score;
-        return {
-          ...user,
-          github_username: gh ? (gh.github_username || '') : '',
-          github_profile_url: gh ? (gh.github_profile_url || '') : '',
-          github_issues,
-          github_prs,
-          github_reviews,
-          github_score,
-          total_score
-        };
-      })
-      .sort((a, b) => b.total_score - a.total_score)
-      .map((u, i) => ({ ...u, rank: i + 1 }));
+    periods[period] = periods[period].map(user => {
+      const gh = githubCache[`${user.username}:${period}`];
+      return {
+        ...user,
+        github_username: gh ? (gh.github_username || '') : '',
+        github_profile_url: gh ? (gh.github_profile_url || '') : '',
+        github_issues: gh ? (gh.github_issues || 0) : 0,
+        github_prs: gh ? (gh.github_prs || 0) : 0,
+        github_prs_reviewed: gh ? (gh.github_prs_reviewed || 0) : 0
+      };
+    });
   }
 
   return periods;
