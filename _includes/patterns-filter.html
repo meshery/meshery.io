@@ -313,20 +313,6 @@
 })();
 </script>
 <script type="module">
-  document.addEventListener("DOMContentLoaded", () => {
-  // Uncheck all checkboxes on page load AND reset their state in the DOM
-  const checkboxes = document.querySelectorAll("input[type='checkbox']");
-  checkboxes.forEach((checkbox) => {
-    checkbox.checked = false;
-  });
-
-  // Reset global filter lists
-  globalTechnologyList = [];
-  globalCategoryList = [];
-  globalPatternTypeList = [];
-
-  showFilterCards(); // Refresh the displayed cards
-});
   // import all integrations data
   import data from "{{ site.baseurl }}/integrations/data.js";
   // add wasmFilter to data array
@@ -679,6 +665,8 @@ function showFilterCards() {
 
   return matchingCards.length; // Return count of matching cards
 }
+
+showFilterCards();
 </script>
 <script>
   // Sort-by-count controls for the Technologies and Categories filter sections.
