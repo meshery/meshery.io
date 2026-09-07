@@ -62,7 +62,6 @@
     
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="Meshery" />
     <meta name="twitter:site" content="@mesheryio" />
     <meta name="twitter:creator" content="@mesheryio" />
     <meta name="author" content="Meshery Authors">
@@ -785,7 +784,7 @@ MeshMark distills a variety of overhead signals and key performance indicators i
 				<li>
 					<h2>
 						
-						<a target="_blank"  
+						<a target="_blank" 
 						href="/community
 " class="community-icon" >
 						
@@ -857,7 +856,7 @@ MeshMark distills a variety of overhead signals and key performance indicators i
 				<li>
 					<h2>
 						
-						<a  
+						<a 
 						href="/#getting-started
 " >
 						
@@ -895,7 +894,7 @@ MeshMark distills a variety of overhead signals and key performance indicators i
 				<li>
 					<h2>
 						
-						<a  
+						<a 
 						href="/community#resources
 " >
 						
@@ -1030,7 +1029,7 @@ MeshMark distills a variety of overhead signals and key performance indicators i
 			</ul>
 			
 
-			<!-- 
+			<!--
 			<ul class="feed">
 				<a class="twitter-timeline" data-width="320" data-height="320" data-theme="light"
 					data-link-color="#62ACCD" href="https://twitter.com/mesheryio"
@@ -1071,6 +1070,27 @@ MeshMark distills a variety of overhead signals and key performance indicators i
 
 <script>
 
+    // Functionality for the copy button next to the ID/UUID in Catalog Details
+
+	// function showCopyFeedback(element, message) {
+	// 	let wrapper = element.closest('.catalog-design-id-copy-wrapper');
+	// 	if (!wrapper) {
+	// 		return false;
+	// 	}
+
+	// 	let feedback = wrapper.querySelector('.copy-feedback');
+	// 	if (!feedback) {
+	// 		return false;
+	// 	}
+
+	// 	feedback.textContent = message;
+	// 	window.clearTimeout(element.copyFeedbackTimeout);
+	// 	element.copyFeedbackTimeout = window.setTimeout(function () {
+	// 		feedback.textContent = '';
+	// 	}, 1500);
+	// 	return true;
+	// }
+
 	function resetCopyText(element) {
 		let childElements = element.childNodes
 		if (childElements.length > 3) {
@@ -1089,18 +1109,23 @@ MeshMark distills a variety of overhead signals and key performance indicators i
 		console.info('Text:', e.text);
 		console.info('Trigger:', e.trigger);
 		let childElements = e.trigger.childNodes;
-		if (childElements.length > 3) {
-		childElements[3].innerHTML = "Copied!";
-	} else {
-		childElements[1].innerHTML = "Copied";
-		childElements[1].style.color = 'white';
-		childElements[1].style.background = "#1a2421";
-	}
+        // ShowCopyFeedback serves as the primary check for the copy button in Catalog Details.
+        // If the copy button is enabled again, the conditional below needs to be encapsulate the childElements conditional
+		// if (!showCopyFeedback(e.trigger, "Copied!")) {}
+
+        if (childElements.length > 3) {
+			childElements[3].innerHTML = "Copied!";
+		} else {
+			childElements[1].innerHTML = "Copied";
+			childElements[1].style.color = 'white';
+			childElements[1].style.background = "#1a2421";
+		}
 		e.clearSelection();
 	});
 	clipboard.on('error', function (e) {
 		console.error('Action:', e.action);
 		console.error('Trigger:', e.trigger);
+		// showCopyFeedback(e.trigger, "Copy failed");
 	});
 </script>
 
@@ -1128,7 +1153,7 @@ MeshMark distills a variety of overhead signals and key performance indicators i
 <script type="text/javascript">
 	let toggleBtn = document.getElementById("mode-toggle-btn")
 	toggleBtn.onclick = setMode;
-	
+
 	if (localStorage.getItem("mode") === null) {
     	localStorage.setItem("mode", "dark-mode");
     }
@@ -1149,7 +1174,7 @@ MeshMark distills a variety of overhead signals and key performance indicators i
 
 	function setMode() {
 		document.body.classList.toggle("dark-mode")
-		
+
 		let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
 		if (document.body.classList.contains("dark-mode")) {
 			allLogos.forEach(e => e.src = e.dataset.logoForDark)
@@ -1166,7 +1191,7 @@ MeshMark distills a variety of overhead signals and key performance indicators i
 			bubbles: true ,
 		}))
 	}
-	
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -1183,7 +1208,7 @@ MeshMark distills a variety of overhead signals and key performance indicators i
       slidesToScroll: 1,
       autoplay: true, // true
       autoplaySpeed: 1500,
-      
+
 
       responsive: [
         {
