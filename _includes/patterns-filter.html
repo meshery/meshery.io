@@ -248,33 +248,31 @@
 </div>
 <script>
 (function () {
-  var dropButton = document.getElementById("arrow-icon");
-  var isDropdownOpen = true;
+  let dropButton = document.getElementById("arrow-icon");
+  let isDropdownOpen = true;
 
   // Expose handleDropdown globally since it is called via an onclick attribute
   window.handleDropdown = function () {
-    document.getElementById("myDropdown").classList.toggle("show");
-    dropButton.style.transform = isDropdownOpen ? "rotate(180deg)" : "rotate(0deg)";
-    dropButton.style.transition = "transform 0.5s";
+    document.getElementById("myDropdown")?.classList.toggle("show");
+    if (dropButton) {
+      dropButton.style.transform = isDropdownOpen ? "rotate(180deg)" : "rotate(0deg)";
+      dropButton.style.transition = "transform 0.5s";
+    }
     isDropdownOpen = !isDropdownOpen;
   };
 
   // target elements to toggle
-  var categoryP = document.getElementById("category-para");
-  var categoryDiv = document.getElementById("category-div");
-  var compP = document.getElementById("compatibility-para");
-  var compDiv = document.getElementById("compatibility-div");
+  let categoryP = document.getElementById("category-para");
+  let categoryDiv = document.getElementById("category-div");
+  let compP = document.getElementById("compatibility-para");
+  let compDiv = document.getElementById("compatibility-div");
 
   // toggler
-  var categoryLink = document.getElementById("category-li");
-  var compatibilityLink = document.getElementById("compatibility-li");
+  let categoryLink = document.getElementById("category-li");
+  let compatibilityLink = document.getElementById("compatibility-li");
 
-  if (categoryLink) {
-    categoryLink.addEventListener("click", showCategory);
-  }
-  if (compatibilityLink) {
-    compatibilityLink.addEventListener("click", showCompatibility);
-  }
+  categoryLink?.addEventListener("click", showCategory);
+  compatibilityLink?.addEventListener("click", showCompatibility);
 
   function showCategory() {
     if (categoryDiv) categoryDiv.style.display = "flex";
@@ -282,10 +280,9 @@
     // compP / compDiv are absent when show_technology="false" (models layout)
     if (compP) compP.style.display = "none";
     if (compDiv) compDiv.style.display = "none";
-    document.getElementById("myDropdown").classList.toggle("show");
-    dropButton.style.transform = "rotate(0deg)";
+    document.getElementById("myDropdown")?.classList.toggle("show");
+    if (dropButton) dropButton.style.transform = "rotate(0deg)";
     isDropdownOpen = !isDropdownOpen;
-    return;
   }
 
   function showCompatibility() {
@@ -294,10 +291,9 @@
     // compP / compDiv are absent when show_technology="false" (models layout)
     if (compP) compP.style.display = "grid";
     if (compDiv) compDiv.style.display = "flex";
-    document.getElementById("myDropdown").classList.toggle("show");
-    dropButton.style.transform = "rotate(0deg)";
+    document.getElementById("myDropdown")?.classList.toggle("show");
+    if (dropButton) dropButton.style.transform = "rotate(0deg)";
     isDropdownOpen = !isDropdownOpen;
-    return;
   }
 
   function showTechnology() {
@@ -305,10 +301,9 @@
     if (compDiv) compDiv.style.display = "none";
     if (categoryDiv) categoryDiv.style.display = "none";
     if (categoryP) categoryP.style.display = "none";
-    document.getElementById("myDropdown").classList.toggle("show");
-    dropButton.style.transform = "rotate(0deg)";
+    document.getElementById("myDropdown")?.classList.toggle("show");
+    if (dropButton) dropButton.style.transform = "rotate(0deg)";
     isDropdownOpen = !isDropdownOpen;
-    return;
   }
 })();
 </script>
