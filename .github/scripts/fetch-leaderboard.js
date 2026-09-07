@@ -6,6 +6,8 @@ const PERIODS = ['weekly', 'monthly', 'all'];
 const GITHUB_API = 'https://api.github.com';
 const GITHUB_ORG = 'meshery';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_ACCESS_TOKEN || '';
+// Note: These GitHub period windows are approximate (7-8 or 30-31 days)
+// and may differ slightly from Discourse's exact period boundaries.
 const PERIOD_SINCE = {
   weekly: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
   monthly: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
@@ -115,7 +117,7 @@ async function fetchPeriodStats(since, githubUser, prReviewsCache) {
   const ghUsername = githubUser.login;
 
   // Issues opened
-  const issuesSinceFilter = since ? `+created:>=${since}` : '';
+  const issuesSinceFilter = since ? `+created:>=${encodeURIComponent(since)}` : '';
   const issuesData = await githubFetch(
     `${GITHUB_API}/search/issues?q=author:${encodeURIComponent(ghUsername)}+org:${GITHUB_ORG}+type:issue${issuesSinceFilter}&per_page=1&advanced_search=true`
   );
@@ -134,7 +136,7 @@ async function fetchPeriodStats(since, githubUser, prReviewsCache) {
   if (since) {
     // For bounded periods, find candidate PRs the user reviewed that were updated in the period
     const reviewsData = await githubFetch(
-      `${GITHUB_API}/search/issues?q=reviewed-by:${encodeURIComponent(ghUsername)}+org:${GITHUB_ORG}+is:pr+updated:>=${since}&per_page=100&advanced_search=true`
+      `${GITHUB_API}/search/issues?q=reviewed-by:${encodeURIComponent(ghUsername)}+org:${GITHUB_ORG}+is:pr+updated:>=${encodeURIComponent(since)}&per_page=100&advanced_search=true`
     );
     await sleep(2000);
     const candidatePrs = reviewsData && reviewsData.items ? reviewsData.items : [];
