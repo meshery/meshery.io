@@ -31,13 +31,13 @@ Furthermore, a Knative Service resource is configured to manage the Knative serv
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:image" content="https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-09-08T01:15:15+00:00" />
-<meta property="article:modified_time" content="2026-09-08T01:15:15+00:00" />
+<meta property="article:published_time" content="2026-09-08T02:02:16+00:00" />
+<meta property="article:modified_time" content="2026-09-08T02:02:16+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg" />
 <meta name="twitter:title" content="knative-service" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-09-08T01:15:15+00:00","datePublished":"2026-09-08T01:15:15+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"knative-service","image":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2947/catalog/deployment/knative-service-e5c65f06-4616-4ce7-9fe9-cb528128d242.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2947/catalog/deployment/knative-service-e5c65f06-4616-4ce7-9fe9-cb528128d242.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-09-08T02:02:16+00:00","datePublished":"2026-09-08T02:02:16+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"knative-service","image":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2947/catalog/deployment/knative-service-e5c65f06-4616-4ce7-9fe9-cb528128d242.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2947/catalog/deployment/knative-service-e5c65f06-4616-4ce7-9fe9-cb528128d242.html"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/pr-preview/pr-2947/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/pr-preview/pr-2947/css/stellarnav.css" />
@@ -531,6 +531,119 @@ Furthermore, a Knative Service resource is configured to manage the Knative serv
 	<div class="post-content">
 		
 <div class="single-page">
+  
+  
+  
+  
+
+  <div class="catalog-content">
+    <h3>What This Design Does:</h3>
+    
+      <p class="pre-white-space">This YAML configuration defines a Kubernetes Deployment for a Knative service. This Deployment, named "knative-service," specifies that a container will be created using a specified container image, which should be replaced with the actual image name. The container is configured to listen on port 8080. The Deployment ensures that a single replica of the container is maintained within the "knative-serving" namespace. The Deployment uses labels to identify the pods it manages.
+
+Additionally, a Kubernetes Service is defined to expose the Deployment. This Service, named "knative-service," is also created within the "knative-serving" namespace. It uses a selector to match the pods labeled with "app: knative-service" and maps the Service port 80 to the container port 8080, facilitating external access to the deployed application.
+
+Furthermore, a Knative Service resource is configured to manage the Knative service. This Knative Service, also named "knative-service" and located in the "knative-serving" namespace, is configured with the same container image and port settings. The Knative Service template includes metadata labels and container specifications, ensuring consistent deployment and management within the Knative environment. This setup allows the Knative service to handle HTTP requests efficiently and leverage Knative's autoscaling capabilities.
+</p>
+    
+
+    <h4 class="design-snapshot">Design Snapshot</h4>
+    <img class="pattern-snapshot"
+      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/e5c65f06-4616-4ce7-9fe9-cb528128d242-light.png"
+      onerror="this.src='/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('e5c65f06-4616-4ce7-9fe9-cb528128d242-light')"/>
+
+    <h3>Caveats and Consideration:</h3>
+    
+      <p class="pre-white-space">Image Pull Policy:Ensure the image pull policy is appropriately set, especially if using a custom or private container image. You may need to configure Kubernetes to access private image repositories by setting up image pull secrets.
+
+Resource Requests and Limits: Define resource requests and limits for CPU and memory to ensure that the Knative service runs efficiently without exhausting cluster resources. This helps in resource allocation and autoscaling.
+
+Namespace Management: Deploying to the knative-serving namespace is typical for Knative components, but for user applications, consider using a separate namespace for better organization and access control.
+
+Autoscaling Configuration: Knative supports autoscaling based on metrics like concurrency or CPU usage. Configure autoscaling settings to match your application's load characteristics.
+
+Networking and Ingress: Ensure your Knative service is properly exposed via an ingress or gateway if external access is required. Configure DNS settings and TLS for secure access.
+
+Monitoring and Logging: Implement monitoring and logging to track the performance and health of your Knative service. Use tools like Prometheus, Grafana, and Elasticsearch for this purpose.
+
+
+</p>
+    
+
+    <h3>Compatibility:</h3>
+        <style>
+        .service-mesh-image{
+            margin: 1.2rem;
+        }
+    </style>
+    <div class="comatibility-grid">
+    
+    
+    
+    <a href="/pr-preview/pr-2947/catalog/models/knative-serving">
+    <!-- Please remove these hardcoding -->
+    <!-- This would require updating the already published content with correct compatibility -->
+    
+        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/knative-serving/icons/color/knative-serving-color.svg" />
+    
+    </a>
+    
+</div>
+
+    
+
+
+
+
+<div id="copy-url">
+  <div class="btn-class">
+    <div class="vertical-center" id="knative-service">
+      <div class="btn-grp">
+        
+        <a href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id=e5c65f06-4616-4ce7-9fe9-cb528128d242&name=knative-service"
+          target="_blank">
+          <button class="import import-brand-primary" style="width: 15rem;">Open in Playground </button>
+        </a>
+        
+
+       
+        
+        <a href="/pr-preview/pr-2947/catalog/e5c65f06-4616-4ce7-9fe9-cb528128d242/0.0.1/design.yml" download="knative-service.yml">
+          <button id="resourceDownloadBtn" data-patternId="e5c65f06-4616-4ce7-9fe9-cb528128d242" onclick="sendCloudTelemetry()"
+            class="import import-brand-secondary" style="width: 7rem;">
+            Download
+          </button>
+        </a>
+
+        <div class="btn-tooltip-grp" id="copy-url-tooltip">
+          <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/e5c65f06-4616-4ce7-9fe9-cb528128d242/0.0.1/design.yml"
+            onmouseout="resetCopyText(this)">
+            <button class="import import-brand-tertiary" style="width: 7rem;">
+              Copy URL
+            </button>
+          </a>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+
+  function sendCloudTelemetry() {
+
+    const element = document.getElementById("resourceDownloadBtn")
+    const patternId = element.dataset.patternid
+    patternId && fetch(`https://cloud.meshery.io/api/content/patterns/download/${patternId}`)
+  }
+
+</script>
+  </div>
+
   <div class="modal-image-container">
 
     <h4>Catalog Details</h4>
@@ -635,119 +748,6 @@ Furthermore, a Knative Service resource is configured to manage the Knative serv
   </div>
   <!-- MINICARD-END -->
 
-  
-  
-  
-  
-  <div>
-    <h3>What This Design Does:</h3>
-    
-      <p class="pre-white-space">This YAML configuration defines a Kubernetes Deployment for a Knative service. This Deployment, named "knative-service," specifies that a container will be created using a specified container image, which should be replaced with the actual image name. The container is configured to listen on port 8080. The Deployment ensures that a single replica of the container is maintained within the "knative-serving" namespace. The Deployment uses labels to identify the pods it manages.
-
-Additionally, a Kubernetes Service is defined to expose the Deployment. This Service, named "knative-service," is also created within the "knative-serving" namespace. It uses a selector to match the pods labeled with "app: knative-service" and maps the Service port 80 to the container port 8080, facilitating external access to the deployed application.
-
-Furthermore, a Knative Service resource is configured to manage the Knative service. This Knative Service, also named "knative-service" and located in the "knative-serving" namespace, is configured with the same container image and port settings. The Knative Service template includes metadata labels and container specifications, ensuring consistent deployment and management within the Knative environment. This setup allows the Knative service to handle HTTP requests efficiently and leverage Knative's autoscaling capabilities.
-</p>
-    
-
-    <h4 class="design-snapshot">Design Snapshot</h4>
-    <img class="pattern-snapshot"
-      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/e5c65f06-4616-4ce7-9fe9-cb528128d242-light.png"
-      onerror="this.src='/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('e5c65f06-4616-4ce7-9fe9-cb528128d242-light')"/>
-
-    <h3>Caveats and Consideration:</h3>
-    
-      <p class="pre-white-space">Image Pull Policy:Ensure the image pull policy is appropriately set, especially if using a custom or private container image. You may need to configure Kubernetes to access private image repositories by setting up image pull secrets.
-
-Resource Requests and Limits: Define resource requests and limits for CPU and memory to ensure that the Knative service runs efficiently without exhausting cluster resources. This helps in resource allocation and autoscaling.
-
-Namespace Management: Deploying to the knative-serving namespace is typical for Knative components, but for user applications, consider using a separate namespace for better organization and access control.
-
-Autoscaling Configuration: Knative supports autoscaling based on metrics like concurrency or CPU usage. Configure autoscaling settings to match your application's load characteristics.
-
-Networking and Ingress: Ensure your Knative service is properly exposed via an ingress or gateway if external access is required. Configure DNS settings and TLS for secure access.
-
-Monitoring and Logging: Implement monitoring and logging to track the performance and health of your Knative service. Use tools like Prometheus, Grafana, and Elasticsearch for this purpose.
-
-
-</p>
-    
-
-    <h3>Compatibility:</h3>
-          <style>
-        .service-mesh-image{
-            margin: 1.2rem;
-        }
-    </style>
-    <div class="comatibility-grid">
-    
-    
-    
-    <a href="/pr-preview/pr-2947/catalog/models/knative-serving">
-    <!-- Please remove these hardcoding -->
-    <!-- This would require updating the already published content with correct compatibility -->
-    
-        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/knative-serving/icons/color/knative-serving-color.svg" />
-    
-    </a>
-    
-</div>
-
-      
-
-
-
-
-<div id="copy-url">
-  <div class="btn-class">
-    <div class="vertical-center" id="knative-service">
-      <div class="btn-grp">
-        
-        <a href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id=e5c65f06-4616-4ce7-9fe9-cb528128d242&name=knative-service"
-          target="_blank">
-          <button class="import import-brand-primary" style="width: 15rem;">Open in Playground </button>
-        </a>
-        
-
-       
-        
-        <a href="/pr-preview/pr-2947/catalog/e5c65f06-4616-4ce7-9fe9-cb528128d242/0.0.1/design.yml" download="knative-service.yml">
-          <button id="resourceDownloadBtn" data-patternId="e5c65f06-4616-4ce7-9fe9-cb528128d242" onclick="sendCloudTelemetry()"
-            class="import import-brand-secondary" style="width: 7rem;">
-            Download
-          </button>
-        </a>
-
-        <div class="btn-tooltip-grp" id="copy-url-tooltip">
-          <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/e5c65f06-4616-4ce7-9fe9-cb528128d242/0.0.1/design.yml"
-            onmouseout="resetCopyText(this)">
-            <button class="import import-brand-tertiary" style="width: 7rem;">
-              Copy URL
-            </button>
-          </a>
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<script>
-
-  function sendCloudTelemetry() {
-
-    const element = document.getElementById("resourceDownloadBtn")
-    const patternId = element.dataset.patternid
-    patternId && fetch(`https://cloud.meshery.io/api/content/patterns/download/${patternId}`)
-  }
-
-</script>
-    </div>
-
-  </div>
   
 </div>
 

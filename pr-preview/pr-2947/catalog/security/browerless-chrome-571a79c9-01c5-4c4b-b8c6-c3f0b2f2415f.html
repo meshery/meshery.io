@@ -38,13 +38,13 @@ env:
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:image" content="https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-09-08T01:15:15+00:00" />
-<meta property="article:modified_time" content="2026-09-08T01:15:15+00:00" />
+<meta property="article:published_time" content="2026-09-08T02:02:16+00:00" />
+<meta property="article:modified_time" content="2026-09-08T02:02:16+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg" />
 <meta name="twitter:title" content="Browerless Chrome" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-09-08T01:15:15+00:00","datePublished":"2026-09-08T01:15:15+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Browerless Chrome","image":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2947/catalog/security/browerless-chrome-571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2947/catalog/security/browerless-chrome-571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-09-08T02:02:16+00:00","datePublished":"2026-09-08T02:02:16+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Browerless Chrome","image":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2947/catalog/security/browerless-chrome-571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2947/catalog/security/browerless-chrome-571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f.html"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/pr-preview/pr-2947/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/pr-preview/pr-2947/css/stellarnav.css" />
@@ -538,6 +538,148 @@ env:
 	<div class="post-content">
 		
 <div class="single-page">
+  
+  
+  
+  
+
+  <div class="catalog-content">
+    <h3>What This Design Does:</h3>
+    
+      <p class="pre-white-space">Chrome as a service container. Bring your own hardware or cloud.
+
+Homepage: https://www.browserless.io
+
+## Configuration
+
+Browserless can be configured via environment variables:
+
+```yaml
+env:
+    PREBOOT_CHROME: "true"
+```
+</p>
+    
+
+    <h4 class="design-snapshot">Design Snapshot</h4>
+    <img class="pattern-snapshot"
+      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f-light.png"
+      onerror="this.src='/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f-light')"/>
+
+    <h3>Caveats and Consideration:</h3>
+    
+      <p class="pre-white-space">Check out the [official documentation](https://docs.browserless.io/docs/docker.html) for the available options.
+
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| replicaCount | int | `1` | Number of replicas (pods) to launch. |
+| image.repository | string | `"browserless/chrome"` | Name of the image repository to pull the container image from. |
+| image.pullPolicy | string | `"IfNotPresent"` | [Image pull policy](https://kubernetes.io/docs/concepts/containers/images/#updating-images) for updating already existing images on a node. |
+| image.tag | string | `""` | Image tag override for the default value (chart appVersion). |
+| imagePullSecrets | list | `[]` | Reference to one or more secrets to be used when [pulling images](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-pod-that-uses-your-secret) (from private registries). |
+| nameOverride | string | `""` | A name in place of the chart name for `app:` labels. |
+| fullnameOverride | string | `""` | A name to substitute for the full names of resources. |
+| volumes | list | `[]` | Additional storage [volumes](https://kubernetes.io/docs/concepts/storage/volumes/). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#volumes-1) for details. |
+| volumeMounts | list | `[]` | Additional [volume mounts](https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#volumes-1) for details. |
+| envFrom | list | `[]` | Additional environment variables mounted from [secrets](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables) or [config maps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#configure-all-key-value-pairs-in-a-configmap-as-container-environment-variables). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#environment-variables) for details. |
+| env | object | `{}` | Additional environment variables passed directly to containers. See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#environment-variables) for details. |
+| serviceAccount.create | bool | `true` | Enable service account creation. |
+| serviceAccount.annotations | object | `{}` | Annotations to be added to the service account. |
+| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template. |
+| podAnnotations | object | `{}` | Annotations to be added to pods. |
+| podSecurityContext | object | `{}` | Pod [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context) for details. |
+| securityContext | object | `{}` | Container [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context-1) for details. |
+| service.annotations | object | `{}` | Annotations to be added to the service. |
+| service.type | string | `"ClusterIP"` | Kubernetes [service type](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types). |
+| service.loadBalancerIP | string | `nil` | Only applies when the service type is LoadBalancer. Load balancer will get created with the IP specified in this field. |
+| service.loadBalancerSourceRanges | list | `[]` | If specified (and supported by the cloud provider), traffic through the load balancer will be restricted to the specified client IPs. Valid values are IP CIDR blocks. |
+| service.port | int | `80` | Service port. |
+| service.nodePort | int | `nil` | Service node port (when applicable). |
+| service.externalTrafficPolicy | string | `nil` | Route external traffic to node-local or cluster-wide endoints. Useful for [preserving the client source IP](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip). |
+| resources | object | No requests or limits. | Container resource [requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#resources) for details. |
+| autoscaling | object | Disabled by default. | Autoscaling configuration (see [values.yaml](values.yaml) for details). |
+| nodeSelector | object | `{}` | [Node selector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) configuration. |
+| tolerations | list | `[]` | [Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for node taints. See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) for details. |
+| affinity | object | `{}` | [Affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) configuration. See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) for details. |
+</p>
+    
+
+    <h3>Compatibility:</h3>
+        <style>
+        .service-mesh-image{
+            margin: 1.2rem;
+        }
+    </style>
+    <div class="comatibility-grid">
+    
+    
+    
+    <a href="/pr-preview/pr-2947/catalog/models/kubernetes">
+    <!-- Please remove these hardcoding -->
+    <!-- This would require updating the already published content with correct compatibility -->
+    
+        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/kubernetes/icons/color/kubernetes-color.svg" />
+    
+    </a>
+    
+</div>
+
+    
+
+
+
+
+<div id="copy-url">
+  <div class="btn-class">
+    <div class="vertical-center" id="Browerless Chrome">
+      <div class="btn-grp">
+        
+        <a href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id=571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f&name=Browerless Chrome"
+          target="_blank">
+          <button class="import import-brand-primary" style="width: 15rem;">Open in Playground </button>
+        </a>
+        
+
+       
+        
+        <a href="/pr-preview/pr-2947/catalog/571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f/0.0.1/design.yml" download="Browerless Chrome.yml">
+          <button id="resourceDownloadBtn" data-patternId="571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f" onclick="sendCloudTelemetry()"
+            class="import import-brand-secondary" style="width: 7rem;">
+            Download
+          </button>
+        </a>
+
+        <div class="btn-tooltip-grp" id="copy-url-tooltip">
+          <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f/0.0.1/design.yml"
+            onmouseout="resetCopyText(this)">
+            <button class="import import-brand-tertiary" style="width: 7rem;">
+              Copy URL
+            </button>
+          </a>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+
+  function sendCloudTelemetry() {
+
+    const element = document.getElementById("resourceDownloadBtn")
+    const patternId = element.dataset.patternid
+    patternId && fetch(`https://cloud.meshery.io/api/content/patterns/download/${patternId}`)
+  }
+
+</script>
+  </div>
+
   <div class="modal-image-container">
 
     <h4>Catalog Details</h4>
@@ -1252,148 +1394,6 @@ env:
   </div>
   <!-- MINICARD-END -->
 
-  
-  
-  
-  
-  <div>
-    <h3>What This Design Does:</h3>
-    
-      <p class="pre-white-space">Chrome as a service container. Bring your own hardware or cloud.
-
-Homepage: https://www.browserless.io
-
-## Configuration
-
-Browserless can be configured via environment variables:
-
-```yaml
-env:
-    PREBOOT_CHROME: "true"
-```
-</p>
-    
-
-    <h4 class="design-snapshot">Design Snapshot</h4>
-    <img class="pattern-snapshot"
-      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f-light.png"
-      onerror="this.src='/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f-light')"/>
-
-    <h3>Caveats and Consideration:</h3>
-    
-      <p class="pre-white-space">Check out the [official documentation](https://docs.browserless.io/docs/docker.html) for the available options.
-
-## Values
-
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| replicaCount | int | `1` | Number of replicas (pods) to launch. |
-| image.repository | string | `"browserless/chrome"` | Name of the image repository to pull the container image from. |
-| image.pullPolicy | string | `"IfNotPresent"` | [Image pull policy](https://kubernetes.io/docs/concepts/containers/images/#updating-images) for updating already existing images on a node. |
-| image.tag | string | `""` | Image tag override for the default value (chart appVersion). |
-| imagePullSecrets | list | `[]` | Reference to one or more secrets to be used when [pulling images](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-pod-that-uses-your-secret) (from private registries). |
-| nameOverride | string | `""` | A name in place of the chart name for `app:` labels. |
-| fullnameOverride | string | `""` | A name to substitute for the full names of resources. |
-| volumes | list | `[]` | Additional storage [volumes](https://kubernetes.io/docs/concepts/storage/volumes/). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#volumes-1) for details. |
-| volumeMounts | list | `[]` | Additional [volume mounts](https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#volumes-1) for details. |
-| envFrom | list | `[]` | Additional environment variables mounted from [secrets](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables) or [config maps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#configure-all-key-value-pairs-in-a-configmap-as-container-environment-variables). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#environment-variables) for details. |
-| env | object | `{}` | Additional environment variables passed directly to containers. See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#environment-variables) for details. |
-| serviceAccount.create | bool | `true` | Enable service account creation. |
-| serviceAccount.annotations | object | `{}` | Annotations to be added to the service account. |
-| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template. |
-| podAnnotations | object | `{}` | Annotations to be added to pods. |
-| podSecurityContext | object | `{}` | Pod [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context) for details. |
-| securityContext | object | `{}` | Container [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context-1) for details. |
-| service.annotations | object | `{}` | Annotations to be added to the service. |
-| service.type | string | `"ClusterIP"` | Kubernetes [service type](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types). |
-| service.loadBalancerIP | string | `nil` | Only applies when the service type is LoadBalancer. Load balancer will get created with the IP specified in this field. |
-| service.loadBalancerSourceRanges | list | `[]` | If specified (and supported by the cloud provider), traffic through the load balancer will be restricted to the specified client IPs. Valid values are IP CIDR blocks. |
-| service.port | int | `80` | Service port. |
-| service.nodePort | int | `nil` | Service node port (when applicable). |
-| service.externalTrafficPolicy | string | `nil` | Route external traffic to node-local or cluster-wide endoints. Useful for [preserving the client source IP](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip). |
-| resources | object | No requests or limits. | Container resource [requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#resources) for details. |
-| autoscaling | object | Disabled by default. | Autoscaling configuration (see [values.yaml](values.yaml) for details). |
-| nodeSelector | object | `{}` | [Node selector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) configuration. |
-| tolerations | list | `[]` | [Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for node taints. See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) for details. |
-| affinity | object | `{}` | [Affinity](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) configuration. See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling) for details. |
-</p>
-    
-
-    <h3>Compatibility:</h3>
-          <style>
-        .service-mesh-image{
-            margin: 1.2rem;
-        }
-    </style>
-    <div class="comatibility-grid">
-    
-    
-    
-    <a href="/pr-preview/pr-2947/catalog/models/kubernetes">
-    <!-- Please remove these hardcoding -->
-    <!-- This would require updating the already published content with correct compatibility -->
-    
-        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/kubernetes/icons/color/kubernetes-color.svg" />
-    
-    </a>
-    
-</div>
-
-      
-
-
-
-
-<div id="copy-url">
-  <div class="btn-class">
-    <div class="vertical-center" id="Browerless Chrome">
-      <div class="btn-grp">
-        
-        <a href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id=571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f&name=Browerless Chrome"
-          target="_blank">
-          <button class="import import-brand-primary" style="width: 15rem;">Open in Playground </button>
-        </a>
-        
-
-       
-        
-        <a href="/pr-preview/pr-2947/catalog/571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f/0.0.1/design.yml" download="Browerless Chrome.yml">
-          <button id="resourceDownloadBtn" data-patternId="571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f" onclick="sendCloudTelemetry()"
-            class="import import-brand-secondary" style="width: 7rem;">
-            Download
-          </button>
-        </a>
-
-        <div class="btn-tooltip-grp" id="copy-url-tooltip">
-          <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/571a79c9-01c5-4c4b-b8c6-c3f0b2f2415f/0.0.1/design.yml"
-            onmouseout="resetCopyText(this)">
-            <button class="import import-brand-tertiary" style="width: 7rem;">
-              Copy URL
-            </button>
-          </a>
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<script>
-
-  function sendCloudTelemetry() {
-
-    const element = document.getElementById("resourceDownloadBtn")
-    const patternId = element.dataset.patternid
-    patternId && fetch(`https://cloud.meshery.io/api/content/patterns/download/${patternId}`)
-  }
-
-</script>
-    </div>
-
-  </div>
   
 </div>
 

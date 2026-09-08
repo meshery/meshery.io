@@ -28,13 +28,13 @@ This YAML configuration defines a Kubernetes Deployment named "gerrit-operator-d
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:image" content="https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-09-08T01:15:15+00:00" />
-<meta property="article:modified_time" content="2026-09-08T01:15:15+00:00" />
+<meta property="article:published_time" content="2026-09-08T02:02:16+00:00" />
+<meta property="article:modified_time" content="2026-09-08T02:02:16+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg" />
 <meta name="twitter:title" content="Gerrit operator" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-09-08T01:15:15+00:00","datePublished":"2026-09-08T01:15:15+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Gerrit operator","image":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2947/catalog/deployment/gerrit-operator-5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2947/catalog/deployment/gerrit-operator-5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-09-08T02:02:16+00:00","datePublished":"2026-09-08T02:02:16+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Gerrit operator","image":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2947/catalog/deployment/gerrit-operator-5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2947/catalog/deployment/gerrit-operator-5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9.html"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/pr-preview/pr-2947/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/pr-preview/pr-2947/css/stellarnav.css" />
@@ -528,6 +528,110 @@ This YAML configuration defines a Kubernetes Deployment named "gerrit-operator-d
 	<div class="post-content">
 		
 <div class="single-page">
+  
+  
+  
+  
+
+  <div class="catalog-content">
+    <h3>What This Design Does:</h3>
+    
+      <p class="pre-white-space">
+This YAML configuration defines a Kubernetes Deployment named "gerrit-operator-deployment" for managing a containerized application called "gerrit-operator". It specifies that one replica of the application should be deployed. The Deployment ensures that the application is always running by managing pod replicas based on the provided selector labels. The template section describes the pod specification, including labels, service account, security context, and container configuration. The container named "gerrit-operator-container" is configured with an image from a container registry, with resource limits and requests defined for CPU and memory. Environment variables are set for various parameters like the namespace, pod name, and platform type. Additionally, specific intervals for syncing Gerrit projects and group members are defined. Further configuration options can be added as needed, such as volumes and initContainers.
+</p>
+    
+
+    <h4 class="design-snapshot">Design Snapshot</h4>
+    <img class="pattern-snapshot"
+      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9-light.png"
+      onerror="this.src='/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9-light')"/>
+
+    <h3>Caveats and Consideration:</h3>
+    
+      <p class="pre-white-space">1. Resource Requirements: Ensure that the resource requests and limits specified for CPU and memory are appropriate for the workload and the cluster's capacity to prevent performance issues or resource contention.
+
+2. Image Pull Policy: The imagePullPolicy set to "Always" ensures that the latest image version is always pulled from the container registry. This may increase deployment time and consume more network bandwidth, so consider the trade-offs based on your deployment requirements.
+
+3. Security Configuration: The security context settings, such as runAsNonRoot and allowPrivilegeEscalation: false, enhance pod security by enforcing non-root user execution and preventing privilege escalation. Verify that these settings align with your organization's security policies.
+
+4. Environment Variables: Review the environment variables set for WATCH_NAMESPACE, POD_NAME, PLATFORM_TYPE, GERRIT_PROJECT_SYNC_INTERVAL, and GERRIT_GROUP_MEMBER_SYNC_INTERVAL to ensure they are correctly configured for your deployment environment and application requirements.
+</p>
+    
+
+    <h3>Compatibility:</h3>
+        <style>
+        .service-mesh-image{
+            margin: 1.2rem;
+        }
+    </style>
+    <div class="comatibility-grid">
+    
+    
+    
+    <a href="/pr-preview/pr-2947/catalog/models/gerrit-operator">
+    <!-- Please remove these hardcoding -->
+    <!-- This would require updating the already published content with correct compatibility -->
+    
+        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/gerrit-operator/icons/color/gerrit-operator-color.svg" />
+    
+    </a>
+    
+</div>
+
+    
+
+
+
+
+<div id="copy-url">
+  <div class="btn-class">
+    <div class="vertical-center" id="Gerrit operator ">
+      <div class="btn-grp">
+        
+        <a href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id=5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9&name=Gerrit operator "
+          target="_blank">
+          <button class="import import-brand-primary" style="width: 15rem;">Open in Playground </button>
+        </a>
+        
+
+       
+        
+        <a href="/pr-preview/pr-2947/catalog/5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9/0.0.1/design.yml" download="Gerrit operator .yml">
+          <button id="resourceDownloadBtn" data-patternId="5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9" onclick="sendCloudTelemetry()"
+            class="import import-brand-secondary" style="width: 7rem;">
+            Download
+          </button>
+        </a>
+
+        <div class="btn-tooltip-grp" id="copy-url-tooltip">
+          <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9/0.0.1/design.yml"
+            onmouseout="resetCopyText(this)">
+            <button class="import import-brand-tertiary" style="width: 7rem;">
+              Copy URL
+            </button>
+          </a>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+
+  function sendCloudTelemetry() {
+
+    const element = document.getElementById("resourceDownloadBtn")
+    const patternId = element.dataset.patternid
+    patternId && fetch(`https://cloud.meshery.io/api/content/patterns/download/${patternId}`)
+  }
+
+</script>
+  </div>
+
   <div class="modal-image-container">
 
     <h4>Catalog Details</h4>
@@ -632,110 +736,6 @@ This YAML configuration defines a Kubernetes Deployment named "gerrit-operator-d
   </div>
   <!-- MINICARD-END -->
 
-  
-  
-  
-  
-  <div>
-    <h3>What This Design Does:</h3>
-    
-      <p class="pre-white-space">
-This YAML configuration defines a Kubernetes Deployment named "gerrit-operator-deployment" for managing a containerized application called "gerrit-operator". It specifies that one replica of the application should be deployed. The Deployment ensures that the application is always running by managing pod replicas based on the provided selector labels. The template section describes the pod specification, including labels, service account, security context, and container configuration. The container named "gerrit-operator-container" is configured with an image from a container registry, with resource limits and requests defined for CPU and memory. Environment variables are set for various parameters like the namespace, pod name, and platform type. Additionally, specific intervals for syncing Gerrit projects and group members are defined. Further configuration options can be added as needed, such as volumes and initContainers.
-</p>
-    
-
-    <h4 class="design-snapshot">Design Snapshot</h4>
-    <img class="pattern-snapshot"
-      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9-light.png"
-      onerror="this.src='/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9-light')"/>
-
-    <h3>Caveats and Consideration:</h3>
-    
-      <p class="pre-white-space">1. Resource Requirements: Ensure that the resource requests and limits specified for CPU and memory are appropriate for the workload and the cluster's capacity to prevent performance issues or resource contention.
-
-2. Image Pull Policy: The imagePullPolicy set to "Always" ensures that the latest image version is always pulled from the container registry. This may increase deployment time and consume more network bandwidth, so consider the trade-offs based on your deployment requirements.
-
-3. Security Configuration: The security context settings, such as runAsNonRoot and allowPrivilegeEscalation: false, enhance pod security by enforcing non-root user execution and preventing privilege escalation. Verify that these settings align with your organization's security policies.
-
-4. Environment Variables: Review the environment variables set for WATCH_NAMESPACE, POD_NAME, PLATFORM_TYPE, GERRIT_PROJECT_SYNC_INTERVAL, and GERRIT_GROUP_MEMBER_SYNC_INTERVAL to ensure they are correctly configured for your deployment environment and application requirements.
-</p>
-    
-
-    <h3>Compatibility:</h3>
-          <style>
-        .service-mesh-image{
-            margin: 1.2rem;
-        }
-    </style>
-    <div class="comatibility-grid">
-    
-    
-    
-    <a href="/pr-preview/pr-2947/catalog/models/gerrit-operator">
-    <!-- Please remove these hardcoding -->
-    <!-- This would require updating the already published content with correct compatibility -->
-    
-        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/gerrit-operator/icons/color/gerrit-operator-color.svg" />
-    
-    </a>
-    
-</div>
-
-      
-
-
-
-
-<div id="copy-url">
-  <div class="btn-class">
-    <div class="vertical-center" id="Gerrit operator ">
-      <div class="btn-grp">
-        
-        <a href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id=5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9&name=Gerrit operator "
-          target="_blank">
-          <button class="import import-brand-primary" style="width: 15rem;">Open in Playground </button>
-        </a>
-        
-
-       
-        
-        <a href="/pr-preview/pr-2947/catalog/5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9/0.0.1/design.yml" download="Gerrit operator .yml">
-          <button id="resourceDownloadBtn" data-patternId="5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9" onclick="sendCloudTelemetry()"
-            class="import import-brand-secondary" style="width: 7rem;">
-            Download
-          </button>
-        </a>
-
-        <div class="btn-tooltip-grp" id="copy-url-tooltip">
-          <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/5fdb64c5-80ca-4f6c-ba6e-1a1f98b553a9/0.0.1/design.yml"
-            onmouseout="resetCopyText(this)">
-            <button class="import import-brand-tertiary" style="width: 7rem;">
-              Copy URL
-            </button>
-          </a>
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<script>
-
-  function sendCloudTelemetry() {
-
-    const element = document.getElementById("resourceDownloadBtn")
-    const patternId = element.dataset.patternid
-    patternId && fetch(`https://cloud.meshery.io/api/content/patterns/download/${patternId}`)
-  }
-
-</script>
-    </div>
-
-  </div>
   
 </div>
 

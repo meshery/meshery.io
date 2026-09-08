@@ -43,13 +43,13 @@ Scalable: Airflow has a modular architecture and uses a message queue to orchest
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:image" content="https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-09-08T01:15:15+00:00" />
-<meta property="article:modified_time" content="2026-09-08T01:15:15+00:00" />
+<meta property="article:published_time" content="2026-09-08T02:02:16+00:00" />
+<meta property="article:modified_time" content="2026-09-08T02:02:16+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg" />
 <meta name="twitter:title" content="Apache Airflow" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-09-08T01:15:15+00:00","datePublished":"2026-09-08T01:15:15+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Apache Airflow","image":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2947/catalog/workloads/apache-airflow-0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2947/catalog/workloads/apache-airflow-0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-09-08T02:02:16+00:00","datePublished":"2026-09-08T02:02:16+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Apache Airflow","image":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2947/catalog/workloads/apache-airflow-0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2947/catalog/workloads/apache-airflow-0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9.html"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/pr-preview/pr-2947/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/pr-preview/pr-2947/css/stellarnav.css" />
@@ -543,6 +543,119 @@ Scalable: Airflow has a modular architecture and uses a message queue to orchest
 	<div class="post-content">
 		
 <div class="single-page">
+  
+  
+  
+  
+
+  <div class="catalog-content">
+    <h3>What This Design Does:</h3>
+    
+      <p class="pre-white-space">Apache Airflow (or simply Airflow) is a platform to programmatically author, schedule, and monitor workflows.
+
+When workflows are defined as code, they become more maintainable, versionable, testable, and collaborative.
+
+Use Airflow to author workflows as directed acyclic graphs (DAGs) of tasks. The Airflow scheduler executes your tasks on an array of workers while following the specified dependencies. Rich command line utilities make performing complex surgeries on DAGs a snap. The rich user interface makes it easy to visualize pipelines running in production, monitor progress, and troubleshoot issues when needed.
+
+Airflow works best with workflows that are mostly static and slowly changing. When the DAG structure is similar from one run to the next, it clarifies the unit of work and continuity. Other similar projects include Luigi, Oozie and Azkaban.
+
+Airflow is commonly used to process data, but has the opinion that tasks should ideally be idempotent (i.e., results of the task will be the same, and will not create duplicated data in a destination system), and should not pass large quantities of data from one task to the next (though tasks can pass metadata using Airflow's XCom feature). For high-volume, data-intensive tasks, a best practice is to delegate to external services specializing in that type of work.
+
+Airflow is not a streaming solution, but it is often used to process real-time data, pulling data off streams in batches.
+
+Principles
+Dynamic: Airflow pipelines are configuration as code (Python), allowing for dynamic pipeline generation. This allows for writing code that instantiates pipelines dynamically.
+Extensible: Easily define your own operators, executors and extend the library so that it fits the level of abstraction that suits your environment.
+Elegant: Airflow pipelines are lean and explicit. Parameterizing your scripts is built into the core of Airflow using the powerful Jinja templating engine.
+Scalable: Airflow has a modular architecture and uses a message queue to orchestrate an arbitrary number of workers.
+</p>
+    
+
+    <h4 class="design-snapshot">Design Snapshot</h4>
+    <img class="pattern-snapshot"
+      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9-light.png"
+      onerror="this.src='/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9-light')"/>
+
+    <h3>Caveats and Consideration:</h3>
+    
+      <p class="pre-white-space">Make sure to fill out your own postgres username ,password, host,port etc to see airflow working as per your database requirements. pass them as environment variables or create secrets   for password and config map for ports ,host .
+</p>
+    
+
+    <h3>Compatibility:</h3>
+        <style>
+        .service-mesh-image{
+            margin: 1.2rem;
+        }
+    </style>
+    <div class="comatibility-grid">
+    
+    
+    
+    <a href="/pr-preview/pr-2947/catalog/models/kubernetes">
+    <!-- Please remove these hardcoding -->
+    <!-- This would require updating the already published content with correct compatibility -->
+    
+        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/kubernetes/icons/color/kubernetes-color.svg" />
+    
+    </a>
+    
+</div>
+
+    
+
+
+
+
+<div id="copy-url">
+  <div class="btn-class">
+    <div class="vertical-center" id="Apache Airflow">
+      <div class="btn-grp">
+        
+        <a href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id=0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9&name=Apache Airflow"
+          target="_blank">
+          <button class="import import-brand-primary" style="width: 15rem;">Open in Playground </button>
+        </a>
+        
+
+       
+        
+        <a href="/pr-preview/pr-2947/catalog/0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9/0.0.1/design.yml" download="Apache Airflow.yml">
+          <button id="resourceDownloadBtn" data-patternId="0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9" onclick="sendCloudTelemetry()"
+            class="import import-brand-secondary" style="width: 7rem;">
+            Download
+          </button>
+        </a>
+
+        <div class="btn-tooltip-grp" id="copy-url-tooltip">
+          <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9/0.0.1/design.yml"
+            onmouseout="resetCopyText(this)">
+            <button class="import import-brand-tertiary" style="width: 7rem;">
+              Copy URL
+            </button>
+          </a>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+
+  function sendCloudTelemetry() {
+
+    const element = document.getElementById("resourceDownloadBtn")
+    const patternId = element.dataset.patternid
+    patternId && fetch(`https://cloud.meshery.io/api/content/patterns/download/${patternId}`)
+  }
+
+</script>
+  </div>
+
   <div class="modal-image-container">
 
     <h4>Catalog Details</h4>
@@ -1311,119 +1424,6 @@ Scalable: Airflow has a modular architecture and uses a message queue to orchest
   </div>
   <!-- MINICARD-END -->
 
-  
-  
-  
-  
-  <div>
-    <h3>What This Design Does:</h3>
-    
-      <p class="pre-white-space">Apache Airflow (or simply Airflow) is a platform to programmatically author, schedule, and monitor workflows.
-
-When workflows are defined as code, they become more maintainable, versionable, testable, and collaborative.
-
-Use Airflow to author workflows as directed acyclic graphs (DAGs) of tasks. The Airflow scheduler executes your tasks on an array of workers while following the specified dependencies. Rich command line utilities make performing complex surgeries on DAGs a snap. The rich user interface makes it easy to visualize pipelines running in production, monitor progress, and troubleshoot issues when needed.
-
-Airflow works best with workflows that are mostly static and slowly changing. When the DAG structure is similar from one run to the next, it clarifies the unit of work and continuity. Other similar projects include Luigi, Oozie and Azkaban.
-
-Airflow is commonly used to process data, but has the opinion that tasks should ideally be idempotent (i.e., results of the task will be the same, and will not create duplicated data in a destination system), and should not pass large quantities of data from one task to the next (though tasks can pass metadata using Airflow's XCom feature). For high-volume, data-intensive tasks, a best practice is to delegate to external services specializing in that type of work.
-
-Airflow is not a streaming solution, but it is often used to process real-time data, pulling data off streams in batches.
-
-Principles
-Dynamic: Airflow pipelines are configuration as code (Python), allowing for dynamic pipeline generation. This allows for writing code that instantiates pipelines dynamically.
-Extensible: Easily define your own operators, executors and extend the library so that it fits the level of abstraction that suits your environment.
-Elegant: Airflow pipelines are lean and explicit. Parameterizing your scripts is built into the core of Airflow using the powerful Jinja templating engine.
-Scalable: Airflow has a modular architecture and uses a message queue to orchestrate an arbitrary number of workers.
-</p>
-    
-
-    <h4 class="design-snapshot">Design Snapshot</h4>
-    <img class="pattern-snapshot"
-      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9-light.png"
-      onerror="this.src='/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9-light')"/>
-
-    <h3>Caveats and Consideration:</h3>
-    
-      <p class="pre-white-space">Make sure to fill out your own postgres username ,password, host,port etc to see airflow working as per your database requirements. pass them as environment variables or create secrets   for password and config map for ports ,host .
-</p>
-    
-
-    <h3>Compatibility:</h3>
-          <style>
-        .service-mesh-image{
-            margin: 1.2rem;
-        }
-    </style>
-    <div class="comatibility-grid">
-    
-    
-    
-    <a href="/pr-preview/pr-2947/catalog/models/kubernetes">
-    <!-- Please remove these hardcoding -->
-    <!-- This would require updating the already published content with correct compatibility -->
-    
-        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/kubernetes/icons/color/kubernetes-color.svg" />
-    
-    </a>
-    
-</div>
-
-      
-
-
-
-
-<div id="copy-url">
-  <div class="btn-class">
-    <div class="vertical-center" id="Apache Airflow">
-      <div class="btn-grp">
-        
-        <a href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id=0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9&name=Apache Airflow"
-          target="_blank">
-          <button class="import import-brand-primary" style="width: 15rem;">Open in Playground </button>
-        </a>
-        
-
-       
-        
-        <a href="/pr-preview/pr-2947/catalog/0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9/0.0.1/design.yml" download="Apache Airflow.yml">
-          <button id="resourceDownloadBtn" data-patternId="0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9" onclick="sendCloudTelemetry()"
-            class="import import-brand-secondary" style="width: 7rem;">
-            Download
-          </button>
-        </a>
-
-        <div class="btn-tooltip-grp" id="copy-url-tooltip">
-          <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/0b6b1ff8-cb2e-41d4-baff-e0a053f7e4d9/0.0.1/design.yml"
-            onmouseout="resetCopyText(this)">
-            <button class="import import-brand-tertiary" style="width: 7rem;">
-              Copy URL
-            </button>
-          </a>
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<script>
-
-  function sendCloudTelemetry() {
-
-    const element = document.getElementById("resourceDownloadBtn")
-    const patternId = element.dataset.patternid
-    patternId && fetch(`https://cloud.meshery.io/api/content/patterns/download/${patternId}`)
-  }
-
-</script>
-    </div>
-
-  </div>
   
 </div>
 

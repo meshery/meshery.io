@@ -27,13 +27,13 @@
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:image" content="https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-09-08T01:15:15+00:00" />
-<meta property="article:modified_time" content="2026-09-08T01:15:15+00:00" />
+<meta property="article:published_time" content="2026-09-08T02:02:16+00:00" />
+<meta property="article:modified_time" content="2026-09-08T02:02:16+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg" />
 <meta name="twitter:title" content="Istio Operator" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-09-08T01:15:15+00:00","datePublished":"2026-09-08T01:15:15+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Istio Operator","image":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2947/catalog/deployment/istio-operator-06ef6097-8f21-4a76-b025-0c9271168814.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2947/catalog/deployment/istio-operator-06ef6097-8f21-4a76-b025-0c9271168814.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-09-08T02:02:16+00:00","datePublished":"2026-09-08T02:02:16+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Istio Operator","image":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2947/catalog/deployment/istio-operator-06ef6097-8f21-4a76-b025-0c9271168814.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2947/catalog/deployment/istio-operator-06ef6097-8f21-4a76-b025-0c9271168814.html"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/pr-preview/pr-2947/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/pr-preview/pr-2947/css/stellarnav.css" />
@@ -527,6 +527,111 @@
 	<div class="post-content">
 		
 <div class="single-page">
+  
+  
+  
+  
+
+  <div class="catalog-content">
+    <h3>What This Design Does:</h3>
+    
+      <p class="pre-white-space">This YAML defines a Kubernetes Deployment for the Istio Operator within the istio-operator namespace. The deployment ensures a single replica of the Istio Operator pod is always running, which is managed by a service account named istio-operator. The deployment's metadata includes the namespace and the deployment name. The pod selector matches pods with the label name: istio-operator, ensuring the correct pods are managed. The pod template specifies metadata and details for the containers, including the container name istio-operator and the image gcr.io/istio-testing/operator:1.5-dev, which runs the istio-operator command with the server argument.
+</p>
+    
+
+    <h4 class="design-snapshot">Design Snapshot</h4>
+    <img class="pattern-snapshot"
+      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/06ef6097-8f21-4a76-b025-0c9271168814-light.png"
+      onerror="this.src='/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('06ef6097-8f21-4a76-b025-0c9271168814-light')"/>
+
+    <h3>Caveats and Consideration:</h3>
+    
+      <p class="pre-white-space">1. Namespace Configuration: Ensure that the istio-operator namespace exists before applying this deployment. If the namespace is not present, the deployment will fail.
+
+2. Image Version: The image specified (gcr.io/istio-testing/operator:1.5-dev) is a development version. It is crucial to verify the stability and compatibility of this version for production environments. Using a stable release version is generally recommended.
+
+3. Resource Allocation: The resource limits and requests are set to specific values (200m CPU, 256Mi memory for limits; 50m CPU, 128Mi memory for requests). These values should be reviewed and adjusted based on the actual resource availability and requirements of your Kubernetes cluster to prevent resource contention or overallocation.
+
+4. Leader Election: The environment variables include LEADER_ELECTION_NAMESPACE which is derived from the pod's namespace. Ensure that the leader election mechanism is properly configured and that only one instance of the operator becomes the leader to avoid conflicts.
+
+5. Security Context: The deployment does not specify a security context for the container. It is advisable to review and define appropriate security contexts to enhance the security posture of the deployment, such as running the container as a non-root user.
+</p>
+    
+
+    <h3>Compatibility:</h3>
+        <style>
+        .service-mesh-image{
+            margin: 1.2rem;
+        }
+    </style>
+    <div class="comatibility-grid">
+    
+    
+    
+    <a href="/pr-preview/pr-2947/catalog/models/istio-operator">
+    <!-- Please remove these hardcoding -->
+    <!-- This would require updating the already published content with correct compatibility -->
+    
+        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/istio-operator/icons/color/istio-operator-color.svg" />
+    
+    </a>
+    
+</div>
+
+    
+
+
+
+
+<div id="copy-url">
+  <div class="btn-class">
+    <div class="vertical-center" id="Istio Operator">
+      <div class="btn-grp">
+        
+        <a href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id=06ef6097-8f21-4a76-b025-0c9271168814&name=Istio Operator"
+          target="_blank">
+          <button class="import import-brand-primary" style="width: 15rem;">Open in Playground </button>
+        </a>
+        
+
+       
+        
+        <a href="/pr-preview/pr-2947/catalog/06ef6097-8f21-4a76-b025-0c9271168814/0.0.1/design.yml" download="Istio Operator.yml">
+          <button id="resourceDownloadBtn" data-patternId="06ef6097-8f21-4a76-b025-0c9271168814" onclick="sendCloudTelemetry()"
+            class="import import-brand-secondary" style="width: 7rem;">
+            Download
+          </button>
+        </a>
+
+        <div class="btn-tooltip-grp" id="copy-url-tooltip">
+          <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/06ef6097-8f21-4a76-b025-0c9271168814/0.0.1/design.yml"
+            onmouseout="resetCopyText(this)">
+            <button class="import import-brand-tertiary" style="width: 7rem;">
+              Copy URL
+            </button>
+          </a>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+
+  function sendCloudTelemetry() {
+
+    const element = document.getElementById("resourceDownloadBtn")
+    const patternId = element.dataset.patternid
+    patternId && fetch(`https://cloud.meshery.io/api/content/patterns/download/${patternId}`)
+  }
+
+</script>
+  </div>
+
   <div class="modal-image-container">
 
     <h4>Catalog Details</h4>
@@ -631,111 +736,6 @@
   </div>
   <!-- MINICARD-END -->
 
-  
-  
-  
-  
-  <div>
-    <h3>What This Design Does:</h3>
-    
-      <p class="pre-white-space">This YAML defines a Kubernetes Deployment for the Istio Operator within the istio-operator namespace. The deployment ensures a single replica of the Istio Operator pod is always running, which is managed by a service account named istio-operator. The deployment's metadata includes the namespace and the deployment name. The pod selector matches pods with the label name: istio-operator, ensuring the correct pods are managed. The pod template specifies metadata and details for the containers, including the container name istio-operator and the image gcr.io/istio-testing/operator:1.5-dev, which runs the istio-operator command with the server argument.
-</p>
-    
-
-    <h4 class="design-snapshot">Design Snapshot</h4>
-    <img class="pattern-snapshot"
-      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/06ef6097-8f21-4a76-b025-0c9271168814-light.png"
-      onerror="this.src='/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('06ef6097-8f21-4a76-b025-0c9271168814-light')"/>
-
-    <h3>Caveats and Consideration:</h3>
-    
-      <p class="pre-white-space">1. Namespace Configuration: Ensure that the istio-operator namespace exists before applying this deployment. If the namespace is not present, the deployment will fail.
-
-2. Image Version: The image specified (gcr.io/istio-testing/operator:1.5-dev) is a development version. It is crucial to verify the stability and compatibility of this version for production environments. Using a stable release version is generally recommended.
-
-3. Resource Allocation: The resource limits and requests are set to specific values (200m CPU, 256Mi memory for limits; 50m CPU, 128Mi memory for requests). These values should be reviewed and adjusted based on the actual resource availability and requirements of your Kubernetes cluster to prevent resource contention or overallocation.
-
-4. Leader Election: The environment variables include LEADER_ELECTION_NAMESPACE which is derived from the pod's namespace. Ensure that the leader election mechanism is properly configured and that only one instance of the operator becomes the leader to avoid conflicts.
-
-5. Security Context: The deployment does not specify a security context for the container. It is advisable to review and define appropriate security contexts to enhance the security posture of the deployment, such as running the container as a non-root user.
-</p>
-    
-
-    <h3>Compatibility:</h3>
-          <style>
-        .service-mesh-image{
-            margin: 1.2rem;
-        }
-    </style>
-    <div class="comatibility-grid">
-    
-    
-    
-    <a href="/pr-preview/pr-2947/catalog/models/istio-operator">
-    <!-- Please remove these hardcoding -->
-    <!-- This would require updating the already published content with correct compatibility -->
-    
-        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/istio-operator/icons/color/istio-operator-color.svg" />
-    
-    </a>
-    
-</div>
-
-      
-
-
-
-
-<div id="copy-url">
-  <div class="btn-class">
-    <div class="vertical-center" id="Istio Operator">
-      <div class="btn-grp">
-        
-        <a href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id=06ef6097-8f21-4a76-b025-0c9271168814&name=Istio Operator"
-          target="_blank">
-          <button class="import import-brand-primary" style="width: 15rem;">Open in Playground </button>
-        </a>
-        
-
-       
-        
-        <a href="/pr-preview/pr-2947/catalog/06ef6097-8f21-4a76-b025-0c9271168814/0.0.1/design.yml" download="Istio Operator.yml">
-          <button id="resourceDownloadBtn" data-patternId="06ef6097-8f21-4a76-b025-0c9271168814" onclick="sendCloudTelemetry()"
-            class="import import-brand-secondary" style="width: 7rem;">
-            Download
-          </button>
-        </a>
-
-        <div class="btn-tooltip-grp" id="copy-url-tooltip">
-          <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/06ef6097-8f21-4a76-b025-0c9271168814/0.0.1/design.yml"
-            onmouseout="resetCopyText(this)">
-            <button class="import import-brand-tertiary" style="width: 7rem;">
-              Copy URL
-            </button>
-          </a>
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<script>
-
-  function sendCloudTelemetry() {
-
-    const element = document.getElementById("resourceDownloadBtn")
-    const patternId = element.dataset.patternid
-    patternId && fetch(`https://cloud.meshery.io/api/content/patterns/download/${patternId}`)
-  }
-
-</script>
-    </div>
-
-  </div>
   
 </div>
 

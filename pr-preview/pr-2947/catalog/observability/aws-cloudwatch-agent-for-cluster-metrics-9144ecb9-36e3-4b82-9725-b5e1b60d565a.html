@@ -27,13 +27,13 @@
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:image" content="https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-09-08T01:15:15+00:00" />
-<meta property="article:modified_time" content="2026-09-08T01:15:15+00:00" />
+<meta property="article:published_time" content="2026-09-08T02:02:16+00:00" />
+<meta property="article:modified_time" content="2026-09-08T02:02:16+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg" />
 <meta name="twitter:title" content="Aws Cloudwatch Agent for Cluster Metrics" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-09-08T01:15:15+00:00","datePublished":"2026-09-08T01:15:15+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Aws Cloudwatch Agent for Cluster Metrics","image":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2947/catalog/observability/aws-cloudwatch-agent-for-cluster-metrics-9144ecb9-36e3-4b82-9725-b5e1b60d565a.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2947/catalog/observability/aws-cloudwatch-agent-for-cluster-metrics-9144ecb9-36e3-4b82-9725-b5e1b60d565a.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-09-08T02:02:16+00:00","datePublished":"2026-09-08T02:02:16+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Aws Cloudwatch Agent for Cluster Metrics","image":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-2947/catalog/observability/aws-cloudwatch-agent-for-cluster-metrics-9144ecb9-36e3-4b82-9725-b5e1b60d565a.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-2947/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-2947/catalog/observability/aws-cloudwatch-agent-for-cluster-metrics-9144ecb9-36e3-4b82-9725-b5e1b60d565a.html"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/pr-preview/pr-2947/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/pr-preview/pr-2947/css/stellarnav.css" />
@@ -527,6 +527,141 @@
 	<div class="post-content">
 		
 <div class="single-page">
+  
+  
+  
+  
+
+  <div class="catalog-content">
+    <h3>What This Design Does:</h3>
+    
+      <p class="pre-white-space">CloudWatch Agent to collect Kubernetes cluster metrics involves configuring and deploying the CloudWatch Agent within your Kubernetes environment. This agent facilitates the collection and forwarding of various system-level and application-level metrics to AWS CloudWatch, enabling comprehensive monitoring and analysis. By integrating the CloudWatch Agent, Kubernetes administrators can effortlessly monitor cluster performance metrics such as CPU utilization, memory usage, disk I/O, and network traffic. This setup enhances operational visibility, supports proactive capacity planning, and enables the creation of alarms and notifications based on customizable thresholds, ensuring robust and reliable management of Kubernetes infrastructure at scale.
+</p>
+    
+
+    <h4 class="design-snapshot">Design Snapshot</h4>
+    <img class="pattern-snapshot"
+      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/9144ecb9-36e3-4b82-9725-b5e1b60d565a-light.png"
+      onerror="this.src='/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('9144ecb9-36e3-4b82-9725-b5e1b60d565a-light')"/>
+
+    <h3>Caveats and Consideration:</h3>
+    
+      <p class="pre-white-space">When deploying the CloudWatch Agent to collect Kubernetes cluster metrics, there are several caveats and considerations to keep in mind:
+
+Resource Consumption: The CloudWatch Agent runs as a daemon set within Kubernetes, consuming resources (CPU, memory) on each node where it's deployed. Ensure your cluster has sufficient resources to accommodate this additional workload.
+
+Networking: Verify that nodes in your Kubernetes cluster can communicate with AWS CloudWatch endpoints over the network. This may involve configuring network policies, security groups, or VPC settings to allow outbound traffic to AWS services.
+
+Permissions: Set up IAM roles or IAM users with appropriate permissions to allow the CloudWatch Agent to publish metrics to CloudWatch. Follow the principle of least privilege to minimize security risks.
+
+Configuration: Properly configure the CloudWatch Agent to collect relevant metrics based on your application and infrastructure requirements. Incorrect configuration can lead to incomplete or inaccurate monitoring data.
+
+Version Compatibility: Ensure compatibility between the CloudWatch Agent version and your Kubernetes cluster version. Updates or changes in Kubernetes versions may require corresponding updates to the CloudWatch Agent for optimal performance and compatibility.
+
+Monitoring Costs: Regularly monitor and review the costs associated with CloudWatch metrics ingestion and storage. Depending on the volume of metrics collected, costs can vary, especially if high-resolution metrics are enabled.
+
+High Availability: Design your deployment for high availability to ensure continuous monitoring and metric collection. Consider deploying multiple instances of the CloudWatch Agent across different availability zones or regions for resilience.
+
+Security: Implement best practices for securing the CloudWatch Agent deployment, including encrypting sensitive data in transit and at rest, using secure IAM roles, and regularly updating to the latest agent version to mitigate security vulnerabilities.
+
+Integration with Monitoring Tools: Integrate CloudWatch metrics with your existing monitoring and alerting tools to streamline incident response and operational workflows. Ensure that metrics from CloudWatch can be correlated with other monitoring data for comprehensive visibility.
+</p>
+    
+
+    <h3>Compatibility:</h3>
+        <style>
+        .service-mesh-image{
+            margin: 1.2rem;
+        }
+    </style>
+    <div class="comatibility-grid">
+    
+    
+    
+    <a href="/pr-preview/pr-2947/catalog/models/aws-cloudwatch-controller">
+    <!-- Please remove these hardcoding -->
+    <!-- This would require updating the already published content with correct compatibility -->
+    
+        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/aws-cloudwatch-controller/icons/color/aws-cloudwatch-controller-color.svg" />
+    
+    </a>
+    
+    
+    
+    <a href="/pr-preview/pr-2947/catalog/models/aws-cloudwatchlogs-controller">
+    <!-- Please remove these hardcoding -->
+    <!-- This would require updating the already published content with correct compatibility -->
+    
+        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/aws-cloudwatchlogs-controller/icons/color/aws-cloudwatchlogs-controller-color.svg" />
+    
+    </a>
+    
+    
+    
+    <a href="/pr-preview/pr-2947/catalog/models/kubernetes">
+    <!-- Please remove these hardcoding -->
+    <!-- This would require updating the already published content with correct compatibility -->
+    
+        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/kubernetes/icons/color/kubernetes-color.svg" />
+    
+    </a>
+    
+</div>
+
+    
+
+
+
+
+<div id="copy-url">
+  <div class="btn-class">
+    <div class="vertical-center" id="Aws Cloudwatch Agent for Cluster Metrics">
+      <div class="btn-grp">
+        
+        <a href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id=9144ecb9-36e3-4b82-9725-b5e1b60d565a&name=Aws Cloudwatch Agent for Cluster Metrics"
+          target="_blank">
+          <button class="import import-brand-primary" style="width: 15rem;">Open in Playground </button>
+        </a>
+        
+
+       
+        
+        <a href="/pr-preview/pr-2947/catalog/9144ecb9-36e3-4b82-9725-b5e1b60d565a/0.0.4/design.yml" download="Aws Cloudwatch Agent for Cluster Metrics.yml">
+          <button id="resourceDownloadBtn" data-patternId="9144ecb9-36e3-4b82-9725-b5e1b60d565a" onclick="sendCloudTelemetry()"
+            class="import import-brand-secondary" style="width: 7rem;">
+            Download
+          </button>
+        </a>
+
+        <div class="btn-tooltip-grp" id="copy-url-tooltip">
+          <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/9144ecb9-36e3-4b82-9725-b5e1b60d565a/0.0.4/design.yml"
+            onmouseout="resetCopyText(this)">
+            <button class="import import-brand-tertiary" style="width: 7rem;">
+              Copy URL
+            </button>
+          </a>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+
+  function sendCloudTelemetry() {
+
+    const element = document.getElementById("resourceDownloadBtn")
+    const patternId = element.dataset.patternid
+    patternId && fetch(`https://cloud.meshery.io/api/content/patterns/download/${patternId}`)
+  }
+
+</script>
+  </div>
+
   <div class="modal-image-container">
 
     <h4>Catalog Details</h4>
@@ -1147,141 +1282,6 @@
   </div>
   <!-- MINICARD-END -->
 
-  
-  
-  
-  
-  <div>
-    <h3>What This Design Does:</h3>
-    
-      <p class="pre-white-space">CloudWatch Agent to collect Kubernetes cluster metrics involves configuring and deploying the CloudWatch Agent within your Kubernetes environment. This agent facilitates the collection and forwarding of various system-level and application-level metrics to AWS CloudWatch, enabling comprehensive monitoring and analysis. By integrating the CloudWatch Agent, Kubernetes administrators can effortlessly monitor cluster performance metrics such as CPU utilization, memory usage, disk I/O, and network traffic. This setup enhances operational visibility, supports proactive capacity planning, and enables the creation of alarms and notifications based on customizable thresholds, ensuring robust and reliable management of Kubernetes infrastructure at scale.
-</p>
-    
-
-    <h4 class="design-snapshot">Design Snapshot</h4>
-    <img class="pattern-snapshot"
-      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/9144ecb9-36e3-4b82-9725-b5e1b60d565a-light.png"
-      onerror="this.src='/pr-preview/pr-2947/assets/images/logos/service-mesh-pattern.svg'" loading="lazy" onclick="toggleFullScreenImage('9144ecb9-36e3-4b82-9725-b5e1b60d565a-light')"/>
-
-    <h3>Caveats and Consideration:</h3>
-    
-      <p class="pre-white-space">When deploying the CloudWatch Agent to collect Kubernetes cluster metrics, there are several caveats and considerations to keep in mind:
-
-Resource Consumption: The CloudWatch Agent runs as a daemon set within Kubernetes, consuming resources (CPU, memory) on each node where it's deployed. Ensure your cluster has sufficient resources to accommodate this additional workload.
-
-Networking: Verify that nodes in your Kubernetes cluster can communicate with AWS CloudWatch endpoints over the network. This may involve configuring network policies, security groups, or VPC settings to allow outbound traffic to AWS services.
-
-Permissions: Set up IAM roles or IAM users with appropriate permissions to allow the CloudWatch Agent to publish metrics to CloudWatch. Follow the principle of least privilege to minimize security risks.
-
-Configuration: Properly configure the CloudWatch Agent to collect relevant metrics based on your application and infrastructure requirements. Incorrect configuration can lead to incomplete or inaccurate monitoring data.
-
-Version Compatibility: Ensure compatibility between the CloudWatch Agent version and your Kubernetes cluster version. Updates or changes in Kubernetes versions may require corresponding updates to the CloudWatch Agent for optimal performance and compatibility.
-
-Monitoring Costs: Regularly monitor and review the costs associated with CloudWatch metrics ingestion and storage. Depending on the volume of metrics collected, costs can vary, especially if high-resolution metrics are enabled.
-
-High Availability: Design your deployment for high availability to ensure continuous monitoring and metric collection. Consider deploying multiple instances of the CloudWatch Agent across different availability zones or regions for resilience.
-
-Security: Implement best practices for securing the CloudWatch Agent deployment, including encrypting sensitive data in transit and at rest, using secure IAM roles, and regularly updating to the latest agent version to mitigate security vulnerabilities.
-
-Integration with Monitoring Tools: Integrate CloudWatch metrics with your existing monitoring and alerting tools to streamline incident response and operational workflows. Ensure that metrics from CloudWatch can be correlated with other monitoring data for comprehensive visibility.
-</p>
-    
-
-    <h3>Compatibility:</h3>
-          <style>
-        .service-mesh-image{
-            margin: 1.2rem;
-        }
-    </style>
-    <div class="comatibility-grid">
-    
-    
-    
-    <a href="/pr-preview/pr-2947/catalog/models/aws-cloudwatch-controller">
-    <!-- Please remove these hardcoding -->
-    <!-- This would require updating the already published content with correct compatibility -->
-    
-        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/aws-cloudwatch-controller/icons/color/aws-cloudwatch-controller-color.svg" />
-    
-    </a>
-    
-    
-    
-    <a href="/pr-preview/pr-2947/catalog/models/aws-cloudwatchlogs-controller">
-    <!-- Please remove these hardcoding -->
-    <!-- This would require updating the already published content with correct compatibility -->
-    
-        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/aws-cloudwatchlogs-controller/icons/color/aws-cloudwatchlogs-controller-color.svg" />
-    
-    </a>
-    
-    
-    
-    <a href="/pr-preview/pr-2947/catalog/models/kubernetes">
-    <!-- Please remove these hardcoding -->
-    <!-- This would require updating the already published content with correct compatibility -->
-    
-        <img class="service-mesh-image" src="/pr-preview/pr-2947/images/integrations/kubernetes/icons/color/kubernetes-color.svg" />
-    
-    </a>
-    
-</div>
-
-      
-
-
-
-
-<div id="copy-url">
-  <div class="btn-class">
-    <div class="vertical-center" id="Aws Cloudwatch Agent for Cluster Metrics">
-      <div class="btn-grp">
-        
-        <a href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id=9144ecb9-36e3-4b82-9725-b5e1b60d565a&name=Aws Cloudwatch Agent for Cluster Metrics"
-          target="_blank">
-          <button class="import import-brand-primary" style="width: 15rem;">Open in Playground </button>
-        </a>
-        
-
-       
-        
-        <a href="/pr-preview/pr-2947/catalog/9144ecb9-36e3-4b82-9725-b5e1b60d565a/0.0.4/design.yml" download="Aws Cloudwatch Agent for Cluster Metrics.yml">
-          <button id="resourceDownloadBtn" data-patternId="9144ecb9-36e3-4b82-9725-b5e1b60d565a" onclick="sendCloudTelemetry()"
-            class="import import-brand-secondary" style="width: 7rem;">
-            Download
-          </button>
-        </a>
-
-        <div class="btn-tooltip-grp" id="copy-url-tooltip">
-          <a class="btn tooltip-modal" data-clipboard-target="#copy-url" data-clipboard-text="https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/9144ecb9-36e3-4b82-9725-b5e1b60d565a/0.0.4/design.yml"
-            onmouseout="resetCopyText(this)">
-            <button class="import import-brand-tertiary" style="width: 7rem;">
-              Copy URL
-            </button>
-          </a>
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<script>
-
-  function sendCloudTelemetry() {
-
-    const element = document.getElementById("resourceDownloadBtn")
-    const patternId = element.dataset.patternid
-    patternId && fetch(`https://cloud.meshery.io/api/content/patterns/download/${patternId}`)
-  }
-
-</script>
-    </div>
-
-  </div>
   
 </div>
 
