@@ -22,10 +22,6 @@
             <div>{{pattern.type}}</div>
           </li>
 
-          <li><p>UUID</p>
-            <div>{{pattern.patternId}}</div>
-          </li>
-
           <li><p>CREATED BY</p>
             <div><a href="https://cloud.meshery.io/user/{{pattern.userId}}">{{pattern.userName}}</a></div>
           </li>
@@ -60,11 +56,6 @@
     </div>
 
     <div class="modal-image-single">
-      <h4>Design Snapshot</h4>
-      <img class="pattern-snapshot"
-      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png"
-      onerror="this.src='{{ '/assets/images/logos/service-mesh-pattern.svg' | relative_url }}'" loading="lazy" onclick="toggleFullScreenImage('{{ pattern.patternId }}-light')"/>
-
       <h4 class="related-patterns">Related Designs</h4>
       <!-- MINICARD-START -->
       {% include related-patterns.html %}
@@ -85,6 +76,11 @@
       <p class="pre-white-space">{{ info | url_decode }}</p>
     {% endif %}
 
+    <h4 class="design-snapshot">Design Snapshot</h4>
+    <img class="pattern-snapshot"
+      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png"
+      onerror="this.src='{{ '/assets/images/logos/service-mesh-pattern.svg' | relative_url }}'" loading="lazy" onclick="toggleFullScreenImage('{{ pattern.patternId }}-light')"/>
+
     <h3>Caveats and Consideration:</h3>
     {% if caveats_clean == '' or caveats_clean == '""' %}
       <p class="pre-white-space"><em>No description available.</em></p>
@@ -93,9 +89,7 @@
     {% endif %}
 
     <h3>Compatibility:</h3>
-      <br />
       {% include partials/compatibility.html%}
-      <br />
       {% include copy-and-download.html %}
     </div>
 
