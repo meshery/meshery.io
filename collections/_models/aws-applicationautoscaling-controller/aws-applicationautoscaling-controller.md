@@ -1,8 +1,8 @@
 ---
 layout: single-page-model
 item-type: model
-name: AWS Applilcation Autoscaling
-subtitle: Collaborative and visual infrastructure as design for AWS Applilcation Autoscaling
+name: AWS Application Autoscaling
+subtitle: Collaborative and visual infrastructure as design for AWS Application Autoscaling
 colorIcon: /assets/images/integration/aws-applicationautoscaling-controller/icons/color/aws-applicationautoscaling-controller-color.svg
 whiteIcon: /assets/images/integration/aws-applicationautoscaling-controller/icons/white/aws-applicationautoscaling-controller-white.svg
 docURL: https://docs.meshery.io/extensibility/integrations/aws-applicationautoscaling-controller
