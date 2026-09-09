@@ -31,7 +31,11 @@ components:
   colorIcon: assets/images/integration/aws-cloudwatchlogs-controller/components/resource-policy/icons/color/resource-policy-color.svg
   whiteIcon: assets/images/integration/aws-cloudwatchlogs-controller/components/resource-policy/icons/white/resource-policy-white.svg
   description: 
-componentsCount: 5
+- name: resource-policy
+  colorIcon: assets/images/integration/aws-cloudwatchlogs-controller/components/resource-policy/icons/color/resource-policy-color.svg
+  whiteIcon: assets/images/integration/aws-cloudwatchlogs-controller/components/resource-policy/icons/white/resource-policy-white.svg
+  description: 
+componentsCount: 6
 relationships: 
 - type: "non-binding"
   kind: "edge"
