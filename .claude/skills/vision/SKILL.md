@@ -160,6 +160,14 @@ Collect the verdict with `AskUserQuestion`, offering **Align**, **Resist**, and 
 
 A `Refine` verdict means the principle as drafted is wrong or incomplete. Go back to Step 4, change it, and record what changed.
 
+**When no maintainer is available.** Some questions are not opinions: the repository has already answered them, and a workflow or a config file is the answer. Those may be recorded as derived verdicts, under these rules:
+
+- Label them `**Verdict (derived from repository behavior)**` and cite the file and line that settles it. Never label a derived verdict as a maintainer verdict, and never put derived reasoning inside a `verbatim` block.
+- Derive only what the repository actually settles. "The workflow deletes these files before regenerating, so hand edits do not survive" is derived. "This tree should stay off limits" is a judgment about what the project wants and is not yours to make.
+- Leave genuine judgment calls open rather than filling them. Record them as `**Verdict**: Open - awaiting maintainer` with a link to where the question was asked, and fill them in as answers arrive.
+
+A calibration record that is honest about which verdicts came from a person and which came from a workflow is worth more than a complete-looking one where you cannot tell the difference.
+
 ### Step 7 - Apply verdicts and run the conformance checks
 
 Every verdict produces either an edit to `VISION.md` or an explicit note that none was needed. Record the mapping in the changelog of `docs/vision/vision-hypotheticals.md`. A changelog line that claims an edit that is not in `VISION.md` is the most common defect in this format; Step 7's third check catches it.
@@ -195,10 +203,25 @@ PY
 #    Read the output. A sentence with no path, no proper noun, and no artifact name is generic.
 awk '/^## /{p=1} p&&/^[A-Z]/' VISION.md | grep -vE "meshery|Meshery|mesheryctl|collections/|_data/|_plugins/|\.github/|Kanvas|Layer5|Jekyll|docs\.meshery\.io"
 
-# 5. Ten hypotheticals, ten verdicts, ten reasoning blocks
+# 5. Ten hypotheticals, each with a verdict and a changelog line
 grep -c "^## Hypothetical" docs/vision/vision-hypotheticals.md
-grep -c "\*\*Verdict\*\*" docs/vision/vision-hypotheticals.md
-grep -c "verbatim" docs/vision/vision-hypotheticals.md
+grep -cE "^\* \*\*Verdict" docs/vision/vision-hypotheticals.md   # matches both verdict forms
+grep -c "^\* \*\*Changelog\*\*" docs/vision/vision-hypotheticals.md
+
+# 6. Every changelog quote actually appears in VISION.md.
+#    A changelog claiming an edit that never landed is the most common defect in
+#    this format, and reviewers do find it.
+python3 - <<'CHK'
+import re, pathlib
+v = pathlib.Path("VISION.md").read_text()
+h = pathlib.Path("docs/vision/vision-hypotheticals.md").read_text()
+quotes = re.findall(r'Produced "([^"]+)"', h) + re.findall(r'and "([^"]+)" in', h)
+bad = [q for q in quotes if q not in v]
+print(f"{len(quotes)} changelog quotes checked")
+print("OK: all present" if not bad else "FAIL: changelog describes edits not in VISION.md:")
+for b in bad:
+    print("  -", b[:80])
+CHK
 ```
 
 Check 4 prints candidate generic sentences rather than passing or failing on its own. Read every line it prints and either make the sentence specific or cut it. Adjust the pattern list for the repository you are running in.
