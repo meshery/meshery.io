@@ -7,7 +7,7 @@ It owns exactly one thing: the public web presence of Meshery, including the ren
 ## The model registry is published here, not owned here
 
 The 394 model pages under `collections/_models`, counted on 2026-09-10, are maintained by the `meshery-ci` bot rather than by contributors.
-`meshery/meshery/.github/workflows/integrations-updater.yml` drives that publish through `meshery-extensions/integrations-workflow`, which checks this repository out alongside `layer5io/layer5`, `layer5io/meshery-cloud`, and `tata-consulting/meshery-remote-provider` and commits to each of them.
+`meshery/meshery/.github/workflows/integrations-updater.yml` drives that publish through `meshery-extensions/integrations-workflow`, which commits to five targets: this repository, `meshery/meshery` itself, `layer5io/layer5`, `layer5io/meshery-cloud`, and `tata-consulting/meshery-remote-provider`.
 The registry data itself sits upstream of all five targets, behind `mesheryctl registry publish`, so a model's components, icons, and categories are not authored in this repository.
 A model whose registry data is wrong on meshery.io is wrong at the registry and is fixed there, while the template, permalink, and rendering of that page remain this repository's to fix.
 
@@ -21,14 +21,14 @@ Commits to these trees carry bot identities: `meshery-ci`, `l5io`, and `Discussi
 
 ## Meshery.io is the front door and docs.meshery.io is the manual
 
-Every one of the 394 model pages carries a `docURL` pointing at `docs.meshery.io/extensibility/integrations/`, verified on 2026-09-10.
+Every one of the 394 model pages carries a `docURL` pointing at `docs.meshery.io`, 377 of them under `/extensibility/integrations/` and the remaining 17 under `/extensibility/adapters/`, counted on 2026-09-10.
 Meshery.io shows that an integration exists and what it covers, and documentation of how to use it lives in `meshery/meshery/docs`.
 The flow runs both ways: `.github/workflows/error-code-updater.yml` generates the Artifact Hub error reference in this repository and commits it into `meshery/meshery/docs/data/errorref/`.
 Governance and maintainership are not defined here either, since `GOVERNANCE.md` and `MAINTAINERS.md` are each a single line pointing at `meshery/meshery`.
 
 ## Content types are Jekyll collections
 
-`_config.yml` declares nine collections and sets `output` explicitly on each, with permalinks on the five that publish under their own URL scheme.
+`_config.yml` declares nine collections and sets `output` explicitly on each, with `permalink` on five of them and `sort_by` on three.
 A content type that needs a public URL is declared in the `_config.yml` `collections:` block rather than added as a loose directory of pages.
 `collections/_handbook` and `charts` set `output: false` where their entries are composed into other pages rather than published directly.
 `_plugins/catalog_page_metadata.rb` derives catalog page titles from registry `name` fields at render time rather than requiring a hand-written title on each entry.

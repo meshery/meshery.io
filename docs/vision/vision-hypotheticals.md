@@ -51,7 +51,7 @@ Seven of the ten below are open. They are posted for maintainer input on meshery
 * **Tests**: Principle 4
 * **For**: Faster for a contributor who wants three pages published this week, with no `_config.yml` change and no layout to write.
 * **Against**: Loose pages get no permalink scheme, no sort order, and no collection-level rendering, so they drift from every other content type on the site.
-* **Verdict (derived from repository behavior)**: **RESIST**. `_config.yml` declares nine collections, and every published content type on the site is one of them, each with explicit `output` and, where published, `permalink` and `sort_by`. `collections/_pages` exists precisely so that standalone pages are still collection members.
+* **Verdict (derived from repository behavior)**: **RESIST**. `_config.yml` declares nine collections and every published content type on the site is one of them. Each sets `output` explicitly; five also set `permalink` and three set `sort_by`, so those keys are available to a collection but not required of one. `collections/_pages` exists precisely so that standalone pages are still collection members.
 * **Changelog**: Produced "A content type that needs a public URL is declared in the `_config.yml` `collections:` block rather than added as a loose directory of pages" in Principle 4.
 
 ---

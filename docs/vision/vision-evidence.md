@@ -22,8 +22,8 @@ Counts drift. Where a count is cited it carries an as-of date, and re-verifying 
 * **Claim**: "The 394 model pages under `collections/_models`, counted on 2026-09-10, are maintained by the `meshery-ci` bot rather than by contributors."
   * **Evidence**: `find collections/_models -name '*.md' | wc -l` returns 394 on 2026-09-10; `git log --format='%an' -- collections/_models` shows `meshery-ci` as the author of every recent change, with commit message "[Docs] Generated documentation for Integration".
 
-* **Claim**: "`meshery/meshery/.github/workflows/integrations-updater.yml` drives that publish through `meshery-extensions/integrations-workflow`, which checks this repository out alongside `layer5io/layer5`, `layer5io/meshery-cloud`, and `tata-consulting/meshery-remote-provider` and commits to each of them."
-  * **Evidence**: `meshery/meshery/.github/workflows/integrations-updater.yml` line 25 calls `meshery-extensions/integrations-workflow/.github/workflows/publish.yml`; that workflow's lines 31-62 check out `meshery/meshery`, `layer5io/layer5`, `meshery/meshery.io`, `layer5io/meshery-cloud`, and `tata-consulting/meshery-remote-provider`, and lines 122-131, 141-150, 160-169, 179-188, and 198-207 commit to each.
+* **Claim**: "`meshery/meshery/.github/workflows/integrations-updater.yml` drives that publish through `meshery-extensions/integrations-workflow`, which commits to five targets: this repository, `meshery/meshery` itself, `layer5io/layer5`, `layer5io/meshery-cloud`, and `tata-consulting/meshery-remote-provider`."
+  * **Evidence**: `meshery/meshery/.github/workflows/integrations-updater.yml` line 25 calls `meshery-extensions/integrations-workflow/.github/workflows/publish.yml`. That workflow commits to five repositories: `repository: ./meshery.io` (line 126), `./l5` (145), `./meshery` (164), `./meshery-cloud` (183), and `./meshery-remote-provider` (202). The `./meshery` target receives generated model documentation at `docs/content/en/extensions/models` (line 154), which is the source of docs.meshery.io.
 
 * **Claim**: "The registry data itself sits upstream of all five targets, behind `mesheryctl registry publish`, so a model's components, icons, and categories are not authored in this repository."
   * **Evidence**: `publish.yml` lines 72, 135, 154, 173, and 192 each invoke `./mesheryctl registry publish` against the same credential and spreadsheet id, writing to a different target's directories on each call. No step in this repository writes model component data.
@@ -50,8 +50,8 @@ Counts drift. Where a count is cited it carries an as-of date, and re-verifying 
 
 ## Principle 3: Meshery.io is the front door and docs.meshery.io is the manual
 
-* **Claim**: "Every one of the 394 model pages carries a `docURL` pointing at `docs.meshery.io/extensibility/integrations/`, verified on 2026-09-10."
-  * **Evidence**: `grep -l "docURL: https://docs.meshery.io" collections/_models/*/*.md | wc -l` returns 394, matching the total page count, on 2026-09-10.
+* **Claim**: "Every one of the 394 model pages carries a `docURL` pointing at `docs.meshery.io`, 377 of them under `/extensibility/integrations/` and the remaining 17 under `/extensibility/adapters/`, counted on 2026-09-10."
+  * **Evidence**: `grep -l 'docURL: https://docs.meshery.io' collections/_models/*/*.md | wc -l` returns 394, matching the total page count. Narrowing to the full path, `grep -l 'docURL: https://docs.meshery.io/extensibility/integrations/'` returns 377; the remaining 17 point at `https://docs.meshery.io/extensibility/adapters/<name>`. No model page lacks a `docURL`. Counted 2026-09-10.
 
 * **Claim**: "Meshery.io shows that an integration exists and what it covers, and documentation of how to use it lives in `meshery/meshery/docs`."
   * **Evidence**: `docURL` frontmatter on every model page pointing at `docs.meshery.io/extensibility/integrations/<name>`; model page frontmatter carries `name`, `subtitle`, `category`, `subcategory`, and `components`, and no usage instructions.
@@ -64,8 +64,8 @@ Counts drift. Where a count is cited it carries an as-of date, and re-verifying 
 
 ## Principle 4: Content types are Jekyll collections
 
-* **Claim**: "`_config.yml` declares nine collections and sets `output` explicitly on each, with permalinks on the five that publish under their own URL scheme."
-  * **Evidence**: `_config.yml` `collections:` block: nine collections (`charts`, `extensions`, `pages`, `programs`, `catalog`, `models`, `filters`, `handbook`, `custom-models`), nine `output:` keys, and five `permalink:` keys (`extensions`, `models`, `filters`, `handbook`, `custom-models`). Three set `sort_by`.
+* **Claim**: "`_config.yml` declares nine collections and sets `output` explicitly on each, with `permalink` on five of them and `sort_by` on three."
+  * **Evidence**: `_config.yml` `collections:` block: nine collections (`charts`, `extensions`, `pages`, `programs`, `catalog`, `models`, `filters`, `handbook`, `custom-models`), nine `output:` keys, five `permalink:` keys (`extensions`, `models`, `filters`, `handbook`, `custom-models`), and three `sort_by:` keys. Note that `permalink` does not imply publication: `handbook` sets a permalink but `output: false`, and `pages`, `programs`, and `catalog` publish without declaring either key.
 
 * **Claim**: "A content type that needs a public URL is declared in the `_config.yml` `collections:` block rather than added as a loose directory of pages."
   * **Evidence**: Every published content type on the site is a member of that `collections:` block; `collections/_pages` exists so that standalone pages are still collection members rather than loose files.
@@ -79,7 +79,7 @@ Counts drift. Where a count is cited it carries an as-of date, and re-verifying 
 ## Scope and non-goals
 
 * **Claim**: "Meshery.io is not the Meshery documentation site."
-  * **Evidence**: Every model page defers to `docs.meshery.io` via `docURL` (394 of 394 on 2026-09-10); `error-code-updater.yml` pushes reference content into `meshery/meshery/docs/` rather than publishing it here.
+  * **Evidence**: Every model page defers to `docs.meshery.io` via `docURL` (394 of 394 on 2026-09-10, across the `/extensibility/integrations/` and `/extensibility/adapters/` paths); `error-code-updater.yml` pushes reference content into `meshery/meshery/docs/` rather than publishing it here.
 
 * **Claim**: "Meshery.io is not the source of truth for the model registry."
   * **Evidence**: `publish.yml` lines 31-62 and 72-192 show the registry published from `meshery/meshery` to five targets, of which this repository is one; `mesheryctl registry publish` (line 72) reads from a registry credential and spreadsheet id, not from this repository.

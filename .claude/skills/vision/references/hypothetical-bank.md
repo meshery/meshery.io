@@ -61,7 +61,7 @@ Three record types. Pick by where the answer actually came from, never by which 
 * **Changelog**: <the edit this produced in VISION.md, or "No edit; principle already covered this.">
 ```
 
-**Derived verdict.** The repository settles it, and a workflow or config file is the answer.
+**Derived verdict.** The repository settles it, and a repository file or command is the answer: a workflow, a config file, a plugin or script, a committed data file, or the observable result of a command run against the repository.
 
 ```markdown
 * **Verdict (derived from repository behavior)**: **RESIST**. <the mechanism, with the file and lines that establish it>
