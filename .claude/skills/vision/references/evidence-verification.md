@@ -91,6 +91,10 @@ Every row reaches a disposition before you write a line of the evidence sheet.
 
 **Intent read as fact.** An open PR, a roadmap item, or a discussion thread is evidence that someone wants something. Mark it `Direction, not shipped state.` and keep it out of the shipped-fact sections.
 
+**The command that will not run.** You cite `grep -l 'pattern'` with no file operand, having actually run it with a glob. The number is right and the command reads standard input, so a reader who pastes it gets a hang or a blank. Cite commands exactly as you ran them, operands included. An evidence sheet whose commands cannot be re-executed is an assertion wearing a costume.
+
+**The count you subtracted.** You measure 377 of 394 matching one path and write "the remaining 17 are under X" without measuring X. Arithmetic is not verification: the residual may be spread across five different shapes, and one of them may be a defect worth naming. Measure every bucket you name.
+
 ## When a whole principle loses its evidence
 
 Cut the principle. Three well-evidenced principles beat five where two are decorative, and the reviewer who finds the decorative one stops trusting the other four.

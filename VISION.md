@@ -21,7 +21,7 @@ Commits to these trees carry bot identities: `meshery-ci`, `l5io`, and `Discussi
 
 ## Meshery.io is the front door and docs.meshery.io is the manual
 
-Every one of the 394 model pages carries a `docURL` pointing at `docs.meshery.io`, 377 of them under `/extensibility/integrations/` and the remaining 17 under `/extensibility/adapters/`, counted on 2026-09-10.
+Every one of the 394 model pages carries a `docURL` pointing into `docs.meshery.io`, 377 of them under `/extensibility/integrations/` and the remaining 17 spread across adapter, installation, task, and guide paths, counted on 2026-09-10.
 Meshery.io shows that an integration exists and what it covers, and documentation of how to use it lives in `meshery/meshery/docs`.
 The flow runs both ways: `.github/workflows/error-code-updater.yml` generates the Artifact Hub error reference in this repository and commits it into `meshery/meshery/docs/data/errorref/`.
 Governance and maintainership are not defined here either, since `GOVERNANCE.md` and `MAINTAINERS.md` are each a single line pointing at `meshery/meshery`.

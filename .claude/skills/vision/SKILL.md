@@ -247,6 +247,32 @@ for b in bad:
 sys.exit(1 if bad else 0)
 CHK
 
+# 7. Cited commands are runnable as written. Advisory: it cannot reliably tell a
+#    verification command you ran from a workflow snippet quoted as evidence, so it
+#    prints candidates instead of failing. Read each one and add the missing operands.
+python3 - <<'CHK'
+import re, pathlib
+ev = pathlib.Path("docs/vision/vision-evidence.md").read_text()
+sus = []
+for cmd in re.findall(r'`([^`]+)`', ev):
+    c = cmd.strip()
+    if not re.match(r'^(grep|rg|find)\b', c):
+        continue
+    # strip program, flags, and the first quoted pattern; do NOT split on "|",
+    # which appears inside grep alternation patterns
+    rest = re.sub(r'^\S+\s*', '', c)
+    rest = re.sub(r'^(-\S+\s*)+', '', rest)
+    rest = re.sub(r'''^("[^"]*"|'[^']*'|\$\w+)\s*''', '', rest)
+    rest = rest.split('|')[0]
+    if not re.search(r'[/*]|\$\w+|\b\w+\.\w+\b', rest):
+        sus.append(c)
+print("-- cited commands with no visible file operand:")
+for s in sus:
+    print("  -", s[:100])
+if not sus:
+    print("  (none)")
+CHK
+
 [ "$FAIL" -eq 0 ] && echo "ALL CHECKS PASSED" || { echo "CHECKS FAILED"; exit 1; }
 ```
 

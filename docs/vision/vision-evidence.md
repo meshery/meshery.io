@@ -50,8 +50,8 @@ Counts drift. Where a count is cited it carries an as-of date, and re-verifying 
 
 ## Principle 3: Meshery.io is the front door and docs.meshery.io is the manual
 
-* **Claim**: "Every one of the 394 model pages carries a `docURL` pointing at `docs.meshery.io`, 377 of them under `/extensibility/integrations/` and the remaining 17 under `/extensibility/adapters/`, counted on 2026-09-10."
-  * **Evidence**: `grep -l 'docURL: https://docs.meshery.io' collections/_models/*/*.md | wc -l` returns 394, matching the total page count. Narrowing to the full path, `grep -l 'docURL: https://docs.meshery.io/extensibility/integrations/'` returns 377; the remaining 17 point at `https://docs.meshery.io/extensibility/adapters/<name>`. No model page lacks a `docURL`. Counted 2026-09-10.
+* **Claim**: "Every one of the 394 model pages carries a `docURL` pointing into `docs.meshery.io`, 377 of them under `/extensibility/integrations/` and the remaining 17 spread across adapter, installation, task, and guide paths, counted on 2026-09-10."
+  * **Evidence**: `grep -l '^docURL: https://docs.meshery.io' collections/_models/*/*.md | wc -l` returns 394, matching `find collections/_models -name '*.md' | wc -l`. Narrowing with the same glob, `grep -l '^docURL: https://docs.meshery.io/extensibility/integrations/' collections/_models/*/*.md | wc -l` returns 377. The remaining 17 resolve to `/extensibility/adapters/` (8), `/installation/` paths (7, one of which contains a double slash and one a trailing space), `/tasks/performance/` (1), and `/guides/infrastructure-management/` (1). No model page lacks a `docURL`. Counted 2026-09-10.
 
 * **Claim**: "Meshery.io shows that an integration exists and what it covers, and documentation of how to use it lives in `meshery/meshery/docs`."
   * **Evidence**: `docURL` frontmatter on every model page pointing at `docs.meshery.io/extensibility/integrations/<name>`; model page frontmatter carries `name`, `subtitle`, `category`, `subcategory`, and `components`, and no usage instructions.
@@ -79,7 +79,7 @@ Counts drift. Where a count is cited it carries an as-of date, and re-verifying 
 ## Scope and non-goals
 
 * **Claim**: "Meshery.io is not the Meshery documentation site."
-  * **Evidence**: Every model page defers to `docs.meshery.io` via `docURL` (394 of 394 on 2026-09-10, across the `/extensibility/integrations/` and `/extensibility/adapters/` paths); `error-code-updater.yml` pushes reference content into `meshery/meshery/docs/` rather than publishing it here.
+  * **Evidence**: Every model page defers to `docs.meshery.io` via `docURL` (394 of 394 on 2026-09-10, 377 of them under `/extensibility/integrations/` and 17 across other documentation paths); `error-code-updater.yml` pushes reference content into `meshery/meshery/docs/` rather than publishing it here.
 
 * **Claim**: "Meshery.io is not the source of truth for the model registry."
   * **Evidence**: `publish.yml` lines 31-62 and 72-192 show the registry published from `meshery/meshery` to five targets, of which this repository is one; `mesheryctl registry publish` (line 72) reads from a registry credential and spreadsheet id, not from this repository.
