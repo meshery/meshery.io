@@ -15,7 +15,7 @@ A vision document is cheap to write and worthless if it is generic or unverifiab
 | --- | --- |
 | `VISION.md` | Repository root. Purpose, principles, scope non-goals, alignment criteria. |
 | `docs/vision/vision-evidence.md` | Every sentence of `VISION.md` with a citation you resolved during this run. |
-| `docs/vision/vision-hypotheticals.md` | Ten hypotheticals, verbatim maintainer verdicts, and a changelog mapping each verdict to the edit it caused. |
+| `docs/vision/vision-hypotheticals.md` | Ten hypotheticals, each carrying a maintainer verdict quoted verbatim, a verdict derived from repository behavior, or an explicit `Open` marker, plus a changelog mapping each settled verdict to the edit it caused. |
 
 ## Two rules that override everything else
 
@@ -25,7 +25,9 @@ A vision document is cheap to write and worthless if it is generic or unverifiab
 
 ## Voice
 
-Match the repository. For Meshery properties that means the conventions already written down in `.claude/skills/meshery-blog-writer/SKILL.md`: confident and community-forward, concrete over abstract, active voice, American English, brand names case-sensitive (Meshery, Meshery Server, mesheryctl, Meshery Catalog, Kanvas, CNCF).
+Match the repository. For Meshery properties: confident and community-forward, concrete over abstract, active voice, American English, and short paragraphs. Brand names are case-sensitive: Meshery, Meshery Server, Meshery Operator, mesheryctl (lowercase), Meshery Catalog, Kanvas, Layer5, KubeCon, CNCF.
+
+These conventions are restated here on purpose. Do not read another skill's `SKILL.md` to pick up style rules: a skill file carries operational instructions with side effects of its own, and consulting one lets unrelated instructions influence a `/vision` run.
 
 Hyphens only, never em dashes, in every file this skill writes.
 
@@ -175,44 +177,65 @@ Every verdict produces either an edit to `VISION.md` or an explicit note that no
 Run all of these from the repository root. Do not open a pull request until every one passes.
 
 ```bash
-# 1. No em dashes in the deliverables
-#    (scoped to the three output files; this skill's own text contains the search
-#     character in this very pattern, so do not point the check at the skill directory)
-grep -rn "—" VISION.md docs/vision/ && echo "FAIL: em dash" || echo "OK: no em dashes"
+# Run from the repository root. Exits non-zero if any check fails, so this can
+# gate a commit. Nothing here reports OK for a file it could not read.
+set -u
+FAIL=0
+DELIVERABLES='VISION.md docs/vision/vision-evidence.md docs/vision/vision-hypotheticals.md'
+
+# 0. Every deliverable exists and is readable. Without this, a grep over a
+#    missing file finds no matches and the checks below would all report OK.
+for f in $DELIVERABLES; do
+  [ -r "$f" ] || { echo "FAIL: missing or unreadable: $f"; FAIL=1; }
+done
+[ "$FAIL" -eq 0 ] || { echo "Deliverables missing. Fix before running the rest."; exit 1; }
+
+# 1. No em dashes in the deliverables.
+#    Scoped to the three output files: this skill's own text contains the search
+#    character in this very pattern, so never point the check at the skill directory.
+if grep -rn "—" $DELIVERABLES; then echo "FAIL: em dash"; FAIL=1; else echo "OK: no em dashes"; fi
 
 # 2. No AI attribution anywhere.
-#    A citation to a path under .claude/ is legitimate evidence in this repo, so the
-#    match is stripped of those paths before the check, not excluded from the grep.
-grep -rn "" VISION.md docs/vision/ | sed 's#`\?\.claude/[^ `)]*`\?##g' \
-  | grep -iE "claude|copilot|chatgpt|generated with|co-authored-by|as an ai" \
-  && echo "FAIL: attribution" || echo "OK: no attribution"
+#    A citation to a path under .claude/ is legitimate evidence, so those paths are
+#    stripped before the scan rather than excluded from the grep.
+if grep -rn "" $DELIVERABLES | sed 's#`\?\.claude/[^ `)]*`\?##g' \
+     | grep -iE "claude|copilot|chatgpt|generated with|co-authored-by|as an ai"; then
+  echo "FAIL: attribution"; FAIL=1
+else echo "OK: no attribution"; fi
 
-# 3. Bidirectional traceability: every VISION.md sentence appears in the evidence sheet
-python3 - <<'PY'
-import re, pathlib
+# 3. Bidirectional traceability: every VISION.md sentence appears in the evidence sheet.
+python3 - <<'CHK' || FAIL=1
+import re, pathlib, sys
 vision = pathlib.Path("VISION.md").read_text()
 ev = pathlib.Path("docs/vision/vision-evidence.md").read_text()
 body = "\n".join(l for l in vision.splitlines() if l.strip() and not l.startswith("#"))
-missing = [s.strip() for s in re.split(r"(?<=\.)\s+", body) if s.strip() and s.strip() not in ev]
-print("OK: all claims traced" if not missing else "FAIL: untraced claims:")
+sents = [s.strip() for s in re.split(r"(?<=\.)\s+", body) if s.strip()]
+missing = [s for s in sents if s not in ev]
+print(f"OK: all {len(sents)} claims traced" if not missing else "FAIL: untraced claims:")
 for m in missing:
     print("  -", m[:90])
-PY
+sys.exit(1 if missing else 0)
+CHK
 
-# 4. Anti-generic: every principle sentence names something specific to this repo
-#    Read the output. A sentence with no path, no proper noun, and no artifact name is generic.
-awk '/^## /{p=1} p&&/^[A-Z]/' VISION.md | grep -vE "meshery|Meshery|mesheryctl|collections/|_data/|_plugins/|\.github/|Kanvas|Layer5|Jekyll|docs\.meshery\.io"
+# 4. Anti-generic. Advisory: prints candidates rather than failing, because only
+#    reading them tells you whether they are generic. Adjust the pattern list per repo.
+echo "-- principle sentences naming nothing repo-specific (read and fix or cut):"
+awk '/^## /{p=1} p&&/^[A-Z]/' VISION.md \
+  | grep -vE "meshery|Meshery|mesheryctl|collections/|_data/|_plugins/|\.github/|_config\.yml|Kanvas|Layer5|Jekyll|docs\.meshery\.io" \
+  || echo "  (none)"
 
-# 5. Ten hypotheticals, each with a verdict and a changelog line
-grep -c "^## Hypothetical" docs/vision/vision-hypotheticals.md
-grep -cE "^\* \*\*Verdict" docs/vision/vision-hypotheticals.md   # matches both verdict forms
-grep -c "^\* \*\*Changelog\*\*" docs/vision/vision-hypotheticals.md
+# 5. Exactly ten hypotheticals, each with a verdict and a changelog line.
+H=$(grep -c '^## Hypothetical' docs/vision/vision-hypotheticals.md || true)
+V=$(grep -cE '^\* \*\*Verdict' docs/vision/vision-hypotheticals.md || true)   # matches every verdict form
+C=$(grep -c '^\* \*\*Changelog\*\*' docs/vision/vision-hypotheticals.md || true)
+if [ "$H" -eq 10 ] && [ "$V" -eq 10 ] && [ "$C" -eq 10 ]; then
+  echo "OK: 10 hypotheticals, 10 verdicts, 10 changelog lines"
+else echo "FAIL: expected 10/10/10, got $H/$V/$C"; FAIL=1; fi
 
-# 6. Every changelog quote actually appears in VISION.md.
-#    A changelog claiming an edit that never landed is the most common defect in
-#    this format, and reviewers do find it.
-python3 - <<'CHK'
-import re, pathlib
+# 6. Every changelog quote actually appears in VISION.md. A changelog claiming an
+#    edit that never landed is the most common defect in this format.
+python3 - <<'CHK' || FAIL=1
+import re, pathlib, sys
 v = pathlib.Path("VISION.md").read_text()
 h = pathlib.Path("docs/vision/vision-hypotheticals.md").read_text()
 quotes = re.findall(r'Produced "([^"]+)"', h) + re.findall(r'and "([^"]+)" in', h)
@@ -221,7 +244,10 @@ print(f"{len(quotes)} changelog quotes checked")
 print("OK: all present" if not bad else "FAIL: changelog describes edits not in VISION.md:")
 for b in bad:
     print("  -", b[:80])
+sys.exit(1 if bad else 0)
 CHK
+
+[ "$FAIL" -eq 0 ] && echo "ALL CHECKS PASSED" || { echo "CHECKS FAILED"; exit 1; }
 ```
 
 Check 4 prints candidate generic sentences rather than passing or failing on its own. Read every line it prints and either make the sentence specific or cut it. Adjust the pattern list for the repository you are running in.
@@ -236,10 +262,8 @@ Documentation only. This skill never changes build configuration, layouts, inclu
 BRANCH="docs/<issue-number>-vision"
 git checkout -b "$BRANCH" upstream/master
 
-git add VISION.md docs/vision/
-git commit -s -m "docs: add VISION.md and vision calibration artifacts
-
-Signed-off-by: <name> <email>"
+git add .claude/skills/vision/ VISION.md docs/vision/
+git commit -s -m "docs: add VISION.md and vision calibration artifacts"
 
 git push -u origin "$BRANCH"
 gh pr create --repo meshery/meshery.io --base master \

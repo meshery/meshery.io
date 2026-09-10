@@ -7,18 +7,19 @@ Verdicts come in two kinds, and the distinction matters:
 * **Derived from repository behavior.** The repository already settles the question, and a workflow or config file is the answer. The citation is given inline. These are mechanics, not judgment.
 * **Maintainer verdict.** A judgment call about what the project wants, answered by a maintainer and quoted verbatim. Questions still awaiting one are marked `Open`, and this file is updated as answers arrive rather than filled in by guesswork.
 
-Six of the ten below are open. They are posted for maintainer input on meshery/meshery.io#2957.
+Seven of the ten below are open. They are posted for maintainer input on meshery/meshery.io#2957.
 
 ---
 
 ## Hypothetical 1: Hand-filled descriptions on generated model pages
 
-* **Proposal**: 386 of the 394 pages under `collections/_models` have an empty `description:` in frontmatter, so catalog pages render with no summary text. Allow contributors to write descriptions directly into those files, marked with a comment the publish workflow is taught to preserve.
+* **Proposal**: 386 of the 394 pages under `collections/_models` have an empty `description:` in frontmatter, so catalog pages render with no summary text. Allow contributors to write descriptions directly into those files.
 * **Tests**: Principle 1, Principle 2
 * **For**: A visible defect on 98% of the catalog, and the highest-leverage content fix available on the site. The registry spreadsheet is not open to most contributors, so routing the fix upstream means it never happens.
-* **Against**: Two writers for one file, and `collections/_models` stops being safely regenerable. The same registry publishes to four other targets, which would still render blanks.
-* **Verdict (derived from repository behavior)**: **RESIST**. `meshery-extensions/integrations-workflow/.github/workflows/publish.yml` line 90 regenerates `collections/_models` wholesale on each run, and the sibling `.github/workflows/update-catalog.yml` lines 45-48 delete every file in each catalog subdirectory before regenerating. Text typed into these files is destroyed on the next run. Whether the generator should learn to preserve a field is a decision for the registry workflow, not for this repository.
-* **Changelog**: Produced "An edit to a file in `collections/_models`, `collections/_catalog`, or `_data/` is destroyed at the next scheduled run" in Principle 2, and "A model that renders wrong on meshery.io is wrong in the registry, and it is fixed there" in Principle 1.
+* **Against**: A second writer in a tree the `meshery-ci` bot maintains, and the same registry publishes to four other targets that would still render blanks.
+* **Verdict**: Open - awaiting maintainer.
+* **Note on verification**: This was first recorded as a derived `RESIST` on the grounds that model pages are regenerated wholesale and hand-written text would be destroyed. Review showed that reasoning was wrong. `meshery-extensions/integrations-workflow/.github/workflows/publish.yml` line 90 reads `collections/_models` to build OCI artifacts rather than writing it, and commit `11f9948` shows `meshery-ci` editing a model page in place, appending one component and changing `componentsCount: 27` to `28` while leaving the rest of the file untouched. The delete-then-rebuild behavior cited belongs to `.github/workflows/update-catalog.yml`, which targets `collections/_catalog` only. The repository therefore does not settle this question, so it is a maintainer call rather than a derived verdict.
+* **Changelog**: The verification above corrected Principle 1 and Principle 2 in `VISION.md`: the claim that `mesheryctl registry publish website` generates the model pages was removed, and the destroyed-edit rule was narrowed to `collections/_catalog`. Model pages are now described as bot-maintained in place. No verdict-driven edit yet.
 
 ---
 
@@ -51,7 +52,7 @@ Six of the ten below are open. They are posted for maintainer input on meshery/m
 * **For**: Faster for a contributor who wants three pages published this week, with no `_config.yml` change and no layout to write.
 * **Against**: Loose pages get no permalink scheme, no sort order, and no collection-level rendering, so they drift from every other content type on the site.
 * **Verdict (derived from repository behavior)**: **RESIST**. `_config.yml` declares nine collections, and every published content type on the site is one of them, each with explicit `output` and, where published, `permalink` and `sort_by`. `collections/_pages` exists precisely so that standalone pages are still collection members.
-* **Changelog**: Produced "A content type that needs a public URL is declared in the `_config.yml` `collections:` block with a layout, not added as a loose directory of pages" in Principle 4.
+* **Changelog**: Produced "A content type that needs a public URL is declared in the `_config.yml` `collections:` block rather than added as a loose directory of pages" in Principle 4.
 
 ---
 
