@@ -24,8 +24,8 @@ async function fetchUsers(period) {
 
 function computeScore(item) {
   return (item.post_count || 0) +
-        ((item.likes_received || 0) * 2) +
-        ((item.solutions || 0) * 3);
+    ((item.likes_received || 0) * 2) +
+    ((item.solutions || 0) * 3);
 }
 
 function buildLeaderboard(items) {
@@ -41,7 +41,10 @@ function buildLeaderboard(items) {
       solutions: item.solutions || 0,
       score: computeScore(item)
     }))
-    .sort((a, b) => b.score - a.score)
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return a.username.localeCompare(b.username);
+    })
     .map((user, index) => ({
       ...user,
       rank: index + 1
