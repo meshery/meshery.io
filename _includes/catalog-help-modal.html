@@ -8,7 +8,6 @@
     height: 100vh; /* Full height */
     padding: 2rem; /* Breathing room around content */
     box-sizing: border-box;
-    /* Center modal content when shown */
     align-items: center;
     justify-content: center;
     overflow: hidden; /* Contain scroll within content */
@@ -64,9 +63,14 @@
   border-radius: 8px;
 }
 
+  .feature-container.modal-open {
+    pointer-events: none;
+  }
+
 @media (max-width: 768px) {
   .help-modal-content {
     width: 85%; /* Change width to 85% */
+    max-height: 90vh;
   }
 }
 
@@ -83,6 +87,8 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
+  background: none;
+  border: none;
   /* margin-right: 10px; */
 }
 
@@ -96,18 +102,18 @@
 
 
 
-<div id="myModal" class="help-modal">
+<div id="myModal" class="help-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="help-modal-content">
        
         <div class="tab">
-            <span class="closed" style=" padding: 4px 10px">&times;</span>
+            <button class="closed" style=" padding: 4px 10px" aria-label="Close">&times;</button>
             <button class="tablinks active" onclick="openTab(event, 'MesheryUI')">Meshery UI</button>
             <button class="tablinks" onclick="openTab(event, 'MesheryCLI')">Meshery CLI</button>
           </div>
           
 
           <div id="MesheryUI" class="tabcontent">
-            <h3>Meshery UI</h3>
+            <h3 id="modal-title">Meshery UI</h3>
             <p>To import designs, visit <a href="https://docs.meshery.io/extensions/importing-a-design" target="_blank">docs</a></p>
             
             <!-- <a href="{{ site.baseurl }}/assets/images/screens/pattern-import.mp4"
@@ -138,12 +144,12 @@
                   {% include copy-to-clipboard.html clipboard_target="#start-pattern" clipboard_text="mesheryctl design apply -f [file | URL]" %}
               </div>
             <p>2. Apply a WASM filter file.</p>
-            <div id="start-pattern" class="highlight-code">
+            <div id="start-filter" class="highlight-code">
                 <p class="code-box" style="height: 40px; line-height: 15px; color: white"><code style="position: absolute;">
                     mesheryctl filter import [file | URL] --wasm-config [filepath|string]
                  </code></p>
 <!-- copy to clipboard -->
-                  {% include copy-to-clipboard.html clipboard_target="#start-pattern" clipboard_text="mesheryctl filter import [file | URL] --wasm-config [filepath|string]" %} 
+                  {% include copy-to-clipboard.html clipboard_target="#start-filter" clipboard_text="mesheryctl filter import [file | URL] --wasm-config [filepath|string]" %}
               </div>
           </div>
           
