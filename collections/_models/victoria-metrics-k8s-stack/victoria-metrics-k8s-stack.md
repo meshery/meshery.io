@@ -107,7 +107,19 @@ components:
   colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vt-single/icons/color/vt-single-color.svg
   whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vt-single/icons/white/vt-single-white.svg
   description: 
-componentsCount: 24
+- name: vl-distributed
+  colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-distributed/icons/color/vl-distributed-color.svg
+  whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vl-distributed/icons/white/vl-distributed-white.svg
+  description: 
+- name: vm-anomaly-config
+  colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vm-anomaly-config/icons/color/vm-anomaly-config-color.svg
+  whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vm-anomaly-config/icons/white/vm-anomaly-config-white.svg
+  description: 
+- name: vm-distributed
+  colorIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vm-distributed/icons/color/vm-distributed-color.svg
+  whiteIcon: assets/images/integration/victoria-metrics-k8s-stack/components/vm-distributed/icons/white/vm-distributed-white.svg
+  description: 
+componentsCount: 27
 relationships: 
 relationshipsCount: 0
 featureList: [
