@@ -71,14 +71,6 @@ function performClientSearch(query) {
     })
     .slice(0, 20);
 
-  // Highlighting for search results
-  results.forEach(result => {
-    result._formatted = {
-      title: highlightText(result.title, query),
-      excerpt: highlightText(result.excerpt, query)
-    };
-  });
-
   return results;
 }
 
@@ -89,10 +81,27 @@ function escapeRegex(string) {
 
 // Simple text highlighting function
 function highlightText(text, query) {
-  if (!text) return '';
+  if (!text) return document.createDocumentFragment();
+
+  const fragment = document.createDocumentFragment();
   const escapedQuery = escapeRegex(query);
   const regex = new RegExp(`(${escapedQuery})`, 'gi');
-  return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+  let lastIndex = 0;
+
+  text.replace(regex, (match, _group, offset) => {
+    fragment.appendChild(document.createTextNode(text.slice(lastIndex, offset)));
+
+    const highlight = document.createElement('mark');
+    highlight.className = 'search-highlight';
+    highlight.textContent = match;
+    fragment.appendChild(highlight);
+
+    lastIndex = offset + match.length;
+    return match;
+  });
+
+  fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+  return fragment;
 }
 
 // Perform search
@@ -122,9 +131,9 @@ function renderResults(results, query) {
   if (!resultsContainer) return;
 
   // Clear previous results and summary
-  resultsContainer.innerHTML = '';
+  resultsContainer.replaceChildren();
   if (searchSummary) {
-    searchSummary.innerHTML = '';
+    searchSummary.replaceChildren();
   }
 
   if (results.length === 0) {
@@ -179,41 +188,75 @@ function renderResults(results, query) {
     const li = document.createElement('li');
     li.className = 'blog-post search-result-item';
 
-    // Get highlighted or original content
-    const title = result._formatted?.title || result.title;
-    const excerpt = result._formatted?.excerpt || result.excerpt;
+    const title = result.title || '';
+    const excerpt = result.excerpt || '';
     const categories = result.categories || [];
     const date = result.date || '';
     const author = result.author || '';
 
-    // Build category links
-    let categoryHtml = '';
+    const titleLink = document.createElement('a');
+    titleLink.href = withBaseUrl(result.url);
+    titleLink.appendChild(highlightText(title, query));
+
+    const heading = document.createElement('h2');
+    heading.appendChild(titleLink);
+
+    const details = document.createElement('p');
+    details.className = 'post-details';
+
     if (categories.length > 0) {
-      categoryHtml = '<span class="blog-filters">';
+      const categoryList = document.createElement('span');
+      categoryList.className = 'blog-filters';
       categories.forEach(cat => {
         const slug = slugify(cat);
-        categoryHtml += `<span class="blog-filter"><a href="${withBaseUrl(`/blog/category/${slug}/`)}">${cat.toLowerCase()}</a></span>`;
+        const category = document.createElement('span');
+        category.className = 'blog-filter';
+
+        const categoryLink = document.createElement('a');
+        categoryLink.href = withBaseUrl(`/blog/category/${slug}/`);
+        categoryLink.textContent = cat.toLowerCase();
+
+        category.appendChild(categoryLink);
+        categoryList.appendChild(category);
       });
-      categoryHtml += '</span>';
+      details.appendChild(categoryList);
     }
 
     // Format date
     const formattedDate = date ? new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+    if (author) {
+      const authorElement = document.createElement('span');
+      authorElement.className = 'post-author';
+      authorElement.textContent = author;
+      details.appendChild(authorElement);
+    }
+    if (formattedDate) {
+      const dateElement = document.createElement('span');
+      dateElement.className = 'post-date';
+      dateElement.textContent = ` ${formattedDate}`;
+      details.appendChild(dateElement);
+    }
 
-    li.innerHTML = `
-        <h2><a href="${withBaseUrl(result.url)}">${title}</a></h2>
-        <p class="post-details">
-          ${categoryHtml}
-          ${author ? `<span class="post-author">${author}</span>` : ''}
-          ${formattedDate ? `<span class="post-date"> ${formattedDate}</span>` : ''}
-        </p>
-        <div class="post-content">
-          <p>${excerpt}</p>
-          <div class="button-para">
-            <a class="link" href="${withBaseUrl(result.url)}">Read More</a>
-          </div>
-        </div>
-      `;
+    const excerptElement = document.createElement('p');
+    excerptElement.appendChild(highlightText(excerpt, query));
+
+    const content = document.createElement('div');
+    content.className = 'post-content';
+    content.appendChild(excerptElement);
+
+    const readMore = document.createElement('a');
+    readMore.className = 'link';
+    readMore.href = withBaseUrl(result.url);
+    readMore.textContent = 'Read More';
+
+    const buttonParagraph = document.createElement('div');
+    buttonParagraph.className = 'button-para';
+    buttonParagraph.appendChild(readMore);
+    content.appendChild(buttonParagraph);
+
+    li.appendChild(heading);
+    li.appendChild(details);
+    li.appendChild(content);
 
     resultsList.appendChild(li);
   });
