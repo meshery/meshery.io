@@ -2,9 +2,46 @@
 
     <div class="leaderboard-controls">
         <div class="period-toggle">
-            <select id="period-select" class="period-select" aria-label="Leaderboard time period">
-                <option value="weekly">This Week</option>
-                <option value="monthly">This Month</option>
+            <div class="custom-period-select" id="custom-period-select">
+                <button type="button"
+                        class="period-select-trigger"
+                        id="period-select-trigger"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Leaderboard time period">
+                    <span class="period-trigger-text">
+                        <span class="selected-period-name" id="selected-period-name">Week</span>
+                        <span class="selected-period-range" id="selected-period-range"></span>
+                    </span>
+                    <span class="select-chevron">
+                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </button>
+                <div class="period-select-dropdown" id="period-select-dropdown" role="listbox" tabindex="-1">
+                    <div class="period-option selected" data-value="weekly" role="option" aria-selected="true" tabindex="0">
+                        <span class="period-option-name">Week</span>
+                        <span class="period-option-range" data-range="weekly"></span>
+                    </div>
+                    <div class="period-option" data-value="monthly" role="option" aria-selected="false" tabindex="0">
+                        <span class="period-option-name">Month</span>
+                        <span class="period-option-range" data-range="monthly"></span>
+                    </div>
+                    <div class="period-option" data-value="yearly" role="option" aria-selected="false" tabindex="0">
+                        <span class="period-option-name">Year</span>
+                        <span class="period-option-range" data-range="yearly"></span>
+                    </div>
+                    <div class="period-option" data-value="all" role="option" aria-selected="false" tabindex="0">
+                        <span class="period-option-name">All Time</span>
+                        <span class="period-option-range" data-range="all"></span>
+                    </div>
+                </div>
+            </div>
+            <select id="period-select" class="period-select visually-hidden" aria-label="Leaderboard time period">
+                <option value="weekly">Week</option>
+                <option value="monthly">Month</option>
+                <option value="yearly">Year</option>
                 <option value="all">All Time</option>
             </select>
         </div>
@@ -45,6 +82,128 @@
 </script>
 
 <script>
+    (function () {
+        var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        function fmt(d, includeYear) {
+            var str = MONTHS[d.getMonth()] + ' ' + d.getDate();
+            if (includeYear) {
+                str += ', ' + d.getFullYear();
+            }
+            return str;
+        }
+
+        var now   = new Date();
+        var today = fmt(now);
+
+        var week  = new Date(now); week.setDate(week.getDate() - 7);
+        var month = new Date(now); month.setDate(month.getDate() - 30);
+        var year  = new Date(now); year.setFullYear(year.getFullYear() - 1);
+
+        var ranges = {
+            weekly:  fmt(week) + ' \u2013 ' + today,
+            monthly: fmt(month) + ' \u2013 ' + today,
+            yearly:  fmt(year, true) + ' \u2013 ' + today,
+            all:     ''
+        };
+
+        var names = {
+            weekly:  'Week',
+            monthly: 'Month',
+            yearly:  'Year',
+            all:     'All Time'
+        };
+
+        Object.keys(ranges).forEach(function (val) {
+            var rangeSpan = document.querySelector('.period-option-range[data-range="' + val + '"]');
+            if (rangeSpan) rangeSpan.textContent = ranges[val];
+        });
+
+        var customSelect = document.getElementById('custom-period-select');
+        var trigger = document.getElementById('period-select-trigger');
+        var dropdown = document.getElementById('period-select-dropdown');
+        var selectedName = document.getElementById('selected-period-name');
+        var selectedRange = document.getElementById('selected-period-range');
+        var hiddenSelect = document.getElementById('period-select');
+        var options = dropdown.querySelectorAll('.period-option');
+
+        function updateSelectedUI(val) {
+            selectedName.textContent = names[val] || 'Week';
+            selectedRange.textContent = ranges[val] ? ranges[val] : '';
+            options.forEach(function (opt) {
+                var isSel = opt.getAttribute('data-value') === val;
+                opt.setAttribute('aria-selected', isSel ? 'true' : 'false');
+                opt.classList.toggle('selected', isSel);
+            });
+        }
+
+        function selectPeriod(val) {
+            if (hiddenSelect.value !== val) {
+                hiddenSelect.value = val;
+                hiddenSelect.dispatchEvent(new Event('change'));
+            }
+            updateSelectedUI(val);
+            closeDropdown();
+        }
+
+        function toggleDropdown() {
+            var isOpen = dropdown.classList.contains('open');
+            if (isOpen) {
+                closeDropdown();
+            } else {
+                openDropdown();
+            }
+        }
+
+        function openDropdown() {
+            dropdown.classList.add('open');
+            trigger.setAttribute('aria-expanded', 'true');
+        }
+
+        function closeDropdown() {
+            dropdown.classList.remove('open');
+            trigger.setAttribute('aria-expanded', 'false');
+        }
+
+        trigger.addEventListener('click', function (e) {
+            e.stopPropagation();
+            toggleDropdown();
+        });
+
+        options.forEach(function (opt) {
+            opt.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var val = this.getAttribute('data-value');
+                selectPeriod(val);
+            });
+            opt.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    var val = this.getAttribute('data-value');
+                    selectPeriod(val);
+                }
+            });
+        });
+
+        document.addEventListener('click', function (e) {
+            if (customSelect && !customSelect.contains(e.target)) {
+                closeDropdown();
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeDropdown();
+            }
+        });
+
+        updateSelectedUI(hiddenSelect.value || 'weekly');
+    })();
+</script>
+
+<script>
+
     (function () {
         var leaderboardData;
         try {

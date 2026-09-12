@@ -69,7 +69,7 @@ body.dark-mode .leaderboard-filter::placeholder {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 3.5rem;
+    gap: 2rem;
     margin: 4rem 0;
     flex-wrap: wrap;
     width: 100%;
@@ -77,8 +77,8 @@ body.dark-mode .leaderboard-filter::placeholder {
 }
 
 .podium-card {
-    flex: 0 0 290px;
-    max-width: 290px;
+    flex: 0 0 220px;
+    max-width: 220px;
     display: flex;
     justify-content: center;
 }
@@ -213,7 +213,6 @@ body.dark-mode .leaderboard-filter::placeholder {
 .podium-username-link {
     text-decoration: none;
     color: inherit;
-    margin-top: 2rem;
 }
 
 .podium-username-link:hover .podium-username {
@@ -361,12 +360,22 @@ body.dark-mode .leaderboard-updated {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    position: relative;
 }
 
-.period-select {
-    width: 200px;
+.custom-period-select {
+    position: relative;
+    display: inline-block;
+}
+
+.period-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    min-width: 220px;
     height: 35px;
-    padding: 0 1rem;
+    padding: 0 0.9rem;
 
     border: 2px solid var(--brand-color-secondary);
     border-radius: 8px;
@@ -387,28 +396,167 @@ body.dark-mode .leaderboard-updated {
         color 0.2s ease;
 }
 
-.period-select:focus-visible {
+.period-select-trigger:focus-visible {
     box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.15);
 }
 
-body.dark-mode .period-select {
-    background: #000000;
-    color: #ffffff;
+.period-trigger-text {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.selected-period-name {
+    font-weight: 700;
+    color: var(--brand-color-secondary);
+}
+
+.selected-period-range {
+    font-weight: 400;
+    font-size: 0.76rem;
+    color: #7A848E;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.select-chevron {
+    display: inline-flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+    color: var(--brand-color-secondary);
+}
+
+.period-select-trigger[aria-expanded="true"] .select-chevron {
+    transform: rotate(180deg);
+}
+
+/* Dropdown menu positioning BELOW selector */
+.period-select-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 100%;
+    width: max-content;
+    max-width: 360px;
+    z-index: 1000;
+
+    background: #ffffff;
+    border: 2px solid var(--brand-color-secondary);
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    padding: 0.3rem 0;
+}
+
+.period-select-dropdown.open {
+    display: block;
+}
+
+/* Options visual separation */
+.period-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.55rem 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    outline: none;
+}
+
+.period-option:hover,
+.period-option:focus,
+.period-option.selected {
+    background-color: rgba(0, 179, 159, 0.08);
+}
+
+.period-option-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--brand-color-secondary);
+    white-space: nowrap;
+}
+
+.period-option-range {
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: #7A848E;
+    white-space: nowrap;
+    text-align: right;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    .period-select-trigger {
+        background: #000000;
+        color: #ffffff;
+    }
+
+    .selected-period-name {
+        color: #ffffff;
+    }
+
+    .selected-period-range {
+        color: #a0a0a0;
+    }
+
+    .select-chevron {
+        color: #ffffff;
+    }
+
+    .period-select-dropdown {
+        background: #000000;
+        border-color: var(--brand-color-secondary);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    }
+
+    .period-option-name {
+        color: #ffffff;
+    }
+
+    .period-option-range {
+        color: #a0a0a0;
+    }
+
+    .period-option:hover,
+    .period-option:focus,
+    .period-option.selected {
+        background-color: rgba(0, 179, 159, 0.2);
+    }
+}
+
+.period-select {
+    width: 200px;
+    height: 35px;
+    padding: 0 1rem;
+
+    border: 2px solid var(--brand-color-secondary);
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: var(--brand-color-secondary);
+
+    font-size: 0.80rem;
+    font-weight: 600;
+
+    cursor: pointer;
+    outline: none;
 }
 
 /* ─────────────────────────────
        TABLET
     ───────────────────────────── */
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
 
     .leaderboard-podium {
-        gap: 1.5rem;
-    }
-
-    .podium-card {
-        flex: 0 0 220px;
-        max-width: 220px;
+        gap: 1rem;
     }
 
     .podium-rank-1 .podium-avatar-wrapper {
@@ -435,7 +583,7 @@ body.dark-mode .period-select {
        MOBILE
     ───────────────────────────── */
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
 
     .leaderboard-section .leaderboard-controls {
         flex-wrap: nowrap;
@@ -451,6 +599,27 @@ body.dark-mode .period-select {
         min-width: 0;
         height: 42px;
         box-sizing: border-box;
+    }
+
+    .custom-period-select {
+        width: 100%;
+        height: 100%;
+    }
+
+    .period-select-trigger {
+        width: 100%;
+        height: 100%;
+        min-width: 0;
+        margin: 0;
+        padding: 0 0.6rem;
+        font-size: 0.74rem;
+        box-sizing: border-box;
+    }
+
+    .period-select-dropdown {
+        min-width: 100%;
+        width: max-content;
+        max-width: calc(100vw - 2rem);
     }
 
     .period-select {
