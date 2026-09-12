@@ -14,6 +14,18 @@ function withBaseUrl(path) {
   return `${siteBaseUrl}${path}`;
 }
 
+function getSafeResultUrl(path) {
+  const url = withBaseUrl(path);
+  if (!url || typeof url !== 'string') return null;
+
+  try {
+    const parsedUrl = new URL(url, window.location.href);
+    return ['http:', 'https:'].includes(parsedUrl.protocol) ? url : null;
+  } catch {
+    return null;
+  }
+}
+
 // Load search data for client-side search
 async function loadSearchData() {
   try {
@@ -195,7 +207,10 @@ function renderResults(results, query) {
     const author = result.author || '';
 
     const titleLink = document.createElement('a');
-    titleLink.href = withBaseUrl(result.url);
+    const resultUrl = getSafeResultUrl(result.url);
+    if (resultUrl) {
+      titleLink.href = resultUrl;
+    }
     titleLink.appendChild(highlightText(title, query));
 
     const heading = document.createElement('h2');
@@ -246,7 +261,9 @@ function renderResults(results, query) {
 
     const readMore = document.createElement('a');
     readMore.className = 'link';
-    readMore.href = withBaseUrl(result.url);
+    if (resultUrl) {
+      readMore.href = resultUrl;
+    }
     readMore.textContent = 'Read More';
 
     const buttonParagraph = document.createElement('div');
