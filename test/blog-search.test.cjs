@@ -66,19 +66,36 @@ test('renders HTML-like metadata as inert text without creating elements', async
   dom.window.close();
 });
 
-test('does not use javascript URLs as result link destinations', async () => {
-  const { dom, resultElement } = await renderSearchResult({
-    title: 'Safe title',
-    url: 'javascript:alert(5)',
-    categories: ['Category'],
-    excerpt: 'Safe excerpt',
-    content: 'Safe title Safe excerpt'
-  }, 'safe');
+test('only uses HTTP(S) URLs as result link destinations', async () => {
+  for (const url of ['data:text/html,<script>alert(1)</script>', 'mailto:test@example.com', 'ftp://example.com/file']) {
+    const { dom, resultElement } = await renderSearchResult({
+      title: 'Safe title',
+      url,
+      categories: ['Category'],
+      excerpt: 'Safe excerpt',
+      content: 'Safe title Safe excerpt'
+    }, 'safe');
 
-  assert.ok(resultElement);
-  const resultLinks = resultElement.querySelectorAll('h2 a, .link');
-  assert.equal(resultLinks.length, 2);
-  assert.equal([...resultLinks].some(link => link.href.toLowerCase().startsWith('javascript:')), false);
+    assert.ok(resultElement);
+    const resultLinks = resultElement.querySelectorAll('h2 a, .link');
+    assert.equal(resultLinks.length, 2);
+    assert.equal([...resultLinks].every(link => !link.hasAttribute('href')), true);
+    dom.window.close();
+  }
 
-  dom.window.close();
+  for (const url of ['http://example.com/blog/safe/', 'https://example.com/blog/safe/']) {
+    const { dom, resultElement } = await renderSearchResult({
+      title: 'Safe title',
+      url,
+      categories: ['Category'],
+      excerpt: 'Safe excerpt',
+      content: 'Safe title Safe excerpt'
+    }, 'safe');
+
+    assert.ok(resultElement);
+    const resultLinks = resultElement.querySelectorAll('h2 a, .link');
+    assert.equal(resultLinks.length, 2);
+    assert.equal([...resultLinks].every(link => link.href === url), true);
+    dom.window.close();
+  }
 });
