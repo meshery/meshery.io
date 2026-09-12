@@ -10,7 +10,7 @@ on:
     - cron: '30 1 * * *' # runs every day at 1:30 AM, staggered from discussions-data-files-update.yml
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   update:
@@ -32,6 +32,8 @@ jobs:
 
       - name: Fetch leaderboard data
         run: node .github/scripts/fetch-leaderboard.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v7
