@@ -74,31 +74,44 @@
         var top3 = users.filter(function (u) { return u.rank <= 3; });
 
         podium.innerHTML = top3.map(function (user) {
-            var hasScore = (Number(user.score) || 0) > 0;
-            var crown = user.rank === 1 ? '<span class="podium-crown">👑</span>' : '';
-
             return (
                 '<div class="podium-card podium-rank-' + user.rank + '">' +
+
                 '<div class="podium-card-body">' +
+
                 '<div class="podium-avatar-wrapper">' +
-                crown +
                 '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
                 '<img class="podium-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
                 '</a>' +
+                '<span class="medal ' + medalClass(user.rank) + '">' + user.rank + '</span>' +
                 '</div>' +
+
                 '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener" class="podium-username-link">' +
                 '<span class="podium-username">' + escapeHtml(user.username) + '</span>' +
                 '</a>' +
-                '<div class="podium-stats-line">' +
-                (Number(user.likes) || 0) + ' likes &middot; ' +
-                (Number(user.posts) || 0) + ' posts &middot; ' +
-                (Number(user.solutions) || 0) + ' sol.' +
+
+                '<div class="podium-stats">' +
+                '<div class="podium-stat">' +
+                '<span class="podium-stat-label">Likes</span>' +
+                '<span class="podium-stat-value">' + (Number(user.likes) || 0) + '</span>' +
                 '</div>' +
-                '<div class="podium-score' + (hasScore ? ' has-score' : '') + '">' + (Number(user.score) || 0) + ' pts</div>' +
+                '<div class="podium-stat">' +
+                '<span class="podium-stat-label">Posts</span>' +
+                '<span class="podium-stat-value">' + (Number(user.posts) || 0) + '</span>' +
                 '</div>' +
-                '<div class="podium-block podium-block-' + user.rank + '">' +
-                '<span class="podium-block-number">' + user.rank + '</span>' +
+                '<div class="podium-stat">' +
+                '<span class="podium-stat-label">Solutions</span>' +
+                '<span class="podium-stat-value">' + (Number(user.solutions) || 0) + '</span>' +
                 '</div>' +
+                '</div>' +
+
+                '<div class="podium-block">' +
+                '<span class="podium-rank-number">' + user.rank + '</span>' +
+                '<span class="podium-block-score">' + (Number(user.score) || 0) + ' pts</span>' +
+                '</div>' +
+
+                '</div>' +
+
                 '</div>'
             );
         }).join('');
