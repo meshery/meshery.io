@@ -2670,37 +2670,42 @@ body.dark-mode .podium-stats-line {
   color: var(--brand-color-secondary);
 }
 
-/* Podium block */
+/* Podium block (pseudo-3D) */
 .podium-block {
+  position: relative;
   width: 100%;
   box-sizing: border-box;
-  margin-top: 1rem;
+  margin-top: 1.25rem;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding-top: 0.6rem;
-  border-radius: 12px 12px 0 0;
+  padding-top: 0.9rem;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  /* lighter top edge + darker right edge = beveled "3D" block */
+  box-shadow: inset 0 6px 0 0 rgba(255, 255, 255, 0.28), inset -8px 0 0 0 rgba(0, 0, 0, 0.18), inset 8px 0 0 0 rgba(255, 255, 255, 0.06);
 }
 
 .podium-block-number {
   font-size: 2.4rem;
   font-weight: 800;
   color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
-.podium-rank-1 .podium-block {
-  height: 140px;
-  background: var(--brand-color-secondary);
+.podium-block-1 {
+  height: 150px;
+  background: linear-gradient(180deg, #17c9b3 0%, var(--brand-color-secondary) 100%);
 }
 
-.podium-rank-2 .podium-block {
-  height: 95px;
-  background: #12756a;
+.podium-block-2 {
+  height: 108px;
+  background: linear-gradient(180deg, #12938a 0%, #0d6e66 100%);
 }
 
-.podium-rank-3 .podium-block {
-  height: 65px;
-  background: #2b2f33;
+.podium-block-3 {
+  height: 76px;
+  background: linear-gradient(180deg, #3a4048 0%, #23272d 100%);
 }
 
 /* ─────────────────────────────
