@@ -229,6 +229,9 @@ async function buildAllGitHubPeriods() {
     const since = PERIOD_SINCE[period];
     periods[period] = await collectGitHubContributors(since, prReviewsCache);
   }
+  if (!periods.all.length) {
+    throw new Error('GitHub all-time period empty — refusing to overwrite');
+  }
   return periods;
 }
 
