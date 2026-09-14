@@ -558,7 +558,7 @@ function showFilterCards() {
   const matchingCards = patternCards.filter(card => {
     const type = card.getAttribute("type")?.toLowerCase();
     const technologyAttr = card.getAttribute("technology");
-    const filterName = card.getAttribute("filter")?.toLowerCase() || "";
+    const filterName = (card.getAttribute("filter") || "").toLowerCase().trim();
     
     // Parse technologies once
     const technologies = technologyAttr ? JSON.parse(technologyAttr) : [];

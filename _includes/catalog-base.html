@@ -128,8 +128,12 @@
                     return -1;
                 }
 
-                var aFilter = a.getAttribute("filter") || "";
-                var bFilter = b.getAttribute("filter") || "";
+                var normalizeStr = function (str) {
+                    return (str || "").trim().replace(/^[^a-zA-Z0-9]+/, "");
+                };
+
+                var aFilter = normalizeStr(a.getAttribute("filter"));
+                var bFilter = normalizeStr(b.getAttribute("filter"));
 
                 if (sortValue === "asc") {
                     return aFilter.localeCompare(bFilter, undefined, { sensitivity: 'base' });
