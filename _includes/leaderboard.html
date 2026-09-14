@@ -8,9 +8,11 @@
                 <option value="all">All Time</option>
             </select>
         </div>
-        <div class="board-tabs" style="flex: 1;">
-            <button id="tab-discourse" class="tab-button active-tab">Community</button>
-            <button id="tab-github" class="tab-button">GitHub</button>
+        <div class="board-tabs-wrapper" style="flex: 1; display: flex; justify-content: center;" role="group" aria-label="Select Leaderboard">
+            <div class="board-tabs">
+                <button id="tab-discourse" class="tab-button active-tab" aria-pressed="true">Community</button>
+                <button id="tab-github" class="tab-button" aria-pressed="false">GitHub</button>
+            </div>
         </div>
         <div class="filter-wrapper" style="flex: 1; display: flex; justify-content: flex-end;">
             <label for="leaderboard-filter" class="visually-hidden">Search leaderboard by username</label>
@@ -236,14 +238,20 @@
         document.getElementById('tab-discourse').addEventListener('click', function() {
             currentBoard = 'discourse';
             this.classList.add('active-tab');
-            document.getElementById('tab-github').classList.remove('active-tab');
+            this.setAttribute('aria-pressed', 'true');
+            var other = document.getElementById('tab-github');
+            other.classList.remove('active-tab');
+            other.setAttribute('aria-pressed', 'false');
             renderLeaderboard();
         });
 
         document.getElementById('tab-github').addEventListener('click', function() {
             currentBoard = 'github';
             this.classList.add('active-tab');
-            document.getElementById('tab-discourse').classList.remove('active-tab');
+            this.setAttribute('aria-pressed', 'true');
+            var other = document.getElementById('tab-discourse');
+            other.classList.remove('active-tab');
+            other.setAttribute('aria-pressed', 'false');
             renderLeaderboard();
         });
 
