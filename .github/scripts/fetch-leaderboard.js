@@ -2,22 +2,27 @@ const fs = require('fs');
 const path = require('path');
 
 const DISCOURSE_BASE_URL = 'https://discuss.meshery.io/directory_items.json';
-const PERIODS = ['weekly', 'monthly', 'all'];
+const PERIODS = ['weekly', 'monthly', 'yearly', 'all'];
 const GITHUB_API = 'https://api.github.com';
 const GITHUB_ORG = 'meshery';
-const GITHUB_BOT_DENYLIST = new Set(['l5io']); // known automation accounts that are User-typed, not Bot-typed
-// GH_ACCESS_TOKEN is a local-run convenience only (e.g. `GH_ACCESS_TOKEN=xxx node ...`).
-// In CI, GITHUB_TOKEN is always set by the workflow and takes precedence.
+// GH_ACCESS_TOKEN is only a fallback for local development runs. The CI
+// workflow always sets GITHUB_TOKEN, so this branch is never reached there.
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_ACCESS_TOKEN || '';
+const GITHUB_BOT_DENYLIST = new Set(['l5io']);
 
 // NOTE: "monthly" and "all" periods are backed by GitHub's Search API, which
-// caps results at 1,000 items per query. For an active org, "all" in practice
-// returns only the most recent items within that cap, not true all-time totals.
+// caps results at 1,000 items per query (10 pages x 100/page). For an active
+// org, "all" in practice returns only the most recent ~1,000 items within
+// that cap, not true all-time totals. A true all-time count would need
+// per-repo REST pagination instead of org-wide search.
 const PERIOD_SINCE = {
   weekly: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
   monthly: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
+  yearly: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
   all: null
 };
+
+const SEARCH_MAX_PAGES = 10; // GitHub Search API hard cap: 1,000 results/query
 
 function isRealUser(u) {
   return !!u && u.type === 'User' && !GITHUB_BOT_DENYLIST.has(u.login);
@@ -90,6 +95,21 @@ function sleep(ms) {
   return new Promise(r => setTimeout(r, ms));
 }
 
+// Explicit error type so callers can distinguish "the request failed" from
+// "the resource legitimately doesn't exist" (status 404) without githubFetch
+// silently deciding that for them.
+class GitHubFetchError extends Error {
+  constructor(message, status) {
+    super(message);
+    this.name = 'GitHubFetchError';
+    this.status = status;
+  }
+}
+
+// Single contract: resolves with parsed JSON on success, always throws
+// GitHubFetchError on any non-OK response (including 404) after handling
+// rate-limit retries. Callers that need to treat a specific status as
+// meaningful (e.g. 404 = "no reviews") catch it explicitly at the call site.
 async function githubFetch(url, attempt = 0) {
   const headers = {
     'User-Agent': 'meshery-leaderboard-bot/1.0',
@@ -100,8 +120,6 @@ async function githubFetch(url, attempt = 0) {
     headers['Authorization'] = `Bearer ${GITHUB_TOKEN}`;
   }
   const res = await fetch(url, { headers });
-
-  if (res.status === 404) return null;
 
   const isRateLimited =
     res.status === 429 ||
@@ -121,10 +139,13 @@ async function githubFetch(url, attempt = 0) {
   }
 
   if (isRateLimited) {
-    throw new Error(`GitHub API error: rate limited after retries, giving up (${url})`);
+    throw new GitHubFetchError(`rate limited after retries, giving up (${url})`, res.status);
   }
 
-  if (!res.ok) throw new Error(`GitHub API error: ${res.status} ${url}`);
+  if (!res.ok) {
+    throw new GitHubFetchError(`GitHub API error: ${res.status} ${url}`, res.status);
+  }
+
   return res.json();
 }
 
@@ -146,8 +167,18 @@ async function fetchAllReviews(prUrl) {
   const reviews = [];
   let page = 1;
   while (true) {
-    const data = await githubFetch(`${prUrl}/reviews?per_page=100&page=${page}`);
-    if (!data || !Array.isArray(data) || data.length === 0) break;
+    let data;
+    try {
+      data = await githubFetch(`${prUrl}/reviews?per_page=100&page=${page}`);
+    } catch (err) {
+      // A 404 here means the PR (or its reviews) genuinely doesn't exist
+      // anymore — treat that as "no reviews" rather than a hard failure.
+      // Any other error (rate limit exhausted, 5xx, etc.) propagates so it
+      // isn't mistaken for "no data" and cached as such.
+      if (err instanceof GitHubFetchError && err.status === 404) break;
+      throw err;
+    }
+    if (!Array.isArray(data) || data.length === 0) break;
     reviews.push(...data);
     if (data.length < 100) break;
     page++;
@@ -174,7 +205,7 @@ async function collectGitHubContributors(since, prReviewsCache) {
   const mergedDateFilter = since ? `+merged:${encodeURIComponent('>=' + since)}` : '';
 
   // 1. Issues
-  const issueItems = await searchAll(`org:${GITHUB_ORG}+is:issue${dateFilter}`, 5);
+  const issueItems = await searchAll(`org:${GITHUB_ORG}+is:issue${dateFilter}`, SEARCH_MAX_PAGES);
   for (const item of issueItems) {
     if (isRealUser(item.user)) {
       initUser(item.user);
@@ -184,7 +215,7 @@ async function collectGitHubContributors(since, prReviewsCache) {
 
   // 2. PRs merged in the period — queried directly via GitHub's `is:merged`
   // qualifier so we don't miss PRs merged outside the recent-activity window.
-  const mergedPrs = await searchAll(`org:${GITHUB_ORG}+is:pr+is:merged${mergedDateFilter}`, 10);
+  const mergedPrs = await searchAll(`org:${GITHUB_ORG}+is:pr+is:merged${mergedDateFilter}`, SEARCH_MAX_PAGES);
   for (const item of mergedPrs) {
     if (isRealUser(item.user)) {
       initUser(item.user);
@@ -194,7 +225,7 @@ async function collectGitHubContributors(since, prReviewsCache) {
 
   // 3. Reviews — separate, broader candidate set since a review can land on
   // any PR (open, closed, or merged), not just ones merged in this period.
-  const reviewCandidatePrs = await searchAll(`org:${GITHUB_ORG}+is:pr${updatedFilter}`, 2);
+  const reviewCandidatePrs = await searchAll(`org:${GITHUB_ORG}+is:pr${updatedFilter}`, SEARCH_MAX_PAGES);
 
   for (const pr of reviewCandidatePrs) {
     if (!pr.pull_request || !pr.pull_request.url) continue;
@@ -282,7 +313,8 @@ async function main() {
     const discoursePeriods = await buildAllDiscoursePeriods();
     saveJSON('leaderboard.json', discoursePeriods, 'weekly');
   } catch (err) {
-    console.error('Discourse leaderboard build failed:', err.message);
+    console.error('GitHub leaderboard build failed:', err.message);
+    if (err.cause) console.error('Cause:', err.cause);
     hadError = true;
   }
 
