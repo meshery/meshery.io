@@ -104,10 +104,10 @@
     var currentPeriod = defaultPeriod || 'weekly';
     var fallbackAvatar = '/assets/images/nav-icons/community.svg';
     var periodDescriptions = {
-        weekly: { phrase: 'from the past 7 days', switchText: '30-day, 365-day or all-time' },
-        monthly: { phrase: 'from the past 30 days', switchText: '7-day, 365-day or all-time' },
-        yearly: { phrase: 'from the past 365 days', switchText: '7-day, 30-day or all-time' },
-        all: { phrase: 'from all time', switchText: '7-day, 30-day or 365-day' }
+      weekly:  'over the past 7 days',
+      monthly: 'over the past 30 days',
+      yearly:  'over the past year',
+      all:     'across all time'
     };
 
     function escapeHtml(str) {
@@ -117,11 +117,8 @@
     }
 
     function updatePeriodDescription(period) {
-        var phraseEl = document.getElementById('leaderboard-period-phrase');
-        var switchEl = document.getElementById('leaderboard-switch-phrase');
-        var config = periodDescriptions[period] || periodDescriptions.weekly;
-        if (phraseEl) phraseEl.textContent = config.phrase;
-        if (switchEl) switchEl.textContent = config.switchText;
+      var phraseEl = document.getElementById('leaderboard-period-phrase');
+      if (phraseEl) phraseEl.textContent = periodDescriptions[period] || periodDescriptions.weekly;
     }
 
     function medalClass(rank) {
