@@ -2,11 +2,11 @@
 layout: page
 title: Community Leaderboard
 permalink: /community/leaderboard/
-description: "Recognizing the most active members of the Meshery discussion forum."
 redirect_from:
   - /community/leaderboard
+description: "Recognizing the most active members of the Meshery community, on both the discussion forum and GitHub."
 ---
 
-Celebrating the top contributors on the [Meshery discussion forum](https://discuss.meshery.io) this week. Rankings are based on posts created, likes received, and solutions accepted — switch periods below to see monthly or all-time standings.
+Celebrating the top contributors to Meshery. Switch between the **Community** board — ranking [discussion forum](https://discuss.meshery.io) activity by posts, likes received, and solutions accepted — and the **GitHub** board, ranking issues opened, PRs merged, and PR reviews. Use the period selector to view weekly, monthly, or all-time standings.
 
 {% include leaderboard.html %}

@@ -8,10 +8,12 @@
                 <option value="all">All Time</option>
             </select>
         </div>
-        <div class="board-tabs-wrapper" role="group" aria-label="Select Leaderboard">
-            <div class="board-tabs">
-                <button id="tab-discourse" class="tab-button active-tab" aria-pressed="true">Community</button>
-                <button id="tab-github" class="tab-button" aria-pressed="false">GitHub</button>
+        <div class="board-tabs-wrapper">
+            <div class="board-tabs" role="tablist" aria-label="Select Leaderboard">
+                <button id="tab-discourse" class="tab-button active-tab" role="tab" aria-selected="true"
+                    aria-controls="board-discourse" tabindex="0">Community</button>
+                <button id="tab-github" class="tab-button" role="tab" aria-selected="false" aria-controls="board-github"
+                    tabindex="-1">GitHub</button>
             </div>
         </div>
         <div class="filter-wrapper">
@@ -20,7 +22,7 @@
         </div>
     </div>
 
-    <div id="board-discourse">
+    <div id="board-discourse" role="tabpanel" aria-labelledby="tab-discourse">
         <div class="leaderboard-podium" id="discourse-podium"></div>
         <div class="leaderboard-wrapper" id="discourse-wrapper">
             <table class="leaderboard-table" id="discourse-table">
@@ -39,7 +41,7 @@
         </div>
     </div>
 
-    <div id="board-github" style="display: none;">
+    <div id="board-github" role="tabpanel" aria-labelledby="tab-github" class="is-hidden">
         <div class="leaderboard-podium" id="github-podium"></div>
         <div class="leaderboard-wrapper" id="github-wrapper">
             <table class="leaderboard-table" id="github-table">
@@ -58,7 +60,7 @@
         </div>
     </div>
 
-    <p class="leaderboard-empty-state" id="leaderboard-empty-state" style="display:none;">
+    <p class="leaderboard-empty-state is-hidden" id="leaderboard-empty-state">
         No activity for this period yet.
     </p>
 
@@ -77,224 +79,242 @@
     (function () {
         var discourseData = {};
         var githubData = {};
-        try { discourseData = JSON.parse(document.getElementById('discourse-data').textContent) || {}; } catch (e) {}
-        try { githubData = JSON.parse(document.getElementById('github-data').textContent) || {}; } catch (e) {}
+        try { discourseData = JSON.parse(document.getElementById('discourse-data').textContent) || {}; } catch (e) { }
+        try { githubData = JSON.parse(document.getElementById('github-data').textContent) || {}; } catch (e) { }
 
-        var defaultPeriod = {{ site.data.leaderboard.default_period | jsonify }};
-        var currentPeriod = defaultPeriod || 'weekly';
-        var currentBoard = 'discourse'; // 'discourse' or 'github'
-        var fallbackAvatar = '/assets/images/nav-icons/community.svg';
+        var defaultPeriod = {{ site.data.leaderboard.default_period | jsonify
+    }};
+    var currentPeriod = defaultPeriod || 'weekly';
+    var currentBoard = 'discourse'; // 'discourse' or 'github'
+    var fallbackAvatar = '/assets/images/nav-icons/community.svg';
 
-        function escapeHtml(str) {
-            var div = document.createElement('div');
-            div.textContent = str == null ? '' : String(str);
-            return div.innerHTML.replace(/"/g, '&quot;');
+    function escapeHtml(str) {
+        var div = document.createElement('div');
+        div.textContent = str == null ? '' : String(str);
+        return div.innerHTML.replace(/"/g, '&quot;');
+    }
+
+    function medalClass(rank) {
+        if (rank === 1) return 'medal-gold';
+        if (rank === 2) return 'medal-silver';
+        return 'medal-bronze';
+    }
+
+    function renderDiscoursePodium(users) {
+        var podium = document.getElementById('discourse-podium');
+        var top3 = users.filter(function (u) { return u.rank <= 3; });
+        podium.innerHTML = top3.map(function (user) {
+            return (
+                '<div class="podium-card podium-rank-' + user.rank + '">' +
+                '<div class="podium-card-body">' +
+                '<div class="podium-avatar-wrapper">' +
+                '<span class="medal ' + medalClass(user.rank) + '">' + user.rank + '</span>' +
+                '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
+                '<img class="podium-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
+                '</a>' +
+                '</div>' +
+                '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener" class="podium-username-link">' +
+                '<span class="podium-username">' + escapeHtml(user.username) + '</span>' +
+                '</a>' +
+                '<div class="podium-stats">' +
+                '<div class="podium-stat"><span class="podium-stat-label">Likes</span><span class="podium-stat-value">' + (Number(user.likes) || 0) + '</span></div>' +
+                '<div class="podium-stat"><span class="podium-stat-label">Posts</span><span class="podium-stat-value">' + (Number(user.posts) || 0) + '</span></div>' +
+                '<div class="podium-stat"><span class="podium-stat-label">Solutions</span><span class="podium-stat-value">' + (Number(user.solutions) || 0) + '</span></div>' +
+                '</div>' +
+                '<div class="podium-score">' + (Number(user.score) || 0) + ' pts</div>' +
+                '</div></div>'
+            );
+        }).join('');
+    }
+
+    function renderDiscourseTable(users) {
+        var tbody = document.getElementById('discourse-tbody');
+        var rest = users.filter(function (u) { return u.rank > 3; });
+        tbody.innerHTML = rest.map(function (user) {
+            return (
+                '<tr class="leaderboard-row">' +
+                '<td class="leaderboard-rank">' + user.rank + '</td>' +
+                '<td class="leaderboard-member">' +
+                '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
+                '<img class="leaderboard-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
+                '<span class="leaderboard-username">' + escapeHtml(user.username) + '</span>' +
+                '</a></td>' +
+                '<td>' + (Number(user.likes) || 0) + '</td>' +
+                '<td>' + (Number(user.posts) || 0) + '</td>' +
+                '<td>' + (Number(user.solutions) || 0) + '</td>' +
+                '<td class="leaderboard-score">' + (Number(user.score) || 0) + '</td>' +
+                '</tr>'
+            );
+        }).join('');
+    }
+
+    function renderGithubPodium(users) {
+        var podium = document.getElementById('github-podium');
+        var top3 = users.filter(function (u) { return u.rank <= 3; });
+        podium.innerHTML = top3.map(function (user) {
+            return (
+                '<div class="podium-card podium-rank-' + user.rank + '">' +
+                '<div class="podium-card-body">' +
+                '<div class="podium-avatar-wrapper">' +
+                '<span class="medal ' + medalClass(user.rank) + '">' + user.rank + '</span>' +
+                '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
+                '<img class="podium-avatar" src="' + escapeHtml(user.avatar_url) + '" alt="' + escapeHtml(user.github_username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
+                '</a>' +
+                '</div>' +
+                '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener" class="podium-username-link">' +
+                '<span class="podium-username">' + escapeHtml(user.github_username) + '</span>' +
+                '</a>' +
+                '<div class="podium-stats">' +
+                '<div class="podium-stat"><span class="podium-stat-label">Issues</span><span class="podium-stat-value">' + (Number(user.issues) || 0) + '</span></div>' +
+                '<div class="podium-stat"><span class="podium-stat-label">PRs</span><span class="podium-stat-value">' + (Number(user.prs) || 0) + '</span></div>' +
+                '<div class="podium-stat"><span class="podium-stat-label">Reviews</span><span class="podium-stat-value">' + (Number(user.reviews) || 0) + '</span></div>' +
+                '</div>' +
+                '<div class="podium-score">' + (Number(user.github_score) || 0) + ' pts</div>' +
+                '</div></div>'
+            );
+        }).join('');
+    }
+
+    function renderGithubTable(users) {
+        var tbody = document.getElementById('github-tbody');
+        var rest = users.filter(function (u) { return u.rank > 3; });
+        tbody.innerHTML = rest.map(function (user) {
+            return (
+                '<tr class="leaderboard-row">' +
+                '<td class="leaderboard-rank">' + user.rank + '</td>' +
+                '<td class="leaderboard-member">' +
+                '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
+                '<img class="leaderboard-avatar" src="' + escapeHtml(user.avatar_url) + '" alt="' + escapeHtml(user.github_username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
+                '<span class="leaderboard-username">' + escapeHtml(user.github_username) + '</span>' +
+                '</a></td>' +
+                '<td>' + (Number(user.issues) || 0) + '</td>' +
+                '<td>' + (Number(user.prs) || 0) + '</td>' +
+                '<td>' + (Number(user.reviews) || 0) + '</td>' +
+                '<td class="leaderboard-score">' + (Number(user.github_score) || 0) + '</td>' +
+                '</tr>'
+            );
+        }).join('');
+    }
+
+    function renderLeaderboard() {
+        var users = currentBoard === 'discourse' ? (discourseData[currentPeriod] || []) : (githubData[currentPeriod] || []);
+
+        var hasActivity = false;
+        if (currentBoard === 'discourse') {
+            hasActivity = users.some(function (u) { return (u.score || 0) > 0; });
+        } else {
+            hasActivity = users.some(function (u) {
+                return (u.issues || 0) > 0 || (u.prs || 0) > 0 || (u.reviews || 0) > 0;
+            });
         }
 
-        function medalClass(rank) {
-            if (rank === 1) return 'medal-gold';
-            if (rank === 2) return 'medal-silver';
-            return 'medal-bronze';
+        var emptyState = document.getElementById('leaderboard-empty-state');
+
+        document.getElementById('board-discourse').classList.toggle('is-hidden', !(currentBoard === 'discourse' && hasActivity));
+        document.getElementById('board-github').classList.toggle('is-hidden', !(currentBoard === 'github' && hasActivity));
+
+        if (!hasActivity) {
+            emptyState.textContent = 'No activity for this period yet.';
+            emptyState.classList.remove('is-hidden');
+            return;
         }
 
-        function renderDiscoursePodium(users) {
-            var podium = document.getElementById('discourse-podium');
-            var top3 = users.filter(function (u) { return u.rank <= 3; });
-            podium.innerHTML = top3.map(function (user) {
-                return (
-                    '<div class="podium-card podium-rank-' + user.rank + '">' +
-                    '<div class="podium-card-body">' +
-                    '<div class="podium-avatar-wrapper">' +
-                    '<span class="medal ' + medalClass(user.rank) + '">' + user.rank + '</span>' +
-                    '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
-                    '<img class="podium-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
-                    '</a>' +
-                    '</div>' +
-                    '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener" class="podium-username-link">' +
-                    '<span class="podium-username">' + escapeHtml(user.username) + '</span>' +
-                    '</a>' +
-                    '<div class="podium-stats">' +
-                    '<div class="podium-stat"><span class="podium-stat-label">Likes</span><span class="podium-stat-value">' + (Number(user.likes) || 0) + '</span></div>' +
-                    '<div class="podium-stat"><span class="podium-stat-label">Posts</span><span class="podium-stat-value">' + (Number(user.posts) || 0) + '</span></div>' +
-                    '<div class="podium-stat"><span class="podium-stat-label">Solutions</span><span class="podium-stat-value">' + (Number(user.solutions) || 0) + '</span></div>' +
-                    '</div>' +
-                    '<div class="podium-score">' + (Number(user.score) || 0) + ' pts</div>' +
-                    '</div></div>'
-                );
-            }).join('');
+        emptyState.classList.add('is-hidden');
+
+        if (currentBoard === 'discourse') {
+            renderDiscoursePodium(users);
+            renderDiscourseTable(users);
+        } else {
+            renderGithubPodium(users);
+            renderGithubTable(users);
         }
+        filterLeaderboard();
+    }
 
-        function renderDiscourseTable(users) {
-            var tbody = document.getElementById('discourse-tbody');
-            var rest = users.filter(function (u) { return u.rank > 3; });
-            tbody.innerHTML = rest.map(function (user) {
-                return (
-                    '<tr class="leaderboard-row">' +
-                    '<td class="leaderboard-rank">' + user.rank + '</td>' +
-                    '<td class="leaderboard-member">' +
-                    '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
-                    '<img class="leaderboard-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
-                    '<span class="leaderboard-username">' + escapeHtml(user.username) + '</span>' +
-                    '</a></td>' +
-                    '<td>' + (Number(user.likes) || 0) + '</td>' +
-                    '<td>' + (Number(user.posts) || 0) + '</td>' +
-                    '<td>' + (Number(user.solutions) || 0) + '</td>' +
-                    '<td class="leaderboard-score">' + (Number(user.score) || 0) + '</td>' +
-                    '</tr>'
-                );
-            }).join('');
-        }
+    var periodSelect = document.getElementById('period-select');
+    periodSelect.value = currentPeriod;
+    periodSelect.addEventListener('change', function () {
+        currentPeriod = this.value;
+        renderLeaderboard();
+    });
 
-        function renderGithubPodium(users) {
-            var podium = document.getElementById('github-podium');
-            var top3 = users.filter(function (u) { return u.rank <= 3; });
-            podium.innerHTML = top3.map(function (user) {
-                return (
-                    '<div class="podium-card podium-rank-' + user.rank + '">' +
-                    '<div class="podium-card-body">' +
-                    '<div class="podium-avatar-wrapper">' +
-                    '<span class="medal ' + medalClass(user.rank) + '">' + user.rank + '</span>' +
-                    '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
-                    '<img class="podium-avatar" src="' + escapeHtml(user.avatar_url) + '" alt="' + escapeHtml(user.github_username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
-                    '</a>' +
-                    '</div>' +
-                    '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener" class="podium-username-link">' +
-                    '<span class="podium-username">' + escapeHtml(user.github_username) + '</span>' +
-                    '</a>' +
-                    '<div class="podium-stats">' +
-                    '<div class="podium-stat"><span class="podium-stat-label">Issues</span><span class="podium-stat-value">' + (Number(user.issues) || 0) + '</span></div>' +
-                    '<div class="podium-stat"><span class="podium-stat-label">PRs</span><span class="podium-stat-value">' + (Number(user.prs) || 0) + '</span></div>' +
-                    '<div class="podium-stat"><span class="podium-stat-label">Reviews</span><span class="podium-stat-value">' + (Number(user.reviews) || 0) + '</span></div>' +
-                    '</div>' +
-                    '<div class="podium-score">' + (Number(user.github_score) || 0) + ' pts</div>' +
-                    '</div></div>'
-                );
-            }).join('');
-        }
+    var tabButtons = [document.getElementById('tab-discourse'), document.getElementById('tab-github')];
 
-        function renderGithubTable(users) {
-            var tbody = document.getElementById('github-tbody');
-            var rest = users.filter(function (u) { return u.rank > 3; });
-            tbody.innerHTML = rest.map(function (user) {
-                return (
-                    '<tr class="leaderboard-row">' +
-                    '<td class="leaderboard-rank">' + user.rank + '</td>' +
-                    '<td class="leaderboard-member">' +
-                    '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
-                    '<img class="leaderboard-avatar" src="' + escapeHtml(user.avatar_url) + '" alt="' + escapeHtml(user.github_username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
-                    '<span class="leaderboard-username">' + escapeHtml(user.github_username) + '</span>' +
-                    '</a></td>' +
-                    '<td>' + (Number(user.issues) || 0) + '</td>' +
-                    '<td>' + (Number(user.prs) || 0) + '</td>' +
-                    '<td>' + (Number(user.reviews) || 0) + '</td>' +
-                    '<td class="leaderboard-score">' + (Number(user.github_score) || 0) + '</td>' +
-                    '</tr>'
-                );
-            }).join('');
-        }
+    function activateTab(tab) {
+        currentBoard = tab.id === 'tab-discourse' ? 'discourse' : 'github';
+        tabButtons.forEach(function (btn) {
+            var isActive = btn === tab;
+            btn.classList.toggle('active-tab', isActive);
+            btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            btn.setAttribute('tabindex', isActive ? '0' : '-1');
+        });
+        renderLeaderboard();
+    }
 
-        function renderLeaderboard() {
-            var users = currentBoard === 'discourse' ? (discourseData[currentPeriod] || []) : (githubData[currentPeriod] || []);
+    tabButtons.forEach(function (tab, index) {
+        tab.addEventListener('click', function () {
+            activateTab(tab);
+        });
 
-            var hasActivity = false;
-            if (currentBoard === 'discourse') {
-                hasActivity = users.some(function (u) { return (u.score || 0) > 0; });
+        tab.addEventListener('keydown', function (e) {
+            var newIndex;
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                newIndex = (index + 1) % tabButtons.length;
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                newIndex = (index - 1 + tabButtons.length) % tabButtons.length;
+            } else if (e.key === 'Home') {
+                newIndex = 0;
+            } else if (e.key === 'End') {
+                newIndex = tabButtons.length - 1;
             } else {
-                hasActivity = users.some(function (u) {
-                    return (u.issues || 0) > 0 || (u.prs || 0) > 0 || (u.reviews || 0) > 0;
-                });
-            }
-
-            var emptyState = document.getElementById('leaderboard-empty-state');
-
-            document.getElementById('board-discourse').style.display = (currentBoard === 'discourse' && hasActivity) ? 'block' : 'none';
-            document.getElementById('board-github').style.display = (currentBoard === 'github' && hasActivity) ? 'block' : 'none';
-
-            if (!hasActivity) {
-                emptyState.textContent = 'No activity for this period yet.';
-                emptyState.style.display = '';
                 return;
             }
+            e.preventDefault();
+            tabButtons[newIndex].focus();
+            activateTab(tabButtons[newIndex]);
+        });
+    });
 
-            emptyState.style.display = 'none';
+    function filterLeaderboard() {
+        var input = document.getElementById('leaderboard-filter').value.toLowerCase();
+        var visibleCount = 0;
+        var tableId = currentBoard === 'discourse' ? '#discourse-table' : '#github-table';
+        var podiumId = currentBoard === 'discourse' ? '#discourse-podium' : '#github-podium';
 
-            if (currentBoard === 'discourse') {
-                renderDiscoursePodium(users);
-                renderDiscourseTable(users);
-            } else {
-                renderGithubPodium(users);
-                renderGithubTable(users);
+        var rows = document.querySelectorAll(tableId + ' tbody tr');
+        rows.forEach(function (row) {
+            var username = row.querySelector('.leaderboard-username');
+            if (username) {
+                var matches = username.textContent.toLowerCase().includes(input);
+                row.style.display = matches ? '' : 'none';
+                if (matches) visibleCount++;
             }
-            filterLeaderboard();
+        });
+
+        var cards = document.querySelectorAll(podiumId + ' .podium-card');
+        cards.forEach(function (card) {
+            var username = card.querySelector('.podium-username');
+            if (username) {
+                var matches = username.textContent.toLowerCase().includes(input);
+                card.style.display = matches ? '' : 'none';
+                if (matches) visibleCount++;
+            }
+        });
+
+        var emptyState = document.getElementById('leaderboard-empty-state');
+        if (input && visibleCount === 0) {
+            emptyState.textContent = 'No members match that search.';
+            emptyState.classList.remove('is-hidden');
+        } else if (rows.length === 0 && cards.length === 0) {
+            emptyState.textContent = 'No activity for this period yet.';
+            emptyState.classList.remove('is-hidden');
+        } else {
+            emptyState.classList.add('is-hidden');
         }
+    };
 
-        var periodSelect = document.getElementById('period-select');
-        periodSelect.value = currentPeriod;
-        periodSelect.addEventListener('change', function () {
-            currentPeriod = this.value;
-            renderLeaderboard();
-        });
+    document.getElementById('leaderboard-filter').addEventListener('input', filterLeaderboard);
 
-        document.getElementById('tab-discourse').addEventListener('click', function() {
-            currentBoard = 'discourse';
-            this.classList.add('active-tab');
-            this.setAttribute('aria-pressed', 'true');
-            var other = document.getElementById('tab-github');
-            other.classList.remove('active-tab');
-            other.setAttribute('aria-pressed', 'false');
-            renderLeaderboard();
-        });
-
-        document.getElementById('tab-github').addEventListener('click', function() {
-            currentBoard = 'github';
-            this.classList.add('active-tab');
-            this.setAttribute('aria-pressed', 'true');
-            var other = document.getElementById('tab-discourse');
-            other.classList.remove('active-tab');
-            other.setAttribute('aria-pressed', 'false');
-            renderLeaderboard();
-        });
-
-        function filterLeaderboard() {
-            var input = document.getElementById('leaderboard-filter').value.toLowerCase();
-            var visibleCount = 0;
-            var tableId = currentBoard === 'discourse' ? '#discourse-table' : '#github-table';
-            var podiumId = currentBoard === 'discourse' ? '#discourse-podium' : '#github-podium';
-
-            var rows = document.querySelectorAll(tableId + ' tbody tr');
-            rows.forEach(function (row) {
-                var username = row.querySelector('.leaderboard-username');
-                if (username) {
-                    var matches = username.textContent.toLowerCase().includes(input);
-                    row.style.display = matches ? '' : 'none';
-                    if (matches) visibleCount++;
-                }
-            });
-
-            var cards = document.querySelectorAll(podiumId + ' .podium-card');
-            cards.forEach(function (card) {
-                var username = card.querySelector('.podium-username');
-                if (username) {
-                    var matches = username.textContent.toLowerCase().includes(input);
-                    card.style.display = matches ? '' : 'none';
-                    if (matches) visibleCount++;
-                }
-            });
-
-            var emptyState = document.getElementById('leaderboard-empty-state');
-            if (input && visibleCount === 0) {
-                emptyState.textContent = 'No members match that search.';
-                emptyState.style.display = '';
-            } else if (rows.length === 0 && cards.length === 0) {
-                emptyState.textContent = 'No activity for this period yet.';
-                emptyState.style.display = '';
-            } else {
-                emptyState.style.display = 'none';
-            }
-        };
-
-        document.getElementById('leaderboard-filter').addEventListener('input', filterLeaderboard);
-
-        renderLeaderboard();
-    })();
+    renderLeaderboard();
+    }) ();
 </script>

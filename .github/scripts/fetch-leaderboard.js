@@ -5,13 +5,23 @@ const DISCOURSE_BASE_URL = 'https://discuss.meshery.io/directory_items.json';
 const PERIODS = ['weekly', 'monthly', 'all'];
 const GITHUB_API = 'https://api.github.com';
 const GITHUB_ORG = 'meshery';
+const GITHUB_BOT_DENYLIST = new Set(['l5io']); // known automation accounts that are User-typed, not Bot-typed
+// GH_ACCESS_TOKEN is a local-run convenience only (e.g. `GH_ACCESS_TOKEN=xxx node ...`).
+// In CI, GITHUB_TOKEN is always set by the workflow and takes precedence.
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_ACCESS_TOKEN || '';
 
+// NOTE: "monthly" and "all" periods are backed by GitHub's Search API, which
+// caps results at 1,000 items per query. For an active org, "all" in practice
+// returns only the most recent items within that cap, not true all-time totals.
 const PERIOD_SINCE = {
   weekly: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
   monthly: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
   all: null
 };
+
+function isRealUser(u) {
+  return !!u && u.type === 'User' && !GITHUB_BOT_DENYLIST.has(u.login);
+}
 
 // --- Discourse Logic ---
 
@@ -110,8 +120,40 @@ async function githubFetch(url, attempt = 0) {
     return githubFetch(url, attempt + 1);
   }
 
+  if (isRateLimited) {
+    throw new Error(`GitHub API error: rate limited after retries, giving up (${url})`);
+  }
+
   if (!res.ok) throw new Error(`GitHub API error: ${res.status} ${url}`);
   return res.json();
+}
+
+async function searchAll(query, maxPages) {
+  const items = [];
+  let page = 1;
+  while (page <= maxPages) {
+    const data = await githubFetch(`${GITHUB_API}/search/issues?q=${query}&sort=created&order=desc&per_page=100&page=${page}&advanced_search=true`);
+    if (!data || !data.items || data.items.length === 0) break;
+    items.push(...data.items);
+    if (data.items.length < 100) break;
+    page++;
+    await sleep(2000);
+  }
+  return items;
+}
+
+async function fetchAllReviews(prUrl) {
+  const reviews = [];
+  let page = 1;
+  while (true) {
+    const data = await githubFetch(`${prUrl}/reviews?per_page=100&page=${page}`);
+    if (!data || !Array.isArray(data) || data.length === 0) break;
+    reviews.push(...data);
+    if (data.length < 100) break;
+    page++;
+    await sleep(1000);
+  }
+  return reviews;
 }
 
 async function collectGitHubContributors(since, prReviewsCache) {
@@ -127,61 +169,39 @@ async function collectGitHubContributors(since, prReviewsCache) {
     }
   };
 
-  const dateFilter = since ? `+created:>=${encodeURIComponent(since)}` : '';
-  const searchOpts = '&advanced_search=true';
+  const dateFilter = since ? `+created:${encodeURIComponent('>=' + since)}` : '';
+  const updatedFilter = since ? `+updated:${encodeURIComponent('>=' + since)}` : '';
+  const mergedDateFilter = since ? `+merged:${encodeURIComponent('>=' + since)}` : '';
 
   // 1. Issues
-  let page = 1;
-  while (page <= 5) { // max 500 items to save quota
-    const data = await githubFetch(`${GITHUB_API}/search/issues?q=org:${GITHUB_ORG}+type:issue${dateFilter}&per_page=100&page=${page}${searchOpts}`);
-    if (!data || !data.items || data.items.length === 0) break;
-    for (const item of data.items) {
-      if (item.user && item.user.type === 'User') {
-        initUser(item.user);
-        userStats[item.user.login].issues++;
-      }
+  const issueItems = await searchAll(`org:${GITHUB_ORG}+is:issue${dateFilter}`, 5);
+  for (const item of issueItems) {
+    if (isRealUser(item.user)) {
+      initUser(item.user);
+      userStats[item.user.login].issues++;
     }
-    if (data.items.length < 100) break;
-    page++;
-    await sleep(2000);
   }
 
-  // 2. PRs
-  page = 1;
-  while (page <= 5) {
-    const data = await githubFetch(`${GITHUB_API}/search/issues?q=org:${GITHUB_ORG}+is:pr${dateFilter}&per_page=100&page=${page}${searchOpts}`);
-    if (!data || !data.items || data.items.length === 0) break;
-    for (const item of data.items) {
-      if (item.user && item.user.type === 'User') {
-        initUser(item.user);
-        userStats[item.user.login].prs++;
-      }
+  // 2. PRs merged in the period — queried directly via GitHub's `is:merged`
+  // qualifier so we don't miss PRs merged outside the recent-activity window.
+  const mergedPrs = await searchAll(`org:${GITHUB_ORG}+is:pr+is:merged${mergedDateFilter}`, 10);
+  for (const item of mergedPrs) {
+    if (isRealUser(item.user)) {
+      initUser(item.user);
+      userStats[item.user.login].prs++;
     }
-    if (data.items.length < 100) break;
-    page++;
-    await sleep(2000);
   }
 
-  // 3. PR Reviews
-  const candidatePrs = [];
-  page = 1;
-  const updatedFilter = since ? `+updated:>=${encodeURIComponent(since)}` : '';
-  while (page <= 2) { // Limit to 200 PRs to keep API usage reasonable
-    const data = await githubFetch(`${GITHUB_API}/search/issues?q=org:${GITHUB_ORG}+is:pr${updatedFilter}&per_page=100&page=${page}${searchOpts}`);
-    if (!data || !data.items || data.items.length === 0) break;
-    candidatePrs.push(...data.items);
-    if (data.items.length < 100) break;
-    page++;
-    await sleep(2000);
-  }
+  // 3. Reviews — separate, broader candidate set since a review can land on
+  // any PR (open, closed, or merged), not just ones merged in this period.
+  const reviewCandidatePrs = await searchAll(`org:${GITHUB_ORG}+is:pr${updatedFilter}`, 2);
 
-  for (const pr of candidatePrs) {
+  for (const pr of reviewCandidatePrs) {
     if (!pr.pull_request || !pr.pull_request.url) continue;
     const prUrl = pr.pull_request.url;
 
-    if (!prReviewsCache[prUrl]) {
-      prReviewsCache[prUrl] = await githubFetch(`${prUrl}/reviews`);
-      await sleep(1000);
+    if (!(prUrl in prReviewsCache)) {
+      prReviewsCache[prUrl] = await fetchAllReviews(prUrl);
     }
 
     const reviews = prReviewsCache[prUrl];
@@ -189,7 +209,7 @@ async function collectGitHubContributors(since, prReviewsCache) {
 
     const reviewedUsers = new Set();
     for (const r of reviews) {
-      if (r.user && r.user.type === 'User' && r.state !== 'PENDING') {
+      if (isRealUser(r.user) && r.state !== 'PENDING') {
         if (!since || (r.submitted_at && new Date(r.submitted_at) >= new Date(since))) {
           reviewedUsers.add(r.user.login);
           initUser(r.user);
@@ -201,10 +221,13 @@ async function collectGitHubContributors(since, prReviewsCache) {
     }
   }
 
-  // Rank
-  // GitHub activity score: 3 points per PR opened, 2 per issue opened,
-  // 1 per formal PR review.
-  const leaderboard = Object.values(userStats)
+  return userStats;
+}
+
+// GitHub activity score: 3 points per PR merged, 2 per issue opened,
+// 1 per formal PR review.
+function buildGitHubLeaderboard(userStats) {
+  return Object.values(userStats)
     .map(user => ({
       ...user,
       github_score: (3 * user.prs) + (2 * user.issues) + user.reviews
@@ -213,12 +236,11 @@ async function collectGitHubContributors(since, prReviewsCache) {
       if (b.github_score !== a.github_score) return b.github_score - a.github_score;
       return a.github_username.localeCompare(b.github_username);
     })
+    .slice(0, 50)
     .map((user, index) => ({
       ...user,
       rank: index + 1
     }));
-
-  return leaderboard.slice(0, 50); // top 50
 }
 
 async function buildAllGitHubPeriods() {
@@ -227,7 +249,8 @@ async function buildAllGitHubPeriods() {
   for (const period of PERIODS) {
     console.log(`Fetching GitHub stats for period: ${period}`);
     const since = PERIOD_SINCE[period];
-    periods[period] = await collectGitHubContributors(since, prReviewsCache);
+    const userStats = await collectGitHubContributors(since, prReviewsCache);
+    periods[period] = buildGitHubLeaderboard(userStats);
   }
   if (!periods.all.length) {
     throw new Error('GitHub all-time period empty — refusing to overwrite');
@@ -240,7 +263,7 @@ async function buildAllGitHubPeriods() {
 function saveJSON(filename, periods, defaultPeriod) {
   const output = {
     last_updated: new Date().toISOString(),
-    default_period: defaultPeriod,
+    ...(defaultPeriod ? { default_period: defaultPeriod } : {}),
     periods
   };
   const outputPath = path.join(__dirname, '../../_data', filename);
@@ -253,20 +276,29 @@ function saveJSON(filename, periods, defaultPeriod) {
 }
 
 async function main() {
+  let hadError = false;
+
   try {
     const discoursePeriods = await buildAllDiscoursePeriods();
     saveJSON('leaderboard.json', discoursePeriods, 'weekly');
-
-    if (GITHUB_TOKEN) {
-      const githubPeriods = await buildAllGitHubPeriods();
-      saveJSON('github_leaderboard.json', githubPeriods, 'weekly');
-    } else {
-      console.warn('No GITHUB_TOKEN provided, skipping GitHub stats generation.');
-    }
   } catch (err) {
-    console.error('Leaderboard build failed:', err.message);
-    process.exit(1);
+    console.error('Discourse leaderboard build failed:', err.message);
+    hadError = true;
   }
+
+  if (GITHUB_TOKEN) {
+    try {
+      const githubPeriods = await buildAllGitHubPeriods();
+      saveJSON('github_leaderboard.json', githubPeriods, null);
+    } catch (err) {
+      console.error('GitHub leaderboard build failed:', err.message);
+      hadError = true;
+    }
+  } else {
+    console.warn('No GITHUB_TOKEN provided, skipping GitHub stats generation.');
+  }
+
+  if (hadError) process.exit(1);
 }
 
 main();

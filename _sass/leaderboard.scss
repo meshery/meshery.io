@@ -26,6 +26,10 @@
     justify-content: flex-end;
 }
 
+.is-hidden {
+    display: none;
+}
+
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -41,6 +45,8 @@
 .leaderboard-filter {
     width: 320px;
     max-width: 100%;
+    height: 42px;
+    box-sizing: border-box;
     padding: 0.9rem 1.4rem;
 
     border: 2px solid var(--brand-color-secondary);
@@ -49,8 +55,8 @@
     font-size: 1rem;
     font-weight: 500;
 
-    background: #ffffff;
-    color: #000000;
+    background: var(--color-white);
+    color: var(--text-color-primary-fixed);
 
     outline: none;
     transition:
@@ -69,12 +75,12 @@
 
 /* Dark mode */
 body.dark-mode .leaderboard-filter {
-    background: #000000;
-    color: #ffffff;
+    background: var(--text-color-primary-fixed);
+    color: var(--color-white);
 }
 
 body.dark-mode .leaderboard-filter::placeholder {
-    color: #ffffff;
+    color: var(--color-white);
 }
 
 /* ─────────────────────────────
@@ -111,16 +117,16 @@ body.dark-mode .leaderboard-filter::placeholder {
 }
 
 .tab-button:hover {
-    background: rgba(0, 179, 159, 0.1);
+    background: var(--brand-color-secondary-50);
 }
 
 .tab-button.active-tab {
     background: var(--brand-color-secondary);
-    color: #ffffff;
+    color: var(--color-white);
 }
 
 body.dark-mode .tab-button.active-tab {
-    color: #000000;
+    color: var(--text-color-primary-fixed);
 }
 
 /* ─────────────────────────────
@@ -240,23 +246,23 @@ body.dark-mode .tab-button.active-tab {
     align-items: center;
     justify-content: center;
 
-    color: #ffffff;
-    border: 4px solid #ffffff;
+    color: var(--color-white);
+    border: 4px solid var(--color-white);
 }
 
 .medal-gold {
     background: #FFD54A;
-    color: #000000;
+    color: var(--text-color-primary-fixed);
 }
 
 .medal-silver {
     background: #c0c0c0;
-    color: #000000;
+    color: var(--text-color-primary-fixed);
 }
 
 .medal-bronze {
     background: #c47a3a;
-    color: #000000;
+    color: var(--text-color-primary-fixed);
 }
 
 /* Crown */
@@ -313,7 +319,7 @@ body.dark-mode .tab-button.active-tab {
 }
 
 body.dark-mode .podium-stat-label {
-    color: #ffffff;
+    color: var(--color-white);
 }
 
 .podium-stat-value {
@@ -323,7 +329,7 @@ body.dark-mode .podium-stat-label {
 }
 
 body.dark-mode .podium-stat-value {
-    color: #ffffff;
+    color: var(--color-white);
 }
 
 /* Score */
@@ -352,7 +358,7 @@ body.dark-mode .podium-stat-value {
 
 .leaderboard-table thead tr {
     background-color: var(--brand-color-secondary);
-    color: #000000;
+    color: var(--text-color-primary-fixed);
     text-align: left;
 }
 
@@ -360,17 +366,17 @@ body.dark-mode .podium-stat-value {
     padding: 0.75rem 1rem;
     font-weight: 600;
     white-space: nowrap;
-    color: #000000;
+    color: var(--text-color-primary-fixed);
 }
 
 .leaderboard-table td {
     padding: 0.65rem 1rem;
     vertical-align: middle;
-    color: #000000;
+    color: var(--text-color-primary-fixed);
 }
 
 .leaderboard-table tbody tr:nth-child(odd) {
-    background-color: #ffffff;
+    background-color: var(--color-white);
 }
 
 .leaderboard-table tbody tr:nth-child(even) {
@@ -382,7 +388,7 @@ body.dark-mode {
     .leaderboard-table,
     .leaderboard-table th,
     .leaderboard-table td {
-        border-color: #000000;
+        border-color: var(--text-color-primary-fixed);
     }
 }
 
@@ -396,7 +402,7 @@ body.dark-mode {
 
 
 .leaderboard-member a:hover .leaderboard-username {
-    color: #000000;
+    color: var(--text-color-primary-fixed);
     text-decoration: underline;
 }
 
@@ -411,18 +417,12 @@ body.dark-mode {
 .leaderboard-updated {
     text-align: right;
     font-size: 0.78rem;
-    color: #000000;
+    color: var(--text-color-primary-fixed);
     margin-top: 0.5rem;
 }
 
 body.dark-mode .leaderboard-updated {
-    color: #ffffff;
-}
-
-.period-toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    color: var(--color-white);
 }
 
 .period-select {
@@ -433,7 +433,7 @@ body.dark-mode .leaderboard-updated {
     border: 2px solid var(--brand-color-secondary);
     border-radius: 8px;
 
-    background: #ffffff;
+    background: var(--color-white);
     color: var(--brand-color-secondary);
 
     font-size: 0.80rem;
@@ -454,8 +454,8 @@ body.dark-mode .leaderboard-updated {
 }
 
 body.dark-mode .period-select {
-    background: #000000;
-    color: #ffffff;
+    background: var(--text-color-primary-fixed);
+    color: var(--color-white);
 }
 
 /* ─────────────────────────────
@@ -510,9 +510,9 @@ body.dark-mode .period-select {
     .period-select-wrapper,
     .board-tabs-wrapper,
     .filter-wrapper {
-        flex: 1 1 100% !important;
+        flex: 1 1 100%;
         display: flex;
-        justify-content: center !important;
+        justify-content: center;
     }
 
     .period-select {
@@ -525,6 +525,8 @@ body.dark-mode .period-select {
     }
 
     .leaderboard-filter {
+        height: 100%;
+        box-sizing: border-box;
         padding: 0 0.6rem;
         font-size: 0.74rem;
     }
