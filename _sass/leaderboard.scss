@@ -2,12 +2,32 @@
        FILTER / SEARCH
     ───────────────────────────── */
 
-.leaderboard-section .leaderboard-controls {
+.leaderboard .leaderboard-controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
     margin: 0 0 1.5rem;
+}
+
+.period-select-wrapper {
+    flex: 1;
+}
+
+.board-tabs-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.filter-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.is-hidden {
+    display: none;
 }
 
 .visually-hidden {
@@ -24,7 +44,9 @@
 
 .leaderboard-filter {
     width: 320px;
-    max-width: 90%;
+    max-width: 100%;
+    height: 42px;
+    box-sizing: border-box;
     padding: 0.9rem 1.4rem;
 
     border: 2px solid var(--brand-color-secondary);
@@ -33,8 +55,8 @@
     font-size: 1rem;
     font-weight: 500;
 
-    background: #ffffff;
-    color: #000000;
+    background: var(--color-white);
+    color: var(--text-color-primary-fixed);
 
     outline: none;
     transition:
@@ -48,26 +70,63 @@
 }
 
 .leaderboard-filter:focus-visible {
-    box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.15);
+    box-shadow: 0 0 0 3px var(--brand-color-secondary-50);
 }
 
 /* Dark mode */
 body.dark-mode .leaderboard-filter {
-    background: #000000;
-    color: #ffffff;
-}
-
-body.dark-mode .period-select {
-    background-color: #000000;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.9rem center;
-    background-size: 12px 8px;
-    color: #ffffff;
+    background: var(--text-color-primary-fixed);
+    color: var(--color-white);
 }
 
 body.dark-mode .leaderboard-filter::placeholder {
-    color: #ffffff;
+    color: var(--color-white);
+}
+
+/* ─────────────────────────────
+       BOARD TABS
+    ───────────────────────────── */
+
+.board-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: 2px solid var(--brand-color-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.tab-button {
+    padding: 0.45rem 1.25rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    color: var(--brand-color-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    flex: 1;
+    text-align: center;
+}
+
+.tab-button:first-child {
+    border-right: 2px solid var(--brand-color-secondary);
+}
+
+.tab-button:hover {
+    background: var(--brand-color-secondary-50);
+}
+
+.tab-button.active-tab {
+    background: var(--brand-color-secondary);
+    color: var(--color-white);
+}
+
+body.dark-mode .tab-button.active-tab {
+    color: var(--text-color-primary-fixed);
 }
 
 /* ─────────────────────────────
@@ -78,7 +137,7 @@ body.dark-mode .leaderboard-filter::placeholder {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 2rem;
+    gap: 3.5rem;
     margin: 4rem 0;
     flex-wrap: wrap;
     width: 100%;
@@ -86,8 +145,8 @@ body.dark-mode .leaderboard-filter::placeholder {
 }
 
 .podium-card {
-    flex: 0 0 220px;
-    max-width: 220px;
+    flex: 0 0 290px;
+    max-width: 290px;
     display: flex;
     justify-content: center;
 }
@@ -187,23 +246,23 @@ body.dark-mode .leaderboard-filter::placeholder {
     align-items: center;
     justify-content: center;
 
-    color: #ffffff;
-    border: 4px solid #ffffff;
+    color: var(--color-white);
+    border: 4px solid var(--color-white);
 }
 
 .medal-gold {
     background: #FFD54A;
-    color: #000000;
+    color: var(--text-color-primary-fixed);
 }
 
 .medal-silver {
     background: #c0c0c0;
-    color: #000000;
+    color: var(--text-color-primary-fixed);
 }
 
 .medal-bronze {
     background: #c47a3a;
-    color: #000000;
+    color: var(--text-color-primary-fixed);
 }
 
 /* Crown */
@@ -222,6 +281,7 @@ body.dark-mode .leaderboard-filter::placeholder {
 .podium-username-link {
     text-decoration: none;
     color: inherit;
+    margin-top: 2rem;
 }
 
 .podium-username-link:hover .podium-username {
@@ -259,7 +319,7 @@ body.dark-mode .leaderboard-filter::placeholder {
 }
 
 body.dark-mode .podium-stat-label {
-    color: #ffffff;
+    color: var(--color-white);
 }
 
 .podium-stat-value {
@@ -269,7 +329,7 @@ body.dark-mode .podium-stat-label {
 }
 
 body.dark-mode .podium-stat-value {
-    color: #ffffff;
+    color: var(--color-white);
 }
 
 /* Score */
@@ -298,7 +358,7 @@ body.dark-mode .podium-stat-value {
 
 .leaderboard-table thead tr {
     background-color: var(--brand-color-secondary);
-    color: #000000;
+    color: var(--text-color-primary-fixed);
     text-align: left;
 }
 
@@ -306,21 +366,21 @@ body.dark-mode .podium-stat-value {
     padding: 0.75rem 1rem;
     font-weight: 600;
     white-space: nowrap;
-    color: #000000;
+    color: var(--text-color-primary-fixed);
 }
 
 .leaderboard-table td {
     padding: 0.65rem 1rem;
     vertical-align: middle;
-    color: #000000;
+    color: var(--text-color-primary-fixed);
 }
 
 .leaderboard-table tbody tr:nth-child(odd) {
-    background-color: #ffffff;
+    background-color: var(--color-white);
 }
 
 .leaderboard-table tbody tr:nth-child(even) {
-    background-color: #00B39F;
+    background-color: var(--brand-color-secondary);
 }
 
 body.dark-mode {
@@ -328,7 +388,7 @@ body.dark-mode {
     .leaderboard-table,
     .leaderboard-table th,
     .leaderboard-table td {
-        border-color: #000000;
+        border-color: var(--text-color-primary-fixed);
     }
 }
 
@@ -342,7 +402,7 @@ body.dark-mode {
 
 
 .leaderboard-member a:hover .leaderboard-username {
-    color: #000000;
+    color: var(--text-color-primary-fixed);
     text-decoration: underline;
 }
 
@@ -357,31 +417,34 @@ body.dark-mode {
 .leaderboard-updated {
     text-align: right;
     font-size: 0.78rem;
-    color: #000000;
+    color: var(--text-color-primary-fixed);
     margin-top: 0.5rem;
 }
 
 body.dark-mode .leaderboard-updated {
-    color: #ffffff;
+    color: var(--color-white);
 }
 
-.period-toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    position: relative;
-}
-
+/* ─────────────────────────────
+       PERIOD SELECT
+       (native <select>, styled with a custom chevron via
+       appearance: none — see the accepted alternative to a
+       custom dropdown component discussed in review)
+    ───────────────────────────── */
 
 .period-select {
-    width: 320px;
+    width: 260px;
+    max-width: 100%;
     height: 35px;
     padding: 0 2.2rem 0 1rem;
 
     border: 2px solid var(--brand-color-secondary);
     border-radius: 8px;
 
-    background-color: #ffffff;
+    background-color: var(--color-white);
+    /* NOTE: SVG data-URIs can't reference CSS custom properties.
+       This stroke color must be kept in sync by hand with
+       --brand-color-secondary in _sass/rootvariables.scss. */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2300B39F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 0.9rem center;
@@ -397,16 +460,38 @@ body.dark-mode .leaderboard-updated {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.period-select:focus-visible {
+    box-shadow: 0 0 0 3px var(--brand-color-secondary-50);
+}
+
+body.dark-mode .period-select {
+    background-color: var(--text-color-primary-fixed);
+    /* Same caveat as above: kept in sync by hand with --color-white. */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    color: var(--color-white);
 }
 
 /* ─────────────────────────────
        TABLET
     ───────────────────────────── */
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
 
     .leaderboard-podium {
-        gap: 1rem;
+        gap: 1.5rem;
+    }
+
+    .podium-card {
+        flex: 0 0 220px;
+        max-width: 220px;
     }
 
     .podium-rank-1 .podium-avatar-wrapper {
@@ -433,35 +518,23 @@ body.dark-mode .leaderboard-updated {
        MOBILE
     ───────────────────────────── */
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
 
-    .leaderboard-section .leaderboard-controls {
-        flex-wrap: nowrap;
-        flex-direction: column;
+    .leaderboard .leaderboard-controls {
+        flex-wrap: wrap;
         justify-content: center;
-        align-items: stretch;
-        gap: 0.6rem;
-        margin-bottom: 32px;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 16px;
     }
 
-    .period-toggle,
-    .leaderboard-filter {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        height: 42px;
-        box-sizing: border-box;
+    .period-select-wrapper,
+    .board-tabs-wrapper,
+    .filter-wrapper {
+        flex: 1 1 100%;
+        display: flex;
+        justify-content: center;
     }
-
-    .leaderboard-filter {
-        order: 1;
-    }
-
-    .period-toggle {
-        order: 2;
-        margin-bottom: 0.5rem;
-    }
-
 
     .period-select {
         width: 100%;
@@ -475,6 +548,7 @@ body.dark-mode .leaderboard-updated {
     }
 
     .leaderboard-filter {
+        box-sizing: border-box;
         padding: 0 0.6rem;
         font-size: 0.74rem;
     }
@@ -483,7 +557,7 @@ body.dark-mode .leaderboard-updated {
         flex-direction: column;
         align-items: center;
         gap: 2rem;
-        margin: 5.5rem 0 2rem;
+        margin: 3.5rem 0 2rem;
         width: 100%;
     }
 
