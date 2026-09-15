@@ -1,11 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const DISCOURSE_BASE_URL = 'https://discuss.meshery.io/directory_items.json';
-const PERIODS = ['weekly', 'monthly', 'all'];
-const GITHUB_API = 'https://api.github.com';
-const GITHUB_ORG = 'meshery';
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_ACCESS_TOKEN || '';
+const BASE_URL = 'https://discuss.meshery.io/directory_items.json';
+const PERIODS = ['weekly', 'monthly', 'yearly', 'all'];
 
 const PERIOD_SINCE = {
   weekly: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),

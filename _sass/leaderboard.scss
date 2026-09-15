@@ -73,6 +73,15 @@ body.dark-mode .leaderboard-filter {
     color: #ffffff;
 }
 
+body.dark-mode .period-select {
+    background-color: #000000;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    background-size: 12px 8px;
+    color: #ffffff;
+}
+
 body.dark-mode .leaderboard-filter::placeholder {
     color: #ffffff;
 }
@@ -131,7 +140,7 @@ body.dark-mode .tab-button.active-tab {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 3.5rem;
+    gap: 2rem;
     margin: 4rem 0;
     flex-wrap: wrap;
     width: 100%;
@@ -139,8 +148,8 @@ body.dark-mode .tab-button.active-tab {
 }
 
 .podium-card {
-    flex: 0 0 290px;
-    max-width: 290px;
+    flex: 0 0 220px;
+    max-width: 220px;
     display: flex;
     justify-content: center;
 }
@@ -275,7 +284,6 @@ body.dark-mode .tab-button.active-tab {
 .podium-username-link {
     text-decoration: none;
     color: inherit;
-    margin-top: 2rem;
 }
 
 .podium-username-link:hover .podium-username {
@@ -423,17 +431,23 @@ body.dark-mode .leaderboard-updated {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    position: relative;
 }
 
+
 .period-select {
-    width: 200px;
+    width: 320px;
     height: 35px;
-    padding: 0 1rem;
+    padding: 0 2.2rem 0 1rem;
 
     border: 2px solid var(--brand-color-secondary);
     border-radius: 8px;
 
-    background: #ffffff;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2300B39F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    background-size: 12px 8px;
     color: var(--brand-color-secondary);
 
     font-size: 0.80rem;
@@ -442,35 +456,19 @@ body.dark-mode .leaderboard-updated {
     cursor: pointer;
     outline: none;
 
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        background-color 0.2s ease,
-        color 0.2s ease;
-}
-
-.period-select:focus-visible {
-    box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.15);
-}
-
-body.dark-mode .period-select {
-    background: #000000;
-    color: #ffffff;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 /* ─────────────────────────────
        TABLET
     ───────────────────────────── */
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
 
     .leaderboard-podium {
-        gap: 1.5rem;
-    }
-
-    .podium-card {
-        flex: 0 0 220px;
-        max-width: 220px;
+        gap: 1rem;
     }
 
     .podium-rank-1 .podium-avatar-wrapper {
@@ -497,29 +495,43 @@ body.dark-mode .period-select {
        MOBILE
     ───────────────────────────── */
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
 
-    .leaderboard .leaderboard-controls {
-        flex-wrap: wrap;
+    .leaderboard-section .leaderboard-controls {
+        flex-wrap: nowrap;
+        flex-direction: column;
         justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 16px;
+        align-items: stretch;
+        gap: 0.6rem;
+        margin-bottom: 32px;
     }
 
-    .period-select-wrapper,
-    .board-tabs-wrapper,
-    .filter-wrapper {
-        flex: 1 1 100% !important;
-        display: flex;
-        justify-content: center !important;
+    .period-toggle,
+    .leaderboard-filter {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        height: 42px;
+        box-sizing: border-box;
     }
+
+    .leaderboard-filter {
+        order: 1;
+    }
+
+    .period-toggle {
+        order: 2;
+        margin-bottom: 0.5rem;
+    }
+
 
     .period-select {
         width: 100%;
         height: 100%;
         margin: 0;
-        padding: 0 0.6rem;
+        padding: 0 2rem 0 0.6rem;
+        background-position: right 0.7rem center;
+        background-size: 11px 7px;
         font-size: 0.74rem;
         box-sizing: border-box;
     }
@@ -533,7 +545,7 @@ body.dark-mode .period-select {
         flex-direction: column;
         align-items: center;
         gap: 2rem;
-        margin: 3.5rem 0 2rem;
+        margin: 5.5rem 0 2rem;
         width: 100%;
     }
 
