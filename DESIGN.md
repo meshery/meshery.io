@@ -1,4 +1,3 @@
-
 ---
 version: alpha
 name: Meshery.io
@@ -156,7 +155,7 @@ shadows:
   box-shadow-primary-dark: '4px 4px 8px rgba(0, 0, 0, 1)'
   box-shadow-primary-quotes-light: '2px 2px 25px #CECECE'
   box-shadow-primary-quotes-dark: '2px 2px 25px rgba(0, 0, 0, 0.1)'
-  integrations-light: '4px 4px 14px #CB CED1, -12px -12px 20px #FFFFFF'
+  integrations-light: '4px 4px 14px #CBCED1, -12px -12px 20px #FFFFFF'
   integrations-dark: '4px 4px 14px #41454A, -4px -4px 10px #78808A'
 
 gradients:
