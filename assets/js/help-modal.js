@@ -1,23 +1,45 @@
-      // Get the modal
-      var Helpmodal = document.getElementById("myModal");
+const modal = document.getElementById("myModal");
+const button = document.getElementById("myBtn");
+const closeButton = document.getElementsByClassName("closed")[0];
+let previouslyFocusedElement = null;
 
-      // Get the button that opens the modal
-      var button = document.getElementById("myBtn");
-      
-      var Closespan = document.getElementsByClassName("closed")[0];
-      
-      button.onclick = function() {
-        Helpmodal.style.display = "flex";
-      }
-      
-      // When the user clicks on <span> (x), close the modal
-      Closespan.onclick = function() {
-        Helpmodal.style.display = "none";
-      }
-      
-      // When the user clicks anywhere outside of the modal, close it
-      window.onclick = function(event) {
-        if (event.target == Helpmodal) {
-          Helpmodal.style.display = "none";
-        }
-      }
+function setCatalogInteraction(enabled) {
+  const catalogContent = document.querySelector(".feature-container");
+  catalogContent.classList.toggle("modal-open", enabled);
+}
+
+button.onclick = function () {
+  modal.style.display = "flex";
+  setCatalogInteraction(true);
+  previouslyFocusedElement = button;
+  closeButton.focus();
+};
+
+closeButton.onclick = function () {
+  modal.style.display = "none";
+  setCatalogInteraction(false);
+  if (previouslyFocusedElement) {
+    previouslyFocusedElement.focus();
+  }
+};
+
+modal.onkeydown = function (event) {
+  if (event.key === "Escape") {
+    event.preventDefault();
+    modal.style.display = "none";
+    setCatalogInteraction(false);
+    if (previouslyFocusedElement) {
+      previouslyFocusedElement.focus();
+    }
+  }
+};
+
+window.onclick = function (event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+    setCatalogInteraction(false);
+    if (previouslyFocusedElement) {
+      previouslyFocusedElement.focus();
+    }
+  }
+};
