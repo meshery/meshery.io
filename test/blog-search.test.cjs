@@ -67,7 +67,7 @@ test('renders HTML-like metadata as inert text without creating elements', async
 });
 
 test('only uses HTTP(S) URLs as result link destinations', async () => {
-  for (const url of ['data:text/html,<script>alert(1)</script>', 'mailto:test@example.com', 'ftp://example.com/file']) {
+  for (const url of ['data:text/html,<script>alert(1)</script>', 'mailto:test@example.com', 'ftp://example.com/file', 'javascript:alert(1)']) {
     const { dom, resultElement } = await renderSearchResult({
       title: 'Safe title',
       url,
@@ -78,7 +78,7 @@ test('only uses HTTP(S) URLs as result link destinations', async () => {
 
     assert.ok(resultElement);
     const resultLinks = resultElement.querySelectorAll('h2 a, .link');
-    assert.equal(resultLinks.length, 2);
+    assert.equal(resultLinks.length, 1);
     assert.equal([...resultLinks].every(link => !link.hasAttribute('href')), true);
     dom.window.close();
   }

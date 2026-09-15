@@ -96,6 +96,11 @@ function highlightText(text, query) {
   if (!text) return document.createDocumentFragment();
 
   const fragment = document.createDocumentFragment();
+  if (!query) {
+    fragment.appendChild(document.createTextNode(text));
+    return fragment;
+  }
+
   const escapedQuery = escapeRegex(query);
   const regex = new RegExp(`(${escapedQuery})`, 'gi');
   let lastIndex = 0;
@@ -259,17 +264,17 @@ function renderResults(results, query) {
     content.className = 'post-content';
     content.appendChild(excerptElement);
 
-    const readMore = document.createElement('a');
-    readMore.className = 'link';
     if (resultUrl) {
+      const readMore = document.createElement('a');
+      readMore.className = 'link';
       readMore.href = resultUrl;
-    }
-    readMore.textContent = 'Read More';
+      readMore.textContent = 'Read More';
 
-    const buttonParagraph = document.createElement('div');
-    buttonParagraph.className = 'button-para';
-    buttonParagraph.appendChild(readMore);
-    content.appendChild(buttonParagraph);
+      const buttonParagraph = document.createElement('div');
+      buttonParagraph.className = 'button-para';
+      buttonParagraph.appendChild(readMore);
+      content.appendChild(buttonParagraph);
+    }
 
     li.appendChild(heading);
     li.appendChild(details);
