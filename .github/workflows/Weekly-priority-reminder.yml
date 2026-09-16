@@ -1,0 +1,79 @@
+name: Weekly Meeting Priority Issues Reminder
+
+on:
+  schedule:
+    - cron: '0 12 * * 3' # Every Wednesday, 12:00 UTC. Only fires from the default branch.
+  workflow_dispatch:
+    inputs:
+      target-branch:
+        description: 'Branch to check out for this run'
+        required: false
+        default: 'JoelEbenka/issue-2913'
+        type: string
+
+permissions:
+  issues: read
+  pull-requests: read
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  notify-priority-items:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout target branch
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ inputs.target-branch || 'JoelEbenka/issue-2913' }}
+
+      - name: Find priority issues and PRs
+        id: search
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const orgs = ['meshery', 'meshery-extensions'];
+            const labels = ['urgent', 'high priority'];
+
+            // Query per org/label and merge + de-dupe results, rather than
+            // trusting "OR" inside a single query string.
+            async function searchAll(type) {
+              const byId = new Map();
+              for (const org of orgs) {
+                for (const label of labels) {
+                  const labelQualifier = label.includes(' ') ? `label:"${label}"` : `label:${label}`;
+                  const { data } = await github.rest.search.issuesAndPullRequests({
+                    q: `is:open is:${type} org:${org} ${labelQualifier}`,
+                    per_page: 50,
+                  });
+                  for (const item of data.items) byId.set(item.id, item);
+                }
+              }
+              return [...byId.values()];
+            }
+
+            const [issues, prs] = await Promise.all([searchAll('issue'), searchAll('pr')]);
+            console.log(`Found ${issues.length} priority issues and ${prs.length} priority PRs.`);
+
+            const labelQuery = labels.map(l => (l.includes(' ') ? `label:"${l}"` : `label:${l}`)).join(' OR ');
+            const issuesUrl = `https://github.com/issues?q=${encodeURIComponent(`is:open is:issue org:meshery org:meshery-extensions (${labelQuery})`)}`;
+            const prsUrl = `https://github.com/pulls?q=${encodeURIComponent(`is:open is:pr org:meshery org:meshery-extensions (${labelQuery})`)}`;
+
+            core.setOutput('has_items', String(issues.length > 0 || prs.length > 0));
+            core.setOutput(
+              'slack_text',
+              `:rotating_light: *Weekly Priority Reminder* — ${issues.length} issue(s) and ${prs.length} PR(s) tagged urgent/high priority. <${issuesUrl}|View issues> \u00b7 <${prsUrl}|View PRs>`
+            );
+
+      - name: Notify Slack
+        if: steps.search.outputs.has_items == 'true'
+        uses: slackapi/slack-github-action@v4.0.0
+        with:
+          method: chat.postMessage
+          token: ${{ secrets.SLACK_BOT_TOKEN }}
+          payload: |
+            channel: ${{ vars.MESHERY_SLACK_CHANNEL_ID }}
+            text: ${{ toJSON(steps.search.outputs.slack_text) }}
