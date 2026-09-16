@@ -10,22 +10,16 @@ const GITHUB_ORG = 'meshery';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_ACCESS_TOKEN || '';
 const GITHUB_BOT_DENYLIST = new Set(['l5io']);
 
-// NOTE: "monthly" and "all" periods are backed by GitHub's Search API, which
-// caps results at 1,000 items per query (10 pages x 100/page). For an active
-// org, "all" in practice returns only the most recent ~1,000 items within
-// that cap, not true all-time totals. A true all-time count would need
-// per-repo REST pagination instead of org-wide search.
+// Rolling period cutoff timestamps in ISO UTC format for exact boundary comparisons.
 const PERIOD_SINCE = {
-  weekly: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
-  monthly: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
-  yearly: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
+  weekly: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+  monthly: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
+  yearly: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString(),
   all: null
 };
 
-const SEARCH_MAX_PAGES = 10; // GitHub Search API hard cap: 1,000 results/query
-
 function isRealUser(u) {
-  return !!u && u.type === 'User' && !GITHUB_BOT_DENYLIST.has(u.login);
+  return !!u && u.type === 'User' && !u.login.endsWith('[bot]') && !GITHUB_BOT_DENYLIST.has(u.login);
 }
 
 // --- Discourse Logic ---
@@ -106,9 +100,11 @@ class GitHubFetchError extends Error {
   }
 }
 
+let remainingRateLimit = 5000;
+
 // Single contract: resolves with parsed JSON on success, always throws
 // GitHubFetchError on any non-OK response (including 404) after handling
-// rate-limit retries. Callers that need to treat a specific status as
+// bounded rate-limit retries. Callers that need to treat a specific status as
 // meaningful (e.g. 404 = "no reviews") catch it explicitly at the call site.
 async function githubFetch(url, attempt = 0) {
   const headers = {
@@ -121,9 +117,14 @@ async function githubFetch(url, attempt = 0) {
   }
   const res = await fetch(url, { headers });
 
+  const ratelimitRem = res.headers.get('x-ratelimit-remaining');
+  if (ratelimitRem !== null) {
+    remainingRateLimit = parseInt(ratelimitRem, 10);
+  }
+
   const isRateLimited =
     res.status === 429 ||
-    (res.status === 403 && res.headers.get('x-ratelimit-remaining') === '0') ||
+    (res.status === 403 && ratelimitRem === '0') ||
     (res.status === 403 && res.headers.get('retry-after') !== null);
 
   if (isRateLimited && attempt < 2) {
@@ -149,21 +150,61 @@ async function githubFetch(url, attempt = 0) {
   return res.json();
 }
 
-async function searchAll(query, maxPages) {
-  const items = [];
+async function fetchRepositories() {
+  const repos = [];
   let page = 1;
-  while (page <= maxPages) {
-    const data = await githubFetch(`${GITHUB_API}/search/issues?q=${query}&sort=created&order=desc&per_page=100&page=${page}&advanced_search=true`);
-    if (!data || !data.items || data.items.length === 0) break;
-    items.push(...data.items);
-    if (data.items.length < 100) break;
+  while (true) {
+    const data = await githubFetch(`${GITHUB_API}/orgs/${GITHUB_ORG}/repos?per_page=100&page=${page}`);
+    if (!Array.isArray(data) || data.length === 0) break;
+    for (const repo of data) {
+      if (!repo.fork && !repo.disabled) {
+        repos.push({ name: repo.name });
+      }
+    }
+    if (data.length < 100) break;
     page++;
-    await sleep(2000);
+    await sleep(200);
   }
-  return items;
+  return repos;
 }
 
-async function fetchAllReviews(prUrl) {
+// Single paginated source for issues and pull requests per repository.
+// GET /repos/{owner}/{repo}/issues returns both ordinary issues and PRs.
+// PR items contain a pull_request object with merged_at and url, avoiding
+// the need for a duplicate fetch from the /pulls endpoint.
+async function fetchRepositoryActivity(repoName) {
+  const issues = [];
+  const prs = [];
+  let page = 1;
+  while (true) {
+    const data = await githubFetch(`${GITHUB_API}/repos/${GITHUB_ORG}/${repoName}/issues?state=all&per_page=100&page=${page}`);
+    if (!Array.isArray(data) || data.length === 0) break;
+    for (const item of data) {
+      if (item.pull_request) {
+        prs.push({
+          number: item.number,
+          user: item.user,
+          created_at: item.created_at,
+          updated_at: item.updated_at,
+          merged_at: item.pull_request.merged_at || null,
+          url: item.pull_request.url
+        });
+      } else {
+        issues.push({
+          number: item.number,
+          user: item.user,
+          created_at: item.created_at
+        });
+      }
+    }
+    if (data.length < 100) break;
+    page++;
+    await sleep(200);
+  }
+  return { issues, prs };
+}
+
+async function fetchPullRequestReviews(prUrl) {
   const reviews = [];
   let page = 1;
   while (true) {
@@ -171,88 +212,65 @@ async function fetchAllReviews(prUrl) {
     try {
       data = await githubFetch(`${prUrl}/reviews?per_page=100&page=${page}`);
     } catch (err) {
-      // A 404 here means the PR (or its reviews) genuinely doesn't exist
-      // anymore — treat that as "no reviews" rather than a hard failure.
-      // Any other error (rate limit exhausted, 5xx, etc.) propagates so it
-      // isn't mistaken for "no data" and cached as such.
+      // Only status 404 (e.g. PR removed or reviews endpoint missing) is treated as empty.
       if (err instanceof GitHubFetchError && err.status === 404) break;
+      // All other failures (rate-limit, 5xx, network) must throw so they are fatal!
       throw err;
     }
     if (!Array.isArray(data) || data.length === 0) break;
     reviews.push(...data);
     if (data.length < 100) break;
     page++;
-    await sleep(1000);
+    await sleep(150);
   }
   return reviews;
 }
 
-async function collectGitHubContributors(since, prReviewsCache) {
-  const userStats = {};
-  const initUser = (u) => {
-    if (!userStats[u.login]) {
-      userStats[u.login] = {
-        github_username: u.login,
-        avatar_url: u.avatar_url,
-        profile_url: u.html_url,
-        issues: 0, prs: 0, reviews: 0
-      };
-    }
+// Bounded review candidate window (30 days = ~767 PRs in org:meshery).
+// With ~314 repo/issue calls + ~767 review calls = ~1,081 total calls, this
+// ensures 100% complete Weekly and Monthly reviews within the 5,000 req/hr rate limit.
+const REVIEW_CANDIDATE_DAYS = 30;
+
+async function fetchGitHubActivity() {
+  const activity = {
+    issues: [],
+    prs: [],
+    reviews: []
   };
 
-  const dateFilter = since ? `+created:${encodeURIComponent('>=' + since)}` : '';
-  const updatedFilter = since ? `+updated:${encodeURIComponent('>=' + since)}` : '';
-  const mergedDateFilter = since ? `+merged:${encodeURIComponent('>=' + since)}` : '';
+  const repos = await fetchRepositories();
+  console.log(`Discovered ${repos.length} non-fork repositories in org '${GITHUB_ORG}'.`);
 
-  // 1. Issues
-  const issueItems = await searchAll(`org:${GITHUB_ORG}+is:issue${dateFilter}`, SEARCH_MAX_PAGES);
-  for (const item of issueItems) {
-    if (isRealUser(item.user)) {
-      initUser(item.user);
-      userStats[item.user.login].issues++;
+  for (const repo of repos) {
+    const { issues, prs } = await fetchRepositoryActivity(repo.name);
+    activity.issues.push(...issues);
+    activity.prs.push(...prs);
+  }
+  console.log(`Loaded ${activity.issues.length} total issues and ${activity.prs.length} total PRs.`);
+
+  // To protect the 5,000 req/hr GitHub rate limit, review candidates are selected
+  // from PRs updated in the active review window (last 30 days) and sorted newest first.
+  // Weekly and Monthly review sets are guaranteed complete. Yearly and All-Time reviews
+  // encompass reviews observed in this active window.
+  const reviewCutoff = new Date(Date.now() - REVIEW_CANDIDATE_DAYS * 24 * 60 * 60 * 1000).toISOString();
+  const reviewCandidates = activity.prs
+    .filter(pr => pr.updated_at && pr.updated_at >= reviewCutoff)
+    .sort((a, b) => b.updated_at.localeCompare(a.updated_at));
+
+  console.log(`Evaluating reviews for ${reviewCandidates.length} candidate PRs updated since ${reviewCutoff}...`);
+
+  for (const pr of reviewCandidates) {
+    if (remainingRateLimit < 200) {
+      throw new Error(`GitHub API rate limit headroom exhausted (${remainingRateLimit} remaining) during review collection — failing safely to preserve previous valid leaderboard`);
+    }
+    if (!pr.url) continue;
+    const reviews = await fetchPullRequestReviews(pr.url);
+    if (reviews.length > 0) {
+      activity.reviews.push({ prUrl: pr.url, reviews });
     }
   }
 
-  // 2. PRs merged in the period — queried directly via GitHub's `is:merged`
-  // qualifier so we don't miss PRs merged outside the recent-activity window.
-  const mergedPrs = await searchAll(`org:${GITHUB_ORG}+is:pr+is:merged${mergedDateFilter}`, SEARCH_MAX_PAGES);
-  for (const item of mergedPrs) {
-    if (isRealUser(item.user)) {
-      initUser(item.user);
-      userStats[item.user.login].prs++;
-    }
-  }
-
-  // 3. Reviews — separate, broader candidate set since a review can land on
-  // any PR (open, closed, or merged), not just ones merged in this period.
-  const reviewCandidatePrs = await searchAll(`org:${GITHUB_ORG}+is:pr${updatedFilter}`, SEARCH_MAX_PAGES);
-
-  for (const pr of reviewCandidatePrs) {
-    if (!pr.pull_request || !pr.pull_request.url) continue;
-    const prUrl = pr.pull_request.url;
-
-    if (!(prUrl in prReviewsCache)) {
-      prReviewsCache[prUrl] = await fetchAllReviews(prUrl);
-    }
-
-    const reviews = prReviewsCache[prUrl];
-    if (!reviews || !Array.isArray(reviews)) continue;
-
-    const reviewedUsers = new Set();
-    for (const r of reviews) {
-      if (isRealUser(r.user) && r.state !== 'PENDING') {
-        if (!since || (r.submitted_at && new Date(r.submitted_at) >= new Date(since))) {
-          reviewedUsers.add(r.user.login);
-          initUser(r.user);
-        }
-      }
-    }
-    for (const username of reviewedUsers) {
-      userStats[username].reviews++;
-    }
-  }
-
-  return userStats;
+  return activity;
 }
 
 // GitHub activity score: 3 points per PR merged, 2 per issue opened,
@@ -274,16 +292,73 @@ function buildGitHubLeaderboard(userStats) {
     }));
 }
 
-async function buildAllGitHubPeriods() {
-  const periods = {};
-  const prReviewsCache = {}; // Cache to avoid redundant API calls across periods
+function aggregateGitHubPeriods(activity) {
+  const periodsData = {};
+
   for (const period of PERIODS) {
-    console.log(`Fetching GitHub stats for period: ${period}`);
     const since = PERIOD_SINCE[period];
-    const userStats = await collectGitHubContributors(since, prReviewsCache);
-    periods[period] = buildGitHubLeaderboard(userStats);
+    const sinceMs = since ? new Date(since).getTime() : null;
+    const userStats = {};
+    const initUser = (u) => {
+      if (!userStats[u.login]) {
+        userStats[u.login] = {
+          github_username: u.login,
+          avatar_url: u.avatar_url,
+          profile_url: u.html_url,
+          issues: 0, prs: 0, reviews: 0
+        };
+      }
+    };
+
+    // 1. Issues opened (classified strictly by created_at)
+    for (const issue of activity.issues) {
+      if (sinceMs !== null && (!issue.created_at || new Date(issue.created_at).getTime() < sinceMs)) continue;
+      if (isRealUser(issue.user)) {
+        initUser(issue.user);
+        userStats[issue.user.login].issues++;
+      }
+    }
+
+    // 2. PRs merged (classified strictly by merged_at)
+    for (const pr of activity.prs) {
+      if (!pr.merged_at) continue; // unmerged PRs are never counted
+      if (sinceMs !== null && new Date(pr.merged_at).getTime() < sinceMs) continue;
+      if (isRealUser(pr.user)) {
+        initUser(pr.user);
+        userStats[pr.user.login].prs++;
+      }
+    }
+
+    // 3. Reviews submitted (classified strictly by submitted_at, 1 per reviewer per PR)
+    for (const candidate of activity.reviews) {
+      const reviewedUsers = new Set();
+      for (const r of candidate.reviews) {
+        if (isRealUser(r.user) && r.state !== 'PENDING') {
+          if (sinceMs === null || (r.submitted_at && new Date(r.submitted_at).getTime() >= sinceMs)) {
+            reviewedUsers.add(r.user.login);
+            initUser(r.user);
+          }
+        }
+      }
+      for (const username of reviewedUsers) {
+        userStats[username].reviews++;
+      }
+    }
+
+    periodsData[period] = buildGitHubLeaderboard(userStats);
   }
-  if (!periods.all.length) {
+
+  return periodsData;
+}
+
+async function buildAllGitHubPeriods() {
+  console.log('Fetching raw GitHub activity across all repositories...');
+  const activity = await fetchGitHubActivity();
+
+  console.log('Aggregating activity into periods...');
+  const periods = aggregateGitHubPeriods(activity);
+
+  if (!periods.all || !periods.all.length) {
     throw new Error('GitHub all-time period empty — refusing to overwrite');
   }
   return periods;
@@ -313,7 +388,7 @@ async function main() {
     const discoursePeriods = await buildAllDiscoursePeriods();
     saveJSON('leaderboard.json', discoursePeriods, 'weekly');
   } catch (err) {
-    console.error('GitHub leaderboard build failed:', err.message);
+    console.error('Discourse leaderboard build failed:', err.message);
     if (err.cause) console.error('Cause:', err.cause);
     hadError = true;
   }
@@ -321,7 +396,7 @@ async function main() {
   if (GITHUB_TOKEN) {
     try {
       const githubPeriods = await buildAllGitHubPeriods();
-      saveJSON('github_leaderboard.json', githubPeriods, null);
+      saveJSON('github_leaderboard.json', githubPeriods, 'weekly');
     } catch (err) {
       console.error('GitHub leaderboard build failed:', err.message);
       hadError = true;
@@ -333,4 +408,22 @@ async function main() {
   if (hadError) process.exit(1);
 }
 
-main();
+// Export for unit/mock testing
+if (typeof module !== 'undefined') {
+  module.exports = {
+    isRealUser,
+    PERIODS,
+    PERIOD_SINCE,
+    fetchRepositories,
+    fetchRepositoryActivity,
+    fetchPullRequestReviews,
+    fetchGitHubActivity,
+    buildGitHubLeaderboard,
+    aggregateGitHubPeriods,
+    GitHubFetchError
+  };
+}
+
+if (require.main === module) {
+  main();
+}
