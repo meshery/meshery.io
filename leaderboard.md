@@ -7,6 +7,8 @@ redirect_from:
 description: "Recognizing the most active members of the Meshery community, on both the discussion forum and GitHub."
 ---
 
-Celebrating the top contributors to Meshery. Switch between the **Community** board — ranking [discussion forum](https://discuss.meshery.io) activity by posts, likes received, and solutions accepted — and the **GitHub** board, ranking issues opened, PRs merged, and PR reviews. Use the period selector to view weekly, monthly, yearly, or all-time standings.
+<h1 class="leaderboard-heading">Community Leaderboard</h1>
+
+<p id="leaderboard-description">Celebrating the top contributors on the <a href="https://discuss.meshery.io">Meshery discussion forum</a> <span id="leaderboard-period-phrase">{% case site.data.leaderboard.default_period %}{% when 'monthly' %}over the past 30 days{% when 'yearly' %}over the past year{% when 'all' %}across all time{% else %}over the past 7 days{% endcase %}</span>. Members earn their spot by staying active — a post is worth a point, a like from a fellow member is worth two, and an answer accepted as the solution is worth three. See who leads across different periods.</p>
 
 {% include leaderboard.html %}

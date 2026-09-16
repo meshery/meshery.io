@@ -136,11 +136,22 @@
     var currentPeriod = defaultPeriod || 'weekly';
     var currentBoard = 'discourse'; // 'discourse' or 'github'
     var fallbackAvatar = '/assets/images/nav-icons/community.svg';
+    var periodDescriptions = {
+      weekly:  'over the past 7 days',
+      monthly: 'over the past 30 days',
+      yearly:  'over the past year',
+      all:     'across all time'
+    };
 
     function escapeHtml(str) {
         var div = document.createElement('div');
         div.textContent = str == null ? '' : String(str);
         return div.innerHTML.replace(/"/g, '&quot;');
+    }
+
+    function updatePeriodDescription(period) {
+      var phraseEl = document.getElementById('leaderboard-period-phrase');
+      if (phraseEl) phraseEl.textContent = periodDescriptions[period] || periodDescriptions.weekly;
     }
 
     function medalClass(rank) {
