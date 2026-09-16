@@ -5,11 +5,6 @@ on:
     - cron: '0 12 * * 3' # Every Wednesday, 12:00 UTC. Only fires from the default branch.
   workflow_dispatch:
     inputs:
-      target-branch:
-        description: 'Branch to check out for this run'
-        required: false
-        default: 'JoelEbenka/issue-2913'
-        type: string
       notify-when-empty:
         description: 'Post to Slack even when nothing matches (for testing delivery)'
         required: false
@@ -19,7 +14,6 @@ on:
 permissions:
   issues: read
   pull-requests: read
-  contents: read
 
 concurrency:
   group: ${{ github.workflow }}
@@ -30,11 +24,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Checkout target branch
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-        with:
-          ref: ${{ inputs.target-branch || 'JoelEbenka/issue-2913' }}
-
       - name: Find priority issues and PRs
         id: search
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
@@ -47,17 +36,18 @@ jobs:
             const labels = ['urgent', 'high priority'];
 
             // Query per org/label and merge + de-dupe results, rather than
-            // trusting "OR" inside a single query string.
+            // trusting "OR" inside a single query string. github.paginate()
+            // walks every page (per_page only bounds a single page).
             async function searchAll(type) {
               const byId = new Map();
               for (const org of orgs) {
                 for (const label of labels) {
                   const labelQualifier = label.includes(' ') ? `label:"${label}"` : `label:${label}`;
-                  const { data } = await github.rest.search.issuesAndPullRequests({
+                  const items = await github.paginate(github.rest.search.issuesAndPullRequests, {
                     q: `is:open is:${type} org:${org} ${labelQualifier}`,
-                    per_page: 50,
+                    per_page: 100,
                   });
-                  for (const item of data.items) byId.set(item.id, item);
+                  for (const item of items) byId.set(item.id, item);
                 }
               }
               return [...byId.values()];
@@ -83,7 +73,7 @@ jobs:
 
       - name: Notify Slack
         if: steps.search.outputs.should_notify == 'true'
-        uses: slackapi/slack-github-action@v2.1.1
+        uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a # v2.1.1
         with:
           method: chat.postMessage
           token: ${{ secrets.SLACK_BOT_TOKEN }}
