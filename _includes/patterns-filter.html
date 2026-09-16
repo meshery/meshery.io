@@ -301,20 +301,17 @@
   }
 </script>
 <script type="module">
-  document.addEventListener("DOMContentLoaded", () => {
-  // Uncheck all checkboxes on page load AND reset their state in the DOM
-  const checkboxes = document.querySelectorAll("input[type='checkbox']");
-  checkboxes.forEach((checkbox) => {
-    checkbox.checked = false;
-  });
+  const pageKey = window.location.pathname;
 
-  // Reset global filter lists
-  globalTechnologyList = [];
-  globalCategoryList = [];
-  globalPatternTypeList = [];
+  function loadFilter(name) {
+    try { return JSON.parse(sessionStorage.getItem(`selected_${name}_${pageKey}`)) || []; }
+    catch { return []; }
+  }
+  function saveFilter(name, list) {
+    try { sessionStorage.setItem(`selected_${name}_${pageKey}`, JSON.stringify(list)); }
+    catch { /* storage unavailable */ }
+  }
 
-  showFilterCards(); // Refresh the displayed cards
-});
   // import all integrations data
   import data from "{{ site.baseurl }}/integrations/data.js";
   // add wasmFilter to data array
@@ -348,17 +345,13 @@
   // get all empty filter containers
   const container = document.getElementById("compatibility-div");
   const categoryContainer = document.getElementById("category-div");
-    // const patternTypeContainer = document.getElementById("cardpatterntype-div");
 
   // globalTechnologyList stores all the technologies checked by user as strings
   // example: ["gcp", "keda"]
-  let globalTechnologyList = [];
+  let globalTechnologyList = loadFilter('technologies');
   // globalCategorySelected stores the category selected by the user, users can select multiple categories at the same time for sorting
   // initially it is empty
-  let globalCategoryList = [];
-    // globalPatternTypeList stores the pattern types which currently are models, designs and wasm filters.
-  // multiple pattern types can be selected at the same time
-  let globalPatternTypeList = [];
+  let globalCategoryList = loadFilter('categories');
   // get all pattern cards
   const patternCards = document.querySelectorAll(".patternCard");
 
@@ -424,6 +417,9 @@
     //     updatePatternTypeList(cardPatternType[i]);
     //     showFilterCards();
     //   };
+    //   if (globalPatternTypeList.includes(cardPatternType[i])) {
+    //     input.checked = true;
+    //   }
     //   inputContainer.appendChild(input);
     //   const label = document.createElement("label");
     //   label.innerHTML = `<div class="name">${cardPatternType[i].replace(
@@ -449,6 +445,9 @@
     input.name = "type";
     input.value = cardType[i];
     input.id = cardType[i];
+    if (globalCategoryList.includes(cardType[i])) {
+      input.checked = true;
+    }
     // When it is checked or unchecked, updateCategoryList function is called followed by showFilterCards function
     input.onclick = function () {
       updateCategoryList(cardType[i]);
@@ -493,6 +492,9 @@
     input.name = data[i].name;
     input.value = data[i].name;
     input.id = data[i].name;
+    if (globalTechnologyList.includes(data[i].name)) {
+      input.checked = true;
+    }
     // When technology checkbox is checked or unchecked, updateTechnologyList function is called, followed by showFilterCards function
     input.onclick = function () {
       updateTechnologyList(data[i].name);
@@ -523,6 +525,7 @@
     } else {
       globalTechnologyList.push(value);
     }
+    saveFilter('technologies', globalTechnologyList);
   }
 
   // This function updates the category list
@@ -538,16 +541,7 @@
         globalCategoryList = [];
       }
     }
-  }
-
-  function updatePatternTypeList(value) {
-    if (globalPatternTypeList.includes(value)) {
-      globalPatternTypeList = globalPatternTypeList.filter(
-        (item) => item !== value
-      );
-    } else {
-      globalPatternTypeList.push(value);
-    }
+    saveFilter('categories', globalCategoryList);
   }
 
 // Function called when user clicks on any of Technology checkboxes or Category Boxes
@@ -561,7 +555,6 @@ function showFilterCards() {
   const matchingCards = patternCards.filter(card => {
     const type = card.getAttribute("type")?.toLowerCase();
     const technologyAttr = card.getAttribute("technology");
-    const patternType = card.getAttribute("patternType")?.toLowerCase();
     
     // Parse technologies once
     const technologies = technologyAttr ? JSON.parse(technologyAttr) : [];
@@ -573,11 +566,8 @@ function showFilterCards() {
     const showCardCat = globalCategoryList.length === 0 || 
                        globalCategoryList.some(cat => type.includes(cat));
     
-    const showCardPatternType = globalPatternTypeList.length === 0 || 
-                               globalPatternTypeList.some(pt => patternType.includes(pt));
-    
     // Return true if card matches all criteria
-    return showCardTech && showCardCat && showCardPatternType;
+    return showCardTech && showCardCat;
   });
   
   // Hide all cards first (batch operation)
@@ -587,8 +577,7 @@ function showFilterCards() {
   
   // Check if filters are active
   const noFiltersActive = globalTechnologyList.length === 0 && 
-                         globalCategoryList.length === 0 && 
-                         globalPatternTypeList.length === 0;
+                         globalCategoryList.length === 0;
   
   // Update "not found" message
   const noCard = document.getElementById("not-found");
@@ -658,6 +647,8 @@ function showFilterCards() {
   
   return matchingCards.length; // Return count of matching cards
 }
+
+showFilterCards();
 </script>
 <script>
   // Sort-by-count controls for the Technologies and Categories filter sections.
