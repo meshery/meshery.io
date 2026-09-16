@@ -20,7 +20,7 @@ function getSafeResultUrl(path) {
 
   try {
     const parsedUrl = new URL(url, window.location.href);
-    return ['http:', 'https:'].includes(parsedUrl.protocol) ? url : null;
+    return ['http:', 'https:'].includes(parsedUrl.protocol) && parsedUrl.origin === window.location.origin ? url : null;
   } catch {
     return null;
   }

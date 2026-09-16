@@ -66,8 +66,8 @@ test('renders HTML-like metadata as inert text without creating elements', async
   dom.window.close();
 });
 
-test('only uses HTTP(S) URLs as result link destinations', async () => {
-  for (const url of ['data:text/html,<script>alert(1)</script>', 'mailto:test@example.com', 'ftp://example.com/file', 'javascript:alert(1)']) {
+test('only uses same-origin HTTP(S) URLs as result link destinations', async () => {
+  for (const url of ['data:text/html,<script>alert(1)</script>', 'mailto:test@example.com', 'ftp://example.com/file', 'javascript:alert(1)', '//evil.com/x', 'https://evil.com/x']) {
     const { dom, resultElement } = await renderSearchResult({
       title: 'Safe title',
       url,
@@ -83,7 +83,7 @@ test('only uses HTTP(S) URLs as result link destinations', async () => {
     dom.window.close();
   }
 
-  for (const url of ['http://example.com/blog/safe/', 'https://example.com/blog/safe/']) {
+  for (const url of ['/blog/safe/', 'https://meshery.io/blog/safe/']) {
     const { dom, resultElement } = await renderSearchResult({
       title: 'Safe title',
       url,
@@ -95,7 +95,8 @@ test('only uses HTTP(S) URLs as result link destinations', async () => {
     assert.ok(resultElement);
     const resultLinks = resultElement.querySelectorAll('h2 a, .link');
     assert.equal(resultLinks.length, 2);
-    assert.equal([...resultLinks].every(link => link.href === url), true);
+    const expectedUrl = new URL(url, 'https://meshery.io/blog/').href;
+    assert.equal([...resultLinks].every(link => link.href === expectedUrl), true);
     dom.window.close();
   }
 });
