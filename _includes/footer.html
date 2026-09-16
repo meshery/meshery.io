@@ -7,19 +7,18 @@
 					<h2>
 						{% if column.link %}
 						<a {% if column.new_window %}target="_blank" {% endif %}
-							href="{% include relative-src.html src=column.link %}" {% if column.social_icon
-							%}class="{{ column.social_icon | downcase }}-icon" {% endif %}>
-							{% if column.social_icon %}
-							{% include social-icon.html icon=column.social_icon %}
-							{% endif %}
-							{{ column.title }}</a>
+						href="{% include relative-src.html src=column.link %}" {% if column.social_icon
+						%}class="{{ column.social_icon | downcase }}-icon" {% endif %}>
+						{% if column.social_icon %}
+						{% include social-icon.html icon=column.social_icon %}
+						{% endif %}
+						{{ column.title }}</a>
 						{% else %}
 						<span>{% if column.social_icon %}
-							{% include social-icon.html icon=column.social_icon %}
-							{% endif %}
-							{{ column.title }}</span>
+						{% include social-icon.html icon=column.social_icon %}
 						{% endif %}
-					</h2>
+						{{ column.title }}</span>
+						{% endif %}</h2>
 				</li>
 				{% for link in column.links %}
 				<li><a {% if link.new_window %}target="_blank" {% endif %}
@@ -48,12 +47,10 @@
 			<div class="text">Confidently wrangling cloud native infrastructure</div>
 			<div class="text"><a href="https://github.com/meshery/meshery/blob/master/CODE_OF_CONDUCT.md">Code of
 					Conduct</a></div>
-			<div class="text"><a href="https://www.linuxfoundation.org/legal/trademark-usage">The Linux Foundation.
-					Meshery has registered trademarks and uses trademarks</a></div>
+			<div class="text"><a href ="https://www.linuxfoundation.org/legal/trademark-usage">The Linux Foundation. Meshery has registered trademarks and uses trademarks</a></div>
 			{% if page.collection == "pages" or page.collection == "programs" %}
 			<div class="text">
-				<a href="https://github.com/meshery/meshery.io/edit/master/collections/{{ page.path }}">Edit this
-					Page</a>
+				<a href="https://github.com/meshery/meshery.io/edit/master/collections/{{ page.path }}">Edit this Page</a>
 			</div>
 			{% endif %}
 		</div>
@@ -108,10 +105,10 @@
 		if (childElements.length > 3) {
 			childElements[3].innerHTML = "Copy to clipboard";
 		} else {
-			childElements[1].innerHTML = "Copy URL";
-			childElements[1].style.color = 'white';
-			childElements[1].style.background = "#00b39fff";
-		}
+		childElements[1].innerHTML = "Copy URL";
+		childElements[1].style.color = 'white';
+		childElements[1].style.background = "#00b39fff";
+        }
 	}
 
 
@@ -121,7 +118,11 @@
 		console.info('Text:', e.text);
 		console.info('Trigger:', e.trigger);
 		let childElements = e.trigger.childNodes;
-		if (childElements.length > 3) {
+        // ShowCopyFeedback serves as the primary check for the copy button in Catalog Details.
+        // If the copy button is enabled again, the conditional below needs to be encapsulate the childElements conditional
+		// if (!showCopyFeedback(e.trigger, "Copied!")) {}
+
+        if (childElements.length > 3) {
 			childElements[3].innerHTML = "Copied!";
 		} else {
 			childElements[1].innerHTML = "Copied";
@@ -163,8 +164,8 @@
 	toggleBtn.onclick = setMode;
 
 	if (localStorage.getItem("mode") === null) {
-		localStorage.setItem("mode", "dark-mode");
-	}
+    	localStorage.setItem("mode", "dark-mode");
+    }
 
 	const isDark = document.body.classList.contains("dark-mode");
 	const currentMode = localStorage.getItem("mode");
@@ -194,9 +195,9 @@
 		} else {
 			localStorage.setItem("mode", "light-mode")
 		}
-		document.dispatchEvent(new CustomEvent("themeChange", {
-			detail: { value: localStorage.getItem("mode") },
-			bubbles: true,
+		document.dispatchEvent(new CustomEvent("themeChange",{
+			detail : {value : localStorage.getItem("mode")},
+			bubbles: true ,
 		}))
 	}
 
@@ -204,38 +205,39 @@
 
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
-	$(document).ready(function () {
-		$('.slider').slick({
-			centerMode: true,
-			centerPadding: '0px',
-			dots: false,
-			arrows: false,
-			infinite: true,
-			speed: 400,
-			slidesToShow: 3,
-			slidesToScroll: 1,
-			autoplay: true, // true
-			autoplaySpeed: 1500,
+  $(document).ready(function () {
+    $('.slider').slick({
+      centerMode: true,
+      centerPadding: '0px',
+      dots: false,
+      arrows: false,
+      infinite: true,
+      speed: 400,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      autoplay: true, // true
+      autoplaySpeed: 1500,
 
-			responsive: [
-				{
-					breakpoint: 1140,
-					settings: {
-						slidesToShow: 2,
-						centerMode: false,
-					}
-				},
-				{
-					breakpoint: 800,
-					settings: {
-						slidesToShow: 1,
-						centerMode: true,
-						centerPadding: '0px',
-					}
-				}
-			]
-		});
-	});
+
+      responsive: [
+        {
+          breakpoint: 1140,
+          settings: {
+            slidesToShow: 2,
+            centerMode: false,
+          }
+        },
+        {
+          breakpoint: 800,
+          settings: {
+            slidesToShow: 1,
+            centerMode: true,
+            centerPadding: '0px',
+          }
+        }
+      ]
+    });
+  });
 </script>
 </body>
 
