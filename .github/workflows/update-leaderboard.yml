@@ -34,11 +34,13 @@ jobs:
         run: node .github/scripts/fetch-leaderboard.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
 
       - name: Commit changes
+        if: always()
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
-          file_pattern: "_data/leaderboard.json _data/github_leaderboard.json"
+          file_pattern: "_data/discuss_leaderboard.json _data/github_leaderboard.json"
           commit_user_name: Discussions bot
           commit_user_email: discussions@meshery.io
           commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>

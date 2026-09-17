@@ -65,12 +65,13 @@
         No activity for this period yet.
     </p>
 
-    <p class="leaderboard-updated">Last updated: {{ site.data.leaderboard.last_updated | date: "%B %-d, %Y" }}</p>
+    <p class="leaderboard-updated">Last updated: {{ site.data.discuss_leaderboard.last_updated | date: "%B %-d, %Y" }}
+    </p>
 
 </section>
 
 <script type="application/json" id="discourse-data">
-    {{ site.data.leaderboard.periods | jsonify }}
+    {{ site.data.discuss_leaderboard.periods | jsonify }}
 </script>
 <script type="application/json" id="github-data">
     {{ site.data.github_leaderboard.periods | jsonify }}
@@ -131,16 +132,16 @@
         try { discourseData = JSON.parse(document.getElementById('discourse-data').textContent) || {}; } catch (e) { }
         try { githubData = JSON.parse(document.getElementById('github-data').textContent) || {}; } catch (e) { }
 
-        var defaultPeriod = {{ site.data.leaderboard.default_period | jsonify
+        var defaultPeriod = {{ site.data.discuss_leaderboard.default_period | jsonify
     }};
     var currentPeriod = defaultPeriod || 'weekly';
     var currentBoard = 'discourse'; // 'discourse' or 'github'
     var fallbackAvatar = '/assets/images/nav-icons/community.svg';
     var periodDescriptions = {
-      weekly:  'over the past 7 days',
-      monthly: 'over the past 30 days',
-      yearly:  'over the past year',
-      all:     'across all time'
+        weekly: 'over the past 7 days',
+        monthly: 'over the past 30 days',
+        yearly: 'over the past year',
+        all: 'across all time'
     };
 
     function escapeHtml(str) {
@@ -150,8 +151,8 @@
     }
 
     function updatePeriodDescription(period) {
-      var phraseEl = document.getElementById('leaderboard-period-phrase');
-      if (phraseEl) phraseEl.textContent = periodDescriptions[period] || periodDescriptions.weekly;
+        var phraseEl = document.getElementById('leaderboard-period-phrase');
+        if (phraseEl) phraseEl.textContent = periodDescriptions[period] || periodDescriptions.weekly;
     }
 
     function medalClass(rank) {
@@ -160,97 +161,101 @@
         return 'medal-bronze';
     }
 
-    function renderDiscoursePodium(users) {
-        var podium = document.getElementById('discourse-podium');
+    // Board config: field names differ (username vs github_username, score vs
+    // github_score), and the third podium stat needs the yearly/all "—" override
+    // for reviews. Everything else is identical layout, so one pair of renderers
+    // takes a config object instead of duplicating markup per board.
+    var BOARDS = {
+        discourse: {
+            podiumEl: 'discourse-podium',
+            tbodyEl: 'discourse-tbody',
+            nameField: 'username',
+            scoreField: 'score',
+            scoreSuffix: ' pts',
+            stats: [
+                { label: 'Likes', field: 'likes' },
+                { label: 'Posts', field: 'posts' },
+                { label: 'Solutions', field: 'solutions' }
+            ],
+            columns: [
+                { field: 'likes' },
+                { field: 'posts' },
+                { field: 'solutions' }
+            ]
+        },
+        github: {
+            podiumEl: 'github-podium',
+            tbodyEl: 'github-tbody',
+            nameField: 'github_username',
+            scoreField: 'github_score',
+            scoreSuffix: ' pts',
+            stats: [
+                { label: 'Issues', field: 'issues' },
+                { label: 'PRs', field: 'prs' },
+                { label: 'Reviews', field: 'reviews' }
+            ],
+            columns: [
+                { field: 'issues' },
+                { field: 'prs' },
+                { field: 'reviews' }
+            ]
+        }
+    };
+
+    function statValue(user, col) {
+        if (col.maskInPeriods && col.maskInPeriods.indexOf(currentPeriod) !== -1) return '—';
+        return Number(user[col.field]) || 0;
+    }
+
+    function renderPodium(board, users) {
+        var config = BOARDS[board];
+        var podium = document.getElementById(config.podiumEl);
         var top3 = users.filter(function (u) { return u.rank <= 3; });
         podium.innerHTML = top3.map(function (user) {
+            var avatarSrc = board === 'discourse' ? user.avatar : user.avatar_url;
+            var name = user[config.nameField];
+            var statsHtml = config.stats.map(function (s) {
+                return '<div class="podium-stat"><span class="podium-stat-label">' + s.label + '</span><span class="podium-stat-value">' + statValue(user, s) + '</span></div>';
+            }).join('');
             return (
                 '<div class="podium-card podium-rank-' + user.rank + '">' +
                 '<div class="podium-card-body">' +
                 '<div class="podium-avatar-wrapper">' +
                 '<span class="medal ' + medalClass(user.rank) + '">' + user.rank + '</span>' +
                 '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
-                '<img class="podium-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
+                '<img class="podium-avatar" src="' + escapeHtml(avatarSrc) + '" alt="' + escapeHtml(name) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
                 '</a>' +
                 '</div>' +
                 '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener" class="podium-username-link">' +
-                '<span class="podium-username">' + escapeHtml(user.username) + '</span>' +
+                '<span class="podium-username">' + escapeHtml(name) + '</span>' +
                 '</a>' +
-                '<div class="podium-stats">' +
-                '<div class="podium-stat"><span class="podium-stat-label">Likes</span><span class="podium-stat-value">' + (Number(user.likes) || 0) + '</span></div>' +
-                '<div class="podium-stat"><span class="podium-stat-label">Posts</span><span class="podium-stat-value">' + (Number(user.posts) || 0) + '</span></div>' +
-                '<div class="podium-stat"><span class="podium-stat-label">Solutions</span><span class="podium-stat-value">' + (Number(user.solutions) || 0) + '</span></div>' +
-                '</div>' +
-                '<div class="podium-score">' + (Number(user.score) || 0) + ' pts</div>' +
+                '<div class="podium-stats">' + statsHtml + '</div>' +
+                '<div class="podium-score">' + (Number(user[config.scoreField]) || 0) + config.scoreSuffix + '</div>' +
                 '</div></div>'
             );
         }).join('');
     }
 
-    function renderDiscourseTable(users) {
-        var tbody = document.getElementById('discourse-tbody');
+    function renderTable(board, users) {
+        var config = BOARDS[board];
+        var tbody = document.getElementById(config.tbodyEl);
         var rest = users.filter(function (u) { return u.rank > 3; });
         tbody.innerHTML = rest.map(function (user) {
+            var avatarSrc = board === 'discourse' ? user.avatar : user.avatar_url;
+            var name = user[config.nameField];
+            var colsHtml = config.columns.map(function (c) {
+                return '<td>' + statValue(user, c) + '</td>';
+            }).join('');
             return (
                 '<tr class="leaderboard-row">' +
                 '<td class="leaderboard-rank">' + user.rank + '</td>' +
                 '<td class="leaderboard-member">' +
                 '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
-                '<img class="leaderboard-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
-                '<span class="leaderboard-username">' + escapeHtml(user.username) + '</span>' +
+                '<img class="leaderboard-avatar" src="' + escapeHtml(avatarSrc) + '" alt="' + escapeHtml(name) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
+                '<span class="leaderboard-username">' + escapeHtml(name) + '</span>' +
                 '</a></td>' +
-                '<td>' + (Number(user.likes) || 0) + '</td>' +
-                '<td>' + (Number(user.posts) || 0) + '</td>' +
-                '<td>' + (Number(user.solutions) || 0) + '</td>' +
-                '<td class="leaderboard-score">' + (Number(user.score) || 0) + '</td>' +
-                '</tr>'
-            );
-        }).join('');
-    }
-
-    function renderGithubPodium(users) {
-        var podium = document.getElementById('github-podium');
-        var top3 = users.filter(function (u) { return u.rank <= 3; });
-        podium.innerHTML = top3.map(function (user) {
-            return (
-                '<div class="podium-card podium-rank-' + user.rank + '">' +
-                '<div class="podium-card-body">' +
-                '<div class="podium-avatar-wrapper">' +
-                '<span class="medal ' + medalClass(user.rank) + '">' + user.rank + '</span>' +
-                '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
-                '<img class="podium-avatar" src="' + escapeHtml(user.avatar_url) + '" alt="' + escapeHtml(user.github_username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
-                '</a>' +
-                '</div>' +
-                '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener" class="podium-username-link">' +
-                '<span class="podium-username">' + escapeHtml(user.github_username) + '</span>' +
-                '</a>' +
-                '<div class="podium-stats">' +
-                '<div class="podium-stat"><span class="podium-stat-label">Issues</span><span class="podium-stat-value">' + (Number(user.issues) || 0) + '</span></div>' +
-                '<div class="podium-stat"><span class="podium-stat-label">PRs</span><span class="podium-stat-value">' + (Number(user.prs) || 0) + '</span></div>' +
-                '<div class="podium-stat"><span class="podium-stat-label">Reviews</span><span class="podium-stat-value">' + (Number(user.reviews) || 0) + '</span></div>' +
-                '</div>' +
-                '<div class="podium-score">' + (Number(user.github_score) || 0) + ' pts</div>' +
-                '</div></div>'
-            );
-        }).join('');
-    }
-
-    function renderGithubTable(users) {
-        var tbody = document.getElementById('github-tbody');
-        var rest = users.filter(function (u) { return u.rank > 3; });
-        tbody.innerHTML = rest.map(function (user) {
-            return (
-                '<tr class="leaderboard-row">' +
-                '<td class="leaderboard-rank">' + user.rank + '</td>' +
-                '<td class="leaderboard-member">' +
-                '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
-                '<img class="leaderboard-avatar" src="' + escapeHtml(user.avatar_url) + '" alt="' + escapeHtml(user.github_username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
-                '<span class="leaderboard-username">' + escapeHtml(user.github_username) + '</span>' +
-                '</a></td>' +
-                '<td>' + (Number(user.issues) || 0) + '</td>' +
-                '<td>' + (Number(user.prs) || 0) + '</td>' +
-                '<td>' + (Number(user.reviews) || 0) + '</td>' +
-                '<td class="leaderboard-score">' + (Number(user.github_score) || 0) + '</td>' +
+                colsHtml +
+                '<td class="leaderboard-score">' + (Number(user[config.scoreField]) || 0) + '</td>' +
                 '</tr>'
             );
         }).join('');
@@ -274,6 +279,12 @@
         document.getElementById('board-github').classList.toggle('is-hidden', !(currentBoard === 'github' && hasActivity));
 
         if (!hasActivity) {
+            // Clear both boards' rows so a later filter input can't find stale
+            // DOM nodes and count them as visible matches.
+            document.getElementById('discourse-tbody').innerHTML = '';
+            document.getElementById('discourse-podium').innerHTML = '';
+            document.getElementById('github-tbody').innerHTML = '';
+            document.getElementById('github-podium').innerHTML = '';
             emptyState.textContent = 'No activity for this period yet.';
             emptyState.classList.remove('is-hidden');
             return;
@@ -281,20 +292,17 @@
 
         emptyState.classList.add('is-hidden');
 
-        if (currentBoard === 'discourse') {
-            renderDiscoursePodium(users);
-            renderDiscourseTable(users);
-        } else {
-            renderGithubPodium(users);
-            renderGithubTable(users);
-        }
+        renderPodium(currentBoard, users);
+        renderTable(currentBoard, users);
         filterLeaderboard();
     }
 
     var periodSelect = document.getElementById('period-select');
     periodSelect.value = currentPeriod;
+    updatePeriodDescription(currentPeriod);
     periodSelect.addEventListener('change', function () {
         currentPeriod = this.value;
+        updatePeriodDescription(currentPeriod);
         renderLeaderboard();
     });
 
@@ -338,8 +346,8 @@
     function filterLeaderboard() {
         var input = document.getElementById('leaderboard-filter').value.toLowerCase();
         var visibleCount = 0;
-        var tableId = currentBoard === 'discourse' ? '#discourse-table' : '#github-table';
-        var podiumId = currentBoard === 'discourse' ? '#discourse-podium' : '#github-podium';
+        var tableId = '#' + BOARDS[currentBoard].tbodyEl.replace('-tbody', '-table');
+        var podiumId = '#' + BOARDS[currentBoard].podiumEl;
 
         var rows = document.querySelectorAll(tableId + ' tbody tr');
         rows.forEach(function (row) {

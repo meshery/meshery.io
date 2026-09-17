@@ -4,10 +4,13 @@ const path = require('path');
 const DISCOURSE_BASE_URL = 'https://discuss.meshery.io/directory_items.json';
 const PERIODS = ['weekly', 'monthly', 'yearly', 'all'];
 const GITHUB_API = 'https://api.github.com';
+const GITHUB_GRAPHQL_URL = 'https://api.github.com/graphql';
 const GITHUB_ORG = 'meshery';
-// GH_ACCESS_TOKEN is only a fallback for local development runs. The CI
-// workflow always sets GITHUB_TOKEN, so this branch is never reached there.
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN || process.env.GH_ACCESS_TOKEN || '';
+// GITHUB_TOKEN (the Actions-provided token) is rate-limited to 1,000 req/hr
+// per repository, not the 5,000 req/hr of a user PAT. Set GH_ACCESS_TOKEN
+// (a personal access token) in CI to get the higher limit; GITHUB_TOKEN
+// remains the local-dev fallback.
+const GITHUB_TOKEN = process.env.GH_ACCESS_TOKEN || process.env.GITHUB_TOKEN || '';
 const GITHUB_BOT_DENYLIST = new Set(['l5io']);
 
 // Rolling period cutoff timestamps in ISO UTC format for exact boundary comparisons.
@@ -18,8 +21,15 @@ const PERIOD_SINCE = {
   all: null
 };
 
+// isRealUser is the REST-shaped check, still used by fetchRepositories'
+// pagination path if ever needed for REST data. GraphQL responses use
+// __typename instead of `type` — see isRealGraphQLUser below.
 function isRealUser(u) {
   return !!u && u.type === 'User' && !u.login.endsWith('[bot]') && !GITHUB_BOT_DENYLIST.has(u.login);
+}
+
+function isRealGraphQLUser(u) {
+  return !!u && u.__typename === 'User' && !u.login.endsWith('[bot]') && !GITHUB_BOT_DENYLIST.has(u.login);
 }
 
 // --- Discourse Logic ---
@@ -83,7 +93,7 @@ async function buildAllDiscoursePeriods() {
   return periods;
 }
 
-// --- GitHub Logic ---
+// --- GitHub Logic (REST — repo discovery only) ---
 
 function sleep(ms) {
   return new Promise(r => setTimeout(r, ms));
@@ -100,7 +110,11 @@ class GitHubFetchError extends Error {
   }
 }
 
-let remainingRateLimit = 5000;
+// Conservative floor until the first response tells us the real limit
+// (1,000/hr for GITHUB_TOKEN, 5,000/hr for a PAT). Starting low means the
+// headroom guard is safe either way instead of assuming the best case.
+// Only used by the REST path (fetchRepositories).
+let remainingRateLimit = 1000;
 
 // Single contract: resolves with parsed JSON on success, always throws
 // GitHubFetchError on any non-OK response (including 404) after handling
@@ -154,6 +168,9 @@ async function fetchRepositories() {
   const repos = [];
   let page = 1;
   while (true) {
+    if (remainingRateLimit < 200) {
+      throw new Error(`GitHub API rate limit headroom exhausted (${remainingRateLimit} remaining) during repository discovery — failing safely to preserve previous valid leaderboard`);
+    }
     const data = await githubFetch(`${GITHUB_API}/orgs/${GITHUB_ORG}/repos?per_page=100&page=${page}`);
     if (!Array.isArray(data) || data.length === 0) break;
     for (const repo of data) {
@@ -168,68 +185,148 @@ async function fetchRepositories() {
   return repos;
 }
 
-// Single paginated source for issues and pull requests per repository.
-// GET /repos/{owner}/{repo}/issues returns both ordinary issues and PRs.
-// PR items contain a pull_request object with merged_at and url, avoiding
-// the need for a duplicate fetch from the /pulls endpoint.
-async function fetchRepositoryActivity(repoName) {
-  const issues = [];
-  const prs = [];
-  let page = 1;
-  while (true) {
-    const data = await githubFetch(`${GITHUB_API}/repos/${GITHUB_ORG}/${repoName}/issues?state=all&per_page=100&page=${page}`);
-    if (!Array.isArray(data) || data.length === 0) break;
-    for (const item of data) {
-      if (item.pull_request) {
-        prs.push({
-          number: item.number,
-          user: item.user,
-          created_at: item.created_at,
-          updated_at: item.updated_at,
-          merged_at: item.pull_request.merged_at || null,
-          url: item.pull_request.url
-        });
-      } else {
-        issues.push({
-          number: item.number,
-          user: item.user,
-          created_at: item.created_at
-        });
+// --- GitHub Logic (GraphQL — issues, PRs, and reviews) ---
+
+// GraphQL uses a cost-based budget (5,000 points/hr for both GITHUB_TOKEN and
+// a PAT — unlike REST, the two token types share the same GraphQL limit).
+// Track remaining points from each response's `rateLimit` field rather than
+// the REST `x-ratelimit-remaining` header.
+let remainingGraphQLPoints = 5000;
+
+async function githubGraphQL(query, variables, attempt = 0) {
+  const res = await fetch(GITHUB_GRAPHQL_URL, {
+    method: 'POST',
+    headers: {
+      'User-Agent': 'meshery-leaderboard-bot/1.0',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${GITHUB_TOKEN}`
+    },
+    body: JSON.stringify({ query, variables })
+  });
+
+  if (!res.ok) {
+    if ((res.status === 429 || res.status === 403) && attempt < 2) {
+      const retryAfter = res.headers.get('retry-after');
+      const waitMs = retryAfter ? (parseInt(retryAfter, 10) + 2) * 1000 : 60000;
+      console.warn(`GraphQL HTTP rate limit. Waiting ${Math.round(waitMs / 1000)}s before retry...`);
+      await sleep(waitMs);
+      return githubGraphQL(query, variables, attempt + 1);
+    }
+    const body = await res.text();
+    throw new GitHubFetchError(`GraphQL HTTP error: ${res.status} - ${body.slice(0, 300)}`, res.status);
+  }
+
+  const json = await res.json();
+
+  if (json.errors && json.errors.length) {
+    const rateLimited = json.errors.some(e => e.type === 'RATE_LIMITED');
+    if (rateLimited && attempt < 2) {
+      console.warn('GraphQL query cost exceeded remaining budget. Waiting 60s before retry...');
+      await sleep(60000);
+      return githubGraphQL(query, variables, attempt + 1);
+    }
+    throw new GitHubFetchError(`GraphQL errors: ${JSON.stringify(json.errors).slice(0, 300)}`, 200);
+  }
+
+  if (json.data && json.data.rateLimit) {
+    remainingGraphQLPoints = json.data.rateLimit.remaining;
+  }
+
+  return json.data;
+}
+
+const PR_REVIEWS_QUERY = `
+  query($org: String!, $repo: String!, $cursor: String) {
+    rateLimit { remaining cost resetAt }
+    repository(owner: $org, name: $repo) {
+      pullRequests(first: 50, after: $cursor, orderBy: {field: UPDATED_AT, direction: DESC}) {
+        pageInfo { hasNextPage endCursor }
+        nodes {
+          number
+          createdAt
+          mergedAt
+          updatedAt
+          author { login avatarUrl url __typename }
+          reviews(first: 30) {
+            totalCount
+            nodes {
+              state
+              submittedAt
+              author { login avatarUrl url __typename }
+            }
+          }
+        }
       }
     }
-    if (data.length < 100) break;
-    page++;
-    await sleep(200);
   }
-  return { issues, prs };
-}
+`;
 
-async function fetchPullRequestReviews(prUrl) {
-  const reviews = [];
-  let page = 1;
-  while (true) {
-    let data;
-    try {
-      data = await githubFetch(`${prUrl}/reviews?per_page=100&page=${page}`);
-    } catch (err) {
-      // Only status 404 (e.g. PR removed or reviews endpoint missing) is treated as empty.
-      if (err instanceof GitHubFetchError && err.status === 404) break;
-      // All other failures (rate-limit, 5xx, network) must throw so they are fatal!
-      throw err;
+const ISSUES_QUERY = `
+  query($org: String!, $repo: String!, $cursor: String) {
+    rateLimit { remaining cost resetAt }
+    repository(owner: $org, name: $repo) {
+      issues(first: 75, after: $cursor, orderBy: {field: CREATED_AT, direction: DESC}) {
+        pageInfo { hasNextPage endCursor }
+        nodes {
+          number
+          createdAt
+          author { login avatarUrl url __typename }
+        }
+      }
     }
-    if (!Array.isArray(data) || data.length === 0) break;
-    reviews.push(...data);
-    if (data.length < 100) break;
-    page++;
-    await sleep(150);
   }
-  return reviews;
+`;
+
+async function fetchRepositoryPRsAndReviews(repoName) {
+  const prs = [];
+  const reviews = [];
+  let cursor = null;
+  while (true) {
+    if (remainingGraphQLPoints < 200) {
+      throw new Error(`GraphQL rate limit headroom exhausted (${remainingGraphQLPoints} points remaining) while fetching PRs for '${repoName}' — failing safely to preserve previous valid leaderboard`);
+    }
+    const data = await githubGraphQL(PR_REVIEWS_QUERY, { org: GITHUB_ORG, repo: repoName, cursor });
+    const conn = data.repository.pullRequests;
+    for (const pr of conn.nodes) {
+      prs.push({
+        number: pr.number,
+        user: pr.author,
+        created_at: pr.createdAt,
+        updated_at: pr.updatedAt,
+        merged_at: pr.mergedAt || null
+      });
+      if (pr.reviews.totalCount > pr.reviews.nodes.length) {
+        console.warn(`'${repoName}' PR #${pr.number} has ${pr.reviews.totalCount} reviews, only first ${pr.reviews.nodes.length} counted.`);
+      }
+      for (const r of pr.reviews.nodes) {
+        if (isRealGraphQLUser(r.author) && r.state !== 'PENDING') {
+          reviews.push({ prNumber: pr.number, user: r.author, submitted_at: r.submittedAt, state: r.state });
+        }
+      }
+    }
+    if (!conn.pageInfo.hasNextPage) break;
+    cursor = conn.pageInfo.endCursor;
+  }
+  return { prs, reviews };
 }
 
-// Bounded review candidate window (30 days = ~767 PRs in org:meshery).
-// With ~314 repo/issue calls + ~767 review calls = ~1,081 total calls, this
-// ensures 100% complete Weekly and Monthly reviews within the 5,000 req/hr rate limit.
-const REVIEW_CANDIDATE_DAYS = 30;
+async function fetchRepositoryIssuesGraphQL(repoName) {
+  const issues = [];
+  let cursor = null;
+  while (true) {
+    if (remainingGraphQLPoints < 200) {
+      throw new Error(`GraphQL rate limit headroom exhausted (${remainingGraphQLPoints} points remaining) while fetching issues for '${repoName}' — failing safely to preserve previous valid leaderboard`);
+    }
+    const data = await githubGraphQL(ISSUES_QUERY, { org: GITHUB_ORG, repo: repoName, cursor });
+    const conn = data.repository.issues;
+    for (const issue of conn.nodes) {
+      issues.push({ number: issue.number, user: issue.author, created_at: issue.createdAt });
+    }
+    if (!conn.pageInfo.hasNextPage) break;
+    cursor = conn.pageInfo.endCursor;
+  }
+  return issues;
+}
 
 async function fetchGitHubActivity() {
   const activity = {
@@ -238,43 +335,27 @@ async function fetchGitHubActivity() {
     reviews: []
   };
 
+  // Repo discovery stays on REST (fetchRepositories) — it's cheap and not
+  // worth converting.
   const repos = await fetchRepositories();
   console.log(`Discovered ${repos.length} non-fork repositories in org '${GITHUB_ORG}'.`);
 
   for (const repo of repos) {
-    const { issues, prs } = await fetchRepositoryActivity(repo.name);
+    const issues = await fetchRepositoryIssuesGraphQL(repo.name);
+    const { prs, reviews } = await fetchRepositoryPRsAndReviews(repo.name);
     activity.issues.push(...issues);
     activity.prs.push(...prs);
+    activity.reviews.push(...reviews);
   }
-  console.log(`Loaded ${activity.issues.length} total issues and ${activity.prs.length} total PRs.`);
-
-  // To protect the 5,000 req/hr GitHub rate limit, review candidates are selected
-  // from PRs updated in the active review window (last 30 days) and sorted newest first.
-  // Weekly and Monthly review sets are guaranteed complete. Yearly and All-Time reviews
-  // encompass reviews observed in this active window.
-  const reviewCutoff = new Date(Date.now() - REVIEW_CANDIDATE_DAYS * 24 * 60 * 60 * 1000).toISOString();
-  const reviewCandidates = activity.prs
-    .filter(pr => pr.updated_at && pr.updated_at >= reviewCutoff)
-    .sort((a, b) => b.updated_at.localeCompare(a.updated_at));
-
-  console.log(`Evaluating reviews for ${reviewCandidates.length} candidate PRs updated since ${reviewCutoff}...`);
-
-  for (const pr of reviewCandidates) {
-    if (remainingRateLimit < 200) {
-      throw new Error(`GitHub API rate limit headroom exhausted (${remainingRateLimit} remaining) during review collection — failing safely to preserve previous valid leaderboard`);
-    }
-    if (!pr.url) continue;
-    const reviews = await fetchPullRequestReviews(pr.url);
-    if (reviews.length > 0) {
-      activity.reviews.push({ prUrl: pr.url, reviews });
-    }
-  }
+  console.log(`Loaded ${activity.issues.length} issues, ${activity.prs.length} PRs, ${activity.reviews.length} reviews across all repos and all history.`);
 
   return activity;
 }
 
 // GitHub activity score: 3 points per PR merged, 2 per issue opened,
-// 1 per formal PR review.
+// 1 per formal PR review. GraphQL fetches full history for every repo (no
+// recency window), so review data is complete for every period — no
+// reviewsReliable masking needed.
 function buildGitHubLeaderboard(userStats) {
   return Object.values(userStats)
     .map(user => ({
@@ -303,8 +384,8 @@ function aggregateGitHubPeriods(activity) {
       if (!userStats[u.login]) {
         userStats[u.login] = {
           github_username: u.login,
-          avatar_url: u.avatar_url,
-          profile_url: u.html_url,
+          avatar_url: u.avatarUrl,
+          profile_url: u.url,
           issues: 0, prs: 0, reviews: 0
         };
       }
@@ -313,7 +394,7 @@ function aggregateGitHubPeriods(activity) {
     // 1. Issues opened (classified strictly by created_at)
     for (const issue of activity.issues) {
       if (sinceMs !== null && (!issue.created_at || new Date(issue.created_at).getTime() < sinceMs)) continue;
-      if (isRealUser(issue.user)) {
+      if (isRealGraphQLUser(issue.user)) {
         initUser(issue.user);
         userStats[issue.user.login].issues++;
       }
@@ -323,26 +404,22 @@ function aggregateGitHubPeriods(activity) {
     for (const pr of activity.prs) {
       if (!pr.merged_at) continue; // unmerged PRs are never counted
       if (sinceMs !== null && new Date(pr.merged_at).getTime() < sinceMs) continue;
-      if (isRealUser(pr.user)) {
+      if (isRealGraphQLUser(pr.user)) {
         initUser(pr.user);
         userStats[pr.user.login].prs++;
       }
     }
 
-    // 3. Reviews submitted (classified strictly by submitted_at, 1 per reviewer per PR)
-    for (const candidate of activity.reviews) {
-      const reviewedUsers = new Set();
-      for (const r of candidate.reviews) {
-        if (isRealUser(r.user) && r.state !== 'PENDING') {
-          if (sinceMs === null || (r.submitted_at && new Date(r.submitted_at).getTime() >= sinceMs)) {
-            reviewedUsers.add(r.user.login);
-            initUser(r.user);
-          }
-        }
-      }
-      for (const username of reviewedUsers) {
-        userStats[username].reviews++;
-      }
+    // 3. Reviews submitted (1 per reviewer per PR, classified by submitted_at)
+    const reviewedByPr = {};
+    for (const r of activity.reviews) {
+      if (!isRealGraphQLUser(r.user)) continue;
+      if (sinceMs !== null && (!r.submitted_at || new Date(r.submitted_at).getTime() < sinceMs)) continue;
+      const key = r.prNumber + ':' + r.user.login;
+      if (reviewedByPr[key]) continue;
+      reviewedByPr[key] = true;
+      initUser(r.user);
+      userStats[r.user.login].reviews++;
     }
 
     periodsData[period] = buildGitHubLeaderboard(userStats);
@@ -382,15 +459,15 @@ function saveJSON(filename, periods, defaultPeriod) {
 }
 
 async function main() {
-  let hadError = false;
+  let discourseFailed = false;
 
   try {
     const discoursePeriods = await buildAllDiscoursePeriods();
-    saveJSON('leaderboard.json', discoursePeriods, 'weekly');
+    saveJSON('discuss_leaderboard.json', discoursePeriods, 'weekly');
   } catch (err) {
     console.error('Discourse leaderboard build failed:', err.message);
     if (err.cause) console.error('Cause:', err.cause);
-    hadError = true;
+    discourseFailed = true;
   }
 
   if (GITHUB_TOKEN) {
@@ -398,25 +475,29 @@ async function main() {
       const githubPeriods = await buildAllGitHubPeriods();
       saveJSON('github_leaderboard.json', githubPeriods, 'weekly');
     } catch (err) {
+      // Non-fatal for the process exit code: a GitHub-only failure must not
+      // block the Discourse update from being committed. The workflow's
+      // commit step still needs `if: always()` so it runs even when this
+      // exits 1 for a Discourse failure.
       console.error('GitHub leaderboard build failed:', err.message);
-      hadError = true;
     }
   } else {
     console.warn('No GITHUB_TOKEN provided, skipping GitHub stats generation.');
   }
 
-  if (hadError) process.exit(1);
+  if (discourseFailed) process.exit(1);
 }
 
 // Export for unit/mock testing
 if (typeof module !== 'undefined') {
   module.exports = {
     isRealUser,
+    isRealGraphQLUser,
     PERIODS,
     PERIOD_SINCE,
     fetchRepositories,
-    fetchRepositoryActivity,
-    fetchPullRequestReviews,
+    fetchRepositoryPRsAndReviews,
+    fetchRepositoryIssuesGraphQL,
     fetchGitHubActivity,
     buildGitHubLeaderboard,
     aggregateGitHubPeriods,
