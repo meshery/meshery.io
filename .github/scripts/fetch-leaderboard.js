@@ -187,11 +187,10 @@ async function fetchRepositories() {
 
 // --- GitHub Logic (GraphQL — issues, PRs, and reviews) ---
 
-// GraphQL uses a cost-based budget (5,000 points/hr for both GITHUB_TOKEN and
-// a PAT — unlike REST, the two token types share the same GraphQL limit).
-// Track remaining points from each response's `rateLimit` field rather than
-// the REST `x-ratelimit-remaining` header.
-let remainingGraphQLPoints = 5000;
+// Conservative floor until the first response tells us the real limit
+// (1,000 points/hr for GITHUB_TOKEN, 5,000 points/hr for a PAT / GH_ACCESS_TOKEN).
+// Starting low ensures the headroom guard is safe before the first call.
+let remainingGraphQLPoints = 1000;
 
 async function githubGraphQL(query, variables, attempt = 0) {
   const res = await fetch(GITHUB_GRAPHQL_URL, {
