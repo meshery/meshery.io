@@ -57,8 +57,9 @@ jobs:
             console.log(`Found ${issues.length} priority issues and ${prs.length} priority PRs.`);
 
             const labelQuery = labels.map(l => (l.includes(' ') ? `label:"${l}"` : `label:${l}`)).join(' OR ');
-            const issuesUrl = `https://github.com/issues?q=${encodeURIComponent(`is:open is:issue org:meshery org:meshery-extensions (${labelQuery})`)}`;
-            const prsUrl = `https://github.com/pulls?q=${encodeURIComponent(`is:open is:pr org:meshery org:meshery-extensions (${labelQuery})`)}`;
+            const orgQuery = orgs.map(o => `org:${o}`).join(' OR ');
+            const issuesUrl = `https://github.com/issues?q=${encodeURIComponent(`is:open is:issue (${orgQuery}) (${labelQuery})`)}`;
+            const prsUrl = `https://github.com/pulls?q=${encodeURIComponent(`is:open is:pr (${orgQuery}) (${labelQuery})`)}`;
 
             const hasItems = issues.length > 0 || prs.length > 0;
             const notifyWhenEmpty = process.env.NOTIFY_WHEN_EMPTY === 'true';
