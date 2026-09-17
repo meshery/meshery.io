@@ -14,6 +14,7 @@
        FILTER / SEARCH
     ───────────────────────────── */
 
+.leaderboard-section .leaderboard-controls,
 .leaderboard .leaderboard-controls {
     display: flex;
     justify-content: space-between;
@@ -149,7 +150,7 @@ body.dark-mode .tab-button.active-tab {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 3.5rem;
+    gap: 2rem;
     margin: 4rem 0;
     flex-wrap: wrap;
     width: 100%;
@@ -157,8 +158,8 @@ body.dark-mode .tab-button.active-tab {
 }
 
 .podium-card {
-    flex: 0 0 290px;
-    max-width: 290px;
+    flex: 0 0 220px;
+    max-width: 220px;
     display: flex;
     justify-content: center;
 }
@@ -293,7 +294,6 @@ body.dark-mode .tab-button.active-tab {
 .podium-username-link {
     text-decoration: none;
     color: inherit;
-    margin-top: 2rem;
 }
 
 .podium-username-link:hover .podium-username {
@@ -444,8 +444,16 @@ body.dark-mode .leaderboard-updated {
        custom dropdown component discussed in review)
     ───────────────────────────── */
 
+.period-toggle,
+.period-select-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+}
+
 .period-select {
-    width: 260px;
+    width: 320px;
     max-width: 100%;
     height: 35px;
     padding: 0 2.2rem 0 1rem;
@@ -495,15 +503,10 @@ body.dark-mode .period-select {
        TABLET
     ───────────────────────────── */
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
 
     .leaderboard-podium {
-        gap: 1.5rem;
-    }
-
-    .podium-card {
-        flex: 0 0 220px;
-        max-width: 220px;
+        gap: 1rem;
     }
 
     .podium-rank-1 .podium-avatar-wrapper {
@@ -530,22 +533,66 @@ body.dark-mode .period-select {
        MOBILE
     ───────────────────────────── */
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
 
+    .leaderboard-section .leaderboard-controls,
     .leaderboard .leaderboard-controls {
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        flex-direction: column;
         justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 16px;
+        align-items: stretch;
+        gap: 0.6rem;
+        margin-bottom: 32px;
     }
 
+    .period-toggle,
     .period-select-wrapper,
     .board-tabs-wrapper,
+    .filter-wrapper,
+    .leaderboard-filter {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        height: 42px;
+        box-sizing: border-box;
+    }
+
     .filter-wrapper {
-        flex: 1 1 100%;
+        order: 1;
+    }
+
+    .leaderboard-filter {
+        order: 1;
+        width: 100%;
+        height: 100%;
+        padding: 0 0.6rem;
+        font-size: 0.74rem;
+        box-sizing: border-box;
+    }
+
+    .board-tabs-wrapper {
+        order: 2;
         display: flex;
         justify-content: center;
+    }
+
+    .board-tabs {
+        width: 100%;
+        height: 100%;
+    }
+
+    .tab-button {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.74rem;
+    }
+
+    .period-toggle,
+    .period-select-wrapper {
+        order: 3;
+        margin-bottom: 0.5rem;
     }
 
     .period-select {
@@ -559,17 +606,11 @@ body.dark-mode .period-select {
         box-sizing: border-box;
     }
 
-    .leaderboard-filter {
-        box-sizing: border-box;
-        padding: 0 0.6rem;
-        font-size: 0.74rem;
-    }
-
     .leaderboard-podium {
         flex-direction: column;
         align-items: center;
         gap: 2rem;
-        margin: 3.5rem 0 2rem;
+        margin: 5.5rem 0 2rem;
         width: 100%;
     }
 
