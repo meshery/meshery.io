@@ -1,8 +1,7 @@
-﻿<section class="leaderboard-section">
-
+<section class="leaderboard">
     <div class="leaderboard-controls">
-        <div class="period-toggle">
-            <label for="period-select" class="visually-hidden">Leaderboard time period</label>
+        <div class="period-select-wrapper">
+            <label for="period-select" class="visually-hidden">Select time period</label>
             <select id="period-select" class="period-select" aria-label="Leaderboard time period">
                 <option value="weekly">Week</option>
                 <option value="monthly">Month</option>
@@ -10,46 +9,82 @@
                 <option value="all">All Time</option>
             </select>
         </div>
-        <label for="leaderboard-filter" class="visually-hidden">Search leaderboard by username</label>
-        <input type="text" id="leaderboard-filter" class="leaderboard-filter" placeholder="Search username" />
+        <div class="board-tabs-wrapper">
+            <div class="board-tabs" role="tablist" aria-label="Select Leaderboard">
+                <button id="tab-discourse" class="tab-button active-tab" role="tab" aria-selected="true"
+                    aria-controls="board-discourse" tabindex="0">Community</button>
+                <button id="tab-github" class="tab-button" role="tab" aria-selected="false" aria-controls="board-github"
+                    tabindex="-1">GitHub</button>
+            </div>
+        </div>
+        <div class="filter-wrapper">
+            <label for="leaderboard-filter" class="visually-hidden">Search leaderboard by username</label>
+            <input type="text" id="leaderboard-filter" class="leaderboard-filter" placeholder="Search username" />
+        </div>
     </div>
 
-    <!-- Top 3 Cards -->
-    <div class="leaderboard-podium" id="leaderboard-podium"></div>
-
-    <!-- Rank 4+ Table -->
-    <div class="leaderboard-wrapper">
-        <table class="leaderboard-table" id="leaderboard-table">
-            <thead>
-                <tr>
-                    <th scope="col">Rank</th>
-                    <th scope="col">Member</th>
-                    <th scope="col">Likes Received</th>
-                    <th scope="col">Posts</th>
-                    <th scope="col">Solutions Accepted</th>
-                    <th scope="col">Total Points</th>
-                </tr>
-            </thead>
-            <tbody id="leaderboard-tbody"></tbody>
-        </table>
+    <div id="board-discourse" role="tabpanel" aria-labelledby="tab-discourse">
+        <div class="leaderboard-podium" id="discourse-podium"></div>
+        <div class="leaderboard-wrapper" id="discourse-wrapper">
+            <table class="leaderboard-table" id="discourse-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Rank</th>
+                        <th scope="col">Member</th>
+                        <th scope="col">Likes Received</th>
+                        <th scope="col">Posts</th>
+                        <th scope="col">Solutions Accepted</th>
+                        <th scope="col">Total Points</th>
+                    </tr>
+                </thead>
+                <tbody id="discourse-tbody"></tbody>
+            </table>
+        </div>
     </div>
 
-    <p class="leaderboard-empty-state" id="leaderboard-empty-state" style="display:none;">
+    <div id="board-github" role="tabpanel" aria-labelledby="tab-github" class="is-hidden">
+        <div class="leaderboard-podium" id="github-podium"></div>
+        <div class="leaderboard-wrapper" id="github-wrapper">
+            <table class="leaderboard-table" id="github-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Rank</th>
+                        <th scope="col">GitHub User</th>
+                        <th scope="col">Issues Opened</th>
+                        <th scope="col">PRs Merged</th>
+                        <th scope="col">PRs Reviewed</th>
+                        <th scope="col">Activity Score</th>
+                    </tr>
+                </thead>
+                <tbody id="github-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <p class="leaderboard-empty-state is-hidden" id="leaderboard-empty-state">
         No activity for this period yet.
     </p>
 
-    <p class="leaderboard-updated">Last updated: {{ site.data.leaderboard.last_updated | date: "%B %-d, %Y" }}</p>
+    <p class="leaderboard-updated">Last updated: {{ site.data.discuss_leaderboard.last_updated | date: "%B %-d, %Y" }}
+    </p>
 
 </section>
 
-<script type="application/json" id="leaderboard-data">
-    {{ site.data.leaderboard.periods | jsonify }}
+<script type="application/json" id="discourse-data">
+    {{ site.data.discuss_leaderboard.periods | jsonify }}
+</script>
+<script type="application/json" id="github-data">
+    {{ site.data.github_leaderboard.periods | jsonify }}
 </script>
 
 <script>
+    // Rewrites the static period-select labels with actual rolling date ranges,
+    // e.g. "Week" -> "Week Aug 26 – Sep 2". Purely cosmetic; option values
+    // (weekly/monthly/yearly/all) are untouched, so the render script below
+    // doesn't need to know about this.
     (function () {
         var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
         function fmt(d, includeYear) {
             var str = MONTHS[d.getMonth()] + ' ' + d.getDate();
@@ -59,25 +94,25 @@
             return str;
         }
 
-        var now   = new Date();
+        var now = new Date();
         var today = fmt(now);
 
-        var week  = new Date(now); week.setDate(week.getDate() - 7);
+        var week = new Date(now); week.setDate(week.getDate() - 7);
         var month = new Date(now); month.setDate(month.getDate() - 30);
-        var year  = new Date(now); year.setFullYear(year.getFullYear() - 1);
+        var year = new Date(now); year.setFullYear(year.getFullYear() - 1);
 
         var ranges = {
-            weekly:  fmt(week) + ' \u2013 ' + today,
+            weekly: fmt(week) + ' \u2013 ' + today,
             monthly: fmt(month) + ' \u2013 ' + today,
-            yearly:  fmt(year, true) + ' \u2013 ' + today,
-            all:     ''
+            yearly: fmt(year, true) + ' \u2013 ' + today,
+            all: ''
         };
 
         var names = {
-            weekly:  'Week',
+            weekly: 'Week',
             monthly: 'Month',
-            yearly:  'Year',
-            all:     'All Time'
+            yearly: 'Year',
+            all: 'All Time'
         };
 
         var periodSelectEl = document.getElementById('period-select');
@@ -91,23 +126,22 @@
 </script>
 
 <script>
-
     (function () {
-        var leaderboardData;
-        try {
-            leaderboardData = JSON.parse(document.getElementById('leaderboard-data').textContent) || {};
-        } catch (e) {
-            leaderboardData = {};
-        }
-        var defaultPeriod = {{ site.data.leaderboard.default_period | jsonify
+        var discourseData = {};
+        var githubData = {};
+        try { discourseData = JSON.parse(document.getElementById('discourse-data').textContent) || {}; } catch (e) { }
+        try { githubData = JSON.parse(document.getElementById('github-data').textContent) || {}; } catch (e) { }
+
+        var defaultPeriod = {{ site.data.discuss_leaderboard.default_period | jsonify
     }};
     var currentPeriod = defaultPeriod || 'weekly';
+    var currentBoard = 'discourse'; // 'discourse' or 'github'
     var fallbackAvatar = '/assets/images/nav-icons/community.svg';
     var periodDescriptions = {
-      weekly:  'over the past 7 days',
-      monthly: 'over the past 30 days',
-      yearly:  'over the past year',
-      all:     'across all time'
+        weekly: 'over the past 7 days',
+        monthly: 'over the past 30 days',
+        yearly: 'over the past year',
+        all: 'across all time'
     };
 
     function escapeHtml(str) {
@@ -117,8 +151,8 @@
     }
 
     function updatePeriodDescription(period) {
-      var phraseEl = document.getElementById('leaderboard-period-phrase');
-      if (phraseEl) phraseEl.textContent = periodDescriptions[period] || periodDescriptions.weekly;
+        var phraseEl = document.getElementById('leaderboard-period-phrase');
+        if (phraseEl) phraseEl.textContent = periodDescriptions[period] || periodDescriptions.weekly;
     }
 
     function medalClass(rank) {
@@ -127,98 +161,196 @@
         return 'medal-bronze';
     }
 
-    function renderPodium(users) {
-        var podium = document.getElementById('leaderboard-podium');
-        var top3 = users.filter(function (u) { return u.rank <= 3; });
+    // Board config: field names differ (username vs github_username, score vs
+    // github_score), and the third podium stat needs the yearly/all "—" override
+    // for reviews. Everything else is identical layout, so one pair of renderers
+    // takes a config object instead of duplicating markup per board.
+    var BOARDS = {
+        discourse: {
+            podiumEl: 'discourse-podium',
+            tbodyEl: 'discourse-tbody',
+            nameField: 'username',
+            scoreField: 'score',
+            scoreSuffix: ' pts',
+            stats: [
+                { label: 'Likes', field: 'likes' },
+                { label: 'Posts', field: 'posts' },
+                { label: 'Solutions', field: 'solutions' }
+            ],
+            columns: [
+                { field: 'likes' },
+                { field: 'posts' },
+                { field: 'solutions' }
+            ]
+        },
+        github: {
+            podiumEl: 'github-podium',
+            tbodyEl: 'github-tbody',
+            nameField: 'github_username',
+            scoreField: 'github_score',
+            scoreSuffix: ' pts',
+            stats: [
+                { label: 'Issues', field: 'issues' },
+                { label: 'PRs', field: 'prs' },
+                { label: 'Reviews', field: 'reviews' }
+            ],
+            columns: [
+                { field: 'issues' },
+                { field: 'prs' },
+                { field: 'reviews' }
+            ]
+        }
+    };
 
+    function statValue(user, col) {
+        if (col.maskInPeriods && col.maskInPeriods.indexOf(currentPeriod) !== -1) return '—';
+        return Number(user[col.field]) || 0;
+    }
+
+    function renderPodium(board, users) {
+        var config = BOARDS[board];
+        var podium = document.getElementById(config.podiumEl);
+        var top3 = users.filter(function (u) { return u.rank <= 3; });
         podium.innerHTML = top3.map(function (user) {
+            var avatarSrc = board === 'discourse' ? user.avatar : user.avatar_url;
+            var name = user[config.nameField];
+            var statsHtml = config.stats.map(function (s) {
+                return '<div class="podium-stat"><span class="podium-stat-label">' + s.label + '</span><span class="podium-stat-value">' + statValue(user, s) + '</span></div>';
+            }).join('');
             return (
                 '<div class="podium-card podium-rank-' + user.rank + '">' +
                 '<div class="podium-card-body">' +
                 '<div class="podium-avatar-wrapper">' +
                 '<span class="medal ' + medalClass(user.rank) + '">' + user.rank + '</span>' +
                 '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
-                '<img class="podium-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
+                '<img class="podium-avatar" src="' + escapeHtml(avatarSrc) + '" alt="' + escapeHtml(name) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
                 '</a>' +
                 '</div>' +
                 '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener" class="podium-username-link">' +
-                '<span class="podium-username">' + escapeHtml(user.username) + '</span>' +
+                '<span class="podium-username">' + escapeHtml(name) + '</span>' +
                 '</a>' +
-                '<div class="podium-stats">' +
-                '<div class="podium-stat"><span class="podium-stat-label">Likes</span><span class="podium-stat-value">' + (Number(user.likes) || 0) + '</span></div>' +
-                '<div class="podium-stat"><span class="podium-stat-label">Posts</span><span class="podium-stat-value">' + (Number(user.posts) || 0) + '</span></div>' +
-                '<div class="podium-stat"><span class="podium-stat-label">Solutions</span><span class="podium-stat-value">' + (Number(user.solutions) || 0) + '</span></div>' +
-                '</div>' +
-                '<div class="podium-score">' + (Number(user.score) || 0) + ' pts</div>' +
-                '</div>' +
-                '</div>'
+                '<div class="podium-stats">' + statsHtml + '</div>' +
+                '<div class="podium-score">' + (Number(user[config.scoreField]) || 0) + config.scoreSuffix + '</div>' +
+                '</div></div>'
             );
         }).join('');
     }
 
-    function renderTable(users) {
-        var tbody = document.getElementById('leaderboard-tbody');
+    function renderTable(board, users) {
+        var config = BOARDS[board];
+        var tbody = document.getElementById(config.tbodyEl);
         var rest = users.filter(function (u) { return u.rank > 3; });
-
         tbody.innerHTML = rest.map(function (user) {
+            var avatarSrc = board === 'discourse' ? user.avatar : user.avatar_url;
+            var name = user[config.nameField];
+            var colsHtml = config.columns.map(function (c) {
+                return '<td>' + statValue(user, c) + '</td>';
+            }).join('');
             return (
                 '<tr class="leaderboard-row">' +
                 '<td class="leaderboard-rank">' + user.rank + '</td>' +
                 '<td class="leaderboard-member">' +
                 '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
-                '<img class="leaderboard-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
-                '<span class="leaderboard-username">' + escapeHtml(user.username) + '</span>' +
-                '</a>' +
-                '</td>' +
-                '<td>' + (Number(user.likes) || 0) + '</td>' +
-                '<td>' + (Number(user.posts) || 0) + '</td>' +
-                '<td>' + (Number(user.solutions) || 0) + '</td>' +
-                '<td class="leaderboard-score">' + (Number(user.score) || 0) + '</td>' +
+                '<img class="leaderboard-avatar" src="' + escapeHtml(avatarSrc) + '" alt="' + escapeHtml(name) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
+                '<span class="leaderboard-username">' + escapeHtml(name) + '</span>' +
+                '</a></td>' +
+                colsHtml +
+                '<td class="leaderboard-score">' + (Number(user[config.scoreField]) || 0) + '</td>' +
                 '</tr>'
             );
         }).join('');
     }
 
-    function renderLeaderboard(period) {
-        var users = leaderboardData[period] || [];
-        updatePeriodDescription(period);
-        var hasActivity = users.some(function (u) { return u.score > 0; });
+    function renderLeaderboard() {
+        updatePeriodDescription(currentPeriod);
+        var users = currentBoard === 'discourse' ? (discourseData[currentPeriod] || []) : (githubData[currentPeriod] || []);
+
+        var hasActivity = false;
+        if (currentBoard === 'discourse') {
+            hasActivity = users.some(function (u) { return (u.score || 0) > 0; });
+        } else {
+            hasActivity = users.some(function (u) {
+                return (u.issues || 0) > 0 || (u.prs || 0) > 0 || (u.reviews || 0) > 0;
+            });
+        }
+
         var emptyState = document.getElementById('leaderboard-empty-state');
-        var podium = document.getElementById('leaderboard-podium');
-        var wrapper = document.querySelector('.leaderboard-wrapper');
+
+        document.getElementById('board-discourse').classList.toggle('is-hidden', !(currentBoard === 'discourse' && hasActivity));
+        document.getElementById('board-github').classList.toggle('is-hidden', !(currentBoard === 'github' && hasActivity));
 
         if (!hasActivity) {
+            // Clear both boards' rows so a later filter input can't find stale
+            // DOM nodes and count them as visible matches.
+            document.getElementById('discourse-tbody').innerHTML = '';
+            document.getElementById('discourse-podium').innerHTML = '';
+            document.getElementById('github-tbody').innerHTML = '';
+            document.getElementById('github-podium').innerHTML = '';
             emptyState.textContent = 'No activity for this period yet.';
-            emptyState.style.display = '';
-            podium.style.display = 'none';
-            podium.innerHTML = '';
-            document.getElementById('leaderboard-tbody').innerHTML = '';
-            wrapper.style.display = 'none';
+            emptyState.classList.remove('is-hidden');
             return;
         }
 
-        emptyState.style.display = 'none';
-        podium.style.display = '';
-        wrapper.style.display = '';
-        renderPodium(users);
-        renderTable(users);
+        emptyState.classList.add('is-hidden');
+
+        renderPodium(currentBoard, users);
+        renderTable(currentBoard, users);
         filterLeaderboard();
     }
 
     var periodSelect = document.getElementById('period-select');
-
     periodSelect.value = currentPeriod;
-
+    updatePeriodDescription(currentPeriod);
     periodSelect.addEventListener('change', function () {
         currentPeriod = this.value;
-        renderLeaderboard(currentPeriod);
+        updatePeriodDescription(currentPeriod);
+        renderLeaderboard();
+    });
+
+    var tabButtons = [document.getElementById('tab-discourse'), document.getElementById('tab-github')];
+
+    function activateTab(tab) {
+        currentBoard = tab.id === 'tab-discourse' ? 'discourse' : 'github';
+        tabButtons.forEach(function (btn) {
+            var isActive = btn === tab;
+            btn.classList.toggle('active-tab', isActive);
+            btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            btn.setAttribute('tabindex', isActive ? '0' : '-1');
+        });
+        renderLeaderboard();
+    }
+
+    tabButtons.forEach(function (tab, index) {
+        tab.addEventListener('click', function () {
+            activateTab(tab);
+        });
+
+        tab.addEventListener('keydown', function (e) {
+            var newIndex;
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                newIndex = (index + 1) % tabButtons.length;
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                newIndex = (index - 1 + tabButtons.length) % tabButtons.length;
+            } else if (e.key === 'Home') {
+                newIndex = 0;
+            } else if (e.key === 'End') {
+                newIndex = tabButtons.length - 1;
+            } else {
+                return;
+            }
+            e.preventDefault();
+            tabButtons[newIndex].focus();
+            activateTab(tabButtons[newIndex]);
+        });
     });
 
     function filterLeaderboard() {
         var input = document.getElementById('leaderboard-filter').value.toLowerCase();
         var visibleCount = 0;
+        var tableId = '#' + BOARDS[currentBoard].tbodyEl.replace('-tbody', '-table');
+        var podiumId = '#' + BOARDS[currentBoard].podiumEl;
 
-        var rows = document.querySelectorAll('#leaderboard-table tbody tr');
+        var rows = document.querySelectorAll(tableId + ' tbody tr');
         rows.forEach(function (row) {
             var username = row.querySelector('.leaderboard-username');
             if (username) {
@@ -228,7 +360,7 @@
             }
         });
 
-        var cards = document.querySelectorAll('.podium-card');
+        var cards = document.querySelectorAll(podiumId + ' .podium-card');
         cards.forEach(function (card) {
             var username = card.querySelector('.podium-username');
             if (username) {
@@ -241,15 +373,17 @@
         var emptyState = document.getElementById('leaderboard-empty-state');
         if (input && visibleCount === 0) {
             emptyState.textContent = 'No members match that search.';
-            emptyState.style.display = '';
-        } else {
+            emptyState.classList.remove('is-hidden');
+        } else if (rows.length === 0 && cards.length === 0) {
             emptyState.textContent = 'No activity for this period yet.';
-            emptyState.style.display = rows.length === 0 && cards.length === 0 ? '' : 'none';
+            emptyState.classList.remove('is-hidden');
+        } else {
+            emptyState.classList.add('is-hidden');
         }
     };
 
     document.getElementById('leaderboard-filter').addEventListener('input', filterLeaderboard);
 
-    renderLeaderboard(currentPeriod);
-}) ();
+    renderLeaderboard();
+    }) ();
 </script>
