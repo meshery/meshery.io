@@ -28,7 +28,7 @@ Most of what this site displays belongs to other projects. Models, integrations,
 
 What Meshery.io does own is the presentation: information architecture, layout, navigation, and the reading experience. That distinction decides where a fix belongs.
 
-### Generated content is generated
+### Generated content stays generated
 
 Content produced by automation remains the responsibility of the system that generates it. Contributors improve those systems rather than editing their output by hand.
 
