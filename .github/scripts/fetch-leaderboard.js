@@ -297,9 +297,18 @@ async function fetchRepositoryPRsAndReviews(repoName) {
       if (pr.reviews.totalCount > pr.reviews.nodes.length) {
         console.warn(`'${repoName}' PR #${pr.number} has ${pr.reviews.totalCount} reviews, only first ${pr.reviews.nodes.length} counted.`);
       }
+      const prAuthorLogin = pr.author && pr.author.login ? pr.author.login : null;
       for (const r of pr.reviews.nodes) {
         if (isRealGraphQLUser(r.author) && r.state !== 'PENDING') {
-          reviews.push({ prNumber: pr.number, user: r.author, submitted_at: r.submittedAt, state: r.state });
+          if (prAuthorLogin && r.author.login === prAuthorLogin) continue;
+          reviews.push({
+            repo: repoName,
+            prNumber: pr.number,
+            prAuthorLogin,
+            user: r.author,
+            submitted_at: r.submittedAt,
+            state: r.state
+          });
         }
       }
     }
@@ -413,8 +422,10 @@ function aggregateGitHubPeriods(activity) {
     const reviewedByPr = {};
     for (const r of activity.reviews) {
       if (!isRealGraphQLUser(r.user)) continue;
+      if (r.prAuthorLogin && r.user.login === r.prAuthorLogin) continue;
       if (sinceMs !== null && (!r.submitted_at || new Date(r.submitted_at).getTime() < sinceMs)) continue;
-      const key = r.prNumber + ':' + r.user.login;
+      const repoPrefix = r.repo ? r.repo + ':' : '';
+      const key = repoPrefix + r.prNumber + ':' + r.user.login;
       if (reviewedByPr[key]) continue;
       reviewedByPr[key] = true;
       initUser(r.user);
