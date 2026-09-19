@@ -1,0 +1,298 @@
+@use "./variables.scss" as *;
+
+/* CHECKBOX-STYLES */
+.filter-wrap {
+  flex: 0 0 25%;
+  width: 23%;
+  padding: 4px;
+  border-radius: 15px;
+  height: fit-content; /* height needs to be increased with regarding to the total no. of patterns */
+  .load-more {
+    display: none;
+  }
+}
+
+.dropdown-icon {
+  width: 20px;
+  vertical-align: middle;
+  padding: 2px;
+}
+
+
+
+#myInput {
+    box-sizing: border-box;
+    background-image: url("searchicon.png");
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+#myInput:focus {
+    outline: 3px solid #ddd;
+}
+.filter-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+}
+
+.show {
+    display: block;
+}
+.arrow-icon-up {
+    transform: rotate(180deg);
+    transition: transform 10s linear;
+}
+
+.arrow-icon-down {
+    transform: rotate(0deg);
+    transition: transform 1s linear;
+}
+
+#compatibility-div label,
+#category-div label,
+#cardpatterntype-div label {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-indent: unset;
+}
+
+#compatibility-div input,
+#category-div input,
+#cardpatterntype-div input {
+    flex-shrink: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+#compatibility-div input[type="checkbox"],
+#category-div input[type="checkbox"],
+#cardpatterntype-div input[type="checkbox"] {
+    accent-color: var(--brand-color-secondary);
+}
+
+#compatibility-div img {
+    max-width: 50px;
+    height: 100%;
+}
+#compatibility-div .badge,
+#category-div .badge,
+#cardpatterntype-div .badge {
+    background: var(--color-primary-dark);
+    border: 1px solid var(--color-primary-extra-dark);
+    border-radius: 999px;
+    color: var(--color-secondary-dark);
+    height: 20px;
+    min-width: 20px;
+    padding: 0 6px;
+    box-sizing: border-box;
+    text-align: center;
+    flex-shrink: 0;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+}
+#cardpatterntype-div .badge {
+    padding: 2px;
+}
+#compatibility-div .input-container .name,
+#category-div .input-container .name,
+#cardpatterntype-div .input-container .name {
+    margin: 0 10px 0 10px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#compatibility-div .input-container,
+#category-div .input-container,
+#cardpatterntype-div .input-container {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+#category-div,
+#compatibility-div,
+#cardpatterntype-div {
+    flex-wrap: wrap;
+}
+#compatibility-div {
+    max-height: 360px; /* Adjust to display exactly 9 checkboxes */
+    overflow-y: auto;
+    padding-right: 1.25rem;
+    height: min-content;
+}
+.page-info {
+    margin: 0 1rem;
+    align-self: center;
+    font-weight: bold;
+    color: var(--color-secondary-dark);
+}
+
+
+.sort-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--color-secondary-light);
+    background: var(--color-primary-dark);
+    border: 1px solid var(--color-primary-extra-dark);
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+.sort-btn:hover {
+    border-color: var(--brand-color-secondary);
+    color: var(--brand-color-secondary);
+}
+  .sort-btn:focus-visible {
+    outline: 2px solid var(--brand-color-secondary);
+    outline-offset: 1px;
+}
+.sort-btn.active {
+    color: var(--brand-color-secondary);
+    border-color: var(--brand-color-secondary);
+}
+.sort-btn .sort-arrow {
+    font-size: 10px;
+    line-height: 1;
+}
+.mobile-only{
+    display: none;
+}
+
+
+
+
+@media screen and (max-width: 770px) {
+  .filter-wrap {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 5; 
+    width: 100%;
+    height: calc(100vh - 9rem);
+    height: calc(100dvh - 9rem);
+    border-radius: 15px 15px 0 0;
+    overflow: hidden;
+        display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: var(--color-primary-light-dark);
+    box-sizing: border-box;
+    padding-bottom: 4rem;
+        transform: translateY(100%);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .filter-wrap.is-open {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+  }
+  
+  .mobile-header{
+    display: block;
+    & div{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        & button {
+            padding: 0.5rem 0.1rem;
+            width: 10rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+    }
+  }
+  .compatibility-para, .compatibility-div, .category-para, .category-div{
+    display: none;
+  }
+  .compatibility-div, .category-div{
+        flex: 1 1 auto;
+        flex-direction: row;
+        min-height: 0;
+        height: auto !important;
+        max-height: none !important;
+    overflow-y: auto;
+    flex-wrap: nowrap;
+        align-content: flex-start;
+        justify-content: flex-start;
+        gap: 0.5rem;
+  }
+    .mobile-header {
+        flex: 0 0 auto;
+    }
+    #compatibility-div .input-container,
+    #category-div .input-container {
+        width: 100%;
+        flex-wrap: nowrap;
+    }
+    #compatibility-div .input-container .name,
+    #category-div .input-container .name {
+        min-width: 0;
+    }
+  .mobile-only{
+    display: block;
+  }
+  .action-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 0;
+    width: 100%;
+    & div {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 0.25rem;
+        & button {
+            padding: 0.5rem 0.1rem;
+            width: 10rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+    }
+  }
+  #x-icon{
+    border-radius: 50%;
+    padding: 0.25rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .filter-wrap,  .action-btn div{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+   
+}
+@media screen and (min-width: 440px) and (max-width: 770px) {
+  .filter-wrap,  .action-btn div{
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
