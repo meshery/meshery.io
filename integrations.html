@@ -855,6 +855,7 @@
         const menuElement = document.getElementById("menu");
         menuElement.addEventListener("click", function(e){
           const element = e.target;
+          if (!targets[element.id]) return;
           element.classList.add("highlight_button");
           removeClassFromElement(element.id);
           transform(targets[element.id], 2000);
