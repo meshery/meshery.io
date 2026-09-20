@@ -114,22 +114,23 @@ body.dark-mode .period-select {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    gap: 1.5rem;
-    margin: 0 0 2rem;
+    gap: 1.25rem;
+    margin: 0 0 -1px;
+    position: relative;
+    z-index: 2;
     width: 100%;
     box-sizing: border-box;
 }
 
 .podium-card {
-    flex: 0 0 180px;
-    max-width: 180px;
+    flex: 0 0 150px;
+    max-width: 150px;
     display: flex;
     justify-content: center;
 }
 
 .podium-rank-1 {
     order: 2;
-    transform: translateY(-20px);
 }
 
 .podium-rank-2 {
@@ -152,11 +153,8 @@ body.dark-mode .period-select {
 /* Crown (rank 1 only) */
 
 .podium-crown {
+    color: $caribbean-green;
     display: flex;
-    justify-content: center;
-    font-size: 1.75rem;
-    line-height: 1;
-    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
 }
 
 /* Avatar */
@@ -167,7 +165,7 @@ body.dark-mode .period-select {
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    flex-shrink: 0;
+    overflow: hidden;
 }
 
 .podium-avatar {
@@ -184,30 +182,21 @@ body.dark-mode .period-select {
 }
 
 .podium-rank-1 .podium-avatar-wrapper {
-    width: 128px;
-    height: 128px;
-}
-
-.podium-rank-1 .podium-avatar {
-    border: 4px solid $caribbean-green;
+    width: 84px;
+    height: 84px;
+    border: 3px solid $caribbean-green;
 }
 
 .podium-rank-2 .podium-avatar-wrapper {
-    width: 128px;
-    height: 128px;
-}
-
-.podium-rank-2 .podium-avatar {
-    border: 4px solid $caribbean-green;
+    width: 72px;
+    height: 72px;
+    border: 3px solid $keppel;
 }
 
 .podium-rank-3 .podium-avatar-wrapper {
-    width: 128px;
-    height: 128px;
-}
-
-.podium-rank-3 .podium-avatar {
-    border: 4px solid $caribbean-green;
+    width: 72px;
+    height: 72px;
+    border: 3px solid rgba($keppel, 0.6);
 }
 
 .podium-avatar-wrapper a {
@@ -218,57 +207,13 @@ body.dark-mode .period-select {
     overflow: hidden;
 }
 
-/* Rank badge — sits at the bottom-right edge of the avatar, never over the face */
+/* Crown */
 
-.podium-rank-badge {
+.podium-rank-1 .podium-avatar-wrapper::before {
+    content: "👑";
     position: absolute;
-    bottom: -4px;
-    right: -4px;
-    z-index: 2;
-
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 0.85rem;
-    font-weight: 700;
-
-    border: 2px solid $light-card-bg;
-}
-
-body.dark-mode .podium-rank-badge {
-    border-color: $dark-card-bg;
-}
-
-.podium-rank-1 .podium-rank-badge {
-    background: $caribbean-green;
-    color: #ffffff;
-}
-
-body.dark-mode .podium-rank-1 .podium-rank-badge {
-    color: #04342C;
-}
-
-.podium-rank-2 .podium-rank-badge {
-    background: $caribbean-green;
-    color: #ffffff;
-}
-
-body.dark-mode .podium-rank-2 .podium-rank-badge {
-    color: #04342C;
-}
-
-.podium-rank-3 .podium-rank-badge {
-    background: $caribbean-green;
-    color: #ffffff;
-}
-
-body.dark-mode .podium-rank-3 .podium-rank-badge {
-    color: #04342C;
+    top: -42px;
+    font-size: 2rem;
 }
 
 /* ─────────────────────────────
@@ -288,19 +233,13 @@ body.dark-mode .podium-rank-3 .podium-rank-badge {
 }
 
 .podium-username {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
-    line-height: 1.25;
+    line-height: 1.2;
     text-align: center;
     color: $light-text-primary;
     width: 100%;
-    max-width: 100%;
     overflow-wrap: break-word;
-
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
 }
 
 body.dark-mode .podium-username {
@@ -308,14 +247,91 @@ body.dark-mode .podium-username {
 }
 
 .podium-score {
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-size: 0.88rem;
+    font-weight: 600;
     line-height: 1;
+    padding: 5px 14px;
+    border-radius: 6px;
     white-space: nowrap;
+
+    background: $light-card-bg;
+    border: 1px solid $keppel;
     color: $light-accent-text;
 }
 
 body.dark-mode .podium-score {
+    background: $dark-control-bg;
+    border-color: $caribbean-green;
+    color: $caribbean-green;
+}
+
+/* ─────────────────────────────
+       PODIUM BLOCKS (pedestals)
+    ───────────────────────────── */
+
+.podium-block {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10px;
+    box-sizing: border-box;
+}
+
+.podium-block-rank {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+/* Rank 1 block — tallest, caribbean green */
+.podium-rank-1 .podium-block {
+    height: 160px;
+    background: $caribbean-green;
+}
+
+.podium-rank-1 .podium-block-rank {
+    color: #ffffff;
+}
+
+body.dark-mode .podium-rank-1 .podium-block-rank {
+    color: #04342C;
+}
+
+/* Rank 2 block — keppel */
+.podium-rank-2 .podium-block {
+    height: 100px;
+    background: $keppel;
+}
+
+.podium-rank-2 .podium-block-rank {
+    color: #ffffff;
+}
+
+body.dark-mode .podium-rank-2 .podium-block-rank {
+    color: #04342C;
+}
+
+/* Rank 3 block — outlined, quiet */
+.podium-rank-3 .podium-block {
+    height: 70px;
+    background: #E4F5F1;
+    border: 1px solid $keppel;
+    border-bottom: 1px solid $keppel;
+}
+
+.podium-rank-3 .podium-block-rank {
+    color: $light-accent-text;
+}
+
+body.dark-mode .podium-rank-3 .podium-block {
+    background: $dark-row-b;
+    border-color: $keppel;
+    border-bottom: 1px solid $keppel;
+}
+
+body.dark-mode .podium-rank-3 .podium-block-rank {
     color: $caribbean-green;
 }
 
@@ -356,6 +372,7 @@ body.dark-mode .leaderboard-card {
     width: 260px;
     height: 38px;
     padding: 0 2.2rem 0 1rem;
+    box-sizing: border-box;
 
     border: 1px solid $light-border;
     border-radius: 8px;
@@ -548,51 +565,44 @@ body.dark-mode .leaderboard-empty-state {
     }
 
     .podium-card {
-        flex: 0 0 120px;
-        max-width: 120px;
+        flex: 0 0 100px;
+        max-width: 100px;
     }
-
-    .podium-rank-1 {
-        transform: translateY(-20px);
-    }
-
-    // .podium-rank-2 {
-    //     transform: translateY(-9px);
-    // }
-
-    // .podium-rank-3 {
-    //     transform: translateY(-9px);
-    // }
 
     .podium-rank-1 .podium-avatar-wrapper {
-        width: 76px;
-        height: 76px;
+        width: 54px;
+        height: 54px;
     }
 
     .podium-rank-2 .podium-avatar-wrapper,
     .podium-rank-3 .podium-avatar-wrapper {
-        width: 62px;
-        height: 62px;
-    }
-
-    .podium-crown {
-        font-size: 1.3rem;
+        width: 46px;
+        height: 46px;
     }
 
     .podium-username {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
 
     .podium-score {
-        font-size: 0.95rem;
+        font-size: 0.72rem;
+        padding: 3px 9px;
     }
 
-    .podium-rank-badge {
-        width: 24px;
-        height: 24px;
-        font-size: 0.65rem;
-        bottom: -3px;
-        right: -3px;
+    .podium-rank-1 .podium-block {
+        height: 96px;
+    }
+
+    .podium-rank-2 .podium-block {
+        height: 64px;
+    }
+
+    .podium-rank-3 .podium-block {
+        height: 44px;
+    }
+
+    .podium-block-rank {
+        font-size: 1.25rem;
     }
 
     .leaderboard-card {
@@ -617,7 +627,7 @@ body.dark-mode .leaderboard-empty-state {
 
     .period-toggle,
     .leaderboard-filter {
-        width: 320px;
+        width: 100%;
         max-width: 100%;
         min-width: 0;
         height: 42px;
@@ -647,56 +657,48 @@ body.dark-mode .leaderboard-empty-state {
 
     .leaderboard-podium {
         gap: 0.5rem;
-        margin: 0 0 1.5rem;
+        margin: 0 0 -1px;
     }
 
     .podium-card {
-        flex: 0 0 104px;
-        max-width: 104px;
+        flex: 0 0 88px;
+        max-width: 88px;
     }
-
-    .podium-rank-1 {
-        transform: translateY(-20px);
-    }
-
-    // .podium-rank-2 {
-    //     transform: translateY(-6px);
-    // }
-
-    // .podium-rank-3 {
-    //     transform: translateY(-6px);
-    // }
 
     .podium-rank-1 .podium-avatar-wrapper {
-        width: 62px;
-        height: 62px;
+        width: 44px;
+        height: 44px;
     }
 
     .podium-rank-2 .podium-avatar-wrapper,
     .podium-rank-3 .podium-avatar-wrapper {
-        width: 52px;
-        height: 52px;
-    }
-
-    .podium-crown {
-        font-size: 1.05rem;
+        width: 38px;
+        height: 38px;
     }
 
     .podium-username {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
     }
 
     .podium-score {
-        font-size: 0.8rem;
+        font-size: 0.62rem;
+        padding: 2px 7px;
     }
 
-    .podium-rank-badge {
-        width: 18px;
-        height: 18px;
-        font-size: 0.55rem;
-        border-width: 1.5px;
-        bottom: -2px;
-        right: -2px;
+    .podium-rank-1 .podium-block {
+        height: 78px;
+    }
+
+    .podium-rank-2 .podium-block {
+        height: 52px;
+    }
+
+    .podium-rank-3 .podium-block {
+        height: 36px;
+    }
+
+    .podium-block-rank {
+        font-size: 1rem;
     }
 
     .leaderboard-card {

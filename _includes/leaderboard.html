@@ -105,6 +105,7 @@
         var defaultPeriod = {{ site.data.leaderboard.default_period | jsonify
     }};
     var currentPeriod = defaultPeriod || 'weekly';
+    var CROWN_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 6l5.5 4L12 4l3.5 6L21 6l-2 10H5zm0 2h14v2H5v-2z"/></svg>';
     var fallbackAvatar = '/assets/images/nav-icons/community.svg';
 
     function escapeHtml(str) {
@@ -112,8 +113,6 @@
         div.textContent = str == null ? '' : String(str);
         return div.innerHTML.replace(/"/g, '&quot;');
     }
-
-    var CROWN_SVG = '<span aria-hidden="true">\uD83D\uDC51</span>';
 
     function renderPodium(users) {
         var podium = document.getElementById('leaderboard-podium');
@@ -128,12 +127,12 @@
                 '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
                 '<img class="podium-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
                 '</a>' +
-                '<span class="podium-rank-badge">' + user.rank + '</span>' +
                 '</div>' +
                 '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener" class="podium-username-link">' +
                 '<span class="podium-username">' + escapeHtml(user.username) + '</span>' +
                 '</a>' +
                 '<div class="podium-score">' + (Number(user.score) || 0) + ' pts</div>' +
+                '<div class="podium-block"><span class="podium-block-rank">' + user.rank + '</span></div>' +
                 '</div>' +
                 '</div>'
             );
