@@ -118,7 +118,11 @@
 <script>
   // Lazy load the catalog-modal.js script
   function loadCatalogModalScript() {
-    const script = document.createElement("script");
+  if (document.querySelector('script[src*="catalog-modal.js"]')) {
+    return;
+  }
+
+  const script = document.createElement("script");
     script.src = "{{ site.baseurl }}/assets/js/catalog-modal.js";
     document.body.appendChild(script);
   }
