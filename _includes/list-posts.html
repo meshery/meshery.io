@@ -5,11 +5,8 @@
 		{% include post-title.html post=post %}
 		<div class="post-content">
 			{%- if post.featured-image -%}
-				{%- assign post_dark_image = post.featured-image-dark | default: post.darkImage | default: post.featured-image -%}
-				{%- assign post_light_image = post.featured-image-light | default: post.whiteImage | default: post.lightImage -%}
-				{%- if post_light_image == nil and post_dark_image contains '-dark.' -%}
-					{%- assign post_light_image = post_dark_image | replace: '-dark.', '-light.' -%}
-				{%- endif -%}
+				{%- assign post_dark_image = post.featured-image.dark | default: post.featured-image -%}
+				{%- assign post_light_image = post.featured-image.light | default: post.featured-image-light -%}
 				{%- if post_light_image -%}
 					<img src="{{- post_dark_image | relative_url -}}"
 						 data-logo-for-dark="{{- post_dark_image | relative_url -}}"
