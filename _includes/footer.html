@@ -6,7 +6,7 @@
 				<li>
 					<h2>
 						{% if column.link %}
-						<a {% if column.new_window %}target="_blank" {% endif %} 
+						<a {% if column.new_window %}target="_blank" {% endif %}
 						href="{% include relative-src.html src=column.link %}" {% if column.social_icon
 						%}class="{{ column.social_icon | downcase }}-icon" {% endif %}>
 						{% if column.social_icon %}
@@ -32,7 +32,7 @@
 			</ul>
 			{% endfor %}
 
-			<!-- 
+			<!--
 			<ul class="feed">
 				<a class="twitter-timeline" data-width="320" data-height="320" data-theme="light"
 					data-link-color="#62ACCD" href="https://twitter.com/mesheryio"
@@ -79,6 +79,27 @@
 
 <script>
 
+    // Functionality for the copy button next to the ID/UUID in Catalog Details
+
+	// function showCopyFeedback(element, message) {
+	// 	let wrapper = element.closest('.catalog-design-id-copy-wrapper');
+	// 	if (!wrapper) {
+	// 		return false;
+	// 	}
+
+	// 	let feedback = wrapper.querySelector('.copy-feedback');
+	// 	if (!feedback) {
+	// 		return false;
+	// 	}
+
+	// 	feedback.textContent = message;
+	// 	window.clearTimeout(element.copyFeedbackTimeout);
+	// 	element.copyFeedbackTimeout = window.setTimeout(function () {
+	// 		feedback.textContent = '';
+	// 	}, 1500);
+	// 	return true;
+	// }
+
 	function resetCopyText(element) {
 		let childElements = element.childNodes
 		if (childElements.length > 3) {
@@ -97,18 +118,23 @@
 		console.info('Text:', e.text);
 		console.info('Trigger:', e.trigger);
 		let childElements = e.trigger.childNodes;
-		if (childElements.length > 3) {
-		childElements[3].innerHTML = "Copied!";
-	} else {
-		childElements[1].innerHTML = "Copied";
-		childElements[1].style.color = 'white';
-		childElements[1].style.background = "#1a2421";
-	}
+        // ShowCopyFeedback serves as the primary check for the copy button in Catalog Details.
+        // If the copy button is enabled again, the conditional below needs to be encapsulate the childElements conditional
+		// if (!showCopyFeedback(e.trigger, "Copied!")) {}
+
+        if (childElements.length > 3) {
+			childElements[3].innerHTML = "Copied!";
+		} else {
+			childElements[1].innerHTML = "Copied";
+			childElements[1].style.color = 'white';
+			childElements[1].style.background = "#1a2421";
+		}
 		e.clearSelection();
 	});
 	clipboard.on('error', function (e) {
 		console.error('Action:', e.action);
 		console.error('Trigger:', e.trigger);
+		// showCopyFeedback(e.trigger, "Copy failed");
 	});
 </script>
 
@@ -116,6 +142,7 @@
 	function displayCode(id) {
 		var divId = id + "_code";
 		var element = document.getElementById(divId);
+		var isOpening = !element.classList.contains("showDiv");
 		element.classList.toggle("showDiv");
 		var toggleDivs = document.getElementsByClassName("toggle");
 		if (element.style.maxHeight) {
@@ -131,12 +158,16 @@
 				}
 			}
 		}
+		var platformOptions = document.querySelectorAll(".platform-option");
+		platformOptions.forEach(function(option) {
+			option.classList.toggle("selected", option.id === id && isOpening);
+		});
 	}
 </script>
 <script type="text/javascript">
 	let toggleBtn = document.getElementById("mode-toggle-btn")
 	toggleBtn.onclick = setMode;
-	
+
 	if (localStorage.getItem("mode") === null) {
     	localStorage.setItem("mode", "dark-mode");
     }
@@ -145,18 +176,23 @@
 	const currentMode = localStorage.getItem("mode");
 	if (isDark ^ (currentMode === "dark-mode")) {
 		setMode();
+	} else {
+		// Body already matches the stored theme, so setMode() is not called here.
+		// Sync every theme-aware logo to the current theme so logos that render
+		// after the header script (such as #l5-logo) show the correct image on
+		// load instead of waiting for a manual toggle.
+		document.querySelectorAll("#logo-dark-light, .logo-dark-light").forEach(e => {
+			e.src = document.body.classList.contains("dark-mode") ? e.dataset.logoForDark : e.dataset.logoForLight;
+		});
 	}
 
 	function setMode() {
 		document.body.classList.toggle("dark-mode")
-		
-		let l5Logos = document.querySelectorAll("#l5-logo");
-		let allLogos = document.querySelectorAll("#logo-dark-light");
+
+		let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
 		if (document.body.classList.contains("dark-mode")) {
-			l5Logos.forEach(e => e.src = '../assets/images/company-logo/dark-mode-logo.svg')
 			allLogos.forEach(e => e.src = e.dataset.logoForDark)
 		} else {
-			l5Logos.forEach(e => e.src = '../assets/images/company-logo/no-trim.svg')
 			allLogos.forEach(e => e.src = e.dataset.logoForLight)
 		}
 		if (document.body.classList.contains("dark-mode")) {
@@ -169,7 +205,7 @@
 			bubbles: true ,
 		}))
 	}
-	
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
@@ -186,7 +222,7 @@
       slidesToScroll: 1,
       autoplay: true, // true
       autoplaySpeed: 1500,
-      
+
 
       responsive: [
         {

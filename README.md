@@ -140,7 +140,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   <i>If you like Meshery, please <a href="../../stargazers">★</a> star this repository to show your support! 🤩</i>
  <br />
 <a href="../../stargazers">
- <img align="center" src="https://api.star-history.com/svg?repos=meshery/meshery.io&type=Date" />
+ <img align="center" src="https://star-history.dera.page/svg?repos=meshery/meshery.io&type=Date" />
 </a></p>
 
 #### License

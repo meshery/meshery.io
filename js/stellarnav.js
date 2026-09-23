@@ -206,6 +206,19 @@ $.fn.stellarNav = function(options, width, breakpoint) {
       }
     });
 
+    // closes mobile menu when a navigation item link (e.g. Getting Started) is clicked
+    nav.on('click', 'a', function() {
+      if ($(this).hasClass('menu-toggle') || $(this).hasClass('close-menu') || $(this).hasClass('dd-toggle') || $(this).hasClass('sub-list') || $(this).hasClass('call-btn-mobile') || $(this).hasClass('location-btn-mobile')) {
+        return;
+      }
+      if (nav.hasClass('mobile') && nav.hasClass('active')) {
+        nav.removeClass('active');
+        nav.find('ul:first').stop(true, true).slideUp(settings.openingSpeed, function() {
+          nav.find('li.open').removeClass('open').children('ul').hide();
+        });
+      }
+    });
+
 
     // adds toggle button to li items that have children
     nav.find('li a').each(function() {

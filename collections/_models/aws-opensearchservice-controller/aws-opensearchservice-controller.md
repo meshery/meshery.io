@@ -27,7 +27,11 @@ components:
   colorIcon: assets/images/integration/aws-opensearchservice-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
   whiteIcon: assets/images/integration/aws-opensearchservice-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
   description: 
-componentsCount: 4
+- name: vpc-endpoint
+  colorIcon: assets/images/integration/aws-opensearchservice-controller/components/vpc-endpoint/icons/color/vpc-endpoint-color.svg
+  whiteIcon: assets/images/integration/aws-opensearchservice-controller/components/vpc-endpoint/icons/white/vpc-endpoint-white.svg
+  description: 
+componentsCount: 5
 relationships: 
 - type: "non-binding"
   kind: "edge"

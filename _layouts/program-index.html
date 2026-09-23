@@ -11,7 +11,10 @@ layout: default
     <div class="cover" style="z-index: 20">
         <div class="project-details" style="max-width: 800px; margin: 0 auto;">
             <div class="card-content" style="margin-bottom: 2rem; display: flex; justify-content: center;">
-                <img src="{{ page.image | relative_url }}" alt="{{ page.title }}"
+                <img class="logo-dark-light"
+                    data-logo-for-light="{{ page.image | relative_url }}"
+                    data-logo-for-dark="{% if page.imageDark %}{{ page.imageDark | relative_url }}{% else %}{{ page.image | relative_url }}{% endif %}"
+                    src="{% if page.imageDark %}{{ page.imageDark | relative_url }}{% else %}{{ page.image | relative_url }}{% endif %}" alt="{{ page.title }}"
                     style="max-width: 300px; width: 100%; height: auto;" />
             </div>
         </div>

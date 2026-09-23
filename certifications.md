@@ -1,8 +1,10 @@
 ---
 layout: page
 title: Certifications
-permalink: /community/certifications
+permalink: /community/certifications/
 description: "Validate your Meshery skills and expertise with the Meshery Certification Program."
+redirect_from:
+  - /community/certifications
 ---
 
 The Meshery Certification Program offers a structured pathway for professionals to validate their skills in managing and contributing to Meshery. The program includes certifications for administrators, developers, and open source contributors, each tailored to different levels of expertise and roles within the Meshery ecosystem.

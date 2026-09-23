@@ -83,6 +83,12 @@
     cursor: pointer;
   }
 
+  #compatibility-div input[type="checkbox"],
+  #category-div input[type="checkbox"],
+  #cardpatterntype-div input[type="checkbox"] {
+    accent-color: var(--brand-color-secondary);
+  }
+
   #compatibility-div img {
     max-width: 50px;
     height: 100%;
@@ -90,18 +96,21 @@
   #compatibility-div .badge,
   #category-div .badge,
   #cardpatterntype-div .badge {
-    background: var(--color-secondary-dark);
-    border-radius: 50%;
-    color: var(--color-primary-light);
+    background: var(--color-primary-dark);
+    border: 1px solid var(--color-primary-extra-dark);
+    border-radius: 999px;
+    color: var(--color-secondary-dark);
     height: 20px;
-    width: 20px;
+    min-width: 20px;
+    padding: 0 6px;
+    box-sizing: border-box;
     text-align: center;
     flex-shrink: 0;
     font-size: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 200;
+    font-weight: 400;
   }
   #cardpatterntype-div .badge {
     padding: 2px;
@@ -141,6 +150,46 @@
     font-weight: bold;
     color: var(--color-secondary-dark);
   }
+
+  .filter-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+  }
+  .sort-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--color-secondary-light);
+    background: var(--color-primary-dark);
+    border: 1px solid var(--color-primary-extra-dark);
+    border-radius: 999px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .sort-btn:hover {
+    border-color: var(--brand-color-secondary);
+    color: var(--brand-color-secondary);
+  }
+  .sort-btn:focus-visible {
+    outline: 2px solid var(--brand-color-secondary);
+    outline-offset: 1px;
+  }
+  .sort-btn.active {
+    color: var(--brand-color-secondary);
+    border-color: var(--brand-color-secondary);
+  }
+  .sort-btn .sort-arrow {
+    font-size: 10px;
+    line-height: 1;
+  }
 </style>
 
 <div class="filter-wrap">
@@ -164,11 +213,37 @@
   
   {% if show_technology=="true"%}
   <p id="compatibility-para" class="compatibility-para">
-    <strong>Technologies:</strong>
+    <span class="filter-heading">
+      <strong>Technologies:</strong>
+      <button
+        type="button"
+        class="sort-btn"
+        id="compatibility-sort"
+        data-order="none"
+        title="Sort by count"
+        aria-label="Sort technologies by count"
+      >
+        Count <span class="sort-arrow" aria-hidden="true">⇅</span>
+      </button>
+    </span>
   </p>
   <div id="compatibility-div" class="compatibility-div"></div>
   {% endif %}
-  <p id="category-para" class="category-para"><strong>Categories:</strong></p>
+  <p id="category-para" class="category-para">
+    <span class="filter-heading">
+      <strong>Categories:</strong>
+      <button
+        type="button"
+        class="sort-btn"
+        id="category-sort"
+        data-order="none"
+        title="Sort by count"
+        aria-label="Sort categories by count"
+      >
+        Count <span class="sort-arrow" aria-hidden="true">⇅</span>
+      </button>
+    </span>
+  </p>
   <div id="category-div" class="category-div" style="padding-right: 1.25rem;"></div>
 </div>
 <script>
@@ -226,20 +301,17 @@
   }
 </script>
 <script type="module">
-  document.addEventListener("DOMContentLoaded", () => {
-  // Uncheck all checkboxes on page load AND reset their state in the DOM
-  const checkboxes = document.querySelectorAll("input[type='checkbox']");
-  checkboxes.forEach((checkbox) => {
-    checkbox.checked = false;
-  });
+  const pageKey = window.location.pathname;
 
-  // Reset global filter lists
-  globalTechnologyList = [];
-  globalCategoryList = [];
-  globalPatternTypeList = [];
+  function loadFilter(name) {
+    try { return JSON.parse(sessionStorage.getItem(`selected_${name}_${pageKey}`)) || []; }
+    catch { return []; }
+  }
+  function saveFilter(name, list) {
+    try { sessionStorage.setItem(`selected_${name}_${pageKey}`, JSON.stringify(list)); }
+    catch { /* storage unavailable */ }
+  }
 
-  showFilterCards(); // Refresh the displayed cards
-});
   // import all integrations data
   import data from "{{ site.baseurl }}/integrations/data.js";
   // add wasmFilter to data array
@@ -273,17 +345,13 @@
   // get all empty filter containers
   const container = document.getElementById("compatibility-div");
   const categoryContainer = document.getElementById("category-div");
-    // const patternTypeContainer = document.getElementById("cardpatterntype-div");
 
   // globalTechnologyList stores all the technologies checked by user as strings
   // example: ["gcp", "keda"]
-  let globalTechnologyList = [];
+  let globalTechnologyList = loadFilter('technologies');
   // globalCategorySelected stores the category selected by the user, users can select multiple categories at the same time for sorting
   // initially it is empty
-  let globalCategoryList = [];
-    // globalPatternTypeList stores the pattern types which currently are models, designs and wasm filters.
-  // multiple pattern types can be selected at the same time
-  let globalPatternTypeList = [];
+  let globalCategoryList = loadFilter('categories');
   // get all pattern cards
   const patternCards = document.querySelectorAll(".patternCard");
 
@@ -349,6 +417,9 @@
     //     updatePatternTypeList(cardPatternType[i]);
     //     showFilterCards();
     //   };
+    //   if (globalPatternTypeList.includes(cardPatternType[i])) {
+    //     input.checked = true;
+    //   }
     //   inputContainer.appendChild(input);
     //   const label = document.createElement("label");
     //   label.innerHTML = `<div class="name">${cardPatternType[i].replace(
@@ -367,12 +438,16 @@
     const count = categoryCardCount[cardType[i]];
     const inputContainer = document.createElement("div");
     inputContainer.className = "input-container";
+    inputContainer.dataset.count = count;
 
     const input = document.createElement("input");
     input.type = "checkbox";
     input.name = "type";
     input.value = cardType[i];
     input.id = cardType[i];
+    if (globalCategoryList.includes(cardType[i])) {
+      input.checked = true;
+    }
     // When it is checked or unchecked, updateCategoryList function is called followed by showFilterCards function
     input.onclick = function () {
       updateCategoryList(cardType[i]);
@@ -410,12 +485,16 @@
     // Create nodes
     const inputContainer = document.createElement("div");
     inputContainer.className = "input-container";
+    inputContainer.dataset.count = count;
     // Here the categories are generated with a "checkbox" input type
     const input = document.createElement("input");
     input.type = "checkbox";
     input.name = data[i].name;
     input.value = data[i].name;
     input.id = data[i].name;
+    if (globalTechnologyList.includes(data[i].name)) {
+      input.checked = true;
+    }
     // When technology checkbox is checked or unchecked, updateTechnologyList function is called, followed by showFilterCards function
     input.onclick = function () {
       updateTechnologyList(data[i].name);
@@ -446,6 +525,7 @@
     } else {
       globalTechnologyList.push(value);
     }
+    saveFilter('technologies', globalTechnologyList);
   }
 
   // This function updates the category list
@@ -461,16 +541,7 @@
         globalCategoryList = [];
       }
     }
-  }
-
-  function updatePatternTypeList(value) {
-    if (globalPatternTypeList.includes(value)) {
-      globalPatternTypeList = globalPatternTypeList.filter(
-        (item) => item !== value
-      );
-    } else {
-      globalPatternTypeList.push(value);
-    }
+    saveFilter('categories', globalCategoryList);
   }
 
 // Function called when user clicks on any of Technology checkboxes or Category Boxes
@@ -484,7 +555,6 @@ function showFilterCards() {
   const matchingCards = patternCards.filter(card => {
     const type = card.getAttribute("type")?.toLowerCase();
     const technologyAttr = card.getAttribute("technology");
-    const patternType = card.getAttribute("patternType")?.toLowerCase();
     
     // Parse technologies once
     const technologies = technologyAttr ? JSON.parse(technologyAttr) : [];
@@ -496,11 +566,8 @@ function showFilterCards() {
     const showCardCat = globalCategoryList.length === 0 || 
                        globalCategoryList.some(cat => type.includes(cat));
     
-    const showCardPatternType = globalPatternTypeList.length === 0 || 
-                               globalPatternTypeList.some(pt => patternType.includes(pt));
-    
     // Return true if card matches all criteria
-    return showCardTech && showCardCat && showCardPatternType;
+    return showCardTech && showCardCat;
   });
   
   // Hide all cards first (batch operation)
@@ -510,8 +577,7 @@ function showFilterCards() {
   
   // Check if filters are active
   const noFiltersActive = globalTechnologyList.length === 0 && 
-                         globalCategoryList.length === 0 && 
-                         globalPatternTypeList.length === 0;
+                         globalCategoryList.length === 0;
   
   // Update "not found" message
   const noCard = document.getElementById("not-found");
@@ -581,4 +647,78 @@ function showFilterCards() {
   
   return matchingCards.length; // Return count of matching cards
 }
+
+showFilterCards();
+</script>
+<script>
+  // Sort-by-count controls for the Technologies and Categories filter sections.
+  // Each control cycles through three states: unsorted -> descending -> ascending.
+  // The checkbox list is built asynchronously by the module script above, so the
+  // original order and counts are read lazily on the first interaction.
+  (function () {
+    var sortSections = [
+      { key: "compatibility", container: "compatibility-div", button: "compatibility-sort" },
+      { key: "category", container: "category-div", button: "category-sort" },
+    ];
+
+    sortSections.forEach(function (section) {
+      var button = document.getElementById(section.button);
+      var container = document.getElementById(section.container);
+      // Technologies section is absent on pages that opt out (e.g. Models).
+      if (!button || !container) return;
+
+      var order = "none"; // none -> desc -> asc -> none
+      var originalOrder = null;
+
+      button.addEventListener("click", function () {
+        // Capture the as-built order once so the "none" state can restore it.
+        if (!originalOrder) {
+          originalOrder = Array.prototype.slice.call(container.children);
+        }
+        order = order === "none" ? "desc" : order === "desc" ? "asc" : "none";
+        applyOrder(container, order, originalOrder);
+        updateButton(button, order);
+      });
+    });
+
+    function applyOrder(container, order, originalOrder) {
+      if (order === "none") {
+        originalOrder.forEach(function (el) {
+          container.appendChild(el);
+        });
+        return;
+      }
+      var items = Array.prototype.slice.call(
+        container.querySelectorAll(".input-container")
+      );
+      items.sort(function (a, b) {
+        var countA = Number(a.dataset.count) || 0;
+        var countB = Number(b.dataset.count) || 0;
+        return order === "asc" ? countA - countB : countB - countA;
+      });
+      items.forEach(function (el) {
+        container.appendChild(el);
+      });
+    }
+
+    function updateButton(button, order) {
+      var arrow = button.querySelector(".sort-arrow");
+      var labelText = button.getAttribute("aria-label") || "Sort by count";
+      var baseLabel = labelText.split(" (")[0];
+      if (order === "desc") {
+        if (arrow) arrow.textContent = "▼"; // ▼
+        button.classList.add("active");
+        button.setAttribute("aria-label", baseLabel + " (high to low)");
+      } else if (order === "asc") {
+        if (arrow) arrow.textContent = "▲"; // ▲
+        button.classList.add("active");
+        button.setAttribute("aria-label", baseLabel + " (low to high)");
+      } else {
+        if (arrow) arrow.textContent = "⇅"; // ⇅
+        button.classList.remove("active");
+        button.setAttribute("aria-label", baseLabel);
+      }
+      button.setAttribute("data-order", order);
+    }
+  })();
 </script>

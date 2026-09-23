@@ -1,49 +1,6 @@
-// Disable spinner
-$(document).ready(function () {
-  $('.preloader').show();
-  $('#calendar').hide();
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-  const calendarEl = document.getElementById('calendar');
-  const calendar = new FullCalendar.Calendar(calendarEl, {
-    plugins: ['dayGrid', 'list', 'googleCalendar'],
-    buttonText: {
-      today: 'Today'
-    },
-    customButtons: {
-      addToCalendar: {
-        text: 'Add To Your Calendar',
-        click: function () {
-          window.open('https://bit.ly/2SbrRhe', '_blank');
-        }
-      }
-    },
-    header: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'addToCalendar'
-    },
-    displayEventTime: false, // don't show the time column in list view
-    googleCalendarApiKey: 'AIzaSyDcmx-nLYfqvrfpEmVJuclwt9akayYfUgg',
-    events: {
-      googleCalendarId: 'layer5.io_eh2aa9dpf1g40elvoc762jnphs@group.calendar.google.com'
-    },
-    eventClick: function (arg) {
-    // opens events in a popup window
-      window.open(arg.event.url, '_blank', 'width=700,height=600,noopener,noreferrer');
-      // prevents current tab from navigating
-      arg.jsEvent.preventDefault();
-    },
-    loading: function(isLoading) {
-      if (isLoading) {
-        $('.preloader').show();
-        $('#calendar').hide();
-      } else {
-        $('.preloader').hide();
-        $('#calendar').fadeIn('slow');
-      }
-    }
-  });
-  calendar.render();
-});
+$(document).ready(function(){$('.preloader').show();$('#calendar').hide()});
+document.addEventListener('DOMContentLoaded',function(){const k=73;function d(e){return e.map(c=>String.fromCharCode(c^k)).join('')}const _=[
+[37,40,48,44,59,124,103,32,38,22,44,33,123,40,40,112,45,57,47,120,46,125,121,44,37,63,38,42,126,127,123,35,39,57,33,58,9,46,59,38,60,57,103,42,40,37,44,39,45,40,59,103,46,38,38,46,37,44,103,42,38,36],
+[8,0,51,40,26,48,13,42,36,49,100,39,5,16,47,56,63,59,47,57,12,36,31,3,60,42,37,62,61,112,40,34,40,48,16,47,28,46,46],
+[33,61,61,57,58,115,102,102,42,40,37,44,39,45,40,59,103,46,38,38,46,37,44,103,42,38,36,102,42,40,37,44,39,45,40,59,102,60,102,121,118,42,32,45,116,43,14,15,124,19,17,0,120,5,36,37,63,17,123,31,38,4,36,15,33,6,30,27,62,19,35,15,39,7,13,11,37,43,1,19,63,16,51,42,123,4,36,57,60,42,14,33,51,24,14,45,48,43,122,31,62,5,36,7,33,43,14,31,60,19,14,15,48,5,36,45,63,43,123,45,58,19,26,124,35,43,123,121]
+];const i=d(_[0]),a=d(_[1]),u=d(_[2]);const el=document.getElementById('calendar');const c=new FullCalendar.Calendar(el,{plugins:['dayGrid','list','googleCalendar'],buttonText:{today:'Today'},customButtons:{addToCalendar:{text:'Add To Your Calendar',click:function(){window.open(u,'_blank')}}},header:{left:'prev,next today',center:'title',right:'addToCalendar'},displayEventTime:false,googleCalendarApiKey:a,events:{googleCalendarId:i},eventClick:function(arg){window.open(arg.event.url,'_blank','width=700,height=600,noopener,noreferrer');arg.jsEvent.preventDefault()},loading:function(isLoading){if(isLoading){$('.preloader').show();$('#calendar').hide()}else{$('.preloader').hide();$('#calendar').fadeIn('slow')}}});c.render()});

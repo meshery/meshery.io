@@ -5,9 +5,9 @@ name: Meshery Academy
 kind: Remote Provider
 userName: Meshery Authors
 type: Academy
-compatibility: 
+compatibility:
   - meshery
-extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
+extensionId: c5ada327-8a58-4c8a-b9fa-51b95696488c
 logo: /assets/images/extensions/meshery-academy.svg
 whiteImage: /assets/images/extensions/meshery-academy.svg
 colorImage: /assets/images/extensions/meshery-academy.svg

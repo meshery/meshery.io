@@ -5,12 +5,12 @@ name: DigitalOcean Academy
 kind: Remote Provider
 userName: DigitalOcean
 type: Academy
-compatibility: 
+compatibility:
   - meshery
-extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68dd98
-logo: /assets/images/extensions/do-vertical-white.png
-whiteImage: /assets/images/extensions/do-vertical-white.png
-colorImage: /assets/images/extensions/do-vertical-blue.png
+extensionId: 3e2f9c82-1a4c-4781-adf9-99ec22cd994e
+logo: /assets/images/extensions/do-vertical-blue.png
+whiteImage: /assets/images/extensions/do-vertical-blue.png
+colorImage: /assets/images/extensions/do-vertical-white.png
 extensionInfo: |
   DigitalOcean Academy is a platform that provides a comprehensive learning experience for anyone beginning their journey into DigitalOcean and cloud native infrastructure.
 extensionCaveats: |

@@ -11,12 +11,13 @@ compatibility:
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: https://playground.meshery.io/static/img/meshmap-snapshot-logo.svg
 whiteImage: /images/integrations/appmesh-controller/icons/color/appmesh-controller-color.svg
-colorImage: /images/integrations/appmesh-controller/icons/white/appmesh-controller-white.svg
+colorImage: /images/integrations/appmesh-controller/icons/color/appmesh-controller-color.svg
 extensionInfo: |
   Deploy the Meshery Adapter for App Mesh in order to enable deeper lifecycle management of App Mesh.
 extensionCaveats: |
   - Use the Meshery Adapter for App Mesh for lifecycle management of App Mesh and sample applications.
   - Performance testing to identify overhead involved in running App Mesh and various configurations.
   - Utilize Prometheus and Grafana integration for monitoring App Mesh's performance.
+URL: https://github.com/meshery-extensions/meshery-app-mesh
 docsURL: 'https://docs.meshery.io/extensibility/adapters/app-mesh'
 ---
