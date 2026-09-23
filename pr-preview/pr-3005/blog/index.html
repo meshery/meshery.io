@@ -2318,6 +2318,7 @@ ul.archive-months {
 	function displayCode(id) {
 		var divId = id + "_code";
 		var element = document.getElementById(divId);
+		var isOpening = !element.classList.contains("showDiv");
 		element.classList.toggle("showDiv");
 		var toggleDivs = document.getElementsByClassName("toggle");
 		if (element.style.maxHeight) {
@@ -2333,6 +2334,10 @@ ul.archive-months {
 				}
 			}
 		}
+		var platformOptions = document.querySelectorAll(".platform-option");
+		platformOptions.forEach(function(option) {
+			option.classList.toggle("selected", option.id === id && isOpening);
+		});
 	}
 </script>
 <script type="text/javascript">
