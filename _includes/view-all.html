@@ -1,4 +1,35 @@
-<div style="display: flex; width: 75%; margin: 0 auto">
+<style>
+  .search-container{
+    display: flex;
+    width: 75%;
+    margin: 0 auto;
+  }
+  .filter-btn {
+    display: none;
+    background-color: #00b39f;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  } 
+  @media screen and (max-width: 770px) { 
+    .search-container {
+      display: flex;
+      gap: 0.25rem;
+      width: 100%;
+    }
+    .filter-btn{
+      display: block;
+    }
+
+    
+  }
+
+</style>
+
+<div class="search-container">
   <div class="sorting-options" style="flex-grow: 1">
     <select id="sort">
       <option disabled selected value>Sort by</option>
@@ -7,4 +38,66 @@
     </select>
     <input type="text" id="search" placeholder="Search..." />
   </div>
+  <!-- Add filter here, it should only be visible at mobile, and when it is, the select should 
+  not be visible any more.  -->
+  
+  <button type="button" onclick="handleDropdown()" class="filter-btn">
+    <svg  style="height: 1rem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <path fill="white" d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/>
+  </svg>
+    Filters
+  </button>
 </div>
+
+<script>
+  const filterWrapper = document.querySelector(".filter-wrap");
+  const technologieHeaderFilterSection = document.querySelector(".compatibility-para")
+  const technologiFilterSection = document.querySelector(".compatibility-div")
+  const categoryHeaderFilterSection = document.querySelector(".category-para")
+  const categoryFilterSection = document.querySelector(".category-div")
+
+  function hideCategoryOrTechnology() {
+    {% if show_technology == "true" %}
+      if (technologieHeaderFilterSection) {
+        technologieHeaderFilterSection.style.display = "block";
+      }
+
+      if (technologiFilterSection) {
+        technologiFilterSection.style.display = "flex";
+      }
+
+      if (categoryHeaderFilterSection) {
+        categoryHeaderFilterSection.style.display = "none";
+      }
+
+      if (categoryFilterSection) {
+        categoryFilterSection.style.display = "none";
+      }
+
+    {% else %}
+      if (technologieHeaderFilterSection) {
+        technologieHeaderFilterSection.style.display = "none";
+      }
+
+      if (technologiFilterSection) {
+        technologiFilterSection.style.display = "none";
+      }
+
+      if (categoryHeaderFilterSection) {
+        categoryHeaderFilterSection.style.display = "block";
+      }
+
+      if (categoryFilterSection) {
+        categoryFilterSection.style.display = "flex";
+      }
+    {% endif %}
+  }
+  function handleDropdown() {
+    if (filterWrapper.classList.contains("is-open")) {
+      filterWrapper.classList.remove("is-open");
+    } else {
+      filterWrapper.classList.add("is-open");
+      hideCategoryOrTechnology()
+    }
+  }
+</script>
