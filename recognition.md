@@ -1,8 +1,9 @@
 ---
 layout: page
-title: Recognition Programs
+title: Community Recognition
+heading: Meshery Recognition
 permalink: /community/recognition/
-description: "Meshery publicly recognizes and appreciates its users and contributors."
+description: "Earn badges for your contributions and milestones, and validate your expertise with Meshery certifications."
 redirect_from:
   - /community/badges
   - /community/recognition

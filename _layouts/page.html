@@ -25,17 +25,17 @@ layout: default
 							<p style="text-align: center;"><strong>{{ page.howItWorks }}: </strong>{% if page.howItWorksDetails %}{{ page.howItWorksDetails }}{% endif %}</p>
 						  {% endif %}
 
+					  {% elsif page.heading and page.layout == 'page' %}
+						{% assign page_header = true %}
+						{% include partials/extension-header.html title=page.heading description=page.description %}
 					  {% endif %} 
 					
 				{% if page.subheading %}
 				<h3 class="subheading">{{ page.subheading }}</h3>
 				{% endif %}
-			{% elsif page.title and page.layout != 'archive' %}
-				<h1 style="text-align: center; margin: 2.5rem 0; text-transform: capitalize;">{{ page.title}}</h1>
-			
 			{% endif %}	
 
-			{% if page.description %}
+			{% if page.description and page_header != true %}
 				<p class="subtext">{{ page.description }}</p>
 			{% endif %}
 			{{ content }}
