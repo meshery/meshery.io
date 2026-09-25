@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Certifications
+heading: Meshery Certifications
 permalink: /community/certifications/
 description: "Validate your Meshery skills and expertise with the Meshery Certification Program."
 redirect_from:
