@@ -247,71 +247,67 @@
   <div id="category-div" class="category-div" style="padding-right: 1.25rem;"></div>
 </div>
 <script>
+(function () {
+  let dropButton = document.getElementById("arrow-icon");
+  let isDropdownOpen = true;
 
-  var drop_button = document.getElementById("arrow-icon")
-  var open = true
-  function handleDropdown() {
-    document.getElementById("myDropdown").classList.toggle("show"); 
-    drop_button.style.transform = open ? "rotate(180deg)":"rotate(0deg)"
-    drop_button.style.transition = "transform 0.5s"
-    open = !open
-}
+  // Expose handleDropdown globally since it is called via an onclick attribute
+  window.handleDropdown = function () {
+    document.getElementById("myDropdown")?.classList.toggle("show");
+    if (dropButton) {
+      dropButton.style.transform = isDropdownOpen ? "rotate(180deg)" : "rotate(0deg)";
+      dropButton.style.transition = "transform 0.5s";
+    }
+    isDropdownOpen = !isDropdownOpen;
+  };
+
   // target elements to toggle
-  var category_p = document.getElementById("category-para");
-  var category_div = document.getElementById("category-div");
-  var comp_p = document.getElementById("compatibility-para");
-  var comp_div = document.getElementById("compatibility-div");
+  let categoryP = document.getElementById("category-para");
+  let categoryDiv = document.getElementById("category-div");
+  let compP = document.getElementById("compatibility-para");
+  let compDiv = document.getElementById("compatibility-div");
+
   // toggler
-  var categotyLink = document.getElementById("category-li");
-  var compatibilityLink = document.getElementById("compatibility-li");
+  let categoryLink = document.getElementById("category-li");
+  let compatibilityLink = document.getElementById("compatibility-li");
 
-
-  categotyLink.addEventListener("click", showCategory);
-  compatibilityLink.addEventListener("click", showCompatibility);
+  categoryLink?.addEventListener("click", showCategory);
+  compatibilityLink?.addEventListener("click", showCompatibility);
 
   function showCategory() {
-    category_div.style.display = "flex";
-    category_p.style.display = "grid";
-    comp_p.style.display = "none";
-    comp_div.style.display = "none";
-    document.getElementById("myDropdown").classList.toggle("show");
-    drop_button.style.transform = "rotate(0deg)"
-    open = !open
-    return;
+    if (categoryDiv) categoryDiv.style.display = "flex";
+    if (categoryP) categoryP.style.display = "grid";
+    // compP / compDiv are absent when show_technology="false" (models layout)
+    if (compP) compP.style.display = "none";
+    if (compDiv) compDiv.style.display = "none";
+    document.getElementById("myDropdown")?.classList.toggle("show");
+    if (dropButton) dropButton.style.transform = "rotate(0deg)";
+    isDropdownOpen = !isDropdownOpen;
   }
+
   function showCompatibility() {
-    category_div.style.display = "none";
-    category_p.style.display = "none";
-    comp_p.style.display = "grid";
-    comp_div.style.display = "flex";
-    document.getElementById("myDropdown").classList.toggle("show");
-    drop_button.style.transform = "rotate(0deg)"
-    open = !open
-    return;
+    if (categoryDiv) categoryDiv.style.display = "none";
+    if (categoryP) categoryP.style.display = "none";
+    // compP / compDiv are absent when show_technology="false" (models layout)
+    if (compP) compP.style.display = "grid";
+    if (compDiv) compDiv.style.display = "flex";
+    document.getElementById("myDropdown")?.classList.toggle("show");
+    if (dropButton) dropButton.style.transform = "rotate(0deg)";
+    isDropdownOpen = !isDropdownOpen;
   }
-  function showTechnology() { 
-    comp_p.style.display = "none";
-    comp_div.style.display = "none";
-    category_div.style.display = "none";
-    category_p.style.display = "none";
-    document.getElementById("myDropdown").classList.toggle("show");
-    drop_button.style.transform = "rotate(0deg)"
-    open = !open
-    return;
+
+  function showTechnology() {
+    if (compP) compP.style.display = "none";
+    if (compDiv) compDiv.style.display = "none";
+    if (categoryDiv) categoryDiv.style.display = "none";
+    if (categoryP) categoryP.style.display = "none";
+    document.getElementById("myDropdown")?.classList.toggle("show");
+    if (dropButton) dropButton.style.transform = "rotate(0deg)";
+    isDropdownOpen = !isDropdownOpen;
   }
+})();
 </script>
 <script type="module">
-  const pageKey = window.location.pathname;
-
-  function loadFilter(name) {
-    try { return JSON.parse(sessionStorage.getItem(`selected_${name}_${pageKey}`)) || []; }
-    catch { return []; }
-  }
-  function saveFilter(name, list) {
-    try { sessionStorage.setItem(`selected_${name}_${pageKey}`, JSON.stringify(list)); }
-    catch { /* storage unavailable */ }
-  }
-
   // import all integrations data
   import data from "{{ site.baseurl }}/integrations/data.js";
   // add wasmFilter to data array
@@ -345,13 +341,17 @@
   // get all empty filter containers
   const container = document.getElementById("compatibility-div");
   const categoryContainer = document.getElementById("category-div");
+    // const patternTypeContainer = document.getElementById("cardpatterntype-div");
 
   // globalTechnologyList stores all the technologies checked by user as strings
   // example: ["gcp", "keda"]
-  let globalTechnologyList = loadFilter('technologies');
+  let globalTechnologyList = [];
   // globalCategorySelected stores the category selected by the user, users can select multiple categories at the same time for sorting
   // initially it is empty
-  let globalCategoryList = loadFilter('categories');
+  let globalCategoryList = [];
+    // globalPatternTypeList stores the pattern types which currently are models, designs and wasm filters.
+  // multiple pattern types can be selected at the same time
+  let globalPatternTypeList = [];
   // get all pattern cards
   const patternCards = document.querySelectorAll(".patternCard");
 
@@ -417,9 +417,6 @@
     //     updatePatternTypeList(cardPatternType[i]);
     //     showFilterCards();
     //   };
-    //   if (globalPatternTypeList.includes(cardPatternType[i])) {
-    //     input.checked = true;
-    //   }
     //   inputContainer.appendChild(input);
     //   const label = document.createElement("label");
     //   label.innerHTML = `<div class="name">${cardPatternType[i].replace(
@@ -445,9 +442,6 @@
     input.name = "type";
     input.value = cardType[i];
     input.id = cardType[i];
-    if (globalCategoryList.includes(cardType[i])) {
-      input.checked = true;
-    }
     // When it is checked or unchecked, updateCategoryList function is called followed by showFilterCards function
     input.onclick = function () {
       updateCategoryList(cardType[i]);
@@ -471,30 +465,29 @@
   // to remove duplicates, a set is used
   cardTechnology = Array.from(new Set(cardTechnology));
   // For creating a list of checkboxes for Technologies section
-  for (let i = 0; i < data.length; i++) {
-    const count = cardCompatibility.filter(
-      (item) => item === data[i].name
-    ).length;
-    // Skip adding the filter to list if it is not used in any of the pattern cards
-    // Skip adding the filter to list if it is already added to the list
-    if (count === 0 || filterEntries.includes(data[i].name)) continue;
+  // container is absent when show_technology="false" (models layout) — skip the loop entirely
+  if (container) {
+    for (let i = 0; i < data.length; i++) {
+      const count = cardCompatibility.filter(
+        (item) => item === data[i].name
+      ).length;
+      // Skip adding the filter to list if it is not used in any of the pattern cards
+      // Skip adding the filter to list if it is already added to the list
+      if (count === 0 || filterEntries.includes(data[i].name)) continue;
 
-    // Add the filter to list
-    filterEntries.push(data[i].name);
+      // Add the filter to list
+      filterEntries.push(data[i].name);
 
     // Create nodes
     const inputContainer = document.createElement("div");
     inputContainer.className = "input-container";
     inputContainer.dataset.count = count;
-    // Here the categories are generated with a "checkbox" input type
+
     const input = document.createElement("input");
     input.type = "checkbox";
     input.name = data[i].name;
     input.value = data[i].name;
     input.id = data[i].name;
-    if (globalTechnologyList.includes(data[i].name)) {
-      input.checked = true;
-    }
     // When technology checkbox is checked or unchecked, updateTechnologyList function is called, followed by showFilterCards function
     input.onclick = function () {
       updateTechnologyList(data[i].name);
@@ -512,6 +505,7 @@
     label.setAttribute("for", data[i].name);
     inputContainer.appendChild(label);
     container.appendChild(inputContainer);
+    }
   }
 
   // This function checks if the gloabalTechnologyList contains the value, and updates the list accordingly..
@@ -525,7 +519,6 @@
     } else {
       globalTechnologyList.push(value);
     }
-    saveFilter('technologies', globalTechnologyList);
   }
 
   // This function updates the category list
@@ -541,7 +534,16 @@
         globalCategoryList = [];
       }
     }
-    saveFilter('categories', globalCategoryList);
+  }
+
+  function updatePatternTypeList(value) {
+    if (globalPatternTypeList.includes(value)) {
+      globalPatternTypeList = globalPatternTypeList.filter(
+        (item) => item !== value
+      );
+    } else {
+      globalPatternTypeList.push(value);
+    }
   }
 
 // Function called when user clicks on any of Technology checkboxes or Category Boxes
@@ -555,6 +557,7 @@ function showFilterCards() {
   const matchingCards = patternCards.filter(card => {
     const type = card.getAttribute("type")?.toLowerCase();
     const technologyAttr = card.getAttribute("technology");
+    const patternType = card.getAttribute("patternType")?.toLowerCase();
     
     // Parse technologies once
     const technologies = technologyAttr ? JSON.parse(technologyAttr) : [];
@@ -566,8 +569,11 @@ function showFilterCards() {
     const showCardCat = globalCategoryList.length === 0 || 
                        globalCategoryList.some(cat => type.includes(cat));
     
+    const showCardPatternType = globalPatternTypeList.length === 0 || 
+                               globalPatternTypeList.some(pt => patternType.includes(pt));
+    
     // Return true if card matches all criteria
-    return showCardTech && showCardCat;
+    return showCardTech && showCardCat && showCardPatternType;
   });
   
   // Hide all cards first (batch operation)
@@ -577,74 +583,81 @@ function showFilterCards() {
   
   // Check if filters are active
   const noFiltersActive = globalTechnologyList.length === 0 && 
-                         globalCategoryList.length === 0;
+                         globalCategoryList.length === 0 && 
+                         globalPatternTypeList.length === 0;
   
   // Update "not found" message
   const noCard = document.getElementById("not-found");
-  noCard.style.display = matchingCards.length > 0 ? "none" : "block";
-  
+  if (noCard) noCard.style.display = matchingCards.length > 0 ? "none" : "block";
+
   // Get pagination elements
   const paginationButtons = document.querySelector(".pagination");
   const prevButton = document.getElementById("designs-prev") || document.getElementById("models-prev") || document.getElementById("filters-prev");
   const nextButton = document.getElementById("designs-next") || document.getElementById("models-next") || document.getElementById("filters-next");
 
-  
   // Function to update pagination display
   function updatePagination() {
     const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
-    prevButton.disabled = currentPage === 0;
-    nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
-
-  const pageInfo = prevButton.parentElement.querySelector(".page-info");
-    
-  if (pageInfo) {
-    if (totalPages > 0) {
-      pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
-      pageInfo.style.display = "inline";
-    } else {
-      pageInfo.style.display = "none";
+    if (prevButton) {
+      prevButton.disabled = currentPage === 0;
+      const pageInfo = prevButton.parentElement.querySelector(".page-info");
+      if (pageInfo) {
+        if (totalPages > 0) {
+          pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+          pageInfo.style.display = "inline";
+        } else {
+          pageInfo.style.display = "none";
+        }
+      }
+    }
+    if (nextButton) {
+      nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
     }
   }
 
-  }
-  
   // Function to show the current page of cards
   function showCardsForPage() {
     // Calculate range for current page
     const start = currentPage * itemsPerPage;
     const end = Math.min(start + itemsPerPage, matchingCards.length);
-    
+
     // Show only cards for current page
     for (let i = 0; i < matchingCards.length; i++) {
       matchingCards[i].style.display = (i >= start && i < end) ? "block" : "none";
     }
-    
+
     updatePagination();
   }
-  
+
   // Set up pagination handlers
-  prevButton.onclick = function() {
-    if (currentPage > 0) {
-      currentPage--;
-      showCardsForPage();
-    }
-  };
-  
-  nextButton.onclick = function() {
-    const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
-    if (currentPage + 1 < totalPages) {
-      currentPage++;
-      showCardsForPage();
-    }
-  };
-  
+  if (prevButton) {
+    prevButton.onclick = function() {
+      if (currentPage > 0) {
+        currentPage--;
+        showCardsForPage();
+      }
+    };
+  }
+
+  if (nextButton) {
+    nextButton.onclick = function() {
+      const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
+      if (currentPage + 1 < totalPages) {
+        currentPage++;
+        showCardsForPage();
+      }
+    };
+  }
+
   // Initialize pagination for both filtered and unfiltered cases
-  paginationButtons.style.display = matchingCards.length > itemsPerPage ? "flex" : "none";
-  
+  if (paginationButtons) {
+    paginationButtons.style.display = matchingCards.length > itemsPerPage ? "flex" : "none";
+  }
+
   // Show initial page
   currentPage = 0;
   showCardsForPage();
-  
+
   return matchingCards.length; // Return count of matching cards
 }
 
