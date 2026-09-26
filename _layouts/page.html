@@ -5,7 +5,17 @@ layout: default
 	<section class="page">
 		<div class="container {% if page.full_width %}max-container{% endif %}">
 			{%- if page.featured-image -%}
-				<img src="{{- page.featured-image | relative_url -}}" alt="" class="featured-image">
+				{%- assign page_dark_image = page.featured-image.dark | default: page.featured-image -%}
+				{%- assign page_light_image = page.featured-image.light | default: page.featured-image-light -%}
+				{%- if page_light_image -%}
+					<img src="{{- page_dark_image | relative_url -}}"
+						 data-logo-for-dark="{{- page_dark_image | relative_url -}}"
+						 data-logo-for-light="{{- page_light_image | relative_url -}}"
+						 alt="{{ page.title | default: page.name }}"
+						 class="featured-image logo-dark-light">
+				{%- else -%}
+					<img src="{{- page_dark_image | relative_url -}}" alt="{{ page.title | default: page.name }}" class="featured-image">
+				{%- endif -%}
 			{%- endif -%}
 
 			{% if page.name %}	

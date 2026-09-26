@@ -5,11 +5,18 @@
 		{% include post-title.html post=post %}
 		<div class="post-content">
 			{%- if post.featured-image -%}
-			<img src="{{- post.featured-image | relative_url -}}" alt="" class="featured-image">
-		{%- else -%}
-			<!-- {%- assign postImage = "/assets/images/image-default.jpg" -%}
-			<img src="{{- postImage | relative_url -}}" alt="" class="featured-image"> -->
-		{%- endif -%}
+				{%- assign post_dark_image = post.featured-image.dark | default: post.featured-image -%}
+				{%- assign post_light_image = post.featured-image.light | default: post.featured-image-light -%}
+				{%- if post_light_image -%}
+					<img src="{{- post_dark_image | relative_url -}}"
+						 data-logo-for-dark="{{- post_dark_image | relative_url -}}"
+						 data-logo-for-light="{{- post_light_image | relative_url -}}"
+						 alt="{{ post.title }}"
+						 class="featured-image logo-dark-light">
+				{%- else -%}
+					<img src="{{- post_dark_image | relative_url -}}" alt="{{ post.title }}" class="featured-image">
+				{%- endif -%}
+			{%- endif -%}
 			{{ post.excerpt }}
 			<div class="button-para"><a class="link" href="{% include relative-src.html src=post.url %}">Read More</a></div>
 		</div>
