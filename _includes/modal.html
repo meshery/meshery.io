@@ -116,24 +116,19 @@
 </div>
 
 <script>
-  // Lazy load the catalog-modal.js script
-  function loadCatalogModalScript() {
+  window.loadedScripts = window.loadedScripts || new Set();
+
+  function loadScriptOnce(src) {
+    if (window.loadedScripts.has(src)) return;
+    window.loadedScripts.add(src);
     const script = document.createElement("script");
-    script.src = "{{ site.baseurl }}/assets/js/catalog-modal.js";
+    script.src = src;
     document.body.appendChild(script);
   }
-
-  // Lazy load the thumbnail-clickable.js script
-  function loadThumbnailClickableScript() {
-    const script = document.createElement("script");
-    script.src = "{{ site.baseurl }}/assets/js/thumbnail-clickable.js";
-    document.body.appendChild(script);
-  }
-
   // Lazy load scripts when the modal is opened
   document.getElementById("open-modal").addEventListener("click", () => {
-    loadCatalogModalScript();
-    loadThumbnailClickableScript();
+    loadScriptOnce("{{ site.baseurl }}/assets/js/catalog-modal.js");
+    loadScriptOnce("{{ site.baseurl }}/assets/js/thumbnail-clickable.js");
   });
 
 
