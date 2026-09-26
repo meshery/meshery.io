@@ -27,10 +27,12 @@ layout: default
 
 					  {% elsif page.heading and page.layout == 'page' %}
 						{% assign page_header = true %}
-						{% include partials/extension-header.html title=page.heading description=page.description level=1 %}
+						{% assign header_description = page.description %}
+						{% if page.hide_description %}{% assign header_description = nil %}{% endif %}
+						{% include partials/extension-header.html title=page.heading subheading=page.subheading description=header_description level=1 %}
 					  {% endif %} 
 					
-				{% if page.subheading %}
+				{% if page.subheading and page_header != true %}
 				<h3 class="subheading">{{ page.subheading }}</h3>
 				{% endif %}
 			{% endif %}	
