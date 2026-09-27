@@ -31,11 +31,7 @@ components:
   colorIcon: assets/images/integration/aws-opensearchservice-controller/components/vpc-endpoint/icons/color/vpc-endpoint-color.svg
   whiteIcon: assets/images/integration/aws-opensearchservice-controller/components/vpc-endpoint/icons/white/vpc-endpoint-white.svg
   description: 
-- name: vpc-endpoint-access
-  colorIcon: assets/images/integration/aws-opensearchservice-controller/components/vpc-endpoint-access/icons/color/vpc-endpoint-access-color.svg
-  whiteIcon: assets/images/integration/aws-opensearchservice-controller/components/vpc-endpoint-access/icons/white/vpc-endpoint-access-white.svg
-  description: 
-componentsCount: 6
+componentsCount: 5
 relationships: 
 - type: "non-binding"
   kind: "edge"
