@@ -1,14 +1,22 @@
 // Style for the testimonials section
 
 .testimonials-wrapper {
-    max-width: 100%;
+    width: 100%;
     background: var(--color-primary-testimonial-wrapper);
+    box-sizing: border-box;
 }
 
 .testimonials-wrapper .slider {
     overflow: hidden;
-    padding: 0.5rem 0 0.5rem;
-    max-width: 100%;
+    padding: 1.5rem 0.5rem;
+    width: 100%;
+    max-width: 2160px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.testimonials-wrapper .slider .slick-list {
+    padding: 20px 0 !important;
 }
 
 .testimonials-wrapper .slider .slick-track {
@@ -19,14 +27,13 @@
 .testimonials-wrapper .slider .slick-slide {
     height: auto !important;
     display: flex !important;
+    box-sizing: border-box;
 }
 
 .testimonials-wrapper h2 {
     text-align: center;
     padding-top: 2rem;
     margin: 0 0 20px 0;
-
-
 }
 
 .type-one-quote-base blockquote:before {
@@ -40,26 +47,33 @@
     quotes: none;
 }
 
-
 .testimonials-wrapper .slider .bq-section {
-    padding: 20px;
-    margin-bottom: 40px;
-    display: flex;
+    padding: 20px 10px;
+    margin-bottom: 25px;
+    display: flex !important;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .testimonials-wrapper .slider .type-one-wrapper {
-    margin: 0px 1rem;
+    margin: 0 auto;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
-.type-one-wrapper.type-one-wrapper-boxed {
+.testimonials-wrapper .slider .type-one-wrapper.type-one-wrapper-boxed {
     max-width: 576px;
     margin: 0 auto;
     width: 100%;
+    box-sizing: border-box;
 }
 
 
@@ -68,21 +82,27 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    min-height: 250px;
+    min-height: 280px;
     height: 100%;
+    width: 100%;
+    max-width: 576px;
+    margin: 0 auto;
+    box-sizing: border-box;
     box-shadow: var(--box-shadow-primary-quotes);
     border-radius: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.testimonials-wrapper .slider .slick-center .type-one-quote {
-    transform: translateY(-15px);
-    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.22);
+@media (min-width: 1140px) {
+    .testimonials-wrapper .slider .slick-center .type-one-quote {
+        transform: translateY(-15px);
+        box-shadow: 0 10px 25px rgba(255, 255, 255, 0.22);
+    }
 }
 
 
 .type-one-quote .type-one-quote-pattern {
-    flex-basis: 80px;
+    flex-basis: 50px;
     background: linear-gradient(180deg, rgba(71, 126, 150, 1) 0%, rgba(0, 179, 159, 1) 35%, rgba(60, 73, 79, 1) 100%);
     border-radius: 10px 0 0 10px;
     font-size: 1.125rem;
@@ -94,38 +114,45 @@
 }
 
 .type-one-quote .type-one-quote-base {
-    flex-basis: calc(100% - 80px);
+    flex-basis: calc(100% - 50px);
     background-color: var(--color-primary-light-tbase);
-    padding: 40px 30px 20px 80px;
+    padding: 85px 25px 20px 25px;
     font-size: 11pt;
     line-height: 1.62em;
     border-radius: 0 10px 10px 0;
     margin: 0;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 .type-one-quote .type-one-quote-qmark {
     position: absolute;
-    top: 45px;
-    left: 100px;
-    font-family: Garamond, Georgia, "Times New Roman", serif;
-    font-size: 42pt;
+    top: 21px;
+    left: 88px;
+    width: 34px;
+    height: 34px;
     color: #999999;
     -moz-user-select: none;
     -ms-user-select: none;
     -webkit-user-select: none;
     user-select: none;
-    line-height: 28px;
+    display: flex;
+    align-items: center;
 
+    svg {
+        width: 100%;
+        height: 100%;
+        fill: currentColor;
+    }
 }
 
 .type-one-quote .type-one-quote-userpic {
     position: absolute;
-    top: 80px;
-    left: 25px;
-    width: 90px;
-    height: 90px;
+    top: 18px;
+    left: 10px;
+    width: 65px;
+    height: 65px;
 
     img {
         border-radius: 50%;
@@ -165,6 +192,30 @@
     font-size: 9pt;
 }
 
+@media screen and (min-width: 769px) and (max-width: 1199px) {
+    .type-one-quote .type-one-quote-base {
+        padding: 85px 20px 20px 20px;
+    }
+
+    .type-one-quote .type-one-quote-userpic {
+        width: 65px;
+        height: 65px;
+        left: 10px;
+        top: 18px;
+    }
+
+    .type-one-quote .type-one-quote-qmark {
+        left: 88px;
+        top: 21px;
+        width: 34px;
+        height: 34px;
+    }
+
+    .type-one-quote {
+        min-height: 280px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .type-one-quote .type-one-quote-pattern {
         flex-basis: 20px;
@@ -172,18 +223,48 @@
 
     .type-one-quote .type-one-quote-base {
         flex-basis: calc(100% - 20px);
-        padding: 100px 30px 50px 30px;
+        padding: 75px 20px 20px 20px;
     }
 
     .type-one-quote .type-one-quote-userpic {
         width: 50px;
         height: 50px;
-        left: 40px;
-        top: 20px;
+        left: 10px;
+        top: 15px;
     }
 
     .type-one-quote .type-one-quote-qmark {
-        left: 100px;
-        top: 45px;
+        left: 68px;
+        top: 19px;
+        width: 26px;
+        height: 26px;
+    }
+
+    .type-one-quote {
+        min-height: 280px;
+    }
+}
+
+@media screen and (min-width: 1800px) {
+    .testimonials-wrapper .slider {
+        max-width: 2160px;
+    }
+
+    .testimonials-wrapper .slider .bq-section {
+        padding: 20px 8px;
+    }
+
+    .testimonials-wrapper .slider .type-one-wrapper.type-one-wrapper-boxed {
+        max-width: 680px;
+    }
+
+    .type-one-quote {
+        max-width: 680px;
+        min-height: 300px;
+    }
+
+    .type-one-quote .type-one-quote-base {
+        padding: 90px 28px 24px 28px;
+        font-size: 12pt;
     }
 }
