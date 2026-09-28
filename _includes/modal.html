@@ -116,11 +116,11 @@
 </div>
 
 <script>
-  const loadedScripts = new Set();
+  window.loadedScripts = window.loadedScripts || new Set();
 
   function loadScriptOnce(src) {
-    if (loadedScripts.has(src)) return;
-    loadedScripts.add(src);
+    if (window.loadedScripts.has(src)) return;
+    window.loadedScripts.add(src);
     const script = document.createElement("script");
     script.src = src;
     document.body.appendChild(script);
