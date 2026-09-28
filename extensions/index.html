@@ -24,12 +24,12 @@
 <meta property="og:url" content="https://meshery.io/extensions/" />
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-09-28T15:49:29+00:00" />
-<meta property="article:modified_time" content="2026-09-28T15:49:29+00:00" />
+<meta property="article:published_time" content="2026-09-28T18:34:00+00:00" />
+<meta property="article:modified_time" content="2026-09-28T18:34:00+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Extensions" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-09-28T15:49:29+00:00","datePublished":"2026-09-28T15:49:29+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Extensions","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/extensions/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/extensions/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-09-28T18:34:00+00:00","datePublished":"2026-09-28T18:34:00+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Extensions","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/extensions/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/extensions/"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/css/stellarnav.css" />
@@ -534,7 +534,22 @@
     background-position: right 10px top 50%;
     margin-right: 10px;
     @media (max-width: 506px) {
-     display: none;
+      width: 44px;
+      padding: 10px;
+      margin-right: 8px;
+      color: transparent;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/></svg>');
+      background-position: center;
+    }
+  }
+  #sort option {
+    color: var(--color-primary-qtext);
+  }
+  /* Matches the `body.dark-mode #sort` chevron swap in catalog.scss, which is
+     specific enough to outrank the icon set above. */
+  @media (max-width: 506px) {
+    body.dark-mode #sort {
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px"><path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/></svg>');
     }
   }
   #search {
@@ -560,9 +575,12 @@
   .section-container {
     width: 100%;
   }
+  /* No longer a flex item of .row, so it needs centering of its own. */
+  .not-found {
+    text-align: center;
+    margin: 3rem 0;
+  }
 </style>
-
-
 
 
 
@@ -578,7 +596,8 @@
   
 </div>
 <div class="section-container">
-  <div style="display: flex; width: 75%; margin: 0 auto">
+  <div class="extensions-toolbar">
+    <div style="display: flex; width: 75%; margin: 0 auto">
   <div class="sorting-options" style="flex-grow: 1">
     <select id="sort">
       <option disabled selected value>Sort by</option>
@@ -587,7 +606,23 @@
     </select>
     <input type="text" id="search" placeholder="Search..." />
   </div>
-</div> <script>
+</div>
+    <button
+      type="button"
+      class="extensions-filter-toggle"
+      id="extensions-filter-toggle"
+      aria-expanded="false"
+      aria-controls="extensions-filter-panel"
+      title="Filters"
+      aria-label="Filters"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
+        <path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/>
+      </svg>
+    </button>
+  </div>
+
+  <script>
     document.addEventListener('DOMContentLoaded', function () {
 
     var modal = document.querySelectorAll('.modal-window');
@@ -635,42 +670,176 @@
 
 </script>
 
-  <div class="row">
-    <h2 class="not-found" style="display: none;" id="not-found">
-      No results found
-    </h2>
-    
-    
-     <!--
-    
-    
-      <h1>
-        GITOPS
-      </h1>
-    -->
-    <div
-      class="column column-lg extensionCard"
-      filter="GitHub Action Performance Analysis"
-      type="GitOps"
-      technology='["github","kubernetes"]'
-      status=""
-      style="display: none"
-    >    
+  <div class="extensions-catalog">
+    <div class="extensions-filter-wrap">
+      <aside
+        class="extensions-filter"
+        id="extensions-filter-panel"
+        aria-label="Filter extensions by category"
+      >
+        <div class="extensions-filter-head">
+          <strong>Filters</strong>
+          <button
+            type="button"
+            class="extensions-filter-close"
+            id="extensions-filter-close"
+            aria-label="Close filters"
+          >
+            &times;
+          </button>
+        </div>
+
+        <p class="extensions-category-heading">
+          <span class="filter-heading">
+            <strong>Categories:</strong>
+            <button
+              type="button"
+              class="sort-btn"
+              id="extensions-category-sort"
+              data-order="none"
+              title="Sort by count"
+              aria-label="Sort categories by count"
+            >
+
+              <span class="sort-arrow" aria-hidden="true">
+                <svg class="sort-icon sort-icon-none" viewBox="0 0 10 10">
+                  <path d="M5 0 8 4H2z" /><path d="M5 10 2 6h6z" />
+                </svg>
+                <svg class="sort-icon sort-icon-desc" viewBox="0 0 10 10">
+                  <path d="M5 8 1 3h8z" />
+                </svg>
+                <svg class="sort-icon sort-icon-asc" viewBox="0 0 10 10">
+                  <path d="M5 2 9 7H1z" />
+                </svg>
+              </span>
+            </button>
+          </span>
+        </p>
+
+        <div id="extensions-category-div">
+          
+          <div class="input-container" data-count="4">
+            <input
+              type="checkbox"
+              name="extension-category"
+              value="Academy"
+              id="category-academy"
+            />
+            <label for="category-academy">
+              <div class="name">Academy</div>
+              <div class="badge">4</div>
+            </label>
+          </div>
+          
+          <div class="input-container" data-count="5">
+            <input
+              type="checkbox"
+              name="extension-category"
+              value="Collaboration"
+              id="category-collaboration"
+            />
+            <label for="category-collaboration">
+              <div class="name">Collaboration</div>
+              <div class="badge">5</div>
+            </label>
+          </div>
+          
+          <div class="input-container" data-count="5">
+            <input
+              type="checkbox"
+              name="extension-category"
+              value="Configuration"
+              id="category-configuration"
+            />
+            <label for="category-configuration">
+              <div class="name">Configuration</div>
+              <div class="badge">5</div>
+            </label>
+          </div>
+          
+          <div class="input-container" data-count="2">
+            <input
+              type="checkbox"
+              name="extension-category"
+              value="GitOps"
+              id="category-gitops"
+            />
+            <label for="category-gitops">
+              <div class="name">GitOps</div>
+              <div class="badge">2</div>
+            </label>
+          </div>
+          
+          <div class="input-container" data-count="9">
+            <input
+              type="checkbox"
+              name="extension-category"
+              value="Lifecycle"
+              id="category-lifecycle"
+            />
+            <label for="category-lifecycle">
+              <div class="name">Lifecycle</div>
+              <div class="badge">9</div>
+            </label>
+          </div>
+          
+          <div class="input-container" data-count="1">
+            <input
+              type="checkbox"
+              name="extension-category"
+              value="Performance"
+              id="category-performance"
+            />
+            <label for="category-performance">
+              <div class="name">Performance</div>
+              <div class="badge">1</div>
+            </label>
+          </div>
+          
+        </div>
+      </aside>
+    </div>
+
+    <div class="extensions-results">
+      <h2 class="not-found" style="display: none;" id="not-found">
+        No results found
+      </h2>
+
       
+      <section class="extension-category" id="academy" data-category="Academy">
+        <div class="category-divider">
+          <hr class="category-divider-line" />
+          <span class="chip category-divider-chip ACADEMY">
+            <small class="pattern-type">ACADEMY</small>
+          </span>
+        </div>
+
+        <div class="row">
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="DigitalOcean Academy"
+            type="Academy"
+            technology='["meshery"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
       <div class="front">
-        <div class="chip GITOPS">
-          <small class="pattern-type">GITOPS</small>
+        <div class="chip ACADEMY">
+          <small class="pattern-type">ACADEMY</small>
         </div>
-        <h4 class="pattern-name">GitHub Action Performance Analysis</h4>
+        <h4 class="pattern-name">DigitalOcean Academy</h4>
         <div class="pattern-image-container">
           
           <img class= "pattern-image extension-image logo-dark-light" 
-          data-logo-for-light="/assets/images/meshmark-dark.svg"
-          data-logo-for-dark="/assets/images/meshmark-dark.svg"
-          alt="GitHub Action Performance Analysis" 
+          data-logo-for-light="/assets/images/extensions/do-vertical-blue.png"
+          data-logo-for-dark="/assets/images/extensions/do-vertical-white.png"
+          alt="DigitalOcean Academy" 
           loading="lazy"/>
         </div>
       </div> 
@@ -697,8 +866,8 @@
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -720,20 +889,20 @@
       <div class="modal-image">
         <button class="modal-close close">&times;</button>
         <img class="image-class extension-image logo-dark-light"  
-        data-logo-for-light="/assets/images/meshmark-dark.svg"
-        data-logo-for-dark="/assets/images/meshmark-dark.svg"
-        src="/assets/images/meshmark-dark.svg"
+        data-logo-for-light="/assets/images/extensions/do-vertical-blue.png"
+        data-logo-for-dark="/assets/images/extensions/do-vertical-white.png"
+        src="/assets/images/extensions/do-vertical-white.png"
         onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
       </div>
       <div class="vertical-line"></div>
       <div class="modal-info">
         <h2 class="modal-h2">
-          <a href="/extensions/github-action-performance-analysis" target="_blank">GITHUB ACTION PERFORMANCE ANALYSIS
+          <a href="/extensions/digitalocean-academy" target="_blank">DIGITALOCEAN ACADEMY
              <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
           </a>
         </h2> 
         <h3 class="modal-h3">Description</h3>
-        <p class="content-toggle contentdata pre-white-space">Characterize the performance of your services using Meshery&apos;s performance analysis GitHub Action to benchmark and visually compare percentiles (e.g. P99) over time.
+        <p class="content-toggle contentdata pre-white-space">DigitalOcean Academy is a platform that provides a comprehensive learning experience for anyone beginning their journey into DigitalOcean and cloud native infrastructure.
 </p>
         <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
     <span class="redirect">Read more</span>
@@ -741,9 +910,10 @@
   </span> -->
 
         <h3 class="modal-h3">Features</h3>
-        <p class="content-toggle contentdata pre-white-space">- Integrate performance characterization in CI/CD pipelines with GitHub Action Performance Analysis.
-- Ensure stability and efficiency with performance testing using this action.
-- Use for Kubernetes systems for enhanced analysis with Meshery.
+        <p class="content-toggle contentdata pre-white-space">- Provides self-paced learning accessible through DigitalOcean.
+- Includes interactive labs and guided exercises within live DigitalOcean environments.
+- Monitors learner progress and issues certifications upon course completion.
+- Regularly updated to include new topics on DigitalOcean and emerging cloud native technologies.
 </p>
         <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
     <span class="redirect">Read more</span>
@@ -754,12 +924,12 @@
             <div class="vertical-center" id="">
               <div class="btn-grp">
                 
-                <a href="https://docs.meshery.io/guides/performance-management/performance-management">
+                <a href="https://docs.meshery.io/extensions/academies/">
                   <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
                 
                 <div class="btn-tooltip-grp">
                 
-                  <a href="https://github.com/marketplace/actions/performance-testing-with-meshery">
+                  <a href="https://github.com/meshery-extensions/digitalocean-academy">
                     <button class="import" style="width: 7rem;">Visit</button></a>
                 
                 </div>
@@ -775,40 +945,32 @@
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    
-    </div>
-    <h1>
-      GITOPS
-    </h1>
-    <div class="row">-->
-    <div
-      class="column column-lg extensionCard"
-      filter="GitHub Action Snapshot"
-      type="GitOps"
-      technology='["github","kubernetes"]'
-      status=""
-      style="display: none"
-    >    
-      
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Exoscale Academy"
+            type="Academy"
+            technology='["meshery"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
       <div class="front">
-        <div class="chip GITOPS">
-          <small class="pattern-type">GITOPS</small>
+        <div class="chip ACADEMY">
+          <small class="pattern-type">ACADEMY</small>
         </div>
-        <h4 class="pattern-name">GitHub Action Snapshot</h4>
+        <h4 class="pattern-name">Exoscale Academy</h4>
         <div class="pattern-image-container">
           
           <img class= "pattern-image extension-image logo-dark-light" 
-          data-logo-for-light="/assets/images/github-color.svg"
-          data-logo-for-dark="/assets/images/logos/github-white.svg"
-          alt="GitHub Action Snapshot" 
+          data-logo-for-light="/assets/images/extensions/exoscale-icon.svg"
+          data-logo-for-dark="/assets/images/extensions/exoscale-icon.svg"
+          alt="Exoscale Academy" 
           loading="lazy"/>
         </div>
       </div> 
@@ -835,8 +997,8 @@
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -858,20 +1020,20 @@
       <div class="modal-image">
         <button class="modal-close close">&times;</button>
         <img class="image-class extension-image logo-dark-light"  
-        data-logo-for-light="/assets/images/github-color.svg"
-        data-logo-for-dark="/assets/images/logos/github-white.svg"
-        src="/assets/images/logos/github-white.svg"
+        data-logo-for-light="/assets/images/extensions/exoscale-icon.svg"
+        data-logo-for-dark="/assets/images/extensions/exoscale-icon.svg"
+        src="/assets/images/extensions/exoscale-icon.svg"
         onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
       </div>
       <div class="vertical-line"></div>
       <div class="modal-info">
         <h2 class="modal-h2">
-          <a href="/extensions/github-action-meshery-snapshot" target="_blank">GITHUB ACTION SNAPSHOT
+          <a href="/extensions/exoscale-academy" target="_blank">EXOSCALE ACADEMY
              <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
           </a>
         </h2> 
         <h3 class="modal-h3">Description</h3>
-        <p class="content-toggle contentdata pre-white-space">Connect Meshery to your GitHub repo and see changes pull request-to-pull request. Get snapshots of your infrastructure directly in your PRs.
+        <p class="content-toggle contentdata pre-white-space">Exoscale Academy is a platform that provides a comprehensive learning experience for anyone beginning their journey into Exoscale and cloud native infrastructure.
 </p>
         <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
     <span class="redirect">Read more</span>
@@ -879,9 +1041,10 @@
   </span> -->
 
         <h3 class="modal-h3">Features</h3>
-        <p class="content-toggle contentdata pre-white-space">- See your deployment before you merge.
-- Utilize snapshots when you need to automate your software development process using GitHub Actions.
-- Customize snapshot workflow triggers to run based on specific GitHub activities, such as creating a pull request, pushing code, or releasing a new version.
+        <p class="content-toggle contentdata pre-white-space">- Provides self-paced learning accessible through Exoscale.
+- Includes interactive labs and guided exercises within live Exoscale environments.
+- Monitors learner progress and issues certifications upon course completion.
+- Regularly updated to include new topics on Exoscale and emerging cloud native technologies.
 </p>
         <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
     <span class="redirect">Read more</span>
@@ -892,12 +1055,12 @@
             <div class="vertical-center" id="">
               <div class="btn-grp">
                 
-                <a href="https://docs.meshery.io/guides/infrastructure-management/gitops-with-meshery/">
+                <a href="https://docs.meshery.io/extensions/academies/">
                   <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
                 
                 <div class="btn-tooltip-grp">
                 
-                  <a href="https://github.com/marketplace/actions/kanvas-snapshot">
+                  <a href="https://exoscale.layer5.io/academy">
                     <button class="import" style="width: 7rem;">Visit</button></a>
                 
                 </div>
@@ -913,26 +1076,954 @@
    
   <!-- </div> -->
 </div>
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Layer5 Academy"
+            type="Academy"
+            technology='["meshery"]'
+            status=""
+            style="display: none"
+          >
+            
+
+<div class= "card link">  
+    <div class="card-inner">
+      <div class="front">
+        <div class="chip ACADEMY">
+          <small class="pattern-type">ACADEMY</small>
+        </div>
+        <h4 class="pattern-name">Layer5 Academy</h4>
+        <div class="pattern-image-container">
+          
+          <img class= "pattern-image extension-image logo-dark-light" 
+          data-logo-for-light="/assets/images/extensions/dual-layer5-academy-color.svg"
+          data-logo-for-dark="/assets/images/extensions/dual-layer5-academy-color.svg"
+          alt="Layer5 Academy" 
+          loading="lazy"/>
+        </div>
+      </div> 
+      <div class="back">
+        
+      </div>
+    </div>
+  </div>  
+
+<style>
+  .pattern-image-container {
+    width: 90%;
+    height: 50%;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .pattern-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+</style>
+
+
+            <!-- modal included -->
+            
+<style>
+  .modal-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .modal-image > img {
+    width: 100%;
+    object-fit: contain;
+  }
+</style>
+
+
+
+<div id="open-modal" class="modal-window">
+  <!-- <div class="click-container"> -->
+    <div class="modal-content">
+      <div class="modal-image">
+        <button class="modal-close close">&times;</button>
+        <img class="image-class extension-image logo-dark-light"  
+        data-logo-for-light="/assets/images/extensions/dual-layer5-academy-color.svg"
+        data-logo-for-dark="/assets/images/extensions/dual-layer5-academy-color.svg"
+        src="/assets/images/extensions/dual-layer5-academy-color.svg"
+        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
+      </div>
+      <div class="vertical-line"></div>
+      <div class="modal-info">
+        <h2 class="modal-h2">
+          <a href="/extensions/layer5-academy" target="_blank">LAYER5 ACADEMY
+             <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
+          </a>
+        </h2> 
+        <h3 class="modal-h3">Description</h3>
+        <p class="content-toggle contentdata pre-white-space">Layer5 Academy is a platform that provides a comprehensive learning experience for anyone beginning their journey into Layer5 and cloud native infrastructure.
+</p>
+        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
+    <span class="redirect">Read more</span>
+</a>
+  </span> -->
+
+        <h3 class="modal-h3">Features</h3>
+        <p class="content-toggle contentdata pre-white-space">- Provides self-paced learning accessible through Layer5.
+- Includes interactive labs and guided exercises within live Layer5 environments.
+- Monitors learner progress and issues certifications upon course completion.
+- Regularly updated to include new topics on Layer5 and emerging cloud native technologies.
+</p>
+        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
+    <span class="redirect">Read more</span>
+</a>
+  </span> -->
+        <div id="copy-url">
+          <div class="btn-class">
+            <div class="vertical-center" id="">
+              <div class="btn-grp">
+                
+                <a href="https://docs.layer5.io/cloud/academy/">
+                  <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
+                
+                <div class="btn-tooltip-grp">
+                
+                  <a href="https://github.com/layer5io/layer5-academy">
+                    <button class="import" style="width: 7rem;">Visit</button></a>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
     </div>
      
-    
-     <!--
-    
-    
+ <script src="/assets/js/thumbnail-clickable.js"></script>
+   
+  <!-- </div> -->
+</div>
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Meshery Academy"
+            type="Academy"
+            technology='["meshery"]'
+            status=""
+            style="display: none"
+          >
+            
+
+<div class= "card link">  
+    <div class="card-inner">
+      <div class="front">
+        <div class="chip ACADEMY">
+          <small class="pattern-type">ACADEMY</small>
+        </div>
+        <h4 class="pattern-name">Meshery Academy</h4>
+        <div class="pattern-image-container">
+          
+          <img class= "pattern-image extension-image logo-dark-light" 
+          data-logo-for-light="/assets/images/extensions/meshery-academy.svg"
+          data-logo-for-dark="/assets/images/extensions/meshery-academy.svg"
+          alt="Meshery Academy" 
+          loading="lazy"/>
+        </div>
+      </div> 
+      <div class="back">
+        
+      </div>
     </div>
-    <h1>
-      CONFIGURATION
-    </h1>
-    <div class="row">-->
-    <div
-      class="column column-lg extensionCard"
-      filter="Helm Plugin for Kanvas Snapshot"
-      type="Configuration"
-      technology='["aws","kubernetes","helm"]'
-      status=""
-      style="display: none"
-    >    
+  </div>  
+
+<style>
+  .pattern-image-container {
+    width: 90%;
+    height: 50%;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .pattern-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+</style>
+
+
+            <!-- modal included -->
+            
+<style>
+  .modal-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .modal-image > img {
+    width: 100%;
+    object-fit: contain;
+  }
+</style>
+
+
+
+<div id="open-modal" class="modal-window">
+  <!-- <div class="click-container"> -->
+    <div class="modal-content">
+      <div class="modal-image">
+        <button class="modal-close close">&times;</button>
+        <img class="image-class extension-image logo-dark-light"  
+        data-logo-for-light="/assets/images/extensions/meshery-academy.svg"
+        data-logo-for-dark="/assets/images/extensions/meshery-academy.svg"
+        src="/assets/images/extensions/meshery-academy.svg"
+        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
+      </div>
+      <div class="vertical-line"></div>
+      <div class="modal-info">
+        <h2 class="modal-h2">
+          <a href="/extensions/meshery-academy" target="_blank">MESHERY ACADEMY
+             <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
+          </a>
+        </h2> 
+        <h3 class="modal-h3">Description</h3>
+        <p class="content-toggle contentdata pre-white-space">Meshery Academy is a platform that provides a comprehensive learning experience for anyone beginning their journey into Meshery and cloud native infrastructure.
+</p>
+        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
+    <span class="redirect">Read more</span>
+</a>
+  </span> -->
+
+        <h3 class="modal-h3">Features</h3>
+        <p class="content-toggle contentdata pre-white-space">- Provides self-paced learning accessible through Meshery.
+- Includes interactive labs and guided exercises within live Meshery environments.
+- Monitors learner progress and issues certifications upon course completion.
+- Regularly updated to include new topics on Meshery and emerging cloud native technologies.
+</p>
+        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
+    <span class="redirect">Read more</span>
+</a>
+  </span> -->
+        <div id="copy-url">
+          <div class="btn-class">
+            <div class="vertical-center" id="">
+              <div class="btn-grp">
+                
+                <a href="https://docs.meshery.io/extensions/academies/">
+                  <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
+                
+                <div class="btn-tooltip-grp">
+                
+                  <a href="https://cloud.meshery.io/academy">
+                    <button class="import" style="width: 7rem;">Visit</button></a>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+     
+ <script src="/assets/js/thumbnail-clickable.js"></script>
+   
+  <!-- </div> -->
+</div>
+          </div>
+          
+        </div>
+      </section>
       
+      <section class="extension-category" id="collaboration" data-category="Collaboration">
+        <div class="category-divider">
+          <hr class="category-divider-line" />
+          <span class="chip category-divider-chip COLLABORATION">
+            <small class="pattern-type">COLLABORATION</small>
+          </span>
+        </div>
+
+        <div class="row">
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Kanvas"
+            type="Collaboration"
+            technology='["aws","kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
+
+<div class= "card link">  
+    <div class="card-inner">
+      <div class="front">
+        <div class="chip COLLABORATION">
+          <small class="pattern-type">COLLABORATION</small>
+        </div>
+        <h4 class="pattern-name">Kanvas</h4>
+        <div class="pattern-image-container">
+          
+          <img class= "pattern-image extension-image logo-dark-light" 
+          data-logo-for-light="/assets/images/kanvas-icon-color.svg"
+          data-logo-for-dark="/assets/images/kanvas-icon-color.svg"
+          alt="Kanvas" 
+          loading="lazy"/>
+        </div>
+      </div> 
+      <div class="back">
+        
+      </div>
+    </div>
+  </div>  
+
+<style>
+  .pattern-image-container {
+    width: 90%;
+    height: 50%;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .pattern-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+</style>
+
+
+            <!-- modal included -->
+            
+<style>
+  .modal-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .modal-image > img {
+    width: 100%;
+    object-fit: contain;
+  }
+</style>
+
+
+
+<div id="open-modal" class="modal-window">
+  <!-- <div class="click-container"> -->
+    <div class="modal-content">
+      <div class="modal-image">
+        <button class="modal-close close">&times;</button>
+        <img class="image-class extension-image logo-dark-light"  
+        data-logo-for-light="/assets/images/kanvas-icon-color.svg"
+        data-logo-for-dark="/assets/images/kanvas-icon-color.svg"
+        src="/assets/images/kanvas-icon-color.svg"
+        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
+      </div>
+      <div class="vertical-line"></div>
+      <div class="modal-info">
+        <h2 class="modal-h2">
+          <a href="/extensions/kanvas" target="_blank">KANVAS
+             <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
+          </a>
+        </h2> 
+        <h3 class="modal-h3">Description</h3>
+        <p class="content-toggle contentdata pre-white-space">Collaboratively design and manage your Kubernetes clusters and Cloud services. 
+</p>
+        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
+    <span class="redirect">Read more</span>
+</a>
+  </span> -->
+
+        <h3 class="modal-h3">Features</h3>
+        <p class="content-toggle contentdata pre-white-space">Kanvas is a visual interface for managing your infrastructure. It allows you to create, edit, and share your infrastructure as code.
+</p>
+        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
+    <span class="redirect">Read more</span>
+</a>
+  </span> -->
+        <div id="copy-url">
+          <div class="btn-class">
+            <div class="vertical-center" id="">
+              <div class="btn-grp">
+                
+                <a href="https://docs.kanvas.new">
+                  <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
+                
+                <div class="btn-tooltip-grp">
+                
+                  <a href="https://www.kanvas.new">
+                    <button class="import" style="width: 7rem;">Visit</button></a>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+     
+ <script src="/assets/js/thumbnail-clickable.js"></script>
+   
+  <!-- </div> -->
+</div>
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Meshery Design Embed"
+            type="Collaboration"
+            technology='["html","css","javascript"]'
+            status=""
+            style="display: none"
+          >
+            
+
+<div class= "card link">  
+    <div class="card-inner">
+      <div class="front">
+        <div class="chip COLLABORATION">
+          <small class="pattern-type">COLLABORATION</small>
+        </div>
+        <h4 class="pattern-name">Meshery Design Embed</h4>
+        <div class="pattern-image-container">
+          
+          <img class= "pattern-image extension-image logo-dark-light" 
+          data-logo-for-light="/assets/images/logos/meshery-logo.png"
+          data-logo-for-dark="/assets/images/logos/meshery-logo-light.svg"
+          alt="Meshery Design Embed" 
+          loading="lazy"/>
+        </div>
+      </div> 
+      <div class="back">
+        
+      </div>
+    </div>
+  </div>  
+
+<style>
+  .pattern-image-container {
+    width: 90%;
+    height: 50%;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .pattern-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+</style>
+
+
+            <!-- modal included -->
+            
+<style>
+  .modal-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .modal-image > img {
+    width: 100%;
+    object-fit: contain;
+  }
+</style>
+
+
+
+<div id="open-modal" class="modal-window">
+  <!-- <div class="click-container"> -->
+    <div class="modal-content">
+      <div class="modal-image">
+        <button class="modal-close close">&times;</button>
+        <img class="image-class extension-image logo-dark-light"  
+        data-logo-for-light="/assets/images/logos/meshery-logo.png"
+        data-logo-for-dark="/assets/images/logos/meshery-logo-light.svg"
+        src="/assets/images/logos/meshery-logo-light.svg"
+        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
+      </div>
+      <div class="vertical-line"></div>
+      <div class="modal-info">
+        <h2 class="modal-h2">
+          <a href="/extensions/meshery-design-embed" target="_blank">MESHERY DESIGN EMBED
+             <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
+          </a>
+        </h2> 
+        <h3 class="modal-h3">Description</h3>
+        <p class="content-toggle contentdata pre-white-space">Export, embed, and share interactive designs effortlessly with Meshery Design Embedding.
+</p>
+        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
+    <span class="redirect">Read more</span>
+</a>
+  </span> -->
+
+        <h3 class="modal-h3">Features</h3>
+        <p class="content-toggle contentdata pre-white-space">- Embed your Meshery design easily by selecting the "Embed" option and downloading the embedding script.
+- Use the script for static sites or integrate it into React projects with the 'meshery-design-embed' package.
+- Customize the embedded design’s styles with CSS classes or inline styles as needed.
+</p>
+        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
+    <span class="redirect">Read more</span>
+</a>
+  </span> -->
+        <div id="copy-url">
+          <div class="btn-class">
+            <div class="vertical-center" id="">
+              <div class="btn-grp">
+                
+                <a href="https://docs.layer5.io/kanvas/designer/embedding-designs/">
+                  <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
+                
+                <div class="btn-tooltip-grp">
+                
+                  <a href="https://playground.meshery.io/extensions">
+                    <button class="import" style="width: 7rem;">Visit</button></a>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+     
+ <script src="/assets/js/thumbnail-clickable.js"></script>
+   
+  <!-- </div> -->
+</div>
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Meshery Docker Extension"
+            type="Collaboration"
+            technology='["kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
+
+<div class= "card link">  
+    <div class="card-inner">
+      <div class="front">
+        <div class="chip COLLABORATION">
+          <small class="pattern-type">COLLABORATION</small>
+        </div>
+        <h4 class="pattern-name">Meshery Docker Extension</h4>
+        <div class="pattern-image-container">
+          
+          <img class= "pattern-image extension-image logo-dark-light" 
+          data-logo-for-light="/assets/images/logos/docker-color.svg"
+          data-logo-for-dark="/assets/images/logos/docker-white-silhouette.svg"
+          alt="Meshery Docker Extension" 
+          loading="lazy"/>
+        </div>
+      </div> 
+      <div class="back">
+        
+      </div>
+    </div>
+  </div>  
+
+<style>
+  .pattern-image-container {
+    width: 90%;
+    height: 50%;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .pattern-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+</style>
+
+
+            <!-- modal included -->
+            
+<style>
+  .modal-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .modal-image > img {
+    width: 100%;
+    object-fit: contain;
+  }
+</style>
+
+
+
+<div id="open-modal" class="modal-window">
+  <!-- <div class="click-container"> -->
+    <div class="modal-content">
+      <div class="modal-image">
+        <button class="modal-close close">&times;</button>
+        <img class="image-class extension-image logo-dark-light"  
+        data-logo-for-light="/assets/images/logos/docker-color.svg"
+        data-logo-for-dark="/assets/images/logos/docker-white-silhouette.svg"
+        src="/assets/images/logos/docker-white-silhouette.svg"
+        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
+      </div>
+      <div class="vertical-line"></div>
+      <div class="modal-info">
+        <h2 class="modal-h2">
+          <a href="/extensions/meshery-docker-extension" target="_blank">MESHERY DOCKER EXTENSION
+             <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
+          </a>
+        </h2> 
+        <h3 class="modal-h3">Description</h3>
+        <p class="content-toggle contentdata pre-white-space">Wrangle cloud native apps using Docker Desktop and Meshery.
+</p>
+        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
+    <span class="redirect">Read more</span>
+</a>
+  </span> -->
+
+        <h3 class="modal-h3">Features</h3>
+        <p class="content-toggle contentdata pre-white-space">- Visually design your Docker-based infrastructure.
+- Import your Docker Compose apps. Configure and deploy them to Kubernetes and integrate into your GitOps pipeline.
+- Using Meshery as a visual topology for designing Docker Compose applications, operating Kubernetes, service meshes, and their workloads.
+</p>
+        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
+    <span class="redirect">Read more</span>
+</a>
+  </span> -->
+        <div id="copy-url">
+          <div class="btn-class">
+            <div class="vertical-center" id="">
+              <div class="btn-grp">
+                
+                <a href="https://docs.meshery.io/concepts/architecture#meshery-docker-extension">
+                  <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
+                
+                <div class="btn-tooltip-grp">
+                
+                  <a href="https://meshery.io/extensions/meshery-docker-extension">
+                    <button class="import" style="width: 7rem;">Visit</button></a>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+     
+ <script src="/assets/js/thumbnail-clickable.js"></script>
+   
+  <!-- </div> -->
+</div>
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Shape Builder"
+            type="Collaboration"
+            technology='["meshery"]'
+            status=""
+            style="display: none"
+          >
+            
+
+<div class= "card link">  
+    <div class="card-inner">
+      <div class="front">
+        <div class="chip COLLABORATION">
+          <small class="pattern-type">COLLABORATION</small>
+        </div>
+        <h4 class="pattern-name">Shape Builder</h4>
+        <div class="pattern-image-container">
+          
+          <img class= "pattern-image extension-image logo-dark-light" 
+          data-logo-for-light="/assets/images/extensions/shape-builder.svg"
+          data-logo-for-dark="/assets/images/extensions/shape-builder.svg"
+          alt="Shape Builder" 
+          loading="lazy"/>
+        </div>
+      </div> 
+      <div class="back">
+        
+      </div>
+    </div>
+  </div>  
+
+<style>
+  .pattern-image-container {
+    width: 90%;
+    height: 50%;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .pattern-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+</style>
+
+
+            <!-- modal included -->
+            
+<style>
+  .modal-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .modal-image > img {
+    width: 100%;
+    object-fit: contain;
+  }
+</style>
+
+
+
+<div id="open-modal" class="modal-window">
+  <!-- <div class="click-container"> -->
+    <div class="modal-content">
+      <div class="modal-image">
+        <button class="modal-close close">&times;</button>
+        <img class="image-class extension-image logo-dark-light"  
+        data-logo-for-light="/assets/images/extensions/shape-builder.svg"
+        data-logo-for-dark="/assets/images/extensions/shape-builder.svg"
+        src="/assets/images/extensions/shape-builder.svg"
+        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
+      </div>
+      <div class="vertical-line"></div>
+      <div class="modal-info">
+        <h2 class="modal-h2">
+          <a href="/extensions/shape-builder" target="_blank">SHAPE BUILDER
+             <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
+          </a>
+        </h2> 
+        <h3 class="modal-h3">Description</h3>
+        <p class="content-toggle contentdata pre-white-space">A Meshery extension for creating custom polygon shapes for Meshery components
+</p>
+        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
+    <span class="redirect">Read more</span>
+</a>
+  </span> -->
+
+        <h3 class="modal-h3">Features</h3>
+        <p class="content-toggle contentdata pre-white-space">- Visually create polygon-based component shapes for use in Kanvas.
+- Export the format Meshery needs to recognize and render custom shapes.
+- Help teams choose or create shapes that better communicate component purpose in designs.
+</p>
+        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
+    <span class="redirect">Read more</span>
+</a>
+  </span> -->
+        <div id="copy-url">
+          <div class="btn-class">
+            <div class="vertical-center" id="">
+              <div class="btn-grp">
+                
+                <a href="https://github.com/meshery-extensions/shape-builder">
+                  <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
+                
+                <div class="btn-tooltip-grp">
+                
+                  <a href="https://shapes.meshery.io/">
+                    <button class="import" style="width: 7rem;">Visit</button></a>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+     
+ <script src="/assets/js/thumbnail-clickable.js"></script>
+   
+  <!-- </div> -->
+</div>
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="TCS Labs Academy"
+            type="Collaboration"
+            technology='["meshery"]'
+            status=""
+            style="display: none"
+          >
+            
+
+<div class= "card link">  
+    <div class="card-inner">
+      <div class="front">
+        <div class="chip COLLABORATION">
+          <small class="pattern-type">COLLABORATION</small>
+        </div>
+        <h4 class="pattern-name">TCS Labs Academy</h4>
+        <div class="pattern-image-container">
+          
+          <img class= "pattern-image extension-image logo-dark-light" 
+          data-logo-for-light="/assets/images/extensions/tcslabs-academy-color.svg"
+          data-logo-for-dark="/assets/images/extensions/tcslabs-academy-color.svg"
+          alt="TCS Labs Academy" 
+          loading="lazy"/>
+        </div>
+      </div> 
+      <div class="back">
+        
+      </div>
+    </div>
+  </div>  
+
+<style>
+  .pattern-image-container {
+    width: 90%;
+    height: 50%;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .pattern-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+</style>
+
+
+            <!-- modal included -->
+            
+<style>
+  .modal-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .modal-image > img {
+    width: 100%;
+    object-fit: contain;
+  }
+</style>
+
+
+
+<div id="open-modal" class="modal-window">
+  <!-- <div class="click-container"> -->
+    <div class="modal-content">
+      <div class="modal-image">
+        <button class="modal-close close">&times;</button>
+        <img class="image-class extension-image logo-dark-light"  
+        data-logo-for-light="/assets/images/extensions/tcslabs-academy-color.svg"
+        data-logo-for-dark="/assets/images/extensions/tcslabs-academy-color.svg"
+        src="/assets/images/extensions/tcslabs-academy-color.svg"
+        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
+      </div>
+      <div class="vertical-line"></div>
+      <div class="modal-info">
+        <h2 class="modal-h2">
+          <a href="/extensions/tcslabs-academy" target="_blank">TCS LABS ACADEMY
+             <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
+          </a>
+        </h2> 
+        <h3 class="modal-h3">Description</h3>
+        <p class="content-toggle contentdata pre-white-space">TCS Labs Academy is the official learning-content repository for TCS Labs on the Meshery Academy platform. It hosts structured learning paths, challenges, certifications, and Meshery infrastructure designs.
+</p>
+        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
+    <span class="redirect">Read more</span>
+</a>
+  </span> -->
+
+        <h3 class="modal-h3">Features</h3>
+        <p class="content-toggle contentdata pre-white-space">- Provides structured learning paths and certifications.
+- Includes challenges and guided learning experiences.
+- Uses Meshery as the management plane for cloud native infrastructure learning.
+</p>
+        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
+    <span class="redirect">Read more</span>
+</a>
+  </span> -->
+        <div id="copy-url">
+          <div class="btn-class">
+            <div class="vertical-center" id="">
+              <div class="btn-grp">
+                
+                <a href="https://docs.meshery.io/extensions/academies/">
+                  <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
+                
+                <div class="btn-tooltip-grp">
+                
+                  <a href="https://github.com/meshery-extensions/tcslabs-academy">
+                    <button class="import" style="width: 7rem;">Visit</button></a>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+     
+ <script src="/assets/js/thumbnail-clickable.js"></script>
+   
+  <!-- </div> -->
+</div>
+          </div>
+          
+        </div>
+      </section>
+      
+      <section class="extension-category" id="configuration" data-category="Configuration">
+        <div class="category-divider">
+          <hr class="category-divider-line" />
+          <span class="chip category-divider-chip CONFIGURATION">
+            <small class="pattern-type">CONFIGURATION</small>
+          </span>
+        </div>
+
+        <div class="row">
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Helm Plugin for Kanvas Snapshot"
+            type="Configuration"
+            technology='["aws","kubernetes","helm"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
@@ -973,8 +2064,8 @@
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -1054,26 +2145,18 @@ Helm charts can be complex, especially when custom configurations are applied vi
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    
-    </div>
-    <h1>
-      CONFIGURATION
-    </h1>
-    <div class="row">-->
-    <div
-      class="column column-lg extensionCard"
-      filter="Kubectl Plugin for MeshSync Snapshot"
-      type="Configuration"
-      technology='["kubernetes"]'
-      status=""
-      style="display: none"
-    >    
-      
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Kubectl Plugin for MeshSync Snapshot"
+            type="Configuration"
+            technology='["kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
@@ -1114,8 +2197,8 @@ Helm charts can be complex, especially when custom configurations are applied vi
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -1190,26 +2273,18 @@ This snapshot of state of your Kubernetes clusters can then be imported into Mes
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    
-    </div>
-    <h1>
-      CONFIGURATION
-    </h1>
-    <div class="row">-->
-    <div
-      class="column column-lg extensionCard"
-      filter="Meshery Catalog"
-      type="Configuration"
-      technology='["aws","kubernetes"]'
-      status=""
-      style="display: none"
-    >    
-      
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Meshery Catalog"
+            type="Configuration"
+            technology='["aws","kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
@@ -1250,8 +2325,8 @@ This snapshot of state of your Kubernetes clusters can then be imported into Mes
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -1328,26 +2403,18 @@ This snapshot of state of your Kubernetes clusters can then be imported into Mes
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    
-    </div>
-    <h1>
-      CONFIGURATION
-    </h1>
-    <div class="row">-->
-    <div
-      class="column column-lg extensionCard"
-      filter="Snapshot Kubectl Plugin"
-      type="Configuration"
-      technology='["kubernetes"]'
-      status=""
-      style="display: none"
-    >    
-      
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Snapshot Kubectl Plugin"
+            type="Configuration"
+            technology='["kubernetes"]'
+            status="coming-soon"
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
@@ -1390,8 +2457,8 @@ This snapshot of state of your Kubernetes clusters can then be imported into Mes
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -1465,26 +2532,18 @@ Kubernetes manifests, particularly collections of them, can be complex. This Mes
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    
-    </div>
-    <h1>
-      CONFIGURATION
-    </h1>
-    <div class="row">-->
-    <div
-      class="column column-lg extensionCard"
-      filter="mesheryctl-axi"
-      type="Configuration"
-      technology='["meshery","kubernetes"]'
-      status=""
-      style="display: none"
-    >    
-      
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="mesheryctl-axi"
+            type="Configuration"
+            technology='["meshery","kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
@@ -1525,8 +2584,8 @@ Kubernetes manifests, particularly collections of them, can be complex. This Mes
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -1606,40 +2665,45 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    
-    </div>
-    <h1>
-      COLLABORATION
-    </h1>
-    <div class="row">-->
-    <div
-      class="column column-lg extensionCard"
-      filter="Kanvas"
-      type="Collaboration"
-      technology='["aws","kubernetes"]'
-      status=""
-      style="display: none"
-    >    
+          </div>
+          
+        </div>
+      </section>
       
+      <section class="extension-category" id="gitops" data-category="GitOps">
+        <div class="category-divider">
+          <hr class="category-divider-line" />
+          <span class="chip category-divider-chip GITOPS">
+            <small class="pattern-type">GITOPS</small>
+          </span>
+        </div>
+
+        <div class="row">
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="GitHub Action Performance Analysis"
+            type="GitOps"
+            technology='["github","kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
       <div class="front">
-        <div class="chip COLLABORATION">
-          <small class="pattern-type">COLLABORATION</small>
+        <div class="chip GITOPS">
+          <small class="pattern-type">GITOPS</small>
         </div>
-        <h4 class="pattern-name">Kanvas</h4>
+        <h4 class="pattern-name">GitHub Action Performance Analysis</h4>
         <div class="pattern-image-container">
           
           <img class= "pattern-image extension-image logo-dark-light" 
-          data-logo-for-light="/assets/images/kanvas-icon-color.svg"
-          data-logo-for-dark="/assets/images/kanvas-icon-color.svg"
-          alt="Kanvas" 
+          data-logo-for-light="/assets/images/meshmark-dark.svg"
+          data-logo-for-dark="/assets/images/meshmark-dark.svg"
+          alt="GitHub Action Performance Analysis" 
           loading="lazy"/>
         </div>
       </div> 
@@ -1666,8 +2730,8 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -1689,20 +2753,20 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
       <div class="modal-image">
         <button class="modal-close close">&times;</button>
         <img class="image-class extension-image logo-dark-light"  
-        data-logo-for-light="/assets/images/kanvas-icon-color.svg"
-        data-logo-for-dark="/assets/images/kanvas-icon-color.svg"
-        src="/assets/images/kanvas-icon-color.svg"
+        data-logo-for-light="/assets/images/meshmark-dark.svg"
+        data-logo-for-dark="/assets/images/meshmark-dark.svg"
+        src="/assets/images/meshmark-dark.svg"
         onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
       </div>
       <div class="vertical-line"></div>
       <div class="modal-info">
         <h2 class="modal-h2">
-          <a href="/extensions/kanvas" target="_blank">KANVAS
+          <a href="/extensions/github-action-performance-analysis" target="_blank">GITHUB ACTION PERFORMANCE ANALYSIS
              <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
           </a>
         </h2> 
         <h3 class="modal-h3">Description</h3>
-        <p class="content-toggle contentdata pre-white-space">Collaboratively design and manage your Kubernetes clusters and Cloud services. 
+        <p class="content-toggle contentdata pre-white-space">Characterize the performance of your services using Meshery&apos;s performance analysis GitHub Action to benchmark and visually compare percentiles (e.g. P99) over time.
 </p>
         <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
     <span class="redirect">Read more</span>
@@ -1710,7 +2774,9 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
   </span> -->
 
         <h3 class="modal-h3">Features</h3>
-        <p class="content-toggle contentdata pre-white-space">Kanvas is a visual interface for managing your infrastructure. It allows you to create, edit, and share your infrastructure as code.
+        <p class="content-toggle contentdata pre-white-space">- Integrate performance characterization in CI/CD pipelines with GitHub Action Performance Analysis.
+- Ensure stability and efficiency with performance testing using this action.
+- Use for Kubernetes systems for enhanced analysis with Meshery.
 </p>
         <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
     <span class="redirect">Read more</span>
@@ -1721,12 +2787,12 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
             <div class="vertical-center" id="">
               <div class="btn-grp">
                 
-                <a href="https://docs.meshery.io/extensions/extensions/kanvas/">
+                <a href="https://docs.meshery.io/guides/performance-management/performance-management">
                   <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
                 
                 <div class="btn-tooltip-grp">
                 
-                  <a href="https://www.kanvas.new">
+                  <a href="https://github.com/marketplace/actions/performance-testing-with-meshery">
                     <button class="import" style="width: 7rem;">Visit</button></a>
                 
                 </div>
@@ -1742,35 +2808,32 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    -->
-    <div
-      class="column column-lg extensionCard"
-      filter="Meshery Design Embed"
-      type="Collaboration"
-      technology='["html","css","javascript"]'
-      status=""
-      style="display: none"
-    >    
-      
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="GitHub Action Snapshot"
+            type="GitOps"
+            technology='["github","kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
       <div class="front">
-        <div class="chip COLLABORATION">
-          <small class="pattern-type">COLLABORATION</small>
+        <div class="chip GITOPS">
+          <small class="pattern-type">GITOPS</small>
         </div>
-        <h4 class="pattern-name">Meshery Design Embed</h4>
+        <h4 class="pattern-name">GitHub Action Snapshot</h4>
         <div class="pattern-image-container">
           
           <img class= "pattern-image extension-image logo-dark-light" 
-          data-logo-for-light="/assets/images/logos/meshery-logo.png"
-          data-logo-for-dark="/assets/images/logos/meshery-logo-light.svg"
-          alt="Meshery Design Embed" 
+          data-logo-for-light="/assets/images/github-color.svg"
+          data-logo-for-dark="/assets/images/logos/github-white.svg"
+          alt="GitHub Action Snapshot" 
           loading="lazy"/>
         </div>
       </div> 
@@ -1797,8 +2860,8 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -1820,20 +2883,20 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
       <div class="modal-image">
         <button class="modal-close close">&times;</button>
         <img class="image-class extension-image logo-dark-light"  
-        data-logo-for-light="/assets/images/logos/meshery-logo.png"
-        data-logo-for-dark="/assets/images/logos/meshery-logo-light.svg"
-        src="/assets/images/logos/meshery-logo-light.svg"
+        data-logo-for-light="/assets/images/github-color.svg"
+        data-logo-for-dark="/assets/images/logos/github-white.svg"
+        src="/assets/images/logos/github-white.svg"
         onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
       </div>
       <div class="vertical-line"></div>
       <div class="modal-info">
         <h2 class="modal-h2">
-          <a href="/extensions/meshery-design-embed" target="_blank">MESHERY DESIGN EMBED
+          <a href="/extensions/github-action-meshery-snapshot" target="_blank">GITHUB ACTION SNAPSHOT
              <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
           </a>
         </h2> 
         <h3 class="modal-h3">Description</h3>
-        <p class="content-toggle contentdata pre-white-space">Export, embed, and share interactive designs effortlessly with Meshery Design Embedding.
+        <p class="content-toggle contentdata pre-white-space">Connect Meshery to your GitHub repo and see changes pull request-to-pull request. Get snapshots of your infrastructure directly in your PRs.
 </p>
         <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
     <span class="redirect">Read more</span>
@@ -1841,9 +2904,9 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
   </span> -->
 
         <h3 class="modal-h3">Features</h3>
-        <p class="content-toggle contentdata pre-white-space">- Embed your Meshery design easily by selecting the "Embed" option and downloading the embedding script.
-- Use the script for static sites or integrate it into React projects with the 'meshery-design-embed' package.
-- Customize the embedded design’s styles with CSS classes or inline styles as needed.
+        <p class="content-toggle contentdata pre-white-space">- See your deployment before you merge.
+- Utilize snapshots when you need to automate your software development process using GitHub Actions.
+- Customize snapshot workflow triggers to run based on specific GitHub activities, such as creating a pull request, pushing code, or releasing a new version.
 </p>
         <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
     <span class="redirect">Read more</span>
@@ -1854,12 +2917,12 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
             <div class="vertical-center" id="">
               <div class="btn-grp">
                 
-                <a href="https://docs.layer5.io/kanvas/designer/embedding-designs/">
+                <a href="https://docs.meshery.io/guides/infrastructure-management/gitops-with-meshery/">
                   <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
                 
                 <div class="btn-tooltip-grp">
                 
-                  <a href="https://playground.meshery.io/extensions">
+                  <a href="https://github.com/marketplace/actions/kanvas-snapshot">
                     <button class="import" style="width: 7rem;">Visit</button></a>
                 
                 </div>
@@ -1875,976 +2938,31 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    -->
-    <div
-      class="column column-lg extensionCard"
-      filter="Meshery Docker Extension"
-      type="Collaboration"
-      technology='["kubernetes"]'
-      status=""
-      style="display: none"
-    >    
-      
-
-<div class= "card link">  
-    <div class="card-inner">
-      <div class="front">
-        <div class="chip COLLABORATION">
-          <small class="pattern-type">COLLABORATION</small>
-        </div>
-        <h4 class="pattern-name">Meshery Docker Extension</h4>
-        <div class="pattern-image-container">
+          </div>
           
-          <img class= "pattern-image extension-image logo-dark-light" 
-          data-logo-for-light="/assets/images/logos/docker-color.svg"
-          data-logo-for-dark="/assets/images/logos/docker-white-silhouette.svg"
-          alt="Meshery Docker Extension" 
-          loading="lazy"/>
         </div>
-      </div> 
-      <div class="back">
-        
-      </div>
-    </div>
-  </div>  
-
-<style>
-  .pattern-image-container {
-    width: 90%;
-    height: 50%;
-    position: relative;
-    margin: 0 auto;
-  }
-
-  .pattern-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-</style>
-
-
-      <!-- modal included -->
+      </section>
       
-<style>
-  .modal-image {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  .modal-image > img {
-    width: 100%;
-    object-fit: contain;
-  }
-</style>
-
-
-
-<div id="open-modal" class="modal-window">
-  <!-- <div class="click-container"> -->
-    <div class="modal-content">
-      <div class="modal-image">
-        <button class="modal-close close">&times;</button>
-        <img class="image-class extension-image logo-dark-light"  
-        data-logo-for-light="/assets/images/logos/docker-color.svg"
-        data-logo-for-dark="/assets/images/logos/docker-white-silhouette.svg"
-        src="/assets/images/logos/docker-white-silhouette.svg"
-        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
-      </div>
-      <div class="vertical-line"></div>
-      <div class="modal-info">
-        <h2 class="modal-h2">
-          <a href="/extensions/meshery-docker-extension" target="_blank">MESHERY DOCKER EXTENSION
-             <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
-          </a>
-        </h2> 
-        <h3 class="modal-h3">Description</h3>
-        <p class="content-toggle contentdata pre-white-space">Wrangle cloud native apps using Docker Desktop and Meshery.
-</p>
-        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
-    <span class="redirect">Read more</span>
-</a>
-  </span> -->
-
-        <h3 class="modal-h3">Features</h3>
-        <p class="content-toggle contentdata pre-white-space">- Visually design your Docker-based infrastructure.
-- Import your Docker Compose apps. Configure and deploy them to Kubernetes and integrate into your GitOps pipeline.
-- Using Meshery as a visual topology for designing Docker Compose applications, operating Kubernetes, service meshes, and their workloads.
-</p>
-        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
-    <span class="redirect">Read more</span>
-</a>
-  </span> -->
-        <div id="copy-url">
-          <div class="btn-class">
-            <div class="vertical-center" id="">
-              <div class="btn-grp">
-                
-                <a href="https://docs.meshery.io/concepts/architecture#meshery-docker-extension">
-                  <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
-                
-                <div class="btn-tooltip-grp">
-                
-                  <a href="https://meshery.io/extensions/meshery-docker-extension">
-                    <button class="import" style="width: 7rem;">Visit</button></a>
-                
-                </div>
-              </div>
-            </div>
-          </div>
+      <section class="extension-category" id="lifecycle" data-category="Lifecycle">
+        <div class="category-divider">
+          <hr class="category-divider-line" />
+          <span class="chip category-divider-chip LIFECYCLE">
+            <small class="pattern-type">LIFECYCLE</small>
+          </span>
         </div>
-        
-      </div>
-    </div>
-     
- <script src="/assets/js/thumbnail-clickable.js"></script>
-   
-  <!-- </div> -->
-</div>
-    </div>
-     
-    
-     <!--
-    
-    
-    </div>
-    <h1>
-      COLLABORATION
-    </h1>
-    <div class="row">-->
-    <div
-      class="column column-lg extensionCard"
-      filter="Shape Builder"
-      type="Collaboration"
-      technology='["meshery"]'
-      status=""
-      style="display: none"
-    >    
-      
 
-<div class= "card link">  
-    <div class="card-inner">
-      <div class="front">
-        <div class="chip COLLABORATION">
-          <small class="pattern-type">COLLABORATION</small>
-        </div>
-        <h4 class="pattern-name">Shape Builder</h4>
-        <div class="pattern-image-container">
+        <div class="row">
           
-          <img class= "pattern-image extension-image logo-dark-light" 
-          data-logo-for-light="/assets/images/extensions/shape-builder.svg"
-          data-logo-for-dark="/assets/images/extensions/shape-builder.svg"
-          alt="Shape Builder" 
-          loading="lazy"/>
-        </div>
-      </div> 
-      <div class="back">
-        
-      </div>
-    </div>
-  </div>  
-
-<style>
-  .pattern-image-container {
-    width: 90%;
-    height: 50%;
-    position: relative;
-    margin: 0 auto;
-  }
-
-  .pattern-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-</style>
-
-
-      <!-- modal included -->
-      
-<style>
-  .modal-image {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  .modal-image > img {
-    width: 100%;
-    object-fit: contain;
-  }
-</style>
-
-
-
-<div id="open-modal" class="modal-window">
-  <!-- <div class="click-container"> -->
-    <div class="modal-content">
-      <div class="modal-image">
-        <button class="modal-close close">&times;</button>
-        <img class="image-class extension-image logo-dark-light"  
-        data-logo-for-light="/assets/images/extensions/shape-builder.svg"
-        data-logo-for-dark="/assets/images/extensions/shape-builder.svg"
-        src="/assets/images/extensions/shape-builder.svg"
-        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
-      </div>
-      <div class="vertical-line"></div>
-      <div class="modal-info">
-        <h2 class="modal-h2">
-          <a href="/extensions/shape-builder" target="_blank">SHAPE BUILDER
-             <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
-          </a>
-        </h2> 
-        <h3 class="modal-h3">Description</h3>
-        <p class="content-toggle contentdata pre-white-space">A Meshery extension for creating custom polygon shapes for Meshery components
-</p>
-        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
-    <span class="redirect">Read more</span>
-</a>
-  </span> -->
-
-        <h3 class="modal-h3">Features</h3>
-        <p class="content-toggle contentdata pre-white-space">- Visually create polygon-based component shapes for use in Kanvas.
-- Export the format Meshery needs to recognize and render custom shapes.
-- Help teams choose or create shapes that better communicate component purpose in designs.
-</p>
-        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
-    <span class="redirect">Read more</span>
-</a>
-  </span> -->
-        <div id="copy-url">
-          <div class="btn-class">
-            <div class="vertical-center" id="">
-              <div class="btn-grp">
-                
-                <a href="https://github.com/meshery-extensions/shape-builder">
-                  <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
-                
-                <div class="btn-tooltip-grp">
-                
-                  <a href="https://shapes.meshery.io/">
-                    <button class="import" style="width: 7rem;">Visit</button></a>
-                
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-     
- <script src="/assets/js/thumbnail-clickable.js"></script>
-   
-  <!-- </div> -->
-</div>
-    </div>
-     
-    
-     <!--
-    
-    
-    </div>
-    <h1>
-      COLLABORATION
-    </h1>
-    <div class="row">-->
-    <div
-      class="column column-lg extensionCard"
-      filter="TCS Labs Academy"
-      type="Collaboration"
-      technology='["meshery"]'
-      status=""
-      style="display: none"
-    >    
-      
-
-<div class= "card link">  
-    <div class="card-inner">
-      <div class="front">
-        <div class="chip COLLABORATION">
-          <small class="pattern-type">COLLABORATION</small>
-        </div>
-        <h4 class="pattern-name">TCS Labs Academy</h4>
-        <div class="pattern-image-container">
           
-          <img class= "pattern-image extension-image logo-dark-light" 
-          data-logo-for-light="/assets/images/extensions/tcslabs-academy-color.svg"
-          data-logo-for-dark="/assets/images/extensions/tcslabs-academy-color.svg"
-          alt="TCS Labs Academy" 
-          loading="lazy"/>
-        </div>
-      </div> 
-      <div class="back">
-        
-      </div>
-    </div>
-  </div>  
-
-<style>
-  .pattern-image-container {
-    width: 90%;
-    height: 50%;
-    position: relative;
-    margin: 0 auto;
-  }
-
-  .pattern-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-</style>
-
-
-      <!-- modal included -->
-      
-<style>
-  .modal-image {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  .modal-image > img {
-    width: 100%;
-    object-fit: contain;
-  }
-</style>
-
-
-
-<div id="open-modal" class="modal-window">
-  <!-- <div class="click-container"> -->
-    <div class="modal-content">
-      <div class="modal-image">
-        <button class="modal-close close">&times;</button>
-        <img class="image-class extension-image logo-dark-light"  
-        data-logo-for-light="/assets/images/extensions/tcslabs-academy-color.svg"
-        data-logo-for-dark="/assets/images/extensions/tcslabs-academy-color.svg"
-        src="/assets/images/extensions/tcslabs-academy-color.svg"
-        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
-      </div>
-      <div class="vertical-line"></div>
-      <div class="modal-info">
-        <h2 class="modal-h2">
-          <a href="/extensions/tcslabs-academy" target="_blank">TCS LABS ACADEMY
-             <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
-          </a>
-        </h2> 
-        <h3 class="modal-h3">Description</h3>
-        <p class="content-toggle contentdata pre-white-space">TCS Labs Academy is the official learning-content repository for TCS Labs on the Meshery Academy platform. It hosts structured learning paths, challenges, certifications, and Meshery infrastructure designs.
-</p>
-        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
-    <span class="redirect">Read more</span>
-</a>
-  </span> -->
-
-        <h3 class="modal-h3">Features</h3>
-        <p class="content-toggle contentdata pre-white-space">- Provides structured learning paths and certifications.
-- Includes challenges and guided learning experiences.
-- Uses Meshery as the management plane for cloud native infrastructure learning.
-</p>
-        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
-    <span class="redirect">Read more</span>
-</a>
-  </span> -->
-        <div id="copy-url">
-          <div class="btn-class">
-            <div class="vertical-center" id="">
-              <div class="btn-grp">
-                
-                <a href="https://docs.meshery.io/extensions/academies/">
-                  <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
-                
-                <div class="btn-tooltip-grp">
-                
-                  <a href="https://github.com/meshery-extensions/tcslabs-academy">
-                    <button class="import" style="width: 7rem;">Visit</button></a>
-                
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-     
- <script src="/assets/js/thumbnail-clickable.js"></script>
-   
-  <!-- </div> -->
-</div>
-    </div>
-     
-    
-     <!--
-    
-    -->
-    <div
-      class="column column-lg extensionCard"
-      filter="DigitalOcean Academy"
-      type="Academy"
-      technology='["meshery"]'
-      status=""
-      style="display: none"
-    >    
-      
-
-<div class= "card link">  
-    <div class="card-inner">
-      <div class="front">
-        <div class="chip ACADEMY">
-          <small class="pattern-type">ACADEMY</small>
-        </div>
-        <h4 class="pattern-name">DigitalOcean Academy</h4>
-        <div class="pattern-image-container">
-          
-          <img class= "pattern-image extension-image logo-dark-light" 
-          data-logo-for-light="/assets/images/extensions/do-vertical-blue.png"
-          data-logo-for-dark="/assets/images/extensions/do-vertical-white.png"
-          alt="DigitalOcean Academy" 
-          loading="lazy"/>
-        </div>
-      </div> 
-      <div class="back">
-        
-      </div>
-    </div>
-  </div>  
-
-<style>
-  .pattern-image-container {
-    width: 90%;
-    height: 50%;
-    position: relative;
-    margin: 0 auto;
-  }
-
-  .pattern-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-</style>
-
-
-      <!-- modal included -->
-      
-<style>
-  .modal-image {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  .modal-image > img {
-    width: 100%;
-    object-fit: contain;
-  }
-</style>
-
-
-
-<div id="open-modal" class="modal-window">
-  <!-- <div class="click-container"> -->
-    <div class="modal-content">
-      <div class="modal-image">
-        <button class="modal-close close">&times;</button>
-        <img class="image-class extension-image logo-dark-light"  
-        data-logo-for-light="/assets/images/extensions/do-vertical-blue.png"
-        data-logo-for-dark="/assets/images/extensions/do-vertical-white.png"
-        src="/assets/images/extensions/do-vertical-white.png"
-        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
-      </div>
-      <div class="vertical-line"></div>
-      <div class="modal-info">
-        <h2 class="modal-h2">
-          <a href="/extensions/digitalocean-academy" target="_blank">DIGITALOCEAN ACADEMY
-             <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
-          </a>
-        </h2> 
-        <h3 class="modal-h3">Description</h3>
-        <p class="content-toggle contentdata pre-white-space">DigitalOcean Academy is a platform that provides a comprehensive learning experience for anyone beginning their journey into DigitalOcean and cloud native infrastructure.
-</p>
-        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
-    <span class="redirect">Read more</span>
-</a>
-  </span> -->
-
-        <h3 class="modal-h3">Features</h3>
-        <p class="content-toggle contentdata pre-white-space">- Provides self-paced learning accessible through DigitalOcean.
-- Includes interactive labs and guided exercises within live DigitalOcean environments.
-- Monitors learner progress and issues certifications upon course completion.
-- Regularly updated to include new topics on DigitalOcean and emerging cloud native technologies.
-</p>
-        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
-    <span class="redirect">Read more</span>
-</a>
-  </span> -->
-        <div id="copy-url">
-          <div class="btn-class">
-            <div class="vertical-center" id="">
-              <div class="btn-grp">
-                
-                <a href="https://docs.meshery.io/extensions/academies/">
-                  <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
-                
-                <div class="btn-tooltip-grp">
-                
-                  <a href="https://github.com/meshery-extensions/digitalocean-academy">
-                    <button class="import" style="width: 7rem;">Visit</button></a>
-                
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-     
- <script src="/assets/js/thumbnail-clickable.js"></script>
-   
-  <!-- </div> -->
-</div>
-    </div>
-     
-    
-     <!--
-    
-    
-    </div>
-    <h1>
-      ACADEMY
-    </h1>
-    <div class="row">-->
-    <div
-      class="column column-lg extensionCard"
-      filter="Exoscale Academy"
-      type="Academy"
-      technology='["meshery"]'
-      status=""
-      style="display: none"
-    >    
-      
-
-<div class= "card link">  
-    <div class="card-inner">
-      <div class="front">
-        <div class="chip ACADEMY">
-          <small class="pattern-type">ACADEMY</small>
-        </div>
-        <h4 class="pattern-name">Exoscale Academy</h4>
-        <div class="pattern-image-container">
-          
-          <img class= "pattern-image extension-image logo-dark-light" 
-          data-logo-for-light="/assets/images/extensions/exoscale-icon.svg"
-          data-logo-for-dark="/assets/images/extensions/exoscale-icon.svg"
-          alt="Exoscale Academy" 
-          loading="lazy"/>
-        </div>
-      </div> 
-      <div class="back">
-        
-      </div>
-    </div>
-  </div>  
-
-<style>
-  .pattern-image-container {
-    width: 90%;
-    height: 50%;
-    position: relative;
-    margin: 0 auto;
-  }
-
-  .pattern-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-</style>
-
-
-      <!-- modal included -->
-      
-<style>
-  .modal-image {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  .modal-image > img {
-    width: 100%;
-    object-fit: contain;
-  }
-</style>
-
-
-
-<div id="open-modal" class="modal-window">
-  <!-- <div class="click-container"> -->
-    <div class="modal-content">
-      <div class="modal-image">
-        <button class="modal-close close">&times;</button>
-        <img class="image-class extension-image logo-dark-light"  
-        data-logo-for-light="/assets/images/extensions/exoscale-icon.svg"
-        data-logo-for-dark="/assets/images/extensions/exoscale-icon.svg"
-        src="/assets/images/extensions/exoscale-icon.svg"
-        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
-      </div>
-      <div class="vertical-line"></div>
-      <div class="modal-info">
-        <h2 class="modal-h2">
-          <a href="/extensions/exoscale-academy" target="_blank">EXOSCALE ACADEMY
-             <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
-          </a>
-        </h2> 
-        <h3 class="modal-h3">Description</h3>
-        <p class="content-toggle contentdata pre-white-space">Exoscale Academy is a platform that provides a comprehensive learning experience for anyone beginning their journey into Exoscale and cloud native infrastructure.
-</p>
-        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
-    <span class="redirect">Read more</span>
-</a>
-  </span> -->
-
-        <h3 class="modal-h3">Features</h3>
-        <p class="content-toggle contentdata pre-white-space">- Provides self-paced learning accessible through Exoscale.
-- Includes interactive labs and guided exercises within live Exoscale environments.
-- Monitors learner progress and issues certifications upon course completion.
-- Regularly updated to include new topics on Exoscale and emerging cloud native technologies.
-</p>
-        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
-    <span class="redirect">Read more</span>
-</a>
-  </span> -->
-        <div id="copy-url">
-          <div class="btn-class">
-            <div class="vertical-center" id="">
-              <div class="btn-grp">
-                
-                <a href="https://docs.meshery.io/extensions/academies/">
-                  <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
-                
-                <div class="btn-tooltip-grp">
-                
-                  <a href="https://exoscale.layer5.io/academy">
-                    <button class="import" style="width: 7rem;">Visit</button></a>
-                
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-     
- <script src="/assets/js/thumbnail-clickable.js"></script>
-   
-  <!-- </div> -->
-</div>
-    </div>
-     
-    
-     <!--
-    
-    -->
-    <div
-      class="column column-lg extensionCard"
-      filter="Layer5 Academy"
-      type="Academy"
-      technology='["meshery"]'
-      status=""
-      style="display: none"
-    >    
-      
-
-<div class= "card link">  
-    <div class="card-inner">
-      <div class="front">
-        <div class="chip ACADEMY">
-          <small class="pattern-type">ACADEMY</small>
-        </div>
-        <h4 class="pattern-name">Layer5 Academy</h4>
-        <div class="pattern-image-container">
-          
-          <img class= "pattern-image extension-image logo-dark-light" 
-          data-logo-for-light="/assets/images/extensions/dual-layer5-academy-color.svg"
-          data-logo-for-dark="/assets/images/extensions/dual-layer5-academy-color.svg"
-          alt="Layer5 Academy" 
-          loading="lazy"/>
-        </div>
-      </div> 
-      <div class="back">
-        
-      </div>
-    </div>
-  </div>  
-
-<style>
-  .pattern-image-container {
-    width: 90%;
-    height: 50%;
-    position: relative;
-    margin: 0 auto;
-  }
-
-  .pattern-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-</style>
-
-
-      <!-- modal included -->
-      
-<style>
-  .modal-image {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  .modal-image > img {
-    width: 100%;
-    object-fit: contain;
-  }
-</style>
-
-
-
-<div id="open-modal" class="modal-window">
-  <!-- <div class="click-container"> -->
-    <div class="modal-content">
-      <div class="modal-image">
-        <button class="modal-close close">&times;</button>
-        <img class="image-class extension-image logo-dark-light"  
-        data-logo-for-light="/assets/images/extensions/dual-layer5-academy-color.svg"
-        data-logo-for-dark="/assets/images/extensions/dual-layer5-academy-color.svg"
-        src="/assets/images/extensions/dual-layer5-academy-color.svg"
-        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
-      </div>
-      <div class="vertical-line"></div>
-      <div class="modal-info">
-        <h2 class="modal-h2">
-          <a href="/extensions/layer5-academy" target="_blank">LAYER5 ACADEMY
-             <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
-          </a>
-        </h2> 
-        <h3 class="modal-h3">Description</h3>
-        <p class="content-toggle contentdata pre-white-space">Layer5 Academy is a platform that provides a comprehensive learning experience for anyone beginning their journey into Layer5 and cloud native infrastructure.
-</p>
-        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
-    <span class="redirect">Read more</span>
-</a>
-  </span> -->
-
-        <h3 class="modal-h3">Features</h3>
-        <p class="content-toggle contentdata pre-white-space">- Provides self-paced learning accessible through Layer5.
-- Includes interactive labs and guided exercises within live Layer5 environments.
-- Monitors learner progress and issues certifications upon course completion.
-- Regularly updated to include new topics on Layer5 and emerging cloud native technologies.
-</p>
-        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
-    <span class="redirect">Read more</span>
-</a>
-  </span> -->
-        <div id="copy-url">
-          <div class="btn-class">
-            <div class="vertical-center" id="">
-              <div class="btn-grp">
-                
-                <a href="https://docs.layer5.io/cloud/academy/">
-                  <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
-                
-                <div class="btn-tooltip-grp">
-                
-                  <a href="https://github.com/layer5io/layer5-academy">
-                    <button class="import" style="width: 7rem;">Visit</button></a>
-                
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-     
- <script src="/assets/js/thumbnail-clickable.js"></script>
-   
-  <!-- </div> -->
-</div>
-    </div>
-     
-    
-     <!--
-    
-    
-    </div>
-    <h1>
-      ACADEMY
-    </h1>
-    <div class="row">-->
-    <div
-      class="column column-lg extensionCard"
-      filter="Meshery Academy"
-      type="Academy"
-      technology='["meshery"]'
-      status=""
-      style="display: none"
-    >    
-      
-
-<div class= "card link">  
-    <div class="card-inner">
-      <div class="front">
-        <div class="chip ACADEMY">
-          <small class="pattern-type">ACADEMY</small>
-        </div>
-        <h4 class="pattern-name">Meshery Academy</h4>
-        <div class="pattern-image-container">
-          
-          <img class= "pattern-image extension-image logo-dark-light" 
-          data-logo-for-light="/assets/images/extensions/meshery-academy.svg"
-          data-logo-for-dark="/assets/images/extensions/meshery-academy.svg"
-          alt="Meshery Academy" 
-          loading="lazy"/>
-        </div>
-      </div> 
-      <div class="back">
-        
-      </div>
-    </div>
-  </div>  
-
-<style>
-  .pattern-image-container {
-    width: 90%;
-    height: 50%;
-    position: relative;
-    margin: 0 auto;
-  }
-
-  .pattern-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-</style>
-
-
-      <!-- modal included -->
-      
-<style>
-  .modal-image {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  .modal-image > img {
-    width: 100%;
-    object-fit: contain;
-  }
-</style>
-
-
-
-<div id="open-modal" class="modal-window">
-  <!-- <div class="click-container"> -->
-    <div class="modal-content">
-      <div class="modal-image">
-        <button class="modal-close close">&times;</button>
-        <img class="image-class extension-image logo-dark-light"  
-        data-logo-for-light="/assets/images/extensions/meshery-academy.svg"
-        data-logo-for-dark="/assets/images/extensions/meshery-academy.svg"
-        src="/assets/images/extensions/meshery-academy.svg"
-        onerror="this.src='/assets/images/meshery-color.svg'" loading="lazy" onclick="toggleFullScreenImage(this.src, 'extension')" />
-      </div>
-      <div class="vertical-line"></div>
-      <div class="modal-info">
-        <h2 class="modal-h2">
-          <a href="/extensions/meshery-academy" target="_blank">MESHERY ACADEMY
-             <img class="internal-link" src="/assets/images/buttons/external-link_black.svg"/> 
-          </a>
-        </h2> 
-        <h3 class="modal-h3">Description</h3>
-        <p class="content-toggle contentdata pre-white-space">Meshery Academy is a platform that provides a comprehensive learning experience for anyone beginning their journey into Meshery and cloud native infrastructure.
-</p>
-        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
-    <span class="redirect">Read more</span>
-</a>
-  </span> -->
-
-        <h3 class="modal-h3">Features</h3>
-        <p class="content-toggle contentdata pre-white-space">- Provides self-paced learning accessible through Meshery.
-- Includes interactive labs and guided exercises within live Meshery environments.
-- Monitors learner progress and issues certifications upon course completion.
-- Regularly updated to include new topics on Meshery and emerging cloud native technologies.
-</p>
-        <!-- <span class="read-more" href="read-more.html"><a class="external" href="" target="_blank">
-    <span class="redirect">Read more</span>
-</a>
-  </span> -->
-        <div id="copy-url">
-          <div class="btn-class">
-            <div class="vertical-center" id="">
-              <div class="btn-grp">
-                
-                <a href="https://docs.meshery.io/extensions/academies/">
-                  <button class="import-secondary" style="width: 7rem;">Learn More</button></a>
-                
-                <div class="btn-tooltip-grp">
-                
-                  <a href="https://cloud.meshery.io/academy">
-                    <button class="import" style="width: 7rem;">Visit</button></a>
-                
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-     
- <script src="/assets/js/thumbnail-clickable.js"></script>
-   
-  <!-- </div> -->
-</div>
-    </div>
-     
-    
-     <!--
-    
-    -->
-    <div
-      class="column column-lg extensionCard"
-      filter="Meshery Adapter for App Mesh"
-      type="Lifecycle"
-      technology='["github","kubernetes"]'
-      status=""
-      style="display: none"
-    >    
-      
+          <div
+            class="column column-lg extensionCard"
+            filter="Meshery Adapter for App Mesh"
+            type="Lifecycle"
+            technology='["github","kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
@@ -2885,8 +3003,8 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -2963,21 +3081,18 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    -->
-    <div
-      class="column column-lg extensionCard"
-      filter="Meshery Adapter for Cilium Service Mesh"
-      type="Lifecycle"
-      technology='["cilium","kubernetes"]'
-      status=""
-      style="display: none"
-    >    
-      
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Meshery Adapter for Cilium Service Mesh"
+            type="Lifecycle"
+            technology='["cilium","kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
@@ -3018,8 +3133,8 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -3093,21 +3208,18 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    -->
-    <div
-      class="column column-lg extensionCard"
-      filter="Meshery Adapter for Consul"
-      type="Lifecycle"
-      technology='["github","kubernetes"]'
-      status=""
-      style="display: none"
-    >    
-      
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Meshery Adapter for Consul"
+            type="Lifecycle"
+            technology='["github","kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
@@ -3148,8 +3260,8 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -3223,21 +3335,18 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    -->
-    <div
-      class="column column-lg extensionCard"
-      filter="Meshery Adapter for Istio"
-      type="Lifecycle"
-      technology='["github","kubernetes"]'
-      status=""
-      style="display: none"
-    >    
-      
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Meshery Adapter for Istio"
+            type="Lifecycle"
+            technology='["github","kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
@@ -3278,8 +3387,8 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -3353,21 +3462,18 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    -->
-    <div
-      class="column column-lg extensionCard"
-      filter="Meshery Adapter for Kuma"
-      type="Lifecycle"
-      technology='["kuma","kubernetes"]'
-      status=""
-      style="display: none"
-    >    
-      
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Meshery Adapter for Kuma"
+            type="Lifecycle"
+            technology='["kuma","kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
@@ -3408,8 +3514,8 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -3483,21 +3589,18 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    -->
-    <div
-      class="column column-lg extensionCard"
-      filter="Meshery Adapter for Linkerd"
-      type="Lifecycle"
-      technology='["linkerd","kubernetes"]'
-      status=""
-      style="display: none"
-    >    
-      
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Meshery Adapter for Linkerd"
+            type="Lifecycle"
+            technology='["linkerd","kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
@@ -3538,8 +3641,8 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -3613,21 +3716,18 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    -->
-    <div
-      class="column column-lg extensionCard"
-      filter="Meshery Adapter for NGINX Service Mesh"
-      type="Lifecycle"
-      technology='["nginx"]'
-      status=""
-      style="display: none"
-    >    
-      
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Meshery Adapter for NGINX Service Mesh"
+            type="Lifecycle"
+            technology='["nginx"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
@@ -3668,8 +3768,8 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -3743,26 +3843,18 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    
-    </div>
-    <h1>
-      LIFECYCLE
-    </h1>
-    <div class="row">-->
-    <div
-      class="column column-lg extensionCard"
-      filter="Meshery Adapter for Network Service Mesh"
-      type="Lifecycle"
-      technology='["aws","kubernetes"]'
-      status=""
-      style="display: none"
-    >    
-      
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Meshery Adapter for Network Service Mesh"
+            type="Lifecycle"
+            technology='["aws","kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
@@ -3803,8 +3895,8 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -3878,26 +3970,18 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    
-    </div>
-    <h1>
-      LIFECYCLE
-    </h1>
-    <div class="row">-->
-    <div
-      class="column column-lg extensionCard"
-      filter="Meshery Adapter for Traefik Mesh"
-      type="Lifecycle"
-      technology='["traefik-mesh","kubernetes"]'
-      status=""
-      style="display: none"
-    >    
-      
+          </div>
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Meshery Adapter for Traefik Mesh"
+            type="Lifecycle"
+            technology='["traefik-mesh","kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
@@ -3938,8 +4022,8 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -4016,26 +4100,31 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
    
   <!-- </div> -->
 </div>
-    </div>
-     
-    
-     <!--
-    
-    
-    </div>
-    <h1>
-      PERFORMANCE
-    </h1>
-    <div class="row">-->
-    <div
-      class="column column-lg extensionCard"
-      filter="Meshery Adapter for Nighthawk"
-      type="Performance"
-      technology='["aws","kubernetes"]'
-      status=""
-      style="display: none"
-    >    
+          </div>
+          
+        </div>
+      </section>
       
+      <section class="extension-category" id="performance" data-category="Performance">
+        <div class="category-divider">
+          <hr class="category-divider-line" />
+          <span class="chip category-divider-chip PERFORMANCE">
+            <small class="pattern-type">PERFORMANCE</small>
+          </span>
+        </div>
+
+        <div class="row">
+          
+          
+          <div
+            class="column column-lg extensionCard"
+            filter="Meshery Adapter for Nighthawk"
+            type="Performance"
+            technology='["aws","kubernetes"]'
+            status=""
+            style="display: none"
+          >
+            
 
 <div class= "card link">  
     <div class="card-inner">
@@ -4076,8 +4165,8 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
 </style>
 
 
-      <!-- modal included -->
-      
+            <!-- modal included -->
+            
 <style>
   .modal-image {
     display: flex;
@@ -4154,81 +4243,306 @@ Run it with <code>npx -y mesheryctl-axi</code>. It spawns your existing mesheryc
    
   <!-- </div> -->
 </div>
-    </div>
+          </div>
+          
+        </div>
+      </section>
       
+    </div>
   </div>
 </div>
 
 <script>
-  document.getElementById("sort").addEventListener("change", function () {
-    var sortValue = this.value;
-    var cardsContainer = document.querySelector(".row");
-    var cards = cardsContainer.querySelectorAll(".extensionCard");
+  const categorySections = document.querySelectorAll(".extension-category");
+  const categoryCheckboxes = document.querySelectorAll(
+    "#extensions-category-div input[type='checkbox']"
+  );
+  const searchInput = document.getElementById("search");
+  const notFound = document.getElementById("not-found");
+  const sortSelect = document.getElementById("sort");
+  const resultsContainer = document.querySelector(".extensions-results");
+  const categoryCountSort = document.getElementById("extensions-category-sort");
 
-    var catalog = Array.from(cards);
+  // Orders the sidebar checkboxes by name so they follow the section order.
+  // Skipped while a count sort is active, since that order was chosen explicitly.
+  function sortCategoryCheckboxes(direction) {
+    var container = document.getElementById("extensions-category-div");
+    if (!container) return;
 
-    if (sortValue === "asc") {
-      catalog = catalog.sort(function (a, b) {
-        if (a.getAttribute("status") === "ComingSoon") {
-          return 1;
-        } else if (b.getAttribute("status") === "ComingSoon") {
-          return -1;
-        } else {
-          return a
-            .getAttribute("filter")
-            .localeCompare(b.getAttribute("filter"));
-        }
+    Array.from(container.querySelectorAll(".input-container"))
+      .sort(function (a, b) {
+        return (
+          direction *
+          a
+            .querySelector("input")
+            .value.localeCompare(b.querySelector("input").value)
+        );
+      })
+      .forEach(function (item) {
+        container.appendChild(item);
       });
-    } else if (sortValue === "desc") {
-      catalog = catalog.sort(function (a, b) {
-        if (a.getAttribute("status") === "ComingSoon") {
-          return 1;
-        } else if (b.getAttribute("status") === "ComingSoon") {
-          return -1;
-        } else {
-          return b
-            .getAttribute("filter")
-            .localeCompare(a.getAttribute("filter"));
-        }
-      });
-    }
+  }
 
-    catalog.forEach(function (extension) {
-      cardsContainer.appendChild(extension);
+  // Sorting is applied within each category so that the section dividers keep
+  // describing the cards underneath them, and to the sections themselves so the
+  // categories follow the same order as the cards.
+  function applySort(sortValue) {
+    if (sortValue !== "asc" && sortValue !== "desc") return;
+
+    var direction = sortValue === "asc" ? 1 : -1;
+
+    categorySections.forEach(function (section) {
+      var cardsContainer = section.querySelector(".row");
+      var catalog = Array.from(
+        cardsContainer.querySelectorAll(".extensionCard")
+      );
+
+      catalog.sort(function (a, b) {
+        var aComingSoon = a.getAttribute("status") === "coming-soon";
+        var bComingSoon = b.getAttribute("status") === "coming-soon";
+        if (aComingSoon !== bComingSoon) {
+          return aComingSoon ? 1 : -1;
+        }
+        return (
+          direction *
+          a.getAttribute("filter").localeCompare(b.getAttribute("filter"))
+        );
+      });
+
+      catalog.forEach(function (extension) {
+        cardsContainer.appendChild(extension);
+      });
     });
+
+    Array.from(categorySections)
+      .sort(function (a, b) {
+        return (
+          direction *
+          a
+            .getAttribute("data-category")
+            .localeCompare(b.getAttribute("data-category"))
+        );
+      })
+      .forEach(function (section) {
+        resultsContainer.appendChild(section);
+      });
+
+    if (!categoryCountSort || categoryCountSort.dataset.order === "none") {
+      sortCategoryCheckboxes(direction);
+    }
+  }
+
+  sortSelect.addEventListener("change", function () {
+    applySort(this.value);
   });
 
-  document.getElementById("search").addEventListener("input", function () {
-    var searchValue = this.value.toLowerCase();
-    var cardsContainer = document.querySelector(".row");
-    var cards = cardsContainer.querySelectorAll(".extensionCard");
-    var notFound = document.getElementById("not-found");
+  function applyExtensionFilters() {
+    var searchValue = searchInput.value.toLowerCase();
+    var selected = [];
 
-    let found = false;
-
-    cards.forEach(function (extension) {
-      var filterValue = extension.getAttribute("filter").toLowerCase();
-      if (filterValue.includes(searchValue)) {
-        extension.style.display = "block";
-        found = true;
-      } else {
-        extension.style.display = "none";
+    categoryCheckboxes.forEach(function (box) {
+      if (box.checked) {
+        selected.push(box.value);
       }
     });
 
-    if (!found) {
-      notFound.style.display = "block";
-    } else {
-      notFound.style.display = "none";
-    }
+    var found = false;
+
+    categorySections.forEach(function (section) {
+      var inSelected =
+        selected.length === 0 ||
+        selected.indexOf(section.getAttribute("data-category")) !== -1;
+      var matches = 0;
+
+      section.querySelectorAll(".extensionCard").forEach(function (extension) {
+        var filterValue = extension.getAttribute("filter").toLowerCase();
+        var visible = inSelected && filterValue.includes(searchValue);
+
+        extension.style.display = visible ? "block" : "none";
+        if (visible) {
+          matches++;
+        }
+      });
+
+      section.style.display = matches ? "" : "none";
+
+      if (matches) {
+        found = true;
+      }
+    });
+
+    notFound.style.display = found ? "none" : "block";
+  }
+
+  searchInput.addEventListener("input", applyExtensionFilters);
+
+  categoryCheckboxes.forEach(function (box) {
+    box.addEventListener("change", applyExtensionFilters);
   });
 </script>
 <script>
-  const extensionCards = document.querySelectorAll(".extensionCard");
-  document.addEventListener("DOMContentLoaded", () => {
-    extensionCards.forEach((card) => {
-      card.style.display = "block";
+  (function () {
+    var button = document.getElementById("extensions-category-sort");
+    var container = document.getElementById("extensions-category-div");
+    if (!button || !container) return;
+
+    var order = "none";
+
+    button.addEventListener("click", function () {
+      order = order === "none" ? "desc" : order === "desc" ? "asc" : "none";
+      applyOrder(order);
+      updateButton(order);
     });
+
+    function applyOrder(order) {
+      // Back to name order, following whichever direction the page is sorted in.
+      if (order === "none") {
+        sortCategoryCheckboxes(sortSelect.value === "desc" ? -1 : 1);
+        return;
+      }
+
+      var items = Array.prototype.slice.call(
+        container.querySelectorAll(".input-container")
+      );
+      items.sort(function (a, b) {
+        var countA = Number(a.dataset.count) || 0;
+        var countB = Number(b.dataset.count) || 0;
+        return order === "asc" ? countA - countB : countB - countA;
+      });
+      items.forEach(function (el) {
+        container.appendChild(el);
+      });
+    }
+    function updateButton(order) {
+      var baseLabel = "Sort categories by count";
+      var suffix = "";
+
+      if (order === "desc") {
+        suffix = " (high to low)";
+      } else if (order === "asc") {
+        suffix = " (low to high)";
+      }
+
+      button.classList.toggle("active", order !== "none");
+      button.setAttribute("aria-label", baseLabel + suffix);
+      button.setAttribute("data-order", order);
+    }
+  })();
+
+  (function () {
+    var toggle = document.getElementById("extensions-filter-toggle");
+    var panel = document.getElementById("extensions-filter-panel");
+    var closeButton = document.getElementById("extensions-filter-close");
+    if (!toggle || !panel) return;
+
+    var STACK_BREAKPOINT = 770;
+    var PANEL_MARGIN = 8;
+    var PANEL_VIEWPORT_FILL = 0.7;
+
+    function positionPanel() {
+      if (window.innerWidth > STACK_BREAKPOINT) return;
+
+      var viewportHeight = window.innerHeight;
+      var rect = toggle.getBoundingClientRect();
+
+      // Cap the height against window.innerHeight instead of leaving it to the
+      // CSS `vh` unit, which mobile browsers resolve against the viewport with
+      // the URL bar hidden. Sizing and placement then share one measure of the
+      // viewport, so the clamp below always leaves the panel fully on screen.
+      panel.style.maxHeight =
+        Math.floor(viewportHeight * PANEL_VIEWPORT_FILL) + "px";
+
+      var maxTop = viewportHeight - panel.offsetHeight - PANEL_MARGIN;
+      var maxLeft = window.innerWidth - panel.offsetWidth - PANEL_MARGIN;
+      panel.style.top =
+        Math.max(PANEL_MARGIN, Math.min(rect.bottom + PANEL_MARGIN, maxTop)) +
+        "px";
+      panel.style.left =
+        Math.max(PANEL_MARGIN, Math.min(rect.left, maxLeft)) + "px";
+    }
+
+    // The inline sizing above belongs to the floating mobile panel only; clear
+    // it so it cannot clip the static sidebar once the layout goes wide again.
+    function resetPanel() {
+      panel.style.top = "";
+      panel.style.left = "";
+      panel.style.maxHeight = "";
+    }
+
+    // The panel is only a dialog while it floats on narrow screens; on wide
+    // screens it is the static sidebar and keeps its plain landmark role.
+    function setOpen(open) {
+      var floating = open && window.innerWidth <= STACK_BREAKPOINT;
+
+      panel.classList.toggle("show", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+
+      if (floating) {
+        panel.setAttribute("role", "dialog");
+        positionPanel();
+        var firstCheckbox = panel.querySelector("input[type='checkbox']");
+        if (firstCheckbox) firstCheckbox.focus({ preventScroll: true });
+      } else {
+        panel.removeAttribute("role");
+      }
+    }
+
+    toggle.addEventListener("click", function () {
+      setOpen(!panel.classList.contains("show"));
+    });
+
+    if (closeButton) {
+      closeButton.addEventListener("click", function () {
+        setOpen(false);
+        toggle.focus();
+      });
+    }
+    document.addEventListener("click", function (event) {
+      if (!panel.classList.contains("show")) return;
+      if (panel.contains(event.target) || toggle.contains(event.target)) return;
+      setOpen(false);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && panel.classList.contains("show")) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > STACK_BREAKPOINT) {
+        setOpen(false);
+        resetPanel();
+      } else if (panel.classList.contains("show")) {
+        positionPanel();
+      }
+    });
+
+    var repositionQueued = false;
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (!panel.classList.contains("show") || repositionQueued) return;
+        repositionQueued = true;
+        window.requestAnimationFrame(function () {
+          positionPanel();
+          repositionQueued = false;
+        });
+      },
+      { passive: true }
+    );
+  })();
+
+  document.addEventListener("DOMContentLoaded", () => {
+
+    categoryCheckboxes.forEach((box) => {
+      box.checked = false;
+    });
+
+    sortSelect.value = "asc";
+    applySort(sortSelect.value);
+    applyExtensionFilters();
   });
 </script>
 <script src="/assets/js/catalog-modal.js"></script>
