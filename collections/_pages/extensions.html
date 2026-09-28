@@ -78,24 +78,24 @@ published: true
 </style>
 
 {% comment %}
-  Keep only the categories that have something to list, so the navigator never
-  links to an empty section, and order them alphabetically to match the A-Z sort
-  the page loads with. A new extension type therefore renders without a change
-  here.
+  Build the displayable list once; the sidebar, badges and sections all read
+  from it. Extensions without a `type` fall into "Other". Categories are sorted
+  alphabetically to match the A-Z sort the page loads with, so a new extension
+  type renders without a change here.
 {% endcomment %}
-{% assign categories = "" | split: "" %}
+{% assign listed = "" | split: "" %}
 {% for extension in site.extensions %}
-  {% if extension.extensionInfo or extension.patternInfo and extension.status != "coming-soon" %}
-    {% if extension.type %}
-      {% unless categories contains extension.type %}
-        {% assign categories = categories | push: extension.type %}
-      {% endunless %}
-    {% endif %}
+  {% if extension.extensionInfo or extension.patternInfo %}
+    {% assign listed = listed | push: extension %}
   {% endif %}
 {% endfor %}
-{% assign categories = categories | sort_natural %}
+{% assign categories = listed | group_by_exp: "e", "e.type | default: 'Other'" | sort_natural: "name" %}
 
 
+{% include partials/extension-header.html
+  title="Meshery Extensions"
+  description="Discover extensions that expand Meshery's capabilities across cloud native infrastructure, GitOps, collaboration, and more."
+%}
 <div class="section-container">
   <div class="extensions-toolbar">
     {% include view-all.html %}
@@ -163,24 +163,17 @@ published: true
         </p>
 
         <div id="extensions-category-div">
-          {% for type in categories %}
-          {% assign type_count = 0 %}
-          {% for extension in site.extensions %}
-            {% if extension.type == type %}{% if extension.extensionInfo or extension.patternInfo and extension.status
-            != "coming-soon" %}
-            {% assign type_count = type_count | plus: 1 %}
-            {% endif %}{% endif %}
-          {% endfor %}
-          <div class="input-container" data-count="{{ type_count }}">
+          {% for group in categories %}
+          <div class="input-container" data-count="{{ group.size }}">
             <input
               type="checkbox"
               name="extension-category"
-              value="{{ type }}"
-              id="category-{{ type | slugify }}"
+              value="{{ group.name }}"
+              id="category-{{ group.name | slugify }}"
             />
-            <label for="category-{{ type | slugify }}">
-              <div class="name">{{ type }}</div>
-              <div class="badge">{{ type_count }}</div>
+            <label for="category-{{ group.name | slugify }}">
+              <div class="name">{{ group.name }}</div>
+              <div class="badge">{{ group.size }}</div>
             </label>
           </div>
           {% endfor %}
@@ -193,23 +186,22 @@ published: true
         No results found
       </h2>
 
-      {% for type in categories %}
-      <section class="extension-category" id="{{ type | slugify }}" data-category="{{ type }}">
+      {% for group in categories %}
+      <section class="extension-category" id="{{ group.name | slugify }}" data-category="{{ group.name }}">
         <div class="category-divider">
           <hr class="category-divider-line" />
-          <span class="chip category-divider-chip {{ type | upcase }}">
-            <small class="pattern-type">{{ type | upcase }}</small>
+          <span class="chip category-divider-chip {{ group.name | upcase }}">
+            <small class="pattern-type">{{ group.name | upcase }}</small>
           </span>
         </div>
 
         <div class="row">
-          {% for extension in site.extensions %}{% if extension.type == type %}{% if extension.extensionInfo or
-          extension.patternInfo and extension.status != "coming-soon" %}
+          {% for extension in group.items %}
           {% assign last = extension.compatibility | last %}
           <div
             class="column column-lg extensionCard"
             filter="{{ extension.name }}"
-            type="{{ extension.type }}"
+            type="{{ group.name }}"
             technology='[{% for item in extension.compatibility %}"{{ item | downcase | replace: ' ', '-' }}"{% if item != last %},{% endif %}{% endfor %}]'
             status="{{ extension.status }}"
             style="display: none"
@@ -218,7 +210,7 @@ published: true
             <!-- modal included -->
             {% include extensions/modal.html %}
           </div>
-          {% endif %}{% endif %}{% endfor %}
+          {% endfor %}
         </div>
       </section>
       {% endfor %}
@@ -235,6 +227,27 @@ published: true
   const notFound = document.getElementById("not-found");
   const sortSelect = document.getElementById("sort");
   const resultsContainer = document.querySelector(".extensions-results");
+  const categoryCountSort = document.getElementById("extensions-category-sort");
+
+  // Orders the sidebar checkboxes by name so they follow the section order.
+  // Skipped while a count sort is active, since that order was chosen explicitly.
+  function sortCategoryCheckboxes(direction) {
+    var container = document.getElementById("extensions-category-div");
+    if (!container) return;
+
+    Array.from(container.querySelectorAll(".input-container"))
+      .sort(function (a, b) {
+        return (
+          direction *
+          a
+            .querySelector("input")
+            .value.localeCompare(b.querySelector("input").value)
+        );
+      })
+      .forEach(function (item) {
+        container.appendChild(item);
+      });
+  }
 
   // Sorting is applied within each category so that the section dividers keep
   // describing the cards underneath them, and to the sections themselves so the
@@ -279,6 +292,10 @@ published: true
       .forEach(function (section) {
         resultsContainer.appendChild(section);
       });
+
+    if (!categoryCountSort || categoryCountSort.dataset.order === "none") {
+      sortCategoryCheckboxes(direction);
+    }
   }
 
   sortSelect.addEventListener("change", function () {
@@ -336,22 +353,17 @@ published: true
     if (!button || !container) return;
 
     var order = "none";
-    var originalOrder = null;
 
     button.addEventListener("click", function () {
-      if (!originalOrder) {
-        originalOrder = Array.prototype.slice.call(container.children);
-      }
       order = order === "none" ? "desc" : order === "desc" ? "asc" : "none";
       applyOrder(order);
       updateButton(order);
     });
 
     function applyOrder(order) {
+      // Back to name order, following whichever direction the page is sorted in.
       if (order === "none") {
-        originalOrder.forEach(function (el) {
-          container.appendChild(el);
-        });
+        sortCategoryCheckboxes(sortSelect.value === "desc" ? -1 : 1);
         return;
       }
 
@@ -423,11 +435,22 @@ published: true
       panel.style.maxHeight = "";
     }
 
+    // The panel is only a dialog while it floats on narrow screens; on wide
+    // screens it is the static sidebar and keeps its plain landmark role.
     function setOpen(open) {
+      var floating = open && window.innerWidth <= STACK_BREAKPOINT;
+
       panel.classList.toggle("show", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
 
-      if (open) positionPanel();
+      if (floating) {
+        panel.setAttribute("role", "dialog");
+        positionPanel();
+        var firstCheckbox = panel.querySelector("input[type='checkbox']");
+        if (firstCheckbox) firstCheckbox.focus({ preventScroll: true });
+      } else {
+        panel.removeAttribute("role");
+      }
     }
 
     toggle.addEventListener("click", function () {
