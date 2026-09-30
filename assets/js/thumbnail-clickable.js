@@ -7,8 +7,7 @@ function toggleFullScreenImage(patternId, patternType) {
     createFullScreenContainer(patternId, patternType);
     document.body.style.overflow = "hidden";
   } else {
-    document.body.removeChild(fullScreenContainer);
-    document.body.style.overflow = "auto";
+    fullScreenContainer.click();
   }
 }
 
@@ -56,8 +55,21 @@ function createFullScreenContainer(patternId, patternType){
   fullScreenContainer.appendChild(fullScreenImage);
 
   document.body.appendChild(fullScreenContainer);
-  fullScreenContainer.onclick = function () {
+
+function closeFullScreen() {
+  if (document.body.contains(fullScreenContainer)) {
     document.body.removeChild(fullScreenContainer);
     document.body.style.overflow = "auto";
-  };
+    document.removeEventListener("keydown", handleEscape);
+  }
+}
+
+function handleEscape(event) {
+  if (event.key === "Escape") {
+    closeFullScreen();
+  }
+}
+
+document.addEventListener("keydown", handleEscape);
+fullScreenContainer.onclick = closeFullScreen;
 }
