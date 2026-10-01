@@ -195,7 +195,51 @@ components:
   colorIcon: assets/images/integration/kubedb/components/weaviate-version/icons/color/weaviate-version-color.svg
   whiteIcon: assets/images/integration/kubedb/components/weaviate-version/icons/white/weaviate-version-white.svg
   description: 
-componentsCount: 46
+- name: certificate
+  colorIcon: assets/images/integration/kubedb/components/certificate/icons/color/certificate-color.svg
+  whiteIcon: assets/images/integration/kubedb/components/certificate/icons/white/certificate-white.svg
+  description: 
+- name: issuer
+  colorIcon: assets/images/integration/kubedb/components/issuer/icons/color/issuer-color.svg
+  whiteIcon: assets/images/integration/kubedb/components/issuer/icons/white/issuer-white.svg
+  description: 
+- name: aerospike-version
+  colorIcon: assets/images/integration/kubedb/components/aerospike-version/icons/color/aerospike-version-color.svg
+  whiteIcon: assets/images/integration/kubedb/components/aerospike-version/icons/white/aerospike-version-white.svg
+  description: 
+- name: document-db-version
+  colorIcon: assets/images/integration/kubedb/components/document-db-version/icons/color/document-db-version-color.svg
+  whiteIcon: assets/images/integration/kubedb/components/document-db-version/icons/white/document-db-version-white.svg
+  description: 
+- name: branch
+  colorIcon: assets/images/integration/kubedb/components/branch/icons/color/branch-color.svg
+  whiteIcon: assets/images/integration/kubedb/components/branch/icons/white/branch-white.svg
+  description: 
+- name: branch-work
+  colorIcon: assets/images/integration/kubedb/components/branch-work/icons/color/branch-work-color.svg
+  whiteIcon: assets/images/integration/kubedb/components/branch-work/icons/white/branch-work-white.svg
+  description: 
+- name: maria-db-migration
+  colorIcon: assets/images/integration/kubedb/components/maria-db-migration/icons/color/maria-db-migration-color.svg
+  whiteIcon: assets/images/integration/kubedb/components/maria-db-migration/icons/white/maria-db-migration-white.svg
+  description: 
+- name: mongo-db-migration
+  colorIcon: assets/images/integration/kubedb/components/mongo-db-migration/icons/color/mongo-db-migration-color.svg
+  whiteIcon: assets/images/integration/kubedb/components/mongo-db-migration/icons/white/mongo-db-migration-white.svg
+  description: 
+- name: mssql-server-migration
+  colorIcon: assets/images/integration/kubedb/components/mssql-server-migration/icons/color/mssql-server-migration-color.svg
+  whiteIcon: assets/images/integration/kubedb/components/mssql-server-migration/icons/white/mssql-server-migration-white.svg
+  description: 
+- name: my-sql-migration
+  colorIcon: assets/images/integration/kubedb/components/my-sql-migration/icons/color/my-sql-migration-color.svg
+  whiteIcon: assets/images/integration/kubedb/components/my-sql-migration/icons/white/my-sql-migration-white.svg
+  description: 
+- name: postgres-migration
+  colorIcon: assets/images/integration/kubedb/components/postgres-migration/icons/color/postgres-migration-color.svg
+  whiteIcon: assets/images/integration/kubedb/components/postgres-migration/icons/white/postgres-migration-white.svg
+  description: 
+componentsCount: 57
 relationships: 
 relationshipsCount: 0
 featureList: [
