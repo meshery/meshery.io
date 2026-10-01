@@ -2,11 +2,13 @@
 version: alpha
 name: Meshery.io
 description: Meshery.io is the website for Meshery, an open-source, CNCF project that provides a self-service engineering platform for designing, managing, and operating cloud-native infrastructure and applications.
+
 colors:
   brand-color-primary: '#00D3A9'
   brand-color-secondary: '#00B39F'
   brand-color-secondary-50: 'rgba(0, 179, 159, 0.5)'
   brand-color-tertiary: '#477E96'
+  brand-color-quaternary: '#359AC0'
   color-white: '#FFFFFF'
 
   color-primary-light: '#FFFFFF'
@@ -69,14 +71,12 @@ dark-mode:
 
   scrollbar-color: '#00D3A9'
 
-
 dark-mode-gradients:
   background-light: 'linear-gradient(to right top, #3D3D3D, #343434, #2B2B2B, #222222, #1A1A1A, #181818, #161616, #141414, #181818, #1C1C1C, #212121, #252525)'
   background-grey: 'linear-gradient(to right top, #868E96, #767E86, #676E76, #585F66, #495057)'
   background-grey-secondary: 'linear-gradient(to right bottom, #DEE2E6, #D2D7DC, #C5CBD1, #B9C0C7, #ADB5BD)'
   background-nav-dropdown: 'linear-gradient(to right top, #3D3D3D, #343434, #2B2B2B, #222222, #1A1A1A)'
 
- 
 typography:
   headingPrimary:
     fontFamily: '"Qanelas Soft", "Open Sans", sans-serif'
@@ -84,41 +84,48 @@ typography:
     fontWeight: 300
     lineHeight: '1.2'
     letterSpacing: 'normal'
+
   headingSecondary:
     fontFamily: '"Qanelas Soft", "Open Sans", sans-serif'
     fontSize: '2.2em'
     fontWeight: 300
     lineHeight: '1.2'
     letterSpacing: 'normal'
+
   headingTertiary:
     fontFamily: '"Qanelas Soft", "Open Sans", sans-serif'
     fontSize: '2rem'
     fontWeight: 400
     lineHeight: '1.2'
     letterSpacing: 'normal'
+
   bodyCopy:
     fontFamily: '"Qanelas Soft", "Open Sans", sans-serif'
     fontSize: '1.38em'
     fontWeight: 400
     lineHeight: '1.4em'
     letterSpacing: 'normal'
+
   strongHeading:
     fontFamily: '"Qanelas Soft", "Open Sans", sans-serif'
     fontWeight: 700
     lineHeight: '1.2'
     letterSpacing: 'normal'
+
   metadata:
     fontFamily: '"Qanelas Soft", "Open Sans", sans-serif'
     fontSize: '0.75rem'
     fontWeight: 400
     lineHeight: '1.5rem'
     letterSpacing: 'normal'
+
   codeInline:
     fontFamily: 'Consolas, monospace'
     fontSize: '0.75rem'
     fontWeight: 400
     lineHeight: '1.5rem'
     letterSpacing: 'normal'
+
 rounded:
   xs: 3px
   sm: 5px
@@ -127,6 +134,7 @@ rounded:
   xl: 15px
   xxl: 20px
   full: 9999px
+
 spacing:
   base: 8px
   xxs: 4px
@@ -137,6 +145,7 @@ spacing:
   xl: 24px
   xxl: 32px
   xxxl: 40px
+
 strokes:
   light-default: '#ECF0F3'
   light-strong: '#3D4F57'
@@ -144,6 +153,7 @@ strokes:
   dark-default: '#15272F'
   dark-strong: '#D2D8DA'
   dark-normal: '#495057'
+
 status-colors:
   info: '#477E96'
   success: '#00D3A9'
@@ -181,134 +191,155 @@ backgrounds:
   integrations-3d-bg-dark: '#222222'
   background-image-light: 'none'
   background-image-dark: 'radial-gradient(circle 100px at 50% 50%, rgba(167, 173, 180, 0.78) 0%, rgba(103, 110, 118, 0.79) 80%, rgba(103, 110, 118, 1) 100%)'
-  
+
 components:
   app-shell-light:
     backgroundColor: '#FFFFFF'
     textColor: '#000000'
     typography: 'Qanelas Soft, Open Sans, sans-serif'
     padding: '0'
+
   app-shell-dark:
     backgroundColor: '#212529'
     textColor: '#F1F3F5'
     typography: 'Qanelas Soft, Open Sans, sans-serif'
     padding: '0'
+
   navigation-bar-light:
     backgroundColor: '#FFFFFF'
     textColor: '#343A40'
     typography: 'Qanelas Soft, Open Sans, sans-serif'
     padding: '0 2vw'
+
   navigation-bar-dark:
     backgroundColor: '#212529'
     textColor: '#F1F3F5'
     typography: 'Qanelas Soft, Open Sans, sans-serif'
     padding: '0 2vw'
+
   button-primary:
     backgroundColor: '#00D3A9'
     textColor: '#FFFFFF'
     typography: 'Qanelas Soft, Open Sans, sans-serif'
     rounded: 7px
-    padding: 10px 30px
+    padding: '10px 30px'
+
   button-primary-hover:
     backgroundColor: '#00B39F'
     textColor: '#FFFFFF'
     rounded: 7px
+
   button-secondary:
     backgroundColor: '#EBC017'
     textColor: '#FFFFFF'
     rounded: 7px
-    padding: 10px 30px
+    padding: '10px 30px'
+
   button-secondary-hover:
     backgroundColor: '#C09E0F'
     textColor: '#FFFFFF'
     rounded: 7px
+
   card-standard-light:
     backgroundColor: '#F8F9FA'
     textColor: '#000000'
     rounded: 15px
-    padding: 1.5rem
+    padding: '1.5rem'
+
   card-standard-dark:
     backgroundColor: '#343A40'
     textColor: '#FFFFFF'
     rounded: 15px
-    padding: 1.5rem
+    padding: '1.5rem'
+
   tab-selected-light:
     backgroundColor: '#ECF0F3'
     textColor: '#000000'
     rounded: 4px
-    padding: 10px
+    padding: '10px'
+
   tab-selected-dark:
     backgroundColor: '#495057'
     textColor: '#FFFFFF'
     rounded: 4px
-    padding: 10px
+    padding: '10px'
+
   input-field-light:
     backgroundColor: '#FFFFFF'
     textColor: '#000000'
     rounded: 8px
-    padding: 14px 22px
+    padding: '14px 22px'
+
   input-field-dark:
     backgroundColor: '#212529'
     textColor: '#FFFFFF'
     rounded: 8px
-    padding: 14px 22px
+    padding: '14px 22px'
+
   checkbox:
     backgroundColor: transparent
     textColor: '#000000'
     rounded: 3px
     size: 20px
+
   modal-header-light:
     backgroundColor: 'linear-gradient(90deg, #477E96 0%, #455A64 100%)'
     textColor: '#FFFFFF'
     rounded: 8px
-    padding: 1rem 1.5rem
+    padding: '1rem 1.5rem'
+
   modal-header-dark:
     backgroundColor: 'linear-gradient(90deg, #28353A 0%, #3D4F57 100%)'
     textColor: '#FFFFFF'
     rounded: 8px
-    padding: 1rem 1.5rem
+    padding: '1rem 1.5rem'
+
   panel-floating-light:
     backgroundColor: '#ECF0F3'
     textColor: '#000000'
     rounded: 20px
-    padding: 1rem
+    padding: '1rem'
+
   panel-floating-dark:
     backgroundColor: '#222222'
     textColor: '#FFFFFF'
     rounded: 20px
-    padding: 1rem
+    padding: '1rem'
+
   table-header-light:
     backgroundColor: '#F1F3F5'
     textColor: '#000000'
-    padding: 1rem
+    padding: '1rem'
+
   table-header-dark:
     backgroundColor: '#343A40'
     textColor: '#FFFFFF'
-    padding: 1rem
+    padding: '1rem'
+
   badge-community:
     backgroundColor: '#00B39F'
     textColor: '#FFFFFF'
     rounded: 9999px
-    padding: 4px 8px
+    padding: '4px 8px'
+
   badge-official:
     backgroundColor: '#EBC017'
     textColor: '#FFFFFF'
     rounded: 9999px
-    padding: 4px 8px
+    padding: '4px 8px'
+
   badge-verified:
     backgroundColor: '#00D3A9'
     textColor: '#FFFFFF'
     rounded: 9999px
-    padding: 4px 8px
+    padding: '4px 8px'
 ---
-
-
 
 # Meshery Design System
 
 ## Overview
 
-Meshery.io is a Jekyll site for engineers, operators, contributors, and the wider cloud-native community. Its visual system is content-led and Sass-driven: neutral surfaces establish structure, Qanelas Soft carries the voice, and teal and saffron provide focused emphasis.
+Meshery.io is a Jekyll-based site for engineers, operators, contributors, and the wider cloud-native community. Its visual system is content-led and Sass-driven: neutral surfaces establish structure, Qanelas Soft carries the voice, and teal and saffron provide focused emphasis.
 
 The front matter above is the source of truth for the documented tokens. The guidance below explains how those tokens should be used in pages, layouts, includes, and Sass without inventing a second design system.
 
@@ -357,7 +388,6 @@ Meshery.io uses a practical 8px-based rhythm, with 4px, 8px, 12px, 16px, 20px, 2
 - `.container` is constrained to `1140px` on wide layouts.
 - `.text-container` is constrained to `750px` for readable text blocks.
 - Text containers use `1.5rem` horizontal padding.
-- Navigation uses `2vw` horizontal padding and switches behavior at project breakpoints.
 - Catalog, blog, and program surfaces may use their own grid and spacing rules; preserve their local density when extending them.
 
 ### Whitespace
