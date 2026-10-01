@@ -8,7 +8,6 @@ colors:
   brand-color-secondary: '#00B39F'
   brand-color-secondary-50: 'rgba(0, 179, 159, 0.5)'
   brand-color-tertiary: '#477E96'
-  brand-color-quaternary: '#359AC0'
   color-white: '#FFFFFF'
 
   color-primary-light: '#FFFFFF'
