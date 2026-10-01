@@ -1,37 +1,40 @@
 ﻿<section class="leaderboard-section">
 
-    <div class="leaderboard-controls">
-        <div class="period-toggle">
-            <label for="period-select" class="visually-hidden">Leaderboard time period</label>
-            <select id="period-select" class="period-select" aria-label="Leaderboard time period">
-                <option value="weekly">Week</option>
-                <option value="monthly">Month</option>
-                <option value="yearly">Year</option>
-                <option value="all">All Time</option>
-            </select>
-        </div>
-        <label for="leaderboard-filter" class="visually-hidden">Search leaderboard by username</label>
-        <input type="text" id="leaderboard-filter" class="leaderboard-filter" placeholder="Search username" />
-    </div>
-
-    <!-- Top 3 Cards -->
+    <!-- Top 3 Podium -->
     <div class="leaderboard-podium" id="leaderboard-podium"></div>
 
-    <!-- Rank 4+ Table -->
-    <div class="leaderboard-wrapper">
-        <table class="leaderboard-table" id="leaderboard-table">
-            <thead>
-                <tr>
-                    <th scope="col">Rank</th>
-                    <th scope="col">Member</th>
-                    <th scope="col">Likes Received</th>
-                    <th scope="col">Posts</th>
-                    <th scope="col">Solutions Accepted</th>
-                    <th scope="col">Total Points</th>
-                </tr>
-            </thead>
-            <tbody id="leaderboard-tbody"></tbody>
-        </table>
+    <div class="leaderboard-card">
+
+        <div class="leaderboard-controls">
+            <div class="period-toggle">
+                <label for="period-select" class="visually-hidden">Leaderboard time period</label>
+                <select id="period-select" class="period-select" aria-label="Leaderboard time period">
+                    <option value="weekly">Week</option>
+                    <option value="monthly">Month</option>
+                    <option value="yearly">Year</option>
+                    <option value="all">All Time</option>
+                </select>
+            </div>
+            <label for="leaderboard-filter" class="visually-hidden">Search leaderboard by username</label>
+            <input type="text" id="leaderboard-filter" class="leaderboard-filter" placeholder="Search username" />
+        </div>
+
+        <div class="leaderboard-wrapper">
+            <table class="leaderboard-table" id="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Member</th>
+                        <th scope="col">Likes Received</th>
+                        <th scope="col">Posts</th>
+                        <th scope="col">Solutions Accepted</th>
+                        <th scope="col">Total Points</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-tbody"></tbody>
+            </table>
+        </div>
+
     </div>
 
     <p class="leaderboard-empty-state" id="leaderboard-empty-state" style="display:none;">
@@ -49,7 +52,7 @@
 <script>
     (function () {
         var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
         function fmt(d, includeYear) {
             var str = MONTHS[d.getMonth()] + ' ' + d.getDate();
@@ -59,25 +62,25 @@
             return str;
         }
 
-        var now   = new Date();
+        var now = new Date();
         var today = fmt(now);
 
-        var week  = new Date(now); week.setDate(week.getDate() - 7);
+        var week = new Date(now); week.setDate(week.getDate() - 7);
         var month = new Date(now); month.setDate(month.getDate() - 30);
-        var year  = new Date(now); year.setFullYear(year.getFullYear() - 1);
+        var year = new Date(now); year.setFullYear(year.getFullYear() - 1);
 
         var ranges = {
-            weekly:  fmt(week) + ' \u2013 ' + today,
+            weekly: fmt(week) + ' \u2013 ' + today,
             monthly: fmt(month) + ' \u2013 ' + today,
-            yearly:  fmt(year, true) + ' \u2013 ' + today,
-            all:     ''
+            yearly: fmt(year, true) + ' \u2013 ' + today,
+            all: ''
         };
 
         var names = {
-            weekly:  'Week',
+            weekly: 'Week',
             monthly: 'Month',
-            yearly:  'Year',
-            all:     'All Time'
+            yearly: 'Year',
+            all: 'All Time'
         };
 
         var periodSelectEl = document.getElementById('period-select');
@@ -102,29 +105,13 @@
         var defaultPeriod = {{ site.data.leaderboard.default_period | jsonify
     }};
     var currentPeriod = defaultPeriod || 'weekly';
+    var CROWN_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 6l5.5 4L12 4l3.5 6L21 6l-2 10H5zm0 2h14v2H5v-2z"/></svg>';
     var fallbackAvatar = '/assets/images/nav-icons/community.svg';
-    var periodDescriptions = {
-      weekly:  'over the past 7 days',
-      monthly: 'over the past 30 days',
-      yearly:  'over the past year',
-      all:     'across all time'
-    };
 
     function escapeHtml(str) {
         var div = document.createElement('div');
         div.textContent = str == null ? '' : String(str);
         return div.innerHTML.replace(/"/g, '&quot;');
-    }
-
-    function updatePeriodDescription(period) {
-      var phraseEl = document.getElementById('leaderboard-period-phrase');
-      if (phraseEl) phraseEl.textContent = periodDescriptions[period] || periodDescriptions.weekly;
-    }
-
-    function medalClass(rank) {
-        if (rank === 1) return 'medal-gold';
-        if (rank === 2) return 'medal-silver';
-        return 'medal-bronze';
     }
 
     function renderPodium(users) {
@@ -135,8 +122,8 @@
             return (
                 '<div class="podium-card podium-rank-' + user.rank + '">' +
                 '<div class="podium-card-body">' +
+                (user.rank === 1 ? '<span class="podium-crown">' + CROWN_SVG + '</span>' : '') +
                 '<div class="podium-avatar-wrapper">' +
-                '<span class="medal ' + medalClass(user.rank) + '">' + user.rank + '</span>' +
                 '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener">' +
                 '<img class="podium-avatar" src="' + escapeHtml(user.avatar) + '" alt="' + escapeHtml(user.username) + '" onerror="this.onerror=null; this.src=\'' + fallbackAvatar + '\';" />' +
                 '</a>' +
@@ -144,12 +131,8 @@
                 '<a href="' + escapeHtml(user.profile_url) + '" target="_blank" rel="noopener" class="podium-username-link">' +
                 '<span class="podium-username">' + escapeHtml(user.username) + '</span>' +
                 '</a>' +
-                '<div class="podium-stats">' +
-                '<div class="podium-stat"><span class="podium-stat-label">Likes</span><span class="podium-stat-value">' + (Number(user.likes) || 0) + '</span></div>' +
-                '<div class="podium-stat"><span class="podium-stat-label">Posts</span><span class="podium-stat-value">' + (Number(user.posts) || 0) + '</span></div>' +
-                '<div class="podium-stat"><span class="podium-stat-label">Solutions</span><span class="podium-stat-value">' + (Number(user.solutions) || 0) + '</span></div>' +
-                '</div>' +
                 '<div class="podium-score">' + (Number(user.score) || 0) + ' pts</div>' +
+                '<div class="podium-block"><span class="podium-block-rank">' + user.rank + '</span></div>' +
                 '</div>' +
                 '</div>'
             );
@@ -158,9 +141,9 @@
 
     function renderTable(users) {
         var tbody = document.getElementById('leaderboard-tbody');
-        var rest = users.filter(function (u) { return u.rank > 3; });
+        var sorted = users.slice().sort(function (a, b) { return a.rank - b.rank; });
 
-        tbody.innerHTML = rest.map(function (user) {
+        tbody.innerHTML = sorted.map(function (user) {
             return (
                 '<tr class="leaderboard-row">' +
                 '<td class="leaderboard-rank">' + user.rank + '</td>' +
@@ -173,7 +156,7 @@
                 '<td>' + (Number(user.likes) || 0) + '</td>' +
                 '<td>' + (Number(user.posts) || 0) + '</td>' +
                 '<td>' + (Number(user.solutions) || 0) + '</td>' +
-                '<td class="leaderboard-score">' + (Number(user.score) || 0) + '</td>' +
+                '<td class="leaderboard-score">' + (Number(user.score) || 0) + ' pts</td>' +
                 '</tr>'
             );
         }).join('');
@@ -181,11 +164,10 @@
 
     function renderLeaderboard(period) {
         var users = leaderboardData[period] || [];
-        updatePeriodDescription(period);
         var hasActivity = users.some(function (u) { return u.score > 0; });
         var emptyState = document.getElementById('leaderboard-empty-state');
         var podium = document.getElementById('leaderboard-podium');
-        var wrapper = document.querySelector('.leaderboard-wrapper');
+        var card = document.querySelector('.leaderboard-card');
 
         if (!hasActivity) {
             emptyState.textContent = 'No activity for this period yet.';
@@ -193,13 +175,13 @@
             podium.style.display = 'none';
             podium.innerHTML = '';
             document.getElementById('leaderboard-tbody').innerHTML = '';
-            wrapper.style.display = 'none';
+            card.style.display = 'none';
             return;
         }
 
         emptyState.style.display = 'none';
         podium.style.display = '';
-        wrapper.style.display = '';
+        card.style.display = '';
         renderPodium(users);
         renderTable(users);
         filterLeaderboard();
