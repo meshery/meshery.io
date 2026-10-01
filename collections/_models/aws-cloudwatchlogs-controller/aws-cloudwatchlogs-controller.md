@@ -27,7 +27,15 @@ components:
   colorIcon: assets/images/integration/aws-cloudwatchlogs-controller/components/iam-role-selector/icons/color/iam-role-selector-color.svg
   whiteIcon: assets/images/integration/aws-cloudwatchlogs-controller/components/iam-role-selector/icons/white/iam-role-selector-white.svg
   description: 
-componentsCount: 4
+- name: resource-policy
+  colorIcon: assets/images/integration/aws-cloudwatchlogs-controller/components/resource-policy/icons/color/resource-policy-color.svg
+  whiteIcon: assets/images/integration/aws-cloudwatchlogs-controller/components/resource-policy/icons/white/resource-policy-white.svg
+  description: 
+- name: resource-policy
+  colorIcon: assets/images/integration/aws-cloudwatchlogs-controller/components/resource-policy/icons/color/resource-policy-color.svg
+  whiteIcon: assets/images/integration/aws-cloudwatchlogs-controller/components/resource-policy/icons/white/resource-policy-white.svg
+  description: 
+componentsCount: 6
 relationships: 
 - type: "non-binding"
   kind: "edge"
