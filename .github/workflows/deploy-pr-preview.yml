@@ -6,9 +6,9 @@ on:
     types: [completed]
 
 permissions:
-  contents: write
-  pull-requests: write
-  actions: read
+  contents: none
+  pull-requests: none
+  actions: none
 
 concurrency:
   group: preview-post-build-${{ github.event.workflow_run.head_branch }}
@@ -21,6 +21,8 @@ jobs:
   read-metadata:
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-24.04
+    permissions:
+      actions: read
     outputs:
       pr-number: ${{ steps.pr.outputs.PULL_REQUEST }}
       action: ${{ steps.pr.outputs.ACTION }}
@@ -56,6 +58,10 @@ jobs:
   deploy:
     needs: read-metadata
     runs-on: ubuntu-24.04
+    permissions:
+      actions: read
+      contents: write
+      pull-requests: write
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
@@ -84,6 +90,7 @@ jobs:
           umbrella-dir: pr-preview
           qr-code: false
           comment: false
+          wait-for-pages-deployment: true
           action: ${{ needs.read-metadata.outputs.action == 'closed' && 'remove' || 'deploy' }}
           pr-number: ${{ needs.read-metadata.outputs.pr-number }}
 
@@ -101,6 +108,9 @@ jobs:
     needs: read-metadata
     runs-on: ubuntu-24.04
     if: needs.read-metadata.outputs.action != 'closed'
+    permissions:
+      contents: write
+      pull-requests: write
     outputs:
       removed_prs: ${{ steps.prune-previews.outputs.removed_prs }}
       removed_prs_json: ${{ steps.prune-previews.outputs.removed_prs_json }}
