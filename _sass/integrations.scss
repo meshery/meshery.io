@@ -11,8 +11,8 @@
     overflow: hidden;
 
     & h1 {
-      line-height: 3.75rem;
-      font-size: 3.125rem;
+      line-height: 1.2;
+      font-size: clamp(1.625rem, 6.5vw, 3.125rem);
       font-weight: 700;
       text-align: center;
       position:relative;
@@ -20,7 +20,8 @@
     }
     h2 {
       font-weight: 300;
-      font-size: 2.2em;
+      font-size: clamp(1.25rem, 4.5vw, 2.2rem);
+      line-height: 1.3;
       color: var(--color-secondary-medium);
       z-index:2;
       position:relative;
@@ -75,6 +76,11 @@
     .home-integrations-subtext {
       margin: auto 10vw;
       color: var(--color-secondary-medium);
+      // The .parallel-* wedges are opaque and sit at z-index 2; the sibling
+      // headings opt above them the same way. Without this the subtext is
+      // painted over once the headings are short enough to move it up.
+      position: relative;
+      z-index: 2;
     }
   }
 
