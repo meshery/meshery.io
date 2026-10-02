@@ -32,8 +32,8 @@
   </div>
 
   <div class="modal-image-container">
-
-    <h4>Design Details</h4>
+    {% if pattern.filterInfo %}<h4>Filter Details</h4>{% else %}<h4>Design Details</h4>{% endif %}
+    
       <!-- {% for category in pattern.type %}
         <div>
         <span class="pattern-type">
@@ -50,7 +50,9 @@
         <ul style="list-style: none; padding:0rem; margin:0rem;" class="catalog-item-detail">
 
           <li><p>CATEGORY</p>
+            {{ if pattern.type }}
             <div class="category-tag">{{pattern.type}}</div>
+            {{ endif }}
           </li>
 
           <!-- <li><p>ID</p>
@@ -79,7 +81,9 @@
           </li>
 
           <li><p>VERSION</p>
+            {{ if pattern.publishedVersion }}
             <div class="category-tag">{{ pattern.publishedVersion }}</div>
+            {{ endif }}
           </li>
           <li>
             <p>MODELS</p>
