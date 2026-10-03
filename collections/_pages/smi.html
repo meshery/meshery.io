@@ -190,14 +190,19 @@ heading: Service Mesh Interface Conformance
     $.getJSON(
       "https://cloud.meshery.io/api/smi/results/public",
       (data, status) => {
-        // Disable spinner
         $(".loader").addClass("hide");
 
-        if (status !== "success") return;
+        if (status !== "success") {
+          $("#smi-error").removeClass("hide");
+          return;
+        }
 
         createTable(data.results);
       }
-    );
+    ).fail(() => {
+      $(".loader").addClass("hide");
+      $("#smi-error").removeClass("hide");
+    });
   });
 </script>
 
@@ -556,6 +561,9 @@ heading: Service Mesh Interface Conformance
       <tbody></tbody>
     </table>
     <div class="loader"></div>
+    <p id="smi-error" class="hide" role="alert">
+      Unable to load SMI conformance results. Please try again later.
+    </p>
   </div>
   <div class="mainLegendDiv">
     <div class="legend">
