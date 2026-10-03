@@ -291,7 +291,7 @@ permalink: /integrations
           //
 
           const object = new THREE.Object3D();
-          object.position.x = table[i].col * 140 - 1850;
+          object.position.x = table[i].col * 140 - (cols + 1) * 70;
           object.position.y = -(table[i].row * 180) + 900;
 
           targets.table.push(object);
@@ -358,7 +358,54 @@ permalink: /integrations
         controls = new TrackballControls(camera, renderer.domElement);
         controls.minDistance = 500;
         controls.maxDistance = 6000;
+        controls.noZoom = true;
         controls.addEventListener("change", render);
+
+        // Zoom-to-cursor: zoom centers on where the mouse is pointing
+        renderer.domElement.addEventListener("wheel", function (event) {
+          event.preventDefault();
+
+          const rect = renderer.domElement.getBoundingClientRect();
+          const mouseNDC = new THREE.Vector2(
+            ((event.clientX - rect.left) / rect.width) * 2 - 1,
+            -((event.clientY - rect.top) / rect.height) * 2 + 1
+          );
+
+          if (event.deltaY === 0) return;
+          const zoomFactor = event.deltaY > 0 ? 1.1 : 0.9;
+          const currentDistance = camera.position.distanceTo(controls.target);
+          const newDistance = currentDistance * zoomFactor;
+
+          if (newDistance < controls.minDistance || newDistance > controls.maxDistance) return;
+
+          // Intersect camera ray with the plane through controls.target
+          const raycaster = new THREE.Raycaster();
+          raycaster.setFromCamera(mouseNDC, camera);
+          const planeNormal = new THREE.Vector3()
+            .subVectors(controls.target, camera.position)
+            .normalize();
+          const denom = raycaster.ray.direction.dot(planeNormal);
+          if (Math.abs(denom) < 1e-6) return;
+          const t = currentDistance / denom;
+          const cursorWorld = new THREE.Vector3().copy(camera.position)
+            .add(raycaster.ray.direction.clone().multiplyScalar(t));
+
+          // Pan toward cursor on zoom-in, away on zoom-out
+          const panOffset = new THREE.Vector3()
+            .subVectors(cursorWorld, controls.target)
+            .multiplyScalar(1 - zoomFactor);
+
+          controls.target.add(panOffset);
+          camera.position.add(panOffset);
+
+          // Apply zoom along the look direction
+          const lookDir = new THREE.Vector3()
+            .subVectors(controls.target, camera.position)
+            .normalize();
+          camera.position.copy(controls.target).sub(lookDir.multiplyScalar(newDistance));
+
+          render();
+        }, { passive: false });
 
         const menuElement = document.getElementById("menu");
         menuElement.addEventListener("click", function(e){
