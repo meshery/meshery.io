@@ -121,14 +121,6 @@ function performClientSearch(query) {
     })
     .slice(0, 20);
 
-  // Highlight matches
-  results.forEach(result => {
-    result._formatted = {
-      title: highlightText(result.title, query),
-      excerpt: highlightText(result.excerpt, query)
-    };
-  });
-  
   return results;
 }
 ```
@@ -136,10 +128,27 @@ function performClientSearch(query) {
 ### Highlighting Function
 ```javascript
 function highlightText(text, query) {
-  if (!text) return '';
+  if (!text) return document.createDocumentFragment();
+
+  const fragment = document.createDocumentFragment();
   const escapedQuery = escapeRegex(query);
   const regex = new RegExp(`(${escapedQuery})`, 'gi');
-  return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+  let lastIndex = 0;
+
+  text.replace(regex, (match, _group, offset) => {
+    fragment.appendChild(document.createTextNode(text.slice(lastIndex, offset)));
+
+    const highlight = document.createElement('mark');
+    highlight.className = 'search-highlight';
+    highlight.textContent = match;
+    fragment.appendChild(highlight);
+
+    lastIndex = offset + match.length;
+    return match;
+  });
+
+  fragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+  return fragment;
 }
 ```
 
@@ -159,7 +168,12 @@ function highlightText(text, query) {
    - Query trimmed before processing
    - Debouncing prevents excessive processing
 
-3. **Slug Generation**
+3. **Safe DOM Rendering**
+  - Post metadata is assigned with `textContent` or DOM properties
+  - Search highlights are created as `<mark>` elements
+  - Metadata is never interpolated into `innerHTML`
+
+4. **Slug Generation**
    ```javascript
    function slugify(text) {
      return text.toString().toLowerCase().trim()
