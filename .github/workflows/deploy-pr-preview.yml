@@ -31,7 +31,7 @@ jobs:
           egress-policy: audit
 
       - name: Download build artifact
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8.0.0
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: docs-preview-build
           path: docs-preview-build
@@ -63,12 +63,12 @@ jobs:
           egress-policy: audit
 
       - name: Checkout PR
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: true
 
       - name: Download build artifact
-        uses: actions/download-artifact@70fc10c6e5e1ce46ad2ea6f2b72d43f7d47b13c3 # v8.0.0
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: docs-preview-build
           path: docs-preview-build
@@ -77,25 +77,25 @@ jobs:
 
       - name: Deploy PR preview
         id: preview
-        uses: rossjrw/pr-preview-action@ffa7509e91a3ec8dfc2e5536c4d5c1acdf7a6de9 #1.8.1
+        uses: rossjrw/pr-preview-action@ffa7509e91a3ec8dfc2e5536c4d5c1acdf7a6de9 # v1.8.1
         with:
           source-dir: ./docs-preview-build/_site
           pages-base-url: meshery.io
           umbrella-dir: pr-preview
           qr-code: false
           comment: false
+          wait-for-pages-deployment: false
           action: ${{ needs.read-metadata.outputs.action == 'closed' && 'remove' || 'deploy' }}
           pr-number: ${{ needs.read-metadata.outputs.pr-number }}
 
       - name: Comment preview URL
-        uses: marocchino/sticky-pull-request-comment@67d0dec7b07ed060a405f9b2a64b8ab319fdd7db # v2.9.2
+        uses: marocchino/sticky-pull-request-comment@5770ad5eb8f42dd2c4f34da00c94c5381e49af88 # v3.0.5
         with:
           header: pr-preview
           number: ${{ needs.read-metadata.outputs.pr-number }}
           message: |
-            ${{ needs.read-metadata.outputs.action == 'closed'
-                && 'Preview removed because the pull request was closed.'
-                || format('📖 Pull request preview: {0}', steps.preview.outputs.preview-url) }}
+            ${{ needs.read-metadata.outputs.action == 'closed' && 'Preview removed because the pull request was closed.' || format('🚀 Preview deployment: {0}', steps.preview.outputs.preview-url) }}
+            ${{ needs.read-metadata.outputs.action != 'closed' && format('> *Note: Preview may take a moment (GitHub Pages deployment in progress). Please wait and refresh. Track deployment [here](https://github.com/{0}/deployments)*', github.repository) || '' }}
 
   prune:
     needs: read-metadata
@@ -106,7 +106,7 @@ jobs:
       removed_prs_json: ${{ steps.prune-previews.outputs.removed_prs_json }}
     steps:
       - name: Checkout gh-pages for preview retention
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: gh-pages
           fetch-depth: 0
@@ -199,7 +199,7 @@ jobs:
             } >> "$GITHUB_OUTPUT"
           fi
       - name: Comment on pruned previews
-        uses: actions/github-script@v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           REMOVED_PRS_JSON: ${{ steps.prune-previews.outputs.removed_prs_json }}
           PREVIEW_RETENTION_LIMIT: ${{ env.PREVIEW_RETENTION_LIMIT }}
