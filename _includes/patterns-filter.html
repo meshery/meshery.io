@@ -200,7 +200,7 @@
       <path fill="white" d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/>
     </svg>
       Filters
-      <svg id="arrow-icon" class="arrow-icon-down" style="height:1rem";" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+      <svg id="arrow-icon" class="arrow-icon-down" style="height:1rem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
       <path  fill="white" d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/>
       </svg>
     </button>
@@ -211,7 +211,7 @@
       {% endif %}
     </div>
   </div>
-
+  
   {% if show_technology=="true"%}
   <p id="compatibility-para" class="compatibility-para">
     <span class="filter-heading">
@@ -268,13 +268,15 @@
 
 
   categotyLink.addEventListener("click", showCategory);
-  compatibilityLink.addEventListener("click", showCompatibility);
+  if (compatibilityLink) {
+    compatibilityLink.addEventListener("click", showCompatibility);
+  }
 
   function showCategory() {
     category_div.style.display = "flex";
     category_p.style.display = "grid";
-    comp_p.style.display = "none";
-    comp_div.style.display = "none";
+    if (comp_p) comp_p.style.display = "none";
+    if (comp_div) comp_div.style.display = "none";
     document.getElementById("myDropdown").classList.toggle("show");
     drop_button.style.transform = "rotate(0deg)"
     open = !open
@@ -285,16 +287,6 @@
     category_p.style.display = "none";
     comp_p.style.display = "grid";
     comp_div.style.display = "flex";
-    document.getElementById("myDropdown").classList.toggle("show");
-    drop_button.style.transform = "rotate(0deg)"
-    open = !open
-    return;
-  }
-  function showTechnology() {
-    comp_p.style.display = "none";
-    comp_div.style.display = "none";
-    category_div.style.display = "none";
-    category_p.style.display = "none";
     document.getElementById("myDropdown").classList.toggle("show");
     drop_button.style.transform = "rotate(0deg)"
     open = !open
@@ -338,6 +330,16 @@
       comparison = -1;
     }
     return comparison;
+  }
+
+  function parseTechnologies(attr) {
+    if (!attr) return [];
+    try {
+      const parsed = JSON.parse(attr);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
   }
 
   // sort catalog entries by alphabetically by technology type
@@ -388,14 +390,10 @@
         (patternTypeCardCount[lowerCasePatternType] || 0) + 1;
     }
 
-    const technology = patternCards[i].getAttribute("technology");
-
-    if (technology) {
-      let t = JSON.parse(technology);
-      for (let i = 0; i < t.length; i++) {
-        cardTechnology.add(t[i]);
-        cardCompatibility.push(t[i]);
-      }
+    const technologies = parseTechnologies(patternCards[i].getAttribute("technology"));
+    for (let j = 0; j < technologies.length; j++) {
+      cardTechnology.add(technologies[j]);
+      cardCompatibility.push(technologies[j]);
     }
   }
 
@@ -472,47 +470,49 @@
   // to remove duplicates, a set is used
   cardTechnology = Array.from(new Set(cardTechnology));
   // For creating a list of checkboxes for Technologies section
-  for (let i = 0; i < data.length; i++) {
-    const count = cardCompatibility.filter(
-      (item) => item === data[i].name
-    ).length;
-    // Skip adding the filter to list if it is not used in any of the pattern cards
-    // Skip adding the filter to list if it is already added to the list
-    if (count === 0 || filterEntries.includes(data[i].name)) continue;
+  if (container) {
+    for (let i = 0; i < data.length; i++) {
+      const count = cardCompatibility.filter(
+        (item) => item === data[i].name
+      ).length;
+      // Skip adding the filter to list if it is not used in any of the pattern cards
+      // Skip adding the filter to list if it is already added to the list
+      if (count === 0 || filterEntries.includes(data[i].name)) continue;
 
-    // Add the filter to list
-    filterEntries.push(data[i].name);
+      // Add the filter to list
+      filterEntries.push(data[i].name);
 
-    // Create nodes
-    const inputContainer = document.createElement("div");
-    inputContainer.className = "input-container";
-    inputContainer.dataset.count = count;
-    // Here the categories are generated with a "checkbox" input type
-    const input = document.createElement("input");
-    input.type = "checkbox";
-    input.name = data[i].name;
-    input.value = data[i].name;
-    input.id = data[i].name;
-    if (globalTechnologyList.includes(data[i].name)) {
-      input.checked = true;
+      // Create nodes
+      const inputContainer = document.createElement("div");
+      inputContainer.className = "input-container";
+      inputContainer.dataset.count = count;
+      // Here the categories are generated with a "checkbox" input type
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.name = data[i].name;
+      input.value = data[i].name;
+      input.id = data[i].name;
+      if (globalTechnologyList.includes(data[i].name)) {
+        input.checked = true;
+      }
+      // When technology checkbox is checked or unchecked, updateTechnologyList function is called, followed by showFilterCards function
+      input.onclick = function () {
+        updateTechnologyList(data[i].name);
+        showFilterCards();
+      };
+      inputContainer.appendChild(input);
+      const label = document.createElement("label");
+      let colorImg = "/" + data[i].color.split("/").slice(1).join("/");
+      let whiteImg = "/" + data[i].white.split("/").slice(1).join("/");
+      label.innerHTML = `<img src="${colorImg}" id="logo-dark-light" data-logo-for-dark="${whiteImg ?? colorImg
+        }"data-logo-for-light="${colorImg}" /><div class="name">${data[
+          i
+        ].name.replace(/-/g, " ")}</div><div class="badge">${count}</div>`;
+      label.style.height = "20px";
+      label.setAttribute("for", data[i].name);
+      inputContainer.appendChild(label);
+      container.appendChild(inputContainer);
     }
-    // When technology checkbox is checked or unchecked, updateTechnologyList function is called, followed by showFilterCards function
-    input.onclick = function () {
-      updateTechnologyList(data[i].name);
-      showFilterCards();
-    };
-    inputContainer.appendChild(input);
-    const label = document.createElement("label");
-    let colorImg = "/" + data[i].color.split("/").slice(1).join("/");
-    let whiteImg = "/" + data[i].white.split("/").slice(1).join("/");
-    label.innerHTML = `<img src="${colorImg}" id="logo-dark-light" data-logo-for-dark="${whiteImg ?? colorImg
-      }"data-logo-for-light="${colorImg}" /><div class="name">${data[
-        i
-      ].name.replace(/-/g, " ")}</div><div class="badge">${count}</div>`;
-    label.style.height = "20px";
-    label.setAttribute("for", data[i].name);
-    inputContainer.appendChild(label);
-    container.appendChild(inputContainer);
   }
 
   // This function checks if the gloabalTechnologyList contains the value, and updates the list accordingly..
@@ -555,10 +555,7 @@ function showFilterCards() {
   // First, filter the cards that match our criteria
   const matchingCards = patternCards.filter(card => {
     const type = card.getAttribute("type")?.toLowerCase();
-    const technologyAttr = card.getAttribute("technology");
-
-    // Parse technologies once
-    const technologies = technologyAttr ? JSON.parse(technologyAttr) : [];
+    const technologies = parseTechnologies(card.getAttribute("technology"));
 
     // Check if card matches all filter criteria
     const showCardTech = globalTechnologyList.length === 0 ||
