@@ -41,6 +41,7 @@ var (
 	ErrDecodingContentCode     = "test_code"
 )
 
+// main runs catalog generation and exits unsuccessfully if generation fails.
 func main() {
 	token := os.Getenv("GH_ACCESS_TOKEN")
 	log, err := logger.New("mesheryio_package", logger.Options{
@@ -58,6 +59,7 @@ func main() {
 	}
 }
 
+// runCatalogGeneration fetches catalog patterns and processes each one.
 func runCatalogGeneration(
 	fetchPatterns func() (*designv1beta3.CatalogContentPage, error),
 	processPatternFunc func(designv1beta3.MesheryPattern, string) error,
@@ -90,6 +92,7 @@ func slugify(name string) string {
 	return strings.Trim(s, "-")
 }
 
+// fetchCatalogPatterns retrieves catalog patterns from Meshery Cloud.
 func fetchCatalogPatterns() (*designv1beta3.CatalogContentPage, error) {
 	endpoint := fmt.Sprintf("%s/api/catalog/content/pattern?populate=pattern_file", mesheryCloudBaseURL)
 	resp, err := http.Get(endpoint)
@@ -105,6 +108,7 @@ func fetchCatalogPatterns() (*designv1beta3.CatalogContentPage, error) {
 	return &page, nil
 }
 
+// processPattern writes a catalog pattern and triggers its snapshot workflow.
 func processPattern(pattern designv1beta3.MesheryPattern, token string) error {
 	patternID := pattern.ID.String()
 	patternImageURL := getPatternImageURL(pattern)

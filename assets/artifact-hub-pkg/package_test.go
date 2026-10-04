@@ -8,6 +8,7 @@ import (
 	designv1beta3 "github.com/meshery/schemas/models/v1beta3/design"
 )
 
+// TestRunCatalogGenerationFetchFailure verifies fetch errors are returned.
 func TestRunCatalogGenerationFetchFailure(t *testing.T) {
 	wantErr := errors.New("catalog service unavailable")
 	err := runCatalogGeneration(
@@ -26,6 +27,7 @@ func TestRunCatalogGenerationFetchFailure(t *testing.T) {
 	}
 }
 
+// TestRunCatalogGenerationPatternFailure verifies processing errors stop generation.
 func TestRunCatalogGenerationPatternFailure(t *testing.T) {
 	patterns := []designv1beta3.MesheryPattern{{}, {}, {}}
 	page := &designv1beta3.CatalogContentPage{Patterns: &patterns}
@@ -55,6 +57,7 @@ func TestRunCatalogGenerationPatternFailure(t *testing.T) {
 	}
 }
 
+// TestRunCatalogGenerationSuccess verifies all patterns process successfully.
 func TestRunCatalogGenerationSuccess(t *testing.T) {
 	patterns := []designv1beta3.MesheryPattern{{}, {}}
 	page := &designv1beta3.CatalogContentPage{Patterns: &patterns}
