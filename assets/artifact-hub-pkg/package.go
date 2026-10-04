@@ -52,25 +52,36 @@ func main() {
 		os.Exit(1)
 	}
 
-	page, err := fetchCatalogPatterns()
-	if err != nil {
+	if err := runCatalogGeneration(fetchCatalogPatterns, processPattern, token); err != nil {
 		log.Error(err)
-		return
+		os.Exit(1)
+	}
+}
+
+func runCatalogGeneration(
+	fetchPatterns func() (*designv1beta3.CatalogContentPage, error),
+	processPatternFunc func(designv1beta3.MesheryPattern, string) error,
+	token string,
+) error {
+	page, err := fetchPatterns()
+	if err != nil {
+		return err
 	}
 	if page.Patterns == nil {
-		return
+		return nil
 	}
 
 	for _, pattern := range *page.Patterns {
-		if err := processPattern(pattern, token); err != nil {
-			log.Error(meshkitErrors.New(ErrProcessPatternCode, meshkitErrors.Alert,
+		if err := processPatternFunc(pattern, token); err != nil {
+			return meshkitErrors.New(ErrProcessPatternCode, meshkitErrors.Alert,
 				[]string{"unable to process catalog pattern"},
-				[]string{err.Error()},
+				[]string{fmt.Sprintf("pattern %s: %s", pattern.ID.String(), err.Error())},
 				[]string{"fail to read/write file", "error regarding user info"},
 				[]string{"check the catalog pattern file", "check for updated files"},
-			))
+			)
 		}
 	}
+	return nil
 }
 
 func slugify(name string) string {
