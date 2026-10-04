@@ -250,12 +250,12 @@
 <script>
 
   var drop_button = document.getElementById("arrow-icon")
-  var open = true
+  var isDropdownOpen = true
   function handleDropdown() {
     document.getElementById("myDropdown").classList.toggle("show");
-    drop_button.style.transform = open ? "rotate(180deg)":"rotate(0deg)"
+    drop_button.style.transform = isDropdownOpen ? "rotate(180deg)":"rotate(0deg)"
     drop_button.style.transition = "transform 0.5s"
-    open = !open
+    isDropdownOpen = !isDropdownOpen
 }
   // target elements to toggle
   var category_p = document.getElementById("category-para");
@@ -273,23 +273,23 @@
   }
 
   function showCategory() {
-    category_div.style.display = "flex";
-    category_p.style.display = "grid";
+    if (category_div) category_div.style.display = "flex";
+    if (category_p) category_p.style.display = "grid";
     if (comp_p) comp_p.style.display = "none";
     if (comp_div) comp_div.style.display = "none";
     document.getElementById("myDropdown").classList.toggle("show");
     drop_button.style.transform = "rotate(0deg)"
-    open = !open
+    isDropdownOpen = !isDropdownOpen
     return;
   }
   function showCompatibility() {
-    category_div.style.display = "none";
-    category_p.style.display = "none";
-    comp_p.style.display = "grid";
-    comp_div.style.display = "flex";
+    if (category_div) category_div.style.display = "none";
+    if (category_p) category_p.style.display = "none";
+    if (comp_p) comp_p.style.display = "grid";
+    if (comp_div) comp_div.style.display = "flex";
     document.getElementById("myDropdown").classList.toggle("show");
     drop_button.style.transform = "rotate(0deg)"
-    open = !open
+    isDropdownOpen = !isDropdownOpen
     return;
   }
 </script>
@@ -562,7 +562,7 @@ function showFilterCards() {
                         globalTechnologyList.some(tech => technologies.includes(tech));
 
     const showCardCat = globalCategoryList.length === 0 ||
-                       globalCategoryList.some(cat => type.includes(cat));
+                       (type && globalCategoryList.some(cat => type.includes(cat)));
 
     // Return true if card matches all criteria
     return showCardTech && showCardCat;
