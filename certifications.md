@@ -1,8 +1,11 @@
 ---
 layout: page
 title: Certifications
+heading: Meshery Certifications
+subheading: Validate Your Meshery Skills and Expertise
 permalink: /community/certifications/
 description: "Validate your Meshery skills and expertise with the Meshery Certification Program."
+hide_description: true
 redirect_from:
   - /community/certifications
 ---
