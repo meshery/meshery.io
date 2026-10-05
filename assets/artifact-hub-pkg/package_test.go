@@ -27,6 +27,24 @@ func TestRunCatalogGenerationFetchFailure(t *testing.T) {
 	}
 }
 
+// TestRunCatalogGenerationMissingPatterns verifies missing patterns are rejected.
+func TestRunCatalogGenerationMissingPatterns(t *testing.T) {
+	err := runCatalogGeneration(
+		func() (*designv1beta3.CatalogContentPage, error) {
+			return &designv1beta3.CatalogContentPage{}, nil
+		},
+		func(designv1beta3.MesheryPattern, string) error {
+			t.Fatal("pattern processor called with missing patterns")
+			return nil
+		},
+		"token",
+	)
+
+	if err == nil || !strings.Contains(err.Error(), "missing required patterns field") {
+		t.Fatalf("runCatalogGeneration() error = %v, want missing patterns field error", err)
+	}
+}
+
 // TestRunCatalogGenerationPatternFailure verifies processing errors stop generation.
 func TestRunCatalogGenerationPatternFailure(t *testing.T) {
 	patterns := []designv1beta3.MesheryPattern{{}, {}, {}}
@@ -81,5 +99,29 @@ func TestRunCatalogGenerationSuccess(t *testing.T) {
 	}
 	if processed != len(patterns) {
 		t.Fatalf("processed %d patterns, want %d", processed, len(patterns))
+	}
+}
+
+// TestRunCatalogGenerationEmptyPatterns verifies an explicit empty list is valid.
+func TestRunCatalogGenerationEmptyPatterns(t *testing.T) {
+	patterns := []designv1beta3.MesheryPattern{}
+	page := &designv1beta3.CatalogContentPage{Patterns: &patterns}
+	processed := false
+	err := runCatalogGeneration(
+		func() (*designv1beta3.CatalogContentPage, error) {
+			return page, nil
+		},
+		func(designv1beta3.MesheryPattern, string) error {
+			processed = true
+			return nil
+		},
+		"token",
+	)
+
+	if err != nil {
+		t.Fatalf("runCatalogGeneration() error = %v, want nil", err)
+	}
+	if processed {
+		t.Fatal("pattern processor called for an empty patterns list")
 	}
 }

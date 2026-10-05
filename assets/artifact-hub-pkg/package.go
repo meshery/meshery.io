@@ -70,7 +70,7 @@ func runCatalogGeneration(
 		return err
 	}
 	if page.Patterns == nil {
-		return nil
+		return fmt.Errorf("catalog response is missing required patterns field")
 	}
 
 	for _, pattern := range *page.Patterns {
