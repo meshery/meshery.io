@@ -2,11 +2,20 @@ package main
 
 import (
 	"errors"
+	"net/http"
+	"os"
+	"os/exec"
 	"strings"
 	"testing"
 
 	designv1beta3 "github.com/meshery/schemas/models/v1beta3/design"
 )
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(request *http.Request) (*http.Response, error) {
+	return f(request)
+}
 
 // TestRunCatalogGenerationFetchFailure verifies fetch errors are returned.
 func TestRunCatalogGenerationFetchFailure(t *testing.T) {
@@ -24,6 +33,32 @@ func TestRunCatalogGenerationFetchFailure(t *testing.T) {
 
 	if !errors.Is(err, wantErr) {
 		t.Fatalf("runCatalogGeneration() error = %v, want %v", err, wantErr)
+	}
+}
+
+// TestMainExitsNonZeroOnCatalogGenerationFailure verifies the CLI exit status.
+func TestMainExitsNonZeroOnCatalogGenerationFailure(t *testing.T) {
+	const helperEnv = "MESHERY_CATALOG_MAIN_HELPER"
+	if os.Getenv(helperEnv) == "1" {
+		http.DefaultTransport = roundTripFunc(func(*http.Request) (*http.Response, error) {
+			return nil, errors.New("forced catalog fetch failure")
+		})
+		main()
+		return
+	}
+
+	command := exec.Command(os.Args[0], "-test.run=^TestMainExitsNonZeroOnCatalogGenerationFailure$")
+	command.Env = append(os.Environ(), helperEnv+"=1")
+	output, err := command.CombinedOutput()
+	if err == nil {
+		t.Fatalf("CLI exited successfully after catalog fetch failure; output: %s", output)
+	}
+	exitError, ok := err.(*exec.ExitError)
+	if !ok {
+		t.Fatalf("CLI error = %v, want non-zero process exit; output: %s", err, output)
+	}
+	if exitError.ExitCode() == 0 {
+		t.Fatalf("CLI exit code = 0 after catalog fetch failure; output: %s", output)
 	}
 }
 
