@@ -268,13 +268,11 @@
 
 
   categotyLink.addEventListener("click", showCategory);
-  if (compatibilityLink) {
-    compatibilityLink.addEventListener("click", showCompatibility);
-  }
+  compatibilityLink?.addEventListener("click", showCompatibility);
 
   function showCategory() {
-    if (category_div) category_div.style.display = "flex";
-    if (category_p) category_p.style.display = "grid";
+    category_div.style.display = "flex";
+    category_p.style.display = "grid";
     if (comp_p) comp_p.style.display = "none";
     if (comp_div) comp_div.style.display = "none";
     document.getElementById("myDropdown").classList.toggle("show");
@@ -283,8 +281,8 @@
     return;
   }
   function showCompatibility() {
-    if (category_div) category_div.style.display = "none";
-    if (category_p) category_p.style.display = "none";
+    category_div.style.display = "none";
+    category_p.style.display = "none";
     if (comp_p) comp_p.style.display = "grid";
     if (comp_div) comp_div.style.display = "flex";
     document.getElementById("myDropdown").classList.toggle("show");
