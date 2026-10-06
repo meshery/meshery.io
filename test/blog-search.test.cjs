@@ -7,6 +7,7 @@ const {
   escapeHTML,
   highlightText,
   slugify,
+  withBaseUrl,
   getSafeResultUrl,
   renderResultItem,
 } = require('../js/blog-search.js');
@@ -19,6 +20,14 @@ test('escapeHTML turns HTML special chars into entities', () => {
   assert.equal(escapeHTML(''), '');
   assert.equal(escapeHTML(null), '');
   assert.equal(escapeHTML(undefined), '');
+});
+
+test('withBaseUrl correctly prefixes baseurl and avoids duplicate prefixes', () => {
+  assert.equal(withBaseUrl('/blog/safe/', ''), '/blog/safe/');
+  assert.equal(withBaseUrl('/blog/safe/', '/meshery.io'), '/meshery.io/blog/safe/');
+  assert.equal(withBaseUrl('/meshery.io/blog/safe/', '/meshery.io'), '/meshery.io/blog/safe/');
+  assert.equal(withBaseUrl('https://meshery.io/blog/safe/', '/meshery.io'), 'https://meshery.io/blog/safe/');
+  assert.equal(withBaseUrl('//evil.com/x', '/meshery.io'), '//evil.com/x');
 });
 
 test('highlightText returns plain escaped text when query is empty', () => {
@@ -79,6 +88,26 @@ test('getSafeResultUrl allows same-origin relative and absolute paths', () => {
   assert.equal(getSafeResultUrl('https://meshery.io/blog/safe/'), 'https://meshery.io/blog/safe/');
 });
 
+test('getSafeResultUrl respects configured baseurl without duplicate prefixing', () => {
+  assert.equal(getSafeResultUrl('/blog/safe/', '/meshery.io'), '/meshery.io/blog/safe/');
+  assert.equal(getSafeResultUrl('/meshery.io/blog/safe/', '/meshery.io'), '/meshery.io/blog/safe/');
+});
+
+test('getSafeResultUrl resolves production URLs to safe paths on deploy previews and localhost', () => {
+  global.window = {
+    location: {
+      origin: 'https://deploy-preview-123.netlify.app',
+      href: 'https://deploy-preview-123.netlify.app/blog/'
+    }
+  };
+  try {
+    assert.equal(getSafeResultUrl('https://meshery.io/blog/safe/'), '/blog/safe/');
+    assert.equal(getSafeResultUrl('/blog/safe/'), '/blog/safe/');
+  } finally {
+    delete global.window;
+  }
+});
+
 test('slugify converts a category name to a URL-safe slug', () => {
   assert.equal(slugify('Service Mesh'), 'service-mesh');
   assert.equal(slugify('  Hello  World!  '), 'hello-world');
@@ -103,6 +132,31 @@ test('renderResultItem escapes HTML metadata and prevents XSS markup', () => {
   assert.ok(html.includes('&lt;script&gt;alert(3)&lt;/script&gt;'));
   assert.ok(html.includes('&lt;svg onload=alert(2)&gt;'));
   assert.ok(html.includes('&lt;iframe src=javascript:alert(4)&gt;'));
+});
+
+test('browser renders escaped metadata safely as plain text rather than executing code', () => {
+  const rawAuthor = '<script>alert("xss")</script>';
+  const rawExcerpt = '<img src=x onerror="steal()">Malicious text';
+
+  const html = renderResultItem({
+    title: 'Post Title',
+    url: '/blog/safe/',
+    author: rawAuthor,
+    excerpt: rawExcerpt,
+  }, '');
+
+  const authorMatch = html.match(/<span class="post-author">(.*?)<\/span>/);
+  assert.ok(authorMatch, 'Author span should exist');
+
+  const decodedAuthor = authorMatch[1]
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, '&');
+
+  assert.equal(decodedAuthor, rawAuthor);
+  assert.ok(!authorMatch[1].includes('<script>'), 'Markup should not contain unescaped <script>');
 });
 
 test('renderResultItem omits href for unsafe URLs and includes href for safe URLs', () => {

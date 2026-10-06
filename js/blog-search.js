@@ -7,11 +7,14 @@
 let searchData = null;
 const siteBaseUrl = (typeof window !== 'undefined' && window.siteBaseUrl) || '';
 
-function withBaseUrl(path) {
+function withBaseUrl(path, customBaseUrl = siteBaseUrl) {
   if (!path || typeof path !== 'string') return path;
   if (/^(?:[a-z]+:)?\/\//i.test(path)) return path;
   if (!path.startsWith('/')) return path;
-  return `${siteBaseUrl}${path}`;
+  if (customBaseUrl && (path === customBaseUrl || path.startsWith(`${customBaseUrl}/`))) {
+    return path;
+  }
+  return `${customBaseUrl}${path}`;
 }
 
 function escapeHTML(str) {
@@ -24,15 +27,37 @@ function escapeHTML(str) {
   }[c]));
 }
 
-function getSafeResultUrl(path) {
-  const url = withBaseUrl(path);
-  if (!url || typeof url !== 'string') return null;
+function getSafeResultUrl(path, customBaseUrl = siteBaseUrl) {
+  if (!path || typeof path !== 'string') return null;
 
   try {
-    const origin = typeof window !== 'undefined' && window.location ? window.location.origin : 'https://meshery.io';
-    const href = typeof window !== 'undefined' && window.location ? window.location.href : 'https://meshery.io/blog/';
-    const parsedUrl = new URL(url, href);
-    return ['http:', 'https:'].includes(parsedUrl.protocol) && parsedUrl.origin === origin ? url : null;
+    const origin = typeof window !== 'undefined' && window.location && window.location.origin
+      ? window.location.origin
+      : 'https://meshery.io';
+    const href = typeof window !== 'undefined' && window.location && window.location.href
+      ? window.location.href
+      : 'https://meshery.io/blog/';
+
+    if (path.trim().startsWith('//')) return null;
+
+    const parsedUrl = new URL(path, href);
+    if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
+      return null;
+    }
+
+    const isCurrentOrigin = parsedUrl.origin === origin;
+    const isProductionOrigin =
+      parsedUrl.origin === 'https://meshery.io' || parsedUrl.origin === 'http://meshery.io';
+
+    if (!isCurrentOrigin && !isProductionOrigin) {
+      return null;
+    }
+
+    if (isCurrentOrigin) {
+      return path.startsWith('/') ? withBaseUrl(path, customBaseUrl) : path;
+    }
+
+    return withBaseUrl(parsedUrl.pathname + parsedUrl.search + parsedUrl.hash, customBaseUrl);
   } catch {
     return null;
   }
@@ -343,6 +368,7 @@ if (typeof module !== 'undefined' && module.exports) {
     escapeRegex,
     highlightText,
     slugify,
+    withBaseUrl,
     getSafeResultUrl,
     renderResultItem,
   };

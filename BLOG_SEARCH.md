@@ -107,19 +107,27 @@ Change the value in `debounce(handleSearchInput, 300)`
 ```javascript
 function performClientSearch(query) {
   if (!searchData) return [];
-  
+
   const lowerQuery = query.toLowerCase();
   const results = searchData
     .filter(post => {
-      const titleMatch = post.title?.toLowerCase().includes(lowerQuery);
-      const excerptMatch = post.excerpt?.toLowerCase().includes(lowerQuery);
-      const contentMatch = post.content?.toLowerCase().includes(lowerQuery);
-      const categoryMatch = post.categories?.some(cat => cat.toLowerCase().includes(lowerQuery));
-      const authorMatch = post.author?.toLowerCase().includes(lowerQuery);
-      
+      const titleMatch = post._searchTitle.includes(lowerQuery);
+      const excerptMatch = post._searchExcerpt.includes(lowerQuery);
+      const contentMatch = post._searchContent.includes(lowerQuery);
+      const categoryMatch = post._searchCategories.some(cat => cat.includes(lowerQuery));
+      const authorMatch = post._searchAuthor.includes(lowerQuery);
+
       return titleMatch || excerptMatch || contentMatch || categoryMatch || authorMatch;
     })
     .slice(0, 20);
+
+  // Highlighting for search results
+  results.forEach(result => {
+    result._formatted = {
+      title: highlightText(result.title, query),
+      excerpt: highlightText(result.excerpt, query)
+    };
+  });
 
   return results;
 }
