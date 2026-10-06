@@ -55,10 +55,13 @@ func TestMainExitsNonZeroOnCatalogGenerationFailure(t *testing.T) {
 	}
 	exitError, ok := err.(*exec.ExitError)
 	if !ok {
-		t.Fatalf("CLI error = %v, want non-zero process exit; output: %s", err, output)
+		t.Fatalf("CLI error = %v, want process exit code 1; output: %s", err, output)
 	}
-	if exitError.ExitCode() == 0 {
-		t.Fatalf("CLI exit code = 0 after catalog fetch failure; output: %s", output)
+	if exitError.ExitCode() != 1 {
+		t.Fatalf("CLI exit code = %d, want 1; output: %s", exitError.ExitCode(), output)
+	}
+	if !strings.Contains(string(output), "forced catalog fetch failure") {
+		t.Fatalf("CLI output = %q, want evidence of forced catalog fetch failure", output)
 	}
 }
 
