@@ -173,7 +173,10 @@
   }
 
   function markLightboxableImages() {
-    var images = document.querySelectorAll(CONTENT_SELECTOR + ' img');
+    var imageSelector = CONTENT_SELECTOR.split(',').map(function (part) {
+      return part.trim() + ' img';
+    }).join(', ');
+    var images = document.querySelectorAll(imageSelector);
     images.forEach(function (img) {
       if (shouldSkipImage(img)) {
         return;
@@ -225,8 +228,9 @@
         return;
       }
       if (anchor && anchor.getAttribute('href') && isImageUrl(anchor.getAttribute('href'))) {
-        event.preventDefault();
-        handleTrigger(target);
+        if (handleTrigger(target)) {
+          event.preventDefault();
+        }
         return;
       }
       if (handleTrigger(target)) {
@@ -238,6 +242,26 @@
       var overlay = getModal();
       if (event.key === 'Escape' && overlay && overlay.classList.contains('is-open')) {
         closeModal();
+        return;
+      }
+      if (event.key === 'Tab' && overlay && overlay.classList.contains('is-open')) {
+        var focusable = overlay.querySelectorAll('button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])');
+        var visible = Array.prototype.filter.call(focusable, function (el) {
+          return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+        });
+        if (visible.length === 0) {
+          event.preventDefault();
+          return;
+        }
+        var first = visible[0];
+        var last = visible[visible.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
         return;
       }
       if ((event.key === 'Enter' || event.key === ' ') && isImageElement(event.target)) {
