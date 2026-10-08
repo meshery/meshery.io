@@ -507,31 +507,46 @@
 
 <p>Meshery.io is a Jekyll-based site for engineers, operators, contributors, and the wider cloud-native community. Its visual system is content-led and Sass-driven: neutral surfaces establish structure, Qanelas Soft carries the voice, and teal and saffron provide focused emphasis.</p>
 
-<p>This document is a reference for contributors and automation, not a compiled or enforced source file. It is not consumed by the site at build time. The source-of-truth order for design decisions is:</p>
-
-<ol>
-  <li>Actual implementation in the Jekyll templates, Liquid includes, and Sass partials</li>
-  <li>Shared design decisions documented here when they match the implemented UI</li>
-  <li>New design intent only when the codebase has no existing pattern and a justified change is required</li>
-</ol>
-
-<p>Use <code class="language-plaintext highlighter-rouge">_sass/rootvariables.scss</code> for CSS custom properties, <code class="language-plaintext highlighter-rouge">_sass/variables.scss</code> for shared Sass variables, and the nearest component partial for current selector behavior. When this document and the live implementation disagree, the implementation is authoritative for existing UI, while this document remains the intended reference for new work.</p>
+<p>This document is a reference for contributors and automation, not a compiled or enforced source file. It is not consumed by the site at build time.</p>
 
 <h3 id="authority-and-decision-rules">Authority and decision rules</h3>
 
+<p>Authority is split by kind of decision:</p>
+
 <ul>
-  <li>Do not treat the YAML front matter as a token system or a generated design source.</li>
+  <li><strong>Values</strong> (colors, sizes, radii, shadows, breakpoints): the Sass is authoritative. Use <code class="language-plaintext highlighter-rouge">_sass/rootvariables.scss</code> for CSS custom properties, <code class="language-plaintext highlighter-rouge">_sass/variables.scss</code> for shared Sass variables, and the nearest component partial for selector behavior. If this document disagrees with the Sass on a value, this document is out of date; follow the Sass and update this file in the same PR.</li>
+  <li><strong>Usage rules</strong> that have no Sass equivalent (contrast, motion, color roles, the UI change checklist): this document is the reference for new work, even where existing components do not yet follow it.</li>
+</ul>
+
+<p>Additional rules:</p>
+
+<ul>
+  <li>The YAML front matter mirrors values from the Sass for quick reference. It is not a token system and is not read by the site build.</li>
   <li>Do not invent a new color, radius, component variant, or breakpoint without confirming whether an equivalent pattern already exists in the Sass or component code.</li>
   <li>Prefer the smallest existing selector or variable that matches the intended behavior.</li>
   <li>When a pattern is legacy or page-specific, document the exception rather than hiding it.</li>
-  <li>Use the implementation to inspect current behavior and this document to guide new work that is not yet represented in the codebase.</li>
 </ul>
+
+<h3 id="relationship-to-sistent">Relationship to Sistent</h3>
+
+<p>Meshery.io shares its brand colors with <a href="https://github.com/layer5io/sistent">Sistent</a>, the Layer5 design system: <code class="language-plaintext highlighter-rouge">#00D3A9</code> (Caribbean Green), <code class="language-plaintext highlighter-rouge">#00B39F</code> (Keppel), <code class="language-plaintext highlighter-rouge">#EBC017</code> (Saffron), <code class="language-plaintext highlighter-rouge">#477E96</code> (Teal Blue), and <code class="language-plaintext highlighter-rouge">#3C494F</code> (Charcoal). Sistent’s <a href="https://github.com/layer5io/sistent/blob/master/DESIGN.md">DESIGN.md</a> is the reference for those shared brand decisions. This file covers how meshery.io applies them in its own Jekyll and Sass implementation. Meshery.io does not consume Sistent at build time, so a change to a shared brand color must also be made in this repository’s Sass: <code class="language-plaintext highlighter-rouge">_sass/rootvariables.scss</code> for the custom properties, or <code class="language-plaintext highlighter-rouge">_sass/variables.scss</code> for <code class="language-plaintext highlighter-rouge">$coolgray</code> / <code class="language-plaintext highlighter-rouge">$brand-color</code> (Charcoal).</p>
 
 <h3 id="how-theming-works">How theming works</h3>
 
-<p>The values in the front matter’s <code class="language-plaintext highlighter-rouge">colors</code> and <code class="language-plaintext highlighter-rouge">gradients</code> sections describe the default values declared in <code class="language-plaintext highlighter-rouge">:root</code>; they are not necessarily the initial appearance. <code class="language-plaintext highlighter-rouge">_includes/header.html</code> renders the body with <code class="language-plaintext highlighter-rouge">.dark-mode</code> by default and removes that class when the saved preference is <code class="language-plaintext highlighter-rouge">light-mode</code>. <code class="language-plaintext highlighter-rouge">_sass/rootvariables.scss</code> then overrides theme-dependent custom properties under <code class="language-plaintext highlighter-rouge">.dark-mode</code>. Use the CSS custom properties in component styles rather than copying a value from this reference, especially for surfaces, shadows, and image filters.</p>
+<p>The front matter’s <code class="language-plaintext highlighter-rouge">colors</code> section lists the values declared in <code class="language-plaintext highlighter-rouge">:root</code>, which are the light-mode values; they are not the initial appearance. The <code class="language-plaintext highlighter-rouge">dark-mode</code> and <code class="language-plaintext highlighter-rouge">dark-mode-gradients</code> sections list the <code class="language-plaintext highlighter-rouge">.dark-mode</code> overrides. <code class="language-plaintext highlighter-rouge">_includes/header.html</code> renders the body with <code class="language-plaintext highlighter-rouge">.dark-mode</code> by default and removes that class when the saved preference is <code class="language-plaintext highlighter-rouge">light-mode</code>. Use the CSS custom properties in component styles rather than copying a value from this reference.</p>
 
-<p>This site uses dark mode as the default presentation, while light mode is a persisted user preference. Do not treat dark mode as a simple inversion of the light theme; some tokens and gradients intentionally vary by mode.</p>
+<p>Beyond colors, these custom properties also change under <code class="language-plaintext highlighter-rouge">.dark-mode</code>, so always reference them with <code class="language-plaintext highlighter-rouge">var()</code>:</p>
+
+<ul>
+  <li>Shadows: <code class="language-plaintext highlighter-rouge">--box-shadow-primary</code>, <code class="language-plaintext highlighter-rouge">--box-shadow-primary-quotes</code>, <code class="language-plaintext highlighter-rouge">--integrations-box-shadow</code></li>
+  <li>Gradients: <code class="language-plaintext highlighter-rouge">--background-light</code>, <code class="language-plaintext highlighter-rouge">--background-light-cards</code>, <code class="language-plaintext highlighter-rouge">--background-grey</code>, <code class="language-plaintext highlighter-rouge">--background-grey-secondary</code>, <code class="language-plaintext highlighter-rouge">--background-nav-dropdown</code>, <code class="language-plaintext highlighter-rouge">--background-image-light</code></li>
+  <li>Image filters: <code class="language-plaintext highlighter-rouge">--image-color</code>, <code class="language-plaintext highlighter-rouge">--image-filter-light</code>, <code class="language-plaintext highlighter-rouge">--image-filter-dark</code>, <code class="language-plaintext highlighter-rouge">--logo-filter</code> (<code class="language-plaintext highlighter-rouge">--image-filter-light</code> and <code class="language-plaintext highlighter-rouge">--image-filter-dark</code> swap values in dark mode)</li>
+  <li>Integration surfaces: <code class="language-plaintext highlighter-rouge">--integrations-bg</code>, <code class="language-plaintext highlighter-rouge">--integrations-3d-bg</code></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">--background-primary</code> and <code class="language-plaintext highlighter-rouge">--background-primary-2</code> are brand gradients and do not change between modes.</p>
+
+<p>This site uses dark mode as the default presentation, while light mode is a persisted user preference. Do not treat dark mode as a simple inversion of the light theme; some custom properties and gradients intentionally vary by mode.</p>
 
 <h3 id="design-character">Design character</h3>
 
@@ -546,7 +561,7 @@
 
 <h2 id="color-and-surface-usage">Color and surface usage</h2>
 
-<p>Use the brand teal values for primary interaction and for links or selected controls where the existing component uses them. Use saffron for action emphasis and classification, not as a replacement for the primary teal action.</p>
+<p>Use the brand teal values for primary interaction and for links or selected controls where the existing component uses them. Use saffron for action emphasis and classification, not as a replacement for the primary teal action. <code class="language-plaintext highlighter-rouge">--brand-color-quaternary</code> (<code class="language-plaintext highlighter-rouge">#359AC0</code>) is currently used only for the catalog’s <code class="language-plaintext highlighter-rouge">.chip.PERFORMANCE</code> classification in <code class="language-plaintext highlighter-rouge">_sass/catalog.scss</code>; it is not a general accent.</p>
 
 <p>Neutral values carry most of the interface. Light mode uses white, off-white, and cool gray surfaces. Dark mode uses charcoal and blue-gray layers with white or pale gray text. The <code class="language-plaintext highlighter-rouge">background-*</code> custom properties are established project treatments for page chrome and panels; they should not be added merely as decoration.</p>
 
@@ -571,7 +586,7 @@
 
 <h2 id="layout-and-spacing">Layout and spacing</h2>
 
-<p>Meshery.io uses a practical 8px-based rhythm, with 4px, 8px, 12px, 16px, 20px, 24px, 32px, and 40px appearing throughout the Sass. The token names describe increasing scale, but component source remains authoritative when a legacy or page-specific value is required.</p>
+<p>Meshery.io uses a practical 8px-based rhythm, with 4px, 8px, 12px, 16px, 20px, 24px, 32px, and 40px appearing throughout the Sass. The <code class="language-plaintext highlighter-rouge">spacing</code> names in the front matter (<code class="language-plaintext highlighter-rouge">xxs</code> through <code class="language-plaintext highlighter-rouge">xxxl</code>) are descriptive labels for these pixel values, not Sass or CSS variables; component source remains authoritative when a legacy or page-specific value is required.</p>
 
 <h3 id="containers-and-grids">Containers and grids</h3>
 
@@ -584,11 +599,11 @@
 
 <h3 id="whitespace">Whitespace</h3>
 
-<p>Use whitespace to separate content groups and establish reading order. Avoid adding large marketing-style gaps to dense catalog, table, or form surfaces. Prefer the smallest token that clearly separates adjacent controls, then move to 24px, 32px, or 40px for section-level separation.</p>
+<p>Use whitespace to separate content groups and establish reading order. Avoid adding large marketing-style gaps to dense catalog, table, or form surfaces. Prefer the smallest spacing value that clearly separates adjacent controls, then move to 24px, 32px, or 40px for section-level separation.</p>
 
 <h2 id="elevation-and-depth">Elevation and depth</h2>
 
-<p>Meshery separates surfaces primarily through color, borders, gradients, and restrained shadows. The shadow values come from CSS custom properties and should be used according to context. The primary and quote shadow properties change under <code class="language-plaintext highlighter-rouge">.dark-mode</code>; integrations have one property that is also theme-dependent.</p>
+<p>Meshery separates surfaces primarily through color, borders, gradients, and restrained shadows. The shadow values come from CSS custom properties and should be used according to context. All three shadow properties change under <code class="language-plaintext highlighter-rouge">.dark-mode</code>.</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">--box-shadow-primary</code> supports raised content surfaces</li>
@@ -619,9 +634,7 @@
 
 <h3 id="buttons-and-actions">Buttons and actions</h3>
 
-<p>The <code class="language-plaintext highlighter-rouge">.button a, input[type=submit]</code> selector uses <code class="language-plaintext highlighter-rouge">var(--brand-color-primary)</code>, white text, <code class="language-plaintext highlighter-rouge">7px</code> rounding, and <code class="language-plaintext highlighter-rouge">10px 30px</code> padding; its hover background uses <code class="language-plaintext highlighter-rouge">var(--brand-color-secondary)</code>. This shipped white-on-teal pairing has a contrast gap (see above). The <code class="language-plaintext highlighter-rouge">.button.alt a</code> action is translucent white with a <code class="language-plaintext highlighter-rouge">1px</code> translucent border, <code class="language-plaintext highlighter-rouge">3px</code> rounding, and <code class="language-plaintext highlighter-rouge">16px 50px</code> padding. The <code class="language-plaintext highlighter-rouge">.button-para .link</code> CTA uses a hard-coded teal background, white text, <code class="language-plaintext highlighter-rouge">7px</code> rounding, and <code class="language-plaintext highlighter-rouge">.5rem</code> padding. Saffron is an action color, not a documented shared secondary-button variant; use dark text on saffron backgrounds.</p>
-
-<p>Secondary actions may use the transparent white treatment and <code class="language-plaintext highlighter-rouge">1px</code> translucent border documented in the token layer. The outlined action uses <code class="language-plaintext highlighter-rouge">3px</code> rounding and <code class="language-plaintext highlighter-rouge">16px 50px</code> padding; check the owning Sass before documenting catalog-action values.</p>
+<p>The <code class="language-plaintext highlighter-rouge">.button a, input[type=submit]</code> selector uses <code class="language-plaintext highlighter-rouge">var(--brand-color-primary)</code>, white text, <code class="language-plaintext highlighter-rouge">7px</code> rounding, and <code class="language-plaintext highlighter-rouge">10px 30px</code> padding; its hover background uses <code class="language-plaintext highlighter-rouge">var(--brand-color-secondary)</code>. This shipped white-on-teal pairing has a contrast gap (see above). The <code class="language-plaintext highlighter-rouge">.button.alt a</code> action is translucent white with a <code class="language-plaintext highlighter-rouge">1px</code> translucent border, <code class="language-plaintext highlighter-rouge">3px</code> rounding, and <code class="language-plaintext highlighter-rouge">16px 50px</code> padding. The <code class="language-plaintext highlighter-rouge">.button-para .link</code> CTA uses a hard-coded teal background, white text, <code class="language-plaintext highlighter-rouge">7px</code> rounding, and <code class="language-plaintext highlighter-rouge">.5rem</code> padding. Saffron is an action color, not a documented shared secondary-button variant; use dark text on saffron backgrounds. Check the owning Sass before documenting catalog-action values.</p>
 
 <h3 id="cards-panels-and-catalog-surfaces">Cards, panels, and catalog surfaces</h3>
 
@@ -647,7 +660,7 @@
 
 <h2 id="motion-and-interaction">Motion and interaction</h2>
 
-<p>Existing transitions commonly use <code class="language-plaintext highlighter-rouge">.2s</code>, <code class="language-plaintext highlighter-rouge">.3s</code>, or <code class="language-plaintext highlighter-rouge">.4s</code>, but there is no centralized motion-token contract. Use motion for feedback, avoid layout shifts, and ensure new animations respect <code class="language-plaintext highlighter-rouge">prefers-reduced-motion</code>.</p>
+<p>Existing transitions commonly use <code class="language-plaintext highlighter-rouge">.2s</code>, <code class="language-plaintext highlighter-rouge">.3s</code>, or <code class="language-plaintext highlighter-rouge">.4s</code>, but there are no shared motion variables. Use motion for feedback.</p>
 
 <ul>
   <li>Keep hover movement small and avoid layout shifts.</li>
@@ -699,7 +712,7 @@
 <h3 id="do-not">Do not</h3>
 
 <ul>
-  <li>Do not introduce generic placeholder tokens that are not defined in this file.</li>
+  <li>Do not add a new CSS custom property or Sass variable when an existing one fits. If a new one is needed, add it to <code class="language-plaintext highlighter-rouge">_sass/rootvariables.scss</code> (in both <code class="language-plaintext highlighter-rouge">:root</code> and <code class="language-plaintext highlighter-rouge">.dark-mode</code> when it is theme-dependent) or <code class="language-plaintext highlighter-rouge">_sass/variables.scss</code>, and record it here in the same PR.</li>
   <li>Do not replace project colors with a new framework palette.</li>
   <li>Do not make every component pill-shaped or heavily rounded.</li>
   <li>Do not use gradients or shadows on every surface.</li>
@@ -717,14 +730,14 @@
   <li>shared type and element behavior belongs in <code class="language-plaintext highlighter-rouge">_sass/elements.scss</code> and <code class="language-plaintext highlighter-rouge">_sass/fonts.scss</code></li>
   <li>global containers and structural layout belong in <code class="language-plaintext highlighter-rouge">_sass/layout.scss</code></li>
   <li>component-specific behavior belongs in the nearest Sass partial or shared include</li>
-  <li>this document should describe stable implemented behavior, not aspirational values</li>
+  <li>values recorded in this document should describe implemented behavior, not aspirational values</li>
 </ul>
 
-<p>Before documenting a new token, search <code class="language-plaintext highlighter-rouge">_sass/</code>, <code class="language-plaintext highlighter-rouge">_includes/</code>, and the relevant layout for an existing value. If the implementation is inconsistent, document the dominant pattern and name the exception rather than hiding the inconsistency.</p>
+<p>Before documenting a new value, search <code class="language-plaintext highlighter-rouge">_sass/</code>, <code class="language-plaintext highlighter-rouge">_includes/</code>, and the relevant layout for an existing value. If the implementation is inconsistent, document the dominant pattern and name the exception rather than hiding the inconsistency.</p>
 
 <h3 id="ui-change-checklist">UI change checklist</h3>
 
-<p>Before changing a UI token, selector, or component pattern, verify all of the following:</p>
+<p>Before changing a shared value, selector, or component pattern, verify all of the following:</p>
 
 <ul>
   <li>Is there an existing selector or variable in <code class="language-plaintext highlighter-rouge">_sass/</code> that already solves the problem?</li>
@@ -784,7 +797,7 @@
 <h2 id="known-gaps">Known gaps</h2>
 
 <ul>
-  <li>This front matter is documentation metadata, not a generated or enforced token system. Sass remains authoritative.</li>
+  <li>The front matter is documentation metadata, not a generated or enforced token system. For values, the Sass remains authoritative.</li>
   <li>The project has many page-specific spacing, radius, and color values; the shared variables do not replace component Sass.</li>
   <li>Some components use hard-coded colors while others use CSS custom properties; new work should prefer theme-aware shared properties.</li>
   <li>Badge variants and status colors are not consistently represented by shared named selectors or tokens.</li>
