@@ -4,132 +4,30 @@ name: Meshery.io
 description: Meshery.io is the website for Meshery, an open-source, CNCF project that provides a self-service engineering platform for designing, managing, and operating cloud-native infrastructure and applications.
 
 colors:
-  brand-color-primary: '#00D3A9'
-  brand-color-secondary: '#00B39F'
-  brand-color-secondary-50: 'rgba(0, 179, 159, 0.5)'
-  brand-color-tertiary: '#477E96'
-  brand-color-quaternary: '#359AC0'
-  color-white: '#FFFFFF'
-
-  color-primary-light: '#FFFFFF'
-  color-primary-light-dark: '#D9E0E2'
-  color-primary-medium-dark: '#FFFFFF'
-  color-primary-medium: '#F8F9FA'
-  color-primary-dark: '#F1F3F5'
-  color-primary-extra-dark: '#B2B6BD'
-  color-primary-super-dark: '#818C9A'
-
-  color-secondary-light: '#495057'
-  color-secondary-light-two: 'rgb(243, 255, 253)'
-  color-secondary-medium: '#343A40'
-  color-secondary-dark: '#212529'
-  color-grey-light: '#868E96'
-
-  color-primary-light-tbase: '#ECF0F3'
-  color-primary-qmeta: '#777777'
-  color-primary-qtext: 'rgb(0, 0, 0)'
-  color-primary-testimonial-wrapper: 'rgb(250, 250, 250)'
-  text-color-primary-fixed: 'rgb(0, 0, 0)'
-
-  link-hover-color: '#00B39F'
-
-  background-nav-fixed: '#E7EFF333'
-  color-nav-fixed: '#000000'
-
-  action-color-dark: '#EBC017'
-  action-color-dark-hover: '#C09E0F'
-  action-color-light: '#FFF3C5'
-
-  color-summary-background: '#BAC1C8'
-  color-summary-background-hover: '#8F949A'
-  color-details-background: '#D3D8DD'
-  color-components-background: '#F9F9F9'
-  scrollbar-color: '#00B39F'
-
-dark-mode:
-  color-primary-light: '#212529'
-  color-primary-light-dark: '#202020'
-  color-primary-medium-dark: '#464D53'
-  color-primary-medium: '#343A40'
-  color-primary-dark: '#495057'
-  color-primary-extra-dark: '#6C747E'
-  color-primary-super-dark: '#818C9A'
-
-  color-secondary-light: '#FFFFFF'
-  color-secondary-light-two: 'rgba(0, 179, 159, 0.4)'
-  color-secondary-medium: '#F1F3F5'
-  color-secondary-dark: '#F1F3F5'
-  color-grey-light: '#CED4DA'
-
-  color-primary-light-tbase: '#212121'
-  color-primary-qmeta: '#EEEEEE'
-  color-primary-qtext: 'rgb(255, 255, 255)'
-  color-primary-testimonial-wrapper: 'rgb(0, 0, 0)'
-
-  background-nav-fixed: '#15272F80'
-  color-nav-fixed: '#FFFFFF'
-
-  color-summary-background: '#333333'
-  color-summary-background-hover: '#666666'
-  color-details-background: '#282828'
-  color-components-background: '#202020'
-  background-light-cards: 'linear-gradient(to right top, #3D3D3D, #343434, #2B2B2B, #222222, #1A1A1A, #181818, #161616, #141414, #181818, #1C1C1C, #212121, #252525)'
-  scrollbar-color: '#00D3A9'
-
-dark-mode-gradients:
-  background-light: 'linear-gradient(to right top, #3D3D3D, #343434, #2B2B2B, #222222, #1A1A1A, #181818, #161616, #141414, #181818, #1C1C1C, #212121, #252525)'
-  background-grey: 'linear-gradient(to right top, #868E96, #767E86, #676E76, #585F66, #495057)'
-  background-grey-secondary: 'linear-gradient(to right bottom, #DEE2E6, #D2D7DC, #C5CBD1, #B9C0C7, #ADB5BD)'
-  background-nav-dropdown: 'linear-gradient(to right top, #3D3D3D, #343434, #2B2B2B, #222222, #1A1A1A)'
+  # Brand and action colors only. They are identical in light and dark mode.
+  # Theme-dependent surface, text, and gradient values live only in
+  # _sass/rootvariables.scss (`:root` and `.dark-mode`); read them there.
+  brand-color-primary: '#00D3A9'        # --brand-color-primary (Sistent: Caribbean Green)
+  brand-color-secondary: '#00B39F'      # --brand-color-secondary (Sistent: Keppel)
+  brand-color-tertiary: '#477E96'       # --brand-color-tertiary (Sistent: Teal Blue)
+  brand-color-quaternary: '#359AC0'     # --brand-color-quaternary
+  action-color-dark: '#EBC017'          # --action-color-dark (Sistent: Saffron)
+  action-color-dark-hover: '#C09E0F'    # --action-color-dark-hover
+  action-color-light: '#FFF3C5'         # --action-color-light
+  coolgray: '#3C494F'                   # $coolgray / $brand-color in _sass/variables.scss (Sistent: Charcoal)
 
 typography:
-  headingPrimary:
-    fontFamily: '"Qanelas Soft", "Open Sans", sans-serif'
-    fontSize: '2.3em'
-    fontWeight: 300
-    lineHeight: '1.2'
-    letterSpacing: 'normal'
-
-  headingSecondary:
-    fontFamily: '"Qanelas Soft", "Open Sans", sans-serif'
-    fontSize: '2.2em'
-    fontWeight: 300
-    lineHeight: '1.2'
-    letterSpacing: 'normal'
-
-  headingTertiary:
-    fontFamily: '"Qanelas Soft", "Open Sans", sans-serif'
-    fontSize: '2rem'
-    fontWeight: 400
-    lineHeight: '1.2'
-    letterSpacing: 'normal'
-
-  bodyCopy:
-    fontFamily: '"Qanelas Soft", "Open Sans", sans-serif'
-    fontSize: '1.38em'
-    fontWeight: 400
-    lineHeight: '1.4em'
-    letterSpacing: 'normal'
-
-  strongHeading:
-    fontFamily: '"Qanelas Soft", "Open Sans", sans-serif'
-    fontWeight: 700
-    lineHeight: '1.2'
-    letterSpacing: 'normal'
-
-  metadata:
-    fontFamily: '"Qanelas Soft", "Open Sans", sans-serif'
-    fontSize: '0.75rem'
-    fontWeight: 400
-    lineHeight: '1.5rem'
-    letterSpacing: 'normal'
-
-  codeInline:
-    fontFamily: '"Courier New", Courier, monospace'
-    fontSize: '1.1em'
-    fontWeight: 400
-    lineHeight: '1.5em'
-    letterSpacing: 'normal'
+  # All entries use '"Qanelas Soft", "Open Sans", sans-serif' unless fontFamily is set.
+  # Form controls use "Open Sans" (_sass/forms.scss).
+  # fontWeight is the weight requested in CSS. The "Qanelas Soft" family only registers
+  # 400 and 600 faces (_sass/fonts.scss), so 300 renders with the 400 face and 700 with 600.
+  headingPrimary:   { fontSize: '2.3em', fontWeight: 300 }    # h1
+  headingSecondary: { fontSize: '2.2em', fontWeight: 300 }    # h2
+  headingTertiary:  { fontSize: '2rem', fontWeight: 700 }     # h3 (no weight set; browser default)
+  bodyCopy:         { fontSize: '1.38em', fontWeight: 400, lineHeight: '1.4em' }   # p
+  strongHeading:    { fontWeight: 700 }
+  metadata:         { fontSize: '0.75rem', fontWeight: 400, lineHeight: '1.5rem' }
+  codeInline:       { fontFamily: '"Courier New", Courier, monospace', fontSize: '1.1em', lineHeight: '1.5em' }
 
 rounded:
   xs: 3px
@@ -195,7 +93,7 @@ Authority is split by kind of decision:
 
 Additional rules:
 
-- The YAML front matter mirrors values from the Sass for quick reference. It is not a token system and is not read by the site build.
+- The YAML front matter is a short summary: brand and action colors, typography, radii, spacing, and key selectors. It is not a token system and is not read by the site build. Theme-dependent values are intentionally not copied here; read them in `_sass/rootvariables.scss`.
 - Do not invent a new color, radius, component variant, or breakpoint without confirming whether an equivalent pattern already exists in the Sass or component code.
 - Prefer the smallest existing selector or variable that matches the intended behavior.
 - When a pattern is legacy or page-specific, document the exception rather than hiding it.
@@ -206,9 +104,11 @@ Meshery.io shares its brand colors with [Sistent](https://github.com/layer5io/si
 
 ### How theming works
 
-The front matter's `colors` section lists the values declared in `:root`, which are the light-mode values; they are not the initial appearance. The `dark-mode` and `dark-mode-gradients` sections list the `.dark-mode` overrides. `_includes/header.html` renders the body with `.dark-mode` by default and removes that class when the saved preference is `light-mode`. Use the CSS custom properties in component styles rather than copying a value from this reference.
+`_sass/rootvariables.scss` declares light-mode values on `:root` and overrides theme-dependent ones under `.dark-mode`. `_includes/header.html` renders the body with `.dark-mode` by default and removes that class when the saved preference is `light-mode`, so the light values are not the initial appearance. The brand and action colors in the front matter are the same in both modes. Use the CSS custom properties in component styles rather than copying a value from this reference.
 
-Beyond colors, these custom properties also change under `.dark-mode`, so always reference them with `var()`:
+These groups of custom properties change under `.dark-mode`, so always reference them with `var()`:
+
+- Surfaces and text: the `--color-primary-*`, `--color-secondary-*`, and `--color-grey-light` families, plus `--background-nav-fixed`, `--color-nav-fixed`, `--scrollbar-color`, and the summary, details, and components backgrounds
 
 - Shadows: `--box-shadow-primary`, `--box-shadow-primary-quotes`, `--integrations-box-shadow`
 - Gradients: `--background-light`, `--background-light-cards`, `--background-grey`, `--background-grey-secondary`, `--background-nav-dropdown`, `--background-image-light`
@@ -240,12 +140,12 @@ The shipped primary button uses white text on `var(--brand-color-primary)` (`#00
 
 ## Typography
 
-Qanelas Soft is the primary typeface for headings and body copy. Form controls (`textarea`, `input`, `button`, and `select`) use Open Sans in `_sass/forms.scss`. Inline code uses `'Courier New', Courier, monospace` in `_sass/layout.scss`. The loaded Qanelas Soft weights range from thin through black, but the existing site primarily uses light headings, regular body copy, and bold emphasis.
+Qanelas Soft is the primary typeface for headings and body copy. Form controls (`textarea`, `input`, `button`, and `select`) use Open Sans in `_sass/forms.scss`. Inline code uses `'Courier New', Courier, monospace` in `_sass/layout.scss`. Other Qanelas Soft weights (Thin through Black) are loaded in `_sass/fonts.scss` under separate family names such as `"Qanelas Soft Light"`. The `"Qanelas Soft"` family itself only registers the 400 and 600 faces, so a requested weight of 300 renders with the Regular face and 700 with SemiBold. To get a true light or bold face, name that family explicitly.
 
 The `typography` reference describes common implemented sizes and hierarchy; consult the owning Sass selector for exact page-specific behavior:
 
-- Major headings use `2.3em` and `2.2em` at weight `300`.
-- Tertiary headings use `2rem` at weight `400`.
+- Major headings (`h1`, `h2`) use `2.3em` and `2.2em` and request weight `300`, which renders with the Regular face.
+- Tertiary headings (`h3`) use `2rem` and set no weight, so they get the browser's default bold (rendered with the SemiBold face).
 - Paragraphs use `1.38em` with `1.4em` line height.
 - Metadata commonly uses `0.75rem` with a `1.5rem` line height. Inline code uses `1.1em` with `1.5em` line height.
 
@@ -364,7 +264,7 @@ The site uses responsive Sass media queries rather than a single application bre
 
 ### Do not
 
-- Do not add a new CSS custom property or Sass variable when an existing one fits. If a new one is needed, add it to `_sass/rootvariables.scss` (in both `:root` and `.dark-mode` when it is theme-dependent) or `_sass/variables.scss`, and record it here in the same PR.
+- Do not add a new CSS custom property or Sass variable when an existing one fits. If a new one is needed, add it to `_sass/rootvariables.scss` (in both `:root` and `.dark-mode` when it is theme-dependent) or `_sass/variables.scss`. Update this file in the same PR only if the change affects a value or rule it lists.
 - Do not replace project colors with a new framework palette.
 - Do not make every component pill-shaped or heavily rounded.
 - Do not use gradients or shadows on every surface.
