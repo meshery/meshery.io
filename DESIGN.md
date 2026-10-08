@@ -68,6 +68,11 @@ dark-mode:
   background-nav-fixed: '#15272F80'
   color-nav-fixed: '#FFFFFF'
 
+  color-summary-background: '#333333'
+  color-summary-background-hover: '#666666'
+  color-details-background: '#282828'
+  color-components-background: '#202020'
+  background-light-cards: 'linear-gradient(to right top, #3D3D3D, #343434, #2B2B2B, #222222, #1A1A1A, #181818, #161616, #141414, #181818, #1C1C1C, #212121, #252525)'
   scrollbar-color: '#00D3A9'
 
 dark-mode-gradients:
@@ -119,10 +124,10 @@ typography:
     letterSpacing: 'normal'
 
   codeInline:
-    fontFamily: 'Consolas, monospace'
-    fontSize: '0.75rem'
+    fontFamily: '"Courier New", Courier, monospace'
+    fontSize: '1.1em'
     fontWeight: 400
-    lineHeight: '1.5rem'
+    lineHeight: '1.5em'
     letterSpacing: 'normal'
 
 rounded:
@@ -132,7 +137,7 @@ rounded:
   lg: 8px
   xl: 15px
   xxl: 20px
-  full: 9999px
+  full: 999px
 
 spacing:
   base: 8px
@@ -145,193 +150,56 @@ spacing:
   xxl: 32px
   xxxl: 40px
 
-strokes:
-  light-default: '#ECF0F3'
-  light-strong: '#3D4F57'
-  light-normal: '#8C999E'
-  dark-default: '#15272F'
-  dark-strong: '#D2D8DA'
-  dark-normal: '#495057'
-
-status-colors:
-  info: '#477E96'
-  success: '#00D3A9'
-  warning: '#EBC017'
-  error: '#F91313'
-
 shadows:
-  box-shadow-primary-light: '3px 3px 10px rgba(134, 142, 150, 0.8)'
-  box-shadow-primary-dark: '4px 4px 8px rgba(0, 0, 0, 1)'
-  box-shadow-primary-quotes-light: '2px 2px 25px #CECECE'
-  box-shadow-primary-quotes-dark: '2px 2px 25px rgba(0, 0, 0, 0.1)'
-  integrations-light: '4px 4px 14px #CBCED1, -12px -12px 20px #FFFFFF'
-  integrations-dark: '4px 4px 14px #41454A, -4px -4px 10px #78808A'
+  box-shadow-primary: 'var(--box-shadow-primary)'
+  box-shadow-primary-quotes: 'var(--box-shadow-primary-quotes)'
+  integrations-box-shadow: 'var(--integrations-box-shadow)'
 
 gradients:
-  background-primary: 'linear-gradient(250deg, #477E96 0%, #00B39F 35%, rgb(60, 73, 79) 100%)'
-  background-primary-2: 'linear-gradient(100deg, #477E96 0%, #00B39F 35%, #5A6F79 100%)'
-  background-light: 'linear-gradient(to right top, #FFFFFF, #FFFFFF)'
-  background-light-cards: 'linear-gradient(to left bottom, #F1F3F5, #F4F5F7, #F7F7F9, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #F7F7F9, #F4F5F7, #F1F3F5)'
-  background-grey: 'linear-gradient(to right bottom, #DEE2E6, #D2D7DC, #C5CBD1, #B9C0C7, #ADB5BD)'
-  background-grey-secondary: 'linear-gradient(to right top, #868E96, #767E86, #676E76, #585F66, #495057)'
-  background-nav-dropdown: 'linear-gradient(to right bottom, #DEE2E6, #D2D7DC, #C5CBD1, #B9C0C7, #ADB5BD)'
+  background-primary: 'var(--background-primary)'
+  background-primary-2: 'var(--background-primary-2)'
+  background-light: 'var(--background-light)'
+  background-light-cards: 'var(--background-light-cards)'
+  background-grey: 'var(--background-grey)'
+  background-grey-secondary: 'var(--background-grey-secondary)'
+  background-nav-dropdown: 'var(--background-nav-dropdown)'
 
 filters:
-  image-color: 'brightness(15%)'
-  image-filter-light: 'invert(27%) sepia(34%) saturate(217%) hue-rotate(154deg) brightness(92%) contrast(95%)'
-  image-filter-dark: 'brightness(40) invert(1)'
-  logo-filter-light: 'brightness(100%) invert(0)'
-  logo-filter-dark: 'invert(0.9) grayscale(1.6) brightness(1.5)'
+  image-color: 'var(--image-color)'
+  image-filter-light: 'var(--image-filter-light)'
+  image-filter-dark: 'var(--image-filter-dark)'
+  logo-filter: 'var(--logo-filter)'
 
 backgrounds:
-  integrations-bg-light: '#ECF0F3'
-  integrations-bg-dark: '#676E76'
-  integrations-3d-bg-light: '#F3F4F6'
-  integrations-3d-bg-dark: '#222222'
-  background-image-light: 'none'
-  background-image-dark: 'radial-gradient(circle 100px at 50% 50%, rgba(167, 173, 180, 0.78) 0%, rgba(103, 110, 118, 0.79) 80%, rgba(103, 110, 118, 1) 100%)'
+  integrations-bg: 'var(--integrations-bg)'
+  integrations-3d-bg: 'var(--integrations-3d-bg)'
+  background-image-light: 'var(--background-image-light)'
 
 components:
-  app-shell-light:
-    backgroundColor: '#FFFFFF'
-    textColor: '#000000'
-    typography: 'Qanelas Soft, Open Sans, sans-serif'
-    padding: '0'
-
-  app-shell-dark:
-    backgroundColor: '#212529'
-    textColor: '#F1F3F5'
-    typography: 'Qanelas Soft, Open Sans, sans-serif'
-    padding: '0'
-
-  navigation-bar-light:
-    backgroundColor: '#FFFFFF'
-    textColor: '#343A40'
-    typography: 'Qanelas Soft, Open Sans, sans-serif'
-    padding: '0 2vw'
-
-  navigation-bar-dark:
-    backgroundColor: '#212529'
-    textColor: '#F1F3F5'
-    typography: 'Qanelas Soft, Open Sans, sans-serif'
-    padding: '0 2vw'
-
-  button-primary:
-    backgroundColor: '#00D3A9'
-    textColor: '#FFFFFF'
-    typography: 'Qanelas Soft, Open Sans, sans-serif'
+  primary-button:
+    selector: '.button a, input[type=submit]'
+    source: '_sass/forms.scss'
+    backgroundColor: 'var(--brand-color-primary)'
+    hoverBackgroundColor: 'var(--brand-color-secondary)'
+    textColor: '#fff'
     rounded: 7px
     padding: '10px 30px'
 
-  button-primary-hover:
-    backgroundColor: '#00B39F'
-    textColor: '#FFFFFF'
-    rounded: 7px
-
-  button-secondary:
-    backgroundColor: '#EBC017'
-    textColor: '#FFFFFF'
-    rounded: 7px
-    padding: '10px 30px'
-
-  button-secondary-hover:
-    backgroundColor: '#C09E0F'
-    textColor: '#FFFFFF'
-    rounded: 7px
-
-  card-standard-light:
-    backgroundColor: '#F8F9FA'
-    textColor: '#000000'
-    rounded: 15px
-    padding: '1.5rem'
-
-  card-standard-dark:
-    backgroundColor: '#343A40'
-    textColor: '#FFFFFF'
-    rounded: 15px
-    padding: '1.5rem'
-
-  tab-selected-light:
-    backgroundColor: '#ECF0F3'
-    textColor: '#000000'
-    rounded: 4px
-    padding: '10px'
-
-  tab-selected-dark:
-    backgroundColor: '#495057'
-    textColor: '#FFFFFF'
-    rounded: 4px
-    padding: '10px'
-
-  input-field-light:
-    backgroundColor: '#FFFFFF'
-    textColor: '#000000'
-    rounded: 8px
-    padding: '14px 22px'
-
-  input-field-dark:
-    backgroundColor: '#212529'
-    textColor: '#FFFFFF'
-    rounded: 8px
-    padding: '14px 22px'
-
-  checkbox:
-    backgroundColor: transparent
-    textColor: '#000000'
+  outlined-action:
+    selector: '.button.alt a'
+    source: '_sass/forms.scss'
+    backgroundColor: 'rgba(255, 255, 255, 0.15)'
+    border: '1px solid rgba(255, 255, 255, 0.3)'
     rounded: 3px
-    size: 20px
+    padding: '16px 50px'
 
-  modal-header-light:
-    backgroundColor: 'linear-gradient(90deg, #477E96 0%, #455A64 100%)'
-    textColor: '#FFFFFF'
-    rounded: 8px
-    padding: '1rem 1.5rem'
-
-  modal-header-dark:
-    backgroundColor: 'linear-gradient(90deg, #28353A 0%, #3D4F57 100%)'
-    textColor: '#FFFFFF'
-    rounded: 8px
-    padding: '1rem 1.5rem'
-
-  panel-floating-light:
-    backgroundColor: '#ECF0F3'
-    textColor: '#000000'
-    rounded: 20px
-    padding: '1rem'
-
-  panel-floating-dark:
-    backgroundColor: '#222222'
-    textColor: '#FFFFFF'
-    rounded: 20px
-    padding: '1rem'
-
-  table-header-light:
-    backgroundColor: '#F1F3F5'
-    textColor: '#000000'
-    padding: '1rem'
-
-  table-header-dark:
-    backgroundColor: '#343A40'
-    textColor: '#FFFFFF'
-    padding: '1rem'
-
-  badge-community:
+  cta-link:
+    selector: '.button-para .link'
+    source: '_sass/forms.scss'
     backgroundColor: '#00B39F'
-    textColor: '#FFFFFF'
-    rounded: 9999px
-    padding: '4px 8px'
-
-  badge-official:
-    backgroundColor: '#EBC017'
-    textColor: '#FFFFFF'
-    rounded: 9999px
-    padding: '4px 8px'
-
-  badge-verified:
-    backgroundColor: '#00D3A9'
-    textColor: '#FFFFFF'
-    rounded: 9999px
-    padding: '4px 8px'
+    textColor: '#fff'
+    rounded: 7px
+    padding: '.5rem'
 ---
 
 # Meshery Design System
@@ -340,7 +208,11 @@ components:
 
 Meshery.io is a Jekyll-based site for engineers, operators, contributors, and the wider cloud-native community. Its visual system is content-led and Sass-driven: neutral surfaces establish structure, Qanelas Soft carries the voice, and teal and saffron provide focused emphasis.
 
-The front matter above is the source of truth for the documented tokens. The guidance below explains how those tokens should be used in pages, layouts, includes, and Sass without inventing a second design system.
+The front matter is a human-readable reference, not a source file consumed by the site. Implemented Sass is authoritative: use `_sass/rootvariables.scss` for CSS custom properties, `_sass/variables.scss` for shared Sass variables, and component partials for actual selector behavior. This document summarizes those sources and calls out where the implementation is inconsistent.
+
+### How theming works
+
+The values in the front matter's `colors` and `gradients` sections describe the default values declared in `:root`; they are not necessarily the initial appearance. `_includes/header.html` renders the body with `.dark-mode` by default and removes that class when the saved preference is `light-mode`. `_sass/rootvariables.scss` then overrides theme-dependent custom properties under `.dark-mode`. Use the CSS custom properties in component styles rather than copying a value from this reference, especially for surfaces, shadows, and image filters.
 
 ### Design character
 
@@ -352,29 +224,24 @@ The front matter above is the source of truth for the documented tokens. The gui
 
 ## Color and surface usage
 
-Use the brand teal values for primary interaction, links, active states, verification, and selected controls. Use saffron for action emphasis and classification, not as a replacement for the primary teal action.
+Use the brand teal values for primary interaction and for links or selected controls where the existing component uses them. Use saffron for action emphasis and classification, not as a replacement for the primary teal action.
 
-Neutral values carry most of the interface. Light mode uses white, off-white, and cool gray surfaces. Dark mode uses charcoal and blue-gray layers with white or pale gray text. The `background-*` gradients in the token layer are established project treatments for page chrome and panels; they should not be added merely as decoration.
+Neutral values carry most of the interface. Light mode uses white, off-white, and cool gray surfaces. Dark mode uses charcoal and blue-gray layers with white or pale gray text. The `background-*` custom properties are established project treatments for page chrome and panels; they should not be added merely as decoration.
 
-Semantic color must remain meaningful:
+The Sass does not define a complete semantic status-color palette. Do not infer status tokens from colors that happen to be used by individual components. Avoid teal, saffron, or red as general-purpose text colors when neutral text is sufficient, and preserve contrast between the surface and content first.
 
-- `status-colors.info` supports informational emphasis.
-- `status-colors.success` supports positive or completed states.
-- `status-colors.warning` supports caution and saffron action surfaces.
-- `status-colors.error` supports failure and destructive feedback.
-
-Do not use teal, saffron, or red as general-purpose text colors when neutral text is sufficient. Preserve contrast between the surface and the content first.
+The shipped primary button uses white text on `var(--brand-color-primary)` (`#00D3A9`), which does not provide sufficient contrast for normal-sized text. Treat that as a known accessibility gap, not as evidence that white-on-teal is a recommended text pairing. Saffron (`#EBC017`) also needs dark foreground text when used as a button background.
 
 ## Typography
 
-Qanelas Soft is the project’s primary typeface. Open Sans is the fallback for general text, and Consolas is reserved for inline code. The loaded Qanelas Soft weights range from thin through black, but the existing site primarily uses light headings, regular body copy, and bold emphasis.
+Qanelas Soft is the primary typeface for headings and body copy. Form controls (`textarea`, `input`, `button`, and `select`) use Open Sans in `_sass/forms.scss`. Inline code uses `'Courier New', Courier, monospace` in `_sass/layout.scss`. The loaded Qanelas Soft weights range from thin through black, but the existing site primarily uses light headings, regular body copy, and bold emphasis.
 
-The documented `typography` tokens describe the implemented hierarchy:
+The `typography` reference describes common implemented sizes and hierarchy; consult the owning Sass selector for exact page-specific behavior:
 
 - Major headings use `2.3em` and `2.2em` at weight `300`.
 - Tertiary headings use `2rem` at weight `400`.
 - Paragraphs use `1.38em` with `1.4em` line height.
-- Metadata and inline code use `0.75rem` with a `1.5rem` line height.
+- Metadata commonly uses `0.75rem` with a `1.5rem` line height. Inline code uses `1.1em` with `1.5em` line height.
 
 Keep the type hierarchy stable across content types. Do not introduce a second display face, excessive tracking, or a dense dashboard type scale for isolated components.
 
@@ -395,11 +262,11 @@ Use whitespace to separate content groups and establish reading order. Avoid add
 
 ## Elevation and depth
 
-Meshery separates surfaces primarily through color, borders, gradients, and restrained shadows. The documented shadow tokens come from the project’s CSS variables and should be used according to context:
+Meshery separates surfaces primarily through color, borders, gradients, and restrained shadows. The shadow values come from CSS custom properties and should be used according to context. The primary and quote shadow properties change under `.dark-mode`; integrations have one property that is also theme-dependent.
 
-- primary light and dark shadows support raised content surfaces
-- quote shadows support testimonial treatments
-- integration shadows support the project’s neumorphic integration surfaces
+- `--box-shadow-primary` supports raised content surfaces
+- `--box-shadow-primary-quotes` supports testimonial treatments
+- `--integrations-box-shadow` supports integration surfaces
 - gradients provide structural framing for navigation, headers, and panels
 
 Do not layer multiple strong shadows on ordinary cards. A card should first be understandable through its surface, border, spacing, and type.
@@ -411,50 +278,50 @@ The project uses measured rounding rather than one universal radius:
 - `3px` to `5px` for controls, links, and small details
 - `7px` to `8px` for buttons, inputs, modals, and compact UI
 - `15px` to `20px` for catalog cards and larger panels
-- `9999px` for badges, pills, and fully rounded shapes
+- `999px` for fully rounded filter pills in the current filter implementation
 - `50%` remains appropriate for avatars and circular icons where the component requires it
 
-Use larger radii for catalog, feature, and independently framed surfaces. Keep utility controls modestly rounded so tables, forms, and navigation remain crisp.
+These are observed values, not centralized radius tokens. A `999px` radius appears on filter pills; do not assume that every badge or pill shares that treatment. Use larger radii for catalog, feature, and independently framed surfaces, and keep utility controls modestly rounded so tables, forms, and navigation remain crisp.
 
 ## Components
 
-The component entries in the front matter document recurring visual roles, not framework components or CSS class names. When implementing a component, use the closest existing Sass selector and then record any stable new variant in the token layer.
+The component entries in the front matter identify existing selectors and their source; they are not framework components or generated design tokens. Prefer the closest existing selector when implementing a similar role.
 
 ### Buttons and actions
 
-Primary buttons use `#00D3A9`, white text, `7px` rounding, and the project’s `10px 30px` button padding. Hover treatment shifts to `#00B39F`. Saffron `#EBC017` and its darker hover value are reserved for action emphasis and classification, with dark text preferred when contrast requires it.
+The `.button a, input[type=submit]` selector uses `var(--brand-color-primary)`, white text, `7px` rounding, and `10px 30px` padding; its hover background uses `var(--brand-color-secondary)`. This shipped white-on-teal pairing has a contrast gap (see above). The `.button.alt a` action is translucent white with a `1px` translucent border, `3px` rounding, and `16px 50px` padding. The `.button-para .link` CTA uses a hard-coded teal background, white text, `7px` rounding, and `.5rem` padding. Saffron is an action color, not a documented shared secondary-button variant; use dark text on saffron backgrounds.
 
 Secondary actions may use the transparent white treatment and `1px` translucent border documented in the token layer. Outlined and catalog actions should retain the project’s compact `4px` radius and `10px` padding.
 
 ### Cards, panels, and catalog surfaces
 
-Standard light and dark cards use the corresponding neutral surface tokens, `15px` rounding, and `1.5rem` padding in the documented component layer. Catalog surfaces can use `15px` to `16px` rounding and teal accent shadows where the existing Sass already establishes that pattern.
+Card surfaces and padding vary by page. Catalog components commonly use `15px` rounding, but check the component Sass before assuming that a card has a particular surface, radius, padding, or shadow.
 
-Floating panels use the light and dark background treatments from `backgrounds`, `20px` rounding, and `1rem` padding. They should feel elevated through tonal contrast and the documented shadow, not through ornamental borders.
+Floating panels and modals do not share a documented universal gradient, radius, or padding. Follow their existing component styles and use theme-aware surface variables where available.
 
 ### Forms and inputs
 
-Inputs should remain full-width where the existing form styles require it. Use the project font stack, visible labels, clear focus treatment, and enough padding for touch interaction. The documented input entries use `14px 22px` padding and `8px` rounding; page-specific forms may use the existing `10px 30px`, `.5rem`, or `16px 50px` patterns in `_sass/forms.scss`.
+Inputs and textareas are full-width and use `10px` padding in `_sass/forms.scss`; the global form-control font is Open Sans. Border radius and dimensions vary by component, so do not assume a universal `8px` radius or `14px 22px` padding. Preserve visible labels, focus treatment, and enough padding for touch interaction.
 
 Checkboxes and compact controls use small radii. Do not turn utility fields into pills.
 
 ### Navigation, modals, and tables
 
-Navigation is a flex-based row with `2vw` horizontal container padding, compact links, and an `8px` item gap. Preserve the existing mobile collapse behavior instead of adding a second navigation pattern.
+Navigation layout and spacing are owned by `_sass/navigation.scss` and `_sass/header.scss`. Preserve the existing mobile collapse behavior instead of adding a second navigation pattern.
 
-Modal content uses dark or light surface contrast, `8px` rounding, and the documented gradient headers. Table headers should remain neutral and readable; color should support scanning rather than replace row structure.
+Modal styles are component-specific; there is no documented shared gradient header treatment. Table headers should remain neutral and readable; color should support scanning rather than replace row structure.
 
 ### Badges and classification
 
-Badges are compact labels with `4px 8px` padding and full rounding. Their colors should come from an existing project role such as teal brand, saffron action, or a documented status color. Do not create a badge color solely to decorate a card.
+Badge styling is not represented by a consistent set of named variants in the shared design reference. Check the owning component before reusing a badge's color, padding, or radius; do not create badge colors solely to decorate a card.
 
 ## Motion and interaction
 
-Existing transitions are short and functional, commonly `.2s`, `.3s`, `.4s`, or the documented motion durations. Use motion for hover feedback, opacity changes, menu transitions, and focus affordances.
+Existing transitions commonly use `.2s`, `.3s`, or `.4s`, but there is no centralized motion-token contract. Use motion for feedback, avoid layout shifts, and ensure new animations respect `prefers-reduced-motion`.
 
 - Keep hover movement small and avoid layout shifts.
 - Make focus states visible without relying on hover.
-- Respect `prefers-reduced-motion` when introducing new animation.
+- Respect `prefers-reduced-motion` when introducing new animation; do not assume all existing components already do so.
 - Do not animate content simply to make a static page feel active.
 
 ## Accessibility
@@ -472,6 +339,8 @@ Accessibility is part of the visual system, not a later layer.
 
 The site uses responsive Sass media queries rather than a single application breakpoint. Layouts should progressively reduce columns, wrap navigation, and preserve content order as the viewport narrows.
 
+- Shared Sass breakpoint variables are `$mobile` (max-width `420px`), `$tablet` (min-width `450px`), `$mid-point` (min-width `620px`), and `$desktop` (min-width `768px`) in `_sass/variables.scss`.
+- These variables are not a complete site-wide contract: many legacy partials still use literal media-query widths. Check nearby styles before choosing a breakpoint.
 - Keep the `1140px` container constraint on wide screens.
 - Reduce horizontal padding before reducing readable type size.
 - Stack cards, catalog controls, and multi-column sections when their content becomes cramped.
@@ -482,7 +351,7 @@ The site uses responsive Sass media queries rather than a single application bre
 
 ### Do
 
-- Use the front matter tokens before adding a new value.
+- Check the Sass source for an existing custom property, variable, or component value before adding a new value.
 - Prefer existing Sass variables and selectors in `_sass/`.
 - Use teal for primary interaction and saffron for deliberate action emphasis.
 - Let typography, spacing, and neutral surfaces create hierarchy.
@@ -500,9 +369,10 @@ The site uses responsive Sass media queries rather than a single application bre
 
 ## Implementation guidance
 
-This repository is a Jekyll site with layouts, Liquid includes, and Sass partials. Apply design changes in the smallest owning layer:
+This repository is a Jekyll site with layouts, Liquid includes, and Sass partials. `css/screen.scss` is the main Sass entry point; a Sass partial must be included there with `@use "<partial>" as *;` to be compiled into the site stylesheet. Apply design changes in the smallest owning layer:
 
-- shared theme values belong in `_sass/rootvariables.scss`
+- shared CSS custom properties and theme overrides belong in `_sass/rootvariables.scss`
+- shared Sass variables belong in `_sass/variables.scss`; its current z-index variables are `$z-index-nav: 1000` and `$z-index-header: 2001`
 - shared type and element behavior belongs in `_sass/elements.scss` and `_sass/fonts.scss`
 - global containers and structural layout belong in `_sass/layout.scss`
 - component-specific behavior belongs in the nearest Sass partial or shared include
@@ -510,12 +380,25 @@ This repository is a Jekyll site with layouts, Liquid includes, and Sass partial
 
 Before documenting a new token, search `_sass/`, `_includes/`, and the relevant layout for an existing value. If the implementation is inconsistent, document the dominant pattern and name the exception rather than hiding the inconsistency.
 
+### Selector-to-role reference
+
+| Role | Existing selector | Source |
+| --- | --- | --- |
+| Primary button | `.button a, input[type=submit]` | `_sass/forms.scss` |
+| Outlined action | `.button.alt a` | `_sass/forms.scss` |
+| CTA link | `.button-para .link` | `_sass/forms.scss` |
+| Main content container | `.container` | `_sass/layout.scss` |
+| Readable text container | `.text-container` | `_sass/layout.scss` |
+| Heading and body typography | `h1`–`h6`, `p` | `_sass/elements.scss` |
+
 ## Known gaps
 
-- The project has many page-specific spacing and radius values, so the token layer is a useful normalization rather than a complete replacement for Sass.
-- Some components use hard-coded colors while others use CSS variables; new work should prefer the shared variables.
-- The exact semantics of badge variants are not consistently represented by named selectors across the site.
-- Responsive behavior is distributed across Sass partials instead of one centralized breakpoint contract.
+- This front matter is documentation metadata, not a generated or enforced token system. Sass remains authoritative.
+- The project has many page-specific spacing, radius, and color values; the shared variables do not replace component Sass.
+- Some components use hard-coded colors while others use CSS custom properties; new work should prefer theme-aware shared properties.
+- Badge variants and status colors are not consistently represented by shared named selectors or tokens.
+- Responsive behavior is distributed across Sass partials, and many media queries do not use the shared breakpoint variables.
+- White text on the primary teal button and saffron action backgrounds needs a contrast review.
 
 ## Final intent
 
