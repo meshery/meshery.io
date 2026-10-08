@@ -208,11 +208,27 @@ components:
 
 Meshery.io is a Jekyll-based site for engineers, operators, contributors, and the wider cloud-native community. Its visual system is content-led and Sass-driven: neutral surfaces establish structure, Qanelas Soft carries the voice, and teal and saffron provide focused emphasis.
 
-The front matter is a human-readable reference, not a source file consumed by the site. Implemented Sass is authoritative: use `_sass/rootvariables.scss` for CSS custom properties, `_sass/variables.scss` for shared Sass variables, and component partials for actual selector behavior. This document summarizes those sources and calls out where the implementation is inconsistent.
+This document is a reference for contributors and automation, not a compiled or enforced source file. It is not consumed by the site at build time. The source-of-truth order for design decisions is:
+
+1. Actual implementation in the Jekyll templates, Liquid includes, and Sass partials
+2. Shared design decisions documented here when they match the implemented UI
+3. New design intent only when the codebase has no existing pattern and a justified change is required
+
+Use `_sass/rootvariables.scss` for CSS custom properties, `_sass/variables.scss` for shared Sass variables, and the nearest component partial for current selector behavior. When this document and the live implementation disagree, the implementation is authoritative for existing UI, while this document remains the intended reference for new work.
+
+### Authority and decision rules
+
+- Do not treat the YAML front matter as a token system or a generated design source.
+- Do not invent a new color, radius, component variant, or breakpoint without confirming whether an equivalent pattern already exists in the Sass or component code.
+- Prefer the smallest existing selector or variable that matches the intended behavior.
+- When a pattern is legacy or page-specific, document the exception rather than hiding it.
+- Use the implementation to inspect current behavior and this document to guide new work that is not yet represented in the codebase.
 
 ### How theming works
 
 The values in the front matter's `colors` and `gradients` sections describe the default values declared in `:root`; they are not necessarily the initial appearance. `_includes/header.html` renders the body with `.dark-mode` by default and removes that class when the saved preference is `light-mode`. `_sass/rootvariables.scss` then overrides theme-dependent custom properties under `.dark-mode`. Use the CSS custom properties in component styles rather than copying a value from this reference, especially for surfaces, shadows, and image filters.
+
+This site uses dark mode as the default presentation, while light mode is a persisted user preference. Do not treat dark mode as a simple inversion of the light theme; some tokens and gradients intentionally vary by mode.
 
 ### Design character
 
@@ -221,6 +237,7 @@ The values in the front matter's `colors` and `gradients` sections describe the 
 - editorial enough for blogs and community content
 - structured enough for catalogs, tables, forms, and documentation
 - consistent across light mode, dark mode, and responsive layouts
+- resilient as content grows, not optimized only for marketing hero layouts
 
 ## Color and surface usage
 
@@ -379,6 +396,19 @@ This repository is a Jekyll site with layouts, Liquid includes, and Sass partial
 - this document should describe stable implemented behavior, not aspirational values
 
 Before documenting a new token, search `_sass/`, `_includes/`, and the relevant layout for an existing value. If the implementation is inconsistent, document the dominant pattern and name the exception rather than hiding the inconsistency.
+
+### UI change checklist
+
+Before changing a UI token, selector, or component pattern, verify all of the following:
+
+- Is there an existing selector or variable in `_sass/` that already solves the problem?
+- Does the change respect both default dark-mode behavior and the light-mode preference override?
+- Does the change preserve readability, focus treatment, and touch targets on mobile and desktop?
+- Is the change consistent with the nearest component pattern instead of inventing a new framework pattern?
+- Does the change preserve layout stability and avoid introducing motion or spacing that causes jank?
+- If the implementation and the intended design disagree, is the rationale clearly documented?
+
+This checklist should be treated as the minimum review for new UI work, especially for agent-assisted contributions.
 
 ### Selector-to-role reference
 
