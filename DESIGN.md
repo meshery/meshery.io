@@ -8,6 +8,7 @@ colors:
   brand-color-secondary: '#00B39F'
   brand-color-secondary-50: 'rgba(0, 179, 159, 0.5)'
   brand-color-tertiary: '#477E96'
+  brand-color-quaternary: '#359AC0'
   color-white: '#FFFFFF'
 
   color-primary-light: '#FFFFFF'
@@ -150,31 +151,6 @@ spacing:
   xxl: 32px
   xxxl: 40px
 
-shadows:
-  box-shadow-primary: 'var(--box-shadow-primary)'
-  box-shadow-primary-quotes: 'var(--box-shadow-primary-quotes)'
-  integrations-box-shadow: 'var(--integrations-box-shadow)'
-
-gradients:
-  background-primary: 'var(--background-primary)'
-  background-primary-2: 'var(--background-primary-2)'
-  background-light: 'var(--background-light)'
-  background-light-cards: 'var(--background-light-cards)'
-  background-grey: 'var(--background-grey)'
-  background-grey-secondary: 'var(--background-grey-secondary)'
-  background-nav-dropdown: 'var(--background-nav-dropdown)'
-
-filters:
-  image-color: 'var(--image-color)'
-  image-filter-light: 'var(--image-filter-light)'
-  image-filter-dark: 'var(--image-filter-dark)'
-  logo-filter: 'var(--logo-filter)'
-
-backgrounds:
-  integrations-bg: 'var(--integrations-bg)'
-  integrations-3d-bg: 'var(--integrations-3d-bg)'
-  background-image-light: 'var(--background-image-light)'
-
 components:
   primary-button:
     selector: '.button a, input[type=submit]'
@@ -208,27 +184,40 @@ components:
 
 Meshery.io is a Jekyll-based site for engineers, operators, contributors, and the wider cloud-native community. Its visual system is content-led and Sass-driven: neutral surfaces establish structure, Qanelas Soft carries the voice, and teal and saffron provide focused emphasis.
 
-This document is a reference for contributors and automation, not a compiled or enforced source file. It is not consumed by the site at build time. The source-of-truth order for design decisions is:
-
-1. Actual implementation in the Jekyll templates, Liquid includes, and Sass partials
-2. Shared design decisions documented here when they match the implemented UI
-3. New design intent only when the codebase has no existing pattern and a justified change is required
-
-Use `_sass/rootvariables.scss` for CSS custom properties, `_sass/variables.scss` for shared Sass variables, and the nearest component partial for current selector behavior. When this document and the live implementation disagree, the implementation is authoritative for existing UI, while this document remains the intended reference for new work.
+This document is a reference for contributors and automation, not a compiled or enforced source file. It is not consumed by the site at build time.
 
 ### Authority and decision rules
 
-- Do not treat the YAML front matter as a token system or a generated design source.
+Authority is split by kind of decision:
+
+- **Values** (colors, sizes, radii, shadows, breakpoints): the Sass is authoritative. Use `_sass/rootvariables.scss` for CSS custom properties, `_sass/variables.scss` for shared Sass variables, and the nearest component partial for selector behavior. If this document disagrees with the Sass on a value, this document is out of date; follow the Sass and update this file in the same PR.
+- **Usage rules** that have no Sass equivalent (contrast, motion, color roles, the UI change checklist): this document is the reference for new work, even where existing components do not yet follow it.
+
+Additional rules:
+
+- The YAML front matter mirrors values from the Sass for quick reference. It is not a token system and is not read by the site build.
 - Do not invent a new color, radius, component variant, or breakpoint without confirming whether an equivalent pattern already exists in the Sass or component code.
 - Prefer the smallest existing selector or variable that matches the intended behavior.
 - When a pattern is legacy or page-specific, document the exception rather than hiding it.
-- Use the implementation to inspect current behavior and this document to guide new work that is not yet represented in the codebase.
+
+### Relationship to Sistent
+
+Meshery.io shares its brand colors with [Sistent](https://github.com/layer5io/sistent), the Layer5 design system: `#00D3A9` (Caribbean Green), `#00B39F` (Keppel), `#EBC017` (Saffron), `#477E96` (Teal Blue), and `#3C494F` (Charcoal). Sistent's [DESIGN.md](https://github.com/layer5io/sistent/blob/master/DESIGN.md) is the reference for those shared brand decisions. This file covers how meshery.io applies them in its own Jekyll and Sass implementation. Meshery.io does not consume Sistent at build time, so a change to a shared brand color must also be made in this repository's Sass: `_sass/rootvariables.scss` for the custom properties, or `_sass/variables.scss` for `$coolgray` / `$brand-color` (Charcoal).
 
 ### How theming works
 
-The values in the front matter's `colors` and `gradients` sections describe the default values declared in `:root`; they are not necessarily the initial appearance. `_includes/header.html` renders the body with `.dark-mode` by default and removes that class when the saved preference is `light-mode`. `_sass/rootvariables.scss` then overrides theme-dependent custom properties under `.dark-mode`. Use the CSS custom properties in component styles rather than copying a value from this reference, especially for surfaces, shadows, and image filters.
+The front matter's `colors` section lists the values declared in `:root`, which are the light-mode values; they are not the initial appearance. The `dark-mode` and `dark-mode-gradients` sections list the `.dark-mode` overrides. `_includes/header.html` renders the body with `.dark-mode` by default and removes that class when the saved preference is `light-mode`. Use the CSS custom properties in component styles rather than copying a value from this reference.
 
-This site uses dark mode as the default presentation, while light mode is a persisted user preference. Do not treat dark mode as a simple inversion of the light theme; some tokens and gradients intentionally vary by mode.
+Beyond colors, these custom properties also change under `.dark-mode`, so always reference them with `var()`:
+
+- Shadows: `--box-shadow-primary`, `--box-shadow-primary-quotes`, `--integrations-box-shadow`
+- Gradients: `--background-light`, `--background-light-cards`, `--background-grey`, `--background-grey-secondary`, `--background-nav-dropdown`, `--background-image-light`
+- Image filters: `--image-color`, `--image-filter-light`, `--image-filter-dark`, `--logo-filter` (`--image-filter-light` and `--image-filter-dark` swap values in dark mode)
+- Integration surfaces: `--integrations-bg`, `--integrations-3d-bg`
+
+`--background-primary` and `--background-primary-2` are brand gradients and do not change between modes.
+
+This site uses dark mode as the default presentation, while light mode is a persisted user preference. Do not treat dark mode as a simple inversion of the light theme; some custom properties and gradients intentionally vary by mode.
 
 ### Design character
 
@@ -241,7 +230,7 @@ This site uses dark mode as the default presentation, while light mode is a pers
 
 ## Color and surface usage
 
-Use the brand teal values for primary interaction and for links or selected controls where the existing component uses them. Use saffron for action emphasis and classification, not as a replacement for the primary teal action.
+Use the brand teal values for primary interaction and for links or selected controls where the existing component uses them. Use saffron for action emphasis and classification, not as a replacement for the primary teal action. `--brand-color-quaternary` (`#359AC0`) is currently used only for the catalog's `.chip.PERFORMANCE` classification in `_sass/catalog.scss`; it is not a general accent.
 
 Neutral values carry most of the interface. Light mode uses white, off-white, and cool gray surfaces. Dark mode uses charcoal and blue-gray layers with white or pale gray text. The `background-*` custom properties are established project treatments for page chrome and panels; they should not be added merely as decoration.
 
@@ -264,7 +253,7 @@ Keep the type hierarchy stable across content types. Do not introduce a second d
 
 ## Layout and spacing
 
-Meshery.io uses a practical 8px-based rhythm, with 4px, 8px, 12px, 16px, 20px, 24px, 32px, and 40px appearing throughout the Sass. The token names describe increasing scale, but component source remains authoritative when a legacy or page-specific value is required.
+Meshery.io uses a practical 8px-based rhythm, with 4px, 8px, 12px, 16px, 20px, 24px, 32px, and 40px appearing throughout the Sass. The `spacing` names in the front matter (`xxs` through `xxxl`) are descriptive labels for these pixel values, not Sass or CSS variables; component source remains authoritative when a legacy or page-specific value is required.
 
 ### Containers and grids
 
@@ -275,11 +264,11 @@ Meshery.io uses a practical 8px-based rhythm, with 4px, 8px, 12px, 16px, 20px, 2
 
 ### Whitespace
 
-Use whitespace to separate content groups and establish reading order. Avoid adding large marketing-style gaps to dense catalog, table, or form surfaces. Prefer the smallest token that clearly separates adjacent controls, then move to 24px, 32px, or 40px for section-level separation.
+Use whitespace to separate content groups and establish reading order. Avoid adding large marketing-style gaps to dense catalog, table, or form surfaces. Prefer the smallest spacing value that clearly separates adjacent controls, then move to 24px, 32px, or 40px for section-level separation.
 
 ## Elevation and depth
 
-Meshery separates surfaces primarily through color, borders, gradients, and restrained shadows. The shadow values come from CSS custom properties and should be used according to context. The primary and quote shadow properties change under `.dark-mode`; integrations have one property that is also theme-dependent.
+Meshery separates surfaces primarily through color, borders, gradients, and restrained shadows. The shadow values come from CSS custom properties and should be used according to context. All three shadow properties change under `.dark-mode`.
 
 - `--box-shadow-primary` supports raised content surfaces
 - `--box-shadow-primary-quotes` supports testimonial treatments
@@ -306,9 +295,7 @@ The component entries in the front matter identify existing selectors and their 
 
 ### Buttons and actions
 
-The `.button a, input[type=submit]` selector uses `var(--brand-color-primary)`, white text, `7px` rounding, and `10px 30px` padding; its hover background uses `var(--brand-color-secondary)`. This shipped white-on-teal pairing has a contrast gap (see above). The `.button.alt a` action is translucent white with a `1px` translucent border, `3px` rounding, and `16px 50px` padding. The `.button-para .link` CTA uses a hard-coded teal background, white text, `7px` rounding, and `.5rem` padding. Saffron is an action color, not a documented shared secondary-button variant; use dark text on saffron backgrounds.
-
-Secondary actions may use the transparent white treatment and `1px` translucent border documented in the token layer. The outlined action uses `3px` rounding and `16px 50px` padding; check the owning Sass before documenting catalog-action values.
+The `.button a, input[type=submit]` selector uses `var(--brand-color-primary)`, white text, `7px` rounding, and `10px 30px` padding; its hover background uses `var(--brand-color-secondary)`. This shipped white-on-teal pairing has a contrast gap (see above). The `.button.alt a` action is translucent white with a `1px` translucent border, `3px` rounding, and `16px 50px` padding. The `.button-para .link` CTA uses a hard-coded teal background, white text, `7px` rounding, and `.5rem` padding. Saffron is an action color, not a documented shared secondary-button variant; use dark text on saffron backgrounds. Check the owning Sass before documenting catalog-action values.
 
 ### Cards, panels, and catalog surfaces
 
@@ -334,7 +321,7 @@ Badge styling is not represented by a consistent set of named variants in the sh
 
 ## Motion and interaction
 
-Existing transitions commonly use `.2s`, `.3s`, or `.4s`, but there is no centralized motion-token contract. Use motion for feedback, avoid layout shifts, and ensure new animations respect `prefers-reduced-motion`.
+Existing transitions commonly use `.2s`, `.3s`, or `.4s`, but there are no shared motion variables. Use motion for feedback.
 
 - Keep hover movement small and avoid layout shifts.
 - Make focus states visible without relying on hover.
@@ -377,7 +364,7 @@ The site uses responsive Sass media queries rather than a single application bre
 
 ### Do not
 
-- Do not introduce generic placeholder tokens that are not defined in this file.
+- Do not add a new CSS custom property or Sass variable when an existing one fits. If a new one is needed, add it to `_sass/rootvariables.scss` (in both `:root` and `.dark-mode` when it is theme-dependent) or `_sass/variables.scss`, and record it here in the same PR.
 - Do not replace project colors with a new framework palette.
 - Do not make every component pill-shaped or heavily rounded.
 - Do not use gradients or shadows on every surface.
@@ -393,13 +380,13 @@ This repository is a Jekyll site with layouts, Liquid includes, and Sass partial
 - shared type and element behavior belongs in `_sass/elements.scss` and `_sass/fonts.scss`
 - global containers and structural layout belong in `_sass/layout.scss`
 - component-specific behavior belongs in the nearest Sass partial or shared include
-- this document should describe stable implemented behavior, not aspirational values
+- values recorded in this document should describe implemented behavior, not aspirational values
 
-Before documenting a new token, search `_sass/`, `_includes/`, and the relevant layout for an existing value. If the implementation is inconsistent, document the dominant pattern and name the exception rather than hiding the inconsistency.
+Before documenting a new value, search `_sass/`, `_includes/`, and the relevant layout for an existing value. If the implementation is inconsistent, document the dominant pattern and name the exception rather than hiding the inconsistency.
 
 ### UI change checklist
 
-Before changing a UI token, selector, or component pattern, verify all of the following:
+Before changing a shared value, selector, or component pattern, verify all of the following:
 
 - Is there an existing selector or variable in `_sass/` that already solves the problem?
 - Does the change respect both default dark-mode behavior and the light-mode preference override?
@@ -423,7 +410,7 @@ This checklist should be treated as the minimum review for new UI work, especial
 
 ## Known gaps
 
-- This front matter is documentation metadata, not a generated or enforced token system. Sass remains authoritative.
+- The front matter is documentation metadata, not a generated or enforced token system. For values, the Sass remains authoritative.
 - The project has many page-specific spacing, radius, and color values; the shared variables do not replace component Sass.
 - Some components use hard-coded colors while others use CSS custom properties; new work should prefer theme-aware shared properties.
 - Badge variants and status colors are not consistently represented by shared named selectors or tokens.
