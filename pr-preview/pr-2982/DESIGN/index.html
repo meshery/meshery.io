@@ -507,11 +507,31 @@
 
 <p>Meshery.io is a Jekyll-based site for engineers, operators, contributors, and the wider cloud-native community. Its visual system is content-led and Sass-driven: neutral surfaces establish structure, Qanelas Soft carries the voice, and teal and saffron provide focused emphasis.</p>
 
-<p>The front matter is a human-readable reference, not a source file consumed by the site. Implemented Sass is authoritative: use <code class="language-plaintext highlighter-rouge">_sass/rootvariables.scss</code> for CSS custom properties, <code class="language-plaintext highlighter-rouge">_sass/variables.scss</code> for shared Sass variables, and component partials for actual selector behavior. This document summarizes those sources and calls out where the implementation is inconsistent.</p>
+<p>This document is a reference for contributors and automation, not a compiled or enforced source file. It is not consumed by the site at build time. The source-of-truth order for design decisions is:</p>
+
+<ol>
+  <li>Actual implementation in the Jekyll templates, Liquid includes, and Sass partials</li>
+  <li>Shared design decisions documented here when they match the implemented UI</li>
+  <li>New design intent only when the codebase has no existing pattern and a justified change is required</li>
+</ol>
+
+<p>Use <code class="language-plaintext highlighter-rouge">_sass/rootvariables.scss</code> for CSS custom properties, <code class="language-plaintext highlighter-rouge">_sass/variables.scss</code> for shared Sass variables, and the nearest component partial for current selector behavior. When this document and the live implementation disagree, the implementation is authoritative for existing UI, while this document remains the intended reference for new work.</p>
+
+<h3 id="authority-and-decision-rules">Authority and decision rules</h3>
+
+<ul>
+  <li>Do not treat the YAML front matter as a token system or a generated design source.</li>
+  <li>Do not invent a new color, radius, component variant, or breakpoint without confirming whether an equivalent pattern already exists in the Sass or component code.</li>
+  <li>Prefer the smallest existing selector or variable that matches the intended behavior.</li>
+  <li>When a pattern is legacy or page-specific, document the exception rather than hiding it.</li>
+  <li>Use the implementation to inspect current behavior and this document to guide new work that is not yet represented in the codebase.</li>
+</ul>
 
 <h3 id="how-theming-works">How theming works</h3>
 
 <p>The values in the front matter’s <code class="language-plaintext highlighter-rouge">colors</code> and <code class="language-plaintext highlighter-rouge">gradients</code> sections describe the default values declared in <code class="language-plaintext highlighter-rouge">:root</code>; they are not necessarily the initial appearance. <code class="language-plaintext highlighter-rouge">_includes/header.html</code> renders the body with <code class="language-plaintext highlighter-rouge">.dark-mode</code> by default and removes that class when the saved preference is <code class="language-plaintext highlighter-rouge">light-mode</code>. <code class="language-plaintext highlighter-rouge">_sass/rootvariables.scss</code> then overrides theme-dependent custom properties under <code class="language-plaintext highlighter-rouge">.dark-mode</code>. Use the CSS custom properties in component styles rather than copying a value from this reference, especially for surfaces, shadows, and image filters.</p>
+
+<p>This site uses dark mode as the default presentation, while light mode is a persisted user preference. Do not treat dark mode as a simple inversion of the light theme; some tokens and gradients intentionally vary by mode.</p>
 
 <h3 id="design-character">Design character</h3>
 
@@ -521,6 +541,7 @@
   <li>editorial enough for blogs and community content</li>
   <li>structured enough for catalogs, tables, forms, and documentation</li>
   <li>consistent across light mode, dark mode, and responsive layouts</li>
+  <li>resilient as content grows, not optimized only for marketing hero layouts</li>
 </ul>
 
 <h2 id="color-and-surface-usage">Color and surface usage</h2>
@@ -700,6 +721,21 @@
 </ul>
 
 <p>Before documenting a new token, search <code class="language-plaintext highlighter-rouge">_sass/</code>, <code class="language-plaintext highlighter-rouge">_includes/</code>, and the relevant layout for an existing value. If the implementation is inconsistent, document the dominant pattern and name the exception rather than hiding the inconsistency.</p>
+
+<h3 id="ui-change-checklist">UI change checklist</h3>
+
+<p>Before changing a UI token, selector, or component pattern, verify all of the following:</p>
+
+<ul>
+  <li>Is there an existing selector or variable in <code class="language-plaintext highlighter-rouge">_sass/</code> that already solves the problem?</li>
+  <li>Does the change respect both default dark-mode behavior and the light-mode preference override?</li>
+  <li>Does the change preserve readability, focus treatment, and touch targets on mobile and desktop?</li>
+  <li>Is the change consistent with the nearest component pattern instead of inventing a new framework pattern?</li>
+  <li>Does the change preserve layout stability and avoid introducing motion or spacing that causes jank?</li>
+  <li>If the implementation and the intended design disagree, is the rationale clearly documented?</li>
+</ul>
+
+<p>This checklist should be treated as the minimum review for new UI work, especially for agent-assisted contributions.</p>
 
 <h3 id="selector-to-role-reference">Selector-to-role reference</h3>
 
