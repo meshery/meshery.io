@@ -5,13 +5,62 @@
 'use strict';
 
 let searchData = null;
-const siteBaseUrl = window.siteBaseUrl || '';
+const siteBaseUrl = (typeof window !== 'undefined' && window.siteBaseUrl) || '';
 
-function withBaseUrl(path) {
+function withBaseUrl(path, customBaseUrl = siteBaseUrl) {
   if (!path || typeof path !== 'string') return path;
   if (/^(?:[a-z]+:)?\/\//i.test(path)) return path;
   if (!path.startsWith('/')) return path;
-  return `${siteBaseUrl}${path}`;
+  if (customBaseUrl && (path === customBaseUrl || path.startsWith(`${customBaseUrl}/`))) {
+    return path;
+  }
+  return `${customBaseUrl}${path}`;
+}
+
+function escapeHTML(str) {
+  return String(str ?? '').replace(/[&<>"']/g, c => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[c]));
+}
+
+function getSafeResultUrl(path, customBaseUrl = siteBaseUrl) {
+  if (!path || typeof path !== 'string') return null;
+
+  try {
+    const origin = typeof window !== 'undefined' && window.location && window.location.origin
+      ? window.location.origin
+      : 'https://meshery.io';
+    const href = typeof window !== 'undefined' && window.location && window.location.href
+      ? window.location.href
+      : 'https://meshery.io/blog/';
+
+    if (path.trim().startsWith('//')) return null;
+
+    const parsedUrl = new URL(path, href);
+    if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
+      return null;
+    }
+
+    const isCurrentOrigin = parsedUrl.origin === origin;
+    const isProductionOrigin =
+      parsedUrl.origin === 'https://meshery.io' || parsedUrl.origin === 'http://meshery.io';
+
+    if (!isCurrentOrigin && !isProductionOrigin) {
+      return null;
+    }
+
+    if (isCurrentOrigin) {
+      return path.startsWith('/') ? withBaseUrl(path, customBaseUrl) : path;
+    }
+
+    return withBaseUrl(parsedUrl.pathname + parsedUrl.search + parsedUrl.hash, customBaseUrl);
+  } catch {
+    return null;
+  }
 }
 
 // Load search data for client-side search
@@ -90,9 +139,21 @@ function escapeRegex(string) {
 // Simple text highlighting function
 function highlightText(text, query) {
   if (!text) return '';
+  if (!query) return escapeHTML(text);
+
   const escapedQuery = escapeRegex(query);
-  const regex = new RegExp(`(${escapedQuery})`, 'gi');
-  return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+  const regex = new RegExp(escapedQuery, 'gi');
+  let result = '';
+  let lastIndex = 0;
+
+  for (const match of String(text).matchAll(regex)) {
+    result += escapeHTML(text.slice(lastIndex, match.index));
+    result += `<mark class="search-highlight">${escapeHTML(match[0])}</mark>`;
+    lastIndex = match.index + match[0].length;
+  }
+
+  result += escapeHTML(text.slice(lastIndex));
+  return result;
 }
 
 // Perform search
@@ -113,6 +174,46 @@ function slugify(text) {
     .replace(/-+$/, '');         // Trim - from end
 }
 
+function renderResultItem(result, query) {
+  const title = result._formatted?.title || highlightText(result.title, query);
+  const excerpt = result._formatted?.excerpt || highlightText(result.excerpt, query);
+  const categories = result.categories || [];
+  const date = result.date || '';
+  const author = result.author || '';
+  const safeUrl = getSafeResultUrl(result.url);
+
+  let categoryHtml = '';
+  if (categories.length > 0) {
+    categoryHtml = '<span class="blog-filters">';
+    categories.forEach(cat => {
+      const slug = slugify(cat);
+      categoryHtml += `<span class="blog-filter"><a href="${escapeHTML(withBaseUrl(`/blog/category/${slug}/`))}">${escapeHTML(cat.toLowerCase())}</a></span>`;
+    });
+    categoryHtml += '</span>';
+  }
+
+  const formattedDate = date ? new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+  const titleLink = safeUrl
+    ? `<a href="${escapeHTML(safeUrl)}">${title}</a>`
+    : `<a>${title}</a>`;
+  const readMore = safeUrl
+    ? `<div class="button-para"><a class="link" href="${escapeHTML(safeUrl)}">Read More</a></div>`
+    : '';
+
+  return `
+        <h2>${titleLink}</h2>
+        <p class="post-details">
+          ${categoryHtml}
+          ${author ? `<span class="post-author">${escapeHTML(author)}</span>` : ''}
+          ${formattedDate ? `<span class="post-date"> ${escapeHTML(formattedDate)}</span>` : ''}
+        </p>
+        <div class="post-content">
+          <p>${excerpt}</p>
+          ${readMore}
+        </div>
+      `;
+}
+
 // Render search results
 function renderResults(results, query) {
   const resultsContainer = document.getElementById('search-results');
@@ -121,7 +222,6 @@ function renderResults(results, query) {
 
   if (!resultsContainer) return;
 
-  // Clear previous results and summary
   resultsContainer.innerHTML = '';
   if (searchSummary) {
     searchSummary.innerHTML = '';
@@ -129,21 +229,10 @@ function renderResults(results, query) {
 
   if (results.length === 0) {
     if (searchSummary) {
-      const mainMessage = document.createElement('div');
-      mainMessage.className = 'search-main-message';
-      mainMessage.appendChild(document.createTextNode('No results found for "'));
-      const querySpan = document.createElement('span');
-      querySpan.className = 'search-summary-query';
-      querySpan.textContent = query;
-      mainMessage.appendChild(querySpan);
-      mainMessage.appendChild(document.createTextNode('"'));
-
-      const helperText = document.createElement('div');
-      helperText.className = 'search-helper-text';
-      helperText.textContent = 'Try another keyword or browse categories below.';
-
-      searchSummary.appendChild(mainMessage);
-      searchSummary.appendChild(helperText);
+      searchSummary.innerHTML = `
+        <div class="search-main-message">No results found for "<span class="search-summary-query">${escapeHTML(query)}</span>"</div>
+        <div class="search-helper-text">Try another keyword or browse categories below.</div>
+      `;
       searchSummary.style.display = 'flex';
     }
     resultsContainer.style.display = 'none';
@@ -154,16 +243,9 @@ function renderResults(results, query) {
   }
 
   if (searchSummary) {
-    const mainMessage = document.createElement('div');
-    mainMessage.className = 'search-main-message';
-    mainMessage.appendChild(document.createTextNode(`Found ${results.length} result${results.length !== 1 ? 's' : ''} for "`));
-    const querySpan = document.createElement('span');
-    querySpan.className = 'search-summary-query';
-    querySpan.textContent = query;
-    mainMessage.appendChild(querySpan);
-    mainMessage.appendChild(document.createTextNode('"'));
-
-    searchSummary.appendChild(mainMessage);
+    searchSummary.innerHTML = `
+      <div class="search-main-message">Found ${results.length} result${results.length !== 1 ? 's' : ''} for "<span class="search-summary-query">${escapeHTML(query)}</span>"</div>
+    `;
     searchSummary.style.display = 'flex';
   }
   if (blogPosts) {
@@ -178,43 +260,7 @@ function renderResults(results, query) {
   results.forEach(result => {
     const li = document.createElement('li');
     li.className = 'blog-post search-result-item';
-
-    // Get highlighted or original content
-    const title = result._formatted?.title || result.title;
-    const excerpt = result._formatted?.excerpt || result.excerpt;
-    const categories = result.categories || [];
-    const date = result.date || '';
-    const author = result.author || '';
-
-    // Build category links
-    let categoryHtml = '';
-    if (categories.length > 0) {
-      categoryHtml = '<span class="blog-filters">';
-      categories.forEach(cat => {
-        const slug = slugify(cat);
-        categoryHtml += `<span class="blog-filter"><a href="${withBaseUrl(`/blog/category/${slug}/`)}">${cat.toLowerCase()}</a></span>`;
-      });
-      categoryHtml += '</span>';
-    }
-
-    // Format date
-    const formattedDate = date ? new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
-
-    li.innerHTML = `
-        <h2><a href="${withBaseUrl(result.url)}">${title}</a></h2>
-        <p class="post-details">
-          ${categoryHtml}
-          ${author ? `<span class="post-author">${author}</span>` : ''}
-          ${formattedDate ? `<span class="post-date"> ${formattedDate}</span>` : ''}
-        </p>
-        <div class="post-content">
-          <p>${excerpt}</p>
-          <div class="button-para">
-            <a class="link" href="${withBaseUrl(result.url)}">Read More</a>
-          </div>
-        </div>
-      `;
-
+    li.innerHTML = renderResultItem(result, query);
     resultsList.appendChild(li);
   });
 
@@ -302,12 +348,29 @@ async function initSearch() {
 }
 
 // Initialize when DOM is loaded
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initSearch);
-} else {
-  initSearch();
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSearch);
+  } else {
+    initSearch();
+  }
 }
 
 // Expose clear function globally for use in templates
-window.clearBlogSearch = clearSearch;
+if (typeof window !== 'undefined') {
+  window.clearBlogSearch = clearSearch;
+}
+
+/* global module */
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    escapeHTML,
+    escapeRegex,
+    highlightText,
+    slugify,
+    withBaseUrl,
+    getSafeResultUrl,
+    renderResultItem,
+  };
+}
 })();

@@ -39,7 +39,11 @@ components:
   colorIcon: assets/images/integration/karpenter/components/node-overlay/icons/color/node-overlay-color.svg
   whiteIcon: assets/images/integration/karpenter/components/node-overlay/icons/white/node-overlay-white.svg
   description: 
-componentsCount: 7
+- name: gce-custom-machine-type
+  colorIcon: assets/images/integration/karpenter/components/gce-custom-machine-type/icons/color/gce-custom-machine-type-color.svg
+  whiteIcon: assets/images/integration/karpenter/components/gce-custom-machine-type/icons/white/gce-custom-machine-type-white.svg
+  description: 
+componentsCount: 8
 relationships: 
 relationshipsCount: 0
 featureList: [
