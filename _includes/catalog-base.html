@@ -145,6 +145,10 @@
             catalog.forEach(function (pattern) {
                 cardsContainer.appendChild(pattern);
             });
+
+            if (typeof window.refreshFilterPagination === "function") {
+                window.refreshFilterPagination();
+            }
         });
     // Search functionality
     function setupSearchFunction() {
@@ -152,6 +156,8 @@
     if (!searchInput) {
         return;
     }
+
+    const itemsPerPage = 11;
     
     searchInput.addEventListener("input", function() {
         const searchTerm = this.value.toLowerCase();
