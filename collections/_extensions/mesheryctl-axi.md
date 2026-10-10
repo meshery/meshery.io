@@ -8,10 +8,10 @@ type: Configuration
 compatibility: 
   - meshery
   - kubernetes
-logo: /assets/images/logos/meshery-logo-light.svg
-whiteImage: /assets/images/logos/meshery-logo-light.svg
-colorImage: /assets/images/logos/meshery-logo-light.svg
-image-light: /assets/images/logos/meshery-logo-light.svg
+logo: /assets/images/logos/terminal.svg
+whiteImage: /assets/images/logos/terminal.svg
+colorImage: /assets/images/logos/terminal.svg
+image-light: /assets/images/logos/terminal.svg
 extensionInfo: |
   mesheryctl-axi is an agent-ergonomic <a href="https://axi.md/">AXI</a> wrapper around <a href="https://docs.meshery.io/reference/mesheryctl">mesheryctl</a>. It wraps the human-facing CLI rather than changing it, presenting the same Meshery operations through an interface designed for AI agents and automation: token-efficient TOON output for list and view reporting, definitive empty states, structured errors, and <code>help[]</code> next-step suggestions on every successful command.
 
