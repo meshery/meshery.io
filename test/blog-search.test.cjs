@@ -93,12 +93,10 @@ test('getSafeResultUrl respects configured baseurl without duplicate prefixing',
   assert.equal(getSafeResultUrl('/meshery.io/blog/safe/', '/meshery.io'), '/meshery.io/blog/safe/');
 });
 
-test('getSafeResultUrl resolves production URLs to safe paths on deploy previews and localhost', () => {
+test('getSafeResultUrl resolves production URLs to safe paths on preview hosts', () => {
+  const previewLocation = new URL('https://preview.example.test/blog/');
   global.window = {
-    location: {
-      origin: 'https://deploy-preview-123.netlify.app',
-      href: 'https://deploy-preview-123.netlify.app/blog/'
-    }
+    location: previewLocation
   };
   try {
     assert.equal(getSafeResultUrl('https://meshery.io/blog/safe/'), '/blog/safe/');
