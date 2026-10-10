@@ -15,11 +15,11 @@ categories:
 
 It is official: the **Cloud Native Computing Foundation (CNCF) Technical Oversight Committee has voted to accept Meshery as an Incubating project**! This marks a massive milestone in our journey from a Sandbox project to becoming the premier cloud native manager and infrastructure management platform. 
 
-### The Current State of Meshery
+### Project Pulse
 
 Meshery has evolved far beyond its initial iterations. Today, it stands as an expansive cloud native manager designed to simplify the complex lifecycle of modern infrastructure. Instead of leaving you to wrestle with an endless pile of YAML, Meshery allows you to treat your cluster as a dynamic knowledge graph. This approach provides multi-cluster fleet management, deep visibility, and an extensible architecture that brings order and automation to cloud native operations.
 
-### Meshery's Incubating Status: A Community-Driven Triumph
+### A Community-Driven Triumph
 
 This incubation milestone belongs to the community. It is a direct result of the relentless collaboration and innovation from developers around the globe. Since entering the CNCF Sandbox on June 22, 2021, our ecosystem’s growth has been staggering:
 
@@ -32,7 +32,7 @@ This incubation milestone belongs to the community. It is a direct result of the
 
 These metrics are more than just numbers, they reflect the real-world trust and reliance that users and organizations are placing in Meshery to design, operate, and manage their cloud native deployments at scale.
 
-### The Future of Meshery
+### The Future
 
 In the era of AI, Meshery is working on tackling critical gaps in cloud-native AI by grounding LLMs in rich, topology-aware context rather than leaving them to hallucinate over raw, isolated YAML manifests. By exposing cloud-native infrastructures as an active semantic knowledge graph, Meshery provides agents with full structural visibility into relationships, dependencies, and policy guardrails before they generate or mutate configurations. Subsequently, visualizing these AI-generated changes for review esnures human-in-the-loop. Crucially, these improvements to Meshery treats AI agents as first-class operators. We are also refining `mesheryctl` for headless, non-interactive execution and rolling out token-efficient output serializations like TOON alongside JSON and YAML, cutting context-window overhead while giving agents deterministic pre-change impact analysis directly inside their execution loops. And our newest project [`mesheryctl-axi`](https://github.com/meshery-extensions/mesheryctl-axi) takes this further by providing a dedicated Agent eXecution Interface (AXI) built specifically for autonomous systems—offering token-efficient TOON list and view reporting, definitive empty states, structured errors, actionable next-step suggestions, and strictly non-interactive execution, making it the preferred entry point over raw `mesheryctl` for agent workflows.
 
