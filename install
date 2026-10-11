@@ -114,12 +114,12 @@ fi
 
 if ! command_exists curl ; then
     echo "Missing required utility: 'curl'. Please install 'curl' and try again."
-    exit;
+    exit 1;
 fi
 
 if ! command_exists tar; then
     echo "Missing required utility: 'tar'. Please install 'tar' and try again."
-    exit;
+    exit 1;
 fi
 
 if [ "x${MESHERY_VERSION}" = "x" ] ; then
@@ -128,7 +128,7 @@ fi
 
 if [ "x${MESHERY_VERSION}" = "x" ] ; then
   printf "Unable to get latest mesheryctl version. Set MESHERY_VERSION env var and re-run. For example: export MESHERY_VERSION=v0.1.6\n"
-  exit;
+  exit 1;
 fi
 
 # For patch releases, the meshery tar ball will not be generated, so fall back to last stable release
@@ -148,7 +148,7 @@ curl -L ${URL} -o ${PWD}/meshery.tar.gz
 validFile=`file ${PWD}/meshery.tar.gz | grep 'gzip compressed data'`
 if [ -z "$validFile" ] ; then
   printf "Unable to download '%s' from ${URL}. Set MESHERY_VERSION environment variable to a different version and re-run. For example: export MESHERY_VERSION=v0.9.0\n" "$FILENAME"
-  exit;
+  exit 1;
 fi
 
 # Generate a temporary folder to store intermediate installation files
