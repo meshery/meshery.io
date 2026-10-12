@@ -66,11 +66,19 @@
     {% endif %}
   }
   function handleDropdown() {
+    const filterButton = document.querySelector(".filter-btn");
     if (filterWrapper.classList.contains("is-open")) {
       filterWrapper.classList.remove("is-open");
+      filterButton?.focus();
     } else {
       filterWrapper.classList.add("is-open");
       hideCategoryOrTechnology()
+      const target = filterWrapper.querySelector(".tab-btn.is-selected") || filterWrapper.querySelector("#x-icon");
+      target?.focus();
+      // The panel is still visibility:hidden while it slides in, so retry once the transition ends.
+      if (target && document.activeElement !== target) {
+        filterWrapper.addEventListener("transitionend", () => target.focus(), { once: true });
+      }
     }
   }
 </script>
