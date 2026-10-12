@@ -20,8 +20,10 @@ layout: default
                 {% endif %}
 
                 {% if project.description %}
-                <p><span class="sub_headings">Description:</span></p>
-                <p class="program-p">{{ project.description }}</p>
+                <h4 class="project-list"><span class="sub_headings">Description:</span></h4>
+                <div class="program-p">
+                    {{ project.description | markdownify }}
+                </div>
                 {% endif %}
 
                 {% if project.skills or project.skills_list %}
@@ -59,7 +61,7 @@ layout: default
                 <h4 class="project-list"><span class="sub_headings">Mentors:</span></h4>
                 <ul>
                     {% for mentor in project.mentors %}
-                    <li style="padding-bottom: 1rem">
+                    <li>
                         {% if mentor.link %}
                         <a href="{{ mentor.link }}">{{ mentor.name }}</a>
                         {% else %}
@@ -71,17 +73,17 @@ layout: default
                 {% endif %}
 
                 {% if project.issues %}
-                <h4 class="project-list">Issues:</h4>
+                <h4 class="project-list"><span class="sub_headings">Issues:</span></h4>
                 <ul>
                     {% for issue in project.issues %}
                     <li>
-                        <a class="issue" href="{{ issue }}">{{ issue }}</a>
+                        <a class="issue program-p" href="{{ issue }}">{{ issue }}</a>
                     </li>
                     {% endfor %}
                 </ul>
                 {% elsif project.issue %}
-                <h4 class="project-list">Issue:</h4>
-                <a class="issue" href="{{ project.issue }}">{{ project.issue }}</a>
+                <h4 class="project-list"><span class="sub_headings">Issue:</span></h4>
+                <a class="issue program-p" href="{{ project.issue }}">{{ project.issue }}</a>
                 {% endif %}
                 </div>
                 {% endfor %}
@@ -90,29 +92,29 @@ layout: default
         </div>
 
         {% if page.timeline %}
-        <h3 class="cohort_title" id="timeline">{{ page.timeline_title }}</h3>
+        <h3 class="cohort_title" id="timeline"><span class="sub_headings">{{ page.timeline_title }}</span></h3>
         <div class="program">
             <div class="community-details">
-                <p><span class="sub_headings">Full-Time Terms:</span></p>
+                <h4 class="section-title"><span class="sub_headings">Full-Time Terms:</span></h4>
 
             {% for term in page.timeline %}
-            <h4>{{ term.name }}</h4>
-            <ul class="gsoc">
-                {% for item in term.dates %}
-                <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
+            <div class="timeline-section">
+                <h4>{{ term.name }}</h4>
+                <ul class="gsoc">
+                    {% for item in term.dates %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
             {% endfor %}
 
             {% if page.community_description %}
             <div class="community-description">
-                <p><span class="sub_headings">About the Community</span></p>
-                <p>
-                    {{ page.community_description }}
-                </p>
-                <a href="https://slack.meshery.io">
-                    <input type="button" value="Join Slack" class="participate-button" />
-                </a>
+                <h4 class="section-title"><span class="sub_headings">About the Community</span></h4>
+                <div class="program-p">
+                    {{ page.community_description | markdownify }}
+                </div>
+                <a href="https://slack.meshery.io" class="participate-button">Join Slack</a>
             </div>
             {% endif %}
             </div>
@@ -151,6 +153,6 @@ layout: default
 </div>
 <a id="button-scroll-to-up" style="text-decoration: none; color: var(--color-white);"></a>
 
-<div class="text subscribe program__subscribe">
+<div class="text subscribe program__subscribe lfx-subscribe">
      {% include mailing-lists.html %}
 </div>

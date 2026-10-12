@@ -14,9 +14,8 @@ build:
 	$(jekyll) build --drafts
 
 docker:
-	@# Run jekyll in official jekyll image without running bundle install
-	@# This avoids fetching gems on the host when Docker provides a working jekyll runtime
-	docker run --name meshery-io -d --rm -p 4000:4000 -v `pwd`:"/srv/jekyll" -w /srv/jekyll jekyll/jekyll:4 jekyll serve --drafts --livereload
+	@# Run Jekyll with the repo's Gemfile dependencies isolated in a Docker volume.
+	docker run --name meshery-io --rm -p 4000:4000 -p 35729:35729 -v "$(CURDIR)":"/srv/jekyll" -v meshery-io-bundle:"/usr/local/bundle" -w /srv/jekyll jekyll/jekyll:4 sh -lc 'bundle check || bundle install; bundle exec jekyll serve --host 0.0.0.0 --drafts --livereload --config _config_dev.yml'
 
 docker-stop:
 	docker stop meshery-io

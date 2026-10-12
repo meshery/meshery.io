@@ -9,7 +9,7 @@ compatibility:
 extensionId: 2d54f372-10e5-4c4e-8d23-b9c35c68ce98
 logo: /assets/images/meshery-logo.svg
 whiteImage: /images/integrations/nginx-ingress/icons/color/nginx-ingress-color.svg
-colorImage: /images/integrations/nginx-ingress/icons/white/nginx-ingress-white.svg
+colorImage: /images/integrations/nginx-ingress/icons/color/nginx-ingress-color.svg
 extensionInfo: |
   Deploy the Meshery Adapter for NGINX Service Mesh to enable comprehensive lifecycle management of NGINX service meshes.
 extensionCaveats: |

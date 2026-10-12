@@ -18,5 +18,5 @@ extensionCaveats: |
   - Export the format Meshery needs to recognize and render custom shapes.
   - Help teams choose or create shapes that better communicate component purpose in designs.
 URL: https://shapes.meshery.io/
-docsURL: https://docs.meshery.io/extensions/component-shape-guide
+docsURL: https://github.com/meshery-extensions/shape-builder
 ---
