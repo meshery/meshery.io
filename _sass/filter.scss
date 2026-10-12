@@ -138,6 +138,34 @@
     display: none;
 }
 
+/* SEARCH / FILTER TOOLBAR (_includes/view-all.html) */
+.search-container {
+  display: flex;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.filter-btn {
+  display: none;
+  background-color: #00b39f;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 770px) {
+  .search-container {
+    gap: 0.25rem;
+    width: 100%;
+  }
+  .filter-btn {
+    display: block;
+  }
+}
+
 
 
 
@@ -171,6 +199,28 @@
         pointer-events: auto;
   }
   
+  .mobile-header .tab-btn {
+    background-color: var(--color-primary-dark);
+    color: var(--color-secondary-light);
+    border: 1px solid var(--color-primary-extra-dark);
+    font-weight: 600;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .mobile-header .tab-btn.is-selected {
+    background-color: #00b39f;
+    border-color: #00b39f;
+    color: #fff;
+  }
+  .action-btn .clear-btn {
+    background-color: var(--color-primary-dark);
+    color: var(--color-secondary-light);
+    border: 1px solid var(--color-primary-extra-dark);
+  }
+  .action-btn .apply-btn {
+    background-color: #00b39f;
+    color: #fff;
+    font-weight: 600;
+  }
   .mobile-header{
     display: block;
     & div{
@@ -189,14 +239,14 @@
   .compatibility-para, .compatibility-div, .category-para, .category-div{
     display: none;
   }
-  .compatibility-div, .category-div{
+  /* Id selectors so these override the desktop #compatibility-div sizing without !important */
+  #compatibility-div, #category-div{
         flex: 1 1 auto;
         flex-direction: row;
         min-height: 0;
-        height: auto !important;
-        max-height: none !important;
-    overflow-y: auto;
-    flex-wrap: nowrap;
+        height: auto;
+        max-height: none;
+        overflow-y: auto;
         align-content: flex-start;
         justify-content: flex-start;
         gap: 0.5rem;

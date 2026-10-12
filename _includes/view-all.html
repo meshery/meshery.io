@@ -1,34 +1,3 @@
-<style>
-  .search-container{
-    display: flex;
-    width: 75%;
-    margin: 0 auto;
-  }
-  .filter-btn {
-    display: none;
-    background-color: #00b39f;
-    color: white;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-  } 
-  @media screen and (max-width: 770px) { 
-    .search-container {
-      display: flex;
-      gap: 0.25rem;
-      width: 100%;
-    }
-    .filter-btn{
-      display: block;
-    }
-
-    
-  }
-
-</style>
-
 <div class="search-container">
   <div class="sorting-options" style="flex-grow: 1">
     <select id="sort">
@@ -60,6 +29,7 @@
   const categoryFilterSection = document.querySelector(".category-div")
 
   function hideCategoryOrTechnology() {
+    setActiveTab({% if show_technology == "true" %}"technology"{% else %}"category"{% endif %});
     {% if show_technology == "true" %}
       if (technologieHeaderFilterSection) {
         technologieHeaderFilterSection.style.display = "block";
