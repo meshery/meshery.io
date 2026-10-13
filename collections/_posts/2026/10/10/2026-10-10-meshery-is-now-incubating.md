@@ -23,7 +23,7 @@ Meshery has evolved far beyond its initial iterations. Today, it stands as an ex
 
 This incubation milestone belongs to the community. It is a direct result of the relentless collaboration and innovation from developers around the globe. Since entering the CNCF Sandbox on June 22, 2021, our ecosystem’s growth has been staggering:
 
-*   **Fifth highest-velocity project** in the CNCF (as of this writing).
+*   **5th highest-velocity project** in the CNCF.
 *   **350% increase in code commits** between July 1, 2025 to July 1, 2026.
 *   **7,000+ Contributors** helping build and refine the platform.
 *   **1,000+ Contributing Organizations** backing the ecosystem.
