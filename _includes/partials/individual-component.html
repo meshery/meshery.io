@@ -1,5 +1,27 @@
 {% assign pattern = page %}
 <div class="single-page">
+  {% unless pattern.filterInfo %}
+  <div class="cstore-detail-top">
+  <nav class="cstore-crumbs" aria-label="Breadcrumb"><a href="{{ '/catalog/designs/' | relative_url }}">Design Catalog</a> <span aria-hidden="true">/</span> <a href="{{ '/catalog/designs/' | relative_url }}?category={{ pattern.type | uri_escape }}">{{ pattern.type | replace: "-", " " }}</a></nav>
+  <div class="cstore-cta" role="group" aria-label="Design actions">
+    <a class="cstore-cta-primary" href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id={{ pattern.patternId }}&name={{ pattern.name | uri_escape }}" target="_blank" rel="noopener">Open in Playground</a>
+    {% if pattern.URL %}<a class="cstore-cta-secondary" href="{{ pattern.URL }}" download>Download design</a>{% endif %}
+    <code class="cstore-cta-cmd">mesheryctl design import -f {{ pattern.URL | default: 'design.yml' }}</code>
+  </div>
+  </div>
+  <style>
+    .cstore-detail-top{grid-column:1/-1;width:100%;flex-basis:100%}
+    .cstore-crumbs{margin:0 0 1rem;font-size:.9rem;text-transform:capitalize}
+    .cstore-crumbs a{color:#00b39f;text-decoration:none}
+    .cstore-cta{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin:0 0 2rem}
+    .cstore-cta a{white-space:nowrap;display:inline-block;padding:10px 22px;border-radius:999px;font-weight:700;text-decoration:none}
+    .cstore-cta-primary{background:#00b39f;color:#fff}
+    .cstore-cta-primary:hover,.cstore-cta-primary:focus-visible{background:#00897b;color:#fff;outline:none;box-shadow:0 0 0 3px rgba(0,179,159,.35)}
+    .cstore-cta-secondary{border:2px solid #00b39f;color:#00b39f}
+    .cstore-cta-secondary:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(0,179,159,.35)}
+    .cstore-cta-cmd{font-size:.8rem;padding:6px 10px;border-radius:6px;background:rgba(0,179,159,.1);overflow-wrap:anywhere}
+  </style>
+  {% endunless %}
   {% assign info = pattern.patternInfo | default: pattern.filterInfo %}
   {% assign caveats = pattern.patternCaveats | default: pattern.filterCaveats %}
   {% assign info_clean = info | strip %}
