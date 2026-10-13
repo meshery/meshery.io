@@ -147,7 +147,71 @@ components:
   colorIcon: assets/images/integration/kubevault/components/vault-relay/icons/color/vault-relay-color.svg
   whiteIcon: assets/images/integration/kubevault/components/vault-relay/icons/white/vault-relay-white.svg
   description: 
-componentsCount: 34
+- name: db2role
+  colorIcon: assets/images/integration/kubevault/components/db2role/icons/color/db2role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/db2role/icons/white/db2role-white.svg
+  description: 
+- name: druid-role
+  colorIcon: assets/images/integration/kubevault/components/druid-role/icons/color/druid-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/druid-role/icons/white/druid-role-white.svg
+  description: 
+- name: etcd-role
+  colorIcon: assets/images/integration/kubevault/components/etcd-role/icons/color/etcd-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/etcd-role/icons/white/etcd-role-white.svg
+  description: 
+- name: hana-db-role
+  colorIcon: assets/images/integration/kubevault/components/hana-db-role/icons/color/hana-db-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/hana-db-role/icons/white/hana-db-role-white.svg
+  description: 
+- name: hazelcast-role
+  colorIcon: assets/images/integration/kubevault/components/hazelcast-role/icons/color/hazelcast-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/hazelcast-role/icons/white/hazelcast-role-white.svg
+  description: 
+- name: ignite-role
+  colorIcon: assets/images/integration/kubevault/components/ignite-role/icons/color/ignite-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/ignite-role/icons/white/ignite-role-white.svg
+  description: 
+- name: kafka-role
+  colorIcon: assets/images/integration/kubevault/components/kafka-role/icons/color/kafka-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/kafka-role/icons/white/kafka-role-white.svg
+  description: 
+- name: memcached-role
+  colorIcon: assets/images/integration/kubevault/components/memcached-role/icons/color/memcached-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/memcached-role/icons/white/memcached-role-white.svg
+  description: 
+- name: milvus-role
+  colorIcon: assets/images/integration/kubevault/components/milvus-role/icons/color/milvus-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/milvus-role/icons/white/milvus-role-white.svg
+  description: 
+- name: mssql-server-role
+  colorIcon: assets/images/integration/kubevault/components/mssql-server-role/icons/color/mssql-server-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/mssql-server-role/icons/white/mssql-server-role-white.svg
+  description: 
+- name: neo4j-role
+  colorIcon: assets/images/integration/kubevault/components/neo4j-role/icons/color/neo4j-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/neo4j-role/icons/white/neo4j-role-white.svg
+  description: 
+- name: oracle-role
+  colorIcon: assets/images/integration/kubevault/components/oracle-role/icons/color/oracle-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/oracle-role/icons/white/oracle-role-white.svg
+  description: 
+- name: qdrant-role
+  colorIcon: assets/images/integration/kubevault/components/qdrant-role/icons/color/qdrant-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/qdrant-role/icons/white/qdrant-role-white.svg
+  description: 
+- name: rabbit-mq-role
+  colorIcon: assets/images/integration/kubevault/components/rabbit-mq-role/icons/color/rabbit-mq-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/rabbit-mq-role/icons/white/rabbit-mq-role-white.svg
+  description: 
+- name: solr-role
+  colorIcon: assets/images/integration/kubevault/components/solr-role/icons/color/solr-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/solr-role/icons/white/solr-role-white.svg
+  description: 
+- name: weaviate-role
+  colorIcon: assets/images/integration/kubevault/components/weaviate-role/icons/color/weaviate-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/weaviate-role/icons/white/weaviate-role-white.svg
+  description: 
+componentsCount: 50
 relationships: 
 relationshipsCount: 0
 featureList: [

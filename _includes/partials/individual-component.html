@@ -1,8 +1,61 @@
 {% assign pattern = page %}
 <div class="single-page">
-  <div class="modal-image-container">
+  {% unless pattern.filterInfo %}
+  <div class="cstore-detail-top">
+  <nav class="cstore-crumbs" aria-label="Breadcrumb"><a href="{{ '/catalog/designs/' | relative_url }}">Design Catalog</a> <span aria-hidden="true">/</span> <a href="{{ '/catalog/designs/' | relative_url }}?category={{ pattern.type | uri_escape }}">{{ pattern.type | replace: "-", " " }}</a></nav>
+  <div class="cstore-cta" role="group" aria-label="Design actions">
+    <a class="cstore-cta-primary" href="https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id={{ pattern.patternId }}&name={{ pattern.name | uri_escape }}" target="_blank" rel="noopener">Open in Playground</a>
+    {% if pattern.URL %}<a class="cstore-cta-secondary" href="{{ pattern.URL }}" download>Download design</a>{% endif %}
+    <code class="cstore-cta-cmd">mesheryctl design import -f {{ pattern.URL | default: 'design.yml' }}</code>
+  </div>
+  </div>
+  <style>
+    .cstore-detail-top{grid-column:1/-1;width:100%;flex-basis:100%}
+    .cstore-crumbs{margin:0 0 1rem;font-size:.9rem;text-transform:capitalize}
+    .cstore-crumbs a{color:#00b39f;text-decoration:none}
+    .cstore-cta{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin:0 0 2rem}
+    .cstore-cta a{white-space:nowrap;display:inline-block;padding:10px 22px;border-radius:999px;font-weight:700;text-decoration:none}
+    .cstore-cta-primary{background:#00b39f;color:#fff}
+    .cstore-cta-primary:hover,.cstore-cta-primary:focus-visible{background:#00897b;color:#fff;outline:none;box-shadow:0 0 0 3px rgba(0,179,159,.35)}
+    .cstore-cta-secondary{border:2px solid #00b39f;color:#00b39f}
+    .cstore-cta-secondary:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(0,179,159,.35)}
+    .cstore-cta-cmd{font-size:.8rem;padding:6px 10px;border-radius:6px;background:rgba(0,179,159,.1);overflow-wrap:anywhere}
+  </style>
+  {% endunless %}
+  {% assign info = pattern.patternInfo | default: pattern.filterInfo %}
+  {% assign caveats = pattern.patternCaveats | default: pattern.filterCaveats %}
+  {% assign info_clean = info | strip %}
+  {% assign caveats_clean = caveats | strip %}
 
-    <h4>{{page.collection | slice: 0, 9 | capitalize }} Details</h4>
+  <div class="catalog-content">
+    <h3>{% if pattern.filterInfo %}What This Filter Does:{% else %}What This Design Does:{% endif %}</h3>
+    {% if info_clean == '' or info_clean == '""' %}
+      <p class="pre-white-space"><em>No description available.</em></p>
+    {% else %}
+      <p class="pre-white-space">{{ info | url_decode }}</p>
+    {% endif %}
+
+    <h4 class="design-snapshot">Design Snapshot</h4>
+    <img class="pattern-snapshot"
+      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png"
+      onerror="this.src='{{ '/assets/images/logos/service-mesh-pattern.svg' | relative_url }}'" loading="lazy" onclick="toggleFullScreenImage('{{ pattern.patternId }}-light')"
+      alt="{{ pattern.name | default: '' | escape }} design snapshot"/>
+
+    <h3>Caveats and Consideration:</h3>
+    {% if caveats_clean == '' or caveats_clean == '""' %}
+      <p class="pre-white-space"><em>No description available.</em></p>
+    {% else %}
+      <p class="pre-white-space">{{ caveats | url_decode }}</p>
+    {% endif %}
+
+    <h3>Compatibility:</h3>
+    {% include partials/compatibility.html%}
+    {% include copy-and-download.html %}
+  </div>
+
+  <div class="modal-image-container">
+    {% if pattern.filterInfo %}<h4>Filter Details</h4>{% else %}<h4>Design Details</h4>{% endif %}
+    
       <!-- {% for category in pattern.type %}
         <div>
         <span class="pattern-type">
@@ -19,7 +72,9 @@
         <ul style="list-style: none; padding:0rem; margin:0rem;" class="catalog-item-detail">
 
           <li><p>CATEGORY</p>
-            <div>{{pattern.type}}</div>
+            {% if pattern.type %}
+            <div class="category-tag">{{pattern.type}}</div>
+            {% endif %}
           </li>
 
           <!-- <li><p>ID</p>
@@ -48,7 +103,9 @@
           </li>
 
           <li><p>VERSION</p>
-            <div>{{ pattern.publishedVersion }}</div>
+            {% if pattern.publishedVersion %}
+            <div class="category-tag">{{ pattern.publishedVersion }}</div>
+            {% endif %}
           </li>
           <li>
             <p>MODELS</p>
@@ -73,11 +130,6 @@
     </div>
 
     <div class="modal-image-single">
-      <h4>Design Snapshot</h4>
-      <img class="pattern-snapshot"
-      src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png"
-      onerror="this.src='{{ '/assets/images/logos/service-mesh-pattern.svg' | relative_url }}'" loading="lazy" onclick="toggleFullScreenImage('{{ pattern.patternId }}-light')"/>
-
       <h4 class="related-patterns">Related Designs</h4>
       <!-- MINICARD-START -->
       {% include related-patterns.html %}
@@ -86,33 +138,6 @@
   </div>
   <!-- MINICARD-END -->
 
-  {% assign info = pattern.patternInfo | default: pattern.filterInfo %}
-  {% assign caveats = pattern.patternCaveats | default: pattern.filterCaveats %}
-  {% assign info_clean = info | strip %}
-  {% assign caveats_clean = caveats | strip %}
-  <div>
-    <h3>{% if pattern.filterInfo %}What This Filter Does:{% else %}What This Design Does:{% endif %}</h3>
-    {% if info_clean == '' or info_clean == '""' %}
-      <p class="pre-white-space"><em>No description available.</em></p>
-    {% else %}
-      <p class="pre-white-space">{{ info | url_decode }}</p>
-    {% endif %}
-
-    <h3>Caveats and Consideration:</h3>
-    {% if caveats_clean == '' or caveats_clean == '""' %}
-      <p class="pre-white-space"><em>No description available.</em></p>
-    {% else %}
-      <p class="pre-white-space">{{ caveats | url_decode }}</p>
-    {% endif %}
-
-    <h3>Compatibility:</h3>
-      <br />
-      {% include partials/compatibility.html%}
-      <br />
-      {% include copy-and-download.html %}
-    </div>
-
-  </div>
   {%if false %}
   {% include related-discussion.html tag="meshery" %}
   {% endif %}
