@@ -7,13 +7,14 @@ categories:
   - meshkit
   - github
   - open-source
+featured-image: /assets/images/integration/github/github.svg
 redirect_from: /blog/faster-smarter-github-imports
 published: true
 ---
 
 Importing designs, Helm charts, and models straight from a GitHub repository is one of the most common ways people bring infrastructure into Meshery. Until now, every one of those imports started the same way: shallow-clone the whole repository, then filter it. That works, but on a large repository it means downloading a great deal of content just to find a handful of manifests.
 
-[MeshKit v1.0.24](https://github.com/meshery/meshkit/releases/tag/v1.0.24) changes that. Pull request [meshery/meshkit#1121](https://github.com/meshery/meshkit/pull/1121) introduces a **hybrid GitHub crawl** in MeshKit's `utils/walker` package, the code that Meshery Server, Meshery Cloud, Meshery extensions, and MeshKit's own GitHub generator all use to read remote repositories. Meshery is picking it up in [the MeshKit bump PR](https://github.com/meshery/meshery/pulls?q=is%3Apr+meshkit+v1.0.24).
+[MeshKit v1.0.24](https://github.com/meshery/meshkit/releases/tag/v1.0.24) changes that. Pull request [meshery/meshkit#1121](https://github.com/meshery/meshkit/pull/1121) introduces a **hybrid GitHub crawl** in MeshKit's `utils/walker` package, the code that Meshery Server, Meshery Cloud, Meshery extensions, and MeshKit's own GitHub generator all use to read remote repositories. Meshery is picking it up in [meshery/meshery#22361](https://github.com/meshery/meshery/pull/22361).
 
 ## How the hybrid crawl works
 
