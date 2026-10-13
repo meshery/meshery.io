@@ -177,10 +177,10 @@ fi
 
 printf "\nInstalling mesheryctl in $install_dir.\n"
 WHOAMI=$(whoami)
-if mv ${PWD}/$temporary_dir_name/mesheryctl $install_dir/mesheryctl >/dev/null 2>&1; then
+if mv ${PWD}/$temporary_dir_name/mesheryctl "$install_dir/mesheryctl" >/dev/null 2>&1; then
   echo "mesheryctl installed."
 else
-  if sudo mv ${PWD}/$temporary_dir_name/mesheryctl $install_dir/mesheryctl ; then
+  if sudo mv ${PWD}/$temporary_dir_name/mesheryctl "$install_dir/mesheryctl" ; then
     echo "Permission Resolved: mesheryctl installed using sudo permissions."
   else
     echo "Cannot install mesheryctl. Check permissions of $WHOAMI for $install_dir."
@@ -191,7 +191,7 @@ fi
 #Transfering permissions and ownership to client USER
 if [ "$SUDO_USER" == "" ] ;
 then
-  if chown $WHOAMI $install_dir/mesheryctl ; then
+  if chown $WHOAMI "$install_dir/mesheryctl" ; then
     # Give write access to user to create .meshery folder in home directory
     chown $WHOAMI $HOME
     chmod u+w $HOME
@@ -201,7 +201,7 @@ then
     exit 1
   fi
 else
-  if chown $SUDO_USER /usr/local/bin/mesheryctl ; then
+  if chown "$SUDO_USER" "$install_dir/mesheryctl" ; then
     # Give write access to SUDO_USER to create .meshery folder in home directory
     chown $SUDO_USER $HOME
     chmod u+w $HOME
