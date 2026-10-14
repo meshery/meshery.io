@@ -211,7 +211,11 @@ components:
   colorIcon: assets/images/integration/kubevault/components/weaviate-role/icons/color/weaviate-role-color.svg
   whiteIcon: assets/images/integration/kubevault/components/weaviate-role/icons/white/weaviate-role-white.svg
   description: 
-componentsCount: 50
+- name: zoo-keeper-role
+  colorIcon: assets/images/integration/kubevault/components/zoo-keeper-role/icons/color/zoo-keeper-role-color.svg
+  whiteIcon: assets/images/integration/kubevault/components/zoo-keeper-role/icons/white/zoo-keeper-role-white.svg
+  description: 
+componentsCount: 51
 relationships: 
 relationshipsCount: 0
 featureList: [
