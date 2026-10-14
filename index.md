@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Meshery | The Kubernetes and Cloud Native Manager - an extensible developer platform
-description: As a CNCF project, Meshery is the open source, cloud native manager, with multi-cluster Kubernetes management.
+title: Meshery - Collaborative Infrastructure Management and Infrastructure as Design | CNCF Incubating
+description: Meshery turns your infrastructure into a shared, relationship-aware model, so every change, whether written by an engineer or suggested by an AI, is visible, validated, and reviewable before it reaches production.
 image: assets/images/logos/meshery-gradient.png
 ---
