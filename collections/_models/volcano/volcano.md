@@ -47,7 +47,11 @@ components:
   colorIcon: assets/images/integration/volcano/components/node-shard/icons/color/node-shard-color.svg
   whiteIcon: assets/images/integration/volcano/components/node-shard/icons/white/node-shard-white.svg
   description: 
-componentsCount: 9
+- name: namespace-queue
+  colorIcon: assets/images/integration/volcano/components/namespace-queue/icons/color/namespace-queue-color.svg
+  whiteIcon: assets/images/integration/volcano/components/namespace-queue/icons/white/namespace-queue-white.svg
+  description: 
+componentsCount: 10
 relationships: 
 relationshipsCount: 0
 featureList: [
