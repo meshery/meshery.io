@@ -51,7 +51,11 @@ components:
   colorIcon: assets/images/integration/volcano/components/namespace-queue/icons/color/namespace-queue-color.svg
   whiteIcon: assets/images/integration/volcano/components/namespace-queue/icons/white/namespace-queue-white.svg
   description: 
-componentsCount: 10
+- name: namespace-queue
+  colorIcon: assets/images/integration/volcano/components/namespace-queue/icons/color/namespace-queue-color.svg
+  whiteIcon: assets/images/integration/volcano/components/namespace-queue/icons/white/namespace-queue-white.svg
+  description: 
+componentsCount: 11
 relationships: 
 relationshipsCount: 0
 featureList: [
