@@ -77,6 +77,20 @@
         window.siteBaseUrl = "{{ site.baseurl }}";
 
         const body = document.body;
+
+        const BANNER_KEY = "sitewideBannerDismissed";
+
+        function isBannerDismissed() {
+            try {
+              return localStorage.getItem(BANNER_KEY) === "true";
+            } catch (e) {
+              return false;
+            }
+          }
+
+        if (isBannerDismissed()) {
+            document.documentElement.classList.add("banner-dismissed");
+          }
     
         if (localStorage.getItem("mode") === "light-mode") {
           body.classList.remove("dark-mode");
@@ -84,7 +98,7 @@
           let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
           allLogos.forEach(e => e.src = e.dataset.logoForLight);
         }
-    
+
         // Automatically set logos based on initial theme
         document.addEventListener('DOMContentLoaded', () => {
           let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
@@ -103,14 +117,25 @@
         document.addEventListener("DOMContentLoaded", function() {
           // $('.sitewide-banner').animate({top: 0});
           const banner = document.querySelector(".sitewide-banner");
-          if (!banner) {
+          if (!banner || isBannerDismissed()) {
             return;
           }
           setTimeout(function() {
             banner.classList.remove("hidden");
             
           }, 0); // Add a delay of 1 second before showing the banner
+
+        const closeBtn = banner.querySelector(".banner-close");
+          if (closeBtn) {
+            closeBtn.addEventListener("click", function () {
+              banner.classList.add("dismissed");
+              try {
+                localStorage.setItem(BANNER_KEY, "true");
+              } catch (e) { }
+            });
+          };
         });
+
       </script>
 
     {% if page.title != "Meshery | The Kubernetes and Cloud Native Manager" and page.title != "Programs" %}
@@ -126,6 +151,10 @@
   <p>
     <a href="https://www.cncf.io/blog/2026/10/07/meshery-becomes-a-cncf-incubating-project/">Read the announcement</a>
   </p>
+  <img class="banner-close" src="../assets/images/buttons/black_cross_icon.svg" id="logo-dark-light"
+    data-logo-for-light="../assets/images/buttons/black_cross_icon.svg"
+    data-logo-for-dark="../assets/images/buttons/white_cross_icon.svg" alt="Close" width="24"
+    height="24">
 </div>
 <header id="mainHeader" class="filledHeader">
   {% else %}
