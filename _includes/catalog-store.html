@@ -193,8 +193,8 @@
   var params = new URLSearchParams(window.location.search);
   state.q = params.get("q") || "";
   state.cats = (params.get("category") || "").toLowerCase().split(",").filter(Boolean);
-  state.techs = (params.get("technology") || "").split(",").filter(Boolean);
-  if (params.get("sort")) sortSel.value = params.get("sort");
+  state.techs = (params.get("technology") || "").toLowerCase().split(",").filter(Boolean);
+  if (["newest", "oldest", "az", "za"].indexOf(params.get("sort")) > -1) sortSel.value = params.get("sort");
   search.value = state.q;
   document.querySelectorAll(".cstore input[type=checkbox]").forEach(function (i) {
     i.checked = (i.name === "category" ? state.cats : state.techs).indexOf(i.value) > -1;
