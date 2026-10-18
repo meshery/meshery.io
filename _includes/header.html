@@ -52,13 +52,14 @@
     <meta name="twitter:creator" content="@mesheryio" />
     <meta name="author" content="Meshery Authors">
     {% if page.featured-image %}
+    {% assign page_og_image = page.featured-image.dark | default: page.featured-image %}
     <meta
       name="twitter:image"
-      content="https://raw.githubusercontent.com/meshery/meshery.io/master/{{ page.featured-image }}"
+      content="https://raw.githubusercontent.com/meshery/meshery.io/master/{{ page_og_image }}"
     />
-    <meta name="image" property="og:image" content="https://raw.githubusercontent.com/meshery/meshery.io/master/{{page.featured-image}}" />
+    <meta name="image" property="og:image" content="https://raw.githubusercontent.com/meshery/meshery.io/master/{{ page_og_image }}" />
     <meta property="og:type" content="website">
-    <meta name="og:image" content="https://raw.githubusercontent.com/meshery/meshery.io/master/{{page.featured-image}}" />
+    <meta name="og:image" content="https://raw.githubusercontent.com/meshery/meshery.io/master/{{ page_og_image }}" />
     {% else %}
     <meta
       name="twitter:image"
