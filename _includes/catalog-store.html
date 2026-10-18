@@ -192,7 +192,7 @@
   // Restore from URL.
   var params = new URLSearchParams(window.location.search);
   state.q = params.get("q") || "";
-  state.cats = (params.get("category") || "").split(",").filter(Boolean);
+  state.cats = (params.get("category") || "").toLowerCase().split(",").filter(Boolean);
   state.techs = (params.get("technology") || "").split(",").filter(Boolean);
   if (params.get("sort")) sortSel.value = params.get("sort");
   search.value = state.q;
