@@ -18,7 +18,32 @@
 # Get the deploy option on whether to install cli alone or to deploy Meshery server as well
 # Default option is to start Meshery server
 
-while getopts ":np:" opt; do
+UNINSTALL=false
+ASSUME_YES=false
+
+args=()
+stop_rewrite=false
+for arg in "$@"; do
+    if [ "$stop_rewrite" = true ]; then
+        args+=("$arg")
+    elif [ "$arg" = "--" ]; then
+        stop_rewrite=true
+        args+=("$arg")
+    elif [ "$arg" = "--uninstall" ]; then
+        args+=("-u")
+    elif [ "$arg" = "--yes" ]; then
+        args+=("-y")
+    else
+        args+=("$arg")
+    fi
+done
+if [ ${#args[@]} -gt 0 ]; then
+    set -- "${args[@]}"
+else
+    set --
+fi
+
+while getopts ":np:uy" opt; do
     case $opt in
     n)
         DEPLOY_MESHERY=false
@@ -49,6 +74,12 @@ while getopts ":np:" opt; do
             ;;
         esac
         ;;
+    u)
+        UNINSTALL=true
+        ;;
+    y)
+        ASSUME_YES=true
+        ;;
     \?)
         echo "Invalid option: -$OPTARG" >&2
         exit 1
@@ -59,6 +90,119 @@ while getopts ":np:" opt; do
         ;;
     esac
 done
+
+if [ "$UNINSTALL" = true ]; then
+    TARGET_BIN=""
+    if [ -n "$MESHERY_INSTALL_DIR" ]; then
+        case "$MESHERY_INSTALL_DIR" in
+            /*) CANDIDATE="$MESHERY_INSTALL_DIR/mesheryctl" ;;
+            *)  CANDIDATE="$(pwd)/$MESHERY_INSTALL_DIR/mesheryctl" ;;
+        esac
+        if [ -f "$CANDIDATE" ] || [ -L "$CANDIDATE" ]; then
+            TARGET_BIN="$CANDIDATE"
+        fi
+    fi
+
+    if [ -z "$TARGET_BIN" ]; then
+        if [ -f "/usr/local/bin/mesheryctl" ] || [ -L "/usr/local/bin/mesheryctl" ]; then
+            TARGET_BIN="/usr/local/bin/mesheryctl"
+        else
+            CMD_PATH=$(command -v mesheryctl 2>/dev/null)
+            case "$CMD_PATH" in
+                /*)
+                    if [ -f "$CMD_PATH" ] || [ -L "$CMD_PATH" ]; then
+                        TARGET_BIN="$CMD_PATH"
+                    fi
+                    ;;
+            esac
+        fi
+    fi
+
+    if [ -z "$TARGET_BIN" ]; then
+        echo "mesheryctl is not installed or could not be found."
+        exit 0
+    fi
+
+    case "$TARGET_BIN" in
+        /*) ;;
+        *)
+            echo "Invalid mesheryctl target path: $TARGET_BIN (must be an absolute path)" >&2
+            exit 1
+            ;;
+    esac
+
+    if [ ! -f "$TARGET_BIN" ] && [ ! -L "$TARGET_BIN" ]; then
+        echo "mesheryctl is not installed or could not be found."
+        exit 0
+    fi
+
+    if [ -d "$TARGET_BIN" ] || [ "$(basename -- "$TARGET_BIN")" != "mesheryctl" ]; then
+        echo "Invalid mesheryctl target path: $TARGET_BIN" >&2
+        exit 1
+    fi
+
+    IS_HOMEBREW=false
+    case "$TARGET_BIN" in
+        *Cellar/*|*homebrew*|*Homebrew*|*linuxbrew*|*Linuxbrew*)
+            IS_HOMEBREW=true
+            ;;
+    esac
+
+    if [ -L "$TARGET_BIN" ]; then
+        LINK_TARGET=$(readlink -- "$TARGET_BIN" 2>/dev/null)
+        case "$LINK_TARGET" in
+            *Cellar/*|*homebrew*|*Homebrew*|*linuxbrew*|*Linuxbrew*)
+                IS_HOMEBREW=true
+                ;;
+        esac
+    fi
+
+    if [ "$IS_HOMEBREW" = true ]; then
+        echo "mesheryctl appears to be installed via Homebrew ($TARGET_BIN)."
+        echo "Please run 'brew uninstall mesheryctl' instead."
+        exit 1
+    fi
+
+    echo "If Meshery is currently running or deployed, you may want to run 'mesheryctl system uninstall' first to remove components and containers."
+    echo "Note: ~/.meshery and configuration files will remain on your system."
+
+    if [ "$ASSUME_YES" != true ]; then
+        if ! ( : < /dev/tty ) 2>/dev/null; then
+            echo "Error: Non-interactive environment detected without a TTY. Use --yes (-y) to confirm uninstallation." >&2
+            exit 1
+        fi
+        printf "Are you sure you want to remove mesheryctl from %s? [y/N]: " "$TARGET_BIN"
+        read -r response < /dev/tty
+        case "$response" in
+            [yY]|[yY][eE][sS])
+                ;;
+            *)
+                echo "Uninstall cancelled."
+                exit 0
+                ;;
+        esac
+    fi
+
+    BIN_DIR=$(dirname -- "$TARGET_BIN")
+    if [ -w "$BIN_DIR" ]; then
+        rm -f -- "$TARGET_BIN"
+    else
+        if command -v sudo >/dev/null 2>&1; then
+            sudo rm -f -- "$TARGET_BIN"
+        else
+            echo "Directory $BIN_DIR is not writable and sudo is not available." >&2
+            exit 1
+        fi
+    fi
+
+    if [ -e "$TARGET_BIN" ] || [ -L "$TARGET_BIN" ]; then
+        echo "Error: Failed to remove $TARGET_BIN. Check permissions." >&2
+        exit 1
+    fi
+
+    echo "mesheryctl uninstalled."
+    exit 0
+fi
 
 # If user wants to install the cli and deploy meshery as well, read the platform flag
 if [ "$DEPLOY_MESHERY" != false ]; then
