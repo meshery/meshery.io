@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"net/url"
 	"os"
@@ -69,7 +70,7 @@ func runCatalogGeneration(
 	if err != nil {
 		return err
 	}
-	if page.Patterns == nil {
+	if page == nil || page.Patterns == nil {
 		return fmt.Errorf("catalog response is missing required patterns field")
 	}
 
@@ -324,6 +325,20 @@ func invokeGitHubAction(contentID, assetLocation string, ghAccessToken string) e
 			[]string{"Check network connectivity", "Ensure the GitHub token is correct"})
 	}
 	defer resp.Body.Close()
+
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		body, _ := io.ReadAll(resp.Body)
+		detail := fmt.Sprintf("Failed to invoke GitHub Actions: unexpected HTTP status %s", resp.Status)
+		if len(body) > 0 {
+			detail = fmt.Sprintf("%s (response: %s)", detail, strings.TrimSpace(string(body)))
+		}
+		return meshkitErrors.New(ErrInvokeGitHubActionsCode, meshkitErrors.Alert,
+			[]string{"Error invoking GitHub Actions"},
+			[]string{detail},
+			[]string{"Invalid GitHub token or insufficient permissions", "Workflow not found", "Network issues"},
+			[]string{"Verify the GitHub token has 'actions:write' permissions", "Verify the repository and workflow exist"})
+	}
+
 	return nil
 }
 
