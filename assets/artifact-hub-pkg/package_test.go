@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -350,6 +351,120 @@ func TestMainExitsNonZeroOnDispatchFailure(t *testing.T) {
 	}
 	if !strings.Contains(string(output), "401 Unauthorized") {
 		t.Fatalf("CLI output = %q, want evidence of dispatch failure (401 Unauthorized)", output)
+	}
+}
+
+// TestFetchCatalogPatterns verifies HTTP handling, status codes, and pattern field presence.
+func TestFetchCatalogPatterns(t *testing.T) {
+	tests := []struct {
+		name      string
+		respCode  int
+		respBody  string
+		respErr   error
+		wantErr   bool
+		errSubstr string
+		wantCount int
+	}{
+		{
+			name:      "successful fetch with patterns",
+			respCode:  http.StatusOK,
+			respBody:  `{"patterns":[{"id":"00000000-0000-0000-0000-000000000001","name":"test-pattern"}]}`,
+			wantErr:   false,
+			wantCount: 1,
+		},
+		{
+			name:      "successful fetch with valid empty patterns list",
+			respCode:  http.StatusOK,
+			respBody:  `{"patterns":[]}`,
+			wantErr:   false,
+			wantCount: 0,
+		},
+		{
+			name:      "missing required patterns field",
+			respCode:  http.StatusOK,
+			respBody:  `{"total_count":0}`,
+			wantErr:   true,
+			errSubstr: "missing required patterns field",
+		},
+		{
+			name:      "non-200 HTTP status",
+			respCode:  http.StatusInternalServerError,
+			respBody:  `{"message":"internal error"}`,
+			wantErr:   true,
+			errSubstr: "500 Internal Server Error",
+		},
+		{
+			name:      "network error",
+			respErr:   errors.New("connection reset by peer"),
+			wantErr:   true,
+			errSubstr: "connection reset by peer",
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			origTransport := http.DefaultTransport
+			defer func() { http.DefaultTransport = origTransport }()
+
+			http.DefaultTransport = roundTripFunc(func(req *http.Request) (*http.Response, error) {
+				if tc.respErr != nil {
+					return nil, tc.respErr
+				}
+				return &http.Response{
+					StatusCode: tc.respCode,
+					Status:     fmt.Sprintf("%d %s", tc.respCode, http.StatusText(tc.respCode)),
+					Body:       io.NopCloser(strings.NewReader(tc.respBody)),
+					Header:     make(http.Header),
+				}, nil
+			})
+
+			page, err := fetchCatalogPatterns()
+			if tc.wantErr {
+				if err == nil {
+					t.Fatalf("fetchCatalogPatterns() error = nil, want error containing %q", tc.errSubstr)
+				}
+				if !strings.Contains(err.Error(), tc.errSubstr) {
+					t.Fatalf("fetchCatalogPatterns() error = %q, want error containing %q", err.Error(), tc.errSubstr)
+				}
+			} else {
+				if err != nil {
+					t.Fatalf("fetchCatalogPatterns() unexpected error = %v", err)
+				}
+				if page == nil || page.Patterns == nil {
+					t.Fatal("fetchCatalogPatterns() returned nil page or nil patterns")
+				}
+				if len(*page.Patterns) != tc.wantCount {
+					t.Fatalf("len(*page.Patterns) = %d, want %d", len(*page.Patterns), tc.wantCount)
+				}
+			}
+		})
+	}
+}
+
+// TestInvokeGitHubActionTruncatesLongResponseBody verifies that large response bodies are capped.
+func TestInvokeGitHubActionTruncatesLongResponseBody(t *testing.T) {
+	origTransport := http.DefaultTransport
+	defer func() { http.DefaultTransport = origTransport }()
+
+	longBody := strings.Repeat("A", 1000)
+	http.DefaultTransport = roundTripFunc(func(req *http.Request) (*http.Response, error) {
+		return &http.Response{
+			StatusCode: http.StatusBadRequest,
+			Status:     "400 Bad Request",
+			Body:       io.NopCloser(strings.NewReader(longBody)),
+			Header:     make(http.Header),
+		}, nil
+	})
+
+	err := invokeGitHubAction("test-id", "test-asset", "test-token")
+	if err == nil {
+		t.Fatal("invokeGitHubAction() error = nil, want error")
+	}
+	if !strings.Contains(err.Error(), "(truncated)") {
+		t.Fatalf("invokeGitHubAction() error = %q, want truncated response body indicator", err.Error())
+	}
+	if strings.Contains(err.Error(), longBody) {
+		t.Fatalf("invokeGitHubAction() logged full body instead of truncated body")
 	}
 }
 

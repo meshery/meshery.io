@@ -102,10 +102,23 @@ func fetchCatalogPatterns() (*designv1beta3.CatalogContentPage, error) {
 	}
 	defer resp.Body.Close()
 
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		return nil, meshkitErrors.New(ErrHTTPGetRequestCode, meshkitErrors.Alert,
+			[]string{"HTTP GET request failed"},
+			[]string{fmt.Sprintf("Failed to fetch catalog patterns from endpoint %s: unexpected HTTP status %s", endpoint, resp.Status)},
+			[]string{"The server might be down", "The endpoint URL might be incorrect"},
+			[]string{"Check the endpoint URL", "Ensure the server is running"})
+	}
+
 	var page designv1beta3.CatalogContentPage
 	if err := json.NewDecoder(resp.Body).Decode(&page); err != nil {
 		return nil, utils.ErrUnmarshal(err)
 	}
+
+	if page.Patterns == nil {
+		return nil, fmt.Errorf("catalog response is missing required patterns field")
+	}
+
 	return &page, nil
 }
 
@@ -327,10 +340,16 @@ func invokeGitHubAction(contentID, assetLocation string, ghAccessToken string) e
 	defer resp.Body.Close()
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		body, _ := io.ReadAll(resp.Body)
+		const maxLoggedBodyBytes = 512
+		limitedReader := io.LimitReader(resp.Body, maxLoggedBodyBytes+1)
+		body, _ := io.ReadAll(limitedReader)
 		detail := fmt.Sprintf("Failed to invoke GitHub Actions: unexpected HTTP status %s", resp.Status)
 		if len(body) > 0 {
-			detail = fmt.Sprintf("%s (response: %s)", detail, strings.TrimSpace(string(body)))
+			bodyStr := strings.TrimSpace(string(body))
+			if len(bodyStr) > maxLoggedBodyBytes {
+				bodyStr = bodyStr[:maxLoggedBodyBytes] + "... (truncated)"
+			}
+			detail = fmt.Sprintf("%s (response: %s)", detail, bodyStr)
 		}
 		return meshkitErrors.New(ErrInvokeGitHubActionsCode, meshkitErrors.Alert,
 			[]string{"Error invoking GitHub Actions"},
