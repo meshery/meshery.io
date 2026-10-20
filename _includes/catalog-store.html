@@ -12,12 +12,15 @@
   <header class="cstore-hero">
     <h1 id="cstore-title" class="cstore-title">Meshery Design Catalog</h1>
     <p class="cstore-lede">Browse ready-made, well-architected designs for Kubernetes and cloud infrastructure. Open any design in the Meshery Playground or import it into your own Meshery.</p>
+  </header>
+
+  <div class="cstore-searchwrap">
     <div class="cstore-searchbar" role="search">
       <label for="cstore-search" class="cstore-sr">Search designs</label>
       <svg aria-hidden="true" viewBox="0 0 24 24" class="cstore-search-icon"><path d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 9.5 16a6.5 6.5 0 0 0 4.2-1.6l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
       <input id="cstore-search" type="search" placeholder="Search by name, technology, author, or description" autocomplete="off">
     </div>
-  </header>
+  </div>
 
   <div class="cstore-layout">
     <aside class="cstore-filters" aria-label="Filters">
@@ -101,16 +104,17 @@
 .cstore{--cs-accent:#00b39f;--cs-accent-2:#00d3a9;--cs-bg:#fff;--cs-card:#fff;--cs-border:#e3e8ea;--cs-text:#1e2117;--cs-muted:#51636b;--cs-chip:#eef9f7;max-width:1320px;margin:0 auto;padding:1rem 1rem 3rem;color:var(--cs-text);text-align:left}
 .dark-mode .cstore,body.dark-mode .cstore,html.dark-mode .cstore,.dark .cstore{--cs-bg:#121212;--cs-card:#1e2227;--cs-border:#33393f;--cs-text:#f2f4f5;--cs-muted:#b8c2c7;--cs-chip:#0f3a35}
 .cstore-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.cstore-hero{text-align:center;padding:1.5rem 0 2rem}
+.cstore-hero{text-align:center;padding:1.5rem 0 .5rem;position:static;box-shadow:none!important}
 .cstore-title{font-size:2.4rem;margin:0 0 .5rem;color:var(--cs-text)}
 .cstore-lede{max-width:720px;margin:0 auto 1.5rem;color:var(--cs-muted);font-size:1.05rem}
+.cstore-searchwrap{position:sticky;top:5rem;z-index:10;background:var(--cs-bg);padding:.75rem 0;margin-bottom:1rem}
 .cstore-searchbar{position:relative;max-width:720px;margin:0 auto}
 .cstore-search-icon{position:absolute;left:16px;top:50%;width:22px;height:22px;transform:translateY(-50%);fill:var(--cs-muted)}
 #cstore-search{width:100%;box-sizing:border-box;padding:16px 18px 16px 50px;font-size:1.05rem;border:2px solid var(--cs-border);border-radius:999px;background:var(--cs-card);color:var(--cs-text)}
 #cstore-search:focus,.cstore-tech-search:focus,#cstore-sort:focus{outline:none;border-color:var(--cs-accent);box-shadow:0 0 0 3px rgba(0,179,159,.25)}
 .cstore-layout{display:grid;grid-template-columns:250px 1fr;gap:2rem}
 @media(max-width:860px){.cstore-layout{grid-template-columns:1fr}}
-.cstore-filters{position:sticky;top:90px;align-self:start;background:var(--cs-card);border:1px solid var(--cs-border);border-radius:12px;padding:1rem;max-height:calc(100vh - 110px);overflow:auto}
+.cstore-filters{position:sticky;top:10.5rem;align-self:start;background:var(--cs-card);border:1px solid var(--cs-border);border-radius:12px;padding:1rem;max-height:calc(100vh - 12rem);overflow:auto}
 @media(max-width:860px){.cstore-filters{position:static;max-height:none}}
 .cstore-filters-head{display:flex;justify-content:space-between;align-items:center}
 .cstore-filters h2{font-size:1.1rem;margin:0;color:var(--cs-text)}
