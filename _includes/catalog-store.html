@@ -177,6 +177,14 @@
   cards.forEach(function (c) {
     c.dataset.tech.split("|").filter(Boolean).forEach(function (t) { techCounts[t] = (techCounts[t] || 0) + 1; });
   });
+  // Names whose icon isn't at <slug>/icons/color/<slug>-color.svg; "" means no asset exists.
+  var techIconOverrides = {
+    "istio": "istio/istio.svg",
+    "exoscale-icons": "",
+    "meshery-flowchart": "",
+    "meshery-shapes": "",
+    "service-mesh": ""
+  };
   Object.keys(techCounts).sort(function (a, b) { return techCounts[b] - techCounts[a] || a.localeCompare(b); }).forEach(function (t) {
     var l = document.createElement("label");
     l.className = "cstore-check";
@@ -185,7 +193,9 @@
     var slug = t.replace(/\s+/g, "-");
     var img = document.createElement("img");
     img.className = "cstore-tech-icon"; img.alt = ""; img.loading = "lazy";
-    img.src = "{{ '/assets/images/integration/' | relative_url }}" + slug + "/icons/color/" + slug + "-color.svg";
+    var iconPath = techIconOverrides[slug] !== undefined ? techIconOverrides[slug] : slug + "/icons/color/" + slug + "-color.svg";
+    if (iconPath) img.src = "{{ '/assets/images/integration/' | relative_url }}" + iconPath;
+    else img.style.visibility = "hidden";
     img.onerror = function () { this.style.visibility = "hidden"; };
     var s = document.createElement("span"); s.textContent = t;
     var n = document.createElement("span"); n.className = "cstore-count"; n.textContent = techCounts[t];
