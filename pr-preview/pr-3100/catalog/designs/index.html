@@ -24,12 +24,12 @@
 <meta property="og:url" content="https://meshery.io/pr-preview/pr-3100/catalog/designs/" />
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-10-21T09:14:17+00:00" />
-<meta property="article:modified_time" content="2026-10-21T09:14:17+00:00" />
+<meta property="article:published_time" content="2026-10-21T09:29:42+00:00" />
+<meta property="article:modified_time" content="2026-10-21T09:29:42+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Meshery Design Catalog" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-10-21T09:14:17+00:00","datePublished":"2026-10-21T09:14:17+00:00","description":"Browse ready-made, well-architected designs for Kubernetes and cloud infrastructure. Search, filter by category and technology, and open any design in Meshery.","headline":"Meshery Design Catalog","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-3100/catalog/designs/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-3100/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-3100/catalog/designs/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-10-21T09:29:42+00:00","datePublished":"2026-10-21T09:29:42+00:00","description":"Browse ready-made, well-architected designs for Kubernetes and cloud infrastructure. Search, filter by category and technology, and open any design in Meshery.","headline":"Meshery Design Catalog","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-3100/catalog/designs/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-3100/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-3100/catalog/designs/"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/pr-preview/pr-3100/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/pr-preview/pr-3100/css/stellarnav.css" />
@@ -10352,6 +10352,14 @@
   cards.forEach(function (c) {
     c.dataset.tech.split("|").filter(Boolean).forEach(function (t) { techCounts[t] = (techCounts[t] || 0) + 1; });
   });
+  // Names whose icon isn't at <slug>/icons/color/<slug>-color.svg; "" means no asset exists.
+  var techIconOverrides = {
+    "istio": "istio/istio.svg",
+    "exoscale-icons": "",
+    "meshery-flowchart": "",
+    "meshery-shapes": "",
+    "service-mesh": ""
+  };
   Object.keys(techCounts).sort(function (a, b) { return techCounts[b] - techCounts[a] || a.localeCompare(b); }).forEach(function (t) {
     var l = document.createElement("label");
     l.className = "cstore-check";
@@ -10360,7 +10368,9 @@
     var slug = t.replace(/\s+/g, "-");
     var img = document.createElement("img");
     img.className = "cstore-tech-icon"; img.alt = ""; img.loading = "lazy";
-    img.src = "/pr-preview/pr-3100/assets/images/integration/" + slug + "/icons/color/" + slug + "-color.svg";
+    var iconPath = techIconOverrides[slug] !== undefined ? techIconOverrides[slug] : slug + "/icons/color/" + slug + "-color.svg";
+    if (iconPath) img.src = "/pr-preview/pr-3100/assets/images/integration/" + iconPath;
+    else img.style.visibility = "hidden";
     img.onerror = function () { this.style.visibility = "hidden"; };
     var s = document.createElement("span"); s.textContent = t;
     var n = document.createElement("span"); n.className = "cstore-count"; n.textContent = techCounts[t];
@@ -10376,8 +10386,8 @@
   var params = new URLSearchParams(window.location.search);
   state.q = params.get("q") || "";
   state.cats = (params.get("category") || "").toLowerCase().split(",").filter(Boolean);
-  state.techs = (params.get("technology") || "").split(",").filter(Boolean);
-  if (params.get("sort")) sortSel.value = params.get("sort");
+  state.techs = (params.get("technology") || "").toLowerCase().split(",").filter(Boolean);
+  if (["newest", "oldest", "az", "za"].indexOf(params.get("sort")) > -1) sortSel.value = params.get("sort");
   search.value = state.q;
   document.querySelectorAll(".cstore input[type=checkbox]").forEach(function (i) {
     i.checked = (i.name === "category" ? state.cats : state.techs).indexOf(i.value) > -1;
