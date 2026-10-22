@@ -9,7 +9,7 @@
 {% assign categories = designs | map: "type" | uniq | sort %}
 
 <section class="cstore" aria-labelledby="cstore-title">
-  <header class="cstore-hero">
+  <div class="cstore-hero">
     <h1 id="cstore-title" class="cstore-title">Meshery Design Catalog</h1>
     <p class="cstore-lede">Browse ready-made, well-architected designs for Kubernetes and cloud infrastructure. Open any design in the Meshery Playground or import it into your own Meshery.</p>
     <div class="cstore-searchbar" role="search">
@@ -17,7 +17,7 @@
       <svg aria-hidden="true" viewBox="0 0 24 24" class="cstore-search-icon"><path d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 9.5 16a6.5 6.5 0 0 0 4.2-1.6l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
       <input id="cstore-search" type="search" placeholder="Search by name, technology, author, or description" autocomplete="off">
     </div>
-  </header>
+  </div>
 
   <div class="cstore-layout">
     <aside class="cstore-filters" aria-label="Filters">
@@ -120,12 +120,15 @@
 .cstore-check{display:flex;align-items:center;gap:.5rem;padding:4px 0;cursor:pointer;color:var(--cs-text);font-size:.95rem;text-transform:none}
 .cstore .cstore-check,.cstore .cstore-check span{text-indent:0!important;padding-left:0}
 .cstore-check input{position:static!important;opacity:1!important;flex:none;accent-color:var(--cs-accent);width:16px;height:16px;margin:0}
+.cstore-check[hidden]{display:none}
+.cstore-tech-icon{width:20px;height:20px;flex:none;object-fit:contain}
 .cstore-count{margin-left:auto;color:var(--cs-muted);font-size:.8rem}
-.cstore-tech-search{width:100%;box-sizing:border-box;padding:8px 10px;border:1px solid var(--cs-border);border-radius:8px;background:var(--cs-bg);color:var(--cs-text);margin-bottom:.5rem}
+.cstore-tech-search{width:100%;box-sizing:border-box;padding:8px 10px;border:1px solid var(--cs-border);border-radius:8px;background:var(--cs-bg);color:var(--cs-text);margin-bottom:.5rem;height:40px}
 .cstore-techs{max-height:300px;overflow:auto}
 .cstore-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem}
 .cstore-status{margin:0;color:var(--cs-muted)}
 .cstore-sort{display:flex;align-items:center;gap:.5rem;color:var(--cs-muted)}
+.cstore-sort label{margin-top:0}
 #cstore-sort{padding:8px 12px;border:1px solid var(--cs-border);border-radius:8px;background:var(--cs-card);color:var(--cs-text)}
 .cstore-active{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
 .cstore-pill{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--cs-accent);color:var(--cs-text);background:var(--cs-chip);border-radius:999px;padding:4px 10px;font-size:.85rem;cursor:pointer}
@@ -174,14 +177,28 @@
   cards.forEach(function (c) {
     c.dataset.tech.split("|").filter(Boolean).forEach(function (t) { techCounts[t] = (techCounts[t] || 0) + 1; });
   });
+  // Names whose icon isn't at <slug>/icons/color/<slug>-color.svg; "" means no asset exists.
+  var techIconOverrides = {
+    "istio": "istio/istio.svg",
+    "exoscale-icons": "",
+    "meshery-flowchart": "",
+    "meshery-shapes": "",
+  };
   Object.keys(techCounts).sort(function (a, b) { return techCounts[b] - techCounts[a] || a.localeCompare(b); }).forEach(function (t) {
     var l = document.createElement("label");
     l.className = "cstore-check";
     var i = document.createElement("input");
     i.type = "checkbox"; i.name = "technology"; i.value = t;
+    var slug = t.replace(/\s+/g, "-");
+    var img = document.createElement("img");
+    img.className = "cstore-tech-icon"; img.alt = ""; img.loading = "lazy";
+    var iconPath = techIconOverrides[slug] !== undefined ? techIconOverrides[slug] : slug + "/icons/color/" + slug + "-color.svg";
+    if (iconPath) img.src = "{{ '/assets/images/integration/' | relative_url }}" + iconPath;
+    else img.style.visibility = "hidden";
+    img.onerror = function () { this.style.visibility = "hidden"; };
     var s = document.createElement("span"); s.textContent = t;
     var n = document.createElement("span"); n.className = "cstore-count"; n.textContent = techCounts[t];
-    l.appendChild(i); l.appendChild(document.createTextNode(" ")); l.appendChild(s); l.appendChild(n);
+    l.appendChild(i); l.appendChild(img); l.appendChild(s); l.appendChild(n);
     techBox.appendChild(l);
   });
   document.querySelectorAll("[data-count-cat]").forEach(function (el) {
@@ -274,8 +291,10 @@
     shown = PAGE; render();
   });
   techSearch.addEventListener("input", function () {
-    var q = techSearch.value.toLowerCase();
-    techBox.querySelectorAll("label").forEach(function (l) { l.hidden = l.textContent.toLowerCase().indexOf(q) === -1; });
+    var q = techSearch.value.trim().toLowerCase();
+    techBox.querySelectorAll("label").forEach(function (l) {
+      l.hidden = l.querySelector("input").value.toLowerCase().indexOf(q) === -1;
+    });
   });
   function clearAll() {
     state = { q: "", cats: [], techs: [] };
