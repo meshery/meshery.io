@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"net/url"
 	"os"
@@ -41,6 +42,7 @@ var (
 	ErrDecodingContentCode     = "test_code"
 )
 
+// main runs catalog generation and exits unsuccessfully if generation fails.
 func main() {
 	token := os.Getenv("GH_ACCESS_TOKEN")
 	log, err := logger.New("mesheryio_package", logger.Options{
@@ -52,25 +54,37 @@ func main() {
 		os.Exit(1)
 	}
 
-	page, err := fetchCatalogPatterns()
-	if err != nil {
+	if err := runCatalogGeneration(fetchCatalogPatterns, processPattern, token); err != nil {
 		log.Error(err)
-		return
+		os.Exit(1)
 	}
-	if page.Patterns == nil {
-		return
+}
+
+// runCatalogGeneration fetches catalog patterns and processes each one.
+func runCatalogGeneration(
+	fetchPatterns func() (*designv1beta3.CatalogContentPage, error),
+	processPatternFunc func(designv1beta3.MesheryPattern, string) error,
+	token string,
+) error {
+	page, err := fetchPatterns()
+	if err != nil {
+		return err
+	}
+	if page == nil || page.Patterns == nil {
+		return fmt.Errorf("catalog response is missing required patterns field")
 	}
 
 	for _, pattern := range *page.Patterns {
-		if err := processPattern(pattern, token); err != nil {
-			log.Error(meshkitErrors.New(ErrProcessPatternCode, meshkitErrors.Alert,
+		if err := processPatternFunc(pattern, token); err != nil {
+			return meshkitErrors.New(ErrProcessPatternCode, meshkitErrors.Alert,
 				[]string{"unable to process catalog pattern"},
-				[]string{err.Error()},
+				[]string{fmt.Sprintf("pattern %s: %s", pattern.ID.String(), err.Error())},
 				[]string{"fail to read/write file", "error regarding user info"},
 				[]string{"check the catalog pattern file", "check for updated files"},
-			))
+			)
 		}
 	}
+	return nil
 }
 
 func slugify(name string) string {
@@ -79,6 +93,7 @@ func slugify(name string) string {
 	return strings.Trim(s, "-")
 }
 
+// fetchCatalogPatterns retrieves catalog patterns from Meshery Cloud.
 func fetchCatalogPatterns() (*designv1beta3.CatalogContentPage, error) {
 	endpoint := fmt.Sprintf("%s/api/catalog/content/pattern?populate=pattern_file", mesheryCloudBaseURL)
 	resp, err := http.Get(endpoint)
@@ -87,13 +102,27 @@ func fetchCatalogPatterns() (*designv1beta3.CatalogContentPage, error) {
 	}
 	defer resp.Body.Close()
 
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		return nil, meshkitErrors.New(ErrHTTPGetRequestCode, meshkitErrors.Alert,
+			[]string{"HTTP GET request failed"},
+			[]string{fmt.Sprintf("Failed to fetch catalog patterns from endpoint %s: unexpected HTTP status %s", endpoint, resp.Status)},
+			[]string{"The server might be down", "The endpoint URL might be incorrect"},
+			[]string{"Check the endpoint URL", "Ensure the server is running"})
+	}
+
 	var page designv1beta3.CatalogContentPage
 	if err := json.NewDecoder(resp.Body).Decode(&page); err != nil {
 		return nil, utils.ErrUnmarshal(err)
 	}
+
+	if page.Patterns == nil {
+		return nil, fmt.Errorf("catalog response is missing required patterns field")
+	}
+
 	return &page, nil
 }
 
+// processPattern writes a catalog pattern and triggers its snapshot workflow.
 func processPattern(pattern designv1beta3.MesheryPattern, token string) error {
 	patternID := pattern.ID.String()
 	patternImageURL := getPatternImageURL(pattern)
@@ -309,6 +338,26 @@ func invokeGitHubAction(contentID, assetLocation string, ghAccessToken string) e
 			[]string{"Check network connectivity", "Ensure the GitHub token is correct"})
 	}
 	defer resp.Body.Close()
+
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		const maxLoggedBodyBytes = 512
+		limitedReader := io.LimitReader(resp.Body, maxLoggedBodyBytes+1)
+		body, _ := io.ReadAll(limitedReader)
+		detail := fmt.Sprintf("Failed to invoke GitHub Actions: unexpected HTTP status %s", resp.Status)
+		if len(body) > 0 {
+			bodyStr := strings.TrimSpace(string(body))
+			if len(bodyStr) > maxLoggedBodyBytes {
+				bodyStr = bodyStr[:maxLoggedBodyBytes] + "... (truncated)"
+			}
+			detail = fmt.Sprintf("%s (response: %s)", detail, bodyStr)
+		}
+		return meshkitErrors.New(ErrInvokeGitHubActionsCode, meshkitErrors.Alert,
+			[]string{"Error invoking GitHub Actions"},
+			[]string{detail},
+			[]string{"Invalid GitHub token or insufficient permissions", "Workflow not found", "Network issues"},
+			[]string{"Verify the GitHub token has 'actions:write' permissions", "Verify the repository and workflow exist"})
+	}
+
 	return nil
 }
 
