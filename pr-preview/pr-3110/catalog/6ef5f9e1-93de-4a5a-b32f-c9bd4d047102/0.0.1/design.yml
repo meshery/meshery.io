@@ -87,6 +87,12 @@ spec:
       protocol: HTTPS
       port: 443
       hostname: api.carebound.example
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              carebound.io/plane: clinical
       tls:
         mode: Terminate
         certificateRefs:
@@ -358,6 +364,41 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
+  name: allow-edge-tier
+  namespace: carebound-clinical
+spec:
+  podSelector:
+    matchLabels:
+      carebound.io/tier: edge
+  policyTypes: ["Ingress", "Egress"]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              carebound.io/plane: edge
+      ports:
+        - protocol: TCP
+          port: 8080
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              carebound.io/tier: api
+      ports:
+        - protocol: TCP
+          port: 8080
+    - to:
+        - namespaceSelector: {}
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+      ports:
+        - protocol: UDP
+          port: 53
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
   name: allow-api-to-postgres
   namespace: carebound-clinical
 spec:
@@ -395,6 +436,9 @@ kind: ClusterSecretStore
 metadata:
   name: carebound-aws-secrets
 spec:
+  conditions:
+    - namespaces:
+        - carebound-clinical
   provider:
     aws:
       service: SecretsManager
@@ -427,6 +471,25 @@ spec:
       remoteRef:
         key: carebound/clinical-api
         property: encryption_key
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: intake-api-secrets
+  namespace: carebound-clinical
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: carebound-aws-secrets
+    kind: ClusterSecretStore
+  target:
+    name: intake-api-secrets
+    creationPolicy: Owner
+  data:
+    - secretKey: DATABASE_URL
+      remoteRef:
+        key: carebound/intake-api
+        property: database_url
 
 ---
 apiVersion: postgresql.cnpg.io/v1
@@ -437,6 +500,10 @@ metadata:
 spec:
   instances: 3
   imageName: ghcr.io/cloudnative-pg/postgresql:16.4
+  serviceAccountTemplate:
+    metadata:
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT_ID:role/carebound-pg-backup
   storage:
     size: 50Gi
     storageClass: carebound-encrypted-gp3
@@ -455,6 +522,19 @@ spec:
     retentionPolicy: "30d"
   monitoring:
     enablePodMonitor: true
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: carebound-pg-nightly
+  namespace: carebound-data
+spec:
+  cluster:
+    name: carebound-pg
+  schedule: "0 0 2 * * *"
+  backupOwnerReference: self
+  immediate: true
+  method: barmanObjectStore
 
 ---
 apiVersion: kyverno.io/v1
@@ -586,10 +666,6 @@ data:
     service:
       pipelines:
         traces:
-          receivers: [otlp]
-          processors: [memory_limiter, attributes, batch]
-          exporters: [otlp/backend]
-        logs:
           receivers: [otlp]
           processors: [memory_limiter, attributes, batch]
           exporters: [otlp/backend]

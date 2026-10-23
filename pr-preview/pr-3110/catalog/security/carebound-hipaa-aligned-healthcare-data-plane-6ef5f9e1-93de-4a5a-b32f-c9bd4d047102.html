@@ -34,13 +34,13 @@ take out of the clinical namespace.
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:image" content="https://meshery.io/pr-preview/pr-3110/assets/images/logos/service-mesh-pattern.svg" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-10-23T13:41:06+00:00" />
-<meta property="article:modified_time" content="2026-10-23T13:41:06+00:00" />
+<meta property="article:published_time" content="2026-10-23T22:25:50+00:00" />
+<meta property="article:modified_time" content="2026-10-23T22:25:50+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://meshery.io/pr-preview/pr-3110/assets/images/logos/service-mesh-pattern.svg" />
 <meta name="twitter:title" content="Carebound — HIPAA-aligned healthcare data plane" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-10-23T13:41:06+00:00","datePublished":"2026-10-23T13:41:06+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Carebound — HIPAA-aligned healthcare data plane","image":"https://meshery.io/pr-preview/pr-3110/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-3110/catalog/security/carebound-hipaa-aligned-healthcare-data-plane-6ef5f9e1-93de-4a5a-b32f-c9bd4d047102.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-3110/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-3110/catalog/security/carebound-hipaa-aligned-healthcare-data-plane-6ef5f9e1-93de-4a5a-b32f-c9bd4d047102.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-10-23T22:25:50+00:00","datePublished":"2026-10-23T22:25:50+00:00","description":"The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.","headline":"Carebound — HIPAA-aligned healthcare data plane","image":"https://meshery.io/pr-preview/pr-3110/assets/images/logos/service-mesh-pattern.svg","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/pr-preview/pr-3110/catalog/security/carebound-hipaa-aligned-healthcare-data-plane-6ef5f9e1-93de-4a5a-b32f-c9bd4d047102.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/pr-preview/pr-3110/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/pr-preview/pr-3110/catalog/security/carebound-hipaa-aligned-healthcare-data-plane-6ef5f9e1-93de-4a5a-b32f-c9bd4d047102.html"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/pr-preview/pr-3110/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/pr-preview/pr-3110/css/stellarnav.css" />
@@ -609,7 +609,10 @@ take out of the clinical namespace.
       <p class="pre-white-space">This is a pattern, not a HIPAA authorization. You still need a BAA with
 your cloud provider, audit log retention, and workforce access reviews.
 Replace IRSA roles, the S3 WAL bucket, and placeholder images before apply.
-Do not put real PHI in this design.
+Do not put real PHI in this design. Envoy Gateway is not installed here;
+label data-plane pods or admit the controller namespace in NetworkPolicy.
+The collector exports traces only. Use TLS and a separate log backend in
+production.
 </p>
     
 
