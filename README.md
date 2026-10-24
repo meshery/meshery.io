@@ -122,7 +122,20 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   ```
   _Note: The Makefile prefers Docker (if available and the daemon is running) and will run Jekyll inside the official jekyll container. If Docker isn't running, the Makefile will only serve locally if required gems are already installed; otherwise it will prompt to start Docker or run `bundle install --path vendor/bundle`._
 
-### 4. Create a Pull Request
+### 4. Lint your changes
+
+- Install the dependencies (requires Node.js 20 or newer) and run the linters before committing
+```bash
+  $ npm ci
+  $ make lint
+```
+- To automatically fix lint issues
+```bash
+  $ make lint-fix
+```
+  _Note: ESLint checks all JavaScript files, and errors fail the check. Prettier checks CSS/SCSS files that are newly added, and errors fail the check. Existing CSS/SCSS files only show a non-blocking warning and are never modified by `make lint-fix`.
+
+### 5. Create a Pull Request
 
 - After making changes, don't forget to commit with the sign-off flag (-s)
   ```bash
