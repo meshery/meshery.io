@@ -21,15 +21,13 @@ The economics are the point. A two-design list renders **363 bytes of TOON versu
 
 AXI, or Agentic eXtension Interface, applies a different design goal: deterministic structures that an agent can inspect, summarize, and act on without guessing where a value lives. `mesheryctl-axi` is an AXI-compliant wrapper around `mesheryctl`; it preserves the underlying Meshery operations while reshaping their reporting for machine consumption.
 
-```mermaid
-graph LR
-  Agent[AI agent] -->|command| AXI[mesheryctl-axi]
-  AXI -->|native command| CLI[mesheryctl]
-  CLI --> Meshery[Meshery Server]
-  Meshery --> CLI
-  CLI --> AXI
-  AXI -->|TOON result| Agent
-```
+### Agent interaction flow
+
+1. **AI agent** sends a structured command.
+2. **`mesheryctl-axi`** receives the command and formats the response with AXI and TOON.
+3. **`mesheryctl-axi`** invokes the native **`mesheryctl`** client.
+4. **`mesheryctl`** communicates with **Meshery Server**.
+5. The result returns through `mesheryctl-axi` as a compact TOON response for the agent.
 
 ## TOON: less structure to repeat
 
