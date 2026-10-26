@@ -31,11 +31,12 @@ changeHeader();
 })();
 
 (function () {
-  var logoLink = document.querySelector("[data-homepage-logo]");
-  if (!logoLink) return;
+var logoLink = document.querySelector("[data-homepage-logo]");
+if (!logoLink) return;
 
-  logoLink.addEventListener("click", function (event) {
-    if (
+logoLink.addEventListener("click", function (event) {
+  if (
+    event.detail === 0 ||
       event.defaultPrevented ||
       event.button !== 0 ||
       event.metaKey ||
@@ -43,23 +44,23 @@ changeHeader();
       event.shiftKey ||
       event.altKey ||
       logoLink.target === "_blank"
-    ) {
-      return;
-    }
+  ) {
+    return;
+  }
 
-    event.preventDefault();
+  event.preventDefault();
 
-    if (window.scrollY <= 0) return;
+  if (window.scrollY <= 0) return;
 
-    var prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+  var prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
-    window.scrollTo({
-      top: 0,
-      behavior: prefersReducedMotion ? "auto" : "smooth"
-    });
+  window.scrollTo({
+    top: 0,
+    behavior: prefersReducedMotion ? "auto" : "smooth"
   });
+});
 })();
 
 var btnscroll = $('#button-scroll-to-up');
