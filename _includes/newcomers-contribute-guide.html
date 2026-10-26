@@ -116,7 +116,7 @@
     </section>
 
     <!-- Under Review Section -->
-    <section class="step container">
+    <section class="step">
         <div class="step-image community-collage">
             <img src="{{ site.baseurl }}/assets/images/newcomers/community-collage.webp" alt="Community Collage" />
         </div>
@@ -139,7 +139,7 @@
         .step {
             display: flex;
             align-items: center;
-            gap: 4rem;
+            gap: 3rem;
         }
 
         .step:nth-child(odd) {
@@ -162,7 +162,7 @@
 
         .step-image {
             flex: 1;
-            min-width: 400px;
+            min-width: 0;
             max-width: 500px;
             text-align: center;
         }
@@ -170,13 +170,15 @@
         .step-image img {
             display: block;
             margin: 1rem auto 0px;
+            max-width: 100%;
             width: 21.875rem;
+            height: auto;
             text-align: center;
         }
 
         .step-content {
             flex: 1;
-            min-width: 50%;
+            min-width: 0;
         }
 
         .step-content h3 {
@@ -289,17 +291,14 @@
             width: 11.85rem !important;
         }
 
-        @media (max-width: 991px) {
+        @media (max-width: 1140px) {
             .instructions .step {
                 flex-direction: column !important;
                 gap: 2rem;
                 text-align: center;
             }
 
-            .instructions .step:nth-child(1),
-            .instructions .step:nth-child(2),
-            .instructions .step:nth-child(3),
-            .instructions .step:nth-child(4) {
+            .instructions .step:nth-child(n) {
                 flex-direction: column !important;
             }
 
