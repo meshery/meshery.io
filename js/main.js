@@ -48,9 +48,9 @@ logoLink.addEventListener("click", function (event) {
     return;
   }
 
-  event.preventDefault();
-
   if (window.scrollY <= 0) return;
+
+  event.preventDefault();
 
   var prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
