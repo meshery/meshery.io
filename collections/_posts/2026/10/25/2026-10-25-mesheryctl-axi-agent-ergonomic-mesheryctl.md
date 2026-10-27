@@ -1,12 +1,12 @@
 ---
 title: "mesheryctl-axi: an agent-ergonomic mesheryctl"
 subheading: "Token-efficient TOON output for AI agents operating Meshery"
-date: 2026-09-18
+date: 2026-10-25
 author: Yī nuò, Salmaan M
 categories:
   - extensibility
   - open-source
-featured-image: /assets/images/meshery-logo-light-text-side.svg
+featured-image: /assets/images/logos/meshery-logo-light-text-side.svg
 redirect_from: /blog/mesheryctl-axi-agent-ergonomic-mesheryctl
 published: true
 ---
@@ -56,7 +56,7 @@ The wrapper uses TOON for reporting and keeps design and model content as raw YA
 npx -y mesheryctl-axi connection list
 ```
 
-The package embeds nothing. It spawns your existing `mesheryctl` binary (override with `MESHERYCTL_BIN`), so `mesheryctl` must be installed and authenticated, and every command runs without TTY prompts, so agent workflows never stall waiting on input.
+The wrapper requires **Node.js 22 or newer** and an installed, authenticated `mesheryctl` binary. It embeds nothing; it spawns your existing `mesheryctl` binary (override the path with `MESHERYCTL_BIN`). Every command runs without TTY prompts, so agent workflows never stall waiting for interactive input.
 
 ## Show, don't tell
 
