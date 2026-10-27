@@ -30,6 +30,29 @@ setInterval(function () {
 changeHeader();
 })();
 
+var logo = document.getElementById("meshery-home-logo");
+
+if (logo) {
+  logo.addEventListener("click", function (e) {
+    var isHomePage = window.location.pathname === "/";
+    var isNormalClick =
+  e.button === 0 &&
+  !e.ctrlKey && !e.metaKey &&
+  !e.shiftKey &&
+  !e.altKey && !e.defaultPrevented &&
+    (!logo.target || logo.target === "_self");
+if (isHomePage && isNormalClick) {
+    e.preventDefault();
+    if (window.scrollY > 0) {
+     window.scrollTo({
+       top: 0,
+    behavior: "smooth"
+   });
+     }
+    }
+  });
+}
+
 var btnscroll = $('#button-scroll-to-up');
 
 $(window).scroll(function() {
@@ -52,4 +75,3 @@ $("#slider").on("input change", (e) => {
   $('.foreground-img').css('width', `${sliderPos}%`)
   $('.slider-button').css('left', `calc(${sliderPos}% - 18px)`)
 });
-
