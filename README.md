@@ -133,7 +133,9 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
 ```bash
   $ make lint-fix
 ```
-  _Note: ESLint checks all JavaScript files, and errors fail the check. Prettier checks CSS/SCSS files that are newly added, and errors fail the check. Existing CSS/SCSS files only show a non-blocking warning and are never modified by `make lint-fix`.
+  _Note: `make lint` compares your branch against `upstream/master` (or `origin/master` if you have no `upstream` remote), so run `git fetch upstream` (or `git fetch origin`) first. ESLint checks only changed JavaScript files, and errors fail the check. Prettier checks only CSS/SCSS files under `_sass/` and `css/`: newly added files must be formatted, and errors fail the check. Existing files in those folders only show a non-blocking formatting warning (Prettier errors such as syntax errors still fail) and are never modified by `make lint-fix`._
+
+  _On Windows, run `make lint` and `make lint-fix` from Git Bash or WSL, since the Makefile uses POSIX shell syntax._
 
 ### 5. Create a Pull Request
 

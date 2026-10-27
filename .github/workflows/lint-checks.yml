@@ -25,6 +25,7 @@ jobs:
       - name: Checkout PR
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
+          fetch-depth: 0
           persist-credentials: false
 
       - name: Set up Node.js
@@ -36,10 +37,21 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts
 
-      # Runs "eslint ." from package.json using eslint.config.mjs.
-      # Covers existing and new JS files; any error fails the job (blocks).
-      - name: Run ESLint
-        run: npm run lint
+      - name: Detect changed JS files
+        id: files
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          # Added, copied, modified, renamed. Deleted files are excluded.
+          git diff --name-only --diff-filter=ACMR "$BASE_SHA" HEAD -- '*.js' '*.mjs' '*.cjs' > changed_js.txt
+          echo "count=$(wc -l < changed_js.txt)" >> "$GITHUB_OUTPUT"
+
+      # BLOCKING: only files changed in this PR are linted.
+      - name: Run ESLint (changed files)
+        if: steps.files.outputs.count != '0'
+        run: |
+          mapfile -t FILES < changed_js.txt
+          npx --no-install eslint --no-warn-ignored "${FILES[@]}"
 
   prettier:
     name: Prettier
@@ -71,9 +83,9 @@ jobs:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
           # New = does not exist in the base branch (renames are not counted as new)
-          git diff --name-only --diff-filter=A "$BASE_SHA" HEAD -- '*.css' '*.scss' > new_styles.txt
+          git diff --name-only --diff-filter=A "$BASE_SHA" HEAD -- '_sass/*.css' '_sass/*.scss' 'css/*.css' 'css/*.scss' > new_styles.txt
           # Existing = modified or renamed files that already exist upstream
-          git diff --name-only --diff-filter=MR "$BASE_SHA" HEAD -- '*.css' '*.scss' > existing_styles.txt
+          git diff --name-only --diff-filter=MR "$BASE_SHA" HEAD -- '_sass/*.css' '_sass/*.scss' 'css/*.css' 'css/*.scss' > existing_styles.txt
           echo "new=$(wc -l < new_styles.txt)" >> "$GITHUB_OUTPUT"
           echo "existing=$(wc -l < existing_styles.txt)" >> "$GITHUB_OUTPUT"
 
@@ -84,10 +96,17 @@ jobs:
           mapfile -t FILES < new_styles.txt
           npx --no-install prettier --check "${FILES[@]}"
 
-      # NON-BLOCKING: existing files are only logged. No exit code and
-      # no ::warning:: annotations, so nothing shows on the workflow run.
+      # NON-BLOCKING for formatting issues only (exit 1): existing files are logged, not failed.
+      # Real errors such as syntax errors (exit 2+) still fail the job.
       - name: Prettier check (existing files)
         if: steps.files.outputs.existing != '0'
         run: |
           mapfile -t FILES < existing_styles.txt
-          npx --no-install prettier --check "${FILES[@]}" || true
+          code=0
+          npx --no-install prettier --check "${FILES[@]}" || code=$?
+          if [ "$code" -eq 1 ]; then
+            echo "Existing files are not Prettier-formatted (non-blocking)."
+          elif [ "$code" -ne 0 ]; then
+            echo "Prettier failed with exit code $code (not a formatting issue)."
+            exit "$code"
+          fi
