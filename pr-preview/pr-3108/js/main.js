@@ -48,9 +48,18 @@ logoLink.addEventListener("click", function (event) {
     return;
   }
 
-  if (window.scrollY <= 0) return;
+  if (Math.round(window.scrollY) <= 0) return;
 
   event.preventDefault();
+
+  // Clear the URL hash while preserving the path and query parameters.
+  if (window.location.hash) {
+    history.replaceState(
+      null,
+      "",
+      window.location.pathname + window.location.search
+    );
+  }
 
   var prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
