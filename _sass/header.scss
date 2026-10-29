@@ -1,4 +1,5 @@
 .sitewide-banner {
+    --nav-gutter: 1rem;
     overflow-y: hidden;
     position:relative;
     animation:animatetop 0.8s;
@@ -8,8 +9,8 @@
     flex-direction: row;
     justify-content: center;
     // color: var(--color-secondary-dark);
-    flex-wrap: wrap;
-    padding: .8rem 3.5rem .8rem 1.1rem;
+    flex-wrap: nowrap;
+    padding: .8rem calc(var(--nav-gutter) + 2.75rem) .8rem 1.1rem;
     background-color:  var(--brand-color-secondary);
     font-size: 1.05rem;
     align-items: center;
@@ -44,14 +45,20 @@
             filter: drop-shadow(0 0 0.6px currentColor);
             border:0;
             border-radius: 50%;
-            transform: translateY(-80%);
+            transform: translateY(-50%);
         }
+    @media (max-width: 1200px) {
+        .banner-close {
+            right: var(--nav-gutter);
+        }
+    }
 
-    @media (max-width: 960px) {
+    @media (max-width: 710px) {
+            flex-direction: column;
             font-size:.9rem;
             text-align: center;
             text-wrap:wrap;
-            padding: .5rem .75rem;
+            padding: .5rem var(--nav-gutter);
             gap:.5rem;
             a {
                 margin-top: .75rem;
@@ -60,13 +67,26 @@
             p {
                 margin: .5rem;
             }
-            .banner-close{
-                top:.4rem;
-                right:.5rem;
-                transform:none;
+            .banner-close {
+                top: .6rem;
+                transform: none;
+            }
+        }
+    @media (max-width: 480px) {
+        .banner-close img {
+            width: 20px;
+            height: 20px;
+        }
+        p {
+            margin: .5rem;
+        
+            &:first-of-type {
+                margin: .5rem 2.5rem;
+                text-wrap: wrap;
             }
         }
     }
+}
 @keyframes animatetop {
     from {
         top:-300px;
