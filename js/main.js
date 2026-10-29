@@ -54,7 +54,7 @@ logoLink.addEventListener("click", function (event) {
 
   // Clear the URL hash while preserving the path and query parameters.
   if (window.location.hash) {
-    history.replaceState(
+    history.pushState(
       null,
       "",
       window.location.pathname + window.location.search
