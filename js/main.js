@@ -36,7 +36,6 @@ if (!logoLink) return;
 
 logoLink.addEventListener("click", function (event) {
   if (
-    event.detail === 0 ||
       event.defaultPrevented ||
       event.button !== 0 ||
       event.metaKey ||
