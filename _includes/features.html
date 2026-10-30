@@ -153,6 +153,18 @@
         document.querySelector('.tab button.active').click();
     };
     let timeoutId;
+    let isHovering = false;
+    let resumeCarousel = null;
+
+    document.getElementById("carousel").addEventListener("mouseenter", function() {
+        isHovering = true;
+        clearTimeout(timeoutId);
+    });
+
+    document.getElementById("carousel").addEventListener("mouseleave", function() {
+        isHovering = false;
+        if (resumeCarousel) resumeCarousel();
+    });
 
     function openTab(evt, relationshipType) {
         const tabContent = document.getElementsByClassName("tabcontent");
@@ -165,6 +177,7 @@
         evt.currentTarget.classList.add("active");
 
         clearTimeout(timeoutId);
+        resumeCarousel = null;
         displayRelationships(relationshipType);
     }
 
@@ -182,10 +195,17 @@
             images[index].style.display = "block";
             index = (index + 1) % images.length;
 
-            if (images.length > 1) {
+            if (images.length > 1 && !isHovering) {
                 timeoutId = setTimeout(displayNextImage, 3000);
             }
         }
+
+        resumeCarousel = function() {
+            if (images.length > 1) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(displayNextImage, 3000);
+            }
+        };
 
         displayNextImage();
     }      
