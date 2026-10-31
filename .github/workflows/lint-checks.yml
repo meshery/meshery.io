@@ -1,0 +1,112 @@
+name: Lint
+
+on:
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lint-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  eslint:
+    name: ESLint
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+
+      - name: Checkout PR
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Detect changed JS files
+        id: files
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          # Added, copied, modified, renamed. Deleted files are excluded.
+          git diff --name-only --diff-filter=ACMR "$BASE_SHA" HEAD -- '*.js' '*.mjs' '*.cjs' > changed_js.txt
+          echo "count=$(wc -l < changed_js.txt)" >> "$GITHUB_OUTPUT"
+
+      # BLOCKING: only files changed in this PR are linted.
+      - name: Run ESLint (changed files)
+        if: steps.files.outputs.count != '0'
+        run: |
+          mapfile -t FILES < changed_js.txt
+          npx --no-install eslint --no-warn-ignored "${FILES[@]}"
+
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+
+      - name: Checkout PR
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0 # full history so the base commit is available for diffing
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Detect new and existing CSS/SCSS files
+        id: files
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          # New = does not exist in the base branch (renames are not counted as new)
+          git diff --name-only --diff-filter=A "$BASE_SHA" HEAD -- '_sass/*.css' '_sass/*.scss' 'css/*.css' 'css/*.scss' > new_styles.txt
+          # Existing = modified or renamed files that already exist upstream
+          git diff --name-only --diff-filter=MR "$BASE_SHA" HEAD -- '_sass/*.css' '_sass/*.scss' 'css/*.css' 'css/*.scss' > existing_styles.txt
+          echo "new=$(wc -l < new_styles.txt)" >> "$GITHUB_OUTPUT"
+          echo "existing=$(wc -l < existing_styles.txt)" >> "$GITHUB_OUTPUT"
+
+      # BLOCKING: files that don't exist upstream must be Prettier-clean.
+      - name: Prettier check (new files, blocking)
+        if: steps.files.outputs.new != '0'
+        run: |
+          mapfile -t FILES < new_styles.txt
+          npx --no-install prettier --check "${FILES[@]}"
+
+      # NON-BLOCKING for formatting issues only (exit 1): existing files are logged, not failed.
+      # Real errors such as syntax errors (exit 2+) still fail the job.
+      - name: Prettier check (existing files)
+        if: steps.files.outputs.existing != '0'
+        run: |
+          mapfile -t FILES < existing_styles.txt
+          code=0
+          npx --no-install prettier --check "${FILES[@]}" || code=$?
+          if [ "$code" -eq 1 ]; then
+            echo "Existing files are not Prettier-formatted (non-blocking)."
+          elif [ "$code" -ne 0 ]; then
+            echo "Prettier failed with exit code $code (not a formatting issue)."
+            exit "$code"
+          fi
