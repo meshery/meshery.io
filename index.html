@@ -759,12 +759,18 @@
         object-fit: contain;
     }
 
+    .sibling img {
+        left: 50%;
+        width: 60%;
+        transform: translateX(-50%);
+    }
+
     .edge,
     .sibling {
         display: none;
     }
 </style>
-            </div>
+          </div>
         
         </div>
     </div>
@@ -18168,6 +18174,70 @@
     </div>
 </section>
 
+
+
+<script>
+    window.onload = function() {
+        document.querySelector('.tab button.active').click();
+    };
+    let timeoutId;
+    let isHovering = false;
+    let resumeCarousel = null;
+
+    document.getElementById("carousel").addEventListener("mouseenter", function() {
+        isHovering = true;
+        clearTimeout(timeoutId);
+    });
+
+    document.getElementById("carousel").addEventListener("mouseleave", function() {
+        isHovering = false;
+        if (resumeCarousel) resumeCarousel();
+    });
+
+    function openTab(evt, relationshipType) {
+        const tabContent = document.getElementsByClassName("tabcontent");
+        const tabLinks = document.getElementsByClassName("tablinks");
+
+        for (const content of tabContent) { content.style.display = "none"; }
+
+        for (const link of tabLinks) { link.classList.remove("active"); }
+
+        evt.currentTarget.classList.add("active");
+
+        clearTimeout(timeoutId);
+        resumeCarousel = null;
+        displayRelationships(relationshipType);
+    }
+
+    function displayRelationships(relationshipType) {
+        const images = document.getElementsByClassName(relationshipType);
+
+        if (images.length === 0) return;
+        
+
+        let index = 0;
+
+        function displayNextImage() {
+            for (const image of images) { image.style.display = "none"; }
+
+            images[index].style.display = "block";
+            index = (index + 1) % images.length;
+
+            if (images.length > 1 && !isHovering) {
+                timeoutId = setTimeout(displayNextImage, 3000);
+            }
+        }
+
+        resumeCarousel = function() {
+            if (images.length > 1) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(displayNextImage, 3000);
+            }
+        };
+
+        displayNextImage();
+    }      
+</script>
 
 </div>
 
