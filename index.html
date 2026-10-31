@@ -18478,15 +18478,15 @@ mesheryctl system start"
           <h4 style="font-size: 1.5em;">Get mesheryctl</h4>
             <p style="font-size: 1em;margin-left:1rem;">Install mesheryctl with <a onclick="displayCode('bash');">Bash</a>, <a onclick="displayCode('brew');">Brew</a>, <a onclick="displayCode('windows');">Scoop</a>, or <a href="https://github.com/meshery/meshery/releases/latest">download directly</a>.</p>
 
-            <!-- Docker - mesheryctl -->
+          <!-- Docker - mesheryctl -->
             <h4 style="font-size: 1.5em;">Use mesheryctl</h4>
-            <div id="start-helm-v3" class="highlight-code">
+            <div id="start-docker-mesheryctl" class="highlight-code">
               <code class="code-box">mesheryctl system context create docker --platform docker --set
                 mesheryctl system start</code>
                 <!-- copy to clipboard -->
 <a 
   class="btn tooltip" 
-  data-clipboard-target="#start-helm-v3"
+  data-clipboard-target="#start-docker-mesheryctl"
   data-clipboard-text="mesheryctl system context create docker --platform docker --set
 mesheryctl system start"
   onmouseout="resetCopyText(this)" 
@@ -18502,12 +18502,12 @@ mesheryctl system start"
 
               <!-- Docker extension for Meshery -->
             <h4 style="font-size: 1.5em;"> Use Docker Extension for Meshery</h4>
-            <div id="start-helm-v3" class="highlight-code">
+            <div id="start-docker-extension" class="highlight-code">
               <code class="code-box">docker extension install meshery/docker-extension-meshery:stable-latest</code>
                 <!-- copy to clipboard -->
 <a 
   class="btn tooltip" 
-  data-clipboard-target="#start-helm-v3"
+  data-clipboard-target="#start-docker-extension"
   data-clipboard-text="docker extension install meshery/docker-extension-meshery:stable-latest"
   onmouseout="resetCopyText(this)" 
   style="position:absolute; top: 0.10rem; right: 0.5rem; font-size: 22px;"
@@ -18531,13 +18531,13 @@ mesheryctl system start"
 
             <!-- Kubernetes - mesheryctl -->
             <h4 style="font-size: 1.5em;">Use mesheryctl</h4>
-            <div id="start-helm-v3" class="highlight-code">
+            <div id="start-k8s-mesheryctl" class="highlight-code">
               <code class="code-box">mesheryctl system context create k8s --platform kubernetes --set
                 mesheryctl system start</code>
                 <!-- copy to clipboard -->
 <a 
   class="btn tooltip" 
-  data-clipboard-target="#start-helm-v3"
+  data-clipboard-target="#start-k8s-mesheryctl"
   data-clipboard-text="mesheryctl system context create k8s --platform kubernetes --set
 mesheryctl system start"
   onmouseout="resetCopyText(this)" 
@@ -18560,17 +18560,17 @@ mesheryctl system start"
 
             <div>
                 <h4 style="font-size: 1.5em;">Using Scoop</h4>
-                <div id="start-windows" class="highlight-code">
+                <div id="start-windows-scoop" class="highlight-code">
                     <code class="code-box"> $ scoop bucket add mesheryctl https://github.com/meshery/scoop-bucket.git
                         $ scoop install mesheryctl
                         $ mesheryctl system start </code>
                     <!-- copy to clipboard -->
 <a 
   class="btn tooltip" 
-  data-clipboard-target="#start-windows"
+  data-clipboard-target="#start-windows-scoop"
   data-clipboard-text="scoop bucket add mesheryctl https://github.com/meshery/scoop-bucket.git
 scoop install mesheryctl
-mesheryctl system start "
+mesheryctl system start"
   onmouseout="resetCopyText(this)" 
   style="position:absolute; top: 0.10rem; right: 0.5rem; font-size: 22px;"
   >
@@ -18587,12 +18587,12 @@ mesheryctl system start "
             <p style="font-size: 1em;">Not a Scoop user? Download and unzip the <a href="https://github.com/meshery/meshery/releases/latest">mesheryctl</a>
               binary directly from the Meshery releases page. Add mesheryctl to your path for ease of use. Then, execute:
               </p>
-              <div id="start-windows" class="highlight-code">
+              <div id="start-windows-binary" class="highlight-code">
                 <code class="code-box"> $ mesheryctl system start </code>
                 <!-- copy to clipboard -->
 <a 
   class="btn tooltip" 
-  data-clipboard-target="#start-windows"
+  data-clipboard-target="#start-windows-binary"
   data-clipboard-text="mesheryctl system start"
   onmouseout="resetCopyText(this)" 
   style="position:absolute; top: 0.10rem; right: 0.5rem; font-size: 22px;"
@@ -18615,15 +18615,14 @@ mesheryctl system start "
           <h4 style="font-size: 1.5em;">Get mesheryctl</h4>
             <p style="font-size: 1em;margin-left:1rem;">Install mesheryctl with <a onclick="displayCode('bash');">Bash</a>, <a onclick="displayCode('brew');">Brew</a>, <a onclick="displayCode('windows');">Scoop</a>, or <a href="https://github.com/meshery/meshery/releases/latest">download directly</a>.</p>
           <h4 style="font-size: 1.5em;">Use mesheryctl</h4>
-          <div id="start-helm-v3" class="highlight-code">
-              <code class="code-box">   mesheryctl system config aks
-              mesheryctl system start </code>
+            <p style="font-size: 1em;margin-left:1rem;">Authenticate to Azure and configure credentials for your intended AKS cluster using <code>az aks get-credentials --resource-group &lt;resource-group&gt; --name &lt;cluster-name&gt;</code>. Verify the active context using <code>kubectl config current-context</code> and select the intended context using <code>kubectl config use-context &lt;context-name&gt;</code> when necessary. Consult the official <a href="https://learn.microsoft.com/en-us/azure/aks/learn/quick-kubernetes-deploy-cli" target="_blank" rel="noopener noreferrer">AKS setup instructions</a> for more details.</p>
+          <div id="start-aks" class="highlight-code">
+              <code class="code-box">mesheryctl system start -p kubernetes</code>
               <!-- copy to clipboard -->
 <a 
   class="btn tooltip" 
-  data-clipboard-target="#start-helm-v3"
-  data-clipboard-text="mesheryctl system context create k8s -p kubernetes -s
-mesheryctl system start"
+  data-clipboard-target="#start-aks"
+  data-clipboard-text="mesheryctl system start -p kubernetes"
   onmouseout="resetCopyText(this)" 
   style="position:absolute; top: 0.10rem; right: 0.5rem; font-size: 22px;"
   >
@@ -18644,12 +18643,12 @@ mesheryctl system start"
           <h4 style="font-size: 1.5em;">Get mesheryctl</h4>
             <p style="font-size: 1em;margin-left:1rem;">Install mesheryctl with <a onclick="displayCode('bash');">Bash</a>, <a onclick="displayCode('brew');">Brew</a>, or <a onclick="displayCode('windows');">Scoop</a>, or <a href="https://github.com/meshery/meshery/releases/latest">download directly</a>.</p>
             <h4 style="font-size: 1.5em;">Use mesheryctl</h4>
-            <div id="start-helm-v3" class="highlight-code">
+            <div id="start-minikube" class="highlight-code">
                 <code class="code-box">   mesheryctl system config minikube </code>
                 <!-- copy to clipboard -->
 <a 
   class="btn tooltip" 
-  data-clipboard-target="#start-helm-v3"
+  data-clipboard-target="#start-minikube"
   data-clipboard-text="mesheryctl system config minikube"
   onmouseout="resetCopyText(this)" 
   style="position:absolute; top: 0.10rem; right: 0.5rem; font-size: 22px;"
@@ -18710,17 +18709,14 @@ kubectl -n meshery apply -f install/deployment_yamls/k8s" onmouseout="resetCopyT
           <h3>Using Helm</h3>
 
           <div id="start-helm-v3" class="highlight-code">
-            <code class="code-box">kubectl create ns meshery
-              helm repo add meshery https://meshery.io/charts
-              helm install meshery meshery/meshery -n meshery
-            </code>
+            <code class="code-box">helm repo add meshery https://meshery.io/charts/
+              helm install meshery meshery/meshery --namespace meshery --create-namespace</code>
               <!-- copy to clipboard -->
 <a 
   class="btn tooltip" 
   data-clipboard-target="#start-helm-v3"
-  data-clipboard-text="kubectl create ns meshery
-helm repo add meshery https://meshery.io/charts/
-helm install meshery meshery/meshery -n meshery"
+  data-clipboard-text="helm repo add meshery https://meshery.io/charts/
+helm install meshery meshery/meshery --namespace meshery --create-namespace"
   onmouseout="resetCopyText(this)" 
   style="position:absolute; top: 0.10rem; right: 0.5rem; font-size: 22px;"
   >
@@ -18744,15 +18740,14 @@ helm install meshery meshery/meshery -n meshery"
           <h4 style="font-size: 1.5em;">Get mesheryctl</h4>
             <p style="font-size: 1em;margin-left:1rem;">Install mesheryctl with <a onclick="displayCode('bash');">Bash</a>, <a onclick="displayCode('brew');">Brew</a>, or <a onclick="displayCode('windows');">Scoop</a>, or <a href="https://github.com/meshery/meshery/releases/latest">download directly</a>.</p>
             <h4 style="font-size: 1.5em;">Using mesheryctl</h4>
-            <div id="start-helm-v3" class="highlight-code">
-              <code class="code-box"> mesheryctl system config gke --token *PATH_TO_TOKEN* </code>
-                mesheryctl system start </code>
-                <!-- copy to clipboard -->
+            <p style="font-size: 1em;margin-left:1rem;">Authenticate to Google Cloud and configure credentials for your intended GKE cluster using <code>gcloud container clusters get-credentials &lt;cluster-name&gt; --location &lt;region-or-zone&gt;</code>. Verify the active context using <code>kubectl config current-context</code> and select the intended context using <code>kubectl config use-context &lt;context-name&gt;</code> when necessary. Consult the official <a href="https://docs.cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl" target="_blank" rel="noopener noreferrer">GKE cluster access instructions</a> for more details.</p>
+            <div id="start-gke" class="highlight-code">
+              <code class="code-box">mesheryctl system start -p kubernetes</code>
+              <!-- copy to clipboard -->
 <a 
   class="btn tooltip" 
-  data-clipboard-target="#start-helm-v3"
-  data-clipboard-text="mesheryctl system config gke
-mesheryctl system start"
+  data-clipboard-target="#start-gke"
+  data-clipboard-text="mesheryctl system start -p kubernetes"
   onmouseout="resetCopyText(this)" 
   style="position:absolute; top: 0.10rem; right: 0.5rem; font-size: 22px;"
   >
@@ -18774,13 +18769,13 @@ mesheryctl system start"
           <h4 style="font-size: 1.5em;">Get mesheryctl</h4>
             <p style="font-size: 1em;margin-left:1rem;">Install mesheryctl with <a onclick="displayCode('bash');">Bash</a>, <a onclick="displayCode('brew');">Brew</a>, <a onclick="displayCode('windows');">Scoop</a>, or <a href="https://github.com/meshery/meshery/releases/latest">download directly</a>.</p>
           <h4 style="font-size: 1.5em;">Use mesheryctl</h4>
-            <div id="start-helm-v3" class="highlight-code">
+            <div id="start-eks" class="highlight-code">
               <code class="code-box"> mesheryctl system config eks
                 mesheryctl system start </code>
                 <!-- copy to clipboard -->
 <a 
   class="btn tooltip" 
-  data-clipboard-target="#start-helm-v3"
+  data-clipboard-target="#start-eks"
   data-clipboard-text="mesheryctl system config eks
 mesheryctl system start"
   onmouseout="resetCopyText(this)" 
