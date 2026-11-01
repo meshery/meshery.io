@@ -21,7 +21,7 @@ paginate:
         />
         <button id="clear-search-btn" class="clear-search" title="Clear search" style="display:none;">×</button>
       </div>
-      <div id="search-summary" class="search-summary" style="display:none;"></div>
+      <div id="search-summary" class="search-summary" aria-live="polite" style="display:none;"></div>
     </div>
 
     <!-- Search Results (hidden by default) -->
@@ -276,6 +276,18 @@ paginate:
 
 .search-result-item {
   margin-bottom: 2rem;
+}
+
+.search-show-more-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.search-show-more-btn {
+  cursor: pointer;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
 }
 
 .search-highlight {
@@ -541,4 +553,7 @@ ul.archive-months {
 </style>
 
 <!-- Blog Search Script -->
+<script>
+  window.blogSearchIndexVersion = "{{ site.time | date: '%s' }}";
+</script>
 <script src="{{ '/js/blog-search.js' | relative_url }}"></script>
