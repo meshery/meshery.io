@@ -1,4 +1,114 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://meshery.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://meshery.io/" rel="alternate" type="text/html" /><updated>2026-11-01T01:36:45+00:00</updated><id>https://meshery.io/feed.xml</id><title type="html">Meshery</title><subtitle>The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.</subtitle><author><name>The Meshery Authors</name><email>community@meshery.io</email></author><entry><title type="html">Meshery is now a CNCF Incubating Project</title><link href="https://meshery.io/blog/2026/10/2026-10-10-meshery-is-now-incubating/" rel="alternate" type="text/html" title="Meshery is now a CNCF Incubating Project" /><published>2026-10-10T00:00:00+00:00</published><updated>2026-10-10T00:00:00+00:00</updated><id>https://meshery.io/blog/2026/10/meshery-is-now-incubating</id><content type="html" xml:base="https://meshery.io/blog/2026/10/2026-10-10-meshery-is-now-incubating/"><![CDATA[<p>It is official: the <strong>Cloud Native Computing Foundation (CNCF) Technical Oversight Committee has voted to accept Meshery as an Incubating project</strong>! This marks a massive milestone in our journey from a Sandbox project to becoming the premier cloud native manager and infrastructure management platform.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://meshery.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://meshery.io/" rel="alternate" type="text/html" /><updated>2026-11-01T04:19:48+00:00</updated><id>https://meshery.io/feed.xml</id><title type="html">Meshery</title><subtitle>The extensible cloud native manager. Confidently wrangle cloud native infrastructure with Meshery.</subtitle><author><name>The Meshery Authors</name><email>community@meshery.io</email></author><entry><title type="html">Announcing mesheryctl-axi: the Agent-Friendly Meshery CLI</title><link href="https://meshery.io/blog/2026/11/2026-11-01-announcing-mesheryctl-axi/" rel="alternate" type="text/html" title="Announcing mesheryctl-axi: the Agent-Friendly Meshery CLI" /><published>2026-11-01T00:00:00+00:00</published><updated>2026-11-01T00:00:00+00:00</updated><id>https://meshery.io/blog/2026/11/announcing-mesheryctl-axi</id><content type="html" xml:base="https://meshery.io/blog/2026/11/2026-11-01-announcing-mesheryctl-axi/"><![CDATA[<p>Your AI agent is already driving your terminal. The question is whether the tools it calls were built for its eyes. <code class="language-plaintext highlighter-rouge">mesheryctl</code> was built for yours: human-readable tables, box-drawing characters, prose summaries. An agent reads all of that too, and pays for every repeated character in tokens. <code class="language-plaintext highlighter-rouge">mesheryctl-axi</code> is the new answer: an agent-ergonomic wrapper around <code class="language-plaintext highlighter-rouge">mesheryctl</code> that speaks TOON, never prompts, and tells the agent exactly what to do next.</p>
+
+<h2 id="the-axi-pattern">The AXI pattern</h2>
+
+<p>AXI - the <a href="https://axi.md">Agent eXperience Interface</a> - is a set of 10 design principles for making CLIs agent-ergonomic, validated across two benchmarks and 915 runs. The pattern is already proven in the wild: <a href="https://github.com/kunchenguid/gh-axi"><code class="language-plaintext highlighter-rouge">gh-axi</code></a> wraps the official <code class="language-plaintext highlighter-rouge">gh</code> CLI with token-efficient TOON output, contextual next-step suggestions, and structured error handling. In the AXI benchmark - 17 real-world GitHub tasks, five interface setups, five repeats each, <code class="language-plaintext highlighter-rouge">claude-sonnet-4-6</code> as the agent with an LLM judge scoring task success - gh-axi posted the lowest input tokens, cost, and duration of all conditions, and was the only one to pass every run: 100% task success against 86% for raw <code class="language-plaintext highlighter-rouge">gh</code>, at 7% lower cost.</p>
+
+<p>The lineage is deliberate. <code class="language-plaintext highlighter-rouge">mesheryctl-axi</code> follows the same validated approach: <strong>wrap the human CLI instead of changing it</strong>. The design and scope are tracked in <a href="https://github.com/meshery/meshery/issues/20979">meshery/meshery#20979</a> - an early draft considered in-tree <code class="language-plaintext highlighter-rouge">--render</code> flags, but the project reversed that call and chose the wrapper. Human output stays human. Agents get their own lane.</p>
+
+<h2 id="what-mesheryctl-axi-is">What mesheryctl-axi is</h2>
+
+<p><a href="https://github.com/meshery-extensions/mesheryctl-axi"><code class="language-plaintext highlighter-rouge">mesheryctl-axi</code></a> spawns <code class="language-plaintext highlighter-rouge">mesheryctl</code> - it does not embed Meshery - and reshapes the reporting around four agent needs. It is published to npm and listed in the <a href="https://docs.meshery.io/extensions/extensions/">Meshery extensions catalog</a>:</p>
+
+<ul>
+  <li><strong>Default TOON reporting.</strong> List, view, system, and error output come back in <a href="https://toonformat.dev/">TOON</a>, a token-efficient serialization for tabular data. Agents spend most of their Meshery tokens reading repeated list and view output, so the wrapper reshapes exactly that. Design and model <em>content</em> stays canonical: raw YAML or JSON, never TOON-wrapped, with no trailing suggestions.</li>
+  <li><strong>Always non-interactive.</strong> No TTY prompts, ever. A command that needs input fails fast instead of hanging an agent session.</li>
+  <li><strong>Structured errors.</strong> Failures return <code class="language-plaintext highlighter-rouge">error</code>, <code class="language-plaintext highlighter-rouge">code</code>, and <code class="language-plaintext highlighter-rouge">help[]</code> in TOON. Codes include <code class="language-plaintext highlighter-rouge">VALIDATION_ERROR</code> (exit 2), <code class="language-plaintext highlighter-rouge">AUTH_REQUIRED</code>, <code class="language-plaintext highlighter-rouge">NOT_FOUND</code>, <code class="language-plaintext highlighter-rouge">MESHERYCTL_NOT_INSTALLED</code>, <code class="language-plaintext highlighter-rouge">MESHERYCTL_INCOMPATIBLE</code>, and <code class="language-plaintext highlighter-rouge">UNKNOWN</code> (exit 1).</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">help[]</code> next-step lines.</strong> Every successful reporting command ends with contextual suggestions for what to run next, so the agent does not have to guess.</li>
+</ul>
+
+<p>Empty results are definitive rather than ambiguous: a successful empty collection reports <code class="language-plaintext highlighter-rouge">connections: 0</code>, while authentication, reachability, and server errors stay structured errors - never silently interpreted as empty.</p>
+
+<h2 id="try-it-copypaste-prompts">Try it: copy/paste prompts</h2>
+
+<p>Run an agent with <code class="language-plaintext highlighter-rouge">mesheryctl-axi</code> as its Meshery tool and paste in one of these prompts. Each drives a single wrapper command and returns clean TOON, so you can compare against the same prompt run through raw <code class="language-plaintext highlighter-rouge">mesheryctl</code>. The outputs below are captured from the released binary against a fixture server speaking the real Meshery API shapes.</p>
+
+<p><strong>Prompt 1: “List my Meshery connections and show only the Kubernetes ones.”</strong></p>
+
+<p>The agent runs:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx <span class="nt">-y</span> mesheryctl-axi connection list <span class="nt">--kind</span> kubernetes
+</code></pre></div></div>
+
+<p>and reads:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>count: 2
+total: 2
+connections[2]{id,name,status,kind,type}:
+  c0ffee11-0000-4000-8000-aaaaaaaaaaaa,metal04,connected,kubernetes,platform
+  c0ffee22-0000-4000-8000-bbbbbbbbbbbb,docker-desktop,discovered,kubernetes,platform
+status:
+  connected: 1
+  discovered: 1
+help[1]:
+  mesheryctl-axi connection view &lt;id&gt;
+</code></pre></div></div>
+
+<p><strong>Prompt 2: “Show me the status of my Meshery system.”</strong></p>
+
+<p>The agent runs:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx <span class="nt">-y</span> mesheryctl-axi system status
+</code></pre></div></div>
+
+<p>and reads the same structured <code class="language-plaintext highlighter-rouge">system_status</code> schema the content-first home (<code class="language-plaintext highlighter-rouge">npx -y mesheryctl-axi</code> with no arguments) reports: status, version, platform, provider, and endpoint, followed by a <code class="language-plaintext highlighter-rouge">help[]</code> suggestion pointing at <code class="language-plaintext highlighter-rouge">system context</code>.</p>
+
+<p><strong>Prompt 3: “Fetch the sock-shop design as YAML.”</strong></p>
+
+<p>The agent runs:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx <span class="nt">-y</span> mesheryctl-axi design content sock-shop <span class="nt">--format</span> yaml
+</code></pre></div></div>
+
+<p>and gets raw YAML back - no TOON, no <code class="language-plaintext highlighter-rouge">help[]</code>. Content commands are schema-faithful by design; the wrapper never re-serializes the artifact the agent asked for.</p>
+
+<p>Bonus: when the agent gets it wrong, the wrapper coaches it back. An unknown flag returns a structured error the agent can act on without scraping prose:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ mesheryctl-axi connection list --bogus
+error: "unknown flag for mesheryctl-axi connection list: --bogus"
+code: VALIDATION_ERROR
+help[2]:
+  mesheryctl-axi connection list [flags]
+  mesheryctl-axi connection list --help
+</code></pre></div></div>
+
+<h2 id="measured-the-agentic-performance-comparison">Measured: the agentic performance comparison</h2>
+
+<p>Assertions about agent ergonomics are cheap, so the project ran a controlled benchmark before announcing: <a href="https://github.com/meshery-extensions/mesheryctl-axi/issues/23">meshery-extensions/mesheryctl-axi#23</a>, by community contributor Salmaan-M. The harness drove the same model (<code class="language-plaintext highlighter-rouge">nvidia/nemotron-3-super-120b-a12b:free</code>) through the same representative tasks with fresh agent runs under paired RAW vs AXI conditions, capturing turns, token usage, wall-clock time, CLI errors, retries, and task accuracy across 40 valid paired observations on 6 representative tasks.</p>
+
+<p>The results:</p>
+
+<ul>
+  <li><strong>Accuracy: 40/40 exact for both RAW and AXI (100%).</strong> Neither condition hallucinated a flag or misparsed output on the primary task set.</li>
+  <li><strong>Wall-clock time is task-dependent, favoring AXI.</strong> AXI was faster in all 5 <code class="language-plaintext highlighter-rouge">system-status</code> repetitions, in most <code class="language-plaintext highlighter-rouge">connections-by-kind</code> repetitions, and in 4 of 5 <code class="language-plaintext highlighter-rouge">component-list</code> repetitions. <code class="language-plaintext highlighter-rouge">connections-count</code>, <code class="language-plaintext highlighter-rouge">design-list-view</code>, and <code class="language-plaintext highlighter-rouge">connection-id-kind</code> were mixed.</li>
+  <li>A secondary <code class="language-plaintext highlighter-rouge">system-version-platform</code> result (5/5 exact, paired) was kept separate because of provider rate-limit and max-turn instability in the surrounding runs.</li>
+</ul>
+
+<p>The <a href="https://github.com/user-attachments/files/33106808/Benchmark_report.pdf">full benchmark report</a> (PDF) has the methodology, task-level tables, exclusions, and reproducibility notes. The headline: the wrapper matches raw <code class="language-plaintext highlighter-rouge">mesheryctl</code> on correctness while shaving wall-clock time on the read-heavy tasks where agents spend most of their tokens.</p>
+
+<h2 id="adopt-it">Adopt it</h2>
+
+<p>Getting an agent onto the wrapper takes minutes:</p>
+
+<ol>
+  <li><strong>Install and authenticate <code class="language-plaintext highlighter-rouge">mesheryctl</code>.</strong> The wrapper spawns it; it is the only hard dependency. (Override the binary with <code class="language-plaintext highlighter-rouge">MESHERYCTL_BIN=/path/to/mesheryctl</code> if it is not on <code class="language-plaintext highlighter-rouge">PATH</code>.)</li>
+  <li><strong>Make the wrapper the agent’s first call.</strong> <code class="language-plaintext highlighter-rouge">npx -y mesheryctl-axi</code> needs Node.js 22 or newer and returns a content-first home with live context and system status.</li>
+  <li><strong>Pin the agent instruction.</strong> Paste this into the repo’s <code class="language-plaintext highlighter-rouge">AGENTS.md</code>, <code class="language-plaintext highlighter-rouge">CLAUDE.md</code>, or equivalent:</li>
+</ol>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Prefer mesheryctl-axi over raw mesheryctl for Meshery operations. Run it with
+`npx -y mesheryctl-axi`, append subcommands directly, and follow its `help[]`
+suggestions. Treat list, view, system, and error output as TOON; preserve
+`design content` and `model content` as raw YAML or JSON. A definitive
+`&lt;resource&gt;: 0` means empty; an error or unavailable field does not.
+</code></pre></div></div>
+
+<ol>
+  <li><strong>Enable ambient discovery.</strong> The npm package ships an Agent Skill (copy it into your agent’s skills directory) and <code class="language-plaintext highlighter-rouge">npx -y mesheryctl-axi setup hooks</code> installs session-start hooks for Claude Code, Codex, and OpenCode.</li>
+  <li><strong>Try the prompts above</strong>, then file feedback and feature requests in the <a href="https://github.com/meshery-extensions/mesheryctl-axi">mesheryctl-axi repository</a>.</li>
+</ol>
+
+<p><code class="language-plaintext highlighter-rouge">mesheryctl</code> was built for your eyes. <code class="language-plaintext highlighter-rouge">mesheryctl-axi</code> is built for your agent’s - and the numbers say it shows.</p>]]></content><author><name>Meshery Authors</name></author><category term="mesheryctl" /><category term="extensions" /><category term="platform-engineering" /><summary type="html"><![CDATA[Your AI agent is already driving your terminal. The question is whether the tools it calls were built for its eyes. mesheryctl was built for yours: human-readable tables, box-drawing characters, prose summaries. An agent reads all of that too, and pays for every repeated character in tokens. mesheryctl-axi is the new answer: an agent-ergonomic wrapper around mesheryctl that speaks TOON, never prompts, and tells the agent exactly what to do next.]]></summary></entry><entry><title type="html">Meshery is now a CNCF Incubating Project</title><link href="https://meshery.io/blog/2026/10/2026-10-10-meshery-is-now-incubating/" rel="alternate" type="text/html" title="Meshery is now a CNCF Incubating Project" /><published>2026-10-10T00:00:00+00:00</published><updated>2026-10-10T00:00:00+00:00</updated><id>https://meshery.io/blog/2026/10/meshery-is-now-incubating</id><content type="html" xml:base="https://meshery.io/blog/2026/10/2026-10-10-meshery-is-now-incubating/"><![CDATA[<p>It is official: the <strong>Cloud Native Computing Foundation (CNCF) Technical Oversight Committee has voted to accept Meshery as an Incubating project</strong>! This marks a massive milestone in our journey from a Sandbox project to becoming the premier cloud native manager and infrastructure management platform.</p>
 
 <h2 id="project-pulse">Project Pulse</h2>
 
@@ -1423,247 +1533,4 @@ Workspace created: test-1
   <li>“workspace already exists”: Choose a unique name or delete the existing workspace if appropriate.</li>
 </ul>
 
-<p>NOTE: These commands are evolving. Share feedback, report issues, and help improve the experience so teams can collaborate more effectively in Meshery.</p>]]></content><author><name>Aadhitya Amarendiran</name></author><category term="mesheryctl" /><summary type="html"><![CDATA[Introducing new mesheryctl commands that enhance organization and workspace management capabilities. These commands empower users to efficiently manage their Meshery organizations and workspaces directly from the command line.]]></summary></entry><entry><title type="html">Mesheryctl End-To-End Testing Introduction</title><link href="https://meshery.io/blog/2025/10/2025-10-30-mesehryctl-e2e-test-introduction/" rel="alternate" type="text/html" title="Mesheryctl End-To-End Testing Introduction" /><published>2025-10-30T13:00:00+00:00</published><updated>2025-10-30T13:00:00+00:00</updated><id>https://meshery.io/blog/2025/10/mesehryctl-e2e-test-introduction</id><content type="html" xml:base="https://meshery.io/blog/2025/10/2025-10-30-mesehryctl-e2e-test-introduction/"><![CDATA[<p>You want to create a test for a new or existing Meshery command? Good. This tutorial explains how to do so. In this tutorial, we will introduce mesheryctl end-to-end testing using <strong>B</strong>ash <strong>A</strong>utomating <strong>T</strong>esting <strong>S</strong>ystem (<strong>BATS</strong>).</p>
-
-<h2 id="understand-meshery-ecosystem">Understand Meshery ecosystem</h2>
-
-<p>The best advice that we can share is first of all, <strong>be familiarized with Meshery ecosystem</strong>, this is the key to be able to implement tests.</p>
-
-<p>Be familiar with the different components and concepts in Meshery’s world, this can be done by reading the official documentation where you will find detailed explanations of the both <a href="https://docs.meshery.io/concepts/architecture">architectural</a> and <a href="https://docs.meshery.io/concepts/logical">logical</a> concepts.</p>
-
-<p><code class="language-plaintext highlighter-rouge">mesheryctl</code> is Meshery’s CLI</p>
-
-<p>Meshery CLI is written in Golang built on the Cobra framework and interacts with Meshery Server’s <a href="https://docs.meshery.io/reference/rest-apis">REST API</a>. By creating end-to-end tests during the development lifecycle, it ensures that changes or new features are behaving as expected.</p>
-
-<h2 id="how-to-create-a-test">How to create a test</h2>
-
-<p>Before starting, be sure you read the contributing guide that will provide you the requirements and the implementation standards <a href="https://docs.meshery.io/project/contributing/contributing-cli-tests">here</a>.</p>
-
-<h3 id="scenario">Scenario</h3>
-
-<p>We will use a fictitious command named <code class="language-plaintext highlighter-rouge">awesome</code> through this tutorial that has 3 subcommands <code class="language-plaintext highlighter-rouge">create</code>, <code class="language-plaintext highlighter-rouge">list</code> and <code class="language-plaintext highlighter-rouge">view</code> that need to be tested. Now, let’s define how they should behave to implement the test.</p>
-
-<p><strong>Subcommands behavior expected:</strong></p>
-
-<ul>
-  <li>
-    <p><strong>create:</strong></p>
-
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create `test`</span>
-~<span class="nv">$ </span>mesheryctl awesome create <span class="nb">test
-test </span>has been created successfully
-
-<span class="c"># Create missing argument</span>
-~<span class="nv">$ </span>mesheryctl awesome create
-Error: no name was provided. 
-Please provide the name that you want to create
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p><strong>list:</strong></p>
-
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~<span class="nv">$ </span>mesheryctl awesome list
-Total number of elements: 3
-Page: 1
-NAME     DESCRIPTION
-<span class="nb">test     </span>description of <span class="nb">test
-</span>test-1   description of <span class="nb">test </span>1
-test-2   description of <span class="nb">test </span>2
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <p><strong>view:</strong></p>
-
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># View `test`</span>
-~<span class="nv">$ </span>mesheryctl awesome view <span class="nb">test
-</span>Name: <span class="nb">test</span>
-
-<span class="c"># View missing argument</span>
-~<span class="nv">$ </span>mesheryctl awesome view
-Error: no name was provided. 
-Please provide the name that you want to view
-
-<span class="c"># View no existing elements</span>
-~<span class="nv">$ </span>mesheryctl awesome view non-existing
-No element with name <span class="s2">"non-existing"</span> has been found. 
-Ensure to provided an existing name. <span class="sb">`</span>mesheryctl awesome list<span class="sb">`</span> to list existing element.
-</code></pre></div>    </div>
-  </li>
-</ul>
-
-<p>All is set now to create required tests.</p>
-
-<h3 id="folder-structure">Folder structure</h3>
-
-<p>All End-To-End tests are stored in <code class="language-plaintext highlighter-rouge">mesheryctl/tests/e2e</code></p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tests/
-└── e2e
-    ├── 000-prerequisites
-    ├── 001-system
-    ├── 002-model
-    ├── 003-design
-    ├── 004-perf
-    ├── 005-component
-    └── helpers
-
-8 directories
-</code></pre></div></div>
-
-<h3 id="implementation">Implementation</h3>
-
-<p>You need to create a new folder that will contain all the tests for this command.</p>
-
-<p>Following the implementation standard, the folder will be <code class="language-plaintext highlighter-rouge">tests/e2e/006-awesome</code>, then we will create a file for each subcommand, this is the expected result</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tests/
-└── e2e
-    ├── 000-prerequisites
-    ├── 001-system
-    ├── 002-model
-    ├── 003-design
-    ├── 004-perf
-    ├── 005-component    
-    ├── 006-awesome
-    │   ├── 00-awesome.bats
-    │   ├── 01-awesome-create.bats
-    │   ├── 02-awesome-list.bats
-    │   └── 03-awesome-view.bats
-    └── helpers
-</code></pre></div></div>
-
-<h4 id="create">Create</h4>
-
-<p>Content of 01-awesome-create.bats</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c">#!/usr/bin/env bats</span>
-
-  <span class="c"># Add helpers functions to not reinvent the wheel</span>
-  setup<span class="o">()</span> <span class="o">{</span>
-    load <span class="s2">"</span><span class="nv">$E2E_HELPERS_PATH</span><span class="s2">/bats_libraries"</span>
-    _load_bats_libraries
-  <span class="o">}</span>
-
-  @test <span class="s2">"create command without arguments fails"</span> <span class="o">{</span>
-    run <span class="nv">$MESHERYCTL_BIN</span> awesome create
-    
-    
-    assert_failure
-    assert_output <span class="nt">--partial</span> <span class="s2">"Error: no name was provided."</span>
-    assert_output <span class="nt">--partial</span> <span class="s2">"Please provide the name that you want to create"</span>
-  <span class="o">}</span>
-
-  @test <span class="s2">"create command with argument succeeds"</span> <span class="o">{</span>
-    run <span class="nv">$MESHERYCTL_BIN</span> awesome create <span class="nb">test
-    
-    </span>assert_success
-    
-    assert_output <span class="s2">"Name: test"</span>
-  <span class="o">}</span>
-</code></pre></div></div>
-
-<h4 id="list">List</h4>
-
-<p>Content of 02-awesome-list.bats</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env bats</span>
-
-<span class="c"># Add helpers functions to not reinvent the wheel</span>
-setup<span class="o">()</span> <span class="o">{</span>
-   load <span class="s2">"</span><span class="nv">$E2E_HELPERS_PATH</span><span class="s2">/bats_libraries"</span>
-	_load_bats_libraries
-<span class="o">}</span>
-
-@test <span class="s2">"list command succeeds"</span> <span class="o">{</span>
-  run <span class="nv">$MESHERYCTL_BIN</span> awesome list   
-  
-  assert_success
-  
-  assert_output <span class="nt">--partial</span> Total number of elements: 3
-  assert_output <span class="nt">--partial</span> Page: 1
-  assert_output <span class="nt">--partial</span> NAME     DESCRIPTION
-  assert_output <span class="nt">--partial</span> <span class="nb">test     </span>description of <span class="nb">test
-  </span>assert_output <span class="nt">--partial</span> test-1   description of <span class="nb">test </span>1
-  assert_output <span class="nt">--partial</span> test-2   description of <span class="nb">test </span>2
-<span class="o">}</span>
-</code></pre></div></div>
-
-<h4 id="view">View</h4>
-
-<p>Content of 03-awesome-view.bats</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/usr/bin/env bats</span>
-
-<span class="c"># Add helpers functions to not reinvent the wheel</span>
-setup<span class="o">()</span> <span class="o">{</span>
-   load <span class="s2">"</span><span class="nv">$E2E_HELPERS_PATH</span><span class="s2">/bats_libraries"</span>
-	_load_bats_libraries
-<span class="o">}</span>
-
-@test <span class="s2">"view command without arguments fails"</span> <span class="o">{</span>
-  run <span class="nv">$MESHERYCTL_BIN</span> awesome view
-   
-  
-  assert_failure
-  assert_output <span class="nt">--partial</span> <span class="s2">"Error: no name was provided."</span>
-  assert_output <span class="nt">--partial</span> <span class="s2">"Please provide the name that you want to view"</span>
-<span class="o">}</span>
-
-@test <span class="s2">"view command with existing awesome name is displaying name"</span> <span class="o">{</span>
-  run <span class="nv">$MESHERYCTL_BIN</span> awesome view <span class="nb">test
-   
-  </span>assert_success
-  
-  assert_output <span class="s2">"Name: test"</span>
-<span class="o">}</span>
-
-@test <span class="s2">"view command with non-existing awesome name is displaying non existing message"</span> <span class="o">{</span>
-  run <span class="nv">$MESHERYCTL_BIN</span> awesome view non-existing
-   
-  assert_success
-  
-  assert_output  <span class="nt">--partial</span> <span class="s2">"No element with name "</span>non-existing<span class="s2">" has been found."</span>
-  assert_output  <span class="nt">--partial</span> <span class="s2">"Ensure to provide an existing name. </span><span class="sb">`</span>mesheryctl awesome list<span class="sb">`</span><span class="s2"> to list existing element."</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<h3 id="run-added-end-to-end-tests">Run added End-To-End tests</h3>
-
-<p>Now you have created a new suite of tests, you can confirm it is working as expected by running the following command and see an example of output</p>
-
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/mesheryctl/ <span class="nv">$ </span>make e2e-no-build <span class="nv">BATS_FOLDER_PATTERN</span><span class="o">=</span>006-awesome
-
-
-<span class="c">#### MESHERYCTL END-TO-END TESTING - START ####</span>
-
-00-awesome.bats
-01-awesome-create.bats
- ✓ create <span class="nb">command </span>without arguments fails
- ✓ create <span class="nb">command </span>with argument succeed
-02-awesome-list.bats
- ✓ list <span class="nb">command </span>succeed
-03-awesome-view.bats
- ✓ view <span class="nb">command </span>without arguments fails
- ✓ view <span class="nb">command </span>with existing awesome name is displaying name
- ✓ view <span class="nb">command </span>with non-existing awesome name is displaying non existing message
-
- 6 tests, 0 failures
-
-
-<span class="c">#### MESHERYCTL END-TO-END TESTING - DONE ####</span>
-</code></pre></div></div>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>You now have a small, repeatable e2e test suite for your imaginary <code class="language-plaintext highlighter-rouge">awesome</code> command. Practice:</p>
-
-<ul>
-  <li>keep tests small and independent,</li>
-  <li>use the helpers to avoid duplication,</li>
-  <li>prefer deterministic assertions (exact when possible, partial when needed),</li>
-  <li>and run them locally before pushing so CI stays happy.</li>
-</ul>
-
-<p>If a test fails: write a better assertion, fix the bug, or add a regression test. Rinse and repeat.</p>
-
-<p>Happy testing — may your CI logs be short and your green checks plentiful.</p>]]></content><author><name>Matthieu EVRIN</name></author><category term="mesheryctl" /><category term="test" /><summary type="html"><![CDATA[You want to create a test for a new or existing Meshery command? Good. This tutorial explains how to do so. In this tutorial, we will introduce mesheryctl end-to-end testing using Bash Automating Testing System (BATS).]]></summary></entry></feed>
+<p>NOTE: These commands are evolving. Share feedback, report issues, and help improve the experience so teams can collaborate more effectively in Meshery.</p>]]></content><author><name>Aadhitya Amarendiran</name></author><category term="mesheryctl" /><summary type="html"><![CDATA[Introducing new mesheryctl commands that enhance organization and workspace management capabilities. These commands empower users to efficiently manage their Meshery organizations and workspaces directly from the command line.]]></summary></entry></feed>
