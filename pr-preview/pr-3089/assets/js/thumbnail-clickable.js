@@ -46,6 +46,7 @@ function createFullScreenContainer(patternId, patternType){
   }
 
   fullScreenImage.onerror = function () {
+    this.onerror = null;
     this.src = "/assets/images/patterns/service-mesh.svg";
   };
   fullScreenImage.loading = "lazy";
