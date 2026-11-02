@@ -264,9 +264,35 @@ class CSS3DRenderer {
 
 				if ( visible === true ) {
 
+					let radius = object._boundingRadius;
+
+					if ( radius === undefined ) {
+
+						if ( typeof object.boundingRadius === 'number' ) {
+
+							radius = object.boundingRadius;
+
+						} else {
+
+							// Derive radius from element dimensions; cached on object to avoid repeated layout queries.
+							// Default integration cards are 120px x 160px (half-diagonal = hypot(60, 80) = 100px).
+							// A minimum / fallback radius of 180px provides an 80px safety buffer covering
+							// drop-shadows, hover glow, border offsets, and card sizes up to ~288px diagonal.
+							const width = object.element.offsetWidth || 120;
+							const height = object.element.offsetHeight || 160;
+							const halfDiagonal = Math.hypot( width / 2, height / 2 );
+
+							radius = Math.max( halfDiagonal + 40, 180 );
+
+						}
+
+						object._boundingRadius = radius;
+
+					}
+
 					_position.setFromMatrixPosition( object.matrixWorld );
 					_sphere.center = _position;
-					_sphere.radius = 180;
+					_sphere.radius = radius;
 
 					if ( ! _frustum.intersectsSphere( _sphere ) ) {
 

@@ -375,9 +375,22 @@ permalink: /integrations
           startAnimation();
         });
 
-        window.addEventListener("pointerup", () => {
+        container.addEventListener("pointerup", () => {
           isInteracting = false;
           startAnimation();
+        });
+
+        container.addEventListener("pointercancel", () => {
+          isInteracting = false;
+        });
+
+        // Reset interaction flag if a drag gesture is released outside the canvas,
+        // without waking the animation loop for unrelated page clicks.
+        window.addEventListener("pointerup", () => {
+          if (isInteracting) {
+            isInteracting = false;
+            startAnimation();
+          }
         });
 
         window.addEventListener("pointercancel", () => {
