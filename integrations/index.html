@@ -369,19 +369,27 @@ permalink: /integrations
           render();
         });
 
+        const activePointers = new Set();
         const container = document.getElementById("container");
-        container.addEventListener("pointerdown", () => {
+        container.addEventListener("pointerdown", (e) => {
+          activePointers.add(e.pointerId);
           isInteracting = true;
           startAnimation();
         });
 
-        window.addEventListener("pointerup", () => {
-          isInteracting = false;
-          startAnimation();
+        window.addEventListener("pointerup", (e) => {
+          activePointers.delete(e.pointerId);
+          if (activePointers.size === 0) {
+            isInteracting = false;
+            startAnimation();
+          }
         });
 
-        window.addEventListener("pointercancel", () => {
-          isInteracting = false;
+        window.addEventListener("pointercancel", (e) => {
+          activePointers.delete(e.pointerId);
+          if (activePointers.size === 0) {
+            isInteracting = false;
+          }
         });
 
         container.addEventListener("wheel", startAnimation, { passive: true });
