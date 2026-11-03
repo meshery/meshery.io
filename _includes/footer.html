@@ -73,6 +73,10 @@
 		jQuery('.stellarnav.mobile').css('text-align', 'end');
 	});
 </script>
+{% if page.tilt or content contains 'data-tilt' %}
+<script src="{{ site.baseurl }}/js/vanilla-tilt.min.js"></script>
+{% endif %}
+
 <!--Script for Copy to Clipboard-->
 {% assign needs_clipboard = false %}
 {% if page.layout == 'home' or page.clipboard %}
@@ -87,13 +91,6 @@
 
 {% if needs_clipboard %}
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-{% endif %}
-
-{% if page.tilt or content contains 'data-tilt' %}
-<script src="{{ site.baseurl }}/js/vanilla-tilt.min.js"></script>
-{% endif %}
-
-{% if needs_clipboard %}
 <script>
 
     // Functionality for the copy button next to the ID/UUID in Catalog Details
