@@ -552,23 +552,30 @@ function showFilterCards() {
   const itemsPerPage = 11; // Number of items per page
   let currentPage = 0; // Current page index
 
-  // First, filter the cards that match our criteria
+  // Rebuild matching cards from the current DOM order.
+  const searchInput = document.getElementById("search");
+  const searchTerm = (searchInput?.value || "").trim().toLowerCase();
+
   const matchingCards = patternCards.filter(card => {
-    const type = card.getAttribute("type")?.toLowerCase();
+    const type = card.getAttribute("type")?.toLowerCase() || "";
     const technologyAttr = card.getAttribute("technology");
+    const technologies = technologyAttr
+      ? JSON.parse(technologyAttr)
+      : [];
 
-    // Parse technologies once
-    const technologies = technologyAttr ? JSON.parse(technologyAttr) : [];
+    const showCardTech =
+      globalTechnologyList.length === 0 ||
+      globalTechnologyList.some(tech => technologies.includes(tech));
 
-    // Check if card matches all filter criteria
-    const showCardTech = globalTechnologyList.length === 0 ||
-                        globalTechnologyList.some(tech => technologies.includes(tech));
+    const showCardCat =
+      globalCategoryList.length === 0 ||
+      globalCategoryList.some(cat => type.includes(cat));
 
-    const showCardCat = globalCategoryList.length === 0 ||
-                       globalCategoryList.some(cat => type.includes(cat));
+    const filterValue = card.getAttribute("filter")?.toLowerCase() || "";
+    const showCardSearch =
+      searchTerm === "" || filterValue.includes(searchTerm);
 
-    // Return true if card matches all criteria
-    return showCardTech && showCardCat;
+    return showCardTech && showCardCat && showCardSearch;
   });
 
   // Hide all cards first (batch operation)
@@ -650,6 +657,12 @@ function showFilterCards() {
 }
 
 window.refreshFilterPagination = showFilterCards;
+
+const catalogSearchInput = document.getElementById("search");
+
+if (catalogSearchInput) {
+  catalogSearchInput.addEventListener("input", showFilterCards);
+}
 
 showFilterCards();
 </script>
