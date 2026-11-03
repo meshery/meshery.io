@@ -63,7 +63,9 @@ function buildLeaderboard(items) {
 async function buildAllPeriods() {
   const entries = await Promise.all(
     PERIODS.map(async (period) => {
-      const items = await fetchUsers(period);
+      const items = await fetchUsers(period).catch((err) => {
+        throw new Error(`leaderboard fetch failed for period=${period}: ${err.message}`);
+      });
       return [period, buildLeaderboard(items)];
     })
   );
