@@ -1,5 +1,5 @@
 ---
-date: 2024-01-17 4:30:05 -0530
+date: 2024-02-17 4:30:05 -0530
 title: Simplifying Cloud Infrastructure and Kubernetes Management
 subheading: with Meshery
 author: James Horton, Lee Calcote
@@ -8,7 +8,9 @@ categories:
   - kubernetes
 #layout: post
 featured-image: /assets/images/posts/2024/2024-02-17-simplifying-cloud-infrastructure-and-kubernetes-management/meshery-catalog.png
-redirect_from: /blog/simplifying-cloud-infrastructure-and-kubernetes-management
+redirect_from:
+  - /blog/simplifying-cloud-infrastructure-and-kubernetes-management
+  - /blog/2024/01/2024-02-17-simplifying-cloud-infrastructure-and-kubernetes-management
 ---
 In the world of cloud computing and Kubernetes-based infrastructure, managing and optimizing resources can be complex and time-consuming. Meshery emerges as a powerful platform that simplifies cloud infrastructure and Kubernetes management, enabling organizations to streamline their operations. In this article, we will explore the features and benefits of Meshery and how it empowers organizations to efficiently manage their cloud infrastructure.
 
