@@ -38,3 +38,14 @@ test('fetchUsers does not retry a non-transient 4xx', async () => {
   await assert.rejects(fetchUsers('weekly'), /404 - not found/);
   assert.equal(calls.length, 1);
 });
+
+test('fetchUsers retries when reading a successful response body fails', async () => {
+  const broken = new Response('{}');
+  broken.text = async () => { throw new Error('terminated'); };
+  mockFetch([broken, Response.json({ directory_items: [{ id: 2 }] })]);
+
+  const items = await fetchUsers('weekly');
+
+  assert.deepEqual(items, [{ id: 2 }]);
+  assert.equal(calls.length, 2);
+});
