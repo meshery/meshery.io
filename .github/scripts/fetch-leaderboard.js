@@ -31,16 +31,16 @@ async function fetchUsers(period) {
     }
 
     if (response.ok) {
-      let body;
+      let data;
       try {
-        body = await response.text();
+        data = JSON.parse(await response.text());
       } catch (err) {
         if (attempt >= MAX_RETRIES) throw err;
-        console.warn(`Response body read failed (period=${period}): ${err.message}; retrying`);
+        console.warn(`Response read/parse failed (period=${period}): ${err.message}; retrying`);
         await sleep(RETRY_BASE_DELAY_MS * 2 ** attempt);
         continue;
       }
-      return JSON.parse(body).directory_items;
+      return data.directory_items;
     }
 
     const retryable = response.status === 429 || response.status >= 500;

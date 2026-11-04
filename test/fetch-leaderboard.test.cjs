@@ -49,3 +49,15 @@ test('fetchUsers retries when reading a successful response body fails', async (
   assert.deepEqual(items, [{ id: 2 }]);
   assert.equal(calls.length, 2);
 });
+
+test('fetchUsers retries when a successful response body is not JSON', async () => {
+  mockFetch([
+    new Response('<html>error</html>', { status: 200 }),
+    Response.json({ directory_items: [{ id: 3 }] }),
+  ]);
+
+  const items = await fetchUsers('weekly');
+
+  assert.deepEqual(items, [{ id: 3 }]);
+  assert.equal(calls.length, 2);
+});
