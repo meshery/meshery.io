@@ -18,7 +18,7 @@ extensionInfo: |
   This snapshot of state of your Kubernetes clusters can then be imported into Meshery for offline management of your systems, so that you can easy perform static configuration and visualization of your clusters. This Meshery extension bridges the gap between full-blown Meshery Operator deployment with MeshSync and Meshery Broker to each Kubernetes cluster and the enablement of your Meshery Server deployment's understand of the state and configuration of your infrastructure.
 
 extensionCaveats: |
-  - Simplify Networking: Overcome common networking challenges between your infrastructure (e.g Kuberentes cluster) and your Meshery Server deployment. - Simplify Access Level Requirements: Overcome the need privileged, write access required by a full Meshery deployment, using read-only access to generate a MeshSync snapshot.
+  - Simplify Networking: Overcome common networking challenges between your infrastructure (e.g. Kubernetes cluster) and your Meshery Server deployment. - Simplify Access Level Requirements: Overcome the need privileged, write access required by a full Meshery deployment, using read-only access to generate a MeshSync snapshot.
   - Snapshot Capture: Works with a single manifest of a single resource, for entire namespaces, or single cluster visualizations.
 
 URL: https://github.com/meshery-extensions/kubectl-meshsync-snapshot

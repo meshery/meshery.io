@@ -26,7 +26,7 @@ jobs:
           fi
           filename="${{ github.event.client_payload.pattern_id }}"
           if [[ $filename != "" ]]; then
-            rm -f $MESHERY_CATALOG_FILES_DIR/$filename.yaml
+            rm -rf "$MESHERY_CATALOG_FILES_DIR/$filename"
             rm -f ./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"/$filename.md
           else
             echo "No patterns to delete"
@@ -40,7 +40,7 @@ jobs:
           fi
           filename="${{ github.event.client_payload.filter_id }}"
           if [[ $filename != "" ]]; then
-            rm -f $MESHERY_CATALOG_FILES_DIR/$filename.yaml
+            rm -rf "$MESHERY_CATALOG_FILES_DIR/$filename"
             rm -f ./collections/_catalog/"$(echo $filterType | tr '[:upper:]' '[:lower:]')"/$filename.md
           else
             echo "No Filters to delete"

@@ -4,9 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="test" content="testing" />
     <!-- Google Tag Manager -->
+    {% if page.patternInfo %}
     <meta name="description" content="{{ page.patternInfo | url_decode }}" />
+    {% endif %}
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -21,7 +22,31 @@
     <link rel="stylesheet" href="{{ site.baseurl }}/css/stellarnav.css" />
     {% endif %} -->
     <link rel="stylesheet" href="{{ site.baseurl }}/css/screen.css" />
-    <link rel="icon" type="image/png" href="{{ site.baseurl }}/favicon.ico" />
+    <link rel="icon" href="{{ '/favicons/favicon.ico' | relative_url }}" />
+    <link
+      rel="apple-touch-icon"
+      href="{{ '/favicons/apple-touch-icon.png' | relative_url }}"
+      sizes="180x180"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ '/favicons/favicon-16x16.png' | relative_url }}"
+      sizes="16x16"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ '/favicons/favicon-32x32.png' | relative_url }}"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ '/favicons/android-chrome-192x192.png' | relative_url }}"
+      sizes="192x192"
+    />
+
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Open+Sans"
@@ -47,7 +72,6 @@
     {% endif %}
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="Meshery" />
     <meta name="twitter:site" content="@mesheryio" />
     <meta name="twitter:creator" content="@mesheryio" />
     <meta name="author" content="Meshery Authors">
@@ -77,6 +101,20 @@
         window.siteBaseUrl = "{{ site.baseurl }}";
 
         const body = document.body;
+
+        const BANNER_KEY = "sitewideBannerDismissed";
+
+        function isBannerDismissed() {
+            try {
+              return localStorage.getItem(BANNER_KEY) === "true";
+            } catch {
+              return false;
+            }
+          }
+
+        if (isBannerDismissed()) {
+            document.documentElement.classList.add("banner-dismissed");
+          }
     
         if (localStorage.getItem("mode") === "light-mode") {
           body.classList.remove("dark-mode");
@@ -84,15 +122,15 @@
           let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
           allLogos.forEach(e => e.src = e.dataset.logoForLight);
         }
-    
+
         // Automatically set logos based on initial theme
         document.addEventListener('DOMContentLoaded', () => {
           let allLogos = document.querySelectorAll("#logo-dark-light, .logo-dark-light");
           allLogos.forEach(e => {
             e.src = body.classList.contains("dark-mode") ? e.dataset.logoForDark : e.dataset.logoForLight;
           });
-          
-          // emit the theme event 
+
+          // emit the theme event
           document.dispatchEvent(new CustomEvent("themeChange",{
 			      detail : {value : localStorage.getItem("mode")},
 			      bubbles: true ,
@@ -103,14 +141,25 @@
         document.addEventListener("DOMContentLoaded", function() {
           // $('.sitewide-banner').animate({top: 0});
           const banner = document.querySelector(".sitewide-banner");
-          if (!banner) {
+          if (!banner || isBannerDismissed()) {
             return;
           }
           setTimeout(function() {
             banner.classList.remove("hidden");
             
           }, 0); // Add a delay of 1 second before showing the banner
+
+        const closeBtn = banner.querySelector(".banner-close");
+          if (closeBtn) {
+            closeBtn.addEventListener("click", function () {
+              banner.classList.add("dismissed");
+              try {
+                localStorage.setItem(BANNER_KEY, "true");
+              } catch { }
+            });
+          };
         });
+
       </script>
 
     {% if page.title != "Meshery | The Kubernetes and Cloud Native Manager" and page.title != "Programs" %}
@@ -120,13 +169,16 @@
 <!-- End Google Tag Manager (noscript) -->
 
 
-<!-- Sitewide Banner
- <div class="sitewide-banner hidden">
-  <p>Meshery's CNCF incubation proposal is here. Are you a fan of Meshery?</p>
+<!-- Sitewide Banner -->
+<div class="sitewide-banner hidden">
+  <p>Meshery is now a CNCF Incubating project.</p>
   <p>
-    <a href="https://github.com/cncf/toc/pull/1264">Show your support by adding a reaction!</a>
+    <a href="https://www.cncf.io/blog/2026/10/07/meshery-becomes-a-cncf-incubating-project/">Read the announcement</a>
   </p>
-</div> -->
+  <button class="banner-close" type="button" aria-label="close announcement button">
+    &times;
+  </button>
+</div>
 <header id="mainHeader" class="filledHeader">
   {% else %}
   <header id="mainHeader">
@@ -135,7 +187,7 @@
     <div class="container nav-container">
   
       <div class="project-name">
-        <a href="{{ site.baseurl }}/">
+        <a href="{{ site.baseurl }}/" {% if page.layout == "home" %}data-homepage-logo{% endif %}>
           <img src="{{ site.baseurl }}/assets/images/logos/meshery-logo.png" alt="Meshery Logo" />&nbsp;
           <img src="{{ site.baseurl }}/assets/images/logos/meshery-logo-text.png"
             data-logo-for-dark="{{ site.baseurl }}/assets/images/logos/meshery-logo-text.png"

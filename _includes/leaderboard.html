@@ -1,10 +1,12 @@
-<section class="leaderboard-section">
+﻿<section class="leaderboard-section">
 
     <div class="leaderboard-controls">
         <div class="period-toggle">
+            <label for="period-select" class="visually-hidden">Leaderboard time period</label>
             <select id="period-select" class="period-select" aria-label="Leaderboard time period">
-                <option value="weekly">This Week</option>
-                <option value="monthly">This Month</option>
+                <option value="weekly">Week</option>
+                <option value="monthly">Month</option>
+                <option value="yearly">Year</option>
                 <option value="all">All Time</option>
             </select>
         </div>
@@ -46,6 +48,51 @@
 
 <script>
     (function () {
+        var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        function fmt(d, includeYear) {
+            var str = MONTHS[d.getMonth()] + ' ' + d.getDate();
+            if (includeYear) {
+                str += ', ' + d.getFullYear();
+            }
+            return str;
+        }
+
+        var now   = new Date();
+        var today = fmt(now);
+
+        var week  = new Date(now); week.setDate(week.getDate() - 7);
+        var month = new Date(now); month.setDate(month.getDate() - 30);
+        var year  = new Date(now); year.setFullYear(year.getFullYear() - 1);
+
+        var ranges = {
+            weekly:  fmt(week) + ' \u2013 ' + today,
+            monthly: fmt(month) + ' \u2013 ' + today,
+            yearly:  fmt(year, true) + ' \u2013 ' + today,
+            all:     ''
+        };
+
+        var names = {
+            weekly:  'Week',
+            monthly: 'Month',
+            yearly:  'Year',
+            all:     'All Time'
+        };
+
+        var periodSelectEl = document.getElementById('period-select');
+
+        Object.keys(names).forEach(function (val) {
+            var opt = periodSelectEl.querySelector('option[value="' + val + '"]');
+            if (!opt) return;
+            opt.textContent = ranges[val] ? (names[val] + ' \u00B7 ' + ranges[val]) : names[val];
+        });
+    })();
+</script>
+
+<script>
+
+    (function () {
         var leaderboardData;
         try {
             leaderboardData = JSON.parse(document.getElementById('leaderboard-data').textContent) || {};
@@ -56,11 +103,22 @@
     }};
     var currentPeriod = defaultPeriod || 'weekly';
     var fallbackAvatar = '/assets/images/nav-icons/community.svg';
+    var periodDescriptions = {
+      weekly:  'over the past 7 days',
+      monthly: 'over the past 30 days',
+      yearly:  'over the past year',
+      all:     'across all time'
+    };
 
     function escapeHtml(str) {
         var div = document.createElement('div');
         div.textContent = str == null ? '' : String(str);
         return div.innerHTML.replace(/"/g, '&quot;');
+    }
+
+    function updatePeriodDescription(period) {
+      var phraseEl = document.getElementById('leaderboard-period-phrase');
+      if (phraseEl) phraseEl.textContent = periodDescriptions[period] || periodDescriptions.weekly;
     }
 
     function medalClass(rank) {
@@ -123,6 +181,7 @@
 
     function renderLeaderboard(period) {
         var users = leaderboardData[period] || [];
+        updatePeriodDescription(period);
         var hasActivity = users.some(function (u) { return u.score > 0; });
         var emptyState = document.getElementById('leaderboard-empty-state');
         var podium = document.getElementById('leaderboard-podium');
