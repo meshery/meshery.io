@@ -1,0 +1,316 @@
+{%- comment -%}
+  Storefront style catalog browser for Meshery designs.
+  Renders every design as a card and lets visitors search, filter by
+  category and technology, sort, and load more results client side.
+  Entries that look like placeholders or test fixtures are hidden by name.
+{%- endcomment -%}
+{% assign designs = site.catalog | where_exp: "d", "d.patternId" | where_exp: "d", "d.Status != 'ComingSoon'" %}
+{% assign junk_names = "untitled design|e2e test|publishing test" | split: "|" %}
+{% assign categories = designs | map: "type" | uniq | sort %}
+
+<section class="cstore" aria-labelledby="cstore-title">
+  <div class="cstore-hero">
+    <h1 id="cstore-title" class="cstore-title">Meshery Design Catalog</h1>
+    <p class="cstore-lede">Browse ready-made, well-architected designs for Kubernetes and cloud infrastructure. Open any design in the Meshery Playground or import it into your own Meshery.</p>
+    <div class="cstore-searchbar" role="search">
+      <label for="cstore-search" class="cstore-sr">Search designs</label>
+      <svg aria-hidden="true" viewBox="0 0 24 24" class="cstore-search-icon"><path d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 9.5 16a6.5 6.5 0 0 0 4.2-1.6l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
+      <input id="cstore-search" type="search" placeholder="Search by name, technology, author, or description" autocomplete="off">
+    </div>
+  </div>
+
+  <div class="cstore-layout">
+    <aside class="cstore-filters" aria-label="Filters">
+      <div class="cstore-filters-head">
+        <h2>Filters</h2>
+        <button type="button" class="cstore-clear" id="cstore-clear">Clear all</button>
+      </div>
+      <fieldset class="cstore-group">
+        <legend>Category</legend>
+        <div id="cstore-cats">
+        {% for c in categories %}
+          <label class="cstore-check"><input type="checkbox" name="category" value="{{ c | escape }}"> <span>{{ c | replace: "-", " " | capitalize }}</span> <span class="cstore-count" data-count-cat="{{ c | escape }}"></span></label>
+        {% endfor %}
+        </div>
+      </fieldset>
+      <fieldset class="cstore-group">
+        <legend>Technology</legend>
+        <label for="cstore-tech-search" class="cstore-sr">Find a technology</label>
+        <input id="cstore-tech-search" class="cstore-tech-search" type="search" placeholder="Find a technology">
+        <div id="cstore-techs" class="cstore-techs"></div>
+      </fieldset>
+    </aside>
+
+    <div class="cstore-main">
+      <div class="cstore-toolbar">
+        <p id="cstore-status" class="cstore-status" role="status" aria-live="polite"></p>
+        <div class="cstore-sort">
+          <label for="cstore-sort">Sort by</label>
+          <select id="cstore-sort">
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="az">Name A to Z</option>
+            <option value="za">Name Z to A</option>
+          </select>
+        </div>
+      </div>
+      <div id="cstore-active" class="cstore-active" aria-label="Active filters"></div>
+
+      <ul class="cstore-grid" id="cstore-grid">
+      {% for d in designs %}
+        {% assign lname = d.name | downcase %}
+        {% assign junk = false %}
+        {% for j in junk_names %}{% if lname contains j %}{% assign junk = true %}{% endif %}{% endfor %}
+        {% unless junk %}
+        {% assign desc = d.patternInfo | url_decode | strip_html | strip_newlines | strip %}
+        {% assign techs = d.compatibility | join: "|" | downcase %}
+        <li class="cstore-card" data-name="{{ d.name | escape }}" data-type="{{ d.type | escape }}" data-tech="{{ techs | escape }}" data-created="{{ d.createdAt }}" data-text="{{ d.name | append: ' ' | append: desc | append: ' ' | append: d.userName | append: ' ' | append: techs | downcase | escape }}">
+          <a class="cstore-card-link" href="{{ d.url | relative_url }}">
+            <div class="cstore-thumb">
+              <img alt="Snapshot of the {{ d.name | escape }} design" loading="lazy"
+                src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/{{ d.patternId }}-light.png"
+                onerror="this.onerror=null;this.src='{{ '/assets/images/brand/meshery-logo.svg' | relative_url }}';this.parentNode.classList.add('cstore-thumb-fallback')">
+              <span class="cstore-badge">{{ d.type | replace: "-", " " }}</span>
+            </div>
+            <div class="cstore-body">
+              <h3 class="cstore-name">{{ d.name | replace: ".tgz", "" | escape }}</h3>
+              <p class="cstore-desc">{% if desc != "" %}{{ desc | truncate: 120 | escape }}{% else %}No description provided yet.{% endif %}</p>
+              <ul class="cstore-chips" aria-label="Technologies">
+                {% for t in d.compatibility limit: 3 %}<li>{{ t | escape }}</li>{% endfor %}
+                {% if d.compatibility.size > 3 %}<li>+{{ d.compatibility.size | minus: 3 }}</li>{% endif %}
+              </ul>
+              <p class="cstore-meta">{% if d.userName %}By {{ d.userName | escape }}{% endif %}{% if d.createdAt %} <span aria-hidden="true">&middot;</span> {{ d.createdAt | date: "%b %-d, %Y" }}{% endif %}</p>
+            </div>
+          </a>
+        </li>
+        {% endunless %}
+      {% endfor %}
+      </ul>
+
+      <div id="cstore-empty" class="cstore-empty" hidden>
+        <h3>No designs match</h3>
+        <p>Try a different search term or clear some filters.</p>
+        <button type="button" class="cstore-btn" id="cstore-empty-clear">Clear all filters</button>
+      </div>
+      <div class="cstore-more-wrap"><button type="button" class="cstore-btn" id="cstore-more">Load more designs</button></div>
+    </div>
+  </div>
+</section>
+
+<style>
+.cstore{--cs-accent:#00b39f;--cs-accent-2:#00d3a9;--cs-bg:#fff;--cs-card:#fff;--cs-border:#e3e8ea;--cs-text:#1e2117;--cs-muted:#51636b;--cs-chip:#eef9f7;max-width:1320px;margin:0 auto;padding:1rem 1rem 3rem;color:var(--cs-text);text-align:left}
+.dark-mode .cstore,body.dark-mode .cstore,html.dark-mode .cstore,.dark .cstore{--cs-bg:#121212;--cs-card:#1e2227;--cs-border:#33393f;--cs-text:#f2f4f5;--cs-muted:#b8c2c7;--cs-chip:#0f3a35}
+.cstore-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cstore-hero{text-align:center;padding:1.5rem 0 2rem}
+.cstore-title{font-size:2.4rem;margin:0 0 .5rem;color:var(--cs-text)}
+.cstore-lede{max-width:720px;margin:0 auto 1.5rem;color:var(--cs-muted);font-size:1.05rem}
+.cstore-searchbar{position:relative;max-width:720px;margin:0 auto}
+.cstore-search-icon{position:absolute;left:16px;top:50%;width:22px;height:22px;transform:translateY(-50%);fill:var(--cs-muted)}
+#cstore-search{width:100%;box-sizing:border-box;padding:16px 18px 16px 50px;font-size:1.05rem;border:2px solid var(--cs-border);border-radius:999px;background:var(--cs-card);color:var(--cs-text)}
+#cstore-search:focus,.cstore-tech-search:focus,#cstore-sort:focus{outline:none;border-color:var(--cs-accent);box-shadow:0 0 0 3px rgba(0,179,159,.25)}
+.cstore-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:2rem}
+.cstore-main{min-width:0}
+@media(max-width:860px){.cstore-layout{grid-template-columns:1fr}}
+.cstore-filters{position:sticky;top:90px;align-self:start;background:var(--cs-card);border:1px solid var(--cs-border);border-radius:12px;padding:1rem;max-height:calc(100vh - 110px);overflow:auto}
+@media(max-width:860px){.cstore-filters{position:static;max-height:none}}
+.cstore-filters-head{display:flex;justify-content:space-between;align-items:center}
+.cstore-filters h2{font-size:1.1rem;margin:0;color:var(--cs-text)}
+.cstore-clear{background:none;border:0;color:var(--cs-accent);cursor:pointer;font-weight:600;padding:4px}
+.cstore-group{border:0;margin:1rem 0 0;padding:0;width:100%;min-width:0;box-sizing:border-box}
+.cstore-group legend{font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--cs-muted);margin-bottom:.5rem}
+.cstore-check{display:flex;align-items:center;gap:.5rem;padding:4px 0;cursor:pointer;color:var(--cs-text);font-size:.95rem;text-transform:none}
+.cstore .cstore-check,.cstore .cstore-check span{text-indent:0!important;padding-left:0}
+.cstore-check input{position:static!important;opacity:1!important;flex:none;accent-color:var(--cs-accent);width:16px;height:16px;margin:0}
+.cstore-check[hidden]{display:none}
+.cstore-tech-icon{width:20px;height:20px;flex:none;object-fit:contain}
+.cstore-count{margin-left:auto;color:var(--cs-muted);font-size:.8rem}
+.cstore-tech-search{display:block;width:100%;min-width:0;max-width:100%;box-sizing:border-box;padding:8px 10px;border:1px solid var(--cs-border);border-radius:8px;background:var(--cs-bg);color:var(--cs-text);margin-bottom:.5rem;height:40px}.cstore-techs{width:100%;min-width:0;max-height:300px;overflow-x:auto;overflow-y:auto}
+.cstore-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem}
+.cstore-techs{display:grid;grid-template-columns:max-content;padding-right:8px;box-sizing:border-box}
+.cstore-techs .cstore-check{width:auto;min-width:0;max-width:none;box-sizing:border-box;display:flex;align-items:center}
+.cstore-techs .cstore-check>span:not(.cstore-count){white-space:nowrap;overflow-wrap:normal}
+.cstore-techs .cstore-count{margin-left:auto;flex-shrink:0}
+#cstore-cats{overflow:visible;max-height:none}
+.cstore-status{margin:0;color:var(--cs-muted)}
+.cstore-sort{display:flex;align-items:center;gap:.5rem;color:var(--cs-muted)}
+.cstore-sort label{margin-top:0}
+#cstore-sort{padding:8px 12px;border:1px solid var(--cs-border);border-radius:8px;background:var(--cs-card);color:var(--cs-text)}
+.cstore-active{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+.cstore-pill{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--cs-accent);color:var(--cs-text);background:var(--cs-chip);border-radius:999px;padding:4px 10px;font-size:.85rem;cursor:pointer}
+.cstore-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.25rem}
+.cstore-card{margin:0;padding:0}
+.cstore-card-link{display:flex;flex-direction:column;height:100%;background:var(--cs-card);border:1px solid var(--cs-border);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.cstore-card-link:hover,.cstore-card-link:focus-visible{transform:translateY(-4px);border-color:var(--cs-accent);box-shadow:0 12px 24px rgba(0,0,0,.12);outline:none}
+.cstore-card-link:focus-visible{box-shadow:0 0 0 3px rgba(0,179,159,.5)}
+.cstore-thumb{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,#eef9f7,#dff3ef);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.dark-mode .cstore-thumb,.dark .cstore-thumb{background:linear-gradient(135deg,#1b2f2c,#122421)}
+.cstore-thumb img{width:100%;height:100%;object-fit:cover}
+.cstore-thumb-fallback img{width:40%;height:auto;object-fit:contain;opacity:.85}
+.cstore-badge{position:absolute;top:10px;left:10px;background:var(--cs-accent);color:#fff;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:3px 9px;border-radius:999px}
+.cstore-body{display:flex;flex-direction:column;gap:.5rem;padding:1rem;flex:1}
+.cstore-name{font-size:1.05rem;margin:0;color:var(--cs-text);line-height:1.3;word-break:break-word}
+.cstore-desc{margin:0;color:var(--cs-muted);font-size:.9rem;line-height:1.45;flex:1}
+.cstore-chips{list-style:none;display:flex;flex-wrap:wrap;gap:.35rem;margin:0;padding:0}
+.cstore-chips li{background:var(--cs-chip);color:var(--cs-text);font-size:.75rem;padding:2px 8px;border-radius:6px}
+.cstore-meta{margin:0;color:var(--cs-muted);font-size:.8rem}
+.cstore-empty{text-align:center;padding:3rem 1rem;color:var(--cs-muted)}
+.cstore-empty h3{color:var(--cs-text)}
+.cstore-more-wrap{text-align:center;margin-top:2rem}
+.cstore-btn{background:var(--cs-accent);color:#fff;border:0;border-radius:999px;padding:12px 26px;font-weight:700;font-size:1rem;cursor:pointer}
+.cstore-btn:hover,.cstore-btn:focus-visible{background:#00897b;outline:none;box-shadow:0 0 0 3px rgba(0,179,159,.35)}
+</style>
+
+<script>
+(function () {
+  var PAGE = 24;
+  var grid = document.getElementById("cstore-grid");
+  if (!grid) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll(".cstore-card"));
+  var search = document.getElementById("cstore-search");
+  var sortSel = document.getElementById("cstore-sort");
+  var status = document.getElementById("cstore-status");
+  var more = document.getElementById("cstore-more");
+  var empty = document.getElementById("cstore-empty");
+  var active = document.getElementById("cstore-active");
+  var techBox = document.getElementById("cstore-techs");
+  var techSearch = document.getElementById("cstore-tech-search");
+  var shown = PAGE;
+  var state = { q: "", cats: [], techs: [] };
+
+  // Build technology list with counts.
+  var techCounts = {};
+  cards.forEach(function (c) {
+    c.dataset.tech.split("|").filter(Boolean).forEach(function (t) { techCounts[t] = (techCounts[t] || 0) + 1; });
+  });
+  // Names whose icon isn't at <slug>/icons/color/<slug>-color.svg; "" means no asset exists.
+  var techIconOverrides = {
+    "istio": "istio/istio.svg",
+    "exoscale-icons": "",
+    "meshery-flowchart": "",
+    "meshery-shapes": "",
+  };
+  Object.keys(techCounts).sort(function (a, b) { return techCounts[b] - techCounts[a] || a.localeCompare(b); }).forEach(function (t) {
+    var l = document.createElement("label");
+    l.className = "cstore-check";
+    var i = document.createElement("input");
+    i.type = "checkbox"; i.name = "technology"; i.value = t;
+    var slug = t.replace(/\s+/g, "-");
+    var img = document.createElement("img");
+    img.className = "cstore-tech-icon"; img.alt = ""; img.loading = "lazy";
+    var iconPath = techIconOverrides[slug] !== undefined ? techIconOverrides[slug] : slug + "/icons/color/" + slug + "-color.svg";
+    if (iconPath) img.src = "{{ '/assets/images/integration/' | relative_url }}" + iconPath;
+    else img.style.visibility = "hidden";
+    img.onerror = function () { this.style.visibility = "hidden"; };
+    var s = document.createElement("span"); s.textContent = t;
+    var n = document.createElement("span"); n.className = "cstore-count"; n.textContent = techCounts[t];
+    l.appendChild(i); l.appendChild(img); l.appendChild(s); l.appendChild(n);
+    techBox.appendChild(l);
+  });
+  document.querySelectorAll("[data-count-cat]").forEach(function (el) {
+    var cat = el.getAttribute("data-count-cat");
+    el.textContent = cards.filter(function (c) { return c.dataset.type === cat; }).length;
+  });
+
+  // Restore from URL.
+  var params = new URLSearchParams(window.location.search);
+  state.q = params.get("q") || "";
+  state.cats = (params.get("category") || "").toLowerCase().split(",").filter(Boolean);
+  state.techs = (params.get("technology") || "").toLowerCase().split(",").filter(Boolean);
+  if (["newest", "oldest", "az", "za"].indexOf(params.get("sort")) > -1) sortSel.value = params.get("sort");
+  search.value = state.q;
+  document.querySelectorAll(".cstore input[type=checkbox]").forEach(function (i) {
+    i.checked = (i.name === "category" ? state.cats : state.techs).indexOf(i.value) > -1;
+  });
+
+  function sync() {
+    var p = new URLSearchParams();
+    if (state.q) p.set("q", state.q);
+    if (state.cats.length) p.set("category", state.cats.join(","));
+    if (state.techs.length) p.set("technology", state.techs.join(","));
+    if (sortSel.value !== "newest") p.set("sort", sortSel.value);
+    var qs = p.toString();
+    history.replaceState(null, "", window.location.pathname + (qs ? "?" + qs : ""));
+  }
+
+  function matches(c) {
+    if (state.q && c.dataset.text.indexOf(state.q.toLowerCase()) === -1) return false;
+    if (state.cats.length && state.cats.indexOf(c.dataset.type) === -1) return false;
+    if (state.techs.length) {
+      var t = c.dataset.tech.split("|");
+      if (!state.techs.some(function (x) { return t.indexOf(x) > -1; })) return false;
+    }
+    return true;
+  }
+
+  function sorter(a, b) {
+    switch (sortSel.value) {
+      case "az": return a.dataset.name.localeCompare(b.dataset.name);
+      case "za": return b.dataset.name.localeCompare(a.dataset.name);
+      case "oldest": return (a.dataset.created || "").localeCompare(b.dataset.created || "");
+      default: return (b.dataset.created || "").localeCompare(a.dataset.created || "");
+    }
+  }
+
+  function renderActive() {
+    active.innerHTML = "";
+    state.cats.concat(state.techs).forEach(function (v) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "cstore-pill";
+      b.setAttribute("aria-label", "Remove filter " + v);
+      b.textContent = v.replace(/-/g, " ") + " \u00d7";
+      b.onclick = function () {
+        state.cats = state.cats.filter(function (x) { return x !== v; });
+        state.techs = state.techs.filter(function (x) { return x !== v; });
+        document.querySelectorAll(".cstore input[type=checkbox]").forEach(function (i) { if (i.value === v) i.checked = false; });
+        shown = PAGE; render();
+      };
+      active.appendChild(b);
+    });
+  }
+
+  function render() {
+    var list = cards.filter(matches).sort(sorter);
+    cards.forEach(function (c) { c.hidden = true; });
+    list.forEach(function (c, i) { grid.appendChild(c); c.hidden = i >= shown; });
+    var visible = Math.min(shown, list.length);
+    status.textContent = list.length ? "Showing " + visible + " of " + list.length + " designs" : "";
+    empty.hidden = list.length > 0;
+    more.parentNode.hidden = list.length <= shown;
+    renderActive();
+    sync();
+  }
+
+  var t;
+  search.addEventListener("input", function () {
+    clearTimeout(t);
+    t = setTimeout(function () { state.q = search.value.trim(); shown = PAGE; render(); }, 150);
+  });
+  sortSel.addEventListener("change", function () { render(); });
+  document.querySelector(".cstore").addEventListener("change", function (e) {
+    var i = e.target;
+    if (i.type !== "checkbox") return;
+    var arr = i.name === "category" ? state.cats : state.techs;
+    var idx = arr.indexOf(i.value);
+    if (i.checked && idx === -1) arr.push(i.value);
+    if (!i.checked && idx > -1) arr.splice(idx, 1);
+    shown = PAGE; render();
+  });
+  techSearch.addEventListener("input", function () {
+    var q = techSearch.value.trim().toLowerCase();
+    techBox.querySelectorAll("label").forEach(function (l) {
+      l.hidden = l.querySelector("input").value.toLowerCase().indexOf(q) === -1;
+    });
+  });
+  function clearAll() {
+    state = { q: "", cats: [], techs: [] };
+    search.value = ""; techSearch.value = "";
+    techBox.querySelectorAll("label").forEach(function (l) { l.hidden = false; });
+    document.querySelectorAll(".cstore input[type=checkbox]").forEach(function (i) { i.checked = false; });
+    shown = PAGE; render();
+  }
+  document.getElementById("cstore-clear").onclick = clearAll;
+  document.getElementById("cstore-empty-clear").onclick = clearAll;
+  more.onclick = function () { shown += PAGE; render(); };
+  render();
+})();
+</script>

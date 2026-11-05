@@ -114,12 +114,12 @@ fi
 
 if ! command_exists curl ; then
     echo "Missing required utility: 'curl'. Please install 'curl' and try again."
-    exit;
+    exit 1;
 fi
 
 if ! command_exists tar; then
     echo "Missing required utility: 'tar'. Please install 'tar' and try again."
-    exit;
+    exit 1;
 fi
 
 if [ "x${MESHERY_VERSION}" = "x" ] ; then
@@ -128,7 +128,7 @@ fi
 
 if [ "x${MESHERY_VERSION}" = "x" ] ; then
   printf "Unable to get latest mesheryctl version. Set MESHERY_VERSION env var and re-run. For example: export MESHERY_VERSION=v0.1.6\n"
-  exit;
+  exit 1;
 fi
 
 # For patch releases, the meshery tar ball will not be generated, so fall back to last stable release
@@ -148,7 +148,7 @@ curl -L ${URL} -o ${PWD}/meshery.tar.gz
 validFile=`file ${PWD}/meshery.tar.gz | grep 'gzip compressed data'`
 if [ -z "$validFile" ] ; then
   printf "Unable to download '%s' from ${URL}. Set MESHERY_VERSION environment variable to a different version and re-run. For example: export MESHERY_VERSION=v0.9.0\n" "$FILENAME"
-  exit;
+  exit 1;
 fi
 
 # Generate a temporary folder to store intermediate installation files
@@ -177,10 +177,10 @@ fi
 
 printf "\nInstalling mesheryctl in $install_dir.\n"
 WHOAMI=$(whoami)
-if mv ${PWD}/$temporary_dir_name/mesheryctl $install_dir/mesheryctl >/dev/null 2>&1; then
+if mv ${PWD}/$temporary_dir_name/mesheryctl "$install_dir/mesheryctl" >/dev/null 2>&1; then
   echo "mesheryctl installed."
 else
-  if sudo mv ${PWD}/$temporary_dir_name/mesheryctl $install_dir/mesheryctl ; then
+  if sudo mv ${PWD}/$temporary_dir_name/mesheryctl "$install_dir/mesheryctl" ; then
     echo "Permission Resolved: mesheryctl installed using sudo permissions."
   else
     echo "Cannot install mesheryctl. Check permissions of $WHOAMI for $install_dir."
@@ -191,7 +191,7 @@ fi
 #Transfering permissions and ownership to client USER
 if [ "$SUDO_USER" == "" ] ;
 then
-  if chown $WHOAMI $install_dir/mesheryctl ; then
+  if chown $WHOAMI "$install_dir/mesheryctl" ; then
     # Give write access to user to create .meshery folder in home directory
     chown $WHOAMI $HOME
     chmod u+w $HOME
@@ -201,7 +201,7 @@ then
     exit 1
   fi
 else
-  if chown $SUDO_USER /usr/local/bin/mesheryctl ; then
+  if chown "$SUDO_USER" "$install_dir/mesheryctl" ; then
     # Give write access to SUDO_USER to create .meshery folder in home directory
     chown $SUDO_USER $HOME
     chmod u+w $HOME

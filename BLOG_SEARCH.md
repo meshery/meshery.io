@@ -107,28 +107,28 @@ Change the value in `debounce(handleSearchInput, 300)`
 ```javascript
 function performClientSearch(query) {
   if (!searchData) return [];
-  
+
   const lowerQuery = query.toLowerCase();
   const results = searchData
     .filter(post => {
-      const titleMatch = post.title?.toLowerCase().includes(lowerQuery);
-      const excerptMatch = post.excerpt?.toLowerCase().includes(lowerQuery);
-      const contentMatch = post.content?.toLowerCase().includes(lowerQuery);
-      const categoryMatch = post.categories?.some(cat => cat.toLowerCase().includes(lowerQuery));
-      const authorMatch = post.author?.toLowerCase().includes(lowerQuery);
-      
+      const titleMatch = post._searchTitle.includes(lowerQuery);
+      const excerptMatch = post._searchExcerpt.includes(lowerQuery);
+      const contentMatch = post._searchContent.includes(lowerQuery);
+      const categoryMatch = post._searchCategories.some(cat => cat.includes(lowerQuery));
+      const authorMatch = post._searchAuthor.includes(lowerQuery);
+
       return titleMatch || excerptMatch || contentMatch || categoryMatch || authorMatch;
     })
     .slice(0, 20);
 
-  // Highlight matches
+  // Highlighting for search results
   results.forEach(result => {
     result._formatted = {
       title: highlightText(result.title, query),
       excerpt: highlightText(result.excerpt, query)
     };
   });
-  
+
   return results;
 }
 ```
@@ -137,9 +137,21 @@ function performClientSearch(query) {
 ```javascript
 function highlightText(text, query) {
   if (!text) return '';
+  if (!query) return escapeHTML(text);
+
   const escapedQuery = escapeRegex(query);
-  const regex = new RegExp(`(${escapedQuery})`, 'gi');
-  return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+  const regex = new RegExp(escapedQuery, 'gi');
+  let result = '';
+  let lastIndex = 0;
+
+  for (const match of String(text).matchAll(regex)) {
+    result += escapeHTML(text.slice(lastIndex, match.index));
+    result += `<mark class="search-highlight">${escapeHTML(match[0])}</mark>`;
+    lastIndex = match.index + match[0].length;
+  }
+
+  result += escapeHTML(text.slice(lastIndex));
+  return result;
 }
 ```
 
@@ -159,7 +171,24 @@ function highlightText(text, query) {
    - Query trimmed before processing
    - Debouncing prevents excessive processing
 
-3. **Slug Generation**
+3. **HTML Escaping & Safe Template Rendering**
+   - Dynamic values are encoded with `escapeHTML()` before being inserted into HTML templates
+   - Search highlighting escapes all text content before wrapping matches in `<mark>` elements
+   - Result URLs are validated via `getSafeResultUrl()` to ensure only same-origin HTTP(S) destinations are linked
+
+   ```javascript
+   function escapeHTML(str) {
+     return String(str ?? '').replace(/[&<>"']/g, c => ({
+       '&': '&amp;',
+       '<': '&lt;',
+       '>': '&gt;',
+       '"': '&quot;',
+       "'": '&#39;'
+     }[c]));
+   }
+   ```
+
+4. **Slug Generation**
    ```javascript
    function slugify(text) {
      return text.toString().toLowerCase().trim()
