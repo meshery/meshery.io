@@ -1,5 +1,6 @@
 require "nokogiri"
 require "reverse_markdown"
+require "uri"
 
 module LlmsTxt
   class Builder
@@ -28,7 +29,7 @@ module LlmsTxt
 
     # llms-full.txt: every page, post and collection document as Markdown
     def llms_full
-      out = +"# #{@site.config['title']}\n\n"
+      out  = +"# #{@site.config['title']}\n\n"
       desc = @site.config["description"].to_s.strip
       out << "> #{desc}\n\n" unless desc.empty?
       ordered.each do |doc|
@@ -42,16 +43,18 @@ module LlmsTxt
 
     private
 
+    # Only documents Jekyll actually publishes as HTML.
     def entries
-        docs = @site.collections.values.flat_map(&:docs)   # real documents only, no static files
+      docs = @site.collections.values.flat_map(&:docs) # real documents only, no static files
 
-        (@site.pages + docs).select do |d|
-            d.data["llms"] != false &&
-            d.respond_to?(:output) &&
-            !d.output.to_s.empty? &&
-            (d.url == "/" || d.url.end_with?("/", ".html")) &&
-            !@cfg["exclude_paths"].include?(d.url)
-        end
+      (@site.pages + docs).select do |d|
+        d.data["llms"] != false &&
+          d.respond_to?(:output) &&
+          (!d.respond_to?(:write?) || d.write?) && # skips output:false collections, future-dated and unpublished docs
+          d.output_ext == ".html" &&               # works for extensionless permalinks too
+          !d.output.to_s.empty? &&
+          !@cfg["exclude_paths"].include?(d.url)
+      end.uniq(&:url)
     end
 
     def ordered
@@ -66,10 +69,28 @@ module LlmsTxt
       return "" unless node
 
       node.css(@cfg["exclude_selectors"].join(",")).remove
-      node.css('a[href^="/"]').each { |a| a["href"] = @base + a["href"] }
+      absolutize_links(node, doc)
 
       md = ReverseMarkdown.convert(node.inner_html, unknown_tags: :bypass, github_flavored: true)
       md.gsub(/\n{3,}/, "\n\n").strip
+    end
+
+    # Resolve relative links (#anchor, ../page, page.html, /root) against the
+    # document's own URL. External, protocol-relative, mailto: and tel: are untouched.
+    def absolutize_links(node, doc)
+      page_url = URI.join("#{@base}/", doc.url.sub(%r{\A/}, ""))
+
+      node.css("a[href]").each do |a|
+        href = a["href"].to_s.strip
+        next if href.empty? || href.start_with?("//")
+
+        begin
+          next if URI.parse(href).scheme
+          a["href"] = URI.join(page_url, href).to_s
+        rescue URI::Error
+          next
+        end
+      end
     end
   end
 end
