@@ -1,6 +1,6 @@
 require "nokogiri"
 require "reverse_markdown"
-require "uri"
+require "addressable/uri" # already a Jekyll dependency, no Gemfile change needed
 
 module LlmsTxt
   class Builder
@@ -22,7 +22,10 @@ module LlmsTxt
       out  = +"# #{@site.config['title']}\n\n"
       desc = @site.config["description"].to_s.strip
       out << "> #{desc}\n\n" unless desc.empty?
-      out << to_markdown(home) << "\n\n" if home
+      if home
+        md = to_markdown(home)
+        out << md << "\n\n" unless md.empty?
+      end
       out << "## Full content\n\n- [llms-full.txt](#{@base}/llms-full.txt)\n"
       out
     end
@@ -36,7 +39,7 @@ module LlmsTxt
         md = to_markdown(doc)
         next if md.empty?
         title = doc.data["title"] || doc.url
-        out << "---\n\n## #{title}\n\nURL: #{@base}#{doc.url}\n\n#{md}\n\n"
+        out << "---\n\n## #{title}\n\nURL: #{@base}#{normalized_path(doc)}\n\n#{md}\n\n"
       end
       out
     end
@@ -44,6 +47,8 @@ module LlmsTxt
     private
 
     # Only documents Jekyll actually publishes as HTML.
+    # Output is NOT checked here: on incremental builds unchanged documents have
+    # an empty output, so their HTML is read back from _site in rendered_html.
     def entries
       docs = @site.collections.values.flat_map(&:docs) # real documents only, no static files
 
@@ -52,7 +57,6 @@ module LlmsTxt
           d.respond_to?(:output) &&
           (!d.respond_to?(:write?) || d.write?) && # skips output:false collections, future-dated and unpublished docs
           d.output_ext == ".html" &&               # works for extensionless permalinks too
-          !d.output.to_s.empty? &&
           !@cfg["exclude_paths"].include?(d.url)
       end.uniq(&:url)
     end
@@ -63,8 +67,28 @@ module LlmsTxt
       home + pages.sort_by(&:url) + docs.sort_by(&:date).reverse
     end
 
+    # Rendered HTML of a document. Fresh output when it was rendered in this
+    # build, otherwise the file written by a previous build (incremental mode).
+    def rendered_html(doc)
+      html = doc.output.to_s
+      return html unless html.empty?
+
+      path = doc.destination(@site.dest)
+      File.file?(path) ? File.read(path, encoding: "UTF-8") : ""
+    end
+
+    # Percent-encoded document path, safe for non-ASCII permalinks like /café/.
+    def normalized_path(doc)
+      Addressable::URI.parse(doc.url).normalize.to_s
+    rescue Addressable::URI::InvalidURIError
+      doc.url
+    end
+
     def to_markdown(doc)
-      html = Nokogiri::HTML(doc.output)
+      raw = rendered_html(doc)
+      return "" if raw.empty?
+
+      html = Nokogiri::HTML(raw)
       node = html.at_css(@cfg["content_selector"]) || html.at_css("body")
       return "" unless node
 
@@ -78,19 +102,22 @@ module LlmsTxt
     # Resolve relative links (#anchor, ../page, page.html, /root) against the
     # document's own URL. External, protocol-relative, mailto: and tel: are untouched.
     def absolutize_links(node, doc)
-      page_url = URI.join("#{@base}/", doc.url.sub(%r{\A/}, ""))
+      page_url = Addressable::URI.parse("#{@base}#{normalized_path(doc)}")
 
       node.css("a[href]").each do |a|
         href = a["href"].to_s.strip
         next if href.empty? || href.start_with?("//")
 
         begin
-          next if URI.parse(href).scheme
-          a["href"] = URI.join(page_url, href).to_s
-        rescue URI::Error
+          uri = Addressable::URI.parse(href)
+          next if uri.scheme
+          a["href"] = Addressable::URI.join(page_url, uri).normalize.to_s
+        rescue Addressable::URI::InvalidURIError
           next
         end
       end
+    rescue Addressable::URI::InvalidURIError
+      nil # leave links untouched rather than fail the build
     end
   end
 end
