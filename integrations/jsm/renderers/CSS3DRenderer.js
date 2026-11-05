@@ -1,7 +1,9 @@
 import {
+	Frustum,
 	Matrix4,
 	Object3D,
 	Quaternion,
+	Sphere,
 	Vector3
 } from 'three';
 
@@ -12,6 +14,10 @@ import {
 const _position = new Vector3();
 const _quaternion = new Quaternion();
 const _scale = new Vector3();
+
+const _frustum = new Frustum();
+const _projScreenMatrix = new Matrix4();
+const _sphere = new Sphere();
 
 class CSS3DObject extends Object3D {
 
@@ -135,6 +141,9 @@ class CSS3DRenderer {
 			if ( scene.matrixWorldAutoUpdate === true ) scene.updateMatrixWorld();
 			if ( camera.parent === null && camera.matrixWorldAutoUpdate === true ) camera.updateMatrixWorld();
 
+			_projScreenMatrix.multiplyMatrices( camera.projectionMatrix, camera.matrixWorldInverse );
+			_frustum.setFromProjectionMatrix( _projScreenMatrix );
+
 			let tx, ty;
 
 			if ( camera.isOrthographicCamera ) {
@@ -180,7 +189,19 @@ class CSS3DRenderer {
 
 		function epsilon( value ) {
 
-			return Math.abs( value ) < 1e-10 ? 0 : value;
+			return ( value < 1e-10 && value > - 1e-10 ) ? 0 : value;
+
+		}
+
+		function matrixEquals( a, b ) {
+
+			for ( let i = 0; i < 16; i ++ ) {
+
+				if ( a[ i ] !== b[ i ] ) return false;
+
+			}
+
+			return true;
 
 		}
 
@@ -239,16 +260,64 @@ class CSS3DRenderer {
 
 			if ( object.isCSS3DObject ) {
 
-				const visible = ( object.visible === true ) && ( object.layers.test( camera.layers ) === true );
-				object.element.style.display = ( visible === true ) ? '' : 'none';
+				let visible = ( object.visible === true ) && ( object.layers.test( camera.layers ) === true );
+
+				if ( visible === true ) {
+
+					let radius = object._boundingRadius;
+
+					if ( radius === undefined ) {
+
+						if ( typeof object.boundingRadius === 'number' ) {
+
+							radius = object.boundingRadius;
+
+						} else {
+
+							// Derive radius from element dimensions; cached on object to avoid repeated layout queries.
+							// Default integration cards are 120px x 160px (half-diagonal = hypot(60, 80) = 100px).
+							// A minimum / fallback radius of 180px provides an 80px safety buffer covering
+							// drop-shadows, hover glow, border offsets, and card sizes up to ~288px diagonal.
+							const width = object.element.offsetWidth || 120;
+							const height = object.element.offsetHeight || 160;
+							const halfDiagonal = Math.hypot( width / 2, height / 2 );
+
+							radius = Math.max( halfDiagonal + 40, 180 );
+
+						}
+
+						object._boundingRadius = radius;
+
+					}
+
+					_position.setFromMatrixPosition( object.matrixWorld );
+					_sphere.center = _position;
+					_sphere.radius = radius;
+
+					if ( ! _frustum.intersectsSphere( _sphere ) ) {
+
+						visible = false;
+
+					}
+
+				}
+
+				const targetDisplay = ( visible === true ) ? '' : 'none';
+
+				if ( object.element.style.display !== targetDisplay ) {
+
+					object.element.style.display = targetDisplay;
+
+				}
 
 				if ( visible === true ) {
 
 					object.onBeforeRender( _this, scene, camera );
 
-					let style;
+					const isSprite = object.isCSS3DSprite === true;
+					let targetMatrix;
 
-					if ( object.isCSS3DSprite ) {
+					if ( isSprite ) {
 
 						// http://swiftcoder.wordpress.com/2008/11/25/constructing-a-billboard-matrix/
 
@@ -266,23 +335,36 @@ class CSS3DRenderer {
 						_matrix.elements[ 11 ] = 0;
 						_matrix.elements[ 15 ] = 1;
 
-						style = getObjectCSSMatrix( _matrix );
+						targetMatrix = _matrix;
 
 					} else {
 
-						style = getObjectCSSMatrix( object.matrixWorld );
+						targetMatrix = object.matrixWorld;
 
 					}
 
 					const element = object.element;
 					const cachedObject = cache.objects.get( object );
+					const targetElements = targetMatrix.elements;
 
-					if ( cachedObject === undefined || cachedObject.style !== style ) {
+					if ( cachedObject === undefined || ! matrixEquals( cachedObject.elements, targetElements ) ) {
 
+						const style = getObjectCSSMatrix( targetMatrix );
 						element.style.transform = style;
 
-						const objectData = { style: style };
-						cache.objects.set( object, objectData );
+						if ( cachedObject === undefined ) {
+
+							cache.objects.set( object, {
+								elements: new Float32Array( targetElements ),
+								style: style
+							} );
+
+						} else {
+
+							cachedObject.elements.set( targetElements );
+							cachedObject.style = style;
+
+						}
 
 					}
 
