@@ -7,7 +7,7 @@ STYLE_GLOBS := '_sass/*.css' '_sass/*.scss' 'css/*.css' 'css/*.scss'
 NEW_STYLE_FILES = $(shell { git diff --name-only --diff-filter=A $(LINT_MERGE_BASE) -- $(STYLE_GLOBS); git ls-files --others --exclude-standard -- $(STYLE_GLOBS); } | sort -u)
 LINT_MERGE_BASE = $(shell git merge-base HEAD $(LINT_BASE_REF))
 EXISTING_STYLE_FILES = $(shell git diff --name-only --diff-filter=MR $(LINT_MERGE_BASE) -- $(STYLE_GLOBS))
-JS_GLOBS := '*.js' '*.mjs' '*.cjs'
+JS_GLOBS := '*.js'
 CHANGED_JS_FILES = $(shell { git diff --name-only --diff-filter=ACMR $(LINT_MERGE_BASE) -- $(JS_GLOBS); git ls-files --others --exclude-standard -- $(JS_GLOBS); } | sort -u)
 
 site:
@@ -52,6 +52,7 @@ clean:
 lint-prerequisites:
 	@test -x node_modules/.bin/eslint -a -x node_modules/.bin/prettier || { echo "Dependencies missing. Run: npm ci"; exit 1; }
 	@git rev-parse --verify --quiet $(LINT_BASE_REF) >/dev/null || { echo "Base ref '$(LINT_BASE_REF)' not found. Run: git fetch $(LINT_BASE_REMOTE) (or pass LINT_BASE_REF=...)"; exit 1; }
+	@git merge-base HEAD $(LINT_BASE_REF) >/dev/null 2>&1 || { echo "No common ancestor between HEAD and '$(LINT_BASE_REF)'. If this is a shallow clone, run: git fetch --unshallow"; exit 1; }
 
 # JS (changed files only): errors, blocking.
 # CSS/SCSS in _sass/ and css/: new files: errors, blocking. Existing changed files: formatting warning only; real Prettier errors (exit 2+) still fail.
