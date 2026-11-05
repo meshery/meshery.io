@@ -1197,97 +1197,15 @@ Workspace created: test-1
 		jQuery('.stellarnav.mobile').css('text-align', 'end');
 	});
 </script>
+
+
 <!--Script for Copy to Clipboard-->
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
-<script src="/js/vanilla-tilt.min.js"></script>
-
-<script>
-
-    // Functionality for the copy button next to the ID/UUID in Catalog Details
-
-	// function showCopyFeedback(element, message) {
-	// 	let wrapper = element.closest('.catalog-design-id-copy-wrapper');
-	// 	if (!wrapper) {
-	// 		return false;
-	// 	}
-
-	// 	let feedback = wrapper.querySelector('.copy-feedback');
-	// 	if (!feedback) {
-	// 		return false;
-	// 	}
-
-	// 	feedback.textContent = message;
-	// 	window.clearTimeout(element.copyFeedbackTimeout);
-	// 	element.copyFeedbackTimeout = window.setTimeout(function () {
-	// 		feedback.textContent = '';
-	// 	}, 1500);
-	// 	return true;
-	// }
-
-	function resetCopyText(element) {
-		let childElements = element.childNodes
-		if (childElements.length > 3) {
-			childElements[3].innerHTML = "Copy to clipboard";
-		} else {
-		childElements[1].innerHTML = "Copy URL";
-		childElements[1].style.color = 'white';
-		childElements[1].style.background = "#00b39fff";
-        }
-	}
 
 
-	var clipboard = new ClipboardJS('.btn');
-	clipboard.on('success', function (e) {
-		console.info('Action:', e.action);
-		console.info('Text:', e.text);
-		console.info('Trigger:', e.trigger);
-		let childElements = e.trigger.childNodes;
-        // ShowCopyFeedback serves as the primary check for the copy button in Catalog Details.
-        // If the copy button is enabled again, the conditional below needs to be encapsulate the childElements conditional
-		// if (!showCopyFeedback(e.trigger, "Copied!")) {}
 
-        if (childElements.length > 3) {
-			childElements[3].innerHTML = "Copied!";
-		} else {
-			childElements[1].innerHTML = "Copied";
-			childElements[1].style.color = 'white';
-			childElements[1].style.background = "#1a2421";
-		}
-		e.clearSelection();
-	});
-	clipboard.on('error', function (e) {
-		console.error('Action:', e.action);
-		console.error('Trigger:', e.trigger);
-		// showCopyFeedback(e.trigger, "Copy failed");
-	});
-</script>
 
-<script>
-	function displayCode(id) {
-		var divId = id + "_code";
-		var element = document.getElementById(divId);
-		var isOpening = !element.classList.contains("showDiv");
-		element.classList.toggle("showDiv");
-		var toggleDivs = document.getElementsByClassName("toggle");
-		if (element.style.maxHeight) {
-			element.style.maxHeight = null;
-		} else {
-			element.style.maxHeight = element.scrollHeight + "px";
-		}
-		for (let i = 0; i < toggleDivs.length; i++) {
-			if (toggleDivs[i] != element) {
-				toggleDivs[i].classList.remove("showDiv");
-				if (toggleDivs[i].style.maxHeight) {
-					toggleDivs[i].style.maxHeight = null;
-				}
-			}
-		}
-		var platformOptions = document.querySelectorAll(".platform-option");
-		platformOptions.forEach(function(option) {
-			option.classList.toggle("selected", option.id === id && isOpening);
-		});
-	}
-</script>
+
+
 <script type="text/javascript">
 	let toggleBtn = document.getElementById("mode-toggle-btn")
 	toggleBtn.onclick = setMode;
@@ -1332,40 +1250,7 @@ Workspace created: test-1
 
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script>
-  $(document).ready(function () {
-    $('.testimonials-slider').slick({
-      centerMode: true,
-      centerPadding: '0px',
-      dots: false,
-      arrows: false,
-      infinite: true,
-      speed: 400,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 1500,
 
-      responsive: [
-        {
-          breakpoint: 1140,
-          settings: {
-            slidesToShow: 2,
-            centerMode: false,
-          }
-        },
-        {
-          breakpoint: 800,
-          settings: {
-            slidesToShow: 1,
-            centerMode: false,
-          }
-        }
-      ]
-    });
-  });
-</script>
 </body>
 
 </html>
