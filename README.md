@@ -128,8 +128,8 @@ On Windows (such as when using Git Bash), `make` is not included by default and 
 
 - **Option 1: Run Jekyll directly (no `make` required)**
   ```bash
-  $ bundle install
-  $ bundle exec jekyll serve --drafts --livereload --config _config_dev.yml
+  $ bundle install --path vendor/bundle
+  $ bundle exec jekyll serve --drafts --incremental --livereload --config _config_dev.yml
   ```
 - **Option 2: Install `make` on Windows**
   Install `make` using a package manager such as [Chocolatey](https://chocolatey.org/) (`choco install make`), [Scoop](https://scoop.sh/) (`scoop install make`), or Winget (`winget install GnuWin32.Make`). Once installed and in your PATH, you can run `make site` normally.
