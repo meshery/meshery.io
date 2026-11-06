@@ -128,6 +128,7 @@ On Windows (such as when using Git Bash), `make` is not included by default and 
 
 - **Option 1: Run Jekyll directly (no `make` required)**
   ```bash
+  $ bundle install
   $ bundle exec jekyll serve --drafts --livereload --config _config_dev.yml
   ```
 - **Option 2: Install `make` on Windows**
