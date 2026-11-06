@@ -313,6 +313,13 @@ func invokeGitHubAction(contentID, assetLocation string, ghAccessToken string) e
 			[]string{"Check network connectivity", "Ensure the GitHub token is correct"})
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusMultipleChoices {
+		return meshkitErrors.New(ErrInvokeGitHubActionsCode, meshkitErrors.Alert,
+			[]string{"GitHub Actions workflow dispatch failed"},
+			[]string{fmt.Sprintf("GitHub Actions returned status: %s", resp.Status)},
+			[]string{"The workflow dispatch request was rejected"},
+			[]string{"Check the GitHub token and workflow configuration"})
+	}
 	return nil
 }
 
