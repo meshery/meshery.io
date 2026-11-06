@@ -62,13 +62,17 @@ func main() {
 	}
 
 	for _, pattern := range *page.Patterns {
-		if err := processPattern(pattern, token); err != nil {
+		if err := processPattern(pattern); err != nil {
 			log.Error(meshkitErrors.New(ErrProcessPatternCode, meshkitErrors.Alert,
 				[]string{"unable to process catalog pattern"},
 				[]string{err.Error()},
 				[]string{"fail to read/write file", "error regarding user info"},
 				[]string{"check the catalog pattern file", "check for updated files"},
 			))
+			os.Exit(1)
+		}
+		if err := invokeGitHubAction(pattern.ID.String(), getPatternImageURL(pattern), token); err != nil {
+			log.Error(err)
 		}
 	}
 }
@@ -94,7 +98,7 @@ func fetchCatalogPatterns() (*designv1beta3.CatalogContentPage, error) {
 	return &page, nil
 }
 
-func processPattern(pattern designv1beta3.MesheryPattern, token string) error {
+func processPattern(pattern designv1beta3.MesheryPattern) error {
 	patternID := pattern.ID.String()
 	patternImageURL := getPatternImageURL(pattern)
 	patternType := getPatternType(catalogTypeOf(pattern.CatalogData))
@@ -124,7 +128,7 @@ func processPattern(pattern designv1beta3.MesheryPattern, token string) error {
 	if err := writePatternFile(pattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL); err != nil {
 		return err
 	}
-	return invokeGitHubAction(patternID, patternImageURL, token)
+	return nil
 }
 
 func getPatternImageURL(pattern designv1beta3.MesheryPattern) string {
@@ -191,7 +195,7 @@ func writePatternFile(pattern designv1beta3.MesheryPattern, versionDir, patternT
 
 	var datatemp map[string]interface{}
 	if err := yaml.Unmarshal(contenttemp, &datatemp); err != nil {
-		utils.ErrUnmarshal(err)
+		return utils.ErrUnmarshal(err)
 	}
 
 	if services, ok := datatemp["services"]; !ok || services == nil {
