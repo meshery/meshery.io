@@ -74,7 +74,6 @@ func main() {
 		}
 		if err := invokeGitHubAction(pattern.ID.String(), getPatternImageURL(pattern), token); err != nil {
 			log.Error(err)
-			os.Exit(1)
 		}
 	}
 }
