@@ -102,6 +102,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
 
 - First [install Ruby](https://jekyllrb.com/docs/installation/), then install Jekyll and Bundler. ( **Note** : Install Ruby 3.2.2 or newer, as specified in the [Gemfile](https://github.com/meshery/meshery.io/blob/master/Gemfile) )
 - If your installed Ruby version is older than the minimum specified in the Gemfile, you can use [RVM](https://rvm.io/rvm/install) to install a compatible version for your operating system.
+- Windows contributors: Note that `make` is required if you want to use the `make site` command; alternatively, you can run Jekyll directly via Bundler without `make` (see [Windows Notes](#windows-notes)).
 
 ### 2. Get the code
 
@@ -121,6 +122,17 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   $ make site
   ```
   _Note: The Makefile prefers Docker (if available and the daemon is running) and will run Jekyll inside the official jekyll container. If Docker isn't running, the Makefile will only serve locally if required gems are already installed; otherwise it will prompt to start Docker or run `bundle install --path vendor/bundle`._
+
+#### Windows Notes
+On Windows (such as when using Git Bash), `make` is not included by default and running `make site` may result in `bash: make: command not found`. Windows contributors can use either of these options:
+
+- **Option 1: Run Jekyll directly (no `make` required)**
+  ```bash
+  $ bundle install --path vendor/bundle
+  $ bundle exec jekyll serve --drafts --incremental --livereload --config _config_dev.yml
+  ```
+- **Option 2: Install `make` on Windows**
+  Install `make` using a package manager such as [Chocolatey](https://chocolatey.org/) (`choco install make`), [Scoop](https://scoop.sh/) (`scoop install make`), or Winget (`winget install GnuWin32.Make`). Once installed and in your PATH, you can run `make site` normally.
 
 ### 4. Create a Pull Request
 
