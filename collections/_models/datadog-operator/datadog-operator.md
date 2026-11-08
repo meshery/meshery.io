@@ -83,7 +83,11 @@ components:
   colorIcon: assets/images/integration/datadog-operator/components/datadog-byoc-cluster/icons/color/datadog-byoc-cluster-color.svg
   whiteIcon: assets/images/integration/datadog-operator/components/datadog-byoc-cluster/icons/white/datadog-byoc-cluster-white.svg
   description: 
-componentsCount: 18
+- name: datadog-observability-pipelines-worker
+  colorIcon: assets/images/integration/datadog-operator/components/datadog-observability-pipelines-worker/icons/color/datadog-observability-pipelines-worker-color.svg
+  whiteIcon: assets/images/integration/datadog-operator/components/datadog-observability-pipelines-worker/icons/white/datadog-observability-pipelines-worker-white.svg
+  description: 
+componentsCount: 19
 relationships: 
 relationshipsCount: 0
 featureList: [
