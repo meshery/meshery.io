@@ -229,36 +229,35 @@ fi
 # linkerd
 # nsm
 # kuma
-# osm
 # traefik
-# nginx
-# tanzu
-# app
 # cilium
 # nighthawk
 
-## Any adapter other than above would be ignored
-if [ ! -z "$ADAPTERS" ]; then
-    adapterString=
+## Any adapter other than above will produce a warning message
+if [ -n "$ADAPTERS" ]; then
+    adapter_args=()
+
     for adapter in $ADAPTERS; do
-        case $adapter in
-            consul|istio|linkerd|nsm|kuma|osm|cilium|nighthawk)
-                adapterString="$adapterString -a meshery-$adapter "
-            ;;
-            nginx|tanzu)
-                adapterString="$adapterString -a meshery-$adapter-sm "
-            ;;
-            traefik|app)
-                adapterString="$adapterString -a meshery-$adapter-mesh "
-            ;;
+        case "$adapter" in
+            consul|istio|linkerd|nsm|kuma|cilium|nighthawk)
+                adapter_args+=(-a "meshery-$adapter")
+                ;;
+            traefik)
+                adapter_args+=(-a "meshery-$adapter-mesh")
+                ;;
             *)
-                # We are just neglecting invalid mesh options
-            ;;
+                echo "WARNING: Adapter '$adapter' is not supported by this installer and will be skipped."
+                ;;
         esac
     done
 
-    mesheryctl system context create custom -s $adapterString --yes
+    if [ "${#adapter_args[@]}" -eq 0 ]; then
+        echo "ERROR: No supported adapters were specified. Cannot create a custom context."
+        exit 1
+    fi
+
+    mesheryctl system context create custom -s "${adapter_args[@]}" --yes
 fi
 
 printf "\nStarting Meshery...\n"
-mesheryctl system start --yes --platform $PLATFORM
+mesheryctl system start --yes --platform "$PLATFORM"
