@@ -5,7 +5,7 @@ title: Meshmark Explained
 author: Lee Calcote
 categories:
   - performance
-redirect_from: /blog/meshmark-explained
+redirect_from: /blog/meshmark-explained/
 ---
 <div class="row" style="width:220px;float:right;padding:5px;text-align:center;">
 ---
