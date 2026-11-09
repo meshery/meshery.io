@@ -6198,6 +6198,7 @@ img.pattern-snapshot:hover {
   --close-size: 2.25rem;
   overflow-y: hidden;
   position: relative;
+  z-index: 2002;
   animation: animatetop 0.8s;
   display: flex;
   flex-direction: row;
@@ -6696,9 +6697,6 @@ iframe {
   filter: invert(1) hue-rotate(180deg) contrast(0.9);
 }
 
-.talks-and-presentations {
-  margin-right: 1rem;
-}
 .talks-and-presentations .modal-window {
   position: fixed;
   top: 0;
@@ -6787,6 +6785,7 @@ iframe {
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
   padding: 2rem;
   color: var(--color-secondary-light);
+  table-layout: fixed;
 }
 .talks-and-presentations .talks-table-row:nth-child(even) {
   background-color: rgba(255, 255, 255, 0.05);
@@ -6815,7 +6814,16 @@ iframe {
   border: none;
 }
 .talks-and-presentations th.topic {
-  width: 60%;
+  width: 45%;
+}
+.talks-and-presentations th:nth-child(2) {
+  width: 25%;
+}
+.talks-and-presentations th:nth-child(3) {
+  width: 30%;
+}
+.talks-and-presentations th, .talks-and-presentations td {
+  overflow-wrap: anywhere;
 }
 .talks-and-presentations td a {
   text-decoration: none;
@@ -6867,13 +6875,13 @@ iframe {
   }
 }
 @media screen and (max-width: 450px) {
-  .talks-and-presentations th {
-    color: white;
-    text-transform: uppercase;
-    font-size: 1rem;
-  }
-  .talks-and-presentations td {
+  .talks-and-presentations .talks-table-row td {
+    padding: 12px 8px;
     font-size: 0.9rem;
+  }
+  .talks-and-presentations th {
+    font-size: 0.75rem;
+    padding: 0 0.25rem;
   }
 }
 
