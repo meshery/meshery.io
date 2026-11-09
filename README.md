@@ -93,7 +93,7 @@ Find out more about the <a href="https://meshery.io/community">Meshery community
 
 ## Contributing to the Meshery.io Website
 
-Before contributing, please review the [Contribution Flow](https://github.com/meshery/meshery/blob/master/CONTRIBUTING.md). In the following steps, you will setup your development environment, fork and clone the repository, run the site locally, and finally commit, sign off, and push any changes made for review.
+Before contributing, please review the [Contribution Flow](https://github.com/meshery/meshery/blob/master/CONTRIBUTING.md) and this repository's [CONTRIBUTING.md](CONTRIBUTING.md). In the following steps, you will setup your development environment, fork and clone the repository, run the site locally, and finally commit, sign off, and push any changes made for review.
 
 ### 1. Set up your development environment
 
