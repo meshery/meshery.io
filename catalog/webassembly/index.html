@@ -24,12 +24,12 @@
 <meta property="og:url" content="https://meshery.io/catalog/webassembly/" />
 <meta property="og:site_name" content="Meshery" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-11-10T05:53:21+00:00" />
-<meta property="article:modified_time" content="2026-11-10T05:53:21+00:00" />
+<meta property="article:published_time" content="2026-11-10T06:03:19+00:00" />
+<meta property="article:modified_time" content="2026-11-10T06:03:19+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Cloud Native Catalog" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-11-10T05:53:21+00:00","datePublished":"2026-11-10T05:53:21+00:00","description":"WASM FILTER HTTP Auth FILTER001 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS HTTP AUTH What this filter does Simulates handling authentication of requests at proxy level. Requests with a header token with value hello are accepted as authorized while the rest unauthorized. The actual authentication is handled by the Upstream server. Whenever the proxy receives a request it extracts the token header and makes a request to the Upstream server which validates the token and returns a response. ...read more Caveats and Considerations Test: curl -H &quot;token&quot;:&quot;hello&quot; 0.0.0.0:18000 -v # Authorized curl -H &quot;token&quot;:&quot;world&quot; 0.0.0.0:18000 -v # Unauthorized Technologies Related Design…","headline":"Cloud Native Catalog","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/catalog/webassembly/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/catalog/webassembly/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"The Meshery Authors"},"dateModified":"2026-11-10T06:03:19+00:00","datePublished":"2026-11-10T06:03:19+00:00","description":"WASM FILTER HTTP Auth FILTER001 WASM FILTER &lt;/a&gt; &times; RELATED DESIGNS HTTP AUTH What this filter does Simulates handling authentication of requests at proxy level. Requests with a header token with value hello are accepted as authorized while the rest unauthorized. The actual authentication is handled by the Upstream server. Whenever the proxy receives a request it extracts the token header and makes a request to the Upstream server which validates the token and returns a response. ...read more Caveats and Considerations Test: curl -H &quot;token&quot;:&quot;hello&quot; 0.0.0.0:18000 -v # Authorized curl -H &quot;token&quot;:&quot;world&quot; 0.0.0.0:18000 -v # Unauthorized Technologies Related Design…","headline":"Cloud Native Catalog","mainEntityOfPage":{"@type":"WebPage","@id":"https://meshery.io/catalog/webassembly/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://meshery.io/assets/images/logos/meshery-gradient.png"},"name":"The Meshery Authors"},"url":"https://meshery.io/catalog/webassembly/"}</script>
 <!-- End Jekyll SEO tag -->
  <link type="application/atom+xml" rel="alternate" href="https://meshery.io/feed.xml" title="Meshery" /> 
     <link rel="stylesheet" href="/css/stellarnav.css" />
@@ -768,7 +768,7 @@
   .help-modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 200; /* Sit on top */
+    z-index: 3000; /* Sit above header ($z-index-header is 2001 in _sass/variables.scss) */
     inset: 0; /* top:0; right:0; bottom:0; left:0 */
     width: 100vw; /* Full width */
     height: 100vh; /* Full height */
@@ -789,6 +789,14 @@
 .tab {
   overflow: hidden;
   background-color: #00D3A9;
+}
+
+/* Make the tab bar span the full modal width.
+   Overrides the generic `.tab { width: 70% }` from _sass/features.scss. */
+.help-modal .tab {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 0;
 }
 
 /* Style the buttons that are used to open the tab content */
