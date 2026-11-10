@@ -60,6 +60,32 @@ while getopts ":np:" opt; do
     esac
 done
 
+# Validate requested adapters before downloading or installing mesheryctl.
+# If ADAPTERS is empty, the default local context will be used.
+
+adapter_args=()
+
+if [ "$DEPLOY_MESHERY" != false ] && [ -n "$ADAPTERS" ]; then
+    for adapter in $ADAPTERS; do
+        case "$adapter" in
+            consul|istio|linkerd|nsm|kuma|cilium)
+                adapter_args+=(-a "meshery-$adapter")
+                ;;
+            traefik)
+                adapter_args+=(-a "meshery-$adapter-mesh")
+                ;;
+            *)
+                echo "WARNING: Adapter '$adapter' is not supported by this installer and will be skipped."
+                ;;
+        esac
+    done
+
+    if [ "${#adapter_args[@]}" -eq 0 ]; then
+        echo "ERROR: No supported adapters were specified. Cannot create a custom context."
+        exit 1
+    fi
+fi
+
 # If user wants to install the cli and deploy meshery as well, read the platform flag
 if [ "$DEPLOY_MESHERY" != false ]; then
   # If no platform flag is present, prompt the user for a platform
@@ -89,7 +115,6 @@ if [ "$DEPLOY_MESHERY" != false ]; then
       ;;
   esac
 fi
-
 
 ####### COMMON FUNCTIONS
 ############################
@@ -222,43 +247,21 @@ then
     exit 0
 fi
 
-# if ADAPTERS are empty then we'd use default local context else go we'd create custom context, which only fetches required adapters
+# If ADAPTERS is specified, create a custom context with the requested adapters.
+# Otherwise, use the default local context.
 # Valid adapter option are
 # consul
 # istio
 # linkerd
 # nsm
 # kuma
-# osm
 # traefik
-# nginx
-# tanzu
-# app
 # cilium
-# nighthawk
 
-## Any adapter other than above would be ignored
-if [ ! -z "$ADAPTERS" ]; then
-    adapterString=
-    for adapter in $ADAPTERS; do
-        case $adapter in
-            consul|istio|linkerd|nsm|kuma|osm|cilium|nighthawk)
-                adapterString="$adapterString -a meshery-$adapter "
-            ;;
-            nginx|tanzu)
-                adapterString="$adapterString -a meshery-$adapter-sm "
-            ;;
-            traefik|app)
-                adapterString="$adapterString -a meshery-$adapter-mesh "
-            ;;
-            *)
-                # We are just neglecting invalid mesh options
-            ;;
-        esac
-    done
-
-    mesheryctl system context create custom -s $adapterString --yes
+# Create a custom context if adapters were specified.
+if [ "${#adapter_args[@]}" -gt 0 ]; then
+    mesheryctl system context create custom -s "${adapter_args[@]}" --yes
 fi
 
 printf "\nStarting Meshery...\n"
-mesheryctl system start --yes --platform $PLATFORM
+mesheryctl system start --yes --platform "$PLATFORM"
