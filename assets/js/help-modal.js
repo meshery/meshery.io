@@ -8,16 +8,19 @@
       
       button.onclick = function() {
         Helpmodal.style.display = "flex";
+        document.body.style.overflow = "hidden";
       }
       
       // When the user clicks on <span> (x), close the modal
       Closespan.onclick = function() {
         Helpmodal.style.display = "none";
+        document.body.style.overflow = "";
       }
       
       // When the user clicks anywhere outside of the modal, close it
       window.onclick = function(event) {
         if (event.target == Helpmodal) {
           Helpmodal.style.display = "none";
+          document.body.style.overflow = "";
         }
       }
