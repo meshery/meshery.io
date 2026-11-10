@@ -231,7 +231,6 @@ fi
 # kuma
 # traefik
 # cilium
-# nighthawk
 
 ## Any adapter other than above will produce a warning message
 if [ -n "$ADAPTERS" ]; then
@@ -239,7 +238,7 @@ if [ -n "$ADAPTERS" ]; then
 
     for adapter in $ADAPTERS; do
         case "$adapter" in
-            consul|istio|linkerd|nsm|kuma|cilium|nighthawk)
+            consul|istio|linkerd|nsm|kuma|cilium)
                 adapter_args+=(-a "meshery-$adapter")
                 ;;
             traefik)
