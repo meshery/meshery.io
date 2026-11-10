@@ -61,9 +61,14 @@ function computeScore(item) {
 }
 
 function buildLeaderboard(items) {
-  return (items || [])
-    .filter(item => item && item.user && item.user.username && !item.user.username.startsWith('anon'))
-    .map(item => ({
+  if (!items) return [];
+
+  const leaderboard = [];
+  for (const item of items) {
+    if (!item || !item.user || !item.user.username || item.user.username.startsWith('anon')) {
+      continue;
+    }
+    leaderboard.push({
       rank: 0,
       username: item.user.username,
       avatar: item.user.avatar_template ? `https://discuss.meshery.io${item.user.avatar_template.replace('{size}', '200')}` : '',
@@ -72,26 +77,34 @@ function buildLeaderboard(items) {
       likes: item.likes_received || 0,
       solutions: item.solutions || 0,
       score: computeScore(item)
-    }))
-    .sort((a, b) => {
-      if (b.score !== a.score) return b.score - a.score;
-      return a.username.localeCompare(b.username);
-    })
-    .map((user, index) => ({
-      ...user,
-      rank: index + 1
-    }));
+    });
+  }
+
+  leaderboard.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return a.username.localeCompare(b.username);
+  });
+
+  for (let i = 0; i < leaderboard.length; i++) {
+    leaderboard[i].rank = i + 1;
+  }
+
+  return leaderboard;
 }
 
 async function buildAllPeriods() {
-  const periods = {};
+  const entries = await Promise.all(
+    PERIODS.map(async (period) => {
+      const items = await fetchUsers(period).catch((err) => {
+        throw new Error(`leaderboard fetch failed for period=${period}: ${err.message}`);
+      });
+      return [period, buildLeaderboard(items)];
+    })
+  );
 
-  for (const period of PERIODS) {
-    const items = await fetchUsers(period);
-    periods[period] = buildLeaderboard(items);
-  }
+  const periods = Object.fromEntries(entries);
 
-  if (!periods.all.length) {
+  if (!periods.all || !periods.all.length) {
     throw new Error('all-time period empty — refusing to overwrite');
   }
 

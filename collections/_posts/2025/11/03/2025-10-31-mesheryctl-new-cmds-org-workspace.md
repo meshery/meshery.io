@@ -8,7 +8,6 @@ categories:
 featured-image: /assets/images/posts/2025/11/meshery-cli-orgs-workspaces/meshery-cli-sign.png
 redirect_from: 
 - /blog/mesheryctl-new-cmds-org-workspace
-- /blog/2025/11/2025-10-31-mesheryctl-new-cmds-org-workspace
 ---
 
 Introducing new `mesheryctl` commands that enhance organization and workspace management capabilities. These commands empower users to efficiently manage their Meshery organizations and workspaces directly from the command line.
