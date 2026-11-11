@@ -314,6 +314,16 @@ Designs capture the desired state of your infrastructure, components and relatio
 
  DEPLOYMENT
 
+#### Portable Ai Interface gateway
+
+###### MESHERY4eff
+
+ ](https://meshery.io/pr-preview/pr-3176/catalog/deployment/portable-ai-interface-gateway-11c27e2d-7354-4eff-a7f1-4e6a65fe1e3b.html)
+
+[ 
+
+ DEPLOYMENT
+
 #### dremio-helm
 
 ###### MESHERY43f5
@@ -4080,7 +4090,7 @@ Designs capture the desired state of your infrastructure, components and relatio
 
  ](https://meshery.io/pr-preview/pr-3176/catalog/workloads/zookeeper-cluster-fde9c2da-e402-4f53-b7cd-02036ac65043.html)
 
-397
+398
 
 Designs
 
@@ -7729,7 +7739,7 @@ Search leaderboard by username
 
 No activity for this period yet.
 
-Last updated: November 10, 2026
+Last updated: November 11, 2026
 
 ---
 
@@ -66551,7 +66561,71 @@ deployment
 
 ` 
 
-[« my first app design](https://meshery.io/pr-preview/pr-3176/catalog/deployment/my-first-app-design-114c94c9-052b-46a2-86fe-4cdd2e88c746.html)[Kyverno Policy Engine »](https://meshery.io/pr-preview/pr-3176/catalog/deployment/kyverno-policy-engine-12250207-b931-43b6-b3c2-a3dbc0ab775a.html)
+[« Portable Ai Interface gateway](https://meshery.io/pr-preview/pr-3176/catalog/deployment/portable-ai-interface-gateway-11c27e2d-7354-4eff-a7f1-4e6a65fe1e3b.html)[Kyverno Policy Engine »](https://meshery.io/pr-preview/pr-3176/catalog/deployment/kyverno-policy-engine-12250207-b931-43b6-b3c2-a3dbc0ab775a.html)
+
+---
+
+## Portable Ai Interface gateway
+
+URL: https://meshery.io/pr-preview/pr-3176/catalog/deployment/portable-ai-interface-gateway-11c27e2d-7354-4eff-a7f1-4e6a65fe1e3b.html
+
+Meshery is now a CNCF Incubating project.
+
+[Read the announcement](https://www.cncf.io/blog/2026/10/07/meshery-becomes-a-cncf-incubating-project/)
+
+ × 
+
+[&nbsp;](https://meshery.io/pr-preview/pr-3176/)
+
+[← Back To Designs](https://meshery.io/pr-preview/pr-3176/catalog/designs)
+
+# Portable Ai Interface gateway
+
+[Open in Playground](https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id=11c27e2d-7354-4eff-a7f1-4e6a65fe1e3b&name=Portable%20Ai%20Interface%20gateway)[Download design](https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/11c27e2d-7354-4eff-a7f1-4e6a65fe1e3b/0.0.2/design.yml)`mesheryctl design import -f https://raw.githubusercontent.com/meshery/meshery.io/master/catalog/11c27e2d-7354-4eff-a7f1-4e6a65fe1e3b/0.0.2/design.yml`
+
+### What This Design Does:
+
+A Kubernetes-based reference architecture for deploying a portable AI inference gateway. The design provides a centralized entry point for inference requests and routes traffic to an independently managed model-serving backend. It includes an Ingress resource for external access, gateway and model-server Deployments, Services for internal communication, and supporting resources for configuration management, identity, security, autoscaling, and availability. The architecture demonstrates how AI inference workloads can be organized using Kubernetes-native components while maintaining separation between request routing and model serving. It is intended as a reusable starting point for teams building self-hosted AI inference infrastructure.
+
+#### Design Snapshot
+
+### Caveats and Consideration:
+
+Caveats This design is a reference architecture and is not a fully production-ready AI inference platform. The model-server workload currently uses a placeholder HTTP container rather than an actual machine learning model runtime. It must be replaced with a compatible inference server such as vLLM, KServe, or another model-serving solution before handling real AI inference requests. The Ingress resource requires a compatible Ingress Controller in the target cluster. Horizontal Pod Autoscaling requires a functioning metrics API and appropriate resource requests. NetworkPolicy enforcement depends on CNI support. The Secret contains placeholder configuration and must be populated with appropriate credentials before production use. No real API keys or sensitive credentials should be stored in the design. A successful Meshery dry-run validates resource compatibility with the tested Kubernetes environment but does not guarantee successful runtime deployment, application functionality, security, or performance. Considerations Before deploying this design, consider the following: 1. Replace the placeholder model-server container with an appropriate inference runtime and configure the required model, storage, and serving parameters. 2. Configure resource requests and limits for gateway and model-server workloads to support predictable scheduling and effective autoscaling. 3. Configure the HorizontalPodAutoscaler according to expected inference traffic, available cluster capacity, and supported resource metrics. 4. Configure TLS termination, authentication, authorization, and rate limiting at the gateway or Ingress layer before exposing inference endpoints externally. 5. Review NetworkPolicy ingress and egress rules to ensure that only authorized workloads can communicate with the model-serving backend. 6. Use a secure secrets-management solution to provide API credentials and other sensitive configuration. 7. Configure health checks, logging, monitoring, and tracing to observe gateway availability and inference request performance. 8. Verify Kubernetes API compatibility, Ingress Controller availability, CNI support, and resource permissions in the target environment before deployment. 9. Test the architecture in a staging environment before adopting it in production.
+
+### Compatibility:
+
+[](https://meshery.io/pr-preview/pr-3176/catalog/models/kubernetes)
+
+[Open in Playground](https://playground.meshery.io/extension/meshmap?mode=design&type=catalog&id=11c27e2d-7354-4eff-a7f1-4e6a65fe1e3b&name=Portable%20Ai%20Interface%20gateway)[Download](https://meshery.io/pr-preview/pr-3176/catalog/11c27e2d-7354-4eff-a7f1-4e6a65fe1e3b/0.0.2/design.yml)
+  Copy URL  
+
+#### Design Details
+
+- CATEGORY
+
+- CREATED BY
+
+- CREATED AT
+
+- VERSION
+
+- MODELS
+
+#### Related Designs
+[ 
+
+deployment
+
+##### vault-0.30.1.tgz
+
+###### MESHERY40c7
+
+ ](https://meshery.io/catalog/deployment/vault-0-30-1-tgz-00fadfee-3655-40c7-8a38-6c5cd72ea4da.html)
+
+` 
+
+[« my first app design](https://meshery.io/pr-preview/pr-3176/catalog/deployment/my-first-app-design-114c94c9-052b-46a2-86fe-4cdd2e88c746.html)[dremio-helm »](https://meshery.io/pr-preview/pr-3176/catalog/deployment/dremio-helm-11d54f4a-129a-43f5-9c17-7e7518202ea6.html)
 
 ---
 
@@ -66615,7 +66689,7 @@ deployment
 
 ` 
 
-[« Oracle e-commerce microservices on kubernetes](https://meshery.io/pr-preview/pr-3176/catalog/deployment/oracle-e-commerce-microservices-on-kubernetes-10caf581-6498-4a1f-a00a-76011b60af48.html)[dremio-helm »](https://meshery.io/pr-preview/pr-3176/catalog/deployment/dremio-helm-11d54f4a-129a-43f5-9c17-7e7518202ea6.html)
+[« Oracle e-commerce microservices on kubernetes](https://meshery.io/pr-preview/pr-3176/catalog/deployment/oracle-e-commerce-microservices-on-kubernetes-10caf581-6498-4a1f-a00a-76011b60af48.html)[Portable Ai Interface gateway »](https://meshery.io/pr-preview/pr-3176/catalog/deployment/portable-ai-interface-gateway-11c27e2d-7354-4eff-a7f1-4e6a65fe1e3b.html)
 
 ---
 
@@ -72028,6 +72102,19 @@ By sonal singh · Aug 16, 2023
 deployment
  
 
+### Portable Ai Interface gateway
+
+A Kubernetes-based reference architecture for deploying a portable AI inference gateway. The design provides a centra...
+
+  - kubernetes
+
+By Aditya Verma · Nov 9, 2026
+
+ ](https://meshery.io/pr-preview/pr-3176/catalog/deployment/portable-ai-interface-gateway-11c27e2d-7354-4eff-a7f1-4e6a65fe1e3b.html)
+- [ 
+deployment
+ 
+
 ### dremio-helm
 
 Dremio (OSS) deployed on Kubernetes via the official dremio\_v2 Helm chart. This Design represents a baseline installa...
@@ -77308,7 +77395,7 @@ Import using mesheryctl, visit [docs](https://docs.meshery.io/guides/configurati
 
 Designs
 
- 397 
+ 398 
 
 Well-architected cloud-native designs and best practice templates.
 
@@ -77374,7 +77461,7 @@ Import using mesheryctl, visit [docs](https://docs.meshery.io/guides/configurati
 
 Designs
 
- 397 
+ 398 
 
 Well-architected cloud-native designs and best practice templates.
 
