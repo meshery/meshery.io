@@ -7,7 +7,7 @@ categories:
   - continuous-integration
   - releases
   - mesheryctl
-redirect_from: /blog/changing-meshery-release-channels
+redirect_from: /blog/changing-meshery-release-channels/
 ---
 
 <div style="text-align:center;padding:20px">

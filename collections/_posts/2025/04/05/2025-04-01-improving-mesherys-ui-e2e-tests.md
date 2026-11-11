@@ -7,7 +7,7 @@ categories:
   - e2e-testing
   - contributors
 featured-image: /assets/images/posts/2025/2025-04-01-improving-mesherys-ui-e2e-tests/6-02.png
-redirect_from: /blog/improving-meshery-ui-e2e-tests
+redirect_from: /blog/improving-meshery-ui-e2e-tests/
 ---
 
 Hey Meshery Contributors 👋
