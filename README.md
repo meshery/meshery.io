@@ -153,7 +153,7 @@ On Windows (such as when using Git Bash), `make` is not included by default and 
 
 - After making changes, don't forget to commit with the sign-off flag (-s)
   ```bash
-  $ git commit -s -m “my commit message w/signoff”
+  $ git commit -s -m "my commit message w/signoff"
   ```
 - Once all changes have been committed, push the changes.
   ```bash
