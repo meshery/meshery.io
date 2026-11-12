@@ -9,7 +9,7 @@ categories:
   - collaboration
   - platform-engineering
   - multi-tenancy
-redirect_from: /blog/harnessing-organizations-for-multi-tenancy
+redirect_from: /blog/harnessing-organizations-for-multi-tenancy/
 featured-image: /assets/images/posts/2026/02/17-organizations-in-meshery/organizations-hero.svg
 ---
 

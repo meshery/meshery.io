@@ -6,7 +6,7 @@ author: Matthieu Evrin
 categories:
   - mesheryctl
 featured-image: /assets/images/posts/2026/03/mesheryctl-relationship-promoted/images.png
-redirect_from: /blog/mesheryctl-relationship-commands-promoted
+redirect_from: /blog/mesheryctl-relationship-commands-promoted/
 published: true
 ---
 

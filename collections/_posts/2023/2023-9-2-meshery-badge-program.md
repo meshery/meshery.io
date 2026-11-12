@@ -7,7 +7,7 @@ categories:
   - community
   - contributors
 redirect_from: 
-  - /blog/mshery-recognition-program
+  - /blog/mshery-recognition-program/
 ---
 <div style="text-align:center;padding:20px">
 <img src="/assets/images/posts/2023/2023-9-2-badge-program/recognition-banner.png" style="width:75%"  alt="Recognition Banner" /></div>

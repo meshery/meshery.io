@@ -9,7 +9,7 @@ categories:
   - community
   - collaboration
   - opensource
-redirect_from: /blog/digitalocean-adopts-meshery
+redirect_from: /blog/digitalocean-adopts-meshery/
 featured-image: /assets/images/posts/2025/digitalocean-adopts-meshery/digitalocean-adopts-meshery.png
 ---
 

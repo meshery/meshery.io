@@ -8,7 +8,7 @@ published: true
 categories:
   - community
   - milestones
-redirect_from: /blog/ninth-highest-velocity-cncf-project
+redirect_from: /blog/ninth-highest-velocity-cncf-project/
 featured-image: /assets/images/posts/2025/ninth-highest-velocity-cncf-project/meshery-project-velocity.png
 ---
 
