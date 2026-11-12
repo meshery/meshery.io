@@ -33,7 +33,7 @@ Meshery Models are packages that contain infrastructure components with specific
 - **Usability:** Not directly deployable, but used as building blocks within Designs.
 - **Sharing:** Can be packaged and shared for others to use in their Designs.
 
-<img alt="Meshery Catalog" src="/assets/images/posts/2024/2024-03-29-models-designs-legos/five-legos-nobg.png" width="100%" />
+<img alt="Illustration of individual Lego bricks representing Meshery Models" src="/assets/images/posts/2024/2024-03-29-models-designs-legos/five-legos-nobg.png" style="border: 0px; width: 100%; max-width: 400px; height: auto; margin: 0 auto; display: block;" />
 Meshery Models are like the individual Lego bricks - they define the building blocks for infrastructure with specific characteristics.
 
 ## Meshery Designs (similar to Lego instructions)
