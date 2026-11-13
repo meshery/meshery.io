@@ -3537,6 +3537,13 @@ p {
   border: 1px solid var(--brand-color-primary);
 }
 
+/* Pill shape only for the Copy URL action in copy-and-download.html.
+   The Quick Start button in _includes/models/modal.html shares
+   .import-brand-tertiary and keeps its current corners. */
+.copy-url-btn {
+  border-radius: 999px;
+}
+
 .btn-tooltip-grp {
   display: flex;
   flex-direction: row;
@@ -3547,6 +3554,67 @@ p {
   background-color: var(--action-color-dark);
 }
 
+.cstore-cta-primary,
+.cstore-cta-secondary {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Teal darkened to #00796b so the labels meet the 4.5:1 contrast guideline
+   in both states (5.3:1 default, 6.6:1 hover). */
+.cstore-cta-primary {
+  background: #00796b;
+  color: #fff;
+}
+
+.cstore-cta-primary:hover,
+.cstore-cta-primary:focus-visible {
+  background: #00695c;
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.35);
+}
+
+.cstore-cta-secondary {
+  border: 2px solid #00796b;
+  color: #00796b;
+}
+
+.cstore-cta-secondary:hover,
+.cstore-cta-secondary:focus-visible {
+  border-color: #00695c;
+  color: #00695c;
+  text-decoration: none;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.35);
+}
+
+/* Dark mode is the default and its surface is dark, so the secondary action
+   uses the lighter brand teal there to keep 4.5:1 contrast. */
+body.dark-mode .cstore-cta-secondary {
+  border-color: var(--brand-color-primary);
+  color: var(--brand-color-primary);
+}
+
+body.dark-mode .cstore-cta-secondary:hover,
+body.dark-mode .cstore-cta-secondary:focus-visible {
+  border-color: var(--brand-color-primary);
+  color: var(--brand-color-primary);
+}
+
+/* Forced-colors mode suppresses box-shadow, so restore a visible outline
+   for keyboard focus. */
+@media (forced-colors: active) {
+  .cstore-cta-primary:focus-visible,
+  .cstore-cta-secondary:focus-visible {
+    outline: 2px solid ButtonText;
+  }
+}
 .import-brand-secondary:hover {
   background-color: var(--action-color-dark-hover);
 }
