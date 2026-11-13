@@ -48,7 +48,7 @@ In essence:
 - **Sharing:** Can be exported, versioned, shared, and published for reuse by others.
 
 
-<img alt="Meshery Catalog" src="/assets/images/posts/2024/2024-03-29-models-designs-legos/five-instructions.png" style="border: 0px; width: 179px; height: 300px; margin: 0px; float: right;" class="dark-mode-contrast" />
+<img alt="Illustration of a figure reading Lego instructions representing Meshery Designs" src="/assets/images/posts/2024/2024-03-29-models-designs-legos/five-instructions.png" style="border: 0px; width: 100%; max-width: 180px; height: auto; margin: 0 auto; display: block;" class="dark-mode-contrast" />
 Meshery Designs are like the Lego instructions - they use Models (like bricks) to lay out the specific infrastructure deployment plan.
 
 **Analogy:** Think of Models as Lego bricks (defining types of pieces) and Designs as Lego instructions (defining how to build something specific). In summary, Meshery Models serve as the theoretical frameworks, while Meshery Designs translate these frameworks into tangible deployments, enabling you to design, deploy, and manage your infrastructure efficiently within the cloud and cloud native ecosystem.
