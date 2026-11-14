@@ -94,7 +94,7 @@
     </section>
 
     <!-- Explore the Meshery Community section -->
-    <section class="step">
+    <section class="step explore-community">
         <!-- <div class="step-image">
             <a class="book-container" href="https://meshery.io/community/handbook/">
                 <div class="book">
@@ -116,7 +116,7 @@
     </section>
 
     <!-- Under Review Section -->
-    <section class="step container">
+    <section class="step">
         <div class="step-image community-collage">
             <img src="{{ site.baseurl }}/assets/images/newcomers/community-collage.webp" alt="Community Collage" />
         </div>
@@ -139,7 +139,9 @@
         .step {
             display: flex;
             align-items: center;
-            gap: 4rem;
+            gap: 3rem;
+            padding: 0;
+            margin-bottom: 3.5rem;
         }
 
         .step:nth-child(odd) {
@@ -162,21 +164,41 @@
 
         .step-image {
             flex: 1;
-            min-width: 400px;
             max-width: 500px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
         }
 
         .step-image img {
             display: block;
             margin: 1rem auto 0px;
+            max-width: 100%;
             width: 21.875rem;
+            height: auto;
             text-align: center;
         }
 
         .step-content {
             flex: 1;
-            min-width: 50%;
+        }
+
+        .explore-community {
+            justify-content: flex-start;
+            text-align: left;
+        }
+
+        .explore-community .step-content {
+            text-align: left;
+            margin: 0;
+        }
+
+        @media (min-width: 1141px) {
+            .explore-community .step-content {
+                max-width: 50%;
+            }
         }
 
         .step-content h3 {
@@ -289,17 +311,17 @@
             width: 11.85rem !important;
         }
 
-        @media (max-width: 991px) {
+        @media (max-width: 1140px) {
             .instructions .step {
                 flex-direction: column !important;
+                align-items: center;
                 gap: 2rem;
                 text-align: center;
+                padding: 0;
+                margin-bottom: 2.5rem;
             }
 
-            .instructions .step:nth-child(1),
-            .instructions .step:nth-child(2),
-            .instructions .step:nth-child(3),
-            .instructions .step:nth-child(4) {
+            .instructions .step:nth-child(n) {
                 flex-direction: column !important;
             }
 
@@ -325,8 +347,7 @@
 
             .step-content,
             .step-image {
-                min-width: auto;
-                max-width: 100%;
+                width: 100%;
             }
         }
 
@@ -336,7 +357,7 @@
             }
 
             .step {
-                margin-bottom: 4rem;
+                margin-bottom: 2.5rem;
                 gap: 2rem;
             }
 
@@ -351,7 +372,8 @@
             }
 
             .step-image img {
-                max-width: 300px;
+                max-width: 100%;
+                width: min(21.875rem, 100%);
             }
 
             .button {
