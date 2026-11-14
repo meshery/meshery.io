@@ -238,11 +238,17 @@ permalink: /integrations
       let camera, scene, renderer;
       let controls;
 
+      let isAnimating = false;
+      let isInteracting = false;
+      let controlsChanged = false;
+      let idleFrames = 0;
+      const MAX_IDLE_FRAMES = 3;
+
       const objects = [];
       const targets = { table: [], sphere: [], helix: [], grid: [], };
 
       init();
-      animate();
+      startAnimation();
 
       function init() {
         camera = new THREE.PerspectiveCamera(
@@ -358,7 +364,41 @@ permalink: /integrations
         controls = new TrackballControls(camera, renderer.domElement);
         controls.minDistance = 500;
         controls.maxDistance = 6000;
-        controls.addEventListener("change", render);
+        controls.addEventListener("change", () => {
+          controlsChanged = true;
+          render();
+        });
+
+        const activePointers = new Set();
+        const container = document.getElementById("container");
+        container.addEventListener("pointerdown", (e) => {
+          activePointers.add(e.pointerId);
+          isInteracting = true;
+          startAnimation();
+        });
+
+        window.addEventListener("pointerup", (e) => {
+          activePointers.delete(e.pointerId);
+          if (activePointers.size === 0) {
+            isInteracting = false;
+            startAnimation();
+          }
+        });
+
+        window.addEventListener("pointercancel", (e) => {
+          activePointers.delete(e.pointerId);
+          if (activePointers.size === 0) {
+            isInteracting = false;
+          }
+        });
+
+        container.addEventListener("wheel", startAnimation, { passive: true });
+
+        window.addEventListener("keydown", (e) => {
+          if (["KeyA", "KeyS", "KeyD"].includes(e.code)) {
+            startAnimation();
+          }
+        });
 
         const menuElement = document.getElementById("menu");
         menuElement.addEventListener("click", function(e){
@@ -422,6 +462,8 @@ permalink: /integrations
           .to({}, duration * 2)
           .onUpdate(render)
           .start();
+
+        startAnimation();
       }
 
       function onWindowResize() {
@@ -429,16 +471,36 @@ permalink: /integrations
         camera.updateProjectionMatrix();
 
         renderer.setSize(window.innerWidth, window.innerHeight - 100);
+        controls.handleResize();
 
         render();
       }
 
-      function animate() {
-        requestAnimationFrame(animate);
+      function startAnimation() {
+        if (!isAnimating) {
+          isAnimating = true;
+          idleFrames = 0;
+          animate();
+        }
+      }
 
-        TWEEN.update();
+      function animate() {
+        controlsChanged = false;
+
+        const hasTween = TWEEN.update();
 
         controls.update();
+
+        if (isInteracting || hasTween || controlsChanged) {
+          idleFrames = 0;
+          requestAnimationFrame(animate);
+        } else if (idleFrames < MAX_IDLE_FRAMES) {
+          idleFrames++;
+          requestAnimationFrame(animate);
+        } else {
+          isAnimating = false;
+          idleFrames = 0;
+        }
       }
 
       function render() {

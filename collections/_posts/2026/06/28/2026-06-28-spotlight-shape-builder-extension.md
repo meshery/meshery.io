@@ -8,7 +8,7 @@ categories:
   - extensibility
   - open-source
 featured-image: /assets/images/posts/2026/06/meshery-extension-closeup.png
-redirect_from: /blog/spotlight-shape-builder-extension
+redirect_from: /blog/spotlight-shape-builder-extension/
 published: true
 ---
 

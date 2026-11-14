@@ -9,7 +9,7 @@ categories:
   - mesheryctl
   - extensions
   - platform-engineering
-redirect_from: /blog/announcing-mesheryctl-axi
+redirect_from: /blog/announcing-mesheryctl-axi/
 featured-image: /assets/images/posts/2026/announcing-mesheryctl-axi/announcing-mesheryctl-axi.png
 ---
 

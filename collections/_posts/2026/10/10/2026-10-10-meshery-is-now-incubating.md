@@ -4,7 +4,6 @@ subheading: "Meshery has officially been accepted as a CNCF Incubating project! 
 date: 2026-10-10
 author: Sangram Rath
 featured-image: /assets/images/posts/2026/10/meshery-incubation-announcement.png
-category: Announcements
 categories:
   - announcements
   - cncf
