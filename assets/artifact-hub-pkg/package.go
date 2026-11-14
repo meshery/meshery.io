@@ -41,6 +41,7 @@ var (
 	ErrDecodingContentCode     = "test_code"
 )
 
+// main fetches catalog patterns, generates their entries, and dispatches snapshots.
 func main() {
 	token := os.Getenv("GH_ACCESS_TOKEN")
 	log, err := logger.New("mesheryio_package", logger.Options{
@@ -55,30 +56,36 @@ func main() {
 	page, err := fetchCatalogPatterns()
 	if err != nil {
 		log.Error(err)
-		return
+		os.Exit(1)
 	}
-	if page.Patterns == nil {
-		return
+	if page == nil || page.Patterns == nil {
+		os.Exit(1)
 	}
 
 	for _, pattern := range *page.Patterns {
-		if err := processPattern(pattern, token); err != nil {
+		if err := processPattern(pattern); err != nil {
 			log.Error(meshkitErrors.New(ErrProcessPatternCode, meshkitErrors.Alert,
 				[]string{"unable to process catalog pattern"},
 				[]string{err.Error()},
 				[]string{"fail to read/write file", "error regarding user info"},
 				[]string{"check the catalog pattern file", "check for updated files"},
 			))
+			os.Exit(1)
+		}
+		if err := invokeGitHubAction(pattern.ID.String(), getPatternImageURL(pattern), token); err != nil {
+			log.Error(err)
 		}
 	}
 }
 
+// slugify converts a display name into a lowercase, hyphen-separated slug.
 func slugify(name string) string {
 	s := strings.ToLower(name)
 	s = regexp.MustCompile("[^a-z0-9]+").ReplaceAllString(s, "-")
 	return strings.Trim(s, "-")
 }
 
+// fetchCatalogPatterns retrieves catalog patterns from Meshery Cloud.
 func fetchCatalogPatterns() (*designv1beta3.CatalogContentPage, error) {
 	endpoint := fmt.Sprintf("%s/api/catalog/content/pattern?populate=pattern_file", mesheryCloudBaseURL)
 	resp, err := http.Get(endpoint)
@@ -86,6 +93,9 @@ func fetchCatalogPatterns() (*designv1beta3.CatalogContentPage, error) {
 		return nil, ErrHTTPGetRequest(err, endpoint)
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusMultipleChoices {
+		return nil, ErrHTTPGetRequest(fmt.Errorf("unexpected HTTP status: %s", resp.Status), endpoint)
+	}
 
 	var page designv1beta3.CatalogContentPage
 	if err := json.NewDecoder(resp.Body).Decode(&page); err != nil {
@@ -94,7 +104,8 @@ func fetchCatalogPatterns() (*designv1beta3.CatalogContentPage, error) {
 	return &page, nil
 }
 
-func processPattern(pattern designv1beta3.MesheryPattern, token string) error {
+// processPattern writes the generated files for one catalog pattern.
+func processPattern(pattern designv1beta3.MesheryPattern) error {
 	patternID := pattern.ID.String()
 	patternImageURL := getPatternImageURL(pattern)
 	patternType := getPatternType(catalogTypeOf(pattern.CatalogData))
@@ -124,9 +135,10 @@ func processPattern(pattern designv1beta3.MesheryPattern, token string) error {
 	if err := writePatternFile(pattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL); err != nil {
 		return err
 	}
-	return invokeGitHubAction(patternID, patternImageURL, token)
+	return nil
 }
 
+// getPatternImageURL returns the pattern's snapshot URLs or default assets.
 func getPatternImageURL(pattern designv1beta3.MesheryPattern) string {
 	patternID := pattern.ID.String()
 	defaultURL := fmt.Sprintf("https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/%s-light.png,https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/%s-dark.png", patternID, patternID)
@@ -145,6 +157,7 @@ func getPatternImageURL(pattern designv1beta3.MesheryPattern) string {
 	}
 }
 
+// getPatternType normalizes a catalog type for use in generated paths.
 func getPatternType(patternType string) string {
 	if patternType == "" {
 		patternType = "Deployment"
@@ -152,6 +165,7 @@ func getPatternType(patternType string) string {
 	return strings.ToLower(strings.ReplaceAll(patternType, " ", "-"))
 }
 
+// getStringOrEmpty returns a YAML empty-string literal when value is empty.
 func getStringOrEmpty(value string) string {
 	if value == "" {
 		return "\"\""
@@ -159,6 +173,7 @@ func getStringOrEmpty(value string) string {
 	return value
 }
 
+// getCompatibility formats compatibility values as YAML list entries.
 func getCompatibility(compatibility []string) string {
 	lines := make([]string, 0, len(compatibility))
 	for _, c := range compatibility {
@@ -167,10 +182,12 @@ func getCompatibility(compatibility []string) string {
 	return strings.Join(lines, "\n")
 }
 
+// decodeURIComponent decodes query-style percent-encoded content.
 func decodeURIComponent(encodedURI string) (string, error) {
 	return url.QueryUnescape(encodedURI)
 }
 
+// writePatternFile generates the design, Artifact Hub metadata, and catalog page.
 func writePatternFile(pattern designv1beta3.MesheryPattern, versionDir, patternType, patternInfo, patternCaveats, compatibility, patternImageURL string) error {
 	patternID := pattern.ID.String()
 	patternName := string(pattern.Name)
@@ -191,7 +208,7 @@ func writePatternFile(pattern designv1beta3.MesheryPattern, versionDir, patternT
 
 	var datatemp map[string]interface{}
 	if err := yaml.Unmarshal(contenttemp, &datatemp); err != nil {
-		utils.ErrUnmarshal(err)
+		return utils.ErrUnmarshal(err)
 	}
 
 	if services, ok := datatemp["services"]; !ok || services == nil {
@@ -286,6 +303,7 @@ func userDisplay(user *userv1beta2.User) (string, string) {
 	return strings.TrimSpace(user.FirstName + " " + user.LastName), avatar
 }
 
+// invokeGitHubAction dispatches the snapshot workflow for a catalog pattern.
 func invokeGitHubAction(contentID, assetLocation string, ghAccessToken string) error {
 	payload := fmt.Sprintf(`{"ref":"master","inputs":{"contentID":"%s","assetLocation":"%s"}}`, contentID, assetLocation)
 	req, err := http.NewRequest("POST", "https://api.github.com/repos/meshery/meshery.io/actions/workflows/snapshot.yml/dispatches", bytes.NewBuffer([]byte(payload)))
@@ -309,6 +327,13 @@ func invokeGitHubAction(contentID, assetLocation string, ghAccessToken string) e
 			[]string{"Check network connectivity", "Ensure the GitHub token is correct"})
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusMultipleChoices {
+		return meshkitErrors.New(ErrInvokeGitHubActionsCode, meshkitErrors.Alert,
+			[]string{"GitHub Actions workflow dispatch failed"},
+			[]string{fmt.Sprintf("GitHub Actions returned status: %s", resp.Status)},
+			[]string{"The workflow dispatch request was rejected"},
+			[]string{"Check the GitHub token and workflow configuration"})
+	}
 	return nil
 }
 
@@ -317,6 +342,7 @@ func invokeGitHubAction(contentID, assetLocation string, ghAccessToken string) e
 // nil-checks across call sites, and translate to meshkit's catalog type at the
 // BuildArtifactHubPkg boundary (which still expects *catalogv1alpha1.CatalogData).
 
+// catalogTypeOf returns the type from optional catalog data.
 func catalogTypeOf(c *catalogv1alpha2.CatalogData) string {
 	if c == nil {
 		return ""
@@ -324,6 +350,7 @@ func catalogTypeOf(c *catalogv1alpha2.CatalogData) string {
 	return string(c.Type)
 }
 
+// catalogPatternInfo returns pattern information from optional catalog data.
 func catalogPatternInfo(c *catalogv1alpha2.CatalogData) string {
 	if c == nil {
 		return ""
@@ -331,6 +358,7 @@ func catalogPatternInfo(c *catalogv1alpha2.CatalogData) string {
 	return c.PatternInfo
 }
 
+// catalogPatternCaveats returns pattern caveats from optional catalog data.
 func catalogPatternCaveats(c *catalogv1alpha2.CatalogData) string {
 	if c == nil {
 		return ""
@@ -338,6 +366,7 @@ func catalogPatternCaveats(c *catalogv1alpha2.CatalogData) string {
 	return c.PatternCaveats
 }
 
+// catalogPublishedVersion returns the published version when present.
 func catalogPublishedVersion(c *catalogv1alpha2.CatalogData) string {
 	if c == nil || c.PublishedVersion == nil {
 		return ""
@@ -345,6 +374,7 @@ func catalogPublishedVersion(c *catalogv1alpha2.CatalogData) string {
 	return *c.PublishedVersion
 }
 
+// catalogCompatibility returns compatibility values from optional catalog data.
 func catalogCompatibility(c *catalogv1alpha2.CatalogData) []string {
 	if c == nil {
 		return nil
@@ -356,6 +386,7 @@ func catalogCompatibility(c *catalogv1alpha2.CatalogData) []string {
 	return out
 }
 
+// toMeshkitCatalogData converts schema catalog data to meshkit's catalog type.
 func toMeshkitCatalogData(c *catalogv1alpha2.CatalogData, info, caveats, version string) *catalogv1alpha1.CatalogData {
 	out := &catalogv1alpha1.CatalogData{
 		PublishedVersion: version,
@@ -378,6 +409,7 @@ func toMeshkitCatalogData(c *catalogv1alpha2.CatalogData, info, caveats, version
 	return out
 }
 
+// ErrHTTPGetRequest creates a structured error for a failed catalog request.
 func ErrHTTPGetRequest(err error, ep string) error {
 	return meshkitErrors.New(ErrHTTPGetRequestCode, meshkitErrors.Alert,
 		[]string{"HTTP GET request failed"},
@@ -386,6 +418,7 @@ func ErrHTTPGetRequest(err error, ep string) error {
 		[]string{"Check the endpoint URL", "Ensure the server is running"})
 }
 
+// ErrDecodingContent creates a structured error for invalid encoded content.
 func ErrDecodingContent(err error) error {
 	return meshkitErrors.New(ErrDecodingContentCode, meshkitErrors.Alert,
 		[]string{"Error decoding content"},
@@ -400,6 +433,7 @@ func ErrDecodingContent(err error) error {
 		})
 }
 
+// ErrCreatingVersionDir creates a structured error for a failed directory operation.
 func ErrCreatingVersionDir(err error) error {
 	return meshkitErrors.New(ErrCreateVersionDirCode, meshkitErrors.Alert,
 		[]string{"Error creating version directory"},
