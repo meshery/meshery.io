@@ -107,16 +107,14 @@ body {
 
   {% for program in site.data.programs  %}
   <a href="{% include relative-src.html src=program.link %}" {% if program.new_window %}target="_blank" rel="noopener noreferrer"{% endif %}>
-  <wrapper>
     <div class="card{% if program.archived %} archived-program{% endif %}">
-      <img src="{% include relative-src.html src=program.imagePath %}">
+      <img src="{% include relative-src.html src=program.imagePath %}" alt="{{ program.name }}">
       <div class="info">
         <h1>{{program.name}}</h1>
         {% if program.archived %}<p class="archived-label">(archived)</p>{% endif %}
       </div>
-      </div>
-      </wrapper>
-    </a>
+    </div>
+  </a>
   {% endfor %}
   
 

@@ -14,8 +14,7 @@
 
 <div align="center">
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/meshery/meshery.svg)](https://hub.docker.com/r/meshery/meshery-io)
-[![Go Report Card](https://goreportcard.com/badge/github.com/meshery/meshery)](https://goreportcard.com/report/github.com/mesheryio/meshery)
+[![Docker Pulls](https://img.shields.io/docker/pulls/meshery/meshery.svg)](https://hub.docker.com/r/meshery/meshery)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/meshery/meshery.io/jekyll.yml?branch=master)](https://github.com/meshery/meshery.io/actions)
 [![GitHub](https://img.shields.io/github/license/meshery/meshery.svg)](LICENSE)
 [![GitHub issues by-label](https://img.shields.io/github/issues/meshery/meshery/help%20wanted.svg)](https://github.com/issues?q=is%3Aopen%20is%3Aissue%20archived%3Afalse%20(org%3Ameshery%20OR%20org%3Aservice-mesh-performance%20OR%20org%3Aservice-mesh-patterns%20OR%20org%3Ameshery-extensions)%20label%3A%22help%20wanted%22)
@@ -94,7 +93,7 @@ Find out more about the <a href="https://meshery.io/community">Meshery community
 
 ## Contributing to the Meshery.io Website
 
-Before contributing, please review the [Contribution Flow](https://github.com/meshery/meshery/blob/master/CONTRIBUTING.md). In the following steps, you will setup your development environment, fork and clone the repository, run the site locally, and finally commit, sign off, and push any changes made for review.
+Before contributing, please review the [Contribution Flow](https://github.com/meshery/meshery/blob/master/CONTRIBUTING.md) and this repository's [CONTRIBUTING.md](CONTRIBUTING.md). In the following steps, you will setup your development environment, fork and clone the repository, run the site locally, and finally commit, sign off, and push any changes made for review.
 
 ### 1. Set up your development environment
 
@@ -102,6 +101,7 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
 
 - First [install Ruby](https://jekyllrb.com/docs/installation/), then install Jekyll and Bundler. ( **Note** : Install Ruby 3.2.2 or newer, as specified in the [Gemfile](https://github.com/meshery/meshery.io/blob/master/Gemfile) )
 - If your installed Ruby version is older than the minimum specified in the Gemfile, you can use [RVM](https://rvm.io/rvm/install) to install a compatible version for your operating system.
+- Windows contributors: Note that `make` is required if you want to use the `make site` command; alternatively, you can run Jekyll directly via Bundler without `make` (see [Windows Notes](#windows-notes)).
 
 ### 2. Get the code
 
@@ -121,6 +121,33 @@ Before contributing, please review the [Contribution Flow](https://github.com/me
   $ make site
   ```
   _Note: The Makefile prefers Docker (if available and the daemon is running) and will run Jekyll inside the official jekyll container. If Docker isn't running, the Makefile will only serve locally if required gems are already installed; otherwise it will prompt to start Docker or run `bundle install --path vendor/bundle`._
+
+### 4. Lint your changes
+
+- Install the dependencies (requires Node.js 20 or newer) and run the linters before committing
+```bash
+  $ npm ci
+  $ make lint
+```
+- To automatically fix lint issues
+```bash
+  $ make lint-fix
+```
+  _Note: `make lint` compares your branch against `upstream/master` (or `origin/master` if you have no `upstream` remote), so run `git fetch upstream` (or `git fetch origin`) first. ESLint checks only changed JavaScript files, and errors fail the check. Prettier checks only CSS/SCSS files under `_sass/` and `css/`: newly added files must be formatted, and errors fail the check. Existing files in those folders only show a non-blocking formatting warning (Prettier errors such as syntax errors still fail) and are never modified by `make lint-fix`._
+
+  _On Windows, run `make lint` and `make lint-fix` from Git Bash or WSL, since the Makefile uses POSIX shell syntax._
+
+### 5. Create a Pull Request
+#### Windows Notes
+On Windows (such as when using Git Bash), `make` is not included by default and running `make site` may result in `bash: make: command not found`. Windows contributors can use either of these options:
+
+- **Option 1: Run Jekyll directly (no `make` required)**
+  ```bash
+  $ bundle install --path vendor/bundle
+  $ bundle exec jekyll serve --drafts --incremental --livereload --config _config_dev.yml
+  ```
+- **Option 2: Install `make` on Windows**
+  Install `make` using a package manager such as [Chocolatey](https://chocolatey.org/) (`choco install make`), [Scoop](https://scoop.sh/) (`scoop install make`), or Winget (`winget install GnuWin32.Make`). Once installed and in your PATH, you can run `make site` normally.
 
 ### 4. Create a Pull Request
 

@@ -23,7 +23,7 @@
 				{% for link in column.links %}
 				<li><a {% if link.new_window %}target="_blank" {% endif %}
 						href="{% include relative-src.html src=link.link %}" {% if link.social_icon
-						%}class="{{ link.social_icon || downcase }}-icon" {% endif %}>
+						%}class="{{ link.social_icon | downcase }}-icon" {% endif %}>
 						{% if link.social_icon %}
 						{% include social-icon.html icon=link.social_icon %}
 						{% endif %}
@@ -73,10 +73,24 @@
 		jQuery('.stellarnav.mobile').css('text-align', 'end');
 	});
 </script>
-<!--Script for Copy to Clipboard-->
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+{% if page.tilt or content contains 'data-tilt' %}
 <script src="{{ site.baseurl }}/js/vanilla-tilt.min.js"></script>
+{% endif %}
 
+<!--Script for Copy to Clipboard-->
+{% assign needs_clipboard = false %}
+{% if page.layout == 'home' or page.clipboard %}
+	{% assign needs_clipboard = true %}
+{% elsif page.collection == 'catalog' or page.collection == 'models' or page.collection == 'extensions' or page.collection == 'handbook' %}
+	{% assign needs_clipboard = true %}
+{% elsif page.layout == 'catalog' or page.layout == 'designs' or page.layout == 'filters' or page.layout == 'models' or page.layout == 'item' or page.layout == 'single-page' or page.layout == 'single-page-model' or page.layout == 'single-page-extension' %}
+	{% assign needs_clipboard = true %}
+{% elsif content contains 'data-clipboard' or content contains 'resetCopyText' %}
+	{% assign needs_clipboard = true %}
+{% endif %}
+
+{% if needs_clipboard %}
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
 
     // Functionality for the copy button next to the ID/UUID in Catalog Details
@@ -137,7 +151,9 @@
 		// showCopyFeedback(e.trigger, "Copy failed");
 	});
 </script>
+{% endif %}
 
+{% if page.layout == 'home' or content contains 'displayCode' %}
 <script>
 	function displayCode(id) {
 		var divId = id + "_code";
@@ -164,6 +180,7 @@
 		});
 	}
 </script>
+{% endif %}
 <script type="text/javascript">
 	let toggleBtn = document.getElementById("mode-toggle-btn")
 	toggleBtn.onclick = setMode;
@@ -208,6 +225,7 @@
 
 </script>
 
+{% if page.layout == 'home' or page.carousel or content contains 'testimonials-slider' %}
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
   $(document).ready(function () {
@@ -242,6 +260,7 @@
     });
   });
 </script>
+{% endif %}
 </body>
 
 </html>
