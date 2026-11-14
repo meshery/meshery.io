@@ -11,7 +11,7 @@ layout: null
       "author": {{ post.author | jsonify }},
       "categories": {{ post.categories | jsonify }},
       "excerpt": {{ post.excerpt | strip_html | strip_newlines | jsonify }},
-      "content": {{ post.content | strip_html | strip_newlines | jsonify }}
+      "snippet": {{ post.content | strip_html | strip_newlines | truncate: 400 | jsonify }}
     }{% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]
