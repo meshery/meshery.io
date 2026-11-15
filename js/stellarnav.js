@@ -11,6 +11,7 @@ $.fn.stellarNav = function(options, width, breakpoint) {
   var nav = $(this);
   width = $(window).width();
   var phoneLabel, locationLabel, closeLabel;
+  var navEventNamespace = '.stellarnav-' + Math.random().toString(36).slice(2);
 
   // default settings
   var settings = $.extend( {
@@ -74,10 +75,10 @@ $.fn.stellarNav = function(options, width, breakpoint) {
     }
 
     // adds the toggle button to open and close nav
-    if ( settings.position == 'right' || settings.position == 'left' ) {
-      nav.prepend('<a href="#" class="menu-toggle"><span class="bars"><span></span><span></span><span></span></span></a>');
+    if (settings.position == 'right' || settings.position == 'left') {
+      nav.prepend('<a href="#" class="menu-toggle" aria-label="Open navigation menu" aria-expanded="false"><span class="bars"><span></span><span></span><span></span></span></a>');
     } else {
-      nav.prepend('<a href="#" class="menu-toggle ' + cssClass + '"><span class="bars"><span></span><span></span><span></span></span></a>');
+      nav.prepend('<a href="#" class="menu-toggle ' + cssClass + '" aria-label="Open navigation menu" aria-expanded="false"><span class="bars"><span></span><span></span><span></span></span></a>');
     }
 
     // adds a click-to-call link
@@ -165,45 +166,73 @@ $.fn.stellarNav = function(options, width, breakpoint) {
       locationIcon.appendChild(newLocationIcon);
     }
 
+    // closes the mobile navigation menu
+    function closeMobileMenu() {
+      if (!nav.hasClass('mobile') || !nav.hasClass('active')) {
+        return;
+      }
+
+      nav.removeClass('active');
+      nav.find('.menu-toggle').attr('aria-expanded', 'false');
+
+      $(document).off(navEventNamespace);
+
+      if (settings.position == 'left' || settings.position == 'right') {
+        nav.find('ul:first').stop(true, true).fadeOut(settings.openingSpeed);
+      } else {
+        nav.find('ul:first').stop(true, true).slideUp(settings.openingSpeed);
+      }
+
+      nav.find('li.open').removeClass('open').children('ul').hide();
+    }
+
     // opens and closes menu
-    $('.menu-toggle, .stellarnav-open').on('click', function(e) {
+    nav.on('click', '.menu-toggle', function(e) {
       e.preventDefault();
 
-      // if nav position is left or right, uses fadeToggle instead of slideToggle
-      if (settings.position == 'left' || settings.position == 'right') {
-        nav.find('ul:first').stop(true, true).fadeToggle(settings.openingSpeed);
-        nav.toggleClass('active');
-
-        if (nav.hasClass('active') && nav.hasClass('mobile')) {
-          // closes the menu when clicked outside of it
-          $(document).on('click', function(event) {
-            // ensures menu hides only on mobile nav
-            if (nav.hasClass('mobile')) {
-							  	if (!$(event.target).closest(nav).length) {
-							  		nav.find('ul:first').stop(true, true).fadeOut(settings.openingSpeed);
-							  		nav.removeClass('active');
-              }
-            }
-          });
-        }
-
-      } else {
-        // static position - normal open and close animation
-        nav.find('ul:first').stop(true, true).slideToggle(settings.openingSpeed);
-        nav.toggleClass('active');
+      if (nav.hasClass('active')) {
+        closeMobileMenu();
+        return;
       }
+
+      if (!nav.hasClass('mobile')) {
+        return;
+      }
+
+      nav.find('ul:first').stop(true, true);
+
+      if (settings.position == 'left' || settings.position == 'right') {
+        nav.find('ul:first').fadeIn(settings.openingSpeed);
+      } else {
+        nav.find('ul:first').slideDown(settings.openingSpeed);
+      }
+
+      nav.addClass('active');
+      nav.find('.menu-toggle').attr('aria-expanded', 'true');
+
+      // Close when clicking outside the navigation
+      $(document).on('click' + navEventNamespace, function(event) {
+        if (
+          !$(event.target).closest(nav).length &&
+          !$(event.target).closest('#mode-toggle-btn').length
+        ) {
+          closeMobileMenu();
+        }
+      });
+
+      // Close when Escape is pressed
+      $(document).on('keydown' + navEventNamespace, function(event) {
+        if (event.key === 'Escape') {
+          closeMobileMenu();
+          nav.find('.menu-toggle').trigger('focus');
+        }
+      });
     });
 
     // activates the close button
-    $('.close-menu, .stellarnav-close').on('click', function() {
-
-      nav.removeClass('active');
-
-      if (settings.position == 'left' || settings.position == 'right') {
-        nav.find('ul:first').stop(true, true).fadeToggle(settings.openingSpeed);
-      } else {
-        nav.find('ul:first').stop(true, true).slideUp(settings.openingSpeed).toggleClass('active');
-      }
+    nav.on('click', '.close-menu, .stellarnav-close', function(e) {
+      e.preventDefault();
+      closeMobileMenu();
     });
 
     // closes mobile menu when a navigation item link (e.g. Getting Started) is clicked
@@ -211,12 +240,8 @@ $.fn.stellarNav = function(options, width, breakpoint) {
       if ($(this).hasClass('menu-toggle') || $(this).hasClass('close-menu') || $(this).hasClass('dd-toggle') || $(this).hasClass('sub-list') || $(this).hasClass('call-btn-mobile') || $(this).hasClass('location-btn-mobile')) {
         return;
       }
-      if (nav.hasClass('mobile') && nav.hasClass('active')) {
-        nav.removeClass('active');
-        nav.find('ul:first').stop(true, true).slideUp(settings.openingSpeed, function() {
-          nav.find('li.open').removeClass('open').children('ul').hide();
-        });
-      }
+
+      closeMobileMenu();
     });
 
 
@@ -316,6 +341,8 @@ $.fn.stellarNav = function(options, width, breakpoint) {
         // desktop nav
         nav.addClass('desktop');
         nav.removeClass('mobile');
+        $(document).off(navEventNamespace);
+        nav.find('.menu-toggle').attr('aria-expanded', 'false');
 
         if (nav.hasClass('active')) {
           nav.removeClass('active');
