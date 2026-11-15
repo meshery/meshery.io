@@ -220,6 +220,11 @@ permalink: /integrations
       const { default: data } = await import("{{ '/integrations/data.js' | relative_url }}");
       if (!data || !data.length) {
         console.error("No integrations data");
+        const container = document.getElementById("container");
+        if (container) {
+          container.innerHTML =
+            "<p>Could not load integrations. Please try refreshing the page.</p>";
+        }
         hideLoader();
         return;
       }
@@ -248,6 +253,11 @@ permalink: /integrations
     } catch (err) {
       console.error("Failed to load integrations data:", err);
       hideLoader();
+      const container = document.getElementById("container");
+      if (container) {
+        container.innerHTML =
+          "<p>Could not load integrations. Please try refreshing the page.</p>";
+      }
     }
   }
 
