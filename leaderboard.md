@@ -2,8 +2,6 @@
 layout: page
 title: Community Leaderboard
 permalink: /community/leaderboard/
-redirect_from:
-  - /community/leaderboard
 ---
 
 <h1 class="leaderboard-heading">Community Leaderboard</h1>

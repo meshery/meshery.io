@@ -19,3 +19,5 @@ group :jekyll_plugins do
   gem 'octopress-paginate'
 end
 
+gem "nokogiri"
+gem "reverse_markdown"

@@ -7,7 +7,7 @@ categories:
   - community
   - open-source
 featured-image: /assets/images/posts/2025/hacktoberfest-2025-kickoff/hacktoberfest-meshery-theme.png
-redirect_from: /blog/hacktoberfest-2025-kickoff
+redirect_from: /blog/hacktoberfest-2025-kickoff/
 ---
 
 As the leaves begin to turn and the air grows crisp, it can only mean one thing: [Hacktoberfest](https://hacktoberfest.com) is here! This annual celebration of open source, hosted by Digital Ocean, invites contributors from all over the world to participate in a month-long extravaganza of code contributions. While the allure of limited-edition swag may be enticing, it's essential to approach Hacktoberfest with a mindset focused on quality, respect for maintainers, and a commitment to long-term community engagement.

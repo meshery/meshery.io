@@ -5,7 +5,7 @@ title: Meshery System Provider
 author: Lee Calcote
 categories: 
   - extensibility
-redirect_from: /blog/mesheryctl-system-provider
+redirect_from: /blog/mesheryctl-system-provider/
 ---
 
 <div style="text-align:center;padding:20px">

@@ -7,7 +7,7 @@ categories:
   - meshery
   - mesheryctl
   - models
-redirect_from: /blog/share-your-meshery-models
+redirect_from: /blog/share-your-meshery-models/
 featured-image: /assets/images/posts/2024/2024-11-06-share-your-meshery-models/meshery-catalog-blog.webp
 ---
 
