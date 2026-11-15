@@ -224,7 +224,11 @@ $.fn.stellarNav = function(options, width, breakpoint) {
       $(document).on('keydown' + navEventNamespace, function(event) {
         if (event.key === 'Escape') {
           closeMobileMenu();
-          nav.find('.menu-toggle').trigger('focus');
+          var focusWasInsideNav = $(event.target).closest(nav).length > 0;
+          closeMobileMenu();
+          if (focusWasInsideNav) {
+            nav.find('.menu-toggle').trigger('focus');
+          }
         }
       });
     });
