@@ -44,7 +44,7 @@ Portainer operates running environments from a console. Meshery works a layer ab
 * **Relationships are the model.** Meshery models how components relate: what mounts what, what selects what, who may talk to whom. The blast radius of a change is visible before it ships, not after.
 * **Designs are shared documents.** Teams comment, record architectural decisions, and review visual diffs in pull requests instead of reading raw YAML.
 * **Meshery complements your IaC.** It does not replace Terraform, Helm, or Crossplane. It sits above them as the visual governance layer.
-* **Built in the open.** Meshery is a CNCF project since 2021 and an Incubating project since September 14, 2026, with more than 5,500 contributors. [Kanvas](https://kanvas.new) is its visual designer.
+* **Built in the open.** Meshery is a CNCF project since 2021 and an Incubating project since September 14, 2026, with about 5,500 contributors. [Kanvas](https://kanvas.new) is its visual designer.
 
 If Portainer 3 has you planning a move to Kubernetes, that move is exactly where Meshery helps: import what you run today, see how it fits together, validate every change, and keep people and AI agents working from the same model.
 
