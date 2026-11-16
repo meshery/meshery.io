@@ -23,7 +23,7 @@
 				{% for link in column.links %}
 				<li><a {% if link.new_window %}target="_blank" {% endif %}
 						href="{% include relative-src.html src=link.link %}" {% if link.social_icon
-						%}class="{{ link.social_icon || downcase }}-icon" {% endif %}>
+						%}class="{{ link.social_icon | downcase }}-icon" {% endif %}>
 						{% if link.social_icon %}
 						{% include social-icon.html icon=link.social_icon %}
 						{% endif %}
@@ -57,7 +57,11 @@
 
 	</div>
 </footer>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh" crossorigin="anonymous"></script>
+{% if page.layout == 'home' or content contains 'data-fancybox' %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha384-Q8BgkilbsFGYNNiDqJm69hvDS7NCJWOodvfK/cwTyQD4VQA0qKzuPpvqNER1UC0F" crossorigin="anonymous" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" integrity="sha384-Zm+UU4tdcfAm29vg+MTbfu//q5B/lInMbMCr4T8c9rQFyOv6PlfQYpB5wItcXWe7" crossorigin="anonymous"></script>
+{% endif %}
 {% if jekyll.environment == 'production' %}
 <script src="{{ site.baseurl }}/js/stellarnav.min.js"></script>
 {% else %}
@@ -90,7 +94,7 @@
 {% endif %}
 
 {% if needs_clipboard %}
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js" integrity="sha384-J08i8An/QeARD9ExYpvphB8BsyOj3Gh2TSh1aLINKO3L0cMSH2dN3E22zFoXEi0Q" crossorigin="anonymous"></script>
 <script>
 
     // Functionality for the copy button next to the ID/UUID in Catalog Details
@@ -226,7 +230,7 @@
 </script>
 
 {% if page.layout == 'home' or page.carousel or content contains 'testimonials-slider' %}
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" integrity="sha384-YGnnOBKslPJVs35GG0TtAZ4uO7BHpHlqJhs0XK3k6cuVb6EBtl+8xcvIIOKV5wB+" crossorigin="anonymous"></script>
 <script>
   $(document).ready(function () {
     $('.testimonials-slider').slick({

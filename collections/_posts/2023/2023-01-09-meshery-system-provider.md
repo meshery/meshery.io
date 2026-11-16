@@ -36,11 +36,11 @@ The CLI command `mesheryctl system provider`  would enable users to enforce a sp
 <p>Subcommands with the specific functions:</p> 
 
 <div id="channelset" class="highlight-code">
-  <code class="code-box">mesheryctl system provider [view|list|set [provider]|switch [provider] prvider reset] 
+  <code class="code-box">mesheryctl system provider [view|list|set [provider]|switch [provider]|reset]
   </code>
     <!-- copy to clipboard -->
     <a class="btn tooltip" style="position: absolute; top:0.10rem; right: 0.5rem; font-size: 22px;" data-clipboard-target="#channelset"
-      data-clipboard-text="mesheryctl system provider [view|list|set [provider]|switch [provider] prvider reset]" onmouseout="resetCopyText(this)">
+      data-clipboard-text="mesheryctl system provider [view|list|set [provider]|switch [provider]|reset]" onmouseout="resetCopyText(this)">
       <i class="far fa-copy"></i>
       <span class="tooltiptext" style="font-size: 15px; width: 140px; height: 40px; padding: 0; line-height: 40px; top: 2rem; left: -80px;">Copy to clipboard</span>
     </a>

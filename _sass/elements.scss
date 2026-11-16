@@ -238,3 +238,43 @@ details > ol {
   padding: 1rem auto;
   margin-bottom: 0;
 }
+
+/* Skip to content link & main landmark */
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 10000;
+  background: var(--brand-color-primary, #00d3a9);
+  color: #111;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: top 0.2s ease-in-out;
+
+  &:hover {
+    color: #111;
+    text-decoration: none;
+  }
+
+  &:focus {
+    top: 1rem;
+    color: #111;
+    outline: 2px solid var(--color-white, #fff);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+main#main-content {
+  display: block;
+
+  &:focus {
+    outline: none;
+  }
+}
