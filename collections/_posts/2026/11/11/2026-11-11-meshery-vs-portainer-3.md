@@ -5,9 +5,9 @@ date: 2026-11-11
 author: Lee Calcote
 published: false
 categories:
-  - meshery
-  - community
-  - kubernetes
+ - meshery
+ - community
+ - kubernetes
 redirect_from: /blog/meshery-vs-portainer-3/
 featured-image: /assets/images/logos/meshery-logo-dark-text-side.svg
 ---
@@ -44,7 +44,7 @@ Portainer operates running environments from a console. Meshery works a layer ab
 * **Relationships are the model.** Meshery models how components relate: what mounts what, what selects what, who may talk to whom. The blast radius of a change is visible before it ships, not after.
 * **Designs are shared documents.** Teams comment, record architectural decisions, and review visual diffs in pull requests instead of reading raw YAML.
 * **Meshery complements your IaC.** It does not replace Terraform, Helm, or Crossplane. It sits above them as the visual governance layer.
-* **Built in the open.** Meshery is a CNCF project since 2021 and an Incubating project since September 14, 2026, with about 5,500 contributors. [Kanvas](https://kanvas.new) is its visual designer.
+* **Built in the open.** Meshery is a CNCF project since 2021 and an Incubating project since September 14, 2026, with more than 7,000 contributors. [Kanvas](https://kanvas.new) is its visual designer.
 
 If Portainer 3 has you planning a move to Kubernetes, that move is exactly where Meshery helps: import what you run today, see how it fits together, validate every change, and keep people and AI agents working from the same model.
 
@@ -52,4 +52,4 @@ Try it in the [Meshery Playground](https://play.meshery.io), and join the commun
 
 ---
 
-*Sources: [Portainer 3 is Kubernetes-first, not Kubernetes-only](https://www.portainer.io/blog/portainer-3-is-kubernetes-first-not-kubernetes-only) (Nov 6, 2026); [meshery.io](https://meshery.io); [Meshery on the CNCF](https://www.cncf.io/projects/meshery/); [Network World: Meshery 1.0 debuts](https://www.networkworld.com/article/4150130/meshery-1-0-debuts-offering-new-layer-of-control-for-cloud-native-infrastructure.html) (Mar 25, 2026). Facts checked November 11, 2026.*
+*Sources: [Portainer 3 is Kubernetes-first, not Kubernetes-only](https://www.portainer.io/blog/portainer-3-is-kubernetes-first-not-kubernetes-only) (Nov 6, 2026); [meshery.io](https://meshery.io); [Meshery becomes a CNCF Incubating project](https://www.cncf.io/blog/2026/10/07/meshery-becomes-a-cncf-incubating-project/) (CNCF, Oct 7, 2026); [Meshery on the CNCF](https://www.cncf.io/projects/meshery/); [Network World: Meshery 1.0 debuts](https://www.networkworld.com/article/4150130/meshery-1-0-debuts-offering-new-layer-of-control-for-cloud-native-infrastructure.html) (Mar 25, 2026). Facts checked November 11 and 16, 2026.*
