@@ -7,6 +7,7 @@
 let searchData = null;
 let searchDataPromise = null;
 let currentSearchVersion = 0;
+let handleSearchInput = null;
 
 // Pagination state
 const RESULTS_PER_PAGE = 20;
@@ -26,9 +27,33 @@ function withBaseUrl(path, customBaseUrl = siteBaseUrl) {
   return `${customBaseUrl}${path}`;
 }
 
-// Safely decode common HTML entities before indexing or searching
+// Normalize typographic curly quotes and apostrophes to standard ASCII quotes
+function normalizeQuotes(str) {
+  if (!str || typeof str !== 'string') return '';
+  return str
+    .replace(/[\u2018\u2019\u201A\u201B`]/g, "'")
+    .replace(/[\u201C\u201D\u201E\u201F]/g, '"');
+}
+
+// Safely decode common HTML entities before indexing or searching.
+// Uses a DOM textarea element in the browser for complete entity decoding,
+// keeping an extended fallback map for non-DOM environments (e.g. Node.js unit tests).
 function decodeHTMLEntities(str) {
   if (!str || typeof str !== 'string') return '';
+  if (!str.includes('&')) return str;
+
+  // In browser / DOM environment, use a textarea element for comprehensive decoding
+  if (typeof document !== 'undefined' && typeof document.createElement === 'function') {
+    try {
+      const textarea = document.createElement('textarea');
+      textarea.innerHTML = str;
+      return textarea.value;
+    } catch {
+      // Fall through to fallback map if textarea fails
+    }
+  }
+
+  // Non-DOM fallback (e.g. Node.js test environment)
   const entityMap = {
     '&amp;': '&',
     '&lt;': '<',
@@ -36,11 +61,29 @@ function decodeHTMLEntities(str) {
     '&quot;': '"',
     '&#39;': "'",
     '&#x27;': "'",
+    '&apos;': "'",
     '&#x2f;': '/',
     '&#47;': '/',
-    '&nbsp;': ' '
+    '&nbsp;': ' ',
+    '&rsquo;': '’',
+    '&#8217;': '’',
+    '&lsquo;': '‘',
+    '&#8216;': '‘',
+    '&rdquo;': '”',
+    '&#8221;': '”',
+    '&ldquo;': '“',
+    '&#8220;': '“',
+    '&hellip;': '…',
+    '&#8230;': '…',
+    '&mdash;': '—',
+    '&#8212;': '—',
+    '&ndash;': '–',
+    '&#8211;': '–',
   };
-  return str.replace(/&(?:amp|lt|gt|quot|#39|#x27|#x2f|#47|nbsp);/gi, match => entityMap[match.toLowerCase()] || match);
+  return str.replace(
+    /&(?:amp|lt|gt|quot|#39|#x27|apos|#x2f|#47|nbsp|rsquo|lsquo|rdquo|ldquo|hellip|mdash|ndash|#8217|#8216|#8221|#8220|#8230|#8212|#8211);/gi,
+    match => entityMap[match.toLowerCase()] || match
+  );
 }
 
 function escapeHTML(str) {
@@ -98,7 +141,7 @@ function cleanToken(token) {
 // Tokenize query into normalized, deduplicated search tokens
 function extractQueryTokens(query) {
   if (!query || typeof query !== 'string') return [];
-  const lowerQuery = query.toLowerCase().trim();
+  const lowerQuery = normalizeQuotes(query).toLowerCase().trim();
   if (!lowerQuery) return [];
 
   const rawTokens = lowerQuery
@@ -146,11 +189,11 @@ async function loadSearchData() {
         ? post.categories.map(cat => decodeHTMLEntities(String(cat)))
         : [];
 
-      const lowerTitle = decodedTitle.toLowerCase();
-      const lowerExcerpt = decodedExcerpt.toLowerCase();
-      const lowerSnippet = decodedSnippet.toLowerCase();
-      const lowerAuthor = decodedAuthor.toLowerCase();
-      const lowerCategories = decodedCategories.map(c => c.toLowerCase());
+      const lowerTitle = normalizeQuotes(decodedTitle).toLowerCase();
+      const lowerExcerpt = normalizeQuotes(decodedExcerpt).toLowerCase();
+      const lowerSnippet = normalizeQuotes(decodedSnippet).toLowerCase();
+      const lowerAuthor = normalizeQuotes(decodedAuthor).toLowerCase();
+      const lowerCategories = decodedCategories.map(c => normalizeQuotes(c).toLowerCase());
 
       // Precompute word sets for fast word-boundary checking
       const titleWords = new Set(lowerTitle.split(/[^a-z0-9+]+/).filter(Boolean));
@@ -205,11 +248,11 @@ function ensureSearchDataLoaded() {
 }
 
 function getSearchFields(post) {
-  const title = post._searchTitle ?? decodeHTMLEntities(post.title || '').toLowerCase();
-  const snippet = post._searchSnippet ?? post._searchExcerpt ?? decodeHTMLEntities(post.snippet || post.excerpt || '').toLowerCase();
-  const excerpt = post._searchExcerpt ?? decodeHTMLEntities(post.excerpt || '').toLowerCase();
-  const categories = post._searchCategories ?? (Array.isArray(post.categories) ? post.categories.map(c => decodeHTMLEntities(String(c)).toLowerCase()) : []);
-  const author = post._searchAuthor ?? decodeHTMLEntities(post.author || '').toLowerCase();
+  const title = post._searchTitle ?? normalizeQuotes(decodeHTMLEntities(post.title || '')).toLowerCase();
+  const snippet = post._searchSnippet ?? post._searchExcerpt ?? normalizeQuotes(decodeHTMLEntities(post.snippet || post.excerpt || '')).toLowerCase();
+  const excerpt = post._searchExcerpt ?? normalizeQuotes(decodeHTMLEntities(post.excerpt || '')).toLowerCase();
+  const categories = post._searchCategories ?? (Array.isArray(post.categories) ? post.categories.map(c => normalizeQuotes(decodeHTMLEntities(String(c))).toLowerCase()) : []);
+  const author = post._searchAuthor ?? normalizeQuotes(decodeHTMLEntities(post.author || '')).toLowerCase();
   const titleWords = post._titleWords ?? new Set(title.split(/[^a-z0-9+]+/).filter(Boolean));
   const snippetWords = post._snippetWords ?? new Set(snippet.split(/[^a-z0-9+]+/).filter(Boolean));
 
@@ -227,18 +270,19 @@ function getSearchFields(post) {
 // Relevance scoring: Title > Categories > Author > Snippet/Excerpt
 function scorePost(post, tokens, lowerQuery) {
   const fields = getSearchFields(post);
+  const normalizedQuery = normalizeQuotes(lowerQuery).toLowerCase().trim();
   let score = 0;
   let matchedTokens = 0;
 
   // 1. Exact full query matches (highest priority)
-  if (lowerQuery) {
-    if (fields.title === lowerQuery) {
+  if (normalizedQuery) {
+    if (fields.title === normalizedQuery) {
       score += 150;
-    } else if (fields.title.includes(lowerQuery)) {
+    } else if (fields.title.includes(normalizedQuery)) {
       score += 60;
     }
 
-    if (fields.snippet.includes(lowerQuery)) {
+    if (fields.snippet.includes(normalizedQuery)) {
       score += 5;
     }
   }
@@ -296,7 +340,7 @@ function scorePost(post, tokens, lowerQuery) {
 function performClientSearch(query, data = searchData) {
   if (!data || !query) return [];
 
-  const lowerQuery = query.toLowerCase().trim();
+  const lowerQuery = normalizeQuotes(query).toLowerCase().trim();
   const tokens = extractQueryTokens(lowerQuery);
   if (tokens.length === 0) return [];
 
@@ -367,7 +411,10 @@ function highlightText(text, query) {
   if (tokens.length === 0) return escapeHTML(safeText);
 
   const pattern = tokens
-    .map(escapeRegex)
+    .map(token => {
+      const escaped = escapeRegex(token);
+      return escaped.replace(/'/g, "['\u2018\u2019]");
+    })
     .sort((a, b) => b.length - a.length)
     .join('|');
 
@@ -587,7 +634,7 @@ function syncQueryToUrl(query) {
 // Clear search and show original posts without page reload
 function clearSearch() {
   // Cancel pending debounce and invalidate in-flight searches
-  if (typeof handleSearchInput?.cancel === 'function') {
+  if (handleSearchInput && typeof handleSearchInput.cancel === 'function') {
     handleSearchInput.cancel();
   }
   currentSearchVersion++;
@@ -595,6 +642,11 @@ function clearSearch() {
   currentSearchResults = [];
   currentRenderedCount = 0;
   activeSearchQuery = '';
+
+  if (typeof document === 'undefined') {
+    syncQueryToUrl('');
+    return;
+  }
 
   const searchInput = document.getElementById('blog-search-input');
   const clearButton = document.getElementById('clear-search-btn');
@@ -722,7 +774,7 @@ async function executeSearch(query) {
 }
 
 // Handle search input
-const handleSearchInput = debounce(function(event) {
+handleSearchInput = debounce(function(event) {
   const query = event.target.value.trim();
   const clearButton = document.getElementById('clear-search-btn');
 
@@ -841,6 +893,7 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     escapeHTML,
     decodeHTMLEntities,
+    normalizeQuotes,
     cleanToken,
     extractQueryTokens,
     escapeRegex,

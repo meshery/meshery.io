@@ -6,6 +6,7 @@ const { test } = require('node:test');
 const {
   escapeHTML,
   decodeHTMLEntities,
+  normalizeQuotes,
   cleanToken,
   extractQueryTokens,
   escapeRegex,
@@ -436,14 +437,70 @@ test('extractQueryTokens preserves technical terms like C++', () => {
   assert.ok(tokens.includes('performance'));
 });
 
-test('decodeHTMLEntities properly decodes common HTML entities', () => {
+test('decodeHTMLEntities properly decodes common HTML entities including typography', () => {
   assert.equal(
     decodeHTMLEntities('&amp; &lt; &gt; &quot; &#39; &#x27;'),
     '& < > " \' \''
   );
+  assert.equal(
+    decodeHTMLEntities('don&rsquo;t &ldquo;quote&rdquo; &hellip; &mdash; &ndash;'),
+    'don’t “quote” … — –'
+  );
   assert.equal(decodeHTMLEntities('Plain Text'), 'Plain Text');
   assert.equal(decodeHTMLEntities(''), '');
   assert.equal(decodeHTMLEntities(null), '');
+});
+
+test('decodeHTMLEntities uses DOM textarea when document is available', () => {
+  global.document = {
+    createElement(tag) {
+      if (tag === 'textarea') {
+        let value = '';
+        return {
+          set innerHTML(html) {
+            value = html.replace(/&rsquo;/g, '’').replace(/&amp;/g, '&');
+          },
+          get value() {
+            return value;
+          }
+        };
+      }
+      return {};
+    }
+  };
+
+  try {
+    const result = decodeHTMLEntities('Meshery &amp; don&rsquo;t fail');
+    assert.equal(result, 'Meshery & don’t fail');
+  } finally {
+    delete global.document;
+  }
+});
+
+test('performClientSearch matches plain-text queries adjacent to HTML entities like &rsquo; (e.g. don\'t)', () => {
+  const sampleData = [
+    {
+      id: 'post-with-entity',
+      title: 'Cloud Native Troubleshooting',
+      url: '/blog/troubleshooting/',
+      date: '2026-01-01',
+      excerpt: 'If it don&rsquo;t connect&mdash;check your proxy.',
+    },
+  ];
+
+  const results = performClientSearch("don't", sampleData);
+  assert.equal(results.length, 1);
+  assert.equal(results[0].id, 'post-with-entity');
+
+  const dashResults = performClientSearch('proxy', sampleData);
+  assert.equal(dashResults.length, 1);
+  assert.equal(dashResults[0].id, 'post-with-entity');
+});
+
+test('clearSearch does not throw ReferenceError due to temporal dead zone', () => {
+  assert.doesNotThrow(() => {
+    clearSearch();
+  });
 });
 
 test('highlightText safely handles special characters like C++ and parenthesis', () => {
