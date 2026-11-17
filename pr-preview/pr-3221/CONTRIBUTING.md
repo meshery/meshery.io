@@ -76,10 +76,10 @@ color: var(--color-primary-light);
 To change the background color in CSS, you can use:
 
 ```css
-background: var(--background-primary);
+background: var(--background-light);
 ```
 
-These global variables will change automatically based on the theme selection. This is done by modifying the `body` class list.
+Some CSS custom properties change automatically based on the selected theme when the `body` class changes, while others remain fixed. For example, `--background-primary` remains the same across themes, whereas `--background-light` has different values for light and dark themes.
 
 ## Changing images according to the theme
 The Meshery.io website contains icons for various organizations, and these are set to change according to the website theme.
