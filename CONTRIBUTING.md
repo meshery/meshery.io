@@ -53,20 +53,22 @@ We welcome everyone to review Pull Requests. It is a great way to learn, network
 The Meshery.io site is built using Jekyll and Javascript.
 
 ## Working with themes
-To differentiate between dark and light theme components, a base file ```rootvariables.scss``` has been created. It contains global CSS variables that can be accessed by using the ```var()``` keyword during styling elements. This file powers all the different styles (including font colors, background colors, image filters and image backgrounds) based on theme changes.
+To differentiate between light and dark theme components, the theme variables are defined in `_sass/rootvariables.scss`.
 
-It is advised to use these predefined styles for contributing to different features on the website that are theme dependent. Avoid creating your own CSS variables.
+The `:root` selector defines the default CSS custom properties, while the `.dark-mode` selector overrides the relevant properties for dark mode. These variables control different styles, including text colors, background colors, image filters, and image backgrounds.
+
+Use these predefined CSS custom properties when styling theme-dependent elements. Access them with the `var()` function, and avoid creating duplicate CSS variables.
 
 ### Example
 
 To change the text color in CSS, this can be used:
 
-```
+```css
 color: var(--color-primary-light);
 ```
 
 To change the background color in CSS, this can be executed:
-```
+```css
 background: var(--background-primary);
 ```
 
