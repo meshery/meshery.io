@@ -7,7 +7,7 @@ categories:
   - meshery
   - models
   - designs
-redirect_from: /blog/lego-bricks-and-lego-instructions
+redirect_from: /blog/lego-bricks-and-lego-instructions/
 featured-image: /assets/images/posts/2024/2024-03-29-models-designs-legos/five-legos.png
 ---
 
@@ -33,7 +33,7 @@ Meshery Models are packages that contain infrastructure components with specific
 - **Usability:** Not directly deployable, but used as building blocks within Designs.
 - **Sharing:** Can be packaged and shared for others to use in their Designs.
 
-<img alt="Meshery Catalog" src="/assets/images/posts/2024/2024-03-29-models-designs-legos/five-legos-nobg.png" width="100%" />
+<img alt="Illustration of individual Lego bricks representing Meshery Models" src="/assets/images/posts/2024/2024-03-29-models-designs-legos/five-legos-nobg.png" style="border: 0px; width: 100%; max-width: 400px; height: auto; margin: 0 auto; display: block;" class="dark-mode-contrast" />
 Meshery Models are like the individual Lego bricks - they define the building blocks for infrastructure with specific characteristics.
 
 ## Meshery Designs (similar to Lego instructions)
@@ -48,7 +48,7 @@ In essence:
 - **Sharing:** Can be exported, versioned, shared, and published for reuse by others.
 
 
-<img alt="Meshery Catalog" src="/assets/images/posts/2024/2024-03-29-models-designs-legos/five-instructions.png" style="border: 0px; width: 179px; height: 300px; margin: 0px; float: right;" />
+<img alt="Illustration of a figure reading Lego instructions representing Meshery Designs" src="/assets/images/posts/2024/2024-03-29-models-designs-legos/five-instructions.png" style="border: 0px; width: 100%; max-width: 180px; height: auto; margin: 0 auto; display: block;" class="dark-mode-contrast" />
 Meshery Designs are like the Lego instructions - they use Models (like bricks) to lay out the specific infrastructure deployment plan.
 
 **Analogy:** Think of Models as Lego bricks (defining types of pieces) and Designs as Lego instructions (defining how to build something specific). In summary, Meshery Models serve as the theoretical frameworks, while Meshery Designs translate these frameworks into tangible deployments, enabling you to design, deploy, and manage your infrastructure efficiently within the cloud and cloud native ecosystem.

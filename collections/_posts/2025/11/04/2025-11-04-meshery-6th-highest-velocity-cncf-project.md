@@ -8,7 +8,7 @@ published: true
 categories:
   - community
   - milestones
-permalink: /blog/sixth-highest-velocity-cncf-project
+permalink: /blog/sixth-highest-velocity-cncf-project/
 featured-image: /assets/images/posts/2025/sixth-highest-velocity-cncf-project/6th-highest-velocity-project-out-of-237-cncf-projects.png
 ---
 

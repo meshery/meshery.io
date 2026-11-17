@@ -2,18 +2,21 @@
 layout: page
 permalink: /blog/category/
 redirect_from:
-  - /blog/categories
+- /blog/categories
 published: true
 title: Blog Categories
 ---
-<div style="display: flex; justify-content: center;"><div style="max-width: 50%">
-<ul>Category: 
-  {% assign sorted_categories = site.categories | sort %}
-  
-  {% for category in sorted_categories %}
-    <li>
-        <a href="{{ site.baseurl }}/category/{{ category[0] | slugify }}"> {{ category[0] | downcase }} ({{ category[1].size }})</a>
+<div class="blog-categories">
+  <h1 class="blog-categories__title">Blog Categories</h1>
+  <ul class="blog-categories__list">
+    {% assign sorted_categories = site.categories | sort %}
+    {% for category in sorted_categories %}
+    <li class="blog-categories__item">
+      <a href="{{ site.baseurl }}/blog/category/{{ category[0] | slugify }}/">
+        <span class="blog-categories__name">{{ category[0] | downcase }}</span>
+        <span class="blog-categories__count">{{ category[1].size }}</span>
+      </a>
     </li>
-  {% endfor %}
-</ul>
-</div></div>
+    {% endfor %}
+  </ul>
+</div>
