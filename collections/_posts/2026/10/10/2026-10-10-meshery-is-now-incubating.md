@@ -12,7 +12,7 @@ categories:
   - open-source
 ---
 
-It is official: the **Cloud Native Computing Foundation (CNCF) Technical Oversight Committee has voted to accept Meshery as an Incubating project**! This marks a massive milestone in our journey from a Sandbox project to becoming the premier cloud native manager and infrastructure management platform. 
+It is official: the **Cloud Native Computing Foundation (CNCF) Technical Oversight Committee has voted to accept Meshery as an Incubating project**! This marks a massive milestone in our journey from a Sandbox project to becoming the premier cloud native manager and infrastructure management platform.
 
 ## Project Pulse
 

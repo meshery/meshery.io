@@ -14,7 +14,7 @@
 
 <div align="center">
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/meshery/meshery.svg)](https://hub.docker.com/r/meshery/meshery-io)
+[![Docker Pulls](https://img.shields.io/docker/pulls/meshery/meshery.svg)](https://hub.docker.com/r/meshery/meshery)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/meshery/meshery.io/jekyll.yml?branch=master)](https://github.com/meshery/meshery.io/actions)
 [![GitHub](https://img.shields.io/github/license/meshery/meshery.svg)](LICENSE)
 [![GitHub issues by-label](https://img.shields.io/github/issues/meshery/meshery/help%20wanted.svg)](https://github.com/issues?q=is%3Aopen%20is%3Aissue%20archived%3Afalse%20(org%3Ameshery%20OR%20org%3Aservice-mesh-performance%20OR%20org%3Aservice-mesh-patterns%20OR%20org%3Ameshery-extensions)%20label%3A%22help%20wanted%22)
@@ -153,7 +153,7 @@ On Windows (such as when using Git Bash), `make` is not included by default and 
 
 - After making changes, don't forget to commit with the sign-off flag (-s)
   ```bash
-  $ git commit -s -m “my commit message w/signoff”
+  git commit -s -m "my commit message w/signoff"
   ```
 - Once all changes have been committed, push the changes.
   ```bash
