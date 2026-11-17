@@ -7,7 +7,7 @@ categories:
   - community
   - open-source
 featured-image: /assets/images/posts/2025/certified-meshery-contributor/certified-meshery-contributor-hero.png
-redirect_from: /blog/certified-meshery-contributors-share-their-experience
+redirect_from: /blog/certified-meshery-contributors-share-their-experience/
 ---
 
 The launch of the [Certified Meshery Contributor (CMC)](https://cloud.meshery.io/academy/certifications/c5ada327-8a58-4c8a-b9fa-51b95696488c/certified-meshery-contributor) certification marked an important milestone for the Meshery project — the first CNCF certification of its kind - designed to uplevel and validate the skills of contributors, who are actively shaping the Meshery ecosystem through real, hands-on open source work. Following the [announcement](/blog/2025/10/2025-10-27-certified-meshery-contributor/), contributors from across the community stepped forward to take the CMC and share their journey. In this post, Certified Meshery Contributors talk about what the certification was really like, what they learned along the way, and why they believe the CMC is worth pursuing.
