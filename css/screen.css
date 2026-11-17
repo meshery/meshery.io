@@ -2325,8 +2325,25 @@ a.nav-text:hover {
 }
 .menu-toggle .bars span {
   background-color: var(--color-secondary-dark) !important;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
 }
 
+.stellarnav.active .menu-toggle .bars span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.stellarnav.active .menu-toggle .bars span:nth-child(2) {
+  opacity: 0;
+}
+.stellarnav.active .menu-toggle .bars span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-toggle .bars span {
+    transition: none !important;
+  }
+}
 .stellarnav.mobile .menu-toggle {
   display: inline-flex;
   cursor: pointer;
