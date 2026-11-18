@@ -6,7 +6,7 @@ author: The Newsroom
 categories:
   - announcements
   - cloud-native
-redirect_from: /blog/service-mesh-offers-promising-solution-for-cloud-native-networking
+redirect_from: /blog/service-mesh-offers-promising-solution-for-cloud-native-networking/
 ---
 <div style="text-align:center;margin-bottom:0.75rem;">
   <img src="{{site.baseurl}}/assets/images/posts/2020/2020-12-04-service-mesh-offers-promising-solution-for-cloud-native-networking/service-mesh.png" alt="service-mesh" width="100%"  />

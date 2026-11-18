@@ -7,7 +7,7 @@ categories:
   - mesheryctl
   - test
 featured-image: /assets/images/posts/2025/mesheryctl-e2e-introduction/downhill.png
-redirect_from: /blog/2025-10-30-mesheryctl-e2e-introduction
+redirect_from: /blog/2025-10-30-mesheryctl-e2e-introduction/
 ---
 
 You want to create a test for a new or existing Meshery command? Good. This tutorial explains how to do so. In this tutorial, we will introduce mesheryctl end-to-end testing using **B**ash **A**utomating **T**esting **S**ystem (**BATS**).

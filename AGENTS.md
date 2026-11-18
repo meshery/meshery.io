@@ -70,6 +70,22 @@ Every night, the integration publish step rewrites the entire `collections/_mode
 - Sign off every commit for DCO: `git commit -s -m "Describe the change"`.
 - Follow the repository's [pull request template](.github/PULL_REQUEST_TEMPLATE.md).
 
+## Worktrees and landing a change
+
+- **Work in a treehouse worktree, never in the main clone.** Other agent sessions and the
+  no-mistakes pipeline share the main clone. Take a worktree with
+  `treehouse get --lease -b <branch>` (it prints the path; `--base <branch>` starts it from
+  another branch), work there, and release it with `treehouse return <path>` once the change
+  has merged. `treehouse status` lists the pool. Never make one with `git worktree add` or a
+  second clone.
+- **Land every change through no-mistakes, at most three runs per pull request.** Commit in
+  the worktree, then run `no-mistakes axi run --intent "<goal>"` (a clone without a
+  `no-mistakes` remote needs `no-mistakes init` once). `no-mistakes axi status` shows the step
+  and its findings, and `no-mistakes axi respond` answers a review gate. The pipeline reviews,
+  tests, pushes and opens the pull request. After the third run, merge the pull request as it
+  stands and open an issue for anything still flagged. A run that stopped on a usage limit
+  counts; one cancelled before it did anything does not.
+
 ## Repository boundaries
 
 Meshery.io is a public-facing website, not the canonical source for product documentation, the Meshery application, catalog data, or project governance. Use [VISION.md](VISION.md#principles) and [VISION.md](VISION.md#boundaries-and-non-goals) for the full scope and decision framework.

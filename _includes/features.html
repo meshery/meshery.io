@@ -1,4 +1,4 @@
-<section id="relationships" style="display:block;margin-top:3rem;margin-bottom:0rem;padding-bottom:0rem;">
+<section id="relationships" style="display:block;">
     <div class="container flex" style="align-items: normal;"  >
         <div class="text" style="padding: 0 20px 20px 0;">
 
@@ -17,7 +17,7 @@
           </div>
           <div id="carousel">
             {% include partials/relationships.html %}
-            </div>
+          </div>
         
         </div>
     </div>
@@ -32,7 +32,7 @@
 <section class="catalog-preview-section">
     <div class="container flex">
         <div class="text">
-<div style="display: flex;">
+            <div style="display: flex;">
                 <img src="{{ '/assets/images/patterns/service-mesh-patterns-side-white.png' | relative_url }}"
                      data-logo-for-light="{{ '/assets/images/patterns/service-mesh-patterns-side.svg' | relative_url }}"
                      data-logo-for-dark="{{ '/assets/images/patterns/service-mesh-patterns-side-white.png' | relative_url }}"
@@ -146,3 +146,67 @@
 </section>
 
 {% include partials/home-where-fits.html %}
+
+
+<script>
+    window.onload = function() {
+        document.querySelector('.tab button.active').click();
+    };
+    let timeoutId;
+    let isHovering = false;
+    let resumeCarousel = null;
+
+    document.getElementById("carousel").addEventListener("mouseenter", function() {
+        isHovering = true;
+        clearTimeout(timeoutId);
+    });
+
+    document.getElementById("carousel").addEventListener("mouseleave", function() {
+        isHovering = false;
+        if (resumeCarousel) resumeCarousel();
+    });
+
+    function openTab(evt, relationshipType) {
+        const tabContent = document.getElementsByClassName("tabcontent");
+        const tabLinks = document.getElementsByClassName("tablinks");
+
+        for (const content of tabContent) { content.style.display = "none"; }
+
+        for (const link of tabLinks) { link.classList.remove("active"); }
+
+        evt.currentTarget.classList.add("active");
+
+        clearTimeout(timeoutId);
+        resumeCarousel = null;
+        displayRelationships(relationshipType);
+    }
+
+    function displayRelationships(relationshipType) {
+        const images = document.getElementsByClassName(relationshipType);
+
+        if (images.length === 0) return;
+        
+
+        let index = 0;
+
+        function displayNextImage() {
+            for (const image of images) { image.style.display = "none"; }
+
+            images[index].style.display = "block";
+            index = (index + 1) % images.length;
+
+            if (images.length > 1 && !isHovering) {
+                timeoutId = setTimeout(displayNextImage, 3000);
+            }
+        }
+
+        resumeCarousel = function() {
+            if (images.length > 1) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(displayNextImage, 3000);
+            }
+        };
+
+        displayNextImage();
+    }      
+</script>
