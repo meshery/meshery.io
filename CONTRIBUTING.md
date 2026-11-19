@@ -30,7 +30,7 @@ Before working on an existing Issue please follow these steps:
 >
 > - Check the `Assignees` box at the top of the page to see if the Issue has been assigned to someone else before requesting this be assigned to you. If the Issue has a current Assignee, but appears to be inactive, politely inquire with the current Assignee as to whether they are still working on a solution and/or if you might collaborate with them.
 > - Only request to be assigned an Issue if you know how to work on it.
-> - If an Issue is unclear, ask questions to get more clarity before asking to have the Issue assigned to you; avoid asking "what do I do next? how do I fix this?" (see the item above this line)
+> - If an Issue is unclear, ask questions to get more clarity before asking to have the Issue assigned to you; avoid asking "what do I do next? how do I fix this?" (see the preceding assignment guidance)
 > - An Issue can be assigned to multiple people if you all agree to collaborate on the Issue (the Pull Request can contain commits from different collaborators).
 > - Any Issue that has no activity after 2 weeks will be unassigned and reassigned to someone else.
 
