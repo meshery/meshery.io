@@ -189,6 +189,27 @@ collection: models
     <!-- Scripts -->
     <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
     <script src="{{ site.baseurl }}/assets/js/thumbnail-clickable.js"></script>
+    <script>
+      // Swap theme-aware images (the model icon and the component icons)
+      // when the theme changes. The header dispatches `themeChange` on load
+      // and on every toggle; the body class is the source of truth for the
+      // current theme, so first visits (no stored mode) render correctly too.
+      // Images without a dark variant keep their light source.
+      function syncModelIcons() {
+        var dark = document.body.classList.contains("dark-mode");
+        document.querySelectorAll("img[data-snapshot-dark]").forEach(function (img) {
+          var light = img.dataset.snapshotLight;
+          var darkSrc = img.dataset.snapshotDark;
+          if (dark && darkSrc) {
+            img.src = darkSrc;
+          } else if (!dark && light) {
+            img.src = light;
+          }
+        });
+      }
+      document.addEventListener("themeChange", syncModelIcons);
+      syncModelIcons();
+    </script>
 
   </div> <!-- End post-content -->
 
@@ -212,7 +233,10 @@ collection: models
       <div style="display: flex; flex-wrap: wrap; gap: 1rem;justify-content: center;">
         {% for component in page.components %}
         <div style="text-align: center; width: 150px;">
-          <img src="{{site.baseurl}}/{{ component.colorIcon }}" onerror="this.src='/assets/images/meshery-color.svg'"
+          <img class="component-icon" src="{{site.baseurl}}/{{ component.colorIcon }}"
+            data-snapshot-light="{{site.baseurl}}/{{ component.colorIcon }}"
+            data-snapshot-dark="{{site.baseurl}}/{{ component.whiteIcon | default: component.colorIcon }}"
+            onerror="this.src='/assets/images/meshery-color.svg'"
             style="width: 100px; height: 100px; object-fit: contain;" loading="lazy" alt="{{ component.name }}" />
           <p><strong>{{ component.name }}</strong></p>
         </div>
