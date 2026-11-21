@@ -1,7 +1,7 @@
 ---
 layout: program-index
 title: "LFX Mentorship"
-subtitle: "Linux Foundation Mentorship with Meshery"
+subtitle: "Gain hands-on experience contributing to cloud native projects with guidance from experienced mentors."
 image: /assets/images/programs/lfx-icon-color.svg
 imageDark: /assets/images/programs/lfx-icon-white.svg
 program_slug: /programs/lfx/
