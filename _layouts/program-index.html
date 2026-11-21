@@ -3,12 +3,23 @@ layout: default
 ---
 
 <div class="page text-container">
-    <div class="program-heading">
-        <h1>{{ page.title }}</h1>
-        <h2 style="text-align: center;">{{ page.subtitle }}</h2>
-    </div>
+<div class="program-heading">
+    <h1>{{ page.title }}</h1>
 
-    <div class="cover" style="z-index: 20">
+    {% if page.url contains '/programs/lfx' %}
+        <h2 style="text-align: center;">
+            Gain hands-on experience contributing to cloud native projects with guidance from experienced mentors.
+        </h2>
+    {% elsif page.url contains '/programs/gsoc' %}
+        <h2 style="text-align: center;">
+            Collaborate with mentors to develop open source software and build real-world coding skills.
+        </h2>
+    {% else %}
+        <h2 style="text-align: center;">{{ page.subtitle }}</h2>
+    {% endif %}
+</div>
+
+
         <div class="project-details" style="max-width: 800px; margin: 0 auto;">
             <div class="card-content" style="margin-bottom: 2rem; display: flex; justify-content: center;">
                 <img class="logo-dark-light"
@@ -20,6 +31,9 @@ layout: default
         </div>
 
         <h3 class="cohort_title">Programs by Year</h3>
+
+
+
 
         <div class="project-details" style="max-width: 800px; margin: 0 auto;">
             {% assign program_pages = site.programs | where_exp: "item", "item.url contains page.program_slug" |
