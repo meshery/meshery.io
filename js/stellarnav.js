@@ -223,7 +223,6 @@ $.fn.stellarNav = function(options, width, breakpoint) {
       // Close when Escape is pressed
       $(document).on('keydown' + navEventNamespace, function(event) {
         if (event.key === 'Escape') {
-          closeMobileMenu();
           var focusWasInsideNav = $(event.target).closest(nav).length > 0;
           closeMobileMenu();
           if (focusWasInsideNav) {
