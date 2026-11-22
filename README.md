@@ -18,7 +18,7 @@
 [![Build Status](https://img.shields.io/github/actions/workflow/status/meshery/meshery.io/jekyll.yml?branch=master)](https://github.com/meshery/meshery.io/actions)
 [![GitHub](https://img.shields.io/github/license/meshery/meshery.svg)](LICENSE)
 [![GitHub issues by-label](https://img.shields.io/github/issues/meshery/meshery/help%20wanted.svg)](https://github.com/issues?q=is%3Aopen%20is%3Aissue%20archived%3Afalse%20(org%3Ameshery%20OR%20org%3Aservice-mesh-performance%20OR%20org%3Aservice-mesh-patterns%20OR%20org%3Ameshery-extensions)%20label%3A%22help%20wanted%22)
-[![Website](https://img.shields.io/website/https/meshery.io/meshery.svg)](https://meshery.io/)
+[![Website](https://img.shields.io/website?url=https:%2F%2Fmeshery.io)](https://meshery.io/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/mesheryio)](https://twitter.com/intent/follow?screen_name=mesheryio)
 [![Discuss Users](https://img.shields.io/discourse/users?server=https%3A%2F%2Fdiscuss.meshery.io)](https://discuss.meshery.io)
 [![Slack](https://img.shields.io/badge/Slack-@meshery.svg?logo=slack)](https://slack.meshery.io)
@@ -93,7 +93,7 @@ Find out more about the <a href="https://meshery.io/community">Meshery community
 
 ## Contributing to the Meshery.io Website
 
-Before contributing, please review the [Contribution Flow](https://github.com/meshery/meshery/blob/master/CONTRIBUTING.md) and this repository's [CONTRIBUTING.md](CONTRIBUTING.md). In the following steps, you will setup your development environment, fork and clone the repository, run the site locally, and finally commit, sign off, and push any changes made for review.
+Before contributing, please review the [Contribution Flow](https://github.com/meshery/meshery/blob/master/CONTRIBUTING.md) and this repository's [CONTRIBUTING.md](CONTRIBUTING.md). In the following steps, you will set up your development environment, fork and clone the repository, run the site locally, and finally commit, sign off, and push any changes made for review.
 
 ### 1. Set up your development environment
 
