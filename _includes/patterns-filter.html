@@ -147,7 +147,7 @@
   {% endif %}
   <p id="category-para" class="category-para">
     <span class="filter-heading">
-      <strong>Categories:</strong>
+      <strong>Categories <span class="category-icon" onclick="toggleCategoryDisplay()">▼</span></strong>
       <button
         type="button"
         class="sort-btn"
@@ -162,7 +162,14 @@
   </p>
   <div id="category-div" class="category-div" style="padding-right: 1.25rem;"></div>
 </div>
-
+<script>
+  function toggleCategoryDisplay() {
+    const icon = document.querySelector(".category-icon");
+    const container = document.getElementById("category-div");
+    const isOpen = container.classList.toggle("category-open");
+    icon.textContent = isOpen ? "▲" : "▼";
+  }
+</script>
 <script type="module">
   const pageKey = window.location.pathname;
 
@@ -327,7 +334,7 @@
     inputContainer.appendChild(label);
     categoryContainer.appendChild(inputContainer);
   }
-
+  
     // remove duplicate entries of integrations in filter section
   // Maintain a list of filterEntries, whenever you come across a new one, add it to list, else if the filter already exists in the list skip the further process of creating nodes
   const filterEntries = [];
