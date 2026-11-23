@@ -375,7 +375,39 @@ components:
   colorIcon: assets/images/integration/vault-config-operator/components/userpass-auth-engine-user/icons/color/userpass-auth-engine-user-color.svg
   whiteIcon: assets/images/integration/vault-config-operator/components/userpass-auth-engine-user/icons/white/userpass-auth-engine-user-white.svg
   description: 
-componentsCount: 91
+- name: cors-config
+  colorIcon: assets/images/integration/vault-config-operator/components/cors-config/icons/color/cors-config-color.svg
+  whiteIcon: assets/images/integration/vault-config-operator/components/cors-config/icons/white/cors-config-white.svg
+  description: 
+- name: key-rotation-config
+  colorIcon: assets/images/integration/vault-config-operator/components/key-rotation-config/icons/color/key-rotation-config-color.svg
+  whiteIcon: assets/images/integration/vault-config-operator/components/key-rotation-config/icons/white/key-rotation-config-white.svg
+  description: 
+- name: lease-count-quota
+  colorIcon: assets/images/integration/vault-config-operator/components/lease-count-quota/icons/color/lease-count-quota-color.svg
+  whiteIcon: assets/images/integration/vault-config-operator/components/lease-count-quota/icons/white/lease-count-quota-white.svg
+  description: 
+- name: logger-config
+  colorIcon: assets/images/integration/vault-config-operator/components/logger-config/icons/color/logger-config-color.svg
+  whiteIcon: assets/images/integration/vault-config-operator/components/logger-config/icons/white/logger-config-white.svg
+  description: 
+- name: quota-config
+  colorIcon: assets/images/integration/vault-config-operator/components/quota-config/icons/color/quota-config-color.svg
+  whiteIcon: assets/images/integration/vault-config-operator/components/quota-config/icons/white/quota-config-white.svg
+  description: 
+- name: rate-limit-quota
+  colorIcon: assets/images/integration/vault-config-operator/components/rate-limit-quota/icons/color/rate-limit-quota-color.svg
+  whiteIcon: assets/images/integration/vault-config-operator/components/rate-limit-quota/icons/white/rate-limit-quota-white.svg
+  description: 
+- name: rotation-policy
+  colorIcon: assets/images/integration/vault-config-operator/components/rotation-policy/icons/color/rotation-policy-color.svg
+  whiteIcon: assets/images/integration/vault-config-operator/components/rotation-policy/icons/white/rotation-policy-white.svg
+  description: 
+- name: ui-custom-header
+  colorIcon: assets/images/integration/vault-config-operator/components/ui-custom-header/icons/color/ui-custom-header-color.svg
+  whiteIcon: assets/images/integration/vault-config-operator/components/ui-custom-header/icons/white/ui-custom-header-white.svg
+  description: 
+componentsCount: 99
 relationships: 
 relationshipsCount: 0
 featureList: [

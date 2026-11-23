@@ -1,5 +1,7 @@
 ---
 layout: single-page-model
+redirect_from:
+  - /catalog/models/exoscale-icons
 item-type: model
 name: Exoscale Icons
 subtitle: A curated collection of high-quality icons designed by Exoscale.

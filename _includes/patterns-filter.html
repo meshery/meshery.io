@@ -1,70 +1,4 @@
 <style>
-  .dropbtn {
-    background-color: #00b39f;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-  }
-
-  #myInput {
-    box-sizing: border-box;
-    background-image: url("searchicon.png");
-    background-position: 14px 12px;
-    background-repeat: no-repeat;
-    font-size: 16px;
-    padding: 14px 20px 12px 45px;
-    border: none;
-    border-bottom: 1px solid #ddd;
-  }
-
-  #myInput:focus {
-    outline: 3px solid #ddd;
-  }
-
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f6f6f6;
-    min-width: 150px;
-    overflow: auto;
-    border: 1px solid #ddd;
-    z-index: 1;
-    left: -1rem;
-    margin-top: 0.3rem;
-  }
-
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-
-  .dropdown a:hover {
-    background-color: #ddd;
-    cursor: pointer;
-  }
-
-  .show {
-    display: block;
-  }
-  .arrow-icon-up {
-    transform: rotate(180deg);
-    transition: transform 10s linear;
-  }
-
-  .arrow-icon-down {
-    transform: rotate(0deg);
-    transition: transform 1s linear;
-  }
-
   #compatibility-div label,
   #category-div label,
   #cardpatterntype-div label {
@@ -193,24 +127,6 @@
 </style>
 
 <div class="filter-wrap">
-  <div class="dropdown">
-    <button onclick="handleDropdown()" class="dropbtn">
-     <svg  style="height: 1rem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-      <path fill="white" d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/>
-    </svg>
-      Filters
-      <svg id="arrow-icon" class="arrow-icon-down" style="height:1rem";" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-      <path  fill="white" d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/>
-      </svg>
-    </button>
-    <div id="myDropdown" class="dropdown-content">
-      <a id="category-li">Categories</a>
-      {% if show_technology=="true"%}
-      <a id="compatibility-li">Technologies</a>
-      {% endif %}
-    </div>
-  </div>
-  
   {% if show_technology=="true"%}
   <p id="compatibility-para" class="compatibility-para">
     <span class="filter-heading">
@@ -246,60 +162,7 @@
   </p>
   <div id="category-div" class="category-div" style="padding-right: 1.25rem;"></div>
 </div>
-<script>
 
-  var drop_button = document.getElementById("arrow-icon")
-  var open = true
-  function handleDropdown() {
-    document.getElementById("myDropdown").classList.toggle("show"); 
-    drop_button.style.transform = open ? "rotate(180deg)":"rotate(0deg)"
-    drop_button.style.transition = "transform 0.5s"
-    open = !open
-}
-  // target elements to toggle
-  var category_p = document.getElementById("category-para");
-  var category_div = document.getElementById("category-div");
-  var comp_p = document.getElementById("compatibility-para");
-  var comp_div = document.getElementById("compatibility-div");
-  // toggler
-  var categotyLink = document.getElementById("category-li");
-  var compatibilityLink = document.getElementById("compatibility-li");
-
-
-  categotyLink.addEventListener("click", showCategory);
-  compatibilityLink.addEventListener("click", showCompatibility);
-
-  function showCategory() {
-    category_div.style.display = "flex";
-    category_p.style.display = "grid";
-    comp_p.style.display = "none";
-    comp_div.style.display = "none";
-    document.getElementById("myDropdown").classList.toggle("show");
-    drop_button.style.transform = "rotate(0deg)"
-    open = !open
-    return;
-  }
-  function showCompatibility() {
-    category_div.style.display = "none";
-    category_p.style.display = "none";
-    comp_p.style.display = "grid";
-    comp_div.style.display = "flex";
-    document.getElementById("myDropdown").classList.toggle("show");
-    drop_button.style.transform = "rotate(0deg)"
-    open = !open
-    return;
-  }
-  function showTechnology() { 
-    comp_p.style.display = "none";
-    comp_div.style.display = "none";
-    category_div.style.display = "none";
-    category_p.style.display = "none";
-    document.getElementById("myDropdown").classList.toggle("show");
-    drop_button.style.transform = "rotate(0deg)"
-    open = !open
-    return;
-  }
-</script>
 <script type="module">
   const pageKey = window.location.pathname;
 
@@ -550,45 +413,45 @@ function showFilterCards() {
   const patternCards = Array.from(document.querySelectorAll('.patternCard'));
   const itemsPerPage = 11; // Number of items per page
   let currentPage = 0; // Current page index
-  
+
   // First, filter the cards that match our criteria
   const matchingCards = patternCards.filter(card => {
     const type = card.getAttribute("type")?.toLowerCase();
     const technologyAttr = card.getAttribute("technology");
-    
+
     // Parse technologies once
     const technologies = technologyAttr ? JSON.parse(technologyAttr) : [];
-    
+
     // Check if card matches all filter criteria
-    const showCardTech = globalTechnologyList.length === 0 || 
+    const showCardTech = globalTechnologyList.length === 0 ||
                         globalTechnologyList.some(tech => technologies.includes(tech));
-    
-    const showCardCat = globalCategoryList.length === 0 || 
+
+    const showCardCat = globalCategoryList.length === 0 ||
                        globalCategoryList.some(cat => type.includes(cat));
-    
+
     // Return true if card matches all criteria
     return showCardTech && showCardCat;
   });
-  
+
   // Hide all cards first (batch operation)
   patternCards.forEach(card => {
     card.style.display = "none";
   });
-  
+
   // Check if filters are active
-  const noFiltersActive = globalTechnologyList.length === 0 && 
+  const noFiltersActive = globalTechnologyList.length === 0 &&
                          globalCategoryList.length === 0;
-  
+
   // Update "not found" message
   const noCard = document.getElementById("not-found");
   noCard.style.display = matchingCards.length > 0 ? "none" : "block";
-  
+
   // Get pagination elements
   const paginationButtons = document.querySelector(".pagination");
   const prevButton = document.getElementById("designs-prev") || document.getElementById("models-prev") || document.getElementById("filters-prev");
   const nextButton = document.getElementById("designs-next") || document.getElementById("models-next") || document.getElementById("filters-next");
 
-  
+
   // Function to update pagination display
   function updatePagination() {
     const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
@@ -596,7 +459,7 @@ function showFilterCards() {
     nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
 
   const pageInfo = prevButton.parentElement.querySelector(".page-info");
-    
+
   if (pageInfo) {
     if (totalPages > 0) {
       pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
@@ -607,21 +470,21 @@ function showFilterCards() {
   }
 
   }
-  
+
   // Function to show the current page of cards
   function showCardsForPage() {
     // Calculate range for current page
     const start = currentPage * itemsPerPage;
     const end = Math.min(start + itemsPerPage, matchingCards.length);
-    
+
     // Show only cards for current page
     for (let i = 0; i < matchingCards.length; i++) {
       matchingCards[i].style.display = (i >= start && i < end) ? "block" : "none";
     }
-    
+
     updatePagination();
   }
-  
+
   // Set up pagination handlers
   prevButton.onclick = function() {
     if (currentPage > 0) {
@@ -629,7 +492,7 @@ function showFilterCards() {
       showCardsForPage();
     }
   };
-  
+
   nextButton.onclick = function() {
     const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
     if (currentPage + 1 < totalPages) {
@@ -637,14 +500,14 @@ function showFilterCards() {
       showCardsForPage();
     }
   };
-  
+
   // Initialize pagination for both filtered and unfiltered cases
   paginationButtons.style.display = matchingCards.length > itemsPerPage ? "flex" : "none";
-  
+
   // Show initial page
   currentPage = 0;
   showCardsForPage();
-  
+
   return matchingCards.length; // Return count of matching cards
 }
 
