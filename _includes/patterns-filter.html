@@ -147,7 +147,10 @@
   {% endif %}
   <p id="category-para" class="category-para">
     <span class="filter-heading">
-      <strong>Categories <span class="category-icon" onclick="toggleCategoryDisplay()">▼</span></strong>
+      <strong>Categories
+          <button type="button" class="category-icon" onclick="toggleCategoryDisplay()" aria-label="Toggle categories"
+            aria-expanded="true" aria-controls="category-div">▼</button>
+      </strong>
       <button
         type="button"
         class="sort-btn"
@@ -168,6 +171,7 @@
     const container = document.getElementById("category-div");
     const isOpen = container.classList.toggle("category-open");
     icon.textContent = isOpen ? "▲" : "▼";
+    icon.setAttribute("aria-expanded", isOpen);
   }
 </script>
 <script type="module">
