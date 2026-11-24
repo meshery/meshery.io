@@ -23,7 +23,7 @@ Before working on an existing Issue please follow these steps:
     1. Convey your intended approach to solving the issue.
     1. Put each of these items in writing in one or more comments.
 1. After the Issue is assigned to you, you can start working on it.
-1. In general, **only** start working on this Issue (and open a Pull Request) when it has been assigned to you. Doing so will prevent confusion, duplicate work (some of which may go unaccepted given its duplicity), incidental stepping on toes, and the headache involved for maintainers and contributors alike as Issue assignments collide and heads bump together. 
+1. In general, **only** start working on this Issue (and open a Pull Request) when it has been assigned to you. Doing so will prevent confusion, duplicate work that may go unaccepted, incidental stepping on toes, and the headache involved for maintainers and contributors alike as Issue assignments collide and heads bump together.
 1. Reference the Issue in your Pull Request (for example `This PR fixes #123`) so that the corresponding Issue is automatically closed upon merge of your Pull Request.
 
 > Notes:

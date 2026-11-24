@@ -83,10 +83,10 @@ $(window).scroll(function() {
 
 btnscroll.on('click', function(e) {
   e.preventDefault();
-  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-   window.scrollTo(0, 0);
-  }else{
-  $('html, body').animate({ scrollTop: 0 }, '0');
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.scrollTo(0, 0);
+  } else {
+    $('html, body').animate({ scrollTop: 0 }, '0');
   }
 });
 
