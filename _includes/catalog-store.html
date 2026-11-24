@@ -64,16 +64,17 @@
         {% unless junk %}
         {% assign desc = d.patternInfo | url_decode | strip_html | strip_newlines | strip %}
         {% assign techs = d.compatibility | join: "|" | downcase %}
-        <li class="cstore-card" data-name="{{ d.name | escape }}" data-type="{{ d.type | escape }}" data-tech="{{ techs | escape }}" data-created="{{ d.createdAt }}" data-text="{{ d.name | append: ' ' | append: desc | append: ' ' | append: d.userName | append: ' ' | append: techs | downcase | escape }}">
+        {% assign clean_name = d.name | strip | replace: ".tgz", "" | strip %}
+        <li class="cstore-card" data-name="{{ clean_name | escape }}" data-type="{{ d.type | escape }}" data-tech="{{ techs | escape }}" data-created="{{ d.createdAt }}" data-text="{{ d.name | append: ' ' | append: desc | append: ' ' | append: d.userName | append: ' ' | append: techs | downcase | escape }}">
           <a class="cstore-card-link" href="{{ d.url | relative_url }}">
             <div class="cstore-thumb">
-              <img alt="Snapshot of the {{ d.name | escape }} design" loading="lazy" decoding="async"
+              <img alt="Snapshot of the {{ clean_name | escape }} design" loading="lazy" decoding="async"
                 src="https://cdn.jsdelivr.net/gh/meshery-extensions/meshery-extensions-packages@master/action-assets/design-assets/{{ d.patternId }}-light.png"
                 onerror="this.onerror=null;this.src='{{ '/assets/images/brand/meshery-logo.svg' | relative_url }}';this.parentNode.classList.add('cstore-thumb-fallback')">
               <span class="cstore-badge">{{ d.type | replace: "-", " " }}</span>
             </div>
             <div class="cstore-body">
-              <h3 class="cstore-name">{{ d.name | replace: ".tgz", "" | escape }}</h3>
+              <h3 class="cstore-name">{{ clean_name | escape }}</h3>
               <p class="cstore-desc">{% if desc != "" %}{{ desc | truncate: 120 | escape }}{% else %}No description provided yet.{% endif %}</p>
               <ul class="cstore-chips" aria-label="Technologies">
                 {% for t in d.compatibility limit: 3 %}<li>{{ t | escape }}</li>{% endfor %}
@@ -244,8 +245,8 @@
 
   function sorter(a, b) {
     switch (sortSel.value) {
-      case "az": return a.dataset.name.localeCompare(b.dataset.name);
-      case "za": return b.dataset.name.localeCompare(a.dataset.name);
+      case "az": return (a.dataset.name || "").trim().localeCompare((b.dataset.name || "").trim(), undefined, { sensitivity: "base" });
+      case "za": return (b.dataset.name || "").trim().localeCompare((a.dataset.name || "").trim(), undefined, { sensitivity: "base" });
       case "oldest": return (a.dataset.created || "").localeCompare(b.dataset.created || "");
       default: return (b.dataset.created || "").localeCompare(a.dataset.created || "");
     }
