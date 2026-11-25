@@ -871,15 +871,8 @@
     .selected a {
         background-color: #222222;
     }
-    .sort-container {
+   .sort-search {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin: 0 auto;
-    padding: 10px 30px;
-    box-sizing: border-box;
-    align-items: center;
 }
 
 .sorting-options {
@@ -891,19 +884,34 @@
 }
 
 #sort {
-
-   width: 200px;
-   padding: 10px;
-   font-size: 16px;
-   border: 1px solid #ddd;
-   border-radius: 5px;
-   appearance: none;
-   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M7 10l5 5 5-5z"/></svg>');
-   background-repeat: no-repeat;
-   background-position: right 10px top 50%;
-   margin-right: 10px;
+    padding: 10px 35px 10px 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    margin-right: 10px;
+    @media (max-width: 506px) {
+      width: 44px;
+      padding: 10px;
+      margin-right: 8px;
+      color: transparent;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="18px" height="18px"><path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/></svg>');
+      background-position: center;
+    }
 }
-
+  #sort option {
+    color: var(--color-primary-qtext);
+  }
+  /* Matches the `body.dark-mode #sort` chevron swap in catalog.scss, which is
+     specific enough to outrank the icon set above. */
+  @media (max-width: 506px) {
+    body.dark-mode #sort {
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px"><path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/></svg>');
+    }
+  }
 #search {
     width: 100%;
     flex-grow: 0;
@@ -911,7 +919,7 @@
     margin: 0 auto;
     display: block;
     border: 1px solid #ddd;
-    border-radius: 50px;
+    border-radius: 5px;
     box-sizing: border-box;
 }
     .row {
