@@ -3,7 +3,7 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const { spawnSync } = require('node:child_process');
+const { Liquid } = require('liquidjs');
 const vm = require('node:vm');
 const { test } = require('node:test');
 
@@ -12,26 +12,11 @@ const catalogStore = fs.readFileSync(
   'utf8'
 );
 const catalogScript = catalogStore.match(/<script>\s*([\s\S]*?)\s*<\/script>/)[1];
-const liquidRenderer = `
-require "jekyll"
-require "json"
-
-class TestSite
-  def baseurl
-    ""
-  end
-
-  def filter_cache
-    @filter_cache ||= {}
-  end
-end
-
-Liquid::Template.register_filter(Jekyll::Filters)
-template = Liquid::Template.parse(STDIN.read)
-context = { "site" => { "catalog" => JSON.parse(ARGV.fetch(0)) } }
-print template.render!(context, registers: { site: TestSite.new })
-`;
-const liquidRendererAvailable = spawnSync('bundle', ['exec', 'ruby', '-e', 'require "jekyll"']).status === 0;
+const liquid = new Liquid({ strictFilters: true });
+liquid.registerFilter('relative_url', (url) => url);
+liquid.registerFilter('where_exp', (items, variable, expression) => items.filter((item) => (
+  liquid.parseAndRenderSync(`{% if ${expression} %}true{% endif %}`, { [variable]: item }) === 'true'
+)));
 
 function element(properties = {}) {
   const listeners = {};
@@ -126,45 +111,44 @@ function card(name, heading, alt) {
 }
 
 function renderCatalogCards(designs) {
-  const result = spawnSync(
-    'bundle',
-    ['exec', 'ruby', '-e', liquidRenderer, JSON.stringify(designs)],
-    { encoding: 'utf8', input: catalogStore }
-  );
-  assert.equal(result.error, undefined, result.error?.message);
-  assert.equal(result.status, 0, result.stderr);
-  return [...result.stdout.matchAll(
+  const output = liquid.parseAndRenderSync(catalogStore, { site: { catalog: designs } });
+  return [...output.matchAll(
     /<li class="cstore-card" data-name="([^"]*)"[^>]*>[\s\S]*?<img alt="([^"]*)"[\s\S]*?<h3 class="cstore-name">([\s\S]*?)<\/h3>/g
   )].map(([, name, alt, heading]) => card(name, heading.trim(), alt));
 }
 
-test('Catalog name sorting uses normalized displayed design titles', { skip: !liquidRendererAvailable }, () => {
-  const designs = [
-    { name: '\tOnline Polling Application ', patternId: 'online', type: 'example', compatibility: [] },
-    { name: 'Alpha Zoo', patternId: 'alpha-zoo', type: 'example', compatibility: [] },
-    { name: 'alpha application', patternId: 'alpha-application', type: 'example', compatibility: [] },
-    { name: ' Alpha.tgz ', patternId: 'suffix-normalized', type: 'example', compatibility: [] },
-    { name: 'alpha', patternId: 'case-tie-lower', type: 'example', compatibility: [] },
-    { name: 'Alpha 2', patternId: 'alpha-2', type: 'example', compatibility: [] },
-    { name: 'Working with .tgz archives', patternId: 'middle-tgz-preserved', type: 'example', compatibility: [] },
-  ];
-  const expectedTitles = [
-    'Online Polling Application',
-    'Alpha Zoo',
-    'alpha application',
-    'Alpha',
-    'alpha',
-    'Alpha 2',
-    'Working with .tgz archives',
-  ];
+const designs = [
+  { name: '\tOnline Polling Application ', patternId: 'online', type: 'example', compatibility: [], url: '/' },
+  { name: 'Alpha Zoo', patternId: 'alpha-zoo', type: 'example', compatibility: [], url: '/' },
+  { name: 'alpha application', patternId: 'alpha-application', type: 'example', compatibility: [], url: '/' },
+  { name: ' Alpha.tgz ', patternId: 'suffix-normalized', type: 'example', compatibility: [], url: '/' },
+  { name: 'alpha', patternId: 'case-tie-lower', type: 'example', compatibility: [], url: '/' },
+  { name: 'Alpha 2', patternId: 'alpha-2', type: 'example', compatibility: [], url: '/' },
+  { name: 'Working with .tgz archives', patternId: 'middle-tgz-preserved', type: 'example', compatibility: [], url: '/' },
+];
+const expectedTitles = [
+  'Online Polling Application',
+  'Alpha Zoo',
+  'alpha application',
+  'Alpha',
+  'alpha',
+  'Alpha 2',
+  'Working with .tgz archives',
+];
 
-  let cards = renderCatalogCards(designs);
+test('Catalog cards render normalized design titles', () => {
+  const cards = renderCatalogCards(designs);
+
   assert.deepEqual(cards.map((item) => item.dataset.name), expectedTitles);
   assert.deepEqual(cards.map((item) => item.heading), expectedTitles);
   assert.deepEqual(
     cards.map((item) => item.alt),
     expectedTitles.map((title) => `Snapshot of the ${title} design`)
   );
+});
+
+test('Catalog name sorting uses normalized displayed design titles', () => {
+  let cards = renderCatalogCards(designs);
   let { grid, sort } = runCatalog(cards, 'az');
   assert.equal(sort.value, 'az');
   assert.deepEqual(
