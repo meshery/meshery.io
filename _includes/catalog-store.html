@@ -64,7 +64,12 @@
         {% unless junk %}
         {% assign desc = d.patternInfo | url_decode | strip_html | strip_newlines | strip %}
         {% assign techs = d.compatibility | join: "|" | downcase %}
-        {% assign clean_name = d.name | strip | replace: ".tgz", "" | strip %}
+        {% assign clean_name = d.name | strip %}
+        {% assign clean_name_suffix = clean_name | slice: -4, 4 %}
+        {% if clean_name_suffix == ".tgz" %}
+          {% assign clean_name_length = clean_name | size | minus: 4 %}
+          {% assign clean_name = clean_name | slice: 0, clean_name_length | strip %}
+        {% endif %}
         <li class="cstore-card" data-name="{{ clean_name | escape }}" data-type="{{ d.type | escape }}" data-tech="{{ techs | escape }}" data-created="{{ d.createdAt }}" data-text="{{ d.name | append: ' ' | append: desc | append: ' ' | append: d.userName | append: ' ' | append: techs | downcase | escape }}">
           <a class="cstore-card-link" href="{{ d.url | relative_url }}">
             <div class="cstore-thumb">

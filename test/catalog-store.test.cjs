@@ -96,12 +96,21 @@ function runCatalog(cards, sortBy) {
   return { grid, sort };
 }
 
-function card(name, heading, sourceName = heading) {
+function card(name, heading, sourceName = heading, identity = sourceName) {
   return element({
     dataset: { created: '2026-01-01', name, tech: '', text: '', type: '' },
     heading,
+    identity,
     sourceName,
   });
+}
+
+function cardFromRawSource(sourceName, identity = sourceName) {
+  const trimmedName = sourceName.trim();
+  const heading = trimmedName.endsWith('.tgz')
+    ? trimmedName.slice(0, -'.tgz'.length).trim()
+    : trimmedName;
+  return card(heading, heading, sourceName, identity);
 }
 
 test('Catalog name sorting uses normalized displayed design titles', () => {
@@ -110,11 +119,14 @@ test('Catalog name sorting uses normalized displayed design titles', () => {
   // put the tab-prefixed title before A titles and order lowercase first.
   function catalogCards() {
     return [
-      card('\tOnline Polling Application ', 'Online Polling Application'),
-      card('Alpha Zoo', 'Alpha Zoo'),
-      card('alpha application', 'alpha application'),
-      card('Alpha', 'Alpha', 'Alpha.tgz'),
-      card('Alpha 2', 'Alpha 2'),
+      cardFromRawSource('\tOnline Polling Application '),
+      cardFromRawSource('Alpha Zoo'),
+      cardFromRawSource('alpha application'),
+      cardFromRawSource(' Alpha.tgz ', 'suffix-normalized'),
+      cardFromRawSource('Alpha 2'),
+      cardFromRawSource('Beta', 'case-tie-upper'),
+      cardFromRawSource('beta', 'case-tie-lower'),
+      cardFromRawSource('Working with .tgz archives', 'middle-tgz-preserved'),
     ];
   }
 
@@ -123,14 +135,49 @@ test('Catalog name sorting uses normalized displayed design titles', () => {
   assert.equal(sort.value, 'az');
   assert.deepEqual(
     grid.order().map((item) => item.heading),
-    ['Alpha', 'Alpha 2', 'alpha application', 'Alpha Zoo', 'Online Polling Application']
+    [
+      'Alpha',
+      'Alpha 2',
+      'alpha application',
+      'Alpha Zoo',
+      'Beta',
+      'beta',
+      'Online Polling Application',
+      'Working with .tgz archives',
+    ]
   );
-  assert.equal(cards.find((item) => item.sourceName.endsWith('.tgz')).heading, 'Alpha');
+  assert.equal(cards.find((item) => item.identity === 'suffix-normalized').dataset.name, 'Alpha');
+  assert.equal(cards.find((item) => item.identity === 'suffix-normalized').heading, 'Alpha');
+  assert.equal(
+    cards.find((item) => item.identity === 'middle-tgz-preserved').heading,
+    'Working with .tgz archives'
+  );
+  assert.deepEqual(
+    grid.order()
+      .filter((item) => item.identity.startsWith('case-tie-'))
+      .map((item) => item.identity),
+    ['case-tie-upper', 'case-tie-lower']
+  );
 
   cards = catalogCards();
   ({ grid } = runCatalog(cards, 'za'));
   assert.deepEqual(
     grid.order().map((item) => item.heading),
-    ['Online Polling Application', 'Alpha Zoo', 'alpha application', 'Alpha 2', 'Alpha']
+    [
+      'Working with .tgz archives',
+      'Online Polling Application',
+      'Beta',
+      'beta',
+      'Alpha Zoo',
+      'alpha application',
+      'Alpha 2',
+      'Alpha',
+    ]
+  );
+  assert.deepEqual(
+    grid.order()
+      .filter((item) => item.identity.startsWith('case-tie-'))
+      .map((item) => item.identity),
+    ['case-tie-upper', 'case-tie-lower']
   );
 });
