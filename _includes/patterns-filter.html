@@ -1,13 +1,16 @@
 <style>
-  #compatibility-div img {
+#compatibility-div img {
     max-width: 50px;
     height: 100%;
   }
   #compatibility-div {
     max-height: 360px;
-    overflow-y: auto;
-    padding-right: 1.25rem;
     height: min-content;
+  }
+  #compatibility-div,
+  #category-div {
+    overflow: auto;
+    scrollbar-gutter: stable;
   }
   .page-info {
     margin: 0 1rem;
@@ -25,20 +28,20 @@
 </span>
 {% endcapture %}
 
-<div class="models-filter-wrap">
-  <button type="button" class="models-filter-toggle" id="models-filter-toggle"
-          aria-expanded="false" aria-controls="models-filter-panel"
+<div class="pattern-filter-wrap">
+  <button type="button" class="pattern-filter-toggle" id="pattern-filter-toggle"
+          aria-expanded="false" aria-controls="pattern-filter-panel"
           title="Filters" aria-label="Filters">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
       <path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/>
     </svg>
   </button>
 
-  <aside class="models-filter" id="models-filter-panel" aria-label="Filters">
-    <div class="models-filter-head">
+  <aside class="pattern-filter" id="pattern-filter-panel" aria-label="Filters">
+    <div class="pattern-filter-head">
       <strong>Filters</strong>
-      <button type="button" class="models-filter-close"
-              id="models-filter-close" aria-label="Close filters">&times;</button>
+      <button type="button" class="pattern-filter-close"
+              id="pattern-filter-close" aria-label="Close filters">&times;</button>
     </div>
 
     <div class="filter-wrap">
@@ -422,8 +425,8 @@
 <script src="{{ site.baseurl }}/assets/js/filter-panel.js"></script>
 <script>
   initFilterPanel({
-    toggleId: "models-filter-toggle",
-    panelId: "models-filter-panel",
-    closeId: "models-filter-close"
+    toggleId: "pattern-filter-toggle",
+    panelId: "pattern-filter-panel",
+    closeId: "pattern-filter-close"
   });
 </script>
