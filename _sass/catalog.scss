@@ -486,7 +486,8 @@ $extensions-filter-width: 15rem;
 $extensions-filter-stack: 770px;
 $extensions-filter-pill-height: 20px;
 
-.extensions-catalog {
+.extensions-catalog,
+.models-catalog {
   display: flex;
   gap: 2rem;
   align-items: flex-start;
@@ -497,7 +498,8 @@ $extensions-filter-pill-height: 20px;
   }
 }
 
-.extensions-toolbar {
+.extensions-toolbar,
+.models-toolbar {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -506,15 +508,15 @@ $extensions-filter-pill-height: 20px;
   @media (max-width: $extensions-filter-stack) {
     margin: 0;
   }
-
-  > div:first-child {
-    flex: 1 1 auto;
-    width: auto !important;
-    margin: 0 !important;
-  }
+}
+.extensions-toolbar > div:first-child {
+  flex: 1 1 auto;
+  width: auto !important;
+  margin: 0 !important;
 }
 
-.extensions-filter-wrap {
+.extensions-filter-wrap,
+.models-filter-wrap {
   flex: 0 0 $extensions-filter-width;
   padding-top: 1rem;
 
@@ -526,11 +528,13 @@ $extensions-filter-pill-height: 20px;
 }
 
 .extensions-filter-toggle,
-.extensions-filter-head {
+.extensions-filter-head,
+.models-filter-toggle,
+.models-filter-head {
   display: none;
 }
-
-.extensions-filter-toggle {
+.extensions-filter-toggle,
+.models-filter-toggle {
   align-items: center;
   justify-content: center;
   align-self: center;
@@ -552,7 +556,8 @@ $extensions-filter-pill-height: 20px;
   }
 }
 
-.extensions-filter-head {
+.extensions-filter-head,
+.models-filter-head {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
@@ -560,7 +565,8 @@ $extensions-filter-pill-height: 20px;
   color: var(--color-secondary-dark);
 }
 
-.extensions-filter-close {
+.extensions-filter-close,
+.models-filter-close {
   padding: 0 0.35rem;
   font-size: 1.5rem;
   line-height: 1;
@@ -575,7 +581,8 @@ $extensions-filter-pill-height: 20px;
   }
 }
 
-.extensions-filter {
+.extensions-filter,
+.models-filter {
   .extensions-category-heading {
     margin-bottom: 0;
   }
@@ -697,21 +704,31 @@ $extensions-filter-pill-height: 20px;
   }
 }
 
-.extensions-results {
+.models-filter .filter-wrap {
+  flex: none;
+  width: 100%;
+  padding: 0;
+}
+
+.extensions-results,
+.models-results {
   flex: 1 1 auto;
   min-width: 0;
 }
 
 @media (max-width: $extensions-filter-stack) {
-  .extensions-filter-toggle {
+  .extensions-filter-toggle,
+  .models-filter-toggle {
     display: inline-flex;
   }
 
-  .extensions-filter-head {
+  .extensions-filter-head,
+  .models-filter-head {
     display: flex;
   }
 
-  .extensions-filter {
+  .extensions-filter,
+  .models-filter {
     display: none;
     position: fixed;
     z-index: 6;
@@ -735,7 +752,6 @@ $extensions-filter-pill-height: 20px;
     }
   }
 }
-
 .category-label {
   display: inline;
   font-family: "Open Sans", sans-serif;
@@ -1325,15 +1341,7 @@ label {
 .hide-by-default {
   display: none;
 }
-.category-icon {
-  display: none;
-  background: none;
-  border: none;
-  padding: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-}
+
 @media screen and (max-width: 700px) {
   .modal-window {
     width: 100%;
@@ -1592,37 +1600,26 @@ label {
       margin-bottom: 3rem;
       margin-top: -1rem;
     }
-    .category-div,
-    .compatibility-div,
-    .tech-div {
-      display: grid;
-      label {
-        margin: 0;
-      }
-      column-gap: 2rem;
-      .open-service-mesh {
-        grid-row: 4/5;
-        grid-column: 1/3;
-      }
-    }
-    .category-icon{
-      display: inline-block;
-    }
-    .category-div,
-    .compatibility-div,
-    .tech-div,
-    .compatibility-para,
-    .tech-para {
-      display: none;
-    }
-#category-div.category-open {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;      
-  max-height: 150px;
-  overflow-y: auto;        
-  overflow-x: hidden;
-}
+    // .category-div,
+    // .compatibility-div,
+    // .tech-div {
+    //   display: grid;
+    //   label {
+    //     margin: 0;
+    //   }
+    //   column-gap: 2rem;
+    //   .open-service-mesh {
+    //     grid-row: 4/5;
+    //     grid-column: 1/3;
+    //   }
+    // }
+    // .category-div,
+    // .compatibility-div,
+    // .tech-div,
+    // .compatibility-para,
+    // .tech-para {
+    //   display: none;
+    // }
     .load-more {
       display: block;
       align-self: center;

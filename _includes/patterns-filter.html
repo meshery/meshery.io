@@ -1,79 +1,10 @@
 <style>
-  #compatibility-div label,
-  #category-div label,
-  #cardpatterntype-div label {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    text-indent: unset;
-  }
-
-  #compatibility-div input,
-  #category-div input,
-  #cardpatterntype-div input {
-    flex-shrink: 0;
-    top: 0;
-    cursor: pointer;
-  }
-
-  #compatibility-div input[type="checkbox"],
-  #category-div input[type="checkbox"],
-  #cardpatterntype-div input[type="checkbox"] {
-    accent-color: var(--brand-color-secondary);
-  }
-
   #compatibility-div img {
     max-width: 50px;
     height: 100%;
   }
-  #compatibility-div .badge,
-  #category-div .badge,
-  #cardpatterntype-div .badge {
-    background: var(--color-primary-dark);
-    border: 1px solid var(--color-primary-extra-dark);
-    border-radius: 999px;
-    color: var(--color-secondary-dark);
-    height: 20px;
-    min-width: 20px;
-    padding: 0 6px;
-    box-sizing: border-box;
-    text-align: center;
-    flex-shrink: 0;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 400;
-  }
-  #cardpatterntype-div .badge {
-    padding: 2px;
-  }
-  #compatibility-div .input-container .name,
-  #category-div .input-container .name,
-  #cardpatterntype-div .input-container .name {
-    margin: 0 10px 0 10px;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  #compatibility-div .input-container,
-  #category-div .input-container,
-  #cardpatterntype-div .input-container {
-    display: flex;
-    align-items: center;
-    margin: 20px 0;
-  }
-
-  #category-div,
-  #compatibility-div,
-  #cardpatterntype-div {
-    flex-wrap: wrap;
-  }
   #compatibility-div {
-    max-height: 360px; /* Adjust to display exactly 9 checkboxes */
+    max-height: 360px;
     overflow-y: auto;
     padding-right: 1.25rem;
     height: min-content;
@@ -84,96 +15,58 @@
     font-weight: bold;
     color: var(--color-secondary-dark);
   }
-
-  .filter-heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    width: 100%;
-  }
-  .sort-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 2px 10px;
-    font-size: 11px;
-    font-weight: 600;
-    line-height: 1.4;
-    color: var(--color-secondary-light);
-    background: var(--color-primary-dark);
-    border: 1px solid var(--color-primary-extra-dark);
-    border-radius: 999px;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: color 0.15s ease, border-color 0.15s ease;
-  }
-  .sort-btn:hover {
-    border-color: var(--brand-color-secondary);
-    color: var(--brand-color-secondary);
-  }
-  .sort-btn:focus-visible {
-    outline: 2px solid var(--brand-color-secondary);
-    outline-offset: 1px;
-  }
-  .sort-btn.active {
-    color: var(--brand-color-secondary);
-    border-color: var(--brand-color-secondary);
-  }
-  .sort-btn .sort-arrow {
-    font-size: 10px;
-    line-height: 1;
-  }
 </style>
 
-<div class="filter-wrap">
-  {% if show_technology=="true"%}
-  <p id="compatibility-para" class="compatibility-para">
-    <span class="filter-heading">
-      <strong>Technologies:</strong>
-      <button
-        type="button"
-        class="sort-btn"
-        id="compatibility-sort"
-        data-order="none"
-        title="Sort by count"
-        aria-label="Sort technologies by count"
-      >
-        Count <span class="sort-arrow" aria-hidden="true">⇅</span>
-      </button>
-    </span>
-  </p>
-  <div id="compatibility-div" class="compatibility-div"></div>
-  {% endif %}
-  <p id="category-para" class="category-para">
-    <span class="filter-heading">
-      <strong>Categories
-          <button type="button" class="category-icon" onclick="toggleCategoryDisplay()" aria-label="Toggle categories"
-            aria-expanded="false" aria-controls="category-div">▼</button>
-      </strong>
-      <button
-        type="button"
-        class="sort-btn"
-        id="category-sort"
-        data-order="none"
-        title="Sort by count"
-        aria-label="Sort categories by count"
-      >
-        Count <span class="sort-arrow" aria-hidden="true">⇅</span>
-      </button>
-    </span>
-  </p>
-  <div id="category-div" class="category-div" style="padding-right: 1.25rem;"></div>
+{% capture sort_icons %}
+<span class="sort-arrow" aria-hidden="true">
+  <svg class="sort-icon sort-icon-none" viewBox="0 0 10 10"><path d="M5 0 8 4H2z" /><path d="M5 10 2 6h6z" /></svg>
+  <svg class="sort-icon sort-icon-desc" viewBox="0 0 10 10"><path d="M5 8 1 3h8z" /></svg>
+  <svg class="sort-icon sort-icon-asc" viewBox="0 0 10 10"><path d="M5 2 9 7H1z" /></svg>
+</span>
+{% endcapture %}
+
+<div class="models-filter-wrap">
+  <button type="button" class="models-filter-toggle" id="models-filter-toggle"
+          aria-expanded="false" aria-controls="models-filter-panel"
+          title="Filters" aria-label="Filters">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
+      <path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/>
+    </svg>
+  </button>
+
+  <aside class="models-filter" id="models-filter-panel" aria-label="Filters">
+    <div class="models-filter-head">
+      <strong>Filters</strong>
+      <button type="button" class="models-filter-close"
+              id="models-filter-close" aria-label="Close filters">&times;</button>
+    </div>
+
+    <div class="filter-wrap">
+      {% if show_technology == "true" %}
+      <p id="compatibility-para" class="compatibility-para">
+        <span class="filter-heading">
+          <strong>Technologies:</strong>
+          <button type="button" class="sort-btn" id="compatibility-sort"
+                  data-order="none" title="Sort by count"
+                  aria-label="Sort technologies by count">{{ sort_icons }}</button>
+        </span>
+      </p>
+      <div id="compatibility-div" class="compatibility-div"></div>
+      {% endif %}
+
+      <p id="category-para" class="category-para">
+        <span class="filter-heading">
+          <strong>Categories:</strong>
+          <button type="button" class="sort-btn" id="category-sort"
+                  data-order="none" title="Sort by count"
+                  aria-label="Sort categories by count">{{ sort_icons }}</button>
+        </span>
+      </p>
+      <div id="category-div" class="category-div"></div>
+    </div>
+  </aside>
 </div>
-<script>
-  function toggleCategoryDisplay() {
-    const icon = document.querySelector(".category-icon");
-    const container = document.getElementById("category-div");
-    const isOpen = container.classList.toggle("category-open");
-    icon.textContent = isOpen ? "▲" : "▼";
-    icon.setAttribute("aria-expanded", isOpen);
-  }
-</script>
+
 <script type="module">
   const pageKey = window.location.pathname;
 
@@ -223,8 +116,7 @@
   // globalTechnologyList stores all the technologies checked by user as strings
   // example: ["gcp", "keda"]
   let globalTechnologyList = loadFilter('technologies');
-  // globalCategorySelected stores the category selected by the user, users can select multiple categories at the same time for sorting
-  // initially it is empty
+  // globalCategoryList stores the categories selected by the user (multiple allowed)
   let globalCategoryList = loadFilter('categories');
   // get all pattern cards
   const patternCards = document.querySelectorAll(".patternCard");
@@ -232,27 +124,25 @@
   const cardCompatibility = [];
   // cardType stores the names of all categories (unique)
   let cardType = new Set();
-  // cardPatternType stores the names of all pattern types (unique): currently three
-  // model, design and wasmfilter
+  // cardPatternType stores the names of all pattern types (unique)
   let cardPatternType = new Set();
-  // cardTechnology stores the set of all technologies (unqiue)
+  // cardTechnology stores the set of all technologies (unique)
   let cardTechnology = new Set();
-  // This variable stores the count of each category in an object which looks like a key value pair
-    // example: {"deployment": 102, "security": 10, ...} and so on
-    const categoryCardCount = {};
-    const patternTypeCardCount = {};
+  // Count of each category, example: {"deployment": 102, "security": 10, ...}
+  const categoryCardCount = {};
+  const patternTypeCardCount = {};
 
-  // Loop over all pattern cards to get there compatibility, type and technology so we can make a unique list out of it
-    for (let i = 0; i < patternCards.length; i++) {
-      const type = patternCards[i].getAttribute("type");
+  // Loop over all pattern cards to get their compatibility, type and technology
+  for (let i = 0; i < patternCards.length; i++) {
+    const type = patternCards[i].getAttribute("type");
 
-      const patternType = patternCards[i].getAttribute("patternType");
+    const patternType = patternCards[i].getAttribute("patternType");
 
-      if (type && type !== "wasm filter") {
-        const lowerCaseType = type?.toLowerCase();
-        cardType.add(lowerCaseType);
+    if (type && type !== "wasm filter") {
+      const lowerCaseType = type?.toLowerCase();
+      cardType.add(lowerCaseType);
       categoryCardCount[lowerCaseType] =
-        (categoryCardCount[lowerCaseType] || 0) + 1; // count cards that have a certain category
+        (categoryCardCount[lowerCaseType] || 0) + 1;
     }
     if (patternType) {
       const lowerCasePatternType = patternType?.toLowerCase();
@@ -274,41 +164,10 @@
 
   cardType = Array.from(cardType);
   cardTechnology = Array.from(cardTechnology);
-    cardPatternType = Array.from(cardPatternType);
-
-    // for (let i = 0; i < cardPatternType.length; i++) {
-    //   const count = patternTypeCardCount[cardPatternType[i]];
-    //   const inputContainer = document.createElement("div");
-    //   inputContainer.className = "input-container";
-
-    //   const input = document.createElement("input");
-    //   input.type = "checkbox";
-    //   input.name = "patterntype";
-    //   input.value = cardPatternType[i];
-    //   input.id = cardPatternType[i];
-
-    //   input.onclick = function () {
-    //     updatePatternTypeList(cardPatternType[i]);
-    //     showFilterCards();
-    //   };
-    //   if (globalPatternTypeList.includes(cardPatternType[i])) {
-    //     input.checked = true;
-    //   }
-    //   inputContainer.appendChild(input);
-    //   const label = document.createElement("label");
-    //   label.innerHTML = `<div class="name">${cardPatternType[i].replace(
-    //     /-/g,
-    //     " "
-    //   )}</div><div class="badge">${count}</div>`;
-    //   label.style.height = "fit-content";
-    //   label.setAttribute("for", cardPatternType[i]);
-    //   inputContainer.appendChild(label);
-    //   patternTypeContainer.appendChild(inputContainer);
-    // }
+  cardPatternType = Array.from(cardPatternType);
 
   // For creating a list of checkboxes for Categories section
-    for (let i = 0; i < cardType.length; i++) {
-    // We get the count of each technology from the object we made at line 286, we access the count here like: categoryCardCount["deployment"] gives 102
+  for (let i = 0; i < cardType.length; i++) {
     const count = categoryCardCount[cardType[i]];
     const inputContainer = document.createElement("div");
     inputContainer.className = "input-container";
@@ -322,7 +181,7 @@
     if (globalCategoryList.includes(cardType[i])) {
       input.checked = true;
     }
-    // When it is checked or unchecked, updateCategoryList function is called followed by showFilterCards function
+    // When it is checked or unchecked, updateCategoryList is called followed by showFilterCards
     input.onclick = function () {
       updateCategoryList(cardType[i]);
       showFilterCards();
@@ -338,29 +197,23 @@
     inputContainer.appendChild(label);
     categoryContainer.appendChild(inputContainer);
   }
-  
-    // remove duplicate entries of integrations in filter section
-  // Maintain a list of filterEntries, whenever you come across a new one, add it to list, else if the filter already exists in the list skip the further process of creating nodes
+
+  // Remove duplicate entries of integrations in filter section
   const filterEntries = [];
-  // to remove duplicates, a set is used
   cardTechnology = Array.from(new Set(cardTechnology));
   // For creating a list of checkboxes for Technologies section
   for (let i = 0; i < data.length; i++) {
     const count = cardCompatibility.filter(
       (item) => item === data[i].name
     ).length;
-    // Skip adding the filter to list if it is not used in any of the pattern cards
-    // Skip adding the filter to list if it is already added to the list
+    // Skip if not used in any card, or already added
     if (count === 0 || filterEntries.includes(data[i].name)) continue;
 
-    // Add the filter to list
     filterEntries.push(data[i].name);
 
-    // Create nodes
     const inputContainer = document.createElement("div");
     inputContainer.className = "input-container";
     inputContainer.dataset.count = count;
-    // Here the categories are generated with a "checkbox" input type
     const input = document.createElement("input");
     input.type = "checkbox";
     input.name = data[i].name;
@@ -369,7 +222,6 @@
     if (globalTechnologyList.includes(data[i].name)) {
       input.checked = true;
     }
-    // When technology checkbox is checked or unchecked, updateTechnologyList function is called, followed by showFilterCards function
     input.onclick = function () {
       updateTechnologyList(data[i].name);
       showFilterCards();
@@ -388,9 +240,7 @@
     container.appendChild(inputContainer);
   }
 
-  // This function checks if the gloabalTechnologyList contains the value, and updates the list accordingly..
-  // When the user selects a technology, it is not present in the globalTechnologyList, so the else part is called and the technology is pushed in the globalTechnologyList
-  // When the user deselcts the technology, the list is filtered to the cards that don't contain that technology, that is, the value that is unchecked is removed from the list.
+  // Adds the technology to the list if it is not there, removes it if it is
   function updateTechnologyList(value) {
     if (globalTechnologyList.includes(value)) {
       globalTechnologyList = globalTechnologyList.filter(
@@ -402,15 +252,12 @@
     saveFilter('technologies', globalTechnologyList);
   }
 
-  // This function updates the category list
+  // Updates the category list depending on whether the box is checked
   function updateCategoryList(value) {
-    // When user checks a category, that category category is pushed in globalCategoryList array which holds the categories selected
     if (document.getElementById(value).checked) {
       globalCategoryList.push(value);
     } else {
-      // When user unchecks a category, it is removed from the array globalCategoryList
       globalCategoryList = globalCategoryList.filter((item) => item !== value);
-      // if after removing a category, no category remains then we empty the globalCategoryList (just a safety step)
       if (globalCategoryList.length === 0) {
         globalCategoryList = [];
       }
@@ -418,117 +265,101 @@
     saveFilter('categories', globalCategoryList);
   }
 
-// Function called when user clicks on any of Technology checkboxes or Category Boxes
-function showFilterCards() {
-  // Get all pattern cards once
-  const patternCards = Array.from(document.querySelectorAll('.patternCard'));
-  const itemsPerPage = 11; // Number of items per page
-  let currentPage = 0; // Current page index
+  // Function called when user clicks on any of Technology checkboxes or Category boxes
+  function showFilterCards() {
+    const patternCards = Array.from(document.querySelectorAll('.patternCard'));
+    const itemsPerPage = 11;
+    let currentPage = 0;
 
-  // First, filter the cards that match our criteria
-  const matchingCards = patternCards.filter(card => {
-    const type = card.getAttribute("type")?.toLowerCase();
-    const technologyAttr = card.getAttribute("technology");
+    // First, filter the cards that match our criteria
+    const matchingCards = patternCards.filter(card => {
+      const type = card.getAttribute("type")?.toLowerCase();
+      const technologyAttr = card.getAttribute("technology");
 
-    // Parse technologies once
-    const technologies = technologyAttr ? JSON.parse(technologyAttr) : [];
+      const technologies = technologyAttr ? JSON.parse(technologyAttr) : [];
 
-    // Check if card matches all filter criteria
-    const showCardTech = globalTechnologyList.length === 0 ||
-                        globalTechnologyList.some(tech => technologies.includes(tech));
+      const showCardTech = globalTechnologyList.length === 0 ||
+                          globalTechnologyList.some(tech => technologies.includes(tech));
 
-    const showCardCat = globalCategoryList.length === 0 ||
-                       globalCategoryList.some(cat => type.includes(cat));
+      const showCardCat = globalCategoryList.length === 0 ||
+                         globalCategoryList.some(cat => type.includes(cat));
 
-    // Return true if card matches all criteria
-    return showCardTech && showCardCat;
-  });
+      return showCardTech && showCardCat;
+    });
 
-  // Hide all cards first (batch operation)
-  patternCards.forEach(card => {
-    card.style.display = "none";
-  });
+    // Hide all cards first
+    patternCards.forEach(card => {
+      card.style.display = "none";
+    });
 
-  // Check if filters are active
-  const noFiltersActive = globalTechnologyList.length === 0 &&
-                         globalCategoryList.length === 0;
+    // Update "not found" message
+    const noCard = document.getElementById("not-found");
+    noCard.style.display = matchingCards.length > 0 ? "none" : "block";
 
-  // Update "not found" message
-  const noCard = document.getElementById("not-found");
-  noCard.style.display = matchingCards.length > 0 ? "none" : "block";
+    // Get pagination elements
+    const paginationButtons = document.querySelector(".pagination");
+    const prevButton = document.getElementById("designs-prev") || document.getElementById("models-prev") || document.getElementById("filters-prev");
+    const nextButton = document.getElementById("designs-next") || document.getElementById("models-next") || document.getElementById("filters-next");
 
-  // Get pagination elements
-  const paginationButtons = document.querySelector(".pagination");
-  const prevButton = document.getElementById("designs-prev") || document.getElementById("models-prev") || document.getElementById("filters-prev");
-  const nextButton = document.getElementById("designs-next") || document.getElementById("models-next") || document.getElementById("filters-next");
+    function updatePagination() {
+      const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
+      prevButton.disabled = currentPage === 0;
+      nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
 
+      const pageInfo = prevButton.parentElement.querySelector(".page-info");
 
-  // Function to update pagination display
-  function updatePagination() {
-    const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
-    prevButton.disabled = currentPage === 0;
-    nextButton.disabled = currentPage + 1 >= totalPages || totalPages === 0;
-
-  const pageInfo = prevButton.parentElement.querySelector(".page-info");
-
-  if (pageInfo) {
-    if (totalPages > 0) {
-      pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
-      pageInfo.style.display = "inline";
-    } else {
-      pageInfo.style.display = "none";
+      if (pageInfo) {
+        if (totalPages > 0) {
+          pageInfo.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+          pageInfo.style.display = "inline";
+        } else {
+          pageInfo.style.display = "none";
+        }
+      }
     }
+
+    function showCardsForPage() {
+      const start = currentPage * itemsPerPage;
+      const end = Math.min(start + itemsPerPage, matchingCards.length);
+
+      for (let i = 0; i < matchingCards.length; i++) {
+        matchingCards[i].style.display = (i >= start && i < end) ? "block" : "none";
+      }
+
+      updatePagination();
+    }
+
+    prevButton.onclick = function () {
+      if (currentPage > 0) {
+        currentPage--;
+        showCardsForPage();
+      }
+    };
+
+    nextButton.onclick = function () {
+      const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
+      if (currentPage + 1 < totalPages) {
+        currentPage++;
+        showCardsForPage();
+      }
+    };
+
+    paginationButtons.style.display = matchingCards.length > itemsPerPage ? "flex" : "none";
+
+    currentPage = 0;
+    showCardsForPage();
+
+    return matchingCards.length;
   }
 
-  }
-
-  // Function to show the current page of cards
-  function showCardsForPage() {
-    // Calculate range for current page
-    const start = currentPage * itemsPerPage;
-    const end = Math.min(start + itemsPerPage, matchingCards.length);
-
-    // Show only cards for current page
-    for (let i = 0; i < matchingCards.length; i++) {
-      matchingCards[i].style.display = (i >= start && i < end) ? "block" : "none";
-    }
-
-    updatePagination();
-  }
-
-  // Set up pagination handlers
-  prevButton.onclick = function() {
-    if (currentPage > 0) {
-      currentPage--;
-      showCardsForPage();
-    }
-  };
-
-  nextButton.onclick = function() {
-    const totalPages = Math.ceil(matchingCards.length / itemsPerPage);
-    if (currentPage + 1 < totalPages) {
-      currentPage++;
-      showCardsForPage();
-    }
-  };
-
-  // Initialize pagination for both filtered and unfiltered cases
-  paginationButtons.style.display = matchingCards.length > itemsPerPage ? "flex" : "none";
-
-  // Show initial page
-  currentPage = 0;
-  showCardsForPage();
-
-  return matchingCards.length; // Return count of matching cards
-}
-
-showFilterCards();
+  showFilterCards();
 </script>
+
 <script>
   // Sort-by-count controls for the Technologies and Categories filter sections.
-  // Each control cycles through three states: unsorted -> descending -> ascending.
-  // The checkbox list is built asynchronously by the module script above, so the
-  // original order and counts are read lazily on the first interaction.
+  // Each control cycles through: unsorted -> descending -> ascending.
+  // The checkbox list is built by the module script above, so the original
+  // order and counts are read lazily on the first click.
   (function () {
     var sortSections = [
       { key: "compatibility", container: "compatibility-div", button: "compatibility-sort" },
@@ -541,11 +372,10 @@ showFilterCards();
       // Technologies section is absent on pages that opt out (e.g. Models).
       if (!button || !container) return;
 
-      var order = "none"; // none -> desc -> asc -> none
+      var order = "none";
       var originalOrder = null;
 
       button.addEventListener("click", function () {
-        // Capture the as-built order once so the "none" state can restore it.
         if (!originalOrder) {
           originalOrder = Array.prototype.slice.call(container.children);
         }
@@ -575,24 +405,25 @@ showFilterCards();
       });
     }
 
+    // The icon is shown by CSS based on data-order, so no textContent change here.
     function updateButton(button, order) {
-      var arrow = button.querySelector(".sort-arrow");
-      var labelText = button.getAttribute("aria-label") || "Sort by count";
-      var baseLabel = labelText.split(" (")[0];
-      if (order === "desc") {
-        if (arrow) arrow.textContent = "▼"; // ▼
-        button.classList.add("active");
-        button.setAttribute("aria-label", baseLabel + " (high to low)");
-      } else if (order === "asc") {
-        if (arrow) arrow.textContent = "▲"; // ▲
-        button.classList.add("active");
-        button.setAttribute("aria-label", baseLabel + " (low to high)");
-      } else {
-        if (arrow) arrow.textContent = "⇅"; // ⇅
-        button.classList.remove("active");
-        button.setAttribute("aria-label", baseLabel);
-      }
+      var baseLabel = (button.getAttribute("aria-label") || "Sort by count").split(" (")[0];
+      var suffix = order === "desc" ? " (high to low)"
+                 : order === "asc"  ? " (low to high)"
+                 : "";
+
+      button.classList.toggle("active", order !== "none");
+      button.setAttribute("aria-label", baseLabel + suffix);
       button.setAttribute("data-order", order);
     }
   })();
+</script>
+
+<script src="{{ site.baseurl }}/assets/js/filter-panel.js"></script>
+<script>
+  initFilterPanel({
+    toggleId: "models-filter-toggle",
+    panelId: "models-filter-panel",
+    closeId: "models-filter-close"
+  });
 </script>
