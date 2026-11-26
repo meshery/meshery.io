@@ -23,7 +23,7 @@ assignees: ''
  - Device: Desktop Mobile
 
 ---
-## Contributor [Guides](https://docs.meshery.io/project/contributing) and [Handbook](https://meshery.io/community/handbook)
+## Contributor [Guides](https://docs.meshery.io/project/contributing) and [Handbook](https://layer5.io/community/handbook)
 
 The meshery.io website uses Jekyll and GitHub Pages. Site content is found under the [`master` branch](https://github.com/meshery/meshery.io/tree/master).
 - 📚 See the [Contributing to Meshery.io Website](https://github.com/meshery/meshery.io#contributing-to-the-mesheryio-website) section of the readme.md and other [contributing instructions](https://docs.meshery.io/project/contributing), too.
