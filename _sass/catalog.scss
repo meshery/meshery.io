@@ -54,7 +54,7 @@
 
   .front,
   .back {
-    box-shadow: 2px 2px 6px 0px #00d3a9;
+    box-shadow: 2px 2px 6px 0px var(--brand-color-primary);
     position: absolute;
     width: 100%;
     height: 100%;
@@ -100,7 +100,7 @@
   border-radius: 15px;
   border: 0;
   background: rgba(0, 0, 0, 0.7) !important;
-  box-shadow: 2px 2px 6px 0px #00d3a9;
+  box-shadow: 2px 2px 6px 0px var(--brand-color-primary);
   margin-bottom: 20px;
 }
 .overlay-text {
@@ -122,9 +122,15 @@
   opacity: 0.7;
 }
 .catalog {
-  padding-top: 1rem;
-  padding-bottom: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
   display: flex;
+
+  &:empty {
+    display: none;
+    padding: 0;
+    margin: 0;
+  }
 
   & .row {
     display: flex;
@@ -190,7 +196,7 @@ p {
 }
 
 .import {
-  background-color: #00b39fff;
+  background-color: var(--brand-color-secondary);
   color: white;
   border-radius: 4px;
   border: none;
@@ -214,7 +220,7 @@ p {
 }
 .import-secondary {
   background-color: inherit;
-  border:1px solid #00b39f;
+  border: 1px solid var(--brand-color-secondary);
   color: var(--color-primary-qtext);
   border-radius: 4px;
   cursor: pointer;
@@ -226,30 +232,113 @@ p {
    three actions are visually distinct; the tertiary action is outlined
    rather than filled. */
 .import-brand-primary {
-  background-color: var(--brand-color-primary);
-}
-.import-brand-primary:hover {
   background-color: var(--brand-color-secondary);
 }
-.import-brand-secondary {
-  background-color:  var(--brand-color-primary);
-}
-.import-brand-secondary:hover {
-  background-color: var(--brand-color-secondary)
+.import-brand-primary:hover {
+  background-color: var(--brand-color-primary);
 }
 .import-brand-tertiary {
-  background-color: var(--brand-color-primary);
-  color: white;
-
+  background-color: transparent !important; 
+  border: 1px solid var(--brand-color-secondary);
+  color: var(--color-primary-qtext) !important;
 }
 .import-brand-tertiary:hover {
-  background-color: var(--brand-color-tertiary);
-  color: #fff;
+  border: 1px solid var(--brand-color-primary);
+}
+
+/* Pill shape only for the Copy URL action in copy-and-download.html.
+   The Quick Start button in _includes/models/modal.html shares
+   .import-brand-tertiary and keeps its current corners. */
+.copy-url-btn {
+  border-radius: 999px;
 }
 .btn-tooltip-grp {
   display: flex;
   flex-direction: row;
   position: relative;
+}
+
+.import-brand-secondary {
+  background-color: var(--action-color-dark);
+}
+.cstore-cta-primary,
+.cstore-cta-secondary {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Teal darkened to #00796b so the labels meet the 4.5:1 contrast guideline
+   in both states (5.3:1 default, 6.6:1 hover). */
+.cstore-cta-primary {
+  background: #00796b;
+  color: #fff;
+}
+
+.cstore-cta-primary:hover,
+.cstore-cta-primary:focus-visible {
+  background: #00695c;
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.35);
+}
+
+.cstore-cta-secondary {
+  border: 2px solid #00796b;
+  color: #00796b;
+}
+
+.cstore-cta-secondary:hover,
+.cstore-cta-secondary:focus-visible {
+  border-color: #00695c;
+  color: #00695c;
+  text-decoration: none;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 179, 159, 0.35);
+}
+
+/* Dark mode is the default and its surface is dark, so the secondary action
+   uses the lighter brand teal there to keep 4.5:1 contrast. */
+body.dark-mode .cstore-cta-secondary {
+  border-color: var(--brand-color-primary);
+  color: var(--brand-color-primary);
+}
+
+body.dark-mode .cstore-cta-secondary:hover,
+body.dark-mode .cstore-cta-secondary:focus-visible {
+  border-color: var(--brand-color-primary);
+  color: var(--brand-color-primary);
+}
+
+/* Forced-colors mode suppresses box-shadow, so restore a visible outline
+   for keyboard focus. */
+@media (forced-colors: active) {
+  .cstore-cta-primary:focus-visible,
+  .cstore-cta-secondary:focus-visible {
+    outline: 2px solid ButtonText;
+  }
+}
+.import-brand-secondary:hover {
+  background-color: var(--action-color-dark-hover); 
+}
+
+.category-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: var(--background-light-cards);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 0;
+  box-shadow: 
+  0 0 12px rgba(0, 179, 159, 0.25),
+  inset 0 0 4px rgba(255, 255, 255, 0.2);
 }
 
 .vertical-center {
@@ -659,7 +748,7 @@ $extensions-filter-pill-height: 20px;
   left: 0px;
   height: 2.5rem;
   font-size: 1.6rem;
-  background-color: #00d3a9;
+  background-color: var(--brand-color-primary);
   align-self: flex-end;
   float: right;
   box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.25);
@@ -797,7 +886,8 @@ input[type="checkbox"] {
   z-index: 200;
   opacity: 0;
   pointer-events: none;
-  transition: all 0.3s;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 .modal-section {
   display: flex;
@@ -982,7 +1072,7 @@ input[type="checkbox"] {
   border-radius: 15px;
   border: 0;
   transition: 0.4s ease-out;
-  box-shadow: 2px 2px 6px 0px #00d3a9;
+  box-shadow: 2px 2px 6px 0px var(--brand-color-primary);
 }
 .modal-smp {
   width: 20px;
@@ -1046,7 +1136,7 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 .close:hover {
-  color: #00d3a9 !important;
+  color: var(--brand-color-primary) !important;
   opacity: 0.8 !important;
   text-decoration: none;
 }
@@ -1197,9 +1287,6 @@ label {
 .catalog-load-more {
   display: none;
 }
-.dropbtn {
-  display: none;
-}
 .contentdata {
   margin: 0;
   padding: 0;
@@ -1312,7 +1399,7 @@ label {
     border-radius: 15px;
     border: 0;
     background: rgba(0, 0, 0, 0.7);
-    box-shadow: 2px 2px 6px 0px #00d3a9;
+    box-shadow: 2px 2px 6px 0px var(--brand-color-primary);
     margin-bottom: 20px;
   }
   .modal-smp-overlay {
@@ -1361,12 +1448,8 @@ label {
   }
 
   .btn-grp {
-    flex-direction: row;
-    gap: 1rem;
-    // padding-bottom: 2rem;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
+    justify-content: space-evenly;
+    flex-wrap:wrap;
   }
 
   .tooltip-modal {
@@ -1429,7 +1512,7 @@ label {
   color: #fff;
   border-radius: 7px;
   padding: 0.5rem;
-  background: #00b39f;
+  background: var(--brand-color-secondary);
 }
 .viewallbtn:hover{
   color:#fff;
@@ -1456,12 +1539,6 @@ label {
 @media screen and (max-width: 770px) {
   .catalog-load-more {
     display: unset;
-  }
-  .dropbtn {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
   }
   .viewall {
     justify-content: center;
@@ -1495,10 +1572,6 @@ label {
     gap: 1rem;
     // padding-bottom: 3rem;
     margin-bottom: .15rem;
-    .dropdown {
-      align-self: center;
-      margin-bottom: 7rem;
-    }
     .category-div {
       padding-left: 15px;
     }
@@ -1559,12 +1632,53 @@ label {
       max-width: 40%;
     }
   }
-  .modal-h1,
-  .related-patterns {
+  .modal-h1 {
     display: none;
   }
-  .btn-grp {
-    // flex-direction: column;
-    align-items: center;
+
+}
+
+.allbtn-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  border-bottom: solid 1px var(--color-primary-dark);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.allbtn {
+  background: none;
+  color: var(--color-primary-extra-dark);
+  cursor: pointer;
+  border: none;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-bottom: 3px solid transparent;
+  border-top: 1px solid var(--color-primary-dark);
+  border-left: 1px solid var(--color-primary-dark);
+  border-right: 1px solid var(--color-primary-dark);
+  border-radius: .25rem .25rem 0 0;
+
+  &:hover {
+    border-bottom: 3px solid var(--brand-color-secondary);
+    color: var(--color-secondary-dark);
+    border-radius: .25rem .25rem 0 0;
+    transition: all 0.2s ease-in-out;
   }
 }
+
+.activebtn {
+  background: rgba(0, 179, 159, .2);
+  color: var(--color-secondary-medium);
+  border-top: 1px solid var(--color-secondary-medium);
+  border-left: 1px solid var(--color-secondary-medium);
+  border-right: 1px solid var(--color-secondary-medium);
+}
+

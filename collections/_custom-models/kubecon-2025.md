@@ -1,5 +1,7 @@
 ---
 layout: single-page-model
+redirect_from:
+  - /catalog/models/kubecon-2025
 item-type: model
 name: Kubecon 2025
 subtitle: Demo Model for Kubecon NA Meshery Contribfest

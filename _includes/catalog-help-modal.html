@@ -2,7 +2,7 @@
   .help-modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 200; /* Sit on top */
+    z-index: 3000; /* Sit above header ($z-index-header is 2001 in _sass/variables.scss) */
     inset: 0; /* top:0; right:0; bottom:0; left:0 */
     width: 100vw; /* Full width */
     height: 100vh; /* Full height */
@@ -22,7 +22,15 @@
 /* Style the tab */
 .tab {
   overflow: hidden;
-  background-color: #00D3A9;
+  background-color: var(--brand-color-primary);
+}
+
+/* Make the tab bar span the full modal width.
+   Overrides the generic `.tab { width: 70% }` from _sass/features.scss. */
+.help-modal .tab {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 0;
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -38,13 +46,13 @@
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #00B39F;
+  background-color: var(--brand-color-secondary);
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
   background-color: #1E2117;
-  color: "#fff"
+  color: #fff;
 }
 
 /* Style the tab content */

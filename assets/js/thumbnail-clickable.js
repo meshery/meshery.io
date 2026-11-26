@@ -39,16 +39,18 @@ function createFullScreenContainer(patternId, patternType){
       break;
     default:
       fullScreenImage.src =
-      "https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/" +
+      "https://cdn.jsdelivr.net/gh/meshery-extensions/meshery-extensions-packages@master/action-assets/design-assets/" +
       patternId +
       ".png";
       break;
   }
 
   fullScreenImage.onerror = function () {
+    this.onerror = null;
     this.src = "/assets/images/patterns/service-mesh.svg";
   };
   fullScreenImage.loading = "lazy";
+  fullScreenImage.decoding = "async";
   fullScreenImage.style.maxHeight = "75vh";  
   fullScreenImage.style.maxWidth = "75vw";   
 

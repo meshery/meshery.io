@@ -63,8 +63,12 @@
 				padding: 2rem 0;
 				border-radius: 0 0 2px 2px;
 				border: 0;
-				color: var(--color-primary-light-tbase);
+				color: var(--color-on-brand);
 
+				&:focus-visible {
+					outline: 2px solid var(--color-on-brand);
+					outline-offset: -2px;
+				}
 			}
 			.start { 
 				text-align: center;
@@ -72,10 +76,10 @@
 				position: relative;
 				background-color: var(  --brand-color-primary);
 				border-radius: 0 0 1.25rem 1.25rem;
-				&:hover {
+				&:hover,
+				&:focus-within {
 					background-color: var(--brand-color-secondary);	
 					a:hover {
-						color: var(--color-secondary-light);
 						text-decoration: none;
 					}
 				}
@@ -242,9 +246,9 @@
   }
 
 .catalog-preview-section {
-  @media (max-width: 992px) {
+  @media (max-width: 1000px) {
     .container.flex {
-      flex-direction: column;
+      flex-direction: column !important;
 
       .text {
         box-sizing: border-box;
@@ -261,12 +265,14 @@
         margin: 0 auto;
         padding: 0;
       }
+	  .feature-title {
+		margin-top: 1rem;
+	  }
     }
   }
 
   @media (min-width: 993px) {
     .container.flex {
-      flex-direction: row;
       gap: 2rem;
 
       .text {
@@ -285,9 +291,6 @@
   }
 }
 
-h2.feature-title {
-  text-align: left;
-}
 
 .tab {
   display: flex;
@@ -303,11 +306,15 @@ h2.feature-title {
     padding: 0.5em;
     color: var(--color-secondary-dark);
 
-    &:hover {
+	&:hover {
+      background-color: transparent;
+      color: #00d3a9;
+    }
+    &.active {
       background-color: #00d3a9;
       color: white;
       border-radius: 0.5rem;
-    }
+    }	
   }
 }
 

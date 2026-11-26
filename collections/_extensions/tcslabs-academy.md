@@ -4,7 +4,7 @@ item-type: extension
 name: TCS Labs Academy
 kind: Remote Provider
 userName: TCS Labs
-type: Collaboration
+type: Academy
 compatibility:
   - meshery
 extensionId: deea6061-b6be-49a9-ad1c-f1a5c32e1fa9
