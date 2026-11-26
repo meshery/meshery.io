@@ -195,7 +195,7 @@ The component entries in the front matter identify existing selectors and their 
 
 ### Buttons and actions
 
-The `.button a, input[type=submit]` selector uses `var(--brand-color-primary)`, white text, `7px` rounding, and `10px 30px` padding; its hover background uses `var(--brand-color-secondary)`. This shipped white-on-teal pairing has a contrast gap (see above). The `.button.alt a` action is translucent white with a `1px` translucent border, `3px` rounding, and `16px 50px` padding. The `.button-para .link` CTA uses a hard-coded teal background, white text, `7px` rounding, and `.5rem` padding. Saffron is an action color, not a documented shared secondary-button variant; use dark text on saffron backgrounds. Check the owning Sass before documenting catalog-action values.
+The `.button a, input[type=submit]` selector uses `var(--brand-color-primary)`, white text, `7px` rounding, and `10px 30px` padding; its hover background uses `var(--brand-color-secondary)`. This shipped white-on-teal pairing has a contrast gap (see above). The `.button.alt a` action is translucent white with a `1px` translucent border, `3px` rounding, and `16px 50px` padding. The `.button-para .link` CTA uses a hard-coded teal background, dark `var(--color-on-brand)` text, `7px` rounding, and `.5rem` padding. Saffron is an action color, not a documented shared secondary-button variant; use dark text on saffron backgrounds. Check the owning Sass before documenting catalog-action values.
 
 ### Cards, panels, and catalog surfaces
 
