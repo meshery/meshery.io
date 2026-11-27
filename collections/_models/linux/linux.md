@@ -5,7 +5,7 @@ name: Linux
 subtitle: Collaborative and visual infrastructure as design for Linux
 colorIcon: /assets/images/integration/linux/icons/color/linux-color.svg
 whiteIcon: /assets/images/integration/linux/icons/white/linux-white.svg
-docURL: https://docs.meshery.io/installation/linux-mac
+docURL: https://docs.meshery.io/installation/mesheryctl/linux-mac/
 description: 
 category: Platform
 subcategory: Operating System
