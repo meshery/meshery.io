@@ -7,8 +7,7 @@ function toggleFullScreenImage(patternId, patternType) {
     createFullScreenContainer(patternId, patternType);
     document.body.style.overflow = "hidden";
   } else {
-    document.body.removeChild(fullScreenContainer);
-    document.body.style.overflow = "auto";
+    fullScreenContainer.click();
   }
 }
 
@@ -40,24 +39,39 @@ function createFullScreenContainer(patternId, patternType){
       break;
     default:
       fullScreenImage.src =
-      "https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/" +
+      "https://cdn.jsdelivr.net/gh/meshery-extensions/meshery-extensions-packages@master/action-assets/design-assets/" +
       patternId +
       ".png";
       break;
   }
 
   fullScreenImage.onerror = function () {
+    this.onerror = null;
     this.src = "/assets/images/patterns/service-mesh.svg";
   };
   fullScreenImage.loading = "lazy";
+  fullScreenImage.decoding = "async";
   fullScreenImage.style.maxHeight = "75vh";  
   fullScreenImage.style.maxWidth = "75vw";   
 
   fullScreenContainer.appendChild(fullScreenImage);
 
   document.body.appendChild(fullScreenContainer);
-  fullScreenContainer.onclick = function () {
+
+function closeFullScreen() {
+  if (document.body.contains(fullScreenContainer)) {
     document.body.removeChild(fullScreenContainer);
     document.body.style.overflow = "auto";
-  };
+    document.removeEventListener("keydown", handleEscape);
+  }
+}
+
+function handleEscape(event) {
+  if (event.key === "Escape") {
+    closeFullScreen();
+  }
+}
+
+document.addEventListener("keydown", handleEscape);
+fullScreenContainer.onclick = closeFullScreen;
 }

@@ -94,7 +94,7 @@
   border-radius: 7px;
   padding: 0.5rem;
   margin: 0 10px;
-  background: #00b39f;
+  background: var(--brand-color-secondary);
     }
     
 
@@ -109,6 +109,20 @@
         if (!sortSelect) {
             return;
         }
+        // Search and the filter checkboxes don't combine yet (the last one applied wins),
+        // so remember which ran last and let sorting re-apply that same view
+        var lastApplied = "filters";
+        var searchBox = document.getElementById("search");
+        if (searchBox) {
+            searchBox.addEventListener("input", function () {
+                lastApplied = "search";
+            });
+        }
+        document.addEventListener("click", function (e) {
+            if (e.target.matches("#category-div input, #compatibility-div input, #cardpatterntype-div input")) {
+                lastApplied = "filters";
+            }
+        });
         sortSelect.addEventListener("change", function () {
             var sortValue = this.value;
             var cardsContainer = document.querySelector(".row");
@@ -145,6 +159,15 @@
             catalog.forEach(function (pattern) {
                 cardsContainer.appendChild(pattern);
             });
+
+            // Re-paginate in the new order, starting from page 1, re-applying
+            // whichever view (search or filters) the user applied last
+            var searchInput = document.getElementById("search");
+            if (searchInput && lastApplied === "search") {
+                searchInput.dispatchEvent(new Event("input"));
+            } else {
+                document.dispatchEvent(new Event("catalog:reordered"));
+            }
         });
     // Search functionality
     function setupSearchFunction() {
@@ -165,6 +188,8 @@
         const filterValue = card.getAttribute("filter")?.toLowerCase();
         return filterValue?.includes(searchTerm);
         });
+
+        let currentPage = 0;
 
         // Hide all cards first (batch operation)
         allPatternCards.forEach(card => {

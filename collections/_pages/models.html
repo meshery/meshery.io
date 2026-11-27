@@ -1,11 +1,20 @@
 ---
-layout: models
+layout: plain
 title: Cloud Native Catalog - Models
 description: Models package components and relationships providing a versioned and OCI-exportable logical representation of resources.     
 permalink: /catalog/models/
 ---
 
-{% assign models = site.models | concat: site.custom-models %}
+{% assign show_technology = "false" %}
+
+{% include partials/extension-header.html
+    title="Meshery Models"
+    description="Models package components and relationships providing a versioned and OCI-exportable logical representation of resources."
+%}
+<div class="catalog">
+{% include patterns-filter.html %}
+
+{% assign models = site.models | concat: site.custom-models | sort_natural: "name" %}
 <script>
     var models = {{ models | jsonify }};
 </script>
@@ -88,3 +97,4 @@ permalink: /catalog/models/
     }
     updatePagination("models");
 </script>
+</div>

@@ -4,7 +4,6 @@
 title: Meshery
 url: "https://meshery.io"
 baseurl: ""
-google_analytics_key: UA-152604689-1
 google_maps_javascript_api_key:
 disqus_shortname:
 
@@ -59,15 +58,16 @@ collections:
     permalink: /catalog/:collection/:name
     sort_by: name
   filters:
-    output: true
+    output: false
     permalink: /catalog/:collection/:name
     sort_by: name
   handbook:
     output: false
     permalink: /community/:collection/:name
+  # Use collection-based permalinks to prevent slug/routing collisions with standard models
   custom-models:
     output: true
-    permalink: /catalog/models/:name
+    permalink: /catalog/:collection/:name
 
 # Post URL format
 permalink: /blog/:year/:month/:name/
@@ -226,3 +226,19 @@ _comments:
   highlight: Emphasis the text
   color: The background colour used in the plan name and call to action.
   new_window: Open link in new window
+
+
+# llms configuration for content extraction and Markdown conversion, used by the llms plugin to generate llms.txt and llms-full.txt
+# Now they are set in default but this is good to have as a reference for a future configuration or customization.
+# llms:
+#   content_selector: "main"        
+#   exclude_selectors:                
+#     - nav
+#     - footer
+#     - img
+#     - script
+#     - style
+#     - picture
+#     - svg
+#   exclude_paths:
+#     - /404.html

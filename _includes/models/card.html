@@ -9,12 +9,13 @@
         </div>
         <h4 class="pattern-name">{{model.name}}</h4>
         <div class="pattern-image-container">
-          <img class= "model-image" 
-          data-modelicon-light="{{ model.colorIcon | relative_url }}"
-          data-modelicon-dark="{{ model.whiteIcon | relative_url }}"
+          <img class="model-image logo-dark-light"
+          data-logo-for-light="{{ model.colorIcon | relative_url }}"
+          data-logo-for-dark="{{ model.whiteIcon | default: model.colorIcon | relative_url }}"
           src="{{ model.colorIcon | relative_url }}" 
           onerror="this.src='{{ '/assets/images/meshery-color.svg' | relative_url }}'" 
-          loading="lazy"/>
+          loading="lazy"
+          decoding="async"/>
         </div>
       </div> 
       <div class="back">

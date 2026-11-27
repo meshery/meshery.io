@@ -7,7 +7,7 @@ categories:
  - continuous-integration
  - service-mesh
  - gitops
-redirect_from: /blog/pipelining-service-mesh-specifications
+redirect_from: /blog/pipelining-service-mesh-specifications/
 ---
 <div style="text-align:center;margin-bottom:0.75rem;">
   <img src="{{site.baseurl}}/assets/images/posts/2022/2022-01-26-pipelining-service-mesh-specifications/service-mesh-specifications.png" alt="service-mesh-specifications" width="80%"  />
@@ -294,6 +294,6 @@ See this sample GitHub workflow (<a href="https://github.com/meshery-extensions/
 <img width="90%" src="/assets/images/posts/2022/2022-01-26-pipelining-service-mesh-specifications/service-mesh-performance-profile-test-results.png" alt="performance management dashboard">
 </div>
 
-The results from the tests are updated on the Performance Management dashboard in Meshery. To learn more about interpreting the test results, check out <a href="https://docs.meshery.io/guides/interpreting-performance-test-results">this guide</a>. You can always checkout the <a href="https://docs.meshery.io/guides">Meshery User Guides</a> to dive deep into these features.
+The results from the tests are updated on the Performance Management dashboard in Meshery. To learn more about interpreting the test results, check out <a href="https://docs.meshery.io/guides/performance-management/interpreting-performance-test-results">this guide</a>. You can always checkout the <a href="https://docs.meshery.io/guides">Meshery User Guides</a> to dive deep into these features.
 
 Stay meshy!

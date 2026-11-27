@@ -8,7 +8,7 @@ published: true
 categories:
   - community
   - milestones
-redirect_from: /blog/ninth-highest-velocity-cncf-project
+redirect_from: /blog/ninth-highest-velocity-cncf-project/
 featured-image: /assets/images/posts/2025/ninth-highest-velocity-cncf-project/meshery-project-velocity.png
 ---
 
@@ -41,7 +41,7 @@ This sustained growth underscores the project's vitality and increasing relevanc
 
 ### What Drives Meshery's Velocity?
 
-This milestone wouldn't be possible without our incredible community. With over **2,000 contributors** and **8,000+ community members**, the Meshery project thrives on collaboration and a shared passion for simplifying cloud-native management. The 350% growth in code commits last year alone highlights the community's engagement. Our dedicated [Newcomer Onboarding Program](https://docs.meshery.io/project/community/newcomers) ensures that contributing to Meshery is accessible and rewarding for everyone.
+This milestone wouldn't be possible without our incredible community. With over **2,000 contributors** and **8,000+ community members**, the Meshery project thrives on collaboration and a shared passion for simplifying cloud-native management. The 350% growth in code commits last year alone highlights the community's engagement. Our dedicated [Newcomer Onboarding Program](https://docs.meshery.io/project/community) ensures that contributing to Meshery is accessible and rewarding for everyone.
 
 ### Functionality that Empowers Collaboration
 

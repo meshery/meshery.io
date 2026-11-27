@@ -7,7 +7,7 @@ categories:
   - e2e-testing
   - contributors
 featured-image: /assets/images/posts/2025/2025-04-01-improving-mesherys-ui-e2e-tests/6-02.png
-redirect_from: /blog/improving-meshery-ui-e2e-tests
+redirect_from: /blog/improving-meshery-ui-e2e-tests/
 ---
 
 Hey Meshery Contributors 👋
@@ -49,7 +49,7 @@ Here are some handy tools and references to help you diagnose and debug test fai
 For an in-depth walkthrough of how to contribute UI tests using Playwright, see the [Meshery UI Test Contributing Guide](https://docs.meshery.io/project/contributing/contributing-ui-tests)
 
 - **📊 Latest Test Status Dashboard**  
-  [View results from the `master` branch](https://docs.meshery.io/project/contributing/test-status)
+  [View results from the `master` branch](https://github.com/meshery/meshery/actions/workflows/build-and-test.yml?query=branch%3Amaster)
 
 - **🎥 Playwright Trace Viewer**  
   You can replay test runs with Playwright’s trace viewer using the GitHub Actions artifact generated during the workflow:  

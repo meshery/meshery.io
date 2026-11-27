@@ -115,7 +115,7 @@ Workspaces support [multi-environment workflows](https://docs.meshery.io/concept
 - Deploy to production with a single click (with appropriate RBAC checks)
 
 ### Team Management
-Fine-grained [role-based access control](https://docs.meshery.io/concepts/logical/teams) ensures:
+Fine-grained [role-based access control](https://docs.meshery.io/concepts/logical/workspaces) ensures:
 - **Owners** can manage Workspace settings and membership
 - **Editors** can modify designs and environments
 - **Viewers** can browse designs without making changes

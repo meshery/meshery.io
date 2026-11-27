@@ -107,8 +107,28 @@ a.nav-text:hover {
 
 .menu-toggle {
 	color: var(--color-secondary-medium) !important;
-	& .bars span{
-		background-color:var(--color-secondary-dark) !important ;
+	& .bars span {
+		background-color: var(--color-secondary-dark) !important;
+		transition: transform 0.3s ease, opacity 0.3s ease;
+		transform-origin: center;
+	}
+}
+
+.stellarnav.active .menu-toggle .bars {
+	span:nth-child(1) {
+		transform: translateY(6px) rotate(45deg);
+	}
+	span:nth-child(2) {
+		opacity: 0;
+	}
+	span:nth-child(3) {
+		transform: translateY(-6px) rotate(-45deg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.menu-toggle .bars span {
+		transition: none !important;
 	}
 }
 
@@ -199,7 +219,7 @@ a.nav-text:hover {
 }
 
 .active {
-	color: var(--brand-color-secondary) !important;
+	color: var(--brand-color-secondary);
 	font-weight: bolder;
 }
 
@@ -230,9 +250,9 @@ a.nav-text:hover {
 .stellarnav.mobile {
 	
 	& ul.nav-list {
-		position: fixed;
-		right: 12.5%;
-		top: 4.2rem;
+		position: absolute;
+		right: 0;
+		top: 100%;
 		background: transparent;
 		background-color: var(--color-primary-light);
 		max-height: 70vh;

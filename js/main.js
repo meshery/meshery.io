@@ -30,6 +30,47 @@ setInterval(function () {
 changeHeader();
 })();
 
+(function () {
+var logoLink = document.querySelector("[data-homepage-logo]");
+if (!logoLink) return;
+
+logoLink.addEventListener("click", function (event) {
+  if (
+    event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      logoLink.target === "_blank"
+  ) {
+    return;
+  }
+
+  if (Math.round(window.scrollY) <= 0) return;
+
+  event.preventDefault();
+
+  // Clear the URL hash while preserving the path and query parameters.
+  if (window.location.hash) {
+    history.pushState(
+      null,
+      "",
+      window.location.pathname + window.location.search
+    );
+  }
+
+  var prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  window.scrollTo({
+    top: 0,
+    behavior: prefersReducedMotion ? "auto" : "smooth"
+  });
+});
+})();
+
 var btnscroll = $('#button-scroll-to-up');
 
 $(window).scroll(function() {
@@ -42,7 +83,11 @@ $(window).scroll(function() {
 
 btnscroll.on('click', function(e) {
   e.preventDefault();
-  $('html, body').animate({ scrollTop: 0 }, '0');
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.scrollTo(0, 0);
+  } else {
+    $('html, body').animate({ scrollTop: 0 }, '0');
+  }
 });
 
 

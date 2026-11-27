@@ -19,19 +19,21 @@
       {%if pattern.filters.type == "wasm filter" %}
       <img
         class="image-class"
-        src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}.png"
+        src="https://cdn.jsdelivr.net/gh/meshery-extensions/meshery-extensions-packages@master/action-assets/design-assets/{{pattern.patternId}}.png"
         onerror="this.src='{{ '/assets/images/webassembly_logo.svg' | relative_url }}'"
         loading="lazy"
+        decoding="async"
         onclick="toggleFullScreenImage('{{ pattern.patternId }}')"
       />
       {%else%}
       <img
         class="image-class"
-        data-snapshot-light="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png"
-        data-snapshot-dark="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png"
-        src="https://raw.githubusercontent.com/meshery-extensions/meshery-extensions-packages/master/action-assets/design-assets/{{pattern.patternId}}-light.png"
-        onerror="this.src='{{site.baseurl}}/assets/images/logos/service-mesh-pattern.svg', this.style.width = '50%'"
+        data-snapshot-light="https://cdn.jsdelivr.net/gh/meshery-extensions/meshery-extensions-packages@master/action-assets/design-assets/{{pattern.patternId}}-light.png"
+        data-snapshot-dark="https://cdn.jsdelivr.net/gh/meshery-extensions/meshery-extensions-packages@master/action-assets/design-assets/{{pattern.patternId}}-dark.png"
+        src="https://cdn.jsdelivr.net/gh/meshery-extensions/meshery-extensions-packages@master/action-assets/design-assets/{{pattern.patternId}}-light.png"
+        onerror="this.src='{{site.baseurl}}/assets/images/logos/service-mesh-pattern.svg'; this.style.width = '50%'"
         loading="lazy"
+        decoding="async"
         onclick="toggleFullScreenImage('{{ pattern.patternId }}')"
       />
       {%endif%}
@@ -116,11 +118,11 @@
 </div>
 
 <script>
-  const loadedScripts = new Set();
+  window.loadedScripts = window.loadedScripts || new Set();
 
   function loadScriptOnce(src) {
-    if (loadedScripts.has(src)) return;
-    loadedScripts.add(src);
+    if (window.loadedScripts.has(src)) return;
+    window.loadedScripts.add(src);
     const script = document.createElement("script");
     script.src = src;
     document.body.appendChild(script);

@@ -16,41 +16,38 @@
     <a href="{{ '/catalog/models/' | append: model_slug | relative_url }}">
     <!-- Please remove these hardcoding -->
     <!-- This would require updating the already published content with correct compatibility -->
-    {% if item == "Istio" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/integration/istio-base/icons/color/istio-base-color.svg" />
+    {% if item == "Istio" or item == "ISTIO" %}
+      {% assign icon_src = '/assets/images/integration/istio-base/icons/color/istio-base-color.svg' %}
     {% elsif item == "Linkerd" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/linkerd.svg" />
+      {% assign icon_src = '/assets/images/linkerd.svg' %}
     {% elsif item == "Consul" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/consul.svg" />
-    {% elsif item == "ISTIO" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/integration/istio-base/icons/color/istio-base-color.svg" />
+      {% assign icon_src = '/assets/images/consul.svg' %}
     {% elsif item == "ISTIO RATE LIMIT OPERATOR" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/integration/istio-ratelimit-operator/icons/color/istio-ratelimit-operator-color.svg" />
+      {% assign icon_src = '/assets/images/integration/istio-ratelimit-operator/icons/color/istio-ratelimit-operator-color.svg' %}
     {% elsif item == "Traefik" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/traefik-mesh.svg" />
+      {% assign icon_src = '/assets/images/traefik-mesh.svg' %}
     {% elsif item == "OSM" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/osm.svg" />
+      {% assign icon_src = '/assets/images/osm.svg' %}
     {% elsif item == "App Mesh" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/aws-app-mesh.svg" />
+      {% assign icon_src = '/assets/images/aws-app-mesh.svg' %}
     {% elsif item == "Kuma" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/kuma-color.svg" />
+      {% assign icon_src = '/assets/images/kuma-color.svg' %}
     {% elsif item == "Nginx" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/nginx-sm.svg" />
+      {% assign icon_src = '/assets/images/nginx-sm.svg' %}
     {% elsif item == "NSM" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/nsm.svg" />
-    {% elsif item == "saferwall" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/integration/saferwall/icons/color/saferwall-color.svg" />
-    {% elsif item == "cloudcore" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/integration/cloudcore/icons/color/cloudcore-color.svg" />
-    {% elsif item == "k8s-config-connector" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/integration/k8s-config-connector/icons/color/k8s-config-connector-color.svg" />
-    {% elsif item == "keda-http-scaler" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/integration/keda-http-scaler/icons/color/keda-http-scaler-color.svg" />
-    {% elsif item == "wordpress-operator" %}
-    <img class="service-mesh-image" src="{{site.baseurl}}/assets/images/integration/wordpress-operator/icons/color/wordpress-operator-color.svg" />
+      {% assign icon_src = '/assets/images/nsm.svg' %}
+    {% elsif item == "saferwall" or item == "cloudcore" or item == "k8s-config-connector" or item == "keda-http-scaler" or item == "wordpress-operator" %}
+      {% assign icon_src = '/assets/images/integration/' | append: item | append: '/icons/color/' | append: item | append: '-color.svg' %}
     {% else %}
-        <img class="service-mesh-image" src="{{site.baseurl}}/images/integrations/{{ item | downcase | replace: ' ', '-'  }}/icons/color/{{ item | downcase | replace: ' ', '-'  }}-color.svg" />
+      {% assign custom_model = site["custom-models"] | where: "slug", model_slug | first %}
+      {% if custom_model and custom_model.colorIcon %}
+        {% assign icon_src = custom_model.colorIcon %}
+      {% else %}
+        {% assign icon_src = '/assets/images/integration/' | append: model_slug | append: '/icons/color/' | append: model_slug | append: '-color.svg' %}
+      {% endif %}
     {% endif %}
+    {% assign fallback_icon = '/assets/images/meshery-color.svg' | relative_url %}
+    <img class="service-mesh-image" src="{{ icon_src | relative_url }}" alt="{{ item | escape }}" onerror="this.onerror=null;this.src='{{ fallback_icon }}';" />
     </a>
     {% endfor %}
 </div>
