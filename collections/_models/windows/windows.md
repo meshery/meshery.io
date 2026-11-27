@@ -5,7 +5,7 @@ name: Windows
 subtitle: Collaborative and visual infrastructure as design for Windows
 colorIcon: /assets/images/integration/windows/icons/color/windows-color.svg
 whiteIcon: /assets/images/integration/windows/icons/white/windows-white.svg
-docURL: https://docs.meshery.io/installation//windows
+docURL: https://docs.meshery.io/installation/mesheryctl/windows/
 description: 
 category: Platform
 subcategory: Operating System
