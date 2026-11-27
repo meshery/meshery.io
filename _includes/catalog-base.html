@@ -145,6 +145,14 @@
             catalog.forEach(function (pattern) {
                 cardsContainer.appendChild(pattern);
             });
+
+            // Re-paginate in the new order, starting from page 1
+            var searchInput = document.getElementById("search");
+            if (searchInput && searchInput.value) {
+                searchInput.dispatchEvent(new Event("input"));
+            } else {
+                document.dispatchEvent(new Event("catalog:reordered"));
+            }
         });
     // Search functionality
     function setupSearchFunction() {
