@@ -5,7 +5,7 @@ name: Azure Kubernetes Service
 subtitle: Collaborative and visual infrastructure as design for Azure Kubernetes Service
 colorIcon: /assets/images/integration/azure-kubernetes-service/icons/color/azure-kubernetes-service-color.svg
 whiteIcon: /assets/images/integration/azure-kubernetes-service/icons/white/azure-kubernetes-service-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/Azure Kubernetes Service
+docURL: https://docs.meshery.io/extensibility/integrations/azure-kubernetes-service
 description: 
 category: Orchestration & Management
 subcategory: Scheduling & Orchestration

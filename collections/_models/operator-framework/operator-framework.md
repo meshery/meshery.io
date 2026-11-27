@@ -5,7 +5,7 @@ name: Operator Framework
 subtitle: Collaborative and visual infrastructure as design for Operator Framework
 colorIcon: /assets/images/integration/operator-framework/icons/color/operator-framework-color.svg
 whiteIcon: /assets/images/integration/operator-framework/icons/white/operator-framework-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/operator framework
+docURL: https://docs.meshery.io/extensibility/integrations/operator-framework
 description: 
 category: App Definition and Development
 subcategory: Application Definition & Image Build
