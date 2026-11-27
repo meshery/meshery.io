@@ -5,7 +5,7 @@ name: Open Cluster Management
 subtitle: Collaborative and visual infrastructure as design for Open Cluster Management
 colorIcon: /assets/images/integration/open-cluster-management/icons/color/open-cluster-management-color.svg
 whiteIcon: /assets/images/integration/open-cluster-management/icons/white/open-cluster-management-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/open cluster management
+docURL: https://docs.meshery.io/extensibility/integrations/open-cluster-management
 description: 
 category: Orchestration & Management
 subcategory: Scheduling & Orchestration

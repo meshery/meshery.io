@@ -171,9 +171,13 @@ collection: models
                 </a>
                 {% endif %}
                 {% assign modelName = page.path | split: '/' | last | replace: '.md', '' %}
-                <a href="{{ '/assets/modelsFiles/' | append: modelName | append: '.tar' | relative_url }}" download>
+                {% assign modelTarPath = '/assets/modelsFiles/' | append: modelName | append: '.tar' %}
+                {% assign modelTar = site.static_files | where: 'path', modelTarPath | first %}
+                {% if modelTar %}
+                <a href="{{ modelTarPath | relative_url }}" download>
                   <button class="import" style="width: 10rem;">Download Model</button>
                 </a>
+                {% endif %}
 
                 <div class="btn-tooltip-grp">
                   <a href="https://docs.meshery.io/project/contributing/models/contributing-models-quick-start">

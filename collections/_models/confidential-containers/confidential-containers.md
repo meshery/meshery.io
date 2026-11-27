@@ -5,7 +5,7 @@ name: Confidential Containers
 subtitle: Collaborative and visual infrastructure as design for Confidential Containers
 colorIcon: /assets/images/integration/confidential-containers/icons/color/confidential-containers-color.svg
 whiteIcon: /assets/images/integration/confidential-containers/icons/white/confidential-containers-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/confidential containers
+docURL: https://docs.meshery.io/extensibility/integrations/confidential-containers
 description: 
 category: Runtime
 subcategory: Security & Compliance
