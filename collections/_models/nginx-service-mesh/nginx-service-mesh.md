@@ -5,7 +5,7 @@ name: NGINX Service Mesh
 subtitle: Collaborative and visual infrastructure as design for NGINX Service Mesh
 colorIcon: /assets/images/integration/nginx-service-mesh/icons/color/nginx-service-mesh-color.svg
 whiteIcon: /assets/images/integration/nginx-service-mesh/icons/white/nginx-service-mesh-white.svg
-docURL: https://docs.meshery.io/extensibility/adapters/nginx-sm
+docURL: https://docs.meshery.io/extensibility/integrations/nginx-service-mesh
 description: 
 category: Cloud Native Network
 subcategory: Service Mesh

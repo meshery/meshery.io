@@ -5,7 +5,7 @@ name: Open Policy Agent (OPA)
 subtitle: Collaborative and visual infrastructure as design for Open Policy Agent (OPA)
 colorIcon: /assets/images/integration/open-policy-agent-(opa)/icons/color/open-policy-agent-(opa)-color.svg
 whiteIcon: /assets/images/integration/open-policy-agent-(opa)/icons/white/open-policy-agent-(opa)-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/open policy agent (opa)
+docURL: https://docs.meshery.io/extensibility/integrations/open-policy-agent-(opa)
 description: 
 category: Security & Compliance
 subcategory: Security & Compliance
