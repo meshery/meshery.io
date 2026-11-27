@@ -34,7 +34,7 @@ Delivering on these requirements required a tool specifically suited to SMI.
 
 ## SMI Conformance Tool: Meshery
 
-Meshery, the service mesh management plane, is service mesh agnostic, which is an important characteristic as a compliance tool. No better tool for the job exists (in fact, no other tool is capable of the job) than Meshery, which has been [a partner of SMI](https://meshery.io/blog/2019/05/2019-07-20-a-standard-interface-for-service-meshes/) since its inception.
+Meshery, the service mesh management plane, is service mesh agnostic, which is an important characteristic as a compliance tool. No better tool for the job exists (in fact, no other tool is capable of the job) than Meshery, which has been [a partner of SMI](https://meshery.io/blog/a-standard-interface-for-service-meshes) since its inception.
 
 <div style="text-align:center;padding:10px">
 <img src="/assets/images/posts/2021/2021-04-26-validating-smi-conformance-with-meshery/meshery-service-mesh-compliance-tool.png" style="width:100%" alt="SMI Conformance Tool"/></div>
