@@ -5,7 +5,7 @@ name: Inclavare Containers
 subtitle: Collaborative and visual infrastructure as design for Inclavare Containers
 colorIcon: /assets/images/integration/inclavare-containers/icons/color/inclavare-containers-color.svg
 whiteIcon: /assets/images/integration/inclavare-containers/icons/white/inclavare-containers-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/inclavare containers
+docURL: https://docs.meshery.io/extensibility/integrations/inclavare-containers
 description: 
 category: Runtime
 subcategory: Container Runtime

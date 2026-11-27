@@ -5,7 +5,7 @@ name: Azure Alertsmanagement
 subtitle: Collaborative and visual infrastructure as design for Azure Alertsmanagement
 colorIcon: /assets/images/integration/azure-alertsmanagement/icons/color/azure-alertsmanagement-color.svg
 whiteIcon: /assets/images/integration/azure-alertsmanagement/icons/white/azure-alertsmanagement-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/azure-alertsmanagement
+docURL: https://docs.meshery.io/extensibility/integrations/azure-alerts-management
 description: 
 category: Runtime
 subcategory: Cloud Native Storage

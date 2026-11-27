@@ -38,7 +38,7 @@
 	flex-direction: column;
 	align-items: start;
 	text-decoration: none;
-	color: #fff;
+	color: var(--color-on-brand);
 	border-radius: 7px;
 	padding: .5rem;
 	background: #00B39F;
@@ -48,7 +48,22 @@
 	&:hover {
 		text-decoration: none;
 		background: #00d3a9;
-		color: white !important;
+		color: var(--color-on-brand);
+		transform: translateY(-2px);
+		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+
+		&:hover {
+			transform: none;
+		}
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--color-on-brand);
+		outline-offset: -2px;
 	}
 }
 

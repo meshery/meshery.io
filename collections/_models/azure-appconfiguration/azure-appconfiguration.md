@@ -5,7 +5,7 @@ name: Azure Appconfiguration
 subtitle: Collaborative and visual infrastructure as design for Azure Appconfiguration
 colorIcon: /assets/images/integration/azure-appconfiguration/icons/color/azure-appconfiguration-color.svg
 whiteIcon: /assets/images/integration/azure-appconfiguration/icons/white/azure-appconfiguration-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/azure-AppConfiguration
+docURL: https://docs.meshery.io/extensibility/integrations/azure-app-configuration
 description: 
 category: Runtime
 subcategory: Cloud Native Storage

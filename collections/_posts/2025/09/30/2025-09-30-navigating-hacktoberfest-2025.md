@@ -31,7 +31,7 @@ That CONTRIBUTING.md file? It's not there for decoration. Treat it as your playb
 - [Contributing to Meshery using git](https://docs.meshery.io/project/contributing/contributing-gitflow)
 - [Setting up Meshery Development Environment on Windows](https://docs.meshery.io/project/contributing/meshery-windows)
 - [Contributing to Meshery Build and Release (CI)](https://docs.meshery.io/project/contributing/build-and-release)
-  - [Contributing to Meshery's End-to-End Tests using Cypress](https://docs.meshery.io/project/contributing/contributing-cypress)
+  - [Contributing to Meshery's End-to-End Tests using Playwright](https://docs.meshery.io/project/contributing/contributing-ui-tests)
 - [Contributing to Meshery Adapters](https://docs.meshery.io/project/contributing/contributing-adapters)
 - [Contributing to Meshery Docker Extension](https://docs.meshery.io/project/contributing/contributing-docker-extension)
 - [Contributing to Meshery Server](https://docs.meshery.io/project/contributing/contributing-server)
