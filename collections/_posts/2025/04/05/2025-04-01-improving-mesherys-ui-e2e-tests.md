@@ -49,7 +49,7 @@ Here are some handy tools and references to help you diagnose and debug test fai
 For an in-depth walkthrough of how to contribute UI tests using Playwright, see the [Meshery UI Test Contributing Guide](https://docs.meshery.io/project/contributing/contributing-ui-tests)
 
 - **📊 Latest Test Status Dashboard**  
-  [View results from the `master` branch](https://docs.meshery.io/project/contributing/test-status)
+  [View results from the `master` branch](https://docs.meshery.io/project/releases/latest)
 
 - **🎥 Playwright Trace Viewer**  
   You can replay test runs with Playwright’s trace viewer using the GitHub Actions artifact generated during the workflow:  
