@@ -1,5 +1,6 @@
 @use "./mixins/transitions.scss" as *;
 @use "./variables.scss" as *;
+
 nav {
 	font-size: .8rem;
 	width: fit-content;
@@ -13,6 +14,7 @@ nav {
 		padding-left: 1rem;
 		width: 40%;
 	}
+
 	@media only screen and (max-width: 620px) {
 		width: 99%;
 	}
@@ -25,13 +27,15 @@ nav {
 	justify-content: space-between;
 	align-items: center;
 }
-.stellarnav.desktop{
+
+.stellarnav.desktop {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
 }
-.stellarnav.mobile{
-	text-align: end!important;
+
+.stellarnav.mobile {
+	text-align: end !important;
 }
 
 .nav-list {
@@ -43,16 +47,16 @@ nav {
 	border-radius: 3px;
 }
 
-.nav-item:not(.has-sub) > a:not(.highlight).nav-text{
+.nav-item:not(.has-sub) > a:not(.highlight).nav-text {
 	position: relative;
-	&:hover{
 
-		&::after{
-		  width: 100%;
+	&:hover {
+		&::after {
+			width: 100%;
 		}
-	  }
+	}
 
-	  &::after{
+	&::after {
 		content: "";
 		width: 0px;
 		height: 2px;
@@ -62,26 +66,28 @@ nav {
 		position: absolute;
 		background: var(--background-primary);
 		transition: width .3s;
-	  }
+	}
 }
 
 .nav-text {
 	font-size: .9rem !important;
+
 	@media (min-width: 840px) {
 		padding: 0.5rem !important;
-		
-		margin: 0px 3px; 
+		margin: 0px 3px;
 		color: var(--color-secondary-medium) !important;
 	}
-	& { cursor: pointer; }
+
+	& {
+		cursor: pointer;
+	}
 }
 
-.nav-mode-icon{
-
+.nav-mode-icon {
 	border: none;
-	background: transparent;      
+	background: transparent;
 	margin-top: 0;
-	
+
 	& > img {
 		margin-left: .5rem;
 		width: 2rem;
@@ -93,7 +99,6 @@ nav {
 
 a.nav-text:hover {
 	color: var(--color-secondary-dark) !important;
-
 }
 
 .nav-img {
@@ -107,6 +112,7 @@ a.nav-text:hover {
 
 .menu-toggle {
 	color: var(--color-secondary-medium) !important;
+
 	& .bars span {
 		background-color: var(--color-secondary-dark) !important;
 		transition: transform 0.3s ease, opacity 0.3s ease;
@@ -118,9 +124,11 @@ a.nav-text:hover {
 	span:nth-child(1) {
 		transform: translateY(6px) rotate(45deg);
 	}
+
 	span:nth-child(2) {
 		opacity: 0;
 	}
+
 	span:nth-child(3) {
 		transform: translateY(-6px) rotate(-45deg);
 	}
@@ -138,39 +146,41 @@ a.nav-text:hover {
 }
 
 .stellarnav.desktop li.has-sub a {
-    padding-right: 1rem;
-	&::after{
+	padding-right: 1rem;
+
+	&::after {
 		transform: translateY(-1.5px);
 	}
 
-	&.sublink-active{
-		&::after{
+	&.sublink-active {
+		&::after {
 			border-top: 6px solid;
 		}
 	}
-	&:hover{
-	}
 }
 
-
+/*
+ * Preserve the original width behavior for all navigation lists.
+ * Desktop-specific dropdown styling is defined separately below.
+ */
 .stellarnav ul {
-	width:fit-content;
-	// margin-top: 0.5rem;
-	& ul{
-  	border-radius: 5px;
-	background-color: var(--color-secondary-light);
-	background-color: #dee2e6;
-	background-image: var(--background-nav-dropdown);
+	width: fit-content;
+}
+
+/* Desktop-only dropdown styling */
+.stellarnav.desktop ul ul {
+	border-radius: 5px;
+	background-color: var(--color-primary-light);
+	background-image: none;
 	overflow: hidden;
 	width: fit-content;
 	box-shadow: var(--box-shadow-primary);
-	}
 }
 
 .stellarnav li.has-sub > a:after {
-	border-top: 6px solid var(--color-secondary-medium); display: inline-block;
+	border-top: 6px solid var(--color-secondary-medium);
+	display: inline-block;
 }
-
 
 .sub-nav-li {
 	@include btn-hover-secondary;
@@ -178,34 +188,60 @@ a.nav-text:hover {
 	display: flex;
 	align-items: center;
 
-	&--active{
-		&::after{
-			width: 100%  !important;
+	&--active {
+		&::after {
+			width: 100% !important;
 		}
-		&  a{
+
+		& a {
 			color: #fff !important;
 			border-color: white;
 		}
-		& img{
-			filter:brightness(0) invert(1);
+
+		& img {
+			filter: brightness(0) invert(1);
 		}
 	}
 
-	&:hover{
-		& img{
-			filter:brightness(0) invert(1);
+	&:hover {
+		& img {
+			filter: brightness(0) invert(1);
 		}
 	}
-  
 }
 
-.nav-item a{
+/* Desktop dropdown: keep hover/active labels readable on the theme-aware surface */
+.stellarnav.desktop .sub-nav-li {
+	&:hover,
+	&--active {
+		& a {
+			color: var(--color-secondary-dark) !important;
+			border-color: var(--color-secondary-dark);
+		}
+
+		& img {
+			filter: var(--image-filter-light);
+		}
+	}
+}
+
+/* Dark mode: --image-filter-light resolves to black here, so keep the original white icon */
+.dark-mode .stellarnav.desktop .sub-nav-li {
+	&:hover,
+	&--active {
+		& img {
+			filter: brightness(0) invert(1);
+		}
+	}
+}
+
+.nav-item a {
 	white-space: nowrap;
 }
 
 .subnav-item {
 	white-space: nowrap;
-	width:100%;
+	width: 100%;
 	background-size: cover;
 	display: flex !important;
 	justify-content: space-between;
@@ -215,7 +251,7 @@ a.nav-text:hover {
 .nav-sublink-logo {
 	max-width: 10px;
 	vertical-align: top;
-	filter:var(--logo-filter);
+	filter: var(--logo-filter);
 }
 
 .active {
@@ -224,31 +260,34 @@ a.nav-text:hover {
 }
 
 .highlight.nav-text {
-	border:1px solid var(--color-grey-light);
-	&:hover{
+	border: 1px solid var(--color-grey-light);
+
+	&:hover {
 		color: white !important;
 	}
 }
 
-.highlight { 
-	color: #fff ;
+.highlight {
+	color: #fff;
 	border-radius: 7px;
 	padding: .5rem 1rem;
 	transition: all .4s;
 	background: #00B39F;
-	&:active{
+
+	&:active {
 		transform: scale(.95);
 	}
-	&:hover{
+
+	&:hover {
 		text-decoration: none;
 		background-color: #00d3a9;
 		color: white !important;
 	}
 }
 
-
+/* Mobile navigation: preserve original behavior */
 .stellarnav.mobile {
-	
+
 	& ul.nav-list {
 		position: absolute;
 		right: 0;
@@ -276,14 +315,13 @@ a.nav-text:hover {
 
 	& > ul > li > a {
 		padding: 15px !important;
-		
 	}
 
-	&  li a {
+	& li a {
 		color: var(--color-secondary-dark);
 	}
 
-	& .subnav-item{
+	& .subnav-item {
 		display: flex;
 		gap: 5px;
 	}
@@ -295,17 +333,16 @@ a.nav-text:hover {
 		text-overflow: ellipsis;
 		max-width: 100%;
 	}
-	
 }
 
-@media screen and (max-width: 1140px)  {
+@media screen and (max-width: 1140px) {
 	.project-name {
 		padding-top: 10px;
 	}
 }
 
 @media screen and (max-width: 839px) {
-    .nav-mode-icon {
-        // padding-top: 10px;
-    }
+	.nav-mode-icon {
+		// padding-top: 10px;
+	}
 }
