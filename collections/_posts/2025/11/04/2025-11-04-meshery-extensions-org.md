@@ -107,7 +107,7 @@ The mechanics of managing two organizations involve distinct development, testin
 
 * **Comprehensive Guides**: Documentation covers core platform usage, extension development, and integration ([Meshery Docs](https://docs.meshery.io)). The Newcomers’ Guide and MeshMates program aid onboarding ([Meshery Community](https://meshery.io/community)).  
 * **Catalog and Templates**: Meshery’s catalog of design templates includes extension configurations, promoting best practices ([See Meshery Catalog](https://meshery.io/catalog)).  
-* **Community Resources**: Weekly meetings, Slack channels, and the [community handbook](https://docs.meshery.io/community/handbook) provide ongoing support.
+* **Community Resources**: Weekly meetings, Slack channels, and the [community handbook](https://layer5.io/community/handbook/) provide ongoing support.
 
 ## Reflections on Other Projects
 

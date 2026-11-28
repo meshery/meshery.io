@@ -53,7 +53,7 @@ Don't confine yourself to a GitHub profile. Engage in meaningful discussions, pa
 
 ### 6. Compassion Over Code: Recognizing Maintainer Burnout
 
-<p><a href="/community/handbook/repository-overview">Maintainers</a> are the unsung heroes of the open-source world, often overwhelmed by the Hacktoberfest influx. Your seemingly "simple" pull request may be the tipping point. Recognize their efforts and respect their capacity. Some projects may not actively seek new contributions, and that's perfectly valid. Begin by identifying projects explicitly welcoming newcomers, tagged with "good first issue" or "help wanted".</p>
+<p><a href="https://layer5.io/community/handbook/repository-overview">Maintainers</a> are the unsung heroes of the open-source world, often overwhelmed by the Hacktoberfest influx. Your seemingly "simple" pull request may be the tipping point. Recognize their efforts and respect their capacity. Some projects may not actively seek new contributions, and that's perfectly valid. Begin by identifying projects explicitly welcoming newcomers, tagged with "good first issue" or "help wanted".</p>
 
 ### 7. The Virtue of Patience: Embracing the Long Game
 
