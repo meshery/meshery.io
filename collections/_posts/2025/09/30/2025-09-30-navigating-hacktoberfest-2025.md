@@ -31,7 +31,7 @@ That CONTRIBUTING.md file? It's not there for decoration. Treat it as your playb
 - [Contributing to Meshery using git](https://docs.meshery.io/project/contributing/contributing-gitflow)
 - [Setting up Meshery Development Environment on Windows](https://docs.meshery.io/project/contributing/meshery-windows)
 - [Contributing to Meshery Build and Release (CI)](https://docs.meshery.io/project/contributing/build-and-release)
-  - [Contributing to Meshery's End-to-End Tests using Cypress](https://docs.meshery.io/project/contributing/contributing-cypress)
+  - [Contributing to Meshery's End-to-End Tests using Playwright](https://docs.meshery.io/project/contributing/contributing-ui-tests)
 - [Contributing to Meshery Adapters](https://docs.meshery.io/project/contributing/contributing-adapters)
 - [Contributing to Meshery Docker Extension](https://docs.meshery.io/project/contributing/contributing-docker-extension)
 - [Contributing to Meshery Server](https://docs.meshery.io/project/contributing/contributing-server)
@@ -61,7 +61,7 @@ Open source is a marathon, not a sprint. Feedback may take time, and collaborati
 
 ### 8. Humility and Gratitude: The Essence of Meaningful Contributions
 
-Remember, a meaningful contribution is its own reward. Swag and a profile boost is a delightful bonus, not the end goal. Celebrate your progress, no matter how small, and learn from your experiences. As you recognize that you are part of a much larger movement, we <a href="/blog/community/recognition-program">recognize our contributors and users milestones</a> each step of the way. Earn any number of <a href="https://meshery.io/community/badges">recognition badges</a> as you grow with the community.
+Remember, a meaningful contribution is its own reward. Swag and a profile boost is a delightful bonus, not the end goal. Celebrate your progress, no matter how small, and learn from your experiences. As you recognize that you are part of a much larger movement, we <a href="/blog/2023/09/2023-9-2-meshery-badge-program/">recognize our contributors and users milestones</a> each step of the way. Earn any number of <a href="https://meshery.io/community/badges">recognition badges</a> as you grow with the community.
 
 ### 9. Earn a Badge
 

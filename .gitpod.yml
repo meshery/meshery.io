@@ -5,8 +5,10 @@
 tasks:
   - init: |
       # Install the Ruby version from Gemfile 
-      ruby_version=$(grep 'ruby ' Gemfile | head -n 1 | cut -d"'" -f2) 
+      ruby_version=$(grep "^ruby " Gemfile | head -n 1 | grep -oE '[0-9]+(\.[0-9]+)+')
       rvm install $ruby_version
-      make && bundle install
+      bundle install
+
+  - command: make
 
 

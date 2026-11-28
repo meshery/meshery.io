@@ -5,7 +5,7 @@ name: Azure Apimanagement
 subtitle: Collaborative and visual infrastructure as design for Azure Apimanagement
 colorIcon: /assets/images/integration/azure-apimanagement/icons/color/azure-apimanagement-color.svg
 whiteIcon: /assets/images/integration/azure-apimanagement/icons/white/azure-apimanagement-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/azure-ApiManagement
+docURL: https://docs.meshery.io/extensibility/integrations/azure-api-management
 description: 
 category: Runtime
 subcategory: Cloud Native Storage
