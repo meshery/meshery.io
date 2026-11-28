@@ -1,82 +1,16 @@
 <style>
-  #compatibility-div label,
-  #category-div label,
-  #cardpatterntype-div label {
-    margin: 0;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    text-indent: unset;
-  }
-
-  #compatibility-div input,
-  #category-div input,
-  #cardpatterntype-div input {
-    flex-shrink: 0;
-    top: 0;
-    cursor: pointer;
-  }
-
-  #compatibility-div input[type="checkbox"],
-  #category-div input[type="checkbox"],
-  #cardpatterntype-div input[type="checkbox"] {
-    accent-color: var(--brand-color-secondary);
-  }
-
-  #compatibility-div img {
+#compatibility-div img {
     max-width: 50px;
     height: 100%;
   }
-  #compatibility-div .badge,
-  #category-div .badge,
-  #cardpatterntype-div .badge {
-    background: var(--color-primary-dark);
-    border: 1px solid var(--color-primary-extra-dark);
-    border-radius: 999px;
-    color: var(--color-secondary-dark);
-    height: 20px;
-    min-width: 20px;
-    padding: 0 6px;
-    box-sizing: border-box;
-    text-align: center;
-    flex-shrink: 0;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 400;
-  }
-  #cardpatterntype-div .badge {
-    padding: 2px;
-  }
-  #compatibility-div .input-container .name,
-  #category-div .input-container .name,
-  #cardpatterntype-div .input-container .name {
-    margin: 0 10px 0 10px;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  #compatibility-div .input-container,
-  #category-div .input-container,
-  #cardpatterntype-div .input-container {
-    display: flex;
-    align-items: center;
-    margin: 20px 0;
-  }
-
-  #category-div,
-  #compatibility-div,
-  #cardpatterntype-div {
-    flex-wrap: wrap;
-  }
   #compatibility-div {
-    max-height: 360px; /* Adjust to display exactly 9 checkboxes */
-    overflow-y: auto;
-    padding-right: 1.25rem;
+    max-height: 360px;
     height: min-content;
+  }
+  #compatibility-div,
+  #category-div {
+    overflow: auto;
+    scrollbar-gutter: stable;
   }
   .page-info {
     margin: 0 1rem;
@@ -84,83 +18,56 @@
     font-weight: bold;
     color: var(--color-secondary-dark);
   }
-
-  .filter-heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    width: 100%;
-  }
-  .sort-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 2px 10px;
-    font-size: 11px;
-    font-weight: 600;
-    line-height: 1.4;
-    color: var(--color-secondary-light);
-    background: var(--color-primary-dark);
-    border: 1px solid var(--color-primary-extra-dark);
-    border-radius: 999px;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: color 0.15s ease, border-color 0.15s ease;
-  }
-  .sort-btn:hover {
-    border-color: var(--brand-color-secondary);
-    color: var(--brand-color-secondary);
-  }
-  .sort-btn:focus-visible {
-    outline: 2px solid var(--brand-color-secondary);
-    outline-offset: 1px;
-  }
-  .sort-btn.active {
-    color: var(--brand-color-secondary);
-    border-color: var(--brand-color-secondary);
-  }
-  .sort-btn .sort-arrow {
-    font-size: 10px;
-    line-height: 1;
-  }
 </style>
 
-<div class="filter-wrap">
-  {% if show_technology=="true"%}
-  <p id="compatibility-para" class="compatibility-para">
-    <span class="filter-heading">
-      <strong>Technologies:</strong>
-      <button
-        type="button"
-        class="sort-btn"
-        id="compatibility-sort"
-        data-order="none"
-        title="Sort by count"
-        aria-label="Sort technologies by count"
-      >
-        Count <span class="sort-arrow" aria-hidden="true">⇅</span>
-      </button>
-    </span>
-  </p>
-  <div id="compatibility-div" class="compatibility-div"></div>
-  {% endif %}
-  <p id="category-para" class="category-para">
-    <span class="filter-heading">
-      <strong>Categories:</strong>
-      <button
-        type="button"
-        class="sort-btn"
-        id="category-sort"
-        data-order="none"
-        title="Sort by count"
-        aria-label="Sort categories by count"
-      >
-        Count <span class="sort-arrow" aria-hidden="true">⇅</span>
-      </button>
-    </span>
-  </p>
-  <div id="category-div" class="category-div" style="padding-right: 1.25rem;"></div>
+{% capture sort_icons %}
+<span class="sort-arrow" aria-hidden="true">
+  <svg class="sort-icon sort-icon-none" viewBox="0 0 10 10"><path d="M5 0 8 4H2z" /><path d="M5 10 2 6h6z" /></svg>
+  <svg class="sort-icon sort-icon-desc" viewBox="0 0 10 10"><path d="M5 8 1 3h8z" /></svg>
+  <svg class="sort-icon sort-icon-asc" viewBox="0 0 10 10"><path d="M5 2 9 7H1z" /></svg>
+</span>
+{% endcapture %}
+
+<div class="pattern-filter-wrap">
+  <button type="button" class="pattern-filter-toggle" id="pattern-filter-toggle"
+          aria-expanded="false" aria-controls="pattern-filter-panel"
+          title="Filters" aria-label="Filters">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
+      <path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/>
+    </svg>
+  </button>
+
+  <aside class="pattern-filter" id="pattern-filter-panel" aria-label="Filters">
+    <div class="pattern-filter-head">
+      <strong>Filters</strong>
+      <button type="button" class="pattern-filter-close"
+              id="pattern-filter-close" aria-label="Close filters">&times;</button>
+    </div>
+
+    <div class="filter-wrap">
+      {% if show_technology == "true" %}
+      <p id="compatibility-para" class="compatibility-para">
+        <span class="filter-heading">
+          <strong>Technologies:</strong>
+          <button type="button" class="sort-btn" id="compatibility-sort"
+                  data-order="none" title="Sort by count"
+                  aria-label="Sort technologies by count">{{ sort_icons }}</button>
+        </span>
+      </p>
+      <div id="compatibility-div" class="compatibility-div"></div>
+      {% endif %}
+
+      <p id="category-para" class="category-para">
+        <span class="filter-heading">
+          <strong>Categories:</strong>
+          <button type="button" class="sort-btn" id="category-sort"
+                  data-order="none" title="Sort by count"
+                  aria-label="Sort categories by count">{{ sort_icons }}</button>
+        </span>
+      </p>
+      <div id="category-div" class="category-div"></div>
+    </div>
+  </aside>
 </div>
 
 <script type="module">
@@ -586,4 +493,13 @@ document.addEventListener("catalog:reordered", showFilterCards);
       button.setAttribute("data-order", order);
     }
   })();
+</script>
+
+<script src="{{ site.baseurl }}/assets/js/filter-panel.js"></script>
+<script>
+  initFilterPanel({
+    toggleId: "pattern-filter-toggle",
+    panelId: "pattern-filter-panel",
+    closeId: "pattern-filter-close"
+  });
 </script>

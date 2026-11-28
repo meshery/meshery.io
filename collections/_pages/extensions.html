@@ -8,17 +8,21 @@ published: true
   .selected a {
     background-color: #222222;
   }
-  .sorting-options {
-    margin: 0 20px 0 20px;
-    display: flex;
-    align-items: center;
-    padding-top: 25px;
-    @media (max-width: 506px) {
-      text-align: center;
-      margin: auto;
+  .sort-search{
+    width: 75%;
+   @media (max-width: 770px) {
+     width: 100%;
     }
   }
+  .sorting-options {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  gap: 0.5rem;
+  }
   #sort {
+     flex: 0 0 auto;
     padding: 10px 35px 10px 10px;
     font-size: 16px;
     border: 1px solid #ddd;
@@ -28,7 +32,7 @@ published: true
     background-repeat: no-repeat;
     background-position: right 10px top 50%;
     margin-right: 10px;
-    @media (max-width: 506px) {
+    @media (max-width: 600px) {
       width: 44px;
       padding: 10px;
       margin-right: 8px;
@@ -48,8 +52,8 @@ published: true
     }
   }
   #search {
-    width: 30%;
-    flex-grow: 1;
+     flex: 1 1 0;
+    width: 100%;
     padding: 20px 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -345,6 +349,15 @@ published: true
   categoryCheckboxes.forEach(function (box) {
     box.addEventListener("change", applyExtensionFilters);
   });
+  document.addEventListener("DOMContentLoaded", function () {
+    categoryCheckboxes.forEach(function (box) {
+      box.checked = false;
+    });
+
+    sortSelect.value = "asc";
+    applySort(sortSelect.value);
+    applyExtensionFilters();
+  });
 </script>
 <script>
   (function () {
@@ -394,121 +407,13 @@ published: true
       button.setAttribute("data-order", order);
     }
   })();
-
-  (function () {
-    var toggle = document.getElementById("extensions-filter-toggle");
-    var panel = document.getElementById("extensions-filter-panel");
-    var closeButton = document.getElementById("extensions-filter-close");
-    if (!toggle || !panel) return;
-
-    var STACK_BREAKPOINT = 770;
-    var PANEL_MARGIN = 8;
-    var PANEL_VIEWPORT_FILL = 0.7;
-
-    function positionPanel() {
-      if (window.innerWidth > STACK_BREAKPOINT) return;
-
-      var viewportHeight = window.innerHeight;
-      var rect = toggle.getBoundingClientRect();
-
-      // Cap the height against window.innerHeight instead of leaving it to the
-      // CSS `vh` unit, which mobile browsers resolve against the viewport with
-      // the URL bar hidden. Sizing and placement then share one measure of the
-      // viewport, so the clamp below always leaves the panel fully on screen.
-      panel.style.maxHeight =
-        Math.floor(viewportHeight * PANEL_VIEWPORT_FILL) + "px";
-
-      var maxTop = viewportHeight - panel.offsetHeight - PANEL_MARGIN;
-      var maxLeft = window.innerWidth - panel.offsetWidth - PANEL_MARGIN;
-      panel.style.top =
-        Math.max(PANEL_MARGIN, Math.min(rect.bottom + PANEL_MARGIN, maxTop)) +
-        "px";
-      panel.style.left =
-        Math.max(PANEL_MARGIN, Math.min(rect.left, maxLeft)) + "px";
-    }
-
-    // The inline sizing above belongs to the floating mobile panel only; clear
-    // it so it cannot clip the static sidebar once the layout goes wide again.
-    function resetPanel() {
-      panel.style.top = "";
-      panel.style.left = "";
-      panel.style.maxHeight = "";
-    }
-
-    // The panel is only a dialog while it floats on narrow screens; on wide
-    // screens it is the static sidebar and keeps its plain landmark role.
-    function setOpen(open) {
-      var floating = open && window.innerWidth <= STACK_BREAKPOINT;
-
-      panel.classList.toggle("show", open);
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-
-      if (floating) {
-        panel.setAttribute("role", "dialog");
-        positionPanel();
-        var firstCheckbox = panel.querySelector("input[type='checkbox']");
-        if (firstCheckbox) firstCheckbox.focus({ preventScroll: true });
-      } else {
-        panel.removeAttribute("role");
-      }
-    }
-
-    toggle.addEventListener("click", function () {
-      setOpen(!panel.classList.contains("show"));
-    });
-
-    if (closeButton) {
-      closeButton.addEventListener("click", function () {
-        setOpen(false);
-        toggle.focus();
-      });
-    }
-    document.addEventListener("click", function (event) {
-      if (!panel.classList.contains("show")) return;
-      if (panel.contains(event.target) || toggle.contains(event.target)) return;
-      setOpen(false);
-    });
-
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && panel.classList.contains("show")) {
-        setOpen(false);
-        toggle.focus();
-      }
-    });
-
-    window.addEventListener("resize", function () {
-      if (window.innerWidth > STACK_BREAKPOINT) {
-        setOpen(false);
-        resetPanel();
-      } else if (panel.classList.contains("show")) {
-        positionPanel();
-      }
-    });
-
-    var repositionQueued = false;
-    window.addEventListener(
-      "scroll",
-      function () {
-        if (!panel.classList.contains("show") || repositionQueued) return;
-        repositionQueued = true;
-        window.requestAnimationFrame(function () {
-          positionPanel();
-          repositionQueued = false;
-        });
-      },
-      { passive: true }
-    );
-  })();
-
-  document.addEventListener("DOMContentLoaded", () => {
-
-    categoryCheckboxes.forEach((box) => {
-      box.checked = false;
-    });
-
-    sortSelect.value = "asc";
-    applySort(sortSelect.value);
-    applyExtensionFilters();
+</script>
+<script src="{{ site.baseurl }}/assets/js/filter-panel.js"></script>
+<script>
+  initFilterPanel({
+    toggleId: "extensions-filter-toggle",
+    panelId: "extensions-filter-panel",
+    closeId: "extensions-filter-close"
   });
 </script>
 <script src="{{ site.baseurl }}/assets/js/catalog-modal.js"></script>
