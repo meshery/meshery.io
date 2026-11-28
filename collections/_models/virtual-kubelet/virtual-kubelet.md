@@ -5,7 +5,7 @@ name: Virtual Kubelet
 subtitle: Collaborative and visual infrastructure as design for Virtual Kubelet
 colorIcon: /assets/images/integration/virtual-kubelet/icons/color/virtual-kubelet-color.svg
 whiteIcon: /assets/images/integration/virtual-kubelet/icons/white/virtual-kubelet-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/virtual-kubelet
+docURL: https://docs.meshery.io/extensibility/integrations/virtual kubelet
 description: 
 category: Serverless
 subcategory: Installable Platform

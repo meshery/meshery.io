@@ -5,7 +5,7 @@ name: Piraeus Datastore
 subtitle: Collaborative and visual infrastructure as design for Piraeus Datastore
 colorIcon: /assets/images/integration/piraeus-datastore/icons/color/piraeus-datastore-color.svg
 whiteIcon: /assets/images/integration/piraeus-datastore/icons/white/piraeus-datastore-white.svg
-docURL: https://docs.meshery.io/extensibility/integrations/piraeus-datastore
+docURL: https://docs.meshery.io/extensibility/integrations/piraeus datastore
 description: 
 category: Cloud Native Storage
 subcategory: Database
